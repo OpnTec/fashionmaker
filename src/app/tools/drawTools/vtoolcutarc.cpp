@@ -230,24 +230,19 @@ void VToolCutArc::ArcChoosed(quint32 id)
  */
 void VToolCutArc::ChangedActivDraw(const QString &newName)
 {
+    bool flag = true;
     if (nameActivDraw == newName)
     {
         currentColor = Qt::black;
-        firstArc->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        firstArc->setAcceptHoverEvents(true);
-        secondArc->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        secondArc->setAcceptHoverEvents(true);
+        flag = true;
     }
     else
     {
         currentColor = Qt::gray;
-        firstArc->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        firstArc->setAcceptHoverEvents(false);
-        secondArc->setFlag(QGraphicsItem::ItemIsSelectable, false);
-        secondArc->setAcceptHoverEvents(false);
+        flag = false;
     }
-    firstArc->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    secondArc->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    firstArc->ChangedActivDraw(flag);
+    secondArc->ChangedActivDraw(flag);
     VToolPoint::ChangedActivDraw(newName);
 }
 

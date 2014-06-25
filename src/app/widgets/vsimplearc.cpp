@@ -55,6 +55,14 @@ VSimpleArc::VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimpleArc::ChangedActivDraw(const bool &flag)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, flag);
+    setAcceptHoverEvents(flag);
+    setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.

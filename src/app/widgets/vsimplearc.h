@@ -41,6 +41,7 @@ class VSimpleArc : public QObject, public QGraphicsPathItem
     Q_OBJECT
 public:
     VSimpleArc(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = nullptr);
+    void            ChangedActivDraw(const bool &flag);
 signals:
     /**
      * @brief Choosed send id when clicked.
