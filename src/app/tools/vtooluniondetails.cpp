@@ -766,38 +766,8 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
  */
 void VToolUnionDetails::AddNode(QDomElement &domElement, const VNodeDetail &node)
 {
-    QDomElement nod = doc->createElement(TagNode);
-
-    doc->SetAttribute(nod, AttrIdObject, node.getId());
-    doc->SetAttribute(nod, AttrMx, qApp->fromPixel(node.getMx()));
-    doc->SetAttribute(nod, AttrMy, qApp->fromPixel(node.getMy()));
-    if (node.getTypeNode() == NodeDetail::Contour)
-    {
-        doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);
-    }
-    else
-    {
-        doc->SetAttribute(nod, AttrNodeType, NodeTypeModeling);
-    }
-    switch (node.getTypeTool())
-    {
-        case (Tool::NodeArc):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeArc"));
-            break;
-        case (Tool::NodePoint):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodePoint"));
-            break;
-        case (Tool::NodeSpline):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSpline"));
-            break;
-        case (Tool::NodeSplinePath):
-            doc->SetAttribute(nod, AttrType, QStringLiteral("NodeSplinePath"));
-            break;
-        default:
-            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
-            break;
-    }
-    domElement.appendChild(nod);
+    //Right now method similar to method in class VToolDetail.
+    VToolDetail::AddNode(doc, domElement, node);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
