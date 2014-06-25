@@ -540,6 +540,10 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS += -O0 -Wall -Wextra -pedantic
         }
     }
+
+    #Calculate revision number only in release mode. Change revision number each time need recompilation
+    #precompiled headers file.
+    DEFINES += LOCAL_REVISION=\\\"0\\\"
 }else{
     # Release
     *-g++{
@@ -547,6 +551,14 @@ CONFIG(debug, debug|release){
     }
 
     DEFINES += QT_NO_DEBUG_OUTPUT
+    #local revision number for using in version
+    !system(hg) {
+        DEFINES += LOCAL_REVISION=\\\"0\\\"
+    }
+    else
+    {
+        DEFINES += LOCAL_REVISION=$$system(hg parents --template '{rev}')
+    }
 }
 
 message(Qt version: $$[QT_VERSION])
@@ -561,15 +573,6 @@ message(Data files: $$[QT_INSTALL_DATA])
 message(Translation files: $$[QT_INSTALL_TRANSLATIONS])
 message(Settings: $$[QT_INSTALL_SETTINGS])
 message(Examples: $$[QT_INSTALL_EXAMPLES])
-
-#local revision number for using in version
-!system(hg) {
-    DEFINES += LOCAL_REVISION=\\\"0\\\"
-}
-else
-{
-    DEFINES += LOCAL_REVISION=$$system(hg parents --template '{rev}')
-}
 
 win32:RC_FILE = share/resources/valentina.rc
 
