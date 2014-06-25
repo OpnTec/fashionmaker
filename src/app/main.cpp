@@ -29,7 +29,6 @@
 #include "mainwindow.h"
 #include "widgets/vapplication.h"
 #include <QTextCodec>
-#include <QtCore>
 #include <QMessageBox>
 #include <QThread>
 #include "tablewindow.h"

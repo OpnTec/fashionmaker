@@ -44,9 +44,8 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object
  */
-VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                   QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent)
+VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem *parent)
+    :VAbstractSpline(doc, data, id, parent)
 {
     const VArc *arc = data->GeometricObject<const VArc *>(id);
     QPainterPath path;
@@ -176,59 +175,6 @@ void VToolArc::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolArc::ChangedActivDraw(const QString &newName)
-{
-    bool selectable = false;
-    if (nameActivDraw == newName)
-    {
-        selectable = true;
-        currentColor = Qt::black;
-    }
-    else
-    {
-        selectable = false;
-        currentColor = Qt::gray;
-    }
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
-    this->setAcceptHoverEvents (selectable);
-    VDrawTool::ChangedActivDraw(newName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowTool highlight tool.
- * @param id object id in container
- * @param color highlight color.
- * @param enable enable or disable highlight.
- */
-void VToolArc::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
-{
-    ShowItem(this, id, color, enable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetFactor set current scale factor of scene.
- * @param factor scene scale factor.
- */
-void VToolArc::SetFactor(qreal factor)
-{
-    VDrawTool::SetFactor(factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolArc::Disable(bool disable)
-{
-    DisableItem(this, disable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */
@@ -289,79 +235,12 @@ void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
- */
-//cppcheck-suppress unusedFunction
-void VToolArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverLeaveEvent handle hover leave events.
- * @param event hover leave event.
- */
-//cppcheck-suppress unusedFunction
-void VToolArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolArc::RemoveReferens()
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
     doc->DecrementReferens(arc->GetCenter().id());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief itemChange handle tool change.
- * @param change change.
- * @param value value.
- * @return value.
- */
-QVariant VToolArc::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
-{
-    if (change == QGraphicsItem::ItemSelectedChange)
-    {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
-    }
-
-    return QGraphicsItem::itemChange(change, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief keyReleaseEvent handle key release events.
- * @param event key release event.
- */
-void VToolArc::keyReleaseEvent(QKeyEvent *event)
-{
-    switch (event->key())
-    {
-        case Qt::Key_Delete:
-            DeleteTool(this);
-            break;
-        default:
-            break;
-    }
-    QGraphicsItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -206,12 +206,6 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSpline::Disable(bool disable)
-{
-    DisableItem(this, disable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.

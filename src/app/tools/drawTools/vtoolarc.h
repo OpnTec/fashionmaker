@@ -29,14 +29,12 @@
 #ifndef VTOOLARC_H
 #define VTOOLARC_H
 
-#include "vdrawtool.h"
-#include <QGraphicsPathItem>
-#include "../../widgets/vcontrolpointspline.h"
+#include "vabstractspline.h"
 
 /**
  * @brief The VToolArc class tool for creation arc.
  */
-class VToolArc :public VDrawTool, public QGraphicsPathItem
+class VToolArc :public VAbstractSpline
 {
     Q_OBJECT
 public:
@@ -50,20 +48,12 @@ public:
     static const QString ToolType;
 public slots:
     virtual void     FullUpdateFromFile();
-    virtual void     ChangedActivDraw(const QString &newName);
-    virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
-    virtual void     SetFactor(qreal factor);
-    void             Disable(bool disable);
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     AddToFile();
     virtual void     RefreshDataInFile();
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void     RemoveReferens();
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void     keyReleaseEvent(QKeyEvent * event);
     virtual void     SaveDialog(QDomElement &domElement);
 private:
     void             RefreshGeometry();

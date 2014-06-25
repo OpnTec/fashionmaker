@@ -28,7 +28,6 @@
 
 #include "configdialog.h"
 #include <QListWidget>
-#include <QtWidgets>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>

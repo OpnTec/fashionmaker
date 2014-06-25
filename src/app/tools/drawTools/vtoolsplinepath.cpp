@@ -188,12 +188,6 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSplinePath::Disable(bool disable)
-{
-    DisableItem(this, disable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdateControlPoints update position points control points in file.
  * @param spl spline what was changed.

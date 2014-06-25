@@ -42,7 +42,6 @@
 #include "widgets/undoevent.h"
 
 #include <QInputDialog>
-#include <QtCore>
 #include <QDebug>
 #include <QMessageBox>
 #include <QShowEvent>
