@@ -38,6 +38,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QTableWidget>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -296,13 +297,12 @@ void DialogIncrements::FillIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillLengthLines fill data for table of lines lengths
- */
-void DialogIncrements::FillLengthLines()
+void DialogIncrements::FillTable(const QHash<QString, qreal> *varTable, QTableWidget *table)
 {
-    const QHash<QString, qreal> *linesTable = data->DataLengthLines();
-    QHashIterator<QString, qreal> iHash(*linesTable);
+    SCASSERT(table != nullptr);
+    SCASSERT(varTable != nullptr);
+
+    QHashIterator<QString, qreal> iHash(*varTable);
     QMap<QString, qreal> map;
     //Sorting QHash by name
     while (iHash.hasNext())
@@ -318,20 +318,29 @@ void DialogIncrements::FillLengthLines()
         i.next();
         qreal length = i.value();
         currentRow++;
-        ui->tableWidgetLines->setRowCount ( linesTable->size() );
+        table->setRowCount ( varTable->size() );
 
-        QTableWidgetItem *item = new QTableWidgetItem(QString(i.key()));
+        QTableWidgetItem *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
         item->setFont(QFont("Times", 12, QFont::Bold));
-        ui->tableWidgetLines->setItem(currentRow, 0, item);
+        table->setItem(currentRow, 0, item);
 
         item = new QTableWidgetItem(QString().setNum(length));
         item->setTextAlignment(Qt::AlignHCenter);
-        ui->tableWidgetLines->setItem(currentRow, 1, item);
+        table->setItem(currentRow, 1, item);
     }
-    ui->tableWidgetLines->resizeColumnsToContents();
-    ui->tableWidgetLines->resizeRowsToContents();
-    ui->tableWidgetLines->verticalHeader()->setDefaultSectionSize(20);
+    table->resizeColumnsToContents();
+    table->resizeRowsToContents();
+    table->verticalHeader()->setDefaultSectionSize(20);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FillLengthLines fill data for table of lines lengths
+ */
+void DialogIncrements::FillLengthLines()
+{
+    FillTable(data->DataLengthLines(), ui->tableWidgetLines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,37 +349,7 @@ void DialogIncrements::FillLengthLines()
  */
 void DialogIncrements::FillLengthSplines()
 {
-    const QHash<QString, qreal> *splinesTable = data->DataLengthSplines();
-    QHashIterator<QString, qreal> iHash(*splinesTable);
-    QMap<QString, qreal> map;
-    //Sorting QHash by name
-    while (iHash.hasNext())
-    {
-        iHash.next();
-        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
-    }
-
-    qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(map);
-    while (i.hasNext())
-    {
-        i.next();
-        qreal length = i.value();
-        currentRow++;
-        ui->tableWidgetSplines->setRowCount ( splinesTable->size() );
-
-        QTableWidgetItem *item = new QTableWidgetItem(i.key());
-        item->setTextAlignment(Qt::AlignLeft);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        ui->tableWidgetSplines->setItem(currentRow, 0, item);
-
-        item = new QTableWidgetItem(QString().setNum(length));
-        item->setTextAlignment(Qt::AlignHCenter);
-        ui->tableWidgetSplines->setItem(currentRow, 1, item);
-    }
-    ui->tableWidgetSplines->resizeColumnsToContents();
-    ui->tableWidgetSplines->resizeRowsToContents();
-    ui->tableWidgetSplines->verticalHeader()->setDefaultSectionSize(20);
+    FillTable(data->DataLengthSplines(), ui->tableWidgetSplines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -379,37 +358,7 @@ void DialogIncrements::FillLengthSplines()
  */
 void DialogIncrements::FillLengthArcs()
 {
-    const QHash<QString, qreal> *arcsTable = data->DataLengthArcs();
-    QHashIterator<QString, qreal> iHash(*arcsTable);
-    QMap<QString, qreal> map;
-    //Sorting QHash by name
-    while (iHash.hasNext())
-    {
-        iHash.next();
-        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
-    }
-
-    qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(map);
-    while (i.hasNext())
-    {
-        i.next();
-        qreal length = i.value();
-        currentRow++;
-        ui->tableWidgetArcs->setRowCount ( arcsTable->size() );
-
-        QTableWidgetItem *item = new QTableWidgetItem(i.key());
-        item->setTextAlignment(Qt::AlignLeft);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        ui->tableWidgetArcs->setItem(currentRow, 0, item);
-
-        item = new QTableWidgetItem(QString().setNum(length));
-        item->setTextAlignment(Qt::AlignHCenter);
-        ui->tableWidgetArcs->setItem(currentRow, 1, item);
-    }
-    ui->tableWidgetArcs->verticalHeader()->setDefaultSectionSize(20);
-    ui->tableWidgetArcs->resizeColumnsToContents();
-    ui->tableWidgetArcs->resizeRowsToContents();
+    FillTable(data->DataLengthArcs(), ui->tableWidgetArcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

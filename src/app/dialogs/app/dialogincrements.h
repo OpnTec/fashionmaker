@@ -33,6 +33,7 @@
 
 class VPattern;
 class VIndividualMeasurements;
+class QTableWidget;
 
 namespace Ui
 {
@@ -93,6 +94,7 @@ private:
 
     void                 FillMeasurements();
     void                 FillIncrements();
+    void                 FillTable(const QHash<QString, qreal> *varTable, QTableWidget *table);
     void                 FillLengthLines();
     void                 FillLengthSplines();
     void                 FillLengthArcs();
