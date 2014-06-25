@@ -29,8 +29,8 @@
 #ifndef VSPLINE_H
 #define VSPLINE_H
 
+#include "vabstractcurve.h"
 #include "vpointf.h"
-#include "vgobject.h"
 #include <QLineF>
 #include <QPointF>
 
@@ -41,7 +41,7 @@ class QPainterPath;
 /**
  * @brief VSpline class that implements the spline.
  */
-class VSpline :public VGObject
+class VSpline :public VAbstractCurve
 {
 public:
     VSpline();
@@ -58,7 +58,6 @@ public:
     qreal   GetAngle1 () const;
     qreal   GetAngle2() const;
     qreal   GetLength () const;
-    QString name () const;
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
@@ -67,7 +66,6 @@ public:
     qreal           LengthT(qreal t) const;
     QPointF         CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
     QVector<QPointF> GetPoints () const;
-    QPainterPath    GetPath() const;
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);

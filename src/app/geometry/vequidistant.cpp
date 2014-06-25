@@ -111,22 +111,22 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             case (Tool::NodeSplinePath):
             {
                 const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(detail.at(i).getId());
-                qreal len1 = GetLengthContour(points, splinePath->GetPathPoints());
-                qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath->GetPathPoints()));
+                qreal len1 = GetLengthContour(points, splinePath->GetPoints());
+                qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath->GetPoints()));
                 if (len1 <= lenReverse)
                 {
-                    points << splinePath->GetPathPoints();
+                    points << splinePath->GetPoints();
                     if (detail.getSeamAllowance() == true)
                     {
-                     pointsEkv << biasPoints(splinePath->GetPathPoints(), detail.at(i).getMx(), detail.at(i).getMy());
+                     pointsEkv << biasPoints(splinePath->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
                     }
                 }
                 else
                 {
-                    points << GetReversePoint(splinePath->GetPathPoints());
+                    points << GetReversePoint(splinePath->GetPoints());
                     if (detail.getSeamAllowance() == true)
                     {
-                        pointsEkv << biasPoints(GetReversePoint(splinePath->GetPathPoints()), detail.at(i).getMx(),
+                        pointsEkv << biasPoints(GetReversePoint(splinePath->GetPoints()), detail.at(i).getMx(),
                                                 detail.at(i).getMy());
                     }
                 }

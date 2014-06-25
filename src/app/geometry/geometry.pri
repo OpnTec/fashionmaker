@@ -7,7 +7,8 @@ HEADERS += \
     geometry/varc.h \
     geometry/vgobject.h \
     geometry/vpointf.h \
-    geometry/vequidistant.h
+    geometry/vequidistant.h \
+    geometry/vabstractcurve.h
 
 SOURCES += \
     geometry/vsplinepoint.cpp \
@@ -18,4 +19,5 @@ SOURCES += \
     geometry/varc.cpp \
     geometry/vgobject.cpp \
     geometry/vpointf.cpp \
-    geometry/vequidistant.cpp
+    geometry/vequidistant.cpp \
+    geometry/vabstractcurve.cpp

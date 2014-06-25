@@ -29,7 +29,7 @@
 #ifndef VARC_H
 #define VARC_H
 
-#include "vgobject.h"
+#include "vabstractcurve.h"
 #include "vpointf.h"
 #include <QCoreApplication>
 
@@ -38,7 +38,7 @@ class QPainterPath;
 /**
  * @brief VArc class for anticlockwise arc.
  */
-class VArc: public VGObject
+class VArc: public VAbstractCurve
 {
     Q_DECLARE_TR_FUNCTIONS(VArc)
 public:
@@ -60,7 +60,6 @@ public:
     QPainterPath       GetPath() const;
     qreal              AngleArc() const;
     QVector<QPointF>   GetPoints () const;
-    virtual QString    name() const;
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
     virtual void       setId(const quint32 &id);
 private:

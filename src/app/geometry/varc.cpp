@@ -42,7 +42,7 @@
  * @brief VArc default constructor.
  */
 VArc::VArc ()
-    :VGObject(GOType::Arc), f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0),
+    :VAbstractCurve(GOType::Arc), f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0),
       formulaRadius(QString()), center(VPointF())
 {}
 
@@ -56,7 +56,7 @@ VArc::VArc ()
  */
 VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
             QString formulaF2, quint32 idObject, Draw mode)
-    : VGObject(GOType::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
+    : VAbstractCurve(GOType::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
       radius(radius), formulaRadius(formulaRadius), center(center)
 {
     _name = QString (arc_+"%1").arg(this->GetCenter().name());
@@ -68,7 +68,7 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
  * @param arc arc
  */
 VArc::VArc(const VArc &arc)
-    : VGObject(arc), f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
+    : VAbstractCurve(arc), f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
     formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
     center(arc.GetCenter())
 {}
@@ -81,7 +81,7 @@ VArc::VArc(const VArc &arc)
  */
 VArc &VArc::operator =(const VArc &arc)
 {
-    VGObject::operator=(arc);
+    VAbstractCurve::operator=(arc);
     this->f1 = arc.GetF1();
     this->formulaF1 = arc.GetFormulaF1();
     this->f2 = arc.GetF2();
@@ -193,16 +193,6 @@ QVector<QPointF> VArc::GetPoints() const
         }
     } while (i <= angle);
     return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief name return arc name. This name used in variables.
- * @return name
- */
-QString VArc::name() const
-{
-    return _name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

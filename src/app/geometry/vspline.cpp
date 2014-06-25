@@ -39,7 +39,7 @@
  * @brief VSpline default constructor
  */
 VSpline::VSpline()
-    :VGObject(GOType::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
+    :VAbstractCurve(GOType::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
       kAsm1(1), kAsm2(1), kCurve(1)
 {}
 
@@ -49,7 +49,7 @@ VSpline::VSpline()
  * @param spline spline from which the copy.
  */
 VSpline::VSpline ( const VSpline & spline )
-    :VGObject(spline), p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()),
+    :VAbstractCurve(spline), p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()),
       angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()),
       kCurve(spline.GetKcurve())
 {}
@@ -67,7 +67,7 @@ VSpline::VSpline ( const VSpline & spline )
  */
 VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
                   quint32 idObject, Draw mode)
-    :VGObject(GOType::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
+    :VAbstractCurve(GOType::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
       angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve)
 {
     CreateName();
@@ -102,7 +102,7 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
  * @param p4 second point spline.
  */
 VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Draw mode)
-    :VGObject(GOType::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
+    :VAbstractCurve(GOType::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
       kAsm2(1), kCurve(1)
 {
     CreateName();
@@ -133,16 +133,6 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, 
 qreal VSpline::GetLength () const
 {
     return LengthBezier ( GetP1().toQPointF(), this->p2, this->p3, GetP4().toQPointF());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief name return spline name. Used for variables.
- * @return name.
- */
-QString VSpline::name() const
-{
-    return _name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -667,30 +657,6 @@ void VSpline::CreateName()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetPath return QPainterPath for this spline.
- * @return path.
- */
-QPainterPath VSpline::GetPath() const
-{
-    QPainterPath splinePath;
-    QVector<QPointF> points = GetPoints ();
-    if (points.count() >= 2)
-    {
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            splinePath.moveTo(points.at(i));
-            splinePath.lineTo(points.at(i+1));
-        }
-    }
-    else
-    {
-        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
-    }
-    return splinePath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SplinePoints return list with spline points.
  * @param p1 first spline point.
  * @param p4 last spline point.
@@ -722,7 +688,7 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
 //---------------------------------------------------------------------------------------------------------------------
 VSpline &VSpline::operator =(const VSpline &spline)
 {
-    VGObject::operator=(spline);
+    VAbstractCurve::operator=(spline);
     this->p1 = spline.GetP1 ();
     this->p2 = spline.GetP2 ();
     this->p3 = spline.GetP3 ();

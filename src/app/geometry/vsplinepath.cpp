@@ -31,12 +31,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw mode)
-    : VGObject(GOType::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
+    : VAbstractCurve(GOType::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(const VSplinePath &splPath)
-    : VGObject(splPath), path(*splPath.GetPoint()), kCurve(splPath.getKCurve()),
+    : VAbstractCurve(splPath), path(*splPath.GetPoint()), kCurve(splPath.getKCurve()),
       maxCountPoints(splPath.getMaxCountPoints())
 {}
 
@@ -95,7 +95,7 @@ QPainterPath VSplinePath::GetPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VSplinePath::GetPathPoints() const
+QVector<QPointF> VSplinePath::GetPoints() const
 {
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= Count(); ++i)
@@ -157,7 +157,7 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 {
-    VGObject::operator=(path);
+    VAbstractCurve::operator=(path);
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();
     this->maxCountPoints = path.getMaxCountPoints();
@@ -211,9 +211,6 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     }
     return QPointF();
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VSplinePath::name() const{return _name;}
 
 //---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::getMaxCountPoints() const

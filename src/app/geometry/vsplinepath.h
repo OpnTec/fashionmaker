@@ -29,7 +29,7 @@
 #ifndef VSPLINEPATH_H
 #define VSPLINEPATH_H
 
-#include "vgobject.h"
+#include "vabstractcurve.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
 #include <QCoreApplication>
@@ -41,7 +41,7 @@ enum class SplinePointPosition : char { FirstPoint, LastPoint };
 /**
  * @brief The VSplinePath class keep information about splinePath.
  */
-class VSplinePath :public VGObject
+class VSplinePath :public VAbstractCurve
 {
     Q_DECLARE_TR_FUNCTIONS(VSplinePath)
 public:
@@ -87,7 +87,7 @@ public:
      * @brief GetPathPoints return list of points what located on path.
      * @return list.
      */
-    QVector<QPointF> GetPathPoints() const;
+    QVector<QPointF> GetPoints() const;
     /**
      * @brief GetSplinePath return list with spline points.
      * @return list.
@@ -172,11 +172,6 @@ public:
      */
     QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
                                 QPointF &spl2p3) const;
-    /**
-     * @brief name return spline path name.
-     * @return name.
-     */
-    virtual QString name() const;
     /**
      * @brief getMaxCountPoints return max count of points what can have spline path. This method use tool union detail.
      * Because cutting point can change position spline can have diffirent count of points. Need know max value. This
