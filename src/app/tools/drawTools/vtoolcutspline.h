@@ -30,7 +30,7 @@
 #define VTOOLCUTSPLINE_H
 
 #include "vtoolpoint.h"
-#include "../../widgets/vsimplespline.h"
+#include "../../widgets/vsimplecurve.h"
 
 /**
  * @brief The VToolCutSpline class for tool CutSpline. This tool find point on spline and cut spline on two.
@@ -72,10 +72,10 @@ private:
     quint32        splineId;
 
     /** @brief firstSpline first spline after cutting. */
-    VSimpleSpline *firstSpline;
+    VSimpleCurve *firstSpline;
 
     /** @brief secondSpline second spline after cutting. */
-    VSimpleSpline *secondSpline;
+    VSimpleCurve *secondSpline;
 
     /** @brief spl1id id first spline after cutting. */
     const quint32  spl1id;
@@ -83,7 +83,7 @@ private:
     /** @brief spl2id id second spline after cutting. */
     const quint32  spl2id;
 
-    void          RefreshSpline(VSimpleSpline *spline, quint32 splid, SimpleSplinePoint tr);
+    void          RefreshSpline(VSimpleCurve *spline, quint32 splid, SimpleCurvePoint tr);
 };
 
 #endif // VTOOLCUTSPLINE_H

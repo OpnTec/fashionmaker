@@ -7,12 +7,12 @@ HEADERS += \
     widgets/vcontrolpointspline.h \
     widgets/vapplication.h \
     widgets/doubledelegate.h \
-    widgets/vsimplespline.h \
     widgets/vsimplesplinepath.h \
     widgets/vsimplearc.h \
     widgets/textdelegate.h \
     widgets/vtranslation.h \
-    widgets/undoevent.h
+    widgets/undoevent.h \
+    widgets/vsimplecurve.h
 
 SOURCES += \
     widgets/vtablegraphicsview.cpp \
@@ -23,9 +23,9 @@ SOURCES += \
     widgets/vcontrolpointspline.cpp \
     widgets/vapplication.cpp \
     widgets/doubledelegate.cpp \
-    widgets/vsimplespline.cpp \
     widgets/vsimplesplinepath.cpp \
     widgets/vsimplearc.cpp \
     widgets/textdelegate.cpp \
     widgets/vtranslation.cpp \
-    widgets/undoevent.cpp
+    widgets/undoevent.cpp \
+    widgets/vsimplecurve.cpp

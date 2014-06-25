@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vsimplespline.h
+ **  @file   vsimplecurve.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   17 12, 2013
  **
@@ -26,21 +26,21 @@
  **
  *************************************************************************/
 
-#ifndef VSIMPLESPLINE_H
-#define VSIMPLESPLINE_H
+#ifndef VSIMPLECURVE_H
+#define VSIMPLECURVE_H
 
 #include <QGraphicsPathItem>
 
-enum class SimpleSplinePoint : char { FirstPoint, ForthPoint };
+enum class SimpleCurvePoint : char { FirstPoint, ForthPoint };
 
 /**
  * @brief The VSimpleSpline class for simple spline. This object used when we cut spline and want show peaces.
  */
-class VSimpleSpline : public QObject, public QGraphicsPathItem
+class VSimpleCurve : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
+    VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
 signals:
     /**
@@ -53,7 +53,7 @@ protected:
     virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
-    Q_DISABLE_COPY(VSimpleSpline)
+    Q_DISABLE_COPY(VSimpleCurve)
     /** @brief id spline id. */
     quint32         id;
 
@@ -64,4 +64,4 @@ private:
     Qt::GlobalColor *currentColor;
 };
 
-#endif // VSIMPLESPLINE_H
+#endif // VSIMPLECURVE_H

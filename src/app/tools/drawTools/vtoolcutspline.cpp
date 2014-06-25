@@ -57,15 +57,15 @@ VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &i
     Q_ASSERT_X(spl1id > 0, Q_FUNC_INFO, "spl1id <= 0");
     Q_ASSERT_X(spl2id > 0, Q_FUNC_INFO, "spl2id <= 0");
 
-    firstSpline = new VSimpleSpline(spl1id, &currentColor, &factor);
-    RefreshSpline(firstSpline, spl1id, SimpleSplinePoint::ForthPoint);
+    firstSpline = new VSimpleCurve(spl1id, &currentColor, &factor);
+    RefreshSpline(firstSpline, spl1id, SimpleCurvePoint::ForthPoint);
     firstSpline->setParentItem(this);
-    connect(firstSpline, &VSimpleSpline::Choosed, this, &VToolCutSpline::SplineChoosed);
+    connect(firstSpline, &VSimpleCurve::Choosed, this, &VToolCutSpline::SplineChoosed);
 
-    secondSpline = new VSimpleSpline(spl2id, &currentColor, &factor);
-    RefreshSpline(secondSpline, spl2id, SimpleSplinePoint::FirstPoint);
+    secondSpline = new VSimpleCurve(spl2id, &currentColor, &factor);
+    RefreshSpline(secondSpline, spl2id, SimpleCurvePoint::FirstPoint);
     secondSpline->setParentItem(this);
-    connect(secondSpline, &VSimpleSpline::Choosed, this, &VToolCutSpline::SplineChoosed);
+    connect(secondSpline, &VSimpleCurve::Choosed, this, &VToolCutSpline::SplineChoosed);
 
     if (typeCreation == Source::FromGui)
     {
@@ -303,8 +303,8 @@ void VToolCutSpline::RefreshDataInFile()
  */
 void VToolCutSpline::RefreshGeometry()
 {
-    RefreshSpline(firstSpline, spl1id, SimpleSplinePoint::ForthPoint);
-    RefreshSpline(secondSpline, spl2id, SimpleSplinePoint::FirstPoint);
+    RefreshSpline(firstSpline, spl1id, SimpleCurvePoint::ForthPoint);
+    RefreshSpline(secondSpline, spl2id, SimpleCurvePoint::FirstPoint);
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
@@ -338,13 +338,13 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
  * @param splid spline id.
  * @param tr spline type.
  */
-void VToolCutSpline::RefreshSpline(VSimpleSpline *spline, quint32 splid, SimpleSplinePoint tr)
+void VToolCutSpline::RefreshSpline(VSimpleCurve *spline, quint32 splid, SimpleCurvePoint tr)
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(splid);
     QPainterPath path;
     path.addPath(spl->GetPath());
     path.setFillRule( Qt::WindingFill );
-    if (tr == SimpleSplinePoint::FirstPoint)
+    if (tr == SimpleCurvePoint::FirstPoint)
     {
         path.translate(-spl->GetP1().toQPointF().x(), -spl->GetP1().toQPointF().y());
     }

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vsimplespline.cpp
+ **  @file   vsimplecurve.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   17 12, 2013
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vsimplespline.h"
+#include "vsimplecurve.h"
 #include "../widgets/vapplication.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
@@ -39,7 +39,7 @@
  * @param currentColor current color.
  * @param parent parent object.
  */
-VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
+VSimpleCurve::VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
 {
     if (factor == nullptr)
@@ -55,7 +55,7 @@ VSimpleSpline::VSimpleSpline(quint32 id, Qt::GlobalColor *currentColor, qreal *f
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimpleSpline::ChangedActivDraw(const bool &flag)
+void VSimpleCurve::ChangedActivDraw(const bool &flag)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, flag);
     setAcceptHoverEvents(flag);
@@ -67,7 +67,7 @@ void VSimpleSpline::ChangedActivDraw(const bool &flag)
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.
  */
-void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
@@ -81,7 +81,7 @@ void VSimpleSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  * @brief hoverMoveEvent handle hover move events.
  * @param event hover move event.
  */
-void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VSimpleCurve::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     if (factor == nullptr)
@@ -99,7 +99,7 @@ void VSimpleSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
  * @brief hoverLeaveEvent handle hover leave events.
  * @param event hover leave event.
  */
-void VSimpleSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     if (factor == nullptr)
