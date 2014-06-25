@@ -58,15 +58,15 @@ VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, con
     Q_ASSERT_X(arc1id > 0, Q_FUNC_INFO, "arc1id <= 0");
     Q_ASSERT_X(arc2id > 0, Q_FUNC_INFO, "arc2id <= 0");
 
-    firstArc = new VSimpleArc(arc1id, &currentColor, &factor);
-    RefreshArc(firstArc, arc1id, SimpleArcPoint::ForthPoint);
+    firstArc = new VSimpleCurve(arc1id, &currentColor, &factor);
+    RefreshArc(firstArc, arc1id, SimpleCurvePoint::ForthPoint);
     firstArc->setParentItem(this);
-    connect(firstArc, &VSimpleArc::Choosed, this, &VToolCutArc::ArcChoosed);
+    connect(firstArc, &VSimpleCurve::Choosed, this, &VToolCutArc::ArcChoosed);
 
-    secondArc = new VSimpleArc(arc2id, &currentColor, &factor);
-    RefreshArc(secondArc, arc2id, SimpleArcPoint::FirstPoint);
+    secondArc = new VSimpleCurve(arc2id, &currentColor, &factor);
+    RefreshArc(secondArc, arc2id, SimpleCurvePoint::FirstPoint);
     secondArc->setParentItem(this);
-    connect(secondArc, &VSimpleArc::Choosed, this, &VToolCutArc::ArcChoosed);
+    connect(secondArc, &VSimpleCurve::Choosed, this, &VToolCutArc::ArcChoosed);
 
     if (typeCreation == Source::FromGui)
     {
@@ -311,8 +311,8 @@ void VToolCutArc::RefreshDataInFile()
  */
 void VToolCutArc::RefreshGeometry()
 {
-    RefreshArc(firstArc, arc1id, SimpleArcPoint::ForthPoint);
-    RefreshArc(secondArc, arc2id, SimpleArcPoint::FirstPoint);
+    RefreshArc(firstArc, arc1id, SimpleCurvePoint::ForthPoint);
+    RefreshArc(secondArc, arc2id, SimpleCurvePoint::FirstPoint);
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
@@ -337,13 +337,13 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
  * @param arcid arc id.
  * @param tr arc type.
  */
-void VToolCutArc::RefreshArc(VSimpleArc *sArc, quint32 arcid, SimpleArcPoint tr)
+void VToolCutArc::RefreshArc(VSimpleCurve *sArc, quint32 arcid, SimpleCurvePoint tr)
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(arcid);
     QPainterPath path;
     path.addPath(arc->GetPath());
     path.setFillRule( Qt::WindingFill );
-    if (tr == SimpleArcPoint::FirstPoint)
+    if (tr == SimpleCurvePoint::FirstPoint)
     {
         path.translate(-arc->GetP1().x(), -arc->GetP1().y());
     }

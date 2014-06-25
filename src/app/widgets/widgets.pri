@@ -8,7 +8,6 @@ HEADERS += \
     widgets/vapplication.h \
     widgets/doubledelegate.h \
     widgets/vsimplesplinepath.h \
-    widgets/vsimplearc.h \
     widgets/textdelegate.h \
     widgets/vtranslation.h \
     widgets/undoevent.h \
@@ -24,7 +23,6 @@ SOURCES += \
     widgets/vapplication.cpp \
     widgets/doubledelegate.cpp \
     widgets/vsimplesplinepath.cpp \
-    widgets/vsimplearc.cpp \
     widgets/textdelegate.cpp \
     widgets/vtranslation.cpp \
     widgets/undoevent.cpp \

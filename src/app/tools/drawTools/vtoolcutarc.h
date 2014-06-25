@@ -30,7 +30,7 @@
 #define VTOOLCUTARC_H
 
 #include "vtoolpoint.h"
-#include "../../widgets/vsimplearc.h"
+#include "../../widgets/vsimplecurve.h"
 
 /**
  * @brief The VToolCutArc class tool for cutting arc.
@@ -70,17 +70,17 @@ private:
     quint32       arcId;
 
     /** @brief firstArc first arc after cutting. */
-    VSimpleArc   *firstArc;
+    VSimpleCurve   *firstArc;
 
     /** @brief secondArc second arc after cutting. */
-    VSimpleArc   *secondArc;
+    VSimpleCurve   *secondArc;
 
     /** @brief arc1id id first arc after cutting. */
     const quint32 arc1id;
 
     /** @brief arc2id id second arc after cutting. */
     const quint32 arc2id;
-    void         RefreshArc(VSimpleArc *sArc, quint32 arcid, SimpleArcPoint tr);
+    void         RefreshArc(VSimpleCurve *sArc, quint32 arcid, SimpleCurvePoint tr);
 };
 
 #endif // VTOOLCUTARC_H
