@@ -3,11 +3,11 @@ Upstream-Name: valentina
 Source: https://bitbucket.org/dismine/valentina
 
 Files: *
-Copyright: 2013 Roman Telezhinsky <dismine@gmail.com>
+Copyright: 2013 Roman Telezhynskyi <dismine@gmail.com>
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: 2013 Roman Telezhinsky <dismine@gmail.com>
+Copyright: 2013 Roman Telezhynskyi <dismine@gmail.com>
 License: GPL-3.0+
 
 License: GPL-3.0+

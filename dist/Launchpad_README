@@ -85,4 +85,5 @@ DEBEMAIL="<Your email address>"
   This will create a directory "working-dir" with dolibarr sources and will add sources from ~eldy/dolibarr/debian
 - Test package sources
     sudo pbuilder build <working-dir>/<project>_<version>.dsc
+    Example: sudo pbuilder build working-dir/valentina_0.2.2.dsc
 

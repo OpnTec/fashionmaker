@@ -20,6 +20,10 @@ set -e
 
 case "$1" in
     configure)
+
+    echo "ldocnfig..." >&2
+    ldconfig
+    ;;
     
 	if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ] ; then
 	update-menus
