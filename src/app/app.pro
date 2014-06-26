@@ -541,9 +541,9 @@ CONFIG(debug, debug|release){
         }
     }
 
-    #Calculate revision number only in release mode. Change revision number each time need recompilation
+    #Calculate revision number only in release mode. Change revision number each time requare recompilation
     #precompiled headers file.
-    DEFINES += LOCAL_REVISION=0
+    DEFINES += "LOC_REV=0"
 }else{
     # Release
     *-g++{
@@ -553,11 +553,11 @@ CONFIG(debug, debug|release){
     DEFINES += QT_NO_DEBUG_OUTPUT
     #local revision number for using in version
     !system(hg) {
-        DEFINES += LOCAL_REVISION=0
+        DEFINES += "LOC_REV=0"
     }
     else
     {
-        DEFINES += LOCAL_REVISION=$$system(hg parents --template '{rev}')
+        DEFINES += LOC_REV=$$system(hg parents --template '{rev}')
     }
 }
 
