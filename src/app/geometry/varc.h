@@ -57,7 +57,6 @@ public:
     VPointF            GetCenter () const;
     QPointF            GetP1() const;
     QPointF            GetP2 () const;
-    QPainterPath       GetPath() const;
     qreal              AngleArc() const;
     QVector<QPointF>   GetPoints () const;
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;

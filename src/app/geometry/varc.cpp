@@ -130,31 +130,6 @@ QPointF VArc::GetP2 () const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetPath return QPainterPath for this arc.
- * @return path.
- */
-QPainterPath VArc::GetPath() const
-{
-    QPainterPath path;
-
-    QVector<QPointF> points = GetPoints();
-    if (points.count() >= 2)
-    {
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            path.moveTo(points.at(i));
-            path.lineTo(points.at(i+1));
-        }
-    }
-    else
-    {
-        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
-    }
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief AngleArc calculate arc angle.
  * @return angle in degree.
  */
