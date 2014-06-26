@@ -32,7 +32,8 @@ HEADERS += \
     tools/drawTools/vtoolcutsplinepath.h \
     tools/vtooluniondetails.h \
     tools/drawTools/vtoolcutarc.h \
-    tools/drawTools/vabstractspline.h
+    tools/drawTools/vabstractspline.h \
+    tools/drawTools/vtoolcut.h
 
 SOURCES += \
     tools/vtooldetail.cpp \
@@ -65,4 +66,5 @@ SOURCES += \
     tools/drawTools/vtoolcutsplinepath.cpp \
     tools/vtooluniondetails.cpp \
     tools/drawTools/vtoolcutarc.cpp \
-    tools/drawTools/vabstractspline.cpp
+    tools/drawTools/vabstractspline.cpp \
+    tools/drawTools/vtoolcut.cpp

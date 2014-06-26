@@ -29,13 +29,12 @@
 #ifndef VTOOLCUTARC_H
 #define VTOOLCUTARC_H
 
-#include "vtoolpoint.h"
-#include "../../widgets/vsimplecurve.h"
+#include "vtoolcut.h"
 
 /**
  * @brief The VToolCutArc class tool for cutting arc.
  */
-class VToolCutArc : public VToolPoint
+class VToolCutArc : public VToolCut
 {
     Q_OBJECT
 public:
@@ -51,36 +50,16 @@ public:
     static const QString AttrArc;
 public slots:
     virtual void FullUpdateFromFile();
-    void         ArcChoosed(quint32 id);
-    virtual void ChangedActivDraw(const QString &newName);
+    virtual void CurveChoosed(quint32 id);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void AddToFile();
     virtual void RefreshDataInFile();
-    void         RefreshGeometry();
     virtual void SaveDialog(QDomElement &domElement);
+    virtual void RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr);
 private:
     Q_DISABLE_COPY(VToolCutArc)
-
-    /** @brief formula keep formula of length */
-    QString      formula;
-
-    /** @brief arcId keep id of arc */
-    quint32       arcId;
-
-    /** @brief firstArc first arc after cutting. */
-    VSimpleCurve   *firstArc;
-
-    /** @brief secondArc second arc after cutting. */
-    VSimpleCurve   *secondArc;
-
-    /** @brief arc1id id first arc after cutting. */
-    const quint32 arc1id;
-
-    /** @brief arc2id id second arc after cutting. */
-    const quint32 arc2id;
-    void         RefreshArc(VSimpleCurve *sArc, quint32 arcid, SimpleCurvePoint tr);
 };
 
 #endif // VTOOLCUTARC_H

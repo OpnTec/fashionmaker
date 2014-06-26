@@ -33,7 +33,7 @@
 
 #include <geometry/vspline.h>
 
-const QString VToolCutSpline::ToolType = QStringLiteral("cutSpline");
+const QString VToolCutSpline::ToolType   = QStringLiteral("cutSpline");
 const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,22 +50,10 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
 VToolCutSpline::VToolCutSpline(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                                const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
                                const Source &typeCreation, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), formula(formula), splineId(splineId), firstSpline(), secondSpline(),
-      spl1id(spl1id), spl2id(spl2id)
+    :VToolCut(doc, data, id, formula, splineId, spl1id, spl2id, parent)
 {
-    Q_ASSERT_X(splineId > 0, Q_FUNC_INFO, "splineId <= 0");
-    Q_ASSERT_X(spl1id > 0, Q_FUNC_INFO, "spl1id <= 0");
-    Q_ASSERT_X(spl2id > 0, Q_FUNC_INFO, "spl2id <= 0");
-
-    firstSpline = new VSimpleCurve(spl1id, &currentColor, &factor);
-    RefreshSpline(firstSpline, spl1id, SimpleCurvePoint::ForthPoint);
-    firstSpline->setParentItem(this);
-    connect(firstSpline, &VSimpleCurve::Choosed, this, &VToolCutSpline::SplineChoosed);
-
-    secondSpline = new VSimpleCurve(spl2id, &currentColor, &factor);
-    RefreshSpline(secondSpline, spl2id, SimpleCurvePoint::FirstPoint);
-    secondSpline->setParentItem(this);
-    connect(secondSpline, &VSimpleCurve::Choosed, this, &VToolCutSpline::SplineChoosed);
+    RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
+    RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
 
     if (typeCreation == Source::FromGui)
     {
@@ -88,7 +76,7 @@ void VToolCutSpline::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
-    dialogTool->setSplineId(splineId, id);
+    dialogTool->setSplineId(curveCutId, id);
     dialogTool->setPointName(point->name());
 }
 
@@ -196,46 +184,17 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
  */
 void VToolCutSpline::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        formula = domElement.attribute(AttrLength, "");
-        splineId = domElement.attribute(AttrSpline, "").toUInt();
-    }
-    RefreshGeometry();
+    FullUpdateCurveFromFile(AttrSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SplineChoosed send signal about selection from spline.
+ * @brief CurveChoosed send signal about selection from spline.
  * @param id object id in container.
  */
-void VToolCutSpline::SplineChoosed(quint32 id)
+void VToolCutSpline::CurveChoosed(quint32 id)
 {
     emit ChoosedTool(id, SceneObject::Spline);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolCutSpline::ChangedActivDraw(const QString &newName)
-{
-    bool flag = true;
-    if (nameActivDraw == newName)
-    {
-        currentColor = Qt::black;
-        flag = true;
-    }
-    else
-    {
-        currentColor = Qt::gray;
-        flag = false;
-    }
-    firstSpline->ChangedActivDraw(flag);
-    secondSpline->ChangedActivDraw(flag);
-    VToolPoint::ChangedActivDraw(newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +233,7 @@ void VToolCutSpline::AddToFile()
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrLength, formula);
-    doc->SetAttribute(domElement, AttrSpline, splineId);
+    doc->SetAttribute(domElement, AttrSpline, curveCutId);
 
     AddToCalculation(domElement);
 }
@@ -293,28 +252,8 @@ void VToolCutSpline::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
         doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrLength, formula);
-        doc->SetAttribute(domElement, AttrSpline, splineId);
+        doc->SetAttribute(domElement, AttrSpline, curveCutId);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry  refresh item on scene.
- */
-void VToolCutSpline::RefreshGeometry()
-{
-    RefreshSpline(firstSpline, spl1id, SimpleCurvePoint::ForthPoint);
-    RefreshSpline(secondSpline, spl2id, SimpleCurvePoint::FirstPoint);
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RemoveReferens decrement referens value for used objects.
- */
-void VToolCutSpline::RemoveReferens()
-{
-    doc->DecrementReferens(splineId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,14 +272,14 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RefreshSpline refresh spline on scene.
- * @param spline spline.
- * @param splid spline id.
- * @param tr spline type.
+ * @brief RefreshCurve refresh curve on scene.
+ * @param curve curve.
+ * @param curveId curve id.
+ * @param tr point type.
  */
-void VToolCutSpline::RefreshSpline(VSimpleCurve *spline, quint32 splid, SimpleCurvePoint tr)
+void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr)
 {
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(splid);
+    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(curveId);
     QPainterPath path;
     path.addPath(spl->GetPath());
     path.setFillRule( Qt::WindingFill );
@@ -352,5 +291,5 @@ void VToolCutSpline::RefreshSpline(VSimpleCurve *spline, quint32 splid, SimpleCu
     {
         path.translate(-spl->GetP4().toQPointF().x(), -spl->GetP4().toQPointF().y());
     }
-    spline->setPath(path);
+    curve->setPath(path);
 }

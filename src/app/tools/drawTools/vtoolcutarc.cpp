@@ -33,7 +33,7 @@
 #include "../../geometry/varc.h"
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
-const QString VToolCutArc::AttrArc = QStringLiteral("arc");
+const QString VToolCutArc::AttrArc  = QStringLiteral("arc");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -51,22 +51,10 @@ const QString VToolCutArc::AttrArc = QStringLiteral("arc");
 VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                          const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
                          const Source &typeCreation, QGraphicsItem * parent)
-    :VToolPoint(doc, data, id, parent), formula(formula), arcId(arcId), firstArc(), secondArc(), arc1id(arc1id),
-      arc2id(arc2id)
+    :VToolCut(doc, data, id, formula, arcId, arc1id, arc2id, parent)
 {
-    Q_ASSERT_X(arcId > 0, Q_FUNC_INFO, "arcId <= 0");
-    Q_ASSERT_X(arc1id > 0, Q_FUNC_INFO, "arc1id <= 0");
-    Q_ASSERT_X(arc2id > 0, Q_FUNC_INFO, "arc2id <= 0");
-
-    firstArc = new VSimpleCurve(arc1id, &currentColor, &factor);
-    RefreshArc(firstArc, arc1id, SimpleCurvePoint::ForthPoint);
-    firstArc->setParentItem(this);
-    connect(firstArc, &VSimpleCurve::Choosed, this, &VToolCutArc::ArcChoosed);
-
-    secondArc = new VSimpleCurve(arc2id, &currentColor, &factor);
-    RefreshArc(secondArc, arc2id, SimpleCurvePoint::FirstPoint);
-    secondArc->setParentItem(this);
-    connect(secondArc, &VSimpleCurve::Choosed, this, &VToolCutArc::ArcChoosed);
+    RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
+    RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
 
     if (typeCreation == Source::FromGui)
     {
@@ -89,7 +77,7 @@ void VToolCutArc::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
-    dialogTool->setArcId(arcId, id);
+    dialogTool->setArcId(curveCutId, id);
     dialogTool->setPointName(point->name());
 }
 
@@ -204,46 +192,17 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
  */
 void VToolCutArc::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        formula = domElement.attribute(AttrLength, "");
-        arcId = domElement.attribute(AttrArc, "").toUInt();
-    }
-    RefreshGeometry();
+    FullUpdateCurveFromFile(AttrArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ArcChoosed send signal about selection from cutted arc.
+ * @brief CurveChoosed send signal about selection from cutted arc.
  * @param id object id in container.
  */
-void VToolCutArc::ArcChoosed(quint32 id)
+void VToolCutArc::CurveChoosed(quint32 id)
 {
     emit ChoosedTool(id, SceneObject::Arc);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolCutArc::ChangedActivDraw(const QString &newName)
-{
-    bool flag = true;
-    if (nameActivDraw == newName)
-    {
-        currentColor = Qt::black;
-        flag = true;
-    }
-    else
-    {
-        currentColor = Qt::gray;
-        flag = false;
-    }
-    firstArc->ChangedActivDraw(flag);
-    secondArc->ChangedActivDraw(flag);
-    VToolPoint::ChangedActivDraw(newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -282,7 +241,7 @@ void VToolCutArc::AddToFile()
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrLength, formula);
-    doc->SetAttribute(domElement, AttrArc, arcId);
+    doc->SetAttribute(domElement, AttrArc, curveCutId);
 
     AddToCalculation(domElement);
 }
@@ -301,19 +260,8 @@ void VToolCutArc::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
         doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrLength, formula);
-        doc->SetAttribute(domElement, AttrArc, arcId);
+        doc->SetAttribute(domElement, AttrArc, curveCutId);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry  refresh item on scene.
- */
-void VToolCutArc::RefreshGeometry()
-{
-    RefreshArc(firstArc, arc1id, SimpleCurvePoint::ForthPoint);
-    RefreshArc(secondArc, arc2id, SimpleCurvePoint::FirstPoint);
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,14 +280,14 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RefreshArc refresh arc on scene.
- * @param sArc arc.
- * @param arcid arc id.
- * @param tr arc type.
+ * @brief RefreshCurve refresh curve on scene.
+ * @param curve curve.
+ * @param curveId curve id.
+ * @param tr point type.
  */
-void VToolCutArc::RefreshArc(VSimpleCurve *sArc, quint32 arcid, SimpleCurvePoint tr)
+void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr)
 {
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(arcid);
+    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(curveId);
     QPainterPath path;
     path.addPath(arc->GetPath());
     path.setFillRule( Qt::WindingFill );
@@ -351,5 +299,5 @@ void VToolCutArc::RefreshArc(VSimpleCurve *sArc, quint32 arcid, SimpleCurvePoint
     {
         path.translate(-arc->GetP2().x(), -arc->GetP2().y());
     }
-    sArc->setPath(path);
+    curve->setPath(path);
 }

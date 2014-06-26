@@ -55,13 +55,13 @@ protected:
 private:
     Q_DISABLE_COPY(VSimpleCurve)
     /** @brief id spline id. */
-    quint32         id;
+    quint32           id;
 
     /** @brief factor scale factor. */
-    qreal           *factor;
+    qreal             *factor;
 
     /** @brief currentColor current color. */
-    Qt::GlobalColor *currentColor;
+    Qt::GlobalColor   *currentColor;
 };
 
 #endif // VSIMPLECURVE_H

@@ -29,14 +29,13 @@
 #ifndef VTOOLCUTSPLINEPATH_H
 #define VTOOLCUTSPLINEPATH_H
 
-#include "vtoolpoint.h"
-#include "../../widgets/vsimplecurve.h"
+#include "vtoolcut.h"
 
 /**
  * @brief The VToolCutSplinePath class for tool CutSplinePath. This tool find point on splinePath and cut splinePath on
  * two.
  */
-class VToolCutSplinePath : public VToolPoint
+class VToolCutSplinePath : public VToolCut
 {
     Q_OBJECT
 public:
@@ -53,38 +52,16 @@ public:
     static const QString AttrSplinePath;
 public slots:
     virtual void  FullUpdateFromFile();
-    void          SplineChoosed(quint32 id);
-    virtual void  ChangedActivDraw(const QString &newName);
+    virtual void  CurveChoosed(quint32 id);
     virtual void  ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void  AddToFile();
     virtual void  RefreshDataInFile();
-    void          RefreshGeometry();
-    virtual void  RemoveReferens();
     virtual void  SaveDialog(QDomElement &domElement);
+    virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr);
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
-
-    /** @brief formula keep formula of length */
-    QString       formula;
-
-    /** @brief splineId keep id of spline. */
-    quint32        splinePathId;
-
-    /** @brief firstSpline first splinePath after cutting. */
-    VSimpleCurve *firstSpline;
-
-    /** @brief secondSpline second splinePath after cutting. */
-    VSimpleCurve *secondSpline;
-
-    /** @brief splPath1id id first splinePath after cutting. */
-    const quint32  splPath1id;
-
-    /** @brief splPath2id id second splinePath after cutting. */
-    const quint32  splPath2id;
-
-    void          RefreshSpline(VSimpleCurve *spline, quint32 splPathid, SimpleCurvePoint tr);
 };
 
 #endif // VTOOLCUTSPLINEPATH_H
