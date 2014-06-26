@@ -148,6 +148,7 @@ protected:
     virtual void            RemoveReferens(){}
     virtual void            DeleteTool(bool ask = true);
     Qt::PenStyle            LineStyle();
+    static int              ConfirmDeletion();
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

@@ -496,17 +496,11 @@ void VToolDetail::DeleteTool(bool ask)
     DeleteDetail *delDet = new DeleteDetail(doc, id);
     if (ask)
     {
-        QMessageBox msgBox;
-        msgBox.setText(tr("Confirm the deletion."));
-        msgBox.setInformativeText(tr("Do you really want delete?"));
-        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Question);
-        if (msgBox.exec() == QMessageBox::Cancel)
+        if (ConfirmDeletion() == QMessageBox::Cancel)
         {
             return;
         }
-        /*Ugly hack. If UnionDetails delete detail no need emit FullParsing */
+        /* If UnionDetails tool delete detail no need emit FullParsing.*/
         connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     }
     qApp->getUndoStack()->push(delDet);

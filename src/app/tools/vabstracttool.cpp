@@ -246,13 +246,7 @@ void VAbstractTool::DeleteTool(bool ask)
 {
     if (ask)
     {
-        QMessageBox msgBox;
-        msgBox.setText(tr("Confirm the deletion."));
-        msgBox.setInformativeText(tr("Do you really want delete?"));
-        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Question);
-        if (msgBox.exec() == QMessageBox::Cancel)
+        if (ConfirmDeletion() == QMessageBox::Cancel)
         {
             return;
         }
@@ -294,6 +288,18 @@ Qt::PenStyle VAbstractTool::LineStyle()
             return Qt::SolidLine;
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VAbstractTool::ConfirmDeletion()
+{
+    QMessageBox msgBox;
+    msgBox.setText(tr("Confirm the deletion."));
+    msgBox.setInformativeText(tr("Do you really want delete?"));
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Question);
+    return msgBox.exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
