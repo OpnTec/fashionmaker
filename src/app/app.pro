@@ -551,14 +551,13 @@ CONFIG(debug, debug|release){
     }
 
     DEFINES += QT_NO_DEBUG_OUTPUT
+
     #local revision number for using in version
-    !system(hg) {
-        DEFINES += "LOC_REV=0"
+    HG_REV=$$system(hg parents --template '{rev}')
+    isEmpty(HG_REV){
+        HG_REV = 0
     }
-    else
-    {
-        DEFINES += LOC_REV=$$system(hg parents --template '{rev}')
-    }
+    DEFINES += "LOC_REV=$${HG_REV}"
 }
 
 message(Qt version: $$[QT_VERSION])

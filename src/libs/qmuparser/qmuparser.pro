@@ -490,4 +490,3 @@ QMAKE_DISTCLEAN += \
     $${DESTDIR}/* \
     $${OBJECTS_DIR}/* \
     $${MOC_DIR}/*
-
