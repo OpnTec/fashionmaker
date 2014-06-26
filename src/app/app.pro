@@ -543,7 +543,7 @@ CONFIG(debug, debug|release){
 
     #Calculate revision number only in release mode. Change revision number each time need recompilation
     #precompiled headers file.
-    DEFINES += LOCAL_REVISION=\\\"0\\\"
+    DEFINES += LOCAL_REVISION=0
 }else{
     # Release
     *-g++{
@@ -553,7 +553,7 @@ CONFIG(debug, debug|release){
     DEFINES += QT_NO_DEBUG_OUTPUT
     #local revision number for using in version
     !system(hg) {
-        DEFINES += LOCAL_REVISION=\\\"0\\\"
+        DEFINES += LOCAL_REVISION=0
     }
     else
     {
