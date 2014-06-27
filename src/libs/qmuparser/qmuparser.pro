@@ -482,7 +482,7 @@ LIBDIR = $$PREFIX/lib
 #MAKE INSTALL
 target.path = $$LIBDIR/$${TARGET}/
 INSTALLS += \
-    lib
+    target
 }
 
 # Remove generated files at cleaning
