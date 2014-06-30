@@ -480,7 +480,7 @@ isEmpty(PREFIX) {
 }
 LIBDIR = $$PREFIX/lib
 #MAKE INSTALL
-target.path = $$LIBDIR/$${TARGET}/
+target.path = $$LIBDIR/
 INSTALLS += \
     target
 }

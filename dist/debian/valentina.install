@@ -1,0 +1,7 @@
+usr/bin/*
+usr/lib/valentina/lib*
+usr/share/valentina/translations/*
+usr/share/valentina/tables/standard/*
+usr/share/pixmaps/*
+usr/share/applications/*
+dist/application-x-valentina-pattern.png usr/share/pixmaps

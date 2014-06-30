@@ -606,9 +606,9 @@ DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
 target.path = $$BINDIR
 desktop.path = $$DATADIR/applications/
-desktop.files += dist/$${TARGET}.desktop
+desktop.files += ../../dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/
-pixmaps.files += dist/$${TARGET}.png
+pixmaps.files += ../../dist/$${TARGET}.png
 translations.path = $$DATADIR/$${TARGET}/translations/
 translations.files = $$INSTALL_TRANSLATIONS
 standard.path = $$DATADIR/$${TARGET}/tables/standard/
