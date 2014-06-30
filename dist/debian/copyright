@@ -10,7 +10,7 @@ Files: debian/*
 Copyright: 2013-2014 Roman Telezhynskyi <dismine@gmail.com>
 License: GPL-3.0+
 
-Files: usr/lib/valentina/qmuparser.so.*
+Files: usr/lib/libqmuparser.so.*
 Copyright: 2004-2014 Ingo Berg <ingo_berg@gmx.de>, 2014 Roman Telezhynskyi <dismine@gmail.com>
 License: MIT 
 
@@ -50,5 +50,3 @@ License: MIT
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 
-The Debian packaging is © 2014, Roman Telezhynskyi <dismine@gmail.com> and
-is licensed under the GPL-3.0+, see `/usr/share/common-licenses/GPL-3'.

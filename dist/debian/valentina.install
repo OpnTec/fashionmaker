@@ -1,5 +1,5 @@
 usr/bin/*
-usr/lib/valentina/lib*
+usr/lib/lib*
 usr/share/valentina/translations/*
 usr/share/valentina/tables/standard/*
 usr/share/pixmaps/*
