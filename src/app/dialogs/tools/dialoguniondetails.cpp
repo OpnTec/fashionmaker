@@ -145,6 +145,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 {
                     ++numberP;
                     emit ToolTip("");
+                    this->setModal(true);
                     this->show();
                     return;
                 }

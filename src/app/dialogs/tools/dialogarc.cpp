@@ -184,6 +184,7 @@ void DialogArc::ChoosedObject(quint32 id, const SceneObject &type)
 
         ChangeCurrentText(ui->comboBoxBasePoint, point->name());
         emit ToolTip("");
+        this->setModal(true);
         this->show();
     }
 }

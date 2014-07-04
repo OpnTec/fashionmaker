@@ -130,6 +130,7 @@ void DialogBisector::ChoosedObject(quint32 id, const SceneObject &type)
             }
             if (isInitialized == false)
             {
+                this->setModal(true);
                 this->show();
             }
         }

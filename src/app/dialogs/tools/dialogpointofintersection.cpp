@@ -106,6 +106,7 @@ void DialogPointOfIntersection::ChoosedObject(quint32 id, const SceneObject &typ
             }
             if (isInitialized == false)
             {
+                this->setModal(true);
                 this->show();
             }
         }

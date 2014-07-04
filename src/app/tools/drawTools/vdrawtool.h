@@ -121,6 +121,7 @@ protected:
                 QGraphicsScene *scene = tool->scene();
                 QList<QGraphicsView *> list =  scene->views();
                 dialog = new Dialog(getData(), list.first());
+                dialog->setModal(true);
 
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
                         &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);

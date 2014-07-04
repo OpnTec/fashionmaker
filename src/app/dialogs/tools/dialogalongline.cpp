@@ -108,6 +108,7 @@ void DialogAlongLine::ChoosedObject(quint32 id, const SceneObject &type)
                 number = 0;
                 if (isInitialized == false)
                 {
+                    this->setModal(true);
                     this->show();
                 }
             }

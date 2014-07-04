@@ -3,7 +3,7 @@
  <class>DialogSinglePoint</class>
  <widget class="QDialog" name="DialogSinglePoint">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -24,7 +24,7 @@
    <locale language="English" country="UnitedStates"/>
   </property>
   <property name="modal">
-   <bool>false</bool>
+   <bool>true</bool>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">

@@ -95,6 +95,7 @@ void DialogCutArc::ChoosedObject(quint32 id, const SceneObject &type)
         const VArc *arc = data->GeometricObject<const VArc *>(id);
         ChangeCurrentText(ui->comboBoxArc, arc->name());
         emit ToolTip("");
+        this->setModal(true);
         this->show();
     }
 }

@@ -121,6 +121,7 @@ void DialogCutSplinePath::ChoosedObject(quint32 id, const SceneObject &type)
         const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
         ChangeCurrentText(ui->comboBoxSplinePath, splPath->name());
         emit ToolTip("");
+        this->setModal(true);
         this->show();
     }
 }

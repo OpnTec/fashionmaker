@@ -123,6 +123,7 @@ void DialogLineIntersect::ChoosedObject(quint32 id, const SceneObject &type)
             {
                 flagPoint = CheckIntersecion();
                 CheckState();
+                this->setModal(true);
                 this->show();
                 connect(ui->comboBoxP1Line1,
                         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,

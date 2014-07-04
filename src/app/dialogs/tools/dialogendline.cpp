@@ -91,6 +91,7 @@ void DialogEndLine::ChoosedObject(quint32 id, const SceneObject &type)
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
         ChangeCurrentText(ui->comboBoxBasePoint, point->name());
         emit ToolTip("");
+        this->setModal(true);
         this->show();
     }
 }

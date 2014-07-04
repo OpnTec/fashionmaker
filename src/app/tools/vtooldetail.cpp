@@ -408,6 +408,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         QGraphicsScene *scene = this->scene();
         QList<QGraphicsView *> list =  scene->views();
         dialog = new DialogDetail(getData(), list.first());
+        dialog->setModal(true);
         connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                 dialog, &DialogTool::ChoosedObject);
         connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);

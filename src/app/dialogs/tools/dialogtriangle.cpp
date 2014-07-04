@@ -96,6 +96,7 @@ void DialogTriangle::ChoosedObject(quint32 id, const SceneObject &type)
                 emit ToolTip(tr(""));
                 if (isInitialized == false)
                 {
+                    this->setModal(true);
                     this->show();
                 }
                 break;

@@ -106,6 +106,7 @@ void DialogLine::setFirstPoint(const quint32 &value)
  */
 void DialogLine::DialogAccepted()
 {
+    //TODO check if points different
     qint32 index = ui->comboBoxFirstPoint->currentIndex();
     firstPoint = qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(index));
     index = ui->comboBoxSecondPoint->currentIndex();
@@ -147,6 +148,7 @@ void DialogLine::ChoosedObject(quint32 id, const SceneObject &type)
             }
             if (isInitialized == false)
             {
+                this->setModal(true);
                 this->show();
             }
         }

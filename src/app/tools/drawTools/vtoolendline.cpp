@@ -71,6 +71,7 @@ VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  
 void VToolEndLine::setDialog()
 {
     SCASSERT(dialog != nullptr);
+    dialog->setModal(true);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
