@@ -575,14 +575,6 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 
 win32:RC_FILE = share/resources/valentina.rc
 
-# Remove generated files at cleaning
-QMAKE_DISTCLEAN += $${DESTDIR}/* \
-                   $${OBJECTS_DIR}/* \
-                   $${UI_DIR}/* \
-                   $${MOC_DIR}/* \
-                   $${RCC_DIR}/* \
-                   $$PWD/share/translations/valentina_*.qm
-
 INSTALL_TRANSLATIONS += \
     share/translations/valentina_ru.qm \
     share/translations/valentina_uk.qm \

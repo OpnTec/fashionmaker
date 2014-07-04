@@ -472,21 +472,3 @@ CONFIG(debug, debug|release){
 
     DEFINES += QT_NO_DEBUG_OUTPUT
 }
-
-unix {
-#VARIABLES
-isEmpty(PREFIX) {
-  PREFIX = /usr
-}
-LIBDIR = $$PREFIX/lib
-#MAKE INSTALL
-target.path = $$LIBDIR/
-INSTALLS += \
-    target
-}
-
-# Remove generated files at cleaning
-QMAKE_DISTCLEAN += \
-    $${DESTDIR}/* \
-    $${OBJECTS_DIR}/* \
-    $${MOC_DIR}/*
