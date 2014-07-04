@@ -72,6 +72,7 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent)
     //Keep synchronize with VAbstractTool styles list!!!
     lineStyles<<tr("No line")<<tr("Line")<<tr("Dash Line")<<tr("Dot Line")<<tr("Dash Dot Line")
              <<tr("Dash Dot Dot Line");
+    this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
