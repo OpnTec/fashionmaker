@@ -163,6 +163,10 @@ void MainWindow::ActionNewPP()
                 return;
             }
         }
+
+        //Set scene size to size scene view
+        VAbstractTool::NewSceneRect(sceneDraw, view);
+        VAbstractTool::NewSceneRect(sceneDetails, view);
     }
     else
     {
