@@ -50,6 +50,8 @@
 #include <QSourceLocation>
 #include <QUndoStack>
 #include <QAction>
+#include <QProcess>
+#include <QSettings>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -61,8 +63,8 @@ MainWindow::MainWindow(QWidget *parent)
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
-      currentToolBoxIndex(0), drawMode(true), recentFileActs{0, 0, 0, 0, 0}, separatorAct(nullptr),
-      autoSaveTimer(nullptr), guiEnabled(true)
+      currentToolBoxIndex(0), drawMode(true), recentFileActs{nullptr, nullptr, nullptr, nullptr, nullptr},
+      separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true)
 {
     CreateActions();
     CreateMenus();
@@ -912,7 +914,7 @@ void MainWindow::OpenRecentFile()
     QAction *action = qobject_cast<QAction *>(sender());
     if (action)
     {
-        LoadPattern(action->data().toString());
+        OpenPattern(action->data().toString());
     }
 }
 
@@ -1464,43 +1466,24 @@ bool MainWindow::Save()
  */
 void MainWindow::Open()
 {
-    if (MaybeSave())
-    {
-        QString filter(tr("Pattern files (*.val)"));
-        //Get list last open files
-        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                           QApplication::applicationName());
-        QStringList files = settings.value("recentFileList").toStringList();
-        QString dir;
-        if (files.isEmpty())
-        {
-            dir = QDir::homePath();
-        }
-        else
-        {
-            //Absolute path to last open file
-            dir = QFileInfo(files.first()).absolutePath();
-        }
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
-        if (fileName.isEmpty() == false && fileName != curFile)
-        {
-            if (curFile.isEmpty())
-            {
-                LoadPattern(fileName);
 
-                VAbstractTool::NewSceneRect(sceneDraw, view);
-                VAbstractTool::NewSceneRect(sceneDetails, view);
-            }
-            else
-            {
-                QProcess *v = new QProcess(this);
-                QStringList arguments;
-                arguments << fileName;
-                v->startDetached(QCoreApplication::applicationFilePath(), arguments);
-                delete v;
-            }
-        }
+    const QString filter(tr("Pattern files (*.val)"));
+    //Get list last open files
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+    const QStringList files = settings.value("recentFileList").toStringList();
+    QString dir;
+    if (files.isEmpty())
+    {
+        dir = QDir::homePath();
     }
+    else
+    {
+        //Absolute path to last open file
+        dir = QFileInfo(files.first()).absolutePath();
+    }
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
+    OpenPattern(filePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2325,4 +2308,23 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
         }
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::OpenPattern(const QString &filePath)
+{
+    if (filePath.isEmpty() == false && filePath != curFile)
+    {
+        if (curFile.isEmpty() && this->isWindowModified() == false)
+        {
+            LoadPattern(filePath);
+
+            VAbstractTool::NewSceneRect(sceneDraw, view);
+            VAbstractTool::NewSceneRect(sceneDetails, view);
+        }
+        else
+        {
+            VApplication::NewValentina(filePath);
+        }
+    }
 }

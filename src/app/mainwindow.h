@@ -74,6 +74,9 @@ public slots:
     void               Open();
     void               Preferences();
     void               NewPattern();
+    void               ShowToolTip(const QString &toolTip);
+    void               OpenRecentFile();
+    void               Clear();
 
     void               currentDrawChanged( int index );
     void               OptionDraw();
@@ -134,9 +137,6 @@ public slots:
     void               AboutQt();
     void               PatternProperties();
 
-    void               ShowToolTip(const QString &toolTip);
-    void               OpenRecentFile();
-    void               Clear();
     /**
      * @brief Edit XML code of pattern
      */
@@ -254,6 +254,7 @@ private:
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
     QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
+    void               OpenPattern(const QString &filePath);
 };
 
 #endif // MAINWINDOW_H

@@ -37,6 +37,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QProcess>
 #include <QSettings>
 #include <QUndoStack>
 
@@ -66,6 +67,20 @@ VApplication::VApplication(int &argc, char **argv)
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NewValentina start Valentina in new process, send path to pattern file in argument.
+ * @param fileName path to pattern file.
+ */
+void VApplication::NewValentina(const QString &fileName)
+{
+    QProcess *v = new QProcess();
+    QStringList arguments;
+    arguments << fileName;
+    v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+    delete v;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
