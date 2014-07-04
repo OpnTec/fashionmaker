@@ -9,7 +9,6 @@
 				<xs:element name="size">
 					<xs:complexType>
 						<xs:attribute name="base" type="xs:double"></xs:attribute>
-					   	<xs:attribute name="name" type="xs:string"></xs:attribute>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="height">
@@ -21,7 +20,6 @@
 				<xs:element name="body-measurements">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="unit" type="units"></xs:element>
 							<xs:element name="head_and_neck">
 								<xs:complexType>
 									<xs:sequence>
@@ -29,28 +27,28 @@
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="mid_neck_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_base_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="head_and_neck_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -63,315 +61,315 @@
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="center_back_waist_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="side_waist_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="trunk_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_chest_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="bust_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="under_bust_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="high_hip_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hip_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_front_chest_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_chest_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="across_front_shoulder_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="across_back_shoulder_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_back_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="bustpoint_to_bustpoint">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="halter_bustpoint_to_bustpoint">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_bustpoint">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="crotch_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="rise_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_drop">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_slope_degrees">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_shoulder_slope_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_shoulder_slope_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_shoulder_to_waist_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_shoulder_to_waist_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_neck_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_neck_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_upper_chest_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_upper_chest_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_waist_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_waist_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_upper_hip_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_upper_hip_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_hip_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_hip_arc">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="chest_slope">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_slope">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_waist_slope">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="back_waist_slope">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_neck_to_upper_chest_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_neck_to_bust_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -384,70 +382,70 @@
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="elbow_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="upper_arm_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="wrist_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="scye_depth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_and_arm_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="underarm_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="cervicale_to_wrist_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_to_elbow_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="arm_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -460,21 +458,21 @@
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hand_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hand_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -487,49 +485,49 @@
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="mid_thigh_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="knee_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="calf_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="ankle_girth">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="knee_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="ankle_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -542,14 +540,14 @@
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="foot_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -558,67 +556,60 @@
 							<xs:element name="heights">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="height">
-											<xs:complexType>
-												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
-											</xs:complexType>
-										</xs:element>
 										<xs:element name="cervicale_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="cervicale_to_knee_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="high_hip_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hip_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_hip_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_knee_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="crotch_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>
@@ -627,347 +618,340 @@
 							<xs:element name="extended">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="size">
-											<xs:complexType>
-												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
-											</xs:complexType>
-										</xs:element>
 										<xs:element name="height_front_neck_base_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_base_neck_side_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_shoulder_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_nipple_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_back_angle_axilla">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_scapular_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_under_buttock_folds">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hips_excluding_protruding_abdomen">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="girth_foot_instep">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="side_waist_to_floor">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_waist_to_floor">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="arc_through_groin_area">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_plane_seat">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_radial_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_third_finger">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_first_line_chest_circumference">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_waist_length">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="arc_through_shoulder_joint">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_back_line_chest_circumference">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_neck_side">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="arc_length_upper_body">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="chest_width">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="anteroposterior_diameter_hands">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_clavicular_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="height_armhole_slash">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="slash_shoulder_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_neck">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_neck_for_shirts">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_chest_first">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_chest_second">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_chest_third">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_waist">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_hips_considering_protruding_abdomen">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="half_girth_hips_excluding_protruding_abdomen">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="girth_knee_flexed_feet">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_transverse_diameter">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="front_slash_shoulder_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_front_waist_line">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="hand_vertical_diameter">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_knee_point">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="waist_to_knee">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="shoulder_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>										
 										<xs:element name="head_height">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="body_position">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="arc_behind_shoulder_girdle">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="neck_to_neck_base">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="depth_waist_first">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="depth_waist_second">
 											<xs:complexType>
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 												<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
-												<xs:attribute name="size_increace" type="xs:double" use="required"></xs:attribute>
+												<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
 									</xs:sequence>

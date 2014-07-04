@@ -3,7 +3,7 @@
 	<version>0.1.0</version>
 	<description>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</description>
 	<unit>mm</unit>
-	<size base="500">
+	<size base="500"/>
 	<height base="1760"/>
 	<body-measurements>
         <head_and_neck>
@@ -13,7 +13,7 @@
             <head_and_neck_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </head_and_neck>
         <torso>
-            <center_front_waist_length value="0.0" size_increase="" height_increase=""/><!--Нету перевода-->
+            <center_front_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <center_back_waist_length value="438" size_increase="2" height_increase ="10"/><!--Дтс(Длина спины до талии с учетом выступа лопаток)-->
             <shoulder_length value="160" size_increase="1" height_increase ="4"/><!--Шп(Длина плечевого ската)-->
             <side_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Дб(Длина боковой части)-->
@@ -56,7 +56,7 @@
             <back_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <front_waist_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <back_waist_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
-            <front_neck_to_upper_chest_height value="0.0" size_increase="0" height_increase=""/><!--Нету перевода-->
+            <front_neck_to_upper_chest_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <front_neck_to_bust_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </torso>
         <arm>

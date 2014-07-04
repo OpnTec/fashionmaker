@@ -1466,7 +1466,6 @@ bool MainWindow::Save()
  */
 void MainWindow::Open()
 {
-
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
