@@ -98,8 +98,8 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/icon/24x24/putHereLeft.png</normaloff>:/icon/24x24/putHereLeft.png</iconset>
+        <iconset resource="../../share/resources/icon.qrc">
+         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
        </property>
        <property name="iconSize">
         <size>
