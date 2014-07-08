@@ -59,7 +59,7 @@ VApplication::VApplication(int &argc, char **argv)
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
       postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr),
-      mainWindow(nullptr)
+      mainWindow(nullptr), openingPattern(false)
 {
     undoStack = new QUndoStack(this);
 
@@ -1966,4 +1966,17 @@ void VApplication::setMainWindow(QWidget *value)
     SCASSERT(value != nullptr)
     mainWindow = value;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::getOpeningPattern() const
+{
+    return openingPattern;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::setOpeningPattern()
+{
+    openingPattern = !openingPattern;
+}
+
 

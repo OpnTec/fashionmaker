@@ -39,7 +39,15 @@ DialogUndo::DialogUndo(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->pushButtonUndo, &QPushButton::clicked, this, &DialogUndo::Undo);
+    bool opening = qApp->getOpeningPattern();
+    if (opening)
+    {
+        ui->pushButtonUndo->setDisabled(opening);
+    }
+    else
+    {
+        connect(ui->pushButtonUndo, &QPushButton::clicked, this, &DialogUndo::Undo);
+    }
     connect(ui->pushButtonFix, &QPushButton::clicked, this, &DialogUndo::Fix);
     connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogUndo::Cancel);
 }

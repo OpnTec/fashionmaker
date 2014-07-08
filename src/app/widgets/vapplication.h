@@ -78,6 +78,8 @@ public:
     void               setAutoSaveTimer(QTimer *value);
     QWidget            *getMainWindow() const;
     void               setMainWindow(QWidget *value);
+    bool               getOpeningPattern() const;
+    void               setOpeningPattern();
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -98,6 +100,11 @@ private:
      * modality doesn't work.
      */
     QWidget            *mainWindow;
+    /**
+     * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
+     * we can allow user use Undo option.
+     */
+    bool               openingPattern;
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();

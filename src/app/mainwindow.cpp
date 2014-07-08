@@ -2194,6 +2194,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
+    qApp->setOpeningPattern();//Begin opening file
     try
     {
         VDomDocument::ValidateXML("://schema/pattern.xsd", fileName);
@@ -2257,6 +2258,8 @@ void MainWindow::LoadPattern(const QString &fileName)
         PatternWasModified(patternModified);
     }
     helpLabel->setText(tr("File loaded"));
+
+    qApp->setOpeningPattern();// End opening file
 }
 
 //---------------------------------------------------------------------------------------------------------------------
