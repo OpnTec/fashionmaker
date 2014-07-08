@@ -41,6 +41,10 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
 {
     ui->setupUi(this);
 
+    QRect position = this->frameGeometry();
+    position.moveCenter(QDesktopWidget().availableGeometry().center());
+    move(position.topLeft());
+
     {
         const QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
         SCASSERT(bOk != nullptr);
