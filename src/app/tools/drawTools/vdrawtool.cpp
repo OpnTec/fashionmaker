@@ -183,6 +183,7 @@ void VDrawTool::SetFactor(qreal factor)
  */
 qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
 {
+    SCASSERT(data != nullptr)
     qreal result = 0;
     Calculator *cal = nullptr;
     try
@@ -193,7 +194,12 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
     }
     catch (qmu::QmuParserError &e)
     {
-        Q_UNUSED(e)
+        //Q_UNUSED(e)
+        qDebug() << "\nMath parser error:\n"
+                 << "--------------------------------------\n"
+                 << "Message:     " << e.GetMsg()  << "\n"
+                 << "Expression:  " << e.GetExpr() << "\n"
+                 << "--------------------------------------";
         delete cal;
 
         DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());

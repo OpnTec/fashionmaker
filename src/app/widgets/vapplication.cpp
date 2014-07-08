@@ -1832,7 +1832,6 @@ QString VApplication::FormulaFromUser(const QString &formula)
     }
 
     return newFormula;
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
