@@ -118,9 +118,7 @@ protected:
             QAction *selectedAction = menu.exec(event->screenPos());
             if (selectedAction == actionOption)
             {
-                QGraphicsScene *scene = tool->scene();
-                QList<QGraphicsView *> list =  scene->views();
-                dialog = new Dialog(getData(), list.first());
+                dialog = new Dialog(getData(), qApp->getMainWindow());
                 dialog->setModal(true);
 
                 connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),

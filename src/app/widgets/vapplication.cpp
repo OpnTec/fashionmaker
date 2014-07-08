@@ -58,7 +58,8 @@ VApplication::VApplication(int &argc, char **argv)
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
-      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr)
+      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr),
+      mainWindow(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -99,32 +100,32 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file. Program will be terminated."));
+        e.CriticalMessageBox(tr("Error parsing file. Program will be terminated."), mainWindow);
         abort();
     }
     catch (const VExceptionBadId &e)
     {
-        e.CriticalMessageBox(tr("Error bad id. Program will be terminated."));
+        e.CriticalMessageBox(tr("Error bad id. Program will be terminated."), mainWindow);
         abort();
     }
     catch (const VExceptionConversionError &e)
     {
-        e.CriticalMessageBox(tr("Error can't convert value. Program will be terminated."));
+        e.CriticalMessageBox(tr("Error can't convert value. Program will be terminated."), mainWindow);
         abort();
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        e.CriticalMessageBox(tr("Error empty parameter. Program will be terminated."));
+        e.CriticalMessageBox(tr("Error empty parameter. Program will be terminated."), mainWindow);
         abort();
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error wrong id. Program will be terminated."));
+        e.CriticalMessageBox(tr("Error wrong id. Program will be terminated."), mainWindow);
         abort();
     }
     catch (const VException &e)
     {
-        e.CriticalMessageBox(tr("Something's wrong!!"));
+        e.CriticalMessageBox(tr("Something's wrong!!"), mainWindow);
         return true;
     }
     catch (std::exception& e)
@@ -1952,3 +1953,17 @@ QString VApplication::FormulaToUser(const QString &formula)
 
     return newFormula;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QWidget *VApplication::getMainWindow() const
+{
+    return mainWindow;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::setMainWindow(QWidget *value)
+{
+    SCASSERT(value != nullptr)
+    mainWindow = value;
+}
+

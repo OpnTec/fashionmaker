@@ -169,6 +169,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowState(w.windowState() ^ Qt::WindowMaximized);
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
+    app.setMainWindow(&w);
     TableWindow table;
     QObject::connect(&w, &MainWindow::ModelChosen, &table, &TableWindow::ModelChosen);
     QObject::connect(&table, &TableWindow::closed, &w, &MainWindow::tableClosed);

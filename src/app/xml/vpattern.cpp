@@ -636,7 +636,7 @@ bool VPattern::SaveDocument(const QString &fileName)
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error no unique id."));
+        e.CriticalMessageBox(tr("Error no unique id."), qApp->getMainWindow());
         return false;
     }
     GarbageCollector();
@@ -665,31 +665,31 @@ void VPattern::LiteParseTree()
     }
     catch (const VExceptionObjectError &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file."));
+        e.CriticalMessageBox(tr("Error parsing file."), qApp->getMainWindow());
         emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionConversionError &e)
     {
-        e.CriticalMessageBox(tr("Error can't convert value."));
+        e.CriticalMessageBox(tr("Error can't convert value."), qApp->getMainWindow());
         emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        e.CriticalMessageBox(tr("Error empty parameter."));
+        e.CriticalMessageBox(tr("Error empty parameter."), qApp->getMainWindow());
         emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error wrong id."));
+        e.CriticalMessageBox(tr("Error wrong id."), qApp->getMainWindow());
         emit SetEnabledGUI(false);
         return;
     }
     catch (VException &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file."));
+        e.CriticalMessageBox(tr("Error parsing file."), qApp->getMainWindow());
         emit SetEnabledGUI(false);
         return;
     }
@@ -698,7 +698,7 @@ void VPattern::LiteParseTree()
 #ifndef QT_NO_CURSOR
         QApplication::restoreOverrideCursor();
 #endif
-        QMessageBox::critical(nullptr, tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."),
+        QMessageBox::critical(qApp->getMainWindow(), tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."),
                               QMessageBox::Ok, QMessageBox::Ok);
 #ifndef QT_NO_CURSOR
         QApplication::setOverrideCursor(Qt::WaitCursor);

@@ -196,14 +196,14 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
         Q_UNUSED(e)
         delete cal;
 
-        DialogUndo *dialogUndo = new DialogUndo();
+        DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
         if (dialogUndo->exec() == QDialog::Accepted)
         {
             UndoButton resultUndo = dialogUndo->Result();
             delete dialogUndo;
             if (resultUndo == UndoButton::Fix)
             {
-                DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
+                DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, qApp->getMainWindow());
                 dialog->setFormula(formula);
                 if (dialog->exec() == QDialog::Accepted)
                 {

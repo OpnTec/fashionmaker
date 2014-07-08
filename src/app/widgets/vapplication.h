@@ -76,6 +76,8 @@ public:
     void               setSceneView(VMainGraphicsView *value);
     QTimer             *getAutoSaveTimer() const;
     void               setAutoSaveTimer(QTimer *value);
+    QWidget            *getMainWindow() const;
+    void               setMainWindow(QWidget *value);
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -91,6 +93,11 @@ private:
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
     QTimer             *autoSaveTimer;
+    /**
+     * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window
+     * modality doesn't work.
+     */
+    QWidget            *mainWindow;
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();
