@@ -86,7 +86,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     if (qApp->patternType() == MeasurementsType::Standard)
     {
-        ui->pagePersonalInformation->setVisible(false);
+        ui->toolBoxMeasurements->setItemEnabled(0, false);
     }
     else
     {
@@ -212,6 +212,7 @@ void DialogIncrements::FillMeasurements()
         }
 
         item = new QTableWidgetItem(m.GetDescription());
+        item->setToolTip(m.GetDescription());
         item->setTextAlignment(Qt::AlignHCenter);
         // set the item non-editable (view only), and non-selectable
         flags = item->flags();
@@ -284,6 +285,7 @@ void DialogIncrements::FillIncrements()
         }
 
         item = new QTableWidgetItem(incr.GetDescription());
+        item->setToolTip(incr.GetDescription());
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetIncrement->setItem(currentRow, 5, item);
     }

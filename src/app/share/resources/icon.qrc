@@ -56,5 +56,7 @@
         <file>icon/32x32/arrowLeftUp.png</file>
         <file>icon/32x32/putHereLeft.png</file>
         <file>icon/path_config.png</file>
+        <file>icon/16x16/info.png</file>
+        <file>icon/16x16/measurement.png</file>
     </qresource>
 </RCC>

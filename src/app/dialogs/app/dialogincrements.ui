@@ -92,6 +92,9 @@
        </item>
        <item>
         <widget class="QToolBox" name="toolBoxMeasurements">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -105,7 +108,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="pagePersonalInformation">
           <property name="enabled">
@@ -119,6 +122,10 @@
             <height>411</height>
            </rect>
           </property>
+          <attribute name="icon">
+           <iconset resource="../../share/resources/icon.qrc">
+            <normaloff>:/icon/16x16/info.png</normaloff>:/icon/16x16/info.png</iconset>
+          </attribute>
           <attribute name="label">
            <string>Personal information</string>
           </attribute>
@@ -275,6 +282,10 @@
             <height>411</height>
            </rect>
           </property>
+          <attribute name="icon">
+           <iconset resource="../../share/resources/icon.qrc">
+            <normaloff>:/icon/16x16/measurement.png</normaloff>:/icon/16x16/measurement.png</iconset>
+          </attribute>
           <attribute name="label">
            <string>Measurements</string>
           </attribute>
