@@ -268,22 +268,22 @@ void DialogIncrements::FillIncrements()
             ui->tableWidgetIncrement->setItem(currentRow, 1, item);
         }
 
-        item = new QTableWidgetItem(QString().setNum(incr.getBase()));
+        item = new QTableWidgetItem(QString().setNum(incr.GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(incr.getKsize()));
+            item = new QTableWidgetItem(QString().setNum(incr.GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 3, item);
 
-            item = new QTableWidgetItem(QString().setNum(incr.getKheight()));
+            item = new QTableWidgetItem(QString().setNum(incr.GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 4, item);
         }
 
-        item = new QTableWidgetItem(incr.getDescription());
+        item = new QTableWidgetItem(incr.GetDescription());
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetIncrement->setItem(currentRow, 5, item);
     }
@@ -734,13 +734,13 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             const qreal base = item->text().replace(",", ".").toDouble(&ok);
             if (ok == false)
             {
-                measur.setBase(0);
+                measur.SetBase(0);
                 item->setText("0");
                 qDebug()<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
             }
             else
             {
-                measur.setBase(base);
+                measur.SetBase(base);
             }
             data->ClearMeasurements();
             m->Measurements();

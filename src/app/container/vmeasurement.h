@@ -29,12 +29,13 @@
 #ifndef VSTANDARDTABLEROW_H
 #define VSTANDARDTABLEROW_H
 
+#include "vvariable.h"
 #include <QString>
 
 /**
  * @brief The VMeasurement class keep data row of standard table
  */
-class VMeasurement
+class VMeasurement :public VVariable
 {
 public:
     VMeasurement();
@@ -45,69 +46,20 @@ public:
                  const QString &description = QString(), const QString &TagName = QString());
     VMeasurement(const VMeasurement &m);
     VMeasurement &operator=(const VMeasurement &m);
-    ~VMeasurement(){}
-    qreal   GetBase() const;
-    void    setBase(const qreal &value);
-    qreal   GetKsize() const;
-    qreal   GetKheight() const;
-    QString GetGuiText() const;
-    QString GetDescription() const;
-    qreal   GetValue() const;
-    qreal   GetValue(const qreal &size, const qreal &height) const;
-    QString TagName() const;
-    void    setTagName(const QString &TagName);
+    virtual ~VMeasurement();
+
+    QString            GetGuiText() const;
+    QString            TagName() const;
+    void               setTagName(const QString &TagName);
+    static QStringList ListHeights();
+    static QStringList ListSizes();
 private:
-    /** @brief base value in base size and growth */
-    qreal          base;
-
-    /** @brief ksize increment in sizes */
-    qreal          ksize;
-
-    /** @brief kgrowth increment in growths */
-    qreal          kheight;
-
     /** @brief description description measurement */
     QString        gui_text;
 
-    QString        description;
     QString        _tagName;
+    static void        ListValue(QStringList &list, qreal value);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetBase return value in base size and growth
- * @return value
- */
-inline qreal VMeasurement::GetBase() const
-{
-    return base;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VMeasurement::setBase(const qreal &value)
-{
-    base = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKsize return increment in sizes
- * @return increment
- */
-inline qreal VMeasurement::GetKsize() const
-{
-    return ksize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKheight return increment in heights
- * @return increment
- */
-inline qreal VMeasurement::GetKheight() const
-{
-    return kheight;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -117,18 +69,6 @@ inline qreal VMeasurement::GetKheight() const
 inline QString VMeasurement::GetGuiText() const
 {
     return gui_text;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VMeasurement::GetDescription() const
-{
-    return description;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qreal VMeasurement::GetValue() const
-{
-    return base;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

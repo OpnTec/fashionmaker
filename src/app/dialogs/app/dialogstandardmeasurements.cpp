@@ -163,7 +163,14 @@ void DialogStandardMeasurements::LoadStandardTables()
             VDomDocument::ValidateXML("://schema/standard_measurements.xsd", fi.absoluteFilePath());
             VStandardMeasurements m(data);
             m.setContent(fi.absoluteFilePath());
-            ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
+            if (m.MUnit() == Unit::Inch)
+            {
+                qWarning()<<"We do not support inches for standard table. Ignore table"<<fi.absoluteFilePath()<<".";
+            }
+            else
+            {
+                ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
+            }
         }
         catch (VException &e)
         {

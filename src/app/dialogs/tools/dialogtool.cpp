@@ -961,7 +961,7 @@ void DialogTool::ValChenged(int row)
     {
         VIncrement incr = data->GetIncrement(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
-                .arg(incr.getDescription());
+                .arg(incr.GetDescription());
         labelDescription->setText(desc);
         return;
     }

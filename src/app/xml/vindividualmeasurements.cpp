@@ -69,11 +69,7 @@ void VIndividualMeasurements::Measurements()
 void VIndividualMeasurements::ReadMeasurement(const QDomElement &domElement, const QString &tag)
 {
     qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
-
-    if (MUnit() == Unit::Mm)//Convert to Cm.
-    {
-        value = value / 10.0;
-    }
+    value = UnitConvertor(value, MUnit(), qApp->patternUnit());
     data->AddMeasurement(tag, VMeasurement(value, qApp->GuiText(tag), qApp->Description(tag), tag));
 }
 

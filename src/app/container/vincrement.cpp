@@ -33,49 +33,35 @@
  * @brief VIncrement create enpty increment
  */
 VIncrement::VIncrement()
-    :id(0), base(0), ksize(50.0), kheight(176.0), description(QString())
+    :VVariable(), id(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VIncrementTableRow create increment
  * @param id id
- * @param base value in base size and growth
+ * @param base value in base size and height
  * @param ksize increment in sizes
  * @param kheight increment in heights
  * @param description description of increment
  */
 VIncrement::VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
-    :id(id), base(base), ksize(ksize), kheight(kheight), description(description)
+    :VVariable(base, ksize, kheight, description), id(id)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::VIncrement(const VIncrement &incr)
-    :id(incr.getId()), base(incr.getBase()), ksize(incr.getKsize()), kheight(incr.getKheight()),
-      description(incr.getDescription())
+    :VVariable(incr), id(incr.getId())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement &VIncrement::operator=(const VIncrement &incr)
 {
+    VVariable::operator=(incr);
     this->id = incr.getId();
-    this->base = incr.getBase();
-    this->ksize = incr.getKsize();
-    this->kheight = incr.getKheight();
-    this->description = incr.getDescription();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VIncrement::GetValue() const
-{
-    return base;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VIncrement::GetValue(const qreal &size, const qreal &height) const
-{
-    const qreal k_size    = ( size - 50.0 ) / 2.0;
-    const qreal k_height  = ( height - 176.0 ) / 6.0;
-    return base + k_size * ksize + k_height * kheight;
-}
+VIncrement::~VIncrement()
+{}

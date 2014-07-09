@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vincrementtablerow.h
+ **  @file   vvariable.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   9 7, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,82 +26,90 @@
  **
  *************************************************************************/
 
-#ifndef VINCREMENTTABLEROW_H
-#define VINCREMENTTABLEROW_H
+#ifndef VVARIABLE_H
+#define VVARIABLE_H
 
-#include "vvariable.h"
 #include <QString>
 
-/**
- * @brief The VIncrement class keep data row of increment table
- */
-class VIncrement :public VVariable
+class VVariable
 {
 public:
-    VIncrement();
-    VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
-    VIncrement(const VIncrement &incr);
-    VIncrement &operator=(const VIncrement &incr);
-    virtual ~VIncrement();
+    VVariable();
+    VVariable(const qreal &base, const qreal &ksize, const qreal &kheight, const QString &description = QString());
+    VVariable(const qreal &base, const QString &description = QString());
+    VVariable(const VVariable &var);
+    VVariable &operator=(const VVariable &var);
+    virtual ~VVariable();
 
-    quint32 getId() const;
-    void    setId(const quint32 &value);
-    void    setKsize(const qreal &value);
-    void    setKheight(const qreal &value);
-    void    setDescription(const QString &value);
+    qreal   GetBase() const;
+    void    SetBase(const qreal &value);
+    qreal   GetKsize() const;
+    qreal   GetKheight() const;
+    QString GetDescription() const;
+    qreal   GetValue() const;
+    qreal   GetValue(const qreal &size, const qreal &height) const;
+protected:
+    /** @brief base value in base size and height */
+    qreal          base;
+
+    /** @brief ksize increment in sizes */
+    qreal          ksize;
+
+    /** @brief kgrowth increment in heights */
+    qreal          kheight;
+
+    /** @brief description description of increment */
+    QString        description;
 private:
-    /** @brief id identificator */
-    quint32 id;
+    void    Init();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getId return id of row
- * @return id
+ * @brief GetBase return value in base size and height
+ * @return value
  */
-inline quint32 VIncrement::getId() const
+inline qreal VVariable::GetBase() const
 {
-    return id;
+    return base;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VVariable::SetBase(const qreal &value)
+{
+    base = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setId set id of row
- * @param value id
+ * @brief GetKsize return increment in sizes
+ * @return increment
  */
-inline void VIncrement::setId(const quint32 &value)
+inline qreal VVariable::GetKsize() const
 {
-    id = value;
+    return ksize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setKsize set increment in sizes
- * @param value value of increment
+ * @brief GetKheight return increment in heights
+ * @return increment
  */
-inline void VIncrement::setKsize(const qreal &value)
+inline qreal VVariable::GetKheight() const
 {
-    ksize = value;
+    return kheight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setKheight set increment in growths
- * @param value value of increment
- */
-inline void VIncrement::setKheight(const qreal &value)
+inline QString VVariable::GetDescription() const
 {
-    kheight = value;
+    return description;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setDescription set description for row
- * @param value description
- */
-inline void VIncrement::setDescription(const QString &value)
+inline qreal VVariable::GetValue() const
 {
-    description = value;
+    return base;
 }
 
-#endif // VINCREMENTTABLEROW_H
+#endif // VVARIABLE_H

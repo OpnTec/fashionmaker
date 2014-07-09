@@ -40,6 +40,7 @@ public:
     Unit         MUnit() const;
     static const QString TagUnit;
     static const QString AttrValue;
+    static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
 protected:
     void         Measurement(const QString &tag);
     virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;

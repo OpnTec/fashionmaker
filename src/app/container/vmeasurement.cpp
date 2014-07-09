@@ -27,19 +27,21 @@
  *************************************************************************/
 
 #include "vmeasurement.h"
+#include "../widgets/vapplication.h"
+#include "../xml/vabstractmeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create empty measurement
  */
 VMeasurement::VMeasurement()
-    :base(0), ksize(50.0), kheight(176.0), gui_text(QString()), description(QString()), _tagName(QString())
+    :VVariable(), gui_text(QString()), _tagName(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for standard table
- * @param base value in base size and growth
+ * @param base value in base size and height
  * @param ksize increment in sizes
  * @param kheight increment in heights
  * @param gui_text shor tooltip for user
@@ -48,44 +50,78 @@ VMeasurement::VMeasurement()
  */
 VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
                            const QString &gui_text, const QString &description, const QString &tagName)
-    :base(base), ksize(ksize), kheight(kheight), gui_text(gui_text), description(description), _tagName(tagName)
+    :VVariable(base, ksize, kheight, description), gui_text(gui_text), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for individual table
- * @param base value in base size and growth
+ * @param base value in base size and height
  * @param gui_text shor tooltip for user
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
 VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :base(base), ksize(50.0), kheight(176.0), gui_text(gui_text), description(description), _tagName(tagName)
+    :VVariable(base, description), gui_text(gui_text), _tagName(tagName)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(const VMeasurement &m)
-    :base(m.GetBase()), ksize(m.GetKsize()), kheight(m.GetKheight()), gui_text(m.GetGuiText()),
-      description(m.GetDescription()), _tagName(m.TagName())
+    :VVariable(m), gui_text(m.GetGuiText()), _tagName(m.TagName())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement &VMeasurement::operator=(const VMeasurement &m)
 {
-    this->base = m.GetBase();
-    this->ksize = m.GetKsize();
-    this->kheight = m.GetKheight();
+    VVariable::operator=(m);
     this->gui_text = m.GetGuiText();
-    this->description = m.GetDescription();
     this->_tagName = m.TagName();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetValue(const qreal &size, const qreal &height) const
+VMeasurement::~VMeasurement()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurement::ListHeights()
 {
-    const qreal k_size    = ( size - 50.0 ) / 2.0;
-    const qreal k_height  = ( height - 176.0 ) / 6.0;
-    return base + k_size * ksize + k_height * kheight;
+    if (qApp->patternUnit() == Unit::Inch)
+    {
+        qWarning()<<"Standard table doesn't support inches.";
+    }
+
+    QStringList list;
+    // from 92 cm to 188 cm
+    for (int i = 92; i<= 188; i = i+6)
+    {
+        ListValue(list, i);
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurement::ListSizes()
+{
+    if (qApp->patternUnit() == Unit::Inch)
+    {
+        qWarning()<<"Standard table doesn't support inches.";
+    }
+
+    QStringList list;
+    // from 22 cm to 56 cm
+    for (int i = 22; i<= 56; i = i+2)
+    {
+       ListValue(list, i);
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::ListValue(QStringList &list, qreal value)
+{
+    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
+    QString strVal = QString("%1").arg(val);
+    list.append(strVal);
 }

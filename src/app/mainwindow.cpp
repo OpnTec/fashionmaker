@@ -169,6 +169,7 @@ void MainWindow::ActionNewPP()
         //Set scene size to size scene view
         VAbstractTool::NewSceneRect(sceneDraw, view);
         VAbstractTool::NewSceneRect(sceneDetails, view);
+        ToolBarOption();
     }
     else
     {
@@ -993,34 +994,31 @@ void MainWindow::ToolBarOption()
 {
     if (qApp->patternType() == MeasurementsType::Standard)
     {
-        ui->toolBarOption->addWidget(new QLabel(tr("Height: ")));
+        const QStringList listHeights = VMeasurement::ListHeights();
+        const QStringList listSizes = VMeasurement::ListSizes();
 
-        QStringList list{"92", "98", "104", "110", "116", "122", "128", "134", "140", "146", "152", "158", "164", "170",
-                         "176", "182", "188"};
-        QComboBox *comboBoxHeight = new QComboBox;
-        comboBoxHeight->addItems(list);
-        comboBoxHeight->setCurrentIndex(14);//176
-        ui->toolBarOption->addWidget(comboBoxHeight);
-        connect(comboBoxHeight, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-                this, &MainWindow::ChangedHeight);
-
-        ui->toolBarOption->addWidget(new QLabel(tr(" Size: ")));
-
-        list.clear();
-        list <<"22"<<"24"<<"26"<<"28"<<"30"<<"32"<<"34"<<"36"<<"38"<<"40"<<"42"<<"44"<<"46"<<"48"<<"50"<<"52"<<"54"
-             <<"56";
-        QComboBox *comboBoxSize = new QComboBox;
-        comboBoxSize->addItems(list);
-        comboBoxSize->setCurrentIndex(14);//50
-        ui->toolBarOption->addWidget(comboBoxSize);
-        connect(comboBoxSize, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-                this, &MainWindow::ChangedSize);
+        SetGradationList(tr("Height: "), listHeights, &MainWindow::ChangedHeight);
+        SetGradationList(tr("Size: "), listSizes, &MainWindow::ChangedSize);
 
         ui->toolBarOption->addSeparator();
     }
 
-    mouseCoordinate = new QLabel("0, 0");
+    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(doc->UnitsToStr(qApp->patternUnit())));
     ui->toolBarOption->addWidget(mouseCoordinate);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Func>
+void MainWindow::SetGradationList(const QString &label, const QStringList &list, Func changeSlot)
+{
+    ui->toolBarOption->addWidget(new QLabel(label));
+
+    QComboBox *comboBox = new QComboBox;
+    comboBox->addItems(list);
+    comboBox->setCurrentIndex(14);//176 cm
+    ui->toolBarOption->addWidget(comboBox);
+    connect(comboBox, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, changeSlot);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1126,8 +1124,9 @@ void MainWindow::currentDrawChanged( int index )
  */
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
-    QString string = QString("%1, %2").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
-                                      .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())));
+    QString string = QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                                      .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
+                                      .arg(doc->UnitsToStr(qApp->patternUnit()));
     if (mouseCoordinate != nullptr)
     {
         mouseCoordinate->setText(string);
@@ -2226,7 +2225,6 @@ void MainWindow::LoadPattern(const QString &fileName)
             }
             m.SetSize();
             m.SetHeight();
-            ToolBarOption();
         }
         else
         {
@@ -2240,6 +2238,7 @@ void MainWindow::LoadPattern(const QString &fileName)
                 return;
             }
         }
+        ToolBarOption();
     }
     catch (VException &e)
     {

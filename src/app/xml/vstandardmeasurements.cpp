@@ -53,7 +53,7 @@ QString VStandardMeasurements::Description()
     const QString desc = UniqueTagText(TagDescription, "");
     if (desc.isEmpty())
     {
-        qDebug()<<"Empty description in standard table."<<Q_FUNC_INFO;
+        qWarning()<<"Empty description in standard table."<<Q_FUNC_INFO;
     }
     return desc;
 }
@@ -61,76 +61,64 @@ QString VStandardMeasurements::Description()
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::ReadMeasurement(const QDomElement &domElement, const QString &tag)
 {
-    const qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
-    const qreal size_increase = GetParametrDouble(domElement, AttrSize_increase, "0.0");
-    const qreal height_increase = GetParametrDouble(domElement, AttrHeight_increase, "0.0");
+    qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
+    value = UnitConvertor(value, MUnit(), qApp->patternUnit());
 
-    if (MUnit() == Unit::Mm)// Convert to Cm.
+    qreal size_increase = GetParametrDouble(domElement, AttrSize_increase, "0.0");
+    size_increase = UnitConvertor(size_increase, MUnit(), qApp->patternUnit());
+
+    qreal height_increase = GetParametrDouble(domElement, AttrHeight_increase, "0.0");
+    height_increase = UnitConvertor(height_increase, MUnit(), qApp->patternUnit());
+
+    if (MUnit() == Unit::Inch)
     {
-        data->AddMeasurement(tag, VMeasurement(value/10.0, size_increase/10.0, height_increase/10.0,
-                                               qApp->GuiText(tag), qApp->Description(tag), tag));
+        qWarning()<<"Standard table can't use inch unit.";
     }
-    else// Cm or inch.
+
+    data->AddMeasurement(tag, VMeasurement(value, size_increase, height_increase, qApp->GuiText(tag),
+                                           qApp->Description(tag), tag));
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) const
+{
+    const qreal defVal = UnitConvertor(defValue, Unit::Cm, qApp->patternUnit());
+
+    const QDomNodeList nodeList = this->elementsByTagName(tag);
+    if (nodeList.isEmpty())
     {
-        data->AddMeasurement(tag, VMeasurement(value, size_increase, height_increase, qApp->GuiText(tag),
-                                               qApp->Description(tag), tag));
+        return defVal;
     }
+    else
+    {
+        const QDomNode domNode = nodeList.at(0);
+        if (domNode.isNull() == false && domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                qreal value = GetParametrDouble(domElement, AttrValue, QString("%1").arg(defVal));
+                value = UnitConvertor(value, MUnit(), qApp->patternUnit());
+                return value;
+            }
+        }
+    }
+    return defVal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetSize()
 {
-    const QDomNodeList nodeList = this->elementsByTagName(TagSize);
-    if (nodeList.isEmpty())
-    {
-        data->SetSize(50);
-        data->SetSizeName(size_M);
-    }
-    else
-    {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                qreal value = GetParametrDouble(domElement, AttrValue, "50.0");
-                if (MUnit() == Unit::Mm)// Convert to Cm.
-                {
-                    value = value/10.0;
-                }
-                data->SetSize(value);
-                data->SetSizeName(size_M);
-            }
-        }
-    }
+    const qreal value = TakeParametr(TagSize, 50);
+    data->SetSize(value);
+    data->SetSizeName(size_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetHeight()
 {
-    const QDomNodeList nodeList = this->elementsByTagName(TagHeight);
-    if (nodeList.isEmpty())
-    {
-        data->SetHeight(176);
-        data->SetHeightName(height_M);
-    }
-    else
-    {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                qreal value = GetParametrDouble(domElement, AttrValue, "176.0");
-                if (MUnit() == Unit::Mm)// Convert to Cm.
-                {
-                    value = value / 10.0;
-                }
-                data->SetHeight(value);
-                data->SetHeightName(height_M);
-            }
-        }
-    }
+    const qreal value = TakeParametr(TagHeight, 176);
+    data->SetHeight(value);
+    data->SetHeightName(height_M);
 }

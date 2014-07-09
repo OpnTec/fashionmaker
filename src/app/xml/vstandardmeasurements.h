@@ -57,6 +57,7 @@ protected:
     virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag);
 private:
     Q_DISABLE_COPY(VStandardMeasurements)
+    qreal        TakeParametr(const QString &tag, qreal defValue) const;
 };
 
 #endif // VSTANDARDMEASUREMENTS_H

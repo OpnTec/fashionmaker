@@ -255,6 +255,8 @@ private:
     QString            PatternPieceName(const QString &text);
     QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
     void               OpenPattern(const QString &filePath);
+    template <typename Func>
+    void               SetGradationList(const QString &label, const QStringList &list, Func changeSlot);
 };
 
 #endif // MAINWINDOW_H

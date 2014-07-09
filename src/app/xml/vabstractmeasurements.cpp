@@ -196,6 +196,56 @@ Unit VAbstractMeasurements::MUnit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const Unit &to)
+{
+    switch (from)
+    {
+        case Unit::Mm:
+            switch(to)
+            {
+                case Unit::Mm:
+                    return value;
+                case Unit::Cm:
+                    return value / 10.0;
+                case Unit::Inch:
+                    return value / 25.4;
+                default:
+                    break;
+            }
+            break;
+        case Unit::Cm:
+            switch(to)
+            {
+                case Unit::Mm:
+                    return value * 10.0;
+                case Unit::Cm:
+                    return value;
+                case Unit::Inch:
+                    return value / 2.54;
+                default:
+                    break;
+            }
+            break;
+        case Unit::Inch:
+            switch(to)
+            {
+                case Unit::Mm:
+                    return value * 25.4;
+                case Unit::Cm:
+                    return value * 2.54;
+                case Unit::Inch:
+                    return value;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractMeasurements::Measurement(const QString &tag)
 {
     const QDomNodeList nodeList = this->elementsByTagName(tag);
