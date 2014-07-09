@@ -2210,33 +2210,19 @@ void MainWindow::LoadPattern(const QString &fileName)
             return;
         }
 
-        QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
-                .arg(doc->UnitsToStr(qApp->patternUnit()));
         if (qApp->patternType() == MeasurementsType::Standard)
         {
             VStandardMeasurements m(pattern);
             m.setContent(path);
-            Unit mUnit = m.MUnit();
-            if (qApp->patternUnit() != mUnit)
+            if (m.MUnit() == Unit::Inch)
             {
-                QMessageBox::critical(this, tr("Wrong units."), text);
+                QMessageBox::critical(this, tr("Wrong units."),
+                                      tr("Application doesn't support standard table with inches."));
                 Clear();
                 return;
             }
             m.SetSize();
             m.SetHeight();
-        }
-        else
-        {
-            VIndividualMeasurements m(pattern);
-            m.setContent(path);
-            Unit mUnit = m.MUnit();
-            if (qApp->patternUnit() != mUnit)
-            {
-                QMessageBox::critical(this, tr("Wrong units."), text);
-                Clear();
-                return;
-            }
         }
         ToolBarOption();
     }
