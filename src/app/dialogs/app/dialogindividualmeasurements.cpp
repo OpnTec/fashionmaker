@@ -248,6 +248,18 @@ void DialogIndividualMeasurements::NewTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::InitUnits()
 {
-    ui->comboBoxUnits->addItem(tr("centimeter"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
-    ui->comboBoxUnits->addItem(tr("inch"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                       QApplication::applicationName());
+
+    ui->comboBoxUnits->addItem(tr("Centimeters"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
+    ui->comboBoxUnits->addItem(tr("Milimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
+    ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch, true)));
+
+    const QString checkedUnit = settings.value("configuration/unit", "cm").toString();
+    // set default unit
+    const qint32 indexUnit = ui->comboBoxUnits->findData(checkedUnit);
+    if (indexUnit != -1)
+    {
+        ui->comboBoxUnits->setCurrentIndex(indexUnit);
+    }
 }

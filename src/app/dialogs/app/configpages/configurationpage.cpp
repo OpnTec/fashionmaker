@@ -92,7 +92,7 @@ void ConfigurationPage::Apply()
         QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
         settings.setValue("configuration/unit", unit);
         this->unitChanged = false;
-        QString text = QString(tr("Default unit updated and will be used the next pattern load"));
+        QString text = QString(tr("Default unit updated and will be used the next pattern creation"));
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
 }
