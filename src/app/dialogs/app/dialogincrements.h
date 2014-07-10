@@ -100,6 +100,7 @@ private:
     void                 FillLengthArcs();
     void                 AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base,
                                             const qreal &ksize, const qreal &kheight, const QString &description);
+    void                 HideColumns(QTableWidget *table);
 };
 
 #endif // DIALOGINCREMENTS_H

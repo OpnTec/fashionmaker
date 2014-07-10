@@ -39,6 +39,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QTableWidget>
+#include <QSettings>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -93,13 +94,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         QRegExpValidator *reg = new QRegExpValidator(QRegExp("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"));
         ui->lineEditMail->setValidator(reg);
 
-        ui->tableWidgetMeasurements->setColumnHidden( 1, true );// calculated value
-        ui->tableWidgetMeasurements->setColumnHidden( 3, true );// in sizes
-        ui->tableWidgetMeasurements->setColumnHidden( 4, true );// in heights
-
-        ui->tableWidgetIncrement->setColumnHidden( 1, true );// calculated value
-        ui->tableWidgetIncrement->setColumnHidden( 3, true );// in sizes
-        ui->tableWidgetIncrement->setColumnHidden( 4, true );// in heights
+        HideColumns(ui->tableWidgetMeasurements);
+        HideColumns(ui->tableWidgetIncrement);
 
         ui->tableWidgetMeasurements->setItemDelegateForColumn(2, doubleDelegate);// base value
 
@@ -185,7 +181,7 @@ void DialogIncrements::FillMeasurements()
             Qt::ItemFlags flags = item->flags();
             flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
             item->setFlags(flags);
-            ui->tableWidgetMeasurements->setItem(currentRow, 1, item);
+            ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
         }
 
         item = new QTableWidgetItem(QString().setNum(m.GetBase()));
@@ -200,7 +196,7 @@ void DialogIncrements::FillMeasurements()
             Qt::ItemFlags flags = item->flags();
             flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
             item->setFlags(flags);
-            ui->tableWidgetMeasurements->setItem(currentRow, 3, item);
+            ui->tableWidgetMeasurements->setItem(currentRow, 3, item);// in sizes
 
             item = new QTableWidgetItem(QString().setNum(m.GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
@@ -208,7 +204,7 @@ void DialogIncrements::FillMeasurements()
             flags = item->flags();
             flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
             item->setFlags(flags);
-            ui->tableWidgetMeasurements->setItem(currentRow, 4, item);
+            ui->tableWidgetMeasurements->setItem(currentRow, 4, item);// in heights
         }
 
         item = new QTableWidgetItem(m.GetDescription());
@@ -369,10 +365,17 @@ void DialogIncrements::FillLengthArcs()
  */
 void DialogIncrements::FullUpdateFromFile()
 {
-    disconnect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
+    if (qApp->patternType() == MeasurementsType::Individual)
+    {
+        disconnect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this,
+                   &DialogIncrements::MeasurementChanged);
+    }
     ui->tableWidgetMeasurements->clearContents();
     FillMeasurements();
-    connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
+    if (qApp->patternType() == MeasurementsType::Individual)
+    {
+        connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
+    }
 
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     ui->tableWidgetIncrement->clearContents();
@@ -448,7 +451,13 @@ void DialogIncrements::OpenTable()
     if (qApp->patternType() == MeasurementsType::Individual)
     {
         const QString filter(tr("Individual measurements (*.vit)"));
-        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+
+        //Use standard path to individual measurements
+        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                           QApplication::applicationName());
+        QString path = settings.value("paths/individual_measurements", QDir::homePath()).toString();
+
+        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
         {
             return;
@@ -488,7 +497,7 @@ void DialogIncrements::OpenTable()
     else
     {
         const QString filter(tr("Standard measurements (*.vst)"));
-        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), qApp->pathToTables(), filter);
         if (filePath.isEmpty())
         {
             return;
@@ -648,6 +657,16 @@ void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::HideColumns(QTableWidget *table)
+{
+    SCASSERT(table != nullptr);
+
+    table->setColumnHidden( 1, true );// calculated value
+    table->setColumnHidden( 3, true );// in sizes
+    table->setColumnHidden( 4, true );// in heights
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief cellChanged cell in table was changed
  * @param row number of row
@@ -714,7 +733,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
     {
         case 2:// value column
         {
-            const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);
+            const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);// name column
             QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
             VMeasurement measur = data->GetMeasurement(qApp->VarFromUser(itemName->text()));
@@ -727,11 +746,6 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
                 return;
             }
 
-            m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, item->text());
-            if (m->SaveDocument(doc->MPath()) == false)
-            {
-                qDebug()<<"Can't save measurement";
-            }
             bool ok = false;
             const qreal base = item->text().replace(",", ".").toDouble(&ok);
             if (ok == false)
@@ -744,8 +758,19 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             {
                 measur.SetBase(base);
             }
+
+            // Convert value to measurements table unit
+            base = UnitConvertor(base, qApp->patternUnit(), m->MUnit());
+
+            m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, QString("%1").atg(base));
+            if (m->SaveDocument(doc->MPath()) == false)
+            {
+                qDebug()<<"Can't save measurement";
+            }
+
             data->ClearMeasurements();
             m->Measurements();
+
             emit FullUpdateTree();
             break;
         }
