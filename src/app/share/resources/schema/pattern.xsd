@@ -213,8 +213,8 @@
                </xs:complexType>
          </xs:element>
 	<xs:simpleType name="shortName">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="^([^0-9-*/^+=\s\(\)%:;!]){1,1}([^-*/^+=\s\(\)%:;!]){0,}$"/>
+		<xs:restriction base="xs:string">   
+			<xs:pattern value="^([^0-9-*/^+=\s\(\)%:;!.,]){1,1}([^-*/^+=\s\(\)%:;!.,]){0,}$"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="units">
