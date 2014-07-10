@@ -2226,7 +2226,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     if (patternModified)
     {
         //For situation where was fixed wrong formula need return for document status was modified.
-        PatternWasModified(patternModified);
+        PatternWasModified(!patternModified);
     }
     helpLabel->setText(tr("File loaded"));
 
@@ -2259,7 +2259,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
             {
                 filter = tr("Individual measurements (*.vit)");
             }
-            QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter);
+            QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), qApp->pathToTables(), filter);
 
             if (mPath.isEmpty())
             {
@@ -2276,6 +2276,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
                     VDomDocument::ValidateXML("://schema/individual_measurements.xsd", mPath);
                 }
                 doc->SetPath(mPath);
+                PatternWasModified(false);
                 return mPath;
             }
         }
