@@ -747,7 +747,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             }
 
             bool ok = false;
-            const qreal base = item->text().replace(",", ".").toDouble(&ok);
+            qreal base = item->text().replace(",", ".").toDouble(&ok);
             if (ok == false)
             {
                 measur.SetBase(0);
@@ -760,9 +760,9 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             }
 
             // Convert value to measurements table unit
-            base = UnitConvertor(base, qApp->patternUnit(), m->MUnit());
+            base = VAbstractMeasurements::UnitConvertor(base, qApp->patternUnit(), m->MUnit());
 
-            m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, QString("%1").atg(base));
+            m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, QString("%1").arg(base));
             if (m->SaveDocument(doc->MPath()) == false)
             {
                 qDebug()<<"Can't save measurement";
