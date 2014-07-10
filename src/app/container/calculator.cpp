@@ -97,9 +97,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
         DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
         DefinePostfixOprt(qApp->PostfixOperator(in_Oprt), InchUnit);
 
-        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                           QApplication::applicationName());
-        bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+        bool osSeparatorValue = qApp->getSettings()->value("configuration/osSeparator", 1).toBool();
 
         if (osSeparatorValue)
         {

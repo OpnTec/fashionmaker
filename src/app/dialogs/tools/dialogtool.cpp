@@ -459,11 +459,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             const qreal result = cal->EvalFormula(formula);
             delete cal;
 
-            QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                               QApplication::applicationName());
-            bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
-
-            if (osSeparatorValue)
+            if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
             {
                 QLocale loc = QLocale::system();
                 label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));

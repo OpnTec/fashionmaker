@@ -60,11 +60,8 @@ PathPage::PathPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::Apply()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-
-    settings.setValue("paths/individual_measurements", pathTable->item(0, 1)->text());
-    settings.setValue("paths/pattern", pathTable->item(1, 1)->text());
+    qApp->getSettings()->setValue("paths/individual_measurements", pathTable->item(0, 1)->text());
+    qApp->getSettings()->setValue("paths/pattern", pathTable->item(1, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,17 +137,14 @@ void PathPage::InitTable()
     QStringList tableHeader{tr("Type"), tr("Path")};
     pathTable->setHorizontalHeaderLabels(tableHeader);
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-
     QString path;
 
     pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-    path = settings.value("paths/individual_measurements", QDir::homePath()).toString();
+    path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
     pathTable->setItem(0, 1, new QTableWidgetItem(path));
 
     pathTable->setItem(1, 0, new QTableWidgetItem(tr("Patterns")));
-    path = settings.value("paths/pattern", QDir::homePath()).toString();
+    path = qApp->getSettings()->value("paths/pattern", QDir::homePath()).toString();
     pathTable->setItem(1, 1, new QTableWidgetItem(path));
 
     pathTable->verticalHeader()->setDefaultSectionSize(20);

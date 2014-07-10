@@ -453,9 +453,7 @@ void DialogIncrements::OpenTable()
         const QString filter(tr("Individual measurements (*.vit)"));
 
         //Use standard path to individual measurements
-        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                           QApplication::applicationName());
-        QString path = settings.value("paths/individual_measurements", QDir::homePath()).toString();
+        QString path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
 
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())

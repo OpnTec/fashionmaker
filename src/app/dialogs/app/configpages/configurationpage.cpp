@@ -59,10 +59,8 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::Apply()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    settings.setValue("configuration/autosave/state", autoSaveCheck->isChecked());
-    settings.setValue("configuration/autosave/time", autoTime->value());
+    qApp->getSettings()->setValue("configuration/autosave/state", autoSaveCheck->isChecked());
+    qApp->getSettings()->setValue("configuration/autosave/time", autoTime->value());
 
     QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
     SCASSERT(autoSaveTimer);
@@ -76,12 +74,12 @@ void ConfigurationPage::Apply()
         autoSaveTimer->stop();
     }
 
-    settings.setValue("configuration/osSeparator", osOptionCheck->isChecked());
+    qApp->getSettings()->setValue("configuration/osSeparator", osOptionCheck->isChecked());
 
     if (langChanged)
     {
         QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
-        settings.setValue("configuration/locale", locale);
+        qApp->getSettings()->setValue("configuration/locale", locale);
         langChanged = false;
         QString text = QString(tr("Setup user interface language updated and will be used the next time start") + " " +
                                QApplication::applicationName());
@@ -90,7 +88,7 @@ void ConfigurationPage::Apply()
     if (this->unitChanged)
     {
         QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
-        settings.setValue("configuration/unit", unit);
+        qApp->getSettings()->setValue("configuration/unit", unit);
         this->unitChanged = false;
         QString text = QString(tr("Default unit updated and will be used the next pattern creation"));
         QMessageBox::information(this, QApplication::applicationName(), text);
@@ -112,20 +110,20 @@ void ConfigurationPage::UnitChanged()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SaveGroup()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
+    QSettings *settings = qApp->getSettings();
+    SCASSERT(settings != nullptr);
 
     QGroupBox *saveGroup = new QGroupBox(tr("Save"));
 
     autoSaveCheck = new QCheckBox(tr("Auto-save modified pattern"));
-    bool autoSaveValue = settings.value("configuration/autosave/state", 1).toBool();
+    bool autoSaveValue = settings->value("configuration/autosave/state", 1).toBool();
     autoSaveCheck->setChecked(autoSaveValue);
 
     QLabel *intervalLabel = new QLabel(tr("Interval:"));
 
     autoTime = new QSpinBox();
     bool ok = true;
-    qint32 autoTimeValue = settings.value("configuration/autosave/time", 5).toInt(&ok);
+    qint32 autoTimeValue = settings->value("configuration/autosave/time", 5).toInt(&ok);
     if (ok == false)
     {
         autoTimeValue = 5;
@@ -148,8 +146,8 @@ QGroupBox *ConfigurationPage::SaveGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::LangGroup()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
+    QSettings *settings = qApp->getSettings();
+    SCASSERT(settings != nullptr);
 
     QGroupBox *langGroup = new QGroupBox(tr("Language"));
     QLabel *guiLabel = new QLabel(tr("GUI language"));
@@ -158,7 +156,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     // format systems language
     QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
     defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString checkedLocale = settings.value("configuration/locale", defaultLocale).toString();
+    QString checkedLocale = settings->value("configuration/locale", defaultLocale).toString();
 
     QString m_langPath = qApp->translationsPath();
     QDir dir(m_langPath);
@@ -199,7 +197,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
-    bool osOptionValue = settings.value("configuration/osSeparator", 1).toBool();
+    bool osOptionValue = settings->value("configuration/osSeparator", 1).toBool();
     osOptionCheck->setChecked(osOptionValue);
 
     QHBoxLayout *separatorLayout = new QHBoxLayout;
@@ -210,7 +208,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     this->unitCombo = new QComboBox;
     QLabel *unitLabel = new QLabel(tr("Default unit"));
 
-    QString checkedUnit = settings.value("configuration/unit", "cm").toString();
+    QString checkedUnit = settings->value("configuration/unit", "cm").toString();
 
     this->unitCombo->addItem(tr("Centimeters"), "cm");
     this->unitCombo->addItem(tr("Milimiters"), "mm");

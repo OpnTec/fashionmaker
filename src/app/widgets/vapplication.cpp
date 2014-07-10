@@ -38,7 +38,6 @@
 #include <QDebug>
 #include <QDir>
 #include <QProcess>
-#include <QSettings>
 #include <QUndoStack>
 
 #include <QtMath>
@@ -59,7 +58,7 @@ VApplication::VApplication(int &argc, char **argv)
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
       postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr),
-      mainWindow(nullptr), openingPattern(false)
+      mainWindow(nullptr), openingPattern(false), settings(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -1796,9 +1795,7 @@ QString VApplication::FormulaFromUser(const QString &formula)
         }
     }
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+    bool osSeparatorValue = getSettings()->value("configuration/osSeparator", 1).toBool();
 
     QLocale loc = QLocale::system();
     if (loc != QLocale(QLocale::C) && osSeparatorValue)
@@ -1914,9 +1911,7 @@ QString VApplication::FormulaToUser(const QString &formula)
         }
     }
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    bool osSeparatorValue = settings.value("configuration/osSeparator", 1).toBool();
+    bool osSeparatorValue = getSettings()->value("configuration/osSeparator", 1).toBool();
 
     QLocale loc = QLocale::system();
     if (loc != QLocale::C && osSeparatorValue)
@@ -1978,4 +1973,25 @@ void VApplication::setOpeningPattern()
     openingPattern = !openingPattern;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::OpenSettings get acsses to application settings.
+ *
+ * Because we can create object in constructor we open file separately.
+ */
+void VApplication::OpenSettings()
+{
+    settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                             QApplication::applicationName(), this);
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::getSettings hide settings constructor.
+ * @return pointer to class for acssesing to settings in ini file.
+ */
+QSettings *VApplication::getSettings()
+{
+    SCASSERT(settings != nullptr);
+    return settings;
+}

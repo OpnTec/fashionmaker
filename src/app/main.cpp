@@ -142,11 +142,11 @@ int main(int argc, char *argv[])
     // Setting the Application version
     app.setApplicationVersion(APP_VERSION);
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
+    app.OpenSettings();
+
     QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
     defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString checkedLocale = settings.value("configuration/locale", defaultLocale).toString();
+    QString checkedLocale = qApp->getSettings()->value("configuration/locale", defaultLocale).toString();
 
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));

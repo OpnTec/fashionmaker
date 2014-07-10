@@ -193,10 +193,7 @@ void DialogIndividualMeasurements::CheckState()
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
-
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    QString path = settings.value("paths/individual_measurements", QDir::homePath()).toString();
+    QString path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
     if (fileName.isEmpty())
@@ -248,14 +245,11 @@ void DialogIndividualMeasurements::NewTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::InitUnits()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-
     ui->comboBoxUnits->addItem(tr("Centimeters"), QVariant(VDomDocument::UnitsToStr(Unit::Cm)));
     ui->comboBoxUnits->addItem(tr("Milimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
     ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch, true)));
 
-    const QString checkedUnit = settings.value("configuration/unit", "cm").toString();
+    const QString checkedUnit = qApp->getSettings()->value("configuration/unit", "cm").toString();
     // set default unit
     const qint32 indexUnit = ui->comboBoxUnits->findData(checkedUnit);
     if (indexUnit != -1)

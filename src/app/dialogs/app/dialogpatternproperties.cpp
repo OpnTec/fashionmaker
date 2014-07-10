@@ -31,6 +31,7 @@
 #include <QSettings>
 #include <QPushButton>
 #include "../../xml/vpattern.h"
+#include "../../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
@@ -40,12 +41,12 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
 
     SCASSERT(doc != nullptr);
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
+    QSettings *settings = qApp->getSettings();
+    SCASSERT(settings != nullptr);
 #ifdef Q_OS_WIN
-    QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
+    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
 #else
-    QString user = settings.value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
+    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
 #endif
 
     ui->lineEditAuthor->setText(this->doc->UniqueTagText("author", user));

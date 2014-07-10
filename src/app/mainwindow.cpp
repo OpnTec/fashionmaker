@@ -1409,9 +1409,7 @@ void MainWindow::ActionDetails(bool checked)
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    QString path = settings.value("paths/pattern", QDir::homePath()).toString();
+    QString path = qApp->getSettings()->value("paths/pattern", QDir::homePath()).toString();
     QString dir;
     if (curFile.isEmpty())
     {
@@ -1467,9 +1465,7 @@ void MainWindow::Open()
 {
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    const QStringList files = settings.value("recentFileList").toStringList();
+    const QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
     QString dir;
     if (files.isEmpty())
     {
@@ -1936,9 +1932,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     }
     else
     {
-        QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                           QApplication::applicationName());
-        QStringList files = settings.value("recentFileList").toStringList();
+        QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
         files.removeAll(fileName);
         files.prepend(fileName);
         while (files.size() > MaxRecentFiles)
@@ -1946,7 +1940,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
             files.removeLast();
         }
 
-        settings.setValue("recentFileList", files);
+        qApp->getSettings()->setValue("recentFileList", files);
         UpdateRecentFileActions();
     }
     shownName+="[*]";
@@ -1970,21 +1964,19 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    QPoint pos = settings.value("pos", QPoint(10, 10)).toPoint();
-    QSize size = settings.value("size", QSize(1000, 800)).toSize();
+    QPoint pos = qApp->getSettings()->value("pos", QPoint(10, 10)).toPoint();
+    QSize size = qApp->getSettings()->value("size", QSize(1000, 800)).toSize();
     resize(size);
     move(pos);
 
     // Scene antialiasing
-    bool graphOutputValue = settings.value("pattern/graphicalOutput", 1).toBool();
+    bool graphOutputValue = qApp->getSettings()->value("pattern/graphicalOutput", 1).toBool();
     view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
     bool ok = true;
-    qint32 count = settings.value("pattern/undo", 0).toInt(&ok);
+    qint32 count = qApp->getSettings()->value("pattern/undo", 0).toInt(&ok);
     if (ok == false)
     {
         count = 0;
@@ -1998,10 +1990,8 @@ void MainWindow::ReadSettings()
  */
 void MainWindow::WriteSettings()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    settings.setValue("pos", pos());
-    settings.setValue("size", size());
+    qApp->getSettings()->setValue("pos", pos());
+    qApp->getSettings()->setValue("size", size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2032,9 +2022,7 @@ bool MainWindow::MaybeSave()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateRecentFileActions()
 {
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    QStringList files = settings.value("recentFileList").toStringList();
+    QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
 
     int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
@@ -2128,13 +2116,11 @@ void MainWindow::InitAutoSave()
     connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     autoSaveTimer->stop();
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                       QApplication::applicationName());
-    bool autoSave = settings.value("configuration/autosave/state", 1).toBool();
+    bool autoSave = qApp->getSettings()->value("configuration/autosave/state", 1).toBool();
     if (autoSave)
     {
         bool ok = true;
-        qint32 autoTime = settings.value("configuration/autosave/time", 5).toInt(&ok);
+        qint32 autoTime = qApp->getSettings()->value("configuration/autosave/time", 5).toInt(&ok);
         if (ok == false)
         {
             autoTime = 5;

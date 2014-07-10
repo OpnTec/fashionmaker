@@ -32,8 +32,9 @@
 #include <QApplication>
 #include "../options.h"
 #include "vtranslation.h"
+#include <QSettings>
 
-class VApplication;
+class VApplication;// used in define
 class QUndoStack;
 class VMainGraphicsView;
 
@@ -80,6 +81,8 @@ public:
     void               setMainWindow(QWidget *value);
     bool               getOpeningPattern() const;
     void               setOpeningPattern();
+    void               OpenSettings();
+    QSettings          *getSettings();
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -105,6 +108,10 @@ private:
      * we can allow user use Undo option.
      */
     bool               openingPattern;
+    /**
+     * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
+     */
+    QSettings          *settings;
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();
