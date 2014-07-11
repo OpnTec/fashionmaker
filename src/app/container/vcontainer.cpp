@@ -536,6 +536,7 @@ QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &s
  */
 void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
+    SCASSERT(obj != nullptr);
     UpdateObject(gObjects, id, obj);
 }
 

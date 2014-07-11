@@ -76,7 +76,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     sceneDetails = new VMainGraphicsScene();
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
+
     view = new VMainGraphicsView();
+    view->setDisabled(true);
     ui->LayoutView->addWidget(view);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -1742,6 +1744,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomOut->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomOriginal->setEnabled(enable);
+    //Now we want allow user call context menu
+    view->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2184,7 +2188,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
-    // Fit scene to view
+    // On this stage scene empty. Fit scene size to view size
     VAbstractTool::NewSceneRect(sceneDraw, view);
     VAbstractTool::NewSceneRect(sceneDetails, view);
 
@@ -2244,6 +2248,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     VAbstractTool::NewSceneRect(sceneDraw, view);
     VAbstractTool::NewSceneRect(sceneDetails, view);
 
+    //Fit scene size to best size for first show
     ActionDetails(true);
     view->ZoomFitBest();
 

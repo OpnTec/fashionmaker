@@ -298,7 +298,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(tool.getId());
                 SCASSERT(arc != nullptr);
-                const QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
+                const QString arcCenterName = data->GeometricObject<const VPointF *>(arc->GetCenter().id())->name();
                 return QString(tr("Arc with center in point %1")).arg(arcCenterName);
             }
             case Tool::SplinePathTool:

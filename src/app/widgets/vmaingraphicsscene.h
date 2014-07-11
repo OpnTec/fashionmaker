@@ -52,8 +52,8 @@ public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
 protected:
-    void          mouseMoveEvent(QGraphicsSceneMouseEvent* event);
-    void          mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event);
 signals:
     /**
      * @brief mouseMove send new mouse position.
