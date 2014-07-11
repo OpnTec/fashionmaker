@@ -43,5 +43,11 @@
         <file alias="16x16/actions/go-down.png">icons/win.icon.theme/16x16/actions/go-down.png</file>
         <file alias="24x24/actions/go-down.png">icons/win.icon.theme/24x24/actions/go-down.png</file>
         <file alias="32x32/actions/go-down.png">icons/win.icon.theme/32x32/actions/go-down.png</file>
+        <file alias="16x16/actions/zoom-fit-best.png">icons/win.icon.theme/16x16/actions/zoom-fit-best.png</file>
+        <file alias="16x16/actions/zoom-original.png">icons/win.icon.theme/16x16/actions/zoom-original.png</file>
+        <file alias="24x24/actions/zoom-fit-best.png">icons/win.icon.theme/24x24/actions/zoom-fit-best.png</file>
+        <file alias="24x24/actions/zoom-original.png">icons/win.icon.theme/24x24/actions/zoom-original.png</file>
+        <file alias="32x32/actions/zoom-fit-best.png">icons/win.icon.theme/32x32/actions/zoom-fit-best.png</file>
+        <file alias="32x32/actions/zoom-original.png">icons/win.icon.theme/32x32/actions/zoom-original.png</file>
     </qresource>
 </RCC>

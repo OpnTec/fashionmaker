@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>144</width>
          <height>150</height>
         </rect>
        </property>
@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>150</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -779,6 +779,8 @@
    </attribute>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
+   <addaction name="actionZoomOriginal"/>
+   <addaction name="actionZoomFitBest"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -1060,6 +1062,28 @@
   <action name="actionEdit_pattern_code">
    <property name="text">
     <string>Edit pattern XML code</string>
+   </property>
+  </action>
+  <action name="actionZoomOriginal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-original"/>
+   </property>
+   <property name="text">
+    <string>ZoomOriginal</string>
+   </property>
+  </action>
+  <action name="actionZoomFitBest">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-fit-best"/>
+   </property>
+   <property name="text">
+    <string>ZoomFitBest</string>
    </property>
   </action>
  </widget>

@@ -159,6 +159,33 @@ void VMainGraphicsView::ZoomOut()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::ZoomOriginal()
+{
+    QTransform trans = this->transform();
+    trans.setMatrix(1.0, trans.m12(), trans.m13(), trans.m21(), 1.0, trans.m23(), trans.m31(), trans.m32(),
+                    trans.m33());
+    this->setTransform(trans);
+    VAbstractTool::NewSceneRect(this->scene(), this);
+    emit NewFactor(1.0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::ZoomFitBest()
+{
+    QRectF rect = this->scene()->itemsBoundingRect();
+
+    if (rect.isEmpty())
+    {
+        return;
+    }
+
+    this->fitInView(rect,Qt::KeepAspectRatio);
+    VAbstractTool::NewSceneRect(this->scene(), this);
+    QTransform trans = this->transform();
+    emit NewFactor(trans.m11());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mousePressEvent handle mouse press events.
  * @param mousePress mouse press event.

@@ -1067,6 +1067,9 @@ void MainWindow::ToolBarTools()
                                                  Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier};
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, view, &VMainGraphicsView::ZoomOut);
+
+    connect(ui->actionZoomOriginal, &QAction::triggered, view, &VMainGraphicsView::ZoomOriginal);
+    connect(ui->actionZoomFitBest, &QAction::triggered, view, &VMainGraphicsView::ZoomFitBest);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1737,6 +1740,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionEdit_pattern_code->setEnabled(enable);
     ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
+    ui->actionZoomFitBest->setEnabled(enable);
+    ui->actionZoomOriginal->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2179,6 +2184,10 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
+    // Fit scene to view
+    VAbstractTool::NewSceneRect(sceneDraw, view);
+    VAbstractTool::NewSceneRect(sceneDetails, view);
+
     qApp->setOpeningPattern();//Begin opening file
     try
     {
@@ -2231,6 +2240,15 @@ void MainWindow::LoadPattern(const QString &fileName)
     helpLabel->setText(tr("File loaded"));
 
     qApp->setOpeningPattern();// End opening file
+
+    VAbstractTool::NewSceneRect(sceneDraw, view);
+    VAbstractTool::NewSceneRect(sceneDetails, view);
+
+    ActionDetails(true);
+    view->ZoomFitBest();
+
+    ActionDraw(true);
+    view->ZoomFitBest();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2292,9 +2310,6 @@ void MainWindow::OpenPattern(const QString &filePath)
         if (curFile.isEmpty() && this->isWindowModified() == false)
         {
             LoadPattern(filePath);
-
-            VAbstractTool::NewSceneRect(sceneDraw, view);
-            VAbstractTool::NewSceneRect(sceneDetails, view);
         }
         else
         {

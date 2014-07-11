@@ -52,6 +52,8 @@ public slots:
     void     animFinished();
     void     ZoomIn();
     void     ZoomOut();
+    void     ZoomOriginal();
+    void     ZoomFitBest();
 protected:
     void     wheelEvent ( QWheelEvent * event );
     void     mousePressEvent(QMouseEvent *mousePress);

@@ -43,7 +43,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
-    font.setPointSize(font.pointSize()+3);
+    font.setPointSize(font.pointSize()+20);
     fontSize = font.pointSize();
     this->setFont(font);
 }
