@@ -86,6 +86,8 @@ private:
     QString           Record(const VToolRecord &tool);
     void              InitialTable();
     void              ShowPoint();
+    QString           PointName(quint32 pointId);
+    quint32           AttrUInt(const QDomElement &domElement, const QString &name);
 };
 
 #endif // DIALOGHISTORY_H

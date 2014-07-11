@@ -203,8 +203,8 @@ void DialogHistory::FillTable()
  */
 QString DialogHistory::Record(const VToolRecord &tool)
 {
-    const QDomElement domElement = doc->elementById(QString().setNum(tool.getId()));
-    if (domElement.isElement() == false)
+    const QDomElement domElem = doc->elementById(QString().setNum(tool.getId()));
+    if (domElem.isElement() == false)
     {
         qDebug()<<"Can't find element by id"<<Q_FUNC_INFO;
         return QString(tr("Can't create record."));
@@ -218,88 +218,66 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 break;
             case Tool::SinglePointTool:
             {
-                const QString name = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%1 - Base point")).arg(name);
+                return QString(tr("%1 - Base point")).arg(PointName(tool.getId()));
             }
             case Tool::EndLineTool:
             {
-                const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
-                const QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%1_%2 - Line from point %1 to point %2")).arg(basePointIdName, toolIdName);
+                return QString(tr("%1_%2 - Line from point %1 to point %2"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)))
+                        .arg(PointName(tool.getId()));
             }
             case Tool::LineTool:
             {
-                const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                return QString(tr("%1_%2 - Line from point %1 to point %2")).arg(firstPointIdName, secondPointIdName);
+                return QString(tr("%1_%2 - Line from point %1 to point %2"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
             }
             case Tool::AlongLineTool:
             {
-                const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%3 - Point along line %1_%2")).arg(basePointIdName, secondPointIdName, toolIdName);
+                return QString(tr("%3 - Point along line %1_%2"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(tool.getId()));
             }
             case Tool::ShoulderPointTool:
             {
-                const QString name = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%1 - Point of shoulder")).arg(name);
+                return QString(tr("%1 - Point of shoulder")).arg(PointName(tool.getId()));
             }
             case Tool::NormalTool:
             {
-                const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%3 - normal to line %1_%2")).arg(basePointIdName, secondPointIdName, toolIdName);
+                return QString(tr("%3 - normal to line %1_%2"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(tool.getId()));
             }
             case Tool::BisectorTool:
             {
-                const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const quint32 thirdPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, "0");
-                const QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                const QString thirdPointIdName = data->GeometricObject<const VPointF *>(thirdPointId)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%4 - bisector of angle %1_%2_%3")).arg(firstPointIdName, secondPointIdName,
-                                                                          thirdPointIdName, toolIdName);
+                return QString(tr("%4 - bisector of angle %1_%2_%3"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrThirdPoint)))
+                        .arg(PointName(tool.getId()));
             }
             case Tool::LineIntersectTool:
             {
-                const quint32 p1Line1 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, "0");
-                const quint32 p2Line1 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, "0");
-                const quint32 p1Line2 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line2, "0");
-                const quint32 p2Line2 = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, "0");
-                const QString p1Line1Name = data->GeometricObject<const VPointF *>(p1Line1)->name();
-                const QString p2Line1Name = data->GeometricObject<const VPointF *>(p2Line1)->name();
-                const QString p1Line2Name = data->GeometricObject<const VPointF *>(p1Line2)->name();
-                const QString p2Line2Name = data->GeometricObject<const VPointF *>(p2Line2)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%5 - intersection of lines %1_%2 and %3_%4")).arg(p1Line1Name, p2Line1Name,
-                                                                                     p1Line2Name, p2Line2Name,
-                                                                                     toolIdName);
+                return QString(tr("%5 - intersection of lines %1_%2 and %3_%4"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line1)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line1)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line2)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line2)))
+                        .arg(PointName(tool.getId()));
             }
             case Tool::SplineTool:
             {
                 const VSpline *spl = data->GeometricObject<const VSpline *>(tool.getId());
                 SCASSERT(spl != nullptr);
-                const QString splP1Name = data->GeometricObject<const VPointF *>(spl->GetP1().id())->name();
-                const QString splP4Name = data->GeometricObject<const VPointF *>(spl->GetP4().id())->name();
-                return QString(tr("Curve %1_%2")).arg(splP1Name, splP4Name);
+                return QString(tr("Curve %1_%2")).arg(PointName(spl->GetP1().id())).arg(PointName(spl->GetP4().id()));
             }
             case Tool::ArcTool:
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(tool.getId());
                 SCASSERT(arc != nullptr);
-                const QString arcCenterName = data->GeometricObject<const VPointF *>(arc->GetCenter().id())->name();
-                return QString(tr("Arc with center in point %1")).arg(arcCenterName);
+                return QString(tr("Arc with center in point %1")).arg(PointName(arc->GetCenter().id()));
             }
             case Tool::SplinePathTool:
             {
@@ -309,12 +287,11 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 QString record;
                 if (points.size() != 0 )
                 {
-                    const QString pName = data->GeometricObject<const VPointF *>(points.at(0).P().id())->name();
-                    record = QString(tr("Curve point %1")).arg(pName);
+                    // We use only first and last point name in curve
+                    record = QString(tr("Curve point %1")).arg(PointName(points.at(0).P().id()));
                     if (points.size() > 1)
                     {
-                        const QString pName = data->GeometricObject<const VPointF *>(points.last().P().id())->name();
-                        record.append(QString("_%1").arg(pName));
+                        record.append(QString("_%1").arg(PointName(points.last().P().id())));
                     }
                 }
                 else
@@ -326,87 +303,67 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
             case Tool::PointOfContact:
             {
-                const quint32 center = doc->GetParametrUInt(domElement, VAbstractTool::AttrCenter, "0");
-                const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
-                const QString centerName = data->GeometricObject<const VPointF *>(center)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")).arg(
-                            centerName, firstPointIdName, secondPointIdName, toolIdName);
+                return QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrCenter)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(tool.getId()));
             }
             case Tool::Height:
             {
-                const quint32 basePointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
-                const quint32 p1LineId = doc->GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
-                const quint32 p2LineId = doc->GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
-                const QString basePointIdName = data->GeometricObject<const VPointF *>(basePointId)->name();
-                const QString p1LineIdName = data->GeometricObject<const VPointF *>(p1LineId)->name();
-                const QString p2LineIdName = data->GeometricObject<const VPointF *>(p2LineId)->name();
-                return QString(tr("Point of perpendicular from point %1 to line %2_%3")).arg(basePointIdName,
-                                                                                             p1LineIdName,
-                                                                                             p2LineIdName);
+                return QString(tr("Point of perpendicular from point %1 to line %2_%3"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line)));
             }
             case Tool::Triangle:
             {
-                const quint32 axisP1Id = doc->GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, "0");
-                const quint32 axisP2Id = doc->GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, "0");
-                const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const QString axisP1IdName = data->GeometricObject<const VPointF *>(axisP1Id)->name();
-                const QString axisP2IdName = data->GeometricObject<const VPointF *>(axisP2Id)->name();
-                const QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                return QString(tr("Triangle: axis %1_%2, points %3 and %4")).arg(axisP1IdName, axisP2IdName,
-                                                                                 firstPointIdName, secondPointIdName);
+                return QString(tr("Triangle: axis %1_%2, points %3 and %4"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrAxisP1)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrAxisP2)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
             }
             case Tool::PointOfIntersection:
             {
-                const quint32 firstPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-                const quint32 secondPointId = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
-                const QString firstPointIdName = data->GeometricObject<const VPointF *>(firstPointId)->name();
-                const QString secondPointIdName = data->GeometricObject<const VPointF *>(secondPointId)->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%1 - point of intersection %2 and %3")).arg(toolIdName, firstPointIdName,
-                                                                               secondPointIdName);
+                return QString(tr("%1 - point of intersection %2 and %3"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
             }
             case Tool::CutArcTool:
             {
-                const quint32 arcId = doc->GetParametrUInt(domElement, VToolCutArc::AttrArc, "0");
-                const VArc *arc = data->GeometricObject<const VArc *>(arcId);
+                const VArc *arc = data->GeometricObject<const VArc *>(AttrUInt(domElem, VToolCutArc::AttrArc));
                 SCASSERT(arc != nullptr);
-                const QString arcCenterName = data->GeometricObject<const VArc *>(arc->GetCenter().id())->name();
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                return QString(tr("%1 - cut arc with center %2")).arg(toolIdName, arcCenterName);
+                return QString(tr("%1 - cut arc with center %2"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(arc->GetCenter().id()));
             }
             case Tool::CutSplineTool:
             {
-                const quint32 splineId = doc->GetParametrUInt(domElement, VToolCutSpline::AttrSpline, "0");
+                const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
                 const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
                 SCASSERT(spl != nullptr);
-                const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                const QString splP1Name = data->GeometricObject<const VPointF *>(spl->GetP1().id())->name();
-                const QString splP4Name = data->GeometricObject<const VPointF *>(spl->GetP4().id())->name();
-                return QString(tr("%1 - cut curve %2_%3")).arg(toolIdName, splP1Name, splP4Name);
+                return QString(tr("%1 - cut curve %2_%3"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(spl->GetP1().id()))
+                        .arg(PointName(spl->GetP4().id()));
             }
             case Tool::CutSplinePathTool:
             {
-                const quint32 splinePathId = doc->GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath, "0");
+                const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
                 const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
                 SCASSERT(splPath != nullptr);
                 const QVector<VSplinePoint> points = splPath->GetSplinePath();
                 QString record;
                 if (points.size() != 0 )
                 {
-                    const QString toolIdName = data->GeometricObject<const VPointF *>(tool.getId())->name();
-                    const QString pName = data->GeometricObject<const VPointF *>(points.at(0).P().id())->name();
-                    record = QString(tr("%1 - cut curve path %2")).arg(toolIdName, pName);
+                    record = QString(tr("%1 - cut curve path %2"))
+                            .arg(PointName(tool.getId()))
+                            .arg(PointName(points.at(0).P().id()));
                     if (points.size() > 1)
                     {
-                        const QString pName = data->GeometricObject<const VPointF *>(points.last().P().id())->name();
-                        const QString name = QString("_%1").arg(pName);
-                        record.append(name);
+                        record.append(QString("_%1").arg(PointName(points.last().P().id())));
                     }
                 }
                 else
@@ -432,6 +389,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 break;
             default:
                 qDebug()<<"Got wrong tool type. Ignore.";
+                return QString(tr("Can't create record."));
                 break;
         }
     }
@@ -470,6 +428,25 @@ void DialogHistory::ShowPoint()
         quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         emit ShowHistoryTool(id, Qt::green, true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogHistory::PointName return point name by id.
+ *
+ * Refacoring what hide ugly string getting point name by id.
+ * @param pointId point if in data.
+ * @return point name.
+ */
+QString DialogHistory::PointName(quint32 pointId)
+{
+    return data->GeometricObject<const VPointF *>(pointId)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 DialogHistory::AttrUInt(const QDomElement &domElement, const QString &name)
+{
+    return doc->GetParametrUInt(domElement, name, "0");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
