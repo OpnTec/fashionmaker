@@ -1909,3 +1909,117 @@ int VPattern::CountPP() const
 
     return rootElement.elementsByTagName( TagDraw ).count();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VPattern::ActiveDrawBoundingRect() const
+{
+    QRectF rec;
+
+    for (qint32 i = 0; i< history.size(); ++i)
+    {
+        const VToolRecord tool = history.at(i);
+        if (tool.getNameDraw() == nameActivDraw)
+        {
+            switch ( tool.getTypeTool() )
+            {
+                case Tool::ArrowTool:
+                    Q_UNREACHABLE();
+                    break;
+                case Tool::SinglePointTool:
+                    rec = ToolBoundingRect<VToolSinglePoint>(rec, tool.getId());
+                    break;
+                case Tool::EndLineTool:
+                    rec = ToolBoundingRect<VToolEndLine>(rec, tool.getId());
+                    break;
+                case Tool::LineTool:
+                    rec = ToolBoundingRect<VToolLine>(rec, tool.getId());
+                    break;
+                case Tool::AlongLineTool:
+                    rec = ToolBoundingRect<VToolAlongLine>(rec, tool.getId());
+                    break;
+                case Tool::ShoulderPointTool:
+                    rec = ToolBoundingRect<VToolShoulderPoint>(rec, tool.getId());
+                    break;
+                case Tool::NormalTool:
+                    rec = ToolBoundingRect<VToolNormal>(rec, tool.getId());
+                    break;
+                case Tool::BisectorTool:
+                    rec = ToolBoundingRect<VToolBisector>(rec, tool.getId());
+                    break;
+                case Tool::LineIntersectTool:
+                    rec = ToolBoundingRect<VToolLineIntersect>(rec, tool.getId());
+                    break;
+                case Tool::SplineTool:
+                    rec = ToolBoundingRect<VToolSpline>(rec, tool.getId());
+                    break;
+                case Tool::ArcTool:
+                    rec = ToolBoundingRect<VToolArc>(rec, tool.getId());
+                    break;
+                case Tool::SplinePathTool:
+                    rec = ToolBoundingRect<VToolSplinePath>(rec, tool.getId());
+                    break;
+                case Tool::PointOfContact:
+                    rec = ToolBoundingRect<VToolPointOfContact>(rec, tool.getId());
+                    break;
+                case Tool::Height:
+                    rec = ToolBoundingRect<VToolHeight>(rec, tool.getId());
+                    break;
+                case Tool::Triangle:
+                    rec = ToolBoundingRect<VToolTriangle>(rec, tool.getId());
+                    break;
+                case Tool::PointOfIntersection:
+                    rec = ToolBoundingRect<VToolPointOfIntersection>(rec, tool.getId());
+                    break;
+                case Tool::CutArcTool:
+                    rec = ToolBoundingRect<VToolCutArc>(rec, tool.getId());
+                    break;
+                case Tool::CutSplineTool:
+                    rec = ToolBoundingRect<VToolCutSpline>(rec, tool.getId());
+                    break;
+                case Tool::CutSplinePathTool:
+                    rec = ToolBoundingRect<VToolCutSplinePath>(rec, tool.getId());
+                    break;
+                //Because "history" not only show history of pattern, but help restore current data for each pattern's
+                //piece, we need add record about details and nodes, but don't show them.
+                case Tool::DetailTool:
+                    break;
+                case Tool::UnionDetails:
+                    break;
+                case Tool::NodeArc:
+                    break;
+                case Tool::NodePoint:
+                    break;
+                case Tool::NodeSpline:
+                    break;
+                case Tool::NodeSplinePath:
+                    break;
+                default:
+                    qDebug()<<"Got wrong tool type. Ignore.";
+                    break;
+            }
+        }
+    }
+    return rec;
+}
+
+template <typename T>
+QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
+{
+    QRectF recTool = recTool.united(rec);
+    if (tools.contains(id))
+    {
+        T *vTool = qobject_cast<T *>(tools.value(id));
+        SCASSERT(vTool != nullptr);
+
+        QRectF childrenRect = vTool->childrenBoundingRect();
+        //map to scene coordinate.
+        childrenRect.translate(vTool->scenePos());
+
+        recTool = recTool | vTool->boundingRect() | childrenRect;
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id="<<id;
+    }
+    return recTool;
+}

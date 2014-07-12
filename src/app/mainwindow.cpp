@@ -1112,12 +1112,7 @@ void MainWindow::currentDrawChanged( int index )
         if (drawMode)
         {
             ArrowTool();
-            quint32 id = doc->SPointActiveDraw();
-            if (id != 0)
-            {
-                const VPointF *p = pattern->GeometricObject<const VPointF *>(id);
-                view->centerOn(p->toQPointF());
-            }
+            view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
         }
     }
 }

@@ -36,6 +36,7 @@
  */
 class VToolPointOfContact : public VToolPoint
 {
+    Q_OBJECT
 public:
     VToolPointOfContact(VPattern *doc, VContainer *data, const quint32 &id, const QString &arcRadius,
                         const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,

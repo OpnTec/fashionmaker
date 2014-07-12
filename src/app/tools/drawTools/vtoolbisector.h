@@ -36,6 +36,7 @@
  */
 class VToolBisector : public VToolLinePoint
 {
+    Q_OBJECT
 public:
 
     VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,

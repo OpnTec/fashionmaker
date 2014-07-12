@@ -179,7 +179,7 @@ void VMainGraphicsView::ZoomFitBest()
         return;
     }
 
-    this->fitInView(rect,Qt::KeepAspectRatio);
+    this->fitInView(rect, Qt::KeepAspectRatio);
     VAbstractTool::NewSceneRect(this->scene(), this);
     QTransform trans = this->transform();
     emit NewFactor(trans.m11());

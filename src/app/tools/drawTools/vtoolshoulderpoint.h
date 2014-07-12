@@ -37,6 +37,7 @@
  */
 class VToolShoulderPoint : public VToolLinePoint
 {
+    Q_OBJECT
 public:
     VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                        const QString &formula, const quint32 &p1Line, const quint32 &p2Line, const quint32 &pShoulder,
