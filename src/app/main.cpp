@@ -31,6 +31,7 @@
 #include <QTextCodec>
 #include <QMessageBox>
 #include <QThread>
+#include <QCommandLineParser>
 #include "tablewindow.h"
 #include "version.h"
 
@@ -181,10 +182,16 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
     parser.process(app);
     const QStringList args = parser.positionalArguments();
-    if (args.size() > 0)
+    for(int i=0;i<args.size();++i)
     {
-        w.LoadPattern(args.at(0));
-
+        if (i == 0)
+        {
+            w.LoadPattern(args.at(i));
+        }
+        else
+        {
+            VApplication::NewValentina(args.at(i));
+        }
     }
     w.show();
     return app.exec();
