@@ -31,15 +31,16 @@
 
 #include <QDialog>
 #include <QDialogButtonBox>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QRadioButton>
 #include "../../widgets/vapplication.h"
 #include <QPushButton>
 
 class QDoubleSpinBox;
 class QLabel;
-class QRadioButton;
 class QComboBox;
 class QListWidgetItem;
-class QListWidget;
 class VContainer;
 class QPlainTextEdit;
 class VAbstractTool;

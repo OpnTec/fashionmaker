@@ -31,6 +31,8 @@
 
 #include "../tools/dialogtool.h"
 
+#include <QDomElement>
+
 class VPattern;
 class VToolRecord;
 

@@ -43,6 +43,7 @@
 #include <QTableWidget>
 #include <QPushButton>
 #include <QFileDialog>
+#include <QHeaderView>
 
 //---------------------------------------------------------------------------------------------------------------------
 PathPage::PathPage(QWidget *parent)

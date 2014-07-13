@@ -117,11 +117,8 @@ void VMainGraphicsView::scrollingTime(qreal x)
     }
     else
     {
-//        if (verticalScrollBar()->value() > 0)
-//        {
-            verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
-            emit NewFactor(factor);
-//        }
+        verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
+        emit NewFactor(factor);
     }
 }
 
@@ -180,9 +177,7 @@ void VMainGraphicsView::ZoomFitBest()
     }
 
     this->fitInView(rect, Qt::KeepAspectRatio);
-    VAbstractTool::NewSceneRect(this->scene(), this);
-    QTransform trans = this->transform();
-    emit NewFactor(trans.m11());
+    emit NewFactor(this->transform().m11());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

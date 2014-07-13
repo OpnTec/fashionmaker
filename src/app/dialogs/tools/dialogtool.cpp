@@ -47,8 +47,6 @@
 #include <QSettings>
 #include <QPushButton>
 #include <QDoubleSpinBox>
-#include <QListWidget>
-#include <QRadioButton>
 
 #define DIALOGARC_MAX_FORMULA_HEIGHT 64
 

@@ -40,6 +40,7 @@
 #if defined __cplusplus
 /* Add C++ includes here */
 
+/*In all cases we need include core header for getting defined values*/
 #ifdef QT_CORE_LIB
 #   include <QtCore>
 #endif
@@ -48,24 +49,41 @@
 #   include <QtGui>
 #endif
 
-#ifdef QT_WIDGETS_LIB
-#   include <QtWidgets>
-#endif
-
 #ifdef QT_XML_LIB
 #   include <QtXml>
 #endif
 
-#ifdef QT_SVG_LIB
-#   include <QtSvg/QtSvg>
-#endif
+//In Windows you can't use same header in all modes.
+#if defined(Q_OS_WIN)
+#   if defined(QT_NO_DEBUG)//release mode
 
-#ifdef QT_PRINTSUPPORT_LIB
-#   include <QtPrintSupport>
-#endif
+#       ifdef QT_WIDGETS_LIB
+#           include <QtWidgets>
+#       endif
 
-//Build doesn't work, if include this headers on Windows.
-#ifndef Q_OS_WIN
+#       ifdef QT_SVG_LIB
+#           include <QtSvg/QtSvg>
+#       endif
+
+#       ifdef QT_PRINTSUPPORT_LIB
+#           include <QtPrintSupport>
+#       endif
+#   endif/*QT_NO_DEBUG*/
+#else
+
+#   ifdef QT_WIDGETS_LIB
+#       include <QtWidgets>
+#   endif
+
+#   ifdef QT_SVG_LIB
+#       include <QtSvg/QtSvg>
+#   endif
+
+#   ifdef QT_PRINTSUPPORT_LIB
+#       include <QtPrintSupport>
+#   endif
+
+    //Build doesn't work, if include this headers on Windows.
 #   ifdef QT_XMLPATTERNS_LIB
 #       include <QtXmlPatterns>
 #   endif
@@ -73,7 +91,7 @@
 #   ifdef QT_NETWORK_LIB
 #       include <QtNetwork>
 #   endif
-#endif /*Q_OS_WIN*/
+#endif/*Q_OS_WIN*/
 
 #endif /*__cplusplus*/
 

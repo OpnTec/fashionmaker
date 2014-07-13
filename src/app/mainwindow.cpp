@@ -1113,6 +1113,7 @@ void MainWindow::currentDrawChanged( int index )
         {
             ArrowTool();
             view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
+            view->NewFactor(view->transform().m11());
         }
     }
 }

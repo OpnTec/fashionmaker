@@ -43,6 +43,7 @@
 #include "../../libs/qmuparser/qmuparsererror.h"
 #include "../geometry/varc.h"
 #include <QMessageBox>
+#include <QUndoStack>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -2005,7 +2006,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
 template <typename T>
 QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
 {
-    QRectF recTool = recTool.united(rec);
+    QRectF recTool = rec;
     if (tools.contains(id))
     {
         T *vTool = qobject_cast<T *>(tools.value(id));
@@ -2015,7 +2016,8 @@ QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
         //map to scene coordinate.
         childrenRect.translate(vTool->scenePos());
 
-        recTool = recTool | vTool->boundingRect() | childrenRect;
+        recTool = recTool.united(vTool->boundingRect());
+        recTool = recTool.united(childrenRect);
     }
     else
     {

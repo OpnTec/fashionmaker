@@ -182,6 +182,10 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
     parser.process(app);
     const QStringList args = parser.positionalArguments();
+
+    //Before we load pattern show window.
+    w.show();
+
     for(int i=0;i<args.size();++i)
     {
         if (i == 0)
@@ -193,6 +197,6 @@ int main(int argc, char *argv[])
             VApplication::NewValentina(args.at(i));
         }
     }
-    w.show();
+
     return app.exec();
 }
