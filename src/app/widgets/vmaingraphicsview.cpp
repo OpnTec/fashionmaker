@@ -162,7 +162,6 @@ void VMainGraphicsView::ZoomOriginal()
     trans.setMatrix(1.0, trans.m12(), trans.m13(), trans.m21(), 1.0, trans.m23(), trans.m31(), trans.m32(),
                     trans.m33());
     this->setTransform(trans);
-    VAbstractTool::NewSceneRect(this->scene(), this);
     emit NewFactor(1.0);
 }
 
