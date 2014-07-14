@@ -62,12 +62,35 @@ DialogNormal::DialogNormal(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogNormal::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogNormal::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::PointNameChanged()
+{
+    if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,7 +174,7 @@ void DialogNormal::SaveData()
  */
 void DialogNormal::setSecondPointId(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -162,7 +185,7 @@ void DialogNormal::setSecondPointId(const quint32 &value, const quint32 &id)
  */
 void DialogNormal::setFirstPointId(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
