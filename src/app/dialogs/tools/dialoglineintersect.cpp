@@ -54,6 +54,14 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent
     FillComboBoxPoints(ui->comboBoxP2Line2);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersect::NamePointChanged);
+    connect(ui->comboBoxP1Line1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->comboBoxP2Line1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->comboBoxP1Line2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->comboBoxP2Line2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersect::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -205,6 +213,49 @@ void DialogLineIntersect::P2Line2Changed(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersect::PointNameChanged()
+{
+    QSet<quint32> set;
+    const quint32 p1Line1Id = getCurrentObjectId(ui->comboBoxP1Line1);
+    const quint32 p2Line1Id = getCurrentObjectId(ui->comboBoxP2Line1);
+    const quint32 p1Line2Id = getCurrentObjectId(ui->comboBoxP1Line2);
+    const quint32 p2Line2Id = getCurrentObjectId(ui->comboBoxP2Line2);
+
+    set.insert(p1Line1Id);
+    set.insert(p2Line1Id);
+    set.insert(p1Line2Id);
+    set.insert(p2Line2Id);
+
+    const VPointF *p1Line1 = data->GeometricObject<const VPointF *>(p1Line1Id);
+    const VPointF *p2Line1 = data->GeometricObject<const VPointF *>(p2Line1Id);
+    const VPointF *p1Line2 = data->GeometricObject<const VPointF *>(p1Line2Id);
+    const VPointF *p2Line2 = data->GeometricObject<const VPointF *>(p2Line2Id);
+
+    QLineF line1(p1Line1->toQPointF(), p2Line1->toQPointF());
+    QLineF line2(p1Line2->toQPointF(), p2Line2->toQPointF());
+    QPointF fPoint;
+    QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
+
+    if (set.size() < 3 || intersect == QLineF::NoIntersection)
+    {
+        flagError = false;
+        ChangeColor(ui->labelP1Line1, Qt::red);
+        ChangeColor(ui->labelP2Line1, Qt::red);
+        ChangeColor(ui->labelP1Line2, Qt::red);
+        ChangeColor(ui->labelP2Line2, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelP1Line1, QColor(76, 76, 76));
+        ChangeColor(ui->labelP2Line1, QColor(76, 76, 76));
+        ChangeColor(ui->labelP1Line2, QColor(76, 76, 76));
+        ChangeColor(ui->labelP2Line2, QColor(76, 76, 76));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CheckState check state of dialog. Enable or disable button ok.
  */
@@ -247,8 +298,7 @@ bool DialogLineIntersect::CheckIntersecion()
  */
 void DialogLineIntersect::setP2Line2(const quint32 &value)
 {
-    p2Line2 = value;
-    ChangeCurrentData(ui->comboBoxP2Line2, value);
+    setPointId(ui->comboBoxP2Line2, p2Line2, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -258,8 +308,7 @@ void DialogLineIntersect::setP2Line2(const quint32 &value)
  */
 void DialogLineIntersect::setP1Line2(const quint32 &value)
 {
-    p1Line2 = value;
-    ChangeCurrentData(ui->comboBoxP1Line2, value);
+    setPointId(ui->comboBoxP1Line2, p1Line2, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,8 +318,7 @@ void DialogLineIntersect::setP1Line2(const quint32 &value)
  */
 void DialogLineIntersect::setP2Line1(const quint32 &value)
 {
-    p2Line1 = value;
-    ChangeCurrentData(ui->comboBoxP2Line1, value);
+    setPointId(ui->comboBoxP2Line1, p2Line1, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,8 +328,7 @@ void DialogLineIntersect::setP2Line1(const quint32 &value)
  */
 void DialogLineIntersect::setP1Line1(const quint32 &value)
 {
-    p1Line1 = value;
-    ChangeCurrentData(ui->comboBoxP1Line1, value);
+    setPointId(ui->comboBoxP1Line1, p1Line1, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

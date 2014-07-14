@@ -88,7 +88,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="labelP1Line1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -104,7 +104,7 @@
       <widget class="QComboBox" name="comboBoxP1Line1"/>
      </item>
      <item>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="labelP2Line1">
        <property name="text">
         <string>Second point</string>
        </property>
@@ -125,7 +125,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="labelP1Line2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -141,7 +141,7 @@
       <widget class="QComboBox" name="comboBoxP1Line2"/>
      </item>
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="labelP2Line2">
        <property name="text">
         <string>Second point</string>
        </property>

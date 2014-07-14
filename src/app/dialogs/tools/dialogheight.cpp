@@ -31,6 +31,7 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -180,11 +181,20 @@ void DialogHeight::DialogAccepted()
 void DialogHeight::PointNameChanged()
 {
     QSet<quint32> set;
-    set.insert(getCurrentObjectId(ui->comboBoxBasePoint));
-    set.insert(getCurrentObjectId(ui->comboBoxP1Line));
-    set.insert(getCurrentObjectId(ui->comboBoxP2Line));
+    const quint32 basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
+    const quint32 p1LineId = getCurrentObjectId(ui->comboBoxP1Line);
+    const quint32 p2LineId = getCurrentObjectId(ui->comboBoxP2Line);
 
-    if (set.size() != 3)
+    set.insert(basePointId);
+    set.insert(p1LineId);
+    set.insert(p2LineId);
+
+    const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
+    const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
+    const VPointF *p2Line = data->GeometricObject<const VPointF *>(p2LineId);
+
+    if (set.size() != 3 || VAbstractTool::ClosestPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()),
+                                                       basePoint->toQPointF()) == QPointF())
     {
         flagError = false;
         ChangeColor(ui->labelBasePoint, Qt::red);

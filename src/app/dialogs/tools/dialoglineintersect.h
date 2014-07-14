@@ -71,6 +71,7 @@ public slots:
     void                    P2Line1Changed( int index);
     void                    P1Line2Changed( int index);
     void                    P2Line2Changed( int index);
+    virtual void            PointNameChanged();
 private:
     Q_DISABLE_COPY(DialogLineIntersect)
 
