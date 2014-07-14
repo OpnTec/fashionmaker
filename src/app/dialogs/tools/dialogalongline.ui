@@ -195,7 +195,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="go-down"/>
+        <iconset theme="go-down">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -268,7 +270,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="labelFirstPoint">
            <property name="text">
             <string>First point</string>
            </property>
@@ -286,7 +288,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="labelSecondPoint">
            <property name="text">
             <string>Second point</string>
            </property>

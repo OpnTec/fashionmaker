@@ -122,6 +122,13 @@ protected:
     /** @brief flagFormula true if formula correct */
     bool             flagFormula;
 
+    /** @brief flagError use this flag if for you do not enought @see flagName and @see flagFormula.
+     *
+     * In many cases you will need more flags fore checking if all data are valid.
+     * By default this flag is true.
+     */
+    bool             flagError;
+
     /** @brief timerFormula timer for check formula */
     QTimer           *timerFormula;
 
@@ -292,6 +299,7 @@ protected:
      * @brief associatedTool vdrawtool associated with opened dialog.
      */
     VAbstractTool* associatedTool;
+    void             ChangeColor(QWidget *widget, const QColor &color);
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };

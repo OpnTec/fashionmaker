@@ -63,12 +63,34 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogTool::PutVal);
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogAlongLine::PointChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogAlongLine::PointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::PointChanged()
+{
+    if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
