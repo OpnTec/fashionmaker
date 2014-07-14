@@ -69,15 +69,16 @@ public slots:
     /**
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply();
+    virtual void   DialogApply();
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void DeployFormulaTextEdit();
+    void           DeployFormulaTextEdit();
     /**
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
-    void FormulaTextChanged();
+    void           FormulaTextChanged();
+    virtual void   PointNameChanged();
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
 

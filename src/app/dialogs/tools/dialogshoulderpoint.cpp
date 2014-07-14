@@ -64,12 +64,43 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogShoulderPoint::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogShoulderPoint::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogShoulderPoint::DeployFormulaTextEdit);
+    connect(ui->comboBoxP1Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogShoulderPoint::PointNameChanged);
+    connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogShoulderPoint::PointNameChanged);
+    connect(ui->comboBoxPShoulder, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogShoulderPoint::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxP1Line));
+    set.insert(getCurrentObjectId(ui->comboBoxP2Line));
+    set.insert(getCurrentObjectId(ui->comboBoxPShoulder));
+
+    if (set.size() != 3)
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+        ChangeColor(ui->labelPointShoulder, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelPointShoulder, QColor(76, 76, 76));
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,7 +202,7 @@ void DialogShoulderPoint::SaveData()
  */
 void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxPShoulder, pShoulder, value, id);
+    setPointId(ui->comboBoxPShoulder, pShoulder, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,7 +213,7 @@ void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
  */
 void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxP2Line, p2Line, value, id);
+    setPointId(ui->comboBoxP2Line, p2Line, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,7 +224,7 @@ void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
  */
 void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxP1Line, p1Line, value, id);
+    setPointId(ui->comboBoxP1Line, p1Line, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -53,6 +53,10 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, QWi
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersection::NamePointChanged);
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfIntersection::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfIntersection::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -69,8 +73,7 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
  */
 void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const quint32 &id)
 {
-    secondPointId = value;
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -126,6 +129,24 @@ void DialogPointOfIntersection::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersection::PointNameChanged()
+{
+    if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
@@ -133,8 +154,7 @@ void DialogPointOfIntersection::DialogAccepted()
  */
 void DialogPointOfIntersection::setFirstPointId(const quint32 &value, const quint32 &id)
 {
-    firstPointId = value;
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
