@@ -81,7 +81,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="labelAxisP1">
        <property name="text">
         <string>First point of axis</string>
        </property>
@@ -99,7 +99,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="labelAxisP2">
        <property name="text">
         <string>Second point of axis</string>
        </property>
@@ -117,7 +117,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="labelFirstPoint">
        <property name="text">
         <string>First point</string>
        </property>
@@ -135,7 +135,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="labelSecondPoint">
        <property name="text">
         <string>Second point</string>
        </property>

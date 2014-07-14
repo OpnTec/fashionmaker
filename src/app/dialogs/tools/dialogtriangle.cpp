@@ -54,6 +54,14 @@ DialogTriangle::DialogTriangle(const VContainer *data, QWidget *parent)
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogTriangle::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogTriangle::PointNameChanged);
+    connect(ui->comboBoxAxisP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogTriangle::PointNameChanged);
+    connect(ui->comboBoxAxisP2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogTriangle::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,6 +129,34 @@ void DialogTriangle::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTriangle::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
+    set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
+    set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
+    set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
+
+    if (set.size() != 4)
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+        ChangeColor(ui->labelAxisP1, Qt::red);
+        ChangeColor(ui->labelAxisP2, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelAxisP1, QColor(76, 76, 76));
+        ChangeColor(ui->labelAxisP2, QColor(76, 76, 76));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setPointName set name of point
  * @param value name
@@ -139,8 +175,7 @@ void DialogTriangle::setPointName(const QString &value)
  */
 void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
 {
-    secondPointId = value;
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,8 +186,7 @@ void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
  */
 void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
 {
-    firstPointId = value;
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,8 +197,7 @@ void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
  */
 void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
 {
-    axisP2Id = value;
-    setCurrentPointId(ui->comboBoxAxisP2, axisP2Id, value, id);
+    setPointId(ui->comboBoxAxisP2, axisP2Id, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,6 +208,5 @@ void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
  */
 void DialogTriangle::setAxisP1Id(const quint32 &value, const quint32 &id)
 {
-    axisP1Id = value;
-    setCurrentPointId(ui->comboBoxAxisP1, axisP1Id, value, id);
+    setPointId(ui->comboBoxAxisP1, axisP1Id, value, id);
 }
