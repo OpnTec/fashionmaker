@@ -42,6 +42,7 @@ include(tools/tools.pri)
 include(widgets/widgets.pri)
 include(xml/xml.pri)
 include(undocommands/undocommands.pri)
+include(visualization/visualization.pri)
 
 SOURCES += \
         main.cpp \

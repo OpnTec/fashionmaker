@@ -31,7 +31,7 @@
 
 #include "vdrawtool.h"
 #include <QGraphicsPathItem>
-#include "../../widgets/vcontrolpointspline.h"
+#include "../../visualization/vcontrolpointspline.h"
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {

@@ -30,7 +30,7 @@
 #define VTOOLCUT_H
 
 #include "vtoolpoint.h"
-#include "../../widgets/vsimplecurve.h"
+#include "../../visualization/vsimplecurve.h"
 
 class VToolCut : public VToolPoint
 {

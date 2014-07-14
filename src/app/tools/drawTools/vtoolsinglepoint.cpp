@@ -28,7 +28,7 @@
 
 #include "vtoolsinglepoint.h"
 #include "../../dialogs/tools/dialogsinglepoint.h"
-#include "../../widgets/vgraphicssimpletextitem.h"
+#include "../../visualization/vgraphicssimpletextitem.h"
 #include "../../undocommands/movespoint.h"
 #include "../../undocommands/addpatternpiece.h"
 #include "../../undocommands/deletepatternpiece.h"
