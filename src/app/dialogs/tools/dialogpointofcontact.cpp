@@ -79,12 +79,43 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, QWidget *pare
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfContact::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfContact::PointNameChanged);
+    connect(ui->comboBoxCenter, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfContact::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
+    set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
+    set.insert(getCurrentObjectId(ui->comboBoxCenter));
+
+    if (set.size() != 3)
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+        ChangeColor(ui->labelArcCenter, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelArcCenter, QColor(76, 76, 76));
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,7 +210,7 @@ void DialogPointOfContact::SaveData()
  */
 void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPoint, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPoint, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,7 +221,7 @@ void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &i
  */
 void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPoint, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPoint, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -201,8 +232,7 @@ void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id
  */
 void DialogPointOfContact::setCenter(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxCenter, center, value, id);
-    center = value;
+    setPointId(ui->comboBoxCenter, center, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
