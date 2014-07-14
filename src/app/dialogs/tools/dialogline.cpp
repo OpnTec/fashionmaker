@@ -49,6 +49,11 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
     number = 0;
+
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLine::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLine::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -64,13 +69,7 @@ DialogLine::~DialogLine()
  */
 void DialogLine::setSecondPoint(const quint32 &value)
 {
-    secondPoint = value;
-    const VPointF *point = data->GeometricObject<const VPointF *>(value);
-    qint32 index = ui->comboBoxSecondPoint->findText(point->name());
-    if (index != -1)
-    {
-        ui->comboBoxSecondPoint->setCurrentIndex(index);
-    }
+    setPointId(ui->comboBoxSecondPoint, secondPoint, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,13 +90,7 @@ void DialogLine::setTypeLine(const QString &value)
  */
 void DialogLine::setFirstPoint(const quint32 &value)
 {
-    firstPoint = value;
-    const VPointF *point = data->GeometricObject<const VPointF *>(value);
-    qint32 index = ui->comboBoxFirstPoint->findText(point->name());
-    if (index != -1)
-    {
-        ui->comboBoxFirstPoint->setCurrentIndex(index);
-    }
+    setPointId(ui->comboBoxFirstPoint, firstPoint, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +106,24 @@ void DialogLine::DialogAccepted()
     secondPoint = qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(index));
     typeLine = GetTypeLine(ui->comboBoxLineType);
     DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::PointNameChanged()
+{
+    if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -60,7 +60,8 @@ public slots:
     /** TODO ISSUE 79 : create real function
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply(){}
+    virtual void   DialogApply(){}
+    virtual void   PointNameChanged();
 private:
     Q_DISABLE_COPY(DialogLine)
 
