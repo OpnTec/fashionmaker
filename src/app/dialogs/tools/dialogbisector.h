@@ -70,15 +70,16 @@ public slots:
     /**
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply();
+    virtual void       DialogApply();
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void DeployFormulaTextEdit();
+    void               DeployFormulaTextEdit();
     /**
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
     void FormulaTextChanged();
+    virtual void       PointChanged();
 private:
     Q_DISABLE_COPY(DialogBisector)
 
@@ -107,12 +108,14 @@ private:
     quint32            thirdPointId;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int                formulaBaseHeight;
 
     /**
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData();
+private:
+    void               setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

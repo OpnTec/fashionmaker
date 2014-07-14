@@ -66,12 +66,43 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogBisector::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogBisector::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
+    connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogBisector::PointChanged);
+    connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogBisector::PointChanged);
+    connect(ui->comboBoxThirdPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogBisector::PointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::PointChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
+    set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
+    set.insert(getCurrentObjectId(ui->comboBoxThirdPoint));
+
+    if (set.size() != 3)
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+        ChangeColor(ui->labelThirdPoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelThirdPoint, QColor(76, 76, 76));
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,6 +207,18 @@ void DialogBisector::setFormula(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id)
+{
+    disconnect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
+               &DialogBisector::PointChanged);
+
+    setCurrentPointId(box, pointId, value, id);
+
+    connect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
+            &DialogBisector::PointChanged);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
@@ -183,7 +226,7 @@ void DialogBisector::setFormula(const QString &value)
  */
 void DialogBisector::setFirstPointId(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,7 +237,7 @@ void DialogBisector::setFirstPointId(const quint32 &value, const quint32 &id)
  */
 void DialogBisector::setSecondPointId(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -205,7 +248,7 @@ void DialogBisector::setSecondPointId(const quint32 &value, const quint32 &id)
  */
 void DialogBisector::setThirdPointId(const quint32 &value, const quint32 &id)
 {
-    setCurrentPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
+    setPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
