@@ -53,6 +53,13 @@ DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
     FillComboBoxPoints(ui->comboBoxP2Line);
     FillComboBoxTypeLine(ui->comboBoxLineType);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
+    connect(ui->comboBoxBasePoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogHeight::PointNameChanged);
+    connect(ui->comboBoxP1Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogHeight::PointNameChanged);
+    connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogHeight::PointNameChanged);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,8 +98,7 @@ void DialogHeight::setTypeLine(const QString &value)
  */
 void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
 {
-    basePointId = value;
-    setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
+    setPointId(ui->comboBoxBasePoint, basePointId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,8 +109,7 @@ void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
  */
 void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
 {
-    p1LineId = value;
-    setCurrentPointId(ui->comboBoxP1Line, p1LineId, value, id);
+    setPointId(ui->comboBoxP1Line, p1LineId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,8 +120,7 @@ void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
  */
 void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
 {
-    p2LineId = value;
-    setCurrentPointId(ui->comboBoxP2Line, p2LineId, value, id);
+    setPointId(ui->comboBoxP2Line, p2LineId, value, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,4 +174,29 @@ void DialogHeight::DialogAccepted()
     p1LineId = getCurrentObjectId(ui->comboBoxP1Line);
     p2LineId = getCurrentObjectId(ui->comboBoxP2Line);
     emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHeight::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxBasePoint));
+    set.insert(getCurrentObjectId(ui->comboBoxP1Line));
+    set.insert(getCurrentObjectId(ui->comboBoxP2Line));
+
+    if (set.size() != 3)
+    {
+        flagError = false;
+        ChangeColor(ui->labelBasePoint, Qt::red);
+        ChangeColor(ui->labelFirstLinePoint, Qt::red);
+        ChangeColor(ui->labelSecondLinePoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelBasePoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelFirstLinePoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondLinePoint, QColor(76, 76, 76));
+    }
+    CheckState();
 }

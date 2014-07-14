@@ -685,6 +685,19 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id)
+{
+    SCASSERT(box != nullptr);
+    disconnect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
+               &DialogTool::PointNameChanged);
+
+    setCurrentPointId(box, pointId, value, id);
+
+    connect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
+            &DialogTool::PointNameChanged);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogAccepted save data and emit signal about closed dialog.
  */

@@ -67,11 +67,11 @@ DialogBisector::DialogBisector(const VContainer *data, QWidget *parent)
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogBisector::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
     connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogBisector::PointChanged);
+            this, &DialogBisector::PointNameChanged);
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogBisector::PointChanged);
+            this, &DialogBisector::PointNameChanged);
     connect(ui->comboBoxThirdPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, &DialogBisector::PointChanged);
+            this, &DialogBisector::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ void DialogBisector::FormulaTextChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogBisector::PointChanged()
+void DialogBisector::PointNameChanged()
 {
     QSet<quint32> set;
     set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
@@ -204,18 +204,6 @@ void DialogBisector::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogBisector::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id)
-{
-    disconnect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
-               &DialogBisector::PointChanged);
-
-    setCurrentPointId(box, pointId, value, id);
-
-    connect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
-            &DialogBisector::PointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -78,8 +78,8 @@ public slots:
     /**
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
-    void FormulaTextChanged();
-    virtual void       PointChanged();
+    void               FormulaTextChanged();
+    virtual void       PointNameChanged();
 private:
     Q_DISABLE_COPY(DialogBisector)
 
@@ -114,8 +114,6 @@ private:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData();
-private:
-    void               setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
