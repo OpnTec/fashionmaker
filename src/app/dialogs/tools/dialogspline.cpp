@@ -47,6 +47,10 @@ DialogSpline::DialogSpline(const VContainer *data, QWidget *parent)
 
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);
+    connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSpline::PointNameChanged);
+    connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogSpline::PointNameChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,6 +134,28 @@ void DialogSpline::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxP1));
+    set.insert(getCurrentObjectId(ui->comboBoxP4));
+
+    if (getCurrentObjectId(ui->comboBoxP1) == getCurrentObjectId(ui->comboBoxP4))
+    {
+        flagError = false;
+        ChangeColor(ui->labelFirstPoint, Qt::red);
+        ChangeColor(ui->labelSecondPoint, Qt::red);
+    }
+    else
+    {
+        flagError = true;
+        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
+        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setKCurve set coefficient curve
  * @param value value. Can be >= 0.
@@ -191,8 +217,7 @@ void DialogSpline::setAngle1(const qreal &value)
  */
 void DialogSpline::setP4(const quint32 &value)
 {
-    p4 = value;
-    ChangeCurrentData(ui->comboBoxP4, value);
+    setPointId(ui->comboBoxP4, p4, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,8 +227,7 @@ void DialogSpline::setP4(const quint32 &value)
  */
 void DialogSpline::setP1(const quint32 &value)
 {
-    p1 = value;
-    ChangeCurrentData(ui->comboBoxP1, value);
+    setPointId(ui->comboBoxP1, p1, value, 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
