@@ -131,18 +131,19 @@ void DialogPointOfIntersection::DialogAccepted()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::PointNameChanged()
 {
+    QColor color = okColor;
     if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
     {
         flagError = false;
-        ChangeColor(ui->labelFirstPoint, Qt::red);
-        ChangeColor(ui->labelSecondPoint, Qt::red);
+        color = errorColor;
     }
     else
     {
         flagError = true;
-        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
+        color = okColor;
     }
+    ChangeColor(ui->labelFirstPoint, color);
+    ChangeColor(ui->labelSecondPoint, color);
     CheckState();
 }
 

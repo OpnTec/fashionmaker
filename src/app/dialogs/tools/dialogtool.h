@@ -179,6 +179,8 @@ protected:
 
     /** @brief lineStyles list supported line styles. */
     QStringList      lineStyles;
+    const QColor     okColor;
+    const QColor     errorColor;
 
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );

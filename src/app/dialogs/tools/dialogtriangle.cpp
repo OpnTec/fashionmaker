@@ -137,22 +137,21 @@ void DialogTriangle::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
     set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
 
+    QColor color = okColor;
     if (set.size() != 4)
     {
         flagError = false;
-        ChangeColor(ui->labelFirstPoint, Qt::red);
-        ChangeColor(ui->labelSecondPoint, Qt::red);
-        ChangeColor(ui->labelAxisP1, Qt::red);
-        ChangeColor(ui->labelAxisP2, Qt::red);
+        color = errorColor;
     }
     else
     {
         flagError = true;
-        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelAxisP1, QColor(76, 76, 76));
-        ChangeColor(ui->labelAxisP2, QColor(76, 76, 76));
+        color = okColor;
     }
+    ChangeColor(ui->labelFirstPoint, color);
+    ChangeColor(ui->labelSecondPoint, color);
+    ChangeColor(ui->labelAxisP1, color);
+    ChangeColor(ui->labelAxisP2, color);
     CheckState();
 }
 

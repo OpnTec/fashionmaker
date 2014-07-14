@@ -193,20 +193,20 @@ void DialogHeight::PointNameChanged()
     const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
     const VPointF *p2Line = data->GeometricObject<const VPointF *>(p2LineId);
 
+    QColor color = okColor;
     if (set.size() != 3 || VAbstractTool::ClosestPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()),
                                                        basePoint->toQPointF()) == QPointF())
     {
         flagError = false;
-        ChangeColor(ui->labelBasePoint, Qt::red);
-        ChangeColor(ui->labelFirstLinePoint, Qt::red);
-        ChangeColor(ui->labelSecondLinePoint, Qt::red);
+        color = errorColor;
     }
     else
     {
         flagError = true;
-        ChangeColor(ui->labelBasePoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelFirstLinePoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelSecondLinePoint, QColor(76, 76, 76));
+        color = okColor;
     }
+    ChangeColor(ui->labelBasePoint, color);
+    ChangeColor(ui->labelFirstLinePoint, color);
+    ChangeColor(ui->labelSecondLinePoint, color);
     CheckState();
 }

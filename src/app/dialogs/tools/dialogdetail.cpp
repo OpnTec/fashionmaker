@@ -59,7 +59,7 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
     connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     flagName = true;//We have default name of detail.
-    ChangeColor(labelEditNamePoint, QColor(76, 76, 76));
+    ChangeColor(labelEditNamePoint, okColor);
     CheckState();
 
     connect(ui.listWidget, &QListWidget::currentRowChanged, this, &DialogDetail::ObjectChanged);

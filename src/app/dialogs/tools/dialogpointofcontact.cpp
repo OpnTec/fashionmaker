@@ -101,20 +101,20 @@ void DialogPointOfContact::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
     set.insert(getCurrentObjectId(ui->comboBoxCenter));
 
+    QColor color = okColor;
     if (set.size() != 3)
     {
         flagError = false;
-        ChangeColor(ui->labelFirstPoint, Qt::red);
-        ChangeColor(ui->labelSecondPoint, Qt::red);
-        ChangeColor(ui->labelArcCenter, Qt::red);
+        color = errorColor;
     }
     else
     {
         flagError = true;
-        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelArcCenter, QColor(76, 76, 76));
+        color = okColor;
     }
+    ChangeColor(ui->labelFirstPoint, color);
+    ChangeColor(ui->labelSecondPoint, color);
+    ChangeColor(ui->labelArcCenter, color);
     CheckState();
 }
 

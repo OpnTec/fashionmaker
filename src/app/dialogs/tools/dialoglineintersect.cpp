@@ -236,22 +236,21 @@ void DialogLineIntersect::PointNameChanged()
     QPointF fPoint;
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
 
+    QColor color = okColor;
     if (set.size() < 3 || intersect == QLineF::NoIntersection)
     {
         flagError = false;
-        ChangeColor(ui->labelP1Line1, Qt::red);
-        ChangeColor(ui->labelP2Line1, Qt::red);
-        ChangeColor(ui->labelP1Line2, Qt::red);
-        ChangeColor(ui->labelP2Line2, Qt::red);
+        color = errorColor;
     }
     else
     {
         flagError = true;
-        ChangeColor(ui->labelP1Line1, QColor(76, 76, 76));
-        ChangeColor(ui->labelP2Line1, QColor(76, 76, 76));
-        ChangeColor(ui->labelP1Line2, QColor(76, 76, 76));
-        ChangeColor(ui->labelP2Line2, QColor(76, 76, 76));
+        color = okColor;
     }
+    ChangeColor(ui->labelP1Line1, color);
+    ChangeColor(ui->labelP2Line1, color);
+    ChangeColor(ui->labelP1Line2, color);
+    ChangeColor(ui->labelP2Line2, color);
     CheckState();
 }
 

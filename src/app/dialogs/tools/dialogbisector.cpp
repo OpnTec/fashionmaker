@@ -88,20 +88,20 @@ void DialogBisector::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
     set.insert(getCurrentObjectId(ui->comboBoxThirdPoint));
 
+    QColor color = okColor;
     if (set.size() != 3)
     {
         flagError = false;
-        ChangeColor(ui->labelFirstPoint, Qt::red);
-        ChangeColor(ui->labelSecondPoint, Qt::red);
-        ChangeColor(ui->labelThirdPoint, Qt::red);
+        color = errorColor;
     }
     else
     {
         flagError = true;
-        ChangeColor(ui->labelFirstPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelSecondPoint, QColor(76, 76, 76));
-        ChangeColor(ui->labelThirdPoint, QColor(76, 76, 76));
+        color = okColor;
     }
+    ChangeColor(ui->labelFirstPoint, color);
+    ChangeColor(ui->labelSecondPoint, color);
+    ChangeColor(ui->labelThirdPoint, color);
     CheckState();
 }
 

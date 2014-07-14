@@ -62,7 +62,8 @@ DialogTool::DialogTool(const VContainer *data, QWidget *parent)
       listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
-      radioButtonLengthCurve(nullptr), lineStyles(QStringList()), associatedTool(nullptr)
+      radioButtonLengthCurve(nullptr), lineStyles(QStringList()), okColor(QColor(76, 76, 76)), errorColor(Qt::red),
+      associatedTool(nullptr)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -463,7 +464,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
                 label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
             }
             flag = true;
-            ChangeColor(labelEditFormula, QColor(76, 76, 76));
+            ChangeColor(labelEditFormula, okColor);
             emit ToolTip("");
         }
         catch (qmu::QmuParserError &e)
@@ -669,7 +670,7 @@ void DialogTool::NamePointChanged()
         else
         {
             flagName = true;
-            ChangeColor(labelEditNamePoint, QColor(76, 76, 76));
+            ChangeColor(labelEditNamePoint, okColor);
         }
     }
     CheckState();
