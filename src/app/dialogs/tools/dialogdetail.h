@@ -50,13 +50,14 @@ public slots:
     /** TODO ISSUE 79 : create real function
      * @brief DialogApply apply data and emit signal about applied dialog.
      */
-    virtual void      DialogApply(){}
+    virtual void     DialogApply(){}
     void             BiasXChanged(qreal d);
     void             BiasYChanged(qreal d);
     void             ClickedSeams(bool checked);
     void             ClickedClosed(bool checked);
     void             ObjectChanged(int row);
     void             DeleteItem();
+    virtual void     UpdateList();
 private:
 
     /** @brief ui keeps information about user interface */

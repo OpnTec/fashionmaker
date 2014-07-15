@@ -68,6 +68,7 @@ public slots:
      */
     virtual void     DialogApply(){}
     virtual void     PointNameChanged();
+    virtual void     UpdateList();
 private:
     Q_DISABLE_COPY(DialogHeight)
 

@@ -211,6 +211,15 @@ void DialogSplinePath::KAsm2Changed(qreal d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::UpdateList()
+{
+    /*
+     * Does nothing. We redefine this slot because it is only one now way block update list of variable.
+     * This dialog doesn't work with formula. Don't delete. Help avoid crash.
+     */
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NewItem add point to list
  * @param id id

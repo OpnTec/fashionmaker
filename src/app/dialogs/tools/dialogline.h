@@ -64,6 +64,7 @@ public slots:
      */
     virtual void   DialogApply(){}
     virtual void   PointNameChanged();
+    virtual void   UpdateList();
 protected:
     virtual void   ShowVisualization();
 private:

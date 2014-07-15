@@ -62,6 +62,7 @@ public slots:
     void               Angle2Changed( qreal index );
     void               KAsm1Changed(qreal d);
     void               KAsm2Changed(qreal d);
+    virtual void       UpdateList();
 private:
     Q_DISABLE_COPY(DialogSplinePath)
 

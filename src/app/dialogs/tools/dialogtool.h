@@ -106,7 +106,7 @@ public slots:
     void             PutHere();
     void             PutVal(QListWidgetItem * item);
     virtual void     ValChenged(int row);
-    void             UpdateList();
+    virtual void     UpdateList();
     virtual void     PointNameChanged(){}
 protected:
     Q_DISABLE_COPY(DialogTool)

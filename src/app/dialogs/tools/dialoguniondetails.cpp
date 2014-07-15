@@ -79,6 +79,15 @@ void DialogUnionDetails::DialogAccepted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogUnionDetails::UpdateList()
+{
+    /*
+     * Does nothing. We redefine this slot because it is only one now way block update list of variable.
+     * This dialog doesn't work with formula. Don't delete. Help avoid crash.
+     */
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CheckObject check if detail contain this id
  * @param id id of item
