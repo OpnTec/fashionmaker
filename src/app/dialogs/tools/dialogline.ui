@@ -13,6 +13,18 @@
     <height>154</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>267</width>
+    <height>154</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>267</width>
+    <height>154</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Line</string>
   </property>
