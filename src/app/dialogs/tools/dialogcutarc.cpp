@@ -88,7 +88,7 @@ DialogCutArc::~DialogCutArc()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogCutArc::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Arc)
     {

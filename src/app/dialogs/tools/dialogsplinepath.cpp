@@ -88,7 +88,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
  * @param id id of point or detail
  * @param type don't show this id in list
  */
-void DialogSplinePath::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

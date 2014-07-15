@@ -76,7 +76,7 @@ DialogLineIntersect::~DialogLineIntersect()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogLineIntersect::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

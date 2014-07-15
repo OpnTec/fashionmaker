@@ -82,7 +82,7 @@ void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const qui
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogPointOfIntersection::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

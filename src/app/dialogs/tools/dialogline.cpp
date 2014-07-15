@@ -157,7 +157,7 @@ void DialogLine::ShowVisualization()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogLine::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

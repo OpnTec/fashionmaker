@@ -114,7 +114,7 @@ void DialogCutSpline::setSplineId(const quint32 &value, const quint32 &id)
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogCutSpline::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Spline)
     {

@@ -112,7 +112,7 @@ DialogAlongLine::~DialogAlongLine()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogAlongLine::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

@@ -112,7 +112,7 @@ DialogNormal::~DialogNormal()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogNormal::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

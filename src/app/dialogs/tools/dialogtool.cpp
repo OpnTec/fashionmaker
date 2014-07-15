@@ -642,11 +642,11 @@ void DialogTool::CheckState()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
+ * @brief ChosenObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogTool::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogTool::ChosenObject(quint32 id, const SceneObject &type)
 {
     Q_UNUSED(id);
     Q_UNUSED(type);

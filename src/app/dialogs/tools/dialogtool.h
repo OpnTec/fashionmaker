@@ -75,7 +75,7 @@ signals:
      */
     void             ToolTip(const QString &toolTip);
 public slots:
-    virtual void     ChoosedObject(quint32 id, const SceneObject &type);
+    virtual void     ChosenObject(quint32 id, const SceneObject &type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
     /**

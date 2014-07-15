@@ -57,7 +57,7 @@ public:
     QString        getTypeLine() const;
     void           setTypeLine(const QString &value);
 public slots:
-    virtual void   ChoosedObject(quint32 id, const SceneObject &type);
+    virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   DialogAccepted();
     /** TODO ISSUE 79 : create real function
      * @brief DialogApply apply data and emit signal about applied dialog.

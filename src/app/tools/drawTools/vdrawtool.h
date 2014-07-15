@@ -121,8 +121,6 @@ protected:
                 dialog = new Dialog(getData(), qApp->getMainWindow());
                 dialog->setModal(true);
 
-                connect(qobject_cast< VMainGraphicsScene * >(tool->scene()),
-                        &VMainGraphicsScene::ChoosedObject, dialog, &DialogTool::ChoosedObject);
                 connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
                 connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
                 if (ignoreFullUpdate == false)

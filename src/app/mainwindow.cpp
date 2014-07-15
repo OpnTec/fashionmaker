@@ -264,7 +264,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         view->setCursor(cur);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, this);
-        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
+        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
@@ -302,7 +302,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         view->setCursor(cur);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, this);
-        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChoosedObject);
+        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);

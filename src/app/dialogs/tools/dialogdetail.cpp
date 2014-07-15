@@ -80,7 +80,7 @@ DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
  * @param id id of objects (points, arcs, splines, spline paths)
  * @param type type of object
  */
-void DialogDetail::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type != SceneObject::Line && type != SceneObject::Detail)
     {

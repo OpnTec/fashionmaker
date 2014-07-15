@@ -57,7 +57,7 @@ DialogUnionDetails::~DialogUnionDetails()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogUnionDetails::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogUnionDetails::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (numberD == 0)
     {

@@ -84,7 +84,7 @@ void DialogEndLine::DeployFormulaTextEdit()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogEndLine::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

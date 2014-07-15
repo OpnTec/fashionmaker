@@ -123,7 +123,7 @@ DialogBisector::~DialogBisector()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogBisector::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

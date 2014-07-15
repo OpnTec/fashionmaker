@@ -130,7 +130,7 @@ void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogHeight::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

@@ -121,7 +121,7 @@ DialogShoulderPoint::~DialogShoulderPoint()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogShoulderPoint::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

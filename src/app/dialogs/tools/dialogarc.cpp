@@ -176,7 +176,7 @@ void DialogArc::SetRadius(const QString &value)
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogArc::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

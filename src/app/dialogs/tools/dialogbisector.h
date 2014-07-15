@@ -65,7 +65,7 @@ public:
     quint32            getThirdPointId() const;
     void               setThirdPointId(const quint32 &value, const quint32 &id);
 public slots:
-    virtual void       ChoosedObject(quint32 id, const SceneObject &type);
+    virtual void       ChosenObject(quint32 id, const SceneObject &type);
     virtual void       DialogAccepted();
     /**
      * @brief DialogApply apply data and emit signal about applied dialog.

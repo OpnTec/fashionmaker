@@ -130,7 +130,7 @@ void DialogPointOfContact::DeployFormulaTextEdit()
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogPointOfContact::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {

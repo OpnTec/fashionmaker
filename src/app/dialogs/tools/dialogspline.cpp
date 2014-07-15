@@ -75,7 +75,7 @@ quint32 DialogSpline::getP1() const
  * @param id id of point or detail
  * @param type type of object
  */
-void DialogSpline::ChoosedObject(quint32 id, const SceneObject &type)
+void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {
