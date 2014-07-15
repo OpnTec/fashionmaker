@@ -36,7 +36,7 @@
  * @brief VMainGraphicsScene default constructor.
  */
 VMainGraphicsScene::VMainGraphicsScene()
-    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
+    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()), scenePos(QPointF())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,8 @@ VMainGraphicsScene::VMainGraphicsScene()
  * @param parent parent object.
  */
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
-    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform())
+    :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()),
+      scenePos(QPointF())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,6 +57,7 @@ VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * paren
  */
 void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
+    scenePos = event->scenePos();
     emit mouseMove(event->scenePos());
     QGraphicsScene::mouseMoveEvent(event);
 }
@@ -69,6 +71,12 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit mousePress(event->scenePos());
     QGraphicsScene::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VMainGraphicsScene::getScenePos() const
+{
+    return scenePos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

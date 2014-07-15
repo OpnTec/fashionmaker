@@ -31,6 +31,9 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vgraphicslineitem.h"
+#include "../../widgets/vapplication.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -39,7 +42,8 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0), typeLine(QString())
+    :DialogTool(data, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0), typeLine(QString()),
+      line(nullptr)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -59,6 +63,7 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 DialogLine::~DialogLine()
 {
+    delete line;
     delete ui;
 }
 
@@ -128,6 +133,16 @@ void DialogLine::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLine::ShowVisualization()
+{
+    VMainGraphicsScene *scene = qApp->getCurrentScene();
+    line = new VGraphicsLineItem(data, getCurrentObjectId(ui->comboBoxFirstPoint),
+                                 getCurrentObjectId(ui->comboBoxSecondPoint));
+    connect(scene, &VMainGraphicsScene::NewFactor, line, &VGraphicsLineItem::SetFactor);
+    scene->addItem(line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail
@@ -143,6 +158,13 @@ void DialogLine::ChoosedObject(quint32 id, const SceneObject &type)
             qint32 index = ui->comboBoxFirstPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
+
+                VMainGraphicsScene *scene = qApp->getCurrentScene();
+                line = new VGraphicsLineItem(data, id, scene->getScenePos());
+                scene->addItem(line);
+                connect(scene, &VMainGraphicsScene::NewFactor, line, &VGraphicsLineItem::SetFactor);
+                connect(scene, &VMainGraphicsScene::mouseMove, line, &VGraphicsLineItem::MousePos);
+
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point"));
@@ -155,13 +177,12 @@ void DialogLine::ChoosedObject(quint32 id, const SceneObject &type)
             if ( index != -1 )
             { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
-                number = 0;
-                emit ToolTip("");
-            }
-            if (isInitialized == false)
-            {
-                this->setModal(true);
-                this->show();
+                if (flagError)
+                {
+                    number = 0;
+                    emit ToolTip("");
+                    DialogAccepted();
+                }
             }
         }
     }

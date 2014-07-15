@@ -36,6 +36,8 @@ namespace Ui
     class DialogLine;
 }
 
+class VGraphicsLineItem;
+
 /**
  * @brief The DialogLine class dialog for ToolLine. Help create line and edit option.
  */
@@ -62,6 +64,8 @@ public slots:
      */
     virtual void   DialogApply(){}
     virtual void   PointNameChanged();
+protected:
+    virtual void   ShowVisualization();
 private:
     Q_DISABLE_COPY(DialogLine)
 
@@ -79,6 +83,7 @@ private:
 
     /** @brief typeLine type of line */
     QString        typeLine;
+    VGraphicsLineItem *line;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

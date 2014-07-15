@@ -48,6 +48,7 @@ public:
     QTransform    transform() const;
     void          setTransform(const QTransform &transform);
     void          SetDisable(bool enabled);
+    QPointF       getScenePos() const;
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
@@ -59,7 +60,7 @@ signals:
      * @brief mouseMove send new mouse position.
      * @param scenePos new mouse position.
      */
-    void          mouseMove(QPointF scenePos);
+    void          mouseMove(const QPointF &scenePos);
     /**
      * @brief mousePress send new mouse press position.
      * @param scenePos new mouse press position.
@@ -89,6 +90,7 @@ private:
 
     /** @brief _transform view transform value. */
     QTransform    _transform;
+    QPointF       scenePos;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

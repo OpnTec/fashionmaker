@@ -164,10 +164,7 @@ void VDrawTool::DialogLinkDestroy()
  */
 void VDrawTool::SetFactor(qreal factor)
 {
-    if (factor <= 2 && factor >= 0.5)
-    {
-        this->factor = factor;
-    }
+    VApplication::CheckFactor(this->factor, factor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

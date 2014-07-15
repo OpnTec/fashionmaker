@@ -48,6 +48,9 @@ public:
     VDrawTool(VPattern *doc, VContainer *data, quint32 id);
     virtual      ~VDrawTool();
 
+    /** @brief factor scene scale factor. */
+    static qreal factor;
+
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
     virtual void DialogLinkDestroy();
@@ -69,9 +72,6 @@ protected:
 
     /** @brief nameActivDraw name of tool's pattern peace. */
     QString      nameActivDraw;
-
-    /** @brief factor scene scale factor. */
-    static qreal factor;
 
     /** @brief dialog dialog options.*/
     DialogTool *dialog;

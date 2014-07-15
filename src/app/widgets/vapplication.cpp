@@ -57,8 +57,8 @@ VApplication::VApplication(int &argc, char **argv)
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
-      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), autoSaveTimer(nullptr),
-      mainWindow(nullptr), openingPattern(false), settings(nullptr)
+      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), currentScene(nullptr),
+      autoSaveTimer(nullptr), mainWindow(nullptr), openingPattern(false), settings(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -81,6 +81,15 @@ void VApplication::NewValentina(const QString &fileName)
     arguments << fileName;
     v->startDetached(QCoreApplication::applicationFilePath(), arguments);
     delete v;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::CheckFactor(qreal &oldFactor, const qreal &Newfactor)
+{
+    if (Newfactor <= 2 && Newfactor >= 0.5)
+    {
+        oldFactor = Newfactor;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1994,4 +2003,17 @@ QSettings *VApplication::getSettings()
 {
     SCASSERT(settings != nullptr);
     return settings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VMainGraphicsScene *VApplication::getCurrentScene() const
+{
+    SCASSERT(currentScene != nullptr);
+    return currentScene;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::setCurrentScene(VMainGraphicsScene *value)
+{
+    currentScene = value;
 }

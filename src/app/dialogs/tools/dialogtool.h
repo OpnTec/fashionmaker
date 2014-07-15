@@ -304,6 +304,7 @@ protected:
     VAbstractTool* associatedTool;
     void             ChangeColor(QWidget *widget, const QColor &color);
     void             setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id);
+    virtual void     ShowVisualization(){}
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };

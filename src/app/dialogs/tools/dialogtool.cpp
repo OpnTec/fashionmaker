@@ -102,6 +102,7 @@ void DialogTool::showEvent(QShowEvent *event)
         return;
     }
     isInitialized = true;//first show windows are held
+    ShowVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

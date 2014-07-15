@@ -73,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
+    qApp->setCurrentScene(currentScene);
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     sceneDetails = new VMainGraphicsScene();
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);

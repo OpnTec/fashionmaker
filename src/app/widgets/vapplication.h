@@ -37,6 +37,7 @@
 class VApplication;// used in define
 class QUndoStack;
 class VMainGraphicsView;
+class VMainGraphicsScene;
 
 #if defined(qApp)
 #undef qApp
@@ -53,6 +54,7 @@ public:
     VApplication(int &argc, char ** argv);
     virtual ~VApplication() {}
     static void        NewValentina(const QString &fileName);
+    static void        CheckFactor(qreal &oldFactor, const qreal &Newfactor);
     virtual bool       notify(QObject * receiver, QEvent * event);
     Unit               patternUnit() const;
     void               setPatternUnit(const Unit &patternUnit);
@@ -83,6 +85,8 @@ public:
     void               setOpeningPattern();
     void               OpenSettings();
     QSettings          *getSettings();
+    VMainGraphicsScene *getCurrentScene() const;
+    void               setCurrentScene(VMainGraphicsScene *value);
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -97,6 +101,7 @@ private:
     QMap<QString, VTranslation> postfixOperators;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
+    VMainGraphicsScene *currentScene;
     QTimer             *autoSaveTimer;
     /**
      * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window
