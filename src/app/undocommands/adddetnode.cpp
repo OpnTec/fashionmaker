@@ -31,9 +31,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddDetNode::AddDetNode(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QUndoCommand(parent), xml(xml), doc(doc)
+    : VUndoCommand(xml, doc, parent)
 {
     setText(QObject::tr("Add node"));
+    nodeId = doc->GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,7 +47,20 @@ void AddDetNode::undo()
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
-        modelingElement.removeChild(xml);
+        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        if (domElement.isElement())
+        {
+            if (modelingElement.removeChild(domElement).isNull())
+            {
+                qDebug()<<"Can't delete node";
+                return;
+            }
+        }
+        else
+        {
+            qDebug()<<"Can't get node by id = "<<nodeId<<Q_FUNC_INFO;
+            return;
+        }
     }
     else
     {

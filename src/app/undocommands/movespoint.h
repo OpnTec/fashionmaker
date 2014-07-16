@@ -29,12 +29,11 @@
 #ifndef MOVESPOINT_H
 #define MOVESPOINT_H
 
-#include <QUndoCommand>
+#include "vundocommand.h"
 
-class VPattern;
 class QGraphicsScene;
 
-class MoveSPoint : public QObject, public QUndoCommand
+class MoveSPoint : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -48,23 +47,20 @@ public:
     quint32      getSPointId() const;
     double       getNewX() const;
     double       getNewY() const;
-signals:
-    void NeedLiteParsing();
+    void         Do(double x, double y);
 private:
     Q_DISABLE_COPY(MoveSPoint)
-    VPattern *doc;
     double   oldX;
     double   oldY;
     double   newX;
     double   newY;
-    quint32  sPointId;
     QGraphicsScene *scene;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 MoveSPoint::getSPointId() const
 {
-    return sPointId;
+    return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

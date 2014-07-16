@@ -5,7 +5,6 @@ HEADERS += \
     undocommands/movespline.h \
     undocommands/movesplinepath.h \
     undocommands/savetooloptions.h \
-    undocommands/undocommands.h \
     undocommands/savedetailoptions.h \
     undocommands/movedetail.h \
     undocommands/deltool.h \
@@ -13,7 +12,8 @@ HEADERS += \
     undocommands/adddetnode.h \
     undocommands/adddet.h \
     undocommands/adduniondetails.h \
-    undocommands/deletedetail.h
+    undocommands/deletedetail.h \
+    undocommands/vundocommand.h
     
 
 SOURCES += \
@@ -30,5 +30,6 @@ SOURCES += \
     undocommands/adddetnode.cpp \
     undocommands/adddet.cpp \
     undocommands/adduniondetails.cpp \
-    undocommands/deletedetail.cpp
+    undocommands/deletedetail.cpp \
+    undocommands/vundocommand.cpp
     

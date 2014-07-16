@@ -27,15 +27,15 @@
  *************************************************************************/
 
 #include "savedetailoptions.h"
-#include "undocommands.h"
 #include "../tools/nodeDetails/vabstractnode.h"
 #include <QGraphicsView>
 
 SaveDetailOptions::SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VPattern *doc, const quint32 &id,
                                      QGraphicsScene *scene, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), oldDet(oldDet), newDet(newDet), doc(doc), detId(id), scene(scene)
+    : VUndoCommand(QDomElement(), doc, parent), oldDet(oldDet), newDet(newDet), scene(scene)
 {
     setText(tr("Save detail option"));
+    nodeId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -45,13 +45,10 @@ SaveDetailOptions::~SaveDetailOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(detId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrName, oldDet.getName());
-        doc->SetAttribute(domElement, VToolDetail::AttrSupplement, QString().setNum(oldDet.getSeamAllowance()));
-        doc->SetAttribute(domElement, VToolDetail::AttrClosed, QString().setNum(oldDet.getClosed()));
-        doc->SetAttribute(domElement, VToolDetail::AttrWidth, QString().setNum(oldDet.getWidth()));
+        SaveDet(domElement, oldDet);
         doc->RemoveAllChild(domElement);
         for (ptrdiff_t i = 0; i < oldDet.CountNode(); ++i)
         {
@@ -75,7 +72,7 @@ void SaveDetailOptions::undo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -83,13 +80,10 @@ void SaveDetailOptions::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(detId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrName, newDet.getName());
-        doc->SetAttribute(domElement, VToolDetail::AttrSupplement, QString().setNum(newDet.getSeamAllowance()));
-        doc->SetAttribute(domElement, VToolDetail::AttrClosed, QString().setNum(newDet.getClosed()));
-        doc->SetAttribute(domElement, VToolDetail::AttrWidth, QString().setNum(newDet.getWidth()));
+        SaveDet(domElement, newDet);
         doc->RemoveAllChild(domElement);
         for (ptrdiff_t i = 0; i < newDet.CountNode(); ++i)
         {
@@ -113,7 +107,7 @@ void SaveDetailOptions::redo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -125,7 +119,7 @@ bool SaveDetailOptions::mergeWith(const QUndoCommand *command)
     SCASSERT(saveCommand != nullptr);
     const quint32 id = saveCommand->getDetId();
 
-    if (id != detId)
+    if (id != nodeId)
     {
         return false;
     }
@@ -138,4 +132,13 @@ bool SaveDetailOptions::mergeWith(const QUndoCommand *command)
 int SaveDetailOptions::id() const
 {
     return static_cast<int>(UndoCommand::SaveDetailOptions);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SaveDetailOptions::SaveDet(QDomElement &domElement, const VDetail &det)
+{
+    doc->SetAttribute(domElement, VAbstractTool::AttrName, det.getName());
+    doc->SetAttribute(domElement, VToolDetail::AttrSupplement, QString().setNum(det.getSeamAllowance()));
+    doc->SetAttribute(domElement, VToolDetail::AttrClosed, QString().setNum(det.getClosed()));
+    doc->SetAttribute(domElement, VToolDetail::AttrWidth, QString().setNum(det.getWidth()));
 }

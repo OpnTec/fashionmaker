@@ -29,13 +29,12 @@
 #ifndef MOVESPLINE_H
 #define MOVESPLINE_H
 
-#include <QUndoCommand>
+#include "vundocommand.h"
 #include "../geometry/vspline.h"
 
-class VPattern;
 class QGraphicsScene;
 
-class MoveSpline : public QObject, public QUndoCommand
+class MoveSpline : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -48,21 +47,18 @@ public:
     virtual int  id() const;
     quint32      getSplineId() const;
     VSpline      getNewSpline() const;
-signals:
-    void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(MoveSpline)
-    VPattern *doc;
     VSpline  oldSpline;
     VSpline  newSpline;
-    quint32  splineId;
     QGraphicsScene *scene;
+    void         Do(const VSpline &spl);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 MoveSpline::getSplineId() const
 {
-    return splineId;
+    return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,12 +29,9 @@
 #ifndef ADDTOCALC_H
 #define ADDTOCALC_H
 
-#include <QDomElement>
-#include <QUndoCommand>
+#include "vundocommand.h"
 
-class VPattern;
-
-class AddToCalc : public QObject, public QUndoCommand
+class AddToCalc : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -42,15 +39,10 @@ public:
     virtual ~AddToCalc();
     virtual void undo();
     virtual void redo();
-signals:
-    void NeedFullParsing();
 private:
     Q_DISABLE_COPY(AddToCalc)
-    const QDomElement xml;
-    VPattern *doc;
-    const QString nameActivDraw;
-    quint32 cursor;
-    bool redoFlag;
+    const QString     nameActivDraw;
+    quint32           cursor;
 };
 
 #endif // ADDTOCALC_H

@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   undocommands.h
+ **  @file   vundocommand.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 6, 2014
+ **  @date   16 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,8 +26,11 @@
  **
  *************************************************************************/
 
-#ifndef UNDOCOMMANDS_H
-#define UNDOCOMMANDS_H
+#ifndef VUNDOCOMMAND_H
+#define VUNDOCOMMAND_H
+
+#include <QUndoCommand>
+#include <QDomElement>
 
 enum class UndoCommand: char { AddPatternPiece,
                                AddToCalc,
@@ -41,4 +44,26 @@ enum class UndoCommand: char { AddPatternPiece,
                                DeletePatternPiece
                              };
 
-#endif // UNDOCOMMANDS_H
+class VPattern;
+
+class VUndoCommand : public QObject, public QUndoCommand
+{
+    Q_OBJECT
+public:
+    VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    virtual ~VUndoCommand();
+signals:
+    void ClearScene();
+    void NeedFullParsing();
+    void NeedLiteParsing();
+protected:
+    QDomElement xml;
+    VPattern    *doc;
+    quint32     nodeId;
+    bool        redoFlag;
+    void        RedoFullParsing();
+private:
+    Q_DISABLE_COPY(VUndoCommand)
+};
+
+#endif // VUNDOCOMMAND_H

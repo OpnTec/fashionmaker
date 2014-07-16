@@ -29,14 +29,12 @@
 #ifndef SAVEDETAILOPTIONS_H
 #define SAVEDETAILOPTIONS_H
 
-#include <QUndoCommand>
-#include <QDomElement>
+#include "vundocommand.h"
 #include "../tools/vtooldetail.h"
 
-class VPattern;
 class QGraphicsScene;
 
-class SaveDetailOptions : public QObject, public QUndoCommand
+class SaveDetailOptions : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -49,21 +47,18 @@ public:
     virtual int  id() const;
     quint32      getDetId() const;
     VDetail      getNewDet() const;
-signals:
-    void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(SaveDetailOptions)
     const VDetail oldDet;
     VDetail       newDet;
-    VPattern      *doc;
-    const quint32 detId;
     QGraphicsScene *scene;
+    void         SaveDet(QDomElement &domElement, const VDetail &det);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 SaveDetailOptions::getDetId() const
 {
-    return detId;
+    return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

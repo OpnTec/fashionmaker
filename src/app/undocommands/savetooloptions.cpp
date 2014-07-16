@@ -29,14 +29,14 @@
 #include "savetooloptions.h"
 #include "../options.h"
 #include "../xml/vpattern.h"
-#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VPattern *doc, const quint32 &id,
                                  QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), oldXml(oldXml), newXml(newXml), doc(doc), toolId(id)
+    : VUndoCommand(QDomElement(), doc, parent), oldXml(oldXml), newXml(newXml)
 {
     setText(tr("Save tool option"));
+    nodeId = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ SaveToolOptions::~SaveToolOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(toolId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(oldXml, domElement);
@@ -55,7 +55,7 @@ void SaveToolOptions::undo()
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< toolId << Q_FUNC_INFO;
+        qDebug()<<"Can't find tool with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -63,7 +63,7 @@ void SaveToolOptions::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(toolId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(newXml, domElement);
@@ -72,7 +72,7 @@ void SaveToolOptions::redo()
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< toolId << Q_FUNC_INFO;
+        qDebug()<<"Can't find tool with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -84,7 +84,7 @@ bool SaveToolOptions::mergeWith(const QUndoCommand *command)
     SCASSERT(saveCommand != nullptr);
     const quint32 id = saveCommand->getToolId();
 
-    if (id != toolId)
+    if (id != nodeId)
     {
         return false;
     }

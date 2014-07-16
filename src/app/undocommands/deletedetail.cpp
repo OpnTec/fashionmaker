@@ -32,9 +32,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(QDomElement()), doc(doc), detId(id), parentNode(QDomNode())
+    : VUndoCommand(xml, doc, parent), parentNode(QDomNode())
 {
     setText(tr("Delete tool"));
+    nodeId = id;
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -43,7 +44,7 @@ DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
     }
     else
     {
-        qDebug()<<"Can't get detail by id = "<<detId<<Q_FUNC_INFO;
+        qDebug()<<"Can't get detail by id = "<<nodeId<<Q_FUNC_INFO;
         return;
     }
 }
@@ -62,7 +63,7 @@ void DeleteDetail::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DeleteDetail::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(detId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
         parentNode.removeChild(domElement);
@@ -70,7 +71,7 @@ void DeleteDetail::redo()
         //When UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
-        VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(detId));
+        VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(nodeId));
         SCASSERT(toolDet != nullptr);
         toolDet->hide();
 
@@ -78,7 +79,7 @@ void DeleteDetail::redo()
     }
     else
     {
-        qDebug()<<"Can't get detail by id = "<<detId<<Q_FUNC_INFO;
+        qDebug()<<"Can't get detail by id = "<<nodeId<<Q_FUNC_INFO;
         return;
     }
 }

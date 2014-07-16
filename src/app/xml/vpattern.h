@@ -112,6 +112,7 @@ public:
     bool           CheckNamePP(const QString& name) const;
     int            CountPP() const;
     QRectF         ActiveDrawBoundingRect() const;
+    quint32        GetParametrId(const QDomElement& domElement) const;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -198,7 +199,6 @@ private:
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      const Document &parse, const QString& type);
     void           ParseIncrementsElement(const QDomNode& node);
-    quint32        GetParametrId(const QDomElement& domElement) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document &parse);
     void           UpdateMeasurements();

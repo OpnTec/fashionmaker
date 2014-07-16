@@ -29,12 +29,9 @@
 #ifndef SAVETOOLOPTIONS_H
 #define SAVETOOLOPTIONS_H
 
-#include <QUndoCommand>
-#include <QDomElement>
+#include "vundocommand.h"
 
-class VPattern;
-
-class SaveToolOptions : public QObject, public QUndoCommand
+class SaveToolOptions : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -53,8 +50,6 @@ private:
     Q_DISABLE_COPY(SaveToolOptions)
     const QDomElement oldXml;
     QDomElement       newXml;
-    VPattern          *doc;
-    const quint32     toolId;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,7 +61,7 @@ inline QDomElement SaveToolOptions::getNewXml() const
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 SaveToolOptions::getToolId() const
 {
-    return toolId;
+    return nodeId;
 }
 
 #endif // SAVETOOLOPTIONS_H

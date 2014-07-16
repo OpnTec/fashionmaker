@@ -31,9 +31,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddUnionDetails::AddUnionDetails(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), redoFlag(false)
+    : VUndoCommand(xml, doc, parent)
 {
     setText(tr("Add union details"));
+    nodeId = doc->GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,7 +47,20 @@ void AddUnionDetails::undo()
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
-        modelingElement.removeChild(xml);
+        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        if (domElement.isElement())
+        {
+            if (modelingElement.removeChild(domElement).isNull())
+            {
+                qDebug()<<"Can't delete node";
+                return;
+            }
+        }
+        else
+        {
+            qDebug()<<"Can't get node by id = "<<nodeId<<Q_FUNC_INFO;
+            return;
+        }
     }
     else
     {
@@ -69,9 +83,5 @@ void AddUnionDetails::redo()
         qDebug()<<"Can't find tag"<<VPattern::TagModeling<< Q_FUNC_INFO;
         return;
     }
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
+    RedoFullParsing();
 }

@@ -183,7 +183,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
     UpdateControlPoints(spl, newSplPath, indexSpline);
 
     MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
-    connect(moveSplPath, &MoveSplinePath::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSplPath);
 }
 

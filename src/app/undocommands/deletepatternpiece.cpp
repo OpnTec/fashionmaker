@@ -32,15 +32,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
-      previousNode(QDomNode())
+    : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
+      previousPPName(QString())
 {
     setText(tr("Delete pattern piece %1").arg(namePP));
 
-    QDomElement patternP= doc->GetPPElement(namePP);
+    QDomElement patternP = doc->GetPPElement(namePP);
     patternPiece = patternP.cloneNode().toElement();
     mPath = doc->MPath();
-    previousNode = patternP.previousSibling();//find previous pattern piece
+    QDomNode previousPP = patternP.previousSibling();//find previous pattern piece
+    previousPPName = doc->GetParametrString(previousPP.toElement(), VPattern::AttrName, "");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,7 +52,8 @@ DeletePatternPiece::~DeletePatternPiece()
 void DeletePatternPiece::undo()
 {
     QDomElement rootElement = doc->documentElement();
-    rootElement.insertAfter(patternPiece, previousNode);
+    QDomNode previousPP = doc->GetPPElement(previousPPName);
+    rootElement.insertAfter(patternPiece, previousPP);
 
     emit NeedFullParsing();
     doc->ChangedActivPP(namePP);

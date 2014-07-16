@@ -32,15 +32,14 @@
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../widgets/vapplication.h"
-#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                        QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), oldX(0.0), oldY(0.0), newX(x), newY(y), detId(id), scene(scene),
-      redoFlag(false)
+    : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(scene)
 {
     setText(QObject::tr("Move detail"));
+    nodeId = id;
 
     SCASSERT(scene != nullptr);
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -51,7 +50,7 @@ MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const qu
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -63,11 +62,10 @@ MoveDetail::~MoveDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(detId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(oldX)));
-        doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(oldY)));
+        SaveCoordinates(domElement, oldX, oldY);
 
         emit NeedLiteParsing();
 
@@ -76,7 +74,7 @@ void MoveDetail::undo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -84,11 +82,10 @@ void MoveDetail::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(detId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(newX)));
-        doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(newY)));
+        SaveCoordinates(domElement, newX, newY);
 
         if (redoFlag)
         {
@@ -101,7 +98,7 @@ void MoveDetail::redo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< detId << Q_FUNC_INFO;
+        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
         return;
     }
 }
@@ -114,7 +111,7 @@ bool MoveDetail::mergeWith(const QUndoCommand *command)
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getDetId();
 
-    if (id != detId)
+    if (id != nodeId)
     {
         return false;
     }
@@ -128,4 +125,11 @@ bool MoveDetail::mergeWith(const QUndoCommand *command)
 int MoveDetail::id() const
 {
     return static_cast<int>(UndoCommand::MoveDetail);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MoveDetail::SaveCoordinates(QDomElement &domElement, double x, double y)
+{
+    doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(x)));
+    doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(y)));
 }

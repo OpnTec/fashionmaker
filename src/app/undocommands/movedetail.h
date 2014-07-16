@@ -29,12 +29,11 @@
 #ifndef MOVEDETAIL_H
 #define MOVEDETAIL_H
 
-#include <QUndoCommand>
+#include "vundocommand.h"
 
-class VPattern;
 class QGraphicsScene;
 
-class MoveDetail : public QObject, public QUndoCommand
+class MoveDetail : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -49,24 +48,20 @@ public:
     quint32      getDetId() const;
     double       getNewX() const;
     double       getNewY() const;
-signals:
-    void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(MoveDetail)
-    VPattern *doc;
     double   oldX;
     double   oldY;
     double   newX;
     double   newY;
-    quint32  detId;
     QGraphicsScene *scene;
-    bool redoFlag;
+    void         SaveCoordinates(QDomElement &domElement, double x, double y);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 MoveDetail::getDetId() const
 {
-    return detId;
+    return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

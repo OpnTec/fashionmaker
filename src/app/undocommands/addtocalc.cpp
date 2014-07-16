@@ -31,10 +31,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), nameActivDraw(doc->GetNameActivDraw()),
-      cursor(doc->getCursor()), redoFlag(false)
+    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivDraw()), cursor(doc->getCursor())
 {
     setText(tr("Add object"));
+    nodeId = doc->GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,16 +50,29 @@ void AddToCalc::undo()
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VPattern::TagCalculation, calcElement))
     {
-        calcElement.removeChild(xml);
-        if (cursor > 0)
+        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        if (domElement.isElement())
         {
-            doc->setCursor(0);
+            if (calcElement.removeChild(domElement).isNull())
+            {
+                qDebug()<<"Can't delete node";
+                return;
+            }
+        }
+        else
+        {
+            qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
+            return;
         }
     }
     else
     {
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
         return;
+    }
+    if (cursor > 0)
+    {
+        doc->setCursor(0);
     }
     emit NeedFullParsing();
 }
@@ -97,9 +110,5 @@ void AddToCalc::redo()
         qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
         return;
     }
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
+    RedoFullParsing();
 }

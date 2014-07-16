@@ -31,14 +31,14 @@
 #include <QDomElement>
 #include <QGraphicsView>
 #include "../xml/vpattern.h"
-#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
                        QGraphicsScene *scene, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), oldSpline(*oldSpl), newSpline(newSpl), splineId(id), scene(scene)
+    : VUndoCommand(QDomElement(), doc, parent), oldSpline(*oldSpl), newSpline(newSpl), scene(scene)
 {
     setText(tr("Move spline"));
+    nodeId = id;
 
     SCASSERT(scene != nullptr);
 }
@@ -50,49 +50,13 @@ MoveSpline::~MoveSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(splineId));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, VAbstractTool::AttrAngle1, QString().setNum(oldSpline.GetAngle1()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrAngle2, QString().setNum(oldSpline.GetAngle2()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm1, QString().setNum(oldSpline.GetKasm1()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm2, QString().setNum(oldSpline.GetKasm2()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKCurve, QString().setNum(oldSpline.GetKcurve()));
-
-        emit NeedLiteParsing();
-
-        QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
-    }
-    else
-    {
-        qDebug()<<"Can't find spline with id ="<< splineId << Q_FUNC_INFO;
-        return;
-    }
+    Do(oldSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(splineId));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, VAbstractTool::AttrAngle1, QString().setNum(newSpline.GetAngle1()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrAngle2, QString().setNum(newSpline.GetAngle2()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm1, QString().setNum(newSpline.GetKasm1()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm2, QString().setNum(newSpline.GetKasm2()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKCurve, QString().setNum(newSpline.GetKcurve()));
-
-        emit NeedLiteParsing();
-
-        QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
-    }
-    else
-    {
-        qDebug()<<"Can't find spline with id ="<< splineId << Q_FUNC_INFO;
-        return;
-    }
+    Do(newSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,7 +66,7 @@ bool MoveSpline::mergeWith(const QUndoCommand *command)
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getSplineId();
 
-    if (id != splineId)
+    if (id != nodeId)
     {
         return false;
     }
@@ -115,4 +79,28 @@ bool MoveSpline::mergeWith(const QUndoCommand *command)
 int MoveSpline::id() const
 {
     return static_cast<int>(UndoCommand::MoveSpline);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MoveSpline::Do(const VSpline &spl)
+{
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    if (domElement.isElement())
+    {
+        doc->SetAttribute(domElement, VAbstractTool::AttrAngle1, QString().setNum(spl.GetAngle1()));
+        doc->SetAttribute(domElement, VAbstractTool::AttrAngle2, QString().setNum(spl.GetAngle2()));
+        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        doc->SetAttribute(domElement, VAbstractTool::AttrKCurve, QString().setNum(spl.GetKcurve()));
+
+        emit NeedLiteParsing();
+
+        QList<QGraphicsView*> list = scene->views();
+        VAbstractTool::NewSceneRect(scene, list[0]);
+    }
+    else
+    {
+        qDebug()<<"Can't find spline with id ="<< nodeId << Q_FUNC_INFO;
+        return;
+    }
 }

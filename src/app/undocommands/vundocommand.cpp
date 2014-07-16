@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   addpatternpiece.h
+ **  @file   vundocommand.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   9 6, 2014
+ **  @date   16 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,24 +26,29 @@
  **
  *************************************************************************/
 
-#ifndef ADDPATTERNPIECE_H
-#define ADDPATTERNPIECE_H
-
 #include "vundocommand.h"
+#include "../xml/vpattern.h"
 
-class AddPatternPiece : public VUndoCommand
+//---------------------------------------------------------------------------------------------------------------------
+VUndoCommand::VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+    :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(0), redoFlag(false)
 {
-    Q_OBJECT
-public:
-    AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
-                    QUndoCommand *parent = 0);
-    virtual ~AddPatternPiece();
-    virtual void undo();
-    virtual void redo();
-private:
-    Q_DISABLE_COPY(AddPatternPiece)
-    QString    namePP;
-    QString    mPath;
-};
+    SCASSERT(xml.isNull() == false);
+    SCASSERT(doc != nullptr);
+}
 
-#endif // ADDPATTERNPIECE_H
+//---------------------------------------------------------------------------------------------------------------------
+VUndoCommand::~VUndoCommand()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::RedoFullParsing()
+{
+    if (redoFlag)
+    {
+        emit NeedFullParsing();
+    }
+    redoFlag = true;
+}

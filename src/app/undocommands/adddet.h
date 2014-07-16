@@ -29,12 +29,11 @@
 #ifndef ADDDET_H
 #define ADDDET_H
 
-#include <QDomElement>
-#include <QUndoCommand>
+#include "vundocommand.h"
 
 class VPattern;
 
-class AddDet : public QObject, public QUndoCommand
+class AddDet : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -44,13 +43,8 @@ public:
     virtual void undo();
     // cppcheck-suppress unusedFunction
     virtual void redo();
-signals:
-    void NeedFullParsing();
 private:
     Q_DISABLE_COPY(AddDet)
-    const QDomElement xml;
-    VPattern *doc;
-    bool redoFlag;
 };
 
 #endif // ADDDET_H

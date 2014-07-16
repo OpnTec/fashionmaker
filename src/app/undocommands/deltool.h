@@ -29,13 +29,10 @@
 #ifndef DELTOOL_H
 #define DELTOOL_H
 
-#include <QDomElement>
-#include <QUndoCommand>
-
-class VPattern;
+#include "vundocommand.h"
 class QGraphicsItem;
 
-class DelTool : public QObject, public QUndoCommand
+class DelTool : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -43,14 +40,9 @@ public:
     virtual ~DelTool();
     virtual void undo();
     virtual void redo();
-signals:
-    void NeedFullParsing();
 private:
     Q_DISABLE_COPY(DelTool)
-    QDomElement xml;
     QDomNode parentNode;
-    VPattern *doc;
-    quint32  toolId;
     quint32 cursor;
 };
 

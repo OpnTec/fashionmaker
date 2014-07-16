@@ -29,12 +29,9 @@
 #ifndef DELETEPATTERNPIECE_H
 #define DELETEPATTERNPIECE_H
 
-#include <QDomElement>
-#include <QUndoCommand>
+#include "vundocommand.h"
 
-class VPattern;
-
-class DeletePatternPiece : public QObject, public QUndoCommand
+class DeletePatternPiece : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -42,15 +39,12 @@ public:
     virtual ~DeletePatternPiece();
     virtual void undo();
     virtual void redo();
-signals:
-    void NeedFullParsing();
 private:
     Q_DISABLE_COPY(DeletePatternPiece)
-    VPattern    *doc;
     QString     namePP;
     QDomElement patternPiece;
     QString     mPath;
-    QDomNode    previousNode;
+    QString     previousPPName;
 };
 
 #endif // DELETEPATTERNPIECE_H

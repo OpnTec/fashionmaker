@@ -32,9 +32,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
                                  QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), namePP(namePP), redoFlag(false), mPath(mPath)
+    : VUndoCommand(xml, doc, parent), namePP(namePP), mPath(mPath)
 {
-    SCASSERT(xml.isNull() == false);
     SCASSERT(namePP.isEmpty() == false);
     SCASSERT(mPath.isEmpty() == false);
     setText(tr("Add pattern piece %1").arg(namePP));
@@ -72,9 +71,5 @@ void AddPatternPiece::redo()
 
     rootElement.appendChild(xml);
 
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
+    RedoFullParsing();
 }

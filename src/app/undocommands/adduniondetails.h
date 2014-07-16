@@ -29,12 +29,9 @@
 #ifndef ADDUNIONDETAILS_H
 #define ADDUNIONDETAILS_H
 
-#include <QDomElement>
-#include <QUndoCommand>
+#include "vundocommand.h"
 
-class VPattern;
-
-class AddUnionDetails : public QObject, public QUndoCommand
+class AddUnionDetails : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -42,13 +39,8 @@ public:
     virtual ~AddUnionDetails();
     virtual void undo();
     virtual void redo();
-signals:
-    void NeedFullParsing();
 private:
     Q_DISABLE_COPY(AddUnionDetails)
-    const QDomElement xml;
-    VPattern *doc;
-    bool redoFlag;
 };
 
 #endif // ADDUNIONDETAILS_H

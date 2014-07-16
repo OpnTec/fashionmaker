@@ -33,10 +33,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(QDomElement()), parentNode(QDomNode()), doc(doc), toolId(id),
-      cursor(doc->getCursor())
+    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), cursor(doc->getCursor())
 {
     setText(tr("Delete tool"));
+    nodeId = id;
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -45,7 +45,7 @@ DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
     }
     else
     {
-        qDebug()<<"Can't get tool by id = "<<toolId<<Q_FUNC_INFO;
+        qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
         return;
     }
 }
@@ -75,7 +75,7 @@ void DelTool::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(toolId));
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
         parentNode.removeChild(domElement);
@@ -83,7 +83,7 @@ void DelTool::redo()
     }
     else
     {
-        qDebug()<<"Can't get tool by id = "<<toolId<<Q_FUNC_INFO;
+        qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
         return;
     }
 }

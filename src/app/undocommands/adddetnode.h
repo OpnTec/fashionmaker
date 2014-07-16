@@ -29,13 +29,11 @@
 #ifndef ADDDETNODE_H
 #define ADDDETNODE_H
 
-#include <QDomElement>
-#include <QUndoCommand>
+#include "vundocommand.h"
 
-class VPattern;
-
-class AddDetNode : public QUndoCommand
+class AddDetNode : public VUndoCommand
 {
+    Q_OBJECT
 public:
     AddDetNode(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
     virtual ~AddDetNode();
@@ -43,8 +41,6 @@ public:
     virtual void redo();
 private:
     Q_DISABLE_COPY(AddDetNode)
-    const QDomElement xml;
-    VPattern *doc;
 };
 
 #endif // ADDDETNODE_H

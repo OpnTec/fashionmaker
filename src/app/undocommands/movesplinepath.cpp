@@ -29,15 +29,14 @@
 #include "movesplinepath.h"
 #include <QDomElement>
 #include "../tools/drawTools/vtoolsplinepath.h"
-#include "undocommands.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
                                const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), doc(doc), oldSplinePath(oldSplPath), newSplinePath(newSplPath), splinePathId(id),
-      scene(scene)
+    : VUndoCommand(QDomElement(), doc, parent), oldSplinePath(oldSplPath), newSplinePath(newSplPath), scene(scene)
 {
     setText(tr("Move spline path"));
+    nodeId = id;
 
     SCASSERT(scene != nullptr);
 }
@@ -49,43 +48,13 @@ MoveSplinePath::~MoveSplinePath()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::undo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(splinePathId));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(oldSplinePath.getKCurve()));
-        VToolSplinePath::UpdatePathPoint(doc, domElement, oldSplinePath);
-
-        emit NeedLiteParsing();
-
-        QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
-    }
-    else
-    {
-        qDebug()<<"Can't find spline path with id ="<< splinePathId << Q_FUNC_INFO;
-        return;
-    }
+    Do(oldSplinePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(splinePathId));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(newSplinePath.getKCurve()));
-        VToolSplinePath::UpdatePathPoint(doc, domElement, newSplinePath);
-
-        emit NeedLiteParsing();
-
-        QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
-    }
-    else
-    {
-        qDebug()<<"Can't find spline path with id ="<< splinePathId << Q_FUNC_INFO;
-        return;
-    }
+    Do(newSplinePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,7 +64,7 @@ bool MoveSplinePath::mergeWith(const QUndoCommand *command)
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getSplinePathId();
 
-    if (id != splinePathId)
+    if (id != nodeId)
     {
         return false;
     }
@@ -108,4 +77,25 @@ bool MoveSplinePath::mergeWith(const QUndoCommand *command)
 int MoveSplinePath::id() const
 {
     return static_cast<int>(UndoCommand::MoveSplinePath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MoveSplinePath::Do(const VSplinePath &splPath)
+{
+    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    if (domElement.isElement())
+    {
+        doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(splPath.getKCurve()));
+        VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
+
+        emit NeedLiteParsing();
+
+        QList<QGraphicsView*> list = scene->views();
+        VAbstractTool::NewSceneRect(scene, list[0]);
+    }
+    else
+    {
+        qDebug()<<"Can't find spline path with id ="<< nodeId << Q_FUNC_INFO;
+        return;
+    }
 }

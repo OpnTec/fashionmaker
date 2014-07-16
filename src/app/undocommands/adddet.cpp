@@ -31,9 +31,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddDet::AddDet(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    : QObject(), QUndoCommand(parent), xml(xml), doc(doc), redoFlag(false)
+    : VUndoCommand(xml, doc, parent)
 {
     setText(tr("Add detail"));
+    nodeId = doc->GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,20 @@ void AddDet::undo()
     QDomElement element;
     if (doc->GetActivNodeElement(VPattern::TagDetails, element))
     {
-        element.removeChild(xml);
+        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        if (domElement.isElement())
+        {
+            if (element.removeChild(domElement).isNull())
+            {
+                qDebug()<<"Can't delete node";
+                return;
+            }
+        }
+        else
+        {
+            qDebug()<<"Can't get node by id = "<<nodeId<<Q_FUNC_INFO;
+            return;
+        }
     }
     else
     {
@@ -71,9 +85,5 @@ void AddDet::redo()
         qDebug()<<"Can't find tag"<<VPattern::TagDetails<< Q_FUNC_INFO;
         return;
     }
-    if (redoFlag)
-    {
-        emit NeedFullParsing();
-    }
-    redoFlag = true;
+    RedoFullParsing();
 }

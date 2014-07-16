@@ -29,13 +29,10 @@
 #ifndef DELETEDETAIL_H
 #define DELETEDETAIL_H
 
-#include <QDomElement>
-#include <QUndoCommand>
-
-class VPattern;
+#include "vundocommand.h"
 class QGraphicsItem;
 
-class DeleteDetail : public QObject, public QUndoCommand
+class DeleteDetail : public VUndoCommand
 {
     Q_OBJECT
 public:
@@ -43,13 +40,8 @@ public:
     virtual ~DeleteDetail();
     virtual void undo();
     virtual void redo();
-signals:
-    void NeedFullParsing();
 private:
     Q_DISABLE_COPY(DeleteDetail)
-    QDomElement xml;
-    VPattern *doc;
-    quint32  detId;
     QDomNode parentNode;
 };
 
