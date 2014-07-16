@@ -78,7 +78,7 @@ public slots:
     void               OpenRecentFile();
     void               Clear();
 
-    void               currentDrawChanged( int index );
+    void               currentPPChanged(int index);
     void               OptionDraw();
     void               ChangedSize(const QString &text);
     void               ChangedHeight(const QString & text);
@@ -257,6 +257,7 @@ private:
     void               OpenPattern(const QString &filePath);
     template <typename Func>
     void               SetGradationList(const QString &label, const QStringList &list, Func changeSlot);
+    void               ChangePP(int index , bool zoomBestFit = true);
 };
 
 #endif // MAINWINDOW_H

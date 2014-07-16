@@ -189,7 +189,7 @@ void MainWindow::ActionNewPP()
         return;
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &MainWindow::currentDrawChanged);
+               this, &MainWindow::currentPPChanged);
     comboBoxDraws->addItem(patternPieceName);
 
     pattern->ClearGObjects();
@@ -217,7 +217,7 @@ void MainWindow::ActionNewPP()
         comboBoxDraws->setCurrentIndex(0);
     }
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &MainWindow::currentDrawChanged);
+            &MainWindow::currentPPChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1037,7 +1037,7 @@ void MainWindow::ToolBarDraws()
     ui->toolBarDraws->addWidget(comboBoxDraws);
     comboBoxDraws->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::currentDrawChanged);
+            this, &MainWindow::currentPPChanged);
 
     ui->toolBarDraws->addAction(ui->actionOptionDraw);
     ui->actionOptionDraw->setEnabled(false);
@@ -1101,22 +1101,12 @@ void MainWindow::InitToolButtons()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief currentDrawChanged change active pattern peace.
+ * @brief currentPPChanged change active pattern piece.
  * @param index index in combobox.
  */
-void MainWindow::currentDrawChanged( int index )
+void MainWindow::currentPPChanged(int index)
 {
-    if (index != -1)
-    {
-        doc->ChangeActivPP(comboBoxDraws->itemText(index));
-        doc->setCurrentData();
-        if (drawMode)
-        {
-            ArrowTool();
-            view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
-            view->NewFactor(view->transform().m11());
-        }
-    }
+    ChangePP(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1587,11 +1577,11 @@ void MainWindow::FullParseFile()
         patternPiece = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
     }
     disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &MainWindow::currentDrawChanged);
+               this, &MainWindow::currentPPChanged);
     comboBoxDraws->clear();
     comboBoxDraws->addItems(doc->getPatternPieces());
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::currentDrawChanged);
+            this, &MainWindow::currentPPChanged);
     ui->actionPattern_properties->setEnabled(true);
 
     qint32 index = comboBoxDraws->findText(patternPiece);
@@ -1599,11 +1589,11 @@ void MainWindow::FullParseFile()
     {
         if ( index != -1 )
         { // -1 for not found
-            currentDrawChanged(index);
+            ChangePP(index, false);
         }
         else
         {
-            currentDrawChanged(0);
+            ChangePP(0, false);
         }
     }
     catch (VExceptionBadId &e)
@@ -2316,6 +2306,25 @@ void MainWindow::OpenPattern(const QString &filePath)
         else
         {
             VApplication::NewValentina(filePath);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ChangePP(int index, bool zoomBestFit)
+{
+    if (index != -1)
+    {
+        doc->ChangeActivPP(comboBoxDraws->itemText(index));
+        doc->setCurrentData();
+        if (drawMode)
+        {
+            ArrowTool();
+            if (zoomBestFit)
+            {
+                view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
+                view->NewFactor(view->transform().m11());
+            }
         }
     }
 }
