@@ -33,15 +33,12 @@
 VUndoCommand::VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
     :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(0), redoFlag(false)
 {
-    SCASSERT(xml.isNull() == false);
     SCASSERT(doc != nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VUndoCommand::~VUndoCommand()
-{
-
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VUndoCommand::RedoFullParsing()

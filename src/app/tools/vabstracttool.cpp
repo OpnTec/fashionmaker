@@ -261,7 +261,7 @@ void VAbstractTool::DeleteTool(bool ask)
  * @brief LineStyle return pen style for current line style.
  * @return pen style.
  */
-Qt::PenStyle VAbstractTool::LineStyle()
+Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
 {
     QStringList styles = Styles();
     switch (styles.indexOf(typeLine))

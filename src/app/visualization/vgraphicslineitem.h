@@ -36,24 +36,29 @@ class VGraphicsLineItem : public QObject, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
+    VGraphicsLineItem(const VContainer *data, QGraphicsItem * parent = 0);
     VGraphicsLineItem(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
                       QGraphicsItem * parent = 0);
-    VGraphicsLineItem(const VContainer *data, const quint32 &p1Id, const quint32 &p2Id, QGraphicsItem * parent = 0);
     virtual ~VGraphicsLineItem();
+
+    void    setLineStyle(const Qt::PenStyle &value);
+    void    setPoint1Id(const quint32 &value);
+    void    setPoint2Id(const quint32 &value);
+    void    RefreshGeometry();
 public slots:
-    void SetFactor(qreal factor);
-    void MousePos(const QPointF &scenePos);
+    void    SetFactor(qreal factor);
+    void    MousePos(const QPointF &scenePos);
 protected:
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
 private:
     Q_DISABLE_COPY(VGraphicsLineItem)
     const VContainer *data;
-    const quint32    point1Id;
-    const quint32    point2Id;
+    quint32          point1Id;
+    quint32          point2Id;
     qreal            factor;
     QPointF          scenePos;
     const QColor     color;
-    void         RefreshGeometry();
+    Qt::PenStyle     lineStyle;
 };
 
 #endif // VGRAPHICSLINEITEM_H

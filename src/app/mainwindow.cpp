@@ -394,7 +394,7 @@ void MainWindow::ApplyDialog()
 void MainWindow::ToolEndLine(bool checked)
 {
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
-                                 &MainWindow::ClosedDialogEndLine, &MainWindow::ApplyDialogEndLine);
+                                          &MainWindow::ClosedDialogEndLine, &MainWindow::ApplyDialogEndLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -423,8 +423,8 @@ void MainWindow::ClosedDialogEndLine(int result)
  */
 void MainWindow::ToolLine(bool checked)
 {
-    SetToolButton<DialogLine>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
-                              &MainWindow::ClosedDialogLine);
+    SetToolButtonWithApply<DialogLine>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
+                                       &MainWindow::ClosedDialogLine, &MainWindow::ApplyDialogLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -434,7 +434,14 @@ void MainWindow::ToolLine(bool checked)
  */
 void MainWindow::ClosedDialogLine(int result)
 {
-    ClosedDialog<VToolLine>(result);
+    ClosedDialogWithApply<VToolLine>(result);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ApplyDialogLine()
+{
+    ApplyDialog<VToolLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -445,7 +452,8 @@ void MainWindow::ClosedDialogLine(int result)
 void MainWindow::ToolAlongLine(bool checked)
 {
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png",
-                     tr("Select point"), &MainWindow::ClosedDialogAlongLine, &MainWindow::ApplyDialogAlongLine);
+                                            tr("Select point"), &MainWindow::ClosedDialogAlongLine,
+                                            &MainWindow::ApplyDialogAlongLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

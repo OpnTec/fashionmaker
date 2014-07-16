@@ -98,6 +98,7 @@ public:
     static const QString    TypeLineDashDotDotLine;
     static const QStringList Styles();
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
+    static Qt::PenStyle     LineStyle(const QString &typeLine);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -147,7 +148,6 @@ protected:
      */
     virtual void            RemoveReferens(){}
     virtual void            DeleteTool(bool ask = true);
-    Qt::PenStyle            LineStyle();
     static int              ConfirmDeletion();
 private:
     Q_DISABLE_COPY(VAbstractTool)

@@ -60,7 +60,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
 
     if (typeCreation == Source::FromGui)
     {
@@ -94,7 +94,7 @@ void VToolLine::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
@@ -102,7 +102,14 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
     const quint32 firstPoint = dialogTool->getFirstPoint();
     const quint32 secondPoint = dialogTool->getSecondPoint();
     const QString typeLine = dialogTool->getTypeLine();
-    Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Source::FromGui);
+
+    VToolLine *line = nullptr;
+    line = Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Source::FromGui);
+    if (line != nullptr)
+    {
+        line->dialog=dialogTool;
+    }
+    return line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,7 +125,7 @@ void VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
+VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                        const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                        const Document &parse, const Source &typeCreation)
 {
@@ -151,7 +158,9 @@ void VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quin
         doc->AddTool(id, line);
         doc->IncrementReferens(firstPoint);
         doc->IncrementReferens(secondPoint);
+        return line;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,7 +219,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
         selectable = false;
         currentColor = Qt::gray;
     }
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
     this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
 }
@@ -263,7 +272,7 @@ void VToolLine::RefreshDataInFile()
 void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +283,7 @@ void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,5 +369,5 @@ void VToolLine::RefreshGeometry()
     const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);
     const VPointF *second = VAbstractTool::data.GeometricObject<const VPointF *>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle()));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
 }

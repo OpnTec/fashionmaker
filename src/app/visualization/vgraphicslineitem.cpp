@@ -33,19 +33,16 @@
 #include "../tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+VGraphicsLineItem::VGraphicsLineItem(const VContainer *data, QGraphicsItem *parent)
+    :QObject(), QGraphicsLineItem(parent), data(data), point1Id(0), point2Id(0), factor(VDrawTool::factor),
+      scenePos(QPointF()), color(Qt::red), lineStyle(Qt::SolidLine)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VGraphicsLineItem::VGraphicsLineItem(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
                                      QGraphicsItem *parent)
     :QObject(), QGraphicsLineItem(parent), data(data), point1Id(pointId), point2Id(0), factor(VDrawTool::factor),
-      scenePos(scenePos), color(Qt::black)
-{
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VGraphicsLineItem::VGraphicsLineItem(const VContainer *data, const quint32 &p1Id, const quint32 &p2Id,
-                                     QGraphicsItem *parent)
-    :QObject(), QGraphicsLineItem(parent), data(data), point1Id(p1Id), point2Id(p2Id), factor(VDrawTool::factor),
-      scenePos(QPointF()), color(Qt::red)
+      scenePos(scenePos), color(Qt::black), lineStyle(Qt::SolidLine)
 {
     RefreshGeometry();
 }
@@ -75,6 +72,24 @@ void VGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGraphicsLineItem::setPoint2Id(const quint32 &value)
+{
+    point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsLineItem::setPoint1Id(const quint32 &value)
+{
+    point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsLineItem::setLineStyle(const Qt::PenStyle &value)
+{
+    lineStyle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsLineItem::RefreshGeometry()
 {
     const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
@@ -87,5 +102,5 @@ void VGraphicsLineItem::RefreshGeometry()
         const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
         this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     }
-    this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, Qt::SolidLine));
+    this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
 }

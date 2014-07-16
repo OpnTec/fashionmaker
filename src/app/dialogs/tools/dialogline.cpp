@@ -34,6 +34,7 @@
 #include "../../visualization/vgraphicslineitem.h"
 #include "../../widgets/vapplication.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -46,7 +47,7 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
       line(nullptr)
 {
     ui->setupUi(this);
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
@@ -58,6 +59,8 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
             this, &DialogLine::PointNameChanged);
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogLine::PointNameChanged);
+
+    line = new VGraphicsLineItem(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,6 +78,7 @@ DialogLine::~DialogLine()
 void DialogLine::setSecondPoint(const quint32 &value)
 {
     setPointId(ui->comboBoxSecondPoint, secondPoint, value, 0);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,6 +90,7 @@ void DialogLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,6 +101,7 @@ void DialogLine::setTypeLine(const QString &value)
 void DialogLine::setFirstPoint(const quint32 &value)
 {
     setPointId(ui->comboBoxFirstPoint, firstPoint, value, 0);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,13 +110,17 @@ void DialogLine::setFirstPoint(const quint32 &value)
  */
 void DialogLine::DialogAccepted()
 {
-    //TODO check if points different
-    qint32 index = ui->comboBoxFirstPoint->currentIndex();
-    firstPoint = qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(index));
-    index = ui->comboBoxSecondPoint->currentIndex();
-    secondPoint = qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(index));
-    typeLine = GetTypeLine(ui->comboBoxLineType);
+    this->SaveData();
     DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::DialogApply()
+{
+    this->SaveData();
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->RefreshGeometry();
+    emit DialogApplied();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,7 +146,7 @@ void DialogLine::PointNameChanged()
 void DialogLine::UpdateList()
 {
     /*
-     * Does nothing. We redefine this slot because it is only one now way block update list of variable.
+     * Does nothing. We redefine this slot because it is only one now way block update list of variables.
      * This dialog doesn't work with formula. Don't delete. Help avoid crash.
      */
 }
@@ -145,10 +155,19 @@ void DialogLine::UpdateList()
 void DialogLine::ShowVisualization()
 {
     VMainGraphicsScene *scene = qApp->getCurrentScene();
-    line = new VGraphicsLineItem(data, getCurrentObjectId(ui->comboBoxFirstPoint),
-                                 getCurrentObjectId(ui->comboBoxSecondPoint));
     connect(scene, &VMainGraphicsScene::NewFactor, line, &VGraphicsLineItem::SetFactor);
     scene->addItem(line);
+    line->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::SaveData()
+{
+    qint32 index = ui->comboBoxFirstPoint->currentIndex();
+    firstPoint = qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(index));
+    index = ui->comboBoxSecondPoint->currentIndex();
+    secondPoint = qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(index));
+    typeLine = GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

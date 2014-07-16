@@ -41,9 +41,9 @@ class VToolLine: public VDrawTool, public QGraphicsLineItem
 public:
     VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
               const QString &typeLine, const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    virtual void setDialog();
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static void  Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
+    virtual void     setDialog();
+    static VToolLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                         const QString &typeLine, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document &parse, const Source &typeCreation);
     static const QString TagName;
