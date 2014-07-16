@@ -268,7 +268,7 @@ void VPattern::Parse(const Document &parse)
                         {
                             ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
                         }
-                        ParseDrawElement(sceneDraw, sceneDetail, domElement, parse);
+                        ParseDrawElement(domElement, parse);
                         break;
                     case 1: // TagIncrements
                         ParseIncrementsElement(domElement);
@@ -762,8 +762,7 @@ void VPattern::customEvent(QEvent *event)
  * @param node node.
  * @param parse parser file mode.
  */
-void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
-                                const Document &parse)
+void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
     QStringList tags{TagCalculation, TagModeling, TagDetails};
     QDomNode domNode = node.firstChild();
@@ -778,13 +777,13 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
                 {
                     case 0: // TagCalculation
                         data->ClearCalculationGObjects();
-                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Calculation);
+                        ParseDrawMode(domElement, parse, Draw::Calculation);
                         break;
                     case 1: // TagModeling
-                        ParseDrawMode(sceneDraw, sceneDetail, domElement, parse, Draw::Modeling);
+                        ParseDrawMode(domElement, parse, Draw::Modeling);
                         break;
                     case 2: // TagDetails
-                        ParseDetails(sceneDetail, domElement, parse);
+                        ParseDetails(domElement, parse);
                         break;
                     default:
                         qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
@@ -805,8 +804,7 @@ void VPattern::ParseDrawElement(VMainGraphicsScene *sceneDraw, VMainGraphicsScen
  * @param parse parser file mode.
  * @param mode draw mode.
  */
-void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, const QDomNode &node,
-                             const Document &parse, const Draw &mode)
+void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const Draw &mode)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
@@ -859,10 +857,8 @@ void VPattern::ParseDrawMode(VMainGraphicsScene *sceneDraw, VMainGraphicsScene *
  * @param domElement tag in xml tree.
  * @param parse parser file mode.
  */
-void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
-                                  const Document &parse)
+void VPattern::ParseDetailElement(const QDomElement &domElement, const Document &parse)
 {
-    SCASSERT(sceneDetail != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     try
     {
@@ -934,10 +930,8 @@ void VPattern::ParseDetailElement(VMainGraphicsScene *sceneDetail, const QDomEle
  * @param domElement tag in xml tree.
  * @param parse parser file mode.
  */
-void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &domElement,
-                            const Document &parse)
+void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse)
 {
-    SCASSERT(sceneDetail != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     QDomNode domNode = domElement.firstChild();
     while (domNode.isNull() == false)
@@ -949,7 +943,7 @@ void VPattern::ParseDetails(VMainGraphicsScene *sceneDetail, const QDomElement &
             {
                 if (domElement.tagName() == VToolDetail::TagName)
                 {
-                    ParseDetailElement(sceneDetail, domElement, parse);
+                    ParseDetailElement(domElement, parse);
                 }
             }
         }

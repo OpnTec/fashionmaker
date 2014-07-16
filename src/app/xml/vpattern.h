@@ -180,14 +180,11 @@ private:
     VMainGraphicsScene *sceneDetail;
 
     void           SetActivPP(const QString& name);
-    void           ParseDrawElement(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene *sceneDetail,
-                                    const QDomNode& node, const Document &parse);
-    void           ParseDrawMode(VMainGraphicsScene  *sceneDraw, VMainGraphicsScene  *sceneDetail,
-                                 const QDomNode& node, const Document &parse, const Draw &mode);
-    void           ParseDetailElement(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
+    void           ParseDrawElement(const QDomNode& node, const Document &parse);
+    void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
+    void           ParseDetailElement(const QDomElement &domElement,
                                       const Document &parse);
-    void           ParseDetails(VMainGraphicsScene  *sceneDetail, const QDomElement &domElement,
-                                const Document &parse);
+    void           ParseDetails(const QDomElement &domElement, const Document &parse);
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                      const Document &parse, const QString &type);
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
