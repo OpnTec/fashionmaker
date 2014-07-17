@@ -75,7 +75,7 @@ const QString VPattern::IncrementDescription = QStringLiteral("description");
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
                    VMainGraphicsScene *sceneDetail, QObject *parent)
-    : QObject(parent), VDomDocument(data), nameActivDraw(QString()), tools(QHash<quint32, VDataTool*>()),
+    : QObject(parent), VDomDocument(data), nameActivPP(QString()), tools(QHash<quint32, VDataTool*>()),
       history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), sceneDraw(sceneDraw),
       sceneDetail(sceneDetail)
 {
@@ -129,9 +129,9 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
 void VPattern::ChangeActivPP(const QString &name, const Document &parse)
 {
     Q_ASSERT_X(name.isEmpty() == false, "ChangeActivPP", "name pattern piece is empty");
-    if (CheckNamePP(name))
+    if (CheckExistNamePP(name) && this->nameActivPP != name)
     {
-        this->nameActivDraw = name;
+        this->nameActivPP = name;
         if (parse == Document::FullParse)
         {
             emit ChangedActivPP(name);
@@ -147,7 +147,7 @@ void VPattern::ChangeActivPP(const QString &name, const Document &parse)
  */
 bool VPattern::GetActivDrawElement(QDomElement &element) const
 {
-    if (nameActivDraw.isEmpty() == false)
+    if (nameActivPP.isEmpty() == false)
     {
         const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
         if (elements.size() == 0)
@@ -160,7 +160,7 @@ bool VPattern::GetActivDrawElement(QDomElement &element) const
             if (element.isNull() == false)
             {
                 const QString fieldName = element.attribute( AttrName );
-                if ( fieldName == nameActivDraw )
+                if ( fieldName == nameActivPP )
                 {
                     return true;
                 }
@@ -186,15 +186,15 @@ bool VPattern::appendPP(const QString &name)
     {
         return false;
     }
-    if (CheckNamePP(name) == false)
+    if (CheckExistNamePP(name) == false)
     {
-        if (nameActivDraw.isEmpty())
+        if (nameActivPP.isEmpty())
         {
             SetActivPP(name);
         }
         else
         {
-            this->nameActivDraw = name;
+            this->nameActivPP = name;
             emit ChangedActivPP(name);
         }
         return true;
@@ -204,26 +204,43 @@ bool VPattern::appendPP(const QString &name)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SetNameDraw change current pattern peace.
- * @param name pattern peace name.
+ * @brief ChangeNamePP change pattern piece name.
+ * @param oldName old pattern piece name.
+ * @param newName new pattern piece name.
  * @return true if success.
  */
-bool VPattern::SetNameDraw(const QString &name)
+bool VPattern::ChangeNamePP(const QString& oldName, const QString &newName)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "SetNameDraw", "name draw is empty");
-    const QString oldName = nameActivDraw;
-    QDomElement element;
-    if (GetActivDrawElement(element))
+    Q_ASSERT_X(newName.isEmpty() == false, "SetNamePP", "new name pattern piece is empty");
+    Q_ASSERT_X(oldName.isEmpty() == false, "SetNamePP", "old name pattern piece is empty");
+
+    if (CheckExistNamePP(oldName) == false)
     {
-        nameActivDraw = name;
-        element.setAttribute(AttrName, nameActivDraw);
-        emit patternChanged(false);
-        emit ChangedNameDraw(oldName, nameActivDraw);
+        qDebug()<<"Do not exist pattern piece with name"<<oldName;
+        return false;
+    }
+
+    if (CheckExistNamePP(newName))
+    {
+        qDebug()<<"Already exist pattern piece with name"<<newName;
+        return false;
+    }
+
+    QDomElement ppElement = GetPPElement(oldName);
+    if (ppElement.isElement())
+    {
+        if (nameActivPP == oldName)
+        {
+            nameActivPP = newName;
+        }
+        ppElement.setAttribute(AttrName, newName);
+        emit patternChanged(false);//For situation when we change name directly, without undocommands.
+        emit ChangedNameDraw(oldName, newName);
         return true;
     }
     else
     {
-        qDebug()<<"Can't find activ draw"<<Q_FUNC_INFO;
+        qDebug()<<"Can't find pattern piece node with name"<<oldName<<Q_FUNC_INFO;
         return false;
     }
 }
@@ -254,7 +271,7 @@ void VPattern::Parse(const Document &parse)
                     case 0: // TagDraw
                         if (parse == Document::FullParse)
                         {
-                            if (nameActivDraw.isEmpty())
+                            if (nameActivPP.isEmpty())
                             {
                                 SetActivPP(GetParametrString(domElement, AttrName));
                             }
@@ -349,7 +366,7 @@ void VPattern::setCurrentData()
             for (qint32 i = 0; i < history.size(); ++i)
             {
                 const VToolRecord tool = history.at(i);
-                if (tool.getNameDraw() == nameActivDraw)
+                if (tool.getNameDraw() == nameActivPP)
                 {
                     id = tool.getId();
                 }
@@ -469,7 +486,7 @@ quint32 VPattern::SPointActiveDraw()
  * @param name pattern peace name.
  * @return true if exist.
  */
-bool VPattern::CheckNamePP(const QString &name) const
+bool VPattern::CheckExistNamePP(const QString &name) const
 {
     Q_ASSERT_X(name.isEmpty() == false, "CheckNameDraw", "name draw is empty");
     const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
@@ -499,7 +516,7 @@ bool VPattern::CheckNamePP(const QString &name) const
 void VPattern::SetActivPP(const QString &name)
 {
     Q_ASSERT_X(name.isEmpty() == false, "SetActivPP", "name pattern piece is empty");
-    this->nameActivDraw = name;
+    this->nameActivPP = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1019,7 +1036,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 }
                 if (parse == Document::FullParse)
                 {
-                    spoint = new VToolSinglePoint(this, data, id, Source::FromFile, nameActivDraw, MPath());
+                    spoint = new VToolSinglePoint(this, data, id, Source::FromFile, nameActivPP, MPath());
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
@@ -1806,7 +1823,7 @@ void VPattern::PrepareForParse(const Document &parse)
         TestUniqueId();
         data->Clear();
         UpdateMeasurements();
-        nameActivDraw.clear();
+        nameActivPP.clear();
         sceneDraw->clear();
         sceneDetail->clear();
         patternPieces.clear();
@@ -1913,7 +1930,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
     for (qint32 i = 0; i< history.size(); ++i)
     {
         const VToolRecord tool = history.at(i);
-        if (tool.getNameDraw() == nameActivDraw)
+        if (tool.getNameDraw() == nameActivPP)
         {
             switch ( tool.getTypeTool() )
             {

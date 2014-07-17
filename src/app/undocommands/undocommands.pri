@@ -13,7 +13,8 @@ HEADERS += \
     undocommands/adddet.h \
     undocommands/adduniondetails.h \
     undocommands/deletedetail.h \
-    undocommands/vundocommand.h
+    undocommands/vundocommand.h \
+    undocommands/renamepp.h
     
 
 SOURCES += \
@@ -31,5 +32,6 @@ SOURCES += \
     undocommands/adddet.cpp \
     undocommands/adduniondetails.cpp \
     undocommands/deletedetail.cpp \
-    undocommands/vundocommand.cpp
+    undocommands/vundocommand.cpp \
+    undocommands/renamepp.cpp
     

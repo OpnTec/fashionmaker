@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vundocommand.h
+ **  @file   renamepp.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 7, 2014
+ **  @date   17 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,45 +26,43 @@
  **
  *************************************************************************/
 
-#ifndef VUNDOCOMMAND_H
-#define VUNDOCOMMAND_H
+#ifndef RENAMEPP_H
+#define RENAMEPP_H
 
-#include <QUndoCommand>
-#include <QDomElement>
+#include "vundocommand.h"
+class QComboBox;
 
-enum class UndoCommand: char { AddPatternPiece,
-                               AddToCalc,
-                               MoveSpline,
-                               MoveSplinePath,
-                               MoveSPoint,
-                               SaveToolOptions,
-                               SaveDetailOptions,
-                               MoveDetail,
-                               DeleteTool,
-                               DeletePatternPiece,
-                               RenamePP
-                             };
-
-class VPattern;
-
-class VUndoCommand : public QObject, public QUndoCommand
+class RenamePP :public VUndoCommand
 {
     Q_OBJECT
 public:
-    VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
-    virtual ~VUndoCommand();
-signals:
-    void ClearScene();
-    void NeedFullParsing();
-    void NeedLiteParsing();
-protected:
-    QDomElement xml;
-    VPattern    *doc;
-    quint32     nodeId;
-    bool        redoFlag;
-    void        RedoFullParsing();
+    RenamePP(VPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = 0);
+    virtual ~RenamePP();
+
+    virtual void undo();
+    virtual void redo();
+    virtual bool mergeWith(const QUndoCommand *command);
+    virtual int  id() const;
+    QString      getNewPPname() const;
+    QString      getOldPPname() const;
 private:
-    Q_DISABLE_COPY(VUndoCommand)
+    Q_DISABLE_COPY(RenamePP)
+    QComboBox *combo;
+    QString   newPPname;
+    QString   oldPPname;
+    void      ChangeName(const QString &oldName, const QString &newName);
 };
 
-#endif // VUNDOCOMMAND_H
+//---------------------------------------------------------------------------------------------------------------------
+inline QString RenamePP::getNewPPname() const
+{
+    return newPPname;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QString RenamePP::getOldPPname() const
+{
+    return oldPPname;
+}
+
+#endif // RENAMEPP_H

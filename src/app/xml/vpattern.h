@@ -56,12 +56,17 @@ class VPattern : public QObject, public VDomDocument
 public:
     VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
+
     void           CreateEmptyFile(const QString &tablePath);
     void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
-    QString        GetNameActivDraw() const;
+    QString        GetNameActivPP() const;
     bool           GetActivDrawElement(QDomElement &element) const;
     bool           appendPP(const QString& name);
-    bool           SetNameDraw(const QString& name);
+    bool           ChangeNamePP(const QString& oldName, const QString &newName);
+    QDomElement    GetPPElement(const QString &name);
+    bool           CheckExistNamePP(const QString& name) const;
+    int            CountPP() const;
+
     void           Parse(const Document &parse);
     QHash<quint32, VDataTool*>* getTools();
     VDataTool*     getTool(const quint32 &id);
@@ -108,9 +113,6 @@ public:
     static const QString IncrementDescription;
     virtual bool   SaveDocument(const QString &fileName);
     QStringList    getPatternPieces() const;
-    QDomElement    GetPPElement(const QString &name);
-    bool           CheckNamePP(const QString& name) const;
-    int            CountPP() const;
     QRectF         ActiveDrawBoundingRect() const;
     quint32        GetParametrId(const QDomElement& domElement) const;
 signals:
@@ -120,7 +122,7 @@ signals:
      */
     void           ChangedActivPP(const QString &newName);
     /**
-     * @brief ChangedNameDraw save new name active pattern peace.
+     * @brief ChangedNameDraw save new name pattern peace.
      * @param oldName old name.
      * @param newName new name.
      */
@@ -160,7 +162,7 @@ private:
     Q_DISABLE_COPY(VPattern)
 
     /** @brief nameActivDraw name current pattern peace. */
-    QString        nameActivDraw;
+    QString        nameActivPP;
 
     /** @brief tools list with pointer on tools. */
     QHash<quint32, VDataTool*> tools;
@@ -171,6 +173,7 @@ private:
     /** @brief cursor cursor keep id tool after which we will add new tool in file. */
     quint32        cursor;
 
+    /** @brief patternPieces list of patern pieces names for combobox*/
     QStringList    patternPieces;
 
     /** @brief mode current draw mode. */
@@ -214,12 +217,12 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetNameActivDraw return current pattern peace name.
- * @return pattern peace name.
+ * @brief GetNameActivPP return current pattern piece name.
+ * @return pattern piece name.
  */
-inline QString VPattern::GetNameActivDraw() const
+inline QString VPattern::GetNameActivPP() const
 {
-    return nameActivDraw;
+    return nameActivPP;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

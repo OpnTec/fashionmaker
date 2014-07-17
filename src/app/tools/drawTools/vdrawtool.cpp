@@ -47,7 +47,7 @@ qreal VDrawTool::factor = 1;
  */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
     :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
-      nameActivDraw(doc->GetNameActivDraw()), dialog(nullptr)
+      nameActivDraw(doc->GetNameActivPP()), dialog(nullptr)
 {
     connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);

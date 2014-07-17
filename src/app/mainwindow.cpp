@@ -40,6 +40,7 @@
 #include "xml/vindividualmeasurements.h"
 #include "widgets/vapplication.h"
 #include "widgets/undoevent.h"
+#include "undocommands/renamepp.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -222,24 +223,18 @@ void MainWindow::ActionNewPP()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief OptionDraw help change name of pattern peace.
+ * @brief OptionDraw help change name of pattern piece.
  */
 void MainWindow::OptionDraw()
 {
-    const QString activDraw = doc->GetNameActivDraw();
+    const QString activDraw = doc->GetNameActivPP();
     const QString nameDraw = PatternPieceName(activDraw);
     if (nameDraw.isEmpty())
     {
         return;
     }
-    if (doc->SetNameDraw(nameDraw))
-    {
-        comboBoxDraws->setItemText(comboBoxDraws->findText(activDraw), nameDraw);
-    }
-    else
-    {
-        QMessageBox::warning(this, tr("Error saving change!!!"), tr("Can't save new label of pattern piece"));
-    }
+    RenamePP *renamePP = new RenamePP(doc, nameDraw, comboBoxDraws);
+    qApp->getUndoStack()->push(renamePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2157,7 +2152,7 @@ QString MainWindow::PatternPieceName(const QString &text)
         }
         if (comboBoxDraws->findText(nameDraw) == -1)
         {
-            break;
+            break;//repeate show dialog
         }
     }
     delete dlg;

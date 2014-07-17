@@ -159,7 +159,7 @@ void DialogHistory::FillTable()
     for (qint32 i = 0; i< history->size(); ++i)
     {
         const VToolRecord tool = history->at(i);
-        if (tool.getNameDraw() != doc->GetNameActivDraw())
+        if (tool.getNameDraw() != doc->GetNameActivPP())
         {
             continue;
         }

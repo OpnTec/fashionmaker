@@ -345,7 +345,7 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *
     QVector<VToolRecord> *history = doc->getHistory();
     if (cursor <= 0)
     {
-        history->append(VToolRecord(id, toolType, doc->GetNameActivDraw()));
+        history->append(VToolRecord(id, toolType, doc->GetNameActivPP()));
     }
     else
     {
@@ -359,6 +359,6 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *
                 break;
             }
         }
-        history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivDraw()));
+        history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivPP()));
     }
 }
