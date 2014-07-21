@@ -454,19 +454,28 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             const qreal result = cal->EvalFormula(formula);
             delete cal;
 
-            if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
+            //if result equal 0
+            if (qFuzzyCompare(1 + result, 1 + 0))
             {
-                QLocale loc = QLocale::system();
-                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+                flag = false;
+                ChangeColor(labelEditFormula, Qt::red);
             }
             else
             {
-                QLocale loc = QLocale(QLocale::C);
-                label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+                if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
+                {
+                    QLocale loc = QLocale::system();
+                    label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+                }
+                else
+                {
+                    QLocale loc = QLocale(QLocale::C);
+                    label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+                }
+                flag = true;
+                ChangeColor(labelEditFormula, okColor);
+                emit ToolTip("");
             }
-            flag = true;
-            ChangeColor(labelEditFormula, okColor);
-            emit ToolTip("");
         }
         catch (qmu::QmuParserError &e)
         {
