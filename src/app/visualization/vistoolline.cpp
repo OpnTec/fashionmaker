@@ -26,71 +26,47 @@
  **
  *************************************************************************/
 
-#include "vgraphicslineitem.h"
+#include "vistoolline.h"
 #include "../container/vcontainer.h"
 #include "../geometry/vpointf.h"
 #include "../widgets/vapplication.h"
 #include "../tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VGraphicsLineItem::VGraphicsLineItem(const VContainer *data, QGraphicsItem *parent)
-    :QObject(), QGraphicsLineItem(parent), data(data), point1Id(0), point2Id(0), factor(VDrawTool::factor),
-      scenePos(QPointF()), color(Qt::red), lineStyle(Qt::SolidLine)
-{}
+VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
+    :VisLine(data, parent), point1Id(0), point2Id(0)
+{
+    this->color = Qt::red;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGraphicsLineItem::VGraphicsLineItem(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
+VisToolLine::VisToolLine(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
                                      QGraphicsItem *parent)
-    :QObject(), QGraphicsLineItem(parent), data(data), point1Id(pointId), point2Id(0), factor(VDrawTool::factor),
-      scenePos(scenePos), color(Qt::black), lineStyle(Qt::SolidLine)
+    :VisLine(data, parent), point1Id(pointId), point2Id(0)
 {
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VGraphicsLineItem::~VGraphicsLineItem()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::SetFactor(qreal factor)
-{
-    VApplication::CheckFactor(this->factor, factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::MousePos(const QPointF &scenePos)
-{
+    this->color = Qt::black;
     this->scenePos = scenePos;
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    QGraphicsLineItem::mouseMoveEvent(event);
-}
+VisToolLine::~VisToolLine()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::setPoint2Id(const quint32 &value)
+void VisToolLine::setPoint2Id(const quint32 &value)
 {
     point2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::setPoint1Id(const quint32 &value)
+void VisToolLine::setPoint1Id(const quint32 &value)
 {
     point1Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::setLineStyle(const Qt::PenStyle &value)
-{
-    lineStyle = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGraphicsLineItem::RefreshGeometry()
+void VisToolLine::RefreshGeometry()
 {
     const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
     if (point2Id == 0)

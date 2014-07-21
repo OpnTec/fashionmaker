@@ -31,7 +31,7 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
-#include "../../visualization/vgraphicslineitem.h"
+#include "../../visualization/vistoolline.h"
 #include "../../widgets/vapplication.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -60,7 +60,7 @@ DialogLine::DialogLine(const VContainer *data, QWidget *parent)
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogLine::PointNameChanged);
 
-    line = new VGraphicsLineItem(data);
+    line = new VisToolLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ void DialogLine::UpdateList()
 void DialogLine::ShowVisualization()
 {
     VMainGraphicsScene *scene = qApp->getCurrentScene();
-    connect(scene, &VMainGraphicsScene::NewFactor, line, &VGraphicsLineItem::SetFactor);
+    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
     scene->addItem(line);
     line->RefreshGeometry();
 }
@@ -188,10 +188,10 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
             { // -1 for not found
 
                 VMainGraphicsScene *scene = qApp->getCurrentScene();
-                line = new VGraphicsLineItem(data, id, scene->getScenePos());
+                line = new VisToolLine(data, id, scene->getScenePos());
                 scene->addItem(line);
-                connect(scene, &VMainGraphicsScene::NewFactor, line, &VGraphicsLineItem::SetFactor);
-                connect(scene, &VMainGraphicsScene::mouseMove, line, &VGraphicsLineItem::MousePos);
+                connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
+                connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolLine::MousePos);
 
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;

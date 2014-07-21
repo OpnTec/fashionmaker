@@ -36,7 +36,7 @@ namespace Ui
     class DialogLine;
 }
 
-class VGraphicsLineItem;
+class VisToolLine;
 
 /**
  * @brief The DialogLine class dialog for ToolLine. Help create line and edit option.
@@ -84,7 +84,7 @@ private:
 
     /** @brief typeLine type of line */
     QString        typeLine;
-    VGraphicsLineItem *line;
+    VisToolLine *line;
     /**
      * @brief SaveData Put dialog data in local variables
      */

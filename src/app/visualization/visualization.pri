@@ -3,11 +3,13 @@ HEADERS += \
     visualization/vcontrolpointspline.h \
     visualization/vsimplesplinepath.h \
     visualization/vsimplecurve.h \
-    visualization/vgraphicslineitem.h
+    visualization/visline.h \
+    visualization/vistoolline.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
     visualization/vcontrolpointspline.cpp \
     visualization/vsimplesplinepath.cpp \
     visualization/vsimplecurve.cpp \
-    visualization/vgraphicslineitem.cpp
+    visualization/visline.cpp \
+    visualization/vistoolline.cpp

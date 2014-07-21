@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vgraphicslineitem.h
+ **  @file   visline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 7, 2014
+ **  @date   21 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,39 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef VGRAPHICSLINEITEM_H
-#define VGRAPHICSLINEITEM_H
+#ifndef VISLINE_H
+#define VISLINE_H
 
+#include <QObject>
 #include <QGraphicsLineItem>
+#include <QPointF>
+
 class VContainer;
 
-class VGraphicsLineItem : public QObject, public QGraphicsLineItem
+class VisLine: public QObject, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    VGraphicsLineItem(const VContainer *data, QGraphicsItem * parent = 0);
-    VGraphicsLineItem(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
-                      QGraphicsItem * parent = 0);
-    virtual ~VGraphicsLineItem();
+    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisLine();
 
-    void    setLineStyle(const Qt::PenStyle &value);
-    void    setPoint1Id(const quint32 &value);
-    void    setPoint2Id(const quint32 &value);
-    void    RefreshGeometry();
+    void         setLineStyle(const Qt::PenStyle &value);
+    virtual void RefreshGeometry()=0;
 public slots:
-    void    SetFactor(qreal factor);
-    void    MousePos(const QPointF &scenePos);
+    void         SetFactor(qreal factor);
+    void         MousePos(const QPointF &scenePos);
 protected:
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
-private:
-    Q_DISABLE_COPY(VGraphicsLineItem)
     const VContainer *data;
-    quint32          point1Id;
-    quint32          point2Id;
     qreal            factor;
     QPointF          scenePos;
-    const QColor     color;
+    QColor           color;
     Qt::PenStyle     lineStyle;
+private:
+    Q_DISABLE_COPY(VisLine)
 };
 
-#endif // VGRAPHICSLINEITEM_H
+#endif // VISLINE_H
