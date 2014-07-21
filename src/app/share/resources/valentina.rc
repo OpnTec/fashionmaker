@@ -5,7 +5,9 @@ IDI_ICON1               ICON    DISCARDABLE     "icon/64x64/icon64x64.ico"
 // contains a reference to a magic manifest file which specifies that your
 // app using v6 of the MS common controls library.
 // http://qtcreator.blogspot.it/2009/10/xp-style-common-dialogs.html
-1                        24     DISCARDABLE     "valentina.manifest"
+1                        24     DISCARDABLE     "valentina.exe.manifest"
+
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "valentina.exe.manifest"
 
 #include <windows.h>
 #include "../../version.h"
@@ -13,6 +15,9 @@ IDI_ICON1               ICON    DISCARDABLE     "icon/64x64/icon64x64.ico"
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION
 PRODUCTVERSION  VER_PRODUCTVERSION
+FILEOS         	VOS__WINDOWS32
+FILETYPE       	VFT_APP
+FILESUBTYPE    	VFT2_UNKNOWN
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
@@ -33,6 +38,6 @@ BEGIN
 
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x409, 1252
+        VALUE "Translation", 0x409, 1200, 0x0405, 1200, 0x0407, 1200, 0x040C, 1200, 0x040D, 1200, 0x0413, 1200, 0x0419, 1200
     END
 END

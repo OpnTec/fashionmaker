@@ -38,6 +38,8 @@ extern const int DEBUG_VERSION;
 extern const QString APP_VERSION;
 extern const QString WARRANTY;
 
+// Don't forget change version number in manifest file.
+
 #define VER_FILEVERSION             0,2,2,0
 #define VER_FILEVERSION_STR         "0.2.2.0\0"
 
@@ -45,7 +47,7 @@ extern const QString WARRANTY;
 #define VER_PRODUCTVERSION_STR      "0.2\0"
 
 #define VER_COMPANYNAME_STR         "ValentinaTeam"
-#define VER_FILEDESCRIPTION_STR     "Valentina"
+#define VER_FILEDESCRIPTION_STR     "Patternmaking program."
 #define VER_INTERNALNAME_STR        "Valentina"
 #define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014 Valentina Team"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
