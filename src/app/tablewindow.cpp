@@ -245,12 +245,13 @@ void TableWindow::saveScene()
         return;
     }
 
-    // what if the users did not specify a suffix...?
+    // what if the user did not specify a suffix...?
+    QString suf = extByMessage.value(sf);
+    suf.replace(".", "");
     QFileInfo f( name );
-    if (f.suffix().isEmpty() && f.suffix() != "svg" && f.suffix() != "png" && f.suffix() != "pdf"
-        && f.suffix() != "eps" && f.suffix() != "ps")
+    if (f.suffix().isEmpty() || f.suffix() != suf)
     {
-        name += extByMessage[sf];
+        name += extByMessage.value(sf);
     }
 
     QBrush *brush = new QBrush();
@@ -281,7 +282,7 @@ void TableWindow::saveScene()
             PsFile(name);
             break;
         default:
-            qDebug() << "Bad file suffix"<<Q_FUNC_INFO;
+            qDebug() << "Bad file suffix. File name is "<<name<<Q_FUNC_INFO;
             break;
     }
     paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
