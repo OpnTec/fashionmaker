@@ -199,7 +199,7 @@ void DialogEndLine::ShowDialog(bool click)
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal radius = ((DefPointRadius/*mm*/ / 25.4) * VApplication::PrintDPI)*1.5;
+            qreal radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
             if (line.length() <= radius)
             {
                 return;

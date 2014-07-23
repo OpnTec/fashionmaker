@@ -144,19 +144,19 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double VApplication::toPixel(double unit) const
+double VApplication::toPixel(double val, const Unit &unit) const
 {
     double result = 0;
-    switch (_patternUnit)
+    switch (unit)
     {
     case Unit::Mm:
-        result = (unit / 25.4) * PrintDPI;
+        result = (val / 25.4) * PrintDPI;
         break;
     case Unit::Cm:
-        result = ((unit * 10.0) / 25.4) * PrintDPI;
+        result = ((val * 10.0) / 25.4) * PrintDPI;
         break;
     case Unit::Inch:
-        result = unit * PrintDPI;
+        result = val * PrintDPI;
         break;
     default:
         break;
@@ -165,10 +165,16 @@ double VApplication::toPixel(double unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double VApplication::fromPixel(double pix) const
+double VApplication::toPixel(double val) const
+{
+    return toPixel(val, _patternUnit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VApplication::fromPixel(double pix, const Unit &unit) const
 {
     double result = 0;
-    switch (_patternUnit)
+    switch (unit)
     {
     case Unit::Mm:
         result = (pix / PrintDPI) * 25.4;
@@ -183,6 +189,12 @@ double VApplication::fromPixel(double pix) const
         break;
     }
     return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VApplication::fromPixel(double pix) const
+{
+    return fromPixel(pix, _patternUnit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

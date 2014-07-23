@@ -49,7 +49,7 @@ VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
     point->setBrush(QBrush(Qt::NoBrush));
     point->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
 
-    const qreal radius = (DefPointRadius/*mm*/ / 25.4) * VApplication::PrintDPI;
+    const qreal radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
     rec.translate(-rec.center().x(), -rec.center().y());
     point->setRect(rec);

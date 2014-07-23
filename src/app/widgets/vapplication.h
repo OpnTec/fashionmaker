@@ -60,8 +60,12 @@ public:
     void               setPatternUnit(const Unit &patternUnit);
     MeasurementsType   patternType() const;
     void               setPatternType(const MeasurementsType &patternType);
-    double             toPixel(double unit) const;
+
+    double             toPixel(double val, const Unit &unit) const;
+    double             toPixel(double val) const;
+    double             fromPixel(double pix, const Unit &unit) const;
     double             fromPixel(double pix) const;
+
     static const qreal PrintDPI;
     QString            translationsPath() const;
     QString            pathToTables() const;

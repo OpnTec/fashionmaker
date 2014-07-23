@@ -51,7 +51,7 @@ TableWindow::TableWindow(QWidget *parent)
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
     //sceneRect = QRectF(0, 0, qApp->toPixel(203), qApp->toPixel(287));
-    sceneRect = QRectF(0, 0, qApp->toPixel(823), qApp->toPixel(1171));
+    sceneRect = QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm));
     tableScene = new QGraphicsScene(sceneRect);
     QBrush brush;
     brush.setStyle( Qt::SolidPattern );
@@ -206,7 +206,7 @@ void TableWindow::StopTable()
     delete listOutItems;
     listDetails.clear();
     //sceneRect = QRectF(0, 0, 230*resol/25.9, 327*resol/25.9);
-    sceneRect = QRectF(0, 0, qApp->toPixel(823), qApp->toPixel(1171));
+    sceneRect = QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm));
     emit closed();
 }
 
@@ -442,13 +442,13 @@ void TableWindow::GetNextDetail()
 void TableWindow::AddLength()
 {
     QRectF rect = tableScene->sceneRect();
-    rect.setHeight(rect.height()+qApp->toPixel(279));
+    rect.setHeight(rect.height()+qApp->toPixel(279, Unit::Mm));
     tableScene->setSceneRect(rect);
     rect = shadowPaper->rect();
-    rect.setHeight(rect.height()+qApp->toPixel(279));
+    rect.setHeight(rect.height()+qApp->toPixel(279, Unit::Mm));
     shadowPaper->setRect(rect);
     rect = paper->rect();
-    rect.setHeight(rect.height()+qApp->toPixel(279));
+    rect.setHeight(rect.height()+qApp->toPixel(279, Unit::Mm));
     paper->setRect(rect);
     ui->actionRemove->setEnabled(true);
     emit LengthChanged();
@@ -463,13 +463,13 @@ void TableWindow::RemoveLength()
     if (sceneRect.height() <= tableScene->sceneRect().height() - 100)
     {
         QRectF rect = tableScene->sceneRect();
-        rect.setHeight(rect.height()-qApp->toPixel(279));
+        rect.setHeight(rect.height()-qApp->toPixel(279, Unit::Mm));
         tableScene->setSceneRect(rect);
         rect = shadowPaper->rect();
-        rect.setHeight(rect.height()-qApp->toPixel(279));
+        rect.setHeight(rect.height()-qApp->toPixel(279, Unit::Mm));
         shadowPaper->setRect(rect);
         rect = paper->rect();
-        rect.setHeight(rect.height()-qApp->toPixel(279));
+        rect.setHeight(rect.height()-qApp->toPixel(279, Unit::Mm));
         paper->setRect(rect);
         if (fabs(sceneRect.height() - tableScene->sceneRect().height()) < 0.01)
         {
@@ -561,7 +561,7 @@ void TableWindow::PdfFile(const QString &name) const
     qreal x=0, y=0, w=0, h=0;
     r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
     printer.setResolution(static_cast<int>(qApp->PrintDPI));
-    printer.setPaperSize ( QSizeF(qApp->fromPixel(w), qApp->fromPixel(h)), QPrinter::Millimeter );
+    printer.setPaperSize ( QSizeF(qApp->fromPixel(w, Unit::Mm), qApp->fromPixel(h, Unit::Mm)), QPrinter::Millimeter );
     QPainter painter;
     if (painter.begin( &printer ) == false)
     { // failed to open file
