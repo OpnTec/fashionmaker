@@ -106,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
+    connect(doc, &VPattern::CheckLayout, this, &MainWindow::Layout);
 
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
 
@@ -1355,7 +1356,6 @@ void MainWindow::ActionDraw(bool checked)
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
 
         ui->actionHistory->setEnabled(true);
-        ui->actionLayout->setEnabled(false);
         ui->actionOptionDraw->setEnabled(true);
         ui->actionNewDraw->setEnabled(true);
     }
@@ -1394,7 +1394,6 @@ void MainWindow::ActionDetails(bool checked)
         ui->toolBox->setCurrentIndex(4);
 
         ui->actionHistory->setEnabled(false);
-        ui->actionLayout->setEnabled(true);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
     }
@@ -1521,6 +1520,7 @@ void MainWindow::Clear()
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
+    Layout();
 }
 
 void MainWindow::FullParseFile()
@@ -1672,6 +1672,20 @@ void MainWindow::SetEnabledGUI(bool enabled)
 void MainWindow::ClickEndVisualization()
 {
     EndVisualization(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::Layout()
+{
+    const QHash<quint32, VDetail> *details = pattern->DataDetails();
+    if (details->size() > 0)
+    {
+        ui->actionLayout->setEnabled(true);
+    }
+    else
+    {
+        ui->actionLayout->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

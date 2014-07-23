@@ -676,6 +676,8 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
+    <addaction name="actionLayout"/>
+    <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -694,7 +696,6 @@
     <addaction name="actionNewDraw"/>
     <addaction name="actionOptionDraw"/>
     <addaction name="actionHistory"/>
-    <addaction name="actionLayout"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
     <addaction name="separator"/>
@@ -987,7 +988,7 @@
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
-    <string>Layout</string>
+    <string>Export pattern (layout)</string>
    </property>
    <property name="toolTip">
     <string>Create layout</string>

@@ -308,6 +308,7 @@ void VPattern::Parse(const Document &parse)
         }
         domNode = domNode.nextSibling();
     }
+    emit CheckLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

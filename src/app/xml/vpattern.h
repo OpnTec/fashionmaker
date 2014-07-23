@@ -150,6 +150,7 @@ signals:
     void           ClearMainWindow();
     void           UndoCommand();
     void           SetEnabledGUI(bool enabled);
+    void           CheckLayout();
 public slots:
     void           LiteParseTree();
     void           haveLiteChange();

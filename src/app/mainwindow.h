@@ -145,6 +145,7 @@ public slots:
     void               FullParseFile();
     void               SetEnabledGUI(bool enabled);
     void               ClickEndVisualization();
+    void               Layout();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
