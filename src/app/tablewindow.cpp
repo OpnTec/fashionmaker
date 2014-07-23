@@ -33,6 +33,12 @@
 #include <QPrinter>
 #include "widgets/vapplication.h"
 
+#ifdef Q_OS_WIN
+#   define PDFTOPS "pdftops.exe"
+#else
+#   define PDFTOPS "pdftops"
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief TableWindow constructor.
@@ -220,8 +226,18 @@ void TableWindow::saveScene()
     extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
     extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
     extByMessage[ tr("Images (*.png)") ] = ".png";
-    extByMessage[ tr("PS files (*.ps)") ] = ".ps";
-    extByMessage[ tr("EPS files (*.eps)") ] = ".eps";
+
+    QProcess proc;
+    proc.start(PDFTOPS);
+    if (proc.waitForFinished(15000))
+    {
+        extByMessage[ tr("PS files (*.ps)") ] = ".ps";
+        extByMessage[ tr("EPS files (*.eps)") ] = ".eps";
+    }
+    else
+    {
+        qWarning()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
+    }
 
     QString saveMessage;
     QMapIterator<QString, QString> i(extByMessage);
@@ -282,7 +298,7 @@ void TableWindow::saveScene()
             PsFile(name);
             break;
         default:
-            qDebug() << "Bad file suffix. File name is "<<name<<Q_FUNC_INFO;
+            qDebug() << "Can't recognize file suffix. File file "<<name<<Q_FUNC_INFO;
             break;
     }
     paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
@@ -621,11 +637,7 @@ void TableWindow::PdfToPs(const QStringList &params) const
     QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
     QProcess proc;
-#ifdef Q_OS_WIN
-    proc.start("pdftops.exe", params);
-#else
-    proc.start("pdftops", params);
-#endif
+    proc.start(PDFTOPS, params);
     proc.waitForFinished(15000);
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
