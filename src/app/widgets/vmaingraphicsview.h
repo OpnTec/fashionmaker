@@ -46,6 +46,12 @@ signals:
      * @param factor scene scale factor.
      */
     void     NewFactor(qreal factor);
+    /**
+     * @brief MouseRelease help catch mouse release event.
+     *
+     * Usefull when you need show dialog after working with tool visualization.
+     */
+    void         MouseRelease();
 public slots:
     void     scalingTime(qreal x);
     void     scrollingTime(qreal x);

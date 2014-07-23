@@ -144,6 +144,7 @@ public slots:
     void               EditPatternCode();
     void               FullParseFile();
     void               SetEnabledGUI(bool enabled);
+    void               ClickEndVisualization();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -152,9 +153,9 @@ signals:
      */
     void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile, const QString &description);
 protected:
-    virtual void       keyPressEvent ( QKeyEvent * event );
-    virtual void       showEvent( QShowEvent *event );
-    virtual void       closeEvent( QCloseEvent * event );
+    virtual void       keyPressEvent(QKeyEvent *event);
+    virtual void       showEvent(QShowEvent *event);
+    virtual void       closeEvent(QCloseEvent *event);
     virtual void       customEvent(QEvent * event);
 private:
     Q_DISABLE_COPY(MainWindow)
@@ -259,6 +260,10 @@ private:
     template <typename Func>
     void               SetGradationList(const QString &label, const QStringList &list, Func changeSlot);
     void               ChangePP(int index , bool zoomBestFit = true);
+    /**
+     * @brief EndVisualization try show dialog after and working with tool visualization.
+     */
+    void               EndVisualization(bool click = false);
 };
 
 #endif // MAINWINDOW_H

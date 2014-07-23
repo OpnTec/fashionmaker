@@ -668,6 +668,9 @@ bool VPattern::SaveDocument(const QString &fileName)
  */
 void VPattern::LiteParseTree()
 {
+    // Save name current pattern piece
+    QString namePP = nameActivPP;
+
     try
     {
         emit SetEnabledGUI(true);
@@ -725,6 +728,8 @@ void VPattern::LiteParseTree()
         return;
     }
 
+    // Restore name current pattern piece
+    nameActivPP = namePP;
     setCurrentData();
     emit FullUpdateFromFile();
 }

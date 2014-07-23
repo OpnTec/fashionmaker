@@ -183,7 +183,7 @@ void VToolEndLine::FullUpdateFromFile()
         typeLine = domElement.attribute(AttrTypeLine, "");
         formula = domElement.attribute(AttrLength, "");
         basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
-        angle = domElement.attribute(AttrAngle, "").toInt();
+        angle = domElement.attribute(AttrAngle, "").toDouble();
     }
     RefreshGeometry();
 }

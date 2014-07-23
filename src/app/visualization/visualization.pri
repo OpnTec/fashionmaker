@@ -4,7 +4,8 @@ HEADERS += \
     visualization/vsimplesplinepath.h \
     visualization/vsimplecurve.h \
     visualization/visline.h \
-    visualization/vistoolline.h
+    visualization/vistoolline.h \
+    visualization/vistoolendline.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
@@ -12,4 +13,5 @@ SOURCES += \
     visualization/vsimplesplinepath.cpp \
     visualization/vsimplecurve.cpp \
     visualization/visline.cpp \
-    visualization/vistoolline.cpp
+    visualization/vistoolline.cpp \
+    visualization/vistoolendline.cpp

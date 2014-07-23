@@ -84,7 +84,7 @@ private:
 
     /** @brief typeLine type of line */
     QString        typeLine;
-    VisToolLine *line;
+    VisToolLine    *line;
     /**
      * @brief SaveData Put dialog data in local variables
      */

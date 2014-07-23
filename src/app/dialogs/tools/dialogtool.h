@@ -57,8 +57,9 @@ class DialogTool : public QDialog
 public:
     DialogTool(const VContainer *data, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
-    VAbstractTool* GetAssociatedTool();
-    void SetAssociatedTool(VAbstractTool* tool);
+    VAbstractTool*   GetAssociatedTool();
+    void             SetAssociatedTool(VAbstractTool* tool);
+    virtual void     ShowDialog(bool click);
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -75,6 +76,7 @@ signals:
      */
     void             ToolTip(const QString &toolTip);
 public slots:
+    void             ShowVisToolTip(const QString &toolTip);
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     void             NamePointChanged();
     virtual void     DialogAccepted();
@@ -108,6 +110,7 @@ public slots:
     virtual void     ValChenged(int row);
     virtual void     UpdateList();
     virtual void     PointNameChanged(){}
+
 protected:
     Q_DISABLE_COPY(DialogTool)
 

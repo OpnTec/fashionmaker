@@ -31,6 +31,9 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistoolendline.h"
+#include "../../widgets/vmaingraphicsscene.h"
+#include "../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,7 +43,7 @@
  */
 DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()), formula(QString()),
-      angle(0), basePointId(0), formulaBaseHeight(0)
+      angle(0), basePointId(0), formulaBaseHeight(0), line(nullptr), prepare(false)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -64,6 +67,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEndLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEndLine::DeployFormulaTextEdit);
+
+    line = new VisToolEndLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,13 +91,25 @@ void DialogEndLine::DeployFormulaTextEdit()
  */
 void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        ChangeCurrentText(ui->comboBoxBasePoint, point->name());
-        emit ToolTip("");
-        this->setModal(true);
-        this->show();
+        if (type == SceneObject::Point)
+        {
+            const VPointF *point = data->GeometricObject<const VPointF *>(id);
+            basePointId = id;
+            ChangeCurrentText(ui->comboBoxBasePoint, point->name());
+
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            SCASSERT(scene != nullptr);
+            scene->addItem(line);
+            line->VisualMode(id, scene->getScenePos());
+            connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolEndLine::SetFactor);
+            connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolEndLine::MousePos);
+            connect(line, &VisToolEndLine::ToolTip, this, &DialogTool::ShowVisToolTip);
+
+            emit ToolTip("");
+            prepare = true;
+        }
     }
 }
 
@@ -116,6 +133,7 @@ void DialogEndLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,6 +151,7 @@ void DialogEndLine::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+    line->setLength(data, formula);
     //QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     //cursor.insertText(value);
     //ui->plainTextEditFormula->setCursor(cursor);
@@ -147,6 +166,7 @@ void DialogEndLine::setAngle(const qreal &value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
+    line->setAngle(angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,6 +178,52 @@ void DialogEndLine::setAngle(const qreal &value)
 void DialogEndLine::setBasePointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
+    line->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief DialogEndLine::ShowDialog show dialog after finish working with visual part
+ * @param click true if need show dialog after click mouse
+ */
+void DialogEndLine::ShowDialog(bool click)
+{
+    if (prepare)
+    {
+        if (click)
+        {
+            /*We will ignore click if poinet is in point circle*/
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            SCASSERT(scene != nullptr);
+            const VPointF *point = data->GeometricObject<const VPointF *>(basePointId);
+            QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
+
+            //Radius of point circle, but little bigger. Need handle with hover sizes.
+            qreal radius = ((DefPointRadius/*mm*/ / 25.4) * VApplication::PrintDPI)*1.5;
+            if (line.length() <= radius)
+            {
+                return;
+            }
+        }
+        this->setModal(true);
+        this->setAngle(line->Angle());//Show in dialog angle what user choose
+        line->setColor(Qt::red);//Now linw will be red
+        emit ToolTip("");
+        this->show();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        //TODO move to parent class!
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolEndLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,10 +251,17 @@ void DialogEndLine::SaveData()
     formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
+
+    line->setPoint1Id(basePointId);
+    line->setLength(data, formula);
+    line->setAngle(angle);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::~DialogEndLine()
 {
+    delete line;
     delete ui;
 }

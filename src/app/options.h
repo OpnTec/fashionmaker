@@ -38,6 +38,7 @@
 class QString;
 
 #define SceneSize 50000
+#define DefPointRadius 2.0//mm
 
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail };
 enum class Tool : char

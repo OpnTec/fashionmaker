@@ -302,6 +302,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+        connect(view, &VMainGraphicsView::MouseRelease, this, &MainWindow::ClickEndVisualization);
     }
     else
     {
@@ -377,6 +378,7 @@ void MainWindow::ApplyDialog()
     else
     { // Or update associated tool with data
         VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        SCASSERT(vtool != nullptr);
         vtool->FullUpdateFromGuiApply();
     }
 }
@@ -1284,6 +1286,12 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
         case Qt::Key_Escape:
             ArrowTool();
             break;
+        case Qt::Key_Return:
+            EndVisualization();
+            break;
+        case Qt::Key_Enter:
+            EndVisualization();
+            break;
         default:
             break;
     }
@@ -1658,6 +1666,12 @@ void MainWindow::SetEnabledGUI(bool enabled)
         QApplication::setOverrideCursor(Qt::ArrowCursor);
     #endif
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClickEndVisualization()
+{
+    EndVisualization(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2329,5 +2343,14 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
                 view->NewFactor(view->transform().m11());
             }
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::EndVisualization(bool click)
+{
+    if (dialogTool != nullptr)
+    {
+        dialogTool->ShowDialog(click);
     }
 }

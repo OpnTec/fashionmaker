@@ -45,6 +45,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    this->setInteractive(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -192,13 +193,12 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
         {
             case Qt::ControlModifier:
                 QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
-                QGraphicsView::mousePressEvent(mousePress);
                 break;
             default:
-                QGraphicsView::mousePressEvent(mousePress);
                 break;
         }
     }
+    QGraphicsView::mousePressEvent(mousePress);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,4 +210,8 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event );
     QGraphicsView::setDragMode( QGraphicsView::RubberBandDrag );
+    if (event->button() == Qt::LeftButton)
+    {
+        emit MouseRelease();
+    }
 }

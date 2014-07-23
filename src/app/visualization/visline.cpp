@@ -34,7 +34,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
     :QObject(), QGraphicsLineItem(parent), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
-      color(Qt::red), lineStyle(Qt::SolidLine)
+      color(Qt::red), lineStyle(Qt::SolidLine), point1Id(0), toolTip(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,6 +52,7 @@ void VisLine::SetFactor(qreal factor)
 void VisLine::setLineStyle(const Qt::PenStyle &value)
 {
     lineStyle = value;
+    this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,4 +60,33 @@ void VisLine::MousePos(const QPointF &scenePos)
 {
     this->scenePos = scenePos;
     RefreshGeometry();
+    emit ToolTip(toolTip);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::setColor(const QColor &value)
+{
+    color = value;
+    this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::setScenePos(const QPointF &value)
+{
+    scenePos = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::VisualMode(const quint32 &pointId, const QPointF &scenePos)
+{
+    this->color = Qt::black;
+    this->point1Id = pointId;
+    this->scenePos = scenePos;
+    RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::setPoint1Id(const quint32 &value)
+{
+    point1Id = value;
 }

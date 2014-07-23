@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   visline.h
+ **  @file   vistoolendline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   21 7, 2014
  **
@@ -26,43 +26,31 @@
  **
  *************************************************************************/
 
-#ifndef VISLINE_H
-#define VISLINE_H
+#ifndef VISTOOLENDLINE_H
+#define VISTOOLENDLINE_H
 
-#include <QObject>
-#include <QGraphicsLineItem>
-#include <QPointF>
+#include "visline.h"
 
-class VContainer;
+class QGraphicsEllipseItem;
 
-class VisLine: public QObject, public QGraphicsLineItem
+class VisToolEndLine : public VisLine
 {
     Q_OBJECT
 public:
-    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine();
+    VisToolEndLine(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolEndLine();
 
-    void         setPoint1Id(const quint32 &value);
-    void         setLineStyle(const Qt::PenStyle &value);
-    virtual void RefreshGeometry()=0;
-    void         setScenePos(const QPointF &value);
+    virtual void RefreshGeometry();
     void         VisualMode(const quint32 &pointId, const QPointF &scenePos);
-    void         setColor(const QColor &value);
-signals:
-    void         ToolTip(const QString &toolTip);
-public slots:
-    void         SetFactor(qreal factor);
-    void         MousePos(const QPointF &scenePos);
-protected:
-    const VContainer *data;
-    qreal            factor;
-    QPointF          scenePos;
-    QColor           color;
-    Qt::PenStyle     lineStyle;
-    quint32          point1Id;
-    QString          toolTip;
+    qreal        Angle() const;
+    void         setAngle(const qreal &value);
+    void         setLength(const VContainer *data, const QString &expression);
 private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY(VisToolEndLine)
+    qreal        CorrectAngle(const qreal &angle) const;
+    qreal                length;
+    qreal                angle;
+    QGraphicsEllipseItem *point;
 };
 
-#endif // VISLINE_H
+#endif // VISTOOLENDLINE_H

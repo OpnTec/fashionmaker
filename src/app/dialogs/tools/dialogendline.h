@@ -36,6 +36,8 @@ namespace Ui
     class DialogEndLine;
 }
 
+class VisToolEndLine;
+
 /**
  * @brief The DialogEndLine class dialog for ToolEndLine. Help create point and edit option.
  */
@@ -60,6 +62,7 @@ public:
 
     quint32           getBasePointId() const;
     void              setBasePointId(const quint32 &value, const quint32 &id);
+    virtual void      ShowDialog(bool click);
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type);
     virtual void      DialogAccepted();
@@ -75,6 +78,8 @@ public slots:
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
     void FormulaTextChanged();
+protected:
+    virtual void   ShowVisualization();
 private:
     Q_DISABLE_COPY(DialogEndLine)
 
@@ -94,9 +99,15 @@ private:
     qreal             angle;
 
     /** @brief basePointId id base point of line */
-    quint32            basePointId;
+    quint32           basePointId;
+
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
+
+    VisToolEndLine    *line;
+
+    /** @brief prepare show if we prepare show dialog after finish working with visual part of tool*/
+    bool              prepare;
 
     /**
      * @brief SaveData Put dialog data in local variables

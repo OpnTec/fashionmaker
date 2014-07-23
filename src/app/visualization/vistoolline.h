@@ -36,17 +36,13 @@ class VisToolLine : public VisLine
     Q_OBJECT
 public:
     VisToolLine(const VContainer *data, QGraphicsItem *parent = 0);
-    VisToolLine(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
-                      QGraphicsItem * parent = 0);
     virtual ~VisToolLine();
 
-    void         setPoint1Id(const quint32 &value);
-    void         setPoint2Id(const quint32 &value);
     virtual void RefreshGeometry();
+    void         setPoint2Id(const quint32 &value);
 private:
     Q_DISABLE_COPY(VisToolLine)
-    quint32          point1Id;
-    quint32          point2Id;
+    quint32      point2Id;
 };
 
 #endif // VGRAPHICSLINEITEM_H

@@ -34,36 +34,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), point1Id(0), point2Id(0)
+    :VisLine(data, parent), point2Id(0)
 {
     this->color = Qt::red;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolLine::VisToolLine(const VContainer *data, const quint32 &pointId, const QPointF &scenePos,
-                                     QGraphicsItem *parent)
-    :VisLine(data, parent), point1Id(pointId), point2Id(0)
-{
-    this->color = Qt::black;
-    this->scenePos = scenePos;
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 VisToolLine::~VisToolLine()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolLine::setPoint2Id(const quint32 &value)
-{
-    point2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolLine::setPoint1Id(const quint32 &value)
-{
-    point1Id = value;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLine::RefreshGeometry()
@@ -79,4 +57,10 @@ void VisToolLine::RefreshGeometry()
         this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     }
     this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolLine::setPoint2Id(const quint32 &value)
+{
+    point2Id = value;
 }

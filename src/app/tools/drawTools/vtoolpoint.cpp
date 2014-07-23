@@ -33,8 +33,6 @@
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 
-#define DefRadius 2.0//mm
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolPoint constructor.
@@ -44,9 +42,9 @@ const QString VToolPoint::TagName = QStringLiteral("point");
  * @param parent parent object.
  */
 VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
-    QGraphicsEllipseItem(parent), radius(DefRadius), namePoint(0), lineName(0)
+    QGraphicsEllipseItem(parent), radius(DefPointRadius), namePoint(0), lineName(0)
 {
-    radius = (DefRadius/*mm*/ / 25.4) * VApplication::PrintDPI;
+    radius = (DefPointRadius/*mm*/ / 25.4) * VApplication::PrintDPI;
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     namePoint->setBrush(Qt::black);

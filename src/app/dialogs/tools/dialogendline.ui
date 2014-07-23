@@ -319,8 +319,14 @@
              <property name="sizeConstraint">
               <enum>QLayout::SetMinimumSize</enum>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
              <property name="horizontalSpacing">
-              <number>29</number>
+              <number>28</number>
              </property>
              <property name="verticalSpacing">
               <number>6</number>
@@ -393,7 +399,7 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="0" column="1" alignment="Qt::AlignHCenter">
               <widget class="QToolButton" name="toolButtonArrowUp">
                <property name="minimumSize">
                 <size>
@@ -416,7 +422,7 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="2" column="1" alignment="Qt::AlignHCenter">
               <widget class="QToolButton" name="toolButtonArrowDown">
                <property name="text">
                 <string>...</string>
@@ -467,17 +473,17 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
+             <item row="1" column="1" alignment="Qt::AlignHCenter">
               <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>57</width>
+                 <width>72</width>
                  <height>0</height>
                 </size>
                </property>
@@ -485,6 +491,9 @@
                 <string>Angle of line</string>
                </property>
                <property name="maximum">
+                <double>360.000000000000000</double>
+               </property>
+               <property name="value">
                 <double>360.000000000000000</double>
                </property>
               </widget>

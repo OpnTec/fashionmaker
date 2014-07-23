@@ -118,8 +118,6 @@ void DialogLine::DialogAccepted()
 void DialogLine::DialogApply()
 {
     this->SaveData();
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
-    line->RefreshGeometry();
     emit DialogApplied();
 }
 
@@ -168,6 +166,11 @@ void DialogLine::SaveData()
     index = ui->comboBoxSecondPoint->currentIndex();
     secondPoint = qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(index));
     typeLine = GetTypeLine(ui->comboBoxLineType);
+
+    line->setPoint1Id(firstPoint);
+    line->setPoint2Id(secondPoint);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,7 +191,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
             { // -1 for not found
 
                 VMainGraphicsScene *scene = qApp->getCurrentScene();
-                line = new VisToolLine(data, id, scene->getScenePos());
+                line->VisualMode(id, scene->getScenePos());
                 scene->addItem(line);
                 connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
                 connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolLine::MousePos);
