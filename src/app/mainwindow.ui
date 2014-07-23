@@ -47,7 +47,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>144</width>
+         <width>150</width>
          <height>150</height>
         </rect>
        </property>
@@ -302,7 +302,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -378,7 +378,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>104</height>
         </rect>
        </property>
@@ -579,7 +579,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>150</width>
          <height>58</height>
         </rect>
        </property>
@@ -1002,11 +1002,19 @@
    </property>
   </action>
   <action name="actionAbout_Valentina">
+   <property name="icon">
+    <iconset theme="help-about"/>
+   </property>
    <property name="text">
     <string>&amp;About Valentina</string>
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit">
+     <normaloff/>
+    </iconset>
+   </property>
    <property name="text">
     <string>E&amp;xit</string>
    </property>
@@ -1069,7 +1077,9 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-original"/>
+    <iconset theme="zoom-original">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>ZoomOriginal</string>
@@ -1080,7 +1090,9 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-fit-best"/>
+    <iconset theme="zoom-fit-best">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>ZoomFitBest</string>
