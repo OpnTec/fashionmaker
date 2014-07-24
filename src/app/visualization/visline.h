@@ -64,6 +64,13 @@ protected:
     QString          toolTip;
     QRectF       PointRect();
     qreal        FindLength(const QString &expression);
+    void         DrawLine(QGraphicsLineItem    *lineItem, const QLineF &line, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine);
+    void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color);
+    QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
+
+    QGraphicsEllipseItem *InitPoint(const QColor &color);
+    QGraphicsLineItem    *InitLine(const QColor &color);
 private:
     Q_DISABLE_COPY(VisLine)
 };

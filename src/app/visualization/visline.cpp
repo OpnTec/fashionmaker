@@ -112,6 +112,55 @@ qreal VisLine::FindLength(const QString &expression)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VisLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+{
+    SCASSERT (lineItem != nullptr);
+
+    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
+    lineItem->setLine(line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color)
+{
+    SCASSERT (point != nullptr);
+
+    point->setPos(pos);
+    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VisLine::Line(const QPointF &p1, const qreal &length, const qreal &angle)
+{
+    QLineF line = QLineF();
+    line.setP1(p1);
+    line.setLength(length);
+    line.setAngle(angle);
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsEllipseItem *VisLine::InitPoint(const QColor &color)
+{
+    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(this);
+    point->setZValue(1);
+    point->setBrush(QBrush(Qt::NoBrush));
+    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
+    point->setRect(PointRect());
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsLineItem *VisLine::InitLine(const QColor &color)
+{
+    QGraphicsLineItem *line = new QGraphicsLineItem(this);
+    line->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+    line->setZValue(1);
+    line->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VisLine::setMainColor(const QColor &value)
 {
     mainColor = value;

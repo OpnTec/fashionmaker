@@ -47,10 +47,11 @@ public:
     void         setLength(const QString &expression);
 private:
     Q_DISABLE_COPY(VisToolEndLine)
-    qreal        CorrectAngle(const qreal &angle) const;
     qreal                length;
     qreal                angle;
     QGraphicsEllipseItem *point;
+    qreal        CorrectAngle(const qreal &angle) const;
+    QPointF      CorrectRay(const QPointF &firstPoint) const;
 };
 
 #endif // VISTOOLENDLINE_H

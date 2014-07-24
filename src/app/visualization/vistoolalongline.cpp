@@ -40,13 +40,7 @@ VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent
 
     lineP1 = InitPoint(supportColor);
     lineP2 = InitPoint(supportColor);
-
-    line = new QGraphicsLineItem(this);
-    line->setVisible(false);
-    line->setPen(QPen(supportColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    line->setZValue(1);
-    line->setFlags(QGraphicsItem::ItemStacksBehindParent);
-
+    line = InitLine(supportColor);
     point = InitPoint(mainColor);
 }
 
@@ -64,39 +58,6 @@ void VisToolAlongLine::setPoint2Id(const quint32 &value)
 void VisToolAlongLine::setLength(const QString &expression)
 {
     length = FindLength(expression);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolAlongLine::InitPoint(const QColor &color)
-{
-    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(this);
-    point->setVisible(false);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
-    point->setRect(PointRect());
-    return point;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
-                                Qt::PenStyle style)
-{
-    SCASSERT (lineItem != nullptr);
-
-    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
-    lineItem->setLine(line);
-    lineItem->setVisible(true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color)
-{
-    SCASSERT (point != nullptr);
-
-    point->setPos(pos);
-    point->setVisible(true);
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,11 +82,7 @@ void VisToolAlongLine::RefreshGeometry()
 
             if (qFuzzyCompare(1 + length, 1 + 0) == false)
             {
-                QLineF mainLine = QLineF();
-                mainLine.setP1(first->toQPointF());
-                mainLine.setAngle(line->line().angle());
-                mainLine.setLength(length);
-
+                QLineF mainLine = Line(first->toQPointF(), length, line->line().angle());
                 DrawLine(this, mainLine, mainColor, lineStyle);
 
                 DrawPoint(point, mainLine.p2(), mainColor);

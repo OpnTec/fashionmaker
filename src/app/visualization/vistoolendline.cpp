@@ -41,12 +41,7 @@ VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
 {
     this->mainColor = Qt::red;
 
-    point = new QGraphicsEllipseItem(this);
-    point->setVisible(false);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    point->setRect(PointRect());
+    point = InitPoint(mainColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,42 +52,26 @@ VisToolEndLine::~VisToolEndLine()
 void VisToolEndLine::RefreshGeometry()
 {
     const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
     QLineF line;
     if (qFuzzyCompare(1 + length, 1 + 0))
     {
-        QGraphicsScene *sc = this->scene();
         QPointF second;
-        if(sc == nullptr)
+        if(this->scene() == nullptr)
         {
             second = scenePos;
         }
         else
         {
-            line =  QLineF(first->toQPointF(), scenePos);
-            QRectF scRect = sc->sceneRect();
-            qreal diagonal = sqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
-            line.setLength(diagonal);
-            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
-            {
-                line.setAngle(CorrectAngle(line.angle()));
-            }
-            second = VAbstractTool::LineIntersectRect(scRect, line);
+            second = CorrectRay(first->toQPointF());
         }
         line = QLineF(first->toQPointF(), second);
     }
     else
     {
-        line = QLineF();
-        line.setP1(first->toQPointF());
-        line.setLength(length);
-        line.setAngle(angle);
-
-        point->setPos(line.p2());
-        point->setVisible(true);
-        point->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor));
+        line = Line(first->toQPointF(), length, angle);
+        DrawPoint(point, line.p2(), mainColor);
     }
-    this->setLine(line);
+    DrawLine(this, line, mainColor, lineStyle);
     toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°; <b>Shift</b> - sticking angle, "
                          "<b>Enter</b> - finish creation")).arg(this->line().angle());
 }
@@ -143,6 +122,19 @@ qreal VisToolEndLine::CorrectAngle(const qreal &angle) const
         default: // <360
             return 0;
     }
+}
+
+QPointF VisToolEndLine::CorrectRay(const QPointF &firstPoint) const
+{
+    QLineF line =  QLineF(firstPoint, scenePos);
+    QRectF scRect = this->scene()->sceneRect();
+    qreal diagonal = sqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
+    line.setLength(diagonal);
+    if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+    {
+        line.setAngle(CorrectAngle(line.angle()));
+    }
+    return VAbstractTool::LineIntersectRect(scRect, line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

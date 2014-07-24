@@ -46,17 +46,18 @@ VisToolLine::~VisToolLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLine::RefreshGeometry()
 {
+    QLineF line;
     const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
     if (point2Id == 0)
     {
-        this->setLine(QLineF(first->toQPointF(), scenePos));
+        line = QLineF(first->toQPointF(), scenePos);
     }
     else
     {
         const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
-        this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
+        line = QLineF(first->toQPointF(), second->toQPointF());
     }
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    DrawLine(this, line, mainColor, lineStyle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

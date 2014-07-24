@@ -51,10 +51,6 @@ private:
     QGraphicsEllipseItem *lineP2;
     QGraphicsLineItem    *line;
     qreal                length;
-    QGraphicsEllipseItem *InitPoint(const QColor &mainColor);
-    void                 DrawLine(QGraphicsLineItem    *lineItem, const QLineF &line, const QColor &color,
-                                  Qt::PenStyle style = Qt::SolidLine);
-    void                 DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color);
 };
 
 #endif // VISTOOLALONGLINE_H
