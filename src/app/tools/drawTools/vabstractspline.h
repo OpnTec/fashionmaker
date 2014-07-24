@@ -39,6 +39,7 @@ class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 public:
     VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     static const QString TagName;
+    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 public slots:
     virtual void     FullUpdateFromFile ();
     void             Disable(bool disable);

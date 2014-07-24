@@ -45,6 +45,7 @@ public:
     VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     virtual ~VToolPoint(){}
     static const QString    TagName;
+    virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ChangedActivDraw(const QString &newName);

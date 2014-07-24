@@ -47,6 +47,7 @@ public:
                         const QString &typeLine, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                         const Document &parse, const Source &typeCreation);
     static const QString TagName;
+    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);
