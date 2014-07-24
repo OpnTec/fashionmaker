@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   visline.h
+ **  @file   vistoolalongline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   24 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,46 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef VISLINE_H
-#define VISLINE_H
+#ifndef VISTOOLALONGLINE_H
+#define VISTOOLALONGLINE_H
 
-#include <QObject>
-#include <QGraphicsLineItem>
-#include <QPointF>
+#include "visline.h"
 
 class VContainer;
 
-class VisLine: public QObject, public QGraphicsLineItem
+class VisToolAlongLine :public VisLine
 {
     Q_OBJECT
 public:
-    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine();
+    VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolAlongLine();
 
-    void         setPoint1Id(const quint32 &value);
-    void         setLineStyle(const Qt::PenStyle &value);
-    virtual void RefreshGeometry()=0;
-    void         setScenePos(const QPointF &value);
-    virtual void VisualMode(const quint32 &pointId, const QPointF &scenePos);
-    void         setMainColor(const QColor &value);
-signals:
-    void         ToolTip(const QString &toolTip);
-public slots:
-    void         SetFactor(qreal factor);
-    void         MousePos(const QPointF &scenePos);
-protected:
-    const VContainer *data;
-    qreal            factor;
-    QPointF          scenePos;
-    QColor           mainColor;
-    QColor           supportColor;
-    Qt::PenStyle     lineStyle;
-    quint32          point1Id;
-    QString          toolTip;
-    QRectF       PointRect();
-    qreal        FindLength(const QString &expression);
+    virtual void RefreshGeometry();
+    void         setPoint2Id(const quint32 &value);
+    void         setLength(const QString &expression);
 private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY(VisToolAlongLine)
+    quint32              point2Id;
+    QGraphicsEllipseItem *point;
+    QGraphicsEllipseItem *lineP1;
+    QGraphicsEllipseItem *lineP2;
+    QGraphicsLineItem    *line;
+    qreal                length;
+    QGraphicsEllipseItem *InitPoint(const QColor &mainColor);
+    void                 DrawLine(QGraphicsLineItem    *lineItem, const QLineF &line, const QColor &color,
+                                  Qt::PenStyle style = Qt::SolidLine);
+    void                 DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color);
 };
 
-#endif // VISLINE_H
+#endif // VISTOOLALONGLINE_H

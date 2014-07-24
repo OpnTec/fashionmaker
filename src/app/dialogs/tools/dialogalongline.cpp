@@ -28,6 +28,9 @@
 
 #include "dialogalongline.h"
 #include "ui_dialogalongline.h"
+#include "../../visualization/vistoolalongline.h"
+#include "../../tools/vabstracttool.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 #include <QPushButton>
 
@@ -39,7 +42,7 @@
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
     :DialogTool(data, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
+      formula(QString()), firstPointId(0), secondPointId(0), formulaBaseHeight(0), line(nullptr), prepare(false)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -67,6 +70,8 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, QWidget *parent)
             this, &DialogAlongLine::PointChanged);
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
+
+    line = new VisToolAlongLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,6 +100,18 @@ void DialogAlongLine::PointChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolAlongLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
@@ -103,6 +120,7 @@ void DialogAlongLine::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogAlongLine::~DialogAlongLine()
 {
+    delete line;
     delete ui;
 }
 
@@ -114,25 +132,39 @@ DialogAlongLine::~DialogAlongLine()
  */
 void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        if (number == 0)
+        if (type == SceneObject::Point)
         {
-            if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
+            if (number == 0)
             {
-                number++;
-                return;
-            }
-        }
-        if (number == 1)
-        {
-            if (ChoosedPoint(id, ui->comboBoxSecondPoint, ""))
-            {
-                number = 0;
-                if (isInitialized == false)
+                if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
                 {
-                    this->setModal(true);
-                    this->show();
+                    number++;
+                    VMainGraphicsScene *scene = qApp->getCurrentScene();
+                    SCASSERT(scene != nullptr);
+                    line->VisualMode(id, scene->getScenePos());
+                    scene->addItem(line);
+                    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolAlongLine::SetFactor);
+                    connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolAlongLine::MousePos);
+                    return;
+                }
+            }
+            if (number == 1)
+            {
+                if (ChoosedPoint(id, ui->comboBoxSecondPoint, ""))
+                {
+                    number = 0;
+                    if (isInitialized == false)
+                    {
+                        line->setPoint2Id(id);
+                        line->setMainColor(Qt::red);
+                        line->RefreshGeometry();
+
+                        prepare = true;
+                        this->setModal(true);
+                        this->show();
+                    }
                 }
             }
         }
@@ -164,6 +196,12 @@ void DialogAlongLine::SaveData()
     formula.replace("\n", " ");
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
+
+    line->setPoint1Id(firstPointId);
+    line->setPoint2Id(secondPointId);
+    line->setLength(formula);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,6 +213,7 @@ void DialogAlongLine::SaveData()
 void DialogAlongLine::setSecondPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -186,6 +225,7 @@ void DialogAlongLine::setSecondPointId(const quint32 &value, const quint32 &id)
 void DialogAlongLine::setFirstPointId(const quint32 &value, const quint32 &id)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,6 +242,7 @@ void DialogAlongLine::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+    line->setLength(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,6 +254,7 @@ void DialogAlongLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

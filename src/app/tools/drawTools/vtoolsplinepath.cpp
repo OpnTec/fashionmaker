@@ -42,7 +42,8 @@ const QString VToolSplinePath::ToolType = QStringLiteral("path");
  * @param parent parent object.
  */
 VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                 QGraphicsItem *parent) :VAbstractSpline(doc, data, id, parent)
+                                 QGraphicsItem *parent)
+    :VAbstractSpline(doc, data, id, parent)
 {
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
     QPainterPath path;

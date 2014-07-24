@@ -31,7 +31,6 @@
 #include "../container/vcontainer.h"
 #include "../widgets/vapplication.h"
 #include "../tools/vabstracttool.h"
-#include "../container/calculator.h"
 
 #include <QGraphicsScene>
 #include <QtMath>
@@ -40,19 +39,14 @@
 VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent), length(0), angle(0), point(nullptr)
 {
-    this->color = Qt::red;
-    this->setZValue(1);// Show on top real tool
+    this->mainColor = Qt::red;
 
     point = new QGraphicsEllipseItem(this);
     point->setVisible(false);
     point->setZValue(1);
     point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
-
-    const qreal radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
-    QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    point->setRect(rec);
+    point->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    point->setRect(PointRect());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,7 +57,7 @@ VisToolEndLine::~VisToolEndLine()
 void VisToolEndLine::RefreshGeometry()
 {
     const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
-    this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
     QLineF line;
     if (qFuzzyCompare(1 + length, 1 + 0))
     {
@@ -91,12 +85,12 @@ void VisToolEndLine::RefreshGeometry()
     {
         line = QLineF();
         line.setP1(first->toQPointF());
-        line.setLength(qApp->toPixel(length));
+        line.setLength(length);
         line.setAngle(angle);
 
         point->setPos(line.p2());
         point->setVisible(true);
-        point->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+        point->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor));
     }
     this->setLine(line);
     toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°; <b>Shift</b> - sticking angle, "
@@ -106,7 +100,7 @@ void VisToolEndLine::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::VisualMode(const quint32 &pointId, const QPointF &scenePos)
 {
-    this->color = Qt::black;
+    this->mainColor = Qt::black;
     this->point1Id = pointId;
     this->scenePos = scenePos;
     RefreshGeometry();
@@ -158,34 +152,7 @@ void VisToolEndLine::setAngle(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setLength(const VContainer *data, const QString &expression)
+void VisToolEndLine::setLength(const QString &expression)
 {
-    SCASSERT(data != nullptr);
-
-    if (expression.isEmpty())
-    {
-        length = 0;
-    }
-    else
-    {
-        try
-        {
-            // Replace line return with spaces for calc if exist
-            QString formula = expression;
-            formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);
-            Calculator *cal = new Calculator(data);
-            length = cal->EvalFormula(formula);
-            delete cal;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            length = 0;
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
-        }
-    }
+    length = FindLength(expression);
 }

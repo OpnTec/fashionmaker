@@ -36,7 +36,7 @@
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
     :VisLine(data, parent), point2Id(0)
 {
-    this->color = Qt::red;
+    this->mainColor = Qt::red;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ void VisToolLine::RefreshGeometry()
         const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
         this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     }
-    this->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

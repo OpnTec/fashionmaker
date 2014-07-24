@@ -151,7 +151,7 @@ void DialogEndLine::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
-    line->setLength(data, formula);
+    line->setLength(formula);
     //QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     //cursor.insertText(value);
     //ui->plainTextEditFormula->setCursor(cursor);
@@ -207,7 +207,7 @@ void DialogEndLine::ShowDialog(bool click)
         }
         this->setModal(true);
         this->setAngle(line->Angle());//Show in dialog angle what user choose
-        line->setColor(Qt::red);//Now linw will be red
+        line->setMainColor(Qt::red);//Now linw will be red
         emit ToolTip("");
         this->show();
     }
@@ -253,7 +253,7 @@ void DialogEndLine::SaveData()
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
 
     line->setPoint1Id(basePointId);
-    line->setLength(data, formula);
+    line->setLength(formula);
     line->setAngle(angle);
     line->setLineStyle(VAbstractTool::LineStyle(typeLine));
     line->RefreshGeometry();

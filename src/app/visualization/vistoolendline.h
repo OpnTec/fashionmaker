@@ -44,7 +44,7 @@ public:
     void         VisualMode(const quint32 &pointId, const QPointF &scenePos);
     qreal        Angle() const;
     void         setAngle(const qreal &value);
-    void         setLength(const VContainer *data, const QString &expression);
+    void         setLength(const QString &expression);
 private:
     Q_DISABLE_COPY(VisToolEndLine)
     qreal        CorrectAngle(const qreal &angle) const;

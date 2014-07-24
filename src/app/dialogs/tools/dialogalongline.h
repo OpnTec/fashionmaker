@@ -31,6 +31,8 @@
 
 #include "dialogtool.h"
 
+class VisToolAlongLine;
+
 namespace Ui
 {
     class DialogAlongLine;
@@ -75,6 +77,8 @@ public slots:
      */
     void                FormulaTextChanged();
     void                PointChanged();
+protected:
+    virtual void        ShowVisualization();
 private:
     Q_DISABLE_COPY(DialogAlongLine)
 
@@ -101,6 +105,9 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
+    VisToolAlongLine    *line;
+    /** @brief prepare show if we prepare show dialog after finish working with visual part of tool*/
+    bool                prepare;
 
     /**
      * @brief SaveData Put dialog data in local variables
