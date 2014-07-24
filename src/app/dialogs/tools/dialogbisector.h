@@ -36,6 +36,8 @@ namespace Ui
     class DialogBisector;
 }
 
+class VisToolBisector;
+
 /**
  * @brief The DialogBisector class dialog for ToolBisector. Help create point and edit option.
  */
@@ -80,6 +82,8 @@ public slots:
      */
     void               FormulaTextChanged();
     virtual void       PointNameChanged();
+protected:
+    virtual void       ShowVisualization();
 private:
     Q_DISABLE_COPY(DialogBisector)
 
@@ -109,6 +113,8 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                formulaBaseHeight;
+    VisToolBisector    *line;
+    bool               prepare;
 
     /**
      * @brief SaveData Put dialog data in local variables

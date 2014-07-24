@@ -72,8 +72,7 @@ void VisToolAlongLine::RefreshGeometry()
         {
             DrawLine(line, QLineF(first->toQPointF(), scenePos), supportColor);
         }
-
-        if (point2Id > 0)
+        else
         {
             const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(lineP2, second->toQPointF(), supportColor);

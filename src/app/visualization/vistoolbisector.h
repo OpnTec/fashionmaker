@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolendline.h
+ **  @file   vistoolbisector.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   24 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLENDLINE_H
-#define VISTOOLENDLINE_H
+#ifndef VISTOOLBISECTOR_H
+#define VISTOOLBISECTOR_H
 
 #include "visline.h"
 
-class QGraphicsEllipseItem;
-
-class VisToolEndLine : public VisLine
+class VisToolBisector :public VisLine
 {
     Q_OBJECT
 public:
-    VisToolEndLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolEndLine();
+    VisToolBisector(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolBisector();
 
     virtual void RefreshGeometry();
-    void         VisualMode(const quint32 &pointId, const QPointF &scenePos);
-    qreal        Angle() const;
-    void         setAngle(const qreal &value);
+    void         setPoint2Id(const quint32 &value);
+    void         setPoint3Id(const quint32 &value);
     void         setLength(const QString &expression);
 private:
-    Q_DISABLE_COPY(VisToolEndLine)
-    qreal                length;
-    qreal                angle;
+    Q_DISABLE_COPY(VisToolBisector)
+    quint32              point2Id;
+    quint32              point3Id;
     QGraphicsEllipseItem *point;
+    QGraphicsEllipseItem *line1P1;
+    QGraphicsEllipseItem *line1P2;
+    QGraphicsLineItem    *line1;
+    QGraphicsEllipseItem *line2P2;
+    QGraphicsLineItem    *line2;
+    qreal                length;
 };
 
-#endif // VISTOOLENDLINE_H
+#endif // VISTOOLBISECTOR_H

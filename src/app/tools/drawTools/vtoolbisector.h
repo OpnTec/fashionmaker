@@ -42,6 +42,7 @@ public:
     VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
                   const quint32 &firstPointId, const quint32 &secondPointId, const quint32 &thirdPointId,
                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
     virtual void   setDialog();

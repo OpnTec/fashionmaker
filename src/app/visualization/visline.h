@@ -71,6 +71,10 @@ protected:
 
     QGraphicsEllipseItem *InitPoint(const QColor &color);
     QGraphicsLineItem    *InitLine(const QColor &color);
+
+    qreal        CorrectAngle(const qreal &angle) const;
+    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
+    QPointF      Ray(const QPointF &firstPoint) const;
 private:
     Q_DISABLE_COPY(VisLine)
 };

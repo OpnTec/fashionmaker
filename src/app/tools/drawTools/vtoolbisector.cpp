@@ -66,6 +66,23 @@ VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VToolBisector::BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint)
+{
+    QLineF line1(secondPoint, firstPoint);
+    QLineF line2(secondPoint, thirdPoint);
+    qreal angle = line1.angleTo(line2);
+    if (angle>180)
+    {
+        angle = 360 - angle;
+        return line1.angle()-angle/2;
+    }
+    else
+    {
+        return line1.angle()+angle/2;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FindPoint find bisector point.
  * @param firstPoint first point of angle.
@@ -78,17 +95,7 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
                                  const QPointF &thirdPoint, const qreal &length)
 {
     QLineF line1(secondPoint, firstPoint);
-    QLineF line2(secondPoint, thirdPoint);
-    qreal angle = line1.angleTo(line2);
-    if (angle>180)
-    {
-        angle = 360 - angle;
-        line1.setAngle(line1.angle()-angle/2);
-    }
-    else
-    {
-        line1.setAngle(line1.angle()+angle/2);
-    }
+    line1.setAngle(BisectorAngle(firstPoint, secondPoint, thirdPoint));
     line1.setLength(length);
     return line1.p2();
 }

@@ -62,7 +62,7 @@ void VisToolEndLine::RefreshGeometry()
         }
         else
         {
-            second = CorrectRay(first->toQPointF());
+            second = Ray(first->toQPointF());
         }
         line = QLineF(first->toQPointF(), second);
     }
@@ -90,51 +90,6 @@ void VisToolEndLine::VisualMode(const quint32 &pointId, const QPointF &scenePos)
 qreal VisToolEndLine::Angle() const
 {
     return this->line().angle();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VisToolEndLine::CorrectAngle(const qreal &angle) const
-{
-    qreal ang = angle;
-    if (angle > 360)
-    {
-        ang = angle - 360 * qFloor(angle/360);
-    }
-
-    switch(qFloor((qAbs(ang)+22.5)/45))
-    {
-        case 0: // <22.5
-            return 0;
-        case 1: // <67.5
-            return 45;
-        case 2: // <112.5
-            return 90;
-        case 3: // <157.5
-            return 135;
-        case 4: // <202.5
-            return 180;
-        case 5: // <247.5
-            return 225;
-        case 6: // < 292.5
-            return 270;
-        case 7: // <337.5
-            return 315;
-        default: // <360
-            return 0;
-    }
-}
-
-QPointF VisToolEndLine::CorrectRay(const QPointF &firstPoint) const
-{
-    QLineF line =  QLineF(firstPoint, scenePos);
-    QRectF scRect = this->scene()->sceneRect();
-    qreal diagonal = sqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
-    line.setLength(diagonal);
-    if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
-    {
-        line.setAngle(CorrectAngle(line.angle()));
-    }
-    return VAbstractTool::LineIntersectRect(scRect, line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
