@@ -2028,7 +2028,7 @@ void MainWindow::WriteSettings()
  */
 bool MainWindow::MaybeSave()
 {
-    if (this->isWindowModified())
+    if (this->isWindowModified() && guiEnabled)
     {
         QMessageBox::StandardButton ret;
         ret = QMessageBox::warning(this, tr("Unsaved change"), tr("The pattern has been modified.\n"
