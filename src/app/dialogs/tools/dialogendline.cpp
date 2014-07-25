@@ -207,7 +207,6 @@ void DialogEndLine::ShowDialog(bool click)
         }
         this->setModal(true);
         this->setAngle(line->Angle());//Show in dialog angle what user choose
-        line->setMainColor(Qt::red);//Now linw will be red
         emit ToolTip("");
         this->show();
     }

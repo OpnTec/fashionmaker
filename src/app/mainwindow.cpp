@@ -481,7 +481,7 @@ void MainWindow::ClosedDialogAlongLine(int result)
 void MainWindow::ToolShoulderPoint(bool checked)
 {
     SetToolButtonWithApply<DialogShoulderPoint>(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogShoulderPoint,
+                  tr("Select point of shoulder"), &MainWindow::ClosedDialogShoulderPoint,
                   &MainWindow::ApplyDialogShoulderPoint);
 }
 

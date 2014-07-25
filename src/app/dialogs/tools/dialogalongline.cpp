@@ -158,7 +158,6 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                     if (isInitialized == false)
                     {
                         line->setPoint2Id(id);
-                        line->setMainColor(Qt::red);
                         line->RefreshGeometry();
 
                         prepare = true;

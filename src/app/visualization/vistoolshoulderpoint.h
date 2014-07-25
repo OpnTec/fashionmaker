@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolendline.h
+ **  @file   vistoolshoulderpoint.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   25 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,29 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLENDLINE_H
-#define VISTOOLENDLINE_H
+#ifndef VISTOOLSHOULDERPOINT_H
+#define VISTOOLSHOULDERPOINT_H
 
 #include "visline.h"
 
-class QGraphicsEllipseItem;
-
-class VisToolEndLine : public VisLine
+class VisToolShoulderPoint : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolEndLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolEndLine();
+    VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolShoulderPoint();
 
     virtual void RefreshGeometry();
-    qreal        Angle() const;
-    void         setAngle(const qreal &value);
+    void         setLineP1Id(const quint32 &value);
+    void         setLineP2Id(const quint32 &value);
     void         setLength(const QString &expression);
 private:
-    Q_DISABLE_COPY(VisToolEndLine)
-    qreal                length;
-    qreal                angle;
+    Q_DISABLE_COPY(VisToolShoulderPoint)
+    quint32              lineP1Id;
+    quint32              lineP2Id;
     QGraphicsEllipseItem *point;
+    QGraphicsEllipseItem *line1P1;
+    QGraphicsEllipseItem *line1P2;
+    QGraphicsLineItem    *line1;
+    QGraphicsEllipseItem *line2P2;
+    QGraphicsLineItem    *line2;
+    QGraphicsLineItem    *line3;
+    qreal                length;
 };
 
-#endif // VISTOOLENDLINE_H
+#endif // VISTOOLSHOULDERPOINT_H

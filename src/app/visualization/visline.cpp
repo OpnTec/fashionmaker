@@ -38,6 +38,7 @@ VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
       mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(0), toolTip(QString())
 {
     this->setZValue(1);// Show on top real tool
+    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,7 +233,6 @@ void VisLine::setScenePos(const QPointF &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisLine::VisualMode(const quint32 &pointId, const QPointF &scenePos)
 {
-    this->mainColor = Qt::black;
     this->point1Id = pointId;
     this->scenePos = scenePos;
     RefreshGeometry();

@@ -36,6 +36,8 @@ namespace Ui
     class DialogShoulderPoint;
 }
 
+class VisToolShoulderPoint;
+
 /**
  * @brief The DialogShoulderPoint class dialog for ToolShoulderPoint. Help create point and edit option.
  */
@@ -79,6 +81,8 @@ public slots:
      */
     void           FormulaTextChanged();
     virtual void   PointNameChanged();
+protected:
+    virtual void   ShowVisualization();
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
 
@@ -108,6 +112,8 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
+    VisToolShoulderPoint *line;
+    bool            prepare;
 
     /**
      * @brief SaveData Put dialog data in local variables

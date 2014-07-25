@@ -77,16 +77,6 @@ void VisToolEndLine::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::VisualMode(const quint32 &pointId, const QPointF &scenePos)
-{
-    this->mainColor = Qt::black;
-    this->point1Id = pointId;
-    this->scenePos = scenePos;
-    RefreshGeometry();
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal VisToolEndLine::Angle() const
 {
     return this->line().angle();

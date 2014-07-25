@@ -186,7 +186,6 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                     ui->comboBoxThirdPoint->setCurrentIndex(index);
                     number = 0;
                     line->setPoint3Id(id);
-                    line->setMainColor(Qt::red);
                     line->RefreshGeometry();
                     prepare = true;
                     emit ToolTip("");
