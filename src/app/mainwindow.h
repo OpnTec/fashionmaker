@@ -52,7 +52,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    virtual ~MainWindow();
     void               LoadPattern(const QString &curFile);
 public slots:
     void               mouseMove(const QPointF &scenePos);
@@ -138,13 +138,13 @@ private:
     Ui::MainWindow     *ui;
 
     /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
-    VContainer        *pattern;
+    VContainer         *pattern;
 
     /** @brief doc dom document container */
-    VPattern          *doc;
+    VPattern           *doc;
 
     /** @brief tool current tool */
-    Tool        tool;
+    Tool               tool;
 
     /** @brief currentScene pointer to current scene. */
     VMainGraphicsScene *currentScene;
@@ -178,7 +178,7 @@ private:
     QString            curFile;
 
     /** @brief mode keep current draw mode. */
-    Draw        mode;
+    Draw               mode;
 
     /** @brief currentDrawIndex save current selected pattern peace. */
     qint32             currentDrawIndex;
@@ -211,7 +211,7 @@ private:
                                      Func closeDialogSlot);
     template <typename Dialog, typename Func, typename Func2>
     void               SetToolButtonWithApply(bool checked, Tool t, const QString &cursor, const QString &toolTip,
-                                     Func closeDialogSlot, Func2 applyDialogSlot);
+                                              Func closeDialogSlot, Func2 applyDialogSlot);
     template <typename DrawTool>
     void               ClosedDialog(int result);
     template <typename DrawTool>
