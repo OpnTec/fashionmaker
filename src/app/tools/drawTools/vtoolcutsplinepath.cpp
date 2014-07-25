@@ -132,7 +132,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
     qint32 p1 = 0, p2 = 0;
 
     const QPointF point = splPath->CutSplinePath(qApp->toPixel(result), p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
-    VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+    VPointF *p = new VPointF(point, pointName, mx, my);
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);

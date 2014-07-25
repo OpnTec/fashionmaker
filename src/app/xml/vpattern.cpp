@@ -1277,7 +1277,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
                 const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
-                data->UpdateGObject(id, new VPointF(point->x(), point->y(), point->name(), mx, my, idObject,
+                data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                                     Draw::Modeling));
                 VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
             }

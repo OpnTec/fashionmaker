@@ -125,9 +125,9 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
             else
             {
                 const VArc *arc = data->GeometricObject<const VArc *>(det.at(i).getId());
-                VPointF p1 = VPointF(arc->GetP1().x(), arc->GetP1().y(), "A", 0, 0);
+                VPointF p1 = VPointF(arc->GetP1(), "A", 0, 0);
                 BiasRotatePoint(&p1, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
-                VPointF p2 = VPointF(arc->GetP2().x(), arc->GetP2().y(), "A", 0, 0);
+                VPointF p2 = VPointF(arc->GetP2(), "A", 0, 0);
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(), angle);
                 VPointF *center = new VPointF(arc->GetCenter());
                 BiasRotatePoint(center, dx, dy, data->GeometricObject<const VPointF *>(pRotate)->toQPointF(),

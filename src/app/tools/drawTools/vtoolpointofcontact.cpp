@@ -178,14 +178,14 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
     quint32 id =  _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
         data->AddLine(firstPointId, id);
         data->AddLine(secondPointId, id);
         data->AddLine(center, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
         data->AddLine(firstPointId, id);
         data->AddLine(secondPointId, id);
         data->AddLine(center, id);

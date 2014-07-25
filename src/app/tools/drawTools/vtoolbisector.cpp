@@ -183,12 +183,12 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
         data->AddLine(firstPointId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
         data->AddLine(firstPointId, id);
         if (parse != Document::FullParse)
         {

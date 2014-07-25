@@ -35,11 +35,26 @@
  * @brief VPointF create new point
  * @param x x coordinate
  * @param y y coordinate
+ * @param name point label
  * @param mx offset name respect to x
  * @param my offset name respect to y
  */
-VPointF::VPointF(qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject, Draw mode)
+VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
     :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
+{
+    this->_name = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VPointF create new point
+ * @param point point
+ * @param name point label
+ * @param mx offset name respect to x
+ * @param my offset name respect to y
+ */
+VPointF::VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
+    :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(point.x()), _y(point.y())
 {
     this->_name = name;
 }
@@ -59,6 +74,8 @@ VPointF::VPointF(const VPointF &point) :VGObject(point), _mx(point.mx()), _my(po
 VPointF::VPointF(const QPointF &point) :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y())
 {}
 
+
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief operator = assignment operator
@@ -73,12 +90,6 @@ VPointF &VPointF::operator =(const VPointF &point)
     _x = point.x();
     _y = point.y();
     return *this;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPointF::name() const
-{
-    return _name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

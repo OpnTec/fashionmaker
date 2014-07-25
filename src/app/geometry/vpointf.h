@@ -43,32 +43,33 @@ public:
     VPointF ();
     VPointF (const VPointF &point );
     VPointF (const QPointF &point );
-    VPointF ( qreal x, qreal y, QString name, qreal mx, qreal my, quint32 idObject = 0,
-              Draw mode = Draw::Calculation);
+    VPointF (qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+              const Draw &mode = Draw::Calculation);
+    VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+              const Draw &mode = Draw::Calculation);
     virtual ~VPointF(){}
     VPointF &operator=(const VPointF &point);
-    qreal       mx() const;
-    qreal       my() const;
-    void        setMx(qreal mx);
-    void        setMy(qreal my);
-    QPointF     toQPointF()const;
-    qreal       x() const;
-    void        setX(const qreal &value);
-    qreal       y() const;
-    void        setY(const qreal &value);
-    virtual QString name() const;
+    qreal   mx() const;
+    qreal   my() const;
+    void    setMx(qreal mx);
+    void    setMy(qreal my);
+    QPointF toQPointF()const;
+    qreal   x() const;
+    void    setX(const qreal &value);
+    qreal   y() const;
+    void    setY(const qreal &value);
 private:
     /** @brief _mx offset name respect to x */
-    qreal              _mx;
+    qreal   _mx;
 
     /** @brief _my offset name respect to y */
-    qreal              _my;
+    qreal   _my;
 
     /** @brief _x x coordinate */
-    qreal              _x;
+    qreal   _x;
 
     /** @brief _y y coordinate */
-    qreal              _y;
+    qreal   _y;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -132,14 +132,14 @@ void VToolHeight::Create(const quint32 _id, const QString &pointName, const QStr
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(pHeight, pointName, mx, my));
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(pHeight.x(), pHeight.y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(pHeight, pointName, mx, my));
         data->AddLine(basePointId, id);
         data->AddLine(p1LineId, id);
         data->AddLine(p2LineId, id);

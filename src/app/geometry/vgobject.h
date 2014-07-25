@@ -46,30 +46,30 @@ public:
     VGObject(const VGObject &obj);
     VGObject& operator= (const VGObject &obj);
     virtual ~VGObject(){}
-    quint32          getIdObject() const;
-    void             setIdObject(const quint32 &value);
-    virtual QString  name() const;
-    void             setName(const QString &name);
-    Draw             getMode() const;
-    void             setMode(const Draw &value);
-    GOType           getType() const;
-    quint32          id() const;
-    virtual void     setId(const quint32 &id);
+    quint32         getIdObject() const;
+    void            setIdObject(const quint32 &value);
+    virtual QString name() const;
+    void            setName(const QString &name);
+    Draw            getMode() const;
+    void            setMode(const Draw &value);
+    GOType          getType() const;
+    quint32         id() const;
+    virtual void    setId(const quint32 &id);
 protected:
     /** @brief _id id in container. Ned for arcs, spline and spline paths. */
-    quint32          _id;
+    quint32 _id;
 
     /** @brief type type of graphical object */
-    GOType   type;
+    GOType  type;
 
     /** @brief idObject id of parent object. Only for modeling. All another return 0. */
-    quint32          idObject;
+    quint32 idObject;
 
     /** @brief _name object name */
-    QString         _name;
+    QString _name;
 
     /** @brief mode object created in calculation or drawing mode */
-    Draw     mode;
+    Draw    mode;
 };
 
 #endif // VGOBJECT_H

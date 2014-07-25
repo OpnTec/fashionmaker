@@ -131,7 +131,7 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
     quint32 spl2id = 0;
     if (typeCreation == Source::FromGui)
     {
-        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        VPointF *p = new VPointF(point, pointName, mx, my);
         id = data->AddGObject(p);
 
         VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
@@ -144,7 +144,7 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
     }
     else
     {
-        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        VPointF *p = new VPointF(point, pointName, mx, my);
         data->UpdateGObject(id, p);
 
         spl1id = id + 1;

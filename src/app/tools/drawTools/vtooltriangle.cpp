@@ -133,11 +133,11 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point.x(), point.y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(point, pointName, mx, my));
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point.x(), point.y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

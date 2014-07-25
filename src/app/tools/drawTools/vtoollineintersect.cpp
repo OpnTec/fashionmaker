@@ -139,7 +139,7 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
         quint32 id = _id;
         if (typeCreation == Source::FromGui)
         {
-            id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
             data->AddLine(p1Line1Id, id);
             data->AddLine(id, p2Line1Id);
             data->AddLine(p1Line2Id, id);
@@ -147,7 +147,7 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
         }
         else
         {
-            data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+            data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
             data->AddLine(p1Line1Id, id);
             data->AddLine(id, p2Line1Id);
             data->AddLine(p1Line2Id, id);

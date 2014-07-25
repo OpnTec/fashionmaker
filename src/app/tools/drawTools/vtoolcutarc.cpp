@@ -138,7 +138,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     quint32 arc2id = 0;
     if (typeCreation == Source::FromGui)
     {
-        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        VPointF *p = new VPointF(point, pointName, mx, my);
         id = data->AddGObject(p);
 
         VArc * ar1 = new VArc(arc1);
@@ -149,7 +149,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     }
     else
     {
-        VPointF *p = new VPointF(point.x(), point.y(), pointName, mx, my);
+        VPointF *p = new VPointF(point, pointName, mx, my);
         data->UpdateGObject(id, p);
 
         arc1id = id + 1;

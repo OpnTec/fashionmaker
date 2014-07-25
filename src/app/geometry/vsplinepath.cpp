@@ -31,7 +31,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw mode)
-    : VAbstractCurve(GOType::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
+    : VAbstractCurve(GOType::SplinePath, idObject, mode), path(QVector<VSplinePoint>()), kCurve(kCurve),
+      maxCountPoints(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

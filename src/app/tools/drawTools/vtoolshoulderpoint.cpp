@@ -183,13 +183,13 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
     quint32 id =  _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
         data->AddLine(p1Line, id);
         data->AddLine(p2Line, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint.x(), fPoint.y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
         data->AddLine(p1Line, id);
         data->AddLine(p2Line, id);
         if (parse != Document::FullParse)

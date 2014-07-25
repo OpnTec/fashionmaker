@@ -143,12 +143,12 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        id = data->AddGObject(new VPointF(line.p2(), pointName, mx, my));
         data->AddLine(basePointId, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(line.p2().x(), line.p2().y(), pointName, mx, my));
+        data->UpdateGObject(id, new VPointF(line.p2(), pointName, mx, my));
         data->AddLine(basePointId, id);
         if (parse != Document::FullParse)
         {
