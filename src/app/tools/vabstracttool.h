@@ -99,6 +99,7 @@ public:
     static const QStringList Styles();
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
     static Qt::PenStyle     LineStyle(const QString &typeLine);
+    const VContainer        *getData() const;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -142,7 +143,6 @@ protected:
      * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
      */
     virtual void            RefreshDataInFile()=0;
-    const VContainer        *getData() const;
     /**
      * @brief RemoveReferens decrement value of reference.
      */

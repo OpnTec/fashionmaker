@@ -41,8 +41,8 @@ const QString VToolPoint::TagName = QStringLiteral("point");
  * @param id object id in container.
  * @param parent parent object.
  */
-VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent):VDrawTool(doc, data, id),
-    QGraphicsEllipseItem(parent), radius(DefPointRadius), namePoint(0), lineName(0)
+VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
+    :VDrawTool(doc, data, id), QGraphicsEllipseItem(parent), radius(DefPointRadius), namePoint(0), lineName(0)
 {
     radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);

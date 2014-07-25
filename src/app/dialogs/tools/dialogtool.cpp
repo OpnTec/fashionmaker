@@ -1076,12 +1076,6 @@ void DialogTool::ShowVariable(const QHash<key, val> *var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::DialogApply()
-{
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ShowVisToolTip(const QString &toolTip)
 {
     emit ToolTip(toolTip);
@@ -1091,4 +1085,11 @@ void DialogTool::ShowVisToolTip(const QString &toolTip)
 void DialogTool::ShowDialog(bool click)
 {
     Q_UNUSED(click);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SetAssociatedTool(VAbstractTool *tool)
+{
+    this->associatedTool=tool;
+    this->data = tool->getData();
 }

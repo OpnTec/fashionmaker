@@ -34,7 +34,8 @@
  * @param data container with variables
  * @param parent parent object
  */
-VDataTool::VDataTool(VContainer *data, QObject *parent): QObject(parent), data(*data), _referens(1)
+VDataTool::VDataTool(VContainer *data, QObject *parent)
+    : QObject(parent), data(*data), _referens(1)
 {
     SCASSERT(data != nullptr);
 }

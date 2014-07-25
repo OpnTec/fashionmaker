@@ -83,7 +83,7 @@ public slots:
     /**
      * @brief DialogApply save data and emit signal DialogApplied.
      */
-    virtual void     DialogApply();
+    virtual void     DialogApply(){}
     virtual void     DialogRejected();
     void             FormulaChanged();
     /**
@@ -110,7 +110,6 @@ public slots:
     virtual void     ValChenged(int row);
     virtual void     UpdateList();
     virtual void     PointNameChanged(){}
-
 protected:
     Q_DISABLE_COPY(DialogTool)
 
@@ -316,12 +315,6 @@ private:
 inline VAbstractTool *DialogTool::GetAssociatedTool()
 {
     return this->associatedTool;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void DialogTool::SetAssociatedTool(VAbstractTool *tool)
-{
-    this->associatedTool=tool;
 }
 
 #endif // DIALOGTOOL_H
