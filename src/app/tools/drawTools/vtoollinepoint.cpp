@@ -44,8 +44,7 @@
 VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,
                                const QString &typeLine, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent),  formula(formula), angle(angle), basePointId(basePointId),
-      mainLine(nullptr)
+    :VToolPoint(doc, data, id, parent),  formula(formula), angle(angle), basePointId(basePointId), mainLine(nullptr)
 {
     this->typeLine = typeLine;
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");

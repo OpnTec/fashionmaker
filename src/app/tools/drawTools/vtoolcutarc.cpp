@@ -138,36 +138,31 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     quint32 arc2id = 0;
     if (typeCreation == Source::FromGui)
     {
-        VPointF *p = new VPointF(point, pointName, mx, my);
-        id = data->AddGObject(p);
+        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        arc1id = data->AddGObject(new VArc(arc1));
+        arc2id = data->AddGObject(new VArc(arc2));
 
-        VArc * ar1 = new VArc(arc1);
-        arc1id = data->AddGObject(ar1);
-
-        VArc * ar2 = new VArc(arc2);
-        arc2id = data->AddGObject(ar2);
+        data->AddLengthArc(arc1id);
+        data->AddLengthArc(arc2id);
     }
     else
     {
-        VPointF *p = new VPointF(point, pointName, mx, my);
-        data->UpdateGObject(id, p);
+        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
 
         arc1id = id + 1;
         arc2id = id + 2;
 
-        VArc * ar1 = new VArc(arc1);
-        data->UpdateGObject(arc1id, ar1);
+        data->UpdateGObject(arc1id, new VArc(arc1));
+        data->UpdateGObject(arc2id, new VArc(arc2));
 
-        VArc * ar2 = new VArc(arc2);
-        data->UpdateGObject(arc2id, ar2);
+        data->AddLengthArc(arc1id);
+        data->AddLengthArc(arc2id);
 
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthArc(arc1id);
-    data->AddLengthArc(arc2id);
 
     VDrawTool::AddRecord(id, Tool::CutArcTool, doc);
     if (parse == Document::FullParse)

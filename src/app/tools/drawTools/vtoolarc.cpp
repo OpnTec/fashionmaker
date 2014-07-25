@@ -140,16 +140,17 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(arc);
+        data->AddLengthArc(id);
     }
     else
     {
         data->UpdateGObject(id, arc);
+        data->AddLengthArc(id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
         }
     }
-    data->AddLengthArc(id);
     VDrawTool::AddRecord(id, Tool::ArcTool, doc);
     if (parse == Document::FullParse)
     {
