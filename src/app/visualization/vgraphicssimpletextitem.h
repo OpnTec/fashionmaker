@@ -39,15 +39,11 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
     Q_OBJECT
 public:
+    VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
+    VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
 
-                 VGraphicsSimpleTextItem(QGraphicsItem * parent = nullptr);
-
-                 VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent = nullptr );
-    /**
-     * @brief FontSize return label font size.
-     * @return font size.
-     */
-    qint32       FontSize()const {return fontSize;}
+    qint32       FontSize()const;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -61,12 +57,22 @@ signals:
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent *event );
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event );
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event );
 private:
     /** @brief fontSize label font size. */
     qint32       fontSize;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FontSize return label font size.
+ * @return font size.
+ */
+inline qint32 VGraphicsSimpleTextItem::FontSize() const
+{
+    return fontSize;
+}
 
 #endif // VGRAPHICSSIMPLETEXTITEM_H
