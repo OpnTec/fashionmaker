@@ -392,26 +392,8 @@ void MainWindow::ApplyDialog()
 void MainWindow::ToolEndLine(bool checked)
 {
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLineTool, ":/cursor/endline_cursor.png", tr("Select point"),
-                                          &MainWindow::ClosedDialogEndLine, &MainWindow::ApplyDialogEndLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogEndLine actions after apply in DialogEndLine.
- */
-void MainWindow::ApplyDialogEndLine()
-{
-    ApplyDialog<VToolEndLine>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogEndLine actions after closing DialogEndLine.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogEndLine(int result)
-{
-    ClosedDialogWithApply<VToolEndLine>(result);
+                                          &MainWindow::ClosedDialogWithApply<VToolEndLine>,
+                                          &MainWindow::ApplyDialog<VToolEndLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -422,24 +404,8 @@ void MainWindow::ClosedDialogEndLine(int result)
 void MainWindow::ToolLine(bool checked)
 {
     SetToolButtonWithApply<DialogLine>(checked, Tool::LineTool, ":/cursor/line_cursor.png", tr("Select first point"),
-                                       &MainWindow::ClosedDialogLine, &MainWindow::ApplyDialogLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogLine actions after closing DialogLine.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogLine(int result)
-{
-    ClosedDialogWithApply<VToolLine>(result);
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ApplyDialogLine()
-{
-    ApplyDialog<VToolLine>();
+                                       &MainWindow::ClosedDialogWithApply<VToolLine>,
+                                       &MainWindow::ApplyDialog<VToolLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -450,27 +416,8 @@ void MainWindow::ApplyDialogLine()
 void MainWindow::ToolAlongLine(bool checked)
 {
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLineTool, ":/cursor/alongline_cursor.png",
-                                            tr("Select point"), &MainWindow::ClosedDialogAlongLine,
-                                            &MainWindow::ApplyDialogAlongLine);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogAlongLine actions after apply in DialogAlongLine.
- */
-void MainWindow::ApplyDialogAlongLine()
-{
-    ApplyDialog<VToolAlongLine>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogAlongLine actions after closing DialogAlongLine.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogAlongLine(int result)
-{
-    ClosedDialogWithApply<VToolAlongLine>(result);
+                                            tr("Select point"), &MainWindow::ClosedDialogWithApply<VToolAlongLine>,
+                                            &MainWindow::ApplyDialog<VToolAlongLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -481,27 +428,9 @@ void MainWindow::ClosedDialogAlongLine(int result)
 void MainWindow::ToolShoulderPoint(bool checked)
 {
     SetToolButtonWithApply<DialogShoulderPoint>(checked, Tool::ShoulderPointTool, ":/cursor/shoulder_cursor.png",
-                  tr("Select point of shoulder"), &MainWindow::ClosedDialogShoulderPoint,
-                  &MainWindow::ApplyDialogShoulderPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogShoulderPoint actions after apply in DialogShoulderPoint.
- */
-void MainWindow::ApplyDialogShoulderPoint()
-{
-    ApplyDialog<VToolShoulderPoint>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogShoulderPoint actions after closing DialogShoulderPoint.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogShoulderPoint(int result)
-{
-    ClosedDialogWithApply<VToolShoulderPoint>(result);
+                                                tr("Select point of shoulder"),
+                                                &MainWindow::ClosedDialogWithApply<VToolShoulderPoint>,
+                                                &MainWindow::ApplyDialog<VToolShoulderPoint>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -512,27 +441,9 @@ void MainWindow::ClosedDialogShoulderPoint(int result)
 void MainWindow::ToolNormal(bool checked)
 {
     SetToolButtonWithApply<DialogNormal>(checked, Tool::NormalTool, ":/cursor/normal_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogNormal,
-                  &MainWindow::ApplyDialogNormal);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogNormal actions after apply in DialogNormal.
- */
-void MainWindow::ApplyDialogNormal()
-{
-    ApplyDialog<VToolNormal>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogNormal actions after closing DialogNormal.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogNormal(int result)
-{
-    ClosedDialogWithApply<VToolNormal>(result);
+                                         tr("Select first point of line"),
+                                         &MainWindow::ClosedDialogWithApply<VToolNormal>,
+                                         &MainWindow::ApplyDialog<VToolNormal>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -543,27 +454,9 @@ void MainWindow::ClosedDialogNormal(int result)
 void MainWindow::ToolBisector(bool checked)
 {
     SetToolButtonWithApply<DialogBisector>(checked, Tool::BisectorTool, ":/cursor/bisector_cursor.png",
-                  tr("Select first point of angle"), &MainWindow::ClosedDialogBisector,
-                  &MainWindow::ApplyDialogBisector);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogBisector actions after apply in DialogBisector.
- */
-void MainWindow::ApplyDialogBisector()
-{
-    ApplyDialog<VToolBisector>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogBisector actions after closing DialogBisector.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogBisector(int result)
-{
-    ClosedDialogWithApply<VToolBisector>(result);
+                                           tr("Select first point of angle"),
+                                           &MainWindow::ClosedDialogWithApply<VToolBisector>,
+                                           &MainWindow::ApplyDialog<VToolBisector>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -574,17 +467,8 @@ void MainWindow::ClosedDialogBisector(int result)
 void MainWindow::ToolLineIntersect(bool checked)
 {
     SetToolButton<DialogLineIntersect>(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
-                  tr("Select first point of first line"), &MainWindow::ClosedDialogLineIntersect);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogLineIntersect actions after closing DialogLineIntersect.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogLineIntersect(int result)
-{
-    ClosedDialog<VToolLineIntersect>(result);
+                                       tr("Select first point of first line"),
+                                       &MainWindow::ClosedDialog<VToolLineIntersect>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -595,17 +479,7 @@ void MainWindow::ClosedDialogLineIntersect(int result)
 void MainWindow::ToolSpline(bool checked)
 {
     SetToolButton<DialogSpline>(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
-                  tr("Select first point curve"), &MainWindow::ClosedDialogSpline);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogSpline actions after closing DialogSpline.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogSpline(int result)
-{
-    ClosedDialog<VToolSpline>(result);
+                                tr("Select first point curve"), &MainWindow::ClosedDialog<VToolSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -616,17 +490,7 @@ void MainWindow::ClosedDialogSpline(int result)
 void MainWindow::ToolCutSpline(bool checked)
 {
     SetToolButton<DialogCutSpline>(checked, Tool::CutSplineTool, ":/cursor/spline_cut_point_cursor.png",
-                  tr("Select simple curve"), &MainWindow::ClosedDialogCutSpline);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogCutSpline actions after closing DialogCutSpline.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogCutSpline(int result)
-{
-    ClosedDialog<VToolCutSpline>(result);
+                                   tr("Select simple curve"), &MainWindow::ClosedDialog<VToolCutSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -637,27 +501,8 @@ void MainWindow::ClosedDialogCutSpline(int result)
 void MainWindow::ToolArc(bool checked)
 {
     SetToolButtonWithApply<DialogArc>(checked, Tool::ArcTool, ":/cursor/arc_cursor.png",
-                  tr("Select point of center of arc"), &MainWindow::ClosedDialogArc,
-                  &MainWindow::ApplyDialogArc);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogArc actions after apply in DialogArc.
- */
-void MainWindow::ApplyDialogArc()
-{
-    ApplyDialog<VToolArc>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogArc actions after closing DialogArc.
- * @param result result of dialog working..
- */
-void MainWindow::ClosedDialogArc(int result)
-{
-    ClosedDialogWithApply<VToolArc>(result);
+                                      tr("Select point of center of arc"), &MainWindow::ClosedDialogWithApply<VToolArc>,
+                                      &MainWindow::ApplyDialog<VToolArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -668,17 +513,7 @@ void MainWindow::ClosedDialogArc(int result)
 void MainWindow::ToolSplinePath(bool checked)
 {
     SetToolButton<DialogSplinePath>(checked, Tool::SplinePathTool, ":/cursor/splinepath_cursor.png",
-                  tr("Select point of curve path"), &MainWindow::ClosedDialogSplinePath);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogSplinePath actions after closing DialogSplinePath.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogSplinePath(int result)
-{
-    ClosedDialog<VToolSplinePath>(result);
+                                    tr("Select point of curve path"), &MainWindow::ClosedDialog<VToolSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -690,17 +525,7 @@ void MainWindow::ToolCutSplinePath(bool checked)
 {
     SetToolButton<DialogCutSplinePath>(checked, Tool::CutSplinePathTool,
                                        ":/cursor/splinepath_cut_point_cursor.png", tr("Select curve path"),
-                                       &MainWindow::ClosedDialogCutSplinePath);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogCutSplinePath actions after closing DialogCutSplinePath.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogCutSplinePath(int result)
-{
-    ClosedDialog<VToolCutSplinePath>(result);
+                                       &MainWindow::ClosedDialog<VToolCutSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -711,27 +536,9 @@ void MainWindow::ClosedDialogCutSplinePath(int result)
 void MainWindow::ToolPointOfContact(bool checked)
 {
     SetToolButtonWithApply<DialogPointOfContact>(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
-                  tr("Select first point of line"), &MainWindow::ClosedDialogPointOfContact,
-                  &MainWindow::ApplyDialogPointOfContact);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogPointOfContact actions after apply in DialogPointOfContact.
- */
-void MainWindow::ApplyDialogPointOfContact()
-{
-    ApplyDialog<VToolPointOfContact>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogPointOfContact actions after closing DialogPointOfContact.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogPointOfContact(int result)
-{
-    ClosedDialogWithApply<VToolPointOfContact>(result);
+                                                 tr("Select first point of line"),
+                                                 &MainWindow::ClosedDialogWithApply<VToolPointOfContact>,
+                                                 &MainWindow::ApplyDialog<VToolPointOfContact>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -768,17 +575,7 @@ void MainWindow::ClosedDialogDetail(int result)
 void MainWindow::ToolHeight(bool checked)
 {
     SetToolButton<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
-                                &MainWindow::ClosedDialogHeight);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogHeight actions after closing DialogHeight.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogHeight(int result)
-{
-    ClosedDialog<VToolHeight>(result);
+                                &MainWindow::ClosedDialog<VToolHeight>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -789,17 +586,7 @@ void MainWindow::ClosedDialogHeight(int result)
 void MainWindow::ToolTriangle(bool checked)
 {
     SetToolButton<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
-                                  tr("Select first point of axis"), &MainWindow::ClosedDialogTriangle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogTriangle actions after closing DialogTriangle.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogTriangle(int result)
-{
-    ClosedDialog<VToolTriangle>(result);
+                                  tr("Select first point of axis"), &MainWindow::ClosedDialog<VToolTriangle>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -811,17 +598,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 {
     SetToolButton<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
                                              ":/cursor/pointofintersect_cursor.png", tr("Select point vertically"),
-                                             &MainWindow::ClosedDialogPointOfIntersection);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogPointOfIntersection actions after closing DialogPointOfIntersection.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogPointOfIntersection(int result)
-{
-    ClosedDialog<VToolPointOfIntersection>(result);
+                                             &MainWindow::ClosedDialog<VToolPointOfIntersection>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -856,26 +633,8 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 void MainWindow::ToolCutArc(bool checked)
 {
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArcTool, ":/cursor/arc_cut_cursor.png",
-                  tr("Select arc"), &MainWindow::ClosedDialogCutArc, &MainWindow::ApplyDialogCutArc);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ApplyDialogCutArc actions after apply in DialogCutArc.
- */
-void MainWindow::ApplyDialogCutArc()
-{
-    ApplyDialog<VToolCutArc>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ClosedDialogCutArc actions after closing DialogCutArc.
- * @param result result of dialog working.
- */
-void MainWindow::ClosedDialogCutArc(int result)
-{
-    ClosedDialogWithApply<VToolCutArc>(result);
+                                         tr("Select arc"), &MainWindow::ClosedDialogWithApply<VToolCutArc>,
+                                         &MainWindow::ApplyDialog<VToolCutArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

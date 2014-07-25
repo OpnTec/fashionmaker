@@ -105,34 +105,8 @@ public slots:
     void               ToolUnionDetails(bool checked);
     void               ToolCutArc(bool checked);
 
-    void               ClosedDialogEndLine(int result);
-    void               ApplyDialogEndLine();
-    void               ClosedDialogLine(int result);
-    void               ApplyDialogLine();
-    void               ClosedDialogAlongLine(int result);
-    void               ApplyDialogAlongLine();
-    void               ClosedDialogShoulderPoint(int result);
-    void               ApplyDialogShoulderPoint();
-    void               ClosedDialogNormal(int result);
-    void               ApplyDialogNormal();
-    void               ClosedDialogBisector(int result);
-    void               ApplyDialogBisector();
-    void               ClosedDialogLineIntersect(int result);
-    void               ClosedDialogSpline(int result);
-    void               ClosedDialogArc(int result);
-    void               ApplyDialogArc();
-    void               ClosedDialogSplinePath(int result);
-    void               ClosedDialogCutSplinePath(int result);
-    void               ClosedDialogPointOfContact(int result);
-    void               ApplyDialogPointOfContact();
     void               ClosedDialogDetail(int result);
-    void               ClosedDialogHeight(int result);
-    void               ClosedDialogTriangle(int result);
-    void               ClosedDialogPointOfIntersection(int result);
     void               ClosedDialogUnionDetails(int result);
-    void               ClosedDialogCutSpline(int result);
-    void               ClosedDialogCutArc(int result);
-    void               ApplyDialogCutArc();
 
     void               About();
     void               AboutQt();
