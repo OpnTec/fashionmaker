@@ -2022,15 +2022,8 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     qApp->setOpeningPattern();// End opening file
 
-    VAbstractTool::NewSceneRect(sceneDraw, view);
-    VAbstractTool::NewSceneRect(sceneDetails, view);
-
     //Fit scene size to best size for first show
-    ActionDetails(true);
-    view->ZoomFitBest();
-
-    ActionDraw(true);
-    view->ZoomFitBest();
+    ZoomFirstShow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2126,4 +2119,29 @@ void MainWindow::EndVisualization(bool click)
     {
         dialogTool->ShowDialog(click);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ZoomFirstShow Fit scene size to best size for first show
+ */
+void MainWindow::ZoomFirstShow()
+{
+    /* If don't call ZoomFitBest() twice, after first scaling or moving pattern piece, scene change coordinate and whole
+     * pattern will be moved. Looks very ugly. It is best solution that i have now.
+     */
+    ActionDetails(true);
+    view->ZoomFitBest();
+
+    ActionDraw(true);
+    view->ZoomFitBest();
+
+    VAbstractTool::NewSceneRect(sceneDraw, view);
+    VAbstractTool::NewSceneRect(sceneDetails, view);
+
+    ActionDetails(true);
+    view->ZoomFitBest();
+
+    ActionDraw(true);
+    view->ZoomFitBest();
 }

@@ -157,6 +157,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, toolArc, &VToolArc::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, toolArc, &VToolArc::Disable);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(center);

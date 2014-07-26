@@ -239,6 +239,7 @@ private:
      * @brief EndVisualization try show dialog after and working with tool visualization.
      */
     void               EndVisualization(bool click = false);
+    void               ZoomFirstShow();
 };
 
 #endif // MAINWINDOW_H
