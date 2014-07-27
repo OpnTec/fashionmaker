@@ -43,6 +43,10 @@ VAbstractCurve::VAbstractCurve(const VAbstractCurve &curve)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 {
+    if ( &curve == this )
+    {
+        return *this;
+    }
     VGObject::operator=(curve);
     return *this;
 }

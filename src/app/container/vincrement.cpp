@@ -57,6 +57,10 @@ VIncrement::VIncrement(const VIncrement &incr)
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement &VIncrement::operator=(const VIncrement &incr)
 {
+    if ( &incr == this )
+    {
+        return *this;
+    }
     VVariable::operator=(incr);
     this->id = incr.getId();
     return *this;

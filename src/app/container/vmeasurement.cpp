@@ -74,6 +74,10 @@ VMeasurement::VMeasurement(const VMeasurement &m)
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement &VMeasurement::operator=(const VMeasurement &m)
 {
+    if ( &m == this )
+    {
+        return *this;
+    }
     VVariable::operator=(m);
     this->gui_text = m.GetGuiText();
     this->_tagName = m.TagName();

@@ -98,6 +98,10 @@ public:
      */
     QmuParserToken& operator= ( const QmuParserToken &a_Tok )
     {
+        if ( &a_Tok == this )
+        {
+            return *this;
+        }
         Assign ( a_Tok );
         return *this;
     }

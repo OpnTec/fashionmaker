@@ -57,6 +57,10 @@ VVariable::VVariable(const VVariable &var)
 //---------------------------------------------------------------------------------------------------------------------
 VVariable &VVariable::operator=(const VVariable &var)
 {
+    if ( &var == this )
+    {
+        return *this;
+    }
     this->base = var.GetBase();
     this->ksize = var.GetKsize();
     this->kheight = var.GetKheight();

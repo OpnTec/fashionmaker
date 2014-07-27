@@ -688,6 +688,10 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
 //---------------------------------------------------------------------------------------------------------------------
 VSpline &VSpline::operator =(const VSpline &spline)
 {
+    if ( &spline == this )
+    {
+        return *this;
+    }
     VAbstractCurve::operator=(spline);
     this->p1 = spline.GetP1 ();
     this->p2 = spline.GetP2 ();

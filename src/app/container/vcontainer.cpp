@@ -55,6 +55,10 @@ VContainer::VContainer()
  */
 VContainer &VContainer::operator =(const VContainer &data)
 {
+    if ( &data == this )
+    {
+        return *this;
+    }
     setData(data);
     return *this;
 }

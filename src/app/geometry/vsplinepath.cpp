@@ -158,6 +158,10 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 {
+    if ( &path == this )
+    {
+        return *this;
+    }
     VAbstractCurve::operator=(path);
     this->path = path.GetSplinePath();
     this->kCurve = path.getKCurve();

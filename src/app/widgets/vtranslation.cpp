@@ -53,8 +53,11 @@ VTranslation::VTranslation(const QString &context, const QString &sourceText, co
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslation &VTranslation::operator=(const VTranslation &tr)
-
 {
+    if ( &tr == this )
+    {
+        return *this;
+    }
     this->mcontext = tr.getMcontext();
     this->msourceText = tr.getMsourceText();
     this->mdisambiguation = tr.getMdisambiguation();

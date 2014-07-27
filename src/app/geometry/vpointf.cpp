@@ -84,6 +84,10 @@ VPointF::VPointF(const QPointF &point) :VGObject(VPointF()), _mx(0), _my(0), _x(
  */
 VPointF &VPointF::operator =(const VPointF &point)
 {
+    if ( &point == this )
+    {
+        return *this;
+    }
     VGObject::operator=(point);
     _mx = point.mx();
     _my = point.my();

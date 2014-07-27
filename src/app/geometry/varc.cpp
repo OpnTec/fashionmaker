@@ -81,6 +81,10 @@ VArc::VArc(const VArc &arc)
  */
 VArc &VArc::operator =(const VArc &arc)
 {
+    if ( &arc == this )
+    {
+        return *this;
+    }
     VAbstractCurve::operator=(arc);
     this->f1 = arc.GetF1();
     this->formulaF1 = arc.GetFormulaF1();

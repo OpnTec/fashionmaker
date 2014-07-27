@@ -46,6 +46,10 @@ VNodeDetail::VNodeDetail(const VNodeDetail &node)
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
 {
+    if ( &node == this )
+    {
+        return *this;
+    }
     id = node.getId();
     typeTool = node.getTypeTool();
     typeNode = node.getTypeNode();

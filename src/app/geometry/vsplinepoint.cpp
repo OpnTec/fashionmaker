@@ -69,6 +69,10 @@ VSplinePoint::VSplinePoint(const VSplinePoint &point)
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePoint &VSplinePoint::operator=(const VSplinePoint &point)
 {
+    if ( &point == this )
+    {
+        return *this;
+    }
     this->pSpline = point.P();
     this->angle1 = point.Angle1();
     this->angle2 = point.Angle2();

@@ -53,6 +53,10 @@ VDetail::VDetail(const VDetail &detail)
 //---------------------------------------------------------------------------------------------------------------------
 VDetail &VDetail::operator =(const VDetail &detail)
 {
+    if ( &detail == this )
+    {
+        return *this;
+    }
     _id = detail.id();
     nodes = detail.getNodes();
     name = detail.getName();

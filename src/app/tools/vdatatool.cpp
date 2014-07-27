@@ -48,6 +48,10 @@ VDataTool::VDataTool(VContainer *data, QObject *parent)
  */
 VDataTool &VDataTool::operator =(const VDataTool &tool)
 {
+    if ( &tool == this )
+    {
+        return *this;
+    }
     data = tool.getData();
     _referens = tool.referens();
     return *this;

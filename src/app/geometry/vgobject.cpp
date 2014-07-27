@@ -64,6 +64,10 @@ VGObject::VGObject(const VGObject &obj)
  */
 VGObject &VGObject::operator=(const VGObject &obj)
 {
+    if ( &obj == this )
+    {
+        return *this;
+    }
     this->_id      = obj.id();
     this->type     = obj.getType();
     this->idObject = obj.getIdObject();
