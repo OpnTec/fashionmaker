@@ -52,13 +52,13 @@ public:
     void           setRadius(const QString &value);
 
     quint32        getCenter() const;
-    void           setCenter(const quint32 &value, const quint32 &id);
+    void           setCenter(const quint32 &value);
 
     quint32        getFirstPoint() const;
-    void           setFirstPoint(const quint32 &value, const quint32 &id);
+    void           setFirstPoint(const quint32 &value);
 
     quint32        getSecondPoint() const;
-    void           setSecondPoint(const quint32 &value, const quint32 &id);
+    void           setSecondPoint(const quint32 &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   DialogAccepted();

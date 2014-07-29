@@ -72,10 +72,10 @@ void VToolTriangle::setDialog()
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogTool->setAxisP1Id(axisP1Id, id);
-    dialogTool->setAxisP2Id(axisP2Id, id);
-    dialogTool->setFirstPointId(firstPointId, id);
-    dialogTool->setSecondPointId(secondPointId, id);
+    dialogTool->setAxisP1Id(axisP1Id);
+    dialogTool->setAxisP2Id(axisP2Id);
+    dialogTool->setFirstPointId(firstPointId);
+    dialogTool->setSecondPointId(secondPointId);
     dialogTool->setPointName(p->name());
 }
 

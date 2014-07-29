@@ -77,7 +77,7 @@ void VToolCutArc::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
-    dialogTool->setArcId(curveCutId, id);
+    dialogTool->setArcId(curveCutId);
     dialogTool->setPointName(point->name());
 }
 

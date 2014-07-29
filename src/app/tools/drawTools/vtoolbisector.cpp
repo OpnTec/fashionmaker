@@ -112,9 +112,9 @@ void VToolBisector::setDialog()
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
-    dialogTool->setFirstPointId(firstPointId, id);
-    dialogTool->setSecondPointId(basePointId, id);
-    dialogTool->setThirdPointId(thirdPointId, id);
+    dialogTool->setFirstPointId(firstPointId);
+    dialogTool->setSecondPointId(basePointId);
+    dialogTool->setThirdPointId(thirdPointId);
     dialogTool->setPointName(p->name());
 }
 

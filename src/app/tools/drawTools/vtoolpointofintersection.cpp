@@ -69,8 +69,8 @@ void VToolPointOfIntersection::setDialog()
     DialogPointOfIntersection *dialogTool = qobject_cast<DialogPointOfIntersection*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
-    dialogTool->setFirstPointId(firstPointId, id);
-    dialogTool->setSecondPointId(secondPointId, id);
+    dialogTool->setFirstPointId(firstPointId);
+    dialogTool->setSecondPointId(secondPointId);
     dialogTool->setPointName(p->name());
 }
 

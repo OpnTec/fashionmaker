@@ -53,13 +53,13 @@ public:
     void             setTypeLine(const QString &value);
 
     quint32          getBasePointId() const;
-    void             setBasePointId(const quint32 &value, const quint32 &id);
+    void             setBasePointId(const quint32 &value);
 
     quint32          getP1LineId() const;
-    void             setP1LineId(const quint32 &value, const quint32 &id);
+    void             setP1LineId(const quint32 &value);
 
     quint32          getP2LineId() const;
-    void             setP2LineId(const quint32 &value, const quint32 &id);
+    void             setP2LineId(const quint32 &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     virtual void     DialogAccepted();

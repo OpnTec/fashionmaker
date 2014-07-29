@@ -171,22 +171,20 @@ void DialogNormal::SaveData()
 /**
  * @brief setSecondPointId set id of second point
  * @param value id
- * @param id don't show this id in list
  */
-void DialogNormal::setSecondPointId(const quint32 &value, const quint32 &id)
+void DialogNormal::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
- * @param id don't show this id in list
  */
-void DialogNormal::setFirstPointId(const quint32 &value, const quint32 &id)
+void DialogNormal::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

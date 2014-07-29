@@ -74,9 +74,9 @@ void VToolPointOfContact::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setRadius(arcRadius);
-    dialogTool->setCenter(center, id);
-    dialogTool->setFirstPoint(firstPointId, id);
-    dialogTool->setSecondPoint(secondPointId, id);
+    dialogTool->setCenter(center);
+    dialogTool->setFirstPoint(firstPointId);
+    dialogTool->setSecondPoint(secondPointId);
     dialogTool->setPointName(p->name());
 }
 

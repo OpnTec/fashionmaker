@@ -77,7 +77,7 @@ DialogLine::~DialogLine()
  */
 void DialogLine::setSecondPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPoint, value, 0);
+    setPointId(ui->comboBoxSecondPoint, secondPoint, value);
     line->setPoint2Id(value);
 }
 
@@ -100,7 +100,7 @@ void DialogLine::setTypeLine(const QString &value)
  */
 void DialogLine::setFirstPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPoint, value, 0);
+    setPointId(ui->comboBoxFirstPoint, firstPoint, value);
     line->setPoint1Id(value);
 }
 

@@ -196,12 +196,10 @@ protected:
 
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
-    void             FillComboBoxPoints(QComboBox *box, const quint32 &id = 0)const;
-    void             FillComboBoxArcs(QComboBox *box, const quint32 &id = 0,
-                                      ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc)const;
-    void             FillComboBoxSplines(QComboBox *box, const quint32 &id = 0,
-                                         ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
-    void             FillComboBoxSplinesPath(QComboBox *box, const quint32 &id = 0,
+    void             FillComboBoxPoints(QComboBox *box)const;
+    void             FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc)const;
+    void             FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
+    void             FillComboBoxSplinesPath(QComboBox *box,
                                              ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();
@@ -216,13 +214,12 @@ protected:
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
     void             Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label);
-    void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const;
-    void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
+    void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value) const;
+    void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value,
                                         ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
-    void             setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
-                                        ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc) const;
+    void             setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value,
+                                     ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc) const;
     void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
-                                            const quint32 &id,
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
@@ -312,7 +309,7 @@ protected:
     }
 
     void             ChangeColor(QWidget *widget, const QColor &color);
-    void             setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id);
+    void             setPointId(QComboBox *box, quint32 &pointId, const quint32 &value);
     virtual void     ShowVisualization(){}
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;

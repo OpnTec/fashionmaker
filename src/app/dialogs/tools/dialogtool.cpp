@@ -106,9 +106,8 @@ void DialogTool::showEvent(QShowEvent *event)
 /**
  * @brief FillComboBoxPoints fill comboBox list of points
  * @param box comboBox
- * @param id don't show this id in list
  */
-void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
+void DialogTool::FillComboBoxPoints(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject*> *objs = data->DataGObjects();
@@ -117,7 +116,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
     while (i.hasNext())
     {
         i.next();
-        if (i.key() != id)
+        if (i.key() != toolId)
         {
             VGObject *obj = i.value();
             if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
@@ -131,7 +130,7 @@ void DialogTool::FillComboBoxPoints(QComboBox *box, const quint32 &id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboBoxCutArc cut) const
+void DialogTool::FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
@@ -142,7 +141,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboBoxCut
         i.next();
         if (cut == ComboBoxCutArc::CutArc)
         {
-            if (i.key() != id + 1 && i.key() != id + 2)
+            if (i.key() != toolId + 1 && i.key() != toolId + 2)
             {
                 VGObject *obj = i.value();
                 if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
@@ -154,7 +153,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboBoxCut
         }
         else
         {
-            if (i.key() != id)
+            if (i.key() != toolId)
             {
                 VGObject *obj = i.value();
                 if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
@@ -172,10 +171,9 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, const quint32 &id, ComboBoxCut
 /**
  * @brief FillComboBoxSplines fill comboBox list of splines
  * @param box comboBox
- * @param id don't show id in list
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
@@ -186,7 +184,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboBox
         i.next();
         if (cut == ComboBoxCutSpline::CutSpline)
         {
-            if (i.key() != id + 1 && i.key() != id + 2)
+            if (i.key() != toolId + 1 && i.key() != toolId + 2)
             {
                 VGObject *obj = i.value();
                 if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
@@ -198,7 +196,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboBox
         }
         else
         {
-            if (i.key() != id)
+            if (i.key() != toolId)
             {
                 VGObject *obj = i.value();
                 if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
@@ -216,10 +214,9 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, const quint32 &id, ComboBox
 /**
  * @brief FillComboBoxSplinesPath
  * @param box comboBox
- * @param id don't show id in list
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     const QHash<quint32, VGObject *> *objs = data->DataGObjects();
@@ -230,7 +227,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
         i.next();
         if (cut == ComboBoxCutSpline::CutSpline)
         {
-            if (i.key() != id + 1 && i.key() != id + 2)
+            if (i.key() != toolId + 1 && i.key() != toolId + 2)
             {
                 VGObject *obj = i.value();
                 if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
@@ -242,7 +239,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, const quint32 &id, Comb
         }
         else
         {
-            if (i.key() != id)
+            if (i.key() != toolId)
             {
                 VGObject *obj = i.value();
                 if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
@@ -492,10 +489,10 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id) const
+void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxPoints(box, id);
+    FillComboBoxPoints(box);
     pointId = value;
     ChangeCurrentData(box, value);
 }
@@ -506,14 +503,13 @@ void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint
  * @param box combobox
  * @param splineId save current spline id
  * @param value spline id
- * @param id don't show this id in list
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value, const quint32 &id,
+void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value,
                                     ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxSplines(box, id, cut);
+    FillComboBoxSplines(box, cut);
     splineId = value;
     ChangeCurrentData(box, value);
 }
@@ -524,14 +520,12 @@ void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const qui
  * @param box combobox
  * @param arcId save current arc id
  * @param value arc id
- * @param id don't show this id in list
  * @param cut if set to ComboMode::CutArc don't show id+1 and id+2
  */
-void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, const quint32 &id,
-                                 ComboBoxCutArc cut) const
+void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, ComboBoxCutArc cut) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxArcs(box, id, cut);
+    FillComboBoxArcs(box, cut);
     arcId = value;
     ChangeCurrentData(box, value);
 }
@@ -542,14 +536,13 @@ void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &
  * @param box combobox
  * @param splinePathId save current splinePath id
  * @param value splinePath id
- * @param id don't show this id in list
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
 void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
-                                        const quint32 &id, ComboBoxCutSpline cut) const
+                                        ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxSplinesPath(box, id, cut);
+    FillComboBoxSplinesPath(box, cut);
     splinePathId = value;
     ChangeCurrentData(box, value);
 }
@@ -692,13 +685,13 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id)
+void DialogTool::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value)
 {
     SCASSERT(box != nullptr);
     disconnect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
                &DialogTool::PointNameChanged);
 
-    setCurrentPointId(box, pointId, value, id);
+    setCurrentPointId(box, pointId, value);
 
     connect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
             &DialogTool::PointNameChanged);

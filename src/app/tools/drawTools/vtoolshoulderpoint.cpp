@@ -75,9 +75,9 @@ void VToolShoulderPoint::setDialog()
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
-    dialogTool->setP1Line(basePointId, id);
-    dialogTool->setP2Line(p2Line, id);
-    dialogTool->setPShoulder(pShoulder, id);
+    dialogTool->setP1Line(basePointId);
+    dialogTool->setP2Line(p2Line);
+    dialogTool->setPShoulder(pShoulder);
     dialogTool->setPointName(p->name());
 }
 

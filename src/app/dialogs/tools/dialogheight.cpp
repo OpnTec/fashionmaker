@@ -95,33 +95,30 @@ void DialogHeight::setTypeLine(const QString &value)
 /**
  * @brief setBasePointId set id base point of height
  * @param value id
- * @param id don't show this id in list
  */
-void DialogHeight::setBasePointId(const quint32 &value, const quint32 &id)
+void DialogHeight::setBasePointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxBasePoint, basePointId, value, id);
+    setPointId(ui->comboBoxBasePoint, basePointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setP1LineId set id first point of line
  * @param value id
- * @param id don't show this id in list
  */
-void DialogHeight::setP1LineId(const quint32 &value, const quint32 &id)
+void DialogHeight::setP1LineId(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line, p1LineId, value, id);
+    setPointId(ui->comboBoxP1Line, p1LineId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setP2LineId set id second point of line
  * @param value id
- * @param id don't show this id in list
  */
-void DialogHeight::setP2LineId(const quint32 &value, const quint32 &id)
+void DialogHeight::setP2LineId(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line, p2LineId, value, id);
+    setPointId(ui->comboBoxP2Line, p2LineId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -170,42 +170,38 @@ void DialogTriangle::setPointName(const QString &value)
 /**
  * @brief setSecondPointId set id of second point
  * @param value id
- * @param id don't show this point in list
  */
-void DialogTriangle::setSecondPointId(const quint32 &value, const quint32 &id)
+void DialogTriangle::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
- * @param id don't show this point in list
  */
-void DialogTriangle::setFirstPointId(const quint32 &value, const quint32 &id)
+void DialogTriangle::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setAxisP2Id set id second point of axis
  * @param value id
- * @param id don't show this point in list
  */
-void DialogTriangle::setAxisP2Id(const quint32 &value, const quint32 &id)
+void DialogTriangle::setAxisP2Id(const quint32 &value)
 {
-    setPointId(ui->comboBoxAxisP2, axisP2Id, value, id);
+    setPointId(ui->comboBoxAxisP2, axisP2Id, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setAxisP1Id set id first point of axis
  * @param value id
- * @param id don't show this point in list
  */
-void DialogTriangle::setAxisP1Id(const quint32 &value, const quint32 &id)
+void DialogTriangle::setAxisP1Id(const quint32 &value)
 {
-    setPointId(ui->comboBoxAxisP1, axisP1Id, value, id);
+    setPointId(ui->comboBoxAxisP1, axisP1Id, value);
 }

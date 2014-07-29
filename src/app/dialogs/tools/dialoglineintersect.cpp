@@ -306,7 +306,7 @@ bool DialogLineIntersect::CheckIntersecion()
  */
 void DialogLineIntersect::setP2Line2(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line2, p2Line2, value, 0);
+    setPointId(ui->comboBoxP2Line2, p2Line2, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,7 +316,7 @@ void DialogLineIntersect::setP2Line2(const quint32 &value)
  */
 void DialogLineIntersect::setP1Line2(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line2, p1Line2, value, 0);
+    setPointId(ui->comboBoxP1Line2, p1Line2, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,7 +326,7 @@ void DialogLineIntersect::setP1Line2(const quint32 &value)
  */
 void DialogLineIntersect::setP2Line1(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line1, p2Line1, value, 0);
+    setPointId(ui->comboBoxP2Line1, p2Line1, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ void DialogLineIntersect::setP2Line1(const quint32 &value)
  */
 void DialogLineIntersect::setP1Line1(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line1, p1Line1, value, 0);
+    setPointId(ui->comboBoxP1Line1, p1Line1, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

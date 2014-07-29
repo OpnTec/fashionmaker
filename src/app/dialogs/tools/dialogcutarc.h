@@ -54,7 +54,7 @@ public:
     void              setFormula(const QString &value);
 
     quint32           getArcId() const;
-    void              setArcId(const quint32 &value, const quint32 &id);
+    void              setArcId(const quint32 &value);
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type);
     virtual void      DialogAccepted();

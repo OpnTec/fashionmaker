@@ -78,7 +78,7 @@ void VToolEndLine::setDialog()
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
     dialogTool->setAngle(angle);
-    dialogTool->setBasePointId(basePointId, id);
+    dialogTool->setBasePointId(basePointId);
     dialogTool->setPointName(p->name());
 }
 

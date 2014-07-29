@@ -240,11 +240,10 @@ void DialogShoulderPoint::SaveData()
 /**
  * @brief setPShoulder set id shoulder point
  * @param value id
- * @param id don't show this id in list
  */
-void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
+void DialogShoulderPoint::setPShoulder(const quint32 &value)
 {
-    setPointId(ui->comboBoxPShoulder, pShoulder, value, id);
+    setPointId(ui->comboBoxPShoulder, pShoulder, value);
     line->setPoint1Id(pShoulder);
 }
 
@@ -252,11 +251,10 @@ void DialogShoulderPoint::setPShoulder(const quint32 &value, const quint32 &id)
 /**
  * @brief setP2Line set id second point of line
  * @param value id
- * @param id don't show this id in list
  */
-void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
+void DialogShoulderPoint::setP2Line(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line, p2Line, value, id);
+    setPointId(ui->comboBoxP2Line, p2Line, value);
     line->setLineP2Id(p2Line);
 }
 
@@ -264,11 +262,10 @@ void DialogShoulderPoint::setP2Line(const quint32 &value, const quint32 &id)
 /**
  * @brief setP1Line set id first point of line
  * @param value id
- * @param id don't show this id in list
  */
-void DialogShoulderPoint::setP1Line(const quint32 &value, const quint32 &id)
+void DialogShoulderPoint::setP1Line(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line, p1Line, value, id);
+    setPointId(ui->comboBoxP1Line, p1Line, value);
     line->setLineP1Id(p1Line);
 }
 

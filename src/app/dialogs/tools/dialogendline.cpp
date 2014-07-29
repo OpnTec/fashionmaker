@@ -173,11 +173,10 @@ void DialogEndLine::setAngle(const qreal &value)
 /**
  * @brief setBasePointId set id base point of line
  * @param value id
- * @param id don't show this id in list
  */
-void DialogEndLine::setBasePointId(const quint32 &value, const quint32 &id)
+void DialogEndLine::setBasePointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxBasePoint, basePointId, value, id);
+    setCurrentPointId(ui->comboBoxBasePoint, basePointId, value);
     line->setPoint1Id(value);
 }
 

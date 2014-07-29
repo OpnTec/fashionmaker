@@ -57,10 +57,10 @@ public:
     void                setFormula(const QString &value);
 
     quint32             getFirstPointId() const;
-    void                setFirstPointId(const quint32 &value, const quint32 &id);
+    void                setFirstPointId(const quint32 &value);
 
     quint32             getSecondPointId() const;
-    void                setSecondPointId(const quint32 &value, const quint32 &id);
+    void                setSecondPointId(const quint32 &value);
 public slots:
     virtual void        ChosenObject(quint32 id, const SceneObject &type);
     virtual void        DialogAccepted();

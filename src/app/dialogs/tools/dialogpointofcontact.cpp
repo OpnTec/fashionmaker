@@ -206,33 +206,30 @@ void DialogPointOfContact::SaveData()
 /**
  * @brief setSecondPoint set id second point
  * @param value id
- * @param id don't show this id in list.
  */
-void DialogPointOfContact::setSecondPoint(const quint32 &value, const quint32 &id)
+void DialogPointOfContact::setSecondPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPoint, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPoint, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPoint set id first point
  * @param value id
- * @param id don't show this id in list.
  */
-void DialogPointOfContact::setFirstPoint(const quint32 &value, const quint32 &id)
+void DialogPointOfContact::setFirstPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPoint, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPoint, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetCenter set id of center point
  * @param value id
- * @param id don't show this id in list.
  */
-void DialogPointOfContact::setCenter(const quint32 &value, const quint32 &id)
+void DialogPointOfContact::setCenter(const quint32 &value)
 {
-    setPointId(ui->comboBoxCenter, center, value, id);
+    setPointId(ui->comboBoxCenter, center, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

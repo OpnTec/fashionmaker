@@ -227,7 +227,7 @@ void DialogSpline::setAngle1(const qreal &value)
  */
 void DialogSpline::setP4(const quint32 &value)
 {
-    setPointId(ui->comboBoxP4, p4, value, 0);
+    setPointId(ui->comboBoxP4, p4, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ void DialogSpline::setP4(const quint32 &value)
  */
 void DialogSpline::setP1(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1, p1, value, 0);
+    setPointId(ui->comboBoxP1, p1, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

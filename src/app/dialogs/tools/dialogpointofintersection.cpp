@@ -69,11 +69,10 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 /**
  * @brief setSecondPointId set id of second point
  * @param value id
- * @param id don't show this id in list.
  */
-void DialogPointOfIntersection::setSecondPointId(const quint32 &value, const quint32 &id)
+void DialogPointOfIntersection::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,11 +159,10 @@ void DialogPointOfIntersection::UpdateList()
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
- * @param id don't show this id in list.
  */
-void DialogPointOfIntersection::setFirstPointId(const quint32 &value, const quint32 &id)
+void DialogPointOfIntersection::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

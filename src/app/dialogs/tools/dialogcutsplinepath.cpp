@@ -101,11 +101,10 @@ void DialogCutSplinePath::setFormula(const QString &value)
 /**
  * @brief setSplineId set id spline
  * @param value id
- * @param id don't show this id in list
  */
-void DialogCutSplinePath::setSplinePathId(const quint32 &value, const quint32 &id)
+void DialogCutSplinePath::setSplinePathId(const quint32 &value)
 {
-    setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, id, ComboBoxCutSpline::CutSpline);
+    setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, ComboBoxCutSpline::CutSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

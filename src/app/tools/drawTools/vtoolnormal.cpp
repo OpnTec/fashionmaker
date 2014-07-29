@@ -77,8 +77,8 @@ void VToolNormal::setDialog()
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
     dialogTool->setAngle(angle);
-    dialogTool->setFirstPointId(basePointId, id);
-    dialogTool->setSecondPointId(secondPointId, id);
+    dialogTool->setFirstPointId(basePointId);
+    dialogTool->setSecondPointId(secondPointId);
     dialogTool->setPointName(p->name());
 }
 

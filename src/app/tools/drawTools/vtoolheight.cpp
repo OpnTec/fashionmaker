@@ -72,9 +72,9 @@ void VToolHeight::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
-    dialogTool->setBasePointId(basePointId, id);
-    dialogTool->setP1LineId(p1LineId, id);
-    dialogTool->setP2LineId(p2LineId, id);
+    dialogTool->setBasePointId(basePointId);
+    dialogTool->setP1LineId(p1LineId);
+    dialogTool->setP2LineId(p2LineId);
     dialogTool->setPointName(p->name());
 }
 

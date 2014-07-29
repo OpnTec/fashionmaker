@@ -79,7 +79,7 @@ void VToolCutSplinePath::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setFormula(formula);
-    dialogTool->setSplinePathId(curveCutId, id);
+    dialogTool->setSplinePathId(curveCutId);
     dialogTool->setPointName(point->name());
 }
 

@@ -244,11 +244,10 @@ void DialogBisector::setFormula(const QString &value)
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
- * @param id don't show this id in list
  */
-void DialogBisector::setFirstPointId(const quint32 &value, const quint32 &id)
+void DialogBisector::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
     line->setPoint1Id(firstPointId);
 }
 
@@ -256,11 +255,10 @@ void DialogBisector::setFirstPointId(const quint32 &value, const quint32 &id)
 /**
  * @brief setSecondPointId set id of second point
  * @param value id
- * @param id don't show this id in list
  */
-void DialogBisector::setSecondPointId(const quint32 &value, const quint32 &id)
+void DialogBisector::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
     line->setPoint2Id(secondPointId);
 }
 
@@ -268,11 +266,10 @@ void DialogBisector::setSecondPointId(const quint32 &value, const quint32 &id)
 /**
  * @brief setThirdPointId set id of third point
  * @param value id
- * @param id don't show this id in list
  */
-void DialogBisector::setThirdPointId(const quint32 &value, const quint32 &id)
+void DialogBisector::setThirdPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxThirdPoint, thirdPointId, value, id);
+    setPointId(ui->comboBoxThirdPoint, thirdPointId, value);
     line->setPoint3Id(thirdPointId);
 }
 

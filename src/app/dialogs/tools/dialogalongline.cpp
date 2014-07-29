@@ -208,11 +208,10 @@ void DialogAlongLine::SaveData()
 /**
  * @brief setSecondPointId set id second point of line
  * @param value id
- * @param id id of current point
  */
-void DialogAlongLine::setSecondPointId(const quint32 &value, const quint32 &id)
+void DialogAlongLine::setSecondPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value, id);
+    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value);
     line->setPoint2Id(value);
 }
 
@@ -220,11 +219,10 @@ void DialogAlongLine::setSecondPointId(const quint32 &value, const quint32 &id)
 /**
  * @brief setFirstPointId set id first point of line
  * @param value id
- * @param id id of current point
  */
-void DialogAlongLine::setFirstPointId(const quint32 &value, const quint32 &id)
+void DialogAlongLine::setFirstPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value, id);
+    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value);
     line->setPoint1Id(value);
 }
 

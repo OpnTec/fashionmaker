@@ -47,16 +47,16 @@ public:
     ~DialogTriangle();
 
     quint32        getAxisP1Id() const;
-    void           setAxisP1Id(const quint32 &value, const quint32 &id);
+    void           setAxisP1Id(const quint32 &value);
 
     quint32        getAxisP2Id() const;
-    void           setAxisP2Id(const quint32 &value, const quint32 &id);
+    void           setAxisP2Id(const quint32 &value);
 
     quint32        getFirstPointId() const;
-    void           setFirstPointId(const quint32 &value, const quint32 &id);
+    void           setFirstPointId(const quint32 &value);
 
     quint32        getSecondPointId() const;
-    void           setSecondPointId(const quint32 &value, const quint32 &id);
+    void           setSecondPointId(const quint32 &value);
 
     QString        getPointName() const;
     void           setPointName(const QString &value);

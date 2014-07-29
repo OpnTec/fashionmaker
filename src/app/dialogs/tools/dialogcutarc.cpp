@@ -129,11 +129,10 @@ void DialogCutArc::SaveData()
 /**
  * @brief setArcId set id of arc
  * @param value id
- * @param id don't show this id in list
  */
-void DialogCutArc::setArcId(const quint32 &value, const quint32 &id)
+void DialogCutArc::setArcId(const quint32 &value)
 {
-    setCurrentArcId(ui->comboBoxArc, arcId, value, id, ComboBoxCutArc::CutArc);
+    setCurrentArcId(ui->comboBoxArc, arcId, value, ComboBoxCutArc::CutArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

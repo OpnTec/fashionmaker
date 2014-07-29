@@ -58,13 +58,13 @@ public:
     void           setFormula(const QString &value);
 
     quint32        getP1Line() const;
-    void           setP1Line(const quint32 &value, const quint32 &id);
+    void           setP1Line(const quint32 &value);
 
     quint32        getP2Line() const;
-    void           setP2Line(const quint32 &value, const quint32 &id);
+    void           setP2Line(const quint32 &value);
 
     quint32        getPShoulder() const;
-    void           setPShoulder(const quint32 &value, const quint32 &id);
+    void           setPShoulder(const quint32 &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   DialogAccepted();

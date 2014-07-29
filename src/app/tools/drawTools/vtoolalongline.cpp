@@ -194,8 +194,8 @@ void VToolAlongLine::setDialog()
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formula);
-    dialogTool->setFirstPointId(basePointId, id);
-    dialogTool->setSecondPointId(secondPointId, id);
+    dialogTool->setFirstPointId(basePointId);
+    dialogTool->setSecondPointId(secondPointId);
     dialogTool->setPointName(p->name());
 }
 
