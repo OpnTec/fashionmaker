@@ -144,28 +144,20 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
  */
 void DialogIncrements::FillMeasurements()
 {
-    const QHash<QString, VMeasurement> *table = data->DataMeasurements();
-    QHashIterator<QString, VMeasurement> i(*table);
-    QMap<QString, VMeasurement> map;
-    //Sorting QHash by id
-    while (i.hasNext())
-    {
-        i.next();
-        map.insert(qApp->VarToUser(i.key()), i.value());
-    }
+    const QMap<QString, VMeasurement*> table = data->DataMeasurements();
     qint32 currentRow = -1;
-    QMapIterator<QString, VMeasurement> iMap(map);
-    ui->tableWidgetMeasurements->setRowCount ( table->size() );
+    QMapIterator<QString, VMeasurement*> iMap(table);
+    ui->tableWidgetMeasurements->setRowCount ( table.size() );
     while (iMap.hasNext())
     {
         iMap.next();
-        VMeasurement m = iMap.value();
+        VMeasurement *m = iMap.value();
         currentRow++;
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(iMap.key()));
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setToolTip(m.GetGuiText());
+        item->setToolTip(m->GetGuiText());
         // set the item non-editable (view only), and non-selectable
         Qt::ItemFlags flags = item->flags();
         flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
@@ -175,7 +167,7 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetValueStandardTableRow(iMap.key())));
+            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetTableValue(iMap.key())));
             item->setTextAlignment(Qt::AlignHCenter);
             // set the item non-editable (view only), and non-selectable
             Qt::ItemFlags flags = item->flags();
@@ -184,13 +176,13 @@ void DialogIncrements::FillMeasurements()
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
         }
 
-        item = new QTableWidgetItem(QString().setNum(m.GetBase()));
+        item = new QTableWidgetItem(QString().setNum(m->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetMeasurements->setItem(currentRow, 2, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m.GetKsize()));
+            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             // set the item non-editable (view only), and non-selectable
             Qt::ItemFlags flags = item->flags();
@@ -198,7 +190,7 @@ void DialogIncrements::FillMeasurements()
             item->setFlags(flags);
             ui->tableWidgetMeasurements->setItem(currentRow, 3, item);// in sizes
 
-            item = new QTableWidgetItem(QString().setNum(m.GetKheight()));
+            item = new QTableWidgetItem(QString().setNum(m->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             // set the item non-editable (view only), and non-selectable
             flags = item->flags();
@@ -207,8 +199,8 @@ void DialogIncrements::FillMeasurements()
             ui->tableWidgetMeasurements->setItem(currentRow, 4, item);// in heights
         }
 
-        item = new QTableWidgetItem(m.GetDescription());
-        item->setToolTip(m.GetDescription());
+        item = new QTableWidgetItem(m->GetDescription());
+        item->setToolTip(m->GetDescription());
         item->setTextAlignment(Qt::AlignHCenter);
         // set the item non-editable (view only), and non-selectable
         flags = item->flags();
@@ -228,15 +220,15 @@ void DialogIncrements::FillMeasurements()
  */
 void DialogIncrements::FillIncrements()
 {
-    const QHash<QString, VIncrement> *increments = data->DataIncrements();
-    QHashIterator<QString, VIncrement> i(*increments);
+    const QMap<QString, VIncrement*> increments = data->DataIncrements();
+    QMapIterator<QString, VIncrement*> i(increments);
     QMap<quint32, QString> map;
     //Sorting QHash by id
     while (i.hasNext())
     {
         i.next();
-        VIncrement incr = i.value();
-        map.insert(incr.getId(), i.key());
+        VIncrement *incr = i.value();
+        map.insert(incr->getId(), i.key());
     }
 
     qint32 currentRow = -1;
@@ -244,19 +236,19 @@ void DialogIncrements::FillIncrements()
     while (iMap.hasNext())
     {
         iMap.next();
-        VIncrement incr = increments->value(iMap.value());
+        VIncrement *incr = increments.value(iMap.value());
         currentRow++;
-        ui->tableWidgetIncrement->setRowCount ( increments->size() );
+        ui->tableWidgetIncrement->setRowCount ( increments.size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(iMap.value());
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setData(Qt::UserRole, incr.getId());
+        item->setData(Qt::UserRole, incr->getId());
         ui->tableWidgetIncrement->setItem(currentRow, 0, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(data->GetValueIncrementTableRow(iMap.value())));
+            item = new QTableWidgetItem(QString().setNum(data->GetTableValue(iMap.value())));
             item->setTextAlignment(Qt::AlignHCenter);
             // set the item non-editable (view only), and non-selectable
             Qt::ItemFlags flags = item->flags();
@@ -265,23 +257,23 @@ void DialogIncrements::FillIncrements()
             ui->tableWidgetIncrement->setItem(currentRow, 1, item);
         }
 
-        item = new QTableWidgetItem(QString().setNum(incr.GetBase()));
+        item = new QTableWidgetItem(QString().setNum(incr->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(incr.GetKsize()));
+            item = new QTableWidgetItem(QString().setNum(incr->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 3, item);
 
-            item = new QTableWidgetItem(QString().setNum(incr.GetKheight()));
+            item = new QTableWidgetItem(QString().setNum(incr->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 4, item);
         }
 
-        item = new QTableWidgetItem(incr.GetDescription());
-        item->setToolTip(incr.GetDescription());
+        item = new QTableWidgetItem(incr->GetDescription());
+        item->setToolTip(incr->GetDescription());
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetIncrement->setItem(currentRow, 5, item);
     }
@@ -295,28 +287,18 @@ void DialogIncrements::FillIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillTable(const QHash<QString, qreal> *varTable, QTableWidget *table)
+void DialogIncrements::FillTable(const QMap<QString, qreal> varTable, QTableWidget *table)
 {
     SCASSERT(table != nullptr);
-    SCASSERT(varTable != nullptr);
-
-    QHashIterator<QString, qreal> iHash(*varTable);
-    QMap<QString, qreal> map;
-    //Sorting QHash by name
-    while (iHash.hasNext())
-    {
-        iHash.next();
-        map.insert(qApp->VarToUser(iHash.key()), iHash.value());
-    }
 
     qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(map);
+    QMapIterator<QString, qreal> i(varTable);
     while (i.hasNext())
     {
         i.next();
         qreal length = i.value();
         currentRow++;
-        table->setRowCount ( varTable->size() );
+        table->setRowCount ( varTable.size() );
 
         QTableWidgetItem *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
@@ -485,7 +467,7 @@ void DialogIncrements::OpenTable()
         }
         delete m;
         m = m1;
-        data->ClearMeasurements();
+        data->ClearVariables(VarType::Measurement);
         m->Measurements();
         emit FullUpdateTree();
 
@@ -517,7 +499,7 @@ void DialogIncrements::OpenTable()
             }
             m1->SetSize();
             m1->SetHeight();
-            data->ClearMeasurements();
+            data->ClearVariables(VarType::Measurement);
             m1->Measurements();
             delete m1;
             emit FullUpdateTree();
@@ -553,12 +535,12 @@ void DialogIncrements::clickedToolButtonAdd()
     {
         name = QString(tr("Name_%1")).arg(num);
         num++;
-    } while (data->IncrementTableContains(name));
+    } while (data->IncrementExist(name));
 
     const quint32 id = data->getNextId();
     const QString description(tr("Description"));
-    VIncrement incr = VIncrement(id, 0, 0, 0, description);
-    data->AddIncrement(name, incr);
+    VIncrement *incr = new VIncrement(name, id, 0, 0, 0, description);
+    data->AddVariable(name, incr);
 
     AddIncrementToFile(id, name, 0, 0, 0, description);
 
@@ -610,7 +592,7 @@ void DialogIncrements::clickedToolButtonRemove()
     QTableWidgetItem *item = ui->tableWidgetIncrement->currentItem();
     qint32 row = item->row();
     QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
-    data->RemoveIncrementTableRow(itemName->text());
+    data->RemoveIncrement(itemName->text());
     quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
@@ -687,7 +669,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
     {
         case 0: // VPattern::IncrementName
             doc->SetAttribute(domElement, VPattern::IncrementName, item->text());
-            data->ClearIncrementTable();
+            data->ClearVariables(VarType::Increment);
             this->column = 2;
             emit FullUpdateTree();
             break;
@@ -709,9 +691,8 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
         case 5: // VPattern::IncrementDescription
         {
             doc->SetAttribute(domElement, VPattern::IncrementDescription, item->text());
-            VIncrement incr = data->GetIncrement(itemName->text());
-            incr.setDescription(item->text());
-            data->UpdateIncrement(itemName->text(), incr);
+            VIncrement *incr = data->GetVariable<VIncrement*>(itemName->text());
+            incr->setDescription(item->text());
             ui->tableWidgetIncrement->resizeColumnsToContents();
             ui->tableWidgetIncrement->resizeRowsToContents();
             this->column = 0;
@@ -734,8 +715,8 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);// name column
             QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
-            VMeasurement measur = data->GetMeasurement(qApp->VarFromUser(itemName->text()));
-            const QString tag = measur.TagName();
+            VMeasurement *measur = data->GetVariable<VMeasurement*>(qApp->VarFromUser(itemName->text()));
+            const QString tag = measur->TagName();
             QDomNodeList list = m->elementsByTagName(tag);
             QDomElement domElement = list.at(0).toElement();
             if (domElement.isElement() == false)
@@ -748,13 +729,13 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             qreal base = item->text().replace(",", ".").toDouble(&ok);
             if (ok == false)
             {
-                measur.SetBase(0);
+                measur->SetBase(0);
                 item->setText("0");
                 qDebug()<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
             }
             else
             {
-                measur.SetBase(base);
+                measur->SetBase(base);
             }
 
             // Convert value to measurements table unit
@@ -766,7 +747,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
                 qDebug()<<"Can't save measurement";
             }
 
-            data->ClearMeasurements();
+            data->ClearVariables();
             m->Measurements();
 
             emit FullUpdateTree();

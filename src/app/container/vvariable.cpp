@@ -32,26 +32,34 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable()
-    :base(0), ksize(0), kheight(0), description(QString())
+    :VInternalVariable(), base(0), ksize(0), kheight(0), description(QString())
 {
     Init();
+    value = base;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const qreal &base, const qreal &ksize, const qreal &kheight, const QString &description)
-    :base(base), ksize(ksize), kheight(kheight), description(description)
-{}
+VVariable::VVariable(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
+                     const QString &description)
+    :VInternalVariable(), base(base), ksize(ksize), kheight(kheight), description(description)
+{
+    value = base;
+    this->name = name;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const qreal &base, const QString &description)
+VVariable::VVariable(const QString &name, const qreal &base, const QString &description)
     :base(base), ksize(0), kheight(0), description(description)
 {
     Init();
+    value = base;
+    this->name = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(const VVariable &var)
-    :base(var.GetBase()), ksize(var.GetKsize()), kheight(var.GetKheight()), description(var.GetDescription())
+    :VInternalVariable(var), base(var.GetBase()), ksize(var.GetKsize()), kheight(var.GetKheight()),
+      description(var.GetDescription())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -61,6 +69,7 @@ VVariable &VVariable::operator=(const VVariable &var)
     {
         return *this;
     }
+    VInternalVariable::operator=(var);
     this->base = var.GetBase();
     this->ksize = var.GetKsize();
     this->kheight = var.GetKheight();
@@ -73,24 +82,22 @@ VVariable::~VVariable()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VVariable::GetValue(const qreal &size, const qreal &height) const
+void VVariable::SetValue(const qreal &size, const qreal &height)
 {
-    if (qApp->patternUnit() != Unit::Inch)
+    if (qApp->patternUnit() == Unit::Inch)
     {
-        const qreal baseSize = VAbstractMeasurements::UnitConvertor(50.0, Unit::Cm, qApp->patternUnit());
-        const qreal baseHeight = VAbstractMeasurements::UnitConvertor(176.0, Unit::Cm, qApp->patternUnit());
-        const qreal sizeIncrement = VAbstractMeasurements::UnitConvertor(2.0, Unit::Cm, qApp->patternUnit());
-        const qreal heightIncrement = VAbstractMeasurements::UnitConvertor(6.0, Unit::Cm, qApp->patternUnit());
+        qWarning("Gradation doesn't support inches");
+        return;
+    }
+    const qreal baseSize = VAbstractMeasurements::UnitConvertor(50.0, Unit::Cm, qApp->patternUnit());
+    const qreal baseHeight = VAbstractMeasurements::UnitConvertor(176.0, Unit::Cm, qApp->patternUnit());
+    const qreal sizeIncrement = VAbstractMeasurements::UnitConvertor(2.0, Unit::Cm, qApp->patternUnit());
+    const qreal heightIncrement = VAbstractMeasurements::UnitConvertor(6.0, Unit::Cm, qApp->patternUnit());
 
-        // Formula for calculation gradation
-        const qreal k_size    = ( size - baseSize ) / sizeIncrement;
-        const qreal k_height  = ( height - baseHeight ) / heightIncrement;
-        return base + k_size * ksize + k_height * kheight;
-    }
-    else// Must not be reached!!!!
-    {
-        return base;
-    }
+    // Formula for calculation gradation
+    const qreal k_size    = ( size - baseSize ) / sizeIncrement;
+    const qreal k_height  = ( height - baseHeight ) / heightIncrement;
+    value = base + k_size * ksize + k_height * kheight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

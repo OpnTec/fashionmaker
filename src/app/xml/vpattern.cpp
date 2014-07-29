@@ -1753,7 +1753,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
                     const qreal kgrowth = GetParametrDouble(domElement, IncrementKgrowth, "0");
                     const QString desc = GetParametrString(domElement, IncrementDescription, "Description");
                     data->UpdateId(id);
-                    data->AddIncrement(name, VIncrement(id, base, ksize, kgrowth, desc));
+                    data->AddVariable(name, new VIncrement(name, id, base, ksize, kgrowth, desc));
                 }
             }
         }
@@ -1835,13 +1835,8 @@ void VPattern::PrepareForParse(const Document &parse)
         patternPieces.clear();
         tools.clear();
         cursor = 0;
+        history.clear();
     }
-    data->ClearLengthLines();
-    data->ClearLengthArcs();
-    data->ClearLengthSplines();
-    data->ClearLineAngles();
-    data->ClearDetails();
-    history.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

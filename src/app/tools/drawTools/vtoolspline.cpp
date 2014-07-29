@@ -154,12 +154,12 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddLengthSpline(spline->name(), qApp->fromPixel(spline->GetLength()));
+        data->AddVariable(spline->name(), new VLengthSpline(id, spline));
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddLengthSpline(spline->name(), qApp->fromPixel(spline->GetLength()));
+        data->AddVariable(spline->name(), new VLengthSpline(id, spline));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

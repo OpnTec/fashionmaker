@@ -33,7 +33,7 @@
  * @brief VGObject default constructor.
  */
 VGObject::VGObject()
-    :_id(0), type(GOType::Point), idObject(0), _name(QString()), mode(Draw::Calculation)
+    :_id(0), type(GOType::Unknown), idObject(0), _name(QString()), mode(Draw::Calculation)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

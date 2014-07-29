@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vincrementtablerow.cpp
+ **  @file   vlengtharc.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   28 7, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,51 +26,50 @@
  **
  *************************************************************************/
 
-#include "vincrement.h"
+#include "vlengtharc.h"
+#include "../geometry/varc.h"
+#include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VIncrement create enpty increment
- */
-VIncrement::VIncrement()
-    :VVariable(), id(0)
+VLengthArc::VLengthArc()
+    :VInternalVariable(), id(0)
 {
-    type = VarType::Increment;
+    type = VarType::LengthArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VIncrementTableRow create increment
- * @param name increment's name
- * @param id id
- * @param base value in base size and height
- * @param ksize increment in sizes
- * @param kheight increment in heights
- * @param description description of increment
- */
-VIncrement::VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
-    :VVariable(name, base, ksize, kheight, description), id(id)
+VLengthArc::VLengthArc(const quint32 &id, const VArc *arc)
+    :VInternalVariable(), id(id)
 {
-    type = VarType::Increment;
+    type = VarType::LengthArc;
+    SCASSERT(arc != nullptr);
+    name = arc->name();
+    value = qApp->fromPixel(arc->GetLength());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::VIncrement(const VIncrement &incr)
-    :VVariable(incr), id(incr.getId())
+VLengthArc::VLengthArc(const VLengthArc &var)
+    :VInternalVariable(var), id(var.GetId())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement &VIncrement::operator=(const VIncrement &incr)
+VLengthArc &VLengthArc::operator=(const VLengthArc &var)
 {
-    if ( &incr == this )
+    if ( &var == this )
     {
         return *this;
     }
-    VVariable::operator=(incr);
-    this->id = incr.getId();
+    VInternalVariable::operator=(var);
+    this->id = var.GetId();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::~VIncrement()
+VLengthArc::~VLengthArc()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLengthArc::Filter(quint32 id)
+{
+    return this->id == id;
+}

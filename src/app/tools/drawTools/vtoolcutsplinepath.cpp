@@ -198,18 +198,18 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
     if (typeCreation == Source::FromGui)
     {
         splPath1id = data->AddGObject(splPath1);
-        data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
+        data->AddVariable(splPath1->name(), new VLengthSpline(splPath1id, splPath1));
 
         splPath2id = data->AddGObject(splPath2);
-        data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
+        data->AddVariable(splPath2->name(), new VLengthSpline(splPath2id, splPath2));
     }
     else
     {
         data->UpdateGObject(splPath1id, splPath1);
-        data->AddLengthSpline(splPath1->name(), qApp->fromPixel(splPath1->GetLength()));
+        data->AddVariable(splPath1->name(), new VLengthSpline(splPath1id, splPath1));
 
         data->UpdateGObject(splPath2id, splPath2);
-        data->AddLengthSpline(splPath2->name(), qApp->fromPixel(splPath2->GetLength()));
+        data->AddVariable(splPath2->name(), new VLengthSpline(splPath2id, splPath2));
 
         if (parse != Document::FullParse)
         {

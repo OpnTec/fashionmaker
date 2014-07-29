@@ -36,11 +36,14 @@
  */
 VMeasurement::VMeasurement()
     :VVariable(), gui_text(QString()), _tagName(QString())
-{}
+{
+    type = VarType::Measurement;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for standard table
+ * @param name measurement's name
  * @param base value in base size and height
  * @param ksize increment in sizes
  * @param kheight increment in heights
@@ -48,23 +51,28 @@ VMeasurement::VMeasurement()
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
+VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
                            const QString &gui_text, const QString &description, const QString &tagName)
-    :VVariable(base, ksize, kheight, description), gui_text(gui_text), _tagName(tagName)
-{}
+    :VVariable(name, base, ksize, kheight, description), gui_text(gui_text), _tagName(tagName)
+{
+    type = VarType::Measurement;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for individual table
+ * @param name measurement's name
  * @param base value in base size and height
  * @param gui_text shor tooltip for user
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const qreal &base, const QString &gui_text, const QString &description,
+VMeasurement::VMeasurement(const QString &name, const qreal &base, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(base, description), gui_text(gui_text), _tagName(tagName)
-{}
+    :VVariable(name, base, description), gui_text(gui_text), _tagName(tagName)
+{
+    type = VarType::Measurement;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(const VMeasurement &m)
@@ -91,12 +99,13 @@ VMeasurement::~VMeasurement()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VMeasurement::ListHeights()
 {
+    QStringList list;
     if (qApp->patternUnit() == Unit::Inch)
     {
         qWarning()<<"Standard table doesn't support inches.";
+        return list;
     }
 
-    QStringList list;
     // from 92 cm to 188 cm
     for (int i = 92; i<= 188; i = i+6)
     {
@@ -108,12 +117,13 @@ QStringList VMeasurement::ListHeights()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VMeasurement::ListSizes()
 {
+    QStringList list;
     if (qApp->patternUnit() == Unit::Inch)
     {
         qWarning()<<"Standard table doesn't support inches.";
+        return list;
     }
 
-    QStringList list;
     // from 22 cm to 56 cm
     for (int i = 22; i<= 56; i = i+2)
     {

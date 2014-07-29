@@ -94,7 +94,7 @@ private:
 
     void                 FillMeasurements();
     void                 FillIncrements();
-    void                 FillTable(const QHash<QString, qreal> *varTable, QTableWidget *table);
+    void                 FillTable(const QMap<QString, qreal> varTable, QTableWidget *table);
     void                 FillLengthLines();
     void                 FillLengthSplines();
     void                 FillLengthArcs();

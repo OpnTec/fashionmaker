@@ -197,7 +197,7 @@ protected:
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
     template <class key, class val>
-    void             ShowVariable(const QHash<key, val> *var);
+    void             ShowVariable(const QMap<key, val> var);
     void             SetupTypeLine(QComboBox *box, const QString &value);
     void             ChangeCurrentText(QComboBox *box, const QString &value);
     void             ChangeCurrentData(QComboBox *box, const quint32 &value) const;

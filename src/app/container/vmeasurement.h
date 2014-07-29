@@ -30,7 +30,8 @@
 #define VSTANDARDTABLEROW_H
 
 #include "vvariable.h"
-#include <QString>
+
+#include <QStringList>
 
 /**
  * @brief The VMeasurement class keep data row of standard table
@@ -39,10 +40,10 @@ class VMeasurement :public VVariable
 {
 public:
     VMeasurement();
-    VMeasurement(const qreal &base, const qreal &ksize, const qreal &kheight,
+    VMeasurement(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
                  const QString &gui_text = QString(), const QString &description = QString(),
                  const QString &TagName = QString());
-    VMeasurement(const qreal &base, const QString &gui_text = QString(),
+    VMeasurement(const QString &name, const qreal &base, const QString &gui_text = QString(),
                  const QString &description = QString(), const QString &TagName = QString());
     VMeasurement(const VMeasurement &m);
     VMeasurement &operator=(const VMeasurement &m);

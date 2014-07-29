@@ -29,14 +29,15 @@
 #ifndef VVARIABLE_H
 #define VVARIABLE_H
 
-#include <QString>
+#include "vinternalvariable.h"
 
-class VVariable
+class VVariable :public VInternalVariable
 {
 public:
     VVariable();
-    VVariable(const qreal &base, const qreal &ksize, const qreal &kheight, const QString &description = QString());
-    VVariable(const qreal &base, const QString &description = QString());
+    VVariable(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
+              const QString &description = QString());
+    VVariable(const QString &name, const qreal &base, const QString &description = QString());
     VVariable(const VVariable &var);
     VVariable &operator=(const VVariable &var);
     virtual ~VVariable();
@@ -46,20 +47,19 @@ public:
     qreal   GetKsize() const;
     qreal   GetKheight() const;
     QString GetDescription() const;
-    qreal   GetValue() const;
-    qreal   GetValue(const qreal &size, const qreal &height) const;
+    void    SetValue(const qreal &size, const qreal &height);
 protected:
     /** @brief base value in base size and height */
-    qreal          base;
+    qreal   base;
 
     /** @brief ksize increment in sizes */
-    qreal          ksize;
+    qreal   ksize;
 
     /** @brief kgrowth increment in heights */
-    qreal          kheight;
+    qreal   kheight;
 
     /** @brief description description of increment */
-    QString        description;
+    QString description;
 private:
     void    Init();
 };
@@ -104,12 +104,6 @@ inline qreal VVariable::GetKheight() const
 inline QString VVariable::GetDescription() const
 {
     return description;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qreal VVariable::GetValue() const
-{
-    return base;
 }
 
 #endif // VVARIABLE_H

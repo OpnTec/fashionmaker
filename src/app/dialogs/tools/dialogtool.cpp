@@ -967,30 +967,32 @@ void DialogTool::ValChenged(int row)
     if (radioButtonStandardTable->isChecked())
     {
         QString name = qApp->VarFromUser(item->text());
-        VMeasurement stable = data->GetMeasurement(name);
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueStandardTableRow(name))
-                .arg(stable.GetGuiText());
+        VMeasurement *stable = data->GetVariable<VMeasurement *>(name);
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(name))
+                .arg(stable->GetGuiText());
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonIncrements->isChecked())
     {
-        VIncrement incr = data->GetIncrement(item->text());
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetValueIncrementTableRow(item->text()))
-                .arg(incr.GetDescription());
+        VIncrement *incr = data->GetVariable<VIncrement *>(item->text());
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(item->text()))
+                .arg(incr->GetDescription());
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonLengthLine->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLine(qApp->VarFromUser(item->text())))
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(*data->GetVariable<VLengthLine*>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Line length"));
         labelDescription->setText(desc);
         return;
     }
     if (radioButtonLengthArc->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLengthArc(qApp->VarFromUser(item->text())))
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(*data->GetVariable<VLengthArc *>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Arc length"));
         labelDescription->setText(desc);
         return;
@@ -998,7 +1000,8 @@ void DialogTool::ValChenged(int row)
     if (radioButtonLengthCurve->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(data->GetLengthSpline(qApp->VarFromUser(item->text()))).arg(tr("Curve length"));
+                .arg(*data->GetVariable<VLengthSpline *>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(tr("Curve length"));
         labelDescription->setText(desc);
         return;
     }
@@ -1049,21 +1052,13 @@ void DialogTool::UpdateList()
  * @param var container with variables
  */
 template <class key, class val>
-void DialogTool::ShowVariable(const QHash<key, val> *var)
+void DialogTool::ShowVariable(const QMap<key, val> var)
 {
     SCASSERT(listWidget != nullptr);
     disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->clear();
 
-    QHashIterator<key, val> i(*var);
-    QMap<key, val> map;
-    while (i.hasNext())
-    {
-        i.next();
-        map.insert(qApp->VarToUser(i.key()), i.value());
-    }
-
-    QMapIterator<key, val> iMap(map);
+    QMapIterator<key, val> iMap(var);
     while (iMap.hasNext())
     {
         iMap.next();

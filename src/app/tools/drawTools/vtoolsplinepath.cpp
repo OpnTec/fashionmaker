@@ -136,12 +136,12 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(path);
-        data->AddLengthSpline(path->name(), qApp->fromPixel(path->GetLength()));
+        data->AddVariable(path->name(), new VLengthSpline(id, path));
     }
     else
     {
         data->UpdateGObject(id, path);
-        data->AddLengthSpline(path->name(), qApp->fromPixel(path->GetLength()));
+        data->AddVariable(path->name(), new VLengthSpline(id, path));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

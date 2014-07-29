@@ -33,7 +33,7 @@
 #include <QString>
 #include <QtGlobal>
 
-enum class GOType : char { Point, Arc, Spline, SplinePath };
+enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
 
 /**
  * @brief The VGObject class keep information graphical objects.

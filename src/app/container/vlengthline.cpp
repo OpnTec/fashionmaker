@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vincrementtablerow.cpp
+ **  @file   vlengthline.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   28 7, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,51 +26,64 @@
  **
  *************************************************************************/
 
-#include "vincrement.h"
+#include "vlengthline.h"
+#include "../geometry/vpointf.h"
+#include "../widgets/vapplication.h"
+
+#include <QLineF>
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VIncrement create enpty increment
- */
-VIncrement::VIncrement()
-    :VVariable(), id(0)
+VLengthLine::VLengthLine()
+    :VInternalVariable(), p1Id(0), p2Id(0)
 {
-    type = VarType::Increment;
+    type = VarType::LengthLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VIncrementTableRow create increment
- * @param name increment's name
- * @param id id
- * @param base value in base size and height
- * @param ksize increment in sizes
- * @param kheight increment in heights
- * @param description description of increment
- */
-VIncrement::VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
-    :VVariable(name, base, ksize, kheight, description), id(id)
+VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
+    :VInternalVariable(), p1Id(p1Id), p2Id(p2Id)
 {
-    type = VarType::Increment;
+    SCASSERT(p1 != nullptr);
+    SCASSERT(p2 != nullptr);
+
+    type = VarType::LengthLine;
+    name = QString(line_+"%1_%2").arg(p1->name(), p2->name());
+    SetValue(p1, p2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::VIncrement(const VIncrement &incr)
-    :VVariable(incr), id(incr.getId())
+VLengthLine::VLengthLine(const VLengthLine &var)
+    :VInternalVariable(var), p1Id(var.GetP1Id()), p2Id(var.GetP2Id())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement &VIncrement::operator=(const VIncrement &incr)
+VLengthLine &VLengthLine::operator=(const VLengthLine &var)
 {
-    if ( &incr == this )
+    if ( &var == this )
     {
         return *this;
     }
-    VVariable::operator=(incr);
-    this->id = incr.getId();
+    VInternalVariable::operator=(var);
+    this->p1Id = var.GetP1Id();
+    this->p2Id = var.GetP2Id();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::~VIncrement()
+VLengthLine::~VLengthLine()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLengthLine::Filter(quint32 id)
+{
+    return id == p1Id || id == p2Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
+{
+    SCASSERT(p1 != nullptr);
+    SCASSERT(p2 != nullptr);
+
+    value = qApp->fromPixel(QLineF(p1->toQPointF(), p2->toQPointF()).length());
+}

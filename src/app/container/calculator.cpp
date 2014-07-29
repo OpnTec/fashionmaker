@@ -154,23 +154,23 @@ void Calculator::InitVariables(const VContainer *data)
         num +=2;
     }
 
-    const QHash<QString, qreal> *lengthLines = data->DataLengthLines();
-    num += lengthLines->size();
+    const QMap<QString, qreal> lengthLines = data->DataLengthLines();
+    num += lengthLines.size();
 
-    const QHash<QString, qreal> *lengthSplines = data->DataLengthSplines();
-    num += lengthSplines->size();
+    const QMap<QString, qreal> lengthSplines = data->DataLengthSplines();
+    num += lengthSplines.size();
 
-    const QHash<QString, qreal> *lengthArcs = data->DataLengthArcs();
-    num += lengthArcs->size();
+    const QMap<QString, qreal> lengthArcs = data->DataLengthArcs();
+    num += lengthArcs.size();
 
-    const QHash<QString, qreal> *lineAngles = data->DataLineAngles();
-    num += lineAngles->size();
+    const QMap<QString, qreal> lineAngles = data->DataLineAngles();
+    num += lineAngles.size();
 
-    const QHash<QString, VMeasurement> *measurements = data->DataMeasurements();
-    num += measurements->size();
+    const QMap<QString, VMeasurement*> measurements = data->DataMeasurements();
+    num += measurements.size();
 
-    const QHash<QString, VIncrement> *increments = data->DataIncrements();
-    num += increments->size();
+    const QMap<QString, VIncrement*> increments = data->DataIncrements();
+    num += increments.size();
 
     vVarVal = new qreal[num];
     int j = 0;
@@ -187,8 +187,8 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QHash<QString, qreal>::const_iterator i = lengthLines->constBegin();
-        while (i != lengthLines->constEnd())
+        QMap<QString, qreal>::const_iterator i = lengthLines.constBegin();
+        while (i != lengthLines.constEnd())
         {
             vVarVal[j] = i.value();
             DefineVar(i.key(), &vVarVal[j]);
@@ -198,8 +198,8 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QHash<QString, qreal>::const_iterator i = lengthSplines->constBegin();
-        while (i != lengthSplines->constEnd())
+        QMap<QString, qreal>::const_iterator i = lengthSplines.constBegin();
+        while (i != lengthSplines.constEnd())
         {
             vVarVal[j] = i.value();
             DefineVar(i.key(), &vVarVal[j]);
@@ -209,8 +209,8 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QHash<QString, qreal>::const_iterator i = lengthArcs->constBegin();
-        while (i != lengthArcs->constEnd())
+        QMap<QString, qreal>::const_iterator i = lengthArcs.constBegin();
+        while (i != lengthArcs.constEnd())
         {
             vVarVal[j] = i.value();
             DefineVar(i.key(), &vVarVal[j]);
@@ -220,8 +220,8 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QHash<QString, qreal>::const_iterator i = lineAngles->constBegin();
-        while (i != lineAngles->constEnd())
+        QMap<QString, qreal>::const_iterator i = lineAngles.constBegin();
+        while (i != lineAngles.constEnd())
         {
             vVarVal[j] = i.value();
             DefineVar(i.key(), &vVarVal[j]);
@@ -231,17 +231,15 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QHash<QString, VMeasurement>::const_iterator i = measurements->constBegin();
-        while (i != measurements->constEnd())
+        QMap<QString, VMeasurement*>::const_iterator i = measurements.constBegin();
+        while (i != measurements.constEnd())
         {
+            VMeasurement *m = i.value();
             if (qApp->patternType() == MeasurementsType::Standard)
             {
-                vVarVal[j] = i.value().GetValue(data->size(), data->height());
+                m->SetValue(data->size(), data->height());
             }
-            else
-            {
-                vVarVal[j] = i.value().GetValue();
-            }
+            vVarVal[j] = *m->GetValue();
             DefineVar(i.key(), &vVarVal[j]);
             ++j;
             ++i;
@@ -249,17 +247,15 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QHash<QString, VIncrement>::const_iterator i = increments->constBegin();
-        while (i != increments->constEnd())
+        QMap<QString, VIncrement*>::const_iterator i = increments.constBegin();
+        while (i != increments.constEnd())
         {
+            VIncrement *incr = i.value();
             if (qApp->patternType() == MeasurementsType::Standard)
             {
-                vVarVal[j] = i.value().GetValue(data->size(), data->height());
+                incr->SetValue(data->size(), data->height());
             }
-            else
-            {
-                vVarVal[j] = i.value().GetValue();
-            }
+            vVarVal[j] = *incr->GetValue();
             DefineVar(i.key(), &vVarVal[j]);
             ++j;
             ++i;

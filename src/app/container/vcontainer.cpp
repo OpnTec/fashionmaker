@@ -41,11 +41,11 @@ quint32 VContainer::_id = 0;
  * @brief VContainer create empty container
  */
 VContainer::VContainer()
-    :_size(50), sizeName(size_M), _height(176), heightName(height_M), gObjects(QHash<quint32, VGObject *>()),
-      measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
-      lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
-      lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
-{}
+    :_size(50), sizeName(size_M), _height(176), heightName(height_M),
+      gObjects(QHash<quint32, VGObject *>()), variables(QHash<QString, VInternalVariable*> ()),
+      details(QHash<quint32, VDetail>())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -69,10 +69,9 @@ VContainer &VContainer::operator =(const VContainer &data)
  * @param data container
  */
 VContainer::VContainer(const VContainer &data)
-    :_size(50), sizeName(size_M), _height(176), heightName(height_M), gObjects(QHash<quint32, VGObject *>()),
-      measurements(QHash<QString, VMeasurement>()), increments(QHash<QString, VIncrement>()),
-      lengthLines(QHash<QString, qreal>()), lineAngles(QHash<QString, qreal>()), lengthSplines(QHash<QString, qreal>()),
-      lengthArcs(QHash<QString, qreal>()), details(QHash<quint32, VDetail>())
+    :_size(50), sizeName(size_M), _height(176), heightName(height_M),
+      gObjects(QHash<quint32, VGObject *>()), variables(QHash<QString, VInternalVariable*> ()),
+      details(QHash<quint32, VDetail>())
 {
     setData(data);
 }
@@ -80,8 +79,8 @@ VContainer::VContainer(const VContainer &data)
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::~VContainer()
 {
-    qDeleteAll(gObjects);
-    gObjects.clear();
+    ClearGObjects();
+    ClearVariables();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,40 +94,71 @@ void VContainer::setData(const VContainer &data)
     sizeName = data.SizeName();
     _height = data.height();
     heightName = data.HeightName();
-
-    qDeleteAll(gObjects);
-    gObjects.clear();
-    const QHash<quint32, VGObject*> *obj = data.DataGObjects();
-    SCASSERT(obj != nullptr);
-    QHashIterator<quint32, VGObject*> i(*obj);
-    while (i.hasNext())
     {
-        i.next();
-        switch (i.value()->getType())
+        ClearGObjects();
+        const QHash<quint32, VGObject*> *obj = data.DataGObjects();
+        SCASSERT(obj != nullptr);
+        QHashIterator<quint32, VGObject*> i(*obj);
+        while (i.hasNext())
         {
-            case (GOType::Arc):
-                CopyGObject<VArc>(data, i.key());
-                break;
-            case (GOType::Point):
-                CopyGObject<VPointF>(data, i.key());
-                break;
-            case (GOType::Spline):
-                CopyGObject<VSpline>(data, i.key());
-                break;
-            case (GOType::SplinePath):
-                CopyGObject<VSplinePath>(data, i.key());
-                break;
-            default:
-                qDebug()<<"Don't know how copy this type.";
-                break;
+            i.next();
+            switch (i.value()->getType())
+            {
+                case (GOType::Arc):
+                    CopyGObject<VArc>(data, i.key());
+                    break;
+                case (GOType::Point):
+                    CopyGObject<VPointF>(data, i.key());
+                    break;
+                case (GOType::Spline):
+                    CopyGObject<VSpline>(data, i.key());
+                    break;
+                case (GOType::SplinePath):
+                    CopyGObject<VSplinePath>(data, i.key());
+                    break;
+                default:
+                    qDebug()<<"Don't know how copy this type.";
+                    break;
+            }
         }
     }
-    measurements = *data.DataMeasurements();
-    increments = *data.DataIncrements();
-    lengthLines = *data.DataLengthLines();
-    lineAngles = *data.DataLineAngles();
-    lengthSplines = *data.DataLengthSplines();
-    lengthArcs = *data.DataLengthArcs();
+
+    {
+        ClearVariables();
+        const QHash<QString, VInternalVariable*> *vars = data.DataVariables();
+        SCASSERT(vars != nullptr);
+        QHashIterator<QString, VInternalVariable*> i(*vars);
+        while (i.hasNext())
+        {
+            i.next();
+            switch (i.value()->GetType())
+            {
+                case (VarType::Measurement):
+                    CopyVar<VMeasurement>(data, i.key());
+                    break;
+                case (VarType::Increment):
+                    CopyVar<VIncrement>(data, i.key());
+                    break;
+                case (VarType::LengthLine):
+                    CopyVar<VLengthLine>(data, i.key());
+                    break;
+                case (VarType::LengthSpline):
+                    CopyVar<VLengthSpline>(data, i.key());
+                    break;
+                case (VarType::LengthArc):
+                    CopyVar<VLengthArc>(data, i.key());
+                    break;
+                case (VarType::LineAngle):
+                    CopyVar<VLineAngle>(data, i.key());
+                    break;
+                case (VarType::Unknown):
+                default:
+                    qDebug()<<"Don't know how copy this type.";
+                    break;
+            }
+        }
+    }
+
     details = *data.DataDetails();
 }
 
@@ -166,105 +196,20 @@ const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetObject return object from container
- * @param obj container
- * @param id id of object
- * @return Object
- */
-template <typename key, typename val>
-val VContainer::GetVariable(const QHash<key, val> &obj, key id) const
-{
-    if (obj.contains(id))
-    {
-        return obj.value(id);
-    }
-    else
-    {
-        throw VExceptionBadId(tr("Can't find object"), id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetMeasurement return measurement by name
- * @param name short measurement name
- * @return measurement
- */
-const VMeasurement VContainer::GetMeasurement(const QString &name) const
-{
-    SCASSERT(name.isEmpty()==false);
-    return GetVariable(measurements, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetIncrement return increment table row by name
- * @param name name of increment table row
- * @return increment
- */
-const VIncrement VContainer::GetIncrement(const QString& name) const
-{
-    SCASSERT(name.isEmpty()==false);
-    return GetVariable(increments, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetLine return length of line by name
- * @param name name of line
- * @return length of line in mm
- */
-qreal VContainer::GetLine(const QString &name) const
-{
-    SCASSERT(name.isEmpty()==false);
-    return GetVariable(lengthLines, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetLengthArc return length of arc by name
- * @param name name of arc
- * @return length of arc in mm
- */
-qreal VContainer::GetLengthArc(const QString &name) const
-{
-    SCASSERT(name.isEmpty()==false);
-    return GetVariable(lengthArcs, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetLengthSpline return length of spline by name
- * @param name name of spline
- * @return length of spline in mm
- */
-qreal VContainer::GetLengthSpline(const QString &name) const
-{
-    SCASSERT(name.isEmpty()==false);
-    return GetVariable(lengthSplines, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetLineAngle return angle of line
- * @param name name of line angle
- * @return angle in degree
- */
-qreal VContainer::GetLineAngle(const QString &name) const
-{
-    SCASSERT(name.isEmpty()==false);
-    return GetVariable(lineAngles, name);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetDetail return detail by id
  * @param id id of detail
  * @return detail
  */
 const VDetail VContainer::GetDetail(quint32 id) const
 {
-    return GetVariable(details, id);
+    if (details.contains(id))
+    {
+        return details.value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -289,17 +234,6 @@ quint32 VContainer::AddDetail(VDetail detail)
     quint32 id = getNextId();
     details[id] = detail;
     return id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddIncrement add new increment
- * @param name increment name
- * @param incr increment
- */
-void VContainer::AddIncrement(const QString &name, VIncrement incr)
-{
-    increments[name] = incr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,75 +284,13 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddLengthSpline add length of spline to container
- * @param name name of spline
- * @param value length of spline
- */
-void VContainer::AddLengthSpline(const QString &name, const qreal &value)
-{
-    SCASSERT(name.isEmpty() == false);
-    lengthSplines[name] = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief AddLengthArc add length of arc to container
  * @param id id of arc
  */
 void VContainer::AddLengthArc(const quint32 &id)
 {
     const VArc * arc = GeometricObject<const VArc *>(id);
-    lengthArcs[arc->name()] = qApp->fromPixel(arc->GetLength());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddLineAngle add angle of line to container
- * @param name name of line angle
- * @param value angle in degree
- */
-void VContainer::AddLineAngle(const QString &name, const qreal &value)
-{
-    SCASSERT(name.isEmpty() == false);
-    lineAngles[name] = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetValueStandardTableRow return value of measurement by name
- * @param name name of measurement
- * @return value in measurement units
- */
-qreal VContainer::GetValueStandardTableRow(const QString& name) const
-{
-    const VMeasurement m = GetMeasurement(name);
-    if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        return m.GetValue();
-    }
-    else
-    {
-        return m.GetValue(size(), height());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetValueIncrementTableRow return value of increment table row by name
- * @param name name of row
- * @return value of row in mm
- */
-qreal VContainer::GetValueIncrementTableRow(const QString& name) const
-{
-    const VIncrement icr = GetIncrement(name);
-    if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        return icr.GetValue();
-    }
-    else
-    {
-        return icr.GetValue(size(), height());
-    }
+    AddVariable(arc->name(), new VLengthArc(id, arc));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -428,13 +300,9 @@ qreal VContainer::GetValueIncrementTableRow(const QString& name) const
 void VContainer::Clear()
 {
     _id = 0;
-    measurements.clear();
-    increments.clear();
-    lengthLines.clear();
-    lengthArcs.clear();
-    lineAngles.clear();
+
     details.clear();
-    lengthSplines.clear();
+    ClearVariables();
     ClearGObjects();
 }
 
@@ -444,10 +312,7 @@ void VContainer::Clear()
  */
 void VContainer::ClearGObjects()
 {
-    if (gObjects.size()>0)
-    {
-        qDeleteAll(gObjects);
-    }
+    qDeleteAll(gObjects);
     gObjects.clear();
 }
 
@@ -470,6 +335,32 @@ void VContainer::ClearCalculationGObjects()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearVariables(const VarType &type)
+{
+    if (variables.size()>0)
+    {
+        if (type == VarType::Unknown)
+        {
+            qDeleteAll(variables);
+            variables.clear();
+        }
+        else
+        {
+            QHashIterator<QString, VInternalVariable*> i(variables);
+            while (i.hasNext())
+            {
+                i.next();
+                if (i.value()->GetType() == type)
+                {
+                    delete i.value();
+                    variables.remove(i.key());
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddLine add line to container
  * @param firstPointId id of first point of line
@@ -477,12 +368,14 @@ void VContainer::ClearCalculationGObjects()
  */
 void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
 {
-    QString nameLine = GetNameLine(firstPointId, secondPointId);
     const VPointF *first = GeometricObject<const VPointF *>(firstPointId);
     const VPointF *second = GeometricObject<const VPointF *>(secondPointId);
-    AddLengthLine(nameLine, qApp->fromPixel(QLineF(first->toQPointF(), second->toQPointF()).length()));
-    nameLine = GetNameLineAngle(firstPointId, secondPointId);
-    AddLineAngle(nameLine, QLineF(first->toQPointF(), second->toQPointF()).angle());
+
+    VLengthLine *length = new VLengthLine(first, firstPointId, second, secondPointId);
+    AddVariable(length->GetName(), length);
+
+    VLineAngle *angle = new VLineAngle(first, firstPointId, second, secondPointId);
+    AddVariable(angle->GetName(), angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -500,36 +393,6 @@ quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
     value->setId(id);
     obj[id] = value;
     return id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetNameLine return name of line
- * @param firstPoint id of first point of line
- * @param secondPoint id of second point of line
- * @return name of line
- */
-QString VContainer::GetNameLine(const quint32 &firstPoint, const quint32 &secondPoint) const
-{
-    const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
-    const VPointF *second = GeometricObject<const VPointF *>(secondPoint);
-
-    return QString(line_+"%1_%2").arg(first->name(), second->name());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetNameLineAngle return name of line angle
- * @param firstPoint id of first point of line
- * @param secondPoint id of second point of line
- * @return name of angle of line
- */
-QString VContainer::GetNameLineAngle(const quint32 &firstPoint, const quint32 &secondPoint) const
-{
-    const VPointF *first = GeometricObject<const VPointF *>(firstPoint);
-    const VPointF *second = GeometricObject<const VPointF *>(secondPoint);
-
-    return QString(angleLine_+"%1_%2").arg(first->name(), second->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -558,13 +421,122 @@ void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddLengthLine add length of line to container
- * @param name name of line
- * @param value length of line
- */
-void VContainer::AddLengthLine(const QString &name, const qreal &value)
+qreal VContainer::GetTableValue(const QString &name) const
 {
-    SCASSERT(name.isEmpty() == false);
-    lengthLines[name] = value;
+    VVariable *m = GetVariable<VVariable*>(name);
+    if (qApp->patternType() == MeasurementsType::Standard)
+    {
+        m->SetValue(size(), height());
+    }
+    return *m->GetValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveIncrement remove increment by name from increment table
+ * @param name name of existing increment
+ */
+void VContainer::RemoveIncrement(const QString &name)
+{
+    delete variables.value(name);
+    variables.remove(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, VMeasurement*> VContainer::DataMeasurements() const
+{
+    return DataTableVar<VMeasurement>(VarType::Measurement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, VIncrement *> VContainer::DataIncrements() const
+{
+    return DataTableVar<VIncrement>(VarType::Increment);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, qreal> VContainer::DataLengthLines() const
+{
+    return DataVar(VarType::LengthLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, qreal> VContainer::DataLengthSplines() const
+{
+    return DataVar(VarType::LengthSpline);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, qreal> VContainer::DataLengthArcs() const
+{
+    return DataVar(VarType::LengthArc);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, qreal> VContainer::DataLineAngles() const
+{
+    return DataVar(VarType::LineAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief IncrementTableContains check if increment table contains name
+ * @param name name of row
+ * @return true if contains
+ */
+bool VContainer::IncrementExist(const QString &name)
+{
+    return variables.contains(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::CopyGObject(const VContainer &data, const quint32 &id)
+{
+    T *obj = new T(*data.GeometricObject<const T *>(id));
+    UpdateGObject(id, obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::CopyVar(const VContainer &data, const QString &name)
+{
+    T *var = new T(*data.GetVariable<T*>(name));
+    AddVariable(name, var);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, qreal> VContainer::DataVar(const VarType &type) const
+{
+    QHashIterator<QString, VInternalVariable*> i(variables);
+    QMap<QString, qreal> map;
+    //Sorting QHash by id
+    while (i.hasNext())
+    {
+        i.next();
+        if(i.value()->GetType() == type)
+        {
+            map.insert(qApp->VarToUser(i.key()), *i.value()->GetValue());
+        }
+    }
+    return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+const QMap<QString, T *> VContainer::DataTableVar(const VarType &type) const
+{
+    QHashIterator<QString, VInternalVariable*> i(variables);
+    QMap<QString, T*> map;
+    //Sorting QHash by id
+    while (i.hasNext())
+    {
+        i.next();
+        if(i.value()->GetType() == type)
+        {
+            T *var = GetVariable<T *>(i.key());
+            map.insert(qApp->VarToUser(i.key()), var);
+        }
+    }
+    return map;
 }

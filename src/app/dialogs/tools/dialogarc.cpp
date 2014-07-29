@@ -231,8 +231,8 @@ void DialogArc::ValChenged(int row)
     QListWidgetItem *item = ui->listWidget->item( row );
     if (ui->radioButtonLineAngles->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetLineAngle(item->text()))
-                .arg(tr("Value of angle of line."));
+        qreal angle = *data->GetVariable<VLineAngle*>(item->text())->GetValue();
+        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(angle).arg(tr("Value of angle of line."));
         ui->labelDescription->setText(desc);
         return;
     }
@@ -357,9 +357,8 @@ void DialogArc::ShowLineAngles()
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-    const QHash<QString, qreal> *lineAnglesTable = data->DataLineAngles();
-    SCASSERT(lineAnglesTable != nullptr);
-    QHashIterator<QString, qreal> i(*lineAnglesTable);
+    const QMap<QString, qreal> lineAnglesTable = data->DataLineAngles();
+    QMapIterator<QString, qreal> i(lineAnglesTable);
     while (i.hasNext())
     {
         i.next();

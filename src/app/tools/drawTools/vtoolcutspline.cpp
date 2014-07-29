@@ -136,11 +136,11 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
 
         VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
         spl1id = data->AddGObject(spline1);
-        data->AddLengthSpline(spline1->name(), qApp->fromPixel(spline1->GetLength()));
+        data->AddVariable(spline1->name(), new VLengthSpline(id, spline1));
 
         VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
         spl2id = data->AddGObject(spline2);
-        data->AddLengthSpline(spline2->name(), qApp->fromPixel(spline2->GetLength()));
+        data->AddVariable(spline2->name(), new VLengthSpline(id, spline2));
     }
     else
     {
@@ -152,11 +152,11 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
 
         VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
         data->UpdateGObject(spl1id, spline1);
-        data->AddLengthSpline(spline1->name(), qApp->fromPixel(spline1->GetLength()));
+        data->AddVariable(spline1->name(), new VLengthSpline(id, spline1));
 
         VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
         data->UpdateGObject(spl2id, spline2);
-        data->AddLengthSpline(spline2->name(), qApp->fromPixel(spline2->GetLength()));
+        data->AddVariable(spline2->name(), new VLengthSpline(id, spline2));
 
         if (parse != Document::FullParse)
         {

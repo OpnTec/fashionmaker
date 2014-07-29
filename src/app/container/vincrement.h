@@ -30,7 +30,6 @@
 #define VINCREMENTTABLEROW_H
 
 #include "vvariable.h"
-#include <QString>
 
 /**
  * @brief The VIncrement class keep data row of increment table
@@ -39,7 +38,8 @@ class VIncrement :public VVariable
 {
 public:
     VIncrement();
-    VIncrement(quint32 id, qreal base, qreal ksize, qreal kheight, QString description = QString());
+    VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight,
+               QString description = QString());
     VIncrement(const VIncrement &incr);
     VIncrement &operator=(const VIncrement &incr);
     virtual ~VIncrement();
@@ -50,7 +50,7 @@ public:
     void    setKheight(const qreal &value);
     void    setDescription(const QString &value);
 private:
-    /** @brief id identificator */
+    /** @brief id each increment have unique identificator */
     quint32 id;
 };
 
