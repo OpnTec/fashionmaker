@@ -63,7 +63,8 @@ private:
     Q_DISABLE_COPY(Calculator)
     qreal *vVarVal;
     static int iVal;
-    void          InitVariables(const VContainer *data);
+    const VContainer *data;
+    void          InitVariables(const VContainer *data, const QMap<int, QString> &tokens);
     void          InitCharacterSets();
     static qreal  CmUnit(qreal val);
     static qreal  MmUnit(qreal val);

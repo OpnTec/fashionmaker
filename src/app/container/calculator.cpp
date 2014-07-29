@@ -52,12 +52,9 @@ int Calculator::iVal = -1;
  * @param data pointer to a variable container.
  */
 Calculator::Calculator(const VContainer *data)
-    :QmuParser(), vVarVal(nullptr)
+    :QmuParser(), vVarVal(nullptr), data(data)
 {
     InitCharacterSets();
-
-    // Add variables
-    InitVariables(data);
 
     // Add unary operators
     DefinePostfixOprt(cm_Oprt, CmUnit);
@@ -85,7 +82,7 @@ Calculator::Calculator(const VContainer *data)
  * @param fromUser true if we parse formula from user
  */
 Calculator::Calculator(const QString &formula, bool fromUser)
-    :QmuParser(), vVarVal(nullptr)
+    :QmuParser(), vVarVal(nullptr), data(nullptr)
 {
     InitCharacterSets();
     SetVarFactory(AddVariable, this);
@@ -123,7 +120,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     }
 
     SetExpr(formula);
-    //Need run for making tokens. Don't catch exception here, because it will show us in dialog that formula has error.
+    //Need run for making tokens. Don't catch exception here, because because we want know if formula has error.
     Eval();
 }
 
@@ -141,125 +138,67 @@ Calculator::~Calculator()
  */
 qreal Calculator::EvalFormula(const QString &formula)
 {
+    SetVarFactory(AddVariable, this);
+
     SetExpr(formula);
-    return Eval();
+
+    qreal result = 0;
+    result = Eval();
+
+    QMap<int, QString> tokens = this->GetTokens();
+    if (tokens.isEmpty())
+    {
+        return result;
+    }
+
+    // Add variables
+    InitVariables(data, tokens);
+
+    result = Eval();
+
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Calculator::InitVariables(const VContainer *data)
+void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> &tokens)
 {
-    int num = 0;
     if (qApp->patternType() == MeasurementsType::Standard)
     {
-        num +=2;
+        vVarVal = new qreal[2];
     }
 
-    const QMap<QString, VLengthLine *> lengthLines = data->DataLengthLines();
-    num += lengthLines.size();
+    const QHash<QString, VInternalVariable*> *vars = data->DataVariables();
 
-    const QMap<QString, VLengthSpline *> lengthSplines = data->DataLengthSplines();
-    num += lengthSplines.size();
-
-    const QMap<QString, VLengthArc *> lengthArcs = data->DataLengthArcs();
-    num += lengthArcs.size();
-
-    const QMap<QString, VLineAngle *> lineAngles = data->DataLineAngles();
-    num += lineAngles.size();
-
-    const QMap<QString, VMeasurement*> measurements = data->DataMeasurements();
-    num += measurements.size();
-
-    const QMap<QString, VIncrement*> increments = data->DataIncrements();
-    num += increments.size();
-
-    vVarVal = new qreal[num];
-    int j = 0;
-
-    if (qApp->patternType() == MeasurementsType::Standard)
+    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    while (i != tokens.constEnd())
     {
-        vVarVal[j] = data->size();
-        DefineVar(data->SizeName(), &vVarVal[j]);
-        ++j;
-
-        vVarVal[j] = data->height();
-        DefineVar(data->HeightName(), &vVarVal[j]);
-        ++j;
-    }
-
-    {
-        QMap<QString, VLengthLine *>::const_iterator i = lengthLines.constBegin();
-        while (i != lengthLines.constEnd())
+        if (vars->contains(i.value()))
         {
-            vVarVal[j] = *i.value()->GetValue();
-            DefineVar(i.key(), &vVarVal[j]);
-            ++j;
-            ++i;
-        }
-    }
-
-    {
-        QMap<QString, VLengthSpline *>::const_iterator i = lengthSplines.constBegin();
-        while (i != lengthSplines.constEnd())
-        {
-            vVarVal[j] = *i.value()->GetValue();
-            DefineVar(i.key(), &vVarVal[j]);
-            ++j;
-            ++i;
-        }
-    }
-
-    {
-        QMap<QString, VLengthArc *>::const_iterator i = lengthArcs.constBegin();
-        while (i != lengthArcs.constEnd())
-        {
-            vVarVal[j] = *i.value()->GetValue();
-            DefineVar(i.key(), &vVarVal[j]);
-            ++j;
-            ++i;
-        }
-    }
-
-    {
-        QMap<QString, VLineAngle *>::const_iterator i = lineAngles.constBegin();
-        while (i != lineAngles.constEnd())
-        {
-            vVarVal[j] = *i.value()->GetValue();
-            DefineVar(i.key(), &vVarVal[j]);
-            ++j;
-            ++i;
-        }
-    }
-
-    {
-        QMap<QString, VMeasurement*>::const_iterator i = measurements.constBegin();
-        while (i != measurements.constEnd())
-        {
-            VMeasurement *m = i.value();
-            if (qApp->patternType() == MeasurementsType::Standard)
+            VInternalVariable *var = vars->value(i.value());
+            if ((qApp->patternType() == MeasurementsType::Standard) &&
+                (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
             {
+                VVariable *m = data->GetVariable<VVariable *>(i.value());
                 m->SetValue(data->size(), data->height());
             }
-            vVarVal[j] = *m->GetValue();
-            DefineVar(i.key(), &vVarVal[j]);
-            ++j;
-            ++i;
+            DefineVar(i.value(), var->GetValue());
         }
-    }
 
-    {
-        QMap<QString, VIncrement*>::const_iterator i = increments.constBegin();
-        while (i != increments.constEnd())
+        if (qApp->patternType() == MeasurementsType::Standard)
         {
-            VIncrement *incr = i.value();
-            if (qApp->patternType() == MeasurementsType::Standard)
+            if (i.value() == data->SizeName())
             {
-                incr->SetValue(data->size(), data->height());
+                vVarVal[0] = data->size();
+                DefineVar(data->SizeName(), &vVarVal[0]);
             }
-            vVarVal[j] = *incr->GetValue();
-            DefineVar(i.key(), &vVarVal[j]);
-            ++j;
-            ++i;
+
+            if (i.value() == data->HeightName())
+            {
+                vVarVal[1] = data->height();
+                DefineVar(data->HeightName(), &vVarVal[1]);
+            }
         }
+        ++i;
     }
 }
 
