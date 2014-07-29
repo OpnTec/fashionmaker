@@ -49,7 +49,7 @@
  * @param parent parent widget
  */
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)
+    :DialogTool(data, 0, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0), m(nullptr)
 {
     ui->setupUi(this);
 
@@ -287,16 +287,17 @@ void DialogIncrements::FillIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillTable(const QMap<QString, qreal> varTable, QTableWidget *table)
+template <typename T>
+void DialogIncrements::FillTable(const QMap<QString, T> varTable, QTableWidget *table)
 {
     SCASSERT(table != nullptr);
 
     qint32 currentRow = -1;
-    QMapIterator<QString, qreal> i(varTable);
+    QMapIterator<QString, T> i(varTable);
     while (i.hasNext())
     {
         i.next();
-        qreal length = i.value();
+        qreal length = *i.value()->GetValue();
         currentRow++;
         table->setRowCount ( varTable.size() );
 

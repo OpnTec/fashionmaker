@@ -45,7 +45,7 @@
  * @param parent parent widget
  */
 DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
+    :DialogTool(data, 0, parent), ui(new Ui::DialogHistory), doc(doc), cursorRow(0),
     cursorToolRecordRow(0)
 {
     ui->setupUi(this);

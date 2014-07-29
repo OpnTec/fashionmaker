@@ -56,21 +56,18 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogTool::DialogTool(const VContainer *data, QWidget *parent)
+DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :QDialog(parent), data(data), isInitialized(false), flagName(true), flagFormula(true), flagError(true),
       timerFormula(nullptr), bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), plainTextEditFormula(nullptr),
       listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
-      radioButtonLengthCurve(nullptr), lineStyles(QStringList()), okColor(QColor(76, 76, 76)), errorColor(Qt::red),
-      associatedTool(nullptr)
+      radioButtonLengthCurve(nullptr), lineStyles(VAbstractTool::Styles()), okColor(QColor(76, 76, 76)),
+      errorColor(Qt::red), associatedTool(nullptr), toolId(toolId)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
-    //Keep synchronize with VAbstractTool styles list!!!
-    lineStyles<<tr("No line")<<tr("Line")<<tr("Dash Line")<<tr("Dot Line")<<tr("Dash Dot Line")
-             <<tr("Dash Dot Dot Line");
     this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
 }
 
@@ -1047,6 +1044,18 @@ void DialogTool::UpdateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 DialogTool::GetToolId() const
+{
+    return toolId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SetToolId(const quint32 &value)
+{
+    toolId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowVariable show variables in list
  * @param var container with variables
@@ -1062,9 +1071,12 @@ void DialogTool::ShowVariable(const QMap<key, val> var)
     while (iMap.hasNext())
     {
         iMap.next();
-        QListWidgetItem *item = new QListWidgetItem(iMap.key());
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        listWidget->addItem(item);
+        if (iMap.value()->Filter(toolId) == false)
+        {// If we create this variable don't show
+            QListWidgetItem *item = new QListWidgetItem(iMap.key());
+            item->setFont(QFont("Times", 12, QFont::Bold));
+            listWidget->addItem(item);
+        }
     }
     connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
     listWidget->setCurrentRow (0);
@@ -1086,5 +1098,5 @@ void DialogTool::ShowDialog(bool click)
 void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 {
     this->associatedTool=tool;
-    this->data = tool->getData();
+    SetToolId(tool->getId());
 }

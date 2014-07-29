@@ -41,8 +41,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
     typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0), formulaBaseHeight(0), line (nullptr),
     prepare(false)
 {

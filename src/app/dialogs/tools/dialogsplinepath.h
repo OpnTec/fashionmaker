@@ -44,7 +44,7 @@ class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogSplinePath(const VContainer *data, QWidget *parent = nullptr);
+    DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSplinePath();
 
     VSplinePath        GetPath() const;

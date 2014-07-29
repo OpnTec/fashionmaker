@@ -176,7 +176,7 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     const VPointF *thirdPoint = data->GeometricObject<const VPointF *>(thirdPointId);
 
-    const qreal result = CheckFormula(formula, data);
+    const qreal result = CheckFormula(_id, formula, data);
 
     QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                               thirdPoint->toQPointF(), qApp->toPixel(result));

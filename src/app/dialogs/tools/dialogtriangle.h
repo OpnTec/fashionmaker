@@ -43,7 +43,7 @@ class DialogTriangle : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogTriangle(const VContainer *data, QWidget *parent = nullptr);
+    DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogTriangle();
 
     quint32        getAxisP1Id() const;

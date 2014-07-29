@@ -45,7 +45,7 @@ class DialogShoulderPoint : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogShoulderPoint(const VContainer *data, QWidget *parent = nullptr);
+    DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogShoulderPoint();
 
     QString        getPointName() const;

@@ -173,12 +173,14 @@ void VDrawTool::SetFactor(qreal factor)
  *
  * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
  * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
+ *
+ * @param toolId[in] tool's id.
  * @param formula [in|out] string with formula.
  * @param data [in] container with variables. Need for math parser.
  * @throw QmuParserError.
  * @return result of calculation formula.
  */
-qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
+qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data)
 {
     SCASSERT(data != nullptr)
     qreal result = 0;
@@ -206,7 +208,7 @@ qreal VDrawTool::CheckFormula(QString &formula, VContainer *data)
             delete dialogUndo;
             if (resultUndo == UndoButton::Fix)
             {
-                DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, qApp->getMainWindow());
+                DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
                 dialog->setFormula(formula);
                 if (dialog->exec() == QDialog::Accepted)
                 {

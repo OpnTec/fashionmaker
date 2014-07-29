@@ -154,16 +154,16 @@ void Calculator::InitVariables(const VContainer *data)
         num +=2;
     }
 
-    const QMap<QString, qreal> lengthLines = data->DataLengthLines();
+    const QMap<QString, VLengthLine *> lengthLines = data->DataLengthLines();
     num += lengthLines.size();
 
-    const QMap<QString, qreal> lengthSplines = data->DataLengthSplines();
+    const QMap<QString, VLengthSpline *> lengthSplines = data->DataLengthSplines();
     num += lengthSplines.size();
 
-    const QMap<QString, qreal> lengthArcs = data->DataLengthArcs();
+    const QMap<QString, VLengthArc *> lengthArcs = data->DataLengthArcs();
     num += lengthArcs.size();
 
-    const QMap<QString, qreal> lineAngles = data->DataLineAngles();
+    const QMap<QString, VLineAngle *> lineAngles = data->DataLineAngles();
     num += lineAngles.size();
 
     const QMap<QString, VMeasurement*> measurements = data->DataMeasurements();
@@ -187,10 +187,10 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QMap<QString, qreal>::const_iterator i = lengthLines.constBegin();
+        QMap<QString, VLengthLine *>::const_iterator i = lengthLines.constBegin();
         while (i != lengthLines.constEnd())
         {
-            vVarVal[j] = i.value();
+            vVarVal[j] = *i.value()->GetValue();
             DefineVar(i.key(), &vVarVal[j]);
             ++j;
             ++i;
@@ -198,10 +198,10 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QMap<QString, qreal>::const_iterator i = lengthSplines.constBegin();
+        QMap<QString, VLengthSpline *>::const_iterator i = lengthSplines.constBegin();
         while (i != lengthSplines.constEnd())
         {
-            vVarVal[j] = i.value();
+            vVarVal[j] = *i.value()->GetValue();
             DefineVar(i.key(), &vVarVal[j]);
             ++j;
             ++i;
@@ -209,10 +209,10 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QMap<QString, qreal>::const_iterator i = lengthArcs.constBegin();
+        QMap<QString, VLengthArc *>::const_iterator i = lengthArcs.constBegin();
         while (i != lengthArcs.constEnd())
         {
-            vVarVal[j] = i.value();
+            vVarVal[j] = *i.value()->GetValue();
             DefineVar(i.key(), &vVarVal[j]);
             ++j;
             ++i;
@@ -220,10 +220,10 @@ void Calculator::InitVariables(const VContainer *data)
     }
 
     {
-        QMap<QString, qreal>::const_iterator i = lineAngles.constBegin();
+        QMap<QString, VLineAngle *>::const_iterator i = lineAngles.constBegin();
         while (i != lineAngles.constEnd())
         {
-            vVarVal[j] = i.value();
+            vVarVal[j] = *i.value()->GetValue();
             DefineVar(i.key(), &vVarVal[j]);
             ++j;
             ++i;

@@ -41,9 +41,9 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogEndLine::DialogEndLine(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()), formula(QString()),
-      angle(0), basePointId(0), formulaBaseHeight(0), line(nullptr), prepare(false)
+DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
+      formula(QString()), angle(0), basePointId(0), formulaBaseHeight(0), line(nullptr), prepare(false)
 {
     ui->setupUi(this);
     InitVariables(ui);

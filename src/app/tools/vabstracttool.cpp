@@ -326,7 +326,6 @@ void VAbstractTool::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qre
  */
 const QStringList VAbstractTool::Styles()
 {
-    //Keep synchronize with DialogTool lineStyles list!!!
     QStringList styles{TypeLineNone, TypeLineLine, TypeLineDashLine, TypeLineDotLine, TypeLineDashDotLine,
                 TypeLineDashDotDotLine};
     return styles;

@@ -55,11 +55,16 @@ class DialogTool : public QDialog
 {
     Q_OBJECT
 public:
-    DialogTool(const VContainer *data, QWidget *parent = nullptr);
+    DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual          ~DialogTool() {}
+
     VAbstractTool*   GetAssociatedTool();
     void             SetAssociatedTool(VAbstractTool* tool);
+
     virtual void     ShowDialog(bool click);
+
+    quint32          GetToolId() const;
+    void             SetToolId(const quint32 &value);
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -183,6 +188,11 @@ protected:
     QStringList      lineStyles;
     const QColor     okColor;
     const QColor     errorColor;
+    /**
+     * @brief associatedTool vdrawtool associated with opened dialog.
+     */
+    VAbstractTool    *associatedTool;
+    quint32          toolId;
 
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
@@ -300,10 +310,7 @@ protected:
         plainTextEditFormula = ui->plainTextEditFormula;
         labelEditFormula = ui->labelEditFormula;
     }
-    /**
-     * @brief associatedTool vdrawtool associated with opened dialog.
-     */
-    VAbstractTool* associatedTool;
+
     void             ChangeColor(QWidget *widget, const QColor &color);
     void             setPointId(QComboBox *box, quint32 &pointId, const quint32 &value, const quint32 &id);
     virtual void     ShowVisualization(){}

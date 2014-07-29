@@ -30,8 +30,8 @@
 #include "ui_dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0)
+DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitVariables(ui);

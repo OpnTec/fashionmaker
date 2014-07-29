@@ -125,7 +125,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
     const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
     SCASSERT(splPath != nullptr);
 
-    const qreal result = CheckFormula(formula, data);
+    const qreal result = CheckFormula(_id, formula, data);
 
     quint32 id = _id;
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;

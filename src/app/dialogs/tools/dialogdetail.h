@@ -40,7 +40,7 @@ class DialogDetail : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogDetail(const VContainer *data, QWidget *parent = nullptr);
+    DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
 
     VDetail          getDetails() const;
     void             setDetails(const VDetail &value);

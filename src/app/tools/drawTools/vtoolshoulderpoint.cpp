@@ -176,7 +176,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(p2Line);
     const VPointF *shoulderPoint = data->GeometricObject<const VPointF *>(pShoulder);
 
-    const qreal result = CheckFormula(formula, data);
+    const qreal result = CheckFormula(_id, formula, data);
 
     QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
                                                    shoulderPoint->toQPointF(), qApp->toPixel(result));

@@ -41,8 +41,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogArc::DialogArc(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
+DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
       timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()),
       f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0)
 {
@@ -357,8 +357,8 @@ void DialogArc::ShowLineAngles()
     disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
     ui->listWidget->clear();
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
-    const QMap<QString, qreal> lineAnglesTable = data->DataLineAngles();
-    QMapIterator<QString, qreal> i(lineAnglesTable);
+    const QMap<QString, VLineAngle *> lineAnglesTable = data->DataLineAngles();
+    QMapIterator<QString, VLineAngle *> i(lineAnglesTable);
     while (i.hasNext())
     {
         i.next();

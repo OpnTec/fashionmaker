@@ -39,8 +39,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogHeight::DialogHeight(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
+DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
     typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0)
 {
     ui->setupUi(this);

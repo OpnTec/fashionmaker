@@ -45,7 +45,7 @@ class DialogEndLine : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogEndLine(const VContainer *data, QWidget *parent = nullptr);
+    DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogEndLine();
 
     QString           getPointName() const;

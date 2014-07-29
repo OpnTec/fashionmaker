@@ -94,7 +94,8 @@ private:
 
     void                 FillMeasurements();
     void                 FillIncrements();
-    void                 FillTable(const QMap<QString, qreal> varTable, QTableWidget *table);
+    template <typename T>
+    void                 FillTable(const QMap<QString, T> varTable, QTableWidget *table);
     void                 FillLengthLines();
     void                 FillLengthSplines();
     void                 FillLengthArcs();

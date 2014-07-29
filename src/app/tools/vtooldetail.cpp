@@ -405,7 +405,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
-        dialog = new DialogDetail(getData(), qApp->getMainWindow());
+        dialog = new DialogDetail(getData(), id, qApp->getMainWindow());
         dialog->setModal(true);
         connect(qobject_cast< VMainGraphicsScene * >(this->scene()), &VMainGraphicsScene::ChoosedObject,
                 dialog, &DialogTool::ChosenObject);

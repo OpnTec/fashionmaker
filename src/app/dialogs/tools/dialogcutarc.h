@@ -44,7 +44,7 @@ class DialogCutArc : public DialogTool
     Q_OBJECT
 public:
 
-    DialogCutArc(const VContainer *data, QWidget *parent = nullptr);
+    DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogCutArc();
 
     QString           getPointName() const;

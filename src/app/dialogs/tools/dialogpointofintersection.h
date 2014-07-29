@@ -43,7 +43,7 @@ class DialogPointOfIntersection : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogPointOfIntersection(const VContainer *data, QWidget *parent = nullptr);
+    DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogPointOfIntersection();
 
     QString        getPointName() const;

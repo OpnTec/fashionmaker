@@ -38,8 +38,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogLineIntersect::DialogLineIntersect(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
+DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
     p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true)
 {
     ui->setupUi(this);

@@ -43,7 +43,7 @@ class DialogArc : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogArc(const VContainer *data, QWidget *parent = nullptr);
+    DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogArc();
 
     quint32       GetCenter() const;

@@ -38,8 +38,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
+DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSplinePath), pointName(QString()), formula(QString()),
       splinePathId(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);

@@ -43,7 +43,7 @@ class DialogPointOfContact : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogPointOfContact(const VContainer *data, QWidget *parent = nullptr);
+    DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
 
     QString        getPointName() const;
     void           setPointName(const QString &value);

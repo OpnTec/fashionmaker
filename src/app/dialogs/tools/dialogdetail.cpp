@@ -42,8 +42,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogDetail::DialogDetail(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(), details(VDetail()), supplement(true), closed(true)
+DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(), details(VDetail()), supplement(true), closed(true)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;

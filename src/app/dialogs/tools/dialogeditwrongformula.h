@@ -48,7 +48,7 @@ class DialogEditWrongFormula : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogEditWrongFormula(const VContainer *data, QWidget *parent = nullptr);
+    explicit DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogEditWrongFormula();
 
     QString      getFormula() const;

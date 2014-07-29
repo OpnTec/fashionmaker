@@ -129,10 +129,10 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
-    calcRadius = qApp->toPixel(CheckFormula(radius, data));
+    calcRadius = qApp->toPixel(CheckFormula(_id, radius, data));
 
-    calcF1 = CheckFormula(f1, data);
-    calcF2 = CheckFormula(f2, data);
+    calcF1 = CheckFormula(_id, f1, data);
+    calcF2 = CheckFormula(_id, f2, data);
 
     VPointF c = *data->GeometricObject<const VPointF *>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );

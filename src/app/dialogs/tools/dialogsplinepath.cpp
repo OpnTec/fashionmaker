@@ -37,8 +37,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogSplinePath::DialogSplinePath(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
+DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
     ui->setupUi(this);
     InitOkCancel(ui);

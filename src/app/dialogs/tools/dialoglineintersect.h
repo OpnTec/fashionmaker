@@ -43,7 +43,7 @@ class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogLineIntersect(const VContainer *data, QWidget *parent = nullptr);
+    DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLineIntersect();
 
     quint32                 getP1Line1() const;

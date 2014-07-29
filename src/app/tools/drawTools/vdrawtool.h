@@ -55,7 +55,7 @@ public:
     virtual void setDialog() {}
     virtual void DialogLinkDestroy();
     void         ignoreContextMenu(bool enable);
-    static qreal CheckFormula(QString &formula, VContainer *data);
+    static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
@@ -118,7 +118,7 @@ protected:
             QAction *selectedAction = menu.exec(event->screenPos());
             if (selectedAction == actionOption)
             {
-                dialog = new Dialog(getData(), qApp->getMainWindow());
+                dialog = new Dialog(getData(), id, qApp->getMainWindow());
                 dialog->setModal(true);
 
                 connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);

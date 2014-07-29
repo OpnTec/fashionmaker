@@ -43,7 +43,7 @@ class DialogUnionDetails : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogUnionDetails(const VContainer *data, QWidget *parent = nullptr);
+    DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogUnionDetails();
 
     quint32          getD1() const;

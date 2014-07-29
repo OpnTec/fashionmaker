@@ -43,7 +43,7 @@ class DialogSinglePoint : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogSinglePoint(const VContainer *data, QWidget *parent = nullptr);
+    DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSinglePoint();
     void           setData(const QString &name, const QPointF &point);
     QString        getName()const;

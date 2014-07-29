@@ -43,7 +43,7 @@ class DialogHeight : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogHeight(const VContainer *data, QWidget *parent = nullptr);
+    DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogHeight();
 
     QString          getPointName() const;

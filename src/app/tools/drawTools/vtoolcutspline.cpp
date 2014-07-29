@@ -121,7 +121,7 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
 {
     const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
 
-    const qreal result = CheckFormula(formula, data);
+    const qreal result = CheckFormula(_id, formula, data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
     QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);

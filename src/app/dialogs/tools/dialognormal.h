@@ -43,7 +43,7 @@ class DialogNormal : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogNormal(const VContainer *data, QWidget *parent = nullptr);
+    DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogNormal();
 
     QString          getPointName() const;

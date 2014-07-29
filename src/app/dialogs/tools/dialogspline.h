@@ -43,7 +43,7 @@ class DialogSpline : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogSpline(const VContainer *data, QWidget *parent = nullptr);
+    DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSpline();
 
     quint32        getP1() const;

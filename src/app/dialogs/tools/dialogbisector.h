@@ -46,7 +46,7 @@ class DialogBisector : public DialogTool
     Q_OBJECT
 public:
 
-    DialogBisector(const VContainer *data, QWidget *parent = nullptr);
+    DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogBisector();
 
     QString            getPointName() const;

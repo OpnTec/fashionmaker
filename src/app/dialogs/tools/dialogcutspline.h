@@ -43,7 +43,7 @@ class DialogCutSpline : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogCutSpline(const VContainer *data, QWidget *parent = nullptr);
+    DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogCutSpline();
 
     QString             getPointName() const;

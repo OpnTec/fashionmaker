@@ -45,7 +45,7 @@ class DialogLine : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogLine(const VContainer *data, QWidget *parent = nullptr);
+    DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLine();
 
     quint32        getFirstPoint() const;

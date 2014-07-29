@@ -127,7 +127,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
 {
     const VArc *arc = data->GeometricObject<const VArc *>(arcId);
 
-    const qreal result = CheckFormula(formula, data);
+    const qreal result = CheckFormula(_id, formula, data);
 
     VArc arc1;
     VArc arc2;

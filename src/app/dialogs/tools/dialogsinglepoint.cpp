@@ -35,8 +35,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogSinglePoint::DialogSinglePoint(const VContainer *data, QWidget *parent)
-    :DialogTool(data, parent), ui(new Ui::DialogSinglePoint), name(QString()), point(QPointF())
+DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSinglePoint), name(QString()), point(QPointF())
 {
     ui->setupUi(this);
     ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));

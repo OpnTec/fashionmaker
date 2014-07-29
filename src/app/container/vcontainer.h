@@ -170,12 +170,12 @@ public:
     const QHash<quint32, VDetail>            *DataDetails() const;
     const QHash<QString, VInternalVariable*> *DataVariables() const;
 
-    const QMap<QString, VMeasurement *> DataMeasurements() const;
-    const QMap<QString, VIncrement *>   DataIncrements() const;
-    const QMap<QString, qreal>          DataLengthLines() const;
-    const QMap<QString, qreal>          DataLengthSplines() const;
-    const QMap<QString, qreal>          DataLengthArcs() const;
-    const QMap<QString, qreal>          DataLineAngles() const;
+    const QMap<QString, VMeasurement *>  DataMeasurements() const;
+    const QMap<QString, VIncrement *>    DataIncrements() const;
+    const QMap<QString, VLengthLine *>   DataLengthLines() const;
+    const QMap<QString, VLengthSpline *> DataLengthSplines() const;
+    const QMap<QString, VLengthArc *>    DataLengthArcs() const;
+    const QMap<QString, VLineAngle *>    DataLineAngles() const;
 
 
 private:
@@ -217,10 +217,8 @@ private:
     template <typename T>
     void CopyVar(const VContainer &data, const QString &name);
 
-    QMap<QString, qreal> DataVar(const VarType &type) const;
-
     template <typename T>
-    const QMap<QString, T*> DataTableVar(const VarType &type) const;
+    const QMap<QString, T*> DataVar(const VarType &type) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

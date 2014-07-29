@@ -253,7 +253,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
     QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
 
-    line.setLength(qApp->toPixel(CheckFormula(formula, data)));
+    line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));
 
     quint32 id = _id;
     if (typeCreation == Source::FromGui)

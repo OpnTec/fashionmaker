@@ -171,7 +171,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
     const VPointF *firstP = data->GeometricObject<const VPointF *>(firstPointId);
     const VPointF *secondP = data->GeometricObject<const VPointF *>(secondPointId);
 
-    const qreal result = CheckFormula(radius, data);
+    const qreal result = CheckFormula(_id, radius, data);
 
     QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), centerP->toQPointF(),
                                                      firstP->toQPointF(), secondP->toQPointF());

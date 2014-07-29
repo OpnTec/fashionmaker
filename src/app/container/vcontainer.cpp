@@ -445,37 +445,37 @@ void VContainer::RemoveIncrement(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 const QMap<QString, VMeasurement*> VContainer::DataMeasurements() const
 {
-    return DataTableVar<VMeasurement>(VarType::Measurement);
+    return DataVar<VMeasurement>(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 const QMap<QString, VIncrement *> VContainer::DataIncrements() const
 {
-    return DataTableVar<VIncrement>(VarType::Increment);
+    return DataVar<VIncrement>(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, qreal> VContainer::DataLengthLines() const
+const QMap<QString, VLengthLine *> VContainer::DataLengthLines() const
 {
-    return DataVar(VarType::LengthLine);
+    return DataVar<VLengthLine>(VarType::LengthLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, qreal> VContainer::DataLengthSplines() const
+const QMap<QString, VLengthSpline *> VContainer::DataLengthSplines() const
 {
-    return DataVar(VarType::LengthSpline);
+    return DataVar<VLengthSpline>(VarType::LengthSpline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, qreal> VContainer::DataLengthArcs() const
+const QMap<QString, VLengthArc *> VContainer::DataLengthArcs() const
 {
-    return DataVar(VarType::LengthArc);
+    return DataVar<VLengthArc>(VarType::LengthArc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, qreal> VContainer::DataLineAngles() const
+const QMap<QString, VLineAngle *> VContainer::DataLineAngles() const
 {
-    return DataVar(VarType::LineAngle);
+    return DataVar<VLineAngle>(VarType::LineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -506,25 +506,8 @@ void VContainer::CopyVar(const VContainer &data, const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, qreal> VContainer::DataVar(const VarType &type) const
-{
-    QHashIterator<QString, VInternalVariable*> i(variables);
-    QMap<QString, qreal> map;
-    //Sorting QHash by id
-    while (i.hasNext())
-    {
-        i.next();
-        if(i.value()->GetType() == type)
-        {
-            map.insert(qApp->VarToUser(i.key()), *i.value()->GetValue());
-        }
-    }
-    return map;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-const QMap<QString, T *> VContainer::DataTableVar(const VarType &type) const
+const QMap<QString, T *> VContainer::DataVar(const VarType &type) const
 {
     QHashIterator<QString, VInternalVariable*> i(variables);
     QMap<QString, T*> map;
