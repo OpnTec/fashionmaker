@@ -675,7 +675,8 @@ void VPattern::LiteParseTree()
     try
     {
         emit SetEnabledGUI(true);
-        Parse(Document::LiteParse);
+        ParceCurrentPP();
+        //Parse(Document::LiteParse);
     }
     catch (const VExceptionUndo &e)
     {
@@ -1476,6 +1477,17 @@ void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParceCurrentPP()
+{
+    QDomElement domElement;
+    if (GetActivDrawElement(domElement))
+    {
+        ParseDrawElement(domElement, Document::LiteParse);
+    }
+    emit CheckLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseSplineElement parse spline tag.
  * @param scene scene.
@@ -2015,6 +2027,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
     return rec;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
 {

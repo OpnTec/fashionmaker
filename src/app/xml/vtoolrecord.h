@@ -41,6 +41,9 @@ class VToolRecord
 public:
     VToolRecord();
     VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw);
+    bool operator==(const VToolRecord &record) const;
+    VToolRecord &operator=(const VToolRecord &record);
+    VToolRecord(const VToolRecord &record);
     quint32 getId() const;
     void    setId(const quint32 &value);
     Tool    getTypeTool() const;

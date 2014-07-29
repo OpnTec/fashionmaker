@@ -340,11 +340,17 @@ const QStringList VAbstractTool::Styles()
  */
 void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *doc)
 {
-    quint32 cursor = doc->getCursor();
     QVector<VToolRecord> *history = doc->getHistory();
+    VToolRecord record = VToolRecord(id, toolType, doc->GetNameActivPP());
+    if (history->contains(record))
+    {
+        return;
+    }
+
+    quint32 cursor = doc->getCursor();
     if (cursor <= 0)
     {
-        history->append(VToolRecord(id, toolType, doc->GetNameActivPP()));
+        history->append(record);
     }
     else
     {
@@ -358,6 +364,6 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *
                 break;
             }
         }
-        history->insert(index+1, VToolRecord(id, toolType, doc->GetNameActivPP()));
+        history->insert(index+1, record);
     }
 }

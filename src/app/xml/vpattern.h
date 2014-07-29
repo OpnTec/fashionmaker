@@ -214,6 +214,7 @@ private:
                                            quint32 &idTool);
     template <typename T>
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
+    void           ParceCurrentPP();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
