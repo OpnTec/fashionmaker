@@ -675,7 +675,7 @@ void VPattern::LiteParseTree()
     try
     {
         emit SetEnabledGUI(true);
-        ParceCurrentPP();
+        ParseCurrentPP();
         //Parse(Document::LiteParse);
     }
     catch (const VExceptionUndo &e)
@@ -1477,7 +1477,7 @@ void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParceCurrentPP()
+void VPattern::ParseCurrentPP()
 {
     QDomElement domElement;
     if (GetActivDrawElement(domElement))

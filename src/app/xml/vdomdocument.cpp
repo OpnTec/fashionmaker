@@ -378,7 +378,7 @@ void VDomDocument::setContent(const QString &fileName)
     {
         file.close();
         VException e(errorMsg);
-        e.AddMoreInformation(tr("Parcing error in line %1 column %2").arg(errorLine).arg(errorColumn));
+        e.AddMoreInformation(tr("Parsing error in line %1 column %2").arg(errorLine).arg(errorColumn));
         throw e;
     }
 }
