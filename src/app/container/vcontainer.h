@@ -162,7 +162,7 @@ public:
     qreal              height() const;
     QString            HeightName()const;
 
-    bool               IncrementExist(const QString& name);
+    bool               VariableExist(const QString& name);
 
     void               RemoveIncrement(const QString& name);
 

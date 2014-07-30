@@ -29,15 +29,17 @@
 #include "textdelegate.h"
 #include <QLineEdit>
 #include "../options.h"
+#include "../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief TextDelegate constructor.
  * @param parent parent widget.
  */
-TextDelegate::TextDelegate(const QString &regex, QObject *parent): QItemDelegate(parent), lastText(QString("Name_")),
-    regex(regex)
+TextDelegate::TextDelegate(const QString &regex, VContainer *data, QObject *parent)
+    : QItemDelegate(parent), lastText(QString("Name_")), regex(regex), data(data)
 {
+    SCASSERT(data);
     //Little hack. Help save lineedit text in const method.
     connect(this, &TextDelegate::SaveText, this, &TextDelegate::InitText);
 }
@@ -127,7 +129,7 @@ void TextDelegate::commitAndCloseEditor()
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
     SCASSERT(lineEdit != nullptr);
     QString text = lineEdit->text();
-    if ( lastText != text && text.isEmpty() == false)
+    if ( lastText != text && text.isEmpty() == false && data->VariableExist(text) == false)
     {
         lastText = text;
         emit commitData(lineEdit);

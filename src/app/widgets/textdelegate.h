@@ -31,6 +31,7 @@
 
 #include <QItemDelegate>
 
+class VContainer;
 /**
  * @brief The TextDelegate class a delegate that allows the user to change text values from the model
  * using a edit line widget.
@@ -39,7 +40,7 @@ class TextDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-    TextDelegate(const QString &regex, QObject *parent = nullptr);
+    TextDelegate(const QString &regex, VContainer *data, QObject *parent = nullptr);
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     void    setEditorData(QWidget *editor, const QModelIndex &index) const;
     void    setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
@@ -54,9 +55,13 @@ public slots:
     void    commitAndCloseEditor();
     void    InitText(const QString &text);
 private:
+    Q_DISABLE_COPY(TextDelegate)
+
     /** @brief lastValue last saved value. */
-    QString lastText;
-    QString regex;
+    QString    lastText;
+
+    QString    regex;
+    VContainer *data;
 };
 
 #endif // TEXTDELEGATE_H

@@ -72,7 +72,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     //Same regex in pattern.xsd shema file. Don't forget synchronize.
     TextDelegate *textDelegate = new TextDelegate("^([^0-9-*/^+=\\s\\(\\)%:;!.,]){1,1}([^-*/^+=\\s\\(\\)%:;!.,]){0,}$",
-                                                  ui->tableWidgetIncrement);
+                                                  data, ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);// name
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);// base value
@@ -536,7 +536,7 @@ void DialogIncrements::clickedToolButtonAdd()
     {
         name = QString(tr("Name_%1")).arg(num);
         num++;
-    } while (data->IncrementExist(name));
+    } while (data->VariableExist(name));
 
     const quint32 id = data->getNextId();
     const QString description(tr("Description"));

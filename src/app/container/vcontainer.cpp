@@ -480,11 +480,11 @@ const QMap<QString, VLineAngle *> VContainer::DataLineAngles() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief IncrementTableContains check if increment table contains name
+ * @brief VariableExist check if exist variable this same name.
  * @param name name of row
  * @return true if contains
  */
-bool VContainer::IncrementExist(const QString &name)
+bool VContainer::VariableExist(const QString &name)
 {
     return variables.contains(name);
 }
