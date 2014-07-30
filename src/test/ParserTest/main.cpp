@@ -43,8 +43,7 @@ void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const 
             fprintf(stderr, "%s\n", localMsg.constData());
             break;
         case QtWarningMsg:
-            fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                    context.function);
+            fprintf(stderr, "%s\n", localMsg.constData());
             break;
         case QtCriticalMsg:
             fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
@@ -66,12 +65,15 @@ int main(int argc, char *argv[])
 
     qInstallMessageHandler(testMessageOutput);
 
-    qDebug() << "-----------------------------------------------------------";
-    qDebug() << "Running test suite:\n";
+    qWarning() << "-----------------------------------------------------------";
+    qWarning() << "Running test suite:\n";
 
 
     qmu::Test::QmuParserTester pt;
     pt.Run();
+
+    qWarning() << "Done.";
+    qWarning() << "-----------------------------------------------------------";
 
     return a.exec();
 }
