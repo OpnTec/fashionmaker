@@ -42,6 +42,7 @@ class VSimpleCurve : public QObject, public QGraphicsPathItem
 public:
     VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
+    virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 signals:
     /**
      * @brief Choosed send id when clicked.

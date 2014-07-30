@@ -41,6 +41,7 @@ class VSimpleSplinePath : public VAbstractTool, public QGraphicsPathItem
     Q_OBJECT
 public:
     VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor);
+    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 protected:
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
