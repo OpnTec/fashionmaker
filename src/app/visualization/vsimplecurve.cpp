@@ -30,6 +30,7 @@
 #include "../widgets/vapplication.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
+#include <QStyleOptionGraphicsItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

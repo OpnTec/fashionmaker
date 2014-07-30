@@ -30,6 +30,7 @@
 #include <QFont>
 #include <QBrush>
 #include <QStyle>
+#include <QStyleOptionGraphicsItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
