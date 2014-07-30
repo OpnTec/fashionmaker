@@ -30,6 +30,7 @@
 #include "../tools/vabstracttool.h"
 
 #include <QPen>
+#include <QStyleOptionGraphicsItem>
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
