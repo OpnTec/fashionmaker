@@ -73,6 +73,18 @@
        </property>
        <item>
         <widget class="QToolButton" name="toolButtonStandard">
+         <property name="minimumSize">
+          <size>
+           <width>166</width>
+           <height>123</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>166</width>
+           <height>123</height>
+          </size>
+         </property>
          <property name="text">
           <string>Graduation</string>
          </property>
@@ -119,6 +131,18 @@
        </property>
        <item>
         <widget class="QToolButton" name="toolButtonIndividual">
+         <property name="minimumSize">
+          <size>
+           <width>166</width>
+           <height>123</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>166</width>
+           <height>123</height>
+          </size>
+         </property>
          <property name="text">
           <string>Individual</string>
          </property>
