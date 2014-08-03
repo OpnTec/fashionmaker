@@ -167,7 +167,8 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(data->GetTableValue(iMap.key())));
+            QTableWidgetItem *item = new QTableWidgetItem(QString()
+                                                          .setNum(data->GetTableValue(qApp->VarFromUser(iMap.key()))));
             item->setTextAlignment(Qt::AlignHCenter);
             // set the item non-editable (view only), and non-selectable
             Qt::ItemFlags flags = item->flags();
