@@ -363,8 +363,8 @@ void DialogIncrements::FullUpdateFromFile()
 
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     ui->tableWidgetIncrement->clearContents();
-    ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
     FillIncrements();
+    ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
 
     ui->tableWidgetLines->clearContents();
@@ -575,7 +575,7 @@ void DialogIncrements::clickedToolButtonAdd()
     ui->tableWidgetIncrement->setItem(currentRow, 4, item);
 
     item = new QTableWidgetItem(description);
-    item->setTextAlignment(Qt::AlignHCenter);
+    item->setTextAlignment(Qt::AlignLeft);
     ui->tableWidgetIncrement->setItem(currentRow, 5, item);
 
     ui->toolButtonRemove->setEnabled(true);
@@ -705,6 +705,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
             ui->tableWidgetIncrement->resizeRowsToContents();
             this->column = 0;
             ui->tableWidgetIncrement->setCurrentCell( row, this->column );
+            ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
             break;
         }
         default:
