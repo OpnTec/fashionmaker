@@ -355,6 +355,7 @@ void DialogIncrements::FullUpdateFromFile()
     }
     ui->tableWidgetMeasurements->clearContents();
     FillMeasurements();
+    ui->tableWidgetMeasurements->horizontalHeader()->setStretchLastSection(true);
     if (qApp->patternType() == MeasurementsType::Individual)
     {
         connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
@@ -362,6 +363,7 @@ void DialogIncrements::FullUpdateFromFile()
 
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     ui->tableWidgetIncrement->clearContents();
+    ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
     FillIncrements();
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
 
@@ -590,22 +592,27 @@ void DialogIncrements::clickedToolButtonRemove()
 {
     disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
                &DialogIncrements::IncrementChanged);
+
     QTableWidgetItem *item = ui->tableWidgetIncrement->currentItem();
     qint32 row = item->row();
+
     QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
     data->RemoveIncrement(itemName->text());
-    quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+
+    quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
         QDomNodeList list = doc->elementsByTagName(VPattern::TagIncrements);
         list.at(0).removeChild(domElement);
     }
+
     ui->tableWidgetIncrement->removeRow(row);
     if (ui->tableWidgetIncrement->rowCount() == 0)
     {
         ui->toolButtonRemove->setEnabled(false);
     }
+
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
             &DialogIncrements::IncrementChanged);
     emit haveLiteChange();
