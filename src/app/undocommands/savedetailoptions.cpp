@@ -65,7 +65,7 @@ void SaveDetailOptions::undo()
                 doc->IncrementReferens(nodes.at(i).getId());
             }
         }
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
         VAbstractTool::NewSceneRect(scene, list[0]);
@@ -100,7 +100,7 @@ void SaveDetailOptions::redo()
                 doc->DecrementReferens(list.at(i));
             }
         }
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> listV = scene->views();
         VAbstractTool::NewSceneRect(scene, listV[0]);

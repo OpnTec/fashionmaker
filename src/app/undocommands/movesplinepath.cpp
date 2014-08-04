@@ -88,7 +88,7 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
         doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(splPath.getKCurve()));
         VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
 
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
         VAbstractTool::NewSceneRect(scene, list[0]);

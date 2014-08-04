@@ -93,7 +93,7 @@ void MoveSpline::Do(const VSpline &spl)
         doc->SetAttribute(domElement, VAbstractTool::AttrKAsm2, QString().setNum(spl.GetKasm2()));
         doc->SetAttribute(domElement, VAbstractTool::AttrKCurve, QString().setNum(spl.GetKcurve()));
 
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
         VAbstractTool::NewSceneRect(scene, list[0]);

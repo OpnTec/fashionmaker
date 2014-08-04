@@ -564,7 +564,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
         QMessageBox::warning(this, "Error in changes", message);
         return;
     }
-    this->doc->LiteParseTree();
+    this->doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

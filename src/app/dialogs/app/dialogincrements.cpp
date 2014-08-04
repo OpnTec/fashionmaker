@@ -31,7 +31,6 @@
 #include "../../widgets/doubledelegate.h"
 #include "../../widgets/textdelegate.h"
 #include "../../xml/vstandardmeasurements.h"
-#include "../../xml/vpattern.h"
 #include "../../xml/vindividualmeasurements.h"
 
 #include <QFileDialog>
@@ -471,7 +470,7 @@ void DialogIncrements::OpenTable()
         m = m1;
         data->ClearVariables(VarType::Measurement);
         m->Measurements();
-        emit FullUpdateTree();
+        emit FullUpdateTree(Document::LiteParse);
 
         doc->SetPath(filePath);
         emit haveLiteChange();
@@ -504,7 +503,7 @@ void DialogIncrements::OpenTable()
             data->ClearVariables(VarType::Measurement);
             m1->Measurements();
             delete m1;
-            emit FullUpdateTree();
+            emit FullUpdateTree(Document::LiteParse);
 
             doc->SetPath(filePath);
             emit haveLiteChange();
@@ -673,22 +672,22 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
             doc->SetAttribute(domElement, VPattern::IncrementName, item->text());
             data->ClearVariables(VarType::Increment);
             this->column = 2;
-            emit FullUpdateTree();
+            emit FullUpdateTree(Document::LiteParse);
             break;
         case 2: // VPattern::IncrementBase
             doc->SetAttribute(domElement, VPattern::IncrementBase, item->text());
             this->column = 3;
-            emit FullUpdateTree();
+            emit FullUpdateTree(Document::LiteParse);
             break;
         case 3: // VPattern::IncrementKsize
             doc->SetAttribute(domElement, VPattern::IncrementKsize, item->text());
             this->column = 4;
-            emit FullUpdateTree();
+            emit FullUpdateTree(Document::LiteParse);
             break;
         case 4: // VPattern::IncrementKgrowth
             doc->SetAttribute(domElement, VPattern::IncrementKgrowth, item->text());
             this->column = 5;
-            emit FullUpdateTree();
+            emit FullUpdateTree(Document::LiteParse);
             break;
         case 5: // VPattern::IncrementDescription
         {
@@ -752,7 +751,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             data->ClearVariables();
             m->Measurements();
 
-            emit FullUpdateTree();
+            emit FullUpdateTree(Document::LiteParse);
             break;
         }
         default:

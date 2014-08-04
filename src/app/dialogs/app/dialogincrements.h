@@ -30,8 +30,8 @@
 #define DIALOGINCREMENTS_H
 
 #include "../tools/dialogtool.h"
+#include "../../xml/vpattern.h"
 
-class VPattern;
 class VIndividualMeasurements;
 class QTableWidget;
 
@@ -65,7 +65,7 @@ signals:
     /**
      * @brief FullUpdateTree signal update data for dom document
      */
-    void                 FullUpdateTree();
+    void                 FullUpdateTree(const Document &parse);
     /**
      * @brief haveLiteChange signal show sign of change
      */

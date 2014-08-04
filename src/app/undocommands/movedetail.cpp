@@ -67,7 +67,7 @@ void MoveDetail::undo()
     {
         SaveCoordinates(domElement, oldX, oldY);
 
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
         VAbstractTool::NewSceneRect(scene, list[0]);
@@ -89,7 +89,7 @@ void MoveDetail::redo()
 
         if (redoFlag)
         {
-            emit NeedLiteParsing();
+            emit NeedLiteParsing(Document::LiteParse);
         }
         redoFlag = true;
 

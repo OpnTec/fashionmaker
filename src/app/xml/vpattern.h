@@ -35,7 +35,7 @@
 class VDataTool;
 class VMainGraphicsScene;
 
-enum class Document : char { LiteParse, FullParse};
+enum class Document : char { LiteParse, LitePPParse, FullParse};
 
 /*
    VAL_VERSION is (major << 16) + (minor << 8) + patch.
@@ -152,7 +152,7 @@ signals:
     void           SetEnabledGUI(bool enabled);
     void           CheckLayout();
 public slots:
-    void           LiteParseTree();
+    void           LiteParseTree(const Document &parse);
     void           haveLiteChange();
     void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
     void           NeedFullParsing();

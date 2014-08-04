@@ -32,6 +32,8 @@
 #include <QUndoCommand>
 #include <QDomElement>
 
+#include "../xml/vpattern.h"
+
 enum class UndoCommand: char { AddPatternPiece,
                                AddToCalc,
                                MoveSpline,
@@ -56,7 +58,7 @@ public:
 signals:
     void ClearScene();
     void NeedFullParsing();
-    void NeedLiteParsing();
+    void NeedLiteParsing(const Document &parse);
 protected:
     QDomElement xml;
     VPattern    *doc;

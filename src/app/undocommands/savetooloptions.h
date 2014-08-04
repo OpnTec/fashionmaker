@@ -44,8 +44,6 @@ public:
     virtual int  id() const;
     QDomElement  getNewXml() const;
     quint32 getToolId() const;
-signals:
-    void NeedLiteParsing();
 private:
     Q_DISABLE_COPY(SaveToolOptions)
     const QDomElement oldXml;

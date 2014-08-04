@@ -564,7 +564,7 @@ void MainWindow::ClosedDialogDetail(int result)
         VToolDetail::Create(dialogTool, sceneDetails, doc, pattern);
     }
     ArrowTool();
-    doc->LiteParseTree();
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -622,7 +622,7 @@ void MainWindow::ToolUnionDetails(bool checked)
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
     ClosedDialog<VToolUnionDetails>(result);
-    doc->LiteParseTree();
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1483,7 +1483,7 @@ void MainWindow::ChangedSize(const QString & text)
 {
     qint32 size = text.toInt();
     pattern->SetSize(size);
-    doc->LiteParseTree();
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1495,7 +1495,7 @@ void MainWindow::ChangedHeight(const QString &text)
 {
     qint32 growth = text.toInt();
     pattern->SetHeight(growth);
-    doc->LiteParseTree();
+    doc->LiteParseTree(Document::LiteParse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

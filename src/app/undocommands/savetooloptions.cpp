@@ -51,7 +51,7 @@ void SaveToolOptions::undo()
     {
         domElement.parentNode().replaceChild(oldXml, domElement);
 
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
     }
     else
     {
@@ -68,7 +68,7 @@ void SaveToolOptions::redo()
     {
         domElement.parentNode().replaceChild(newXml, domElement);
 
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LiteParse);
     }
     else
     {

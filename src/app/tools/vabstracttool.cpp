@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vabstracttool.h"
-#include "../xml/vpattern.h"
 #include <QGraphicsView>
 #include <QMessageBox>
 #include "../undocommands/deltool.h"

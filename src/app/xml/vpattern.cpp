@@ -667,7 +667,7 @@ bool VPattern::SaveDocument(const QString &fileName)
 /**
  * @brief LiteParseTree lite parse file.
  */
-void VPattern::LiteParseTree()
+void VPattern::LiteParseTree(const Document &parse)
 {
     // Save name current pattern piece
     QString namePP = nameActivPP;
@@ -675,8 +675,20 @@ void VPattern::LiteParseTree()
     try
     {
         emit SetEnabledGUI(true);
-        ParseCurrentPP();
-        //Parse(Document::LiteParse);
+        switch(parse)
+        {
+            case Document::LitePPParse:
+                ParseCurrentPP();
+                break;
+            case Document::LiteParse:
+                Parse(parse);
+                break;
+            case Document::FullParse:
+                qWarning()<<"Lite parsing doesn't support full parsing";
+                break;
+            default:
+                break;
+        }
     }
     catch (const VExceptionUndo &e)
     {

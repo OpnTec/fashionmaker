@@ -30,8 +30,8 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
+#include "../xml/vpattern.h"
 
-class VPattern;
 class QDomElement;
 class QLineF;
 class QPointF;
@@ -119,7 +119,7 @@ signals:
     /**
      * @brief FullUpdateTree emit if need reparse pattern file.
      */
-    void                    LiteUpdateTree();
+    void                    LiteUpdateTree(const Document &parse);
 protected:
     /** @brief doc dom document container */
     VPattern                *doc;

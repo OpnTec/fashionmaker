@@ -103,7 +103,7 @@ void MoveSPoint::Do(double x, double y)
         doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(x)));
         doc->SetAttribute(domElement, VAbstractTool::AttrY, QString().setNum(qApp->fromPixel(y)));
 
-        emit NeedLiteParsing();
+        emit NeedLiteParsing(Document::LitePPParse);
 
         QList<QGraphicsView*> list = scene->views();
         VAbstractTool::NewSceneRect(scene, list[0]);
