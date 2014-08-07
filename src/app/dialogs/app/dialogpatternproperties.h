@@ -48,11 +48,18 @@ signals:
     void         haveChange();
 public slots:
     void         Apply();
+    void         SelectAll(int state);
+    void         UncheckHeight(int state);
+    void         UncheckSize(int state);
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
     VPattern *doc;
+    char     heightsChecked;
+    char     sizesChecked;
     void         Write(const QString &tagName, const QString &text) const;
+    void         SetHeightsEnabled(bool enabled);
+    void         SetSizesEnabled(bool enabled);
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H
