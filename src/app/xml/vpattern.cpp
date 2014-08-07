@@ -61,10 +61,52 @@ const QString VPattern::TagLine         = QStringLiteral("line");
 const QString VPattern::TagSpline       = QStringLiteral("spline");
 const QString VPattern::TagArc          = QStringLiteral("arc");
 const QString VPattern::TagTools        = QStringLiteral("tools");
+const QString VPattern::TagGradation    = QStringLiteral("gradation");
+const QString VPattern::TagHeights      = QStringLiteral("heights");
+const QString VPattern::TagSizes        = QStringLiteral("sizes");
 
 const QString VPattern::AttrName        = QStringLiteral("name");
 const QString VPattern::AttrType        = QStringLiteral("type");
 const QString VPattern::AttrPath        = QStringLiteral("path");
+
+const QString VPattern::AttrAll         = QStringLiteral("all");
+
+const QString VPattern::AttrH92         = QStringLiteral("h92");
+const QString VPattern::AttrH98         = QStringLiteral("h98");
+const QString VPattern::AttrH104        = QStringLiteral("h104");
+const QString VPattern::AttrH110        = QStringLiteral("h110");
+const QString VPattern::AttrH116        = QStringLiteral("h116");
+const QString VPattern::AttrH122        = QStringLiteral("h122");
+const QString VPattern::AttrH128        = QStringLiteral("h128");
+const QString VPattern::AttrH134        = QStringLiteral("h134");
+const QString VPattern::AttrH140        = QStringLiteral("h140");
+const QString VPattern::AttrH146        = QStringLiteral("h146");
+const QString VPattern::AttrH152        = QStringLiteral("h152");
+const QString VPattern::AttrH158        = QStringLiteral("h158");
+const QString VPattern::AttrH164        = QStringLiteral("h164");
+const QString VPattern::AttrH170        = QStringLiteral("h170");
+const QString VPattern::AttrH176        = QStringLiteral("h176");
+const QString VPattern::AttrH182        = QStringLiteral("h182");
+const QString VPattern::AttrH188        = QStringLiteral("h188");
+
+const QString VPattern::AttrS22         = QStringLiteral("s22");
+const QString VPattern::AttrS24         = QStringLiteral("s24");
+const QString VPattern::AttrS26         = QStringLiteral("s26");
+const QString VPattern::AttrS28         = QStringLiteral("s28");
+const QString VPattern::AttrS30         = QStringLiteral("s30");
+const QString VPattern::AttrS32         = QStringLiteral("s32");
+const QString VPattern::AttrS34         = QStringLiteral("s34");
+const QString VPattern::AttrS36         = QStringLiteral("s36");
+const QString VPattern::AttrS38         = QStringLiteral("s38");
+const QString VPattern::AttrS40         = QStringLiteral("s40");
+const QString VPattern::AttrS42         = QStringLiteral("s42");
+const QString VPattern::AttrS44         = QStringLiteral("s44");
+const QString VPattern::AttrS46         = QStringLiteral("s46");
+const QString VPattern::AttrS48         = QStringLiteral("s48");
+const QString VPattern::AttrS50         = QStringLiteral("s50");
+const QString VPattern::AttrS52         = QStringLiteral("s52");
+const QString VPattern::AttrS54         = QStringLiteral("s54");
+const QString VPattern::AttrS56         = QStringLiteral("s56");
 
 const QString VPattern::IncrementName        = QStringLiteral("name");
 const QString VPattern::IncrementBase        = QStringLiteral("base");
@@ -1813,6 +1855,162 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
         throw excep;
     }
     return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<GHeights, bool> VPattern::GetGradationHeights() const
+{
+    QMap<GHeights, bool> map;
+    map.insert(GHeights::H92, true);
+    map.insert(GHeights::H98, true);
+    map.insert(GHeights::H104, true);
+    map.insert(GHeights::H110, true);
+    map.insert(GHeights::H116, true);
+    map.insert(GHeights::H122, true);
+    map.insert(GHeights::H128, true);
+    map.insert(GHeights::H134, true);
+    map.insert(GHeights::H140, true);
+    map.insert(GHeights::H146, true);
+    map.insert(GHeights::H152, true);
+    map.insert(GHeights::H158, true);
+    map.insert(GHeights::H164, true);
+    map.insert(GHeights::H170, true);
+    map.insert(GHeights::H176, true);
+    map.insert(GHeights::H182, true);
+    map.insert(GHeights::H188, true);
+
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        return map;
+    }
+
+    QStringList gTags{TagHeights, TagSizes};
+    QDomNode domNode = tags.at(0).firstChild();
+    while (domNode.isNull() == false)
+    {
+        if (domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                const QString defValue = QStringLiteral("true");
+                switch (gTags.indexOf(domElement.tagName()))
+                {
+                    case 0: // TagHeights
+                        if (GetParametrBool(domElement, AttrAll, defValue))
+                        {
+                            return map;
+                        }
+
+                        map.insert(GHeights::H92, GetParametrBool(domElement, AttrH92, defValue));
+                        map.insert(GHeights::H98, GetParametrBool(domElement, AttrH98, defValue));
+                        map.insert(GHeights::H104, GetParametrBool(domElement, AttrH104, defValue));
+                        map.insert(GHeights::H110, GetParametrBool(domElement, AttrH110, defValue));
+                        map.insert(GHeights::H116, GetParametrBool(domElement, AttrH116, defValue));
+                        map.insert(GHeights::H122, GetParametrBool(domElement, AttrH122, defValue));
+                        map.insert(GHeights::H128, GetParametrBool(domElement, AttrH128, defValue));
+                        map.insert(GHeights::H134, GetParametrBool(domElement, AttrH134, defValue));
+                        map.insert(GHeights::H140, GetParametrBool(domElement, AttrH140, defValue));
+                        map.insert(GHeights::H146, GetParametrBool(domElement, AttrH146, defValue));
+                        map.insert(GHeights::H152, GetParametrBool(domElement, AttrH152, defValue));
+                        map.insert(GHeights::H158, GetParametrBool(domElement, AttrH158, defValue));
+                        map.insert(GHeights::H164, GetParametrBool(domElement, AttrH164, defValue));
+                        map.insert(GHeights::H170, GetParametrBool(domElement, AttrH170, defValue));
+                        map.insert(GHeights::H176, GetParametrBool(domElement, AttrH176, defValue));
+                        map.insert(GHeights::H182, GetParametrBool(domElement, AttrH182, defValue));
+                        map.insert(GHeights::H188, GetParametrBool(domElement, AttrH188, defValue));
+                        return map;
+                        break;
+                    case 1: // TagSizes
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+    return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<GSizes, bool> VPattern::GetGradationSizes() const
+{
+    QMap<GSizes, bool> map;
+    map.insert(GSizes::S22, true);
+    map.insert(GSizes::S24, true);
+    map.insert(GSizes::S26, true);
+    map.insert(GSizes::S28, true);
+    map.insert(GSizes::S30, true);
+    map.insert(GSizes::S32, true);
+    map.insert(GSizes::S34, true);
+    map.insert(GSizes::S36, true);
+    map.insert(GSizes::S38, true);
+    map.insert(GSizes::S40, true);
+    map.insert(GSizes::S42, true);
+    map.insert(GSizes::S44, true);
+    map.insert(GSizes::S46, true);
+    map.insert(GSizes::S48, true);
+    map.insert(GSizes::S50, true);
+    map.insert(GSizes::S52, true);
+    map.insert(GSizes::S54, true);
+    map.insert(GSizes::S56, true);
+
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        return map;
+    }
+
+    QStringList gTags{TagHeights, TagSizes};
+    QDomNode domNode = tags.at(0).firstChild();
+    while (domNode.isNull() == false)
+    {
+        if (domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                const QString defValue = QStringLiteral("true");
+                switch (gTags.indexOf(domElement.tagName()))
+                {
+                    case 0: // TagHeights
+                        break;
+                    case 1: // TagSizes
+                        if (GetParametrBool(domElement, AttrAll, defValue))
+                        {
+                            return map;
+                        }
+
+                        map.insert(GSizes::S22, GetParametrBool(domElement, AttrS22, defValue));
+                        map.insert(GSizes::S24, GetParametrBool(domElement, AttrS24, defValue));
+                        map.insert(GSizes::S26, GetParametrBool(domElement, AttrS26, defValue));
+                        map.insert(GSizes::S28, GetParametrBool(domElement, AttrS28, defValue));
+                        map.insert(GSizes::S30, GetParametrBool(domElement, AttrS30, defValue));
+                        map.insert(GSizes::S32, GetParametrBool(domElement, AttrS32, defValue));
+                        map.insert(GSizes::S34, GetParametrBool(domElement, AttrS34, defValue));
+                        map.insert(GSizes::S36, GetParametrBool(domElement, AttrS36, defValue));
+                        map.insert(GSizes::S38, GetParametrBool(domElement, AttrS38, defValue));
+                        map.insert(GSizes::S40, GetParametrBool(domElement, AttrS40, defValue));
+                        map.insert(GSizes::S42, GetParametrBool(domElement, AttrS42, defValue));
+                        map.insert(GSizes::S44, GetParametrBool(domElement, AttrS44, defValue));
+                        map.insert(GSizes::S46, GetParametrBool(domElement, AttrS46, defValue));
+                        map.insert(GSizes::S48, GetParametrBool(domElement, AttrS48, defValue));
+                        map.insert(GSizes::S50, GetParametrBool(domElement, AttrS50, defValue));
+                        map.insert(GSizes::S52, GetParametrBool(domElement, AttrS52, defValue));
+                        map.insert(GSizes::S54, GetParametrBool(domElement, AttrS54, defValue));
+                        map.insert(GSizes::S56, GetParametrBool(domElement, AttrS56, defValue));
+                        return map;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+    return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

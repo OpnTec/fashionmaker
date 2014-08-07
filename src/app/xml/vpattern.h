@@ -37,6 +37,10 @@ class VMainGraphicsScene;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse};
 
+enum class GHeights : char { H92, H98, H104, H110, H116, H122, H128, H134, H140, H146, H152, H158, H164, H170, H176,
+                             H182, H188};
+enum class GSizes : char { S22, S24, S26, S28, S30, S32, S34, S36, S38, S40, S42, S44, S46, S48, S50, S52, S54, S56};
+
 /*
    VAL_VERSION is (major << 16) + (minor << 8) + patch.
 */
@@ -103,18 +107,66 @@ public:
     static const QString TagSpline;
     static const QString TagArc;
     static const QString TagTools;
+    static const QString TagGradation;
+    static const QString TagHeights;
+    static const QString TagSizes;
+
     static const QString AttrName;
     static const QString AttrType;
     static const QString AttrPath;
+
+    static const QString AttrAll;
+
+    static const QString AttrH92;
+    static const QString AttrH98;
+    static const QString AttrH104;
+    static const QString AttrH110;
+    static const QString AttrH116;
+    static const QString AttrH122;
+    static const QString AttrH128;
+    static const QString AttrH134;
+    static const QString AttrH140;
+    static const QString AttrH146;
+    static const QString AttrH152;
+    static const QString AttrH158;
+    static const QString AttrH164;
+    static const QString AttrH170;
+    static const QString AttrH176;
+    static const QString AttrH182;
+    static const QString AttrH188;
+
+    static const QString AttrS22;
+    static const QString AttrS24;
+    static const QString AttrS26;
+    static const QString AttrS28;
+    static const QString AttrS30;
+    static const QString AttrS32;
+    static const QString AttrS34;
+    static const QString AttrS36;
+    static const QString AttrS38;
+    static const QString AttrS40;
+    static const QString AttrS42;
+    static const QString AttrS44;
+    static const QString AttrS46;
+    static const QString AttrS48;
+    static const QString AttrS50;
+    static const QString AttrS52;
+    static const QString AttrS54;
+    static const QString AttrS56;
+
     static const QString IncrementName;
     static const QString IncrementBase;
     static const QString IncrementKsize;
     static const QString IncrementKgrowth;
     static const QString IncrementDescription;
+
     virtual bool   SaveDocument(const QString &fileName);
     QStringList    getPatternPieces() const;
     QRectF         ActiveDrawBoundingRect() const;
     quint32        GetParametrId(const QDomElement& domElement) const;
+
+    QMap<GHeights, bool> GetGradationHeights() const;
+    QMap<GSizes, bool>   GetGradationSizes() const;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.

@@ -222,6 +222,45 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) const
+{
+    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    bool ok = false;
+    QString parametr;
+    bool val = true;
+
+    QString message = tr("Can't convert toBool parameter");
+    try
+    {
+        parametr = GetParametrString(domElement, name, defValue);
+
+        QStringList bools {QLatin1String("true"), QLatin1String("false")};
+        switch (bools.indexOf(parametr))
+        {
+            case 0: // true
+                val = true;
+                break;
+            case 1: // false
+                val = false;
+                break;
+            default:// others
+                throw VExceptionConversionError(message, name);
+                break;
+        }
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        VExceptionConversionError excep(message, name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+
+    return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the string value of the given attribute. RENAME: see above
  *

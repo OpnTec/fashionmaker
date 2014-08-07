@@ -100,6 +100,7 @@ public:
         domElement.setAttribute(name, val);
     }
     quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
