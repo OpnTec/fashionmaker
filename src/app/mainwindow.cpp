@@ -196,8 +196,7 @@ void MainWindow::ActionNewPP()
 
     pattern->ClearGObjects();
     //Create single point
-    const quint32 id = pattern->AddGObject(new VPointF(qApp->toPixel((10+comboBoxDraws->count()*5)), qApp->toPixel(10),
-                                                       "А", 5, 10));
+    const quint32 id = pattern->AddGObject(new VPointF(20+comboBoxDraws->count()*5, 20, "А", 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Source::FromGui, patternPieceName, path);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
