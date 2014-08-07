@@ -762,8 +762,8 @@ void MainWindow::ToolBarOption()
 {
     if (qApp->patternType() == MeasurementsType::Standard)
     {
-        const QStringList listHeights = VMeasurement::ListHeights();
-        const QStringList listSizes = VMeasurement::ListSizes();
+        const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights());
+        const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes());
 
         SetGradationList(tr("Height: "), listHeights, &MainWindow::ChangedHeight);
         SetGradationList(tr("Size: "), listSizes, &MainWindow::ChangedSize);

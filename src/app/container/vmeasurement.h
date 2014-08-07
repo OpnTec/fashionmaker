@@ -30,6 +30,7 @@
 #define VSTANDARDTABLEROW_H
 
 #include "vvariable.h"
+#include "../options.h"
 
 #include <QStringList>
 
@@ -52,8 +53,8 @@ public:
     QString            GetGuiText() const;
     QString            TagName() const;
     void               setTagName(const QString &TagName);
-    static QStringList ListHeights();
-    static QStringList ListSizes();
+    static QStringList ListHeights(QMap<GHeights, bool> heights);
+    static QStringList ListSizes(QMap<GSizes, bool> sizes);
 private:
     /** @brief description description measurement */
     QString        gui_text;

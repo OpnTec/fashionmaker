@@ -97,7 +97,7 @@ VMeasurement::~VMeasurement()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListHeights()
+QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights)
 {
     QStringList list;
     if (qApp->patternUnit() == Unit::Inch)
@@ -106,16 +106,29 @@ QStringList VMeasurement::ListHeights()
         return list;
     }
 
-    // from 92 cm to 188 cm
-    for (int i = 92; i<= 188; i = i+6)
+    QMap<GHeights, bool>::const_iterator i = heights.constBegin();
+    while (i != heights.constEnd())
     {
-        ListValue(list, i);
+        if (i.value())
+        {
+            ListValue(list, static_cast<int>(i.key()));
+        }
+        ++i;
+    }
+
+    if (list.isEmpty())
+    {
+        // from 92 cm to 188 cm
+        for (int i = 92; i<= 188; i = i+6)
+        {
+            ListValue(list, i);
+        }
     }
     return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VMeasurement::ListSizes()
+QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes)
 {
     QStringList list;
     if (qApp->patternUnit() == Unit::Inch)
@@ -124,10 +137,23 @@ QStringList VMeasurement::ListSizes()
         return list;
     }
 
-    // from 22 cm to 56 cm
-    for (int i = 22; i<= 56; i = i+2)
+    QMap<GSizes, bool>::const_iterator i = sizes.constBegin();
+    while (i != sizes.constEnd())
     {
-       ListValue(list, i);
+        if (i.value())
+        {
+            ListValue(list, static_cast<int>(i.key()));
+        }
+        ++i;
+    }
+
+    if (list.isEmpty())
+    {
+        // from 22 cm to 56 cm
+        for (int i = 22; i<= 56; i = i+2)
+        {
+           ListValue(list, i);
+        }
     }
     return list;
 }

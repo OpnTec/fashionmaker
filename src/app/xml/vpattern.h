@@ -35,11 +35,7 @@
 class VDataTool;
 class VMainGraphicsScene;
 
-enum class Document : char { LiteParse, LitePPParse, FullParse};
-
-enum class GHeights : char { H92, H98, H104, H110, H116, H122, H128, H134, H140, H146, H152, H158, H164, H170, H176,
-                             H182, H188};
-enum class GSizes : char { S22, S24, S26, S28, S30, S32, S34, S36, S38, S40, S42, S44, S46, S48, S50, S52, S54, S56};
+enum class Document : char { LiteParse, LitePPParse, FullParse };
 
 /*
    VAL_VERSION is (major << 16) + (minor << 8) + patch.
