@@ -62,6 +62,12 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     connect(bCansel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     connect(this, &DialogPatternProperties::haveChange, this->doc, &VPattern::haveLiteChange);
+
+    ui->tabWidget->setCurrentIndex(0);
+    if (qApp->patternUnit() == Unit::Inch)
+    {
+        ui->tabWidget->setTabEnabled(1, false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

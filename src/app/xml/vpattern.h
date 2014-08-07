@@ -130,6 +130,7 @@ public:
     static const QString AttrH176;
     static const QString AttrH182;
     static const QString AttrH188;
+    static const QString AttrH194;
 
     static const QString AttrS22;
     static const QString AttrS24;

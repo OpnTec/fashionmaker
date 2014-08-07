@@ -89,6 +89,7 @@ const QString VPattern::AttrH170        = QStringLiteral("h170");
 const QString VPattern::AttrH176        = QStringLiteral("h176");
 const QString VPattern::AttrH182        = QStringLiteral("h182");
 const QString VPattern::AttrH188        = QStringLiteral("h188");
+const QString VPattern::AttrH194        = QStringLiteral("h194");
 
 const QString VPattern::AttrS22         = QStringLiteral("s22");
 const QString VPattern::AttrS24         = QStringLiteral("s24");
@@ -1879,6 +1880,7 @@ QMap<GHeights, bool> VPattern::GetGradationHeights() const
     map.insert(GHeights::H176, true);
     map.insert(GHeights::H182, true);
     map.insert(GHeights::H188, true);
+    map.insert(GHeights::H194, true);
 
     QDomNodeList tags = elementsByTagName(TagGradation);
     if (tags.size() == 0)
@@ -1921,6 +1923,7 @@ QMap<GHeights, bool> VPattern::GetGradationHeights() const
                         map.insert(GHeights::H176, GetParametrBool(domElement, AttrH176, defValue));
                         map.insert(GHeights::H182, GetParametrBool(domElement, AttrH182, defValue));
                         map.insert(GHeights::H188, GetParametrBool(domElement, AttrH188, defValue));
+                        map.insert(GHeights::H194, GetParametrBool(domElement, AttrH194, defValue));
                         return map;
                         break;
                     case 1: // TagSizes

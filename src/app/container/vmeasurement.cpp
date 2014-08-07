@@ -118,8 +118,8 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights)
 
     if (list.isEmpty())
     {
-        // from 92 cm to 188 cm
-        for (int i = 92; i<= 188; i = i+6)
+        // from 92 cm to 194 cm
+        for (int i = 92; i<= 194; i = i+6)
         {
             ListValue(list, i);
         }
