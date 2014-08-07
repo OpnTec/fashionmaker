@@ -466,7 +466,7 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
             }
             else
             {
-                result = "mm";
+                result = UnitMM;
             }
             break;
         case Unit::Cm:
@@ -476,17 +476,17 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
             }
             else
             {
-                result = "cm";
+                result = UnitCM;
             }
             break;
         case Unit::Inch:
             if (translate)
             {
-                result = QObject::tr("in", "inch abbreviation");
+                result = QObject::tr("inch");
             }
             else
             {
-                result = "inch";//I decided use full name in xml file.
+                result = UnitINCH;
             }
             break;
         default:
@@ -496,7 +496,7 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
             }
             else
             {
-                result = "cm";
+                result = UnitCM;
             }
             break;
     }
