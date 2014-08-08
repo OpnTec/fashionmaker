@@ -110,7 +110,7 @@
               <item row="0" column="0">
                <widget class="QCheckBox" name="checkBoxH92">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -129,7 +129,7 @@
               <item row="0" column="1">
                <widget class="QCheckBox" name="checkBoxH146">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -148,7 +148,7 @@
               <item row="1" column="0">
                <widget class="QCheckBox" name="checkBoxH98">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -167,7 +167,7 @@
               <item row="1" column="1">
                <widget class="QCheckBox" name="checkBoxH152">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -186,7 +186,7 @@
               <item row="2" column="0">
                <widget class="QCheckBox" name="checkBoxH104">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -211,7 +211,7 @@
               <item row="2" column="1">
                <widget class="QCheckBox" name="checkBoxH158">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -230,7 +230,7 @@
               <item row="3" column="0">
                <widget class="QCheckBox" name="checkBoxH110">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -249,7 +249,7 @@
               <item row="3" column="1">
                <widget class="QCheckBox" name="checkBoxH164">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -268,7 +268,7 @@
               <item row="4" column="0">
                <widget class="QCheckBox" name="checkBoxH116">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -287,7 +287,7 @@
               <item row="4" column="1">
                <widget class="QCheckBox" name="checkBoxH170">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -306,7 +306,7 @@
               <item row="5" column="0">
                <widget class="QCheckBox" name="checkBoxH122">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -325,7 +325,7 @@
               <item row="5" column="1">
                <widget class="QCheckBox" name="checkBoxH176">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -344,7 +344,7 @@
               <item row="6" column="0">
                <widget class="QCheckBox" name="checkBoxH128">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -363,7 +363,7 @@
               <item row="6" column="1">
                <widget class="QCheckBox" name="checkBoxH182">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -382,7 +382,7 @@
               <item row="7" column="0">
                <widget class="QCheckBox" name="checkBoxH134">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -401,7 +401,7 @@
               <item row="7" column="1">
                <widget class="QCheckBox" name="checkBoxH188">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -420,7 +420,7 @@
               <item row="8" column="0">
                <widget class="QCheckBox" name="checkBoxH140">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -439,7 +439,7 @@
               <item row="8" column="1">
                <widget class="QCheckBox" name="checkBoxH194">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -484,7 +484,7 @@
               <item row="0" column="0">
                <widget class="QCheckBox" name="checkBoxS22">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -503,7 +503,7 @@
               <item row="0" column="1">
                <widget class="QCheckBox" name="checkBoxS40">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -522,7 +522,7 @@
               <item row="1" column="0">
                <widget class="QCheckBox" name="checkBoxS24">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -541,7 +541,7 @@
               <item row="1" column="1">
                <widget class="QCheckBox" name="checkBoxS42">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -560,7 +560,7 @@
               <item row="2" column="0">
                <widget class="QCheckBox" name="checkBoxS26">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -579,7 +579,7 @@
               <item row="2" column="1">
                <widget class="QCheckBox" name="checkBoxS44">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -598,7 +598,7 @@
               <item row="3" column="0">
                <widget class="QCheckBox" name="checkBoxS28">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -617,7 +617,7 @@
               <item row="3" column="1">
                <widget class="QCheckBox" name="checkBoxS46">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -636,7 +636,7 @@
               <item row="4" column="0">
                <widget class="QCheckBox" name="checkBoxS30">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -655,7 +655,7 @@
               <item row="4" column="1">
                <widget class="QCheckBox" name="checkBoxS48">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -674,7 +674,7 @@
               <item row="5" column="0">
                <widget class="QCheckBox" name="checkBoxS32">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -693,7 +693,7 @@
               <item row="5" column="1">
                <widget class="QCheckBox" name="checkBoxS50">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -712,7 +712,7 @@
               <item row="6" column="0">
                <widget class="QCheckBox" name="checkBoxS34">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -731,7 +731,7 @@
               <item row="6" column="1">
                <widget class="QCheckBox" name="checkBoxS52">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -750,7 +750,7 @@
               <item row="7" column="0">
                <widget class="QCheckBox" name="checkBoxS36">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -769,7 +769,7 @@
               <item row="7" column="1">
                <widget class="QCheckBox" name="checkBoxS54">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -788,7 +788,7 @@
               <item row="8" column="0">
                <widget class="QCheckBox" name="checkBoxS38">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -807,7 +807,7 @@
               <item row="8" column="1">
                <widget class="QCheckBox" name="checkBoxS56">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -840,7 +840,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>

@@ -109,7 +109,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights)
     QMap<GHeights, bool>::const_iterator i = heights.constBegin();
     while (i != heights.constEnd())
     {
-        if (i.value())
+        if (i.value() && i.key() != GHeights::ALL)
         {
             ListValue(list, static_cast<int>(i.key()));
         }
@@ -140,7 +140,7 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes)
     QMap<GSizes, bool>::const_iterator i = sizes.constBegin();
     while (i != sizes.constEnd())
     {
-        if (i.value())
+        if (i.value() && i.key() != GSizes::ALL)
         {
             ListValue(list, static_cast<int>(i.key()));
         }

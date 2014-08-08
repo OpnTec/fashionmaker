@@ -1544,6 +1544,75 @@ void VPattern::ParseCurrentPP()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::CheckTagExists(const QString &tag)
+{
+    QDomNodeList list = elementsByTagName(tag);
+    if (list.size() == 0)
+    {
+        QStringList tags{TagVersion, TagAuthor, TagDescription, TagNotes, TagGradation};
+        QDomElement pattern = documentElement();
+        switch (tags.indexOf(tag))
+        {
+            case 0: //TagVersion
+                break;// Mandatory tag
+            case 1: //TagAuthor
+                pattern.insertAfter(createElement(TagAuthor), elementsByTagName(TagVersion).at(0));
+                SetVersion();
+                break;
+            case 2: //TagDescription
+            {
+                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
+                {
+                    QDomNodeList list = elementsByTagName(tags.at(i));
+                    if (list.isEmpty())
+                    {
+                        continue;
+                    }
+                    pattern.insertAfter(createElement(TagDescription), list.at(0));
+                }
+                SetVersion();
+                break;
+            }
+            case 3: //TagNotes
+            {
+                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
+                {
+                    QDomNodeList list = elementsByTagName(tags.at(i));
+                    if (list.isEmpty())
+                    {
+                        continue;
+                    }
+                    pattern.insertAfter(createElement(TagNotes), list.at(0));
+                }
+                SetVersion();
+                break;
+            }
+            case 4: //TagGradation
+            {
+                QDomElement gradation = createElement(TagGradation);
+                gradation.appendChild(createElement(TagHeights));
+                gradation.appendChild(createElement(TagSizes));
+
+                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
+                {
+                    QDomNodeList list = elementsByTagName(tags.at(i));
+                    if (list.isEmpty())
+                    {
+                        continue;
+                    }
+                    pattern.insertAfter(gradation, list.at(0));
+                    break;
+                }
+                SetVersion();
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseSplineElement parse spline tag.
  * @param scene scene.
@@ -1863,6 +1932,7 @@ quint32 VPattern::GetParametrId(const QDomElement &domElement) const
 QMap<GHeights, bool> VPattern::GetGradationHeights() const
 {
     QMap<GHeights, bool> map;
+    map.insert(GHeights::ALL, true);
     map.insert(GHeights::H92, true);
     map.insert(GHeights::H98, true);
     map.insert(GHeights::H104, true);
@@ -1905,6 +1975,10 @@ QMap<GHeights, bool> VPattern::GetGradationHeights() const
                         {
                             return map;
                         }
+                        else
+                        {
+                            map.insert(GHeights::ALL, false);
+                        }
 
                         map.insert(GHeights::H92, GetParametrBool(domElement, AttrH92, defValue));
                         map.insert(GHeights::H98, GetParametrBool(domElement, AttrH98, defValue));
@@ -1939,9 +2013,67 @@ QMap<GHeights, bool> VPattern::GetGradationHeights() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
+{
+    CheckTagExists(TagGradation);
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
+        return;
+    }
+
+    QStringList gTags{TagHeights, TagSizes};
+    QDomNode domNode = tags.at(0).firstChild();
+    while (domNode.isNull() == false)
+    {
+        if (domNode.isElement())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                switch (gTags.indexOf(domElement.tagName()))
+                {
+                    case 0: // TagHeights
+                        SetAttribute(domElement, AttrAll, options.value(GHeights::ALL));
+                        SetAttribute(domElement, AttrH92, options.value(GHeights::H92));
+                        SetAttribute(domElement, AttrH98, options.value(GHeights::H98));
+                        SetAttribute(domElement, AttrH104, options.value(GHeights::H104));
+                        SetAttribute(domElement, AttrH110, options.value(GHeights::H110));
+                        SetAttribute(domElement, AttrH116, options.value(GHeights::H116));
+                        SetAttribute(domElement, AttrH122, options.value(GHeights::H122));
+                        SetAttribute(domElement, AttrH128, options.value(GHeights::H128));
+                        SetAttribute(domElement, AttrH134, options.value(GHeights::H134));
+                        SetAttribute(domElement, AttrH140, options.value(GHeights::H140));
+                        SetAttribute(domElement, AttrH146, options.value(GHeights::H146));
+                        SetAttribute(domElement, AttrH152, options.value(GHeights::H152));
+                        SetAttribute(domElement, AttrH158, options.value(GHeights::H158));
+                        SetAttribute(domElement, AttrH164, options.value(GHeights::H164));
+                        SetAttribute(domElement, AttrH170, options.value(GHeights::H170));
+                        SetAttribute(domElement, AttrH176, options.value(GHeights::H176));
+                        SetAttribute(domElement, AttrH182, options.value(GHeights::H182));
+                        SetAttribute(domElement, AttrH188, options.value(GHeights::H188));
+                        SetAttribute(domElement, AttrH194, options.value(GHeights::H194));
+
+                        emit patternChanged(false);
+                        return;
+                        break;
+                    case 1: // TagSizes
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMap<GSizes, bool> VPattern::GetGradationSizes() const
 {
     QMap<GSizes, bool> map;
+    map.insert(GSizes::ALL, true);
     map.insert(GSizes::S22, true);
     map.insert(GSizes::S24, true);
     map.insert(GSizes::S26, true);
@@ -1986,6 +2118,10 @@ QMap<GSizes, bool> VPattern::GetGradationSizes() const
                         {
                             return map;
                         }
+                        else
+                        {
+                            map.insert(GSizes::ALL, false);
+                        }
 
                         map.insert(GSizes::S22, GetParametrBool(domElement, AttrS22, defValue));
                         map.insert(GSizes::S24, GetParametrBool(domElement, AttrS24, defValue));
@@ -2015,6 +2151,126 @@ QMap<GSizes, bool> VPattern::GetGradationSizes() const
         domNode = domNode.nextSibling();
     }
     return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
+{
+    CheckTagExists(TagGradation);
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
+        return;
+    }
+
+    QStringList gTags{TagHeights, TagSizes};
+    QDomNode domNode = tags.at(0).firstChild();
+    while (domNode.isNull() == false)
+    {
+        if (domNode.isElement())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                switch (gTags.indexOf(domElement.tagName()))
+                {
+                    case 0: // TagHeights
+                        break;
+                    case 1: // TagSizes
+                        SetAttribute(domElement, AttrAll, options.value(GSizes::ALL));
+                        SetAttribute(domElement, AttrS22, options.value(GSizes::S22));
+                        SetAttribute(domElement, AttrS24, options.value(GSizes::S24));
+                        SetAttribute(domElement, AttrS26, options.value(GSizes::S26));
+                        SetAttribute(domElement, AttrS28, options.value(GSizes::S28));
+                        SetAttribute(domElement, AttrS30, options.value(GSizes::S30));
+                        SetAttribute(domElement, AttrS32, options.value(GSizes::S32));
+                        SetAttribute(domElement, AttrS34, options.value(GSizes::S34));
+                        SetAttribute(domElement, AttrS36, options.value(GSizes::S36));
+                        SetAttribute(domElement, AttrS38, options.value(GSizes::S38));
+                        SetAttribute(domElement, AttrS40, options.value(GSizes::S40));
+                        SetAttribute(domElement, AttrS42, options.value(GSizes::S42));
+                        SetAttribute(domElement, AttrS44, options.value(GSizes::S44));
+                        SetAttribute(domElement, AttrS46, options.value(GSizes::S46));
+                        SetAttribute(domElement, AttrS48, options.value(GSizes::S48));
+                        SetAttribute(domElement, AttrS50, options.value(GSizes::S50));
+                        SetAttribute(domElement, AttrS52, options.value(GSizes::S52));
+                        SetAttribute(domElement, AttrS54, options.value(GSizes::S54));
+                        SetAttribute(domElement, AttrS56, options.value(GSizes::S56));
+
+                        emit patternChanged(false);
+                        return;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GetAuthor() const
+{
+    QSettings *settings = qApp->getSettings();
+    SCASSERT(settings != nullptr);
+#ifdef Q_OS_WIN
+    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
+#else
+    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
+#endif
+
+    return UniqueTagText(TagAuthor, user);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetAuthor(const QString &text)
+{
+    CheckTagExists(TagAuthor);
+    setTagText(TagAuthor, text);
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GetDescription() const
+{
+    return UniqueTagText(TagDescription);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetDescription(const QString &text)
+{
+    CheckTagExists(TagDescription);
+    setTagText(TagDescription, text);
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GetNotes() const
+{
+    return UniqueTagText(TagNotes);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetNotes(const QString &text)
+{
+    CheckTagExists(TagNotes);
+    setTagText(TagNotes, text);
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GetVersion() const
+{
+    return UniqueTagText(TagVersion, VAL_STR_VERSION);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetVersion()
+{
+    setTagText(TagVersion, VAL_STR_VERSION);
+    emit patternChanged(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

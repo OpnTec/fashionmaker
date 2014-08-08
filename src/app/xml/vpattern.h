@@ -163,7 +163,22 @@ public:
     quint32        GetParametrId(const QDomElement& domElement) const;
 
     QMap<GHeights, bool> GetGradationHeights() const;
+    void                 SetGradationHeights(const QMap<GHeights, bool> &options);
+
     QMap<GSizes, bool>   GetGradationSizes() const;
+    void                 SetGradationSizes(const QMap<GSizes, bool> &options);
+
+    QString              GetAuthor() const;
+    void                 SetAuthor(const QString &text);
+
+    QString              GetDescription() const;
+    void                 SetDescription(const QString &text);
+
+    QString              GetNotes() const;
+    void                 SetNotes(const QString &text);
+
+    QString              GetVersion() const;
+    void                 SetVersion();
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -264,6 +279,7 @@ private:
     template <typename T>
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
+    void           CheckTagExists(const QString &tag);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

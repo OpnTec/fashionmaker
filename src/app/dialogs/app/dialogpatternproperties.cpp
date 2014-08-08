@@ -28,7 +28,6 @@
 
 #include "dialogpatternproperties.h"
 #include "ui_dialogpatternproperties.h"
-#include <QSettings>
 #include <QPushButton>
 #include "../../xml/vpattern.h"
 #include "../../widgets/vapplication.h"
@@ -38,79 +37,47 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), heightsChecked(MAX_HEIGHTS), sizesChecked(MAX_SIZES)
+    QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), heightsChecked(MAX_HEIGHTS),
+    sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
+    data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false)
 {
     ui->setupUi(this);
 
     SCASSERT(doc != nullptr);
 
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-#ifdef Q_OS_WIN
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
-#else
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
-#endif
+    ui->lineEditAuthor->setText(doc->GetAuthor());
+    connect(ui->lineEditAuthor, &QLineEdit::editingFinished, this, &DialogPatternProperties::DescEdited);
 
-    ui->lineEditAuthor->setText(this->doc->UniqueTagText("author", user));
-    ui->plainTextEditDescription->setPlainText(this->doc->UniqueTagText("description"));
-    ui->plainTextEditTechNotes->setPlainText(this->doc->UniqueTagText("notes"));
+    ui->plainTextEditDescription->setPlainText(doc->GetDescription());
+    connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
 
-    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-    SCASSERT(bOk != nullptr);
-    connect(bOk, &QPushButton::clicked, this, &DialogPatternProperties::Apply);
+    ui->plainTextEditTechNotes->setPlainText(doc->GetNotes());
+    connect(ui->plainTextEditTechNotes, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
+
+    connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &DialogPatternProperties::Ok);
+    connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
+            &DialogPatternProperties::Apply);
 
     QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCansel != nullptr);
     connect(bCansel, &QPushButton::clicked, this, &DialogPatternProperties::close);
-
-    connect(this, &DialogPatternProperties::haveChange, this->doc, &VPattern::haveLiteChange);
 
     ui->tabWidget->setCurrentIndex(0);
     if (qApp->patternType() == MeasurementsType::Individual)
     {
         ui->tabWidget->setTabEnabled(1, false);
     }
-    connect(ui->checkBoxAllHeights, &QCheckBox::stateChanged, this, &DialogPatternProperties::SelectAll);
-    connect(ui->checkBoxAllSizes, &QCheckBox::stateChanged, this, &DialogPatternProperties::SelectAll);
 
-    connect(ui->checkBoxH92, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH98, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH104, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH110, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH116, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH122, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH128, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH134, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH140, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH146, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH152, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH158, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH164, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH170, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH176, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH182, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH188, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
-    connect(ui->checkBoxH194, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckHeight);
+    InitHeights();
+    InitSizes();
 
-    connect(ui->checkBoxS22, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS24, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS26, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS28, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS30, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS32, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS34, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS36, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS38, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS40, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS42, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS44, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS46, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS48, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS50, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS52, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS54, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
-    connect(ui->checkBoxS56, &QCheckBox::stateChanged, this, &DialogPatternProperties::UncheckSize);
+    heights = doc->GetGradationHeights();
+    sizes = doc->GetGradationSizes();
+
+    SetOptions(heights);
+    SetOptions(sizes);
+
+    gradationChanged = false;//Set to default value after initialization
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,10 +89,36 @@ DialogPatternProperties::~DialogPatternProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Apply()
 {
-    Write("notes", ui->plainTextEditTechNotes->document()->toPlainText());
-    Write("description", ui->plainTextEditDescription->document()->toPlainText());
-    Write("author", ui->lineEditAuthor->text());
-    emit haveChange();
+    switch (ui->tabWidget->currentIndex())
+    {
+        case 0:
+            SaveDescription();
+            descriptionChanged = false;
+            break;
+        case 1:
+            SaveGradation();
+            gradationChanged = false;
+            break;
+        default:
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::Ok()
+{
+    if (descriptionChanged)
+    {
+        SaveDescription();
+        descriptionChanged = false;
+    }
+
+    if (gradationChanged)
+    {
+        SaveGradation();
+        gradationChanged = false;
+    }
+
     close();
 }
 
@@ -139,30 +132,16 @@ void DialogPatternProperties::SelectAll(int state)
         {
             if (state == Qt::Checked)
             {
-                ui->checkBoxH92->setChecked(true);
-                ui->checkBoxH98->setChecked(true);
-                ui->checkBoxH104->setChecked(true);
-                ui->checkBoxH110->setChecked(true);
-                ui->checkBoxH116->setChecked(true);
-                ui->checkBoxH122->setChecked(true);
-                ui->checkBoxH128->setChecked(true);
-                ui->checkBoxH134->setChecked(true);
-                ui->checkBoxH140->setChecked(true);
-                ui->checkBoxH146->setChecked(true);
-                ui->checkBoxH152->setChecked(true);
-                ui->checkBoxH158->setChecked(true);
-                ui->checkBoxH164->setChecked(true);
-                ui->checkBoxH170->setChecked(true);
-                ui->checkBoxH176->setChecked(true);
-                ui->checkBoxH182->setChecked(true);
-                ui->checkBoxH188->setChecked(true);
-                ui->checkBoxH194->setChecked(true);
-
-                SetHeightsEnabled(false);
+                SetHeightsChecked(true);
             }
             else if (state == Qt::Unchecked)
             {
-                SetHeightsEnabled(true);
+                SetHeightsChecked(false);
+            }
+
+            if (data.contains(box))
+            {
+                heights.insert(static_cast<GHeights>(data.value(box)), box->isChecked());
             }
         }
 
@@ -170,181 +149,252 @@ void DialogPatternProperties::SelectAll(int state)
         {
             if (state == Qt::Checked)
             {
-                ui->checkBoxS22->setChecked(true);
-                ui->checkBoxS24->setChecked(true);
-                ui->checkBoxS26->setChecked(true);
-                ui->checkBoxS28->setChecked(true);
-                ui->checkBoxS30->setChecked(true);
-                ui->checkBoxS32->setChecked(true);
-                ui->checkBoxS34->setChecked(true);
-                ui->checkBoxS36->setChecked(true);
-                ui->checkBoxS38->setChecked(true);
-                ui->checkBoxS40->setChecked(true);
-                ui->checkBoxS42->setChecked(true);
-                ui->checkBoxS44->setChecked(true);
-                ui->checkBoxS46->setChecked(true);
-                ui->checkBoxS48->setChecked(true);
-                ui->checkBoxS50->setChecked(true);
-                ui->checkBoxS52->setChecked(true);
-                ui->checkBoxS54->setChecked(true);
-                ui->checkBoxS56->setChecked(true);
-
-                SetSizesEnabled(false);
+                SetSizesChecked(true);
             }
             else if (state == Qt::Unchecked)
             {
-                SetSizesEnabled(true);
+                SetSizesChecked(false);
+            }
+
+            if (data.contains(box))
+            {
+                sizes.insert(static_cast<GSizes>(data.value(box)), box->isChecked());
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::UncheckHeight(int state)
+void DialogPatternProperties::CheckStateHeight(int state)
 {
     QCheckBox* box = qobject_cast<QCheckBox*>(sender());
     if (box)
     {
-        if (box == ui->checkBoxH92  || box == ui->checkBoxH98  || box == ui->checkBoxH104 || box == ui->checkBoxH110 ||
-            box == ui->checkBoxH116 || box == ui->checkBoxH122 || box == ui->checkBoxH128 || box == ui->checkBoxH134 ||
-            box == ui->checkBoxH140 || box == ui->checkBoxH146 || box == ui->checkBoxH152 || box == ui->checkBoxH158 ||
-            box == ui->checkBoxH164 || box == ui->checkBoxH170 || box == ui->checkBoxH176 || box == ui->checkBoxH182 ||
-            box == ui->checkBoxH188 || box == ui->checkBoxH194)
+        if (state == Qt::Checked)
         {
-            if (state == Qt::Checked)
+            ++heightsChecked;
+            if (heightsChecked == MAX_HEIGHTS)
             {
-                ++heightsChecked;
-            }
-            else if (state == Qt::Unchecked)
-            {
-                if (heightsChecked == 1)
-                {
-                    box->setCheckState(Qt::Checked);//Will call this method again with Qt::Checked state
-                    --heightsChecked;// That's why we will increase.
-                }
-                else
-                {
-                    --heightsChecked;
-                }
+                ui->checkBoxAllHeights->blockSignals(true);//don't touch anothers checkboxes
+                ui->checkBoxAllHeights->setCheckState(Qt::Checked);
+                heights.insert(GHeights::ALL, true);
+                ui->checkBoxAllHeights->blockSignals(false);
             }
         }
+        else if (state == Qt::Unchecked)
+        {
+            if (heightsChecked == MAX_HEIGHTS)
+            {
+                ui->checkBoxAllHeights->blockSignals(true);//don't touch anothers checkboxes
+                ui->checkBoxAllHeights->setCheckState(Qt::Unchecked);
+                heights.insert(GHeights::ALL, false);
+                ui->checkBoxAllHeights->blockSignals(false);
+            }
+            --heightsChecked;
+        }
+
+        if (data.contains(box))
+        {
+            heights.insert(static_cast<GHeights>(data.value(box)), box->isChecked());
+        }
+
+        CheckApplyOk();
+        gradationChanged = true;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::UncheckSize(int state)
+void DialogPatternProperties::CheckStateSize(int state)
 {
     QCheckBox* box = qobject_cast<QCheckBox*>(sender());
     if (box)
     {
-        if (box == ui->checkBoxS22 || box == ui->checkBoxS24 || box == ui->checkBoxS26 || box == ui->checkBoxS28 ||
-            box == ui->checkBoxS30 || box == ui->checkBoxS32 || box == ui->checkBoxS34 || box == ui->checkBoxS36 ||
-            box == ui->checkBoxS38 || box == ui->checkBoxS40 || box == ui->checkBoxS42 || box == ui->checkBoxS44 ||
-            box == ui->checkBoxS46 || box == ui->checkBoxS48 || box == ui->checkBoxS50 || box == ui->checkBoxS52 ||
-            box == ui->checkBoxS54 || box == ui->checkBoxS56)
+
+        if (state == Qt::Checked)
         {
-            if (state == Qt::Checked)
+            ++sizesChecked;
+            if (sizesChecked == MAX_SIZES)
             {
-                ++sizesChecked;
-            }
-            else if (state == Qt::Unchecked)
-            {
-                if (sizesChecked == 1)
-                {
-                    box->setCheckState(Qt::Checked);//Will call this method again with Qt::Checked state
-                    --sizesChecked; // That's why we will increase.
-                }
-                else
-                {
-                    --sizesChecked;
-                }
+                ui->checkBoxAllSizes->blockSignals(true);//don't touch anothers checkboxes
+                ui->checkBoxAllSizes->setCheckState(Qt::Checked);
+                sizes.insert(GSizes::ALL, true);
+                ui->checkBoxAllSizes->blockSignals(false);
             }
         }
+        else if (state == Qt::Unchecked)
+        {
+            if (sizesChecked == MAX_SIZES)
+            {
+                ui->checkBoxAllSizes->blockSignals(true);//don't touch anothers checkboxes
+                ui->checkBoxAllSizes->setCheckState(Qt::Unchecked);
+                sizes.insert(GSizes::ALL, false);
+                ui->checkBoxAllSizes->blockSignals(false);
+            }
+            --sizesChecked;
+        }
+
+        if (data.contains(box))
+        {
+            sizes.insert(static_cast<GSizes>(data.value(box)), box->isChecked());
+        }
+
+        CheckApplyOk();
+        gradationChanged = true;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::Write(const QString &tagName, const QString &text) const
+void DialogPatternProperties::DescEdited()
 {
-    QDomNodeList nodeList = doc->elementsByTagName(tagName);
-    if (nodeList.isEmpty())
+    descriptionChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SetHeightsChecked(bool enabled)
+{
+    ui->checkBoxH92->setChecked(enabled);
+    ui->checkBoxH98->setChecked(enabled);
+    ui->checkBoxH104->setChecked(enabled);
+    ui->checkBoxH110->setChecked(enabled);
+    ui->checkBoxH116->setChecked(enabled);
+    ui->checkBoxH122->setChecked(enabled);
+    ui->checkBoxH128->setChecked(enabled);
+    ui->checkBoxH134->setChecked(enabled);
+    ui->checkBoxH140->setChecked(enabled);
+    ui->checkBoxH146->setChecked(enabled);
+    ui->checkBoxH152->setChecked(enabled);
+    ui->checkBoxH158->setChecked(enabled);
+    ui->checkBoxH164->setChecked(enabled);
+    ui->checkBoxH170->setChecked(enabled);
+    ui->checkBoxH176->setChecked(enabled);
+    ui->checkBoxH182->setChecked(enabled);
+    ui->checkBoxH188->setChecked(enabled);
+    ui->checkBoxH194->setChecked(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SetSizesChecked(bool enabled)
+{
+    ui->checkBoxS22->setChecked(enabled);
+    ui->checkBoxS24->setChecked(enabled);
+    ui->checkBoxS26->setChecked(enabled);
+    ui->checkBoxS28->setChecked(enabled);
+    ui->checkBoxS30->setChecked(enabled);
+    ui->checkBoxS32->setChecked(enabled);
+    ui->checkBoxS34->setChecked(enabled);
+    ui->checkBoxS36->setChecked(enabled);
+    ui->checkBoxS38->setChecked(enabled);
+    ui->checkBoxS40->setChecked(enabled);
+    ui->checkBoxS42->setChecked(enabled);
+    ui->checkBoxS44->setChecked(enabled);
+    ui->checkBoxS46->setChecked(enabled);
+    ui->checkBoxS48->setChecked(enabled);
+    ui->checkBoxS50->setChecked(enabled);
+    ui->checkBoxS52->setChecked(enabled);
+    ui->checkBoxS54->setChecked(enabled);
+    ui->checkBoxS56->setChecked(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitHeights()
+{
+    Init(ui->checkBoxAllHeights, static_cast<int>(GHeights::ALL), &DialogPatternProperties::SelectAll);
+
+    Init(ui->checkBoxH92, static_cast<int>(GHeights::H92), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH98, static_cast<int>(GHeights::H98), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH104, static_cast<int>(GHeights::H104), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH110, static_cast<int>(GHeights::H110), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH116, static_cast<int>(GHeights::H116), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH122, static_cast<int>(GHeights::H122), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH128, static_cast<int>(GHeights::H128), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH134, static_cast<int>(GHeights::H134), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH140, static_cast<int>(GHeights::H140), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH146, static_cast<int>(GHeights::H146), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH152, static_cast<int>(GHeights::H152), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH158, static_cast<int>(GHeights::H158), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH164, static_cast<int>(GHeights::H164), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH170, static_cast<int>(GHeights::H170), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH176, static_cast<int>(GHeights::H176), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH182, static_cast<int>(GHeights::H182), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH188, static_cast<int>(GHeights::H188), &DialogPatternProperties::CheckStateHeight);
+    Init(ui->checkBoxH194, static_cast<int>(GHeights::H194), &DialogPatternProperties::CheckStateHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitSizes()
+{
+    Init(ui->checkBoxAllSizes, static_cast<int>(GSizes::ALL), &DialogPatternProperties::SelectAll);
+
+    Init(ui->checkBoxS22, static_cast<int>(GSizes::S22), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS24, static_cast<int>(GSizes::S24), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS26, static_cast<int>(GSizes::S26), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS28, static_cast<int>(GSizes::S28), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS30, static_cast<int>(GSizes::S30), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS32, static_cast<int>(GSizes::S32), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS34, static_cast<int>(GSizes::S34), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS36, static_cast<int>(GSizes::S36), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS38, static_cast<int>(GSizes::S38), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS40, static_cast<int>(GSizes::S40), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS42, static_cast<int>(GSizes::S42), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS44, static_cast<int>(GSizes::S44), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS46, static_cast<int>(GSizes::S46), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS48, static_cast<int>(GSizes::S48), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS50, static_cast<int>(GSizes::S50), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS52, static_cast<int>(GSizes::S52), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS54, static_cast<int>(GSizes::S54), &DialogPatternProperties::CheckStateSize);
+    Init(ui->checkBoxS56, static_cast<int>(GSizes::S56), &DialogPatternProperties::CheckStateSize);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::CheckApplyOk()
+{
+    bool enable = !(heightsChecked == 0 || sizesChecked == 0);
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(enable);
+    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(enable);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveDescription()
+{
+    doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
+    doc->SetDescription(ui->plainTextEditTechNotes->document()->toPlainText());
+    doc->SetAuthor(ui->lineEditAuthor->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveGradation()
+{
+    doc->SetGradationHeights(heights);
+    doc->SetGradationSizes(sizes);
+    emit UpdateGradation();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename Func>
+void DialogPatternProperties::Init(QCheckBox *check, int val, Func slot)
+{
+    connect(check, &QCheckBox::stateChanged, this, slot);
+    data.insert(check, val);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename GVal>
+void DialogPatternProperties::SetOptions(const QMap<GVal, bool> &option)
+{
+    if (option.value(GVal::ALL) == false)
     {
-        QDomElement pattern = doc->documentElement();
-
-        QDomElement tag = doc->createElement(tagName);
-        QDomText domText = doc->createTextNode(text);
-        tag.appendChild(domText);
-        //The Old pattern file doesn't have comment. But here we try insert the tag after first child (comment).
-        // <pattern>
-        //      <!--Valentina pattern format.-->
-        //      -->place for new tag<--
-        // </pattern>
-        if (pattern.firstChild().isComment())
+        QMapIterator<GVal, bool> i(option);
+        while (i.hasNext())
         {
-            pattern.insertAfter(tag, pattern.firstChild());
-        }
-        else
-        {
-            pattern.insertBefore(tag, pattern.firstChild());
+            i.next();
+            if (i.value() == false && i.key() != GVal::ALL)
+            {
+                QCheckBox *box = data.key(static_cast<int>(i.key()));
+                if (box != nullptr)
+                {
+                    box->setCheckState(Qt::Unchecked);
+                }
+            }
         }
     }
-    else
-    {
-        QDomElement oldTag = nodeList.at(0).toElement();
-        if (oldTag.isElement())
-        {
-            QDomElement newTag = doc->createElement(tagName);
-            QDomText domText = doc->createTextNode(text);
-            newTag.appendChild(domText);
-
-            QDomElement pattern = doc->documentElement();
-            pattern.replaceChild(newTag, oldTag);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::SetHeightsEnabled(bool enabled)
-{
-    ui->checkBoxH92->setEnabled(enabled);
-    ui->checkBoxH98->setEnabled(enabled);
-    ui->checkBoxH104->setEnabled(enabled);
-    ui->checkBoxH110->setEnabled(enabled);
-    ui->checkBoxH116->setEnabled(enabled);
-    ui->checkBoxH122->setEnabled(enabled);
-    ui->checkBoxH128->setEnabled(enabled);
-    ui->checkBoxH134->setEnabled(enabled);
-    ui->checkBoxH140->setEnabled(enabled);
-    ui->checkBoxH146->setEnabled(enabled);
-    ui->checkBoxH152->setEnabled(enabled);
-    ui->checkBoxH158->setEnabled(enabled);
-    ui->checkBoxH164->setEnabled(enabled);
-    ui->checkBoxH170->setEnabled(enabled);
-    ui->checkBoxH176->setEnabled(enabled);
-    ui->checkBoxH182->setEnabled(enabled);
-    ui->checkBoxH188->setEnabled(enabled);
-    ui->checkBoxH194->setEnabled(enabled);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::SetSizesEnabled(bool enabled)
-{
-    ui->checkBoxS22->setEnabled(enabled);
-    ui->checkBoxS24->setEnabled(enabled);
-    ui->checkBoxS26->setEnabled(enabled);
-    ui->checkBoxS28->setEnabled(enabled);
-    ui->checkBoxS30->setEnabled(enabled);
-    ui->checkBoxS32->setEnabled(enabled);
-    ui->checkBoxS34->setEnabled(enabled);
-    ui->checkBoxS36->setEnabled(enabled);
-    ui->checkBoxS38->setEnabled(enabled);
-    ui->checkBoxS40->setEnabled(enabled);
-    ui->checkBoxS42->setEnabled(enabled);
-    ui->checkBoxS44->setEnabled(enabled);
-    ui->checkBoxS46->setEnabled(enabled);
-    ui->checkBoxS48->setEnabled(enabled);
-    ui->checkBoxS50->setEnabled(enabled);
-    ui->checkBoxS52->setEnabled(enabled);
-    ui->checkBoxS54->setEnabled(enabled);
-    ui->checkBoxS56->setEnabled(enabled);
 }

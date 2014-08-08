@@ -1594,7 +1594,7 @@ void MainWindow::ActionLayout(bool checked)
         QPainterPath path = VEquidistant().ContourPath(idetail.key(), pattern);
         listDetails.append(new VItem(path, listDetails.size()));
     }
-    QString description = doc->UniqueTagText("description");
+    QString description = doc->GetDescription();
     emit ModelChosen(listDetails, curFile, description);
 }
 

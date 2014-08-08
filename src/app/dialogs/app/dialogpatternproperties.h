@@ -30,8 +30,10 @@
 #define DIALOGPATTERNPROPERTIES_H
 
 #include <QDialog>
+#include "../../options.h"
 
 class VPattern;
+class QCheckBox;
 
 namespace Ui
 {
@@ -45,21 +47,37 @@ public:
     DialogPatternProperties(VPattern *doc, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties();
 signals:
-    void         haveChange();
+    void         UpdateGradation();
 public slots:
     void         Apply();
+    void         Ok();
     void         SelectAll(int state);
-    void         UncheckHeight(int state);
-    void         UncheckSize(int state);
+    void         CheckStateHeight(int state);
+    void         CheckStateSize(int state);
+    void         DescEdited();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
-    VPattern *doc;
-    char     heightsChecked;
-    char     sizesChecked;
-    void         Write(const QString &tagName, const QString &text) const;
-    void         SetHeightsEnabled(bool enabled);
-    void         SetSizesEnabled(bool enabled);
+    VPattern               *doc;
+    char                   heightsChecked;
+    char                   sizesChecked;
+    QMap<GHeights, bool>   heights;
+    QMap<GSizes, bool>     sizes;
+    QMap<QCheckBox *, int> data;
+    bool                   descriptionChanged;
+    bool                   gradationChanged;
+
+    void         SetHeightsChecked(bool enabled);
+    void         SetSizesChecked(bool enabled);
+    void         InitHeights();
+    void         InitSizes();
+    template<typename Func>
+    void         Init(QCheckBox *check, int val, Func slot);
+    template<typename GVal>
+    void         SetOptions(const QMap<GVal, bool> &option);
+    void         CheckApplyOk();
+    void         SaveDescription();
+    void         SaveGradation();
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H
