@@ -120,6 +120,7 @@ public slots:
     void               SetEnabledGUI(bool enabled);
     void               ClickEndVisualization();
     void               Layout();
+    void               UpdateGradation();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -194,6 +195,8 @@ private:
     QAction            *separatorAct;
     QTimer             *autoSaveTimer;
     bool               guiEnabled;
+    QComboBox          *gradationHeights;
+    QComboBox          *gradationSizes;
     void               ToolBarOption();
     void               ToolBarDraws();
     void               ToolBarTools();
@@ -232,14 +235,17 @@ private:
     QString            PatternPieceName(const QString &text);
     QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
     void               OpenPattern(const QString &filePath);
-    template <typename Func>
-    void               SetGradationList(const QString &label, const QStringList &list, Func changeSlot);
+    QComboBox          *SetGradationList(const QString &label, const QStringList &list);
     void               ChangePP(int index , bool zoomBestFit = true);
     /**
      * @brief EndVisualization try show dialog after and working with tool visualization.
      */
     void               EndVisualization(bool click = false);
     void               ZoomFirstShow();
+    void               UpdateHeightsList(const QStringList &list);
+    void               UpdateSizesList(const QStringList &list);
+    void               SetDefaultHeight(int value);
+    void               SetDefaultSize(int value);
 };
 
 #endif // MAINWINDOW_H

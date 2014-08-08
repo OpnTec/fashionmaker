@@ -65,7 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
       view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs{nullptr, nullptr, nullptr, nullptr, nullptr},
-      separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true)
+      separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
+      gradationSizes(nullptr)
 {
     CreateActions();
     CreateMenus();
@@ -690,6 +691,7 @@ void MainWindow::OpenRecentFile()
 void MainWindow::PatternProperties()
 {
     DialogPatternProperties proper(doc, this);
+    connect(&proper, &DialogPatternProperties::UpdateGradation, this, &MainWindow::UpdateGradation);
     proper.exec();
 }
 
@@ -764,8 +766,15 @@ void MainWindow::ToolBarOption()
         const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights());
         const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes());
 
-        SetGradationList(tr("Height: "), listHeights, &MainWindow::ChangedHeight);
-        SetGradationList(tr("Size: "), listSizes, &MainWindow::ChangedSize);
+        gradationHeights = SetGradationList(tr("Height: "), listHeights);
+        SetDefaultHeight(static_cast<int>(GHeights::H176));
+        connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::ChangedHeight);
+
+        gradationSizes = SetGradationList(tr("Size: "), listSizes);
+        SetDefaultSize(static_cast<int>(GSizes::S50));
+        connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &MainWindow::ChangedSize);
 
         ui->toolBarOption->addSeparator();
     }
@@ -775,17 +784,49 @@ void MainWindow::ToolBarOption()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Func>
-void MainWindow::SetGradationList(const QString &label, const QStringList &list, Func changeSlot)
+QComboBox *MainWindow::SetGradationList(const QString &label, const QStringList &list)
 {
     ui->toolBarOption->addWidget(new QLabel(label));
 
     QComboBox *comboBox = new QComboBox;
     comboBox->addItems(list);
-    comboBox->setCurrentIndex(14);//176 cm
     ui->toolBarOption->addWidget(comboBox);
-    connect(comboBox, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            this, changeSlot);
+
+    return comboBox;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetDefaultHeight(int value)
+{
+    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
+    QString strVal = QString("%1").arg(val);
+
+    qint32 index = gradationHeights->findText(strVal);
+    if (index != -1)
+    {
+        gradationHeights->setCurrentIndex(index);
+    }
+    else
+    {
+        pattern->SetHeight(gradationHeights->currentText().toInt());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetDefaultSize(int value)
+{
+    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
+    QString strVal = QString("%1").arg(val);
+
+    qint32 index = gradationSizes->findText(strVal);
+    if (index != -1)
+    {
+        gradationSizes->setCurrentIndex(index);
+    }
+    else
+    {
+        pattern->SetSize(gradationSizes->currentText().toInt());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1447,6 +1488,63 @@ void MainWindow::Layout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UpdateGradation()
+{
+    UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights()));
+    UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UpdateHeightsList(const QStringList &list)
+{
+    QString val;
+    if (gradationHeights->currentIndex() != -1)
+    {
+        val = gradationHeights->currentText();
+    }
+
+    gradationHeights->blockSignals(true);
+    gradationHeights->clear();
+    gradationHeights->addItems(list);
+    gradationHeights->blockSignals(false);
+
+    int index = gradationHeights->findText(val);
+    if (index != -1)
+    {
+        gradationHeights->setCurrentIndex(index);
+    }
+    else
+    {
+        ChangedHeight(list.at(0));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UpdateSizesList(const QStringList &list)
+{
+    QString val;
+    if (gradationSizes->currentIndex() != -1)
+    {
+        val = gradationSizes->currentText();
+    }
+
+    gradationSizes->blockSignals(true);
+    gradationSizes->clear();
+    gradationSizes->addItems(list);
+    gradationSizes->blockSignals(false);
+
+    int index = gradationSizes->findText(val);
+    if (index != -1)
+    {
+        gradationSizes->setCurrentIndex(index);
+    }
+    else
+    {
+        ChangedSize(list.at(0));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NewPattern create new empty pattern.
  */
@@ -1480,8 +1578,7 @@ void MainWindow::PatternWasModified(bool saved)
  */
 void MainWindow::ChangedSize(const QString & text)
 {
-    qint32 size = text.toInt();
-    pattern->SetSize(size);
+    pattern->SetSize(text.toInt());
     doc->LiteParseTree(Document::LiteParse);
 }
 
@@ -1492,8 +1589,7 @@ void MainWindow::ChangedSize(const QString & text)
  */
 void MainWindow::ChangedHeight(const QString &text)
 {
-    qint32 growth = text.toInt();
-    pattern->SetHeight(growth);
+    pattern->SetHeight(text.toInt());
     doc->LiteParseTree(Document::LiteParse);
 }
 
