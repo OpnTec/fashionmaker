@@ -300,7 +300,8 @@ void VPattern::Parse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
-    QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements, TagVersion};
+    QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements, TagVersion,
+                TagGradation};
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -343,6 +344,8 @@ void VPattern::Parse(const Document &parse)
                     case 5: // TagMeasurements
                         break;
                     case 6: // TagVersion
+                        break;
+                    case 7: // TagGradation
                         break;
                     default:
                         qDebug()<<"Wrong tag name"<<domElement.tagName()<<Q_FUNC_INFO;
