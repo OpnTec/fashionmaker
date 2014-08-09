@@ -215,16 +215,15 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
     {
         VSpline spl = splPath.GetSpline(i);
         qint32 j = i*2;
-        disconnect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        disconnect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
+
+        controlPoints[j-2]->blockSignals(true);
+        controlPoints[j-1]->blockSignals(true);
+
         controlPoints[j-2]->setPos(spl.GetP2());
         controlPoints[j-1]->setPos(spl.GetP3());
-        connect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        connect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
+
+        controlPoints[j-2]->blockSignals(false);
+        controlPoints[j-1]->blockSignals(false);
 
         spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4(),
                 splPath.getKCurve());
@@ -391,15 +390,14 @@ void VToolSplinePath::RefreshGeometry()
         emit RefreshLine(i, SplinePointPosition::LastPoint, controlPoint, splinePoint);
 
         qint32 j = i*2;
-        disconnect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        disconnect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
+
+        controlPoints[j-2]->blockSignals(true);
+        controlPoints[j-1]->blockSignals(true);
+
         controlPoints[j-2]->setPos(spl.GetP2());
         controlPoints[j-1]->setPos(spl.GetP3());
-        connect(controlPoints[j-2], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        connect(controlPoints[j-1], &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
+
+        controlPoints[j-2]->blockSignals(false);
+        controlPoints[j-1]->blockSignals(false);
     }
 }

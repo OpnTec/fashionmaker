@@ -354,9 +354,9 @@ void DialogArc::EvalF2()
  */
 void DialogArc::ShowLineAngles()
 {
-    disconnect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
+    ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogArc::ValChenged);
+    ui->listWidget->blockSignals(false);
     const QMap<QString, VLineAngle *> lineAnglesTable = data->DataLineAngles();
     QMapIterator<QString, VLineAngle *> i(lineAnglesTable);
     while (i.hasNext())

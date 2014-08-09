@@ -350,22 +350,21 @@ void DialogIncrements::FullUpdateFromFile()
 {
     if (qApp->patternType() == MeasurementsType::Individual)
     {
-        disconnect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this,
-                   &DialogIncrements::MeasurementChanged);
+        ui->tableWidgetMeasurements->blockSignals(true);
     }
     ui->tableWidgetMeasurements->clearContents();
     FillMeasurements();
     ui->tableWidgetMeasurements->horizontalHeader()->setStretchLastSection(true);
     if (qApp->patternType() == MeasurementsType::Individual)
     {
-        connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
+        ui->tableWidgetMeasurements->blockSignals(false);
     }
 
-    disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
+    ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->clearContents();
     FillIncrements();
     ui->tableWidgetIncrement->horizontalHeader()->setStretchLastSection(true);
-    connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
+    ui->tableWidgetIncrement->blockSignals(false);
 
     ui->tableWidgetLines->clearContents();
     FillLengthLines();
@@ -527,8 +526,7 @@ void DialogIncrements::OpenTable()
 void DialogIncrements::clickedToolButtonAdd()
 {
     ui->tableWidgetIncrement->setFocus(Qt::OtherFocusReason);
-    disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
-               &DialogIncrements::IncrementChanged);
+    ui->tableWidgetIncrement->blockSignals(true);
     qint32 currentRow  = ui->tableWidgetIncrement->rowCount();
     ui->tableWidgetIncrement->insertRow( currentRow );
 
@@ -579,8 +577,7 @@ void DialogIncrements::clickedToolButtonAdd()
     ui->tableWidgetIncrement->setItem(currentRow, 5, item);
 
     ui->toolButtonRemove->setEnabled(true);
-    connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
-            &DialogIncrements::IncrementChanged);
+    ui->tableWidgetIncrement->blockSignals(false);
     emit haveLiteChange();
 }
 
@@ -590,8 +587,7 @@ void DialogIncrements::clickedToolButtonAdd()
  */
 void DialogIncrements::clickedToolButtonRemove()
 {
-    disconnect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
-               &DialogIncrements::IncrementChanged);
+    ui->tableWidgetIncrement->blockSignals(true);
 
     QTableWidgetItem *item = ui->tableWidgetIncrement->currentItem();
     qint32 row = item->row();
@@ -613,8 +609,7 @@ void DialogIncrements::clickedToolButtonRemove()
         ui->toolButtonRemove->setEnabled(false);
     }
 
-    connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this,
-            &DialogIncrements::IncrementChanged);
+    ui->tableWidgetIncrement->blockSignals(false);
     emit haveLiteChange();
 }
 

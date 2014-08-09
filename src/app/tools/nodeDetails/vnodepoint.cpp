@@ -267,12 +267,11 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
     this->setPos(point.toQPointF());
-    disconnect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
-               &VNodePoint::NameChangePosition);
+
+    namePoint->blockSignals(true);
     namePoint->setText(point.name());
     namePoint->setPos(QPointF(point.mx(), point.my()));
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
-            &VNodePoint::NameChangePosition);
+    namePoint->blockSignals(false);
 
     RefreshLine();
 }

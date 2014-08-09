@@ -223,13 +223,13 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
     this->setRect(rec);
     this->setPos(point.toQPointF());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    disconnect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
+    namePoint->blockSignals(true);
     QFont font = namePoint->font();
     font.setPointSize(static_cast<qint32>(namePoint->FontSize()/factor));
     namePoint->setFont(font);
     namePoint->setText(point.name());
     namePoint->setPos(QPointF(point.mx(), point.my()));
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
+    namePoint->blockSignals(false);
     RefreshLine();
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }

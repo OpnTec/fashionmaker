@@ -96,9 +96,9 @@ void DialogHistory::cellClicked(int row, int column)
         cursorRow = row;
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
         quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        disconnect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
+        doc->blockSignals(true);
         doc->setCursor(id);
-        connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
+        doc->blockSignals(false);
     }
     else
     {

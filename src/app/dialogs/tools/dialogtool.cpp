@@ -688,13 +688,9 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
 void DialogTool::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value)
 {
     SCASSERT(box != nullptr);
-    disconnect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
-               &DialogTool::PointNameChanged);
-
+    box->blockSignals(true);
     setCurrentPointId(box, pointId, value);
-
-    connect(box, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged), this,
-            &DialogTool::PointNameChanged);
+    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -835,7 +831,7 @@ void DialogTool::EvalFormula()
 void DialogTool::SizeHeight()
 {
     SCASSERT(listWidget != nullptr);
-    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->blockSignals(true);
     listWidget->clear();
 
     {
@@ -848,7 +844,7 @@ void DialogTool::SizeHeight()
     item->setFont(QFont("Times", 12, QFont::Bold));
     listWidget->addItem(item);
 
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->blockSignals(false);
     listWidget->setCurrentRow (0);
 }
 
@@ -1057,7 +1053,7 @@ template <class key, class val>
 void DialogTool::ShowVariable(const QMap<key, val> var)
 {
     SCASSERT(listWidget != nullptr);
-    disconnect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->blockSignals(true);
     listWidget->clear();
 
     QMapIterator<key, val> iMap(var);
@@ -1071,7 +1067,7 @@ void DialogTool::ShowVariable(const QMap<key, val> var)
             listWidget->addItem(item);
         }
     }
-    connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
+    listWidget->blockSignals(false);
     listWidget->setCurrentRow (0);
 }
 

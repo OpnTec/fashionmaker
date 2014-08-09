@@ -257,16 +257,11 @@ void DialogSplinePath::NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm
  */
 void DialogSplinePath::DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
-    disconnect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &DialogSplinePath::currentPointChanged);
-    disconnect(ui->doubleSpinBoxAngle1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-               this, &DialogSplinePath::Angle1Changed);
-    disconnect(ui->doubleSpinBoxAngle2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-               this, &DialogSplinePath::Angle2Changed);
-    disconnect(ui->doubleSpinBoxKasm1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-               this, &DialogSplinePath::KAsm1Changed);
-    disconnect(ui->doubleSpinBoxKasm2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-               this, &DialogSplinePath::KAsm2Changed);
+    ui->comboBoxPoint->blockSignals(true);
+    ui->doubleSpinBoxAngle1->blockSignals(true);
+    ui->doubleSpinBoxAngle2->blockSignals(true);
+    ui->doubleSpinBoxKasm1->blockSignals(true);
+    ui->doubleSpinBoxKasm2->blockSignals(true);
 
     ChangeCurrentData(ui->comboBoxPoint, id);
     ui->doubleSpinBoxKasm1->setValue(kAsm1);
@@ -274,16 +269,11 @@ void DialogSplinePath::DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kA
     ui->doubleSpinBoxAngle2->setValue(angle2);
     ui->doubleSpinBoxAngle1->setValue(angle1);
 
-    connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &DialogSplinePath::currentPointChanged);
-    connect(ui->doubleSpinBoxAngle1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogSplinePath::Angle1Changed);
-    connect(ui->doubleSpinBoxAngle2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogSplinePath::Angle2Changed);
-    connect(ui->doubleSpinBoxKasm1,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogSplinePath::KAsm1Changed);
-    connect(ui->doubleSpinBoxKasm2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogSplinePath::KAsm2Changed);
+    ui->comboBoxPoint->blockSignals(false);
+    ui->doubleSpinBoxAngle1->blockSignals(false);
+    ui->doubleSpinBoxAngle2->blockSignals(false);
+    ui->doubleSpinBoxKasm1->blockSignals(false);
+    ui->doubleSpinBoxKasm2->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

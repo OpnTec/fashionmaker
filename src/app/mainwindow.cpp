@@ -191,8 +191,7 @@ void MainWindow::ActionNewPP()
         qDebug()<<"Error creating pattern piece with the name "<<patternPieceName<<".";
         return;
     }
-    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &MainWindow::currentPPChanged);
+    comboBoxDraws->blockSignals(true);
     comboBoxDraws->addItem(patternPieceName);
 
     pattern->ClearGObjects();
@@ -218,8 +217,7 @@ void MainWindow::ActionNewPP()
     {
         comboBoxDraws->setCurrentIndex(0);
     }
-    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &MainWindow::currentPPChanged);
+    comboBoxDraws->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1386,12 +1384,10 @@ void MainWindow::FullParseFile()
     {
         patternPiece = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
     }
-    disconnect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-               this, &MainWindow::currentPPChanged);
+    comboBoxDraws->blockSignals(true);
     comboBoxDraws->clear();
     comboBoxDraws->addItems(doc->getPatternPieces());
-    connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-            this, &MainWindow::currentPPChanged);
+    comboBoxDraws->blockSignals(false);
     ui->actionPattern_properties->setEnabled(true);
 
     qint32 index = comboBoxDraws->findText(patternPiece);

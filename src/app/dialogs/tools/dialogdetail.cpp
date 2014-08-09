@@ -179,16 +179,12 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
     ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
-    disconnect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogDetail::BiasXChanged);
-    disconnect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogDetail::BiasYChanged);
+    ui.doubleSpinBoxBiasX->blockSignals(true);
+    ui.doubleSpinBoxBiasY->blockSignals(true);
     ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
     ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
-    connect(ui.doubleSpinBoxBiasX,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogDetail::BiasXChanged);
-    connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogDetail::BiasYChanged);
+    ui.doubleSpinBoxBiasX->blockSignals(false);
+    ui.doubleSpinBoxBiasY->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
