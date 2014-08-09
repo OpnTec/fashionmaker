@@ -35,7 +35,7 @@
 class VDataTool;
 class VMainGraphicsScene;
 
-enum class Document : char { LiteParse, LitePPParse, FullParse};
+enum class Document : char { LiteParse, LitePPParse, FullParse };
 
 /*
    VAL_VERSION is (major << 16) + (minor << 8) + patch.
@@ -43,9 +43,9 @@ enum class Document : char { LiteParse, LitePPParse, FullParse};
 // version without patch part
 #define VAL_MIN_VERSION 0x000100
 // max support version of format
-#define VAL_VERSION 0x000100
+#define VAL_VERSION 0x000101
 
-#define VAL_STR_VERSION "0.1.0"
+#define VAL_STR_VERSION "0.1.1"
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -103,18 +103,82 @@ public:
     static const QString TagSpline;
     static const QString TagArc;
     static const QString TagTools;
+    static const QString TagGradation;
+    static const QString TagHeights;
+    static const QString TagSizes;
+
     static const QString AttrName;
     static const QString AttrType;
     static const QString AttrPath;
+
+    static const QString AttrAll;
+
+    static const QString AttrH92;
+    static const QString AttrH98;
+    static const QString AttrH104;
+    static const QString AttrH110;
+    static const QString AttrH116;
+    static const QString AttrH122;
+    static const QString AttrH128;
+    static const QString AttrH134;
+    static const QString AttrH140;
+    static const QString AttrH146;
+    static const QString AttrH152;
+    static const QString AttrH158;
+    static const QString AttrH164;
+    static const QString AttrH170;
+    static const QString AttrH176;
+    static const QString AttrH182;
+    static const QString AttrH188;
+    static const QString AttrH194;
+
+    static const QString AttrS22;
+    static const QString AttrS24;
+    static const QString AttrS26;
+    static const QString AttrS28;
+    static const QString AttrS30;
+    static const QString AttrS32;
+    static const QString AttrS34;
+    static const QString AttrS36;
+    static const QString AttrS38;
+    static const QString AttrS40;
+    static const QString AttrS42;
+    static const QString AttrS44;
+    static const QString AttrS46;
+    static const QString AttrS48;
+    static const QString AttrS50;
+    static const QString AttrS52;
+    static const QString AttrS54;
+    static const QString AttrS56;
+
     static const QString IncrementName;
     static const QString IncrementBase;
     static const QString IncrementKsize;
     static const QString IncrementKgrowth;
     static const QString IncrementDescription;
+
     virtual bool   SaveDocument(const QString &fileName);
     QStringList    getPatternPieces() const;
     QRectF         ActiveDrawBoundingRect() const;
     quint32        GetParametrId(const QDomElement& domElement) const;
+
+    QMap<GHeights, bool> GetGradationHeights() const;
+    void                 SetGradationHeights(const QMap<GHeights, bool> &options);
+
+    QMap<GSizes, bool>   GetGradationSizes() const;
+    void                 SetGradationSizes(const QMap<GSizes, bool> &options);
+
+    QString              GetAuthor() const;
+    void                 SetAuthor(const QString &text);
+
+    QString              GetDescription() const;
+    void                 SetDescription(const QString &text);
+
+    QString              GetNotes() const;
+    void                 SetNotes(const QString &text);
+
+    QString              GetVersion() const;
+    void                 SetVersion();
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -215,6 +279,7 @@ private:
     template <typename T>
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
+    void           CheckTagExists(const QString &tag);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

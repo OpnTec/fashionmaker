@@ -87,11 +87,6 @@ public:
      * @param domElement element in xml tree.
      * @param name name of attribute.
      * @param value value of attribute.
-     * @param parse parsing mode
-     * @return list of tool pointers
-     * @return list of history record lists
-     * @return cursor
-     * @throw VExceptionUniqueId
      */
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
     {
@@ -100,10 +95,11 @@ public:
         domElement.setAttribute(name, val);
     }
     quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
-    QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
+
     static void    ValidateXML(const QString &schema, const QString &fileName);
     void           setContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
@@ -117,7 +113,8 @@ protected:
     /** @brief data container with data. */
     VContainer     *data;
 
-    void setTagText(const QString &tag, const QString &text);
+    void           setTagText(const QString &tag, const QString &text);
+    QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
 private:
     Q_DISABLE_COPY(VDomDocument)
     /** @brief Map used for finding element by id. */
@@ -132,6 +129,22 @@ inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const Q
                                                 const QString &value) const
 {
     domElement.setAttribute(name, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
+{
+    QString string;
+    if (value)
+    {
+        string = "true";
+    }
+    else
+    {
+        string = "false";
+    }
+    domElement.setAttribute(name, string);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
