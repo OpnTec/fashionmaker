@@ -214,8 +214,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                 {
                     formula = dialog->getFormula();
                     /* Need delete dialog here because parser in dialog don't allow use correct separator for parsing
-                     * here.
-                     * Don't know why. */
+                     * here. */
                     delete dialog;
                     Calculator *cal1 = new Calculator(data);
                     result = cal1->EvalFormula(formula);

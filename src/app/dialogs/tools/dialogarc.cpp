@@ -335,7 +335,7 @@ void DialogArc::EvalRadius()
 void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
-    Eval(ui->plainTextEditF1->toPlainText(), flagF1, timerF1, ui->labelResultF1);
+    Eval(ui->plainTextEditF1->toPlainText(), flagF1, timerF1, ui->labelResultF1, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -345,7 +345,7 @@ void DialogArc::EvalF1()
 void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
-    Eval(ui->plainTextEditF2->toPlainText(), flagF2, timerF2, ui->labelResultF2);
+    Eval(ui->plainTextEditF2->toPlainText(), flagF2, timerF2, ui->labelResultF2, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

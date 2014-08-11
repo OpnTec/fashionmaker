@@ -425,8 +425,9 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @param flag flag state of formula
  * @param timer timer of formula
  * @param label label for signal error
+ * @param checkZero true - if formula can't be equal zero
  */
-void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label)
+void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, bool checkZero)
 {
     SCASSERT(timer != nullptr);
     SCASSERT(label != nullptr);
@@ -449,7 +450,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             delete cal;
 
             //if result equal 0
-            if (qFuzzyCompare(1 + result, 1 + 0))
+            if (checkZero && qFuzzyCompare(1 + result, 1 + 0))
             {
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
