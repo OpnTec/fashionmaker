@@ -36,18 +36,19 @@
   binary-arch: build install
 	dh_testdir
 	dh_testroot
-	dh_installdocs
 	dh_installchangelogs
-#	dh_installexamples
+	dh_installdocs
+	dh_installmenu
+	dh_installmime
 	dh_install --sourcedir=$(CURDIR) -v
 	dh_installman
-	dh_installmime
-	dh_installmenu
+	dh_installinfo
 	dh_link
 	dh_compress
 	dh_fixperms
+	dh_makeshlibs
 	dh_installdeb
-#	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):/usr/lib dh_shlibdeps
+	dh_shlibdeps -Llibqmuparser2 -l$(CURDIR)/debian/tmp/usr/lib
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
