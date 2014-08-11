@@ -109,7 +109,41 @@ qreal VisLine::FindLength(const QString &expression)
                      << "--------------------------------------";
         }
     }
-    return qApp->toPixel(length);
+    return qApp->toPixel(FindVal(expression));
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VisLine::FindVal(const QString &expression)
+{
+    qreal val = 0;
+    if (expression.isEmpty())
+    {
+        val = 0;
+    }
+    else
+    {
+        try
+        {
+            // Replace line return with spaces for calc if exist
+            QString formula = expression;
+            formula.replace("\n", " ");
+            formula = qApp->FormulaFromUser(formula);
+            Calculator *cal = new Calculator(data);
+            val = cal->EvalFormula(formula);
+            delete cal;
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            val = 0;
+            qDebug() << "\nMath parser error:\n"
+                     << "--------------------------------------\n"
+                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Expression:  " << e.GetExpr() << "\n"
+                     << "--------------------------------------";
+        }
+    }
+    return val;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

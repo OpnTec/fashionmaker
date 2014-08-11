@@ -43,13 +43,15 @@
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
-      formula(QString()), angle(0), basePointId(0), formulaBaseHeight(0), line(nullptr), prepare(false)
+      formulaLength(QString()), formulaAngle(QString()), basePointId(0), formulaBaseHeight(0),
+      formulaBaseHeightAngle(0), line(nullptr), prepare(false)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -59,16 +61,45 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxTypeLine(ui->comboBoxLineType);
 
-    InitArrow(ui);
+    connect(ui->toolButtonPutHereLength, &QPushButton::clicked, this, &DialogEndLine::PutHere);
+    connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogEndLine::PutAngle);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEndLine::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEndLine::PutVal);
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
+    connect(ui->toolButtonEqualLength, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
+    connect(ui->toolButtonEqualAngle, &QPushButton::clicked, this, &DialogEndLine::EvalAngle);
+
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
+
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEndLine::FormulaTextChanged);
+    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, &DialogEndLine::AngleTextChanged);
+
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEndLine::DeployFormulaTextEdit);
+    connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogEndLine::DeployAngleTextEdit);
+
+    connect(timerFormula, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
 
     line = new VisToolEndLine(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PutAngle put variable into formula of angle
+ */
+void DialogEndLine::PutAngle()
+{
+    PutValHere(ui->plainTextEditAngle, ui->listWidget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief EvalAngle calculate value of angle
+ */
+void DialogEndLine::EvalAngle()
+{
+    labelEditFormula = ui->labelEditAngle;
+    const QString postfix = QStringLiteral("°");
+    Eval(ui->plainTextEditAngle->toPlainText(), flagError, timerFormula, ui->labelResultCalculationAngle, postfix,
+         false);
+    labelEditFormula = ui->labelEditFormula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,9 +109,23 @@ void DialogEndLine::FormulaTextChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::AngleTextChanged()
+{
+    labelEditFormula = ui->labelEditAngle;
+    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula);
+    labelEditFormula = ui->labelEditFormula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::DeployAngleTextEdit()
+{
+    DeployFormula(ui->plainTextEditAngle, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,18 +188,15 @@ void DialogEndLine::setTypeLine(const QString &value)
  */
 void DialogEndLine::setFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formulaLength = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
-    if (formula.length() > 80)
+    if (formulaLength.length() > 80)
     {
         this->DeployFormulaTextEdit();
     }
-    ui->plainTextEditFormula->setPlainText(formula);
-    line->setLength(formula);
-    //QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-    //cursor.insertText(value);
-    //ui->plainTextEditFormula->setCursor(cursor);
+    ui->plainTextEditFormula->setPlainText(formulaLength);
+    line->setLength(formulaLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -162,11 +204,17 @@ void DialogEndLine::setFormula(const QString &value)
  * @brief setAngle set angle of line
  * @param value angle in degree
  */
-void DialogEndLine::setAngle(const qreal &value)
+void DialogEndLine::setAngle(const QString &value)
 {
-    angle = value;
-    ui->doubleSpinBoxAngle->setValue(angle);
-    line->setAngle(angle);
+    formulaAngle = qApp->FormulaToUser(value);
+    // increase height if needed. TODO : see if I can get the max number of caracters in one line
+    // of this PlainTextEdit to change 80 to this value
+    if (formulaAngle.length() > 80)
+    {
+        this->DeployAngleTextEdit();
+    }
+    ui->plainTextEditAngle->setPlainText(formulaAngle);
+    line->setAngle(formulaAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,14 +293,18 @@ void DialogEndLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    formula = ui->plainTextEditFormula->toPlainText();
-    formula.replace("\n", " ");
-    angle = ui->doubleSpinBoxAngle->value();
+
+    formulaLength = ui->plainTextEditFormula->toPlainText();
+    formulaLength.replace("\n", " ");
+
+    formulaAngle = ui->plainTextEditAngle->toPlainText();
+    formulaAngle.replace("\n", " ");
+
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
 
     line->setPoint1Id(basePointId);
-    line->setLength(formula);
-    line->setAngle(angle);
+    line->setLength(formulaLength);
+    line->setAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyle(typeLine));
     line->RefreshGeometry();
 }

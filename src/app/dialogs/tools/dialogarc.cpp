@@ -34,6 +34,7 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../xml/vdomdocument.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -229,7 +230,7 @@ void DialogArc::ValChenged(int row)
         return;
     }
     QListWidgetItem *item = ui->listWidget->item( row );
-    if (ui->radioButtonLineAngles->isChecked())
+    if (ui->radioButtonAngleLine->isChecked())
     {
         qreal angle = *data->GetVariable<VLineAngle*>(item->text())->GetValue();
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(angle).arg(tr("Value of angle of line."));
@@ -325,7 +326,8 @@ void DialogArc::CheckState()
 void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
-    Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, timerRadius, ui->labelResultRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, timerRadius, ui->labelResultRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,7 +337,8 @@ void DialogArc::EvalRadius()
 void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
-    Eval(ui->plainTextEditF1->toPlainText(), flagF1, timerF1, ui->labelResultF1, false);
+    const QString postfix = QStringLiteral("°");
+    Eval(ui->plainTextEditF1->toPlainText(), flagF1, timerF1, ui->labelResultF1, postfix, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -345,7 +348,8 @@ void DialogArc::EvalF1()
 void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
-    Eval(ui->plainTextEditF2->toPlainText(), flagF2, timerF2, ui->labelResultF2, false);
+    const QString postfix = QStringLiteral("°");
+    Eval(ui->plainTextEditF2->toPlainText(), flagF2, timerF2, ui->labelResultF2, postfix, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,7 +361,7 @@ void DialogArc::ShowLineAngles()
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
     ui->listWidget->blockSignals(false);
-    const QMap<QString, VLineAngle *> lineAnglesTable = data->DataLineAngles();
+    const QMap<QString, VLineAngle *> lineAnglesTable = data->DataAngleLines();
     QMapIterator<QString, VLineAngle *> i(lineAnglesTable);
     while (i.hasNext())
     {

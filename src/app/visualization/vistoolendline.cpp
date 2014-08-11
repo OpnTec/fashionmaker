@@ -77,15 +77,15 @@ void VisToolEndLine::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VisToolEndLine::Angle() const
+QString VisToolEndLine::Angle() const
 {
-    return this->line().angle();
+    return QString("%1").arg(this->line().angle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setAngle(const qreal &value)
+void VisToolEndLine::setAngle(const QString &expression)
 {
-    angle = value;
+    angle = FindVal(expression);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

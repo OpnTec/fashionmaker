@@ -319,7 +319,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonLineAngles">
+          <widget class="QRadioButton" name="radioButtonAngleLine">
            <property name="enabled">
             <bool>true</bool>
            </property>

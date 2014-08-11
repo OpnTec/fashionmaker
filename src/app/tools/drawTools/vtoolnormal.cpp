@@ -75,7 +75,7 @@ void VToolNormal::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formula);
+    dialogTool->setFormula(formulaLength);
     dialogTool->setAngle(angle);
     dialogTool->setFirstPointId(basePointId);
     dialogTool->setSecondPointId(secondPointId);
@@ -203,7 +203,7 @@ void VToolNormal::FullUpdateFromFile()
     if (domElement.isElement())
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
-        formula = domElement.attribute(AttrLength, "");
+        formulaLength = domElement.attribute(AttrLength, "");
         basePointId = domElement.attribute(AttrFirstPoint, "").toUInt();
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
         angle = domElement.attribute(AttrAngle, "").toDouble();
@@ -258,7 +258,7 @@ void VToolNormal::AddToFile()
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrLength, formulaLength);
     doc->SetAttribute(domElement, AttrAngle, angle);
     doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
     doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
@@ -280,7 +280,7 @@ void VToolNormal::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
         doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrLength, formulaLength);
         doc->SetAttribute(domElement, AttrAngle, angle);
         doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
         doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);

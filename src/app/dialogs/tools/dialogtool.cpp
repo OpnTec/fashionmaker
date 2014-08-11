@@ -62,8 +62,8 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
-      radioButtonLengthCurve(nullptr), lineStyles(VAbstractTool::Styles()), okColor(QColor(76, 76, 76)),
-      errorColor(Qt::red), associatedTool(nullptr), toolId(toolId)
+      radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), lineStyles(VAbstractTool::Styles()),
+      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -415,6 +415,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
         ChangeColor(labelEditFormula, Qt::red);
         return;
     }
+    timer->setSingleShot(true);
     timer->start(1000);
 }
 
@@ -425,9 +426,11 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @param flag flag state of formula
  * @param timer timer of formula
  * @param label label for signal error
+ * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
  */
-void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, bool checkZero)
+void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, const QString& postfix,
+                      bool checkZero)
 {
     SCASSERT(timer != nullptr);
     SCASSERT(label != nullptr);
@@ -457,16 +460,16 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             }
             else
             {
+                QLocale loc;
                 if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
                 {
-                    QLocale loc = QLocale::system();
-                    label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+                    loc = QLocale::system();
                 }
                 else
                 {
-                    QLocale loc = QLocale(QLocale::C);
-                    label->setText(loc.toString(result) + VDomDocument::UnitsToStr(qApp->patternUnit(), true));
+                    loc = QLocale(QLocale::C);
                 }
+                label->setText(loc.toString(result) + postfix);
                 flag = true;
                 ChangeColor(labelEditFormula, okColor);
                 emit ToolTip("");
@@ -486,7 +489,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
         }
     }
     CheckState();
-    timer->stop();
+    //timer->stop();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -822,7 +825,8 @@ void DialogTool::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -883,6 +887,12 @@ void DialogTool::LengthArcs()
 void DialogTool::LengthCurves()
 {
     ShowVariable(data->DataLengthSplines());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::AngleLines()
+{
+    ShowVariable(data->DataAngleLines());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

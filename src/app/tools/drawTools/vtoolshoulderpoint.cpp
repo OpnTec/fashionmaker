@@ -74,7 +74,7 @@ void VToolShoulderPoint::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formula);
+    dialogTool->setFormula(formulaLength);
     dialogTool->setP1Line(basePointId);
     dialogTool->setP2Line(p2Line);
     dialogTool->setPShoulder(pShoulder);
@@ -226,7 +226,7 @@ void VToolShoulderPoint::FullUpdateFromFile()
     if (domElement.isElement())
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
-        formula = domElement.attribute(AttrLength, "");
+        formulaLength = domElement.attribute(AttrLength, "");
         basePointId = domElement.attribute(AttrP1Line, "").toUInt();
         p2Line = domElement.attribute(AttrP2Line, "").toUInt();
         pShoulder = domElement.attribute(AttrPShoulder, "").toUInt();
@@ -281,7 +281,7 @@ void VToolShoulderPoint::AddToFile()
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrLength, formulaLength);
     doc->SetAttribute(domElement, AttrP1Line, basePointId);
     doc->SetAttribute(domElement, AttrP2Line, p2Line);
     doc->SetAttribute(domElement, AttrPShoulder, pShoulder);
@@ -303,7 +303,7 @@ void VToolShoulderPoint::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrName, qApp->fromPixel(point->mx()));
         doc->SetAttribute(domElement, AttrName, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrLength, formulaLength);
         doc->SetAttribute(domElement, AttrP1Line, basePointId);
         doc->SetAttribute(domElement, AttrP2Line, p2Line);
         doc->SetAttribute(domElement, AttrPShoulder, pShoulder);

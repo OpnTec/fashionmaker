@@ -41,8 +41,8 @@ public:
     virtual ~VisToolEndLine();
 
     virtual void RefreshGeometry();
-    qreal        Angle() const;
-    void         setAngle(const qreal &value);
+    QString      Angle() const;
+    void         setAngle(const QString &expression);
     void         setLength(const QString &expression);
 private:
     Q_DISABLE_COPY(VisToolEndLine)

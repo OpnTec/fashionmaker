@@ -74,7 +74,7 @@ void VToolAlongLine::FullUpdateFromFile()
     if (domElement.isElement())
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
-        formula = domElement.attribute(AttrLength, "");
+        formulaLength = domElement.attribute(AttrLength, "");
         basePointId = domElement.attribute(AttrFirstPoint, "").toUInt();
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
@@ -129,7 +129,7 @@ void VToolAlongLine::AddToFile()
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrLength, formulaLength);
     doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
     doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
 
@@ -150,7 +150,7 @@ void VToolAlongLine::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrName, point->name());
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrLength, formulaLength);
         doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
         doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
     }
@@ -193,7 +193,7 @@ void VToolAlongLine::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formula);
+    dialogTool->setFormula(formulaLength);
     dialogTool->setFirstPointId(basePointId);
     dialogTool->setSecondPointId(secondPointId);
     dialogTool->setPointName(p->name());

@@ -111,7 +111,7 @@ void VToolBisector::setDialog()
     SCASSERT(dialogTool != nullptr);
     const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
     dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formula);
+    dialogTool->setFormula(formulaLength);
     dialogTool->setFirstPointId(firstPointId);
     dialogTool->setSecondPointId(basePointId);
     dialogTool->setThirdPointId(thirdPointId);
@@ -223,7 +223,7 @@ void VToolBisector::FullUpdateFromFile()
     if (domElement.isElement())
     {
         typeLine = domElement.attribute(AttrTypeLine, "");
-        formula = domElement.attribute(AttrLength, "");
+        formulaLength = domElement.attribute(AttrLength, "");
         firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
         basePointId = domElement.attribute(AttrSecondPoint, "").toUInt();
         thirdPointId = domElement.attribute(AttrThirdPoint, "").toUInt();
@@ -278,7 +278,7 @@ void VToolBisector::AddToFile()
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formula);
+    doc->SetAttribute(domElement, AttrLength, formulaLength);
     doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
     doc->SetAttribute(domElement, AttrSecondPoint, basePointId);
     doc->SetAttribute(domElement, AttrThirdPoint, thirdPointId);
@@ -300,7 +300,7 @@ void VToolBisector::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
         doc->SetAttribute(domElement, AttrName, point->name());
         doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formula);
+        doc->SetAttribute(domElement, AttrLength, formulaLength);
         doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
         doc->SetAttribute(domElement, AttrSecondPoint, basePointId);
         doc->SetAttribute(domElement, AttrThirdPoint, thirdPointId);

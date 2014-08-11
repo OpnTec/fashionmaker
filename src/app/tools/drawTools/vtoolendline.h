@@ -39,15 +39,15 @@ class VToolEndLine : public VToolLinePoint
     Q_OBJECT
 public:
 
-    VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
-                 const qreal &angle, const quint32 &basePointId, const Source &typeCreation,
-                 QGraphicsItem * parent = nullptr);
+    VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
+                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog();
     static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine, QString &formula,
-                                const qreal &angle, const quint32 &basePointId, const qreal &mx, const qreal &my,
-                                VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
-                                const Source &typeCreation);
+    static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                                QString &formulaLength, QString &formulaAngle, const quint32 &basePointId,
+                                const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
+                                VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();
@@ -57,6 +57,8 @@ protected:
     virtual void AddToFile();
     virtual void RefreshDataInFile();
     virtual void SaveDialog(QDomElement &domElement);
+private:
+    QString formulaAngle;
 };
 
 #endif // VTOOLENDLINE_H

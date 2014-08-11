@@ -45,7 +45,7 @@ public slots:
     virtual void      SetFactor(qreal factor);
 protected:
     /** @brief formula string with length formula. */
-    QString           formula;
+    QString           formulaLength;
 
     /** @brief angle line angle. */
     qreal             angle;

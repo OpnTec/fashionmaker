@@ -473,7 +473,7 @@ const QMap<QString, VLengthArc *> VContainer::DataLengthArcs() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VLineAngle *> VContainer::DataLineAngles() const
+const QMap<QString, VLineAngle *> VContainer::DataAngleLines() const
 {
     return DataVar<VLineAngle>(VarType::LineAngle);
 }

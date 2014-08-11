@@ -57,8 +57,8 @@ public:
     QString           getFormula() const;
     void              setFormula(const QString &value);
 
-    qreal             getAngle() const;
-    void              setAngle(const qreal &value);
+    QString           getAngle() const;
+    void              setAngle(const QString &value);
 
     quint32           getBasePointId() const;
     void              setBasePointId(const quint32 &value);
@@ -73,11 +73,15 @@ public slots:
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void DeployFormulaTextEdit();
+    void              DeployFormulaTextEdit();
     /**
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
-    void FormulaTextChanged();
+    void             FormulaTextChanged();
+    void             PutAngle();
+    void             EvalAngle();
+    void             AngleTextChanged();
+    void             DeployAngleTextEdit();
 protected:
     virtual void   ShowVisualization();
 private:
@@ -93,16 +97,17 @@ private:
     QString           typeLine;
 
     /** @brief formula formula */
-    QString           formula;
+    QString           formulaLength;
 
     /** @brief angle angle of line */
-    qreal             angle;
+    QString           formulaAngle;
 
     /** @brief basePointId id base point of line */
     quint32           basePointId;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int               formulaBaseHeight;
+    int               formulaBaseHeightAngle;
 
     VisToolEndLine    *line;
 
@@ -142,17 +147,17 @@ inline QString DialogEndLine::getTypeLine() const
  */
 inline QString DialogEndLine::getFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->FormulaFromUser(formulaLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getAngle return angle of line
- * @return angle in degree
+ * @brief getAngle return formula angle of line
+ * @return angle formula
  */
-inline qreal DialogEndLine::getAngle() const
+inline QString DialogEndLine::getAngle() const
 {
-    return angle;
+    return qApp->FormulaFromUser(formulaAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

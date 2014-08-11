@@ -495,6 +495,22 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonAngleLine">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Angle of lines</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

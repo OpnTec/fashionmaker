@@ -59,7 +59,8 @@ public slots:
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void DeployFormulaTextEdit();
+    void         DeployFormulaTextEdit();
+    virtual void EvalFormula();
 protected:
     virtual void CheckState();
 private:

@@ -254,7 +254,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>First angle degree</string>
+        <string>First angle</string>
        </property>
       </widget>
      </item>
@@ -439,7 +439,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>Second angle degree</string>
+        <string>Second angle</string>
        </property>
       </widget>
      </item>
@@ -704,7 +704,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonLineAngles">
+          <widget class="QRadioButton" name="radioButtonAngleLine">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -762,7 +762,7 @@
   <tabstop>radioButtonLengthLine</tabstop>
   <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
-  <tabstop>radioButtonLineAngles</tabstop>
+  <tabstop>radioButtonAngleLine</tabstop>
   <tabstop>listWidget</tabstop>
   <tabstop>toolButtonPutHereRadius</tabstop>
   <tabstop>toolButtonPutHereF1</tabstop>

@@ -1124,18 +1124,22 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             try
             {
                 PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
+
                 const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
                 QString f = formula;//need for saving fixed formula;
 
                 const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
-                const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
 
-                VToolEndLine::Create(id, name, typeLine, f, angle, basePointId,
-                                        mx, my, scene, this, data, parse, Source::FromFile);
+                const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
+                QString angleFix = angle;
+
+                VToolEndLine::Create(id, name, typeLine, f, angleFix, basePointId, mx, my, scene, this, data, parse,
+                                     Source::FromFile);
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
+                if (f != formula || angleFix != angle)
                 {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
+                    SetAttribute(domElement, VAbstractTool::AttrRadius, f);
+                    SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
                     haveLiteChange();
                 }
             }

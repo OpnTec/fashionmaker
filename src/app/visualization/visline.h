@@ -64,6 +64,7 @@ protected:
     QString          toolTip;
     QRectF       PointRect();
     qreal        FindLength(const QString &expression);
+    qreal        FindVal(const QString &expression);
     void         DrawLine(QGraphicsLineItem    *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color);

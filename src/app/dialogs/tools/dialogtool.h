@@ -103,12 +103,13 @@ public slots:
     void             ArrowLeftDown();
     void             ArrowRightUp();
     void             ArrowRightDown();
-    void             EvalFormula();
+    virtual void     EvalFormula();
     void             SizeHeight();
     void             Measurements();
     void             LengthLines();
     void             LengthArcs();
     void             LengthCurves();
+    void             AngleLines();
     void             Increments();
     void             PutHere();
     void             PutVal(QListWidgetItem * item);
@@ -184,6 +185,8 @@ protected:
     /** @brief radioButtonLengthCurve radio button for lengths of curves variables */
     QRadioButton     *radioButtonLengthCurve;
 
+    QRadioButton     *radioButtonAngleLine;
+
     /** @brief lineStyles list supported line styles. */
     QStringList      lineStyles;
     const QColor     okColor;
@@ -213,7 +216,8 @@ protected:
     void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
-    void             Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, bool checkZero = true);
+    void             Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, const QString &postfix,
+                          bool checkZero = true);
     void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value) const;
     void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value,
                                         ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
@@ -249,6 +253,7 @@ protected:
         radioButtonLengthLine = ui->radioButtonLengthLine;
         radioButtonLengthArc = ui->radioButtonLengthArc;
         radioButtonLengthCurve = ui->radioButtonLengthSpline;
+        radioButtonAngleLine = ui->radioButtonAngleLine;
 
         connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 
@@ -268,6 +273,7 @@ protected:
         connect(radioButtonLengthLine, &QRadioButton::clicked, this, &DialogTool::LengthLines);
         connect(radioButtonLengthArc, &QRadioButton::clicked, this, &DialogTool::LengthArcs);
         connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
+        connect(radioButtonAngleLine, &QRadioButton::clicked, this, &DialogTool::AngleLines);
     }
     template <typename T>
     /**

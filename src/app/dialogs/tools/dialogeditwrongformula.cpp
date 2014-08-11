@@ -87,6 +87,15 @@ void DialogEditWrongFormula::DeployFormulaTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::EvalFormula()
+{
+    SCASSERT(plainTextEditFormula != nullptr);
+    SCASSERT(labelResultCalculation != nullptr);
+    const QString postfix = QStringLiteral("");
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation, postfix);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CheckState()
 {
     SCASSERT(bOk != nullptr);

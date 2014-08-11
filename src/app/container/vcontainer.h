@@ -175,7 +175,7 @@ public:
     const QMap<QString, VLengthLine *>   DataLengthLines() const;
     const QMap<QString, VLengthSpline *> DataLengthSplines() const;
     const QMap<QString, VLengthArc *>    DataLengthArcs() const;
-    const QMap<QString, VLineAngle *>    DataLineAngles() const;
+    const QMap<QString, VLineAngle *>    DataAngleLines() const;
 
 
 private:
