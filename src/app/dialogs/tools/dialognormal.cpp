@@ -40,8 +40,7 @@
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0), line(nullptr),
-      prepare(false)
+      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -141,12 +140,7 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                 if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
                 {
                     number++;
-                    VMainGraphicsScene *scene = qApp->getCurrentScene();
-                    SCASSERT(scene != nullptr);
-                    line->VisualMode(id, scene->getScenePos());
-                    scene->addItem(line);
-                    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolNormal::SetFactor);
-                    connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolNormal::MousePos);
+                    line->VisualMode(id);
                     return;
                 }
             }

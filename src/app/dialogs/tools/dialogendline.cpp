@@ -44,7 +44,7 @@
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
       formulaLength(QString()), formulaAngle(QString()), basePointId(0), formulaBaseHeight(0),
-      formulaBaseHeightAngle(0), line(nullptr), prepare(false)
+      formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -144,12 +144,7 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
             basePointId = id;
             ChangeCurrentText(ui->comboBoxBasePoint, point->name());
 
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
-            SCASSERT(scene != nullptr);
-            scene->addItem(line);
-            line->VisualMode(id, scene->getScenePos());
-            connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolEndLine::SetFactor);
-            connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolEndLine::MousePos);
+            line->VisualMode(id);
             connect(line, &VisToolEndLine::ToolTip, this, &DialogTool::ShowVisToolTip);
 
             emit ToolTip("");

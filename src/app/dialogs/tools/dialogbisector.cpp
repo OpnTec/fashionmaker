@@ -155,12 +155,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                 { // -1 for not found
                     ui->comboBoxFirstPoint->setCurrentIndex(index);
                     number++;
-                    VMainGraphicsScene *scene = qApp->getCurrentScene();
-                    SCASSERT(scene != nullptr);
-                    line->VisualMode(id, scene->getScenePos());
-                    scene->addItem(line);
-                    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolBisector::SetFactor);
-                    connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolBisector::MousePos);
+                    line->VisualMode(id);
                     emit ToolTip(tr("Select second point of angle"));
                     return;
                 }

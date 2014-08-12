@@ -197,6 +197,9 @@ protected:
     VAbstractTool    *associatedTool;
     quint32          toolId;
 
+    /** @brief prepare show if we prepare. Show dialog after finish working with visual part of tool*/
+    bool             prepare;
+
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
     void             FillComboBoxPoints(QComboBox *box)const;

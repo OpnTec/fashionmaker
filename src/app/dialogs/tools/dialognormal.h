@@ -115,9 +115,6 @@ private:
 
     VisToolNormal    *line;
 
-    /** @brief prepare show if we prepare show dialog after finish working with visual part of tool*/
-    bool             prepare;
-
     /**
      * @brief SaveData Put dialog data in local variables
      */

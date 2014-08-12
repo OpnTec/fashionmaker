@@ -270,11 +270,18 @@ void VisLine::setScenePos(const QPointF &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisLine::VisualMode(const quint32 &pointId, const QPointF &scenePos)
+void VisLine::VisualMode(const quint32 &pointId)
 {
+    VMainGraphicsScene *scene = qApp->getCurrentScene();
+    SCASSERT(scene != nullptr);
+
     this->point1Id = pointId;
-    this->scenePos = scenePos;
+    this->scenePos = scene->getScenePos();
     RefreshGeometry();
+
+    scene->addItem(this);
+    connect(scene, &VMainGraphicsScene::NewFactor, this, &VisLine::SetFactor);
+    connect(scene, &VMainGraphicsScene::mouseMove, this, &VisLine::MousePos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

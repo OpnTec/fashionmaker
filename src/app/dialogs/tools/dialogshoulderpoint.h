@@ -113,7 +113,6 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
     VisToolShoulderPoint *line;
-    bool            prepare;
 
     /**
      * @brief SaveData Put dialog data in local variables

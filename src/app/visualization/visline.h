@@ -46,7 +46,7 @@ public:
     void         setLineStyle(const Qt::PenStyle &value);
     virtual void RefreshGeometry()=0;
     void         setScenePos(const QPointF &value);
-    void         VisualMode(const quint32 &pointId, const QPointF &scenePos);
+    void         VisualMode(const quint32 &pointId);
     void         setMainColor(const QColor &value);
 signals:
     void         ToolTip(const QString &toolTip);

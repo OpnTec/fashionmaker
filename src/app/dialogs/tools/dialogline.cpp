@@ -152,10 +152,13 @@ void DialogLine::UpdateList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::ShowVisualization()
 {
-    VMainGraphicsScene *scene = qApp->getCurrentScene();
-    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
-    scene->addItem(line);
-    line->RefreshGeometry();
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,13 +192,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
             qint32 index = ui->comboBoxFirstPoint->findText(point->name());
             if ( index != -1 )
             { // -1 for not found
-
-                VMainGraphicsScene *scene = qApp->getCurrentScene();
-                line->VisualMode(id, scene->getScenePos());
-                scene->addItem(line);
-                connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
-                connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolLine::MousePos);
-
+                line->VisualMode(id);
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
                 emit ToolTip(tr("Select second point"));
@@ -211,6 +208,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
                 if (flagError)
                 {
                     number = 0;
+                    prepare = true;
                     emit ToolTip("");
                     DialogAccepted();
                 }

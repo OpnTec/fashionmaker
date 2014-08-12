@@ -43,8 +43,7 @@
  */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), number(0), pointName(QString()),
-    typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0), formulaBaseHeight(0), line (nullptr),
-    prepare(false)
+    typeLine(QString()), formula(QString()), p1Line(0), p2Line(0), pShoulder(0), formulaBaseHeight(0), line (nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -155,12 +154,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
                 { // -1 for not found
                     ui->comboBoxPShoulder->setCurrentIndex(index);
                     number++;
-                    VMainGraphicsScene *scene = qApp->getCurrentScene();
-                    SCASSERT(scene != nullptr);
-                    line->VisualMode(id, scene->getScenePos());
-                    scene->addItem(line);
-                    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolShoulderPoint::SetFactor);
-                    connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolShoulderPoint::MousePos);
+                    line->VisualMode(id);
                     emit ToolTip(tr("Select first point of line"));
                     return;
                 }

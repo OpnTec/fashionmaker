@@ -48,7 +48,7 @@
 #include <QPushButton>
 #include <QDoubleSpinBox>
 
-#define DIALOGARC_MAX_FORMULA_HEIGHT 64
+#define DIALOG_MAX_FORMULA_HEIGHT 64
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -63,7 +63,7 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), lineStyles(VAbstractTool::Styles()),
-      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId)
+      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId), prepare(false)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -592,9 +592,9 @@ void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowL
 {
     SCASSERT(formula != nullptr);
     SCASSERT(buttonGrowLength != nullptr)
-    if (formula->height() < DIALOGARC_MAX_FORMULA_HEIGHT)
+    if (formula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
-        formula->setFixedHeight(DIALOGARC_MAX_FORMULA_HEIGHT);
+        formula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
         //Set icon from theme (internal for Windows system)
         buttonGrowLength->setIcon(QIcon::fromTheme("go-next",
                                                    QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
