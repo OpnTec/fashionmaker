@@ -56,26 +56,27 @@ TableWindow::TableWindow(QWidget *parent)
     ui->statusBar->addWidget(numberDetal);
     ui->statusBar->addWidget(colission);
     outItems = collidingItems = false;
-    //sceneRect = QRectF(0, 0, qApp->toPixel(203), qApp->toPixel(287));
     sceneRect = QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm));
     tableScene = new QGraphicsScene(sceneRect);
     QBrush brush;
     brush.setStyle( Qt::SolidPattern );
     brush.setColor( QColor( Qt::gray ) );
     tableScene->setBackgroundBrush( brush );
-    VTableGraphicsView* view = new VTableGraphicsView(tableScene);
-    view->fitInView(view->scene()->sceneRect(), Qt::KeepAspectRatio);
-    ui->horizontalLayout->addWidget(view);
-    connect(ui->actionTurn, &QAction::triggered, view, &VTableGraphicsView::rotateItems);
-    connect(ui->actionMirror, &QAction::triggered, view, &VTableGraphicsView::MirrorItem);
-    connect(ui->actionZoomIn, &QAction::triggered, view, &VTableGraphicsView::ZoomIn);
-    connect(ui->actionZoomOut, &QAction::triggered, view, &VTableGraphicsView::ZoomOut);
+
+    ui->view->setScene(tableScene);
+    ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
+    ui->horizontalLayout->addWidget(ui->view);
+    connect(tableScene, &QGraphicsScene::selectionChanged, ui->view, &VTableGraphicsView::selectionChanged);
+    connect(ui->actionTurn, &QAction::triggered, ui->view, &VTableGraphicsView::rotateItems);
+    connect(ui->actionMirror, &QAction::triggered, ui->view, &VTableGraphicsView::MirrorItem);
+    connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomIn);
+    connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomOut);
     connect(ui->actionStop, &QAction::triggered, this, &TableWindow::StopTable);
     connect(ui->actionSave, &QAction::triggered, this, &TableWindow::saveScene);
     connect(ui->actionNext, &QAction::triggered, this, &TableWindow::GetNextDetail);
     connect(ui->actionAdd, &QAction::triggered, this, &TableWindow::AddLength);
     connect(ui->actionRemove, &QAction::triggered, this, &TableWindow::RemoveLength);
-    connect(view, &VTableGraphicsView::itemChect, this, &TableWindow::itemChect);
+    connect(ui->view, &VTableGraphicsView::itemChect, this, &TableWindow::itemChect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -199,6 +200,7 @@ void TableWindow::showEvent ( QShowEvent * event )
 {
     QMainWindow::showEvent(event);
     moveToCenter();
+    ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,8 +213,8 @@ void TableWindow::StopTable()
     tableScene->clear();
     delete listOutItems;
     listDetails.clear();
-    //sceneRect = QRectF(0, 0, 230*resol/25.9, 327*resol/25.9);
     sceneRect = QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm));
+    tableScene->setSceneRect(sceneRect);
     emit closed();
 }
 

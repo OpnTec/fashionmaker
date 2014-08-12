@@ -37,6 +37,9 @@
     <property name="bottomMargin">
      <number>9</number>
     </property>
+    <item>
+     <widget class="VTableGraphicsView" name="view"/>
+    </item>
    </layout>
   </widget>
   <widget class="QToolBar" name="toolBar">
@@ -198,6 +201,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VTableGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>vtablegraphicsview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="share/resources/icon.qrc"/>
  </resources>

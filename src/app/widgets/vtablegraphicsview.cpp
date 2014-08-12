@@ -36,11 +36,10 @@
 #include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VTableGraphicsView::VTableGraphicsView(QGraphicsScene* pScene, QWidget *parent)
-    :QGraphicsView(pScene, parent)
+VTableGraphicsView::VTableGraphicsView(QWidget *parent)
+    :QGraphicsView(parent)
 {
     QGraphicsView::setResizeAnchor(QGraphicsView::AnchorUnderMouse);
-    connect(pScene, &QGraphicsScene::selectionChanged, this, &VTableGraphicsView::selectionChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
