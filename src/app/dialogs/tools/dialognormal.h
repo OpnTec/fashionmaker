@@ -36,6 +36,8 @@ namespace Ui
     class DialogNormal;
 }
 
+class VisToolNormal;
+
 /**
  * @brief The DialogNormal class dialog for ToolNormal. Help create point and edit option.
  */
@@ -79,6 +81,8 @@ public slots:
      */
     void             FormulaTextChanged();
     virtual void     PointNameChanged();
+protected:
+    virtual void     ShowVisualization();
 private:
     Q_DISABLE_COPY(DialogNormal)
 
@@ -108,6 +112,11 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int              formulaBaseHeight;
+
+    VisToolNormal    *line;
+
+    /** @brief prepare show if we prepare show dialog after finish working with visual part of tool*/
+    bool             prepare;
 
     /**
      * @brief SaveData Put dialog data in local variables

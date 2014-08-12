@@ -28,6 +28,9 @@
 
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
+#include "../visualization/vistoolnormal.h"
+#include "../widgets/vmaingraphicsscene.h"
+#include "../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -37,7 +40,8 @@
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0)
+      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0), line(nullptr),
+      prepare(false)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -66,6 +70,8 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogNormal::PointNameChanged);
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogNormal::PointNameChanged);
+
+    line = new VisToolNormal(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +79,6 @@ void DialogNormal::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::PointNameChanged()
@@ -95,6 +100,18 @@ void DialogNormal::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
@@ -103,6 +120,7 @@ void DialogNormal::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogNormal::~DialogNormal()
 {
+    delete line;
     delete ui;
 }
 
@@ -114,25 +132,37 @@ DialogNormal::~DialogNormal()
  */
 void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        if (number == 0)
+        if (type == SceneObject::Point)
         {
-            if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
+            if (number == 0)
             {
-                number++;
-                return;
-            }
-        }
-        if (number == 1)
-        {
-            if (ChoosedPoint(id, ui->comboBoxSecondPoint, ""))
-            {
-                number = 0;
-                if (isInitialized == false)
+                if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
                 {
-                    this->setModal(true);
-                    this->show();
+                    number++;
+                    VMainGraphicsScene *scene = qApp->getCurrentScene();
+                    SCASSERT(scene != nullptr);
+                    line->VisualMode(id, scene->getScenePos());
+                    scene->addItem(line);
+                    connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolNormal::SetFactor);
+                    connect(scene, &VMainGraphicsScene::mouseMove, line, &VisToolNormal::MousePos);
+                    return;
+                }
+            }
+            if (number == 1)
+            {
+                if (ChoosedPoint(id, ui->comboBoxSecondPoint, ""))
+                {
+                    number = 0;
+                    line->setPoint2Id(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+                    if (isInitialized == false)
+                    {
+                        this->setModal(true);
+                        this->show();
+                    }
                 }
             }
         }
@@ -165,6 +195,13 @@ void DialogNormal::SaveData()
     angle = ui->doubleSpinBoxAngle->value();
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
+
+    line->setPoint1Id(firstPointId);
+    line->setPoint2Id(secondPointId);
+    line->setLength(formula);
+    line->setAngle(angle);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,6 +212,7 @@ void DialogNormal::SaveData()
 void DialogNormal::setSecondPointId(const quint32 &value)
 {
     setPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,6 +223,7 @@ void DialogNormal::setSecondPointId(const quint32 &value)
 void DialogNormal::setFirstPointId(const quint32 &value)
 {
     setPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,6 +235,7 @@ void DialogNormal::setAngle(const qreal &value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
+    line->setAngle(angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,6 +252,7 @@ void DialogNormal::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+    line->setLength(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -223,6 +264,7 @@ void DialogNormal::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -230,7 +230,12 @@ qreal VisLine::CorrectAngle(const qreal &angle) const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 {
-    QLineF line =  QLineF();
+    if(this->scene() == nullptr)
+    {
+        return scenePos;// We can't find ray because item doesn't have scene. We eill return cursor position on scene.
+    }
+
+    QLineF line = QLineF();
     line.setP1(firstPoint);
     line.setAngle(angle);
 
@@ -247,7 +252,7 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VisLine::Ray(const QPointF &firstPoint) const
 {
-    QLineF line =  QLineF(firstPoint, scenePos);
+    QLineF line = QLineF(firstPoint, scenePos);
     return Ray(firstPoint, line.angle());
 }
 

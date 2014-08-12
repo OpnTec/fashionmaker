@@ -255,6 +255,7 @@ void DialogEndLine::ShowDialog(bool click)
         this->setModal(true);
         this->setAngle(line->Angle());//Show in dialog angle what user choose
         emit ToolTip("");
+        timerFormula->start();
         this->show();
     }
 }

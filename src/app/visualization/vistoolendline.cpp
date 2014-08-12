@@ -55,16 +55,7 @@ void VisToolEndLine::RefreshGeometry()
     QLineF line;
     if (qFuzzyCompare(1 + length, 1 + 0))
     {
-        QPointF second;
-        if(this->scene() == nullptr)
-        {
-            second = scenePos;
-        }
-        else
-        {
-            second = Ray(first->toQPointF());
-        }
-        line = QLineF(first->toQPointF(), second);
+        line = QLineF(first->toQPointF(), Ray(first->toQPointF()));
     }
     else
     {
