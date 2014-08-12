@@ -44,6 +44,8 @@ include(xml/xml.pri)
 include(undocommands/undocommands.pri)
 include(visualization/visualization.pri)
 
+INCLUDEPATH += "$${PWD}/widgets"
+
 SOURCES += \
         main.cpp \
         mainwindow.cpp \

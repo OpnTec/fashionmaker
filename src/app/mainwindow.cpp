@@ -62,7 +62,7 @@
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Tool::ArrowTool),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
-      view(nullptr), isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
+      isInitialized(false), dialogTable(0), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs{nullptr, nullptr, nullptr, nullptr, nullptr},
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
@@ -80,21 +80,17 @@ MainWindow::MainWindow(QWidget *parent)
     sceneDetails = new VMainGraphicsScene();
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
 
-    view = new VMainGraphicsView();
-    view->setDisabled(true);
-    ui->LayoutView->addWidget(view);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    view->setScene(currentScene);
+    ui->view->setScene(currentScene);
 
-    sceneDraw->setTransform(view->transform());
-    sceneDetails->setTransform(view->transform());
+    sceneDraw->setTransform(ui->view->transform());
+    sceneDetails->setTransform(ui->view->transform());
 
-    connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+    connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
-    view->setSizePolicy(policy);
-    qApp->setSceneView(view);
+    ui->view->setSizePolicy(policy);
+    qApp->setSceneView(ui->view);
+
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
@@ -173,8 +169,8 @@ void MainWindow::ActionNewPP()
         }
 
         //Set scene size to size scene view
-        VAbstractTool::NewSceneRect(sceneDraw, view);
-        VAbstractTool::NewSceneRect(sceneDetails, view);
+        VAbstractTool::NewSceneRect(sceneDraw, ui->view);
+        VAbstractTool::NewSceneRect(sceneDetails, ui->view);
         ToolBarOption();
     }
     else
@@ -255,7 +251,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
-        view->setCursor(cur);
+        ui->view->setCursor(cur);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, 0, this);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
@@ -293,7 +289,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
-        view->setCursor(cur);
+        ui->view->setCursor(cur);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, 0, this);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
@@ -301,7 +297,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
-        connect(view, &VMainGraphicsView::MouseRelease, this, &MainWindow::ClickEndVisualization);
+        connect(ui->view, &VMainGraphicsView::MouseRelease, this, &MainWindow::ClickEndVisualization);
     }
     else
     {
@@ -867,15 +863,15 @@ void MainWindow::ToolBarTools()
     const QList<QKeySequence> zoomInShortcuts = {QKeySequence::ZoomIn,
                                                  Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier};
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
-    connect(ui->actionZoomIn, &QAction::triggered, view, &VMainGraphicsView::ZoomIn);
+    connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomIn);
 
     const QList<QKeySequence> zoomOutShortcuts = {QKeySequence::ZoomOut,
                                                  Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier};
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
-    connect(ui->actionZoomOut, &QAction::triggered, view, &VMainGraphicsView::ZoomOut);
+    connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOut);
 
-    connect(ui->actionZoomOriginal, &QAction::triggered, view, &VMainGraphicsView::ZoomOriginal);
-    connect(ui->actionZoomFitBest, &QAction::triggered, view, &VMainGraphicsView::ZoomFitBest);
+    connect(ui->actionZoomOriginal, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOriginal);
+    connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1059,7 +1055,7 @@ void  MainWindow::ArrowTool()
     ui->actionArrowTool->setChecked(true);
     tool = Tool::ArrowTool;
     QCursor cur(Qt::ArrowCursor);
-    view->setCursor(cur);
+    ui->view->setCursor(cur);
     helpLabel->setText("");
 }
 
@@ -1103,11 +1099,11 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
 void MainWindow::SaveCurrentScene()
 {
     /*Save transform*/
-    currentScene->setTransform(view->transform());
+    currentScene->setTransform(ui->view->transform());
     /*Save scroll bars value for previous scene.*/
-    QScrollBar *horScrollBar = view->horizontalScrollBar();
+    QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
     currentScene->setHorScrollBar(horScrollBar->value());
-    QScrollBar *verScrollBar = view->verticalScrollBar();
+    QScrollBar *verScrollBar = ui->view->verticalScrollBar();
     currentScene->setVerScrollBar(verScrollBar->value());
 }
 
@@ -1118,11 +1114,11 @@ void MainWindow::SaveCurrentScene()
 void MainWindow::RestoreCurrentScene()
 {
     /*Set transform for current scene*/
-    view->setTransform(currentScene->transform());
+    ui->view->setTransform(currentScene->transform());
     /*Set value for current scene scroll bar.*/
-    QScrollBar *horScrollBar = view->horizontalScrollBar();
+    QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
     horScrollBar->setValue(currentScene->getHorScrollBar());
-    QScrollBar *verScrollBar = view->verticalScrollBar();
+    QScrollBar *verScrollBar = ui->view->verticalScrollBar();
     verScrollBar->setValue(currentScene->getVerScrollBar());
 }
 
@@ -1139,8 +1135,8 @@ void MainWindow::ActionDraw(bool checked)
         SaveCurrentScene();
 
         currentScene = sceneDraw;
-        view->setScene(currentScene);
-        connect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+        ui->view->setScene(currentScene);
+        connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
         mode = Draw::Calculation;
@@ -1175,8 +1171,8 @@ void MainWindow::ActionDetails(bool checked)
         SaveCurrentScene();
 
         currentScene = sceneDetails;
-        view->setScene(sceneDetails);
-        disconnect(view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+        ui->view->setScene(sceneDetails);
+        disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
         drawMode = false;
@@ -1453,7 +1449,7 @@ void MainWindow::SetEnabledGUI(bool enabled)
         guiEnabled = enabled;
 
         sceneDraw->SetDisable(!enabled);
-        view->setEnabled(enabled);
+        ui->view->setEnabled(enabled);
 
         SetEnableTool(enabled);
         ui->toolBarOption->setEnabled(enabled);
@@ -1613,7 +1609,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomOriginal->setEnabled(enable);
     //Now we want allow user call context menu
-    view->setEnabled(enable);
+    ui->view->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1747,9 +1743,9 @@ void MainWindow::SetEnableTool(bool enable)
  */
 void MainWindow::MinimumScrollBar()
 {
-    QScrollBar *horScrollBar = view->horizontalScrollBar();
+    QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
     horScrollBar->setValue(horScrollBar->minimum());
-    QScrollBar *verScrollBar = view->verticalScrollBar();
+    QScrollBar *verScrollBar = ui->view->verticalScrollBar();
     verScrollBar->setValue(verScrollBar->minimum());
 }
 
@@ -1848,8 +1844,8 @@ void MainWindow::ReadSettings()
 
     // Scene antialiasing
     bool graphOutputValue = qApp->getSettings()->value("pattern/graphicalOutput", 1).toBool();
-    view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
-    view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
+    ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
+    ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
     bool ok = true;
@@ -2057,8 +2053,8 @@ MainWindow::~MainWindow()
 void MainWindow::LoadPattern(const QString &fileName)
 {
     // On this stage scene empty. Fit scene size to view size
-    VAbstractTool::NewSceneRect(sceneDraw, view);
-    VAbstractTool::NewSceneRect(sceneDetails, view);
+    VAbstractTool::NewSceneRect(sceneDraw, ui->view);
+    VAbstractTool::NewSceneRect(sceneDetails, ui->view);
 
     qApp->setOpeningPattern();//Begin opening file
     try
@@ -2196,8 +2192,8 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
             ArrowTool();
             if (zoomBestFit)
             {
-                view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
-                view->NewFactor(view->transform().m11());
+                ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
+                ui->view->NewFactor(ui->view->transform().m11());
             }
         }
     }
@@ -2222,17 +2218,17 @@ void MainWindow::ZoomFirstShow()
      * pattern will be moved. Looks very ugly. It is best solution that i have now.
      */
     ActionDetails(true);
-    view->ZoomFitBest();
+    ui->view->ZoomFitBest();
 
     ActionDraw(true);
-    view->ZoomFitBest();
+    ui->view->ZoomFitBest();
 
-    VAbstractTool::NewSceneRect(sceneDraw, view);
-    VAbstractTool::NewSceneRect(sceneDetails, view);
+    VAbstractTool::NewSceneRect(sceneDraw, ui->view);
+    VAbstractTool::NewSceneRect(sceneDetails, ui->view);
 
     ActionDetails(true);
-    view->ZoomFitBest();
+    ui->view->ZoomFitBest();
 
     ActionDraw(true);
-    view->ZoomFitBest();
+    ui->view->ZoomFitBest();
 }

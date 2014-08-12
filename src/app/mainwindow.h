@@ -162,9 +162,6 @@ private:
     /** @brief helpLabel help show tooltip. */
     QLabel             *helpLabel;
 
-    /** @brief view show current scene. */
-    VMainGraphicsView  *view;
-
     /** @brief isInitialized true after first show window. */
     bool               isInitialized;
 
