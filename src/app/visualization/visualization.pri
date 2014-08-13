@@ -9,7 +9,8 @@ HEADERS += \
     visualization/vistoolalongline.h \
     visualization/vistoolbisector.h \
     visualization/vistoolshoulderpoint.h \
-    visualization/vistoolnormal.h
+    visualization/vistoolnormal.h \
+    visualization/vistoolheight.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
@@ -22,4 +23,5 @@ SOURCES += \
     visualization/vistoolalongline.cpp \
     visualization/vistoolbisector.cpp \
     visualization/vistoolshoulderpoint.cpp \
-    visualization/vistoolnormal.cpp
+    visualization/vistoolnormal.cpp \
+    visualization/vistoolheight.cpp
