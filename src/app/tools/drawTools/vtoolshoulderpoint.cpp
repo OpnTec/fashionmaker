@@ -125,6 +125,7 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
+ * @return the created tool
  */
 VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                                                VContainer *data)
@@ -165,6 +166,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
+ * @return the created tool
  */
 VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
                                 const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,

@@ -42,11 +42,12 @@ public:
                              const quint32 &secondPointId, const Source &typeCreation,
                              QGraphicsItem * parent = nullptr);
     virtual void setDialog();
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static void  Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
-                        const quint32 &secondPointId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                        VPattern *doc, VContainer *data, const Document &parse,
-                        const Source &typeCreation);
+    static VToolPointOfIntersection *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc,
+                                            VContainer *data);
+    static VToolPointOfIntersection *Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
+                                            const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                                            VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                            const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
     virtual void FullUpdateFromFile();

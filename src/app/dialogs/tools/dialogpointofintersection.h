@@ -36,6 +36,8 @@ namespace Ui
     class DialogPointOfIntersection;
 }
 
+class VisToolPointOfIntersection;
+
 /**
  * @brief The DialogPointOfIntersection class dialog for ToolPointOfIntersection. Help create point and edit option.
  */
@@ -59,6 +61,7 @@ public slots:
     virtual void   PointNameChanged();
     virtual void   UpdateList();
 protected:
+    virtual void   ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -80,6 +83,7 @@ private:
 
     /** @brief secondPointId id second point of line */
     quint32        secondPointId;
+    VisToolPointOfIntersection *line;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

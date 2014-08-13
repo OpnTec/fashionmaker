@@ -591,9 +591,11 @@ void MainWindow::ToolTriangle(bool checked)
  */
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
-    SetToolButton<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
-                                             ":/cursor/pointofintersect_cursor.png", tr("Select point vertically"),
-                                             &MainWindow::ClosedDialog<VToolPointOfIntersection>);
+    SetToolButtonWithApply<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
+                                                      ":/cursor/pointofintersect_cursor.png",
+                                                      tr("Select point vertically"),
+                                                      &MainWindow::ClosedDialogWithApply<VToolPointOfIntersection>,
+                                                      &MainWindow::ApplyDialog<VToolPointOfIntersection>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

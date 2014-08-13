@@ -59,7 +59,6 @@ void VisToolPointOfIntersection::RefreshGeometry()
         QLineF axisL2;
         if (point2Id <= 0)
         {
-            DrawPoint(axisP2, scenePos, supportColor);
             axisL2 = Axis(scenePos, 180);
         }
         else
@@ -67,9 +66,9 @@ void VisToolPointOfIntersection::RefreshGeometry()
             const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(axisP2, second->toQPointF(), supportColor);
             axisL2 = Axis(second->toQPointF(), 180);
+            ShowIntersection(axisL1, axisL2);
         }
         DrawLine(axis2, axisL2, supportColor, Qt::DashLine);
-        ShowIntersection(axisL1, axisL2);
     }
 }
 
@@ -99,6 +98,6 @@ void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLi
     }
     else
     {
-        point->setVisible(true);
+        point->setVisible(false);
     }
 }

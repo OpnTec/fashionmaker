@@ -31,6 +31,8 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistoolpointofintersection.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,7 +42,7 @@
  */
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), number(0), pointName(QString()),
-    firstPointId(0), secondPointId(0)
+    firstPointId(0), secondPointId(0), line(nullptr)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -57,11 +59,14 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
             this, &DialogPointOfIntersection::PointNameChanged);
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersection::PointNameChanged);
+
+    line = new VisToolPointOfIntersection(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersection::~DialogPointOfIntersection()
 {
+    delete line;
     delete ui;
 }
 
@@ -73,6 +78,7 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 void DialogPointOfIntersection::setSecondPointId(const quint32 &value)
 {
     setPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    line->setPoint2Id(secondPointId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,6 +99,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
             { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                line->VisualMode(id);
                 emit ToolTip(tr("Select point horizontally"));
                 return;
             }
@@ -104,6 +111,9 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
             { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number = 0;
+                line->setPoint2Id(id);
+                line->RefreshGeometry();
+                prepare = true;
                 emit ToolTip("");
             }
             if (isInitialized == false)
@@ -121,6 +131,10 @@ void DialogPointOfIntersection::SaveData()
     pointName = ui->lineEditNamePoint->text();
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
+
+    line->setPoint1Id(firstPointId);
+    line->setPoint2Id(secondPointId);
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,6 +166,18 @@ void DialogPointOfIntersection::UpdateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersection::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPointId set id of first point
  * @param value id
@@ -159,6 +185,7 @@ void DialogPointOfIntersection::UpdateList()
 void DialogPointOfIntersection::setFirstPointId(const quint32 &value)
 {
     setPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    line->setPoint1Id(firstPointId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
