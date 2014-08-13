@@ -43,11 +43,11 @@ public:
                 const quint32 &p1LineId, const quint32 &p2LineId, const Source &typeCreation,
                 QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static void    Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                          const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                          const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                          VContainer *data, const Document &parse, const Source &typeCreation);
+    static VToolHeight *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                               const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                               const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
+                               VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
 public slots:

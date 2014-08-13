@@ -58,15 +58,14 @@ public:
     void           setTypeLine(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
-    virtual void   DialogAccepted();
-    /**
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void   DialogApply();
     virtual void   PointNameChanged();
     virtual void   UpdateList();
 protected:
     virtual void   ShowVisualization();
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void   SaveData();
 private:
     Q_DISABLE_COPY(DialogLine)
 
@@ -85,10 +84,7 @@ private:
     /** @brief typeLine type of line */
     QString        typeLine;
     VisToolLine    *line;
-    /**
-     * @brief SaveData Put dialog data in local variables
-     */
-    void           SaveData();
+
 };
 
 //---------------------------------------------------------------------------------------------------------------------

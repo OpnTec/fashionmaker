@@ -191,22 +191,6 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogArc::DialogAccepted()
-{
-    this->SaveData();
-    emit DialogClosed(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogArc::DialogApply()
-{
-    this->SaveData();
-    emit DialogApplied();
-}
-//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::SaveData()
 {
     radius = ui->plainTextEditFormula->toPlainText();

@@ -116,15 +116,11 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogPointOfIntersection::DialogAccepted()
+void DialogPointOfIntersection::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

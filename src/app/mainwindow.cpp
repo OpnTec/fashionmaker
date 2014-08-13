@@ -568,8 +568,9 @@ void MainWindow::ClosedDialogDetail(int result)
  */
 void MainWindow::ToolHeight(bool checked)
 {
-    SetToolButton<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
-                                &MainWindow::ClosedDialog<VToolHeight>);
+    SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
+                                         &MainWindow::ClosedDialogWithApply<VToolHeight>,
+                                         &MainWindow::ApplyDialog<VToolHeight>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

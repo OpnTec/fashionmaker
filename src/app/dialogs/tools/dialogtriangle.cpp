@@ -115,17 +115,13 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogTriangle::DialogAccepted()
+void DialogTriangle::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     axisP1Id = getCurrentObjectId(ui->comboBoxAxisP1);
     axisP2Id = getCurrentObjectId(ui->comboBoxAxisP2);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

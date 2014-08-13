@@ -50,12 +50,12 @@ public:
     QPointF        getPoint()const;
 public slots:
     void           mousePress(const QPointF &scenePos);
-    virtual void   DialogAccepted();
-    /** TODO ISSUE 79 : create real function
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void   DialogApply(){}
     virtual void   UpdateList();
+protected:
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void   SaveData();
 private:
     Q_DISABLE_COPY(DialogSinglePoint)
 

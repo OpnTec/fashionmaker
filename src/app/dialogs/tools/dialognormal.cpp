@@ -164,22 +164,6 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogNormal::DialogAccepted()
-{
-    this->SaveData();
-    emit DialogClosed(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNormal::DialogApply()
-{
-    this->SaveData();
-    emit DialogApplied();
-}
-//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();

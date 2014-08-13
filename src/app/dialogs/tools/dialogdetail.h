@@ -46,11 +46,6 @@ public:
     void             setDetails(const VDetail &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
-    virtual void     DialogAccepted();
-    /** TODO ISSUE 79 : create real function
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void     DialogApply(){}
     void             BiasXChanged(qreal d);
     void             BiasYChanged(qreal d);
     void             ClickedSeams(bool checked);
@@ -58,6 +53,11 @@ public slots:
     void             ObjectChanged(int row);
     void             DeleteItem();
     virtual void     UpdateList();
+protected:
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void     SaveData();
 private:
 
     /** @brief ui keeps information about user interface */

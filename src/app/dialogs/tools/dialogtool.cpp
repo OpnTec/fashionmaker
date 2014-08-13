@@ -71,6 +71,13 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
     this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+DialogTool::~DialogTool()
+{
+    emit ToolTip("");
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief closeEvent handle when dialog cloded
@@ -703,7 +710,15 @@ void DialogTool::setPointId(QComboBox *box, quint32 &pointId, const quint32 &val
  */
 void DialogTool::DialogAccepted()
 {
+    SaveData();
     emit DialogClosed(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::DialogApply()
+{
+    SaveData();
+    emit DialogApplied();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

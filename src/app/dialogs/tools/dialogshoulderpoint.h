@@ -67,11 +67,6 @@ public:
     void           setPShoulder(const quint32 &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
-    virtual void   DialogAccepted();
-    /**
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void   DialogApply();
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -83,6 +78,10 @@ public slots:
     virtual void   PointNameChanged();
 protected:
     virtual void   ShowVisualization();
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void   SaveData();
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
 
@@ -113,11 +112,6 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
     VisToolShoulderPoint *line;
-
-    /**
-     * @brief SaveData Put dialog data in local variables
-     */
-    void SaveData();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

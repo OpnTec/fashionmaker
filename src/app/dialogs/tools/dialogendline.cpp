@@ -269,22 +269,6 @@ void DialogEndLine::ShowVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogEndLine::DialogAccepted()
-{
-    this->SaveData();
-    emit DialogClosed(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEndLine::DialogApply()
-{
-    this->SaveData();
-    emit DialogApplied();
-}
-//---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();

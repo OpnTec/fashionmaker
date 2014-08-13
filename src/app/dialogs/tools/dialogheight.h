@@ -36,6 +36,8 @@ namespace Ui
     class DialogHeight;
 }
 
+class VisToolHeight;
+
 /**
  * @brief The DialogHeight class dialog for ToolHeight. Help create point and edit option.
  */
@@ -62,13 +64,14 @@ public:
     void             setP2LineId(const quint32 &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
-    virtual void     DialogAccepted();
-    /** TODO ISSUE 79 : create real function
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void     DialogApply(){}
     virtual void     PointNameChanged();
     virtual void     UpdateList();
+protected:
+    virtual void     ShowVisualization();
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void     SaveData();
 private:
     Q_DISABLE_COPY(DialogHeight)
 
@@ -85,13 +88,14 @@ private:
     QString          typeLine;
 
     /** @brief basePointId id base point of height */
-    quint32           basePointId;
+    quint32          basePointId;
 
     /** @brief p1LineId id first point of line */
-    quint32           p1LineId;
+    quint32          p1LineId;
 
     /** @brief p2LineId id second point of line */
-    quint32           p2LineId;
+    quint32          p2LineId;
+    VisToolHeight    *line;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -269,22 +269,6 @@ void DialogBisector::setThirdPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogBisector::DialogAccepted()
-{
-    this->SaveData();
-    emit DialogClosed(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogBisector::DialogApply()
-{
-    this->SaveData();
-    emit DialogApplied();
-}
-//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();

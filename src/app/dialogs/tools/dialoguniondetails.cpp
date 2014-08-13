@@ -70,15 +70,6 @@ void DialogUnionDetails::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogUnionDetails::DialogAccepted()
-{
-    emit DialogClosed(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogUnionDetails::UpdateList()
 {
     /*

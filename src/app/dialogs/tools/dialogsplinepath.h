@@ -51,11 +51,6 @@ public:
     void               SetPath(const VSplinePath &value);
 public slots:
     virtual void       ChosenObject(quint32 id, const SceneObject &type);
-    virtual void       DialogAccepted();
-    /** TODO ISSUE 79 : create real function
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void       DialogApply(){}
     void               PointChanged(int row);
     void               currentPointChanged( int index );
     void               Angle1Changed(qreal index );
@@ -63,6 +58,11 @@ public slots:
     void               KAsm1Changed(qreal d);
     void               KAsm2Changed(qreal d);
     virtual void       UpdateList();
+protected:
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void       SaveData();
 private:
     Q_DISABLE_COPY(DialogSplinePath)
 

@@ -71,14 +71,10 @@ void DialogSinglePoint::mousePress(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogSinglePoint::DialogAccepted()
+void DialogSinglePoint::SaveData()
 {
     point = QPointF(qApp->toPixel(ui->doubleSpinBoxX->value()), qApp->toPixel(ui->doubleSpinBoxY->value()));
     name = ui->lineEditName->text();
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -85,9 +85,9 @@ void VToolHeight::setDialog()
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
+ * @return the created tool
  */
-void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data)
+VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
@@ -98,8 +98,15 @@ void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     const quint32 basePointId = dialogTool->getBasePointId();
     const quint32 p1LineId = dialogTool->getP1LineId();
     const quint32 p2LineId = dialogTool->getP2LineId();
-    Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+
+    VToolHeight *point = nullptr;
+    point = Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
+                   Document::FullParse, Source::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,11 +125,12 @@ void VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
+ * @return the created tool
  */
-void VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                         const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                         const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                         VContainer *data, const Document &parse, const Source &typeCreation)
+VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
+                                 const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                                 VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
     const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
@@ -161,7 +169,9 @@ void VToolHeight::Create(const quint32 _id, const QString &pointName, const QStr
         doc->IncrementReferens(basePointId);
         doc->IncrementReferens(p1LineId);
         doc->IncrementReferens(p2LineId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

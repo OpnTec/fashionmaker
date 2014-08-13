@@ -126,16 +126,12 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogCutSplinePath::DialogAccepted()
+void DialogCutSplinePath::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
     splinePathId = getCurrentObjectId(ui->comboBoxSplinePath);
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

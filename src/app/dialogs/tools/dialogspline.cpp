@@ -118,10 +118,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogSpline::DialogAccepted()
+void DialogSpline::SaveData()
 {
     p1 = getCurrentObjectId(ui->comboBoxP1);
     p4 = getCurrentObjectId(ui->comboBoxP4);
@@ -130,7 +127,6 @@ void DialogSpline::DialogAccepted()
     kAsm1 = ui->doubleSpinBoxKasm1->value();
     kAsm2 = ui->doubleSpinBoxKasm2->value();
     kCurve = ui->doubleSpinBoxKcurve->value();
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

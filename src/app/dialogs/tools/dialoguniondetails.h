@@ -52,11 +52,6 @@ public:
     ptrdiff_t        getIndexD2() const;
 public slots:
     void             ChosenObject(quint32 id, const SceneObject &type);
-    virtual void     DialogAccepted();
-    /** TODO ISSUE 79 : create real function
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void     DialogApply(){}
     virtual void     UpdateList();
 private:
     Q_DISABLE_COPY(DialogUnionDetails)

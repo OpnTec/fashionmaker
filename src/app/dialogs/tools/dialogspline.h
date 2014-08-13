@@ -46,10 +46,10 @@ public:
     DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSpline();
 
-    quint32        getP1() const;
+    quint32       getP1() const;
     void          setP1(const quint32 &value);
 
-    quint32        getP4() const;
+    quint32       getP4() const;
     void          setP4(const quint32 &value);
 
     qreal         getAngle1() const;
@@ -68,13 +68,13 @@ public:
     void          setKCurve(const qreal &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type);
-    virtual void  DialogAccepted();
-    /** TODO ISSUE 79 : create real function
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void  DialogApply(){}
     virtual void  PointNameChanged();
     virtual void  UpdateList();
+protected:
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void   SaveData();
 private:
     Q_DISABLE_COPY(DialogSpline)
 

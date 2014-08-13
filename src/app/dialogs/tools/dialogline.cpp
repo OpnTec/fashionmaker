@@ -105,23 +105,6 @@ void DialogLine::setFirstPoint(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogLine::DialogAccepted()
-{
-    this->SaveData();
-    DialogClosed(QDialog::Accepted);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLine::DialogApply()
-{
-    this->SaveData();
-    emit DialogApplied();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogLine::PointNameChanged()
 {
     QColor color = okColor;

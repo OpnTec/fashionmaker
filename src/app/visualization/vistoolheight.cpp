@@ -82,8 +82,10 @@ void VisToolHeight::RefreshGeometry()
             DrawLine(line, base_line, supportColor);
 
             QPointF height = VToolHeight::FindPoint(base_line, first->toQPointF());
+            DrawPoint(point, height, mainColor);
+
             QLineF height_line(first->toQPointF(), height);
-            DrawLine(this, height_line, mainColor);
+            DrawLine(this, height_line, mainColor, lineStyle);
 
             ShowIntersection(height_line, base_line);
         }

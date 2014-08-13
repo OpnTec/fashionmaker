@@ -110,10 +110,7 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogDetail::DialogAccepted()
+void DialogDetail::SaveData()
 {
     details.Clear();
     for (qint32 i = 0; i < ui.listWidget->count(); ++i)
@@ -125,8 +122,6 @@ void DialogDetail::DialogAccepted()
     details.setName(ui.lineEditNameDetail->text());
     details.setSeamAllowance(supplement);
     details.setClosed(closed);
-    emit ToolTip("");
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

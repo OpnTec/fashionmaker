@@ -32,6 +32,8 @@
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../tools/vabstracttool.h"
+#include "../visualization/vistoolheight.h"
+#include "../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -41,11 +43,11 @@
  */
 DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
-    typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0)
+    typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0), line(nullptr)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     flagName = false;
     CheckState();
 
@@ -61,11 +63,13 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
 
+    line = new VisToolHeight(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogHeight::~DialogHeight()
 {
+    delete line;
     delete ui;
 }
 
@@ -89,6 +93,7 @@ void DialogHeight::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -99,6 +104,7 @@ void DialogHeight::setTypeLine(const QString &value)
 void DialogHeight::setBasePointId(const quint32 &value)
 {
     setPointId(ui->comboBoxBasePoint, basePointId, value);
+    line->setPoint1Id(basePointId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,6 +115,7 @@ void DialogHeight::setBasePointId(const quint32 &value)
 void DialogHeight::setP1LineId(const quint32 &value)
 {
     setPointId(ui->comboBoxP1Line, p1LineId, value);
+    line->setLineP1Id(p1LineId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,6 +126,7 @@ void DialogHeight::setP1LineId(const quint32 &value)
 void DialogHeight::setP2LineId(const quint32 &value)
 {
     setPointId(ui->comboBoxP2Line, p2LineId, value);
+    line->setLineP2Id(p2LineId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,17 +145,23 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
             case (0):
                 ChangeCurrentText(ui->comboBoxBasePoint, point->name());
                 number++;
+                line->VisualMode(id);
                 emit ToolTip(tr("Select first point of line"));
                 break;
             case (1):
                 ChangeCurrentText(ui->comboBoxP1Line, point->name());
                 number++;
+                line->setLineP1Id(id);
+                line->RefreshGeometry();
                 emit ToolTip(tr("Select second point of line"));
                 break;
             case (2):
                 ChangeCurrentText(ui->comboBoxP2Line, point->name());
                 number = 0;
-                emit ToolTip(tr(""));
+                emit ToolTip("");
+                line->setLineP2Id(id);
+                line->RefreshGeometry();
+                prepare = true;
                 if (isInitialized == false)
                 {
                     this->setModal(true);
@@ -161,17 +175,19 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogHeight::DialogAccepted()
+void DialogHeight::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
     basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
     p1LineId = getCurrentObjectId(ui->comboBoxP1Line);
     p2LineId = getCurrentObjectId(ui->comboBoxP2Line);
-    emit DialogClosed(QDialog::Accepted);
+
+    line->setPoint1Id(basePointId);
+    line->setLineP1Id(p1LineId);
+    line->setLineP2Id(p2LineId);
+    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -215,4 +231,16 @@ void DialogHeight::UpdateList()
      * Does nothing. We redefine this slot because it is only one now way block update list of variable.
      * This dialog doesn't work with formula. Don't delete. Help avoid crash.
      */
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHeight::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
 }

@@ -56,7 +56,7 @@ class DialogTool : public QDialog
     Q_OBJECT
 public:
     DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual          ~DialogTool() {}
+    virtual          ~DialogTool();
 
     VAbstractTool*   GetAssociatedTool();
     void             SetAssociatedTool(VAbstractTool* tool);
@@ -74,7 +74,7 @@ signals:
     /**
      * @brief DialogApplied emit signal dialog apply changes
      */
-    void     DialogApplied();
+    void             DialogApplied();
     /**
      * @brief ToolTip emit tooltipe for tool
      * @param toolTip text tooltipe
@@ -88,7 +88,7 @@ public slots:
     /**
      * @brief DialogApply save data and emit signal DialogApplied.
      */
-    virtual void     DialogApply(){}
+    virtual void     DialogApply();
     virtual void     DialogRejected();
     void             FormulaChanged();
     /**
@@ -320,6 +320,10 @@ protected:
     void             ChangeColor(QWidget *widget, const QColor &color);
     void             setPointId(QComboBox *box, quint32 &pointId, const quint32 &value);
     virtual void     ShowVisualization(){}
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void     SaveData(){}
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };

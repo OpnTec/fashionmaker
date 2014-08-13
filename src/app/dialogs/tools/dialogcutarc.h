@@ -57,19 +57,19 @@ public:
     void              setArcId(const quint32 &value);
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type);
-    virtual void      DialogAccepted();
-    /**
-     * @brief DialogApply apply data and emit signal about applied dialog.
-     */
-    virtual void      DialogApply();
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void DeployFormulaTextEdit();
+    void              DeployFormulaTextEdit();
     /**
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
-    void FormulaTextChanged();
+    void              FormulaTextChanged();
+protected:
+    /**
+     * @brief SaveData Put dialog data in local variables
+     */
+    virtual void      SaveData();
 private:
     Q_DISABLE_COPY(DialogCutArc)
     /** @brief ui keeps information about user interface */
@@ -86,10 +86,7 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
-    /**
-     * @brief SaveData Put dialog data in local variables
-     */
-    void SaveData();
+
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -99,10 +99,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DialogAccepted save data and emit signal about closed dialog.
- */
-void DialogSplinePath::DialogAccepted()
+void DialogSplinePath::SaveData()
 {
     path.Clear();
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -111,8 +108,6 @@ void DialogSplinePath::DialogAccepted()
         path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
     }
     path.setKCurve(ui->doubleSpinBoxKcurve->value());
-    emit ToolTip("");
-    emit DialogClosed(QDialog::Accepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
