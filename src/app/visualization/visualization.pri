@@ -10,7 +10,8 @@ HEADERS += \
     visualization/vistoolbisector.h \
     visualization/vistoolshoulderpoint.h \
     visualization/vistoolnormal.h \
-    visualization/vistoolheight.h
+    visualization/vistoolheight.h \
+    visualization/vistoolpointofintersection.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
@@ -24,4 +25,5 @@ SOURCES += \
     visualization/vistoolbisector.cpp \
     visualization/vistoolshoulderpoint.cpp \
     visualization/vistoolnormal.cpp \
-    visualization/vistoolheight.cpp
+    visualization/vistoolheight.cpp \
+    visualization/vistoolpointofintersection.cpp

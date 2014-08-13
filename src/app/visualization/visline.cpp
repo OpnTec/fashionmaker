@@ -232,7 +232,9 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 {
     if(this->scene() == nullptr)
     {
-        return scenePos;// We can't find ray because item doesn't have scene. We eill return cursor position on scene.
+        QLineF line = QLineF(firstPoint, scenePos);
+        line.setAngle(angle);
+        return line.p2();// We can't find ray because item doesn't have scene. We will return cursor position on scene.
     }
 
     QLineF line = QLineF();
