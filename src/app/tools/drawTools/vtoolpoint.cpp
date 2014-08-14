@@ -253,7 +253,7 @@ void VToolPoint::RefreshLine()
     {
         lineName->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     }
-    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4))
+    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
     {
         lineName->setVisible(false);
     }
