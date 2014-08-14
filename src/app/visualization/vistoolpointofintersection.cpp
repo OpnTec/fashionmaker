@@ -36,7 +36,7 @@ VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, Q
 {
     axisP1 = InitPoint(supportColor);
     axisP2 = InitPoint(supportColor);
-    axis2 = InitLine(supportColor);
+    axis2 = InitItem<QGraphicsLineItem>(supportColor);
 
     point = InitPoint(mainColor);
 }
@@ -76,14 +76,6 @@ void VisToolPointOfIntersection::RefreshGeometry()
 void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
 {
     point2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QLineF VisToolPointOfIntersection::Axis(const QPointF &p, const qreal &angle) const
-{
-    QPointF endP1 = Ray(p, angle);
-    QPointF endP2 = Ray(p, angle+180);
-    return QLineF(endP1, endP2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

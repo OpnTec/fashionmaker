@@ -29,7 +29,6 @@
 #include "vistoolline.h"
 #include "../container/vcontainer.h"
 #include "../geometry/vpointf.h"
-#include "../widgets/vapplication.h"
 #include "../tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------

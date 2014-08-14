@@ -33,6 +33,8 @@
 #include <QGraphicsLineItem>
 #include <QPointF>
 
+#include "../widgets/vapplication.h"
+
 class VContainer;
 
 class VisLine: public QObject, public QGraphicsLineItem
@@ -71,11 +73,21 @@ protected:
     QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
 
     QGraphicsEllipseItem *InitPoint(const QColor &color);
-    QGraphicsLineItem    *InitLine(const QColor &color);
+    template <class Item>
+    Item         *InitItem(const QColor &color)
+    {
+        Item *item = new Item(this);
+        item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+        item->setZValue(1);
+        item->setFlags(QGraphicsItem::ItemStacksBehindParent);
+        return item;
+    }
 
     qreal        CorrectAngle(const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;
+    QLineF       Axis(const QPointF &p, const qreal &angle) const;
+    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
 private:
     Q_DISABLE_COPY(VisLine)
 };

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vistoolpointofintersection.h
+ **  @file   vistooltriangle.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   13 8, 2014
  **
@@ -26,30 +26,40 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLPOINTOFINTERSECTION_H
-#define VISTOOLPOINTOFINTERSECTION_H
+#ifndef VISTOOLTRIANGLE_H
+#define VISTOOLTRIANGLE_H
 
 #include "visline.h"
 
-class VisToolPointOfIntersection : public VisLine
+class VisToolTriangle : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersection();
+    VisToolTriangle(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolTriangle();
 
     virtual void RefreshGeometry();
 
     void         setPoint2Id(const quint32 &value);
+    void         setHypotenuseP1Id(const quint32 &value);
+    void         setHypotenuseP2Id(const quint32 &value);
 private:
-    Q_DISABLE_COPY(VisToolPointOfIntersection)
-    quint32              point2Id;
+    Q_DISABLE_COPY(VisToolTriangle)
+    quint32              point2Id;//axis second point
+    quint32              hypotenuseP1Id;
+    quint32              hypotenuseP2Id;
     QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *axisP1;//axis1 is class themself
+    QGraphicsEllipseItem *axisP1;
     QGraphicsEllipseItem *axisP2;
-    QGraphicsLineItem    *axis2;//axis1 is class themself
+    QGraphicsPathItem    *axis;
+    QGraphicsEllipseItem *hypotenuseP1;
+    QGraphicsEllipseItem *hypotenuseP2;
+    QGraphicsLineItem    *foot1;
+    QGraphicsLineItem    *foot2;
 
-    void         ShowIntersection(const QLineF &axis1, const QLineF &axis2);
+    void         DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line, const QColor &color,
+                               Qt::PenStyle style = Qt::SolidLine);
+    void         DrawArrow(const QLineF &axis, QPainterPath &path, const qreal &arrow_size);
 };
 
-#endif // VISTOOLPOINTOFINTERSECTION_H
+#endif // VISTOOLTRIANGLE_H

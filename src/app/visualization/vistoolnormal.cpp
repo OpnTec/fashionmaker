@@ -39,7 +39,7 @@ VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
 
     lineP1 = InitPoint(supportColor);
     lineP2 = InitPoint(supportColor);
-    line = InitLine(supportColor);
+    line = InitItem<QGraphicsLineItem>(supportColor);
 
     point = InitPoint(mainColor);
 }

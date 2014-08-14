@@ -29,7 +29,6 @@
 #include "vistoolalongline.h"
 #include "../container/vcontainer.h"
 #include "../geometry/vpointf.h"
-#include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)
@@ -40,7 +39,7 @@ VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent
 
     lineP1 = InitPoint(supportColor);
     lineP2 = InitPoint(supportColor);
-    line = InitLine(supportColor);
+    line = InitItem<QGraphicsLineItem>(supportColor);
     point = InitPoint(mainColor);
 }
 

@@ -30,6 +30,8 @@
 #include "../../dialogs/tools/dialogtriangle.h"
 #include "../../geometry/vpointf.h"
 
+#include <QtMath>
+
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,8 +88,9 @@ void VToolTriangle::setDialog()
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
+ * @return the created tool
  */
-void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolTriangle* VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
@@ -97,8 +100,14 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     const quint32 firstPointId = dialogTool->getFirstPointId();
     const quint32 secondPointId = dialogTool->getSecondPointId();
     const QString pointName = dialogTool->getPointName();
-    Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    VToolTriangle* point = nullptr;
+    point = Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
+                   Document::FullParse, Source::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,11 +126,12 @@ void VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
+ * @return the created tool
  */
-void VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
-                           const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
-                           const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                           VContainer *data, const Document &parse, const Source &typeCreation)
+VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
+                                     const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
+                                     const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                                     VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const VPointF *axisP1 = data->GeometricObject<const VPointF *>(axisP1Id);
     const VPointF *axisP2 = data->GeometricObject<const VPointF *>(axisP2Id);
@@ -157,7 +167,9 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
         doc->IncrementReferens(axisP2Id);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,39 +184,31 @@ void VToolTriangle::Create(const quint32 _id, const QString &pointName, const qu
 QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                                  const QPointF &secondPoint)
 {
-    qreal c = QLineF(firstPoint, secondPoint).length();
-    qreal a = QLineF(axisP2, firstPoint).length();
-    qreal b = QLineF(axisP2, secondPoint).length();
-    if (fabs(c*c - (a*a + b*b)) < 0.0001)
+    QLineF axis(axisP1, axisP2);
+    QLineF hypotenuse(firstPoint, secondPoint);
+
+    QPointF startPoint;
+    QLineF::IntersectType intersect = axis.intersect(hypotenuse, &startPoint);
+    if (intersect != QLineF::UnboundedIntersection && intersect != QLineF::BoundedIntersection)
     {
-        QLineF l1(axisP2, firstPoint);
-        QLineF l2(axisP2, secondPoint);
-        if (fabs(l1.angleTo(l2) - 90) < 0.1 || fabs(l2.angleTo(l1) - 90) < 0.1)
-        {
-            return axisP2;
-        }
+        return QPointF();
     }
 
-    QLineF line = QLineF(axisP1, axisP2);
-    qreal step = 0.01;
+    qreal step = 1;
+
+    QLineF line;
+    line.setP1(startPoint);
+    line.setAngle(axis.angle());
+    line.setLength(step);
+
+    int c = qFloor(hypotenuse.length());
     while (1)
     {
         line.setLength(line.length()+step);
-        a = QLineF(line.p2(), firstPoint).length();
-        b = QLineF(line.p2(), secondPoint).length();
-        if (qFuzzyCompare(c*c, a*a + b*b))
+        int a = qFloor(QLineF(line.p2(), firstPoint).length());
+        int b = qFloor(QLineF(line.p2(), secondPoint).length());
+        if (c*c <= (a*a + b*b))
         {
-            QLineF l1(axisP2, firstPoint);
-            QLineF l2(axisP2, secondPoint);
-            if (fabs(l1.angleTo(l2) - 90) < 0.1 || fabs(l2.angleTo(l1) - 90) < 0.1)
-            {
-                return line.p2();
-            }
-        }
-        if (c*c < a*a + b*b)
-        {
-            //Still don't know why this code handled. Need to think about that.
-            qDebug()<<"Can't find point."<<Q_FUNC_INFO;
             return line.p2();
         }
     }

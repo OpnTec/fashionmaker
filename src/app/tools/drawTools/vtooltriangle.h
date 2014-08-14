@@ -32,7 +32,8 @@
 #include "vtoolpoint.h"
 
 /**
- * @brief The VToolTriangle class tool for what find point intersection two foots right triangle.
+ * @brief The VToolTriangle class for tool that find point intersection two foots right triangle
+ * (triangle with 90 degree).
  */
 class VToolTriangle : public VToolPoint
 {
@@ -42,11 +43,11 @@ public:
                   const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
                   QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
-    static void    Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static void    Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id, const quint32 &axisP2Id,
-                          const quint32 &firstPointId, const quint32 &secondPointId, const qreal &mx, const qreal &my,
-                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                          const Document &parse, const Source &typeCreation);
+    static VToolTriangle *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolTriangle *Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
+                                 const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
+                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                                 VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     static const QString ToolType;

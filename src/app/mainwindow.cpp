@@ -580,8 +580,10 @@ void MainWindow::ToolHeight(bool checked)
  */
 void MainWindow::ToolTriangle(bool checked)
 {
-    SetToolButton<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
-                                  tr("Select first point of axis"), &MainWindow::ClosedDialog<VToolTriangle>);
+    SetToolButtonWithApply<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
+                                           tr("Select first point of axis"),
+                                           &MainWindow::ClosedDialogWithApply<VToolTriangle>,
+                                           &MainWindow::ApplyDialog<VToolTriangle>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

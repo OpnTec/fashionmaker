@@ -37,11 +37,11 @@ VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem
 {
     line1P1 = InitPoint(supportColor);
     line1P2 = InitPoint(supportColor);
-    line1 = InitLine(supportColor);
+    line1 = InitItem<QGraphicsLineItem>(supportColor);
 
     line2P2 = InitPoint(supportColor);
-    line2 = InitLine(supportColor);
-    line3 = InitLine(supportColor);
+    line2 = InitItem<QGraphicsLineItem>(supportColor);
+    line3 = InitItem<QGraphicsLineItem>(supportColor);
 
     point = InitPoint(mainColor);
 }

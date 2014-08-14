@@ -36,6 +36,8 @@ namespace Ui
     class DialogTriangle;
 }
 
+class VisToolTriangle;
+
 /**
  * @brief The DialogTriangle class dialog for ToolTriangle. Help create point and edit option.
  */
@@ -64,6 +66,7 @@ public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   PointNameChanged();
 protected:
+    virtual void   ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -91,6 +94,8 @@ private:
 
     /** @brief secondPointId id second point of line */
     quint32         secondPointId;
+
+    VisToolTriangle *line;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

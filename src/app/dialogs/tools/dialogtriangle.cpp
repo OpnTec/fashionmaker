@@ -30,6 +30,8 @@
 #include "ui_dialogtriangle.h"
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistooltriangle.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -39,12 +41,12 @@
  */
 DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
-    axisP2Id(0), firstPointId(0), secondPointId(0)
+    axisP2Id(0), firstPointId(0), secondPointId(0), line (nullptr)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;
 
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     flagName = false;
     CheckState();
 
@@ -62,11 +64,14 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
             this, &DialogTriangle::PointNameChanged);
     connect(ui->comboBoxAxisP2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
+
+    line = new VisToolTriangle(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogTriangle::~DialogTriangle()
 {
+    delete line;
     delete ui;
 }
 
@@ -86,21 +91,29 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
             case (0):
                 ChangeCurrentText(ui->comboBoxAxisP1, point->name());
                 number++;
+                line->VisualMode(id);
                 emit ToolTip(tr("Select second point of axis"));
                 break;
             case (1):
                 ChangeCurrentText(ui->comboBoxAxisP2, point->name());
                 number++;
+                line->setPoint2Id(id);
+                line->RefreshGeometry();
                 emit ToolTip(tr("Select first point"));
                 break;
             case (2):
                 ChangeCurrentText(ui->comboBoxFirstPoint, point->name());
                 number++;
+                line->setHypotenuseP1Id(id);
+                line->RefreshGeometry();
                 emit ToolTip(tr("Select second point"));
                 break;
             case (3):
                 ChangeCurrentText(ui->comboBoxSecondPoint, point->name());
                 number = 0;
+                line->setHypotenuseP2Id(id);
+                line->RefreshGeometry();
+                prepare = true;
                 emit ToolTip(tr(""));
                 if (isInitialized == false)
                 {
@@ -122,6 +135,12 @@ void DialogTriangle::SaveData()
     secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
     axisP1Id = getCurrentObjectId(ui->comboBoxAxisP1);
     axisP2Id = getCurrentObjectId(ui->comboBoxAxisP2);
+
+    line->setPoint1Id(axisP1Id);
+    line->setPoint2Id(axisP2Id);
+    line->setHypotenuseP1Id(firstPointId);
+    line->setHypotenuseP2Id(secondPointId);
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,7 +153,7 @@ void DialogTriangle::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
 
     QColor color = okColor;
-    if (set.size() != 4)
+    if (set.size() < 3)//Need tree or more unique points for creation triangle
     {
         flagError = false;
         color = errorColor;
@@ -149,6 +168,18 @@ void DialogTriangle::PointNameChanged()
     ChangeColor(ui->labelAxisP1, color);
     ChangeColor(ui->labelAxisP2, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTriangle::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,6 +201,7 @@ void DialogTriangle::setPointName(const QString &value)
 void DialogTriangle::setSecondPointId(const quint32 &value)
 {
     setPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    line->setHypotenuseP2Id(secondPointId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,6 +212,7 @@ void DialogTriangle::setSecondPointId(const quint32 &value)
 void DialogTriangle::setFirstPointId(const quint32 &value)
 {
     setPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    line->setHypotenuseP1Id(firstPointId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,6 +223,7 @@ void DialogTriangle::setFirstPointId(const quint32 &value)
 void DialogTriangle::setAxisP2Id(const quint32 &value)
 {
     setPointId(ui->comboBoxAxisP2, axisP2Id, value);
+    line->setPoint2Id(axisP2Id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -200,4 +234,5 @@ void DialogTriangle::setAxisP2Id(const quint32 &value)
 void DialogTriangle::setAxisP1Id(const quint32 &value)
 {
     setPointId(ui->comboBoxAxisP1, axisP1Id, value);
+    line->setPoint1Id(axisP1Id);
 }

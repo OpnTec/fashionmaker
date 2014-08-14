@@ -28,7 +28,6 @@
 
 #include "visline.h"
 #include "../container/vcontainer.h"
-#include "../widgets/vapplication.h"
 #include "../tools/drawTools/vdrawtool.h"
 #include "../container/calculator.h"
 
@@ -162,6 +161,7 @@ void VisLine::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const Q
 
     point->setPos(pos);
     point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
+    point->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -183,19 +183,11 @@ QGraphicsEllipseItem *VisLine::InitPoint(const QColor &color)
     point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
     point->setRect(PointRect());
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setVisible(false);
     return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsLineItem *VisLine::InitLine(const QColor &color)
-{
-    QGraphicsLineItem *line = new QGraphicsLineItem(this);
-    line->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
-    line->setZValue(1);
-    line->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    return line;
-}
-
 qreal VisLine::CorrectAngle(const qreal &angle) const
 {
     qreal ang = angle;
@@ -290,4 +282,19 @@ void VisLine::VisualMode(const quint32 &pointId)
 void VisLine::setPoint1Id(const quint32 &value)
 {
     point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VisLine::Axis(const QPointF &p, const qreal &angle) const
+{
+    QPointF endP1 = Ray(p, angle+180);
+    QPointF endP2 = Ray(p, angle);
+    return QLineF(endP1, endP2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
+{
+    QLineF line(p1, p2);
+    return Axis(p1, line.angle());
 }
