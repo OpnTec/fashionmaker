@@ -64,12 +64,13 @@ protected:
     Qt::PenStyle     lineStyle;
     quint32          point1Id;
     QString          toolTip;
-    QRectF       PointRect();
+    QRectF       PointRect(const qreal &radius);
     qreal        FindLength(const QString &expression);
     qreal        FindVal(const QString &expression);
     void         DrawLine(QGraphicsLineItem    *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
-    void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color);
+    void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
+                           Qt::PenStyle style = Qt::SolidLine);
     QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
 
     QGraphicsEllipseItem *InitPoint(const QColor &color);

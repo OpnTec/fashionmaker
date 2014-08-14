@@ -70,9 +70,8 @@ void VisLine::MousePos(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisLine::PointRect()
+QRectF VisLine::PointRect(const qreal &radius)
 {
-    const qreal radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
     rec.translate(-rec.center().x(), -rec.center().y());
     return rec;
@@ -155,12 +154,12 @@ void VisLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QC
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisLine::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color)
+void VisLine::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (point != nullptr);
 
     point->setPos(pos);
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
+    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
     point->setVisible(true);
 }
 
@@ -181,7 +180,7 @@ QGraphicsEllipseItem *VisLine::InitPoint(const QColor &color)
     point->setZValue(1);
     point->setBrush(QBrush(Qt::NoBrush));
     point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
-    point->setRect(PointRect());
+    point->setRect(PointRect(qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm)));
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
     point->setVisible(false);
     return point;

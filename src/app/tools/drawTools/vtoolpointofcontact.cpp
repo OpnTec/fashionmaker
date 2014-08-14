@@ -83,7 +83,7 @@ void VToolPointOfContact::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FindPoint return point intersection line and arc.
- * @param arcRadius string with formula radius arc.
+ * @param arcRadius string with formula arc radius.
  * @param center center arc point.
  * @param firstPoint first line point.
  * @param secondPoint second line point.

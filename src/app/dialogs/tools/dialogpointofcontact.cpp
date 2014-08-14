@@ -30,6 +30,8 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistoolpointofcontact.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -39,7 +41,7 @@
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), number(0), pointName(QString()),
-      radius(QString()), center(0), firstPoint(0), secondPoint(0), formulaBaseHeight(0)
+      radius(QString()), center(0), firstPoint(0), secondPoint(0), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -85,6 +87,15 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
             this, &DialogPointOfContact::PointNameChanged);
     connect(ui->comboBoxCenter, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogPointOfContact::PointNameChanged);
+
+    line = new VisToolPointOfContact(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+DialogPointOfContact::~DialogPointOfContact()
+{
+    delete line;
+    delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,6 +130,18 @@ void DialogPointOfContact::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
@@ -142,6 +165,7 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
             { // -1 for not found
                 ui->comboBoxFirstPoint->setCurrentIndex(index);
                 number++;
+                line->VisualMode(id);
                 emit ToolTip(tr("Select second point of line"));
                 return;
             }
@@ -153,6 +177,8 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
             { // -1 for not found
                 ui->comboBoxSecondPoint->setCurrentIndex(index);
                 number++;
+                line->setLineP2Id(id);
+                line->RefreshGeometry();
                 emit ToolTip(tr("Select point of center of arc"));
                 return;
             }
@@ -164,6 +190,9 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
             { // -1 for not found
                 ui->comboBoxCenter->setCurrentIndex(index);
                 number = 0;
+                line->setRadiusId(id);
+                line->RefreshGeometry();
+                prepare = true;
                 emit ToolTip("");
             }
             if (isInitialized == false)
@@ -184,6 +213,12 @@ void DialogPointOfContact::SaveData()
     center = getCurrentObjectId(ui->comboBoxCenter);
     firstPoint = getCurrentObjectId(ui->comboBoxFirstPoint);
     secondPoint = getCurrentObjectId(ui->comboBoxSecondPoint);
+
+    line->setPoint1Id(firstPoint);
+    line->setLineP2Id(secondPoint);
+    line->setRadiusId(center);
+    line->setRadius(radius);
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,6 +229,7 @@ void DialogPointOfContact::SaveData()
 void DialogPointOfContact::setSecondPoint(const quint32 &value)
 {
     setPointId(ui->comboBoxSecondPoint, secondPoint, value);
+    line->setLineP2Id(secondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,6 +240,7 @@ void DialogPointOfContact::setSecondPoint(const quint32 &value)
 void DialogPointOfContact::setFirstPoint(const quint32 &value)
 {
     setPointId(ui->comboBoxFirstPoint, firstPoint, value);
+    line->setPoint1Id(firstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -214,6 +251,7 @@ void DialogPointOfContact::setFirstPoint(const quint32 &value)
 void DialogPointOfContact::setCenter(const quint32 &value)
 {
     setPointId(ui->comboBoxCenter, center, value);
+    line->setRadiusId(center);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,6 +268,7 @@ void DialogPointOfContact::setRadius(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(radius);
+    line->setRadius(radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

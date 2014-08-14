@@ -36,6 +36,9 @@ namespace Ui
 {
     class DialogPointOfContact;
 }
+
+class VisToolPointOfContact;
+
 /**
  * @brief The DialogPointOfContact class dialog for ToolPointOfContact. Help create point and edit option.
  */
@@ -44,6 +47,7 @@ class DialogPointOfContact : public DialogTool
     Q_OBJECT
 public:
     DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    virtual ~DialogPointOfContact();
 
     QString        getPointName() const;
     void           setPointName(const QString &value);
@@ -71,6 +75,7 @@ public slots:
     void           FormulaTextChanged();
     virtual void   PointNameChanged();
 protected:
+    virtual void   ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -101,6 +106,8 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
+
+    VisToolPointOfContact *line;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
