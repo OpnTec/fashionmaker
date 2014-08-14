@@ -460,9 +460,10 @@ void MainWindow::ToolBisector(bool checked)
  */
 void MainWindow::ToolLineIntersect(bool checked)
 {
-    SetToolButton<DialogLineIntersect>(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
-                                       tr("Select first point of first line"),
-                                       &MainWindow::ClosedDialog<VToolLineIntersect>);
+    SetToolButtonWithApply<DialogLineIntersect>(checked, Tool::LineIntersectTool, ":/cursor/intersect_cursor.png",
+                                                tr("Select first point of first line"),
+                                                &MainWindow::ClosedDialogWithApply<VToolLineIntersect>,
+                                                &MainWindow::ApplyDialog<VToolLineIntersect>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

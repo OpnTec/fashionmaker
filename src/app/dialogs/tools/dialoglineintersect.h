@@ -36,6 +36,8 @@ namespace Ui
     class DialogLineIntersect;
 }
 
+class VisToolLineIntersect;
+
 /**
  * @brief The DialogLineIntersect class dialog for ToolLineIntersect. Help create point and edit option.
  */
@@ -69,6 +71,7 @@ public slots:
     virtual void            PointNameChanged();
     virtual void            UpdateList();
 protected:
+    virtual void            ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -99,6 +102,8 @@ private:
 
     /** @brief flagPoint keep state of point */
     bool                    flagPoint;
+
+    VisToolLineIntersect    *line;
 
     virtual void            CheckState();
     bool                    CheckIntersecion();

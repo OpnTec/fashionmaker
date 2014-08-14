@@ -13,7 +13,8 @@ HEADERS += \
     visualization/vistoolheight.h \
     visualization/vistoolpointofintersection.h \
     visualization/vistooltriangle.h \
-    visualization/vistoolpointofcontact.h
+    visualization/vistoolpointofcontact.h \
+    visualization/vistoollineintersect.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
@@ -30,4 +31,5 @@ SOURCES += \
     visualization/vistoolheight.cpp \
     visualization/vistoolpointofintersection.cpp \
     visualization/vistooltriangle.cpp \
-    visualization/vistoolpointofcontact.cpp
+    visualization/vistoolpointofcontact.cpp \
+    visualization/vistoollineintersect.cpp

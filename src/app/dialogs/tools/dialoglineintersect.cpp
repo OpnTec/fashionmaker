@@ -31,6 +31,8 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistoollineintersect.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,11 +42,11 @@
  */
 DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
-    p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true)
+    p1Line1(0), p2Line1(0), p1Line2(0), p2Line2(0), flagPoint(true), line(nullptr)
 {
     ui->setupUi(this);
     number = 0;
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     labelEditNamePoint = ui->labelEditNamePoint;
     flagName = false;
 
@@ -62,11 +64,14 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
             this, &DialogLineIntersect::PointNameChanged);
     connect(ui->comboBoxP2Line2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersect::PointNameChanged);
+
+    line = new VisToolLineIntersect(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersect::~DialogLineIntersect()
 {
+    delete line;
     delete ui;
 }
 
@@ -89,6 +94,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                 ui->comboBoxP1Line1->setCurrentIndex(index);
                 p1Line1 = id;
                 number++;
+                line->VisualMode(id);
                 emit ToolTip(tr("Select second point of first line"));
                 return;
             }
@@ -101,6 +107,8 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                 ui->comboBoxP2Line1->setCurrentIndex(index);
                 p2Line1 = id;
                 number++;
+                line->setLine1P2Id(p2Line1);
+                line->RefreshGeometry();
                 emit ToolTip(tr("Select first point of second line"));
                 return;
             }
@@ -113,6 +121,8 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                 ui->comboBoxP1Line2->setCurrentIndex(index);
                 p1Line2 = id;
                 number++;
+                line->setLine2P1Id(p1Line2);
+                line->RefreshGeometry();
                 emit ToolTip(tr("Select second point of second line"));
                 return;
             }
@@ -125,6 +135,9 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                 ui->comboBoxP2Line2->setCurrentIndex(index);
                 p2Line2 = id;
                 number = 0;
+                line->setLine2P2Id(p2Line2);
+                line->RefreshGeometry();
+                prepare = true;
                 emit ToolTip("");
             }
             if (isInitialized == false)
@@ -158,6 +171,12 @@ void DialogLineIntersect::SaveData()
     p2Line1 = getCurrentObjectId(ui->comboBoxP2Line1);
     p1Line2 = getCurrentObjectId(ui->comboBoxP1Line2);
     p2Line2 = getCurrentObjectId(ui->comboBoxP2Line2);
+
+    line->setPoint1Id(p1Line1);
+    line->setLine1P2Id(p2Line1);
+    line->setLine2P1Id(p1Line2);
+    line->setLine2P2Id(p2Line2);
+    line->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,6 +189,8 @@ void DialogLineIntersect::P1Line1Changed( int index)
     p1Line1 = qvariant_cast<quint32>(ui->comboBoxP1Line1->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
+
+    line->setPoint1Id(p1Line1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,6 +203,8 @@ void DialogLineIntersect::P2Line1Changed(int index)
     p2Line1 = qvariant_cast<quint32>(ui->comboBoxP2Line1->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
+
+    line->setLine1P2Id(p2Line1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,6 +217,8 @@ void DialogLineIntersect::P1Line2Changed(int index)
     p1Line2 = qvariant_cast<quint32>(ui->comboBoxP1Line2->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
+
+    line->setLine2P1Id(p1Line2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -206,6 +231,8 @@ void DialogLineIntersect::P2Line2Changed(int index)
     p2Line2 = qvariant_cast<quint32>(ui->comboBoxP2Line2->itemData(index));
     flagPoint = CheckIntersecion();
     CheckState();
+
+    line->setLine2P2Id(p2Line2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -260,6 +287,18 @@ void DialogLineIntersect::UpdateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersect::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
+        scene->addItem(line);
+        line->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CheckState check state of dialog. Enable or disable button ok.
  */
@@ -303,6 +342,7 @@ bool DialogLineIntersect::CheckIntersecion()
 void DialogLineIntersect::setP2Line2(const quint32 &value)
 {
     setPointId(ui->comboBoxP2Line2, p2Line2, value);
+    line->setLine2P2Id(p2Line2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -313,6 +353,7 @@ void DialogLineIntersect::setP2Line2(const quint32 &value)
 void DialogLineIntersect::setP1Line2(const quint32 &value)
 {
     setPointId(ui->comboBoxP1Line2, p1Line2, value);
+    line->setLine2P1Id(p1Line2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,6 +364,7 @@ void DialogLineIntersect::setP1Line2(const quint32 &value)
 void DialogLineIntersect::setP2Line1(const quint32 &value)
 {
     setPointId(ui->comboBoxP2Line1, p2Line1, value);
+    line->setLine1P2Id(p2Line1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,6 +375,7 @@ void DialogLineIntersect::setP2Line1(const quint32 &value)
 void DialogLineIntersect::setP1Line1(const quint32 &value)
 {
     setPointId(ui->comboBoxP1Line1, p1Line1, value);
+    line->setPoint1Id(p1Line1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

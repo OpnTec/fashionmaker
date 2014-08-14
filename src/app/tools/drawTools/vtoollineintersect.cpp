@@ -87,8 +87,10 @@ void VToolLineIntersect::setDialog()
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
+ * @return the created tool
  */
-void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolLineIntersect* VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+                                               VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
@@ -98,8 +100,14 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
     const quint32 p1Line2Id = dialogTool->getP1Line2();
     const quint32 p2Line2Id = dialogTool->getP2Line2();
     const QString pointName = dialogTool->getPointName();
-    Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    VToolLineIntersect* point = nullptr;
+    point = Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc, data,
+                   Document::FullParse, Source::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,12 +126,13 @@ void VToolLineIntersect::Create(DialogTool *dialog, VMainGraphicsScene *scene, V
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
+ * @return the created tool
  */
-void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
-                                const quint32 &p1Line2Id, const quint32 &p2Line2Id, const QString &pointName,
-                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                                VPattern *doc, VContainer *data, const Document &parse,
-                                const Source &typeCreation)
+VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
+                                               const quint32 &p1Line2Id, const quint32 &p2Line2Id,
+                                               const QString &pointName, const qreal &mx, const qreal &my,
+                                               VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                               const Document &parse, const Source &typeCreation)
 {
     const VPointF *p1Line1 = data->GeometricObject<const VPointF *>(p1Line1Id);
     const VPointF *p2Line1 = data->GeometricObject<const VPointF *>(p2Line1Id);
@@ -171,8 +180,10 @@ void VToolLineIntersect::Create(const quint32 _id, const quint32 &p1Line1Id, con
             doc->IncrementReferens(p2Line1Id);
             doc->IncrementReferens(p1Line2Id);
             doc->IncrementReferens(p2Line2Id);
+            return point;
         }
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
