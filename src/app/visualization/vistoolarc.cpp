@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolpointofintersection.cpp
+ **  @file   vistoolarc.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 8, 2014
+ **  @date   15 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,70 +26,52 @@
  **
  *************************************************************************/
 
-#include "vistoolpointofintersection.h"
+#include "vistoolarc.h"
 #include "../geometry/vpointf.h"
+#include "../geometry/varc.h"
 #include "../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(0), point(nullptr), axisP1(nullptr), axisP2(nullptr), axis2(nullptr)
+VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
+    :VisPath(data, parent), arcCenter(nullptr), radius(0), f1(0), f2(0)
 {
-    axisP1 = InitPoint(supportColor, this);
-    axisP2 = InitPoint(supportColor, this);
-    axis2 = InitItem<QGraphicsLineItem>(supportColor);
-
-    point = InitPoint(mainColor, this);
+    arcCenter = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolPointOfIntersection::~VisToolPointOfIntersection()
+VisToolArc::~VisToolArc()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::RefreshGeometry()
+void VisToolArc::RefreshGeometry()
 {
     if (point1Id > 0)
     {
         const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
-        DrawPoint(axisP1, first->toQPointF(), supportColor);
+        DrawPoint(arcCenter, first->toQPointF(), supportColor);
 
-        QLineF axisL1 = Axis(first->toQPointF(), 90);
-        DrawLine(this, axisL1, supportColor, Qt::DashLine);
-
-        QLineF axisL2;
-        if (point2Id <= 0)
+        if (qFuzzyCompare(1 + radius, 1 + 0) == false && f1 >= 0 && f2 >= 0 && qFuzzyCompare(1 + f1, 1 + f2) == false)
         {
-            axisL2 = Axis(Visualization::scenePos, 180);
+            VArc arc = VArc (*first, radius, f1, f2);
+            DrawPath(this, arc.GetPath(), mainColor);
         }
-        else
-        {
-            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
-            DrawPoint(axisP2, second->toQPointF(), supportColor);
-            axisL2 = Axis(second->toQPointF(), 180);
-            ShowIntersection(axisL1, axisL2);
-        }
-        DrawLine(axis2, axisL2, supportColor, Qt::DashLine);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
+void VisToolArc::setRadius(const QString &expression)
 {
-    point2Id = value;
+    radius = FindLength(expression);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2)
+void VisToolArc::setF1(const QString &expression)
 {
-    QPointF p;
-    QLineF::IntersectType intersect = axis1.intersect(axis2, &p);
-    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
-    {
-        point->setVisible(true);
-        DrawPoint(point, p, mainColor);
-    }
-    else
-    {
-        point->setVisible(false);
-    }
+    f1 = FindVal(expression);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolArc::setF2(const QString &expression)
+{
+    f2 = FindVal(expression);
 }

@@ -28,6 +28,9 @@
 
 #include "visualization.h"
 #include "../tools/drawTools/vdrawtool.h"
+#include "../container/calculator.h"
+
+#include <QGraphicsEllipseItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
@@ -94,4 +97,74 @@ void Visualization::MousePos(const QPointF &scenePos)
     {
         emit ToolTip(toolTip);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent) const
+{
+    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
+    point->setZValue(1);
+    point->setBrush(QBrush(Qt::NoBrush));
+    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
+    point->setRect(PointRect(qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm)));
+    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setVisible(false);
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF Visualization::PointRect(const qreal &radius) const
+{
+    QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
+    rec.translate(-rec.center().x(), -rec.center().y());
+    return rec;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal Visualization::FindLength(const QString &expression)
+{
+    return qApp->toPixel(FindVal(expression));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal Visualization::FindVal(const QString &expression)
+{
+    qreal val = 0;
+    if (expression.isEmpty())
+    {
+        val = 0;
+    }
+    else
+    {
+        try
+        {
+            // Replace line return with spaces for calc if exist
+            QString formula = expression;
+            formula.replace("\n", " ");
+            formula = qApp->FormulaFromUser(formula);
+            Calculator *cal = new Calculator(Visualization::data);
+            val = cal->EvalFormula(formula);
+            delete cal;
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            val = 0;
+            qDebug() << "\nMath parser error:\n"
+                     << "--------------------------------------\n"
+                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Expression:  " << e.GetExpr() << "\n"
+                     << "--------------------------------------";
+        }
+    }
+    return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
+{
+    SCASSERT (point != nullptr);
+
+    point->setPos(pos);
+    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
+    point->setVisible(true);
 }

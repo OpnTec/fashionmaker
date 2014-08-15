@@ -36,6 +36,8 @@ namespace Ui
     class DialogArc;
 }
 
+class VisToolArc;
+
 /**
  * @brief The DialogArc class dialog for ToolArc. Help create arc and edit option.
  */
@@ -76,6 +78,7 @@ public slots:
     void          F2Changed();
 protected:
     virtual void  CheckState();
+    virtual void  ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -120,6 +123,8 @@ private:
     int           formulaBaseHeight;
     int           formulaBaseHeightF1;
     int           formulaBaseHeightF2;
+
+    VisToolArc    *path;
 
     void          EvalRadius();
     void          EvalF1();

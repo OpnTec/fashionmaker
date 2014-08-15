@@ -37,15 +37,15 @@ VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
     :VisLine(data, parent), point2Id(0), hypotenuseP1Id(0), hypotenuseP2Id(0), point(nullptr), axisP1(nullptr),
       axisP2(nullptr), axis(nullptr), hypotenuseP1(nullptr), hypotenuseP2(nullptr), foot1(nullptr), foot2(nullptr)
 {
-    axisP1 = InitPoint(supportColor);
-    axisP2 = InitPoint(supportColor);
+    axisP1 = InitPoint(supportColor, this);
+    axisP2 = InitPoint(supportColor, this);
     axis = InitItem<QGraphicsPathItem>(supportColor);
-    hypotenuseP1 = InitPoint(supportColor);
-    hypotenuseP2 = InitPoint(supportColor);
+    hypotenuseP1 = InitPoint(supportColor, this);
+    hypotenuseP2 = InitPoint(supportColor, this);
     foot1 = InitItem<QGraphicsLineItem>(supportColor);
     foot2 = InitItem<QGraphicsLineItem>(supportColor);
 
-    point = InitPoint(mainColor);
+    point = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

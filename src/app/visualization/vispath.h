@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   visline.h
+ **  @file   vispath.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   15 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,46 +26,27 @@
  **
  *************************************************************************/
 
-#ifndef VISLINE_H
-#define VISLINE_H
+#ifndef VISPATH_H
+#define VISPATH_H
 
 #include "visualization.h"
-#include <QGraphicsLineItem>
-#include <QPointF>
+#include <QGraphicsPathItem>
 
-class VContainer;
-
-class VisLine: public Visualization, public QGraphicsLineItem
+class VisPath : public Visualization, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine();
+    VisPath(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisPath();
 
 protected:
-    void         DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine);
-    QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
-
-    template <class Item>
-    Item         *InitItem(const QColor &color)
-    {
-        Item *item = new Item(this);
-        item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
-        item->setZValue(1);
-        item->setFlags(QGraphicsItem::ItemStacksBehindParent);
-        return item;
-    }
-
-    qreal        CorrectAngle(const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint) const;
-    QLineF       Axis(const QPointF &p, const qreal &angle) const;
-    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
     virtual void InitPen();
     virtual void AddOnScene();
+
+    void         DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine);
 private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY(VisPath)
 };
 
-#endif // VISLINE_H
+#endif // VISPATH_H

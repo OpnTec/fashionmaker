@@ -67,6 +67,13 @@ protected:
     virtual void InitPen()=0;
     virtual void AddOnScene()=0;
 
+    QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent) const;
+    QRectF       PointRect(const qreal &radius) const;
+    qreal        FindLength(const QString &expression);
+    qreal        FindVal(const QString &expression);
+    void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
+                           Qt::PenStyle style = Qt::SolidLine);
+
     template <typename Item>
     void         AddItem(Item *item)
     {

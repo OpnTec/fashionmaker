@@ -35,12 +35,12 @@ VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsIt
     :VisLine(data, parent), lineP2Id(0), radiusId(0), point(nullptr), lineP1(nullptr), lineP2(nullptr),
       arc_point(nullptr), circle(nullptr), radius(0)
 {
-    arc_point = InitPoint(supportColor);
-    lineP1 = InitPoint(supportColor);
-    lineP2 = InitPoint(supportColor);
+    arc_point = InitPoint(supportColor, this);
+    lineP1 = InitPoint(supportColor, this);
+    lineP2 = InitPoint(supportColor, this);
     circle = InitItem<QGraphicsEllipseItem>(supportColor);
 
-    point = InitPoint(mainColor);
+    point = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

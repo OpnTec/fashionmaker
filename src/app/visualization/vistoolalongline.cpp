@@ -37,10 +37,10 @@ VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent
     this->mainColor = Qt::red;
     this->setZValue(2);// Show on top real tool
 
-    lineP1 = InitPoint(supportColor);
-    lineP2 = InitPoint(supportColor);
+    lineP1 = InitPoint(supportColor, this);
+    lineP2 = InitPoint(supportColor, this);
     line = InitItem<QGraphicsLineItem>(supportColor);
-    point = InitPoint(mainColor);
+    point = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

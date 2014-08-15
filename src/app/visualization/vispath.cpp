@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolendline.cpp
+ **  @file   vispath.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   15 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,60 +26,37 @@
  **
  *************************************************************************/
 
-#include "vistoolendline.h"
-#include "../geometry/vpointf.h"
-#include "../container/vcontainer.h"
-#include "../tools/vabstracttool.h"
-
-#include <QGraphicsScene>
-#include <QtMath>
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), length(0), angle(0), point(nullptr)
+VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
+    :Visualization(data), QGraphicsPathItem(parent)
 {
-    this->mainColor = Qt::red;
-
-    point = InitPoint(mainColor, this);
+    this->setZValue(1);// Show on top real tool
+    InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolEndLine::~VisToolEndLine()
+VisPath::~VisPath()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::RefreshGeometry()
+void VisPath::InitPen()
 {
-    const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
-    QLineF line;
-    if (qFuzzyCompare(1 + length, 1 + 0))
-    {
-        line = QLineF(first->toQPointF(), Ray(first->toQPointF()));
-    }
-    else
-    {
-        line = Line(first->toQPointF(), length, angle);
-        DrawPoint(point, line.p2(), mainColor);
-    }
-    DrawLine(this, line, mainColor, lineStyle);
-    Visualization::toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°; <b>Shift</b> - "
-                                        "sticking angle, <b>Enter</b> - finish creation")).arg(this->line().angle());
+    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VisToolEndLine::Angle() const
+void VisPath::AddOnScene()
 {
-    return QString("%1").arg(this->line().angle());
+    AddItem(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setAngle(const QString &expression)
+void VisPath::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color, Qt::PenStyle style)
 {
-    angle = FindVal(expression);
-}
+    SCASSERT (pathItem != nullptr);
 
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setLength(const QString &expression)
-{
-    length = FindLength(expression);
+    pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
+    pathItem->setPath(path);
 }

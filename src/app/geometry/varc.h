@@ -45,6 +45,7 @@ public:
     VArc ();
     VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
          QString formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VArc (VPointF center, qreal radius, qreal f1, qreal f2);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
     QString            GetFormulaF1 () const;

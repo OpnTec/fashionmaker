@@ -108,7 +108,6 @@ void DialogShoulderPoint::PointNameChanged()
     CheckState();
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::ShowVisualization()
 {

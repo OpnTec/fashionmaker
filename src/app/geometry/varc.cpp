@@ -63,6 +63,17 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
+    : VAbstractCurve(GOType::Arc, 0, Draw::Calculation), f1(f1), formulaF1(QStringLiteral("")), f2(f2),
+      formulaF2(QStringLiteral("")), radius(radius), formulaRadius(QStringLiteral("")), center(center)
+{
+    _name = QString (arc_+"%1").arg(this->GetCenter().name());
+    formulaF1 = QString("%1").arg(f1);
+    formulaF2 = QString("%1").arg(f2);
+    formulaRadius = QString("%1").arg(radius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VArc copy constructor
  * @param arc arc

@@ -27,9 +27,7 @@
  *************************************************************************/
 
 #include "visline.h"
-#include "../container/vcontainer.h"
 #include "../tools/drawTools/vdrawtool.h"
-#include "../container/calculator.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
@@ -44,97 +42,12 @@ VisLine::~VisLine()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VisLine::PointRect(const qreal &radius)
-{
-    QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    return rec;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VisLine::FindLength(const QString &expression)
-{
-    qreal length = 0;
-    if (expression.isEmpty())
-    {
-        length = 0;
-    }
-    else
-    {
-        try
-        {
-            // Replace line return with spaces for calc if exist
-            QString formula = expression;
-            formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);
-            Calculator *cal = new Calculator(Visualization::data);
-            length = cal->EvalFormula(formula);
-            delete cal;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            length = 0;
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
-        }
-    }
-    return qApp->toPixel(FindVal(expression));
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VisLine::FindVal(const QString &expression)
-{
-    qreal val = 0;
-    if (expression.isEmpty())
-    {
-        val = 0;
-    }
-    else
-    {
-        try
-        {
-            // Replace line return with spaces for calc if exist
-            QString formula = expression;
-            formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);
-            Calculator *cal = new Calculator(Visualization::data);
-            val = cal->EvalFormula(formula);
-            delete cal;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            val = 0;
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
-        }
-    }
-    return val;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
 {
     SCASSERT (lineItem != nullptr);
 
     lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
     lineItem->setLine(line);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color, Qt::PenStyle style)
-{
-    SCASSERT (point != nullptr);
-
-    point->setPos(pos);
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
-    point->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,19 +58,6 @@ QLineF VisLine::Line(const QPointF &p1, const qreal &length, const qreal &angle)
     line.setLength(length);
     line.setAngle(angle);
     return line;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisLine::InitPoint(const QColor &color)
-{
-    QGraphicsEllipseItem *point = new QGraphicsEllipseItem(this);
-    point->setZValue(1);
-    point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
-    point->setRect(PointRect(qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm)));
-    point->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    point->setVisible(false);
-    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -35,6 +35,7 @@
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../xml/vdomdocument.h"
+#include "../../visualization/vistoolarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,7 +46,7 @@
 DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
       timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(0), radius(QString()), f1(QString()),
-      f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0)
+      f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr)
 {
     ui->setupUi(this);
 
@@ -86,6 +87,8 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
+
+    path = new VisToolArc(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,6 +112,7 @@ void DialogArc::DeployF2TextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogArc::~DialogArc()
 {
+    delete path;
     delete ui;
 }
 
@@ -121,6 +125,7 @@ void DialogArc::SetCenter(const quint32 &value)
 {
     center = value;
     ChangeCurrentData(ui->comboBoxBasePoint, center);
+    path->setPoint1Id(center);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,6 +142,7 @@ void DialogArc::SetF2(const QString &value)
         this->DeployF2TextEdit();
     }
     ui->plainTextEditF2->setPlainText(f2);
+    path->setF2(f2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,6 +159,7 @@ void DialogArc::SetF1(const QString &value)
         this->DeployF1TextEdit();
     }
     ui->plainTextEditF1->setPlainText(f1);
+    path->setF1(f1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -169,6 +176,7 @@ void DialogArc::SetRadius(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(radius);
+    path->setRadius(radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,9 +192,23 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
         const VPointF *point = data->GeometricObject<const VPointF *>(id);
 
         ChangeCurrentText(ui->comboBoxBasePoint, point->name());
+        path->VisualMode(id);
+        prepare = true;
         emit ToolTip("");
         this->setModal(true);
         this->show();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
+        scene->addItem(path);
+        path->RefreshGeometry();
     }
 }
 
@@ -200,6 +222,12 @@ void DialogArc::SaveData()
     f2 = ui->plainTextEditF2->toPlainText();
     f2.replace("\n", " ");
     center = getCurrentObjectId(ui->comboBoxBasePoint);
+
+    path->setPoint1Id(center);
+    path->setRadius(radius);
+    path->setF1(f1);
+    path->setF2(f2);
+    path->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

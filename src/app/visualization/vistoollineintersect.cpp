@@ -35,14 +35,14 @@ VisToolLineIntersect::VisToolLineIntersect(const VContainer *data, QGraphicsItem
     :VisLine(data, parent), line1P2Id(0), line2P1Id(0), line2P2Id(0), point(nullptr), line1P1(nullptr),
       line1P2(nullptr), line1(nullptr), line2P1(nullptr), line2P2(nullptr)
 {
-    line1P1 = InitPoint(supportColor);
-    line1P2 = InitPoint(supportColor);
+    line1P1 = InitPoint(supportColor, this);
+    line1P2 = InitPoint(supportColor, this);
     line1 = InitItem<QGraphicsLineItem>(supportColor);
 
-    line2P1 = InitPoint(supportColor);
-    line2P2 = InitPoint(supportColor);
+    line2P1 = InitPoint(supportColor, this);
+    line2P2 = InitPoint(supportColor, this);
 
-    point = InitPoint(mainColor);
+    point = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
