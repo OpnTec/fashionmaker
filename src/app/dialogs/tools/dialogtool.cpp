@@ -1004,7 +1004,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonLengthArc->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VLengthArc *>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(*data->GetVariable<VArcLength *>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Arc length"));
         labelDescription->setText(desc);
         return;
@@ -1012,7 +1012,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonLengthCurve->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VLengthSpline *>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(*data->GetVariable<VSplineLength *>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Curve length"));
         labelDescription->setText(desc);
         return;

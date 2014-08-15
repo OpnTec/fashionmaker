@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengthsplines.cpp
+ **  @file   vlinelength.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   28 7, 2014
  **
@@ -26,50 +26,64 @@
  **
  *************************************************************************/
 
-#include "vlengthspline.h"
-#include "../geometry/vabstractcurve.h"
+#include "vlinelength.h"
+#include "../geometry/vpointf.h"
 #include "../widgets/vapplication.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-VLengthSpline::VLengthSpline()
-    :VLengthCurve()
-{
-    type = VarType::LengthSpline;
-}
+#include <QLineF>
 
-VLengthSpline::VLengthSpline(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value)
-    :VLengthCurve()
+//---------------------------------------------------------------------------------------------------------------------
+VLengthLine::VLengthLine()
+    :VInternalVariable(), p1Id(0), p2Id(0)
 {
-    type = VarType::LengthSpline;
-    this->name = name;
-    this->value = value;
-    this->id = id;
-    this->parentId = parentId;
+    type = VarType::LineLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthSpline::VLengthSpline(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path)
-    :VLengthCurve(id, parentId, path)
+VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
+    :VInternalVariable(), p1Id(p1Id), p2Id(p2Id)
 {
-    type = VarType::LengthSpline;
+    SCASSERT(p1 != nullptr);
+    SCASSERT(p2 != nullptr);
+
+    type = VarType::LineLength;
+    name = QString(line_+"%1_%2").arg(p1->name(), p2->name());
+    SetValue(p1, p2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthSpline::VLengthSpline(const VLengthSpline &var)
-    :VLengthCurve(var)
+VLengthLine::VLengthLine(const VLengthLine &var)
+    :VInternalVariable(var), p1Id(var.GetP1Id()), p2Id(var.GetP2Id())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthSpline &VLengthSpline::operator=(const VLengthSpline &var)
+VLengthLine &VLengthLine::operator=(const VLengthLine &var)
 {
     if ( &var == this )
     {
         return *this;
     }
-    VLengthCurve::operator=(var);
+    VInternalVariable::operator=(var);
+    this->p1Id = var.GetP1Id();
+    this->p2Id = var.GetP2Id();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthSpline::~VLengthSpline()
+VLengthLine::~VLengthLine()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLengthLine::Filter(quint32 id)
+{
+    return id == p1Id || id == p2Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
+{
+    SCASSERT(p1 != nullptr);
+    SCASSERT(p2 != nullptr);
+
+    value = qApp->fromPixel(QLineF(p1->toQPointF(), p2->toQPointF()).length());
+}

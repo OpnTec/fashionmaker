@@ -5,11 +5,11 @@ SOURCES += \
     container/vincrement.cpp \
     container/vvariable.cpp \
     container/vinternalvariable.cpp \
-    container/vlengthline.cpp \
-    container/vlengthspline.cpp \
-    container/vlengtharc.cpp \
     container/vlineangle.cpp \
-    container/vlengthcurve.cpp
+    container/varclength.cpp \
+    container/vcurvelength.cpp \
+    container/vlinelength.cpp \
+    container/vsplinelength.cpp
  
 HEADERS += \
     container/vcontainer.h \
@@ -18,9 +18,9 @@ HEADERS += \
     container/vincrement.h \
     container/vvariable.h \
     container/vinternalvariable.h \
-    container/vlengthline.h \
-    container/vlengthspline.h \
-    container/vlengtharc.h \
     container/vlineangle.h \
     container/variables.h \
-    container/vlengthcurve.h
+    container/vcurvelength.h \
+    container/varclength.h \
+    container/vlinelength.h \
+    container/vsplinelength.h

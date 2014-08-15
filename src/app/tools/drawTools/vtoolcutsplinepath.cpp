@@ -198,18 +198,18 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
     if (typeCreation == Source::FromGui)
     {
         splPath1id = data->AddGObject(splPath1);
-        data->AddCurveLength<VLengthSpline>(splPath1id, id);
+        data->AddCurveLength<VSplineLength>(splPath1id, id);
 
         splPath2id = data->AddGObject(splPath2);
-        data->AddCurveLength<VLengthSpline>(splPath2id, id);
+        data->AddCurveLength<VSplineLength>(splPath2id, id);
     }
     else
     {
         data->UpdateGObject(splPath1id, splPath1);
-        data->AddCurveLength<VLengthSpline>(splPath1id, id);
+        data->AddCurveLength<VSplineLength>(splPath1id, id);
 
         data->UpdateGObject(splPath2id, splPath2);
-        data->AddCurveLength<VLengthSpline>(splPath2id, id);
+        data->AddCurveLength<VSplineLength>(splPath2id, id);
 
         if (parse != Document::FullParse)
         {

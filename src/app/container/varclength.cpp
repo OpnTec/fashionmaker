@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengthline.cpp
+ **  @file   varclength.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   28 7, 2014
  **
@@ -26,64 +26,40 @@
  **
  *************************************************************************/
 
-#include "vlengthline.h"
-#include "../geometry/vpointf.h"
+#include "varclength.h"
+#include "../geometry/vabstractcurve.h"
 #include "../widgets/vapplication.h"
 
-#include <QLineF>
-
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine()
-    :VInternalVariable(), p1Id(0), p2Id(0)
+VArcLength::VArcLength()
+    :VCurveLength()
 {
-    type = VarType::LengthLine;
+    type = VarType::ArcLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
-    :VInternalVariable(), p1Id(p1Id), p2Id(p2Id)
+VArcLength::VArcLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc)
+    :VCurveLength(id, parentId, arc)
 {
-    SCASSERT(p1 != nullptr);
-    SCASSERT(p2 != nullptr);
-
-    type = VarType::LengthLine;
-    name = QString(line_+"%1_%2").arg(p1->name(), p2->name());
-    SetValue(p1, p2);
+    type = VarType::ArcLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine(const VLengthLine &var)
-    :VInternalVariable(var), p1Id(var.GetP1Id()), p2Id(var.GetP2Id())
+VArcLength::VArcLength(const VArcLength &var)
+    :VCurveLength(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine &VLengthLine::operator=(const VLengthLine &var)
+VArcLength &VArcLength::operator=(const VArcLength &var)
 {
     if ( &var == this )
     {
         return *this;
     }
-    VInternalVariable::operator=(var);
-    this->p1Id = var.GetP1Id();
-    this->p2Id = var.GetP2Id();
+    VCurveLength::operator=(var);
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::~VLengthLine()
+VArcLength::~VArcLength()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLengthLine::Filter(quint32 id)
-{
-    return id == p1Id || id == p2Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
-{
-    SCASSERT(p1 != nullptr);
-    SCASSERT(p2 != nullptr);
-
-    value = qApp->fromPixel(QLineF(p1->toQPointF(), p2->toQPointF()).length());
-}

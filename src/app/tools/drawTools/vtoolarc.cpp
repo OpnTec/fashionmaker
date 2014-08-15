@@ -140,12 +140,12 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(arc);
-        data->AddCurveLength<VLengthArc>(id);
+        data->AddCurveLength<VArcLength>(id);
     }
     else
     {
         data->UpdateGObject(id, arc);
-        data->AddCurveLength<VLengthArc>(id);
+        data->AddCurveLength<VArcLength>(id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

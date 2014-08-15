@@ -139,14 +139,14 @@ void VContainer::setData(const VContainer &data)
                 case (VarType::Increment):
                     CopyVar<VIncrement>(data, i.key());
                     break;
-                case (VarType::LengthLine):
+                case (VarType::LineLength):
                     CopyVar<VLengthLine>(data, i.key());
                     break;
-                case (VarType::LengthSpline):
-                    CopyVar<VLengthSpline>(data, i.key());
+                case (VarType::SplineLength):
+                    CopyVar<VSplineLength>(data, i.key());
                     break;
-                case (VarType::LengthArc):
-                    CopyVar<VLengthArc>(data, i.key());
+                case (VarType::ArcLength):
+                    CopyVar<VArcLength>(data, i.key());
                     break;
                 case (VarType::LineAngle):
                     CopyVar<VLineAngle>(data, i.key());
@@ -446,19 +446,19 @@ const QMap<QString, VIncrement *> VContainer::DataIncrements() const
 //---------------------------------------------------------------------------------------------------------------------
 const QMap<QString, VLengthLine *> VContainer::DataLengthLines() const
 {
-    return DataVar<VLengthLine>(VarType::LengthLine);
+    return DataVar<VLengthLine>(VarType::LineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VLengthSpline *> VContainer::DataLengthSplines() const
+const QMap<QString, VSplineLength *> VContainer::DataLengthSplines() const
 {
-    return DataVar<VLengthSpline>(VarType::LengthSpline);
+    return DataVar<VSplineLength>(VarType::SplineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VLengthArc *> VContainer::DataLengthArcs() const
+const QMap<QString, VArcLength *> VContainer::DataLengthArcs() const
 {
-    return DataVar<VLengthArc>(VarType::LengthArc);
+    return DataVar<VArcLength>(VarType::ArcLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

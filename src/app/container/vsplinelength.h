@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengtharc.h
+ **  @file   vlengthspline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   28 7, 2014
  **
@@ -26,21 +26,22 @@
  **
  *************************************************************************/
 
-#ifndef VLENGTHARC_H
-#define VLENGTHARC_H
+#ifndef VSPLINESLENGTH_H
+#define VSPLINESLENGTH_H
 
-#include "vlengthcurve.h"
+#include "vcurvelength.h"
 
 class VAbstractCurve;
 
-class VLengthArc :public VLengthCurve
+class VSplineLength :public VCurveLength
 {
 public:
-    VLengthArc();
-    VLengthArc(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc);
-    VLengthArc(const VLengthArc &var);
-    VLengthArc &operator=(const VLengthArc &var);
-    virtual ~VLengthArc();
+    VSplineLength();
+    VSplineLength(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value);
+    VSplineLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path);
+    VSplineLength(const VSplineLength &var);
+    VSplineLength &operator=(const VSplineLength &var);
+    virtual ~VSplineLength();
 };
 
-#endif // VLENGTHARC_H
+#endif // VSPLINELENGTH_H

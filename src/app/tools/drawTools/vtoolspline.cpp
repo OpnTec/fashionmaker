@@ -154,12 +154,12 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddCurveLength<VLengthSpline>(id);
+        data->AddCurveLength<VSplineLength>(id);
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddCurveLength<VLengthSpline>(id);
+        data->AddCurveLength<VSplineLength>(id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

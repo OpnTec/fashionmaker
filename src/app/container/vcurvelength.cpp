@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengthcurve.cpp
+ **  @file   vcurvelength.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 8, 2014
  **
@@ -26,19 +26,19 @@
  **
  *************************************************************************/
 
-#include "vlengthcurve.h"
+#include "vcurvelength.h"
 #include "../widgets/vapplication.h"
 #include "../geometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthCurve::VLengthCurve()
+VCurveLength::VCurveLength()
     :VInternalVariable(), id(0), parentId(0)
 {
     type = VarType::Unknown;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthCurve::VLengthCurve(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve)
+VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve)
     :VInternalVariable(), id(id), parentId(parentId)
 {
     type = VarType::Unknown;
@@ -48,12 +48,12 @@ VLengthCurve::VLengthCurve(const quint32 &id, const quint32 &parentId, const VAb
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthCurve::VLengthCurve(const VLengthCurve &var)
+VCurveLength::VCurveLength(const VCurveLength &var)
     :VInternalVariable(var), id(var.GetId()), parentId(var.GetParentId())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthCurve &VLengthCurve::operator=(const VLengthCurve &var)
+VCurveLength &VCurveLength::operator=(const VCurveLength &var)
 {
     if ( &var == this )
     {
@@ -66,11 +66,11 @@ VLengthCurve &VLengthCurve::operator=(const VLengthCurve &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthCurve::~VLengthCurve()
+VCurveLength::~VCurveLength()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLengthCurve::Filter(quint32 id)
+bool VCurveLength::Filter(quint32 id)
 {
     if (parentId != 0)//Do not check if value zero
     {// Not all curves have parents. Only those who was created after cutting the parent curve.

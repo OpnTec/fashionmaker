@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengthsplines.h
+ **  @file   vlinelength.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   28 7, 2014
  **
@@ -26,22 +26,41 @@
  **
  *************************************************************************/
 
-#ifndef VLENGTHSPLINES_H
-#define VLENGTHSPLINES_H
+#ifndef VLINELENGTH_H
+#define VLINELENGTH_H
 
-#include "vlengthcurve.h"
+#include "vinternalvariable.h"
 
-class VAbstractCurve;
+class VPointF;
 
-class VLengthSpline :public VLengthCurve
+class VLengthLine :public VInternalVariable
 {
 public:
-    VLengthSpline();
-    VLengthSpline(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value);
-    VLengthSpline(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path);
-    VLengthSpline(const VLengthSpline &var);
-    VLengthSpline &operator=(const VLengthSpline &var);
-    virtual ~VLengthSpline();
+    VLengthLine();
+    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
+    VLengthLine(const VLengthLine &var);
+    VLengthLine &operator=(const VLengthLine &var);
+    virtual ~VLengthLine();
+
+    virtual bool Filter(quint32 id);
+    void         SetValue(const VPointF *p1, const VPointF *p2);
+    quint32      GetP1Id() const;
+    quint32      GetP2Id() const;
+private:
+    quint32 p1Id;
+    quint32 p2Id;
 };
 
-#endif // VLENGTHSPLINES_H
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 VLengthLine::GetP1Id() const
+{
+    return p1Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline quint32 VLengthLine::GetP2Id() const
+{
+    return p2Id;
+}
+
+#endif // VLINELENGTH_H

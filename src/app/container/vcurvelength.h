@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengthcurve.h
+ **  @file   vcurvelength.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 8, 2014
  **
@@ -26,21 +26,21 @@
  **
  *************************************************************************/
 
-#ifndef VLENGTHCURVE_H
-#define VLENGTHCURVE_H
+#ifndef VCURVELENGTH_H
+#define VCURVELENGTH_H
 
 #include "vinternalvariable.h"
 
 class VAbstractCurve;
 
-class VLengthCurve : public VInternalVariable
+class VCurveLength : public VInternalVariable
 {
 public:
-    VLengthCurve();
-    VLengthCurve(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve);
-    VLengthCurve(const VLengthCurve &var);
-    VLengthCurve &operator=(const VLengthCurve &var);
-    virtual ~VLengthCurve();
+    VCurveLength();
+    VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve);
+    VCurveLength(const VCurveLength &var);
+    VCurveLength &operator=(const VCurveLength &var);
+    virtual ~VCurveLength();
 
     virtual bool Filter(quint32 id);
     quint32      GetId() const;
@@ -51,15 +51,15 @@ protected:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 VLengthCurve::GetId() const
+inline quint32 VCurveLength::GetId() const
 {
     return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 VLengthCurve::GetParentId() const
+inline quint32 VCurveLength::GetParentId() const
 {
     return parentId;
 }
 
-#endif // VLENGTHCURVE_H
+#endif // VCURVELENGTH_H

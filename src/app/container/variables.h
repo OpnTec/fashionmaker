@@ -32,9 +32,9 @@
 #include "vinternalvariable.h"
 #include "vmeasurement.h"
 #include "vincrement.h"
-#include "vlengtharc.h"
-#include "vlengthline.h"
-#include "vlengthspline.h"
+#include "varclength.h"
+#include "vsplinelength.h"
+#include "vlinelength.h"
 #include "vlineangle.h"
 
 #endif // VARIABLES_H

@@ -31,7 +31,7 @@
 
 #include <QString>
 
-enum class VarType : char { Measurement, Increment, LengthLine, LengthSpline, LengthArc, LineAngle, Unknown };
+enum class VarType : char { Measurement, Increment, LineLength, SplineLength, ArcLength, LineAngle, Unknown };
 
 class VInternalVariable
 {

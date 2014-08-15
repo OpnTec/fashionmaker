@@ -187,8 +187,8 @@ public:
     const QMap<QString, VMeasurement *>  DataMeasurements() const;
     const QMap<QString, VIncrement *>    DataIncrements() const;
     const QMap<QString, VLengthLine *>   DataLengthLines() const;
-    const QMap<QString, VLengthSpline *> DataLengthSplines() const;
-    const QMap<QString, VLengthArc *>    DataLengthArcs() const;
+    const QMap<QString, VSplineLength *> DataLengthSplines() const;
+    const QMap<QString, VArcLength *>    DataLengthArcs() const;
     const QMap<QString, VLineAngle *>    DataAngleLines() const;
 
 

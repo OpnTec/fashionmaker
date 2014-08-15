@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlengtharc.cpp
+ **  @file   vsplinelength.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   28 7, 2014
  **
@@ -26,40 +26,50 @@
  **
  *************************************************************************/
 
-#include "vlengtharc.h"
+#include "vsplinelength.h"
 #include "../geometry/vabstractcurve.h"
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthArc::VLengthArc()
-    :VLengthCurve()
+VSplineLength::VSplineLength()
+    :VCurveLength()
 {
-    type = VarType::LengthArc;
+    type = VarType::SplineLength;
+}
+
+VSplineLength::VSplineLength(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value)
+    :VCurveLength()
+{
+    type = VarType::SplineLength;
+    this->name = name;
+    this->value = value;
+    this->id = id;
+    this->parentId = parentId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthArc::VLengthArc(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc)
-    :VLengthCurve(id, parentId, arc)
+VSplineLength::VSplineLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path)
+    :VCurveLength(id, parentId, path)
 {
-    type = VarType::LengthArc;
+    type = VarType::SplineLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthArc::VLengthArc(const VLengthArc &var)
-    :VLengthCurve(var)
+VSplineLength::VSplineLength(const VSplineLength &var)
+    :VCurveLength(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthArc &VLengthArc::operator=(const VLengthArc &var)
+VSplineLength &VSplineLength::operator=(const VSplineLength &var)
 {
     if ( &var == this )
     {
         return *this;
     }
-    VLengthCurve::operator=(var);
+    VCurveLength::operator=(var);
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthArc::~VLengthArc()
+VSplineLength::~VSplineLength()
 {}
