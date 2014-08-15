@@ -30,7 +30,7 @@
 #include "../geometry/vpointf.h"
 #include "../container/vcontainer.h"
 #include "../tools/drawTools/vtooltriangle.h"
-#include "QtMath"
+#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
@@ -57,16 +57,16 @@ void VisToolTriangle::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
         if (point2Id <= 0)
         {
-            DrawAimedAxis(axis, QLineF(first->toQPointF(), scenePos), supportColor);
+            DrawAimedAxis(axis, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(axisP2, second->toQPointF(), supportColor);
 
             DrawAimedAxis(axis, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
@@ -77,23 +77,23 @@ void VisToolTriangle::RefreshGeometry()
             }
             else
             {
-                const VPointF *third = data->GeometricObject<const VPointF *>(hypotenuseP1Id);
+                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(hypotenuseP1Id);
                 DrawPoint(hypotenuseP1, third->toQPointF(), supportColor);
 
                 if (hypotenuseP2Id <= 0)
                 {
-                    DrawLine(this, QLineF(third->toQPointF(), scenePos), supportColor, Qt::DashLine);
+                    DrawLine(this, QLineF(third->toQPointF(), Visualization::scenePos), supportColor, Qt::DashLine);
 
                     QPointF trPoint = VToolTriangle::FindPoint(first->toQPointF(), second->toQPointF(),
-                                                               third->toQPointF(), scenePos);
+                                                               third->toQPointF(), Visualization::scenePos);
                     DrawPoint(point, trPoint, mainColor);
 
                     DrawLine(foot1, QLineF(third->toQPointF(), trPoint), supportColor, Qt::DashLine);
-                    DrawLine(foot2, QLineF(scenePos, trPoint), supportColor, Qt::DashLine);
+                    DrawLine(foot2, QLineF(Visualization::scenePos, trPoint), supportColor, Qt::DashLine);
                 }
                 else
                 {
-                    const VPointF *forth = data->GeometricObject<const VPointF *>(hypotenuseP2Id);
+                    const VPointF *forth = Visualization::data->GeometricObject<const VPointF *>(hypotenuseP2Id);
                     DrawPoint(hypotenuseP2, forth->toQPointF(), supportColor);
 
                     DrawLine(this, QLineF(third->toQPointF(), forth->toQPointF()), supportColor, Qt::DashLine);

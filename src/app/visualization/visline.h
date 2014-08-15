@@ -29,41 +29,20 @@
 #ifndef VISLINE_H
 #define VISLINE_H
 
-#include <QObject>
+#include "visualization.h"
 #include <QGraphicsLineItem>
 #include <QPointF>
 
-#include "../widgets/vapplication.h"
-
 class VContainer;
 
-class VisLine: public QObject, public QGraphicsLineItem
+class VisLine: public Visualization, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
     VisLine(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisLine();
 
-    void         setPoint1Id(const quint32 &value);
-    void         setLineStyle(const Qt::PenStyle &value);
-    virtual void RefreshGeometry()=0;
-    void         setScenePos(const QPointF &value);
-    void         VisualMode(const quint32 &pointId);
-    void         setMainColor(const QColor &value);
-signals:
-    void         ToolTip(const QString &toolTip);
-public slots:
-    void         SetFactor(qreal factor);
-    void         MousePos(const QPointF &scenePos);
 protected:
-    const VContainer *data;
-    qreal            factor;
-    QPointF          scenePos;
-    QColor           mainColor;
-    QColor           supportColor;
-    Qt::PenStyle     lineStyle;
-    quint32          point1Id;
-    QString          toolTip;
     QRectF       PointRect(const qreal &radius);
     qreal        FindLength(const QString &expression);
     qreal        FindVal(const QString &expression);
@@ -89,6 +68,8 @@ protected:
     QPointF      Ray(const QPointF &firstPoint) const;
     QLineF       Axis(const QPointF &p, const qreal &angle) const;
     QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
+    virtual void InitPen();
+    virtual void AddOnScene();
 private:
     Q_DISABLE_COPY(VisLine)
 };

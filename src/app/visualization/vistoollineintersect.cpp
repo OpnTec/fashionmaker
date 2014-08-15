@@ -54,16 +54,16 @@ void VisToolLineIntersect::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
         if (line1P2Id <= 0)
         {
-            DrawLine(line1, QLineF(first->toQPointF(), scenePos), supportColor);
+            DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(line1P2Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(line1P2Id);
             DrawPoint(line1P2, second->toQPointF(), supportColor);
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
@@ -74,15 +74,15 @@ void VisToolLineIntersect::RefreshGeometry()
             }
             else
             {
-                const VPointF *third = data->GeometricObject<const VPointF *>(line2P1Id);
+                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(line2P1Id);
                 DrawPoint(line2P1, third->toQPointF(), supportColor);
 
                 if (line2P2Id <= 0)
                 {
-                    DrawLine(this, QLineF(third->toQPointF(), scenePos), supportColor);
+                    DrawLine(this, QLineF(third->toQPointF(), Visualization::scenePos), supportColor);
 
                     QLineF l1(first->toQPointF(), second->toQPointF());
-                    QLineF l2(third->toQPointF(), scenePos);
+                    QLineF l2(third->toQPointF(), Visualization::scenePos);
                     QPointF fPoint;
                     QLineF::IntersectType intersect = l1.intersect(l2, &fPoint);
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
@@ -92,7 +92,7 @@ void VisToolLineIntersect::RefreshGeometry()
                 }
                 else
                 {
-                    const VPointF *forth = data->GeometricObject<const VPointF *>(line2P2Id);
+                    const VPointF *forth = Visualization::data->GeometricObject<const VPointF *>(line2P2Id);
                     DrawPoint(line2P2, forth->toQPointF(), supportColor);
 
                     DrawLine(this, QLineF(third->toQPointF(), forth->toQPointF()), supportColor);

@@ -73,27 +73,27 @@ void VisToolBisector::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
         if (point2Id <= 0)
         {
-            DrawLine(line1, QLineF(first->toQPointF(), scenePos), supportColor);
+            DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(line1P2, second->toQPointF(), supportColor);
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
             if (point3Id <= 0)
             {
-                DrawLine(line2, QLineF(second->toQPointF(), scenePos), supportColor);
+                DrawLine(line2, QLineF(second->toQPointF(), Visualization::scenePos), supportColor);
             }
             else
             {
-                const VPointF *third = data->GeometricObject<const VPointF *>(point3Id);
+                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(point3Id);
                 DrawPoint(line2P2, third->toQPointF(), supportColor);
 
                 DrawLine(line2, QLineF(second->toQPointF(), third->toQPointF()), supportColor);

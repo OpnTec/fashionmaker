@@ -33,41 +33,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)
-    :QObject(), QGraphicsLineItem(parent), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
-      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(0), toolTip(QString())
+    :Visualization(data), QGraphicsLineItem(parent)
 {
     this->setZValue(1);// Show on top real tool
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::~VisLine()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::SetFactor(qreal factor)
-{
-    VApplication::CheckFactor(this->factor, factor);
-    RefreshGeometry();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::setLineStyle(const Qt::PenStyle &value)
-{
-    lineStyle = value;
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::MousePos(const QPointF &scenePos)
-{
-    this->scenePos = scenePos;
-    RefreshGeometry();
-    if (toolTip.isEmpty() == false)
-    {
-        emit ToolTip(toolTip);
-    }
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VisLine::PointRect(const qreal &radius)
@@ -93,7 +67,7 @@ qreal VisLine::FindLength(const QString &expression)
             QString formula = expression;
             formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
-            Calculator *cal = new Calculator(data);
+            Calculator *cal = new Calculator(Visualization::data);
             length = cal->EvalFormula(formula);
             delete cal;
         }
@@ -127,7 +101,7 @@ qreal VisLine::FindVal(const QString &expression)
             QString formula = expression;
             formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
-            Calculator *cal = new Calculator(data);
+            Calculator *cal = new Calculator(Visualization::data);
             val = cal->EvalFormula(formula);
             delete cal;
         }
@@ -223,7 +197,7 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 {
     if(this->scene() == nullptr)
     {
-        QLineF line = QLineF(firstPoint, scenePos);
+        QLineF line = QLineF(firstPoint, Visualization::scenePos);
         line.setAngle(angle);
         return line.p2();// We can't find ray because item doesn't have scene. We will return cursor position on scene.
     }
@@ -245,42 +219,8 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VisLine::Ray(const QPointF &firstPoint) const
 {
-    QLineF line = QLineF(firstPoint, scenePos);
+    QLineF line = QLineF(firstPoint, Visualization::scenePos);
     return Ray(firstPoint, line.angle());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::setMainColor(const QColor &value)
-{
-    mainColor = value;
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::setScenePos(const QPointF &value)
-{
-    scenePos = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::VisualMode(const quint32 &pointId)
-{
-    VMainGraphicsScene *scene = qApp->getCurrentScene();
-    SCASSERT(scene != nullptr);
-
-    this->point1Id = pointId;
-    this->scenePos = scene->getScenePos();
-    RefreshGeometry();
-
-    scene->addItem(this);
-    connect(scene, &VMainGraphicsScene::NewFactor, this, &VisLine::SetFactor);
-    connect(scene, &VMainGraphicsScene::mouseMove, this, &VisLine::MousePos);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisLine::setPoint1Id(const quint32 &value)
-{
-    point1Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -296,4 +236,16 @@ QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
 {
     QLineF line(p1, p2);
     return Axis(p1, line.angle());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::InitPen()
+{
+    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::AddOnScene()
+{
+    AddItem(this);
 }

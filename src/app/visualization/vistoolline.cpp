@@ -46,14 +46,14 @@ VisToolLine::~VisToolLine()
 void VisToolLine::RefreshGeometry()
 {
     QLineF line;
-    const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+    const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
     if (point2Id == 0)
     {
-        line = QLineF(first->toQPointF(), scenePos);
+        line = QLineF(first->toQPointF(), Visualization::scenePos);
     }
     else
     {
-        const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
+        const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
         line = QLineF(first->toQPointF(), second->toQPointF());
     }
     DrawLine(this, line, mainColor, lineStyle);

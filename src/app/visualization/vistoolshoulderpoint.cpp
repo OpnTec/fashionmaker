@@ -55,27 +55,27 @@ void VisToolShoulderPoint::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
         if (lineP1Id <= 0)
         {
-            DrawLine(line1, QLineF(first->toQPointF(), scenePos), supportColor);
+            DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(lineP1Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(lineP1Id);
             DrawPoint(line1P2, second->toQPointF(), supportColor);
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
             if (lineP2Id <= 0)
             {
-                DrawLine(line2, QLineF(second->toQPointF(), scenePos), supportColor);
+                DrawLine(line2, QLineF(second->toQPointF(), Visualization::scenePos), supportColor);
             }
             else
             {
-                const VPointF *third = data->GeometricObject<const VPointF *>(lineP2Id);
+                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(lineP2Id);
                 DrawPoint(line2P2, third->toQPointF(), supportColor);
 
                 DrawLine(line2, QLineF(second->toQPointF(), third->toQPointF()), supportColor);

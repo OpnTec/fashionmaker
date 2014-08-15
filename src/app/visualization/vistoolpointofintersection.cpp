@@ -50,7 +50,7 @@ void VisToolPointOfIntersection::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
         QLineF axisL1 = Axis(first->toQPointF(), 90);
@@ -59,11 +59,11 @@ void VisToolPointOfIntersection::RefreshGeometry()
         QLineF axisL2;
         if (point2Id <= 0)
         {
-            axisL2 = Axis(scenePos, 180);
+            axisL2 = Axis(Visualization::scenePos, 180);
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(axisP2, second->toQPointF(), supportColor);
             axisL2 = Axis(second->toQPointF(), 180);
             ShowIntersection(axisL1, axisL2);

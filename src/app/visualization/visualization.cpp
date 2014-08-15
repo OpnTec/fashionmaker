@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolendline.cpp
+ **  @file   visualization.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   15 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,60 +26,72 @@
  **
  *************************************************************************/
 
-#include "vistoolendline.h"
-#include "../geometry/vpointf.h"
-#include "../container/vcontainer.h"
-#include "../tools/vabstracttool.h"
-
-#include <QGraphicsScene>
-#include <QtMath>
+#include "visualization.h"
+#include "../tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), length(0), angle(0), point(nullptr)
-{
-    this->mainColor = Qt::red;
-
-    point = InitPoint(mainColor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VisToolEndLine::~VisToolEndLine()
+Visualization::Visualization(const VContainer *data)
+    :QObject(), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
+      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(0), toolTip(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::RefreshGeometry()
+Visualization::~Visualization()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::setPoint1Id(const quint32 &value)
 {
-    const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
-    QLineF line;
-    if (qFuzzyCompare(1 + length, 1 + 0))
+    point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::setLineStyle(const Qt::PenStyle &value)
+{
+    lineStyle = value;
+    InitPen();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::setScenePos(const QPointF &value)
+{
+    scenePos = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::VisualMode(const quint32 &pointId)
+{
+    VMainGraphicsScene *scene = qApp->getCurrentScene();
+    SCASSERT(scene != nullptr);
+
+    this->point1Id = pointId;
+    this->scenePos = scene->getScenePos();
+    RefreshGeometry();
+
+    AddOnScene();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::setMainColor(const QColor &value)
+{
+    mainColor = value;
+    InitPen();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::SetFactor(qreal factor)
+{
+    VApplication::CheckFactor(this->factor, factor);
+    RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::MousePos(const QPointF &scenePos)
+{
+    this->scenePos = scenePos;
+    RefreshGeometry();
+    if (toolTip.isEmpty() == false)
     {
-        line = QLineF(first->toQPointF(), Ray(first->toQPointF()));
+        emit ToolTip(toolTip);
     }
-    else
-    {
-        line = Line(first->toQPointF(), length, angle);
-        DrawPoint(point, line.p2(), mainColor);
-    }
-    DrawLine(this, line, mainColor, lineStyle);
-    Visualization::toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°; <b>Shift</b> - "
-                                        "sticking angle, <b>Enter</b> - finish creation")).arg(this->line().angle());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VisToolEndLine::Angle() const
-{
-    return QString("%1").arg(this->line().angle());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setAngle(const QString &expression)
-{
-    angle = FindVal(expression);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setLength(const QString &expression)
-{
-    length = FindLength(expression);
 }

@@ -53,12 +53,12 @@ void VisToolNormal::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
         if (point2Id <= 0)
         {
-            QLineF line_mouse(first->toQPointF(), scenePos);
+            QLineF line_mouse(first->toQPointF(), Visualization::scenePos);
             DrawLine(line, line_mouse, supportColor);
 
             QLineF normal = line_mouse.normalVector();
@@ -67,7 +67,7 @@ void VisToolNormal::RefreshGeometry()
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(lineP2, second->toQPointF(), supportColor);
 
             QLineF line_mouse(first->toQPointF(), second->toQPointF());

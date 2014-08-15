@@ -64,16 +64,16 @@ void VisToolAlongLine::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = data->GeometricObject<const VPointF *>(point1Id);
+        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
         if (point2Id <= 0)
         {
-            DrawLine(line, QLineF(first->toQPointF(), scenePos), supportColor);
+            DrawLine(line, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const VPointF *second = data->GeometricObject<const VPointF *>(point2Id);
+            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
             DrawPoint(lineP2, second->toQPointF(), supportColor);
 
             DrawLine(line, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
