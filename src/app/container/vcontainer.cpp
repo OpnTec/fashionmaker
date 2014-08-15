@@ -284,17 +284,6 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddLengthArc add length of arc to container
- * @param id id of arc
- */
-void VContainer::AddLengthArc(const quint32 &id)
-{
-    const VArc * arc = GeometricObject<const VArc *>(id);
-    AddVariable(arc->name(), new VLengthArc(id, arc));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Clear clear data in container. Id will be 0.
  */
 void VContainer::Clear()

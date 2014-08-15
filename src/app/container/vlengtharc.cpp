@@ -27,29 +27,26 @@
  *************************************************************************/
 
 #include "vlengtharc.h"
-#include "../geometry/varc.h"
+#include "../geometry/vabstractcurve.h"
 #include "../widgets/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthArc::VLengthArc()
-    :VInternalVariable(), id(0)
+    :VLengthCurve()
 {
     type = VarType::LengthArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthArc::VLengthArc(const quint32 &id, const VArc *arc)
-    :VInternalVariable(), id(id)
+VLengthArc::VLengthArc(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc)
+    :VLengthCurve(id, parentId, arc)
 {
     type = VarType::LengthArc;
-    SCASSERT(arc != nullptr);
-    name = arc->name();
-    value = qApp->fromPixel(arc->GetLength());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthArc::VLengthArc(const VLengthArc &var)
-    :VInternalVariable(var), id(var.GetId())
+    :VLengthCurve(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,17 +56,10 @@ VLengthArc &VLengthArc::operator=(const VLengthArc &var)
     {
         return *this;
     }
-    VInternalVariable::operator=(var);
-    this->id = var.GetId();
+    VLengthCurve::operator=(var);
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthArc::~VLengthArc()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLengthArc::Filter(quint32 id)
-{
-    return this->id == id;
-}

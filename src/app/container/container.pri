@@ -8,7 +8,8 @@ SOURCES += \
     container/vlengthline.cpp \
     container/vlengthspline.cpp \
     container/vlengtharc.cpp \
-    container/vlineangle.cpp
+    container/vlineangle.cpp \
+    container/vlengthcurve.cpp
  
 HEADERS += \
     container/vcontainer.h \
@@ -21,4 +22,5 @@ HEADERS += \
     container/vlengthspline.h \
     container/vlengtharc.h \
     container/vlineangle.h \
-    container/variables.h
+    container/variables.h \
+    container/vlengthcurve.h

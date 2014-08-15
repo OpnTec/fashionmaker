@@ -32,31 +32,31 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthSpline::VLengthSpline()
-    :VInternalVariable(), id(0)
+    :VLengthCurve()
 {
     type = VarType::LengthSpline;
 }
 
-VLengthSpline::VLengthSpline(const quint32 &id, const QString &name, const qreal &value)
-    :VInternalVariable(), id(id)
+VLengthSpline::VLengthSpline(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value)
+    :VLengthCurve()
 {
     type = VarType::LengthSpline;
     this->name = name;
     this->value = value;
+    this->id = id;
+    this->parentId = parentId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthSpline::VLengthSpline(const quint32 &id, const VAbstractCurve *path)
-    :VInternalVariable(), id(id)
+VLengthSpline::VLengthSpline(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path)
+    :VLengthCurve(id, parentId, path)
 {
     type = VarType::LengthSpline;
-    this->name = path->name();
-    this->value = qApp->fromPixel(path->GetLength());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthSpline::VLengthSpline(const VLengthSpline &var)
-    :VInternalVariable(var), id(var.GetId())
+    :VLengthCurve(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,17 +66,10 @@ VLengthSpline &VLengthSpline::operator=(const VLengthSpline &var)
     {
         return *this;
     }
-    VInternalVariable::operator=(var);
-    this->id = var.GetId();
+    VLengthCurve::operator=(var);
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthSpline::~VLengthSpline()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLengthSpline::Filter(quint32 id)
-{
-    return this->id == id;
-}

@@ -33,6 +33,7 @@
 #include "../geometry/vdetail.h"
 #include "../geometry/vgobject.h"
 #include "../exception/vexceptionbadid.h"
+#include "../geometry/vabstractcurve.h"
 
 #include <QCoreApplication>
 #include <QHash>
@@ -118,8 +119,21 @@ public:
 
     quint32            AddGObject(VGObject *obj);
     quint32            AddDetail(VDetail detail);
-    void               AddLengthArc(const quint32 &id);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
+
+    template <typename TLength>
+    /**
+     * @brief AddCurveLength add length of curve type to the container
+     * @param id id of variables
+     * @param parentId if of parent object.
+     *
+     * Parent id - id of cutting point
+     */
+    void               AddCurveLength(const quint32 &id, const quint32 &parentId = 0)
+    {
+        const VAbstractCurve *var = GeometricObject<const VAbstractCurve *>(id);
+        AddVariable(var->name(), new TLength(id, parentId, var));
+    }
 
     template <typename T>
     void               AddVariable(const QString& name, T var)

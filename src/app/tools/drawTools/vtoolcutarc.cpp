@@ -142,8 +142,8 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         arc1id = data->AddGObject(new VArc(arc1));
         arc2id = data->AddGObject(new VArc(arc2));
 
-        data->AddLengthArc(arc1id);
-        data->AddLengthArc(arc2id);
+        data->AddCurveLength<VLengthArc>(arc1id, id);
+        data->AddCurveLength<VLengthArc>(arc2id, id);
     }
     else
     {
@@ -155,8 +155,8 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         data->UpdateGObject(arc1id, new VArc(arc1));
         data->UpdateGObject(arc2id, new VArc(arc2));
 
-        data->AddLengthArc(arc1id);
-        data->AddLengthArc(arc2id);
+        data->AddCurveLength<VLengthArc>(arc1id, id);
+        data->AddCurveLength<VLengthArc>(arc2id, id);
 
         if (parse != Document::FullParse)
         {

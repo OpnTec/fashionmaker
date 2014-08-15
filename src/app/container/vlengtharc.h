@@ -29,28 +29,18 @@
 #ifndef VLENGTHARC_H
 #define VLENGTHARC_H
 
-#include "vinternalvariable.h"
+#include "vlengthcurve.h"
 
-class VArc;
+class VAbstractCurve;
 
-class VLengthArc :public VInternalVariable
+class VLengthArc :public VLengthCurve
 {
 public:
     VLengthArc();
-    VLengthArc(const quint32 &id, const VArc * arc);
+    VLengthArc(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc);
     VLengthArc(const VLengthArc &var);
     VLengthArc &operator=(const VLengthArc &var);
     virtual ~VLengthArc();
-
-    virtual bool Filter(quint32 id);
-    quint32      GetId() const;
-private:
-    quint32 id;
 };
-
-inline quint32 VLengthArc::GetId() const
-{
-    return id;
-}
 
 #endif // VLENGTHARC_H

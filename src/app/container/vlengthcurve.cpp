@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vistoolcutarc.cpp
+ **  @file   vlengthcurve.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 8, 2014
  **
@@ -26,40 +26,58 @@
  **
  *************************************************************************/
 
-#include "vistoolcutarc.h"
-#include "../geometry/varc.h"
-#include "../container/vcontainer.h"
+#include "vlengthcurve.h"
+#include "../widgets/vapplication.h"
+#include "../geometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), length(0)
+VLengthCurve::VLengthCurve()
+    :VInternalVariable(), id(0), parentId(0)
 {
-    point = InitPoint(mainColor, this);
-    point->setZValue(2);
-    point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    type = VarType::Unknown;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutArc::~VisToolCutArc()
+VLengthCurve::VLengthCurve(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve)
+    :VInternalVariable(), id(id), parentId(parentId)
+{
+    type = VarType::Unknown;
+    SCASSERT(curve != nullptr);
+    name = curve->name();
+    value = qApp->fromPixel(curve->GetLength());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VLengthCurve::VLengthCurve(const VLengthCurve &var)
+    :VInternalVariable(var), id(var.GetId()), parentId(var.GetParentId())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutArc::RefreshGeometry()
+VLengthCurve &VLengthCurve::operator=(const VLengthCurve &var)
 {
-    if (point1Id > 0)
+    if ( &var == this )
     {
-        const VArc *arc = Visualization::data->GeometricObject<const VArc *>(point1Id);
-        DrawPath(this, arc->GetPath(), supportColor);
-
-        if (qFuzzyCompare(1 + length, 1 + 0) == false)
-        {
-            DrawPoint(point, arc->CutArc(length), mainColor);
-        }
+        return *this;
     }
+    VInternalVariable::operator=(var);
+    this->id = var.GetId();
+    this->parentId = var.GetParentId();
+    return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutArc::setLength(const QString &expression)
+VLengthCurve::~VLengthCurve()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLengthCurve::Filter(quint32 id)
 {
-    length = FindLength(expression);
+    if (parentId != 0)//Do not check if value zero
+    {// Not all curves have parents. Only those who was created after cutting the parent curve.
+        return this->id == id || parentId == id;
+    }
+    else
+    {
+        return this->id == id;
+    }
 }

@@ -29,30 +29,19 @@
 #ifndef VLENGTHSPLINES_H
 #define VLENGTHSPLINES_H
 
-#include "vinternalvariable.h"
+#include "vlengthcurve.h"
 
 class VAbstractCurve;
 
-class VLengthSpline :public VInternalVariable
+class VLengthSpline :public VLengthCurve
 {
 public:
     VLengthSpline();
-    VLengthSpline(const quint32 &id, const QString &name, const qreal &value);
-    VLengthSpline(const quint32 &id, const VAbstractCurve *path);
+    VLengthSpline(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value);
+    VLengthSpline(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path);
     VLengthSpline(const VLengthSpline &var);
     VLengthSpline &operator=(const VLengthSpline &var);
     virtual ~VLengthSpline();
-
-    virtual bool Filter(quint32 id);
-    quint32      GetId() const;
-private:
-    quint32 id;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline quint32 VLengthSpline::GetId() const
-{
-    return id;
-}
 
 #endif // VLENGTHSPLINES_H
