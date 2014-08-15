@@ -222,6 +222,15 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
     return line.p2();
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VArc::CutArc(const qreal &length) const
+{
+    VArc arc1;
+    VArc arc2;
+    return this->CutArc(length, arc1, arc2);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setId keep id arc in data.

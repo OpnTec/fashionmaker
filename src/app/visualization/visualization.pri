@@ -17,7 +17,8 @@ HEADERS += \
     visualization/vistoollineintersect.h \
     visualization/visualization.h \
     visualization/vistoolarc.h \
-    visualization/vispath.h
+    visualization/vispath.h \
+    visualization/vistoolcutarc.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
@@ -38,4 +39,5 @@ SOURCES += \
     visualization/vistoollineintersect.cpp \
     visualization/visualization.cpp \
     visualization/vistoolarc.cpp \
-    visualization/vispath.cpp
+    visualization/vispath.cpp \
+    visualization/vistoolcutarc.cpp

@@ -36,6 +36,8 @@ namespace Ui
     class DialogCutArc;
 }
 
+class VisToolCutArc;
+
 /**
  * @brief The DialogCutArc class dialog for ToolCutArc.
  */
@@ -66,6 +68,7 @@ public slots:
      */
     void              FormulaTextChanged();
 protected:
+    virtual void      ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -82,11 +85,12 @@ private:
     QString           formula;
 
     /** @brief arcId keep id of arc */
-    quint32            arcId;
+    quint32           arcId;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int               formulaBaseHeight;
 
+    VisToolCutArc     *path;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

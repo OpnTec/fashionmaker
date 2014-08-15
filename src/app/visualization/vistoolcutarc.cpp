@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vispath.cpp
+ **  @file   vistoolcutarc.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 8, 2014
  **
@@ -26,37 +26,39 @@
  **
  *************************************************************************/
 
-#include "vispath.h"
+#include "vistoolcutarc.h"
+#include "../geometry/varc.h"
+#include "../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
-    :Visualization(data), QGraphicsPathItem(parent)
+VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
+    :VisPath(data, parent), point(nullptr), length(0)
 {
-    this->setZValue(1);// Show on top real tool
-    InitPen();
+    point = InitPoint(mainColor, this);
+    point->setZValue(2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisPath::~VisPath()
+VisToolCutArc::~VisToolCutArc()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPath::InitPen()
+void VisToolCutArc::RefreshGeometry()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    if (point1Id > 0)
+    {
+        const VArc *arc = Visualization::data->GeometricObject<const VArc *>(point1Id);
+        DrawPath(this, arc->GetPath(), supportColor);
+
+        if (qFuzzyCompare(1 + length, 1 + 0) == false)
+        {
+            DrawPoint(point, arc->CutArc(length), mainColor);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPath::AddOnScene()
+void VisToolCutArc::setLength(const QString &expression)
 {
-    AddItem(this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisPath::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color, Qt::PenStyle style)
-{
-    SCASSERT (pathItem != nullptr);
-
-    pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
-    pathItem->setPath(path);
+    length = FindLength(expression);
 }

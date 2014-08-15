@@ -31,6 +31,8 @@
 
 #include "../../geometry/varc.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistoolcutarc.h"
+#include "../../widgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,7 +42,7 @@
  */
 DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
     : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()), arcId(0),
-      formulaBaseHeight(0)
+      formulaBaseHeight(0), path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -62,12 +64,26 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutArc::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
+
+    path = new VisToolCutArc(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
+        scene->addItem(path);
+        path->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,6 +95,7 @@ void DialogCutArc::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
+    delete path;
     delete ui;
 }
 
@@ -94,6 +111,8 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
     {
         const VArc *arc = data->GeometricObject<const VArc *>(id);
         ChangeCurrentText(ui->comboBoxArc, arc->name());
+        path->VisualMode(id);
+        prepare = true;
         emit ToolTip("");
         this->setModal(true);
         this->show();
@@ -107,6 +126,10 @@ void DialogCutArc::SaveData()
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
     arcId = getCurrentObjectId(ui->comboBoxArc);
+
+    path->setPoint1Id(arcId);
+    path->setLength(formula);
+    path->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +140,7 @@ void DialogCutArc::SaveData()
 void DialogCutArc::setArcId(const quint32 &value)
 {
     setCurrentArcId(ui->comboBoxArc, arcId, value, ComboBoxCutArc::CutArc);
+    path->setPoint1Id(arcId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,6 +157,7 @@ void DialogCutArc::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+    path->setLength(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

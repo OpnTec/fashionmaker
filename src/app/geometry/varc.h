@@ -61,6 +61,7 @@ public:
     qreal              AngleArc() const;
     QVector<QPointF>   GetPoints () const;
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
+    QPointF            CutArc (const qreal &length) const;
     virtual void       setId(const quint32 &id);
 private:
     /** @brief f1 start angle in degree. */
