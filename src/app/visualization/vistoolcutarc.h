@@ -43,6 +43,8 @@ public:
 protected:
     Q_DISABLE_COPY(VisToolCutArc)
     QGraphicsEllipseItem *point;
+    QGraphicsPathItem    *arc1;
+    QGraphicsPathItem    *arc2;
     qreal                length;
 };
 

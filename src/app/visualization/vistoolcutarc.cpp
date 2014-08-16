@@ -32,8 +32,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), length(0)
+    :VisPath(data, parent), point(nullptr), arc1(nullptr), arc2(nullptr), length(0)
 {
+    arc1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    arc2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+
     point = InitPoint(mainColor, this);
     point->setZValue(2);
     point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
@@ -53,7 +58,13 @@ void VisToolCutArc::RefreshGeometry()
 
         if (qFuzzyCompare(1 + length, 1 + 0) == false)
         {
-            DrawPoint(point, arc->CutArc(length), mainColor);
+            VArc ar1;
+            VArc ar2;
+            QPointF p = arc->CutArc(length, ar1, ar2);
+            DrawPoint(point, p, mainColor);
+
+            DrawPath(arc1, ar1.GetPath(), Qt::darkGreen);
+            DrawPath(arc2, ar2.GetPath(), Qt::darkRed);
         }
     }
 }

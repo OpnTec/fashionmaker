@@ -46,17 +46,6 @@ protected:
     void         DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
     QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
-
-    template <class Item>
-    Item         *InitItem(const QColor &color)
-    {
-        Item *item = new Item(this);
-        item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
-        item->setZValue(1);
-        item->setFlags(QGraphicsItem::ItemStacksBehindParent);
-        return item;
-    }
-
     qreal        CorrectAngle(const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;

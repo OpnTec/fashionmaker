@@ -38,10 +38,10 @@ VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)
 {
     line1P1 = InitPoint(supportColor, this);
     line1P2 = InitPoint(supportColor, this);
-    line1 = InitItem<QGraphicsLineItem>(supportColor);
+    line1 = InitItem<QGraphicsLineItem>(supportColor, this);
 
     line2P2 = InitPoint(supportColor, this);
-    line2 = InitItem<QGraphicsLineItem>(supportColor);
+    line2 = InitItem<QGraphicsLineItem>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }

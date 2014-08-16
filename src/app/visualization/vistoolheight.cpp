@@ -38,8 +38,8 @@ VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)
     base_point = InitPoint(supportColor, this);
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
-    line = InitItem<QGraphicsLineItem>(supportColor);
-    line_intersection = InitItem<QGraphicsLineItem>(supportColor);
+    line = InitItem<QGraphicsLineItem>(supportColor, this);
+    line_intersection = InitItem<QGraphicsLineItem>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }

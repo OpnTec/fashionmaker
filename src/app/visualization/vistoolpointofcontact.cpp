@@ -38,7 +38,7 @@ VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsIt
     arc_point = InitPoint(supportColor, this);
     lineP1 = InitPoint(supportColor, this);
     lineP2 = InitPoint(supportColor, this);
-    circle = InitItem<QGraphicsEllipseItem>(supportColor);
+    circle = InitItem<QGraphicsEllipseItem>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }

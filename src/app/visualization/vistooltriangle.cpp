@@ -39,11 +39,11 @@ VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
 {
     axisP1 = InitPoint(supportColor, this);
     axisP2 = InitPoint(supportColor, this);
-    axis = InitItem<QGraphicsPathItem>(supportColor);
+    axis = InitItem<QGraphicsPathItem>(supportColor, this);
     hypotenuseP1 = InitPoint(supportColor, this);
     hypotenuseP2 = InitPoint(supportColor, this);
-    foot1 = InitItem<QGraphicsLineItem>(supportColor);
-    foot2 = InitItem<QGraphicsLineItem>(supportColor);
+    foot1 = InitItem<QGraphicsLineItem>(supportColor, this);
+    foot2 = InitItem<QGraphicsLineItem>(supportColor, this);
 
     point = InitPoint(mainColor, this);
 }

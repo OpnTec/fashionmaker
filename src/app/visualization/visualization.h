@@ -85,6 +85,16 @@ protected:
         connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);
         connect(scene, &VMainGraphicsScene::mouseMove, item, &Visualization::MousePos);
     }
+
+    template <class Item>
+    Item         *InitItem(const QColor &color, QGraphicsItem *parent)
+    {
+        Item *item = new Item(parent);
+        item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+        item->setZValue(1);
+        item->setFlags(QGraphicsItem::ItemStacksBehindParent);
+        return item;
+    }
 private:
     Q_DISABLE_COPY(Visualization)
 };
