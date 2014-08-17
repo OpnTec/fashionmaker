@@ -241,26 +241,36 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
  */
 void VToolPoint::RefreshLine()
 {
-    QRectF nameRec = namePoint->sceneBoundingRect();
-    QPointF p1, p2;
-    LineIntersectCircle(QPointF(), radius/factor, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
-    QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-    lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if (currentColor == Qt::gray)
+    QRectF nRec = namePoint->sceneBoundingRect();
+    nRec.translate(- scenePos());
+    if (this->rect().intersects(nRec) == false)
     {
-        lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+        QRectF nameRec = namePoint->sceneBoundingRect();
+        QPointF p1, p2;
+        LineIntersectCircle(QPointF(), radius/factor, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
+        QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
+        lineName->setLine(QLineF(p1, pRec - scenePos()));
+        if (currentColor == Qt::gray)
+        {
+            lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+        }
+        else
+        {
+            lineName->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
+        }
+
+        if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
+        {
+            lineName->setVisible(false);
+        }
+        else
+        {
+            lineName->setVisible(true);
+        }
     }
     else
-    {
-        lineName->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
-    }
-    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
     {
         lineName->setVisible(false);
-    }
-    else
-    {
-        lineName->setVisible(true);
     }
 }
 
