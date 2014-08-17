@@ -53,7 +53,7 @@ void VisToolArc::RefreshGeometry()
         if (qFuzzyCompare(1 + radius, 1 + 0) == false && f1 >= 0 && f2 >= 0 && qFuzzyCompare(1 + f1, 1 + f2) == false)
         {
             VArc arc = VArc (*first, radius, f1, f2);
-            DrawPath(this, arc.GetPath(), mainColor);
+            DrawPath(this, arc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
         }
     }
 }

@@ -54,7 +54,7 @@ void VisToolCutArc::RefreshGeometry()
     if (point1Id > 0)
     {
         const VArc *arc = Visualization::data->GeometricObject<const VArc *>(point1Id);
-        DrawPath(this, arc->GetPath(), supportColor);
+        DrawPath(this, arc->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (qFuzzyCompare(1 + length, 1 + 0) == false)
         {
@@ -63,8 +63,8 @@ void VisToolCutArc::RefreshGeometry()
             QPointF p = arc->CutArc(length, ar1, ar2);
             DrawPoint(point, p, mainColor);
 
-            DrawPath(arc1, ar1.GetPath(), Qt::darkGreen);
-            DrawPath(arc2, ar2.GetPath(), Qt::darkRed);
+            DrawPath(arc1, ar1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(arc2, ar2.GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
         }
     }
 }

@@ -53,10 +53,11 @@ void VisPath::AddOnScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisPath::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color, Qt::PenStyle style)
+void VisPath::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color, Qt::PenStyle style,
+                       Qt::PenCapStyle cap)
 {
     SCASSERT (pathItem != nullptr);
 
-    pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
+    pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style, cap));
     pathItem->setPath(path);
 }

@@ -277,13 +277,14 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
  * @param curveId curve id.
  * @param tr point type.
  */
-void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr)
+void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
+                                  PathDirection direction)
 {
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(curveId);
     QPainterPath path;
-    path.addPath(spl->GetPath());
+    path.addPath(spl->GetPath(direction));
     path.setFillRule( Qt::WindingFill );
-    if (tr == SimpleCurvePoint::FirstPoint)
+    if (curvePosition == SimpleCurvePoint::FirstPoint)
     {
         path.translate(-spl->GetP1().toQPointF().x(), -spl->GetP1().toQPointF().y());
     }

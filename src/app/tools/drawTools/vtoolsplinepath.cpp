@@ -45,16 +45,13 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
                                  QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
-    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
-    QPainterPath path;
-    path.addPath(splPath->GetPath());
-    path.setFillRule( Qt::WindingFill );
-    this->setPath(path);
+    this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
+    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
     for (qint32 i = 1; i<=splPath->Count(); ++i)
     {
         VSpline spl = splPath->GetSpline(i);
@@ -374,11 +371,9 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
 void VToolSplinePath::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPath(ToolPath());
+
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
-    QPainterPath path;
-    path.addPath(splPath->GetPath());
-    path.setFillRule( Qt::WindingFill );
-    this->setPath(path);
     for (qint32 i = 1; i<=splPath->Count(); ++i)
     {
         VSpline spl = splPath->GetSpline(i);

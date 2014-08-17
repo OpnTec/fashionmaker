@@ -40,8 +40,10 @@
  * @param currentColor current color.
  * @param parent parent object.
  */
-VSimpleCurve::VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, qreal *factor, QObject *parent)
-    :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor)
+VSimpleCurve::VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurvePoint pointPosition, qreal *factor,
+                           QObject *parent)
+    :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor),
+      curvePosition(pointPosition)
 {
     if (factor == nullptr)
     {
@@ -106,6 +108,7 @@ void VSimpleCurve::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     {
         this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())/ *factor));
     }
+    emit HoverPath(id, curvePosition, PathDirection::Show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -124,4 +127,6 @@ void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     {
         this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
+
+    emit HoverPath(id, curvePosition, PathDirection::Hide);
 }

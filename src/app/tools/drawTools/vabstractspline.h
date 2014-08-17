@@ -74,6 +74,7 @@ protected:
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void     keyReleaseEvent(QKeyEvent * event);
+    QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
 };
 
 #endif // VABSTRACTSPLINE_H

@@ -123,7 +123,8 @@ void VAbstractSpline::SetFactor(qreal factor)
 void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine, Qt::RoundCap));
+    this->setPath(ToolPath(PathDirection::Show));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,6 +137,7 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPath(ToolPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,4 +181,14 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
+{
+    const VAbstractCurve *curve = VAbstractTool::data.GeometricObject<const VAbstractCurve *>(id);
+    QPainterPath path;
+    path.addPath(curve->GetPath(direction));
+    path.setFillRule( Qt::WindingFill );
+    return path;
 }

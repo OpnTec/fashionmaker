@@ -59,7 +59,8 @@ protected:
     virtual void  AddToFile();
     virtual void  RefreshDataInFile();
     virtual void  SaveDialog(QDomElement &domElement);
-    virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr);
+    virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
+                               PathDirection direction = PathDirection::Hide);
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 };

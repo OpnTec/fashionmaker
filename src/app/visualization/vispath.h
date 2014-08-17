@@ -44,7 +44,7 @@ protected:
     virtual void AddOnScene();
 
     void         DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine);
+                          Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 private:
     Q_DISABLE_COPY(VisPath)
 };

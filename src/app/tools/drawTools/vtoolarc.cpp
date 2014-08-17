@@ -47,11 +47,7 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
 VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
-    const VArc *arc = data->GeometricObject<const VArc *>(id);
-    QPainterPath path;
-    path.addPath(arc->GetPath());
-    path.setFillRule( Qt::WindingFill );
-    this->setPath(path);
+    this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
@@ -267,9 +263,5 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 void VToolArc::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
-    QPainterPath path;
-    path.addPath(arc->GetPath());
-    path.setFillRule( Qt::WindingFill );
-    this->setPath(path);
+    this->setPath(ToolPath());
 }

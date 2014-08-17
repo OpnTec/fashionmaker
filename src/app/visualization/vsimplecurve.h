@@ -30,6 +30,7 @@
 #define VSIMPLECURVE_H
 
 #include <QGraphicsPathItem>
+#include "../geometry/vabstractcurve.h"
 
 enum class SimpleCurvePoint : char { FirstPoint, ForthPoint };
 
@@ -40,7 +41,8 @@ class VSimpleCurve : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, qreal *factor = nullptr, QObject *parent = 0);
+    VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurvePoint curvePosition,
+                 qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 signals:
@@ -49,6 +51,7 @@ signals:
      * @param id spline id.
      */
     void            Choosed(quint32 id);
+    void            HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
 protected:
     virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
@@ -63,6 +66,8 @@ private:
 
     /** @brief currentColor current color. */
     Qt::GlobalColor   *currentColor;
+
+    SimpleCurvePoint  curvePosition;
 };
 
 #endif // VSIMPLECURVE_H

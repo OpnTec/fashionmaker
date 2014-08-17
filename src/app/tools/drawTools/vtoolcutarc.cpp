@@ -148,7 +148,6 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     else
     {
         data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
-
         arc1id = id + 1;
         arc2id = id + 2;
 
@@ -280,13 +279,14 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
  * @param curveId curve id.
  * @param tr point type.
  */
-void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint tr)
+void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
+                               PathDirection direction)
 {
     const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(curveId);
     QPainterPath path;
-    path.addPath(arc->GetPath());
+    path.addPath(arc->GetPath(direction));
     path.setFillRule( Qt::WindingFill );
-    if (tr == SimpleCurvePoint::FirstPoint)
+    if (curvePosition == SimpleCurvePoint::FirstPoint)
     {
         path.translate(-arc->GetP1().x(), -arc->GetP1().y());
     }

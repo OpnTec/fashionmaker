@@ -29,6 +29,7 @@
 #include "vabstractcurve.h"
 
 #include <QPainterPath>
+#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
@@ -52,7 +53,7 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractCurve::GetPath() const
+QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
 {
     QPainterPath path;
 
@@ -64,10 +65,56 @@ QPainterPath VAbstractCurve::GetPath() const
             path.moveTo(points.at(i));
             path.lineTo(points.at(i+1));
         }
+
+        if (direction == PathDirection::Show && points.count() >= 3)
+        {
+            path.addPath(ShowDirection(points));
+        }
     }
     else
     {
         qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
+{
+    QPainterPath path;
+
+    if (points.count() >= 2)
+    {
+        /*Need find coordinate midle of curve.
+          Universal way is take all points and find sum.*/
+        const qreal seek_length = GetLength()/2.0;
+        qreal found_length = 0;
+        QLineF arrow;
+        for (qint32 i = 1; i <= points.size()-1; ++i)
+        {
+            arrow = QLineF(points.at(i-1), points.at(i));
+            found_length += arrow.length();//Length that we aready find
+
+            if (seek_length <= found_length)// if have found more that need stop.
+            {
+                //subtract length in last line and you will find position of the middle point.
+                arrow.setLength(arrow.length() - (found_length - seek_length));
+                break;
+            }
+        }
+
+        //Reverse line because we want start arrow from this point
+        arrow = QLineF(arrow.p2(), arrow.p1());
+        const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
+        arrow.setLength(14);//arrow length in pixels
+
+        arrow.setAngle(angle-35);
+        path.moveTo(arrow.p1());
+        path.lineTo(arrow.p2());
+
+        arrow.setAngle(angle+35);
+        path.moveTo(arrow.p1());
+        path.lineTo(arrow.p2());
     }
     return path;
 }

@@ -83,14 +83,14 @@ VSpline VSplinePath::GetSpline(qint32 index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VSplinePath::GetPath() const
+QPainterPath VSplinePath::GetPath(PathDirection direction) const
 {
     QPainterPath painterPath;
     for (qint32 i = 1; i <= Count(); ++i)
     {
         VSpline spl(path.at(i-1).P(), path.at(i).P(), path.at(i-1).Angle2(), path.at(i).Angle1(),
                 path.at(i-1).KAsm2(), path.at(i).KAsm1(), this->kCurve);
-        painterPath.addPath(spl.GetPath());
+        painterPath.addPath(spl.GetPath(direction));
     }
     return painterPath;
 }

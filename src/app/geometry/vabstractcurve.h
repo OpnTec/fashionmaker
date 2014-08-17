@@ -32,6 +32,8 @@
 #include "vgobject.h"
 #include <QPointF>
 
+enum class PathDirection : char { Hide, Show };
+
 class QPainterPath;
 
 class VAbstractCurve :public VGObject
@@ -41,9 +43,11 @@ public:
     VAbstractCurve(const VAbstractCurve &curve);
     VAbstractCurve& operator= (const VAbstractCurve &curve);
     virtual QVector<QPointF> GetPoints() const =0;
-    virtual QPainterPath     GetPath() const;
+    virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual QString          name() const;
     virtual qreal            GetLength() const =0;
+protected:
+    QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

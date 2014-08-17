@@ -82,7 +82,7 @@ public:
      * @brief GetPath return QPainterPath which reprezent spline path.
      * @return path.
      */
-    QPainterPath     GetPath() const;
+    QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     /**
      * @brief GetPathPoints return list of points what located on path.
      * @return list.
