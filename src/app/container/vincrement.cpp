@@ -27,13 +27,14 @@
  *************************************************************************/
 
 #include "vincrement.h"
+#include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VIncrement create enpty increment
  */
 VIncrement::VIncrement()
-    :VVariable(), id(0)
+    :VVariable(), id(NULL_ID)
 {
     type = VarType::Increment;
 }

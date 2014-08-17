@@ -43,7 +43,7 @@
  */
 DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), number(0), pointName(QString()),
-    typeLine(QString()), basePointId(0), p1LineId(0), p2LineId(0), line(nullptr)
+    typeLine(QString()), basePointId(NULL_ID), p1LineId(NULL_ID), p2LineId(NULL_ID), line(nullptr)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;

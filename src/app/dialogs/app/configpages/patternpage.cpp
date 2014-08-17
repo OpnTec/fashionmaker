@@ -40,7 +40,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
-    QWidget(parent), userName(0), graphOutputCheck(0), undoCount(0)
+    QWidget(parent), userName(nullptr), graphOutputCheck(nullptr), undoCount(nullptr)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();

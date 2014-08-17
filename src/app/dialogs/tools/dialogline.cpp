@@ -43,7 +43,7 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), number(0), firstPoint(0), secondPoint(0),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), number(0), firstPoint(NULL_ID), secondPoint(NULL_ID),
       typeLine(QString()), line(nullptr)
 {
     ui->setupUi(this);

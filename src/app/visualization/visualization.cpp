@@ -35,7 +35,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
     :QObject(), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
-      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(0), toolTip(QString())
+      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(NULL_ID), toolTip(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -32,13 +32,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail()
-    :_id(0), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
+    :_id(NULL_ID), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
       width(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
-    :_id(0), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
+    :_id(NULL_ID), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
       width(0)
 {
     this->nodes = nodes;
@@ -46,7 +46,7 @@ VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const VDetail &detail)
-    :_id(0), nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
+    :_id(NULL_ID), nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
       seamAllowance(detail.getSeamAllowance()), closed(detail.getClosed()), width(detail.getWidth())
 {}
 

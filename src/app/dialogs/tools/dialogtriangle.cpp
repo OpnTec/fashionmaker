@@ -40,8 +40,8 @@
  * @param parent parent widget
  */
 DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(0),
-    axisP2Id(0), firstPointId(0), secondPointId(0), line (nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(NULL_ID),
+    axisP2Id(NULL_ID), firstPointId(NULL_ID), secondPointId(NULL_ID), line (nullptr)
 {
     ui->setupUi(this);
     labelEditNamePoint = ui->labelEditNamePoint;

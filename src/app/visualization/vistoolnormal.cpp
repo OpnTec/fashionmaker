@@ -32,8 +32,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(0), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr), length(0),
-      angle(0)
+    : VisLine(data, parent), point2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
+      length(0), angle(0)
 {
     this->mainColor = Qt::red;
 

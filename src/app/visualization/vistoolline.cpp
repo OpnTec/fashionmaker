@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), point2Id(0)
+    :VisLine(data, parent), point2Id(NULL_ID)
 {
     this->mainColor = Qt::red;
 }

@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vexceptionbadid.h"
+#include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -44,7 +45,7 @@ VExceptionBadId::VExceptionBadId(const QString &what, const quint32 &id)
  * @param key string key
  */
 VExceptionBadId::VExceptionBadId(const QString &what, const QString &key)
-    :VException(what), id(0), key(key){}
+    :VException(what), id(NULL_ID), key(key){}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

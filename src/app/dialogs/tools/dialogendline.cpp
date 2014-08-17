@@ -43,7 +43,7 @@
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
-      formulaLength(QString()), formulaAngle(QString()), basePointId(0), formulaBaseHeight(0),
+      formulaLength(QString()), formulaAngle(QString()), basePointId(NULL_ID), formulaBaseHeight(0),
       formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);

@@ -31,7 +31,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VUndoCommand::VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
-    :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(0), redoFlag(false)
+    :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
 {
     SCASSERT(doc != nullptr);
 }

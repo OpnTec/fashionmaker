@@ -50,7 +50,8 @@ const QString VToolBisector::ToolType = QStringLiteral("bisector");
 VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                              const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
                              const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(0), thirdPointId(0)
+    :VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(NULL_ID),
+      thirdPointId(NULL_ID)
 {
     this->firstPointId = firstPointId;
     this->thirdPointId = thirdPointId;

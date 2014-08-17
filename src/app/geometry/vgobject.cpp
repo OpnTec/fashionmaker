@@ -33,7 +33,7 @@
  * @brief VGObject default constructor.
  */
 VGObject::VGObject()
-    :_id(0), type(GOType::Unknown), idObject(0), _name(QString()), mode(Draw::Calculation)
+    :_id(NULL_ID), type(GOType::Unknown), idObject(NULL_ID), _name(QString()), mode(Draw::Calculation)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ VGObject::VGObject()
  * @param mode mode creation. Used in modeling mode.
  */
 VGObject::VGObject(const GOType &type, const quint32 &idObject, const Draw &mode)
-    :_id(0), type(type), idObject(idObject), _name(QString()), mode(mode)
+    :_id(NULL_ID), type(type), idObject(idObject), _name(QString()), mode(mode)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

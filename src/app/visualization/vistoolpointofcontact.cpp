@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), lineP2Id(0), radiusId(0), point(nullptr), lineP1(nullptr), lineP2(nullptr),
+    :VisLine(data, parent), lineP2Id(NULL_ID), radiusId(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr),
       arc_point(nullptr), circle(nullptr), radius(0)
 {
     arc_point = InitPoint(supportColor, this);

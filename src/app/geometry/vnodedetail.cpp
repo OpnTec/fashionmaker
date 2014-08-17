@@ -30,7 +30,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
-    :id(0), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
+    :id(NULL_ID), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

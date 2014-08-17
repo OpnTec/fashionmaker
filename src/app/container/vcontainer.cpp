@@ -34,7 +34,7 @@
 #include <QLineF>
 #include <QtAlgorithms>
 
-quint32 VContainer::_id = 0;
+quint32 VContainer::_id = NULL_ID;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -270,7 +270,7 @@ void VContainer::UpdateId(quint32 newId)
 template <typename val>
 void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
-    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    Q_ASSERT_X(id > NULL_ID, Q_FUNC_INFO, "id = 0");
     SCASSERT(point != nullptr);
     point->setId(id);
     if (gObjects.contains(id))
@@ -288,7 +288,7 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
  */
 void VContainer::Clear()
 {
-    _id = 0;
+    _id = NULL_ID;
 
     details.clear();
     ClearVariables();
@@ -404,7 +404,7 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
  */
 void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 {
-    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    Q_ASSERT_X(id > NULL_ID, Q_FUNC_INFO, "id = 0");
     details[id] = detail;
     UpdateId(id);
 }

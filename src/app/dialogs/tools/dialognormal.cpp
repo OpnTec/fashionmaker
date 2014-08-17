@@ -40,7 +40,7 @@
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), number(0), pointName(QString()), typeLine(QString()),
-      formula(QString()), angle(0), firstPointId(0), secondPointId(0), formulaBaseHeight(0), line(nullptr)
+      formula(QString()), angle(0), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);

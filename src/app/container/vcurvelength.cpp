@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()
-    :VInternalVariable(), id(0), parentId(0)
+    :VInternalVariable(), id(NULL_ID), parentId(NULL_ID)
 {
     type = VarType::Unknown;
 }

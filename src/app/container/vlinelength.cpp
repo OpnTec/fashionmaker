@@ -34,7 +34,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine()
-    :VInternalVariable(), p1Id(0), p2Id(0)
+    :VInternalVariable(), p1Id(NULL_ID), p2Id(NULL_ID)
 {
     type = VarType::LineLength;
 }
