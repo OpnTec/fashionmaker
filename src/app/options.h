@@ -41,7 +41,7 @@ class QString;
 #define DefPointRadius 2.0//mm
 #define NULL_ID 0//use this value for initialization variables that keeps id values. 0 mean uknown id value.
 
-enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail };
+enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
 enum class Tool : char
 {
     ArrowTool,

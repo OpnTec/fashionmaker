@@ -47,6 +47,8 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
 VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
+    sceneType = SceneObject::Arc;
+
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -215,20 +217,6 @@ void VToolArc::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
         doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief mouseReleaseEvent handle mouse release events.
- * @param event mouse release event.
- */
-void VToolArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        emit ChoosedTool(id, SceneObject::Arc);
-    }
-    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

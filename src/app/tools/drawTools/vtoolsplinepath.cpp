@@ -45,6 +45,8 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
                                  QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
+    sceneType = SceneObject::SplinePath;
+
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -319,20 +321,6 @@ void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &
     doc->SetAttribute(pathPoint, AttrAngle, splPoint.Angle2());
 
     domElement.appendChild(pathPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief mouseReleaseEvent  handle mouse release events.
- * @param event mouse release event.
- */
-void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        emit ChoosedTool(id, SceneObject::SplinePath);
-    }
-    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

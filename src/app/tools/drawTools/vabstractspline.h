@@ -63,6 +63,7 @@ protected:
      * @brief controlPoints list pointers of control points.
      */
     QVector<VControlPointSpline *>   controlPoints;
+    SceneObject      sceneType;
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
@@ -74,6 +75,7 @@ protected:
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void     keyReleaseEvent(QKeyEvent * event);
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
 };
 

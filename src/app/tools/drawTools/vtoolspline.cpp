@@ -46,6 +46,8 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Sour
                          QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
+    sceneType = SceneObject::Spline;
+
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
@@ -253,20 +255,6 @@ void VToolSpline::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
         doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief mouseReleaseEvent  handle mouse release events.
- * @param event context menu event.
- */
-void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        emit ChoosedTool(id, SceneObject::Spline);
-    }
-    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

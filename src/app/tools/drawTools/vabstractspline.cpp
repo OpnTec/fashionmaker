@@ -33,7 +33,8 @@ const QString VAbstractSpline::TagName = QStringLiteral("spline");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>())
+    :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
+      sceneType(SceneObject::Unknown)
 {
     ignoreFullUpdate = true;
 }
@@ -181,6 +182,20 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mouseReleaseEvent  handle mouse release events.
+ * @param event mouse release event.
+ */
+void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        emit ChoosedTool(id, sceneType);
+    }
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

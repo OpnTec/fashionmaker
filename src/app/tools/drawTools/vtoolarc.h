@@ -52,7 +52,6 @@ protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     AddToFile();
     virtual void     RefreshDataInFile();
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void     RemoveReferens();
     virtual void     SaveDialog(QDomElement &domElement);
 private:
