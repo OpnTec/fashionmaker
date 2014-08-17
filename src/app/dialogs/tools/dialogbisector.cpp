@@ -147,49 +147,35 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            const VPointF *point = data->GeometricObject<const VPointF *>(id);
-            if (number == 0)
+            switch (number)
             {
-                qint32 index = ui->comboBoxFirstPoint->findText(point->name());
-                if ( index != -1 )
-                { // -1 for not found
-                    ui->comboBoxFirstPoint->setCurrentIndex(index);
-                    number++;
-                    line->VisualMode(id);
-                    emit ToolTip(tr("Select second point of angle"));
-                    return;
-                }
-            }
-            if (number == 1)
-            {
-                qint32 index = ui->comboBoxSecondPoint->findText(point->name());
-                if ( index != -1 )
-                { // -1 for not found
-                    ui->comboBoxSecondPoint->setCurrentIndex(index);
-                    number++;
-                    line->setPoint2Id(id);
-                    line->RefreshGeometry();
-                    emit ToolTip(tr("Select third point of angle"));
-                    return;
-                }
-            }
-            if (number == 2)
-            {
-                qint32 index = ui->comboBoxThirdPoint->findText(point->name());
-                if ( index != -1 )
-                { // -1 for not found
-                    ui->comboBoxThirdPoint->setCurrentIndex(index);
-                    number = 0;
-                    line->setPoint3Id(id);
-                    line->RefreshGeometry();
-                    prepare = true;
-                    emit ToolTip("");
-                }
-                if (isInitialized == false)
-                {
-                    this->setModal(true);
-                    this->show();
-                }
+                case 0:
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point of angle")))
+                    {
+                        number++;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case 1:
+                    if (SetObject(id, ui->comboBoxSecondPoint, tr("Select third point of angle")))
+                    {
+                        number++;
+                        line->setPoint2Id(id);
+                        line->RefreshGeometry();
+                    }
+                    break;
+                case 2:
+                    if (SetObject(id, ui->comboBoxThirdPoint, ""))
+                    {
+                        line->setPoint3Id(id);
+                        line->RefreshGeometry();
+                        prepare = true;
+                        this->setModal(true);
+                        this->show();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

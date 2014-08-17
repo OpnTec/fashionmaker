@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   dialoglineintersect.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -83,81 +83,65 @@ DialogLineIntersect::~DialogLineIntersect()
  */
 void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        if (number == 0)
+        if (type == SceneObject::Point)
         {
-            qint32 index = ui->comboBoxP1Line1->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxP1Line1->setCurrentIndex(index);
-                p1Line1 = id;
-                number++;
-                line->VisualMode(id);
-                emit ToolTip(tr("Select second point of first line"));
-                return;
-            }
-        }
-        if (number == 1)
-        {
-            qint32 index = ui->comboBoxP2Line1->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxP2Line1->setCurrentIndex(index);
-                p2Line1 = id;
-                number++;
-                line->setLine1P2Id(p2Line1);
-                line->RefreshGeometry();
-                emit ToolTip(tr("Select first point of second line"));
-                return;
-            }
-        }
-        if (number == 2)
-        {
-            qint32 index = ui->comboBoxP1Line2->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxP1Line2->setCurrentIndex(index);
-                p1Line2 = id;
-                number++;
-                line->setLine2P1Id(p1Line2);
-                line->RefreshGeometry();
-                emit ToolTip(tr("Select second point of second line"));
-                return;
-            }
-        }
-        if (number == 3)
-        {
-            qint32 index = ui->comboBoxP2Line2->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxP2Line2->setCurrentIndex(index);
-                p2Line2 = id;
-                number = 0;
-                line->setLine2P2Id(p2Line2);
-                line->RefreshGeometry();
-                prepare = true;
-                emit ToolTip("");
-            }
-            if (isInitialized == false)
+            switch (number)
             {
-                flagPoint = CheckIntersecion();
-                CheckState();
-                this->setModal(true);
-                this->show();
-                connect(ui->comboBoxP1Line1,
-                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                        &DialogLineIntersect::P1Line1Changed);
-                connect(ui->comboBoxP2Line1,
-                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                        &DialogLineIntersect::P2Line1Changed);
-                connect(ui->comboBoxP1Line2,
-                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                        &DialogLineIntersect::P1Line2Changed);
-                connect(ui->comboBoxP2Line2,
-                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                        &DialogLineIntersect::P2Line2Changed);
+                case 0:
+                    if (SetObject(id, ui->comboBoxP1Line1, tr("Select second point of first line")))
+                    {
+                        number++;
+                        p1Line1 = id;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case 1:
+                    if (SetObject(id, ui->comboBoxP2Line1, tr("Select first point of second line")))
+                    {
+                        number++;
+                        p2Line1 = id;
+                        line->setLine1P2Id(id);
+                        line->RefreshGeometry();
+                    }
+                    break;
+                case 2:
+                    if (SetObject(id, ui->comboBoxP1Line2, tr("Select second point of second line")))
+                    {
+                        number++;
+                        p1Line2 = id;
+                        line->setLine2P1Id(id);
+                        line->RefreshGeometry();
+                    }
+                    break;
+                case 3:
+                    if (SetObject(id, ui->comboBoxP2Line2, ""))
+                    {
+                        p2Line2 = id;
+                        line->setLine2P2Id(id);
+                        line->RefreshGeometry();
+                        prepare = true;
+                        flagPoint = CheckIntersecion();
+                        CheckState();
+                        this->setModal(true);
+                        this->show();
+                        connect(ui->comboBoxP1Line1,
+                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                &DialogLineIntersect::P1Line1Changed);
+                        connect(ui->comboBoxP2Line1,
+                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                &DialogLineIntersect::P2Line1Changed);
+                        connect(ui->comboBoxP1Line2,
+                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                &DialogLineIntersect::P1Line2Changed);
+                        connect(ui->comboBoxP2Line2,
+                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                &DialogLineIntersect::P2Line2Changed);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

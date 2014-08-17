@@ -135,29 +135,27 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            if (number == 0)
+            switch (number)
             {
-                if (ChoosedPoint(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
-                {
-                    number++;
-                    line->VisualMode(id);
-                    return;
-                }
-            }
-            if (number == 1)
-            {
-                if (ChoosedPoint(id, ui->comboBoxSecondPoint, ""))
-                {
-                    number = 0;
-                    line->setPoint2Id(id);
-                    line->RefreshGeometry();
-                    prepare = true;
-                    if (isInitialized == false)
+                case 0:
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
                     {
+                        number++;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case 1:
+                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    {
+                        line->setPoint2Id(id);
+                        line->RefreshGeometry();
+                        prepare = true;
                         this->setModal(true);
                         this->show();
                     }
-                }
+                    break;
+                default:
+                    break;
             }
         }
     }

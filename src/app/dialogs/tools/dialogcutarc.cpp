@@ -107,15 +107,18 @@ DialogCutArc::~DialogCutArc()
  */
 void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Arc)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VArc *arc = data->GeometricObject<const VArc *>(id);
-        ChangeCurrentText(ui->comboBoxArc, arc->name());
-        path->VisualMode(id);
-        prepare = true;
-        emit ToolTip("");
-        this->setModal(true);
-        this->show();
+        if (type == SceneObject::Arc)
+        {
+            if (SetObject(id, ui->comboBoxArc, ""))
+            {
+                path->VisualMode(id);
+                prepare = true;
+                this->setModal(true);
+                this->show();
+            }
+        }
     }
 }
 

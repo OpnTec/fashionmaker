@@ -137,39 +137,40 @@ void DialogHeight::setP2LineId(const quint32 &value)
  */
 void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        switch (number)
+        if (type == SceneObject::Point)
         {
-            case (0):
-                ChangeCurrentText(ui->comboBoxBasePoint, point->name());
-                number++;
-                line->VisualMode(id);
-                emit ToolTip(tr("Select first point of line"));
-                break;
-            case (1):
-                ChangeCurrentText(ui->comboBoxP1Line, point->name());
-                number++;
-                line->setLineP1Id(id);
-                line->RefreshGeometry();
-                emit ToolTip(tr("Select second point of line"));
-                break;
-            case (2):
-                ChangeCurrentText(ui->comboBoxP2Line, point->name());
-                number = 0;
-                emit ToolTip("");
-                line->setLineP2Id(id);
-                line->RefreshGeometry();
-                prepare = true;
-                if (isInitialized == false)
-                {
-                    this->setModal(true);
-                    this->show();
-                }
-                break;
-            default:
-                break;
+            switch (number)
+            {
+                case (0):
+                    if (SetObject(id, ui->comboBoxBasePoint, tr("Select first point of line")))
+                    {
+                        number++;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case (1):
+                    if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
+                    {
+                        number++;
+                        line->setLineP1Id(id);
+                        line->RefreshGeometry();
+                    }
+                    break;
+                case (2):
+                    if (SetObject(id, ui->comboBoxP2Line, ""))
+                    {
+                        line->setLineP2Id(id);
+                        line->RefreshGeometry();
+                        prepare = true;
+                        this->setModal(true);
+                        this->show();
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

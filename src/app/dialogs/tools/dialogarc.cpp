@@ -187,16 +187,18 @@ void DialogArc::SetRadius(const QString &value)
  */
 void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-
-        ChangeCurrentText(ui->comboBoxBasePoint, point->name());
-        path->VisualMode(id);
-        prepare = true;
-        emit ToolTip("");
-        this->setModal(true);
-        this->show();
+        if (type == SceneObject::Point)
+        {
+            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            {
+                path->VisualMode(id);
+                prepare = true;
+                this->setModal(true);
+                this->show();
+            }
+        }
     }
 }
 

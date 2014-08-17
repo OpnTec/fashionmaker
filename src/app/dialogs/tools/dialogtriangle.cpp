@@ -83,46 +83,48 @@ DialogTriangle::~DialogTriangle()
  */
 void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        switch (number)
+        if (type == SceneObject::Point)
         {
-            case (0):
-                ChangeCurrentText(ui->comboBoxAxisP1, point->name());
-                number++;
-                line->VisualMode(id);
-                emit ToolTip(tr("Select second point of axis"));
-                break;
-            case (1):
-                ChangeCurrentText(ui->comboBoxAxisP2, point->name());
-                number++;
-                line->setPoint2Id(id);
-                line->RefreshGeometry();
-                emit ToolTip(tr("Select first point"));
-                break;
-            case (2):
-                ChangeCurrentText(ui->comboBoxFirstPoint, point->name());
-                number++;
-                line->setHypotenuseP1Id(id);
-                line->RefreshGeometry();
-                emit ToolTip(tr("Select second point"));
-                break;
-            case (3):
-                ChangeCurrentText(ui->comboBoxSecondPoint, point->name());
-                number = 0;
-                line->setHypotenuseP2Id(id);
-                line->RefreshGeometry();
-                prepare = true;
-                emit ToolTip(tr(""));
-                if (isInitialized == false)
-                {
-                    this->setModal(true);
-                    this->show();
-                }
-                break;
-            default:
-                break;
+            switch (number)
+            {
+                case (0):
+                    if (SetObject(id, ui->comboBoxAxisP1, tr("Select second point of axis")))
+                    {
+                        number++;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case (1):
+                    if (SetObject(id, ui->comboBoxAxisP2, tr("Select first point")))
+                    {
+                        number++;
+                        line->setPoint2Id(id);
+                        line->RefreshGeometry();
+                    }
+                    break;
+                case (2):
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
+                    {
+                        number++;
+                        line->setHypotenuseP1Id(id);
+                        line->RefreshGeometry();
+                    }
+                    break;
+                case (3):
+                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    {
+                        line->setHypotenuseP2Id(id);
+                        line->RefreshGeometry();
+                        prepare = true;
+                        this->setModal(true);
+                        this->show();
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

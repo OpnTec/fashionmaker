@@ -213,7 +213,6 @@ protected:
     template <class key, class val>
     void             ShowVariable(const QMap<key, val> var);
     void             SetupTypeLine(QComboBox *box, const QString &value);
-    void             ChangeCurrentText(QComboBox *box, const QString &value);
     void             ChangeCurrentData(QComboBox *box, const quint32 &value) const;
     void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
     void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
@@ -229,7 +228,7 @@ protected:
     void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
-    bool             ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip);
+    bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
     template <typename T>
     void             InitArrow(T *ui)

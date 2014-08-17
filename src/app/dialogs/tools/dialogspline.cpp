@@ -79,40 +79,42 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        if (number == 0)
+        switch (number)
         {
-            qint32 index = ui->comboBoxP1->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxP1->setCurrentIndex(index);
-                number++;
-                emit ToolTip(tr("Select last point of curve"));
-                return;
-            }
-        }
-        if (number == 1)
-        {
-            qint32 index = ui->comboBoxP4->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxP4->setCurrentIndex(index);
-                number = 0;
-                emit ToolTip("");
-                index = ui->comboBoxP1->currentIndex();
-                quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
-
-                QPointF p1 = data->GeometricObject<const VPointF *>(p1Id)->toQPointF();
-                QPointF p4 = data->GeometricObject<const VPointF *>(id)->toQPointF();
-
-                ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
-                ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
-            }
-            if (isInitialized == false)
+            case 0:
+                if (SetObject(id, ui->comboBoxP1, tr("Select last point of curve")))
+                {
+                    number++;
+                }
+                break;
+            case 1:
             {
-                this->setModal(true);
-                this->show();
+                const VPointF *point = data->GeometricObject<const VPointF *>(id);
+                qint32 index = ui->comboBoxP4->findText(point->name());
+                if ( index != -1 )
+                { // -1 for not found
+                    ui->comboBoxP4->setCurrentIndex(index);
+                    emit ToolTip("");
+                    index = ui->comboBoxP1->currentIndex();
+                    quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
+
+                    QPointF p1 = data->GeometricObject<const VPointF *>(p1Id)->toQPointF();
+                    QPointF p4 = data->GeometricObject<const VPointF *>(id)->toQPointF();
+
+                    ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
+                    ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
+
+                    this->setModal(true);
+                    this->show();
+                }
+                else
+                {
+                    qWarning()<<"Can't find object by name"<<point->name();
+                }
+                break;
             }
+            default:
+                break;
         }
     }
 }

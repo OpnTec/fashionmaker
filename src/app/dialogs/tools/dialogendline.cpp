@@ -140,15 +140,13 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            const VPointF *point = data->GeometricObject<const VPointF *>(id);
-            basePointId = id;
-            ChangeCurrentText(ui->comboBoxBasePoint, point->name());
-
-            line->VisualMode(id);
-            connect(line, &VisToolEndLine::ToolTip, this, &DialogTool::ShowVisToolTip);
-
-            emit ToolTip("");
-            prepare = true;
+            if (SetObject(id, ui->comboBoxBasePoint, ""))
+            {
+                basePointId = id;
+                line->VisualMode(id);
+                connect(line, &VisToolEndLine::ToolTip, this, &DialogTool::ShowVisToolTip);
+                prepare = true;
+            }
         }
     }
 }

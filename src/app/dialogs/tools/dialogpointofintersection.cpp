@@ -89,37 +89,31 @@ void DialogPointOfIntersection::setSecondPointId(const quint32 &value)
  */
 void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        if (number == 0)
+        if (type == SceneObject::Point)
         {
-            qint32 index = ui->comboBoxFirstPoint->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxFirstPoint->setCurrentIndex(index);
-                number++;
-                line->VisualMode(id);
-                emit ToolTip(tr("Select point horizontally"));
-                return;
-            }
-        }
-        if (number == 1)
-        {
-            qint32 index = ui->comboBoxSecondPoint->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxSecondPoint->setCurrentIndex(index);
-                number = 0;
-                line->setPoint2Id(id);
-                line->RefreshGeometry();
-                prepare = true;
-                emit ToolTip("");
-            }
-            if (isInitialized == false)
+            switch (number)
             {
-                this->setModal(true);
-                this->show();
+                case 0:
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point horizontally")))
+                    {
+                        number++;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case 1:
+                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    {
+                        line->setPoint2Id(id);
+                        line->RefreshGeometry();
+                        prepare = true;
+                        this->setModal(true);
+                        this->show();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

@@ -115,13 +115,16 @@ void DialogCutSpline::setSplineId(const quint32 &value)
  */
 void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Spline)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VSpline *spl = data->GeometricObject<const VSpline *>(id);
-        ChangeCurrentText(ui->comboBoxSpline, spl->name());
-        emit ToolTip("");
-        this->setModal(true);
-        this->show();
+        if (type == SceneObject::Spline)
+        {
+            if (SetObject(id, ui->comboBoxSpline, ""))
+            {
+                this->setModal(true);
+                this->show();
+            }
+        }
     }
 }
 

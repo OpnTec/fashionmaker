@@ -167,34 +167,32 @@ void DialogLine::SaveData()
  */
 void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (type == SceneObject::Point)
+    if (prepare == false)// After first choose we ignore all objects
     {
-        const VPointF *point = data->GeometricObject<const VPointF *>(id);
-        if (number == 0)
+        if (type == SceneObject::Point)
         {
-            qint32 index = ui->comboBoxFirstPoint->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                line->VisualMode(id);
-                ui->comboBoxFirstPoint->setCurrentIndex(index);
-                number++;
-                emit ToolTip(tr("Select second point"));
-                return;
-            }
-        }
-        if (number == 1)
-        {
-            qint32 index = ui->comboBoxSecondPoint->findText(point->name());
-            if ( index != -1 )
-            { // -1 for not found
-                ui->comboBoxSecondPoint->setCurrentIndex(index);
-                if (flagError)
-                {
-                    number = 0;
-                    prepare = true;
-                    emit ToolTip("");
-                    DialogAccepted();
-                }
+            switch (number)
+            {
+                case 0:
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
+                    {
+                        number++;
+                        line->VisualMode(id);
+                    }
+                    break;
+                case 1:
+                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    {
+                        if (flagError)
+                        {
+                            number = 0;
+                            prepare = true;
+                            DialogAccepted();
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

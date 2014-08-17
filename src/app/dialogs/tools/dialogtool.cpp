@@ -324,25 +324,6 @@ void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangeCurrentText select item in combobox by name
- * @param box combobox
- * @param value name of item
- */
-void DialogTool::ChangeCurrentText(QComboBox *box, const QString &value)
-{
-    qint32 index = box->findText(value);
-    if (index != -1)
-    {
-        box->setCurrentIndex(index);
-    }
-    else
-    {
-        qDebug()<<"Can't find object by name"<<value;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief ChangeCurrentData select item in combobox by id
  * @param box combobox
  * @param value id of item
@@ -579,17 +560,21 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::ChoosedPoint(const quint32 &id, QComboBox *box, const QString &toolTip)
+bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &toolTip)
 {
     SCASSERT(box != nullptr);
-    const VPointF *point = data->GeometricObject<const VPointF *>(id);
-    SCASSERT(point != nullptr);
-    const qint32 index = box->findText(point->name());
+    const VGObject *obj = data->GetGObject(id);
+    SCASSERT(obj != nullptr);
+    const qint32 index = box->findText(obj->name());
     if ( index != -1 )
     { // -1 for not found
         box->setCurrentIndex(index);
         emit ToolTip(toolTip);
         return true;
+    }
+    else
+    {
+        qWarning()<<"Can't find object by name"<<obj->name();
     }
     return false;
 }
