@@ -26,13 +26,13 @@
      <widget class="QToolBox" name="toolBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-        <horstretch>1</horstretch>
+        <horstretch>2</horstretch>
         <verstretch>1</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
        <size>
-        <width>85</width>
+        <width>105</width>
         <height>0</height>
        </size>
       </property>
@@ -40,14 +40,14 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>820</width>
+         <width>144</width>
          <height>272</height>
         </rect>
        </property>
@@ -308,7 +308,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>820</width>
+         <width>105</width>
          <height>70</height>
         </rect>
        </property>
@@ -384,7 +384,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>820</width>
+         <width>105</width>
          <height>116</height>
         </rect>
        </property>
@@ -512,7 +512,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>820</width>
+         <width>105</width>
          <height>70</height>
         </rect>
        </property>
@@ -588,7 +588,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>64</height>
         </rect>
        </property>
@@ -663,6 +663,12 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOn</enum>
       </property>
@@ -704,7 +710,7 @@
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
-   <widget class="QMenu" name="menuDrawing">
+   <widget class="QMenu" name="menuPatternPiece">
     <property name="title">
      <string>&amp;Pattern piece</string>
     </property>
@@ -724,7 +730,7 @@
     <addaction name="actionTable"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuDrawing"/>
+   <addaction name="menuPatternPiece"/>
    <addaction name="menuMeasurements"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -797,6 +803,42 @@
    <addaction name="actionZoomOut"/>
    <addaction name="actionZoomOriginal"/>
    <addaction name="actionZoomFitBest"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetHistory">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::TopDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>History</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_8"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetToolOptions">
+   <property name="minimumSize">
+    <size>
+     <width>125</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>Tool options</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_10"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
