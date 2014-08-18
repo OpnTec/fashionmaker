@@ -168,3 +168,12 @@ void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, c
     point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
     point->setVisible(true);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+{
+    SCASSERT (lineItem != nullptr);
+
+    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
+    lineItem->setLine(line);
+}

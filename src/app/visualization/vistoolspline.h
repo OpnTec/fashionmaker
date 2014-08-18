@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   visline.h
+ **  @file   vistoolspline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   18 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,33 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef VISLINE_H
-#define VISLINE_H
+#ifndef VISTOOLSPLINE_H
+#define VISTOOLSPLINE_H
 
-#include "visualization.h"
-#include <QGraphicsLineItem>
-#include <QPointF>
+#include "vispath.h"
 
-class VContainer;
-
-class VisLine: public Visualization, public QGraphicsLineItem
+class VisToolSpline : public VisPath
 {
     Q_OBJECT
 public:
-    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine();
+    VisToolSpline(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolSpline();
 
+    virtual void RefreshGeometry();
+
+    void         setPoint4Id(const quint32 &value);
+    void         setAngle1(const qreal &value);
+    void         setAngle2(const qreal &value);
+    void         setKAsm1(const qreal &value);
+    void         setKAsm2(const qreal &value);
+    void         setKCurve(const qreal &value);
 protected:
-    QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
-    qreal        CorrectAngle(const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint) const;
-    QLineF       Axis(const QPointF &p, const qreal &angle) const;
-    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen();
-    virtual void AddOnScene();
-private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY(VisToolSpline)
+    quint32              point4Id;
+    QGraphicsEllipseItem *lineP1;
+    QGraphicsEllipseItem *lineP4;
+    QGraphicsLineItem    *line;
+    qreal                angle1;
+    qreal                angle2;
+    qreal                kAsm1;
+    qreal                kAsm2;
+    qreal                kCurve;
 };
 
-#endif // VISLINE_H
+#endif // VISTOOLSPLINE_H

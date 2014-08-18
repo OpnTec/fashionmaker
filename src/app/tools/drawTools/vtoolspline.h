@@ -42,11 +42,11 @@ public:
                  VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                               QGraphicsItem * parent = nullptr );
     virtual void setDialog();
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static void  Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
-                        const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                        VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document &parse, const Source &typeCreation);
+    static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
+                               const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
+                               VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                               const Document &parse, const Source &typeCreation);
     static const QString ToolType;
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,

@@ -42,15 +42,6 @@ VisLine::~VisLine()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
-{
-    SCASSERT (lineItem != nullptr);
-
-    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
-    lineItem->setLine(line);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QLineF VisLine::Line(const QPointF &p1, const qreal &length, const qreal &angle)
 {
     QLineF line = QLineF();

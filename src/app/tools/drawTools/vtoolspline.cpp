@@ -107,8 +107,9 @@ void VToolSpline::setDialog()
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
+ * @return the created tool
  */
-void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
@@ -120,8 +121,14 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     const qreal angle1 = dialogTool->getAngle1();
     const qreal angle2 = dialogTool->getAngle2();
     const qreal kCurve = dialogTool->getKCurve();
-    Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
-           Source::FromGui);
+    VToolSpline *spl = nullptr;
+    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
+                 Source::FromGui);
+    if (spl != nullptr)
+    {
+        spl->dialog=dialogTool;
+    }
+    return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,11 +147,12 @@ void VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
  * @param data container with variables.
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
+ * @return the created tool
  */
-void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
-                         const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                         VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                         const Document &parse, const Source &typeCreation)
+VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
+                                 const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
+                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                 const Document &parse, const Source &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
     VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
@@ -175,7 +183,9 @@ void VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);
         doc->IncrementReferens(p4);
+        return spl;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

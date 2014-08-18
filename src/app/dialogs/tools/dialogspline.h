@@ -36,6 +36,8 @@ namespace Ui
     class DialogSpline;
 }
 
+class VisToolSpline;
+
 /**
  * @brief The DialogSpline class dialog for ToolSpline. Help create spline and edit option.
  */
@@ -71,6 +73,7 @@ public slots:
     virtual void  PointNameChanged();
     virtual void  UpdateList();
 protected:
+    virtual void  ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -104,6 +107,8 @@ private:
 
     /** @brief kCurve coefficient curve */
     qreal         kCurve;
+
+    VisToolSpline *path;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

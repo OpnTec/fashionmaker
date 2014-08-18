@@ -473,8 +473,10 @@ void MainWindow::ToolLineIntersect(bool checked)
  */
 void MainWindow::ToolSpline(bool checked)
 {
-    SetToolButton<DialogSpline>(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
-                                tr("Select first point curve"), &MainWindow::ClosedDialog<VToolSpline>);
+    SetToolButtonWithApply<DialogSpline>(checked, Tool::SplineTool, ":/cursor/spline_cursor.png",
+                                         tr("Select first point curve"),
+                                         &MainWindow::ClosedDialogWithApply<VToolSpline>,
+                                         &MainWindow::ApplyDialog<VToolSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
