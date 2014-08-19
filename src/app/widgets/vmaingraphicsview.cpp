@@ -34,100 +34,63 @@
 #include <QScrollBar>
 #include "../tools/vabstracttool.h"
 
+#include <QMouseEvent>
+#include <qmath.h>
+
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VMainGraphicsView constructor.
- * @param parent parent object.
- */
-VMainGraphicsView::VMainGraphicsView(QWidget *parent)
-    :QGraphicsView(parent), _numScheduledScalings(0)
+GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
+  : QObject(view), _view(view), _numScheduledScalings(0)
 {
-    this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
-    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-    this->setInteractive(true);
+  _view->viewport()->installEventFilter(this);
+  _view->setMouseTracking(true);
+  _modifiers = Qt::ControlModifier;
+  _zoom_factor_base = 1.0015;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief wheelEvent handle wheel events.
- * @param event wheel event.
- */
-//cppcheck-suppress unusedFunction
-void VMainGraphicsView::wheelEvent(QWheelEvent *event)
+void GraphicsViewZoom::gentle_zoom(double factor)
 {
-    int numSteps = event->delta() / 8 / 15;  // see QWheelEvent documentation
-
-    _numScheduledScalings += numSteps;
-    if (_numScheduledScalings * numSteps < 0)
-    {  // if user moved the wheel in another direction, we reset
-        _numScheduledScalings = numSteps;       // previously scheduled scalings
-    }
-
-    QTimeLine *anim = new QTimeLine(300, this);
-    anim->setUpdateInterval(20);
-
-    if (QApplication::keyboardModifiers() == Qt::ControlModifier)
-    {// If you press CTRL this code will be executed
-        connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scalingTime);
-    }
-    else
-    {
-        connect(anim, &QTimeLine::valueChanged, this, &VMainGraphicsView::scrollingTime);
-    }
-    connect(anim, &QTimeLine::finished, this, &VMainGraphicsView::animFinished);
-    anim->start();
+  _view->scale(factor, factor);
+  _view->centerOn(target_scene_pos);
+  QPointF delta_viewport_pos = target_viewport_pos - QPointF(_view->viewport()->width() / 2.0,
+                                                             _view->viewport()->height() / 2.0);
+  QPointF viewport_center = _view->mapFromScene(target_scene_pos) - delta_viewport_pos;
+  _view->centerOn(_view->mapToScene(viewport_center.toPoint()));
+  emit zoomed();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief scalingTime call each time when need handle scaling.
- * @param x value from 0.0 to 1.0
- */
-void VMainGraphicsView::scalingTime(qreal x)
+void GraphicsViewZoom::set_modifiers(Qt::KeyboardModifiers modifiers)
 {
-    Q_UNUSED(x);
-    const QPointF p0scene = mapToScene(mapFromGlobal(QCursor::pos()));
+  _modifiers = modifiers;
 
-    qreal factor = 1.0 + static_cast<qreal>(_numScheduledScalings) / 50.0;
-    scale(factor, factor);
-
-    const QPointF p1mouse = mapFromScene(p0scene);
-    const QPointF move = p1mouse - this->mapFromGlobal(QCursor::pos()); // The move
-    horizontalScrollBar()->setValue(static_cast<qint32>(move.x()) + horizontalScrollBar()->value());
-    verticalScrollBar()->setValue(static_cast<qint32>(move.y()) + verticalScrollBar()->value());
-
-    VAbstractTool::NewSceneRect(this->scene(), this);
-
-    emit NewFactor(factor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief scrollingTime call each time when need handle scrolling.
- * @param x value from 0.0 to 1.0
- */
-void VMainGraphicsView::scrollingTime(qreal x)
+void GraphicsViewZoom::set_zoom_factor_base(double value)
+{
+    _zoom_factor_base = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void GraphicsViewZoom::scrollingTime(qreal x)
 {
     Q_UNUSED(x);
     qreal factor = 1.0;
     if (_numScheduledScalings < 0)
     {
-        verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() + factor*3.5));
-        emit NewFactor(factor);
+        factor = factor*2.8;
     }
     else
     {
-        verticalScrollBar()->setValue(qRound(verticalScrollBar()->value() - factor*3.5));
-        emit NewFactor(factor);
+        factor = factor*-2.8;
     }
+
+    _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() + factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief animFinished
- */
-void VMainGraphicsView::animFinished()
+void GraphicsViewZoom::animFinished()
 {
     if (_numScheduledScalings > 0)
     {
@@ -138,6 +101,69 @@ void VMainGraphicsView::animFinished()
         _numScheduledScalings++;
     }
     sender()->~QObject();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
+{
+  if (event->type() == QEvent::MouseMove)
+  {
+    QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
+    QPointF delta = target_viewport_pos - mouse_event->pos();
+    if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
+    {
+      target_viewport_pos = mouse_event->pos();
+      target_scene_pos = _view->mapToScene(mouse_event->pos());
+    }
+  }
+  else if (event->type() == QEvent::Wheel)
+  {
+    QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event);
+    if (QApplication::keyboardModifiers() == _modifiers)
+    {
+      if (wheel_event->orientation() == Qt::Vertical)
+      {
+        double angle = wheel_event->angleDelta().y();
+        double factor = qPow(_zoom_factor_base, angle);
+        gentle_zoom(factor);
+        return true;
+      }
+    }
+    else
+    {
+        int numSteps = wheel_event->delta() / 8 / 15;  // see QWheelEvent documentation
+
+        _numScheduledScalings += numSteps;
+        if (_numScheduledScalings * numSteps < 0)
+        {  // if user moved the wheel in another direction, we reset
+            _numScheduledScalings = numSteps;       // previously scheduled scalings
+        }
+
+        QTimeLine *anim = new QTimeLine(300, this);
+        anim->setUpdateInterval(20);
+        connect(anim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::scrollingTime);
+        connect(anim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
+        anim->start();
+        return true;
+    }
+  }
+  Q_UNUSED(object)
+  return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VMainGraphicsView constructor.
+ * @param parent parent object.
+ */
+VMainGraphicsView::VMainGraphicsView(QWidget *parent)
+    :QGraphicsView(parent), zoom(nullptr)
+{
+    zoom = new GraphicsViewZoom(this);
+    this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
+    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    this->setInteractive(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
