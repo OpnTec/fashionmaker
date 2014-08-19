@@ -30,6 +30,7 @@
 #define VISUALIZATION_H
 
 #include <QObject>
+#include <QGraphicsItem>
 #include "../widgets/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
 
