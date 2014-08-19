@@ -279,10 +279,10 @@ void VToolLine::RefreshDataInFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
+ * @brief hoverEnterEvent handle hover enter events.
+ * @param event hover enter event.
  */
-void VToolLine::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyle(typeLine)));

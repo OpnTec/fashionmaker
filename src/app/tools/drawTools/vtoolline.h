@@ -58,7 +58,7 @@ protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     AddToFile();
     virtual void     RefreshDataInFile();
-    virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void     RemoveReferens();
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );

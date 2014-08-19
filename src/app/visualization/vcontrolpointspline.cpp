@@ -82,20 +82,28 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
+ * @brief hoverEnterEvent handle hover enter events.
  * @param event hover move event.
  */
-void VControlPointSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+#ifndef QT_NO_CURSOR
+    QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-openhand.png"));
+    QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
+#endif
+    QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
+    //Disable cursor-arrow-openhand
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+    QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -114,6 +122,32 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
         emit ControlPointChangePosition(indexSpline, position, newPos);
     }
     return QGraphicsItem::itemChange(change, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+    #ifndef QT_NO_CURSOR
+        QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-closehand.png"));
+        QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
+    #endif
+    }
+    QGraphicsEllipseItem::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        //Disable cursor-arrow-closehand
+    #ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+    #endif
+    }
+    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

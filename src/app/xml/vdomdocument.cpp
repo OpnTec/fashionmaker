@@ -227,7 +227,6 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
     Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    bool ok = false;
     QString parametr;
     bool val = true;
 

@@ -64,6 +64,7 @@ protected:
      */
     QVector<VControlPointSpline *>   controlPoints;
     SceneObject      sceneType;
+    bool             isHovered;
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */
@@ -71,7 +72,7 @@ protected:
     virtual void     ChangedActivDraw ( const QString &newName );
     virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void     SetFactor(qreal factor);
-    virtual void     hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void     keyReleaseEvent(QKeyEvent * event);

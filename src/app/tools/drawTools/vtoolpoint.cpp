@@ -185,18 +185,19 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         emit ChoosedTool(id, SceneObject::Point);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
+    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
+ * @brief hoverEnterEvent handle hover enter events.
+ * @param event hover enter event.
  */
-void VToolPoint::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
+    QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,5 +315,5 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
         default:
             break;
     }
-    QGraphicsItem::keyReleaseEvent ( event );
+    QGraphicsEllipseItem::keyReleaseEvent ( event );
 }

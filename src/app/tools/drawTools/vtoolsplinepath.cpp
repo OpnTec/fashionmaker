@@ -358,8 +358,14 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
  */
 void VToolSplinePath::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setPath(ToolPath());
+    if(isHovered)
+    {
+        this->setPath(ToolPath(PathDirection::Show));
+    }
+    else
+    {
+        this->setPath(ToolPath());
+    }
 
     const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
     for (qint32 i = 1; i<=splPath->Count(); ++i)

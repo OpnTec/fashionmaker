@@ -34,7 +34,7 @@ const QString VAbstractSpline::TagName = QStringLiteral("spline");
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
-      sceneType(SceneObject::Unknown)
+      sceneType(SceneObject::Unknown), isHovered(false)
 {
     ignoreFullUpdate = true;
 }
@@ -117,15 +117,17 @@ void VAbstractSpline::SetFactor(qreal factor)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
+ * @brief hoverEnterEvent handle hover enter events.
+ * @param event hover enter event.
  */
 // cppcheck-suppress unusedFunction
-void VAbstractSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine, Qt::RoundCap));
     this->setPath(ToolPath(PathDirection::Show));
+    isHovered = true;
+    QGraphicsPathItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,6 +141,8 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
+    isHovered = false;
+    QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -97,13 +97,18 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
+ * @brief hoverEnterEvent handle hover enter events.
+ * @param event hover enter event.
  */
-void VGraphicsSimpleTextItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    Q_UNUSED(event);
     this->setBrush(Qt::green);
+
+#ifndef QT_NO_CURSOR
+    QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-openhand.png"));
+    QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
+#endif
+    QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,6 +120,12 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setBrush(Qt::black);
+
+    //Disable cursor-arrow-openhand
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+    QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,4 +136,30 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VGraphicsSimpleTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     emit ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+    #ifndef QT_NO_CURSOR
+        QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-closehand.png"));
+        QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
+    #endif
+    }
+    QGraphicsSimpleTextItem::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        //Disable cursor-arrow-closehand
+    #ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+    #endif
+    }
+    QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }

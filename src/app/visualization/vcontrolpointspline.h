@@ -63,9 +63,11 @@ protected:
     /** @brief controlLine pointer to line control point. */
     QGraphicsLineItem *controlLine;
 
-    virtual void      hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     QVariant          itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event );
+    virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
 private:
     Q_DISABLE_COPY(VControlPointSpline)
     /** @brief indexSpline index spline in list.. */

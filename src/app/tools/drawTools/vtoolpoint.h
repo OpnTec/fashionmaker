@@ -65,7 +65,7 @@ protected:
 
     virtual void            UpdateNamePosition(qreal mx, qreal my);
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void            hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            RefreshPointGeometry(const VPointF &point);
     void                    RefreshLine();

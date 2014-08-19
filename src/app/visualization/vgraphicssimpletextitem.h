@@ -57,9 +57,11 @@ signals:
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent *event );
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event );
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event );
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
 private:
     /** @brief fontSize label font size. */
     qint32       fontSize;

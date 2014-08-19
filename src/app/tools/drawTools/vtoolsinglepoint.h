@@ -61,6 +61,10 @@ protected:
     virtual void decrementReferens();
     virtual void DeleteTool(bool ask = true);
     virtual void SaveDialog(QDomElement &domElement);
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
 private:
     QString namePP;
     QString mPath;

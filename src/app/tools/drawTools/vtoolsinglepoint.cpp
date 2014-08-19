@@ -216,6 +216,54 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    VToolPoint::hoverEnterEvent(event);
+
+#ifndef QT_NO_CURSOR
+    QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-openhand.png"));
+    QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    VToolPoint::hoverLeaveEvent(event);
+
+    //Disable cursor-arrow-openhand
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+    #ifndef QT_NO_CURSOR
+        QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-closehand.png"));
+        QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
+    #endif
+    }
+    VToolPoint::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        //Disable cursor-arrow-closehand
+    #ifndef QT_NO_CURSOR
+        QApplication::restoreOverrideCursor();
+    #endif
+    }
+    VToolPoint::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setColorLabel change color for label and label line.
  * @param color new color.
@@ -233,6 +281,10 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
  */
 void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+
     quint32 ref = _referens; // store referens
     _referens = 1; // make available delete pattern piece
     if (doc->CountPP() > 1)

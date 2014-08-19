@@ -19,5 +19,7 @@
         <file>cursor/splinepath_cut_point_cursor.png</file>
         <file>cursor/union_cursor.png</file>
         <file>cursor/arc_cut_cursor.png</file>
+        <file>cursor/cursor-arrow-closehand.png</file>
+        <file>cursor/cursor-arrow-openhand.png</file>
     </qresource>
 </RCC>

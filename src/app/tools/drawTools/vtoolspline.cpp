@@ -319,8 +319,15 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
  */
 void VToolSpline::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setPath(ToolPath());
+    //this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    if(isHovered)
+    {
+        this->setPath(ToolPath(PathDirection::Show));
+    }
+    else
+    {
+        this->setPath(ToolPath());
+    }
 
     const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
     QPointF splinePoint = VAbstractTool::data.GeometricObject<const VPointF *>(spl->GetP1().id())->toQPointF();
