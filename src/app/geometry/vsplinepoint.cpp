@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vsplinepoint.h"
+#include "vsplinepoint_p.h"
 #include <QDebug>
 #include <QLineF>
 
@@ -35,7 +36,7 @@
  * @brief VSplinePoint default constructor.
  */
 VSplinePoint::VSplinePoint()
-    :pSpline(VPointF()), angle1(0), angle2(180), kAsm1(1), kAsm2(1)
+    :d(new VSplinePointData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,14 +49,8 @@ VSplinePoint::VSplinePoint()
  * @param angle2 second angle control line.
  */
 VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
-    :pSpline(pSpline), angle1(0), angle2(180), kAsm1(kAsm1), kAsm2(kAsm2)
-{
-    if (qFuzzyCompare(qAbs(angle1-angle2), 180) == false)
-    {
-        qDebug()<<"angle1 and angle2 are not equal.";
-    }
-    SetAngle2(angle2);
-}
+    :d(new VSplinePointData(pSpline, kAsm1, angle1, kAsm2, angle2))
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -63,7 +58,7 @@ VSplinePoint::VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAs
  * @param point point
  */
 VSplinePoint::VSplinePoint(const VSplinePoint &point)
-    :pSpline(point.P()), angle1(point.Angle1()), angle2(point.Angle2()), kAsm1(point.KAsm1()), kAsm2(point.KAsm2())
+    :d(point.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,13 +68,13 @@ VSplinePoint &VSplinePoint::operator=(const VSplinePoint &point)
     {
         return *this;
     }
-    this->pSpline = point.P();
-    this->angle1 = point.Angle1();
-    this->angle2 = point.Angle2();
-    this->kAsm1 = point.KAsm1();
-    this->kAsm2 = point.KAsm2();
+    d = point.d;
     return *this;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VSplinePoint::~VSplinePoint()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -90,10 +85,10 @@ void VSplinePoint::SetAngle1(const qreal &value)
 {
     QLineF line(0, 0, 100, 0);
     line.setAngle(value);
-    angle1 = line.angle();
+    d->angle1 = line.angle();
 
     line.setAngle(value+180);
-    angle2 = line.angle();
+    d->angle2 = line.angle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,8 +100,88 @@ void VSplinePoint::SetAngle2(const qreal &value)
 {
     QLineF line(0, 0, 100, 0);
     line.setAngle(value);
-    angle2 = line.angle();
+    d->angle2 = line.angle();
 
     line.setAngle(value-180);
-    angle1 = line.angle();
+    d->angle1 = line.angle();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief P return point.
+ * @return point.
+ */
+VPointF VSplinePoint::P() const
+{
+    return d->pSpline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetP set point.
+ * @param value point.
+ */
+void VSplinePoint::SetP(const VPointF &value)
+{
+    d->pSpline = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Angle1 return first angle of spline.
+ * @return angle.
+ */
+qreal VSplinePoint::Angle1() const
+{
+    return d->angle1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Angle2 return second angle of spline.
+ * @return angle.
+ */
+qreal VSplinePoint::Angle2() const
+{
+    return d->angle2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief KAsm1 return coefficient of length first control line.
+ * @return coefficient.
+ */
+qreal VSplinePoint::KAsm1() const
+{
+    return d->kAsm1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetKAsm1 set coefficient of length first control line.
+ * @param value coefficient.
+ */
+void VSplinePoint::SetKAsm1(const qreal &value)
+{
+    d->kAsm1 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief KAsm2 return coefficient of length second control line.
+ * @return coefficient.
+ */
+qreal VSplinePoint::KAsm2() const
+{
+    return d->kAsm2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetKAsm2 set coefficient of length second control line.
+ * @param value coefficient.
+ */
+void VSplinePoint::SetKAsm2(const qreal &value)
+{
+    d->kAsm2 = value;
 }

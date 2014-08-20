@@ -32,6 +32,8 @@
 #include "vpointf.h"
 #include <QMetaType>
 
+class VSplinePointData;
+
 /**
  * @brief The VSplinePoint class keep information about point in spline path. Each point have two angles and two
  * coefficient. Point represent at the same time first and last point of spline.
@@ -43,7 +45,8 @@ public:
     VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     VSplinePoint(const VSplinePoint &point);
     VSplinePoint &operator=(const VSplinePoint &point);
-    ~VSplinePoint() {}
+    ~VSplinePoint();
+
     VPointF P() const;
     void    SetP(const VPointF &value);
     qreal   Angle1() const;
@@ -55,101 +58,8 @@ public:
     qreal   KAsm2() const;
     void    SetKAsm2(const qreal &value);
 protected:
-    /** @brief pSpline point. */
-    VPointF        pSpline;
-
-    /** @brief angle1 first angle spline. */
-    qreal          angle1;
-
-    /** @brief angle2 second angle spline. */
-    qreal          angle2;
-
-    /** @brief kAsm1 coefficient of length first control line. */
-    qreal          kAsm1;
-
-    /** @brief kAsm2 coefficient of length second control line. */
-    qreal          kAsm2;
+    QSharedDataPointer<VSplinePointData> d;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief P return point.
- * @return point.
- */
-inline VPointF VSplinePoint::P() const
-{
-    return pSpline;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetP set point.
- * @param value point.
- */
-inline void VSplinePoint::SetP(const VPointF &value)
-{
-    pSpline = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Angle1 return first angle of spline.
- * @return angle.
- */
-inline qreal VSplinePoint::Angle1() const
-{
-    return angle1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Angle2 return second angle of spline.
- * @return angle.
- */
-inline qreal VSplinePoint::Angle2() const
-{
-    return angle2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief KAsm1 return coefficient of length first control line.
- * @return coefficient.
- */
-inline qreal VSplinePoint::KAsm1() const
-{
-    return kAsm1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetKAsm1 set coefficient of length first control line.
- * @param value coefficient.
- */
-inline void VSplinePoint::SetKAsm1(const qreal &value)
-{
-    kAsm1 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief KAsm2 return coefficient of length second control line.
- * @return coefficient.
- */
-inline qreal VSplinePoint::KAsm2() const
-{
-    return kAsm2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetKAsm2 set coefficient of length second control line.
- * @param value coefficient.
- */
-inline void VSplinePoint::SetKAsm2(const qreal &value)
-{
-    kAsm2 = value;
-}
 
 Q_DECLARE_METATYPE(VSplinePoint)
 
