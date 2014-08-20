@@ -30,7 +30,6 @@
 #define VCURVELENGTH_P_H
 
 #include <QSharedData>
-#include "../options.h"
 
 class VCurveLengthData : public QSharedData
 {

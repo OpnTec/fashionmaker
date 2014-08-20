@@ -29,4 +29,5 @@ HEADERS += \
     container/vincrement_p.h \
     container/vcurvelength_p.h \
     container/vlineangle_p.h \
-    container/vlinelength_p.h
+    container/vlinelength_p.h \
+    container/vmeasurement_p.h

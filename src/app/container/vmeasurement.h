@@ -34,6 +34,8 @@
 
 #include <QStringList>
 
+class VMeasurementData;
+
 /**
  * @brief The VMeasurement class keep data row of standard table
  */
@@ -56,33 +58,9 @@ public:
     static QStringList ListHeights(QMap<GHeights, bool> heights);
     static QStringList ListSizes(QMap<GSizes, bool> sizes);
 private:
-    /** @brief description description measurement */
-    QString        gui_text;
+    QSharedDataPointer<VMeasurementData> d;
 
-    QString        _tagName;
     static void        ListValue(QStringList &list, qreal value);
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetGuiText measurement name for tooltip
- * @return measurement name
- */
-inline QString VMeasurement::GetGuiText() const
-{
-    return gui_text;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VMeasurement::TagName() const
-{
-    return _tagName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VMeasurement::setTagName(const QString &tagName)
-{
-    _tagName = tagName;
-}
 
 #endif // VSTANDARDTABLEROW_H

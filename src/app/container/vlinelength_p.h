@@ -30,7 +30,6 @@
 #define VLINELENGTH_P_H
 
 #include <QSharedData>
-#include "../options.h"
 
 class VLengthLineData : public QSharedData
 {

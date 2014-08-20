@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vmeasurement.h"
+#include "vmeasurement_p.h"
 #include "../widgets/vapplication.h"
 #include "../xml/vabstractmeasurements.h"
 
@@ -35,7 +36,7 @@
  * @brief VMeasurement create empty measurement
  */
 VMeasurement::VMeasurement()
-    :VVariable(), gui_text(QString()), _tagName(QString())
+    :VVariable(), d(new VMeasurementData)
 {
     SetType(VarType::Measurement);
 }
@@ -53,7 +54,7 @@ VMeasurement::VMeasurement()
  */
 VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
                            const QString &gui_text, const QString &description, const QString &tagName)
-    :VVariable(name, base, ksize, kheight, description), gui_text(gui_text), _tagName(tagName)
+    :VVariable(name, base, ksize, kheight, description), d(new VMeasurementData(gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }
@@ -69,14 +70,14 @@ VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &
  */
 VMeasurement::VMeasurement(const QString &name, const qreal &base, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(name, base, description), gui_text(gui_text), _tagName(tagName)
+    :VVariable(name, base, description), d(new VMeasurementData(gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(const VMeasurement &m)
-    :VVariable(m), gui_text(m.GetGuiText()), _tagName(m.TagName())
+    :VVariable(m), d(m.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,8 +88,7 @@ VMeasurement &VMeasurement::operator=(const VMeasurement &m)
         return *this;
     }
     VVariable::operator=(m);
-    this->gui_text = m.GetGuiText();
-    this->_tagName = m.TagName();
+    d = m.d;
     return *this;
 }
 
@@ -164,4 +164,26 @@ void VMeasurement::ListValue(QStringList &list, qreal value)
     qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
     QString strVal = QString("%1").arg(val);
     list.append(strVal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetGuiText measurement name for tooltip
+ * @return measurement name
+ */
+QString VMeasurement::GetGuiText() const
+{
+    return d->gui_text;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurement::TagName() const
+{
+    return d->_tagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::setTagName(const QString &tagName)
+{
+    d->_tagName = tagName;
 }

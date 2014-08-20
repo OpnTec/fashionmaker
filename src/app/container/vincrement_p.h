@@ -30,7 +30,6 @@
 #define VINCREMENT_P_H
 
 #include <QSharedData>
-#include "../options.h"
 
 class VIncrementData : public QSharedData
 {

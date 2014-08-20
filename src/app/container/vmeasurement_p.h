@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vlineangle_p.h
+ **  @file   vmeasurement_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   20 8, 2014
  **
@@ -26,32 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef VLINEANGLE_P_H
-#define VLINEANGLE_P_H
+#ifndef VMEASUREMENT_P_H
+#define VMEASUREMENT_P_H
 
 #include <QSharedData>
 
-class VLineAngleData : public QSharedData
+class VMeasurementData : public QSharedData
 {
 public:
 
-    VLineAngleData()
-        :p1Id(NULL_ID), p2Id(NULL_ID)
+    VMeasurementData()
+        :gui_text(QString()), _tagName(QString())
     {}
 
-    VLineAngleData(const quint32 &p1Id, const quint32 &p2Id)
-        :p1Id(p1Id), p2Id(p2Id)
+    VMeasurementData(const QString &gui_text, const QString &tagName)
+        :gui_text(gui_text), _tagName(tagName)
     {}
 
-    VLineAngleData(const VLineAngleData &var)
-        :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id)
+    VMeasurementData(const VMeasurementData &m)
+        :QSharedData(m), gui_text(m.gui_text), _tagName(m._tagName)
     {}
 
-    virtual  ~VLineAngleData() {}
+    virtual  ~VMeasurementData() {}
 
-    quint32 p1Id;
-    quint32 p2Id;
+    /** @brief description description measurement */
+    QString        gui_text;
+
+    QString        _tagName;
 };
 
 
-#endif // VLINEANGLE_P_H
+#endif // VMEASUREMENT_P_H

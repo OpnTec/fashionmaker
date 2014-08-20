@@ -30,7 +30,6 @@
 #define VVARIABLE_P_H
 
 #include <QSharedData>
-#include "../options.h"
 
 class VVariableData : public QSharedData
 {
