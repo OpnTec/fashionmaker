@@ -34,9 +34,7 @@
 #include <QVector>
 
 class QString;
-
-enum class Contour : char { OpenContour, CloseContour };
-enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
+class VDetailData;
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).
@@ -65,6 +63,7 @@ public:
      * @return new detail.
      */
     VDetail &operator=(const VDetail &detail);
+    ~VDetail();
     /**
      * @brief append append in the end of list node.
      * @param node new node.
@@ -224,38 +223,7 @@ public:
      */
     QList<quint32> Missing(const VDetail &det) const;
 private:
-    /**
-     * @brief _id id detail.
-     */
-    quint32        _id;
-    /**
-     * @brief nodes list detail nodes.
-     */
-    QVector<VNodeDetail> nodes;
-    /**
-     * @brief name detail name.
-     */
-    QString        name;
-    /**
-     * @brief mx bias x axis.
-     */
-    qreal          mx;
-    /**
-     * @brief my bias y axis.
-     */
-    qreal          my;
-    /**
-     * @brief seamAllowance status seamAllowance detail.
-     */
-    bool           seamAllowance;
-    /**
-     * @brief closed status equdistant detail.
-     */
-    bool           closed;
-    /**
-     * @brief width value seamAllowance in mm.
-     */
-    qreal          width;
+    QSharedDataPointer<VDetailData> d;
     /**
      * @brief listNodePoint return list nodes only with points.
      * @return list points node.
@@ -267,87 +235,7 @@ private:
      * @param id object (arc, point, spline, splinePath) id.
      * @return index in list or -1 id can't find.
      */
-    static ptrdiff_t     indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
+    static int     indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
 };
-
-inline void VDetail::append(const VNodeDetail &node)
-{
-    nodes.append(node);
-}
-
-inline qint32 VDetail::CountNode() const
-{
-    return nodes.size();
-}
-
-inline QString VDetail::getName() const
-{
-    return name;
-}
-
-inline void VDetail::setName(const QString &value)
-{
-    name = value;
-}
-
-inline qreal VDetail::getMx() const
-{
-    return mx;
-}
-
-inline void VDetail::setMx(const qreal &value)
-{
-    mx = value;
-}
-
-inline qreal VDetail::getMy() const
-{
-    return my;
-}
-
-inline void VDetail::setMy(const qreal &value)
-{
-    my = value;
-}
-
-inline bool VDetail::getSeamAllowance() const
-{
-    return seamAllowance;
-}
-
-inline void VDetail::setSeamAllowance(bool value)
-{
-    seamAllowance = value;
-}
-
-inline bool VDetail::getClosed() const
-{
-    return closed;
-}
-
-inline void VDetail::setClosed(bool value)
-{
-    closed = value;
-}
-
-inline qreal VDetail::getWidth() const
-{
-    return width;
-}
-
-inline void VDetail::setWidth(const qreal &value)
-{
-    width = value;
-}
-
-inline QVector<VNodeDetail> VDetail::getNodes() const
-{
-    return nodes;
-}
-
-inline void VDetail::setNodes(const QVector<VNodeDetail> &value)
-{
-    nodes = value;
-}
 
 #endif // VDETAIL_H

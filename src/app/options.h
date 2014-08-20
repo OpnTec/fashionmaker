@@ -76,6 +76,8 @@ enum class Draw : char { Calculation, Modeling };
 enum class Unit : char { Mm, Cm, Inch };
 enum class MeasurementsType : char { Standard, Individual };
 enum class NodeDetail : char { Contour, Modeling };
+enum class Contour : char { OpenContour, CloseContour };
+enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 
 enum class GHeights : unsigned char { ALL,
                                       H92=92,   H98=98,   H104=104, H110=110, H116=116, H122=122, H128=128, H134=134,

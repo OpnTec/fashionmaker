@@ -27,27 +27,23 @@
  *************************************************************************/
 
 #include "vdetail.h"
+#include "vdetail_p.h"
 #include <QDebug>
 #include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail()
-    :_id(NULL_ID), nodes(QVector<VNodeDetail>()), name(QString()), mx(0), my(0), seamAllowance(true), closed(true),
-      width(0)
+    :d(new VDetailData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
-    :_id(NULL_ID), nodes(QVector<VNodeDetail>()), name(name), mx(0), my(0), seamAllowance(true), closed(true),
-      width(0)
-{
-    this->nodes = nodes;
-}
+    :d(new VDetailData(name, nodes))
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VDetail::VDetail(const VDetail &detail)
-    :_id(NULL_ID), nodes(detail.getNodes()), name(detail.getName()), mx(detail.getMx()), my(detail.getMy()),
-      seamAllowance(detail.getSeamAllowance()), closed(detail.getClosed()), width(detail.getWidth())
+    :d (detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,41 +53,38 @@ VDetail &VDetail::operator =(const VDetail &detail)
     {
         return *this;
     }
-    _id = detail.id();
-    nodes = detail.getNodes();
-    name = detail.getName();
-    mx = detail.getMx();
-    my = detail.getMy();
-    seamAllowance = detail.getSeamAllowance();
-    closed = detail.getClosed();
-    width = detail.getWidth();
+    d = detail.d;
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VDetail::~VDetail()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VDetail::Clear()
 {
-    nodes.clear();
-    name.clear();
-    mx = 0;
-    my = 0;
-    seamAllowance = true;
-    closed = true;
-    width = 0;
+    d->nodes.clear();
+    d->name.clear();
+    d->mx = 0;
+    d->my = 0;
+    d->seamAllowance = true;
+    d->closed = true;
+    d->width = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDetail::ClearNodes()
 {
-    nodes.clear();
+    d->nodes.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VDetail::Containes(const quint32 &id) const
 {
-    for (ptrdiff_t i = 0; i < nodes.size(); ++i)
+    for (int i = 0; i < d->nodes.size(); ++i)
     {
-        VNodeDetail node = nodes.at(i);
+        VNodeDetail node = d->nodes.at(i);
         if (node.getId() == id)
         {
             return true;
@@ -101,33 +94,33 @@ bool VDetail::Containes(const quint32 &id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail &VDetail::operator [](ptrdiff_t indx)
+VNodeDetail &VDetail::operator [](int indx)
 {
-    return nodes[indx];
+    return d->nodes[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VNodeDetail &VDetail::at(ptrdiff_t indx) const
+const VNodeDetail &VDetail::at(int indx) const
 {
-    return nodes.at(indx);
+    return d->nodes.at(indx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ptrdiff_t VDetail::indexOfNode(const quint32 &id) const
+int VDetail::indexOfNode(const quint32 &id) const
 {
-    return indexOfNode(nodes, id);
+    return indexOfNode(d->nodes, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VDetail::id() const
 {
-    return _id;
+    return d->_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDetail::setId(const quint32 &id)
 {
-    _id = id;
+    d->_id = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,8 +132,8 @@ bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
         qDebug()<<"Not enough points.";
         return false;
     }
-    ptrdiff_t i = indexOfNode(list, p1);
-    ptrdiff_t j1 = 0, j2 = 0;
+    int i = indexOfNode(list, p1);
+    int j1 = 0, j2 = 0;
 
     if (i == list.size() - 1)
     {
@@ -169,7 +162,7 @@ bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
+int VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 {
     if (OnEdge(p1, p2) == false)
     {
@@ -178,10 +171,10 @@ ptrdiff_t VDetail::Edge(const quint32 &p1, const quint32 &p2) const
     }
 
     QVector<VNodeDetail> list = listNodePoint();
-    ptrdiff_t i = indexOfNode(list, p1);
-    ptrdiff_t j = indexOfNode(list, p2);
+    int i = indexOfNode(list, p1);
+    int j = indexOfNode(list, p2);
 
-    ptrdiff_t min = qMin(i, j);
+    int min = qMin(i, j);
 
     if (min == 0 && (i == list.size() - 1 || j == list.size() - 1))
     {
@@ -234,8 +227,8 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
             VNodeDetail p1;
             VNodeDetail p2;
             this->NodeOnEdge(i, p1, p2);
-            ptrdiff_t j1 = this->indexOfNode(p1.getId());
-            ptrdiff_t j2 = this->indexOfNode(p2.getId());
+            int j1 = this->indexOfNode(p1.getId());
+            int j2 = this->indexOfNode(p2.getId());
             if (j2 == 0)
             {
                 j2 = this->CountNode()-1;
@@ -246,7 +239,7 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
                     continue;
                 }
             }
-            for (ptrdiff_t j=j1; j<j2; ++j)
+            for (int j=j1; j<j2; ++j)
             {
                 det.append(this->at(j));
                 ++k;
@@ -259,15 +252,15 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
 //---------------------------------------------------------------------------------------------------------------------
 QList<quint32> VDetail::Missing(const VDetail &det) const
 {
-    if (nodes.size() == det.CountNode())
+    if (d->nodes.size() == det.CountNode())
     {
         return QList<quint32>();
     }
 
     QSet<quint32> set1;
-    for (qint32 i = 0; i < nodes.size(); ++i)
+    for (qint32 i = 0; i < d->nodes.size(); ++i)
     {
-        set1.insert(nodes.at(i).getId());
+        set1.insert(d->nodes.at(i).getId());
     }
 
     QSet<quint32> set2;
@@ -285,20 +278,20 @@ QList<quint32> VDetail::Missing(const VDetail &det) const
 QVector<VNodeDetail> VDetail::listNodePoint() const
 {
     QVector<VNodeDetail> list;
-    for (ptrdiff_t i = 0; i < nodes.size(); ++i)
+    for (int i = 0; i < d->nodes.size(); ++i)
     {
-        if (nodes.at(i).getTypeTool() == Tool::NodePoint)
+        if (d->nodes.at(i).getTypeTool() == Tool::NodePoint)
         {
-            list.append(nodes.at(i));
+            list.append(d->nodes.at(i));
         }
     }
     return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
+int VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 {
-    for (ptrdiff_t i = 0; i < list.size(); ++i)
+    for (int i = 0; i < list.size(); ++i)
     {
         if (list.at(i).getId() == id)
         {
@@ -307,4 +300,100 @@ ptrdiff_t VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &
     }
     qDebug()<<"Can't find node.";
     return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::append(const VNodeDetail &node)
+{
+    d->nodes.append(node);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint32 VDetail::CountNode() const
+{
+    return d->nodes.size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDetail::getName() const
+{
+    return d->name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setName(const QString &value)
+{
+    d->name = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VDetail::getMx() const
+{
+    return d->mx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setMx(const qreal &value)
+{
+    d->mx = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VDetail::getMy() const
+{
+    return d->my;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setMy(const qreal &value)
+{
+    d->my = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDetail::getSeamAllowance() const
+{
+    return d->seamAllowance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setSeamAllowance(bool value)
+{
+    d->seamAllowance = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDetail::getClosed() const
+{
+    return d->closed;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setClosed(bool value)
+{
+    d->closed = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VDetail::getWidth() const
+{
+    return d->width;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setWidth(const qreal &value)
+{
+    d->width = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VNodeDetail> VDetail::getNodes() const
+{
+    return d->nodes;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::setNodes(const QVector<VNodeDetail> &value)
+{
+    d->nodes = value;
 }
