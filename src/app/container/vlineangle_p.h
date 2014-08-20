@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlineangle.h
+ **  @file   vlineangle_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,29 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VLINEANGLE_H
-#define VLINEANGLE_H
+#ifndef VLINEANGLE_P_H
+#define VLINEANGLE_P_H
 
-#include "vinternalvariable.h"
+#include <QSharedData>
+#include "../options.h"
 
-class VPointF;
-class VLineAngleData;
-
-class VLineAngle :public VInternalVariable
+class VLineAngleData : public QSharedData
 {
 public:
-    VLineAngle();
-    VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
-    VLineAngle(const VLineAngle &var);
-    VLineAngle &operator=(const VLineAngle &var);
-    virtual ~VLineAngle();
 
-    virtual bool Filter(quint32 id);
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
-private:
-    QSharedDataPointer<VLineAngleData> d;
+    VLineAngleData()
+        :p1Id(NULL_ID), p2Id(NULL_ID)
+    {}
+
+    VLineAngleData(const quint32 &p1Id, const quint32 &p2Id)
+        :p1Id(p1Id), p2Id(p2Id)
+    {}
+
+    VLineAngleData(const VLineAngleData &var)
+        :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id)
+    {}
+
+    virtual  ~VLineAngleData() {}
+
+    quint32 p1Id;
+    quint32 p2Id;
 };
 
-#endif // VLINEANGLE_H
+
+#endif // VLINEANGLE_P_H

@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vlineangle.h"
+#include "vlineangle_p.h"
 #include "../geometry/vpointf.h"
 #include "../widgets/vapplication.h"
 
@@ -34,14 +35,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle()
-    :VInternalVariable(), p1Id(NULL_ID), p2Id(NULL_ID)
+    :VInternalVariable(), d(new VLineAngleData)
 {
     SetType(VarType::LineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
-    :VInternalVariable(), p1Id(p1Id), p2Id(p2Id)
+    :VInternalVariable(), d(new VLineAngleData(p1Id, p2Id))
 {
     SetType(VarType::LineAngle);
 
@@ -54,7 +55,7 @@ VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle(const VLineAngle &var)
-    :VInternalVariable(var), p1Id(var.GetP1Id()), p2Id(var.GetP2Id())
+    :VInternalVariable(var), d(var.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,8 +66,7 @@ VLineAngle &VLineAngle::operator=(const VLineAngle &var)
         return *this;
     }
     VInternalVariable::operator=(var);
-    this->p1Id = var.GetP1Id();
-    this->p2Id = var.GetP2Id();
+    d = var.d;
     return *this;
 }
 
@@ -77,7 +77,7 @@ VLineAngle::~VLineAngle()
 //---------------------------------------------------------------------------------------------------------------------
 bool VLineAngle::Filter(quint32 id)
 {
-    return id == p1Id || id == p2Id;
+    return id == d->p1Id || id == d->p2Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,4 +86,16 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
     VInternalVariable::SetValue(QLineF(p1->toQPointF(), p2->toQPointF()).angle());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VLineAngle::GetP1Id() const
+{
+    return d->p1Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VLineAngle::GetP2Id() const
+{
+    return d->p2Id;
 }
