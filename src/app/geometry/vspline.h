@@ -35,6 +35,7 @@
 #include <QPointF>
 
 class QPainterPath;
+class VSplineData;
 
 #define M_2PI   6.28318530717958647692528676655900576
 
@@ -50,6 +51,7 @@ public:
              quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
              Draw mode = Draw::Calculation);
+    virtual ~VSpline();
     VSpline &operator=(const VSpline &spl);
     VPointF GetP1 () const;
     QPointF GetP2 () const;
@@ -72,127 +74,12 @@ public:
 protected:
     static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:
-    /** @brief p1 first spline point. */
-    VPointF        p1;
-
-    /** @brief p2 first control point. */
-    QPointF        p2;
-
-    /** @brief p3 second control point. */
-    QPointF        p3;
-
-    /** @brief p4 last spline point. */
-    VPointF        p4;
-
-    /** @brief angle1 first angle control line. */
-    qreal          angle1;
-
-    /** @brief angle2 second angle control line. */
-    qreal          angle2;
-
-    /** @brief kAsm1 coefficient of length first control line. */
-    qreal          kAsm1;
-
-    /** @brief kAsm2 coefficient of length second control line. */
-    qreal          kAsm2;
-
-    /** @brief kCurve coefficient of curvature spline. */
-    qreal          kCurve;
+    QSharedDataPointer<VSplineData> d;
     qreal          LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const;
     static void    PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
                                   qint16 level, QVector<qreal> &px, QVector<qreal> &py);
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
     void           CreateName();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetP1 return first spline point.
- * @return first point.
- */
-inline VPointF VSpline::GetP1() const
-{
-    return p1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetP2 return first control point.
- * @return first control point.
- */
-inline QPointF VSpline::GetP2() const
-{
-    return p2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetP3 return second control point.
- * @return second control point.
- */
-inline QPointF VSpline::GetP3() const
-{
-    return p3;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetP4 return last spline point.
- * @return остання точка сплайну.
- */
-inline VPointF VSpline::GetP4() const
-{
-    return p4;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetAngle1 return first angle control line.
- * @return angle.
- */
-inline qreal VSpline::GetAngle1() const
-{
-    return angle1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetAngle2 return second angle control line.
- * @return angle.
- */
-inline qreal VSpline::GetAngle2() const
-{
-    return angle2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKasm1 return coefficient of length first control line.
- * @return coefficient.
- */
-inline qreal VSpline::GetKasm1() const
-{
-    return kAsm1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKasm2 return coefficient of length second control line.
- * @return coefficient.
- */
-inline qreal VSpline::GetKasm2() const
-{
-    return kAsm2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetKcurve return coefficient of curvature spline.
- * @return coefficient
- */
-inline qreal VSpline::GetKcurve() const
-{
-    return kCurve;
-}
 
 #endif // VSPLINE_H

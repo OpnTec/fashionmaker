@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vspline.h"
+#include "vspline_p.h"
 #include <QDebug>
 #include <QPainterPath>
 
@@ -39,8 +40,7 @@
  * @brief VSpline default constructor
  */
 VSpline::VSpline()
-    :VAbstractCurve(GOType::Spline), p1(VPointF()), p2(QPointF()), p3(QPointF()), p4(VPointF()), angle1(0), angle2(0),
-      kAsm1(1), kAsm2(1), kCurve(1)
+    :VAbstractCurve(GOType::Spline), d(new VSplineData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -49,9 +49,7 @@ VSpline::VSpline()
  * @param spline spline from which the copy.
  */
 VSpline::VSpline ( const VSpline & spline )
-    :VAbstractCurve(spline), p1(spline.GetP1 ()), p2(spline.GetP2 ()), p3(spline.GetP3 ()), p4(spline.GetP4 ()),
-      angle1(spline.GetAngle1 ()), angle2(spline.GetAngle2 ()), kAsm1(spline.GetKasm1()), kAsm2(spline.GetKasm2()),
-      kCurve(spline.GetKcurve())
+    :VAbstractCurve(spline), d(spline.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -67,30 +65,9 @@ VSpline::VSpline ( const VSpline & spline )
  */
 VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
                   quint32 idObject, Draw mode)
-    :VAbstractCurve(GOType::Spline, idObject, mode), p1(p1), p2(QPointF()), p3(QPointF()), p4(p4), angle1(angle1),
-      angle2(angle2), kAsm1(kAsm1), kAsm2(kAsm2), kCurve(kCurve)
+    :VAbstractCurve(GOType::Spline, idObject, mode), d(new VSplineData(p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve))
 {
     CreateName();
-
-    this->p1 = p1;
-    this->p4 = p4;
-    this->angle1 = angle1;
-    this->angle2 = angle2;
-    this->kAsm1 = kAsm1;
-    this->kAsm2 = kAsm2;
-    this->kCurve = kCurve;
-
-    qreal L = 0, radius = 0, angle = 90;
-    QPointF point1 = GetP1().toQPointF();
-    QPointF point4 = GetP4().toQPointF();
-    radius = QLineF(point1, point4).length()/1.414213;//1.414213=sqrt(2);
-    L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
-    QLineF p1p2(GetP1().x(), GetP1().y(), GetP1().x() + L * kAsm1, GetP1().y());
-    p1p2.setAngle(angle1);
-    QLineF p4p3(GetP4().x(), GetP4().y(), GetP4().x() + L * kAsm2, GetP4().y());
-    p4p3.setAngle(angle2);
-    this->p2 = p1p2.p2();
-    this->p3 = p4p3.p2();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,28 +79,15 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
  * @param p4 second point spline.
  */
 VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Draw mode)
-    :VAbstractCurve(GOType::Spline, idObject, mode), p1(p1), p2(p2), p3(p3), p4(p4), angle1(0), angle2(0), kAsm1(1),
-      kAsm2(1), kCurve(1)
+    :VAbstractCurve(GOType::Spline, idObject, mode), d(new VSplineData(p1, p2, p3, p4, kCurve))
 {
     CreateName();
-
-    this->p1 = p1;
-    this->p2 = p2;
-    this->p3 = p3;
-    this->p4 = p4;
-    this->angle1 = QLineF ( GetP1().toQPointF(), p2 ).angle();
-    this->angle2 = QLineF ( GetP4().toQPointF(), p3 ).angle();
-
-    qreal L = 0, radius = 0, angle = 90;
-    QPointF point1 = GetP1().toQPointF();
-    QPointF point4 = GetP4().toQPointF();
-    radius = QLineF(point1, point4).length()/1.414213;//1.414213=sqrt(2);
-    L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
-
-    this->kCurve = kCurve;
-    this->kAsm1 = QLineF ( GetP1().toQPointF(), p2 ).length()/L;
-    this->kAsm2 = QLineF ( GetP4().toQPointF(), p3 ).length()/L;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+VSpline::~VSpline()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -132,7 +96,7 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, 
  */
 qreal VSpline::GetLength () const
 {
-    return LengthBezier ( GetP1().toQPointF(), this->p2, this->p3, GetP4().toQPointF());
+    return LengthBezier ( GetP1().toQPointF(), d->p2, d->p3, GetP4().toQPointF());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -284,7 +248,7 @@ QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPo
  */
 QVector<QPointF> VSpline::GetPoints () const
 {
-    return GetPoints(GetP1().toQPointF(), p2, p3, GetP4().toQPointF());
+    return GetPoints(GetP1().toQPointF(), d->p2, d->p3, GetP4().toQPointF());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -693,14 +657,96 @@ VSpline &VSpline::operator =(const VSpline &spline)
         return *this;
     }
     VAbstractCurve::operator=(spline);
-    this->p1 = spline.GetP1 ();
-    this->p2 = spline.GetP2 ();
-    this->p3 = spline.GetP3 ();
-    this->p4 = spline.GetP4 ();
-    this->angle1 = spline.GetAngle1 ();
-    this->angle2 = spline.GetAngle2 ();
-    this->kAsm1 = spline.GetKasm1();
-    this->kAsm2 = spline.GetKasm2();
-    this->kCurve = spline.GetKcurve();
+    d = spline.d;
     return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP1 return first spline point.
+ * @return first point.
+ */
+VPointF VSpline::GetP1() const
+{
+    return d->p1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP2 return first control point.
+ * @return first control point.
+ */
+QPointF VSpline::GetP2() const
+{
+    return d->p2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP3 return second control point.
+ * @return second control point.
+ */
+QPointF VSpline::GetP3() const
+{
+    return d->p3;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP4 return last spline point.
+ * @return остання точка сплайну.
+ */
+VPointF VSpline::GetP4() const
+{
+    return d->p4;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle1 return first angle control line.
+ * @return angle.
+ */
+qreal VSpline::GetAngle1() const
+{
+    return d->angle1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle2 return second angle control line.
+ * @return angle.
+ */
+qreal VSpline::GetAngle2() const
+{
+    return d->angle2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKasm1 return coefficient of length first control line.
+ * @return coefficient.
+ */
+qreal VSpline::GetKasm1() const
+{
+    return d->kAsm1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKasm2 return coefficient of length second control line.
+ * @return coefficient.
+ */
+qreal VSpline::GetKasm2() const
+{
+    return d->kAsm2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKcurve return coefficient of curvature spline.
+ * @return coefficient
+ */
+qreal VSpline::GetKcurve() const
+{
+    return d->kCurve;
 }
