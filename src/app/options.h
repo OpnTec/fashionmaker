@@ -79,6 +79,7 @@ enum class NodeDetail : char { Contour, Modeling };
 enum class Contour : char { OpenContour, CloseContour };
 enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
+enum class SplinePointPosition : char { FirstPoint, LastPoint };
 
 enum class GHeights : unsigned char { ALL,
                                       H92=92,   H98=98,   H104=104, H110=110, H116=116, H122=122, H128=128, H134=134,

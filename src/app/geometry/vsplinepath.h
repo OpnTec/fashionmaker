@@ -36,7 +36,7 @@
 #include <QVector>
 #include <QPainterPath>
 
-enum class SplinePointPosition : char { FirstPoint, LastPoint };
+class VSplinePathData;
 
 /**
  * @brief The VSplinePath class keep information about splinePath.
@@ -57,6 +57,7 @@ public:
      * @param splPath spline path.
      */
     VSplinePath(const VSplinePath& splPath);
+    virtual ~VSplinePath();
     /**
      * @brief append add point in the end of list points.
      * @param point new point.
@@ -184,55 +185,8 @@ public:
      * @param value max count.
      */
     void setMaxCountPoints(const qint32 &value);
-protected:
-    /**
-     * @brief path list spline point.
-     */
-    QVector<VSplinePoint> path;
-    /**
-     * @brief kCurve coefficient of curvature spline.
-     */
-    qreal         kCurve;
-    /**
-     * @brief maxCountPoints max count of points what can have spline path.
-     */
-    qint32        maxCountPoints;
+private:
+    QSharedDataPointer<VSplinePathData> d;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qint32 VSplinePath::CountPoint() const
-{
-    return path.size();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QVector<VSplinePoint> VSplinePath::GetSplinePath() const
-{
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VSplinePath::Clear()
-{
-    path.clear();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qreal VSplinePath::getKCurve() const
-{
-    return kCurve;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VSplinePath::setKCurve(const qreal &value)
-{
-    kCurve = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline const QVector<VSplinePoint> *VSplinePath::GetPoint() const
-{
-    return &path;
-}
 
 #endif // VSPLINEPATH_H

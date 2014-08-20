@@ -14,7 +14,8 @@ HEADERS += \
     geometry/vgobject_p.h \
     geometry/varc_p.h \
     geometry/vspline_p.h \
-    geometry/vsplinepoint_p.h
+    geometry/vsplinepoint_p.h \
+    geometry/vsplinepath_p.h
 
 SOURCES += \
     geometry/vsplinepoint.cpp \
