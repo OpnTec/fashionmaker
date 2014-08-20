@@ -8,7 +8,8 @@ HEADERS += \
     geometry/vgobject.h \
     geometry/vpointf.h \
     geometry/vequidistant.h \
-    geometry/vabstractcurve.h
+    geometry/vabstractcurve.h \
+    geometry/vnodedetail_p.h
 
 SOURCES += \
     geometry/vsplinepoint.cpp \

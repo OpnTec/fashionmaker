@@ -27,20 +27,21 @@
  *************************************************************************/
 
 #include "vnodedetail.h"
+#include "vnodedetail_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
-    :id(NULL_ID), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
+    :d(new VNodeDetailData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my)
-    :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my)
+    :d(new VNodeDetailData(id, typeTool, typeNode, mx, my))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(const VNodeDetail &node)
-    :id(node.getId()), typeTool(node.getTypeTool()), typeNode(node.getTypeNode()), mx(node.getMx()), my(node.getMy())
+    :d (node.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,10 +51,70 @@ VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
     {
         return *this;
     }
-    id = node.getId();
-    typeTool = node.getTypeTool();
-    typeNode = node.getTypeNode();
-    mx = node.getMx();
-    my = node.getMy();
+    d = node.d;
     return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VNodeDetail::~VNodeDetail()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VNodeDetail::getId() const
+{
+    return d->id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeDetail::setId(const quint32 &value)
+{
+    d->id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Tool VNodeDetail::getTypeTool() const
+{
+    return d->typeTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeDetail::setTypeTool(const Tool &value)
+{
+    d->typeTool = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+NodeDetail VNodeDetail::getTypeNode() const
+{
+    return d->typeNode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeDetail::setTypeNode(const NodeDetail &value)
+{
+    d->typeNode = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VNodeDetail::getMx() const
+{
+    return d->mx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeDetail::setMx(const qreal &value)
+{
+    d->mx = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VNodeDetail::getMy() const
+{
+    return d->my;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeDetail::setMy(const qreal &value)
+{
+    d->my = value;
 }

@@ -31,8 +31,9 @@
 
 #include "../options.h"
 #include <QMetaType>
+#include <QSharedDataPointer>
 
-enum class NodeDetail : char { Contour, Modeling };
+class VNodeDetailData;
 
 /**
  * @brief The VNodeDetail class keep information about detail node.
@@ -64,6 +65,7 @@ public:
      * @return node
      */
     VNodeDetail &operator=(const VNodeDetail &node);
+    ~VNodeDetail();
     /**
      * @brief getId return object id.
      * @return id.
@@ -115,77 +117,8 @@ public:
      */
     void        setMy(const qreal &value);
 private:
-    /**
-     * @brief id object id.
-     */
-    quint32     id;
-    /**
-     * @brief typeTool type of tool
-     */
-    Tool typeTool;
-    /**
-     * @brief typeNode node type.
-     */
-    NodeDetail typeNode;
-    /**
-     * @brief mx bias x axis.
-     */
-    qreal       mx;
-    /**
-     * @brief my bias y axis.
-     */
-    qreal       my;
+    QSharedDataPointer<VNodeDetailData> d;
 };
-
-inline quint32 VNodeDetail::getId() const
-{
-    return id;
-}
-
-inline void VNodeDetail::setId(const quint32 &value)
-{
-    id = value;
-}
-
-inline Tool VNodeDetail::getTypeTool() const
-{
-    return typeTool;
-}
-
-inline void VNodeDetail::setTypeTool(const Tool &value)
-{
-    typeTool = value;
-}
-
-inline NodeDetail VNodeDetail::getTypeNode() const
-{
-    return typeNode;
-}
-
-inline void VNodeDetail::setTypeNode(const NodeDetail &value)
-{
-    typeNode = value;
-}
-
-inline qreal VNodeDetail::getMx() const
-{
-    return mx;
-}
-
-inline void VNodeDetail::setMx(const qreal &value)
-{
-    mx = value;
-}
-
-inline qreal VNodeDetail::getMy() const
-{
-    return my;
-}
-
-inline void VNodeDetail::setMy(const qreal &value)
-{
-    my = value;
-}
 
 Q_DECLARE_METATYPE(VNodeDetail)
 
