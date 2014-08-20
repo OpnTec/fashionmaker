@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vabstractcurve.h
+ **  @file   vgobject_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   25 6, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,27 +26,43 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTCURVE_H
-#define VABSTRACTCURVE_H
+#ifndef VGOBJECT_P_H
+#define VGOBJECT_P_H
 
-#include "vgobject.h"
-#include <QPointF>
+#include <QSharedData>
+#include "../options.h"
 
-enum class PathDirection : char { Hide, Show };
-
-class QPainterPath;
-
-class VAbstractCurve :public VGObject
+class VGObjectData : public QSharedData
 {
 public:
-    VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
-    VAbstractCurve(const VAbstractCurve &curve);
-    VAbstractCurve& operator= (const VAbstractCurve &curve);
-    virtual QVector<QPointF> GetPoints() const =0;
-    virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
-    virtual qreal            GetLength() const =0;
-protected:
-    QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
+    VGObjectData()
+        :_id(NULL_ID), type(GOType::Unknown), idObject(NULL_ID), _name(QString()), mode(Draw::Calculation)
+    {}
+
+    VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
+        :_id(NULL_ID), type(type), idObject(idObject), _name(QString()), mode(mode)
+    {}
+
+    VGObjectData(const VGObjectData &obj)
+        :QSharedData(obj), _id(obj._id), type(obj.type), idObject(obj.idObject), _name(obj._name), mode(obj.mode)
+    {}
+
+    virtual ~VGObjectData() {}
+
+    /** @brief _id id in container. Ned for arcs, spline and spline paths. */
+    quint32 _id;
+
+    /** @brief type type of graphical object */
+    GOType  type;
+
+    /** @brief idObject id of parent object. Only for modeling. All another return 0. */
+    quint32 idObject;
+
+    /** @brief _name object name */
+    QString _name;
+
+    /** @brief mode object created in calculation or drawing mode */
+    Draw    mode;
 };
 
-#endif // VABSTRACTCURVE_H
+#endif // VGOBJECT_P_H

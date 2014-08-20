@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "varc.h"
+#include "varc_p.h"
 #include <QDebug>
 #include <QLineF>
 #include <QPainterPath>
@@ -42,8 +43,7 @@
  * @brief VArc default constructor.
  */
 VArc::VArc ()
-    :VAbstractCurve(GOType::Arc), f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0),
-      formulaRadius(QString()), center(VPointF())
+    :VAbstractCurve(GOType::Arc), d (new VArcData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,21 +56,20 @@ VArc::VArc ()
  */
 VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
             QString formulaF2, quint32 idObject, Draw mode)
-    : VAbstractCurve(GOType::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
-      radius(radius), formulaRadius(formulaRadius), center(center)
+    : VAbstractCurve(GOType::Arc, idObject, mode),
+      d (new VArcData(center, radius, formulaRadius, f1, formulaF1, f2, formulaF2))
 {
     setName(QString (arc_+"%1").arg(this->GetCenter().name()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
-    : VAbstractCurve(GOType::Arc, 0, Draw::Calculation), f1(f1), formulaF1(QStringLiteral("")), f2(f2),
-      formulaF2(QStringLiteral("")), radius(radius), formulaRadius(QStringLiteral("")), center(center)
+    : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1, f2))
 {
     setName(QString (arc_+"%1").arg(this->GetCenter().name()));
-    formulaF1 = QString("%1").arg(f1);
-    formulaF2 = QString("%1").arg(f2);
-    formulaRadius = QString("%1").arg(radius);
+    d->formulaF1 = QString("%1").arg(f1);
+    d->formulaF2 = QString("%1").arg(f2);
+    d->formulaRadius = QString("%1").arg(radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,9 +78,7 @@ VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
  * @param arc arc
  */
 VArc::VArc(const VArc &arc)
-    : VAbstractCurve(arc), f1(arc.GetF1()), formulaF1(arc.GetFormulaF1()), f2(arc.GetF2()),
-    formulaF2(arc.GetFormulaF2()), radius(arc.GetRadius()), formulaRadius(arc.GetFormulaRadius()),
-    center(arc.GetCenter())
+    : VAbstractCurve(arc), d (arc.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,15 +94,13 @@ VArc &VArc::operator =(const VArc &arc)
         return *this;
     }
     VAbstractCurve::operator=(arc);
-    this->f1 = arc.GetF1();
-    this->formulaF1 = arc.GetFormulaF1();
-    this->f2 = arc.GetF2();
-    this->formulaF2 = arc.GetFormulaF2();
-    this->radius = arc.GetRadius();
-    this->formulaRadius = arc.GetFormulaRadius();
-    this->center = arc.GetCenter();
+    d = arc.d;
     return *this;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VArc::~VArc()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -114,7 +109,7 @@ VArc &VArc::operator =(const VArc &arc)
  */
 qreal VArc::GetLength() const
 {
-    return (M_PI * radius)/180 * AngleArc();
+    return (M_PI * d->radius)/180 * AngleArc();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -124,9 +119,9 @@ qreal VArc::GetLength() const
  */
 QPointF VArc::GetP1() const
 {
-    QPointF p1 ( GetCenter().x () + radius, GetCenter().y () );
+    QPointF p1 ( GetCenter().x () + d->radius, GetCenter().y () );
     QLineF centerP1(GetCenter().toQPointF(), p1);
-    centerP1.setAngle(f1);
+    centerP1.setAngle(d->f1);
     return centerP1.p2();
 }
 
@@ -137,9 +132,9 @@ QPointF VArc::GetP1() const
  */
 QPointF VArc::GetP2 () const
 {
-    QPointF p2 ( GetCenter().x () + radius, GetCenter().y () );
+    QPointF p2 ( GetCenter().x () + d->radius, GetCenter().y () );
     QLineF centerP2(GetCenter().toQPointF(), p2);
-    centerP2.setAngle(f2);
+    centerP2.setAngle(d->f2);
     return centerP2.p2();
 }
 
@@ -151,9 +146,9 @@ QPointF VArc::GetP2 () const
 qreal VArc::AngleArc() const
 {
     QLineF l1(0, 0, 100, 100);
-    l1.setAngle(f1);
+    l1.setAngle(d->f1);
     QLineF l2(0, 0, 100, 100);
-    l2.setAngle(f2);
+    l2.setAngle(d->f2);
     return l1.angleTo(l2);
 }
 
@@ -171,13 +166,13 @@ QVector<QPointF> VArc::GetPoints() const
     qreal s = angle/(k/4);
     do
     {
-        QLineF line(center.toQPointF(), GetP1());
+        QLineF line(d->center.toQPointF(), GetP1());
         line.setAngle(line.angle()+i);
         points.append(line.p2());
         i = i + s;
         if (i > angle)
         {
-            QLineF line(center.toQPointF(), GetP1());
+            QLineF line(d->center.toQPointF(), GetP1());
             line.setAngle(line.angle()+angle);
             points.append(line.p2());
         }
@@ -210,15 +205,15 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
         len = length;
     }
 
-    qreal n = (len*180)/(M_PI*radius);
+    qreal n = (len*180)/(M_PI*d->radius);
     QLineF line(GetCenter().toQPointF(), GetP1());
     line.setAngle(line.angle()+n);
 
-    arc1 = VArc (center, radius, formulaRadius, f1, formulaF1, line.angle(), QString().setNum(line.angle()),
-                 getIdObject(), getMode());
+    arc1 = VArc (d->center, d->radius, d->formulaRadius, d->f1, d->formulaF1, line.angle(),
+                 QString().setNum(line.angle()), getIdObject(), getMode());
 
-    arc2 = VArc (center, radius, formulaRadius, line.angle(), QString().setNum(line.angle()), f2, formulaF2,
-                 getIdObject(), getMode());
+    arc2 = VArc (d->center, d->radius, d->formulaRadius, line.angle(), QString().setNum(line.angle()), d->f2,
+                 d->formulaF2, getIdObject(), getMode());
     return line.p2();
 }
 
@@ -239,5 +234,75 @@ QPointF VArc::CutArc(const qreal &length) const
 void VArc::setId(const quint32 &id)
 {
     VAbstractCurve::setId(id);
-    setName(QString (arc_+"%1_%2").arg(center.name()).arg(id));
+    setName(QString (arc_+"%1_%2").arg(d->center.name()).arg(id));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF1 return start angle.
+ * @return angle in degree.
+ */
+QString VArc::GetFormulaF1() const
+{
+    return d->formulaF1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF1 return formula for start angle.
+ * @return string with formula.
+ */
+qreal VArc::GetF1() const
+{
+    return d->f1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF2 return end angle.
+ * @return angle in degree.
+ */
+QString VArc::GetFormulaF2() const
+{
+    return d->formulaF2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF2 return formula for end angle.
+ * @return string with formula.
+ */
+qreal VArc::GetF2() const
+{
+    return d->f2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetRadius return arc radius.
+ * @return radius.
+ */
+QString VArc::GetFormulaRadius() const
+{
+    return d->formulaRadius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetRadius return formula for radius.
+ * @return string with formula.
+ */
+qreal VArc::GetRadius() const
+{
+    return d->radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetCenter return center point.
+ * @return center point.
+ */
+VPointF VArc::GetCenter() const
+{
+    return d->center;
 }

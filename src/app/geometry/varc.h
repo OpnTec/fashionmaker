@@ -34,6 +34,7 @@
 #include <QCoreApplication>
 
 class QPainterPath;
+class VArcData;
 
 /**
  * @brief VArc class for anticlockwise arc.
@@ -48,6 +49,8 @@ public:
     VArc (VPointF center, qreal radius, qreal f1, qreal f2);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
+    virtual ~VArc();
+
     QString            GetFormulaF1 () const;
     qreal              GetF1 () const;
     QString            GetFormulaF2 () const;
@@ -64,96 +67,7 @@ public:
     QPointF            CutArc (const qreal &length) const;
     virtual void       setId(const quint32 &id);
 private:
-    /** @brief f1 start angle in degree. */
-    qreal              f1;
-
-    /** @brief formulaF1 formula for start angle. */
-    QString            formulaF1;
-
-    /** @brief f2 end angle in degree. */
-    qreal              f2;
-
-    /** @brief formulaF2 formula for end angle. */
-    QString            formulaF2;
-
-    /** @brief radius arc radius. */
-    qreal              radius;
-
-    /** @brief formulaRadius formula for arc radius. */
-    QString            formulaRadius;
-
-    /** @brief center center point of arc. */
-    VPointF            center;
+    QSharedDataPointer<VArcData> d;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF1 return start angle.
- * @return angle in degree.
- */
-inline QString VArc::GetFormulaF1() const
-{
-    return formulaF1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF1 return formula for start angle.
- * @return string with formula.
- */
-inline qreal VArc::GetF1() const
-{
-    return f1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF2 return end angle.
- * @return angle in degree.
- */
-inline QString VArc::GetFormulaF2() const
-{
-    return formulaF2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF2 return formula for end angle.
- * @return string with formula.
- */
-inline qreal VArc::GetF2() const
-{
-    return f2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetRadius return arc radius.
- * @return radius.
- */
-inline QString VArc::GetFormulaRadius() const
-{
-    return formulaRadius;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetRadius return formula for radius.
- * @return string with formula.
- */
-inline qreal VArc::GetRadius() const
-{
-    return radius;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetCenter return center point.
- * @return center point.
- */
-inline VPointF VArc::GetCenter() const
-{
-    return center;
-}
 
 #endif // VARC_H
