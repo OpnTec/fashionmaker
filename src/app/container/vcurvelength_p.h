@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vcurvelength.h
+ **  @file   vcurvelength_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 8, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VCURVELENGTH_H
-#define VCURVELENGTH_H
+#ifndef VCURVELENGTH_P_H
+#define VCURVELENGTH_P_H
 
-#include "vinternalvariable.h"
+#include <QSharedData>
+#include "../options.h"
 
-class VAbstractCurve;
-class VCurveLengthData;
-
-class VCurveLength : public VInternalVariable
+class VCurveLengthData : public QSharedData
 {
 public:
-    VCurveLength();
-    VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve);
-    VCurveLength(const VCurveLength &var);
-    VCurveLength &operator=(const VCurveLength &var);
-    virtual ~VCurveLength();
 
-    virtual bool Filter(quint32 id);
+    VCurveLengthData()
+        :id(NULL_ID), parentId(NULL_ID)
+    {}
 
-    quint32      GetId() const;
-    void         SetId(const quint32 &id);
+    VCurveLengthData(const quint32 &id, const quint32 &parentId)
+        :id(id), parentId(parentId)
+    {}
 
-    quint32      GetParentId() const;
-    void         SetParentId(const quint32 &value);
-private:
-    QSharedDataPointer<VCurveLengthData> d;
+    VCurveLengthData(const VCurveLengthData &var)
+        :QSharedData(var), id(var.id), parentId(var.parentId)
+    {}
+
+    virtual  ~VCurveLengthData() {}
+
+    quint32 id;
+    quint32 parentId;
 };
 
-#endif // VCURVELENGTH_H
+
+#endif // VCURVELENGTH_P_H

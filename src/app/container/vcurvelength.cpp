@@ -27,19 +27,20 @@
  *************************************************************************/
 
 #include "vcurvelength.h"
+#include "vcurvelength_p.h"
 #include "../widgets/vapplication.h"
 #include "../geometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()
-    :VInternalVariable(), id(NULL_ID), parentId(NULL_ID)
+    :VInternalVariable(), d(new VCurveLengthData)
 {
     SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve)
-    :VInternalVariable(), id(id), parentId(parentId)
+    :VInternalVariable(), d(new VCurveLengthData(id, parentId))
 {
     SetType(VarType::Unknown);
     SCASSERT(curve != nullptr);
@@ -49,7 +50,7 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const VCurveLength &var)
-    :VInternalVariable(var), id(var.GetId()), parentId(var.GetParentId())
+    :VInternalVariable(var), d(var.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,8 +61,7 @@ VCurveLength &VCurveLength::operator=(const VCurveLength &var)
         return *this;
     }
     VInternalVariable::operator=(var);
-    this->id = var.GetId();
-    this->parentId = var.GetParentId();
+    d = var.d;
     return *this;
 }
 
@@ -72,12 +72,36 @@ VCurveLength::~VCurveLength()
 //---------------------------------------------------------------------------------------------------------------------
 bool VCurveLength::Filter(quint32 id)
 {
-    if (parentId != 0)//Do not check if value zero
+    if (d->parentId != 0)//Do not check if value zero
     {// Not all curves have parents. Only those who was created after cutting the parent curve.
-        return this->id == id || parentId == id;
+        return d->id == id || d->parentId == id;
     }
     else
     {
-        return this->id == id;
+        return d->id == id;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VCurveLength::GetId() const
+{
+    return d->id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurveLength::SetId(const quint32 &id)
+{
+    d->id = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VCurveLength::GetParentId() const
+{
+    return d->parentId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurveLength::SetParentId(const quint32 &value)
+{
+    d->parentId = value;
 }

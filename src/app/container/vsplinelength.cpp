@@ -43,8 +43,8 @@ VSplineLength::VSplineLength(const quint32 &id, const quint32 &parentId, const Q
     SetType(VarType::SplineLength);
     SetName(name);
     SetValue(value);
-    this->id = id;
-    this->parentId = parentId;
+    SetId(id);
+    SetParentId(parentId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
