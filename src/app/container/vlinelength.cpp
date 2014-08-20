@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vlinelength.h"
+#include "vlinelength_p.h"
 #include "../geometry/vpointf.h"
 #include "../widgets/vapplication.h"
 
@@ -34,14 +35,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine()
-    :VInternalVariable(), p1Id(NULL_ID), p2Id(NULL_ID)
+    :VInternalVariable(), d(new VLengthLineData)
 {
     SetType(VarType::LineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
-    :VInternalVariable(), p1Id(p1Id), p2Id(p2Id)
+    :VInternalVariable(), d(new VLengthLineData(p1Id, p2Id))
 {
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
@@ -53,7 +54,7 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine(const VLengthLine &var)
-    :VInternalVariable(var), p1Id(var.GetP1Id()), p2Id(var.GetP2Id())
+    :VInternalVariable(var), d(var.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -64,8 +65,7 @@ VLengthLine &VLengthLine::operator=(const VLengthLine &var)
         return *this;
     }
     VInternalVariable::operator=(var);
-    this->p1Id = var.GetP1Id();
-    this->p2Id = var.GetP2Id();
+    d = var.d;
     return *this;
 }
 
@@ -76,7 +76,7 @@ VLengthLine::~VLengthLine()
 //---------------------------------------------------------------------------------------------------------------------
 bool VLengthLine::Filter(quint32 id)
 {
-    return id == p1Id || id == p2Id;
+    return id == d->p1Id || id == d->p2Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,4 +86,16 @@ void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
     SCASSERT(p2 != nullptr);
 
     VInternalVariable::SetValue(qApp->fromPixel(QLineF(p1->toQPointF(), p2->toQPointF()).length()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VLengthLine::GetP1Id() const
+{
+    return d->p1Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VLengthLine::GetP2Id() const
+{
+    return d->p2Id;
 }

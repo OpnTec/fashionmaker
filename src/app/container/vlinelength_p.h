@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlinelength.h
+ **  @file   vlinelength_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,29 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VLINELENGTH_H
-#define VLINELENGTH_H
+#ifndef VLINELENGTH_P_H
+#define VLINELENGTH_P_H
 
-#include "vinternalvariable.h"
+#include <QSharedData>
+#include "../options.h"
 
-class VPointF;
-class VLengthLineData;
-
-class VLengthLine :public VInternalVariable
+class VLengthLineData : public QSharedData
 {
 public:
-    VLengthLine();
-    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
-    VLengthLine(const VLengthLine &var);
-    VLengthLine &operator=(const VLengthLine &var);
-    virtual ~VLengthLine();
 
-    virtual bool Filter(quint32 id);
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
-private:
-    QSharedDataPointer<VLengthLineData> d;
+    VLengthLineData()
+        :p1Id(NULL_ID), p2Id(NULL_ID)
+    {}
+
+    VLengthLineData(const quint32 &p1Id, const quint32 &p2Id)
+        :p1Id(p1Id), p2Id(p2Id)
+    {}
+
+    VLengthLineData(const VLengthLineData &var)
+        :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id)
+    {}
+
+    virtual  ~VLengthLineData() {}
+
+    quint32 p1Id;
+    quint32 p2Id;
 };
 
-#endif // VLINELENGTH_H
+
+#endif // VLINELENGTH_P_H
