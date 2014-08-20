@@ -27,29 +27,30 @@
  *************************************************************************/
 
 #include "vvariable.h"
+#include "vvariable_p.h"
 #include "../widgets/vapplication.h"
 #include "../xml/vabstractmeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable()
-    :VInternalVariable(), base(0), ksize(0), kheight(0), description(QString())
+    :VInternalVariable(), d(new VVariableData)
 {
     Init();
-    VInternalVariable::SetValue(base);
+    VInternalVariable::SetValue(d->base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
                      const QString &description)
-    :VInternalVariable(), base(base), ksize(ksize), kheight(kheight), description(description)
+    :VInternalVariable(), d(new VVariableData(base, ksize, kheight, description))
 {
-    VInternalVariable::SetValue(base);
+    VInternalVariable::SetValue(d->base);
     SetName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(const QString &name, const qreal &base, const QString &description)
-    :base(base), ksize(0), kheight(0), description(description)
+    :d(new VVariableData(base, description))
 {
     Init();
     VInternalVariable::SetValue(base);
@@ -58,8 +59,7 @@ VVariable::VVariable(const QString &name, const qreal &base, const QString &desc
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(const VVariable &var)
-    :VInternalVariable(var), base(var.GetBase()), ksize(var.GetKsize()), kheight(var.GetKheight()),
-      description(var.GetDescription())
+    :VInternalVariable(var), d(var.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,10 +70,7 @@ VVariable &VVariable::operator=(const VVariable &var)
         return *this;
     }
     VInternalVariable::operator=(var);
-    this->base = var.GetBase();
-    this->ksize = var.GetKsize();
-    this->kheight = var.GetKheight();
-    this->description = var.GetDescription();
+    d = var.d;
     return *this;
 }
 
@@ -97,7 +94,7 @@ void VVariable::SetValue(const qreal &size, const qreal &height)
     // Formula for calculation gradation
     const qreal k_size    = ( size - baseSize ) / sizeIncrement;
     const qreal k_height  = ( height - baseHeight ) / heightIncrement;
-    VInternalVariable::SetValue(base + k_size * ksize + k_height * kheight);
+    VInternalVariable::SetValue(d->base + k_size * d->ksize + k_height * d->kheight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,7 +102,69 @@ void VVariable::Init()
 {
     if (qApp->patternUnit() != Unit::Inch)
     {
-        ksize = VAbstractMeasurements::UnitConvertor(50.0, Unit::Cm, qApp->patternUnit());
-        kheight = VAbstractMeasurements::UnitConvertor(176.0, Unit::Cm, qApp->patternUnit());
+        d->ksize = VAbstractMeasurements::UnitConvertor(50.0, Unit::Cm, qApp->patternUnit());
+        d->kheight = VAbstractMeasurements::UnitConvertor(176.0, Unit::Cm, qApp->patternUnit());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetBase return value in base size and height
+ * @return value
+ */
+qreal VVariable::GetBase() const
+{
+    return d->base;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVariable::SetBase(const qreal &value)
+{
+    d->base = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKsize return increment in sizes
+ * @return increment
+ */
+qreal VVariable::GetKsize() const
+{
+    return d->ksize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVariable::SetKsize(const qreal &value)
+{
+    d->ksize = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKheight return increment in heights
+ * @return increment
+ */
+qreal VVariable::GetKheight() const
+{
+    return d->kheight;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVariable::SetKheight(const qreal &value)
+{
+    d->kheight = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VVariable::GetDescription() const
+{
+    return d->description;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVariable::SetDescription(const QString &desc)
+{
+    d->description = desc;
 }

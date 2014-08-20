@@ -46,9 +46,6 @@ public:
 
     quint32 getId() const;
     void    setId(const quint32 &value);
-    void    setKsize(const qreal &value);
-    void    setKheight(const qreal &value);
-    void    setDescription(const QString &value);
 private:
     /** @brief id each increment have unique identificator */
     quint32 id;
@@ -72,36 +69,6 @@ inline quint32 VIncrement::getId() const
 inline void VIncrement::setId(const quint32 &value)
 {
     id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setKsize set increment in sizes
- * @param value value of increment
- */
-inline void VIncrement::setKsize(const qreal &value)
-{
-    ksize = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setKheight set increment in growths
- * @param value value of increment
- */
-inline void VIncrement::setKheight(const qreal &value)
-{
-    kheight = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setDescription set description for row
- * @param value description
- */
-inline void VIncrement::setDescription(const QString &value)
-{
-    description = value;
 }
 
 #endif // VINCREMENTTABLEROW_H

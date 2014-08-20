@@ -695,7 +695,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
         {
             doc->SetAttribute(domElement, VPattern::IncrementDescription, item->text());
             VIncrement *incr = data->GetVariable<VIncrement*>(itemName->text());
-            incr->setDescription(item->text());
+            incr->SetDescription(item->text());
             ui->tableWidgetIncrement->resizeColumnsToContents();
             ui->tableWidgetIncrement->resizeRowsToContents();
             this->column = 0;

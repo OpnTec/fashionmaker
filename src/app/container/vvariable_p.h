@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vvariable.h
+ **  @file   vvariable_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   9 7, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,40 +26,45 @@
  **
  *************************************************************************/
 
-#ifndef VVARIABLE_H
-#define VVARIABLE_H
+#ifndef VVARIABLE_P_H
+#define VVARIABLE_P_H
 
-#include "vinternalvariable.h"
+#include <QSharedData>
+#include "../options.h"
 
-class VVariableData;
-
-class VVariable :public VInternalVariable
+class VVariableData : public QSharedData
 {
 public:
-    VVariable();
-    VVariable(const QString &name, const qreal &base, const qreal &ksize = 0, const qreal &kheight = 0,
-              const QString &description = QString());
-    VVariable(const QString &name, const qreal &base, const QString &description = QString());
-    VVariable(const VVariable &var);
-    VVariable &operator=(const VVariable &var);
-    virtual ~VVariable();
 
-    qreal   GetBase() const;
-    void    SetBase(const qreal &value);
+    VVariableData()
+        :base(0), ksize(0), kheight(0), description(QString())
+    {}
 
-    qreal   GetKsize() const;
-    void    SetKsize(const qreal &value);
+    VVariableData(const qreal &base, const qreal &ksize, const qreal &kheight, const QString &description)
+        :base(base), ksize(ksize), kheight(kheight), description(description)
+    {}
 
-    qreal   GetKheight() const;
-    void    SetKheight(const qreal &value);
+    VVariableData(const qreal &base, const QString &description)
+        :base(base), ksize(0), kheight(0), description(description)
+    {}
 
-    QString GetDescription() const;
-    void    SetDescription(const QString &desc);
+    VVariableData(const VVariableData &var)
+        :QSharedData(var), base(var.base), ksize(var.ksize), kheight(var.kheight), description(var.description)
+    {}
 
-    void    SetValue(const qreal &size, const qreal &height);
-private:
-    QSharedDataPointer<VVariableData> d;
-    void    Init();
+    virtual ~VVariableData() {}
+
+    /** @brief base value in base size and height */
+    qreal   base;
+
+    /** @brief ksize increment in sizes */
+    qreal   ksize;
+
+    /** @brief kgrowth increment in heights */
+    qreal   kheight;
+
+    /** @brief description description of increment */
+    QString description;
 };
 
-#endif // VVARIABLE_H
+#endif // VVARIABLE_P_H
