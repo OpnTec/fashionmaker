@@ -45,12 +45,13 @@ VSplinePath::VSplinePath(const VSplinePath &splPath)
 void VSplinePath::append(const VSplinePoint &point)
 {
     path.append(point);
-    _name = splPath;
-    _name.append(QString("_%1").arg(path.first().P().name()));
+    QString name = splPath;
+    name.append(QString("_%1").arg(path.first().P().name()));
     if (path.size() > 1)
     {
-        _name.append(QString("_%1").arg(path.last().P().name()));
+        name.append(QString("_%1").arg(path.last().P().name()));
     }
+    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

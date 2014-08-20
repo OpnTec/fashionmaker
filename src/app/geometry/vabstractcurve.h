@@ -44,20 +44,9 @@ public:
     VAbstractCurve& operator= (const VAbstractCurve &curve);
     virtual QVector<QPointF> GetPoints() const =0;
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
-    virtual QString          name() const;
     virtual qreal            GetLength() const =0;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief name return curve name. This name used in variables.
- * @return name
- */
-inline QString VAbstractCurve::name() const
-{
-    return _name;
-}
 
 #endif // VABSTRACTCURVE_H

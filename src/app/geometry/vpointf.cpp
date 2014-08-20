@@ -42,7 +42,7 @@
 VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
     :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
 {
-    this->_name = name;
+    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quin
 VPointF::VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
     :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(point.x()), _y(point.y())
 {
-    this->_name = name;
+    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

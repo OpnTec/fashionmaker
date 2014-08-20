@@ -59,7 +59,7 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
     : VAbstractCurve(GOType::Arc, idObject, mode), f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2),
       radius(radius), formulaRadius(formulaRadius), center(center)
 {
-    _name = QString (arc_+"%1").arg(this->GetCenter().name());
+    setName(QString (arc_+"%1").arg(this->GetCenter().name()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
     : VAbstractCurve(GOType::Arc, 0, Draw::Calculation), f1(f1), formulaF1(QStringLiteral("")), f2(f2),
       formulaF2(QStringLiteral("")), radius(radius), formulaRadius(QStringLiteral("")), center(center)
 {
-    _name = QString (arc_+"%1").arg(this->GetCenter().name());
+    setName(QString (arc_+"%1").arg(this->GetCenter().name()));
     formulaF1 = QString("%1").arg(f1);
     formulaF2 = QString("%1").arg(f2);
     formulaRadius = QString("%1").arg(radius);
@@ -215,10 +215,10 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
     line.setAngle(line.angle()+n);
 
     arc1 = VArc (center, radius, formulaRadius, f1, formulaF1, line.angle(), QString().setNum(line.angle()),
-                 idObject, mode);
+                 getIdObject(), getMode());
 
     arc2 = VArc (center, radius, formulaRadius, line.angle(), QString().setNum(line.angle()), f2, formulaF2,
-                 idObject, mode);
+                 getIdObject(), getMode());
     return line.p2();
 }
 
@@ -238,6 +238,6 @@ QPointF VArc::CutArc(const qreal &length) const
  */
 void VArc::setId(const quint32 &id)
 {
-    _id = id;
-    _name = QString (arc_+"%1_%2").arg(center.name()).arg(id);
+    VAbstractCurve::setId(id);
+    setName(QString (arc_+"%1_%2").arg(center.name()).arg(id));
 }

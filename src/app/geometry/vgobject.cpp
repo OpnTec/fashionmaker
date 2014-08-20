@@ -27,13 +27,14 @@
  *************************************************************************/
 
 #include "vgobject.h"
+#include "vgobject_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGObject default constructor.
  */
 VGObject::VGObject()
-    :_id(NULL_ID), type(GOType::Unknown), idObject(NULL_ID), _name(QString()), mode(Draw::Calculation)
+    :d(new VGObjectData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -44,7 +45,7 @@ VGObject::VGObject()
  * @param mode mode creation. Used in modeling mode.
  */
 VGObject::VGObject(const GOType &type, const quint32 &idObject, const Draw &mode)
-    :_id(NULL_ID), type(type), idObject(idObject), _name(QString()), mode(mode)
+    :d(new VGObjectData(type, idObject, mode))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -53,7 +54,7 @@ VGObject::VGObject(const GOType &type, const quint32 &idObject, const Draw &mode
  * @param obj object.
  */
 VGObject::VGObject(const VGObject &obj)
-    :_id(obj.id()), type(obj.getType()), idObject(obj.getIdObject()), _name(obj.name()), mode(obj.getMode())
+    :d (obj.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,13 +69,13 @@ VGObject &VGObject::operator=(const VGObject &obj)
     {
         return *this;
     }
-    this->_id      = obj.id();
-    this->type     = obj.getType();
-    this->idObject = obj.getIdObject();
-    this->_name    = obj.name();
-    this->mode     = obj.getMode();
+    d = obj.d;
     return *this;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VGObject::~VGObject()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -83,7 +84,7 @@ VGObject &VGObject::operator=(const VGObject &obj)
  */
 quint32 VGObject::getIdObject() const
 {
-    return idObject;
+    return d->idObject;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,7 +94,7 @@ quint32 VGObject::getIdObject() const
  */
 void VGObject::setIdObject(const quint32 &value)
 {
-    idObject = value;
+    d->idObject = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,7 +104,7 @@ void VGObject::setIdObject(const quint32 &value)
  */
 QString VGObject::name() const
 {
-    return _name;
+    return d->_name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,7 +114,7 @@ QString VGObject::name() const
  */
 void VGObject::setName(const QString &name)
 {
-    _name = name;
+    d->_name = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,7 +124,7 @@ void VGObject::setName(const QString &name)
  */
 Draw VGObject::getMode() const
 {
-    return mode;
+    return d->mode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,7 +134,7 @@ Draw VGObject::getMode() const
  */
 void VGObject::setMode(const Draw &value)
 {
-    mode = value;
+    d->mode = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,7 +144,13 @@ void VGObject::setMode(const Draw &value)
  */
 GOType VGObject::getType() const
 {
-    return type;
+    return d->type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGObject::setType(const GOType &type)
+{
+    d->type = type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,7 +160,7 @@ GOType VGObject::getType() const
  */
 quint32 VGObject::id() const
 {
-    return _id;
+    return d->_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,5 +170,5 @@ quint32 VGObject::id() const
  */
 void VGObject::setId(const quint32 &id)
 {
-    _id = id;
+    d->_id = id;
 }

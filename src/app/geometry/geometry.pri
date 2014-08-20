@@ -10,7 +10,9 @@ HEADERS += \
     geometry/vequidistant.h \
     geometry/vabstractcurve.h \
     geometry/vnodedetail_p.h \
-    geometry/vdetail_p.h
+    geometry/vdetail_p.h \
+    geometry/vgobject_p.h \
+    geometry/varc_p.h
 
 SOURCES += \
     geometry/vsplinepoint.cpp \
