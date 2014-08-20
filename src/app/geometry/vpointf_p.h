@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vpointf.h
+ **  @file   vpointf_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,41 +26,51 @@
  **
  *************************************************************************/
 
-#ifndef VPOINTF_H
-#define VPOINTF_H
+#ifndef VPOINTF_P_H
+#define VPOINTF_P_H
 
-#include "vgobject.h"
+#include <QSharedData>
+#include "../options.h"
+#include <QPointF>
 
-class QPointF;
-class QString;
-class VPointFData;
-
-/**
- * @brief The VPointF class keep data of point.
- */
-class VPointF:public VGObject
+class VPointFData : public QSharedData
 {
 public:
-    VPointF ();
-    VPointF (const VPointF &point );
-    VPointF (const QPointF &point );
-    VPointF (qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
-              const Draw &mode = Draw::Calculation);
-    VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
-              const Draw &mode = Draw::Calculation);
-    virtual ~VPointF();
-    VPointF &operator=(const VPointF &point);
-    qreal   mx() const;
-    qreal   my() const;
-    void    setMx(qreal mx);
-    void    setMy(qreal my);
-    QPointF toQPointF()const;
-    qreal   x() const;
-    void    setX(const qreal &value);
-    qreal   y() const;
-    void    setY(const qreal &value);
-private:
-    QSharedDataPointer<VPointFData> d;
+
+    VPointFData()
+        : _mx(0), _my(0), _x(0), _y(0)
+    {}
+
+    VPointFData(const VPointFData &point)
+        :QSharedData(point), _mx(point._mx), _my(point._my), _x(point._x), _y(point._y)
+    {}
+
+    VPointFData(const QPointF &point)
+        :_mx(0), _my(0), _x(point.x()), _y(point.y())
+    {}
+
+    VPointFData(qreal x, qreal y, qreal mx, qreal my)
+        :_mx(mx), _my(my), _x(x), _y(y)
+    {}
+
+    VPointFData(const QPointF &point, qreal mx, qreal my)
+        :_mx(mx), _my(my), _x(point.x()), _y(point.y())
+    {}
+
+    virtual ~VPointFData() {}
+
+    /** @brief _mx offset name respect to x */
+    qreal   _mx;
+
+    /** @brief _my offset name respect to y */
+    qreal   _my;
+
+    /** @brief _x x coordinate */
+    qreal   _x;
+
+    /** @brief _y y coordinate */
+    qreal   _y;
 };
 
-#endif // VPOINTF_H
+
+#endif // VPOINTF_P_H

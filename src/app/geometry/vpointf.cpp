@@ -27,8 +27,27 @@
  *************************************************************************/
 
 #include "vpointf.h"
+#include "vpointf_p.h"
 #include <QPointF>
 #include <QString>
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VPointF creat empty point
+ */
+VPointF::VPointF()
+    :VGObject(GOType::Point, 0, Draw::Calculation), d(new VPointFData)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF::VPointF(const VPointF &point)
+    :VGObject(point), d(point.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF::VPointF(const QPointF &point)
+    :VGObject(VPointF()), d(new VPointFData(point))
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,7 +59,7 @@
  * @param my offset name respect to y
  */
 VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
-    :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(x), _y(y)
+    :VGObject(GOType::Point, idObject, mode), d(new VPointFData(x, y, mx, my))
 {
     setName(name);
 }
@@ -54,27 +73,14 @@ VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quin
  * @param my offset name respect to y
  */
 VPointF::VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
-    :VGObject(GOType::Point, idObject, mode), _mx(mx), _my(my), _x(point.x()), _y(point.y())
+    :VGObject(GOType::Point, idObject, mode), d(new VPointFData(point, mx, my))
 {
     setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VPointF creat empty point
- */
-VPointF::VPointF() :VGObject(GOType::Point, 0, Draw::Calculation), _mx(0), _my(0), _x(0), _y(0)
+VPointF::~VPointF()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPointF::VPointF(const VPointF &point) :VGObject(point), _mx(point.mx()), _my(point.my()), _x(point.x()), _y(point.y())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPointF::VPointF(const QPointF &point) :VGObject(VPointF()), _mx(0), _my(0), _x(point.x()), _y(point.y())
-{}
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -89,10 +95,7 @@ VPointF &VPointF::operator =(const VPointF &point)
         return *this;
     }
     VGObject::operator=(point);
-    _mx = point.mx();
-    _my = point.my();
-    _x = point.x();
-    _y = point.y();
+    d = point.d;
     return *this;
 }
 
@@ -103,5 +106,85 @@ VPointF &VPointF::operator =(const VPointF &point)
  */
 QPointF VPointF::toQPointF() const
 {
-    return QPointF(_x, _y);
+    return QPointF(d->_x, d->_y);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief mx return offset name respect to x
+ * @return offset
+ */
+qreal VPointF::mx() const
+{
+    return d->_mx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief my return offset name respect to y
+ * @return offset
+ */
+qreal VPointF::my() const
+{
+    return d->_my;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setMx set offset name respect to x
+ * @param mx offset
+ */
+void VPointF::setMx(qreal mx)
+{
+    d->_mx = mx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setMy set offset name respect to y
+ * @param my offset
+ */
+void VPointF::setMy(qreal my)
+{
+    d->_my = my;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief x return x coordinate
+ * @return value
+ */
+qreal VPointF::x() const
+{
+    return d->_x;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setX set x coordinate
+ * @param value x coordinate
+ */
+void VPointF::setX(const qreal &value)
+{
+    d->_x = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief y return y coordinate
+ * @return value
+ */
+qreal VPointF::y() const
+{
+    return d->_y;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setY set y coordinate
+ * @param value y coordinate
+ */
+void VPointF::setY(const qreal &value)
+{
+    d->_y = value;
 }
