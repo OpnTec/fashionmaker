@@ -37,7 +37,7 @@
 VMeasurement::VMeasurement()
     :VVariable(), gui_text(QString()), _tagName(QString())
 {
-    type = VarType::Measurement;
+    SetType(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &
                            const QString &gui_text, const QString &description, const QString &tagName)
     :VVariable(name, base, ksize, kheight, description), gui_text(gui_text), _tagName(tagName)
 {
-    type = VarType::Measurement;
+    SetType(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ VMeasurement::VMeasurement(const QString &name, const qreal &base, const QString
                            const QString &tagName)
     :VVariable(name, base, description), gui_text(gui_text), _tagName(tagName)
 {
-    type = VarType::Measurement;
+    SetType(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

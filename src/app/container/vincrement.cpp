@@ -36,7 +36,7 @@
 VIncrement::VIncrement()
     :VVariable(), id(NULL_ID)
 {
-    type = VarType::Increment;
+    SetType(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ VIncrement::VIncrement()
 VIncrement::VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
     :VVariable(name, base, ksize, kheight, description), id(id)
 {
-    type = VarType::Increment;
+    SetType(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

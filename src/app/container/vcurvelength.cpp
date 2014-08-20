@@ -34,17 +34,17 @@
 VCurveLength::VCurveLength()
     :VInternalVariable(), id(NULL_ID), parentId(NULL_ID)
 {
-    type = VarType::Unknown;
+    SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve)
     :VInternalVariable(), id(id), parentId(parentId)
 {
-    type = VarType::Unknown;
+    SetType(VarType::Unknown);
     SCASSERT(curve != nullptr);
-    name = curve->name();
-    value = qApp->fromPixel(curve->GetLength());
+    SetName(curve->name());
+    SetValue(qApp->fromPixel(curve->GetLength()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

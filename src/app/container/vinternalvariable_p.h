@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vinternalvariable.h
+ **  @file   vinternalvariable_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,36 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VINTERNALVARIABLE_H
-#define VINTERNALVARIABLE_H
+#ifndef VINTERNALVARIABLE_P_H
+#define VINTERNALVARIABLE_P_H
 
-#include <QString>
-#include <QSharedDataPointer>
+#include <QSharedData>
 #include "../options.h"
 
-class VInternalVariableData;
-
-class VInternalVariable
+class VInternalVariableData : public QSharedData
 {
 public:
-    VInternalVariable();
-    VInternalVariable(const VInternalVariable &var);
-    VInternalVariable &operator=(const VInternalVariable &var);
-    virtual ~VInternalVariable();
 
-    qreal        GetValue() const;
-    qreal*       GetValue();
-    void         SetValue(const qreal &value);
+    VInternalVariableData()
+        :type(VarType::Unknown), value(0), name(QString())
+    {}
 
-    QString      GetName() const;
-    void         SetName(const QString &name);
+    VInternalVariableData(const VInternalVariableData &var)
+        :QSharedData(var), type(var.type), value(var.value), name(var.name)
+    {}
 
-    VarType      GetType() const;
-    void         SetType(const VarType &type);
+    virtual ~VInternalVariableData() {}
 
-    virtual bool Filter(quint32 id);
-private:
-    QSharedDataPointer<VInternalVariableData> d;
+    VarType type;
+
+    /** @brief value variable's value */
+    qreal   value;
+
+    QString name;
 };
 
-#endif // VINTERNALVARIABLE_H
+
+#endif // VINTERNALVARIABLE_P_H

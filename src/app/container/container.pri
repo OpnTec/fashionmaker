@@ -23,4 +23,5 @@ HEADERS += \
     container/vcurvelength.h \
     container/varclength.h \
     container/vlinelength.h \
-    container/vsplinelength.h
+    container/vsplinelength.h \
+    container/vinternalvariable_p.h

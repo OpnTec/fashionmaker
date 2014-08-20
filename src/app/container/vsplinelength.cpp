@@ -34,15 +34,15 @@
 VSplineLength::VSplineLength()
     :VCurveLength()
 {
-    type = VarType::SplineLength;
+    SetType(VarType::SplineLength);
 }
 
 VSplineLength::VSplineLength(const quint32 &id, const quint32 &parentId, const QString &name, const qreal &value)
     :VCurveLength()
 {
-    type = VarType::SplineLength;
-    this->name = name;
-    this->value = value;
+    SetType(VarType::SplineLength);
+    SetName(name);
+    SetValue(value);
     this->id = id;
     this->parentId = parentId;
 }
@@ -51,7 +51,7 @@ VSplineLength::VSplineLength(const quint32 &id, const quint32 &parentId, const Q
 VSplineLength::VSplineLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path)
     :VCurveLength(id, parentId, path)
 {
-    type = VarType::SplineLength;
+    SetType(VarType::SplineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

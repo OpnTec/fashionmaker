@@ -96,12 +96,9 @@ void VContainer::setData(const VContainer &data)
     heightName = data.HeightName();
     {
         ClearGObjects();
-        const QHash<quint32, VGObject*> *obj = data.DataGObjects();
-        SCASSERT(obj != nullptr);
-        QHashIterator<quint32, VGObject*> i(*obj);
-        while (i.hasNext())
+        QHash<quint32, VGObject*>::const_iterator i;
+        for (i = data.gObjects.constBegin(); i != data.gObjects.constEnd(); ++i)
         {
-            i.next();
             switch (i.value()->getType())
             {
                 case (GOType::Arc):
@@ -125,12 +122,9 @@ void VContainer::setData(const VContainer &data)
 
     {
         ClearVariables();
-        const QHash<QString, VInternalVariable*> *vars = data.DataVariables();
-        SCASSERT(vars != nullptr);
-        QHashIterator<QString, VInternalVariable*> i(*vars);
-        while (i.hasNext())
+        QHash<QString, VInternalVariable*>::const_iterator i;
+        for (i = data.variables.constBegin(); i != data.variables.constEnd(); ++i)
         {
-            i.next();
             switch (i.value()->GetType())
             {
                 case (VarType::Measurement):

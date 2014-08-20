@@ -36,19 +36,19 @@
 VLineAngle::VLineAngle()
     :VInternalVariable(), p1Id(NULL_ID), p2Id(NULL_ID)
 {
-    type = VarType::LineAngle;
+    SetType(VarType::LineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
     :VInternalVariable(), p1Id(p1Id), p2Id(p2Id)
 {
-    type = VarType::LineAngle;
+    SetType(VarType::LineAngle);
 
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
 
-    name = QString(angleLine_+"%1_%2").arg(p1->name(), p2->name());
+    SetName(QString(angleLine_+"%1_%2").arg(p1->name(), p2->name()));
     SetValue(p1, p2);
 }
 
@@ -85,5 +85,5 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
 {
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
-    value = QLineF(p1->toQPointF(), p2->toQPointF()).angle();
+    VInternalVariable::SetValue(QLineF(p1->toQPointF(), p2->toQPointF()).angle());
 }

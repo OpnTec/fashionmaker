@@ -35,7 +35,7 @@ VVariable::VVariable()
     :VInternalVariable(), base(0), ksize(0), kheight(0), description(QString())
 {
     Init();
-    value = base;
+    VInternalVariable::SetValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -43,8 +43,8 @@ VVariable::VVariable(const QString &name, const qreal &base, const qreal &ksize,
                      const QString &description)
     :VInternalVariable(), base(base), ksize(ksize), kheight(kheight), description(description)
 {
-    value = base;
-    this->name = name;
+    VInternalVariable::SetValue(base);
+    SetName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,8 +52,8 @@ VVariable::VVariable(const QString &name, const qreal &base, const QString &desc
     :base(base), ksize(0), kheight(0), description(description)
 {
     Init();
-    value = base;
-    this->name = name;
+    VInternalVariable::SetValue(base);
+    SetName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ void VVariable::SetValue(const qreal &size, const qreal &height)
     // Formula for calculation gradation
     const qreal k_size    = ( size - baseSize ) / sizeIncrement;
     const qreal k_height  = ( height - baseHeight ) / heightIncrement;
-    value = base + k_size * ksize + k_height * kheight;
+    VInternalVariable::SetValue(base + k_size * ksize + k_height * kheight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,15 +27,16 @@
  *************************************************************************/
 
 #include "vinternalvariable.h"
+#include "vinternalvariable_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable::VInternalVariable()
-    :type(VarType::Unknown), value(0), name(QString())
+    :d(new VInternalVariableData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable::VInternalVariable(const VInternalVariable &var)
-    :type(var.GetType()), value(var.GetValue()), name(var.GetName())
+    :d(var.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -45,9 +46,7 @@ VInternalVariable &VInternalVariable::operator=(const VInternalVariable &var)
     {
         return *this;
     }
-    this->type = var.GetType();
-    this->value = var.GetValue();
-    this->name = var.GetName();
+    d = var.d;
     return *this;
 }
 
@@ -60,4 +59,46 @@ bool VInternalVariable::Filter(quint32 id)
 {
     Q_UNUSED(id);
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VInternalVariable::GetValue() const
+{
+    return d->value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal *VInternalVariable::GetValue()
+{
+    return &d->value;
+}
+
+void VInternalVariable::SetValue(const qreal &value)
+{
+    d->value = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VInternalVariable::GetName() const
+{
+    return d->name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VInternalVariable::SetName(const QString &name)
+{
+    d->name = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VarType VInternalVariable::GetType() const
+{
+    return d->type;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VInternalVariable::SetType(const VarType &type)
+{
+    d->type = type;
 }

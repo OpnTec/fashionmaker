@@ -34,14 +34,14 @@
 VArcLength::VArcLength()
     :VCurveLength()
 {
-    type = VarType::ArcLength;
+    SetType(VarType::ArcLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcLength::VArcLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc)
     :VCurveLength(id, parentId, arc)
 {
-    type = VarType::ArcLength;
+    SetType(VarType::ArcLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

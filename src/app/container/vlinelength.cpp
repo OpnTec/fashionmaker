@@ -36,7 +36,7 @@
 VLengthLine::VLengthLine()
     :VInternalVariable(), p1Id(NULL_ID), p2Id(NULL_ID)
 {
-    type = VarType::LineLength;
+    SetType(VarType::LineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,8 +46,8 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
 
-    type = VarType::LineLength;
-    name = QString(line_+"%1_%2").arg(p1->name(), p2->name());
+    SetType(VarType::LineLength);
+    SetName(QString(line_+"%1_%2").arg(p1->name(), p2->name()));
     SetValue(p1, p2);
 }
 
@@ -85,5 +85,5 @@ void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
 
-    value = qApp->fromPixel(QLineF(p1->toQPointF(), p2->toQPointF()).length());
+    VInternalVariable::SetValue(qApp->fromPixel(QLineF(p1->toQPointF(), p2->toQPointF()).length()));
 }
