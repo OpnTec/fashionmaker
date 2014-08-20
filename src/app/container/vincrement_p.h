@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vincrementtablerow.h
+ **  @file   vincrement_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,30 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VINCREMENTTABLEROW_H
-#define VINCREMENTTABLEROW_H
+#ifndef VINCREMENT_P_H
+#define VINCREMENT_P_H
 
-#include "vvariable.h"
+#include <QSharedData>
+#include "../options.h"
 
-class VIncrementData;
-
-/**
- * @brief The VIncrement class keep data row of increment table
- */
-class VIncrement :public VVariable
+class VIncrementData : public QSharedData
 {
 public:
-    VIncrement();
-    VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight,
-               QString description = QString());
-    VIncrement(const VIncrement &incr);
-    VIncrement &operator=(const VIncrement &incr);
-    virtual ~VIncrement();
 
-    quint32 getId() const;
-    void    setId(const quint32 &value);
-private:
-    QSharedDataPointer<VIncrementData> d;
+    VIncrementData()
+        :id(NULL_ID)
+    {}
+
+    VIncrementData(quint32 id)
+        :id(id)
+    {}
+
+    VIncrementData(const VIncrementData &incr)
+        :QSharedData(incr), id(incr.id)
+    {}
+
+    virtual  ~VIncrementData() {}
+
+    /** @brief id each increment have unique identificator */
+    quint32 id;
 };
 
-#endif // VINCREMENTTABLEROW_H
+
+#endif // VINCREMENT_P_H

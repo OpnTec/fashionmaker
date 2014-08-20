@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vincrement.h"
+#include "vincrement_p.h"
 #include "../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -34,7 +35,7 @@
  * @brief VIncrement create enpty increment
  */
 VIncrement::VIncrement()
-    :VVariable(), id(NULL_ID)
+    :VVariable(), d(new VIncrementData)
 {
     SetType(VarType::Increment);
 }
@@ -50,14 +51,14 @@ VIncrement::VIncrement()
  * @param description description of increment
  */
 VIncrement::VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
-    :VVariable(name, base, ksize, kheight, description), id(id)
+    :VVariable(name, base, ksize, kheight, description), d(new VIncrementData(id))
 {
     SetType(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::VIncrement(const VIncrement &incr)
-    :VVariable(incr), id(incr.getId())
+    :VVariable(incr), d(incr.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,10 +69,30 @@ VIncrement &VIncrement::operator=(const VIncrement &incr)
         return *this;
     }
     VVariable::operator=(incr);
-    this->id = incr.getId();
+    d = incr.d;
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::~VIncrement()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getId return id of row
+ * @return id
+ */
+quint32 VIncrement::getId() const
+{
+    return d->id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setId set id of row
+ * @param value id
+ */
+void VIncrement::setId(const quint32 &value)
+{
+    d->id = value;
+}
