@@ -73,7 +73,7 @@ void VToolTriangle::setDialog()
     SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setAxisP1Id(axisP1Id);
     dialogTool->setAxisP2Id(axisP2Id);
     dialogTool->setFirstPointId(firstPointId);
@@ -133,10 +133,10 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
                                      const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                                      VContainer *data, const Document &parse, const Source &typeCreation)
 {
-    const VPointF *axisP1 = data->GeometricObject<const VPointF *>(axisP1Id);
-    const VPointF *axisP2 = data->GeometricObject<const VPointF *>(axisP2Id);
-    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
-    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
+    const QSharedPointer<VPointF> axisP1 = data->GeometricObject<VPointF>(axisP1Id);
+    const QSharedPointer<VPointF> axisP2 = data->GeometricObject<VPointF>(axisP2Id);
+    const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
+    const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
 
     QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
                               secondPoint->toQPointF());
@@ -228,7 +228,7 @@ void VToolTriangle::FullUpdateFromFile()
         firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
+    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,7 +269,7 @@ void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolTriangle::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -292,7 +292,7 @@ void VToolTriangle::AddToFile()
  */
 void VToolTriangle::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {

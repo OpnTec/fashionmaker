@@ -50,7 +50,7 @@ VisToolEndLine::~VisToolEndLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::RefreshGeometry()
 {
-    const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
+    const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
     QLineF line;
     if (qFuzzyCompare(1 + length, 1 + 0))
     {

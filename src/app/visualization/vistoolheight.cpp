@@ -53,7 +53,7 @@ void VisToolHeight::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(base_point, first->toQPointF(), supportColor);
 
         if (lineP1Id <= 0)
@@ -62,7 +62,7 @@ void VisToolHeight::RefreshGeometry()
         }
         else
         {
-            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(lineP1Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP1Id);
             DrawPoint(lineP1, second->toQPointF(), supportColor);
 
             QLineF base_line;
@@ -73,7 +73,7 @@ void VisToolHeight::RefreshGeometry()
             }
             else
             {
-                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(lineP2Id);
+                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(lineP2Id);
                 DrawPoint(lineP2, third->toQPointF(), supportColor);
 
                 base_line = QLineF(second->toQPointF(), third->toQPointF());

@@ -117,18 +117,17 @@ void DialogTool::showEvent(QShowEvent *event)
 void DialogTool::FillComboBoxPoints(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
-    const QHash<quint32, VGObject*> *objs = data->DataGObjects();
-    QHashIterator<quint32, VGObject*> i(*objs);
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
     QMap<QString, quint32> list;
-    while (i.hasNext())
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        i.next();
         if (i.key() != toolId)
         {
-            VGObject *obj = i.value();
+            QSharedPointer<VGObject> obj = i.value();
             if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
             {
-                const VPointF *point = data->GeometricObject<const VPointF *>(i.key());
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(i.key());
                 list[point->name()] = i.key();
             }
         }
@@ -140,20 +139,19 @@ void DialogTool::FillComboBoxPoints(QComboBox *box) const
 void DialogTool::FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut) const
 {
     SCASSERT(box != nullptr);
-    const QHash<quint32, VGObject *> *objs = data->DataGObjects();
-    QHashIterator<quint32, VGObject*> i(*objs);
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
-    while (i.hasNext())
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        i.next();
         if (cut == ComboBoxCutArc::CutArc)
         {
             if (i.key() != toolId + 1 && i.key() != toolId + 2)
             {
-                VGObject *obj = i.value();
+                QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
                 {
-                    const VArc *arc = data->GeometricObject<const VArc *>(i.key());
+                    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(i.key());
                     list[arc->name()] = i.key();
                 }
             }
@@ -162,10 +160,10 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut) const
         {
             if (i.key() != toolId)
             {
-                VGObject *obj = i.value();
+                QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
                 {
-                    const VArc *arc = data->GeometricObject<const VArc *>(i.key());
+                    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(i.key());
                     list[arc->name()] = i.key();
                 }
             }
@@ -183,20 +181,19 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut) const
 void DialogTool::FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
-    const QHash<quint32, VGObject *> *objs = data->DataGObjects();
-    QHashIterator<quint32, VGObject*> i(*objs);
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
-    while (i.hasNext())
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        i.next();
         if (cut == ComboBoxCutSpline::CutSpline)
         {
             if (i.key() != toolId + 1 && i.key() != toolId + 2)
             {
-                VGObject *obj = i.value();
+                QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
                 {
-                    const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
+                    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(i.key());
                     list[spl->name()] = i.key();
                 }
             }
@@ -205,10 +202,10 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut) cons
         {
             if (i.key() != toolId)
             {
-                VGObject *obj = i.value();
+                QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
                 {
-                    const VSpline *spl = data->GeometricObject<const VSpline *>(i.key());
+                    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(i.key());
                     list[spl->name()] = i.key();
                 }
             }
@@ -226,20 +223,19 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut) cons
 void DialogTool::FillComboBoxSplinesPath(QComboBox *box, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
-    const QHash<quint32, VGObject *> *objs = data->DataGObjects();
-    QHashIterator<quint32, VGObject *> i(*objs);
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
     QMap<QString, quint32> list;
-    while (i.hasNext())
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        i.next();
         if (cut == ComboBoxCutSpline::CutSpline)
         {
             if (i.key() != toolId + 1 && i.key() != toolId + 2)
             {
-                VGObject *obj = i.value();
+                QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
                 {
-                    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
+                    const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(i.key());
                     list[splPath->name()] = i.key();
                 }
             }
@@ -248,10 +244,10 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, ComboBoxCutSpline cut) 
         {
             if (i.key() != toolId)
             {
-                VGObject *obj = i.value();
+                QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
                 {
-                    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(i.key());
+                    const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(i.key());
                     list[splPath->name()] = i.key();
                 }
             }
@@ -563,8 +559,8 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
 bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &toolTip)
 {
     SCASSERT(box != nullptr);
-    const VGObject *obj = data->GetGObject(id);
-    SCASSERT(obj != nullptr);
+    const QSharedPointer<VGObject> obj = data->GetGObject(id);
+    SCASSERT(obj.isNull() == false);
     const qint32 index = box->findText(obj->name());
     if ( index != -1 )
     { // -1 for not found
@@ -964,7 +960,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonStandardTable->isChecked())
     {
         QString name = qApp->VarFromUser(item->text());
-        VMeasurement *stable = data->GetVariable<VMeasurement *>(name);
+        QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(name))
                 .arg(stable->GetGuiText());
         labelDescription->setText(desc);
@@ -972,7 +968,7 @@ void DialogTool::ValChenged(int row)
     }
     if (radioButtonIncrements->isChecked())
     {
-        VIncrement *incr = data->GetVariable<VIncrement *>(item->text());
+        QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
         QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(item->text()))
                 .arg(incr->GetDescription());
         labelDescription->setText(desc);
@@ -981,7 +977,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonLengthLine->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VLengthLine*>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(*data->GetVariable<VLengthLine>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Line length"));
         labelDescription->setText(desc);
         return;
@@ -989,7 +985,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonLengthArc->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VArcLength *>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(*data->GetVariable<VArcLength>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Arc length"));
         labelDescription->setText(desc);
         return;
@@ -997,7 +993,7 @@ void DialogTool::ValChenged(int row)
     if (radioButtonLengthCurve->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VSplineLength *>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(*data->GetVariable<VSplineLength>(qApp->VarFromUser(item->text()))->GetValue())
                 .arg(tr("Curve length"));
         labelDescription->setText(desc);
         return;

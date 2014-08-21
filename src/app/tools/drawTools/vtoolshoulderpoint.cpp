@@ -72,7 +72,7 @@ void VToolShoulderPoint::setDialog()
     SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formulaLength);
     dialogTool->setP1Line(basePointId);
@@ -174,9 +174,9 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                 const Document &parse, const Source &typeCreation)
 {
-    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(p1Line);
-    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(p2Line);
-    const VPointF *shoulderPoint = data->GeometricObject<const VPointF *>(pShoulder);
+    const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(p1Line);
+    const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(p2Line);
+    const QSharedPointer<VPointF> shoulderPoint = data->GeometricObject<VPointF>(pShoulder);
 
     const qreal result = CheckFormula(_id, formula, data);
 
@@ -273,7 +273,7 @@ void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolShoulderPoint::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -297,7 +297,7 @@ void VToolShoulderPoint::AddToFile()
  */
 void VToolShoulderPoint::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {

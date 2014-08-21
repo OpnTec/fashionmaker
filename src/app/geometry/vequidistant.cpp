@@ -49,7 +49,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
         {
             case (Tool::NodePoint):
             {
-                const VPointF *point = data->GeometricObject<const VPointF*>(detail.at(i).getId());
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(detail.at(i).getId());
                 points.append(point->toQPointF());
                 if (detail.getSeamAllowance() == true)
                 {
@@ -62,7 +62,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             break;
             case (Tool::NodeArc):
             {
-                const VArc *arc = data->GeometricObject<const VArc *>(detail.at(i).getId());
+                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, arc->GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(arc->GetPoints()));
                 if (len1 <= lenReverse)
@@ -86,7 +86,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             break;
             case (Tool::NodeSpline):
             {
-                const VSpline *spline = data->GeometricObject<const VSpline *>(detail.at(i).getId());
+                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, spline->GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(spline->GetPoints()));
                 if (len1 <= lenReverse)
@@ -110,7 +110,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             break;
             case (Tool::NodeSplinePath):
             {
-                const VSplinePath *splinePath = data->GeometricObject<const VSplinePath *>(detail.at(i).getId());
+                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(detail.at(i).getId());
                 qreal len1 = GetLengthContour(points, splinePath->GetPoints());
                 qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath->GetPoints()));
                 if (len1 <= lenReverse)

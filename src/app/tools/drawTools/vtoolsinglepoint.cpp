@@ -78,7 +78,7 @@ void VToolSinglePoint::setDialog()
     SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setData(p->name(), p->toQPointF());
 }
 
@@ -90,7 +90,7 @@ void VToolSinglePoint::AddToFile()
 {
     Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
 
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement sPoint = doc->createElement(TagName);
 
     // Create SPoint tag
@@ -125,7 +125,7 @@ void VToolSinglePoint::AddToFile()
  */
 void VToolSinglePoint::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -304,7 +304,7 @@ void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
  */
 void  VToolSinglePoint::FullUpdateFromFile()
 {
-    VPointF point = *VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    VPointF point = *VAbstractTool::data.GeometricObject<VPointF>(id);
     RefreshPointGeometry(point);
 }
 
@@ -337,7 +337,7 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 void VToolSinglePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<const VPointF *>(id)));
+    RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<VPointF>(id)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

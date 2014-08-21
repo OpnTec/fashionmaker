@@ -86,7 +86,7 @@ void VNodeSplinePath::Create(VPattern *doc, VContainer *data, quint32 id, quint3
     {
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
         doc->AddTool(id, splPath);
-        const VSplinePath *path = data->GeometricObject<const VSplinePath *>(id);
+        const QSharedPointer<VSplinePath> path = data->GeometricObject<VSplinePath>(id);
         const QVector<VSplinePoint> *points = path->GetPoint();
         for (qint32 i = 0; i<points->size(); ++i)
         {
@@ -217,7 +217,7 @@ void VNodeSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VNodeSplinePath::RefreshGeometry()
 {
-    const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     QPainterPath path;
     path.addPath(splPath->GetPath());
     path.setFillRule( Qt::WindingFill );

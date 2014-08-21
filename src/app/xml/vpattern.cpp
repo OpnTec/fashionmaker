@@ -431,7 +431,7 @@ void VPattern::setCurrentData()
             if (tools.size() > 0)
             {
                 const VDataTool *vTool = tools.value(id);
-                data->setData(vTool->getData());
+                *data = vTool->getData();
             }
         }
     }
@@ -1340,7 +1340,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 PointsCommonAttributes(domElement, id, mx, my);
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
-                const VPointF *point = data->GeometricObject<const VPointF *>(idObject );
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
                 data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                                     Draw::Modeling));
                 VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
@@ -1684,7 +1684,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
                             const qreal angle = GetParametrDouble(element, VAbstractTool::AttrAngle, "0");
                             const qreal kAsm2 = GetParametrDouble(element, VAbstractTool::AttrKAsm2, "1.0");
                             const quint32 pSpline = GetParametrUInt(element, VAbstractTool::AttrPSpline, "0");
-                            const VPointF p = *data->GeometricObject<const VPointF *>(pSpline);
+                            const VPointF p = *data->GeometricObject<VPointF>(pSpline);
 
                             QLineF line(0, 0, 100, 0);
                             line.setAngle(angle+180);
@@ -1712,7 +1712,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             try
             {
                 SplinesCommonAttributes(domElement, id, idObject, idTool);
-                VSpline *spl = new VSpline(*data->GeometricObject<const VSpline *>(idObject));
+                VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
                 spl->setIdObject(idObject);
                 spl->setMode(Draw::Modeling);
                 data->UpdateGObject(id, spl);
@@ -1729,7 +1729,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             try
             {
                 SplinesCommonAttributes(domElement, id, idObject, idTool);
-                VSplinePath *path = new VSplinePath(*data->GeometricObject<const VSplinePath *>(idObject));
+                VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
                 path->setIdObject(idObject);
                 path->setMode(Draw::Modeling);
                 data->UpdateGObject(id, path);
@@ -1809,7 +1809,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
                 ToolsCommonAttributes(domElement, id);
                 const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, "0");
                 const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, "0");
-                VArc *arc = new VArc(*data->GeometricObject<const VArc *>(idObject));
+                VArc *arc = new VArc(*data->GeometricObject<VArc>(idObject));
                 arc->setIdObject(idObject);
                 arc->setMode(Draw::Modeling);
                 data->UpdateGObject(id, arc);

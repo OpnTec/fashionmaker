@@ -53,7 +53,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
-    const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
+    const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(id);
     for (qint32 i = 1; i<=splPath->Count(); ++i)
     {
         VSpline spl = splPath->GetSpline(i);
@@ -92,7 +92,7 @@ void VToolSplinePath::setDialog()
     SCASSERT(dialog != nullptr);
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     dialogTool->SetPath(*splPath);
 }
 
@@ -168,7 +168,7 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
 void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                                  const QPointF &pos)
 {
-    VSplinePath oldSplPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    VSplinePath oldSplPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
     VSplinePath newSplPath = oldSplPath;
     VSpline spl = newSplPath.GetSpline(indexSpline);
     if (position == SplinePointPosition::FirstPoint)
@@ -272,7 +272,7 @@ void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolSplinePath::AddToFile()
 {
-    VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -299,7 +299,7 @@ void VToolSplinePath::RefreshDataInFile()
         qDebug()<<"Can't find element with id="<<id<<"in pattern file";
         return;
     }
-    VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
     RefreshSplinePath(splPath);
     doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
     UpdatePathPoint(doc, domElement, splPath);
@@ -329,7 +329,7 @@ void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &
  */
 void VToolSplinePath::RemoveReferens()
 {
-    VSplinePath splPath = *VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
     for (qint32 i = 0; i < splPath.Count(); ++i)
     {
         doc->DecrementReferens(splPath.at(i).P().id());
@@ -367,7 +367,7 @@ void VToolSplinePath::RefreshGeometry()
         this->setPath(ToolPath());
     }
 
-    const VSplinePath *splPath = VAbstractTool::data.GeometricObject<const VSplinePath *>(id);
+    const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     for (qint32 i = 1; i<=splPath->Count(); ++i)
     {
         VSpline spl = splPath->GetSpline(i);

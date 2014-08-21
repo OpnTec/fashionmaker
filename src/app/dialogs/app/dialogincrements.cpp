@@ -143,14 +143,13 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
  */
 void DialogIncrements::FillMeasurements()
 {
-    const QMap<QString, VMeasurement*> table = data->DataMeasurements();
+    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
     qint32 currentRow = -1;
-    QMapIterator<QString, VMeasurement*> iMap(table);
+    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iMap;
     ui->tableWidgetMeasurements->setRowCount ( table.size() );
-    while (iMap.hasNext())
+    for (iMap = table.constBegin(); iMap != table.constEnd(); ++iMap)
     {
-        iMap.next();
-        VMeasurement *m = iMap.value();
+        QSharedPointer<VMeasurement> m = iMap.value();
         currentRow++;
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(iMap.key()));
@@ -220,14 +219,13 @@ void DialogIncrements::FillMeasurements()
  */
 void DialogIncrements::FillIncrements()
 {
-    const QMap<QString, VIncrement*> increments = data->DataIncrements();
-    QMapIterator<QString, VIncrement*> i(increments);
+    const QMap<QString, QSharedPointer<VIncrement> > increments = data->DataIncrements();
+    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
     QMap<quint32, QString> map;
     //Sorting QHash by id
-    while (i.hasNext())
+    for (i = increments.constBegin(); i != increments.constEnd(); ++i)
     {
-        i.next();
-        VIncrement *incr = i.value();
+        QSharedPointer<VIncrement> incr = i.value();
         map.insert(incr->getId(), i.key());
     }
 
@@ -236,7 +234,7 @@ void DialogIncrements::FillIncrements()
     while (iMap.hasNext())
     {
         iMap.next();
-        VIncrement *incr = increments.value(iMap.value());
+        QSharedPointer<VIncrement> incr = increments.value(iMap.value());
         currentRow++;
         ui->tableWidgetIncrement->setRowCount ( increments.size() );
 
@@ -694,7 +692,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
         case 5: // VPattern::IncrementDescription
         {
             doc->SetAttribute(domElement, VPattern::IncrementDescription, item->text());
-            VIncrement *incr = data->GetVariable<VIncrement*>(itemName->text());
+            QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(itemName->text());
             incr->SetDescription(item->text());
             ui->tableWidgetIncrement->resizeColumnsToContents();
             ui->tableWidgetIncrement->resizeRowsToContents();
@@ -719,7 +717,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);// name column
             QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
-            VMeasurement *measur = data->GetVariable<VMeasurement*>(qApp->VarFromUser(itemName->text()));
+            QSharedPointer<VMeasurement> measur = data->GetVariable<VMeasurement>(qApp->VarFromUser(itemName->text()));
             const QString tag = measur->TagName();
             QDomNodeList list = m->elementsByTagName(tag);
             QDomElement domElement = list.at(0).toElement();

@@ -92,7 +92,7 @@ void VToolCut::RefreshGeometry()
 {
     RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
     RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<const VPointF *>(id));
+    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

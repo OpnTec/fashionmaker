@@ -35,17 +35,16 @@
 #include <QtAlgorithms>
 
 quint32 VContainer::_id = NULL_ID;
+qreal VContainer::_size = 50;
+qreal VContainer::_height = 176;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VContainer create empty container
  */
 VContainer::VContainer()
-    :_size(50), sizeName(size_M), _height(176), heightName(height_M),
-      gObjects(QHash<quint32, VGObject *>()), variables(QHash<QString, VInternalVariable*> ()),
-      details(QHash<quint32, VDetail>())
-{
-}
+    :d(new VContainerData)
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,7 +58,7 @@ VContainer &VContainer::operator =(const VContainer &data)
     {
         return *this;
     }
-    setData(data);
+    d = data.d;
     return *this;
 }
 
@@ -69,12 +68,8 @@ VContainer &VContainer::operator =(const VContainer &data)
  * @param data container
  */
 VContainer::VContainer(const VContainer &data)
-    :_size(50), sizeName(size_M), _height(176), heightName(height_M),
-      gObjects(QHash<quint32, VGObject *>()), variables(QHash<QString, VInternalVariable*> ()),
-      details(QHash<quint32, VDetail>())
-{
-    setData(data);
-}
+    :d(data.d)
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::~VContainer()
@@ -85,87 +80,14 @@ VContainer::~VContainer()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setData copy data from container
- * @param data container
- */
-void VContainer::setData(const VContainer &data)
-{
-    _size = data.size();
-    sizeName = data.SizeName();
-    _height = data.height();
-    heightName = data.HeightName();
-    {
-        ClearGObjects();
-        QHash<quint32, VGObject*>::const_iterator i;
-        for (i = data.gObjects.constBegin(); i != data.gObjects.constEnd(); ++i)
-        {
-            switch (i.value()->getType())
-            {
-                case (GOType::Arc):
-                    CopyGObject<VArc>(data, i.key());
-                    break;
-                case (GOType::Point):
-                    CopyGObject<VPointF>(data, i.key());
-                    break;
-                case (GOType::Spline):
-                    CopyGObject<VSpline>(data, i.key());
-                    break;
-                case (GOType::SplinePath):
-                    CopyGObject<VSplinePath>(data, i.key());
-                    break;
-                default:
-                    qDebug()<<"Don't know how copy this type.";
-                    break;
-            }
-        }
-    }
-
-    {
-        ClearVariables();
-        QHash<QString, VInternalVariable*>::const_iterator i;
-        for (i = data.variables.constBegin(); i != data.variables.constEnd(); ++i)
-        {
-            switch (i.value()->GetType())
-            {
-                case (VarType::Measurement):
-                    CopyVar<VMeasurement>(data, i.key());
-                    break;
-                case (VarType::Increment):
-                    CopyVar<VIncrement>(data, i.key());
-                    break;
-                case (VarType::LineLength):
-                    CopyVar<VLengthLine>(data, i.key());
-                    break;
-                case (VarType::SplineLength):
-                    CopyVar<VSplineLength>(data, i.key());
-                    break;
-                case (VarType::ArcLength):
-                    CopyVar<VArcLength>(data, i.key());
-                    break;
-                case (VarType::LineAngle):
-                    CopyVar<VLineAngle>(data, i.key());
-                    break;
-                case (VarType::Unknown):
-                default:
-                    qDebug()<<"Don't know how copy this type.";
-                    break;
-            }
-        }
-    }
-
-    details = *data.DataDetails();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief GetGObject returns a point by id
  * @param id id of point
  * @return point
  */
 // cppcheck-suppress unusedFunction
-const VGObject *VContainer::GetGObject(quint32 id)const
+const QSharedPointer<VGObject> VContainer::GetGObject(quint32 id)const
 {
-    return GetObject(gObjects, id);
+    return GetObject(d->gObjects, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,9 +118,9 @@ const val VContainer::GetObject(const QHash<key, val> &obj, key id) const
  */
 const VDetail VContainer::GetDetail(quint32 id) const
 {
-    if (details.contains(id))
+    if (d->details.contains(id))
     {
-        return details.value(id);
+        return d->details.value(id);
     }
     else
     {
@@ -214,7 +136,9 @@ const VDetail VContainer::GetDetail(quint32 id) const
  */
 quint32 VContainer::AddGObject(VGObject *obj)
 {
-    return AddObject(gObjects, obj);
+    SCASSERT(obj != nullptr);
+    QSharedPointer<VGObject> pointer(obj);
+    return AddObject(d->gObjects, pointer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,7 +150,7 @@ quint32 VContainer::AddGObject(VGObject *obj)
 quint32 VContainer::AddDetail(VDetail detail)
 {
     quint32 id = getNextId();
-    details[id] = detail;
+    d->details[id] = detail;
     return id;
 }
 
@@ -265,12 +189,11 @@ template <typename val>
 void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
     Q_ASSERT_X(id > NULL_ID, Q_FUNC_INFO, "id = 0");
-    SCASSERT(point != nullptr);
+    SCASSERT(point.isNull() == false);
     point->setId(id);
-    if (gObjects.contains(id))
+    if (d->gObjects.contains(id))
     {
-        delete gObjects.value(id);
-        gObjects.remove(id);
+        d->gObjects[id].clear();
     }
     obj[id] = point;
     UpdateId(id);
@@ -284,7 +207,7 @@ void VContainer::Clear()
 {
     _id = NULL_ID;
 
-    details.clear();
+    d->details.clear();
     ClearVariables();
     ClearGObjects();
 }
@@ -295,23 +218,34 @@ void VContainer::Clear()
  */
 void VContainer::ClearGObjects()
 {
-    qDeleteAll(gObjects);
-    gObjects.clear();
+    QHash<quint32, QSharedPointer<VGObject> >::iterator i;
+    for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i)
+    {
+        i.value().clear();
+    }
+    d->gObjects.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearCalculationGObjects()
 {
-    if (gObjects.size()>0)
+    if (d->gObjects.size()>0)
     {
-        QHashIterator<quint32, VGObject*> i(gObjects);
-        while (i.hasNext())
+        QVector<quint32> keys;
+        QHash<quint32, QSharedPointer<VGObject> >::iterator i;
+        for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i)
         {
-            i.next();
             if (i.value()->getMode() == Draw::Calculation)
             {
-                delete i.value();
-                gObjects.remove(i.key());
+                i.value().clear();
+                keys.append(i.key());
+            }
+        }
+        if (keys.size()>0)
+        {
+            for (int i = 0; i < keys.size(); ++i)
+            {
+                d->gObjects.remove(keys.at(i));
             }
         }
     }
@@ -320,23 +254,34 @@ void VContainer::ClearCalculationGObjects()
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearVariables(const VarType &type)
 {
-    if (variables.size()>0)
+    if (d->variables.size()>0)
     {
         if (type == VarType::Unknown)
         {
-            qDeleteAll(variables);
-            variables.clear();
+            QHash<QString, QSharedPointer<VInternalVariable> >::iterator i;
+            for (i = d->variables.begin(); i != d->variables.end(); ++i)
+            {
+                i.value().clear();
+            }
+            d->variables.clear();
         }
         else
         {
-            QHashIterator<QString, VInternalVariable*> i(variables);
-            while (i.hasNext())
+            QVector<QString> keys;
+            QHash<QString, QSharedPointer<VInternalVariable> >::iterator i;
+            for (i = d->variables.begin(); i != d->variables.end(); ++i)
             {
-                i.next();
                 if (i.value()->GetType() == type)
                 {
-                    delete i.value();
-                    variables.remove(i.key());
+                    i.value().clear();
+                    keys.append(i.key());
+                }
+            }
+            if (keys.size()>0)
+            {
+                for (int i = 0; i < keys.size(); ++i)
+                {
+                    d->variables.remove(keys.at(i));
                 }
             }
         }
@@ -351,13 +296,13 @@ void VContainer::ClearVariables(const VarType &type)
  */
 void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPointId)
 {
-    const VPointF *first = GeometricObject<const VPointF *>(firstPointId);
-    const VPointF *second = GeometricObject<const VPointF *>(secondPointId);
+    const QSharedPointer<VPointF> first = GeometricObject<VPointF>(firstPointId);
+    const QSharedPointer<VPointF> second = GeometricObject<VPointF>(secondPointId);
 
-    VLengthLine *length = new VLengthLine(first, firstPointId, second, secondPointId);
+    VLengthLine *length = new VLengthLine(first.data(), firstPointId, second.data(), secondPointId);
     AddVariable(length->GetName(), length);
 
-    VLineAngle *angle = new VLineAngle(first, firstPointId, second, secondPointId);
+    VLineAngle *angle = new VLineAngle(first.data(), firstPointId, second.data(), secondPointId);
     AddVariable(angle->GetName(), angle);
 }
 
@@ -387,7 +332,8 @@ quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
 void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 {
     SCASSERT(obj != nullptr);
-    UpdateObject(gObjects, id, obj);
+    QSharedPointer<VGObject> pointer(obj);
+    UpdateObject(d->gObjects, id, pointer);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -399,14 +345,14 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
 void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 {
     Q_ASSERT_X(id > NULL_ID, Q_FUNC_INFO, "id = 0");
-    details[id] = detail;
+    d->details[id] = detail;
     UpdateId(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VContainer::GetTableValue(const QString &name) const
 {
-    VVariable *m = GetVariable<VVariable*>(name);
+    QSharedPointer<VVariable> m = GetVariable<VVariable>(name);
     if (qApp->patternType() == MeasurementsType::Standard)
     {
         m->SetValue(size(), height());
@@ -421,42 +367,42 @@ qreal VContainer::GetTableValue(const QString &name) const
  */
 void VContainer::RemoveIncrement(const QString &name)
 {
-    delete variables.value(name);
-    variables.remove(name);
+    d->variables[name].clear();
+    d->variables.remove(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VMeasurement*> VContainer::DataMeasurements() const
+const QMap<QString, QSharedPointer<VMeasurement> > VContainer::DataMeasurements() const
 {
     return DataVar<VMeasurement>(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VIncrement *> VContainer::DataIncrements() const
+const QMap<QString, QSharedPointer<VIncrement> > VContainer::DataIncrements() const
 {
     return DataVar<VIncrement>(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VLengthLine *> VContainer::DataLengthLines() const
+const QMap<QString, QSharedPointer<VLengthLine> > VContainer::DataLengthLines() const
 {
     return DataVar<VLengthLine>(VarType::LineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VSplineLength *> VContainer::DataLengthSplines() const
+const QMap<QString, QSharedPointer<VSplineLength> > VContainer::DataLengthSplines() const
 {
     return DataVar<VSplineLength>(VarType::SplineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VArcLength *> VContainer::DataLengthArcs() const
+const QMap<QString, QSharedPointer<VArcLength> > VContainer::DataLengthArcs() const
 {
     return DataVar<VArcLength>(VarType::ArcLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, VLineAngle *> VContainer::DataAngleLines() const
+const QMap<QString, QSharedPointer<VLineAngle> > VContainer::DataAngleLines() const
 {
     return DataVar<VLineAngle>(VarType::LineAngle);
 }
@@ -469,40 +415,119 @@ const QMap<QString, VLineAngle *> VContainer::DataAngleLines() const
  */
 bool VContainer::VariableExist(const QString &name)
 {
-    return variables.contains(name);
+    return d->variables.contains(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void VContainer::CopyGObject(const VContainer &data, const quint32 &id)
+const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type) const
 {
-    T *obj = new T(*data.GeometricObject<const T *>(id));
-    UpdateGObject(id, obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VContainer::CopyVar(const VContainer &data, const QString &name)
-{
-    T *var = new T(*data.GetVariable<T*>(name));
-    AddVariable(name, var);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-const QMap<QString, T *> VContainer::DataVar(const VarType &type) const
-{
-    QHashIterator<QString, VInternalVariable*> i(variables);
-    QMap<QString, T*> map;
+    QMap<QString, QSharedPointer<T> > map;
     //Sorting QHash by id
-    while (i.hasNext())
+    QHash<QString, QSharedPointer<VInternalVariable> >::const_iterator i;
+    for (i = d->variables.constBegin(); i != d->variables.constEnd(); ++i)
     {
-        i.next();
         if(i.value()->GetType() == type)
         {
-            T *var = GetVariable<T *>(i.key());
+            QSharedPointer<T> var = GetVariable<T>(i.key());
             map.insert(qApp->VarToUser(i.key()), var);
         }
     }
     return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearDetails()
+{
+    d->details.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetSize set value of size
+ * @param size value of size
+ */
+void VContainer::SetSize(qreal size)
+{
+    _size = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::SetSizeName(const QString &name)
+{
+    d->sizeName = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetGrowth set value of growth
+ * @param height value of height
+ */
+void VContainer::SetHeight(qreal height)
+{
+    _height = height;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::SetHeightName(const QString &name)
+{
+    d->heightName = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief size return size
+ * @return size in mm
+ */
+qreal VContainer::size() const
+{
+    return _size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VContainer::SizeName() const
+{
+    return d->sizeName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief height return height
+ * @return height in pattern units
+ */
+qreal VContainer::height() const
+{
+    return _height;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VContainer::HeightName() const
+{
+    return d->heightName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief data container with datagObjects return container of gObjects
+ * @return pointer on container of gObjects
+ */
+const QHash<quint32, QSharedPointer<VGObject> > *VContainer::DataGObjects() const
+{
+    return &d->gObjects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief data container with dataDetails return container of details
+ * @return pointer on container of details
+ */
+const QHash<quint32, VDetail> *VContainer::DataDetails() const
+{
+    return &d->details;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QHash<QString, QSharedPointer<VInternalVariable> > *VContainer::DataVariables() const
+{
+    return &d->variables;
 }

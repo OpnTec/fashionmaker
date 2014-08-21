@@ -74,7 +74,7 @@ void VToolCutSpline::setDialog()
     SCASSERT(dialog != nullptr);
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setFormula(formula);
     dialogTool->setSplineId(curveCutId);
     dialogTool->setPointName(point->name());
@@ -119,7 +119,7 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
                             const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                             VContainer *data, const Document &parse, const Source &typeCreation)
 {
-    const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
+    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
 
     const qreal result = CheckFormula(_id, formula, data);
 
@@ -223,7 +223,7 @@ void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolCutSpline::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -244,7 +244,7 @@ void VToolCutSpline::AddToFile()
  */
 void VToolCutSpline::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -280,7 +280,7 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
 void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                   PathDirection direction)
 {
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(curveId);
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(curveId);
     QPainterPath path;
     path.addPath(spl->GetPath(direction));
     path.setFillRule( Qt::WindingFill );

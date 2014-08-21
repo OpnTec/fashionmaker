@@ -72,7 +72,7 @@ void VToolLineIntersect::setDialog()
     SCASSERT(dialog != nullptr);
     DialogLineIntersect *dialogTool = qobject_cast<DialogLineIntersect*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setP1Line1(p1Line1);
     dialogTool->setP2Line1(p2Line1);
     dialogTool->setP1Line2(p1Line2);
@@ -134,10 +134,10 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
                                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                                const Document &parse, const Source &typeCreation)
 {
-    const VPointF *p1Line1 = data->GeometricObject<const VPointF *>(p1Line1Id);
-    const VPointF *p2Line1 = data->GeometricObject<const VPointF *>(p2Line1Id);
-    const VPointF *p1Line2 = data->GeometricObject<const VPointF *>(p1Line2Id);
-    const VPointF *p2Line2 = data->GeometricObject<const VPointF *>(p2Line2Id);
+    const QSharedPointer<VPointF> p1Line1 = data->GeometricObject<VPointF>(p1Line1Id);
+    const QSharedPointer<VPointF> p2Line1 = data->GeometricObject<VPointF>(p2Line1Id);
+    const QSharedPointer<VPointF> p1Line2 = data->GeometricObject<VPointF>(p1Line2Id);
+    const QSharedPointer<VPointF> p2Line2 = data->GeometricObject<VPointF>(p2Line2Id);
 
     QLineF line1(p1Line1->toQPointF(), p2Line1->toQPointF());
     QLineF line2(p1Line2->toQPointF(), p2Line2->toQPointF());
@@ -200,7 +200,7 @@ void VToolLineIntersect::FullUpdateFromFile()
         p1Line2 = domElement.attribute(AttrP1Line2, "").toUInt();
         p2Line2 = domElement.attribute(AttrP2Line2, "").toUInt();
     }
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ void VToolLineIntersect::FullUpdateFromFile()
 void VToolLineIntersect::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolLineIntersect::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -263,7 +263,7 @@ void VToolLineIntersect::AddToFile()
  */
 void VToolLineIntersect::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {

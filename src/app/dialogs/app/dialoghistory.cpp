@@ -269,19 +269,19 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
             case Tool::SplineTool:
             {
-                const VSpline *spl = data->GeometricObject<const VSpline *>(tool.getId());
+                const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.getId());
                 SCASSERT(spl != nullptr);
                 return QString(tr("Curve %1_%2")).arg(PointName(spl->GetP1().id())).arg(PointName(spl->GetP4().id()));
             }
             case Tool::ArcTool:
             {
-                const VArc *arc = data->GeometricObject<const VArc *>(tool.getId());
+                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
                 SCASSERT(arc != nullptr);
                 return QString(tr("Arc with center in point %1")).arg(PointName(arc->GetCenter().id()));
             }
             case Tool::SplinePathTool:
             {
-                const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(tool.getId());
+                const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
                 SCASSERT(splPath != nullptr);
                 const QVector<VSplinePoint> points = splPath->GetSplinePath();
                 QString record;
@@ -333,7 +333,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
             case Tool::CutArcTool:
             {
-                const VArc *arc = data->GeometricObject<const VArc *>(AttrUInt(domElem, VToolCutArc::AttrArc));
+                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, VToolCutArc::AttrArc));
                 SCASSERT(arc != nullptr);
                 return QString(tr("%1 - cut arc with center %2"))
                         .arg(PointName(tool.getId()))
@@ -342,7 +342,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::CutSplineTool:
             {
                 const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
-                const VSpline *spl = data->GeometricObject<const VSpline *>(splineId);
+                const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
                 SCASSERT(spl != nullptr);
                 return QString(tr("%1 - cut curve %2_%3"))
                         .arg(PointName(tool.getId()))
@@ -352,7 +352,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::CutSplinePathTool:
             {
                 const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
-                const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(splinePathId);
+                const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(splinePathId);
                 SCASSERT(splPath != nullptr);
                 const QVector<VSplinePoint> points = splPath->GetSplinePath();
                 QString record;
@@ -440,7 +440,7 @@ void DialogHistory::ShowPoint()
  */
 QString DialogHistory::PointName(quint32 pointId)
 {
-    return data->GeometricObject<const VPointF *>(pointId)->name();
+    return data->GeometricObject<VPointF>(pointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

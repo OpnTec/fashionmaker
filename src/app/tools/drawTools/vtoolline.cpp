@@ -53,8 +53,8 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->typeLine = typeLine;
     ignoreFullUpdate = true;
     //Line
-    const VPointF *first = data->GeometricObject<const VPointF *>(firstPoint);
-    const VPointF *second = data->GeometricObject<const VPointF *>(secondPoint);
+    const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
+    const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -379,8 +379,8 @@ void VToolLine::RefreshGeometry()
         secondPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
         typeLine = doc->GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
     }
-    const VPointF *first = VAbstractTool::data.GeometricObject<const VPointF *>(firstPoint);
-    const VPointF *second = VAbstractTool::data.GeometricObject<const VPointF *>(secondPoint);
+    const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
+    const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
 }

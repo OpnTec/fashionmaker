@@ -72,7 +72,7 @@ void VToolPointOfContact::setDialog()
     SCASSERT(dialog != nullptr);
     DialogPointOfContact *dialogTool = qobject_cast<DialogPointOfContact*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center);
     dialogTool->setFirstPoint(firstPointId);
@@ -167,9 +167,9 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
                                                  VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                                  const Document &parse, const Source &typeCreation)
 {
-    const VPointF *centerP = data->GeometricObject<const VPointF *>(center);
-    const VPointF *firstP = data->GeometricObject<const VPointF *>(firstPointId);
-    const VPointF *secondP = data->GeometricObject<const VPointF *>(secondPointId);
+    const QSharedPointer<VPointF> centerP = data->GeometricObject<VPointF>(center);
+    const QSharedPointer<VPointF> firstP = data->GeometricObject<VPointF>(firstPointId);
+    const QSharedPointer<VPointF> secondP = data->GeometricObject<VPointF>(secondPointId);
 
     const qreal result = CheckFormula(_id, radius, data);
 
@@ -226,7 +226,7 @@ void VToolPointOfContact::FullUpdateFromFile()
         firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ void VToolPointOfContact::FullUpdateFromFile()
 void VToolPointOfContact::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
  */
 void VToolPointOfContact::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -289,7 +289,7 @@ void VToolPointOfContact::AddToFile()
  */
 void VToolPointOfContact::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {

@@ -203,9 +203,9 @@ void DialogHeight::PointNameChanged()
     set.insert(p1LineId);
     set.insert(p2LineId);
 
-    const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
-    const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
-    const VPointF *p2Line = data->GeometricObject<const VPointF *>(p2LineId);
+    const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
+    const QSharedPointer<VPointF> p2Line = data->GeometricObject<VPointF>(p2LineId);
 
     QColor color = okColor;
     if (set.size() != 3 || VAbstractTool::ClosestPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()),

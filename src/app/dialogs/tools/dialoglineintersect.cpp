@@ -233,10 +233,10 @@ void DialogLineIntersect::PointNameChanged()
     set.insert(p1Line2Id);
     set.insert(p2Line2Id);
 
-    const VPointF *p1Line1 = data->GeometricObject<const VPointF *>(p1Line1Id);
-    const VPointF *p2Line1 = data->GeometricObject<const VPointF *>(p2Line1Id);
-    const VPointF *p1Line2 = data->GeometricObject<const VPointF *>(p1Line2Id);
-    const VPointF *p2Line2 = data->GeometricObject<const VPointF *>(p2Line2Id);
+    const QSharedPointer<VPointF> p1Line1 = data->GeometricObject<VPointF>(p1Line1Id);
+    const QSharedPointer<VPointF> p2Line1 = data->GeometricObject<VPointF>(p2Line1Id);
+    const QSharedPointer<VPointF> p1Line2 = data->GeometricObject<VPointF>(p1Line2Id);
+    const QSharedPointer<VPointF> p2Line2 = data->GeometricObject<VPointF>(p2Line2Id);
 
     QLineF line1(p1Line1->toQPointF(), p2Line1->toQPointF());
     QLineF line2(p1Line2->toQPointF(), p2Line2->toQPointF());
@@ -299,10 +299,10 @@ void DialogLineIntersect::CheckState()
  */
 bool DialogLineIntersect::CheckIntersecion()
 {
-    const VPointF *p1L1 = data->GeometricObject<const VPointF *>(p1Line1);
-    const VPointF *p2L1 = data->GeometricObject<const VPointF *>(p2Line1);
-    const VPointF *p1L2 = data->GeometricObject<const VPointF *>(p1Line2);
-    const VPointF *p2L2 = data->GeometricObject<const VPointF *>(p2Line2);
+    const QSharedPointer<VPointF> p1L1 = data->GeometricObject<VPointF>(p1Line1);
+    const QSharedPointer<VPointF> p2L1 = data->GeometricObject<VPointF>(p2Line1);
+    const QSharedPointer<VPointF> p1L2 = data->GeometricObject<VPointF>(p1Line2);
+    const QSharedPointer<VPointF> p2L2 = data->GeometricObject<VPointF>(p2Line2);
 
     QLineF line1(p1L1->toQPointF(), p2L1->toQPointF());
     QLineF line2(p1L2->toQPointF(), p2L2->toQPointF());

@@ -167,18 +167,18 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
         vVarVal = new qreal[2];
     }
 
-    const QHash<QString, VInternalVariable*> *vars = data->DataVariables();
+    const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
         if (vars->contains(i.value()))
         {
-            VInternalVariable *var = vars->value(i.value());
+            QSharedPointer<VInternalVariable> var = vars->value(i.value());
             if ((qApp->patternType() == MeasurementsType::Standard) &&
                 (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
             {
-                VVariable *m = data->GetVariable<VVariable *>(i.value());
+                QSharedPointer<VVariable> m = data->GetVariable<VVariable>(i.value());
                 m->SetValue(data->size(), data->height());
             }
             DefineVar(i.value(), var->GetValue());

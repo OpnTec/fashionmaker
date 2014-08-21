@@ -64,7 +64,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
     if (typeCreation == Source::FromGui)
     {
         AddToFile();
@@ -142,7 +142,7 @@ void VNodePoint::RestoreNode()
  */
 void VNodePoint::FullUpdateFromFile()
 {
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void VNodePoint::FullUpdateFromFile()
  */
 void VNodePoint::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -173,7 +173,7 @@ void VNodePoint::AddToFile()
  */
 void VNodePoint::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -230,7 +230,7 @@ void VNodePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VNodePoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
     QPointF p = pos - this->pos();
     point->setMx(p.x());
     point->setMy(p.y());

@@ -138,7 +138,7 @@ void DialogSplinePath::currentPointChanged(int index)
     qint32 row = ui->listWidget->currentRow();
     QListWidgetItem *item = ui->listWidget->item( row );
     VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
-    const VPointF *point = data->GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
     p.SetP(*point);
     DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
     EnableFields();
@@ -225,7 +225,7 @@ void DialogSplinePath::UpdateList()
  */
 void DialogSplinePath::NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
 {
-    const VPointF *point = data->GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
     QListWidgetItem *item = new QListWidgetItem(point->name());
     item->setFont(QFont("Times", 12, QFont::Bold));
     VSplinePoint p(*point, kAsm1, angle1, kAsm2, angle2);

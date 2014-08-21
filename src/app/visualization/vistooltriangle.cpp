@@ -58,7 +58,7 @@ void VisToolTriangle::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
         if (point2Id <= 0)
@@ -67,7 +67,7 @@ void VisToolTriangle::RefreshGeometry()
         }
         else
         {
-            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
             DrawPoint(axisP2, second->toQPointF(), supportColor);
 
             DrawAimedAxis(axis, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
@@ -78,7 +78,7 @@ void VisToolTriangle::RefreshGeometry()
             }
             else
             {
-                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(hypotenuseP1Id);
+                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(hypotenuseP1Id);
                 DrawPoint(hypotenuseP1, third->toQPointF(), supportColor);
 
                 if (hypotenuseP2Id <= 0)
@@ -94,7 +94,7 @@ void VisToolTriangle::RefreshGeometry()
                 }
                 else
                 {
-                    const VPointF *forth = Visualization::data->GeometricObject<const VPointF *>(hypotenuseP2Id);
+                    const QSharedPointer<VPointF> forth = Visualization::data->GeometricObject<VPointF>(hypotenuseP2Id);
                     DrawPoint(hypotenuseP2, forth->toQPointF(), supportColor);
 
                     DrawLine(this, QLineF(third->toQPointF(), forth->toQPointF()), supportColor, Qt::DashLine);

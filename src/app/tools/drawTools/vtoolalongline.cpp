@@ -119,7 +119,7 @@ void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolAlongLine::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -142,7 +142,7 @@ void VToolAlongLine::AddToFile()
  */
 void VToolAlongLine::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -191,7 +191,7 @@ void VToolAlongLine::setDialog()
     SCASSERT(dialog != nullptr);
     DialogAlongLine *dialogTool = qobject_cast<DialogAlongLine*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formulaLength);
     dialogTool->setFirstPointId(basePointId);
@@ -249,8 +249,8 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
                                        const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                                        VContainer *data, const Document &parse, const Source &typeCreation)
 {
-    const VPointF *firstPoint = data->GeometricObject<const VPointF *>(firstPointId);
-    const VPointF *secondPoint = data->GeometricObject<const VPointF *>(secondPointId);
+    const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
+    const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
     QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
 
     line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));

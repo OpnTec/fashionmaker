@@ -54,7 +54,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Sour
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     VControlPointSpline *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, spl->GetP2(),
                                                                  spl->GetP1().toQPointF(), this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
@@ -90,7 +90,7 @@ void VToolSpline::setDialog()
     SCASSERT(dialog != nullptr);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     dialogTool->setP1(spl->GetP1().id());
     dialogTool->setP4(spl->GetP4().id());
     dialogTool->setAngle1(spl->GetAngle1());
@@ -154,8 +154,8 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
                                  VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation)
 {
-    VPointF point1 = *data->GeometricObject<const VPointF *>(p1);
-    VPointF point4 = *data->GeometricObject<const VPointF *>(p4);
+    VPointF point1 = *data->GeometricObject<VPointF>(p1);
+    VPointF point4 = *data->GeometricObject<VPointF>(p4);
     VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
@@ -199,7 +199,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
                                              const QPointF &pos)
 {
     Q_UNUSED(indexSpline);
-    const VSpline *spline = VAbstractTool::data.GeometricObject<const VSpline *>(id);
+    const QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
     VSpline spl;
     if (position == SplinePointPosition::FirstPoint)
     {
@@ -210,7 +210,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
         spl = VSpline(spline->GetP1(), spline->GetP2(), pos, spline->GetP4(), spline->GetKcurve());
     }
 
-    MoveSpline *moveSpl = new MoveSpline(doc, spline, spl, id, this->scene());
+    MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
     connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSpl);
 }
@@ -231,7 +231,7 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolSpline::AddToFile()
 {
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -253,7 +253,7 @@ void VToolSpline::AddToFile()
  */
 void VToolSpline::RefreshDataInFile()
 {
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -273,7 +273,7 @@ void VToolSpline::RefreshDataInFile()
  */
 void VToolSpline::RemoveReferens()
 {
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     doc->DecrementReferens(spl->GetP1().id());
     doc->DecrementReferens(spl->GetP4().id());
 }
@@ -288,8 +288,8 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
 
-    VPointF point1 = *VAbstractTool::data.GeometricObject<const VPointF *>(dialogTool->getP1());
-    VPointF point4 = *VAbstractTool::data.GeometricObject<const VPointF *>(dialogTool->getP4());
+    VPointF point1 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->getP1());
+    VPointF point4 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->getP4());
     VSpline spl = VSpline (point1, point4, dialogTool->getAngle1(), dialogTool->getAngle2(),
                            dialogTool->getKAsm1(), dialogTool->getKAsm2(), dialogTool->getKCurve());
 
@@ -329,11 +329,11 @@ void VToolSpline::RefreshGeometry()
         this->setPath(ToolPath());
     }
 
-    const VSpline *spl = VAbstractTool::data.GeometricObject<const VSpline *>(id);
-    QPointF splinePoint = VAbstractTool::data.GeometricObject<const VPointF *>(spl->GetP1().id())->toQPointF();
+    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+    QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id())->toQPointF();
     QPointF controlPoint = spl->GetP2();
     emit RefreshLine(1, SplinePointPosition::FirstPoint, controlPoint, splinePoint);
-    splinePoint = VAbstractTool::data.GeometricObject<const VPointF *>(spl->GetP4().id())->toQPointF();
+    splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id())->toQPointF();
     controlPoint = spl->GetP3();
     emit RefreshLine(1, SplinePointPosition::LastPoint, controlPoint, splinePoint);
 

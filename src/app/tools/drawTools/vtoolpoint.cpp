@@ -56,7 +56,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
  */
 void VToolPoint::NameChangePosition(const QPointF &pos)
 {
-    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
     QPointF p = pos - this->pos();
     point->setMx(p.x());
     point->setMy(p.y());
@@ -155,7 +155,7 @@ void VToolPoint::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
 void VToolPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<const VPointF *>(id));
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

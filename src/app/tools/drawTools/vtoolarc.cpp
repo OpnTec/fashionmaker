@@ -74,7 +74,7 @@ void VToolArc::setDialog()
     SCASSERT(dialog != nullptr);
     DialogArc *dialogTool = qobject_cast<DialogArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     dialogTool->SetCenter(arc->GetCenter().id());
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetF2(arc->GetFormulaF2());
@@ -132,7 +132,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     calcF1 = CheckFormula(_id, f1, data);
     calcF2 = CheckFormula(_id, f2, data);
 
-    VPointF c = *data->GeometricObject<const VPointF *>(center);
+    VPointF c = *data->GeometricObject<VPointF>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
@@ -189,7 +189,7 @@ void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolArc::AddToFile()
 {
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -208,7 +208,7 @@ void VToolArc::AddToFile()
  */
 void VToolArc::RefreshDataInFile()
 {
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -225,7 +225,7 @@ void VToolArc::RefreshDataInFile()
  */
 void VToolArc::RemoveReferens()
 {
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(id);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     doc->DecrementReferens(arc->GetCenter().id());
 }
 

@@ -96,7 +96,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                     break;
                 case 1:
                 {
-                    const VPointF *point = data->GeometricObject<const VPointF *>(id);
+                    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
                     qint32 index = ui->comboBoxP4->findText(point->name());
                     if ( index != -1 )
                     { // -1 for not found
@@ -105,8 +105,8 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                         index = ui->comboBoxP1->currentIndex();
                         quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
 
-                        QPointF p1 = data->GeometricObject<const VPointF *>(p1Id)->toQPointF();
-                        QPointF p4 = data->GeometricObject<const VPointF *>(id)->toQPointF();
+                        QPointF p1 = data->GeometricObject<VPointF>(p1Id)->toQPointF();
+                        QPointF p4 = data->GeometricObject<VPointF>(id)->toQPointF();
 
                         ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
                         ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));

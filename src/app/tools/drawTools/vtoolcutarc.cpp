@@ -75,7 +75,7 @@ void VToolCutArc::setDialog()
     SCASSERT(dialog != nullptr);
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setFormula(formula);
     dialogTool->setArcId(curveCutId);
     dialogTool->setPointName(point->name());
@@ -125,7 +125,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
                                  const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                                  VContainer *data, const Document &parse, const Source &typeCreation)
 {
-    const VArc *arc = data->GeometricObject<const VArc *>(arcId);
+    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
 
     const qreal result = CheckFormula(_id, formula, data);
 
@@ -225,7 +225,7 @@ void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolCutArc::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -246,7 +246,7 @@ void VToolCutArc::AddToFile()
  */
 void VToolCutArc::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
@@ -282,7 +282,7 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
 void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                PathDirection direction)
 {
-    const VArc *arc = VAbstractTool::data.GeometricObject<const VArc *>(curveId);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(curveId);
     QPainterPath path;
     path.addPath(arc->GetPath(direction));
     path.setFillRule( Qt::WindingFill );

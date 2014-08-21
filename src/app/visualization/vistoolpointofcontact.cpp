@@ -52,7 +52,7 @@ void VisToolPointOfContact::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
         if (lineP2Id <= 0)
@@ -61,7 +61,7 @@ void VisToolPointOfContact::RefreshGeometry()
         }
         else
         {
-            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(lineP2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP2Id);
             DrawPoint(lineP2, second->toQPointF(), supportColor);
             DrawLine(this, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
@@ -71,7 +71,7 @@ void VisToolPointOfContact::RefreshGeometry()
             }
             else
             {
-                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(radiusId);
+                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(radiusId);
                 DrawPoint(arc_point, third->toQPointF(), supportColor);
 
                 if (qFuzzyCompare(1 + radius, 1 + 0) == false)

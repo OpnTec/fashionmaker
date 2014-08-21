@@ -235,7 +235,7 @@ void DialogEndLine::ShowDialog(bool click)
             /*We will ignore click if poinet is in point circle*/
             VMainGraphicsScene *scene = qApp->getCurrentScene();
             SCASSERT(scene != nullptr);
-            const VPointF *point = data->GeometricObject<const VPointF *>(basePointId);
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(basePointId);
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.

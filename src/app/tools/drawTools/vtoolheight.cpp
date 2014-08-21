@@ -70,7 +70,7 @@ void VToolHeight::setDialog()
     SCASSERT(dialog != nullptr);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setBasePointId(basePointId);
     dialogTool->setP1LineId(p1LineId);
@@ -132,9 +132,9 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
                                  const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                                  VContainer *data, const Document &parse, const Source &typeCreation)
 {
-    const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
-    const VPointF *p1Line = data->GeometricObject<const VPointF *>(p1LineId);
-    const VPointF *p2Line = data->GeometricObject<const VPointF *>(p2LineId);
+    const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
+    const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
+    const QSharedPointer<VPointF> p2Line = data->GeometricObject<VPointF>(p2LineId);
 
     QPointF pHeight = FindPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()), basePoint->toQPointF());
     quint32 id = _id;
@@ -230,7 +230,7 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolHeight::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -254,7 +254,7 @@ void VToolHeight::AddToFile()
  */
 void VToolHeight::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {

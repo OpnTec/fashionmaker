@@ -52,7 +52,7 @@ void VisToolSpline::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
         if (point4Id <= 0)
@@ -61,7 +61,7 @@ void VisToolSpline::RefreshGeometry()
         }
         else
         {
-            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(point4Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point4Id);
             DrawPoint(lineP4, second->toQPointF(), supportColor);
 
             if (qFuzzyCompare(angle1, EMPTY_ANGLE) || qFuzzyCompare(angle2, EMPTY_ANGLE))

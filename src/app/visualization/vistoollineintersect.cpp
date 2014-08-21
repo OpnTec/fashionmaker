@@ -54,7 +54,7 @@ void VisToolLineIntersect::RefreshGeometry()
 {
     if (point1Id > 0)
     {
-        const VPointF *first = Visualization::data->GeometricObject<const VPointF *>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
         if (line1P2Id <= 0)
@@ -63,7 +63,7 @@ void VisToolLineIntersect::RefreshGeometry()
         }
         else
         {
-            const VPointF *second = Visualization::data->GeometricObject<const VPointF *>(line1P2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(line1P2Id);
             DrawPoint(line1P2, second->toQPointF(), supportColor);
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
@@ -74,7 +74,7 @@ void VisToolLineIntersect::RefreshGeometry()
             }
             else
             {
-                const VPointF *third = Visualization::data->GeometricObject<const VPointF *>(line2P1Id);
+                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(line2P1Id);
                 DrawPoint(line2P1, third->toQPointF(), supportColor);
 
                 if (line2P2Id <= 0)
@@ -92,7 +92,7 @@ void VisToolLineIntersect::RefreshGeometry()
                 }
                 else
                 {
-                    const VPointF *forth = Visualization::data->GeometricObject<const VPointF *>(line2P2Id);
+                    const QSharedPointer<VPointF> forth = Visualization::data->GeometricObject<VPointF>(line2P2Id);
                     DrawPoint(line2P2, forth->toQPointF(), supportColor);
 
                     DrawLine(this, QLineF(third->toQPointF(), forth->toQPointF()), supportColor);

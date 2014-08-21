@@ -58,7 +58,7 @@ public:
     static quint32 CreateNode(VContainer *data, const quint32 &id)
     {
         //We can't use exist object. Need create new.
-        T *node = new T(*data->GeometricObject<const T *>(id));
+        T *node = new T(*data->GeometricObject<T>(id).data());
         node->setMode(Draw::Modeling);
         return data->AddGObject(node);
     }

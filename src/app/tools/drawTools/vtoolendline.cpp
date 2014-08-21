@@ -73,7 +73,7 @@ void VToolEndLine::setDialog()
     dialog->setModal(true);
     DialogEndLine *dialogTool = qobject_cast<DialogEndLine*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const VPointF *p = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setTypeLine(typeLine);
     dialogTool->setFormula(formulaLength);
     dialogTool->setAngle(formulaAngle);
@@ -134,7 +134,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
                                    const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                                    VContainer *data, const Document &parse, const Source &typeCreation)
 {
-    const VPointF *basePoint = data->GeometricObject<const VPointF *>(basePointId);
+    const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
 
     line.setLength(qApp->toPixel(CheckFormula(_id, formulaLength, data)));
@@ -213,7 +213,7 @@ void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolEndLine::AddToFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
@@ -236,7 +236,7 @@ void VToolEndLine::AddToFile()
  */
 void VToolEndLine::RefreshDataInFile()
 {
-    const VPointF *point = VAbstractTool::data.GeometricObject<const VPointF *>(id);
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {

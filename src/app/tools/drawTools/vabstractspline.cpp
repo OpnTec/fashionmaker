@@ -205,7 +205,7 @@ void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
 {
-    const VAbstractCurve *curve = VAbstractTool::data.GeometricObject<const VAbstractCurve *>(id);
+    const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(id);
     QPainterPath path;
     path.addPath(curve->GetPath(direction));
     path.setFillRule( Qt::WindingFill );

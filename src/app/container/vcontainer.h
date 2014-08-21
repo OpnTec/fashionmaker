@@ -38,6 +38,39 @@
 #include <QCoreApplication>
 #include <QHash>
 
+class VContainerData : public QSharedData
+{
+public:
+
+    VContainerData()
+        :sizeName(size_M), heightName(height_M), gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
+          variables(QHash<QString, QSharedPointer<VInternalVariable> > ()), details(QHash<quint32, VDetail>())
+    {}
+
+    VContainerData(const VContainerData &data)
+        :QSharedData(data), sizeName(data.sizeName), heightName(data.heightName), gObjects(data.gObjects),
+          variables(data.variables), details(data.details)
+    {}
+
+    virtual ~VContainerData() {}
+
+    QString        sizeName;
+    QString        heightName;
+    /**
+     * @brief gObjects graphicals objects of pattern.
+     */
+    QHash<quint32, QSharedPointer<VGObject> > gObjects;
+
+    /**
+     * @brief variables container for measurements, increments, lines lengths, lines angles, arcs lengths, curve lengths
+     */
+    QHash<QString, QSharedPointer<VInternalVariable>> variables;
+    /**
+     * @brief details container of details
+     */
+    QHash<quint32, VDetail> details;
+};
+
 /**
  * @brief The VContainer class container of all variables.
  */
@@ -50,37 +83,33 @@ public:
     VContainer(const VContainer &data);
     ~VContainer();
 
-    void               setData(const VContainer &data);
-
     template <typename T>
-    const T GeometricObject(const quint32 &id) const
+    const QSharedPointer<T> GeometricObject(const quint32 &id) const
     {
-        VGObject *gObj = nullptr;
-        if (gObjects.contains(id))
+        QSharedPointer<VGObject> gObj = QSharedPointer<VGObject>();
+        if (d->gObjects.contains(id))
         {
-            gObj = gObjects.value(id);
+            gObj = d->gObjects.value(id);
         }
         else
         {
             throw VExceptionBadId(tr("Can't find object"), id);
-            return nullptr;
         }
 
         try
         {
-            T obj = dynamic_cast<T>(gObj);
-            SCASSERT(obj != nullptr);
+            QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(gObj);
+            SCASSERT(obj.isNull() == false);
             return obj;
         }
         catch (const std::bad_alloc &)
         {
             throw VExceptionBadId(tr("Can't cast object"), id);
-            return nullptr;
         }
-        return nullptr;
+        return QSharedPointer<T>();
     }
 
-    const VGObject    *GetGObject(quint32 id) const;
+    const QSharedPointer<VGObject> GetGObject(quint32 id) const;
     const VDetail      GetDetail(quint32 id) const;
     qreal              GetTableValue(const QString& name) const;
     template <typename T>
@@ -89,27 +118,25 @@ public:
      * @param name variable's name
      * @return variable
      */
-    T GetVariable(QString name) const
+    QSharedPointer<T> GetVariable(QString name) const
     {
         SCASSERT(name.isEmpty()==false);
-        if (variables.contains(name))
+        if (d->variables.contains(name))
         {
             try
             {
-                T value = dynamic_cast<T>(variables.value(name));
-                SCASSERT(value != nullptr);
+                QSharedPointer<T> value = qSharedPointerDynamicCast<T>(d->variables.value(name));
+                SCASSERT(value.isNull() == false);
                 return value;
             }
             catch (const std::bad_alloc &)
             {
                 throw VExceptionBadId(tr("Can't cast object"), name);
-                return nullptr;
             }
         }
         else
         {
             throw VExceptionBadId(tr("Can't find object"), name);
-            return nullptr;
         }
     }
 
@@ -131,31 +158,25 @@ public:
      */
     void               AddCurveLength(const quint32 &id, const quint32 &parentId = 0)
     {
-        const VAbstractCurve *var = GeometricObject<const VAbstractCurve *>(id);
-        AddVariable(var->name(), new TLength(id, parentId, var));
+        const QSharedPointer<VAbstractCurve> var = GeometricObject<VAbstractCurve>(id);
+        AddVariable(var->name(), new TLength(id, parentId, var.data()));
     }
 
     template <typename T>
-    void               AddVariable(const QString& name, T var)
+    void               AddVariable(const QString& name, T *var)
     {
-        if(variables.contains(name))
+        if(d->variables.contains(name))
         {
-            if(variables.value(name)->GetType() == var->GetType())
+            if(d->variables.value(name)->GetType() == var->GetType())
             {
-                T v = dynamic_cast<T>(variables.value(name));
-                SCASSERT(v != nullptr);
-                *v = *var;
-                delete var;
+                d->variables[name].clear();
             }
             else
             {
                 throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
             }
         }
-        else
-        {
-            variables[name] = var;
-        }
+        d->variables[name] = QSharedPointer<T>(var);
     }
 
     void               UpdateGObject(quint32 id, VGObject* obj);
@@ -180,16 +201,16 @@ public:
 
     void               RemoveIncrement(const QString& name);
 
-    const QHash<quint32, VGObject*>          *DataGObjects() const;
-    const QHash<quint32, VDetail>            *DataDetails() const;
-    const QHash<QString, VInternalVariable*> *DataVariables() const;
+    const QHash<quint32, QSharedPointer<VGObject> >         *DataGObjects() const;
+    const QHash<quint32, VDetail>                           *DataDetails() const;
+    const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
 
-    const QMap<QString, VMeasurement *>  DataMeasurements() const;
-    const QMap<QString, VIncrement *>    DataIncrements() const;
-    const QMap<QString, VLengthLine *>   DataLengthLines() const;
-    const QMap<QString, VSplineLength *> DataLengthSplines() const;
-    const QMap<QString, VArcLength *>    DataLengthArcs() const;
-    const QMap<QString, VLineAngle *>    DataAngleLines() const;
+    const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurements() const;
+    const QMap<QString, QSharedPointer<VIncrement> >    DataIncrements() const;
+    const QMap<QString, QSharedPointer<VLengthLine> >   DataLengthLines() const;
+    const QMap<QString, QSharedPointer<VSplineLength> > DataLengthSplines() const;
+    const QMap<QString, QSharedPointer<VArcLength> >    DataLengthArcs() const;
+    const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
 
 
 private:
@@ -197,23 +218,16 @@ private:
      * @brief _id current id. New object will have value +1. For empty class equal 0.
      */
     static quint32 _id;
-    qreal          _size;
-    QString        sizeName;
-    qreal          _height;
-    QString        heightName;
-    /**
-     * @brief gObjects graphicals objects of pattern.
-     */
-    QHash<quint32, VGObject*> gObjects;
+    static qreal   _size;
+    static qreal   _height;
 
-    /**
-     * @brief variables container for measurements, increments, lines lengths, lines angles, arcs lengths, curve lengths
-     */
-    QHash<QString, VInternalVariable*> variables;
-    /**
-     * @brief details container of details
-     */
-    QHash<quint32, VDetail> details;
+    QSharedDataPointer<VContainerData> d;
+
+    template <class T>
+    uint qHash( const QSharedPointer<T> &p )
+    {
+        return qHash( p.data() );
+    }
 
     template <typename key, typename val>
     // cppcheck-suppress functionStatic
@@ -226,109 +240,7 @@ private:
     static quint32 AddObject(QHash<key, val> &obj, val value);
 
     template <typename T>
-    void CopyGObject(const VContainer &data, const quint32 &id);
-
-    template <typename T>
-    void CopyVar(const VContainer &data, const QString &name);
-
-    template <typename T>
-    const QMap<QString, T*> DataVar(const VarType &type) const;
+    const QMap<QString, QSharedPointer<T> > DataVar(const VarType &type) const;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VContainer::ClearDetails()
-{
-    details.clear();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetSize set value of size
- * @param size value of size
- */
-inline void VContainer::SetSize(qreal size)
-{
-    _size = size;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VContainer::SetSizeName(const QString &name)
-{
-    sizeName = name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetGrowth set value of growth
- * @param height value of height
- */
-inline void VContainer::SetHeight(qreal height)
-{
-    _height = height;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VContainer::SetHeightName(const QString &name)
-{
-    heightName = name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief size return size
- * @return size in mm
- */
-inline qreal VContainer::size() const
-{
-    return _size;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VContainer::SizeName() const
-{
-    return sizeName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief height return height
- * @return height in pattern units
- */
-inline qreal VContainer::height() const
-{
-    return _height;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString VContainer::HeightName() const
-{
-    return heightName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief data container with datagObjects return container of gObjects
- * @return pointer on container of gObjects
- */
-inline const QHash<quint32, VGObject *> *VContainer::DataGObjects() const
-{
-    return &gObjects;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief data container with dataDetails return container of details
- * @return pointer on container of details
- */
-inline const QHash<quint32, VDetail> *VContainer::DataDetails() const
-{
-    return &details;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline const QHash<QString, VInternalVariable *> *VContainer::DataVariables() const
-{
-    return &variables;
-}
 
 #endif // VCONTAINER_H

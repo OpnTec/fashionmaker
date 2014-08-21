@@ -141,25 +141,25 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     {
         case (Tool::NodePoint):
         {
-            const VPointF *point = data->GeometricObject<const VPointF *>(id);
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
             name = point->name();
             break;
         }
         case (Tool::NodeArc):
         {
-            const VArc *arc = data->GeometricObject<const VArc *>(id);
+            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(id);
             name = arc->name();
             break;
         }
         case (Tool::NodeSpline):
         {
-            const VSpline *spl = data->GeometricObject<const VSpline *>(id);
+            const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(id);
             name = spl->name();
             break;
         }
         case (Tool::NodeSplinePath):
         {
-            const VSplinePath *splPath = data->GeometricObject<const VSplinePath *>(id);
+            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(id);
             name = splPath->name();
             break;
         }
