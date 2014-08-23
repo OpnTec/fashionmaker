@@ -31,6 +31,11 @@
 
 #include <QSharedData>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VVariableData : public QSharedData
 {
 public:
@@ -65,5 +70,9 @@ public:
     /** @brief description description of increment */
     QString description;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VVARIABLE_P_H

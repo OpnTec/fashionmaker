@@ -38,6 +38,11 @@
 #include <QCoreApplication>
 #include <QHash>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VContainerData : public QSharedData
 {
 public:
@@ -70,6 +75,10 @@ public:
      */
     QHash<quint32, VDetail> details;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 /**
  * @brief The VContainer class container of all variables.

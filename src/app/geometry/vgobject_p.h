@@ -32,6 +32,11 @@
 #include <QSharedData>
 #include "../options.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VGObjectData : public QSharedData
 {
 public:
@@ -64,5 +69,9 @@ public:
     /** @brief mode object created in calculation or drawing mode */
     Draw    mode;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VGOBJECT_P_H

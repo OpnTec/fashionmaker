@@ -33,6 +33,11 @@
 #include "../options.h"
 #include <QPointF>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VPointFData : public QSharedData
 {
 public:
@@ -72,5 +77,8 @@ public:
     qreal   _y;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VPOINTF_P_H

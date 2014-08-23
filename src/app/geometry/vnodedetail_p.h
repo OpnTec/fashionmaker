@@ -32,6 +32,11 @@
 #include <QSharedData>
 #include "../options.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VNodeDetailData : public QSharedData
 {
 public:
@@ -70,5 +75,9 @@ public:
    */
   qreal       my;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VNODEDETAIL_P_H

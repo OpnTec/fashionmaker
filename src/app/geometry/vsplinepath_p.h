@@ -33,6 +33,11 @@
 #include "../options.h"
 #include "vsplinepoint.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VSplinePathData : public QSharedData
 {
 public:
@@ -65,5 +70,8 @@ public:
     qint32        maxCountPoints;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VSPLINEPATH_P_H

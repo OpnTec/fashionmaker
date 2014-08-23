@@ -31,6 +31,11 @@
 
 #include <QSharedData>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VLengthLineData : public QSharedData
 {
 public:
@@ -53,5 +58,8 @@ public:
     quint32 p2Id;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VLINELENGTH_P_H

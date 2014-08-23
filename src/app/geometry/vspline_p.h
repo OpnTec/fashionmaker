@@ -34,6 +34,11 @@
 #include "vpointf.h"
 #include <QLineF>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VSplineData : public QSharedData
 {
 public:
@@ -110,5 +115,8 @@ public:
     qreal          kCurve;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VSPLINE_P_H

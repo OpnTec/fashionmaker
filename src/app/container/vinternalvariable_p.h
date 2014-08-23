@@ -32,6 +32,11 @@
 #include <QSharedData>
 #include "../options.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VInternalVariableData : public QSharedData
 {
 public:
@@ -54,5 +59,8 @@ public:
     QString name;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VINTERNALVARIABLE_P_H

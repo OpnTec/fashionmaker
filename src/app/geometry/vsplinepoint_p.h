@@ -33,6 +33,11 @@
 #include "../options.h"
 #include "vpointf.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VSplinePointData : public QSharedData
 {
 public:
@@ -75,5 +80,8 @@ public:
     qreal          kAsm2;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VSPLINEPOINT_P_H

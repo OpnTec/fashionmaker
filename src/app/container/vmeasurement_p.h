@@ -31,6 +31,11 @@
 
 #include <QSharedData>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VMeasurementData : public QSharedData
 {
 public:
@@ -55,5 +60,8 @@ public:
     QString        _tagName;
 };
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VMEASUREMENT_P_H

@@ -33,6 +33,11 @@
 #include "../options.h"
 #include "vnodedetail.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VDetailData : public QSharedData
 {
 public:
@@ -85,5 +90,9 @@ public:
     */
     qreal          width;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // VDETAIL_P_H
