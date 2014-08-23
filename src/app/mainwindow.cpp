@@ -2236,6 +2236,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
                 ui->view->NewFactor(ui->view->transform().m11());
             }
         }
+        toolOptions->itemClicked(nullptr);//hide options for tool in previous pattern piece
     }
 }
 
