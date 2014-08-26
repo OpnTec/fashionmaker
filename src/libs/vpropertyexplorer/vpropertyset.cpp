@@ -103,12 +103,12 @@ int VPropertySet::count() const
 void VPropertySet::clear(bool delete_properties)
 {
     d_ptr->Properties.clear();
-//    while(!d_ptr->RootProperties.isEmpty()) {
-//        VProperty* tmpProp = d_ptr->RootProperties.takeLast();
-//        if(tmpProp != NULL && delete_properties) {
-//            delete tmpProp;
-//        }
-//    }
+    while(!d_ptr->RootProperties.isEmpty()) {
+        VProperty* tmpProp = d_ptr->RootProperties.takeLast();
+        if(tmpProp != nullptr && delete_properties) {
+            delete tmpProp;
+        }
+    }
 }
 
 QString VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const

@@ -67,17 +67,12 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
         return;
     }
 
-    QMap<VProperty *, QString>::ConstIterator itProp = propertyToId.constBegin();
-    while (itProp != propertyToId.constEnd())
-    {
-        delete itProp.key();
-        itProp++;
-    }
+    PropertyModel->clear();
     propertyToId.clear();
     idToProperty.clear();
 
     currentItem = item;
-    PropertyModel->clear();
+
     if (currentItem == nullptr)
     {
         return;
