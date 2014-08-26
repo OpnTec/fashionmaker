@@ -620,29 +620,36 @@ INSTALLS += \
     for(_translation_name, TRANSLATIONS) {
       _translation_name_qm = $$section(_translation_name,".", 0, 0).qm
 
-      system($$shell_path($$[QT_INSTALL_BINS]/lrelease) $$shell_path($$PWD/$$_translation_name) -qm $$shell_path($$PWD/$$_translation_name_qm))
+      system($$shell_path($$[QT_INSTALL_BINS]/lrelease) $$shell_path($${PWD}/$$_translation_name) -qm $$shell_path($${PWD}/$$_translation_name_qm))
     }
 }
 
 for(DIR, INSTALL_TRANSLATIONS) {
      #add these absolute paths to a variable which
      #ends up as 'mkcommands = path1 path2 path3 ...'
-     tr_path += $$PWD/$$DIR
+     tr_path += $${PWD}/$$DIR
 }
 
-copyToDestdir($$tr_path, $$shell_path($$OUT_PWD/$$DESTDIR/translations))
+copyToDestdir($$tr_path, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
 
 for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
      #add these absolute paths to a variable which
      #ends up as 'mkcommands = path1 path2 path3 ...'
-     st_path += $$PWD/$$DIR
+     st_path += $${PWD}/$$DIR
 }
 
-copyToDestdir($$st_path, $$shell_path($$OUT_PWD/$$DESTDIR/tables/standard))
+copyToDestdir($$st_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tables/standard))
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../libs/qmuparser/bin -lqmuparser2
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../libs/qmuparser/bin -lqmuparser2
-else:unix: LIBS += -L$$OUT_PWD/../libs/qmuparser/bin -lqmuparser
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:unix: LIBS += -L$${OUT_PWD}/../libs/qmuparser/$${DESTDIR} -lqmuparser
 
-INCLUDEPATH += $$PWD/../libs/qmuparser
-DEPENDPATH += $$PWD/../libs/qmuparser
+INCLUDEPATH += $${PWD}/../libs/qmuparser
+DEPENDPATH += $${PWD}/../libs/qmuparser
+
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:unix: LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+
+INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
+DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
