@@ -53,12 +53,6 @@ VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
     scroll->setWidgetResizable(true);
     scroll->setWidget(TreeView);
 
-//    QLayout* layout = parent->layout();
-//    layout->setSpacing(5);
-//    layout->setMargin(0);
-//    layout->addWidget(scroll);
-//    parent->setLayout(layout);
-
     parent->setWidget(scroll);
 
     connect(PropertyModel, SIGNAL(onDataChangedByEditor(VProperty*)), this, SLOT(userChangedData(VProperty*)));
@@ -67,6 +61,12 @@ VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 {
+    if (currentItem == item)
+    {
+        UpdateOptions();
+        return;
+    }
+
     QMap<VProperty *, QString>::ConstIterator itProp = propertyToId.constBegin();
     while (itProp != propertyToId.constEnd())
     {

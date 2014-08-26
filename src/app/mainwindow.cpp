@@ -1981,6 +1981,7 @@ void MainWindow::PropertyBrowser()
     toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
 
     connect(ui->view, &VMainGraphicsView::itemClicked, toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
+    connect(doc, &VPattern::FullUpdateFromFile, toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

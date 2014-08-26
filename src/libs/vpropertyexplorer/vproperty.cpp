@@ -86,7 +86,6 @@ QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& o
     QItemEditorFactory::setDefaultFactory(factory);
 
     d_ptr->editor = factory->createEditor(d_ptr->PropertyVariantType, parent);
-    //return factory->createEditor(d_ptr->PropertyVariantType, parent);
     return d_ptr->editor;
 }
 

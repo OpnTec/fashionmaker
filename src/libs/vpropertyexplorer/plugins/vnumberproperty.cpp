@@ -39,7 +39,8 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setValue(d_ptr->VariantValue.toInt());
 
-    return tmpEditor;
+    d_ptr->editor = tmpEditor;
+    return d_ptr->editor;
 }
 
 //! Gets the data from the widget
@@ -126,7 +127,8 @@ QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewI
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setValue(d_ptr->VariantValue.toDouble());
 
-    return tmpEditor;
+    d_ptr->editor = tmpEditor;
+    return d_ptr->editor;
 }
 
 //! Gets the data from the widget
