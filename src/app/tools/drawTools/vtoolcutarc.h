@@ -48,6 +48,8 @@ public:
                                 VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrArc;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::CutArc)};
 public slots:
     virtual void FullUpdateFromFile();
     virtual void CurveChoosed(quint32 id);

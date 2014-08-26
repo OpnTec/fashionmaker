@@ -43,6 +43,8 @@ public:
     void         setLine1P2Id(const quint32 &value);
     void         setLine2P1Id(const quint32 &value);
     void         setLine2P2Id(const quint32 &value);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersect)};
 private:
     Q_DISABLE_COPY(VisToolLineIntersect)
     quint32              line1P2Id;

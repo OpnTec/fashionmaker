@@ -40,6 +40,8 @@ class VToolLinePoint : public VToolPoint
 public:
     VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
                    const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
+    virtual int       type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
 public slots:
     virtual void      ChangedActivDraw(const QString &newName);
     virtual void      SetFactor(qreal factor);

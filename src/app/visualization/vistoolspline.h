@@ -46,6 +46,9 @@ public:
     void         setKAsm1(const qreal &value);
     void         setKAsm2(const qreal &value);
     void         setKCurve(const qreal &value);
+
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
 protected:
     Q_DISABLE_COPY(VisToolSpline)
     quint32              point4Id;

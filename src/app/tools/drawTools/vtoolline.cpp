@@ -147,7 +147,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::LineTool, doc);
+    VDrawTool::AddRecord(id, Tool::Line, doc);
     if (parse == Document::FullParse)
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);

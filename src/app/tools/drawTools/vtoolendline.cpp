@@ -154,7 +154,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::EndLine, doc);
     if (parse == Document::FullParse)
     {
         VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formulaLength, formulaAngle, basePointId,

@@ -48,6 +48,8 @@ public:
                         const Document &parse, const Source &typeCreation);
     static const QString TagName;
     virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    virtual int      type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Line)};
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);

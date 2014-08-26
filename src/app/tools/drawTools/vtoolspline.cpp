@@ -172,7 +172,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::SplineTool, doc);
+    VDrawTool::AddRecord(id, Tool::Spline, doc);
     if (parse == Document::FullParse)
     {
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);

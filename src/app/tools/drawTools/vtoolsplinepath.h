@@ -46,6 +46,8 @@ public:
                          VContainer *data, const Document &parse, const Source &typeCreation);
      static const QString ToolType;
      static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
+     virtual int  type() const {return Type;}
+     enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
 signals:
     /**
      * @brief RefreshLine refresh control line.

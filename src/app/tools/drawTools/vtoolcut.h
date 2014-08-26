@@ -38,6 +38,8 @@ class VToolCut : public VToolPoint
 public:
     VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula, const quint32 &curveCutId,
              const quint32 &curve1id, const quint32 &curve2id, QGraphicsItem * parent = nullptr);
+    virtual int   type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Cut)};
 public slots:
     virtual void  ChangedActivDraw(const QString &newName);
     virtual void  CurveChoosed(quint32 id)=0;

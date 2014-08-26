@@ -196,7 +196,7 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::BisectorTool, doc);
+    VDrawTool::AddRecord(id, Tool::Bisector, doc);
     if (parse == Document::FullParse)
     {
         VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,

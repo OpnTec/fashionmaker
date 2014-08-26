@@ -49,6 +49,8 @@ public:
                                             VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                             const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);

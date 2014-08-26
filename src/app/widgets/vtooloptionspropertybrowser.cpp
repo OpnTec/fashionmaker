@@ -46,18 +46,20 @@ VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
       idToProperty(QMap<QString, VProperty *>())
 {
     PropertyModel = new VPropertyModel(this);
-    TreeView = new VPropertyFormView(PropertyModel);
+    TreeView = new VPropertyFormView(PropertyModel, parent);
     TreeView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    QScrollArea *scroll = new QScrollArea();
+    QScrollArea *scroll = new QScrollArea(parent);
     scroll->setWidgetResizable(true);
     scroll->setWidget(TreeView);
 
-    QHBoxLayout* layout = new QHBoxLayout();
-    parent->setLayout(layout);
-    layout->setSpacing(5);
-    layout->setMargin(0);
-    layout->addWidget(scroll);
+//    QLayout* layout = parent->layout();
+//    layout->setSpacing(5);
+//    layout->setMargin(0);
+//    layout->addWidget(scroll);
+//    parent->setLayout(layout);
+
+    parent->setWidget(scroll);
 
     connect(PropertyModel, SIGNAL(onDataChangedByEditor(VProperty*)), this, SLOT(userChangedData(VProperty*)));
 }

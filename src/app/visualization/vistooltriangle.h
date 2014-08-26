@@ -43,6 +43,9 @@ public:
     void         setPoint2Id(const quint32 &value);
     void         setHypotenuseP1Id(const quint32 &value);
     void         setHypotenuseP2Id(const quint32 &value);
+
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolTriangle)};
 private:
     Q_DISABLE_COPY(VisToolTriangle)
     quint32              point2Id;//axis second point

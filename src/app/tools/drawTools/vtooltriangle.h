@@ -51,6 +51,8 @@ public:
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Triangle)};
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);

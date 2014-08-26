@@ -163,7 +163,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         }
     }
 
-    VDrawTool::AddRecord(id, Tool::CutArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
         VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, typeCreation);

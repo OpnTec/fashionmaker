@@ -217,7 +217,7 @@ void VToolCutSplinePath::Create(const quint32 _id, const QString &pointName, QSt
         }
     }
 
-    VDrawTool::AddRecord(id, Tool::CutSplinePathTool, doc);
+    VDrawTool::AddRecord(id, Tool::CutSplinePath, doc);
     if (parse == Document::FullParse)
     {
         VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,

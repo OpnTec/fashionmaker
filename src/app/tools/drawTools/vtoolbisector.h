@@ -53,6 +53,8 @@ public:
                                  VPattern *doc, VContainer *data, const Document &parse,
                                  const Source &typeCreation);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Bisector)};
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);

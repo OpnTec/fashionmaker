@@ -42,6 +42,8 @@ public:
     VisLine(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisLine();
 
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::Line)};
 protected:
     QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
     qreal        CorrectAngle(const qreal &angle) const;

@@ -216,7 +216,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::DetailTool, doc);
+    VAbstractTool::AddRecord(id, Tool::Detail, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);

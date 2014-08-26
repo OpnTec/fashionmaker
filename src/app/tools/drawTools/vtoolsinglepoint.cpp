@@ -83,6 +83,24 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolSinglePoint::name() const
+{
+    return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::setName(const QString &name)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VToolSinglePoint::type() const
+{
+     return Type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */

@@ -48,6 +48,8 @@ public:
                                VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Spline)};
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);

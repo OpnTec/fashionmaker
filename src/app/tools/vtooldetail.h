@@ -82,6 +82,8 @@ public:
     static const QString NodeSplinePath;
     void               Remove(bool ask);
     static void        AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node);
+    virtual int        type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Detail)};
 public slots:
     virtual void       FullUpdateFromFile ();
     virtual void       FullUpdateFromGuiOk(int result);

@@ -50,6 +50,8 @@ public:
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Normal)};
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);

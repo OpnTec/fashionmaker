@@ -272,7 +272,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::AlongLine, doc);
     if (parse == Document::FullParse)
     {
         VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,

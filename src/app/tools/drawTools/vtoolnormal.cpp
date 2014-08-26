@@ -157,7 +157,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::NormalTool, doc);
+    VDrawTool::AddRecord(id, Tool::Normal, doc);
     if (parse == Document::FullParse)
     {
         VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,

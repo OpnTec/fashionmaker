@@ -50,6 +50,8 @@ public:
                         const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrSplinePath;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
 public slots:
     virtual void  FullUpdateFromFile();
     virtual void  CurveChoosed(quint32 id);

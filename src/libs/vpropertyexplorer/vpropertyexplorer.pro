@@ -15,6 +15,15 @@ CONFIG += c++11
 
 DEFINES += VPROPERTYEXPLORER_LIBRARY
 
+# directory for executable file
+DESTDIR = bin
+
+# files created moc
+MOC_DIR = moc
+
+# objecs files
+OBJECTS_DIR = obj
+
 SOURCES += \
     vproperty.cpp \
     vpropertydelegate.cpp \
@@ -78,3 +87,5 @@ unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+QMAKE_CXXFLAGS += -gdwarf-3

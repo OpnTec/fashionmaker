@@ -41,6 +41,8 @@ public:
     virtual void RefreshGeometry();
 
     void         setPoint2Id(const quint32 &value);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersection)
     quint32              point2Id;

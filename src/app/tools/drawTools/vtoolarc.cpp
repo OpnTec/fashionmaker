@@ -149,7 +149,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::ArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::Arc, doc);
     if (parse == Document::FullParse)
     {
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);

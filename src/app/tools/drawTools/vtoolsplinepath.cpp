@@ -146,7 +146,7 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::SplinePathTool, doc);
+    VDrawTool::AddRecord(id, Tool::SplinePath, doc);
     if (parse == Document::FullParse)
     {
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);

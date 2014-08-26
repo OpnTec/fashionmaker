@@ -199,7 +199,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::ShoulderPointTool, doc);
+    VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
     if (parse == Document::FullParse)
     {
         VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,

@@ -42,6 +42,8 @@ public:
     void         setLineP2Id(const quint32 &value);
     void         setRadiusId(const quint32 &value);
     void         setRadius(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
 private:
     Q_DISABLE_COPY(VisToolPointOfContact)
     quint32              lineP2Id;

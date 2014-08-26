@@ -1095,7 +1095,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const qreal y = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
 
                 data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-                VDrawTool::AddRecord(id, Tool::SinglePointTool, this);
+                VDrawTool::AddRecord(id, Tool::SinglePoint, this);
                 if (parse != Document::FullParse)
                 {
                     UpdateToolData(id, data);
@@ -2424,40 +2424,40 @@ QRectF VPattern::ActiveDrawBoundingRect() const
         {
             switch ( tool.getTypeTool() )
             {
-                case Tool::ArrowTool:
+                case Tool::Arrow:
                     Q_UNREACHABLE();
                     break;
-                case Tool::SinglePointTool:
+                case Tool::SinglePoint:
                     rec = ToolBoundingRect<VToolSinglePoint>(rec, tool.getId());
                     break;
-                case Tool::EndLineTool:
+                case Tool::EndLine:
                     rec = ToolBoundingRect<VToolEndLine>(rec, tool.getId());
                     break;
-                case Tool::LineTool:
+                case Tool::Line:
                     rec = ToolBoundingRect<VToolLine>(rec, tool.getId());
                     break;
-                case Tool::AlongLineTool:
+                case Tool::AlongLine:
                     rec = ToolBoundingRect<VToolAlongLine>(rec, tool.getId());
                     break;
-                case Tool::ShoulderPointTool:
+                case Tool::ShoulderPoint:
                     rec = ToolBoundingRect<VToolShoulderPoint>(rec, tool.getId());
                     break;
-                case Tool::NormalTool:
+                case Tool::Normal:
                     rec = ToolBoundingRect<VToolNormal>(rec, tool.getId());
                     break;
-                case Tool::BisectorTool:
+                case Tool::Bisector:
                     rec = ToolBoundingRect<VToolBisector>(rec, tool.getId());
                     break;
-                case Tool::LineIntersectTool:
+                case Tool::LineIntersect:
                     rec = ToolBoundingRect<VToolLineIntersect>(rec, tool.getId());
                     break;
-                case Tool::SplineTool:
+                case Tool::Spline:
                     rec = ToolBoundingRect<VToolSpline>(rec, tool.getId());
                     break;
-                case Tool::ArcTool:
+                case Tool::Arc:
                     rec = ToolBoundingRect<VToolArc>(rec, tool.getId());
                     break;
-                case Tool::SplinePathTool:
+                case Tool::SplinePath:
                     rec = ToolBoundingRect<VToolSplinePath>(rec, tool.getId());
                     break;
                 case Tool::PointOfContact:
@@ -2472,18 +2472,18 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::PointOfIntersection:
                     rec = ToolBoundingRect<VToolPointOfIntersection>(rec, tool.getId());
                     break;
-                case Tool::CutArcTool:
+                case Tool::CutArc:
                     rec = ToolBoundingRect<VToolCutArc>(rec, tool.getId());
                     break;
-                case Tool::CutSplineTool:
+                case Tool::CutSpline:
                     rec = ToolBoundingRect<VToolCutSpline>(rec, tool.getId());
                     break;
-                case Tool::CutSplinePathTool:
+                case Tool::CutSplinePath:
                     rec = ToolBoundingRect<VToolCutSplinePath>(rec, tool.getId());
                     break;
                 //Because "history" not only show history of pattern, but help restore current data for each pattern's
                 //piece, we need add record about details and nodes, but don't show them.
-                case Tool::DetailTool:
+                case Tool::Detail:
                     break;
                 case Tool::UnionDetails:
                     break;

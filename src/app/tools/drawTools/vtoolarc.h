@@ -46,6 +46,8 @@ public:
                             const Source &typeCreation);
     static const QString TagName;
     static const QString ToolType;
+    virtual int      type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Arc)};
 public slots:
     virtual void     FullUpdateFromFile();
 protected:
