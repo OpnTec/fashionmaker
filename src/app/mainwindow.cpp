@@ -41,6 +41,7 @@
 #include "widgets/vapplication.h"
 #include "widgets/undoevent.h"
 #include "undocommands/renamepp.h"
+#include "vtooloptionspropertybrowser.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -112,6 +113,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBox->setCurrentIndex(0);
 
     ReadSettings();
+    PropertyBrowser();
 
     setCurrentFile("");
 }
@@ -1959,6 +1961,26 @@ void MainWindow::CreateMenus()
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
+    AddDocks();
+}
+
+void MainWindow::AddDocks()
+{
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetHistory->toggleViewAction());
+    ui->dockWidgetHistory->close();//Default don't show hostory
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
+
+    separatorAct = new QAction(this);
+    separatorAct->setSeparator(true);
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PropertyBrowser()
+{
+    toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
+
+    connect(ui->view, &VMainGraphicsView::itemClicked, toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

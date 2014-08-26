@@ -44,6 +44,8 @@ namespace Ui
     class MainWindow;
 }
 
+class VToolOptionsPropertyBrowser;
+
 /**
  * @brief The MainWindow class main windows.
  */
@@ -194,6 +196,8 @@ private:
     bool               guiEnabled;
     QComboBox          *gradationHeights;
     QComboBox          *gradationSizes;
+    VToolOptionsPropertyBrowser *toolOptions;
+
     void               ToolBarOption();
     void               ToolBarDraws();
     void               ToolBarTools();
@@ -243,6 +247,9 @@ private:
     void               UpdateSizesList(const QStringList &list);
     void               SetDefaultHeight(int value);
     void               SetDefaultSize(int value);
+
+    void               AddDocks();
+    void               PropertyBrowser();
 };
 
 #endif // MAINWINDOW_H

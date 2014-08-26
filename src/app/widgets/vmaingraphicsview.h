@@ -108,7 +108,8 @@ signals:
      *
      * Usefull when you need show dialog after working with tool visualization.
      */
-    void         MouseRelease();
+    void     MouseRelease();
+    void     itemClicked(QGraphicsItem *item);
 public slots:
     void     ZoomIn();
     void     ZoomOut();

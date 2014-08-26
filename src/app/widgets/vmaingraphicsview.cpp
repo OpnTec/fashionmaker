@@ -220,6 +220,9 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
             case Qt::ControlModifier:
                 QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
                 break;
+            case Qt::NoModifier:
+                emit itemClicked(itemAt(mousePress->pos()));
+                break;
             default:
                 break;
         }

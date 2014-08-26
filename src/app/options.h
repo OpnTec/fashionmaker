@@ -42,25 +42,29 @@ class QString;
 #define NULL_ID 0//use this value for initialization variables that keeps id values. 0 mean uknown id value.
 
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
-enum class Tool : char
+enum class Tool : unsigned char
 {
-    ArrowTool,
-    SinglePointTool,
-    EndLineTool,
-    LineTool,
-    AlongLineTool,
-    ShoulderPointTool,
-    NormalTool,
-    BisectorTool,
-    LineIntersectTool,
-    SplineTool,
-    CutSplineTool,
-    CutArcTool,
-    ArcTool,
-    SplinePathTool,
-    CutSplinePathTool,
+    Arrow,
+    Point,
+    LinePoint,
+    AbstractSpline,
+    Cut,
+    SinglePoint,
+    EndLine,
+    Line,
+    AlongLine,
+    ShoulderPoint,
+    Normal,
+    Bisector,
+    LineIntersect,
+    Spline,
+    CutSpline,
+    CutArc,
+    Arc,
+    SplinePath,
+    CutSplinePath,
     PointOfContact,
-    DetailTool,
+    Detail,
     NodePoint,
     NodeArc,
     NodeSpline,
@@ -69,6 +73,30 @@ enum class Tool : char
     Triangle,
     PointOfIntersection,
     UnionDetails
+};
+
+enum class Vis : unsigned char
+{
+    ControlPointSpline,
+    GraphicsSimpleTextItem,
+    Line,
+    Path,
+    ToolAlongLine,
+    ToolArc,
+    ToolBisector,
+    ToolCutArc,
+    ToolEndLine,
+    ToolHeight,
+    ToolLine,
+    ToolLineIntersect,
+    ToolNormal,
+    ToolPointOfContact,
+    ToolPointOfIntersection,
+    ToolShoulderPoint,
+    ToolSpline,
+    ToolTriangle,
+    SimpleCurvePoint,
+    SimpleSplinePath
 };
 
 enum class Source : char { FromGui, FromFile, FromTool };

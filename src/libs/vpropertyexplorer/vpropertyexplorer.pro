@@ -15,7 +15,7 @@ CONFIG += c++11
 
 DEFINES += VPROPERTYEXPLORER_LIBRARY
 
-SOURCES += vpropertyexplorer.cpp \
+SOURCES += \
     vproperty.cpp \
     vpropertydelegate.cpp \
     vpropertyfactorymanager.cpp \
@@ -39,7 +39,7 @@ SOURCES += vpropertyexplorer.cpp \
     plugins/vnumberproperty.cpp \
     plugins/Vector3d/vvector3dproperty.cpp
 
-HEADERS += vpropertyexplorer.h\
+HEADERS +=\
         vpropertyexplorer_global.h \
     vpropertyfactorymanager_p.h \
     vpropertytreeview_p.h \

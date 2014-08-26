@@ -7,7 +7,8 @@ HEADERS += \
     widgets/doubledelegate.h \
     widgets/textdelegate.h \
     widgets/vtranslation.h \
-    widgets/undoevent.h 
+    widgets/undoevent.h \ 
+    widgets/vtooloptionspropertybrowser.h
 
 SOURCES += \
     widgets/vtablegraphicsview.cpp \
@@ -18,4 +19,5 @@ SOURCES += \
     widgets/doubledelegate.cpp \
     widgets/textdelegate.cpp \
     widgets/vtranslation.cpp \
-    widgets/undoevent.cpp 
+    widgets/undoevent.cpp \ 
+    widgets/vtooloptionspropertybrowser.cpp
