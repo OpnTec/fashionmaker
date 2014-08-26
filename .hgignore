@@ -38,5 +38,7 @@ cov-int/
 # Ignore Mercurial .orig files
 *.orig
 
+*.rej
+
 # Ignore Makefile
 Makefile
