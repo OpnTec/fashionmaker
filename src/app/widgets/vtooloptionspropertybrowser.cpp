@@ -75,6 +75,8 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 
     if (currentItem == nullptr)
     {
+        QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
+        parent->setWindowTitle(tr("Tool options"));
         return;
     }
 
@@ -188,6 +190,8 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolSinglePoint::Type:
         {
             VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
+            QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
+            parent->setWindowTitle(tr("Tool options (Base point)"));
 
             VProperty* itemName = new VProperty(tr("Point name"));
             itemName->setValue(i->name());
