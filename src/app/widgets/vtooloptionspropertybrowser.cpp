@@ -34,6 +34,7 @@
 #include "visualization/vcontrolpointspline.h"
 #include "../libs/vpropertyexplorer/plugins/vnumberproperty.h"
 #include "../libs/vpropertyexplorer/plugins/vstringproperty.h"
+#include "../libs/vpropertyexplorer/plugins/vpointfproperty.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
@@ -88,9 +89,17 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
 {
-    if (!propertyToId.contains(property))
+    VProperty *prop = property;
+    if (!propertyToId.contains(prop))
     {
-        return;
+        if (!propertyToId.contains(prop->getParent()))// Maybe we know parent
+        {
+            return;
+        }
+        else
+        {
+            prop = prop->getParent();
+        }
     }
 
     if (!currentItem)
@@ -98,9 +107,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         return;
     }
 
-    QVariant variant = property->data(VProperty::DPC_Data);
+    QVariant variant = prop->data(VProperty::DPC_Data);
 
-    QString id = propertyToId[property];
+    QString id = propertyToId[prop];
     switch (currentItem->type())
     {
         case VToolSinglePoint::Type:
@@ -125,13 +134,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
                     }
                 }
             }
-            else if (id == QLatin1String("posX"))
+            else if (id == QLatin1String("position"))
             {
-                currentItem->setX(variant.toDouble());
-            }
-            else if (id == QLatin1String("posY"))
-            {
-                currentItem->setY(variant.toDouble());
+                currentItem->setPos(variant.toPointF());
             }
             break;
         }
@@ -161,8 +166,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         {
             VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem);
             idToProperty[QLatin1String("name")]->setValue(i->name());
-            idToProperty[QLatin1String("posX")]->setValue(i->x());
-            idToProperty[QLatin1String("posY")]->setValue(i->y());
+            idToProperty[QLatin1String("position")]->setValue(i->pos());
             break;
         }
         case VGraphicsSimpleTextItem::Type:
@@ -181,7 +185,7 @@ void VToolOptionsPropertyBrowser::AddProperty(VProperty *property, const QString
 {
     propertyToId[property] = id;
     idToProperty[id] = property;
-    PropertyModel->addProperty(property, QLatin1String("name"));
+    PropertyModel->addProperty(property, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -199,18 +203,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             itemName->setValue(i->name());
             AddProperty(itemName, QLatin1String("name"));
 
-            VDoubleProperty* positionX = new VDoubleProperty(tr("Position X"));
-            positionX->setValue(i->x());
-            AddProperty(positionX, QLatin1String("posX"));
-
-            VDoubleProperty* positionY = new VDoubleProperty(tr("Position Y"));
-            positionY->setValue(i->y());
-            AddProperty(positionY, QLatin1String("posY"));
-
-//            QtVariantProperty *position = variantManager->addProperty(QVariant::PointF, tr("Position"));
-//            position->setValue(i->pos());
-//            AddProperty(position, QLatin1String("position"));
-//            mainGroup->addSubProperty(position);
+            VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
+            itemPosition->setValue(i->pos());
+            AddProperty(itemPosition, QLatin1String("position"));
             break;
         }
         case VGraphicsSimpleTextItem::Type:

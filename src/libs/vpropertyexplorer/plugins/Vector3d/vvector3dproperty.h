@@ -31,8 +31,7 @@ public:
 
 Q_DECLARE_METATYPE(QPE::Vector3D)   // todo
 
-
-namespace QPE{*/
+*/
 
 class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 {

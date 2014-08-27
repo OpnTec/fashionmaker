@@ -47,7 +47,8 @@ SOURCES += \
     plugins/vnumberproperty.cpp \
     plugins/Vector3d/vvector3dproperty.cpp \
     vstandardpropertyfactory.cpp \
-    plugins/vstringproperty.cpp
+    plugins/vstringproperty.cpp \
+    plugins/vpointfproperty.cpp
 
 HEADERS +=\
         vpropertyexplorer_global.h \
@@ -83,7 +84,8 @@ HEADERS +=\
     plugins/Vector3d/vvector3dproperty.h \
     vpropertyfactorymanager.h \
     vserializedproperty.h \
-    plugins/vstringproperty.h
+    plugins/vstringproperty.h \
+    plugins/vpointfproperty.h
 
 unix {
     target.path = /usr/lib

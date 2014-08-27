@@ -121,7 +121,7 @@ void VPropertyFormView::dataSubmitted(VProperty *property)
 
     if(tmpModel && d_ptr->UpdateEditors) {
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = true;
-        //tmpModel->onDataChangedByModel(property);
+        tmpModel->onDataChangedByModel(property);
         tmpModel->showDataChangedByEditor(property);
 
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = false;
