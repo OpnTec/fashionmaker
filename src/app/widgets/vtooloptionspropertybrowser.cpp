@@ -32,6 +32,8 @@
 #include "widgets/vmaingraphicsview.h"
 #include "visualization/vgraphicssimpletextitem.h"
 #include "visualization/vcontrolpointspline.h"
+#include "../libs/vpropertyexplorer/plugins/vnumberproperty.h"
+#include "../libs/vpropertyexplorer/plugins/vstringproperty.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>

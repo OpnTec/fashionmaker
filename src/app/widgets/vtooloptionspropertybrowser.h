@@ -35,7 +35,6 @@
 #include "../libs/vpropertyexplorer/vproperty.h"
 #include "../libs/vpropertyexplorer/vpropertymodel.h"
 #include "../libs/vpropertyexplorer/vpropertyformview.h"
-#include "../libs/vpropertyexplorer/plugins/vnumberproperty.h"
 
 class QDockWidget;
 class QGraphicsItem;
@@ -58,12 +57,6 @@ private:
     VPropertyModel* PropertyModel;
     VPropertyFormView* TreeView;
 
-//    class QtGroupPropertyManager  *groupManager;
-//    class VVariantPropertyManager *variantManager;
-
-//    QtProperty *mainGroup;
-
-//    QtGroupBoxPropertyBrowser *propertyEditor;
     QGraphicsItem *currentItem;
     QMap<VProperty *, QString> propertyToId;
     QMap<QString, VProperty *> idToProperty;

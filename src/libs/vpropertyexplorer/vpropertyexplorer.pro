@@ -34,7 +34,6 @@ SOURCES += \
     vpropertyset.cpp \
     vpropertytreeview.cpp \
     vserializedproperty.cpp \
-    vstandardpropertyFactory.cpp \
     plugins/vwidgetproperty.cpp \
     plugins/vemptyproperty.cpp \
     plugins/vboolproperty.cpp \
@@ -46,7 +45,9 @@ SOURCES += \
     plugins/vcolorpropertyeditor.cpp \
     plugins/vfilepropertyeditor.cpp \
     plugins/vnumberproperty.cpp \
-    plugins/Vector3d/vvector3dproperty.cpp
+    plugins/Vector3d/vvector3dproperty.cpp \
+    vstandardpropertyfactory.cpp \
+    plugins/vstringproperty.cpp
 
 HEADERS +=\
         vpropertyexplorer_global.h \
@@ -81,7 +82,8 @@ HEADERS +=\
     plugins/vnumberproperty.h \
     plugins/Vector3d/vvector3dproperty.h \
     vpropertyfactorymanager.h \
-    vserializedproperty.h
+    vserializedproperty.h \
+    plugins/vstringproperty.h
 
 unix {
     target.path = /usr/lib

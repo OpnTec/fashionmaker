@@ -10,7 +10,7 @@ class VProperty;
 
 class VPropertyFactoryManager;
 
-//! The standard property factory is able to create all the properties that are included in QtPropertyExplorer
+//! The standard property factory is able to create all the properties that are included in VPropertyExplorer
 //! by default.
 class VPROPERTYEXPLORERSHARED_EXPORT VStandardPropertyFactory : public VAbstractPropertyFactory
 {
