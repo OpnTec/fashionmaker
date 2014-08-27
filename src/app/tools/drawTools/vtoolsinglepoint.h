@@ -73,6 +73,7 @@ private:
     QString namePP;
     QString mPath;
     void         setColorLabel(const Qt::GlobalColor & color);
+    void         SaveOptions(QDomElement &tag, const VPointF &point);
 };
 
 #endif // VTOOLSINGLEPOINT_H

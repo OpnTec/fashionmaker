@@ -33,6 +33,7 @@
 #include "../../undocommands/addpatternpiece.h"
 #include "../../undocommands/deletepatternpiece.h"
 #include "../../geometry/vpointf.h"
+#include "../../undocommands/savetooloptions.h"
 
 #include <QMessageBox>
 
@@ -91,7 +92,23 @@ QString VToolSinglePoint::name() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setName(const QString &name)
 {
+    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    if (oldDomElement.isElement())
+    {
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
 
+        VPointF newPoint = VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id).data());
+        newPoint.setName(name);
+        SaveOptions(newDomElement, newPoint);
+
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,13 +129,7 @@ void VToolSinglePoint::AddToFile()
     QDomElement sPoint = doc->createElement(TagName);
 
     // Create SPoint tag
-    doc->SetAttribute(sPoint, VDomDocument::AttrId, id);
-    doc->SetAttribute(sPoint, AttrType, ToolType);
-    doc->SetAttribute(sPoint, AttrName, point->name());
-    doc->SetAttribute(sPoint, AttrX, qApp->fromPixel(point->x()));
-    doc->SetAttribute(sPoint, AttrY, qApp->fromPixel(point->y()));
-    doc->SetAttribute(sPoint, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(sPoint, AttrMy, qApp->fromPixel(point->my()));
+    SaveOptions(sPoint, *point.data());
 
     //Create pattern piece structure
     QDomElement patternPiece = doc->createElement(VPattern::TagDraw);
@@ -147,11 +158,11 @@ void VToolSinglePoint::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(point->x())));
-        doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(point->y())));
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(point->mx())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(point->my())));
+        SaveOptions(domElement, *point.data());
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 
@@ -290,6 +301,18 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
     lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::SaveOptions(QDomElement &tag, const VPointF &point)
+{
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point.name());
+    doc->SetAttribute(tag, AttrX, qApp->fromPixel(point.x()));
+    doc->SetAttribute(tag, AttrY, qApp->fromPixel(point.y()));
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point.mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point.my()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
