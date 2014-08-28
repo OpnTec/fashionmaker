@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vtooloptionspropertybrowser.h
+ **  @file   vproperties.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   22 8, 2014
+ **  @date   28 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,46 +26,21 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLOPTIONSPROPERTYBROWSER_H
-#define VTOOLOPTIONSPROPERTYBROWSER_H
+#ifndef VPROPERTIES_H
+#define VPROPERTIES_H
 
-#include <QObject>
-#include <QMap>
+#include "vproperty.h"
+#include "plugins/vboolproperty.h"
+#include "plugins/vcolorproperty.h"
+#include "plugins/Vector3d/vvector3dproperty.h"
+#include "plugins/vemptyproperty.h"
+#include "plugins/venumproperty.h"
+#include "plugins/vfileproperty.h"
+#include "plugins/vnumberproperty.h"
+#include "plugins/vobjectproperty.h"
+#include "plugins/vpointfproperty.h"
+#include "plugins/vshortcutproperty.h"
+#include "plugins/vstringproperty.h"
+#include "plugins/vwidgetproperty.h"
 
-#include "../libs/vpropertyexplorer/vproperty.h"
-#include "../libs/vpropertyexplorer/vpropertymodel.h"
-#include "../libs/vpropertyexplorer/vpropertyformview.h"
-
-class QDockWidget;
-class QGraphicsItem;
-class QScrollArea;
-
-using namespace VPE;
-
-class VToolOptionsPropertyBrowser : public QObject
-{
-    Q_OBJECT
-public:
-    VToolOptionsPropertyBrowser(QDockWidget *parent);
-public slots:
-    void itemClicked(QGraphicsItem *item);
-    void userChangedData(VProperty* property);
-    void UpdateOptions();
-private:
-    Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
-
-    VPropertyModel* PropertyModel;
-    VPropertyFormView* TreeView;
-
-    QGraphicsItem *currentItem;
-    QMap<VProperty *, QString> propertyToId;
-    QMap<QString, VProperty *> idToProperty;
-
-    void AddProperty(VProperty *property, const QString &id);
-    void ShowItemOptions(QGraphicsItem *item);
-
-    template<class Tool>
-    void SetPointName(const QString &name);
-};
-
-#endif // VTOOLOPTIONSPROPERTYBROWSER_H
+#endif // VPROPERTIES_H

@@ -73,6 +73,12 @@ void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPoint::name() const
+{
+    return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.

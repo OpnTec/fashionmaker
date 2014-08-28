@@ -46,6 +46,8 @@ public:
     virtual ~VToolPoint(){}
     static const QString    TagName;
     virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    QString                 name() const;
+    //void                    setName(const QString &name)=0;
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ChangedActivDraw(const QString &newName);

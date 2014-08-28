@@ -107,3 +107,13 @@ void VToolLinePoint::SetFactor(qreal factor)
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
+
+quint32 VToolLinePoint::getBasePointId() const
+{
+    return basePointId;
+}
+
+QString VToolLinePoint::getFormulaLength() const
+{
+    return formulaLength;
+}

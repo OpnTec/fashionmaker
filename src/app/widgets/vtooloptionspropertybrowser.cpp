@@ -32,10 +32,7 @@
 #include "widgets/vmaingraphicsview.h"
 #include "visualization/vgraphicssimpletextitem.h"
 #include "visualization/vcontrolpointspline.h"
-#include "../libs/vpropertyexplorer/plugins/vnumberproperty.h"
-#include "../libs/vpropertyexplorer/plugins/vstringproperty.h"
-#include "../libs/vpropertyexplorer/plugins/vpointfproperty.h"
-#include "../libs/vpropertyexplorer/plugins/venumproperty.h"
+#include "../libs/vpropertyexplorer/vproperties.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
@@ -108,7 +105,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         return;
     }
 
-    QVariant variant = prop->data(VProperty::DPC_Data);
+    QVariant variant = prop->data(VProperty::DPC_Data, Qt::DisplayRole);
 
     QString id = propertyToId[prop];
     switch (currentItem->type())
@@ -117,23 +114,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         {
             if (id == QLatin1String("name"))
             {
-                if (VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem))
-                {
-                    if (variant.toString() == i->name())
-                    {
-                        return;
-                    }
-
-                    if (variant.toString().isEmpty())
-                    {
-                        idToProperty[QLatin1String("name")]->setValue(i->name());
-                    }
-                    else
-                    {
-                        //TODO check if label name is unique
-                        i->setName(variant.toString());
-                    }
-                }
+                SetPointName<VToolSinglePoint>(variant.toString());
             }
             else if (id == QLatin1String("position"))
             {
@@ -145,16 +126,49 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
 //            }
             break;
         }
-//        case VGraphicsSimpleTextItem::Type:
-//            ShowItemOptions(currentItem->parentItem());
-//            break;
-//        case VControlPointSpline::Type:
-//            ShowItemOptions(currentItem->parentItem());
-//            break;
+        case VToolEndLine::Type:
+        {
+            if (id == QLatin1String("name"))
+            {
+                SetPointName<VToolEndLine>(variant.toString());
+            }
+            else if (id == QLatin1String("basePoint"))
+            {
+                VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
+                i->setBasePointId(variant.toUInt());
+            }
+            break;
+        }
         default:
             break;
     }
     qApp->getSceneView()->update();
+}
+
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
+{
+    if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        if (name == i->name())
+        {
+            return;
+        }
+
+        if (name.isEmpty())
+        {
+            idToProperty[QLatin1String("name")]->setValue(i->name());
+        }
+        else
+        {
+            //TODO check if label name is unique
+            i->setName(name);
+        }
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,6 +186,14 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem);
             idToProperty[QLatin1String("name")]->setValue(i->name());
             idToProperty[QLatin1String("position")]->setValue(i->pos());
+            break;
+        }
+        case VToolEndLine::Type:
+        {
+            VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
+            idToProperty[QLatin1String("name")]->setValue(i->name());
+            idToProperty[QLatin1String("basePoint")]->setValue(i->getBasePointId());
+
             break;
         }
         case VGraphicsSimpleTextItem::Type:
@@ -211,6 +233,24 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
             itemPosition->setValue(i->pos());
             AddProperty(itemPosition, QLatin1String("position"));
+
+            break;
+        }
+        case VToolEndLine::Type:
+        {
+            VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(item);
+            QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
+            parent->setWindowTitle(tr("Tool options (End of line)"));
+
+            VProperty* itemName = new VProperty(tr("Point name"));
+            itemName->setValue(i->name());
+            AddProperty(itemName, QLatin1String("name"));
+
+            VObjectProperty *pointsProperty = new VObjectProperty(tr("Base point"));
+            QMap<QString, quint32> pointsList = i->PointsList();
+            pointsProperty->setObjectsList(pointsList);
+            pointsProperty->setValue(i->getBasePointId());
+            AddProperty(pointsProperty, QLatin1String("basePoint"));
 
 //            VEnumProperty *enumProperty = new VEnumProperty(tr("list"));
 //            QStringList list = QStringList()<<"a1"<<"a2"<<"a3";

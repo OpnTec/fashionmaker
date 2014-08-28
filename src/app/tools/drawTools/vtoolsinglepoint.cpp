@@ -84,12 +84,6 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolSinglePoint::name() const
-{
-    return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::setName(const QString &name)
 {
     QDomElement oldDomElement = doc->elementById(QString().setNum(id));

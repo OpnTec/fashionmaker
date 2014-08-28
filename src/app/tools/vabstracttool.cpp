@@ -31,6 +31,7 @@
 #include <QMessageBox>
 #include "../undocommands/deltool.h"
 #include "../widgets/vapplication.h"
+#include "../geometry/vpointf.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -288,6 +289,31 @@ Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
             break;
     }
 }
+QString VAbstractTool::getTypeLine() const
+{
+    return typeLine;
+}
+
+QMap<QString, quint32> VAbstractTool::PointsList() const
+{
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();
+    QMap<QString, quint32> list;
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    {
+        if (i.key() != id)
+        {
+            QSharedPointer<VGObject> obj = i.value();
+            if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
+            {
+                const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(i.key());
+                list[point->name()] = i.key();
+            }
+        }
+    }
+    return list;
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 int VAbstractTool::ConfirmDeletion()

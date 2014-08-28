@@ -42,6 +42,12 @@ public:
                    const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
+    QString           getFormulaLength() const;
+    //void              setFormulaLength(const QString &value)=0;
+
+    quint32           getBasePointId() const;
+    //void              setBasePointId(const quint32 &value)=0;
+
 public slots:
     virtual void      ChangedActivDraw(const QString &newName);
     virtual void      SetFactor(qreal factor);

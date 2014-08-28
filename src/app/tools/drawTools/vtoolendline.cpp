@@ -32,6 +32,7 @@
 #include "../../dialogs/tools/dialogendline.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../geometry/vpointf.h"
+#include "../../undocommands/savetooloptions.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
@@ -170,6 +171,51 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
     return nullptr;
 }
 
+void VToolEndLine::SaveOption(const VPointF &point)
+{
+    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    if (oldDomElement.isElement())
+    {
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+
+        SaveOptions(newDomElement, point);
+
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
+}
+
+void VToolEndLine::setName(const QString &name)
+{
+    VPointF newPoint = VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id).data());
+    newPoint.setName(name);
+    SaveOption(newPoint);
+}
+
+void  VToolEndLine::setBasePointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        basePointId = value;
+
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        SaveOption(*point.data());
+    }
+}
+
+void  VToolEndLine::setFormulaLength(const QString &value)
+{
+    formulaLength = value;
+
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    SaveOption(*point.data());
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
@@ -216,16 +262,7 @@ void VToolEndLine::AddToFile()
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement domElement = doc->createElement(TagName);
 
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formulaLength);
-    doc->SetAttribute(domElement, AttrAngle, formulaAngle);
-    doc->SetAttribute(domElement, AttrBasePoint, basePointId);
+    SaveOptions(domElement, *point.data());
 
     AddToCalculation(domElement);
 }
@@ -240,13 +277,7 @@ void VToolEndLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formulaLength);
-        doc->SetAttribute(domElement, AttrAngle, formulaAngle);
-        doc->SetAttribute(domElement, AttrBasePoint, basePointId);
+        SaveOptions(domElement, *point.data());
     }
 }
 
@@ -264,4 +295,42 @@ void VToolEndLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->getAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::SaveOptions(QDomElement &tag, const VPointF &point)
+{
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point.name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point.mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point.my()));
+
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLength, formulaLength);
+    doc->SetAttribute(tag, AttrAngle, formulaAngle);
+    doc->SetAttribute(tag, AttrBasePoint, basePointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolEndLine::getFormulaAngle() const
+{
+    return formulaAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::setFormulaAngle(const QString &value)
+{
+    formulaAngle = value;
+
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    SaveOption(*point.data());
+}
+
+void VToolEndLine::setTypeLine(const QString &value)
+{
+    typeLine = value;
+
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    SaveOption(*point.data());
 }

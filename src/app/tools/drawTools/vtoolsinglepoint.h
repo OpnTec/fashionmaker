@@ -43,7 +43,6 @@ public:
                       const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
     virtual void setDialog();
     static const QString ToolType;
-    QString      name() const;
     void         setName(const QString &name);
     virtual int  type()const;
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};

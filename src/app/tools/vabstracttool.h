@@ -100,6 +100,10 @@ public:
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
     static Qt::PenStyle     LineStyle(const QString &typeLine);
     const VContainer        *getData() const;
+
+    QString                 getTypeLine() const;
+    //void                    setTypeLine(const QString &value)=0;
+    QMap<QString, quint32>  PointsList() const;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
