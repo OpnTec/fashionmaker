@@ -289,7 +289,7 @@ Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
             break;
     }
 }
-QString VAbstractTool::getTypeLine() const
+QString VAbstractTool::getLineType() const
 {
     return typeLine;
 }

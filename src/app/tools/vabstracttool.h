@@ -101,7 +101,7 @@ public:
     static Qt::PenStyle     LineStyle(const QString &typeLine);
     const VContainer        *getData() const;
 
-    QString                 getTypeLine() const;
+    QString                 getLineType() const;
     //void                    setTypeLine(const QString &value)=0;
     QMap<QString, quint32>  PointsList() const;
 public slots:

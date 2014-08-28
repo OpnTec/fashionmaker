@@ -128,14 +128,19 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         }
         case VToolEndLine::Type:
         {
+            VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
             if (id == QLatin1String("name"))
             {
                 SetPointName<VToolEndLine>(variant.toString());
             }
             else if (id == QLatin1String("basePoint"))
             {
-                VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
                 i->setBasePointId(variant.toUInt());
+            }
+            else if (id == QLatin1String("lineType"))
+            {
+
+                i->setTypeLine(variant.toString());
             }
             break;
         }
@@ -194,6 +199,10 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             idToProperty[QLatin1String("name")]->setValue(i->name());
             idToProperty[QLatin1String("basePoint")]->setValue(i->getBasePointId());
 
+            QStringList styles = VAbstractTool::Styles();
+            qint32 index = styles.indexOf(i->getLineType());
+            idToProperty[QLatin1String("lineType")]->setValue(index);
+
             break;
         }
         case VGraphicsSimpleTextItem::Type:
@@ -240,7 +249,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         {
             VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(item);
             QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
-            parent->setWindowTitle(tr("Tool options (End of line)"));
+            parent->setWindowTitle(tr("Tool options (Point at distance and angle)"));
 
             VProperty* itemName = new VProperty(tr("Point name"));
             itemName->setValue(i->name());
@@ -252,10 +261,12 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             pointsProperty->setValue(i->getBasePointId());
             AddProperty(pointsProperty, QLatin1String("basePoint"));
 
-//            VEnumProperty *enumProperty = new VEnumProperty(tr("list"));
-//            QStringList list = QStringList()<<"a1"<<"a2"<<"a3";
-//            enumProperty->setLiterals(list);
-//            AddProperty(enumProperty, QLatin1String("list"));
+            VEnumProperty *lineTypeProperty = new VEnumProperty(tr("Line type"));
+            lineTypeProperty->setLiterals(VAbstractTool::Styles());
+            QStringList styles = VAbstractTool::Styles();
+            qint32 index = styles.indexOf(i->getLineType());
+            lineTypeProperty->setValue(index);
+            AddProperty(lineTypeProperty, QLatin1String("lineType"));
             break;
         }
         case VGraphicsSimpleTextItem::Type:
