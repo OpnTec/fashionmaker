@@ -8,8 +8,9 @@ namespace VPE {
 
 
 //! Class for holding an integer property
-class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public QObject, public VProperty
 {
+    Q_OBJECT
 public:
     VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
@@ -49,7 +50,8 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
     virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const;
-
+public slots:
+    void valueChanged(int i);
 protected:
     int Min, Max;
 
@@ -61,6 +63,7 @@ protected:
 //! Class for holding a double property
 class VPROPERTYEXPLORERSHARED_EXPORT VDoubleProperty : public VIntegerProperty
 {
+    Q_OBJECT
 public:
     VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings);
 

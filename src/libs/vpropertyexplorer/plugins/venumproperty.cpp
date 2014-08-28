@@ -2,14 +2,15 @@
 #include "vproperty_p.h"
 
 #include <QComboBox>
+#include <QCoreApplication>
 
 using namespace VPE;
 
 VEnumProperty::VEnumProperty(const QString& name)
-    : VProperty(name, QVariant::Int)
+    : QObject(), VProperty(name, QVariant::Int)
 {
-    d_ptr->VariantValue = 0;
-    d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::d_ptr->VariantValue = 0;
+    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
 
@@ -19,7 +20,7 @@ QVariant VEnumProperty::data (int column, int role) const
     if(EnumerationLiterals.empty())
         return QVariant();
 
-    int tmpIndex = d_ptr->VariantValue.toInt();
+    int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
 
     if(tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
         tmpIndex = 0;
@@ -41,9 +42,12 @@ QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewIte
     QComboBox* tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->addItems(EnumerationLiterals);
-    tmpEditor->setCurrentIndex(d_ptr->VariantValue.toInt());
+    tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
+    connect(tmpEditor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                     &VEnumProperty::currentIndexChanged);
 
-    return tmpEditor;
+    VProperty::d_ptr->editor = tmpEditor;
+    return VProperty::d_ptr->editor;
 }
 
 //! Gets the data from the widget
@@ -76,7 +80,13 @@ void VEnumProperty::setValue(const QVariant& value)
     if(tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
         tmpIndex = 0;
 
-    d_ptr->VariantValue.setValue(tmpIndex);
+    VProperty::d_ptr->VariantValue = tmpIndex;
+    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+
+    if (VProperty::d_ptr->editor != nullptr)
+    {
+        setEditorData(VProperty::d_ptr->editor);
+    }
 }
 
 QString VEnumProperty::type() const
@@ -106,4 +116,11 @@ QVariant VEnumProperty::getSetting(const QString& key) const
 QStringList VEnumProperty::getSettingKeys() const
 {
     return QStringList("literals");
+}
+
+void VEnumProperty::currentIndexChanged(int index)
+{
+    Q_UNUSED(index)
+    UserChangeEvent *event = new UserChangeEvent();
+    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }

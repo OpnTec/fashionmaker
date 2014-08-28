@@ -122,8 +122,6 @@ void VPropertyFormView::dataSubmitted(VProperty *property)
     if(tmpModel && d_ptr->UpdateEditors) {
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = true;
         tmpModel->onDataChangedByModel(property);
-        tmpModel->showDataChangedByEditor(property);
-
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = false;
     }
 }
@@ -171,7 +169,8 @@ void VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widget)
     if(!widget)
         return;
 
-    connect(widget, SIGNAL(propertyDataSubmitted(VProperty*)), this, SLOT(dataSubmitted(VProperty*)));
+    connect(widget, &VPropertyFormWidget::propertyDataSubmitted, this, &VPropertyFormView::dataSubmitted,
+            Qt::UniqueConnection);
     QList<VPropertyFormWidget*> tmpList = widget->getChildPropertyFormWidgets();
 
     foreach(VPropertyFormWidget* tmpEditorWidget, tmpList) {

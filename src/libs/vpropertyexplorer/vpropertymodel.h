@@ -124,8 +124,6 @@ public slots:
     //! This function causes the views to update the property
     void onDataChangedByModel(VProperty* property);
 
-    void showDataChangedByEditor(VProperty* property);
-
 protected:
     //! Gets a property by its ModelIndex
     virtual QModelIndex getIndexFromProperty(VProperty* property, int column = 0) const;

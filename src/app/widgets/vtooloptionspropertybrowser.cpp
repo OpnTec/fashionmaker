@@ -35,6 +35,7 @@
 #include "../libs/vpropertyexplorer/plugins/vnumberproperty.h"
 #include "../libs/vpropertyexplorer/plugins/vstringproperty.h"
 #include "../libs/vpropertyexplorer/plugins/vpointfproperty.h"
+#include "../libs/vpropertyexplorer/plugins/venumproperty.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
@@ -138,6 +139,10 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             {
                 currentItem->setPos(variant.toPointF());
             }
+//            else if (id == QLatin1String("list"))
+//            {
+//                qDebug()<<prop->data(VProperty::DPC_Data, Qt::DisplayRole);
+//            }
             break;
         }
 //        case VGraphicsSimpleTextItem::Type:
@@ -206,6 +211,11 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
             itemPosition->setValue(i->pos());
             AddProperty(itemPosition, QLatin1String("position"));
+
+//            VEnumProperty *enumProperty = new VEnumProperty(tr("list"));
+//            QStringList list = QStringList()<<"a1"<<"a2"<<"a3";
+//            enumProperty->setLiterals(list);
+//            AddProperty(enumProperty, QLatin1String("list"));
             break;
         }
         case VGraphicsSimpleTextItem::Type:

@@ -7,6 +7,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include "vproperty.h"
+#include <QDebug>
 
 using namespace VPE;
 
@@ -125,10 +126,10 @@ void VPropertyFormWidget::commitData(int row)
         tmpEditorWidget.FormWidget->commitData();
     else if(tmpEditorWidget.Editor && tmpProperty) {
         QVariant newValue = tmpProperty->getEditorData(tmpEditorWidget.Editor);
-        QVariant oldValue = tmpProperty->data(VProperty::DPC_Data);
+        QVariant oldValue = tmpProperty->data(VProperty::DPC_Data, Qt::EditRole);
         if (oldValue != newValue)
         {
-            tmpProperty->setValue(tmpProperty->getEditorData(tmpEditorWidget.Editor));
+            tmpProperty->setValue(newValue);
             emit propertyDataSubmitted(tmpProperty);
         }
     }
@@ -205,6 +206,10 @@ bool VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
         event->accept();
         return true;
        }
+    else
+    {
+        return QGroupBox::eventFilter(object, event);
+    }
 
     // Default:
     return false;

@@ -3,6 +3,7 @@
 #include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <QSizePolicy>
+#include <QCoreApplication>
 
 #include "vproperty_p.h"
 
@@ -13,18 +14,18 @@ const int VIntegerProperty::StandardMin = -1000000;
 const int VIntegerProperty::StandardMax = 1000000;
 
 VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VProperty(name, QVariant::Int), Min(StandardMin), Max(StandardMax)
+    : QObject(), VProperty(name, QVariant::Int), Min(StandardMin), Max(StandardMax)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(0);
-    d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
 VIntegerProperty::VIntegerProperty(const QString &name)
-    : VProperty(name), Min(StandardMin), Max(StandardMax)
+    : QObject(), VProperty(name), Min(StandardMin), Max(StandardMax)
 {
-    d_ptr->VariantValue.setValue(0);
-    d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
@@ -37,10 +38,12 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
     tmpEditor->setMinimum(Min);
     tmpEditor->setMaximum(Max);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    tmpEditor->setValue(d_ptr->VariantValue.toInt());
+    tmpEditor->setValue(VProperty::d_ptr->VariantValue.toInt());
+    connect(tmpEditor, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+                     &VIntegerProperty::valueChanged);
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    VProperty::d_ptr->editor = tmpEditor;
+    return VProperty::d_ptr->editor;
 }
 
 //! Gets the data from the widget
@@ -92,6 +95,13 @@ VProperty* VIntegerProperty::clone(bool include_children, VProperty* container) 
     return VProperty::clone(include_children, container ? container : new VIntegerProperty(getName()));
 }
 
+void VIntegerProperty::valueChanged(int i)
+{
+    Q_UNUSED(i)
+    UserChangeEvent *event = new UserChangeEvent();
+    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+}
+
 
 
 
@@ -102,17 +112,17 @@ VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVaria
     : VIntegerProperty(name), Precision(StandardPrecision)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(0);
-    d_ptr->VariantValue.convert(QVariant::Double);
-    d_ptr->PropertyVariantType = QVariant::Double;
+    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::d_ptr->VariantValue.convert(QVariant::Double);
+    VProperty::d_ptr->PropertyVariantType = QVariant::Double;
 }
 
 VDoubleProperty::VDoubleProperty(const QString &name)
     : VIntegerProperty(name), Precision(StandardPrecision)
 {
-    d_ptr->VariantValue.setValue(0);
-    d_ptr->VariantValue.convert(QVariant::Double);
-    d_ptr->PropertyVariantType = QVariant::Double;
+    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::d_ptr->VariantValue.convert(QVariant::Double);
+    VProperty::d_ptr->PropertyVariantType = QVariant::Double;
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
@@ -125,10 +135,12 @@ QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewI
     tmpEditor->setMaximum(Max);
     tmpEditor->setDecimals(Precision);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    tmpEditor->setValue(d_ptr->VariantValue.toDouble());
+    tmpEditor->setValue(VProperty::d_ptr->VariantValue.toDouble());
+    connect(tmpEditor, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,
+                     &VIntegerProperty::valueChanged);
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    VProperty::d_ptr->editor = tmpEditor;
+    return VProperty::d_ptr->editor;
 }
 
 //! Gets the data from the widget

@@ -7,8 +7,9 @@
 
 namespace VPE{
 
-class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public QObject, public VProperty
 {
+    Q_OBJECT
 public:
     //! Constructor
     VEnumProperty(const QString& name);
@@ -56,6 +57,9 @@ public:
 
     //! Returns the list of keys of the property's settings
     virtual QStringList getSettingKeys() const;
+
+public slots:
+    void currentIndexChanged(int index);
 
 protected:
     //! The list of possible options to choose frome

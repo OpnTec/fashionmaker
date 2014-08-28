@@ -230,12 +230,8 @@ void VPropertyModel::onDataChangedByModel(VProperty* property)
     if(tmpIndex.isValid())
     {
         emit dataChanged(tmpIndex, tmpIndex);
+        emit onDataChangedByEditor(property);
     }
-}
-
-void VPropertyModel::showDataChangedByEditor(VProperty *property)
-{
-    emit onDataChangedByEditor(property);
 }
 
 const VPropertySet *VPropertyModel::getPropertySet() const
