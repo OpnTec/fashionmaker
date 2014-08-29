@@ -151,6 +151,14 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
                     i->setFormulaLength(variant.value<VFormula>().getFormula(FormulaType::FromUser));
                 }
             }
+            else if (id == QLatin1String("formulaAngle"))
+            {
+                VFormula formula = variant.value<VFormula>();
+                if (formula.error() == false)
+                {
+                    i->setFormulaAngle(variant.value<VFormula>().getFormula(FormulaType::FromUser));
+                }
+            }
             break;
         }
         default:
@@ -216,9 +224,17 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             formula.setCheckZero(true);
             formula.setToolId(i->getId());
             formula.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
-            QVariant value;
-            value.setValue(formula);
-            idToProperty[QLatin1String("formulaLength")]->setValue(value);
+            QVariant valueFormula;
+            valueFormula.setValue(formula);
+            idToProperty[QLatin1String("formulaLength")]->setValue(valueFormula);
+
+            VFormula formulaAngle(i->getFormulaAngle(), i->getData());
+            formulaAngle.setCheckZero(false);
+            formulaAngle.setToolId(i->getId());
+            formulaAngle.setPostfix(QStringLiteral("°"));
+            QVariant valueAngle;
+            valueAngle.setValue(formulaAngle);
+            idToProperty[QLatin1String("formulaAngle")]->setValue(valueAngle);
 
             break;
         }
@@ -286,12 +302,20 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             AddProperty(lineTypeProperty, QLatin1String("lineType"));
 
             VFormulaProperty* itemLength = new VFormulaProperty(tr("Length"));
-            VFormula formula(i->getFormulaLength(), i->getData());
-            formula.setCheckZero(true);
-            formula.setToolId(i->getId());
-            formula.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
-            itemLength->setFormula(formula);
+            VFormula formulaLength(i->getFormulaLength(), i->getData());
+            formulaLength.setCheckZero(true);
+            formulaLength.setToolId(i->getId());
+            formulaLength.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+            itemLength->setFormula(formulaLength);
             AddProperty(itemLength, QLatin1String("formulaLength"));
+
+            VFormulaProperty* itemAngle = new VFormulaProperty(tr("Angle"));
+            VFormula formulaAngle(i->getFormulaAngle(), i->getData());
+            formulaAngle.setCheckZero(false);
+            formulaAngle.setToolId(i->getId());
+            formulaAngle.setPostfix(QStringLiteral("°"));
+            itemAngle->setFormula(formulaAngle);
+            AddProperty(itemAngle, QLatin1String("formulaAngle"));
             break;
         }
         case VGraphicsSimpleTextItem::Type:

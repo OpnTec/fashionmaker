@@ -85,7 +85,8 @@ void VFormulaPropertyEditor::setFormula(const VFormula& formula)
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaPropertyEditor::onToolButtonClicked()
 {
-    DialogEditWrongFormula* tmpWidget = new DialogEditWrongFormula(formula.getData(), formula.getToolId());
+    DialogEditWrongFormula* tmpWidget = new DialogEditWrongFormula(formula.getData(), formula.getToolId(),
+                                                                   qApp->getMainWindow());
     tmpWidget->setCheckZero(formula.getCheckZero());
     tmpWidget->setPostfix(formula.getPostfix());
     tmpWidget->setFormula(formula.getFormula(FormulaType::FromUser));

@@ -52,10 +52,13 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
 
     //Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
-    if (QApplication::overrideCursor()->shape() == Qt::WaitCursor)
+    if (QApplication::overrideCursor() != nullptr)
     {
-        restoreCursor = true;
-        QApplication::restoreOverrideCursor();
+        if (QApplication::overrideCursor()->shape() == Qt::WaitCursor)
+        {
+            restoreCursor = true;
+            QApplication::restoreOverrideCursor();
+        }
     }
 #endif
 }
