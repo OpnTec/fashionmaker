@@ -78,8 +78,7 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 
     if (currentItem == nullptr)
     {
-        QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
-        parent->setWindowTitle(tr("Tool options"));
+        TreeView->setTitle(tr(""));
         return;
     }
 
@@ -122,10 +121,6 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             {
                 currentItem->setPos(variant.toPointF());
             }
-//            else if (id == QLatin1String("list"))
-//            {
-//                qDebug()<<prop->data(VProperty::DPC_Data, Qt::DisplayRole);
-//            }
             break;
         }
         case VToolEndLine::Type:
@@ -265,8 +260,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolSinglePoint::Type:
         {
             VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
-            QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
-            parent->setWindowTitle(tr("Tool options (Base point)"));
+            TreeView->setTitle(tr("Base point"));
 
             VProperty* itemName = new VProperty(tr("Point name"));
             itemName->setValue(i->name());
@@ -281,8 +275,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolEndLine::Type:
         {
             VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(item);
-            QDockWidget *parent = qobject_cast<QDockWidget *>(this->parent());
-            parent->setWindowTitle(tr("Tool options (Point at distance and angle)"));
+            TreeView->setTitle(tr("Point at distance and angle"));
 
             VProperty* itemName = new VProperty(tr("Point name"));
             itemName->setValue(i->name());
