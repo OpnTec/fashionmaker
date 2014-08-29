@@ -334,6 +334,7 @@ VProperty* VProperty::clone(bool include_children, VProperty* container) const
     container->setValue(getValue());
     container->setSettings(getSettings());
     container->setUpdateBehaviour(getUpdateParent(), getUpdateChildren());
+    container->setPropertyType(propertyType());
 
     if(include_children) {
         foreach(VProperty* tmpChild, d_ptr->Children)
@@ -346,6 +347,11 @@ VProperty* VProperty::clone(bool include_children, VProperty* container) const
 Property VProperty::propertyType() const
 {
     return d_ptr->type;
+}
+
+void VProperty::setPropertyType(const Property &type)
+{
+    d_ptr->type = type;
 }
 
 void VProperty::UpdateParent(const QVariant &value)

@@ -164,18 +164,22 @@ void VPropertyFormWidget::commitData(int row)
     VProperty* tmpProperty = d_ptr->Properties[row];
     if(tmpEditorWidget.FormWidget)
         tmpEditorWidget.FormWidget->commitData();
-    else if(tmpEditorWidget.Editor && tmpProperty) {
+    else if(tmpEditorWidget.Editor && tmpProperty)
+    {
         QVariant newValue = tmpProperty->getEditorData(tmpEditorWidget.Editor);
         QVariant oldValue = tmpProperty->data(VProperty::DPC_Data, Qt::EditRole);
         if (oldValue != newValue)
         {
-            if (VProperty *parent = tmpProperty->getParent())
+            VProperty *parent = tmpProperty->getParent();
+            if (parent == nullptr)
             {
-                if (parent->propertyType() == Property::Complex)
-                {
-                    tmpProperty->UpdateParent(newValue);
-                    emit propertyDataSubmitted(parent);
-                }
+                tmpProperty->setValue(newValue);
+                emit propertyDataSubmitted(tmpProperty);
+            }
+            else if (parent->propertyType() == Property::Complex)
+            {
+                tmpProperty->UpdateParent(newValue);
+                emit propertyDataSubmitted(parent);
             }
             else
             {

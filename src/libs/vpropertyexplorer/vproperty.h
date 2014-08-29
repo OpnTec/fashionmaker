@@ -162,6 +162,7 @@ public:
     virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
     Property propertyType() const;
+    void     setPropertyType(const Property &type);
 
     virtual void UpdateParent(const QVariant &value);
 public slots:
