@@ -28,7 +28,7 @@
 using namespace VPE;
 
 VObjectProperty::VObjectProperty(const QString& name)
-    : QObject(), VProperty(name, QVariant::Int)
+    : VProperty(name, QVariant::Int)
 {
     VProperty::d_ptr->VariantValue = 0;
     VProperty::d_ptr->VariantValue.convert(QVariant::UInt);

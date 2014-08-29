@@ -5,6 +5,8 @@
 #include <QLabel>
 #include "vproperty.h"
 
+class QFormLayout;
+
 namespace VPE {
 
 class VPropertyFormWidgetPrivate;
@@ -31,6 +33,8 @@ public:
 public slots:
     //! Rebuilds the whole form
     virtual void build();
+
+    void buildEditor(VProperty *property, QFormLayout *formLayout, Property type = Property::Simple);
 
     //! Reads the data from the editors and commits it to the properties
     void commitData();

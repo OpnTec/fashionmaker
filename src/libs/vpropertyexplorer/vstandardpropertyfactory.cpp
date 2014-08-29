@@ -45,7 +45,7 @@ VProperty *VStandardPropertyFactory::createProperty(const QString &type, const Q
     } else if(type == QString("bool")) {
         return new VBoolProperty(name);
     } else if(type == QString("color")) {
-        return new QColorProperty(name);
+        return new VColorProperty(name);
     } else if(type == QString("empty")) {
         return new VEmptyProperty(name);
     } else if(type == QString("enum")) {

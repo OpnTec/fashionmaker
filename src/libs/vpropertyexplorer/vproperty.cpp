@@ -10,7 +10,7 @@ using namespace VPE;
 
 //! Standard constructor, takes a name and a parent property as argument
 VProperty::VProperty(const QString& name, QVariant::Type type)
-    : d_ptr(new VPropertyPrivate(name, type))
+    : QObject(), d_ptr(new VPropertyPrivate(name, type))
 {
 
 }
@@ -341,4 +341,19 @@ VProperty* VProperty::clone(bool include_children, VProperty* container) const
     }
 
     return container;
+}
+
+Property VProperty::propertyType() const
+{
+    return d_ptr->type;
+}
+
+void VProperty::UpdateParent(const QVariant &value)
+{
+    Q_UNUSED(value);
+}
+
+void VProperty::ValueChildChanged(const QVariant &value, int typeForParent)
+{
+
 }

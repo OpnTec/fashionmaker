@@ -8,7 +8,7 @@ namespace VPE {
 
 
 //! Class for holding an integer property
-class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public QObject, public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public VProperty
 {
     Q_OBJECT
 public:

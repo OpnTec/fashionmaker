@@ -7,7 +7,7 @@
 
 namespace VPE{
 
-class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public QObject, public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
 {
     Q_OBJECT
 public:

@@ -64,8 +64,14 @@ public:
     //! \return Returns the newly created property (or container, if it was not NULL)
     virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
+    virtual void UpdateParent(const QVariant &value);
+
+    int getTypeForParent() const;
+    void setTypeForParent(int value);
+
 protected:
     bool readOnly;
+    int typeForParent;
 };
 
 }

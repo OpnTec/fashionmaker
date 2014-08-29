@@ -7,11 +7,11 @@
 
 namespace VPE {
 
-class VPROPERTYEXPLORERSHARED_EXPORT QColorProperty : public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VColorProperty : public VProperty
 {
 
 public:
-    QColorProperty(const QString &name);
+    VColorProperty(const QString &name);
 
     //! Get the data how it should be displayed
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const;

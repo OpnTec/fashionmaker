@@ -14,7 +14,7 @@ const int VIntegerProperty::StandardMin = -1000000;
 const int VIntegerProperty::StandardMax = 1000000;
 
 VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : QObject(), VProperty(name, QVariant::Int), Min(StandardMin), Max(StandardMax)
+    : VProperty(name, QVariant::Int), Min(StandardMin), Max(StandardMax)
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -22,7 +22,7 @@ VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVar
 }
 
 VIntegerProperty::VIntegerProperty(const QString &name)
-    : QObject(), VProperty(name), Min(StandardMin), Max(StandardMax)
+    : VProperty(name), Min(StandardMin), Max(StandardMax)
 {
     VProperty::d_ptr->VariantValue.setValue(0);
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);

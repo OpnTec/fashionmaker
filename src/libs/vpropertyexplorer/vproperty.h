@@ -12,6 +12,8 @@
 
 namespace VPE {
 
+enum class Property : char{Simple, Complex};
+
 static const int MyCustomEventType = 1099;
 
 class UserChangeEvent : public QEvent
@@ -22,8 +24,9 @@ public:
 
 class VPropertyPrivate;
 
-class VPROPERTYEXPLORERSHARED_EXPORT VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VProperty : public QObject
 {
+    Q_OBJECT
 public:
     enum DPC_DisplayColumn {
         DPC_Name = 0,
@@ -158,6 +161,13 @@ public:
     //! \return Returns the newly created property (or container, if it was not NULL)
     virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
+    Property propertyType() const;
+
+    virtual void UpdateParent(const QVariant &value);
+public slots:
+    virtual void ValueChildChanged(const QVariant &value, int typeForParent);
+signals:
+    void childChanged(const QVariant &value, int typeForParent);
 
 protected:
     //! Protected constructor

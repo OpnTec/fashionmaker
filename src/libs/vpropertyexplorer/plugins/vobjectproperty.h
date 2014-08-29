@@ -29,7 +29,7 @@ class QComboBox;
 
 namespace VPE{
 
-class VPROPERTYEXPLORERSHARED_EXPORT VObjectProperty : public QObject, public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VObjectProperty : public VProperty
 {
     Q_OBJECT
 public:

@@ -29,7 +29,7 @@ using namespace VPE;
 
 
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String), readOnly(false)
+    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QStringLiteral(""));
@@ -37,7 +37,7 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
-    : VProperty(name), readOnly(false)
+    : VProperty(name), readOnly(false), typeForParent(0)
 {
     d_ptr->VariantValue.setValue(QStringLiteral(""));
     d_ptr->VariantValue.convert(QVariant::String);
@@ -74,29 +74,51 @@ void VPE::VStringProperty::setReadOnly(bool readOnly)
 
 void VPE::VStringProperty::setSetting(const QString &key, const QVariant &value)
 {
-    if(key == "ReadOnly")
+    if(key == QLatin1String("ReadOnly"))
         setReadOnly(value.toBool());
+    if(key == QLatin1String("TypeForParent"))
+        setTypeForParent(value.toInt());
 }
 
 QVariant VPE::VStringProperty::getSetting(const QString &key) const
 {
-    if(key == "ReadOnly")
+    if(key == QLatin1String("ReadOnly"))
         return readOnly;
+    else if (key == QLatin1String("TypeForParent"))
+        return typeForParent;
     else
         return VProperty::getSetting(key);
 }
 
 QStringList VPE::VStringProperty::getSettingKeys() const
 {
-    return QStringList("ReadOnly");
+    QStringList settings;
+    settings << QStringLiteral("ReadOnly") << QStringLiteral("TypeForParent");
+    return settings;
 }
 
 QString VPE::VStringProperty::type() const
 {
-    return "string";
+    return QStringLiteral("string");
 }
 
 VPE::VProperty *VPE::VStringProperty::clone(bool include_children, VPE::VProperty *container) const
 {
-    return VProperty::clone(include_children, container ? container : new VStringProperty(getName()));
+    return VProperty::clone(include_children, container ? container : new VStringProperty(getName(), getSettings()));
 }
+
+void VStringProperty::UpdateParent(const QVariant &value)
+{
+    emit childChanged(value, typeForParent);
+}
+
+int VStringProperty::getTypeForParent() const
+{
+    return typeForParent;
+}
+
+void VStringProperty::setTypeForParent(int value)
+{
+    typeForParent = value;
+}
+

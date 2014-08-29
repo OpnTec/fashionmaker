@@ -33,6 +33,8 @@
 #include "visualization/vgraphicssimpletextitem.h"
 #include "visualization/vcontrolpointspline.h"
 #include "../libs/vpropertyexplorer/vproperties.h"
+#include "vformulaproperty.h"
+#include "../container/vformula.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
@@ -139,8 +141,15 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             }
             else if (id == QLatin1String("lineType"))
             {
-
                 i->setTypeLine(variant.toString());
+            }
+            else if (id == QLatin1String("formulaLength"))
+            {
+                VFormula formula = variant.value<VFormula>();
+                if (formula.error() == false)
+                {
+                    i->setFormulaLength(variant.value<VFormula>().getFormula());
+                }
             }
             break;
         }
@@ -202,6 +211,14 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             QStringList styles = VAbstractTool::Styles();
             qint32 index = styles.indexOf(i->getLineType());
             idToProperty[QLatin1String("lineType")]->setValue(index);
+
+            VFormula formula(i->getFormulaLength(), i->getData());
+            formula.setCheckZero(true);
+            formula.setToolId(i->getId());
+            formula.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+            QVariant value;
+            value.setValue(formula);
+            idToProperty[QLatin1String("formulaLength")]->setValue(value);
 
             break;
         }
@@ -267,6 +284,14 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             qint32 index = styles.indexOf(i->getLineType());
             lineTypeProperty->setValue(index);
             AddProperty(lineTypeProperty, QLatin1String("lineType"));
+
+            VFormulaProperty* itemLength = new VFormulaProperty(tr("Length"));
+            VFormula formula(i->getFormulaLength(), i->getData());
+            formula.setCheckZero(true);
+            formula.setToolId(i->getId());
+            formula.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+            itemLength->setFormula(formula);
+            AddProperty(itemLength, QLatin1String("formulaLength"));
             break;
         }
         case VGraphicsSimpleTextItem::Type:

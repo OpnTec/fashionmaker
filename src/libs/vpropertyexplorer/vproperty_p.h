@@ -40,13 +40,15 @@ public:
 
     QWidget* editor;
 
+    Property type;
+
     //! List of child properties
     QList<VProperty*> Children;
 
     //! Constructor passing name and type
     VPropertyPrivate(const QString& name, QVariant::Type type)
         : VariantValue(type), Name(name), PropertyVariantType(type), UpdateParent(false), UpdateChildren(false),
-          Parent(nullptr), editor(nullptr)
+          Parent(nullptr), editor(nullptr), type(Property::Simple)
     {}
 
     //! Constructor

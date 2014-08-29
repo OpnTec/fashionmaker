@@ -71,37 +71,77 @@ void VPropertyFormWidget::build()
         if(!tmpProperty) continue;
 
         if(tmpProperty->getRowCount() > 0) {
-            // Child properties, the property itself is not being added
-            VPropertyFormWidget* tmpNewFormWidget = new VPropertyFormWidget(tmpProperty, this);
-            tmpFormLayout->addRow(tmpNewFormWidget);
-            d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpNewFormWidget));
-            tmpNewFormWidget->setCommitBehaviour(d_ptr->UpdateEditors);
+            if (tmpProperty->propertyType() == Property::Complex)
+            {
+                buildEditor(tmpProperty, tmpFormLayout, Property::Complex);
+                QWidget *group = new QWidget(this);
+                tmpFormLayout->addRow(group);
+
+                QFormLayout* subFormLayout = new QFormLayout(group);
+                QMargins margins = subFormLayout->contentsMargins();
+                margins.setTop(0);
+                margins.setLeft(14);
+                subFormLayout->setContentsMargins(margins);
+
+                group->setLayout(subFormLayout);
+                QList<VProperty*> children = tmpProperty->getChildren();
+                for (int j = 0; j < children.size(); ++j)
+                {
+                    buildEditor(children[j], subFormLayout);
+                    connect(children[j], &VProperty::childChanged, tmpProperty, &VProperty::ValueChildChanged,
+                            Qt::UniqueConnection);
+                    ++i;
+                    d_ptr->Properties.insert(i, children[j]);
+                }
+            }
+            else
+            {
+                // Child properties, the property itself is not being added
+                VPropertyFormWidget* tmpNewFormWidget = new VPropertyFormWidget(tmpProperty, this);
+                tmpFormLayout->addRow(tmpNewFormWidget);
+                d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpNewFormWidget));
+                tmpNewFormWidget->setCommitBehaviour(d_ptr->UpdateEditors);
+            }
         } else if(tmpProperty->type() == "widget") {
             VWidgetProperty* tmpWidgetProperty = static_cast<VWidgetProperty*>(tmpProperty);
             tmpFormLayout->addRow(tmpWidgetProperty->getWidget());
             d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpWidgetProperty->getWidget()));
         } else {
-            // Add property (no child properties)
-            // Create the editor (if it doesn't work, create empty widget)
-            QWidget* tmpEditor = tmpProperty->createEditor(this, QStyleOptionViewItem(), nullptr);
-            if(!tmpEditor)
-                tmpEditor = new QWidget(this);
-
-            // set tooltip and whats this
-            tmpEditor->setToolTip(tmpProperty->getDescription());
-            tmpEditor->setWhatsThis(tmpProperty->getDescription());
-
-            // Install event filter
-            tmpEditor->installEventFilter(this);
-
-            // Set the editor data
-            tmpProperty->setEditorData(tmpEditor);
-
-            // add new row
-            tmpFormLayout->addRow(tmpProperty->getName(), tmpEditor);
-            d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpEditor));
+            buildEditor(tmpProperty, tmpFormLayout);
         }
     }
+}
+
+void VPropertyFormWidget::buildEditor(VProperty* property, QFormLayout* formLayout, Property type)
+{
+    // Add property (no child properties)
+    // Create the editor (if it doesn't work, create empty widget)
+    QWidget* tmpEditor = property->createEditor(this, QStyleOptionViewItem(), nullptr);
+    if(!tmpEditor)
+        tmpEditor = new QWidget(this);
+
+    // set tooltip and whats this
+    tmpEditor->setToolTip(property->getDescription());
+    tmpEditor->setWhatsThis(property->getDescription());
+
+    // Install event filter
+    tmpEditor->installEventFilter(this);
+
+    // Set the editor data
+    property->setEditorData(tmpEditor);
+
+    // add new row
+    if (type == Property::Complex)
+    {
+        QString name = "<b>"+property->getName()+"</b>";
+        formLayout->addRow(name, tmpEditor);
+    }
+    else
+    {
+        formLayout->addRow(property->getName(), tmpEditor);
+    }
+
+    d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpEditor));
 }
 
 void VPropertyFormWidget::commitData()
@@ -129,8 +169,19 @@ void VPropertyFormWidget::commitData(int row)
         QVariant oldValue = tmpProperty->data(VProperty::DPC_Data, Qt::EditRole);
         if (oldValue != newValue)
         {
-            tmpProperty->setValue(newValue);
-            emit propertyDataSubmitted(tmpProperty);
+            if (VProperty *parent = tmpProperty->getParent())
+            {
+                if (parent->propertyType() == Property::Complex)
+                {
+                    tmpProperty->UpdateParent(newValue);
+                    emit propertyDataSubmitted(parent);
+                }
+            }
+            else
+            {
+                tmpProperty->setValue(newValue);
+                emit propertyDataSubmitted(tmpProperty);
+            }
         }
     }
 }
