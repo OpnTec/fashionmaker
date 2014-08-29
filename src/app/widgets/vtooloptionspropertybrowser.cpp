@@ -148,7 +148,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
                 VFormula formula = variant.value<VFormula>();
                 if (formula.error() == false)
                 {
-                    i->setFormulaLength(variant.value<VFormula>().getFormula());
+                    i->setFormulaLength(variant.value<VFormula>().getFormula(FormulaType::FromUser));
                 }
             }
             break;

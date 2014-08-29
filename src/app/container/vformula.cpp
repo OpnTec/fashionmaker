@@ -40,7 +40,7 @@ VFormula::VFormula()
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
-    :formula(formula), value(QString(tr("Error"))), checkZero(true), data(container), toolId(NULL_ID),
+    :formula(qApp->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container), toolId(NULL_ID),
       postfix(QStringLiteral("")), _error(true)
 {
     this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
@@ -90,17 +90,32 @@ bool VFormula::operator!=(const VFormula &formula) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::getFormula() const
+QString VFormula::getFormula(FormulaType type) const
 {
-    return formula;
+    if (type == FormulaType::ToUser)
+    {
+        return formula;
+    }
+    else
+    {
+        return qApp->FormulaFromUser(formula);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormula::setFormula(const QString &value)
+void VFormula::setFormula(const QString &value, FormulaType type)
 {
     if (formula != value)
     {
-        formula = value;
+        if (type == FormulaType::ToUser)
+        {
+            formula = value;
+        }
+        else
+        {
+            formula = qApp->FormulaToUser(value);
+        }
+        formula.replace("\n", " ");// Replace line return with spaces for calc if exist
         Eval();
     }
 }
@@ -200,7 +215,8 @@ void VFormula::Eval()
         try
         {
             Calculator *cal = new Calculator(data);
-            const qreal result = cal->EvalFormula(formula);
+            QString expression = qApp->FormulaFromUser(formula);
+            const qreal result = cal->EvalFormula(expression);
             delete cal;
 
             //if result equal 0

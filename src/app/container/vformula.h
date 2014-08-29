@@ -31,6 +31,8 @@
 
 #include <QCoreApplication>
 
+enum class FormulaType : char{ToUser, FromUser};
+
 class VContainer;
 
 class VFormula
@@ -44,8 +46,8 @@ public:
     bool operator==(const VFormula &formula) const;
     bool operator!=(const VFormula &formula) const;
 
-    QString getFormula() const;
-    void setFormula(const QString &value);
+    QString getFormula(FormulaType type = FormulaType::ToUser) const;
+    void setFormula(const QString &value, FormulaType type = FormulaType::ToUser);
 
     QString getValue() const;
 

@@ -66,9 +66,6 @@ private:
     const VContainer *data;
     void          InitVariables(const VContainer *data, const QMap<int, QString> &tokens);
     void          InitCharacterSets();
-    static qreal  CmUnit(qreal val);
-    static qreal  MmUnit(qreal val);
-    static qreal  InchUnit(qreal val);
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
 };
 

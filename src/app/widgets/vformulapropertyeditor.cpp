@@ -88,11 +88,11 @@ void VFormulaPropertyEditor::onToolButtonClicked()
     DialogEditWrongFormula* tmpWidget = new DialogEditWrongFormula(formula.getData(), formula.getToolId());
     tmpWidget->setCheckZero(formula.getCheckZero());
     tmpWidget->setPostfix(formula.getPostfix());
-    tmpWidget->setFormula(formula.getFormula());
+    tmpWidget->setFormula(formula.getFormula(FormulaType::FromUser));
 
     if (tmpWidget->exec() == QDialog::Accepted)
     {
-        formula.setFormula(tmpWidget->getFormula());
+        formula.setFormula(tmpWidget->getFormula(), FormulaType::ToUser);
         TextLabel->setText(formula.getValue());
         delete tmpWidget;
         emit dataChangedByUser(formula, this);
