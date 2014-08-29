@@ -209,6 +209,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
             if (resultUndo == UndoButton::Fix)
             {
                 DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
+                dialog->setWindowTitle(tr("Edit wrong formula"));
                 dialog->setFormula(formula);
                 if (dialog->exec() == QDialog::Accepted)
                 {

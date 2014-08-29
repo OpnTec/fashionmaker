@@ -377,11 +377,13 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(labelEditFormula != nullptr);
+    SCASSERT(labelResultCalculation != nullptr);
     if (edit->text().isEmpty())
     {
         flag = false;
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
+        labelResultCalculation->setText(tr("Error"));
         return;
     }
     timer->start(1000);
@@ -392,11 +394,13 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(labelEditFormula != nullptr);
+    SCASSERT(labelResultCalculation != nullptr);
     if (edit->toPlainText().isEmpty())
     {
         flag = false;
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
+        labelResultCalculation->setText(tr("Error"));
         return;
     }
     timer->setSingleShot(true);
@@ -423,6 +427,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
     {
         flag = false;
         ChangeColor(labelEditFormula, Qt::red);
+        label->setText(tr("Error"));
     }
     else
     {
@@ -441,6 +446,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             {
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
+                label->setText(tr("Error"));
             }
             else
             {
