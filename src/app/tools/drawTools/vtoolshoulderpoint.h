@@ -59,10 +59,9 @@ public slots:
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   RemoveReferens();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     /** @brief p2Line id second line point. */
     quint32         p2Line;

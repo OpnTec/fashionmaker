@@ -31,7 +31,6 @@
 #include "../../dialogs/tools/dialogalongline.h"
 #include "../../geometry/vpointf.h"
 #include "exception/vexceptionobjecterror.h"
-#include "../undocommands/savetooloptions.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
@@ -116,38 +115,6 @@ void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolAlongLine::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    SaveOptions(domElement, *point.data());
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolAlongLine::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        SaveOptions(domElement, *point.data());
-    }
-    else
-    {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolAlongLine::RemoveReferens()
@@ -173,38 +140,21 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::SaveOptions(QDomElement &tag, const VPointF &point)
+void VToolAlongLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
     doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrName, point.name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point.mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point.my()));
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrFirstPoint, basePointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::SaveOption(const VPointF &point)
-{
-    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-
-        SaveOptions(newDomElement, point);
-
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
-    }
-    else
-    {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,46 +168,8 @@ void VToolAlongLine::setSecondPointId(const quint32 &value)
 {
     secondPointId = value;
 
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    SaveOption(*point.data());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::setName(const QString &name)
-{
-    VPointF newPoint = VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id).data());
-    newPoint.setName(name);
-    SaveOption(newPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::setTypeLine(const QString &value)
-{
-    typeLine = value;
-
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    SaveOption(*point.data());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::setFormulaLength(const VFormula &value)
-{
-    if (value.error() == false)
-    {
-        formulaLength = value.getFormula(FormulaType::FromUser);
-
-        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-        SaveOption(*point.data());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolAlongLine::setFirstPointId(const quint32 &value)
-{
-    basePointId = value;
-
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    SaveOption(*point.data());
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

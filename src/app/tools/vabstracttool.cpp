@@ -32,6 +32,7 @@
 #include "../undocommands/deltool.h"
 #include "../widgets/vapplication.h"
 #include "../geometry/vpointf.h"
+#include "../undocommands/savetooloptions.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -289,11 +290,23 @@ Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
             break;
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractTool::getLineType() const
 {
     return typeLine;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::setTypeLine(const QString &value)
+{
+    typeLine = value;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMap<QString, quint32> VAbstractTool::PointsList() const
 {
     const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();
@@ -314,7 +327,6 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
     return list;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 int VAbstractTool::ConfirmDeletion()
 {
@@ -325,6 +337,26 @@ int VAbstractTool::ConfirmDeletion()
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.setIcon(QMessageBox::Question);
     return msgBox.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
+{
+    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    if (oldDomElement.isElement())
+    {
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+
+        SaveOptions(newDomElement, obj);
+
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

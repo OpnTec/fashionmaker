@@ -131,6 +131,12 @@ void VNodeSplinePath::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VNodeSplinePath::getTagName() const
+{
+    return VNodeSplinePath::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */

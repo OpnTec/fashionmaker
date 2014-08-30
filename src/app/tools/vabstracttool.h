@@ -102,8 +102,10 @@ public:
     const VContainer        *getData() const;
 
     QString                 getLineType() const;
-    //void                    setTypeLine(const QString &value)=0;
+    void                    setTypeLine(const QString &value);
     QMap<QString, quint32>  PointsList() const;
+    virtual QString         getTagName() const =0;
+
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -139,6 +141,7 @@ protected:
 
     /** @brief typeLine line type. */
     QString                 typeLine;
+
     /**
      * @brief AddToFile add tag with informations about tool into file.
      */
@@ -153,6 +156,8 @@ protected:
     virtual void            RemoveReferens(){}
     virtual void            DeleteTool(bool ask = true);
     static int              ConfirmDeletion();
+    void                    SaveOption(QSharedPointer<VGObject> &obj);
+    virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)=0;
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

@@ -165,6 +165,12 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolArc::getTagName() const
+{
+    return VToolArc::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
@@ -181,42 +187,6 @@ void VToolArc::FullUpdateFromFile()
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogArc>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolArc::AddToFile()
-{
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-    doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-    doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-    doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolArc::RefreshDataInFile()
-{
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-        doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-        doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-        doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,6 +212,20 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
     doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    SCASSERT(arc.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrCenter, arc->GetCenter().id());
+    doc->SetAttribute(tag, AttrRadius, arc->GetFormulaRadius());
+    doc->SetAttribute(tag, AttrAngle1, arc->GetFormulaF1());
+    doc->SetAttribute(tag, AttrAngle2, arc->GetFormulaF2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

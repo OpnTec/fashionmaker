@@ -50,6 +50,7 @@ public:
     virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     virtual int      type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
+    virtual QString  getTagName() const;
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);
@@ -66,6 +67,7 @@ protected:
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void     keyReleaseEvent(QKeyEvent * event);
     virtual void     SaveDialog(QDomElement &domElement);
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     /** @brief firstPoint id first line point. */
     quint32           firstPoint;

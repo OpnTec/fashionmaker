@@ -79,6 +79,20 @@ QString VToolPoint::name() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::setName(const QString &name)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    obj->setName(name);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPoint::getTagName() const
+{
+    return VToolPoint::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.

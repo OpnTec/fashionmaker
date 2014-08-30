@@ -33,7 +33,6 @@
 #include "../../undocommands/addpatternpiece.h"
 #include "../../undocommands/deletepatternpiece.h"
 #include "../../geometry/vpointf.h"
-#include "../../undocommands/savetooloptions.h"
 
 #include <QMessageBox>
 
@@ -84,34 +83,6 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::setName(const QString &name)
-{
-    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-
-        VPointF newPoint = VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id).data());
-        newPoint.setName(name);
-        SaveOptions(newDomElement, newPoint);
-
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
-    }
-    else
-    {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VToolSinglePoint::type() const
-{
-     return Type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */
@@ -119,11 +90,11 @@ void VToolSinglePoint::AddToFile()
 {
     Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
 
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement sPoint = doc->createElement(TagName);
 
     // Create SPoint tag
-    SaveOptions(sPoint, *point.data());
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOptions(sPoint, obj);
 
     //Create pattern piece structure
     QDomElement patternPiece = doc->createElement(VPattern::TagDraw);
@@ -140,24 +111,6 @@ void VToolSinglePoint::AddToFile()
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addPP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolSinglePoint::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        SaveOptions(domElement, *point.data());
-    }
-    else
-    {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -298,15 +251,18 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::SaveOptions(QDomElement &tag, const VPointF &point)
+void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
     doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrName, point.name());
-    doc->SetAttribute(tag, AttrX, qApp->fromPixel(point.x()));
-    doc->SetAttribute(tag, AttrY, qApp->fromPixel(point.y()));
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point.mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point.my()));
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrX, qApp->fromPixel(point->x()));
+    doc->SetAttribute(tag, AttrY, qApp->fromPixel(point->y()));
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -48,14 +48,14 @@ public:
     static const QString ToolType;
     virtual int      type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Arc)};
+    virtual QString  getTagName() const;
 public slots:
     virtual void     FullUpdateFromFile();
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void     AddToFile();
-    virtual void     RefreshDataInFile();
     virtual void     RemoveReferens();
     virtual void     SaveDialog(QDomElement &domElement);
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     void             RefreshGeometry();
 };

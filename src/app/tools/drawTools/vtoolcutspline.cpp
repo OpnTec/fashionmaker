@@ -88,7 +88,7 @@ void VToolCutSpline::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-void VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
+VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
                             VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
@@ -97,7 +97,13 @@ void VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->getFormula();
     const quint32 splineId = dialogTool->getSplineId();
-    Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolCutSpline* point = nullptr;
+    point = Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+    if (point != nullptr)
+    {
+        point->dialog=dialogTool;
+    }
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,9 +121,10 @@ void VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &splineId,
-                            const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                            VContainer *data, const Document &parse, const Source &typeCreation)
+VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString &formula,
+                                       const quint32 &splineId, const qreal &mx, const qreal &my,
+                                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                       const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
 
@@ -175,7 +182,9 @@ void VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString
         doc->AddTool(spl1id, point);
         doc->AddTool(spl2id, point);
         doc->IncrementReferens(splineId);
+        return point;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,45 +228,6 @@ void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolCutSpline::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrLength, formula);
-    doc->SetAttribute(domElement, AttrSpline, curveCutId);
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolCutSpline::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrLength, formula);
-        doc->SetAttribute(domElement, AttrSpline, curveCutId);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolCutSpline::SaveDialog(QDomElement &domElement)
@@ -293,4 +263,20 @@ void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCu
         path.translate(-spl->GetP4().toQPointF().x(), -spl->GetP4().toQPointF().y());
     }
     curve->setPath(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrLength, formula);
+    doc->SetAttribute(tag, AttrSpline, curveCutId);
 }

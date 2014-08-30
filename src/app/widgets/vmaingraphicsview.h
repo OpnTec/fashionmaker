@@ -97,6 +97,8 @@ class VMainGraphicsView : public QGraphicsView
 public:
 
     explicit VMainGraphicsView(QWidget *parent = nullptr);
+    void setShowToolOptions(bool value);
+
 signals:
     /**
      * @brief NewFactor send new scale factor.
@@ -120,6 +122,7 @@ protected:
     void     mouseReleaseEvent(QMouseEvent *event);
 private:
     GraphicsViewZoom* zoom;
+    bool     showToolOptions;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

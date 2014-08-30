@@ -130,3 +130,9 @@ void VAbstractNode::RestoreReferens()
         doc->IncrementReferens(idNode);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+
+}

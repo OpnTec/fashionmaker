@@ -227,48 +227,6 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolSpline::AddToFile()
-{
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
-    doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
-    doc->SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
-    doc->SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
-    doc->SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-    doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-    doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolSpline::RefreshDataInFile()
-{
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
-        doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
-        doc->SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
-        doc->SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
-        doc->SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-        doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-        doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolSpline::RemoveReferens()
@@ -311,6 +269,23 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
     doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
     doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VSpline> spl = qSharedPointerDynamicCast<VSpline>(obj);
+    SCASSERT(spl.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrPoint1, spl->GetP1().id());
+    doc->SetAttribute(tag, AttrPoint4, spl->GetP4().id());
+    doc->SetAttribute(tag, AttrAngle1, spl->GetAngle1());
+    doc->SetAttribute(tag, AttrAngle2, spl->GetAngle2());
+    doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
+    doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
+    doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,11 +50,11 @@ public:
      * @brief setDialog set dialog when user want change tool option.
      */
     virtual void setDialog() {}
-    static void  Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
-    static void  Create(const quint32 _id, const VDetail &d1,  const VDetail &d2, const quint32 &d1id,
-                        const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2, VMainGraphicsScene *scene,
-                        VPattern *doc, VContainer *data, const Document &parse,
-                        const Source &typeCreation);
+    static VToolUnionDetails *Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
+    static VToolUnionDetails *Create(const quint32 _id, const VDetail &d1,  const VDetail &d2, const quint32 &d1id,
+                                     const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
+                                     VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                     const Source &typeCreation);
     static void  PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
     static void  FindJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
     static QVector<VDetail> GetDetailFromFile(VPattern *doc, const QDomElement &domElement);
@@ -76,6 +76,7 @@ public:
                               const qreal &angle = 0);
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                  const qreal &angle);
+    virtual QString getTagName() const;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -84,6 +85,7 @@ public slots:
 protected:
     virtual void AddToFile();
     virtual void RefreshDataInFile();
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolUnionDetails)
     /** @brief d1 first detail. */

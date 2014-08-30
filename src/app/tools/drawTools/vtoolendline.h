@@ -51,24 +51,19 @@ public:
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
-    void         setName(const QString &name);
+
     VFormula     getFormulaAngle() const;
     void         setFormulaAngle(const VFormula &value);
-    void         setTypeLine(const QString &value);
-    void         setFormulaLength(const VFormula &value);
-    void         setBasePointId(const quint32 &value);
+
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void AddToFile();
-    virtual void RefreshDataInFile();
     virtual void SaveDialog(QDomElement &domElement);
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     QString formulaAngle;
-    void         SaveOptions(QDomElement &tag, const VPointF &point);
-    void         SaveOption(const VPointF &point);
 };
 
 #endif // VTOOLENDLINE_H

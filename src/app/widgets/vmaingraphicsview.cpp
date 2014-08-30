@@ -157,7 +157,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
  * @param parent parent object.
  */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
-    :QGraphicsView(parent), zoom(nullptr)
+    :QGraphicsView(parent), zoom(nullptr), showToolOptions(true)
 {
     zoom = new GraphicsViewZoom(this);
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -221,7 +221,10 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
                 QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
                 break;
             case Qt::NoModifier:
-                emit itemClicked(itemAt(mousePress->pos()));
+                if (showToolOptions)
+                {
+                    emit itemClicked(itemAt(mousePress->pos()));
+                }
                 break;
             default:
                 break;
@@ -244,3 +247,10 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
         emit MouseRelease();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::setShowToolOptions(bool value)
+{
+    showToolOptions = value;
+}
+

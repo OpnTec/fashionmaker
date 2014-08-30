@@ -44,10 +44,11 @@ class VToolPoint: public VDrawTool, public QGraphicsEllipseItem
 public:
     VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     virtual ~VToolPoint(){}
-    static const QString    TagName;
     virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     QString                 name() const;
-    //void                    setName(const QString &name)=0;
+    void                    setName(const QString &name);
+    virtual QString         getTagName() const;
+    static const QString    TagName;
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ChangedActivDraw(const QString &newName);

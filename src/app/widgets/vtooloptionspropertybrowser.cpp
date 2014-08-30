@@ -390,7 +390,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolAlongLine(VProperty *property)
             SetPointName<VToolEndLine>(value.toString());
             break;
         case 6: // VAbstractTool::AttrFirstPoint
-            i->setFirstPointId(value.toUInt());
+            i->setBasePointId(value.toUInt());
             break;
         case 7: // VAbstractTool::AttrSecondPoint
             i->setSecondPointId(value.toUInt());

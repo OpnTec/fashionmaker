@@ -53,6 +53,12 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::getTagName() const
+{
+    return VAbstractSpline::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */

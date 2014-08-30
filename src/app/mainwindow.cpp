@@ -255,6 +255,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
         helpLabel->setText(toolTip);
+        ui->view->setShowToolOptions(false);
         dialogTool = new Dialog(pattern, 0, this);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
@@ -292,6 +293,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
+        ui->view->setShowToolOptions(false);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, 0, this);
         connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
@@ -321,7 +323,8 @@ void MainWindow::ClosedDialog(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        DrawTool::Create(dialogTool, currentScene, doc, pattern);
+        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, currentScene, doc, pattern));
+        ui->view->itemClicked(tool);
     }
     ArrowTool();
 }
@@ -349,9 +352,11 @@ void MainWindow::ClosedDialogWithApply(int result)
             vtool->FullUpdateFromGuiApply();
         }
     }
+    QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(dialogTool->GetAssociatedTool());
+    ui->view->itemClicked(tool);
     if (dialogTool->GetAssociatedTool() != nullptr)
     {
-        VDrawTool * vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
+        VDrawTool *vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
         vtool->DialogLinkDestroy();
     }
     ArrowTool();
@@ -1067,6 +1072,7 @@ void  MainWindow::ArrowTool()
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
+    ui->view->setShowToolOptions(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

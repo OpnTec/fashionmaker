@@ -84,6 +84,7 @@ public:
     static void        AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node);
     virtual int        type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Detail)};
+    virtual QString    getTagName() const;
 public slots:
     virtual void       FullUpdateFromFile ();
     virtual void       FullUpdateFromGuiOk(int result);
@@ -95,6 +96,7 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void       RemoveReferens();
     virtual void       keyReleaseEvent(QKeyEvent * event);
+    virtual void       SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolDetail)
     /** @brief dialog dialog options. */

@@ -177,6 +177,12 @@ void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::getTagName() const
+{
+    return VToolLine::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
@@ -254,11 +260,8 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
-    doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
-    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-
+    QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
+    SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
 
@@ -271,9 +274,12 @@ void VToolLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
-        doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
-        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+        QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
+        SaveOptions(domElement, obj);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 
@@ -364,6 +370,17 @@ void VToolLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    Q_UNUSED(obj)
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrFirstPoint, firstPoint);
+    doc->SetAttribute(tag, AttrSecondPoint, secondPoint);
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

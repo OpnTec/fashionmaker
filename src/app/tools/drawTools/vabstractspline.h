@@ -42,6 +42,7 @@ public:
     virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     virtual int      type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
+    virtual QString  getTagName() const;
 public slots:
     virtual void     FullUpdateFromFile ();
     void             Disable(bool disable);

@@ -371,6 +371,12 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.
@@ -473,6 +479,12 @@ void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDet
             break;
     }
     domElement.appendChild(nod);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolDetail::getTagName() const
+{
+    return VToolDetail::TagName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

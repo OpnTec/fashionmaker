@@ -59,9 +59,8 @@ public slots:
 protected:
     virtual void   RemoveReferens();
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */

@@ -41,9 +41,9 @@ public:
     VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                     QGraphicsItem * parent = nullptr);
      virtual void setDialog();
-     static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-     static void  Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene, VPattern *doc,
-                         VContainer *data, const Document &parse, const Source &typeCreation);
+     static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene, VPattern *doc,
+                                    VContainer *data, const Document &parse, const Source &typeCreation);
      static const QString ToolType;
      static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
      virtual int  type() const {return Type;}
@@ -69,10 +69,10 @@ public slots:
                                              const QPointF &pos);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void  AddToFile();
     virtual void  RefreshDataInFile();
     virtual void  RemoveReferens();
     virtual void  SaveDialog(QDomElement &domElement);
+    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     void          RefreshGeometry();
     void          AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);

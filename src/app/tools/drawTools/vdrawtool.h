@@ -81,6 +81,8 @@ protected:
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
     void         SaveDialogChange();
+    virtual void AddToFile();
+    virtual void RefreshDataInFile();
 
     template <typename Dialog, typename Tool>
     /**
