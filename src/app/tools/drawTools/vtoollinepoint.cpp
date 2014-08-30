@@ -113,7 +113,12 @@ quint32 VToolLinePoint::getBasePointId() const
     return basePointId;
 }
 
-QString VToolLinePoint::getFormulaLength() const
+VFormula VToolLinePoint::getFormulaLength() const
 {
-    return formulaLength;
+    VFormula fLength(formulaLength, this->getData());
+    fLength.setCheckZero(true);
+    fLength.setToolId(id);
+    fLength.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+
+    return fLength;
 }

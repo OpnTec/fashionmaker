@@ -52,10 +52,10 @@ public:
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
     void         setName(const QString &name);
-    QString      getFormulaAngle() const;
-    void         setFormulaAngle(const QString &value);
+    VFormula     getFormulaAngle() const;
+    void         setFormulaAngle(const VFormula &value);
     void         setTypeLine(const QString &value);
-    void         setFormulaLength(const QString &value);
+    void         setFormulaLength(const VFormula &value);
     void         setBasePointId(const quint32 &value);
 public slots:
     virtual void FullUpdateFromFile();

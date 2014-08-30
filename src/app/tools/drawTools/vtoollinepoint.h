@@ -30,6 +30,7 @@
 #define VTOOLLINEPOINT_H
 
 #include "vtoolpoint.h"
+#include "../container/vformula.h"
 
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.
@@ -42,7 +43,7 @@ public:
                    const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
-    QString           getFormulaLength() const;
+    VFormula          getFormulaLength() const;
     //void              setFormulaLength(const QString &value)=0;
 
     quint32           getBasePointId() const;

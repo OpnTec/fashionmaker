@@ -51,6 +51,12 @@ public:
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AlongLine)};
+    void         setFirstPointId(const quint32 &value);
+    quint32      getSecondPointId() const;
+    void         setSecondPointId(const quint32 &value);
+    void         setName(const QString &name);
+    void         setTypeLine(const QString &value);
+    void         setFormulaLength(const VFormula &value);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void SetFactor(qreal factor);
@@ -64,6 +70,8 @@ protected:
 private:
     /** @brief secondPointId id second point of line. */
     quint32       secondPointId;
+    void         SaveOptions(QDomElement &tag, const VPointF &point);
+    void         SaveOption(const VPointF &point);
 };
 
 #endif // VTOOLALONGLINE_H

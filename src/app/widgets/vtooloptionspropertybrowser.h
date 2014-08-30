@@ -39,6 +39,7 @@
 class QDockWidget;
 class QGraphicsItem;
 class QScrollArea;
+class VFormula;
 
 using namespace VPE;
 
@@ -66,6 +67,23 @@ private:
 
     template<class Tool>
     void SetPointName(const QString &name);
+
+    template<class Tool>
+    void AddPropertyPointName(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyPointsList(Tool *i, const QString &propertyName, const quint32 &value, const QString &attrName);
+
+    template<class Tool>
+    void AddPropertyLineType(Tool *i, const QString &propertyName);
+
+    void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
+
+    QStringList PropertiesList() const;
+
+    void ChangeDataToolSinglePoint(VProperty *property);
+    void ChangeDataToolEndLine(VProperty *property);
+    void ChangeDataToolAlongLine(VProperty *property);
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

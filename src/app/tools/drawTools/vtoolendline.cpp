@@ -197,7 +197,7 @@ void VToolEndLine::setName(const QString &name)
     SaveOption(newPoint);
 }
 
-void  VToolEndLine::setBasePointId(const quint32 &value)
+void VToolEndLine::setBasePointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -208,12 +208,15 @@ void  VToolEndLine::setBasePointId(const quint32 &value)
     }
 }
 
-void  VToolEndLine::setFormulaLength(const QString &value)
+void  VToolEndLine::setFormulaLength(const VFormula &value)
 {
-    formulaLength = value;
+    if (value.error() == false)
+    {
+        formulaLength = value.getFormula(FormulaType::FromUser);
 
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    SaveOption(*point.data());
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        SaveOption(*point.data());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,6 +282,10 @@ void VToolEndLine::RefreshDataInFile()
     {
         SaveOptions(domElement, *point.data());
     }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -313,20 +320,28 @@ void VToolEndLine::SaveOptions(QDomElement &tag, const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolEndLine::getFormulaAngle() const
+VFormula VToolEndLine::getFormulaAngle() const
 {
-    return formulaAngle;
+    VFormula fAngle(formulaAngle, getData());
+    fAngle.setCheckZero(false);
+    fAngle.setToolId(id);
+    fAngle.setPostfix(QStringLiteral("°"));
+    return fAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolEndLine::setFormulaAngle(const QString &value)
+void VToolEndLine::setFormulaAngle(const VFormula &value)
 {
-    formulaAngle = value;
+    if (value.error() == false)
+    {
+        formulaAngle = value.getFormula(FormulaType::FromUser);
 
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    SaveOption(*point.data());
+        const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        SaveOption(*point.data());
+    }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::setTypeLine(const QString &value)
 {
     typeLine = value;
