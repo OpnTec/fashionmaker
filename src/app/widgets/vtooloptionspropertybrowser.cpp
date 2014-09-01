@@ -67,41 +67,59 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
     switch (item->type())
     {
         case VToolSinglePoint::Type:
-        {
-            VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
-            TreeView->setTitle(tr("Base point"));
-
-            AddPropertyPointName(i, tr("Point name"));
-
-            VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
-            itemPosition->setValue(i->pos());
-            AddProperty(itemPosition, QLatin1String("position"));
+            ShowOptionsToolSinglePoint(item);
             break;
-        }
         case VToolEndLine::Type:
-        {
-            VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(item);
-            TreeView->setTitle(tr("Point at distance and angle"));
-
-            AddPropertyPointName(i, tr("Point name"));
-            AddPropertyPointsList(i, tr("Base point"), i->getBasePointId(), VAbstractTool::AttrBasePoint);
-            AddPropertyLineType(i, tr("Line type"));
-            AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
-            AddPropertyFormula(tr("Angle"), i->getFormulaAngle(), VAbstractTool::AttrAngle);
+            ShowOptionsToolEndLine(item);
             break;
-        }
         case VToolAlongLine::Type:
-        {
-            VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(item);
-            TreeView->setTitle(tr("Point at distance along line"));
-
-            AddPropertyPointName(i, tr("Point name"));
-            AddPropertyPointsList(i, tr("First point"), i->getBasePointId(), VAbstractTool::AttrFirstPoint);
-            AddPropertyPointsList(i, tr("Second point"), i->getSecondPointId(), VAbstractTool::AttrSecondPoint);
-            AddPropertyLineType(i, tr("Line type"));
-            AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
+            ShowOptionsToolAlongLine(item);
             break;
-        }
+        case VToolArc::Type:
+            ShowOptionsToolArc(item);
+            break;
+        case VToolBisector::Type:
+            ShowOptionsToolBisector(item);
+            break;
+        case VToolCutArc::Type:
+            ShowOptionsToolCutArc(item);
+            break;
+        case VToolCutSpline::Type:
+            ShowOptionsToolCutSpline(item);
+            break;
+        case VToolCutSplinePath::Type:
+            ShowOptionsToolCutSplinePath(item);
+            break;
+        case VToolHeight::Type:
+            ShowOptionsToolHeight(item);
+            break;
+        case VToolLine::Type:
+            ShowOptionsToolLine(item);
+            break;
+        case VToolLineIntersect::Type:
+            ShowOptionsToolLineIntersect(item);
+            break;
+        case VToolNormal::Type:
+            ShowOptionsToolNormal(item);
+            break;
+        case VToolPointOfContact::Type:
+            ShowOptionsToolPointOfContact(item);
+            break;
+        case VToolPointOfIntersection::Type:
+            ShowOptionsToolPointOfIntersection(item);
+            break;
+        case VToolShoulderPoint::Type:
+            ShowOptionsToolShoulderPoint(item);
+            break;
+        case VToolSpline::Type:
+            ShowOptionsToolSpline(item);
+            break;
+        case VToolSplinePath::Type:
+            ShowOptionsToolSplinePath(item);
+            break;
+        case VToolTriangle::Type:
+            ShowOptionsToolTriangle(item);
+            break;
         case VGraphicsSimpleTextItem::Type:
             currentItem = item->parentItem();
             ShowItemOptions(currentItem);
@@ -126,49 +144,59 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     switch (currentItem->type())
     {
         case VToolSinglePoint::Type:
-        {
-            VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem);
-            idToProperty[VAbstractTool::AttrName]->setValue(i->name());
-            idToProperty[QLatin1String("position")]->setValue(i->pos());
+            UpdateOptionsToolSinglePoint();
             break;
-        }
         case VToolEndLine::Type:
-        {
-            VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
-            idToProperty[VAbstractTool::AttrName]->setValue(i->name());
-            idToProperty[VAbstractTool::AttrBasePoint]->setValue(i->getBasePointId());
-
-            QStringList styles = VAbstractTool::Styles();
-            qint32 index = styles.indexOf(i->getLineType());
-            idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
-
-            QVariant valueFormula;
-            valueFormula.setValue(i->getFormulaLength());
-            idToProperty[VAbstractTool::AttrLength]->setValue(valueFormula);
-
-            QVariant valueAngle;
-            valueAngle.setValue(i->getFormulaAngle());
-            idToProperty[VAbstractTool::AttrAngle]->setValue(valueAngle);
-
+            UpdateOptionsToolEndLine();
             break;
-        }
         case VToolAlongLine::Type:
-        {
-            VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(currentItem);
-            idToProperty[VAbstractTool::AttrName]->setValue(i->name());
-            idToProperty[VAbstractTool::AttrFirstPoint]->setValue(i->getBasePointId());
-            idToProperty[VAbstractTool::AttrSecondPoint]->setValue(i->getSecondPointId());
-
-            QStringList styles = VAbstractTool::Styles();
-            qint32 index = styles.indexOf(i->getLineType());
-            idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
-
-            QVariant valueFormula;
-            valueFormula.setValue(i->getFormulaLength());
-            idToProperty[VAbstractTool::AttrLength]->setValue(valueFormula);
-
+            UpdateOptionsToolAlongLine();
             break;
-        }
+        case VToolArc::Type:
+            UpdateOptionsToolArc();
+            break;
+        case VToolBisector::Type:
+            UpdateOptionsToolBisector();
+            break;
+        case VToolCutArc::Type:
+            UpdateOptionsToolCutArc();
+            break;
+        case VToolCutSpline::Type:
+            UpdateOptionsToolCutSpline();
+            break;
+        case VToolCutSplinePath::Type:
+            UpdateOptionsToolCutSplinePath();
+            break;
+        case VToolHeight::Type:
+            UpdateOptionsToolHeight();
+            break;
+        case VToolLine::Type:
+            UpdateOptionsToolLine();
+            break;
+        case VToolLineIntersect::Type:
+            UpdateOptionsToolLineIntersect();
+            break;
+        case VToolNormal::Type:
+            UpdateOptionsToolNormal();
+            break;
+        case VToolPointOfContact::Type:
+            UpdateOptionsToolPointOfContact();
+            break;
+        case VToolPointOfIntersection::Type:
+            UpdateOptionsToolPointOfIntersection();
+            break;
+        case VToolShoulderPoint::Type:
+            UpdateOptionsToolShoulderPoint();
+            break;
+        case VToolSpline::Type:
+            UpdateOptionsToolSpline();
+            break;
+        case VToolSplinePath::Type:
+            UpdateOptionsToolSplinePath();
+            break;
+        case VToolTriangle::Type:
+            UpdateOptionsToolTriangle();
+            break;
         case VGraphicsSimpleTextItem::Type:
             ShowItemOptions(currentItem->parentItem());
             break;
@@ -211,6 +239,51 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolAlongLine::Type:
             ChangeDataToolAlongLine(prop);
+            break;
+        case VToolArc::Type:
+            ChangeDataToolArc(prop);
+            break;
+        case VToolBisector::Type:
+            ChangeDataToolBisector(prop);
+            break;
+        case VToolCutArc::Type:
+            ChangeDataToolCutArc(prop);
+            break;
+        case VToolCutSpline::Type:
+            ChangeDataToolCutSpline(prop);
+            break;
+        case VToolCutSplinePath::Type:
+            ChangeDataToolCutSplinePath(prop);
+            break;
+        case VToolHeight::Type:
+            ChangeDataToolHeight(prop);
+            break;
+        case VToolLine::Type:
+            ChangeDataToolLine(prop);
+            break;
+        case VToolLineIntersect::Type:
+            ChangeDataToolLineIntersect(prop);
+            break;
+        case VToolNormal::Type:
+            ChangeDataToolNormal(prop);
+            break;
+        case VToolPointOfContact::Type:
+            ChangeDataToolPointOfContact(prop);
+            break;
+        case VToolPointOfIntersection::Type:
+            ChangeDataToolPointOfIntersection(prop);
+            break;
+        case VToolShoulderPoint::Type:
+            ChangeDataToolShoulderPoint(prop);
+            break;
+        case VToolSpline::Type:
+            ChangeDataToolSpline(prop);
+            break;
+        case VToolSplinePath::Type:
+            ChangeDataToolSplinePath(prop);
+            break;
+        case VToolTriangle::Type:
+            ChangeDataToolTriangle(prop);
             break;
         default:
             break;
@@ -405,6 +478,354 @@ void VToolOptionsPropertyBrowser::ChangeDataToolAlongLine(VProperty *property)
             qWarning()<<"Unknown property type. id = "<<id;
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolArc(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolBisector(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolHeight(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolLine(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersect(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolNormal(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolPointOfContact(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersection(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolShoulderPoint(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolTriangle(VProperty *property)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
+{
+    VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
+    TreeView->setTitle(tr("Base point"));
+
+    AddPropertyPointName(i, tr("Point name"));
+
+    VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
+    itemPosition->setValue(i->pos());
+    AddProperty(itemPosition, QLatin1String("position"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
+{
+    VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(item);
+    TreeView->setTitle(tr("Point at distance and angle"));
+
+    AddPropertyPointName(i, tr("Point name"));
+    AddPropertyPointsList(i, tr("Base point"), i->getBasePointId(), VAbstractTool::AttrBasePoint);
+    AddPropertyLineType(i, tr("Line type"));
+    AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
+    AddPropertyFormula(tr("Angle"), i->getFormulaAngle(), VAbstractTool::AttrAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
+{
+    VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(item);
+    TreeView->setTitle(tr("Point at distance along line"));
+
+    AddPropertyPointName(i, tr("Point name"));
+    AddPropertyPointsList(i, tr("First point"), i->getBasePointId(), VAbstractTool::AttrFirstPoint);
+    AddPropertyPointsList(i, tr("Second point"), i->getSecondPointId(), VAbstractTool::AttrSecondPoint);
+    AddPropertyLineType(i, tr("Line type"));
+    AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
+{
+    VToolArc *i = qgraphicsitem_cast<VToolArc *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
+{
+    VToolBisector *i = qgraphicsitem_cast<VToolBisector *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
+{
+    VToolCutArc *i = qgraphicsitem_cast<VToolCutArc *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
+{
+    VToolCutSpline *i = qgraphicsitem_cast<VToolCutSpline *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *item)
+{
+    VToolCutSplinePath *i = qgraphicsitem_cast<VToolCutSplinePath *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
+{
+    VToolHeight *i = qgraphicsitem_cast<VToolHeight *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
+{
+    VToolLine *i = qgraphicsitem_cast<VToolLine *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersect(QGraphicsItem *item)
+{
+    VToolLineIntersect *i = qgraphicsitem_cast<VToolLineIntersect *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
+{
+    VToolNormal *i = qgraphicsitem_cast<VToolNormal *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *item)
+{
+    VToolPointOfContact *i = qgraphicsitem_cast<VToolPointOfContact *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsItem *item)
+{
+    VToolPointOfIntersection *i = qgraphicsitem_cast<VToolPointOfIntersection *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *item)
+{
+    VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
+{
+    VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
+{
+    VToolSplinePath *i = qgraphicsitem_cast<VToolSplinePath *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolTriangle(QGraphicsItem *item)
+{
+    VToolTriangle *i = qgraphicsitem_cast<VToolTriangle *>(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
+{
+    VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem);
+    TreeView->setTitle(tr("Base point"));
+
+    AddPropertyPointName(i, tr("Point name"));
+
+    VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
+    itemPosition->setValue(i->pos());
+    AddProperty(itemPosition, QLatin1String("position"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
+{
+    VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
+    TreeView->setTitle(tr("Point at distance and angle"));
+
+    AddPropertyPointName(i, tr("Point name"));
+    AddPropertyPointsList(i, tr("Base point"), i->getBasePointId(), VAbstractTool::AttrBasePoint);
+    AddPropertyLineType(i, tr("Line type"));
+    AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
+    AddPropertyFormula(tr("Angle"), i->getFormulaAngle(), VAbstractTool::AttrAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
+{
+    VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(currentItem);
+    TreeView->setTitle(tr("Point at distance along line"));
+
+    AddPropertyPointName(i, tr("Point name"));
+    AddPropertyPointsList(i, tr("First point"), i->getBasePointId(), VAbstractTool::AttrFirstPoint);
+    AddPropertyPointsList(i, tr("Second point"), i->getSecondPointId(), VAbstractTool::AttrSecondPoint);
+    AddPropertyLineType(i, tr("Line type"));
+    AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
+{
+    VToolArc *i = qgraphicsitem_cast<VToolArc *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
+{
+    VToolBisector *i = qgraphicsitem_cast<VToolBisector *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
+{
+    VToolCutArc *i = qgraphicsitem_cast<VToolCutArc *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSpline()
+{
+    VToolCutSpline *i = qgraphicsitem_cast<VToolCutSpline *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
+{
+    VToolCutSplinePath *i = qgraphicsitem_cast<VToolCutSplinePath *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
+{
+    VToolHeight *i = qgraphicsitem_cast<VToolHeight *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
+{
+    VToolLine *i = qgraphicsitem_cast<VToolLine *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersect()
+{
+    VToolLineIntersect *i = qgraphicsitem_cast<VToolLineIntersect *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
+{
+    VToolNormal *i = qgraphicsitem_cast<VToolNormal *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfContact()
+{
+    VToolPointOfContact *i = qgraphicsitem_cast<VToolPointOfContact *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersection()
+{
+    VToolPointOfIntersection *i = qgraphicsitem_cast<VToolPointOfIntersection *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
+{
+    VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
+{
+    VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
+{
+    VToolSplinePath *i = qgraphicsitem_cast<VToolSplinePath *>(currentItem);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolTriangle()
+{
+    VToolTriangle *i = qgraphicsitem_cast<VToolTriangle *>(currentItem);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
