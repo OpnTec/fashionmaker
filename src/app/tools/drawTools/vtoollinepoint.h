@@ -49,6 +49,9 @@ public:
     quint32           getBasePointId() const;
     void              setBasePointId(const quint32 &value);
 
+    qreal             getAngle() const;
+    void              setAngle(const qreal &value);
+
 public slots:
     virtual void      ChangedActivDraw(const QString &newName);
     virtual void      SetFactor(qreal factor);

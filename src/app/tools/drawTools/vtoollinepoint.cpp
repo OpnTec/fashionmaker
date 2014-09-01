@@ -109,6 +109,20 @@ void VToolLinePoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VToolLinePoint::getAngle() const
+{
+    return angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::setAngle(const qreal &value)
+{
+    angle = value;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLinePoint::getBasePointId() const
 {
     return basePointId;

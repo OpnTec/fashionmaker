@@ -287,3 +287,22 @@ void VToolNormal::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrFirstPoint, basePointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolNormal::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolNormal::setSecondPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        secondPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
