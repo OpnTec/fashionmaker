@@ -257,3 +257,40 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrP1Line, p1LineId);
     doc->SetAttribute(tag, AttrP2Line, p2LineId);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolHeight::getP2LineId() const
+{
+    return p2LineId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::setP2LineId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2LineId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolHeight::getP1LineId() const
+{
+    return p1LineId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::setP1LineId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p1LineId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+

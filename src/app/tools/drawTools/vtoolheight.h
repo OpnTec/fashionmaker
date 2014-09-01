@@ -52,6 +52,13 @@ public:
     static const QString ToolType;
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Height)};
+
+    quint32 getP1LineId() const;
+    void    setP1LineId(const quint32 &value);
+
+    quint32 getP2LineId() const;
+    void    setP2LineId(const quint32 &value);
+
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
