@@ -30,6 +30,7 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogpointofcontact.h"
 #include "../../geometry/vpointf.h"
+#include "../../container/vformula.h"
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
@@ -304,3 +305,69 @@ void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setSecondPointId(const quint32 &value)
+{
+    secondPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setFirstPointId(const quint32 &value)
+{
+    firstPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::getCenter() const
+{
+    return center;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setCenter(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        center = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolPointOfContact::getArcRadius() const
+{
+    VFormula radius(arcRadius, this->getData());
+    radius.setCheckZero(true);
+    radius.setToolId(id);
+    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setArcRadius(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        arcRadius = value.getFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
