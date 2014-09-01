@@ -87,7 +87,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             AddPropertyPointsList(i, tr("Base point"), i->getBasePointId(), VAbstractTool::AttrBasePoint);
             AddPropertyLineType(i, tr("Line type"));
             AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
-            AddPropertyFormula(tr("Angle"), i->getFormulaLength(), VAbstractTool::AttrAngle);
+            AddPropertyFormula(tr("Angle"), i->getFormulaAngle(), VAbstractTool::AttrAngle);
             break;
         }
         case VToolAlongLine::Type:
