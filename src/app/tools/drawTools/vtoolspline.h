@@ -50,6 +50,9 @@ public:
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
+
+    VSpline getSpline()const;
+    void    setSpline(const VSpline &spl);
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);

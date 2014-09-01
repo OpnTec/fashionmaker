@@ -189,6 +189,22 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSpline VToolSpline::getSpline() const
+{
+    QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+    return *spline.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::setSpline(const VSpline &spl)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VSpline> spline = qSharedPointerDynamicCast<VSpline>(obj);
+    *spline.data() = spl;
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ControlPointChangePosition handle change position control point.
  * @param indexSpline position spline in spline list.
