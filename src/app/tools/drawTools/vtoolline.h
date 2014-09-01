@@ -51,6 +51,12 @@ public:
     virtual int      type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
     virtual QString  getTagName() const;
+    quint32 getFirstPoint() const;
+    void    setFirstPoint(const quint32 &value);
+
+    quint32 getSecondPoint() const;
+    void    setSecondPoint(const quint32 &value);
+
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);

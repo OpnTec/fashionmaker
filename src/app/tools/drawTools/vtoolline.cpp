@@ -384,6 +384,42 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLine::getSecondPoint() const
+{
+    return secondPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::setSecondPoint(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        secondPoint = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLine::getFirstPoint() const
+{
+    return firstPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::setFirstPoint(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        firstPoint = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry refresh item on scene.
  */
