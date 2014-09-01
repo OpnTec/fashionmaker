@@ -313,3 +313,40 @@ void VToolShoulderPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
     doc->SetAttribute(tag, AttrP2Line, p2Line);
     doc->SetAttribute(tag, AttrPShoulder, pShoulder);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolShoulderPoint::getPShoulder() const
+{
+    return pShoulder;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::setPShoulder(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        pShoulder = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolShoulderPoint::getP2Line() const
+{
+    return p2Line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::setP2Line(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2Line = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
