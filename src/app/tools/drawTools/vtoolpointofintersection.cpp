@@ -232,3 +232,39 @@ void VToolPointOfIntersection::SaveOptions(QDomElement &tag, QSharedPointer<VGOb
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfIntersection::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::setSecondPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        secondPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfIntersection::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::setFirstPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        firstPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}

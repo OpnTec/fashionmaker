@@ -370,4 +370,3 @@ void VToolPointOfContact::setArcRadius(const VFormula &value)
         SaveOption(obj);
     }
 }
-

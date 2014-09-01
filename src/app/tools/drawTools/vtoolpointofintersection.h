@@ -51,6 +51,13 @@ public:
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
+
+    quint32 getFirstPointId() const;
+    void    setFirstPointId(const quint32 &value);
+
+    quint32 getSecondPointId() const;
+    void    setSecondPointId(const quint32 &value);
+
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
