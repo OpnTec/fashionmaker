@@ -55,6 +55,13 @@ public:
     static const QString ToolType;
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
+
+    quint32 getFirstPointId() const;
+    void    setFirstPointId(const quint32 &value);
+
+    quint32 getThirdPointId() const;
+    void    setThirdPointId(const quint32 &value);
+
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);

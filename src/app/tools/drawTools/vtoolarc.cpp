@@ -184,12 +184,15 @@ quint32 VToolArc::getCenter() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArc::setCenter(const quint32 &value)
 {
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    if (value != NULL_ID)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
 
-    QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
-    arc->SetCenter(*point.data());
-    SaveOption(obj);
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
+        arc->SetCenter(*point.data());
+        SaveOption(obj);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -309,3 +309,40 @@ void VToolBisector::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrSecondPoint, basePointId);
     doc->SetAttribute(tag, AttrThirdPoint, thirdPointId);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolBisector::getThirdPointId() const
+{
+    return thirdPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::setThirdPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        thirdPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolBisector::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::setFirstPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        firstPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+

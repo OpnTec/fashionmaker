@@ -166,10 +166,13 @@ quint32 VToolAlongLine::getSecondPointId() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::setSecondPointId(const quint32 &value)
 {
-    secondPointId = value;
+    if (value != NULL_ID)
+    {
+        secondPointId = value;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
