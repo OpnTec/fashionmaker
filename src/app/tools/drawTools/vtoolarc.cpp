@@ -29,8 +29,10 @@
 #include "vtoolarc.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogarc.h"
-#include <QKeyEvent>
 #include "../../geometry/varc.h"
+#include "../container/vformula.h"
+
+#include <QKeyEvent>
 
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
@@ -168,6 +170,101 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 QString VToolArc::getTagName() const
 {
     return VToolArc::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolArc::getCenter() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    return arc->GetCenter().id();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setCenter(const quint32 &value)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+
+    QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
+    arc->SetCenter(*point.data());
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolArc::getFormulaRadius() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    VFormula radius(arc->GetFormulaRadius(), getData());
+    radius.setCheckZero(true);
+    radius.setToolId(id);
+    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setFormulaRadius(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaRadius(value);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolArc::getFormulaF1() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    VFormula f1(arc->GetFormulaF1(), getData());
+    f1.setCheckZero(false);
+    f1.setToolId(id);
+    f1.setPostfix(QStringLiteral("°"));
+    return f1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setFormulaF1(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaF1(value);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolArc::getFormulaF2() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    VFormula f2(arc->GetFormulaF2(), getData());
+    f2.setCheckZero(false);
+    f2.setToolId(id);
+    f2.setPostfix(QStringLiteral("°"));
+    return f2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setFormulaF2(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaF2(value);
+        SaveOption(obj);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

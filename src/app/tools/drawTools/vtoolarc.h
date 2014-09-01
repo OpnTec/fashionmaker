@@ -31,6 +31,8 @@
 
 #include "vabstractspline.h"
 
+class VFormula;
+
 /**
  * @brief The VToolArc class tool for creation arc.
  */
@@ -49,6 +51,18 @@ public:
     virtual int      type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Arc)};
     virtual QString  getTagName() const;
+
+    quint32          getCenter() const;
+    void             setCenter(const quint32 &value);
+
+    VFormula         getFormulaRadius() const;
+    void             setFormulaRadius(const VFormula &value);
+
+    VFormula         getFormulaF1() const;
+    void             setFormulaF1(const VFormula &value);
+
+    VFormula         getFormulaF2() const;
+    void             setFormulaF2(const VFormula &value);
 public slots:
     virtual void     FullUpdateFromFile();
 protected:

@@ -181,7 +181,7 @@ void VFormulaProperty::setFormula(const VFormula &formula)
     value.convert(VFormula::FormulaTypeId());
     VProperty::d_ptr->VariantValue = value;
 
-    QVariant tmpValue(formula.getValue());
+    QVariant tmpValue(formula.getStringValue());
     tmpValue.convert(QVariant::String);
 
     QVariant tmpFormula(formula.getFormula());

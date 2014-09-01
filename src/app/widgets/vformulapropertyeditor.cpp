@@ -58,7 +58,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent) :
 
     // Create the text label
     TextLabel = new QLabel(this);
-    TextLabel->setText(formula.getValue());
+    TextLabel->setText(formula.getStringValue());
 
     // Spacer (this is needed for proper display of the label and button)
     Spacer = new QSpacerItem(1, 0, QSizePolicy::Expanding, QSizePolicy::Ignored);
@@ -78,7 +78,7 @@ void VFormulaPropertyEditor::setFormula(const VFormula& formula)
     if (this->formula != formula)
     {
         this->formula = formula;
-        TextLabel->setText(this->formula.getValue());
+        TextLabel->setText(this->formula.getStringValue());
     }
 }
 
@@ -94,7 +94,7 @@ void VFormulaPropertyEditor::onToolButtonClicked()
     if (tmpWidget->exec() == QDialog::Accepted)
     {
         formula.setFormula(tmpWidget->getFormula(), FormulaType::ToUser);
-        TextLabel->setText(formula.getValue());
+        TextLabel->setText(formula.getStringValue());
         delete tmpWidget;
         emit dataChangedByUser(formula, this);
         UserChangeEvent *event = new UserChangeEvent();

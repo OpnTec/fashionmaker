@@ -35,13 +35,13 @@
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
     :formula(QString()), value(QString(tr("Error"))), checkZero(true), data(nullptr), toolId(NULL_ID),
-      postfix(QStringLiteral("")), _error(true)
+      postfix(QStringLiteral("")), _error(true), dValue(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
     :formula(qApp->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container), toolId(NULL_ID),
-      postfix(QStringLiteral("")), _error(true)
+      postfix(QStringLiteral("")), _error(true), dValue(0)
 {
     this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
     Eval();
@@ -55,29 +55,31 @@ VFormula &VFormula::operator=(const VFormula &formula)
         return *this;
     }
     this->formula = formula.getFormula();
-    this->value = formula.getValue();
+    this->value = formula.getStringValue();
     this->checkZero = formula.getCheckZero();
     this->data = formula.getData();
     this->toolId = formula.getToolId();
     this->postfix = formula.getPostfix();
     this->_error = formula.error();
+    this->dValue = formula.getDoubleValue();
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const VFormula &formula)
-    :formula(formula.getFormula()), value(formula.getValue()), checkZero(formula.getCheckZero()),
-      data(formula.getData()), toolId(formula.getToolId()), postfix(formula.getPostfix()), _error(formula.error())
+    :formula(formula.getFormula()), value(formula.getStringValue()), checkZero(formula.getCheckZero()),
+      data(formula.getData()), toolId(formula.getToolId()), postfix(formula.getPostfix()), _error(formula.error()),
+      dValue(formula.getDoubleValue())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VFormula::operator==(const VFormula &formula) const
 {
     bool isEqual = false;
-    if (this->formula == formula.getFormula() && this->value == formula.getValue() &&
+    if (this->formula == formula.getFormula() && this->value == formula.getStringValue() &&
         this->checkZero == formula.getCheckZero() && this->data == formula.getData() &&
         this->toolId == formula.getToolId() && this->postfix == formula.getPostfix() &&
-        this->_error == formula.error())
+        this->_error == formula.error() && this->dValue == formula.getDoubleValue())
     {
         isEqual = true;
     }
@@ -121,9 +123,15 @@ void VFormula::setFormula(const QString &value, FormulaType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::getValue() const
+QString VFormula::getStringValue() const
 {
     return value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VFormula::getDoubleValue() const
+{
+    return dValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,6 +217,7 @@ void VFormula::Eval()
     {
         value = QString(tr("Error"));
         _error = true;
+        dValue = 0;
     }
     else
     {
@@ -224,6 +233,7 @@ void VFormula::Eval()
             {
                 value = QString("0");
                 _error = true;
+                dValue = 0;
             }
             else
             {
@@ -236,6 +246,7 @@ void VFormula::Eval()
                 {
                     loc = QLocale(QLocale::C);
                 }
+                dValue = result;
                 value = QString(loc.toString(result) + " " + postfix);
                 _error = false;
             }
@@ -244,6 +255,7 @@ void VFormula::Eval()
         {
             value = QString(tr("Error"));
             _error = true;
+            dValue = 0;
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"
