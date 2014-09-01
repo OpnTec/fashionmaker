@@ -279,3 +279,76 @@ void VToolLineIntersect::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
     doc->SetAttribute(tag, AttrP1Line2, p1Line2);
     doc->SetAttribute(tag, AttrP2Line2, p2Line2);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP2Line2() const
+{
+    return p2Line2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP2Line2(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2Line2 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP1Line2() const
+{
+    return p1Line2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP1Line2(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p1Line2 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP2Line1() const
+{
+    return p2Line1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP2Line1(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2Line1 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP1Line1() const
+{
+    return p1Line1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP1Line1(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p1Line1 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+

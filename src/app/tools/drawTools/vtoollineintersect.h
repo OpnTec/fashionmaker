@@ -50,6 +50,19 @@ public:
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
+
+    quint32 getP1Line1() const;
+    void    setP1Line1(const quint32 &value);
+
+    quint32 getP2Line1() const;
+    void    setP2Line1(const quint32 &value);
+
+    quint32 getP1Line2() const;
+    void    setP1Line2(const quint32 &value);
+
+    quint32 getP2Line2() const;
+    void    setP2Line2(const quint32 &value);
+
 public slots:
     virtual void FullUpdateFromFile();
     virtual void SetFactor(qreal factor);
