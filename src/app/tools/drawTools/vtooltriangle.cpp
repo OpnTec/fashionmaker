@@ -296,3 +296,75 @@ void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolTriangle::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::setSecondPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        secondPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolTriangle::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::setFirstPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        firstPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolTriangle::getAxisP2Id() const
+{
+    return axisP2Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::setAxisP2Id(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        axisP2Id = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolTriangle::getAxisP1Id() const
+{
+    return axisP1Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::setAxisP1Id(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        axisP1Id = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
