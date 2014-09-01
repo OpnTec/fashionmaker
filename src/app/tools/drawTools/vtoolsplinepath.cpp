@@ -265,6 +265,22 @@ void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSpli
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSplinePath VToolSplinePath::getSplinePath() const
+{
+    QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+    return *splPath.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::setSplinePath(const VSplinePath &splPath)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VSplinePath> splinePath = qSharedPointerDynamicCast<VSplinePath>(obj);
+    *splinePath.data() = splPath;
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.

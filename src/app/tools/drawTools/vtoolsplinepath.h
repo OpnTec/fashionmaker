@@ -48,6 +48,9 @@ public:
      static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
      virtual int  type() const {return Type;}
      enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
+
+     VSplinePath getSplinePath()const;
+     void        setSplinePath(const VSplinePath &splPath);
 signals:
     /**
      * @brief RefreshLine refresh control line.
