@@ -47,7 +47,7 @@ public:
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
     virtual int     type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::SimpleCurvePoint)};
+    enum { Type = UserType + static_cast<int>(Vis::SimpleSplinePath)};
 signals:
     /**
      * @brief Choosed send id when clicked.

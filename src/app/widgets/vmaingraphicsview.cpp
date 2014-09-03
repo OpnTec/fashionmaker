@@ -33,7 +33,9 @@
 #include <QApplication>
 #include <QScrollBar>
 #include "../tools/vabstracttool.h"
+#include "../visualization/vsimplecurve.h"
 
+#include <QGraphicsItem>
 #include <QMouseEvent>
 #include <qmath.h>
 
@@ -223,7 +225,19 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
             case Qt::NoModifier:
                 if (showToolOptions)
                 {
-                    emit itemClicked(itemAt(mousePress->pos()));
+                    QList<QGraphicsItem *> list = items(mousePress->pos());
+                    if (list.size() == 0)
+                    {
+                        emit itemClicked(nullptr);
+                        break;
+                    }
+                    for (int i = 0; i < list.size(); ++i)
+                    {
+                        if (list.at(i)->type() <= VSimpleCurve::Type && list.at(i)->type() > QGraphicsItem::UserType)
+                        {
+                            emit itemClicked(list.at(i));
+                        }
+                    }
                 }
                 break;
             default:

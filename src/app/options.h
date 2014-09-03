@@ -81,6 +81,7 @@ enum class Vis : unsigned char
 {
     ControlPointSpline = 29, // increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
+    SimpleSplinePath,
     Line,
     Path,
     ToolAlongLine,
@@ -96,9 +97,7 @@ enum class Vis : unsigned char
     ToolPointOfIntersection,
     ToolShoulderPoint,
     ToolSpline,
-    ToolTriangle,
-    SimpleCurvePoint,
-    SimpleSplinePath
+    ToolTriangle
 };
 
 enum class Source : char { FromGui, FromFile, FromTool };
