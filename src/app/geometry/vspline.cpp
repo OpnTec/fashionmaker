@@ -750,3 +750,12 @@ qreal VSpline::GetKcurve() const
 {
     return d->kCurve;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetKcurve(qreal factor)
+{
+    if (factor > 0)
+    {
+        d->kCurve = factor;
+    }
+}

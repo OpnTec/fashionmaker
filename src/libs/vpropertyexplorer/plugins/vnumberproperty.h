@@ -28,7 +28,7 @@ public:
     //! Sets the settings of a basic integer property
     //! \param minimum The minimum value
     //! \param maxiumum The maximum value
-    virtual void setSettings(int minimum, int maxiumum);
+    virtual void setSettings(int minimum, int maxiumum, int singleStep = 1.0);
 
     //! Sets the settings. Available settings:
     //!
@@ -53,7 +53,7 @@ public:
 public slots:
     void valueChanged(int i);
 protected:
-    int Min, Max;
+    double min, max, singleStep;
 
     static const int StandardMin;// = -1000000;
     static const int StandardMax;// = 1000000;
@@ -82,7 +82,7 @@ public:
     //! \param minimum The minimum value
     //! \param maxiumum The maximum value
     //! \param precision The number of decimal places
-    virtual void setSettings(double minimum, double maxiumum, int precision);
+    virtual void setSettings(double minimum, double maxiumum, double singleStep, int precision);
 
     //! Sets the settings. Available settings:
     //!

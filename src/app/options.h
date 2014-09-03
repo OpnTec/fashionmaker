@@ -79,7 +79,7 @@ enum class Tool : unsigned char
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline,
+    ControlPointSpline = 29, // increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
     Line,
     Path,

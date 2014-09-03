@@ -48,7 +48,7 @@ public:
 
     VSplineData ( const VSplineData &spline )
         :QSharedData(spline), p1(spline.p1), p2(spline.p2), p3(spline.p3), p4(spline.p4), angle1(spline.angle1),
-          angle2(spline.angle2), kAsm1(spline.angle2), kAsm2(spline.kAsm1), kCurve(spline.kCurve)
+          angle2(spline.angle2), kAsm1(spline.kAsm1), kAsm2(spline.kAsm2), kCurve(spline.kCurve)
     {}
 
     VSplineData (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve)

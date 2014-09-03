@@ -365,6 +365,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrKCurve, splPath->getKCurve());
 
+    doc->RemoveAllChild(tag);
     for (qint32 i = 0; i < splPath->CountPoint(); ++i)
     {
         AddPathPoint(tag, splPath->at(i));

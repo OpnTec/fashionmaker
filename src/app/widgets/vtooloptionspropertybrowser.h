@@ -56,7 +56,7 @@ private:
     Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
 
     VPropertyModel* PropertyModel;
-    VPropertyFormView* TreeView;
+    VPropertyFormView* formView;
 
     QGraphicsItem *currentItem;
     QMap<VProperty *, QString> propertyToId;
@@ -70,9 +70,6 @@ private:
 
     template<class Tool>
     void AddPropertyPointName(Tool *i, const QString &propertyName);
-
-    template<class Tool>
-    void AddPropertyPointsList(Tool *i, const QString &propertyName, const quint32 &value, const QString &attrName);
 
     template<class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName);

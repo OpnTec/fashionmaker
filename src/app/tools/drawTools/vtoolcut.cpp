@@ -118,6 +118,9 @@ void VToolCut::setFormula(const VFormula &value)
     if (value.error() == false)
     {
         formula = value.getFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
     }
 }
 

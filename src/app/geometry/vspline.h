@@ -63,6 +63,7 @@ public:
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
+    void    SetKcurve(qreal factor);
     // cppcheck-suppress unusedFunction
     QLineF::IntersectType CrossingSplLine(const QLineF &line, QPointF *intersectionPoint ) const;
     qreal           LengthT(qreal t) const;
