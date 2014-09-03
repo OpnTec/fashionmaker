@@ -53,6 +53,8 @@ public:
 
     VSpline getSpline()const;
     void    setSpline(const VSpline &spl);
+
+    virtual void ShowVisualization(bool show);
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);

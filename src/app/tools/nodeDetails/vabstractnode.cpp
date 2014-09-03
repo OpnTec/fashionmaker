@@ -70,6 +70,12 @@ void VAbstractNode::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::ShowVisualization(bool show)
+{
+    Q_UNUSED(show)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToModeling add tag to modeling tag current pattern peace.
  * @param domElement tag.

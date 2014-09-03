@@ -32,6 +32,7 @@
 #include "../../dialogs/tools/dialogendline.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../geometry/vpointf.h"
+#include "./../visualization/vistoolendline.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
@@ -185,6 +186,16 @@ void VToolEndLine::FullUpdateFromFile()
         formulaAngle = domElement.attribute(AttrAngle, "");
     }
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+        visual->setPoint1Id(basePointId);
+        visual->setLength(formulaLength);
+        visual->setAngle(formulaAngle);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -260,5 +271,40 @@ void VToolEndLine::setFormulaAngle(const VFormula &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolEndLine * visual = new VisToolEndLine(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(basePointId);
+            visual->setLength(formulaLength);
+            visual->setAngle(formulaAngle);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }

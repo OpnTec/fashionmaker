@@ -45,6 +45,7 @@ public:
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
+    virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ChangedActivDraw(const QString &newName);

@@ -30,6 +30,7 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogshoulderpoint.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoolshoulderpoint.h"
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 
@@ -234,6 +235,17 @@ void VToolShoulderPoint::FullUpdateFromFile()
         pShoulder = domElement.attribute(AttrPShoulder, "").toUInt();
     }
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
+        visual->setPoint1Id(pShoulder);
+        visual->setLineP1Id(basePointId);
+        visual->setLineP2Id(p2Line);
+        visual->setLength(formulaLength);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,6 +341,42 @@ void VToolShoulderPoint::setPShoulder(const quint32 &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolShoulderPoint * visual = new VisToolShoulderPoint(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(pShoulder);
+            visual->setLineP1Id(basePointId);
+            visual->setLineP2Id(p2Line);
+            visual->setLength(formulaLength);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }
 

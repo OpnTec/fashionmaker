@@ -30,6 +30,7 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialognormal.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoolnormal.h"
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 
@@ -209,6 +210,17 @@ void VToolNormal::FullUpdateFromFile()
         angle = domElement.attribute(AttrAngle, "").toDouble();
     }
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
+        visual->setPoint1Id(basePointId);
+        visual->setPoint2Id(secondPointId);
+        visual->setLength(formulaLength);
+        visual->setAngle(angle);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -303,6 +315,42 @@ void VToolNormal::setSecondPointId(const quint32 &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolNormal::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolNormal * visual = new VisToolNormal(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(basePointId);
+            visual->setPoint2Id(secondPointId);
+            visual->setLength(formulaLength);
+            visual->setAngle(angle);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }
 

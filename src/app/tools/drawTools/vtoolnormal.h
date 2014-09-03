@@ -56,6 +56,7 @@ public:
     quint32 getSecondPointId() const;
     void    setSecondPointId(const quint32 &value);
 
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);

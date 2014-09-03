@@ -281,6 +281,38 @@ void VToolSplinePath::setSplinePath(const VSplinePath &splPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::ShowVisualization(bool show)
+{
+//    if (show)
+//    {
+//        if (vis == nullptr)
+//        {
+//            VisTool * visual = new VisTool(getData());
+//            VMainGraphicsScene *scene = qApp->getCurrentScene();
+//            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+//            scene->addItem(visual);
+
+//            // add options
+//            visual->RefreshGeometry();
+//            vis = visual;
+//        }
+//        else
+//        {
+//            VisTool * visual = qobject_cast<VisTool *>(vis);
+//            if (visual != nullptr)
+//            {
+//                visual->show();
+//            }
+//        }
+//    }
+//    else
+//    {
+//        delete vis;
+//        vis = nullptr;
+//    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.

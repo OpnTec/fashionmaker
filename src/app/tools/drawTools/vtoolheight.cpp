@@ -29,6 +29,7 @@
 #include "vtoolheight.h"
 #include "../../dialogs/tools/dialogheight.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoolheight.h"
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 
@@ -202,6 +203,15 @@ void VToolHeight::FullUpdateFromFile()
     }
     RefreshGeometry();
 
+    if (vis != nullptr)
+    {
+        VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+        visual->setPoint1Id(basePointId);
+        visual->setLineP1Id(p1LineId);
+        visual->setLineP2Id(p2LineId);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -273,6 +283,41 @@ void VToolHeight::setP2LineId(const quint32 &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolHeight * visual = new VisToolHeight(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(basePointId);
+            visual->setLineP1Id(p1LineId);
+            visual->setLineP2Id(p2LineId);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }
 

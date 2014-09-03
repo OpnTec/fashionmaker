@@ -29,6 +29,7 @@
 #include "vtooltriangle.h"
 #include "../../dialogs/tools/dialogtriangle.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistooltriangle.h"
 
 #include <QtMath>
 
@@ -229,6 +230,16 @@ void VToolTriangle::FullUpdateFromFile()
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
+
+    if (vis != nullptr)
+    {
+        VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
+        visual->setPoint1Id(axisP1Id);
+        visual->setPoint2Id(axisP2Id);
+        visual->setHypotenuseP1Id(firstPointId);
+        visual->setHypotenuseP2Id(secondPointId);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -312,6 +323,41 @@ void VToolTriangle::setSecondPointId(const quint32 &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolTriangle * visual = new VisToolTriangle(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(axisP1Id);
+            visual->setPoint2Id(axisP2Id);
+            visual->setHypotenuseP1Id(firstPointId);
+            visual->setHypotenuseP2Id(secondPointId);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }
 

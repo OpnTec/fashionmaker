@@ -29,6 +29,7 @@
 #include "vtoollineintersect.h"
 #include "../../dialogs/tools/dialoglineintersect.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoollineintersect.h"
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
@@ -201,6 +202,16 @@ void VToolLineIntersect::FullUpdateFromFile()
         p2Line2 = domElement.attribute(AttrP2Line2, "").toUInt();
     }
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+
+    if (vis != nullptr)
+    {
+        VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
+        visual->setPoint1Id(p1Line1);
+        visual->setLine1P2Id(p2Line1);
+        visual->setLine2P1Id(p1Line2);
+        visual->setLine2P2Id(p2Line2);
+        vis->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,6 +306,41 @@ void VToolLineIntersect::setP2Line2(const quint32 &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolLineIntersect * visual = new VisToolLineIntersect(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(p1Line1);
+            visual->setLine1P2Id(p2Line1);
+            visual->setLine2P1Id(p1Line2);
+            visual->setLine2P2Id(p2Line2);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }
 

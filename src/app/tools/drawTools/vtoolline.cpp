@@ -31,6 +31,7 @@
 #include <QKeyEvent>
 #include "../../geometry/vpointf.h"
 #include "../../dialogs/tools/dialogline.h"
+#include "../../visualization/vistoolline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
@@ -189,6 +190,15 @@ QString VToolLine::getTagName() const
 void VToolLine::FullUpdateFromFile()
 {
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
+        visual->setPoint1Id(firstPoint);
+        visual->setPoint2Id(secondPoint);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -398,6 +408,40 @@ void VToolLine::setSecondPoint(const quint32 &value)
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolLine * visual = new VisToolLine(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(firstPoint);
+            visual->setPoint2Id(secondPoint);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
     }
 }
 

@@ -30,6 +30,7 @@
 #include "../../geometry/vspline.h"
 #include "../../dialogs/tools/dialogspline.h"
 #include "../../undocommands/movespline.h"
+#include "../../visualization/vistoolspline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
@@ -205,6 +206,45 @@ void VToolSpline::setSpline(const VSpline &spl)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolSpline *visual = new VisToolSpline(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+            visual->setPoint1Id(spl->GetP1().id());
+            visual->setPoint4Id(spl->GetP4().id());
+            visual->setAngle1(spl->GetAngle1());
+            visual->setAngle2(spl->GetAngle2());
+            visual->setKAsm1(spl->GetKasm1());
+            visual->setKAsm2(spl->GetKasm2());
+            visual->setKCurve(spl->GetKcurve());
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ControlPointChangePosition handle change position control point.
  * @param indexSpline position spline in spline list.
@@ -336,4 +376,17 @@ void VToolSpline::RefreshGeometry()
 
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
+
+    if (vis != nullptr)
+    {
+        VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
+        visual->setPoint1Id(spl->GetP1().id());
+        visual->setPoint4Id(spl->GetP4().id());
+        visual->setAngle1(spl->GetAngle1());
+        visual->setAngle2(spl->GetAngle2());
+        visual->setKAsm1(spl->GetKasm1());
+        visual->setKAsm2(spl->GetKasm2());
+        visual->setKCurve(spl->GetKcurve());
+        visual->RefreshGeometry();
+    }
 }

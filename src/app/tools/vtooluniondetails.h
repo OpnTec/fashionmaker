@@ -77,6 +77,7 @@ public:
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                  const qreal &angle);
     virtual QString getTagName() const;
+    virtual void ShowVisualization(bool show);
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

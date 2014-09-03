@@ -51,6 +51,8 @@ public:
 
      VSplinePath getSplinePath()const;
      void        setSplinePath(const VSplinePath &splPath);
+
+     virtual void ShowVisualization(bool show);
 signals:
     /**
      * @brief RefreshLine refresh control line.

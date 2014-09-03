@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogarc.h"
 #include "../../geometry/varc.h"
 #include "../container/vformula.h"
+#include "../../visualization/vistoolarc.h"
 
 #include <QKeyEvent>
 
@@ -271,12 +272,40 @@ void VToolArc::setFormulaF2(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolArc::FullUpdateFromFile()
+void VToolArc::ShowVisualization(bool show)
 {
-    RefreshGeometry();
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolArc * visual = new VisToolArc(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+
+            visual->setPoint1Id(arc->GetCenter().id());
+            visual->setRadius(arc->GetFormulaRadius());
+            visual->setF1(arc->GetFormulaF1());
+            visual->setF2(arc->GetFormulaF2());
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,4 +365,16 @@ void VToolArc::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
+
+    if (vis != nullptr)
+    {
+        const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+        VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
+
+        visual->setPoint1Id(arc->GetCenter().id());
+        visual->setRadius(arc->GetFormulaRadius());
+        visual->setF1(arc->GetFormulaF1());
+        visual->setF2(arc->GetFormulaF2());
+        visual->RefreshGeometry();
+    }
 }

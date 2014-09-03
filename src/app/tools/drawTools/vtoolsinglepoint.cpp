@@ -83,6 +83,12 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ShowVisualization(bool show)
+{
+    Q_UNUSED(show); //don't have any visualization for base point yet
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */

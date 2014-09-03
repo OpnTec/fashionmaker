@@ -57,6 +57,7 @@ public:
     quint32 getSecondPoint() const;
     void    setSecondPoint(const quint32 &value);
 
+    virtual void     ShowVisualization(bool show);
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);

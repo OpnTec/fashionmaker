@@ -59,6 +59,7 @@ public:
     quint32 getP2LineId() const;
     void    setP2LineId(const quint32 &value);
 
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);

@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogcutarc.h"
 #include "../../geometry/vpointf.h"
 #include "../../geometry/varc.h"
+#include "../../visualization/vistoolcutarc.h"
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc  = QStringLiteral("arc");
@@ -181,12 +182,53 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolCutArc * visual = new VisToolCutArc(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(curveCutId);
+            visual->setLength(formula);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
 void VToolCutArc::FullUpdateFromFile()
 {
     FullUpdateCurveFromFile(AttrArc);
+
+    if (vis != nullptr)
+    {
+        VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(formula);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

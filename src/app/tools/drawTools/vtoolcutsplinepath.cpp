@@ -243,6 +243,38 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCutSplinePath::ShowVisualization(bool show)
+{
+//    if (show)
+//    {
+//        if (vis == nullptr)
+//        {
+//            VisTool * visual = new VisTool(getData());
+//            VMainGraphicsScene *scene = qApp->getCurrentScene();
+//            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+//            scene->addItem(visual);
+
+//            // add options
+//            visual->RefreshGeometry();
+//            vis = visual;
+//        }
+//        else
+//        {
+//            VisTool * visual = qobject_cast<VisTool *>(vis);
+//            if (visual != nullptr)
+//            {
+//                visual->show();
+//            }
+//        }
+//    }
+//    else
+//    {
+//        delete vis;
+//        vis = nullptr;
+//    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */

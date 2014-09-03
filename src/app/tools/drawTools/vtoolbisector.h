@@ -62,6 +62,7 @@ public:
     quint32 getThirdPointId() const;
     void    setThirdPointId(const quint32 &value);
 
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);

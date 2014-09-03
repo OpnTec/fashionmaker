@@ -84,12 +84,19 @@ const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDot
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine),
+      vis(nullptr)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VPattern::LiteParseTree);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractTool::~VAbstractTool()
+{
+    delete vis;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

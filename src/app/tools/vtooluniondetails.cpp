@@ -442,6 +442,12 @@ QString VToolUnionDetails::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::ShowVisualization(bool show)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool from GUI.
  * @param dialog dialog.

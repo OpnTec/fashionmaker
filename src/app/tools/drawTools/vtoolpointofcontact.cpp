@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogpointofcontact.h"
 #include "../../geometry/vpointf.h"
 #include "../../container/vformula.h"
+#include "../../visualization/vistoolpointofcontact.h"
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
@@ -228,6 +229,16 @@ void VToolPointOfContact::FullUpdateFromFile()
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+
+    if (vis != nullptr)
+    {
+        VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+        visual->setPoint1Id(firstPointId);
+        visual->setLineP2Id(secondPointId);
+        visual->setRadiusId(center);
+        visual->setRadius(arcRadius);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,6 +327,41 @@ quint32 VToolPointOfContact::getSecondPointId() const
 void VToolPointOfContact::setSecondPointId(const quint32 &value)
 {
     secondPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolPointOfContact * visual = new VisToolPointOfContact(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(firstPointId);
+            visual->setLineP2Id(secondPointId);
+            visual->setRadiusId(center);
+            visual->setRadius(arcRadius);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

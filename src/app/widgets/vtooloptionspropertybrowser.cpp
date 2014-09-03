@@ -308,10 +308,16 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
     propertyToId.clear();
     idToProperty.clear();
 
-    currentItem = item;
+    VAbstractTool *previousTool = dynamic_cast<VAbstractTool *>(currentItem);
+    if (previousTool != nullptr)
+    {
+        previousTool->ShowVisualization(false); // hide for previous tool
+    }
 
+    currentItem = item;
     if (currentItem == nullptr)
     {
+        formView->setTitle("");
         return;
     }
 
@@ -835,6 +841,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolTriangle(VProperty *property)
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Base point"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -848,6 +855,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item
 void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
 {
     VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Point at distance and angle"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -860,6 +868,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
 {
     VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Point at distance along line"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -871,6 +880,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
 {
     VToolArc *i = qgraphicsitem_cast<VToolArc *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Arc"));
 
     AddPropertyFormula(tr("Radius"), i->getFormulaRadius(), VAbstractTool::AttrRadius);
@@ -882,6 +892,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
 {
     VToolBisector *i = qgraphicsitem_cast<VToolBisector *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Point along bisector"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -893,6 +904,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 {
     VToolCutArc *i = qgraphicsitem_cast<VToolCutArc *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Cut arc tool"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -903,6 +915,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
 {
     VToolCutSpline *i = qgraphicsitem_cast<VToolCutSpline *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Tool for segmenting a curve"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -913,6 +926,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *item)
 {
     VToolCutSplinePath *i = qgraphicsitem_cast<VToolCutSplinePath *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Tool segment a pathed curve"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -923,6 +937,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
 void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
 {
     VToolHeight *i = qgraphicsitem_cast<VToolHeight *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Perpendicular point along line"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -933,6 +948,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
 {
     VToolLine *i = qgraphicsitem_cast<VToolLine *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Line between points"));
 
     AddPropertyLineType(i, tr("Line type"));
@@ -942,6 +958,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersect(QGraphicsItem *item)
 {
     VToolLineIntersect *i = qgraphicsitem_cast<VToolLineIntersect *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Point at line intersection"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -951,6 +968,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersect(QGraphicsItem *it
 void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
 {
     VToolNormal *i = qgraphicsitem_cast<VToolNormal *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Point along perpendicular"));
 
     AddPropertyFormula(tr("Length"), i->getFormulaLength(), VAbstractTool::AttrLength);
@@ -969,6 +987,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *item)
 {
     VToolPointOfContact *i = qgraphicsitem_cast<VToolPointOfContact *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Point at intersection of arc and line"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -979,6 +998,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *i
 void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsItem *item)
 {
     VToolPointOfIntersection *i = qgraphicsitem_cast<VToolPointOfIntersection *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from x & y of two other points"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -988,6 +1008,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsIt
 void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *item)
 {
     VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Special point on shoulder"));
 
     AddPropertyPointName(i, tr("Point label"));
@@ -999,6 +1020,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
 void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
 {
     VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Curve tool"));
 
     VDoubleProperty* itemFactor = new VDoubleProperty(tr("Curve factor"));
@@ -1015,6 +1037,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
 {
     VToolSplinePath *i = qgraphicsitem_cast<VToolSplinePath *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Tool for path curve"));
 
     VDoubleProperty* itemFactor = new VDoubleProperty(tr("Curve factor"));
@@ -1031,6 +1054,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
 void VToolOptionsPropertyBrowser::ShowOptionsToolTriangle(QGraphicsItem *item)
 {
     VToolTriangle *i = qgraphicsitem_cast<VToolTriangle *>(item);
+    i->ShowVisualization(true);
     formView->setTitle(tr("Tool triangle"));
 
     AddPropertyPointName(i, tr("Point label"));

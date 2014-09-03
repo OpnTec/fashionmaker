@@ -50,6 +50,7 @@ public:
     static const QString AttrArc;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutArc)};
+    virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void CurveChoosed(quint32 id);

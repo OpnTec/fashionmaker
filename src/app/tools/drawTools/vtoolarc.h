@@ -63,8 +63,8 @@ public:
 
     VFormula         getFormulaF2() const;
     void             setFormulaF2(const VFormula &value);
-public slots:
-    virtual void     FullUpdateFromFile();
+
+    virtual void     ShowVisualization(bool show);
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     RemoveReferens();

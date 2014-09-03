@@ -54,7 +54,7 @@ public:
 
     VFormula     getFormulaAngle() const;
     void         setFormulaAngle(const VFormula &value);
-
+    virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);

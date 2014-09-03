@@ -51,6 +51,7 @@ public:
     static const QString AttrSpline;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSpline)};
+    virtual void  ShowVisualization(bool show);
 public slots:
     virtual void  FullUpdateFromFile();
     virtual void  CurveChoosed(quint32 id);

@@ -45,6 +45,7 @@ public:
     static const QString AttrIdTool;
     virtual void DeleteNode();
     virtual void RestoreNode();
+    virtual void ShowVisualization(bool show);
 protected:
     /** @brief idNodenode id. */
     quint32       idNode;
