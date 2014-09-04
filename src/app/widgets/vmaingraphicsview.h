@@ -84,6 +84,7 @@ private:
 
     bool eventFilter(QObject* object, QEvent* event);
 private:
+    Q_DISABLE_COPY(GraphicsViewZoom)
     /** @brief _numScheduledScalings keep number scheduled scalings. */
     qint32   _numScheduledScalings;
 };
@@ -121,6 +122,7 @@ protected:
     void     mousePressEvent(QMouseEvent *mousePress);
     void     mouseReleaseEvent(QMouseEvent *event);
 private:
+    Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;
     bool     showToolOptions;
 };

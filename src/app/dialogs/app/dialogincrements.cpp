@@ -69,9 +69,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         }
     }
 
-    //Same regex in pattern.xsd shema file. Don't forget synchronize.
-    TextDelegate *textDelegate = new TextDelegate("^([^0-9-*/^+=\\s\\(\\)%:;!.,]){1,1}([^-*/^+=\\s\\(\\)%:;!.,]){0,}$",
-                                                  data, ui->tableWidgetIncrement);
+    TextDelegate *textDelegate = new TextDelegate(nameRegExp, data, ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);// name
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);// base value

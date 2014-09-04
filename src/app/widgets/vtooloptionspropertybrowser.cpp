@@ -369,7 +369,8 @@ void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
             return;
         }
 
-        if (name.isEmpty() || VContainer::IsUnique(name) == false)
+        QRegExp rx(nameRegExp);
+        if (name.isEmpty() || VContainer::IsUnique(name) == false || rx.exactMatch(name) == false)
         {
             idToProperty[VAbstractTool::AttrName]->setValue(i->name());
         }
