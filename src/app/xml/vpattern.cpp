@@ -2326,6 +2326,10 @@ void VPattern::PrepareForParse(const Document &parse)
         cursor = 0;
         history.clear();
     }
+    else if (parse == Document::LiteParse)
+    {
+        data->ClearUniqueNames();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

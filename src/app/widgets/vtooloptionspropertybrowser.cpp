@@ -369,13 +369,12 @@ void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
             return;
         }
 
-        if (name.isEmpty())
+        if (name.isEmpty() || VContainer::IsUnique(name) == false)
         {
             idToProperty[VAbstractTool::AttrName]->setValue(i->name());
         }
         else
         {
-            //TODO check if label name is unique
             i->setName(name);
         }
     }
