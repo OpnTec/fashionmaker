@@ -45,6 +45,7 @@
 
 #include <QMessageBox>
 #include <QUndoStack>
+#include <QtMath>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -1620,6 +1621,68 @@ void VPattern::CheckTagExists(const QString &tag)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GetLabelBase(unsigned int index) const
+{
+    QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
+    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
+    QString checkedLocale = qApp->getSettings()->value("configuration/label_language", defaultLocale).toString();
+
+    QStringList list{"de", "en" , "fr" , "ru" , "uk"};
+
+    QStringList alphabet;
+    switch(list.indexOf(checkedLocale))
+    {
+        case 0: // de
+        {
+            QString al = QStringLiteral("A,Ä,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Ö,P,Q,R,S,ß,T,U,Ü,V,W,X,Y,Z");
+            alphabet = al.split(",");
+            break;
+        }
+        case 1: // en
+        {
+            QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            alphabet = al.split(",");
+            break;
+        }
+        case 2: // fr
+        {
+            QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            alphabet = al.split(",");
+            break;
+        }
+        case 3: // ru
+        {
+            QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,И,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Э,Ю,Я");
+            alphabet = al.split(",");
+            break;
+        }
+        case 4: // uk
+        {
+            QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,І,Ї,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Є,Ю,Я");
+            alphabet = al.split(",");
+            break;
+        }
+        default: // en
+        {
+            QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            alphabet = al.split(",");
+            break;
+        }
+    }
+
+    QString base;
+    int count = qFloor(index/alphabet.size());
+    int number = index - alphabet.size() * count;
+    int i = 0;
+    do
+    {
+        base.append(alphabet.at(number));
+        ++i;
+    } while (i < count);
+    return base;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseSplineElement parse spline tag.
  * @param scene scene.
@@ -2278,6 +2341,66 @@ void VPattern::SetVersion()
 {
     setTagText(TagVersion, VAL_STR_VERSION);
     emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GenerateLabel(const LabelType &type) const
+{
+    QDomNodeList drawList = elementsByTagName(TagDraw);
+
+    if (type == LabelType::NewPatternPiece)
+    {
+        QString name;
+        int i = 0;
+        for(;;)
+        {
+            name = GetLabelBase(drawList.size() + i);
+            if (data->IsUnique(name))
+            {
+                return name;
+            }
+            if (i == INT_MAX)
+            {
+                break;
+            }
+            ++i;
+        }
+        return name;
+    }
+    else if (type == LabelType::NewLabel)
+    {
+        if (drawList.isEmpty())
+        {
+            return GetLabelBase(0);
+        }
+
+        int index = 0;
+        for (int i = 0; i < drawList.size(); ++i)
+        {
+            QDomElement node = drawList.at(i).toElement();
+            if (node.attribute(AttrName) == nameActivPP)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        QString labelBase = GetLabelBase(index);
+
+        qint32 num = 1;
+        QString name;
+        do
+        {
+            name = QString("%1%2").arg(labelBase).arg(num);
+            num++;
+            if (num == INT_MAX)
+            {
+                break;
+            }
+        } while (data->IsUnique(name) == false);
+        return name;
+    }
+    return QString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

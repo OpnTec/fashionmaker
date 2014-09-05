@@ -32,6 +32,7 @@
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolpointofcontact.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -46,12 +47,12 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);

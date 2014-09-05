@@ -32,6 +32,7 @@
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistooltriangle.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -44,10 +45,10 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
     axisP2Id(NULL_ID), firstPointId(NULL_ID), secondPointId(NULL_ID), line (nullptr)
 {
     ui->setupUi(this);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisP1);

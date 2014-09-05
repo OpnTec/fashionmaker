@@ -58,7 +58,7 @@ VApplication::VApplication(int &argc, char **argv)
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
       postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), currentScene(nullptr),
-      autoSaveTimer(nullptr), mainWindow(nullptr), openingPattern(false), settings(nullptr)
+      autoSaveTimer(nullptr), mainWindow(nullptr), openingPattern(false), settings(nullptr), doc(nullptr)
 {
     undoStack = new QUndoStack(this);
 

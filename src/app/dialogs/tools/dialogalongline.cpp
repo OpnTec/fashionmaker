@@ -48,12 +48,13 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
+
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);

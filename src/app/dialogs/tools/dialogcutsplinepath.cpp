@@ -31,6 +31,7 @@
 
 #include "../../geometry/vsplinepath.h"
 #include "../../container/vcontainer.h"
+#include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,12 +46,12 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancel(ui);
     flagFormula = false;
-    flagName = false;
     CheckState();
 
     FillComboBoxSplinesPath(ui->comboBoxSplinePath);

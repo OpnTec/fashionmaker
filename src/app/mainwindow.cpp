@@ -105,6 +105,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
     connect(doc, &VPattern::CheckLayout, this, &MainWindow::Layout);
+    qApp->setCurrentDocument(doc);
 
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
 
@@ -194,7 +195,8 @@ void MainWindow::ActionNewPP()
 
     pattern->ClearGObjects();
     //Create single point
-    const quint32 id = pattern->AddGObject(new VPointF(20+comboBoxDraws->count()*5, 20, "А", 5, 10));
+    QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
+    const quint32 id = pattern->AddGObject(new VPointF(30+comboBoxDraws->count()*5, 40, label, 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Source::FromGui, patternPieceName, path);
     sceneDraw->addItem(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);

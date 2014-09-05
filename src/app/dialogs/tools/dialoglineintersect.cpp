@@ -33,6 +33,7 @@
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoollineintersect.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -47,8 +48,8 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
     ui->setupUi(this);
     number = 0;
     InitOkCancelApply(ui);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
-    flagName = false;
 
     FillComboBoxPoints(ui->comboBoxP1Line1);
     FillComboBoxPoints(ui->comboBoxP2Line1);

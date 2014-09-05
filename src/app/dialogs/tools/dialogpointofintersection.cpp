@@ -33,6 +33,7 @@
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolpointofintersection.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,10 +46,10 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
     firstPointId(NULL_ID), secondPointId(NULL_ID), line(nullptr)
 {
     ui->setupUi(this);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);

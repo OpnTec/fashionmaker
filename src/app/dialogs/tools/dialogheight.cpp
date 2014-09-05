@@ -46,9 +46,9 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     typeLine(QString()), basePointId(NULL_ID), p1LineId(NULL_ID), p2LineId(NULL_ID), line(nullptr)
 {
     ui->setupUi(this);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     InitOkCancelApply(ui);
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
