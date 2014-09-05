@@ -195,10 +195,12 @@ void MainWindow::ActionNewPP()
 
     pattern->ClearGObjects();
     //Create single point
+    ui->view->itemClicked(nullptr);//hide options previous tool
     QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const quint32 id = pattern->AddGObject(new VPointF(30+comboBoxDraws->count()*5, 40, label, 5, 10));
     VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Source::FromGui, patternPieceName, path);
     sceneDraw->addItem(spoint);
+    ui->view->itemClicked(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
