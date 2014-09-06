@@ -36,6 +36,8 @@ namespace Ui
     class DialogCutSpline;
 }
 
+class VisToolCutSpline;
+
 /**
  * @brief The DialogCutSpline class dialog for ToolCutSpline.
  */
@@ -61,6 +63,7 @@ public slots:
      */
     void                DeployFormulaTextEdit();
 protected:
+    virtual void        ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -79,6 +82,8 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                 formulaBaseHeight;
+
+    VisToolCutSpline     *path;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

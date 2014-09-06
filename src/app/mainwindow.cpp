@@ -497,8 +497,10 @@ void MainWindow::ToolSpline(bool checked)
  */
 void MainWindow::ToolCutSpline(bool checked)
 {
-    SetToolButton<DialogCutSpline>(checked, Tool::CutSpline, ":/cursor/spline_cut_point_cursor.png",
-                                   tr("Select simple curve"), &MainWindow::ClosedDialog<VToolCutSpline>);
+    SetToolButtonWithApply<DialogCutSpline>(checked, Tool::CutSpline, ":/cursor/spline_cut_point_cursor.png",
+                                            tr("Select simple curve"),
+                                            &MainWindow::ClosedDialogWithApply<VToolCutSpline>,
+                                            &MainWindow::ApplyDialog<VToolCutSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

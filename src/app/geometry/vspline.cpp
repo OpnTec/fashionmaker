@@ -242,6 +242,20 @@ QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
+{
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
+    QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
+
+    spl1 = VSpline(GetP1(), spl1p2, spl1p3, cutPoint, GetKcurve());
+    spl2 = VSpline(cutPoint, spl2p2, spl2p3, GetP4(), GetKcurve());
+    return cutPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetPoints return list with spline points.
  * @return list of points.

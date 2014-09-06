@@ -30,6 +30,8 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogcutspline.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoolcutspline.h"
+#include "vabstractspline.h"
 
 #include <geometry/vspline.h>
 
@@ -190,33 +192,38 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSpline::ShowVisualization(bool show)
 {
-//    if (show)
-//    {
-//        if (vis == nullptr)
-//        {
-//            VisTool * visual = new VisTool(getData());
-//            VMainGraphicsScene *scene = qApp->getCurrentScene();
-//            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-//            scene->addItem(visual);
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolCutSpline * visual = new VisToolCutSpline(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
 
-//            // add options
-//            visual->RefreshGeometry();
-//            vis = visual;
-//        }
-//        else
-//        {
-//            VisTool * visual = qobject_cast<VisTool *>(vis);
-//            if (visual != nullptr)
-//            {
-//                visual->show();
-//            }
-//        }
-//    }
-//    else
-//    {
-//        delete vis;
-//        vis = nullptr;
-//    }
+            visual->setPoint1Id(curveCutId);
+            visual->setLength(formula);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolCutSpline * visual = qobject_cast<VisToolCutSpline *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
+    {
+        parentCurve->ShowFoot(show);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,6 +233,14 @@ void VToolCutSpline::ShowVisualization(bool show)
 void VToolCutSpline::FullUpdateFromFile()
 {
     FullUpdateCurveFromFile(AttrSpline);
+
+    if (vis != nullptr)
+    {
+        VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(formula);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

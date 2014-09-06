@@ -99,7 +99,10 @@ enum class Vis : unsigned char
     ToolPointOfIntersection,
     ToolShoulderPoint,
     ToolSpline,
-    ToolTriangle
+    ToolTriangle,
+    ToolCutSpline,
+    ToolSplinePath,
+    ToolCutSplinePath
 };
 
 enum class Source : char { FromGui, FromFile, FromTool };
