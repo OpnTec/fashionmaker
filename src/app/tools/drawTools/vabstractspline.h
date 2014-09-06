@@ -81,6 +81,7 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event);
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
+    void             ShowFoot(bool show);
 };
 
 #endif // VABSTRACTSPLINE_H

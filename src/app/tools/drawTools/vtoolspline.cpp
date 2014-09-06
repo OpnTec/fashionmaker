@@ -72,6 +72,8 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Sour
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
     controlPoints.append(controlPoint2);
 
+    ShowFoot(false);
+
     if (typeCreation == Source::FromGui)
     {
         AddToFile();
@@ -242,6 +244,7 @@ void VToolSpline::ShowVisualization(bool show)
         delete vis;
         vis = nullptr;
     }
+    ShowFoot(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

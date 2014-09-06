@@ -217,3 +217,12 @@ QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
     path.setFillRule( Qt::WindingFill );
     return path;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::ShowFoot(bool show)
+{
+    for (int i = 0; i < controlPoints.size(); ++i)
+    {
+        controlPoints.at(i)->setVisible(show);
+    }
+}
