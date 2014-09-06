@@ -429,6 +429,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
         flag = false;
         ChangeColor(labelEditFormula, Qt::red);
         label->setText(tr("Error"));
+        label->setToolTip(tr("Empty field"));
     }
     else
     {
@@ -448,6 +449,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
                 label->setText(tr("Error"));
+                label->setToolTip(tr("Value can't be 0"));
             }
             else
             {
@@ -463,6 +465,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
                 label->setText(loc.toString(result) + postfix);
                 flag = true;
                 ChangeColor(labelEditFormula, okColor);
+                label->setToolTip(tr("Value"));
                 emit ToolTip("");
             }
         }
@@ -472,6 +475,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             flag = false;
             ChangeColor(labelEditFormula, Qt::red);
             emit ToolTip("Parser error: "+e.GetMsg());
+            label->setToolTip("Parser error: "+e.GetMsg());
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"
