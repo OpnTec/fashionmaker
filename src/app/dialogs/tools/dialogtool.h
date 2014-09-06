@@ -200,6 +200,9 @@ protected:
     /** @brief prepare show if we prepare. Show dialog after finish working with visual part of tool*/
     bool             prepare;
 
+    /** @brief pointName name of point */
+    QString          pointName;
+
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
     void             FillComboBoxPoints(QComboBox *box)const;

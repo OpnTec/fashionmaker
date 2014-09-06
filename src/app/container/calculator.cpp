@@ -139,15 +139,12 @@ qreal Calculator::EvalFormula(const QString &formula)
     }
 
     // Add variables
-    InitVariables(data, tokens);
-
-    result = Eval();
-
-    return result;
+    InitVariables(data, tokens, formula);
+    return Eval();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> &tokens)
+void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> &tokens, const QString &formula)
 {
     if (qApp->patternType() == MeasurementsType::Standard)
     {
@@ -156,9 +153,11 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
 
     const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
+    bool found = false;
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
+        found = false;
         if (vars->contains(i.value()))
         {
             QSharedPointer<VInternalVariable> var = vars->value(i.value());
@@ -169,6 +168,7 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
                 m->SetValue(data->size(), data->height());
             }
             DefineVar(i.value(), var->GetValue());
+            found = true;
         }
 
         if (qApp->patternType() == MeasurementsType::Standard)
@@ -177,13 +177,20 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
             {
                 vVarVal[0] = data->size();
                 DefineVar(data->SizeName(), &vVarVal[0]);
+                found = true;
             }
 
             if (i.value() == data->HeightName())
             {
                 vVarVal[1] = data->height();
                 DefineVar(data->HeightName(), &vVarVal[1]);
+                found = true;
             }
+        }
+
+        if (found == false)
+        {
+            throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN , i.value(), formula, i.key());
         }
         ++i;
     }

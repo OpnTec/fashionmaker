@@ -42,7 +42,7 @@
  * @param parent parent widget
  */
 DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersect), number(0), pointName(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersect), number(0),
     p1Line1(NULL_ID), p2Line1(NULL_ID), p1Line2(NULL_ID), p2Line2(NULL_ID), flagPoint(true), line(nullptr)
 {
     ui->setupUi(this);

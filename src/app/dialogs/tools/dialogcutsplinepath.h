@@ -71,9 +71,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogCutSplinePath *ui;
 
-    /** @brief pointName name of created point */
-    QString      pointName;
-
     /** @brief formula string with formula */
     QString      formula;
 

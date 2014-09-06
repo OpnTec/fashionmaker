@@ -85,9 +85,6 @@ private:
     /** @brief number number of handled objects */
     qint32                  number;
 
-    /** @brief pointName name of point */
-    QString                 pointName;
-
     /** @brief p1Line1 id first point of first line */
     quint32                 p1Line1;
 

@@ -41,7 +41,7 @@
  * @param parent parent widget
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), number(0), pointName(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), number(0),
       radius(QString()), center(NULL_ID), firstPoint(NULL_ID), secondPoint(NULL_ID), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);

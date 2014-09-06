@@ -63,7 +63,8 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), lineStyles(VAbstractTool::Styles()),
-      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId), prepare(false)
+      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId), prepare(false),
+      pointName(QString())
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -659,7 +660,8 @@ void DialogTool::NamePointChanged()
     if (edit)
     {
         QString name = edit->text();
-        if (name.isEmpty() || name.contains(" "))
+        name.replace(" ", "");
+        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false))
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);

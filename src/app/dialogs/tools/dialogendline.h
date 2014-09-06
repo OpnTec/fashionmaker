@@ -89,9 +89,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogEndLine *ui;
 
-    /** @brief pointName name of point */
-    QString           pointName;
-
     /** @brief typeLine type of line */
     QString           typeLine;
 

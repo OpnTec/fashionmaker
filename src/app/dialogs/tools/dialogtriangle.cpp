@@ -41,7 +41,7 @@
  * @param parent parent widget
  */
 DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), number(0), pointName(QString()), axisP1Id(NULL_ID),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), number(0), axisP1Id(NULL_ID),
     axisP2Id(NULL_ID), firstPointId(NULL_ID), secondPointId(NULL_ID), line (nullptr)
 {
     ui->setupUi(this);

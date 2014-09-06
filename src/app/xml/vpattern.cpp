@@ -1139,7 +1139,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 //Rewrite attribute formula. Need for situation when we have wrong formula.
                 if (f != formula || angleFix != angle)
                 {
-                    SetAttribute(domElement, VAbstractTool::AttrRadius, f);
+                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
                     SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
                     haveLiteChange();
                 }
@@ -2452,6 +2452,7 @@ void VPattern::PrepareForParse(const Document &parse)
     else if (parse == Document::LiteParse)
     {
         data->ClearUniqueNames();
+        data->ClearVariables();
     }
 }
 

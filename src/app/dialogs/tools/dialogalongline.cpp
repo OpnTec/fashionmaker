@@ -41,7 +41,7 @@
  * @param parent parent widget
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine), number(0), pointName(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine), number(0),
       typeLine(QString()), formula(QString()), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0),
       line(nullptr)
 {

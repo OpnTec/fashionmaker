@@ -42,7 +42,7 @@
  * @param parent parent widget
  */
 DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), pointName(QString()), formula(QString()),
+    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()),
       arcId(NULL_ID), formulaBaseHeight(0), path(nullptr)
 {
     ui->setupUi(this);
