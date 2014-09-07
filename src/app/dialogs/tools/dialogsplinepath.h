@@ -37,6 +37,8 @@ namespace Ui
     class DialogSplinePath;
 }
 
+class VisToolSplinePath;
+
 /**
  * @brief The DialogSplinePath class dialog for ToolSplinePath. Help create spline path and edit option.
  */
@@ -58,7 +60,10 @@ public slots:
     void               KAsm1Changed(qreal d);
     void               KAsm2Changed(qreal d);
     virtual void       UpdateList();
+    virtual void       ShowDialog(bool click);
+    void               PathUpdated(const VSplinePath &path);
 protected:
+    virtual void       ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -72,9 +77,12 @@ private:
     /** @brief path spline path */
     VSplinePath        path;
 
+    VisToolSplinePath *visPath;
+
     void               NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void               DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void               EnableFields();
+    void               SavePath();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

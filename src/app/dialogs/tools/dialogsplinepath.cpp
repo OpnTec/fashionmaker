@@ -30,6 +30,7 @@
 #include "ui_dialogsplinepath.h"
 #include "../../geometry/vsplinepoint.h"
 #include "../../container/vcontainer.h"
+#include "../../visualization/vistoolsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -38,10 +39,10 @@
  * @param parent parent widget
  */
 DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()), visPath(nullptr)
 {
     ui->setupUi(this);
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     bOk->setEnabled(false);
 
     FillComboBoxPoints(ui->comboBoxPoint);
@@ -57,11 +58,14 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
             this, &DialogSplinePath::KAsm1Changed);
     connect(ui->doubleSpinBoxKasm2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::KAsm2Changed);
+
+    visPath = new VisToolSplinePath(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSplinePath::~DialogSplinePath()
 {
+    delete visPath;
     delete ui;
 }
 
@@ -73,6 +77,7 @@ DialogSplinePath::~DialogSplinePath()
 void DialogSplinePath::SetPath(const VSplinePath &value)
 {
     this->path = value;
+    ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoint(); ++i)
     {
@@ -80,6 +85,9 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.getKCurve());
+
+    visPath->setPath(path);
+    ui->listWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,20 +102,29 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
     {
         NewItem(id, 1, 0, 1, 180);
         emit ToolTip(tr("Select point of curve path"));
-        this->show();
+
+        SavePath();
+        visPath->setPath(path);
+        if (path.CountPoint() == 1)
+        {
+            visPath->VisualMode(NULL_ID);
+            connect(visPath, &VisToolSplinePath::ToolTip, this, &DialogTool::ShowVisToolTip);
+            connect(visPath, &VisToolSplinePath::PathChanged, this, &DialogSplinePath::PathUpdated);
+        }
+        else
+        {
+            visPath->RefreshGeometry();
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::SaveData()
 {
-    path.Clear();
-    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
-    {
-        QListWidgetItem *item = ui->listWidget->item(i);
-        path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
-    }
-    path.setKCurve(ui->doubleSpinBoxKcurve->value());
+    SavePath();
+
+    visPath->setPath(path);
+    visPath->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -215,6 +232,35 @@ void DialogSplinePath::UpdateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::ShowDialog(bool click)
+{
+    if (click == false)
+    {
+        emit ToolTip("");
+        DialogAccepted();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::PathUpdated(const VSplinePath &path)
+{
+    SetPath(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, visPath, &Visualization::SetFactor);
+        scene->addItem(visPath);
+        visPath->setMode(Mode::Show);
+        visPath->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NewItem add point to list
  * @param id id
@@ -228,7 +274,7 @@ void DialogSplinePath::NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
     QListWidgetItem *item = new QListWidgetItem(point->name());
     item->setFont(QFont("Times", 12, QFont::Bold));
-    VSplinePoint p(*point, kAsm1, angle1, kAsm2, angle2);
+    VSplinePoint p(*point.data(), kAsm1, angle1, kAsm2, angle2);
     DataPoint(point->id(), kAsm1, angle1, kAsm2, angle2);
     item->setData(Qt::UserRole, QVariant::fromValue(p));
     ui->listWidget->addItem(item);
@@ -294,4 +340,16 @@ void DialogSplinePath::EnableFields()
         ui->doubleSpinBoxAngle2->setEnabled(false);
         return;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::SavePath()
+{
+    path.Clear();
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidget->item(i);
+        path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
+    }
+    path.setKCurve(ui->doubleSpinBoxKcurve->value());
 }

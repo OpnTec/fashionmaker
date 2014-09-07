@@ -522,8 +522,10 @@ void MainWindow::ToolArc(bool checked)
  */
 void MainWindow::ToolSplinePath(bool checked)
 {
-    SetToolButton<DialogSplinePath>(checked, Tool::SplinePath, ":/cursor/splinepath_cursor.png",
-                                    tr("Select point of curve path"), &MainWindow::ClosedDialog<VToolSplinePath>);
+    SetToolButtonWithApply<DialogSplinePath>(checked, Tool::SplinePath, ":/cursor/splinepath_cursor.png",
+                                             tr("Select point of curve path"),
+                                             &MainWindow::ClosedDialogWithApply<VToolSplinePath>,
+                                             &MainWindow::ApplyDialog<VToolSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
