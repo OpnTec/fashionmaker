@@ -32,6 +32,7 @@
 #include "../../geometry/vsplinepath.h"
 #include "../../container/vcontainer.h"
 #include "../../xml/vpattern.h"
+#include "../../visualization/vistoolcutsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -41,7 +42,7 @@
  */
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSplinePath), formula(QString()),
-      splinePathId(NULL_ID), formulaBaseHeight(0)
+      splinePathId(NULL_ID), formulaBaseHeight(0), path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -50,7 +51,7 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
-    InitOkCancel(ui);
+    InitOkCancelApply(ui);
     flagFormula = false;
     CheckState();
 
@@ -62,11 +63,14 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSplinePath::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutSplinePath::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSplinePath::DeployFormulaTextEdit);
+
+    path = new VisToolCutSplinePath(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutSplinePath::~DialogCutSplinePath()
 {
+    delete path;
     delete ui;
 }
 
@@ -96,6 +100,7 @@ void DialogCutSplinePath::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+    path->setLength(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,6 +111,7 @@ void DialogCutSplinePath::setFormula(const QString &value)
 void DialogCutSplinePath::setSplinePathId(const quint32 &value)
 {
     setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, ComboBoxCutSpline::CutSpline);
+    path->setPoint1Id(splinePathId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,6 +128,8 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxSplinePath, ""))
             {
+                path->VisualMode(id);
+                prepare = true;
                 this->setModal(true);
                 this->show();
             }
@@ -136,10 +144,26 @@ void DialogCutSplinePath::SaveData()
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
     splinePathId = getCurrentObjectId(ui->comboBoxSplinePath);
+
+    path->setPoint1Id(splinePathId);
+    path->setLength(formula);
+    path->RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::ShowVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
+        scene->addItem(path);
+        path->RefreshGeometry();
+    }
 }

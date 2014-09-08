@@ -30,6 +30,8 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogcutsplinepath.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoolcutsplinepath.h"
+#include "vabstractspline.h"
 
 #include "../../geometry/vsplinepath.h"
 
@@ -169,16 +171,16 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
                 splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
                                               spl1.GetAngle1()));
                 VSplinePoint cutPoint;
-                if (typeCreation == Source::FromGui)
-                {
-                    cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl1.GetAngle2()+180,
-                                            spl1.GetAngle2());
-                }
-                else
-                {
+//                if (typeCreation == Source::FromGui)
+//                {
+//                    cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(),
+//                                            spl1.GetAngle2());
+//                }
+//                else
+//                {
                     cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(),
                                             spl1.GetAngle2()+180);
-                }
+//                }
                 splPath1->append(cutPoint);
                 continue;
             }
@@ -245,33 +247,38 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::ShowVisualization(bool show)
 {
-//    if (show)
-//    {
-//        if (vis == nullptr)
-//        {
-//            VisTool * visual = new VisTool(getData());
-//            VMainGraphicsScene *scene = qApp->getCurrentScene();
-//            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-//            scene->addItem(visual);
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolCutSplinePath *visual = new VisToolCutSplinePath(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
 
-//            // add options
-//            visual->RefreshGeometry();
-//            vis = visual;
-//        }
-//        else
-//        {
-//            VisTool * visual = qobject_cast<VisTool *>(vis);
-//            if (visual != nullptr)
-//            {
-//                visual->show();
-//            }
-//        }
-//    }
-//    else
-//    {
-//        delete vis;
-//        vis = nullptr;
-//    }
+            visual->setPoint1Id(curveCutId);
+            visual->setLength(formula);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
+    {
+        parentCurve->ShowFoot(show);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,6 +288,14 @@ void VToolCutSplinePath::ShowVisualization(bool show)
 void VToolCutSplinePath::FullUpdateFromFile()
 {
     FullUpdateCurveFromFile(AttrSplinePath);
+
+    if (vis != nullptr)
+    {
+        VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(formula);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

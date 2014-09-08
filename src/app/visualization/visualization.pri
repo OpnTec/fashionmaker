@@ -20,7 +20,8 @@ HEADERS += \
     visualization/vistoolcutarc.h \
     visualization/vistoolspline.h \
     visualization/vistoolcutspline.h \
-    visualization/vistoolsplinepath.h
+    visualization/vistoolsplinepath.h \
+    visualization/vistoolcutsplinepath.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
@@ -44,4 +45,5 @@ SOURCES += \
     visualization/vistoolcutarc.cpp \
     visualization/vistoolspline.cpp \
     visualization/vistoolcutspline.cpp \
-    visualization/vistoolsplinepath.cpp
+    visualization/vistoolsplinepath.cpp \
+    visualization/vistoolcutsplinepath.cpp

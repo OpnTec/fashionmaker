@@ -535,9 +535,10 @@ void MainWindow::ToolSplinePath(bool checked)
  */
 void MainWindow::ToolCutSplinePath(bool checked)
 {
-    SetToolButton<DialogCutSplinePath>(checked, Tool::CutSplinePath,
-                                       ":/cursor/splinepath_cut_point_cursor.png", tr("Select curve path"),
-                                       &MainWindow::ClosedDialog<VToolCutSplinePath>);
+    SetToolButtonWithApply<DialogCutSplinePath>(checked, Tool::CutSplinePath,
+                                                ":/cursor/splinepath_cut_point_cursor.png", tr("Select curve path"),
+                                                &MainWindow::ClosedDialogWithApply<VToolCutSplinePath>,
+                                                &MainWindow::ApplyDialog<VToolCutSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -2452,7 +2452,10 @@ void VPattern::PrepareForParse(const Document &parse)
     else if (parse == Document::LiteParse)
     {
         data->ClearUniqueNames();
-        data->ClearVariables();
+        data->ClearVariables(VarType::ArcLength);
+        data->ClearVariables(VarType::LineAngle);
+        data->ClearVariables(VarType::LineLength);
+        data->ClearVariables(VarType::SplineLength);
     }
 }
 
