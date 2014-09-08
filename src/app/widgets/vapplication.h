@@ -95,6 +95,9 @@ public:
 
     void               setCurrentDocument(VPattern *doc);
     VPattern           *getCurrentDocument()const;
+
+    static void        setOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
+    static void        restoreOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -213,7 +216,7 @@ inline void VApplication::setCurrentDocument(VPattern *doc)
 inline VPattern *VApplication::getCurrentDocument() const
 {
     SCASSERT(doc != nullptr)
-    return doc;
+            return doc;
 }
 
 #endif // VAPPLICATION_H

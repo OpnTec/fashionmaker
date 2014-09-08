@@ -33,6 +33,8 @@
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 
+#include "../widgets/vapplication.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGraphicsSimpleTextItem default constructor.
@@ -105,10 +107,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     this->setBrush(Qt::green);
 
-#ifndef QT_NO_CURSOR
-    QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-openhand.png"));
-    QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
-#endif
+    VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
@@ -123,9 +122,7 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     this->setBrush(Qt::black);
 
     //Disable cursor-arrow-openhand
-#ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
-#endif
+    VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -144,10 +141,7 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-    #ifndef QT_NO_CURSOR
-        QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-closehand.png"));
-        QApplication::setOverrideCursor(QCursor(pixmap, 1, 1));
-    #endif
+        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
     }
     QGraphicsSimpleTextItem::mousePressEvent(event);
 }
@@ -158,9 +152,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
-    #ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
-    #endif
+        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
     }
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }
