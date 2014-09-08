@@ -37,6 +37,7 @@
 quint32 VContainer::_id = NULL_ID;
 qreal VContainer::_size = 50;
 qreal VContainer::_height = 176;
+QSet<const QString> VContainer::uniqueNames = QSet<const QString>();
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -138,6 +139,7 @@ quint32 VContainer::AddGObject(VGObject *obj)
 {
     SCASSERT(obj != nullptr);
     QSharedPointer<VGObject> pointer(obj);
+    uniqueNames.insert(obj->name());
     return AddObject(d->gObjects, pointer);
 }
 
@@ -210,6 +212,7 @@ void VContainer::Clear()
     d->details.clear();
     ClearVariables();
     ClearGObjects();
+    ClearUniqueNames();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,6 +337,7 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
     SCASSERT(obj != nullptr);
     QSharedPointer<VGObject> pointer(obj);
     UpdateObject(d->gObjects, id, pointer);
+    uniqueNames.insert(obj->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -408,6 +412,12 @@ const QMap<QString, QSharedPointer<VLineAngle> > VContainer::DataAngleLines() co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VContainer::IsUnique(const QString &name)
+{
+    return !uniqueNames.contains(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VariableExist check if exist variable this same name.
  * @param name name of row
@@ -440,6 +450,12 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
 void VContainer::ClearDetails()
 {
     d->details.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearUniqueNames()
+{
+    uniqueNames.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

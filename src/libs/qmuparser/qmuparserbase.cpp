@@ -65,7 +65,7 @@ QmuParserBase::QmuParserBase()
     :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
       m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
       m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>())
+      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
 {
     InitTokenReader();
 }
@@ -80,7 +80,7 @@ QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
     :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
       m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
       m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>())
+      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
     Assign(a_Parser);
@@ -217,6 +217,12 @@ void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
     Q_UNUSED(pExpr);
     Q_UNUSED(nStart);
     Q_UNUSED(nEnd);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setAllowSubexpressions(bool value)
+{
+    allowSubexpressions = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1320,6 +1326,10 @@ void QmuParserBase::CreateRPN() const
                 break;
             case cmARG_SEP:
                 if (stArgCount.empty())
+                {
+                    Error(ecUNEXPECTED_ARG_SEP, m_pTokenReader->GetPos());
+                }
+                if (stOpt.empty() && allowSubexpressions == false)
                 {
                     Error(ecUNEXPECTED_ARG_SEP, m_pTokenReader->GetPos());
                 }

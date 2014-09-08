@@ -83,6 +83,12 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ShowVisualization(bool show)
+{
+    Q_UNUSED(show); //don't have any visualization for base point yet
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */
@@ -90,17 +96,11 @@ void VToolSinglePoint::AddToFile()
 {
     Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
 
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     QDomElement sPoint = doc->createElement(TagName);
 
     // Create SPoint tag
-    doc->SetAttribute(sPoint, VDomDocument::AttrId, id);
-    doc->SetAttribute(sPoint, AttrType, ToolType);
-    doc->SetAttribute(sPoint, AttrName, point->name());
-    doc->SetAttribute(sPoint, AttrX, qApp->fromPixel(point->x()));
-    doc->SetAttribute(sPoint, AttrY, qApp->fromPixel(point->y()));
-    doc->SetAttribute(sPoint, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(sPoint, AttrMy, qApp->fromPixel(point->my()));
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOptions(sPoint, obj);
 
     //Create pattern piece structure
     QDomElement patternPiece = doc->createElement(VPattern::TagDraw);
@@ -117,24 +117,6 @@ void VToolSinglePoint::AddToFile()
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addPP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolSinglePoint::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(point->x())));
-        doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(point->y())));
-        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(point->mx())));
-        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(point->my())));
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,7 +222,7 @@ void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
     #ifndef QT_NO_CURSOR
         QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-closehand.png"));
@@ -253,7 +235,7 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
     #ifndef QT_NO_CURSOR
@@ -272,6 +254,21 @@ void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
     lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrX, qApp->fromPixel(point->x()));
+    doc->SetAttribute(tag, AttrY, qApp->fromPixel(point->y()));
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

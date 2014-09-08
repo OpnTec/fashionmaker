@@ -37,6 +37,7 @@
 
 #include <QCoreApplication>
 #include <QHash>
+#include <QSet>
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -186,6 +187,7 @@ public:
             }
         }
         d->variables[name] = QSharedPointer<T>(var);
+        uniqueNames.insert(name);
     }
 
     void               UpdateGObject(quint32 id, VGObject* obj);
@@ -196,6 +198,7 @@ public:
     void               ClearCalculationGObjects();
     void               ClearVariables(const VarType &type = VarType::Unknown);
     void               ClearDetails();
+    static void        ClearUniqueNames();
 
     void               SetSize(qreal size);
     void               SetSizeName(const QString &name);
@@ -221,6 +224,7 @@ public:
     const QMap<QString, QSharedPointer<VArcLength> >    DataLengthArcs() const;
     const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
 
+    static bool        IsUnique(const QString &name);
 
 private:
     /**
@@ -229,6 +233,7 @@ private:
     static quint32 _id;
     static qreal   _size;
     static qreal   _height;
+    static QSet<const QString> uniqueNames;
 
     QSharedDataPointer<VContainerData> d;
 

@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogcutarc.h"
 #include "../../geometry/vpointf.h"
 #include "../../geometry/varc.h"
+#include "../../visualization/vistoolcutarc.h"
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 const QString VToolCutArc::AttrArc  = QStringLiteral("arc");
@@ -163,7 +164,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         }
     }
 
-    VDrawTool::AddRecord(id, Tool::CutArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
         VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, typeCreation);
@@ -181,12 +182,53 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolCutArc * visual = new VisToolCutArc(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(curveCutId);
+            visual->setLength(formula);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
 void VToolCutArc::FullUpdateFromFile()
 {
     FullUpdateCurveFromFile(AttrArc);
+
+    if (vis != nullptr)
+    {
+        VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(formula);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -217,45 +259,6 @@ void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCutArc>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolCutArc::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrLength, formula);
-    doc->SetAttribute(domElement, AttrArc, curveCutId);
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolCutArc::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrLength, formula);
-        doc->SetAttribute(domElement, AttrArc, curveCutId);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,4 +298,20 @@ void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurve
         path.translate(-arc->GetP2().x(), -arc->GetP2().y());
     }
     curve->setPath(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrLength, formula);
+    doc->SetAttribute(tag, AttrArc, curveCutId);
 }

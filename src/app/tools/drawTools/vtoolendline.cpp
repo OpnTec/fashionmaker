@@ -32,6 +32,7 @@
 #include "../../dialogs/tools/dialogendline.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../geometry/vpointf.h"
+#include "./../visualization/vistoolendline.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 
@@ -154,7 +155,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::EndLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::EndLine, doc);
     if (parse == Document::FullParse)
     {
         VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formulaLength, formulaAngle, basePointId,
@@ -185,6 +186,16 @@ void VToolEndLine::FullUpdateFromFile()
         formulaAngle = domElement.attribute(AttrAngle, "");
     }
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+        visual->setPoint1Id(basePointId);
+        visual->setLength(formulaLength);
+        visual->setAngle(formulaAngle);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,49 +220,6 @@ void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolEndLine::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formulaLength);
-    doc->SetAttribute(domElement, AttrAngle, formulaAngle);
-    doc->SetAttribute(domElement, AttrBasePoint, basePointId);
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolEndLine::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formulaLength);
-        doc->SetAttribute(domElement, AttrAngle, formulaAngle);
-        doc->SetAttribute(domElement, AttrBasePoint, basePointId);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolEndLine::SaveDialog(QDomElement &domElement)
@@ -264,4 +232,79 @@ void VToolEndLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->getAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLength, formulaLength);
+    doc->SetAttribute(tag, AttrAngle, formulaAngle);
+    doc->SetAttribute(tag, AttrBasePoint, basePointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolEndLine::getFormulaAngle() const
+{
+    VFormula fAngle(formulaAngle, getData());
+    fAngle.setCheckZero(false);
+    fAngle.setToolId(id);
+    fAngle.setPostfix(QStringLiteral("°"));
+    return fAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::setFormulaAngle(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        formulaAngle = value.getFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolEndLine * visual = new VisToolEndLine(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(basePointId);
+            visual->setLength(formulaLength);
+            visual->setAngle(formulaAngle);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
 }

@@ -50,16 +50,22 @@ public:
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Normal)};
+
+    quint32 getSecondPointId() const;
+    void    setSecondPointId(const quint32 &value);
+
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   RemoveReferens();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;

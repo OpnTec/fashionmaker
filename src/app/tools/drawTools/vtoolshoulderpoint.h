@@ -51,16 +51,25 @@ public:
                                       const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
                                       VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::ShoulderPoint) };
+
+    quint32 getP2Line() const;
+    void    setP2Line(const quint32 &value);
+
+    quint32 getPShoulder() const;
+    void    setPShoulder(const quint32 &value);
+
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   RemoveReferens();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     /** @brief p2Line id second line point. */
     quint32         p2Line;

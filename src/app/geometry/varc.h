@@ -35,6 +35,7 @@
 
 class QPainterPath;
 class VArcData;
+class VFormula;
 
 /**
  * @brief VArc class for anticlockwise arc.
@@ -52,13 +53,21 @@ public:
     virtual ~VArc();
 
     QString            GetFormulaF1 () const;
+    void               SetFormulaF1 (const VFormula &value);
     qreal              GetF1 () const;
+
     QString            GetFormulaF2 () const;
+    void               SetFormulaF2 (const VFormula &value);
     qreal              GetF2 () const;
-    qreal              GetLength () const;
+
     QString            GetFormulaRadius () const;
+    void               SetFormulaRadius (const VFormula &value);
     qreal              GetRadius () const;
+
     VPointF            GetCenter () const;
+    void               SetCenter (const VPointF &value);
+
+    qreal              GetLength () const;
     QPointF            GetP1() const;
     QPointF            GetP2 () const;
     qreal              AngleArc() const;

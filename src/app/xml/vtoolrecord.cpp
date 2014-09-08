@@ -33,7 +33,7 @@
  * @brief VToolRecord default constructor.
  */
 VToolRecord::VToolRecord()
-    :id(NULL_ID), typeTool(Tool::ArrowTool), nameDraw(QString())
+    :id(NULL_ID), typeTool(Tool::Arrow), nameDraw(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

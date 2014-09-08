@@ -89,9 +89,6 @@ private:
     /** @brief number number of handled objects */
     qint32         number;
 
-    /** @brief pointName name of point */
-    QString        pointName;
-
     /** @brief radius radius of arc */
     QString        radius;
 

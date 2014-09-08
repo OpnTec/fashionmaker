@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogalongline.h"
 #include "../../geometry/vpointf.h"
 #include "exception/vexceptionobjecterror.h"
+#include "../../visualization/vistoolalongline.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 
@@ -79,6 +80,16 @@ void VToolAlongLine::FullUpdateFromFile()
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolAlongLine * visual = qobject_cast<VisToolAlongLine *>(vis);
+        visual->setPoint1Id(basePointId);
+        visual->setPoint2Id(secondPointId);
+        visual->setLength(formulaLength);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,49 +126,6 @@ void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolAlongLine::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrLength, formulaLength);
-    doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
-    doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolAlongLine::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrLength, formulaLength);
-        doc->SetAttribute(domElement, AttrFirstPoint, basePointId);
-        doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolAlongLine::RemoveReferens()
@@ -180,6 +148,77 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrFirstPoint, dialogTool->getFirstPointId());
     doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->getSecondPointId());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLength, formulaLength);
+    doc->SetAttribute(tag, AttrFirstPoint, basePointId);
+    doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolAlongLine::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::setSecondPointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        secondPointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolAlongLine *visual = new VisToolAlongLine(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(basePointId);
+            visual->setPoint2Id(secondPointId);
+            visual->setLength(formulaLength);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolAlongLine * visual = qobject_cast<VisToolAlongLine *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,7 +311,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::AlongLineTool, doc);
+    VDrawTool::AddRecord(id, Tool::AlongLine, doc);
     if (parse == Document::FullParse)
     {
         VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,

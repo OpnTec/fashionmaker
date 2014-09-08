@@ -45,6 +45,9 @@ public:
                  qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+
+    virtual int     type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::SimpleSplinePath)};
 signals:
     /**
      * @brief Choosed send id when clicked.

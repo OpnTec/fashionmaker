@@ -28,6 +28,7 @@
 
 #include "vtoolcut.h"
 #include "../../geometry/vpointf.h"
+#include "../../container/vformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
@@ -81,6 +82,45 @@ void VToolCut::HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirecti
     if (simpleCurve)
     {
         RefreshCurve(simpleCurve, id, curvePosition, direction);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolCut::getCurveCutId() const
+{
+    return curveCutId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::setCurveCutId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        curveCutId = value;
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolCut::getFormula() const
+{
+    VFormula val(formula, getData());
+    val.setCheckZero(true);
+    val.setToolId(id);
+    val.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::setFormula(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        formula = value.getFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
     }
 }
 

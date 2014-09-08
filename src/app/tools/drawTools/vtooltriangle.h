@@ -51,15 +51,30 @@ public:
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Triangle)};
+
+    quint32 getAxisP1Id() const;
+    void    setAxisP1Id(const quint32 &value);
+
+    quint32 getAxisP2Id() const;
+    void    setAxisP2Id(const quint32 &value);
+
+    quint32 getFirstPointId() const;
+    void    setFirstPointId(const quint32 &value);
+
+    quint32 getSecondPointId() const;
+    void    setSecondPointId(const quint32 &value);
+
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   RemoveReferens();
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */

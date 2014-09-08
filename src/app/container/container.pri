@@ -9,7 +9,8 @@ SOURCES += \
     container/varclength.cpp \
     container/vcurvelength.cpp \
     container/vlinelength.cpp \
-    container/vsplinelength.cpp
+    container/vsplinelength.cpp \
+    container/vformula.cpp
  
 HEADERS += \
     container/vcontainer.h \
@@ -30,4 +31,5 @@ HEADERS += \
     container/vcurvelength_p.h \
     container/vlineangle_p.h \
     container/vlinelength_p.h \
-    container/vmeasurement_p.h
+    container/vmeasurement_p.h \
+    container/vformula.h

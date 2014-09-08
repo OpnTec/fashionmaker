@@ -29,6 +29,7 @@
 #include "vtoolheight.h"
 #include "../../dialogs/tools/dialogheight.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoolheight.h"
 
 const QString VToolHeight::ToolType = QStringLiteral("height");
 
@@ -202,6 +203,15 @@ void VToolHeight::FullUpdateFromFile()
     }
     RefreshGeometry();
 
+    if (vis != nullptr)
+    {
+        VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+        visual->setPoint1Id(basePointId);
+        visual->setLineP1Id(p1LineId);
+        visual->setLineP2Id(p2LineId);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,50 +236,6 @@ void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolHeight::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-    doc->SetAttribute(domElement, AttrBasePoint, basePointId);
-    doc->SetAttribute(domElement, AttrP1Line, p1LineId);
-    doc->SetAttribute(domElement, AttrP2Line, p2LineId);
-
-    AddToCalculation(domElement);
-
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolHeight::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-        doc->SetAttribute(domElement, AttrBasePoint, basePointId);
-        doc->SetAttribute(domElement, AttrP1Line, p1LineId);
-        doc->SetAttribute(domElement, AttrP2Line, p2LineId);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolHeight::SaveDialog(QDomElement &domElement)
@@ -283,3 +249,93 @@ void VToolHeight::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1LineId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2LineId()));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrBasePoint, basePointId);
+    doc->SetAttribute(tag, AttrP1Line, p1LineId);
+    doc->SetAttribute(tag, AttrP2Line, p2LineId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolHeight::getP2LineId() const
+{
+    return p2LineId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::setP2LineId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2LineId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolHeight * visual = new VisToolHeight(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(basePointId);
+            visual->setLineP1Id(p1LineId);
+            visual->setLineP2Id(p2LineId);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolHeight::getP1LineId() const
+{
+    return p1LineId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::setP1LineId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p1LineId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+

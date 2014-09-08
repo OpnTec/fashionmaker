@@ -73,6 +73,26 @@ void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolPoint::name() const
+{
+    return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::setName(const QString &name)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    obj->setName(name);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolPoint::getTagName() const
+{
+    return VToolPoint::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.

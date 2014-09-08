@@ -31,6 +31,7 @@
 
 #include <QGraphicsSimpleTextItem>
 #include <QObject>
+#include "../options.h"
 
 /**
  * @brief The VGraphicsSimpleTextItem class pointer label.
@@ -44,6 +45,8 @@ public:
 
     qint32       FontSize()const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 signals:
     /**
      * @brief NameChangePosition emit when label change position.

@@ -31,6 +31,8 @@
 
 #include "vtoolpoint.h"
 
+class VFormula;
+
 /**
  * @brief The VToolPointOfContact class tool for creation point intersection line and arc.
  */
@@ -51,28 +53,43 @@ public:
                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
                           VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::PointOfContact) };
+
+    VFormula getArcRadius() const;
+    void     setArcRadius(const VFormula &value);
+
+    quint32 getCenter() const;
+    void    setCenter(const quint32 &value);
+
+    quint32 getFirstPointId() const;
+    void    setFirstPointId(const quint32 &value);
+
+    quint32 getSecondPointId() const;
+    void    setSecondPointId(const quint32 &value);
+
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   SetFactor(qreal factor);
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   RemoveReferens();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     /** @brief radius string with formula radius arc. */
     QString        arcRadius;
 
     /** @brief center id center arc point. */
-    quint32         center;
+    quint32        center;
 
     /** @brief firstPointId id first line point. */
-    quint32         firstPointId;
+    quint32        firstPointId;
 
     /** @brief secondPointId id second line point. */
-    quint32         secondPointId;
+    quint32        secondPointId;
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

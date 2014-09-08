@@ -522,6 +522,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <property name="leftMargin">
+      <number>9</number>
+     </property>
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditF2">
        <property name="sizePolicy">

@@ -48,15 +48,21 @@ public:
                                VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Spline)};
+
+    VSpline getSpline()const;
+    void    setSpline(const VSpline &spl);
+
+    virtual void ShowVisualization(bool show);
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void AddToFile ();
-    virtual void RefreshDataInFile();
     virtual void RemoveReferens();
     virtual void SaveDialog(QDomElement &domElement);
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     void         RefreshGeometry ();
 };

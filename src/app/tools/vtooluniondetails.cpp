@@ -436,13 +436,26 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolUnionDetails::getTagName() const
+{
+    return VToolUnionDetails::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::ShowVisualization(bool show)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool from GUI.
  * @param dialog dialog.
  * @param doc dom document container.
  * @param data container with variables.
  */
-void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
+                                             VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogUnionDetails *dialogTool = qobject_cast<DialogUnionDetails*>(dialog);
@@ -452,9 +465,11 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
     quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
     qApp->getUndoStack()->beginMacro("union details");
-    Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data, Document::FullParse,
-           Source::FromGui);
+    VToolUnionDetails* tool = nullptr;
+    tool = Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene, doc, data,
+                  Document::FullParse, Source::FromGui);
     qApp->getUndoStack()->endMacro();
+    return tool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -473,10 +488,10 @@ void VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsScene *scene, VP
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2, const quint32 &d1id,
-                               const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
-                               VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                               const Document &parse, const Source &typeCreation)
+VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2,
+                                             const quint32 &d1id, const quint32 &d2id, const quint32 &indexD1,
+                                             const quint32 &indexD2, VMainGraphicsScene *scene, VPattern *doc,
+                                             VContainer *data, const Document &parse, const Source &typeCreation)
 {
     VToolUnionDetails *unionDetails = 0;
     quint32 id = _id;
@@ -609,6 +624,7 @@ void VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDeta
             }
         } while (i<d1.RemoveEdge(indexD1).CountNode());
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -738,6 +754,12 @@ void VToolUnionDetails::RefreshDataInFile()
         domNode = UpdateDetail(domNode, d1);
         UpdateDetail(domNode, d2);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

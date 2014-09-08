@@ -31,7 +31,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0),
+      checkZero(false), postfix(QStringLiteral("")), restoreCursor(false)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -51,7 +52,14 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
 
     //Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
+    if (QApplication::overrideCursor() != nullptr)
+    {
+        if (QApplication::overrideCursor()->shape() == Qt::WaitCursor)
+        {
+            restoreCursor = true;
+            QApplication::restoreOverrideCursor();
+        }
+    }
 #endif
 }
 
@@ -59,7 +67,10 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
 DialogEditWrongFormula::~DialogEditWrongFormula()
 {
 #ifndef QT_NO_CURSOR
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    if (restoreCursor)
+    {
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+    }
 #endif
     delete ui;
 }
@@ -91,8 +102,7 @@ void DialogEditWrongFormula::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    const QString postfix = QStringLiteral("");
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation, postfix);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation, postfix, checkZero);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +123,18 @@ void DialogEditWrongFormula::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::setCheckZero(bool value)
+{
+    checkZero = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::setPostfix(const QString &value)
+{
+    postfix = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

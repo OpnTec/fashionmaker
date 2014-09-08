@@ -50,14 +50,23 @@ public:
                                VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
+    virtual int    type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::Height)};
+
+    quint32 getP1LineId() const;
+    void    setP1LineId(const quint32 &value);
+
+    quint32 getP2LineId() const;
+    void    setP2LineId(const quint32 &value);
+
+    virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
     virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   AddToFile();
-    virtual void   RefreshDataInFile();
     virtual void   SaveDialog(QDomElement &domElement);
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;

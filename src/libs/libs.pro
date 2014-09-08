@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
 CONFIG   += ordered
-SUBDIRS = qmuparser
+SUBDIRS = qmuparser \
+    vpropertyexplorer

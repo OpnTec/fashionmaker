@@ -42,6 +42,8 @@ public:
     void         setPoint2Id(const quint32 &value);
     void         setPoint3Id(const quint32 &value);
     void         setLength(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
 private:
     Q_DISABLE_COPY(VisToolBisector)
     quint32              point2Id;

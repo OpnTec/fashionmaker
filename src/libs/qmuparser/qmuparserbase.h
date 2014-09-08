@@ -120,6 +120,8 @@ public:
     {
         AddCallback( a_strName, QmuParserCallback(a_pFun, a_bAllowOpt), m_FunDef, ValidNameChars() );
     }
+    void setAllowSubexpressions(bool value);
+
 protected:
     static const QStringList c_DefaultOprt;
     static std::locale s_locale;  ///< The locale used by the parser
@@ -234,6 +236,8 @@ private:
     mutable int m_nFinalResultIdx;
     mutable QMap<int, QString> m_Tokens;///< Keep all tokens that we can translate
     mutable QMap<int, QString> m_Numbers;///< Keep all numbers what exist in formula
+
+    bool allowSubexpressions;
 
     void               Assign(const QmuParserBase &a_Parser);
     void               InitTokenReader();

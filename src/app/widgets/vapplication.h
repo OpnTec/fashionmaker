@@ -38,6 +38,7 @@ class VApplication;// used in define
 class QUndoStack;
 class VMainGraphicsView;
 class VMainGraphicsScene;
+class VPattern;
 
 #if defined(qApp)
 #undef qApp
@@ -91,6 +92,9 @@ public:
     QSettings          *getSettings();
     VMainGraphicsScene *getCurrentScene() const;
     void               setCurrentScene(VMainGraphicsScene *value);
+
+    void               setCurrentDocument(VPattern *doc);
+    VPattern           *getCurrentDocument()const;
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -121,6 +125,8 @@ private:
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
     QSettings          *settings;
+
+    VPattern           *doc;
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();
@@ -195,6 +201,19 @@ inline QTimer *VApplication::getAutoSaveTimer() const
 inline void VApplication::setAutoSaveTimer(QTimer *value)
 {
     autoSaveTimer = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VApplication::setCurrentDocument(VPattern *doc)
+{
+    this->doc = doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPattern *VApplication::getCurrentDocument() const
+{
+    SCASSERT(doc != nullptr)
+    return doc;
 }
 
 #endif // VAPPLICATION_H

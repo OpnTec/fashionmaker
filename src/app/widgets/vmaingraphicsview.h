@@ -84,6 +84,7 @@ private:
 
     bool eventFilter(QObject* object, QEvent* event);
 private:
+    Q_DISABLE_COPY(GraphicsViewZoom)
     /** @brief _numScheduledScalings keep number scheduled scalings. */
     qint32   _numScheduledScalings;
 };
@@ -97,6 +98,8 @@ class VMainGraphicsView : public QGraphicsView
 public:
 
     explicit VMainGraphicsView(QWidget *parent = nullptr);
+    void setShowToolOptions(bool value);
+
 signals:
     /**
      * @brief NewFactor send new scale factor.
@@ -108,7 +111,8 @@ signals:
      *
      * Usefull when you need show dialog after working with tool visualization.
      */
-    void         MouseRelease();
+    void     MouseRelease();
+    void     itemClicked(QGraphicsItem *item);
 public slots:
     void     ZoomIn();
     void     ZoomOut();
@@ -118,7 +122,9 @@ protected:
     void     mousePressEvent(QMouseEvent *mousePress);
     void     mouseReleaseEvent(QMouseEvent *event);
 private:
+    Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;
+    bool     showToolOptions;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

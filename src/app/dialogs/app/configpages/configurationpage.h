@@ -46,17 +46,22 @@ public:
 public slots:
     void      LangChanged();
     void      UnitChanged();
+    void      LabelLangChanged();
 private:
     Q_DISABLE_COPY(ConfigurationPage)
     QCheckBox *autoSaveCheck;
     QSpinBox  *autoTime;
     QComboBox *langCombo;
+    QComboBox *labelCombo;
     QComboBox *unitCombo;
     QCheckBox *osOptionCheck;
     bool      langChanged;
     bool      unitChanged;
+    bool      labelLangChanged;
+
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
+    void      SetLabelComboBox(const QStringList &list);
 };
 
 #endif // CONFIGURATIONPAGE_H

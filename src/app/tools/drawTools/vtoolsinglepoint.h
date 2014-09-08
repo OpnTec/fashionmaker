@@ -43,6 +43,9 @@ public:
                       const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
     virtual void setDialog();
     static const QString ToolType;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
+    virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void ChangedActivDraw(const QString &newName);
@@ -56,7 +59,6 @@ signals:
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void AddToFile();
-    virtual void RefreshDataInFile();
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void decrementReferens();
     virtual void DeleteTool(bool ask = true);
@@ -65,10 +67,12 @@ protected:
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     QString namePP;
     QString mPath;
     void         setColorLabel(const Qt::GlobalColor & color);
+
 };
 
 #endif // VTOOLSINGLEPOINT_H

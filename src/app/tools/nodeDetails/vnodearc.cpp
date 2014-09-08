@@ -125,6 +125,12 @@ void VNodeArc::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VNodeArc::getTagName() const
+{
+    return VNodeArc::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
@@ -144,7 +150,7 @@ void VNodeArc::AddToFile()
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
-    if (idTool != 0)
+    if (idTool != NULL_ID)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
@@ -162,7 +168,7 @@ void VNodeArc::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, idNode);
-        if (idTool != 0)
+        if (idTool != NULL_ID)
         {
             doc->SetAttribute(domElement, AttrIdTool, idTool);
         }

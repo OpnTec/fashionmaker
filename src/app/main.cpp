@@ -80,21 +80,21 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtWarningMsg:
                 messageBox.setIcon(QMessageBox::Warning);
                 messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                messageBox.setStandardButtons(QMessageBox::Ok);
                 fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
                 break;
             case QtCriticalMsg:
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+                messageBox.setStandardButtons(QMessageBox::Ok);
                 fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
                 break;
             case QtFatalMsg:
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Cancel);
+                messageBox.setStandardButtons(QMessageBox::Ok);
                 fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
                 break;

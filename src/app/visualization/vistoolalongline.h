@@ -43,6 +43,8 @@ public:
     virtual void RefreshGeometry();
     void         setPoint2Id(const quint32 &value);
     void         setLength(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
     Q_DISABLE_COPY(VisToolAlongLine)
     quint32              point2Id;

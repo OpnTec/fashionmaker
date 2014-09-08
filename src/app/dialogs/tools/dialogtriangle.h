@@ -80,9 +80,6 @@ private:
     /** @brief number number of handled objects */
     qint32         number;
 
-    /** @brief pointName name of point */
-    QString        pointName;
-
     /** @brief axisP1Id id first point of axis */
     quint32         axisP1Id;
 

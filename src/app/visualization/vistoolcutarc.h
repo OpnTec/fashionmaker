@@ -40,6 +40,8 @@ public:
 
     virtual void RefreshGeometry();
     void         setLength(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
 protected:
     Q_DISABLE_COPY(VisToolCutArc)
     QGraphicsEllipseItem *point;

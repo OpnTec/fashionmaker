@@ -39,6 +39,7 @@ class QGraphicsScene;
 class QGraphicsView;
 class QGraphicsItem;
 class QRectF;
+class Visualization;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
@@ -48,7 +49,7 @@ class VAbstractTool: public VDataTool
     Q_OBJECT
 public:
     VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VAbstractTool(){}
+    virtual ~VAbstractTool();
     static void             NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
     static QPointF          LineIntersectRect(QRectF rec, QLineF line);
     static qint32           LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
@@ -100,6 +101,12 @@ public:
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
     static Qt::PenStyle     LineStyle(const QString &typeLine);
     const VContainer        *getData() const;
+
+    QString                 getLineType() const;
+    void                    setTypeLine(const QString &value);
+    QMap<QString, quint32>  PointsList() const;
+    virtual QString         getTagName() const =0;
+    virtual void            ShowVisualization(bool show) =0;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -135,6 +142,9 @@ protected:
 
     /** @brief typeLine line type. */
     QString                 typeLine;
+
+    Visualization           *vis;
+
     /**
      * @brief AddToFile add tag with informations about tool into file.
      */
@@ -149,6 +159,8 @@ protected:
     virtual void            RemoveReferens(){}
     virtual void            DeleteTool(bool ask = true);
     static int              ConfirmDeletion();
+    void                    SaveOption(QSharedPointer<VGObject> &obj);
+    virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)=0;
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

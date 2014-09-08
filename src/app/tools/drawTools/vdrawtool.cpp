@@ -150,6 +150,36 @@ void VDrawTool::SaveDialogChange()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief AddToFile add tag with informations about tool into file.
+ */
+void VDrawTool::AddToFile()
+{
+    QDomElement domElement = doc->createElement(getTagName());
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOptions(domElement, obj);
+    AddToCalculation(domElement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
+ */
+void VDrawTool::RefreshDataInFile()
+{
+    QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOptions(domElement, obj);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief DialogLinkDestroy removes dialog pointer
  */
 void VDrawTool::DialogLinkDestroy()
@@ -209,6 +239,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
             if (resultUndo == UndoButton::Fix)
             {
                 DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
+                dialog->setWindowTitle(tr("Edit wrong formula"));
                 dialog->setFormula(formula);
                 if (dialog->exec() == QDialog::Accepted)
                 {

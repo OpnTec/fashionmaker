@@ -36,6 +36,7 @@ class VDataTool;
 class VMainGraphicsScene;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
+enum class LabelType : char {NewPatternPiece, NewLabel};
 
 /*
    VAL_VERSION is (major << 16) + (minor << 8) + patch.
@@ -179,6 +180,8 @@ public:
 
     QString              GetVersion() const;
     void                 SetVersion();
+
+    QString              GenerateLabel(const LabelType &type)const;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -280,6 +283,7 @@ private:
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
     void           CheckTagExists(const QString &tag);
+    QString        GetLabelBase(unsigned int index)const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

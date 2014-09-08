@@ -216,7 +216,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
             doc->UpdateToolData(id, data);
         }
     }
-    VAbstractTool::AddRecord(id, Tool::DetailTool, doc);
+    VAbstractTool::AddRecord(id, Tool::Detail, doc);
     if (parse == Document::FullParse)
     {
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
@@ -371,6 +371,12 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.
@@ -473,6 +479,18 @@ void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDet
             break;
     }
     domElement.appendChild(nod);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolDetail::getTagName() const
+{
+    return VToolDetail::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::ShowVisualization(bool show)
+{
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

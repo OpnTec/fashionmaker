@@ -137,6 +137,12 @@ void VNodePoint::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VNodePoint::getTagName() const
+{
+    return VNodePoint::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
@@ -159,7 +165,7 @@ void VNodePoint::AddToFile()
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-    if (idTool != 0)
+    if (idTool != NULL_ID)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
@@ -180,7 +186,7 @@ void VNodePoint::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrIdObject, idNode);
         doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
         doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        if (idTool != 0)
+        if (idTool != NULL_ID)
         {
             doc->SetAttribute(domElement, AttrIdTool, idTool);
         }

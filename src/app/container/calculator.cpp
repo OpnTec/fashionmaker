@@ -55,14 +55,7 @@ Calculator::Calculator(const VContainer *data)
     :QmuParser(), vVarVal(nullptr), data(data)
 {
     InitCharacterSets();
-
-    // Add unary operators
-    DefinePostfixOprt(cm_Oprt, CmUnit);
-    DefinePostfixOprt(mm_Oprt, MmUnit);
-    DefinePostfixOprt(in_Oprt, InchUnit);
-
-    SetArgSep(',');
-    SetDecSep('.');
+    setAllowSubexpressions(false);//Only one expression per time
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,15 +78,12 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     :QmuParser(), vVarVal(nullptr), data(nullptr)
 {
     InitCharacterSets();
+    setAllowSubexpressions(false);//Only one expression per time
     SetVarFactory(AddVariable, this);
 
     // Add unary operators
     if (fromUser)
     {
-        DefinePostfixOprt(qApp->PostfixOperator(cm_Oprt), CmUnit);
-        DefinePostfixOprt(qApp->PostfixOperator(mm_Oprt), MmUnit);
-        DefinePostfixOprt(qApp->PostfixOperator(in_Oprt), InchUnit);
-
         bool osSeparatorValue = qApp->getSettings()->value("configuration/osSeparator", 1).toBool();
 
         if (osSeparatorValue)
@@ -111,16 +101,13 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     }
     else
     {
-        DefinePostfixOprt(cm_Oprt, CmUnit);
-        DefinePostfixOprt(mm_Oprt, MmUnit);
-        DefinePostfixOprt(in_Oprt, InchUnit);
 
         SetArgSep(',');
         SetDecSep('.');
     }
 
     SetExpr(formula);
-    //Need run for making tokens. Don't catch exception here, because because we want know if formula has error.
+    //Need run for making tokens. Don't catch exception here, because we want know if formula has error.
     Eval();
 }
 
@@ -152,15 +139,12 @@ qreal Calculator::EvalFormula(const QString &formula)
     }
 
     // Add variables
-    InitVariables(data, tokens);
-
-    result = Eval();
-
-    return result;
+    InitVariables(data, tokens, formula);
+    return Eval();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> &tokens)
+void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> &tokens, const QString &formula)
 {
     if (qApp->patternType() == MeasurementsType::Standard)
     {
@@ -169,9 +153,11 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
 
     const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
+    bool found = false;
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
+        found = false;
         if (vars->contains(i.value()))
         {
             QSharedPointer<VInternalVariable> var = vars->value(i.value());
@@ -182,6 +168,7 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
                 m->SetValue(data->size(), data->height());
             }
             DefineVar(i.value(), var->GetValue());
+            found = true;
         }
 
         if (qApp->patternType() == MeasurementsType::Standard)
@@ -190,13 +177,20 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
             {
                 vVarVal[0] = data->size();
                 DefineVar(data->SizeName(), &vVarVal[0]);
+                found = true;
             }
 
             if (i.value() == data->HeightName())
             {
                 vVarVal[1] = data->height();
                 DefineVar(data->HeightName(), &vVarVal[1]);
+                found = true;
             }
+        }
+
+        if (found == false)
+        {
+            throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN , i.value(), formula, i.key());
         }
         ++i;
     }
@@ -219,69 +213,6 @@ void Calculator::InitCharacterSets()
     // Defining identifier character sets
     DefineNameChars(QStringLiteral("0123456789_") + symbols);
     DefineOprtChars(symbols + QStringLiteral("+-*^/?<>=#!$%&|~'_"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal Calculator::CmUnit(qreal val)
-{
-    qreal unit = val;
-    switch (qApp->patternUnit())
-    {
-        case Unit::Mm:
-            unit = val * 10.0;
-            break;
-        case Unit::Cm:
-            break;
-        case Unit::Inch:
-            unit = val / 2.54;
-            break;
-        default:
-            break;
-    }
-
-    return unit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal Calculator::MmUnit(qreal val)
-{
-    qreal unit = val;
-    switch (qApp->patternUnit())
-    {
-        case Unit::Mm:
-            break;
-        case Unit::Cm:
-            unit = val / 10.0;
-            break;
-        case Unit::Inch:
-            unit = val / 25.4;
-            break;
-        default:
-            break;
-    }
-
-    return unit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal Calculator::InchUnit(qreal val)
-{
-    qreal unit = val;
-    switch (qApp->patternUnit())
-    {
-        case Unit::Mm:
-            unit = val * 25.4;
-            break;
-        case Unit::Cm:
-            unit = val * 2.54;
-            break;
-        case Unit::Inch:
-            break;
-        default:
-            break;
-    }
-
-    return unit;
 }
 
 //---------------------------------------------------------------------------

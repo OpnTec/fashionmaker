@@ -29,6 +29,7 @@
 #include "vtoollineintersect.h"
 #include "../../dialogs/tools/dialoglineintersect.h"
 #include "../../geometry/vpointf.h"
+#include "../../visualization/vistoollineintersect.h"
 
 const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
 
@@ -166,7 +167,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
                 doc->UpdateToolData(id, data);
             }
         }
-        VDrawTool::AddRecord(id, Tool::LineIntersectTool, doc);
+        VDrawTool::AddRecord(id, Tool::LineIntersect, doc);
         if (parse == Document::FullParse)
         {
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id, p2Line1Id, p1Line2Id,
@@ -201,6 +202,16 @@ void VToolLineIntersect::FullUpdateFromFile()
         p2Line2 = domElement.attribute(AttrP2Line2, "").toUInt();
     }
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+
+    if (vis != nullptr)
+    {
+        VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
+        visual->setPoint1Id(p1Line1);
+        visual->setLine1P2Id(p2Line1);
+        visual->setLine2P1Id(p1Line2);
+        visual->setLine2P2Id(p2Line2);
+        vis->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -236,49 +247,6 @@ void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolLineIntersect::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrP1Line1, p1Line1);
-    doc->SetAttribute(domElement, AttrP2Line1, p2Line1);
-    doc->SetAttribute(domElement, AttrP1Line2, p1Line2);
-    doc->SetAttribute(domElement, AttrP2Line2, p2Line2);
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolLineIntersect::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrP1Line1, p1Line1);
-        doc->SetAttribute(domElement, AttrP2Line1, p2Line1);
-        doc->SetAttribute(domElement, AttrP1Line2, p1Line2);
-        doc->SetAttribute(domElement, AttrP2Line2, p2Line2);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolLineIntersect::RemoveReferens()
@@ -304,3 +272,129 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogTool->getP1Line2()));
     doc->SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogTool->getP2Line2()));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrP1Line1, p1Line1);
+    doc->SetAttribute(tag, AttrP2Line1, p2Line1);
+    doc->SetAttribute(tag, AttrP1Line2, p1Line2);
+    doc->SetAttribute(tag, AttrP2Line2, p2Line2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP2Line2() const
+{
+    return p2Line2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP2Line2(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2Line2 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolLineIntersect * visual = new VisToolLineIntersect(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(p1Line1);
+            visual->setLine1P2Id(p2Line1);
+            visual->setLine2P1Id(p1Line2);
+            visual->setLine2P2Id(p2Line2);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP1Line2() const
+{
+    return p1Line2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP1Line2(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p1Line2 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP2Line1() const
+{
+    return p2Line1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP2Line1(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p2Line1 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLineIntersect::getP1Line1() const
+{
+    return p1Line1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::setP1Line1(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        p1Line1 = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+

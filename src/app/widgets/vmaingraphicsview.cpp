@@ -33,7 +33,9 @@
 #include <QApplication>
 #include <QScrollBar>
 #include "../tools/vabstracttool.h"
+#include "../visualization/vsimplecurve.h"
 
+#include <QGraphicsItem>
 #include <QMouseEvent>
 #include <qmath.h>
 
@@ -157,7 +159,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
  * @param parent parent object.
  */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
-    :QGraphicsView(parent), zoom(nullptr)
+    :QGraphicsView(parent), zoom(nullptr), showToolOptions(true)
 {
     zoom = new GraphicsViewZoom(this);
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -220,6 +222,24 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
             case Qt::ControlModifier:
                 QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
                 break;
+            case Qt::NoModifier:
+                if (showToolOptions)
+                {
+                    QList<QGraphicsItem *> list = items(mousePress->pos());
+                    if (list.size() == 0)
+                    {
+                        emit itemClicked(nullptr);
+                        break;
+                    }
+                    for (int i = 0; i < list.size(); ++i)
+                    {
+                        if (list.at(i)->type() <= VSimpleCurve::Type && list.at(i)->type() > QGraphicsItem::UserType)
+                        {
+                            emit itemClicked(list.at(i));
+                        }
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -241,3 +261,10 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
         emit MouseRelease();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::setShowToolOptions(bool value)
+{
+    showToolOptions = value;
+}
+

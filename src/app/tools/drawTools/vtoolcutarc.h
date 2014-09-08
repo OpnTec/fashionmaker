@@ -48,17 +48,19 @@ public:
                                 VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrArc;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::CutArc)};
+    virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
     virtual void CurveChoosed(quint32 id);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void AddToFile();
-    virtual void RefreshDataInFile();
     virtual void SaveDialog(QDomElement &domElement);
     virtual void RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                               PathDirection direction = PathDirection::Hide);
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolCutArc)
 };

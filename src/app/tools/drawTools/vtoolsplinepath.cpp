@@ -29,6 +29,7 @@
 #include "vtoolsplinepath.h"
 #include "../../dialogs/tools/dialogsplinepath.h"
 #include "../../undocommands/movesplinepath.h"
+#include "../../visualization/vistoolsplinepath.h"
 
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
@@ -73,6 +74,9 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
         connect(this, &VToolSplinePath::setEnabledPoint, controlPoint, &VControlPointSpline::setEnabledPoint);
         controlPoints.append(controlPoint);
     }
+
+    ShowFoot(false);
+
     if (typeCreation == Source::FromGui)
     {
         AddToFile();
@@ -104,7 +108,7 @@ void VToolSplinePath::setDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
+VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
@@ -114,7 +118,13 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
     {
         doc->IncrementReferens((*path)[i].P().id());
     }
-    Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolSplinePath* spl = nullptr;
+    spl = Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
+    if (spl != nullptr)
+    {
+        spl->dialog=dialogTool;
+    }
+    return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,7 +138,7 @@ void VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene, VPattern *doc,
+VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene, VPattern *doc,
                              VContainer *data, const Document &parse, const Source &typeCreation)
 {
     quint32 id = _id;
@@ -146,7 +156,7 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::SplinePathTool, doc);
+    VDrawTool::AddRecord(id, Tool::SplinePath, doc);
     if (parse == Document::FullParse)
     {
         VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
@@ -155,7 +165,9 @@ void VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphics
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSplinePath::Disable);
         doc->AddTool(id, spl);
+        return spl;
     }
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,6 +269,57 @@ void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSpli
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSplinePath VToolSplinePath::getSplinePath() const
+{
+    QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+    return *splPath.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::setSplinePath(const VSplinePath &splPath)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VSplinePath> splinePath = qSharedPointerDynamicCast<VSplinePath>(obj);
+    *splinePath.data() = splPath;
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolSplinePath *visual = new VisToolSplinePath(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+            visual->setPath(*splPath.data());
+            visual->setMode(Mode::Show);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+    ShowFoot(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
@@ -264,27 +327,6 @@ void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSpli
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSplinePath>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolSplinePath::AddToFile()
-{
-    VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrKCurve, splPath.getKCurve());
-
-    for (qint32 i = 0; i < splPath.CountPoint(); ++i)
-    {
-        AddPathPoint(domElement, splPath.at(i));
-    }
-
-    AddToCalculation(domElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,6 +395,23 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VSplinePath> splPath = qSharedPointerDynamicCast<VSplinePath>(obj);
+    SCASSERT(splPath.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrKCurve, splPath->getKCurve());
+
+    doc->RemoveAllChild(tag);
+    for (qint32 i = 0; i < splPath->CountPoint(); ++i)
+    {
+        AddPathPoint(tag, splPath->at(i));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
@@ -388,5 +447,14 @@ void VToolSplinePath::RefreshGeometry()
 
         controlPoints[j-2]->blockSignals(false);
         controlPoints[j-1]->blockSignals(false);
+    }
+
+    if (vis != nullptr)
+    {
+        VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
+        QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+        visual->setPath(*splPath.data());
+        visual->setMode(Mode::Show);
+        visual->RefreshGeometry();
     }
 }

@@ -63,7 +63,8 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), lineStyles(VAbstractTool::Styles()),
-      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId), prepare(false)
+      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId), prepare(false),
+      pointName(QString())
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -377,11 +378,13 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(labelEditFormula != nullptr);
+    SCASSERT(labelResultCalculation != nullptr);
     if (edit->text().isEmpty())
     {
         flag = false;
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
+        labelResultCalculation->setText(tr("Error"));
         return;
     }
     timer->start(1000);
@@ -392,11 +395,13 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
     SCASSERT(labelEditFormula != nullptr);
+    SCASSERT(labelResultCalculation != nullptr);
     if (edit->toPlainText().isEmpty())
     {
         flag = false;
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
+        labelResultCalculation->setText(tr("Error"));
         return;
     }
     timer->setSingleShot(true);
@@ -423,6 +428,8 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
     {
         flag = false;
         ChangeColor(labelEditFormula, Qt::red);
+        label->setText(tr("Error"));
+        label->setToolTip(tr("Empty field"));
     }
     else
     {
@@ -441,6 +448,8 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             {
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
+                label->setText(tr("Error"));
+                label->setToolTip(tr("Value can't be 0"));
             }
             else
             {
@@ -456,6 +465,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
                 label->setText(loc.toString(result) + postfix);
                 flag = true;
                 ChangeColor(labelEditFormula, okColor);
+                label->setToolTip(tr("Value"));
                 emit ToolTip("");
             }
         }
@@ -465,6 +475,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
             flag = false;
             ChangeColor(labelEditFormula, Qt::red);
             emit ToolTip("Parser error: "+e.GetMsg());
+            label->setToolTip("Parser error: "+e.GetMsg());
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"
@@ -653,7 +664,8 @@ void DialogTool::NamePointChanged()
     if (edit)
     {
         QString name = edit->text();
-        if (name.isEmpty() || name.contains(" "))
+        name.replace(" ", "");
+        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false))
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);

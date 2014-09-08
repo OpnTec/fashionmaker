@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vsimplesplinepath.h
+ **  @file   vistoolcutspline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   17 12, 2013
+ **  @date   6 9, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2014 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,30 +26,28 @@
  **
  *************************************************************************/
 
-#ifndef VSIMPLESPLINEPATH_H
-#define VSIMPLESPLINEPATH_H
+#ifndef VISTOOLCUTSPLINE_H
+#define VISTOOLCUTSPLINE_H
 
-#include <QGraphicsPathItem>
-#include "../tools/vabstracttool.h"
+#include "vispath.h"
 
-/**
- * @brief The VSimpleSplinePath class for simple spline path. This object used when we cut spline path and want show
- * peaces.
- */
-class VSimpleSplinePath : public VAbstractTool, public QGraphicsPathItem
+class VisToolCutSpline : public VisPath
 {
     Q_OBJECT
 public:
-    VSimpleSplinePath(VPattern *doc, VContainer *data, quint32 id, qreal *factor);
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    VisToolCutSpline(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolCutSpline();
+
+    virtual void RefreshGeometry();
+    void         setLength(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
 protected:
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-private:
-    Q_DISABLE_COPY(VSimpleSplinePath)
-    /** @brief factor scale factor. */
-    qreal *factor;
+    Q_DISABLE_COPY(VisToolCutSpline)
+    QGraphicsEllipseItem *point;
+    QGraphicsPathItem    *spl1;
+    QGraphicsPathItem    *spl2;
+    qreal                length;
 };
 
-#endif // VSIMPLESPLINEPATH_H
+#endif // VISTOOLCUTSPLINE_H

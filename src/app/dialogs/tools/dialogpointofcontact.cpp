@@ -32,6 +32,7 @@
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolpointofcontact.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -40,18 +41,18 @@
  * @param parent parent widget
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), number(0), pointName(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), number(0),
       radius(QString()), center(NULL_ID), firstPoint(NULL_ID), secondPoint(NULL_ID), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);

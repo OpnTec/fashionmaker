@@ -53,6 +53,8 @@ public:
 
     QString      getFormula() const;
     void         setFormula(const QString &value);
+    void         setCheckZero(bool value);
+    void         setPostfix(const QString &value);
 public slots:
     virtual void DialogAccepted();
     virtual void DialogRejected();
@@ -72,6 +74,10 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
+
+    bool checkZero;
+    QString postfix;
+    bool restoreCursor;
 };
 
 

@@ -53,6 +53,12 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::getTagName() const
+{
+    return VAbstractSpline::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
@@ -210,4 +216,13 @@ QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
     path.addPath(curve->GetPath(direction));
     path.setFillRule( Qt::WindingFill );
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::ShowFoot(bool show)
+{
+    for (int i = 0; i < controlPoints.size(); ++i)
+    {
+        controlPoints.at(i)->setVisible(show);
+    }
 }

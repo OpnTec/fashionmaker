@@ -43,8 +43,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent)
-    : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), unitCombo(nullptr),
-    osOptionCheck(nullptr), langChanged(false), unitChanged(false)
+    : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), labelCombo(nullptr),
+      unitCombo(nullptr), osOptionCheck(nullptr), langChanged(false), unitChanged(false), labelLangChanged(false)
 {
     QGroupBox *saveGroup = SaveGroup();
     QGroupBox *langGroup = LangGroup();
@@ -93,6 +93,12 @@ void ConfigurationPage::Apply()
         QString text = QString(tr("Default unit updated and will be used the next pattern creation"));
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
+    if (labelLangChanged)
+    {
+        QString locale = qvariant_cast<QString>(labelCombo->itemData(labelCombo->currentIndex()));
+        qApp->getSettings()->setValue("configuration/label_language", locale);
+        labelLangChanged = false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,6 +111,12 @@ void ConfigurationPage::LangChanged()
 void ConfigurationPage::UnitChanged()
 {
     this->unitChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigurationPage::LabelLangChanged()
+{
+    labelLangChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,13 +239,47 @@ QGroupBox *ConfigurationPage::LangGroup()
     UnitLayout->addWidget(unitLabel);
     UnitLayout->addWidget(this->unitCombo);
 
-    //----------------------- Unit setup
+    //----------------------- Label language
+
+    QLabel *labelName = new QLabel(tr("Label language"));
+    labelCombo = new QComboBox;
+
+    QString checkedLabelLocale = settings->value("configuration/label_language", defaultLocale).toString();
+
+    QStringList list{"de", "en" , "fr" , "ru" , "uk"};
+    SetLabelComboBox(list);
+
+    index = labelCombo->findData(checkedLabelLocale);
+    if (index != -1)
+    {
+        labelCombo->setCurrentIndex(index);
+    }
+    connect(labelCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &ConfigurationPage::LabelLangChanged);
+
+    QHBoxLayout *labelLangLayout = new QHBoxLayout;
+    labelLangLayout->addWidget(labelName);
+    labelLangLayout->addWidget(labelCombo);
+
+    //-----------------------
 
     QVBoxLayout *langLayout = new QVBoxLayout;
     langLayout->addLayout(guiLangLayout);
     langLayout->addLayout(separatorLayout);
     langLayout->addLayout(UnitLayout);
+    langLayout->addLayout(labelLangLayout);
     langGroup->setLayout(langLayout);
 
     return langGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigurationPage::SetLabelComboBox(const QStringList &list)
+{
+    for (int i = 0; i < list.size(); ++i)
+    {
+        QString lang = QLocale(list.at(i)).nativeLanguageName();
+        QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg(list.at(i)));
+        labelCombo->addItem(ico, lang, list.at(i));
+    }
 }

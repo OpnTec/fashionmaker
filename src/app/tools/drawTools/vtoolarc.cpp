@@ -29,8 +29,11 @@
 #include "vtoolarc.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogarc.h"
-#include <QKeyEvent>
 #include "../../geometry/varc.h"
+#include "../container/vformula.h"
+#include "../../visualization/vistoolarc.h"
+
+#include <QKeyEvent>
 
 const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
@@ -149,7 +152,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::ArcTool, doc);
+    VDrawTool::AddRecord(id, Tool::Arc, doc);
     if (parse == Document::FullParse)
     {
         VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
@@ -165,12 +168,144 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolArc::FullUpdateFromFile()
+QString VToolArc::getTagName() const
 {
-    RefreshGeometry();
+    return VToolArc::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolArc::getCenter() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    return arc->GetCenter().id();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setCenter(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+
+        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(value);
+        arc->SetCenter(*point.data());
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolArc::getFormulaRadius() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    VFormula radius(arc->GetFormulaRadius(), getData());
+    radius.setCheckZero(true);
+    radius.setToolId(id);
+    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setFormulaRadius(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaRadius(value);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolArc::getFormulaF1() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    VFormula f1(arc->GetFormulaF1(), getData());
+    f1.setCheckZero(false);
+    f1.setToolId(id);
+    f1.setPostfix(QStringLiteral("°"));
+    return f1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setFormulaF1(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaF1(value);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolArc::getFormulaF2() const
+{
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    SCASSERT(arc.isNull() == false);
+
+    VFormula f2(arc->GetFormulaF2(), getData());
+    f2.setCheckZero(false);
+    f2.setToolId(id);
+    f2.setPostfix(QStringLiteral("°"));
+    return f2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::setFormulaF2(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaF2(value);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolArc::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolArc * visual = new VisToolArc(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+
+            visual->setPoint1Id(arc->GetCenter().id());
+            visual->setRadius(arc->GetFormulaRadius());
+            visual->setF1(arc->GetFormulaF1());
+            visual->setF2(arc->GetFormulaF2());
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,42 +316,6 @@ void VToolArc::FullUpdateFromFile()
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogArc>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolArc::AddToFile()
-{
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-    doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-    doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-    doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolArc::RefreshDataInFile()
-{
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrCenter, arc->GetCenter().id());
-        doc->SetAttribute(domElement, AttrRadius, arc->GetFormulaRadius());
-        doc->SetAttribute(domElement, AttrAngle1, arc->GetFormulaF1());
-        doc->SetAttribute(domElement, AttrAngle2, arc->GetFormulaF2());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,6 +344,20 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    SCASSERT(arc.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrCenter, arc->GetCenter().id());
+    doc->SetAttribute(tag, AttrRadius, arc->GetFormulaRadius());
+    doc->SetAttribute(tag, AttrAngle1, arc->GetFormulaF1());
+    doc->SetAttribute(tag, AttrAngle2, arc->GetFormulaF2());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
@@ -252,4 +365,16 @@ void VToolArc::RefreshGeometry()
 {
     this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
+
+    if (vis != nullptr)
+    {
+        const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+        VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
+
+        visual->setPoint1Id(arc->GetCenter().id());
+        visual->setRadius(arc->GetFormulaRadius());
+        visual->setF1(arc->GetFormulaF1());
+        visual->setF2(arc->GetFormulaF2());
+        visual->RefreshGeometry();
+    }
 }

@@ -30,6 +30,7 @@
 #include "../../geometry/vspline.h"
 #include "../../dialogs/tools/dialogspline.h"
 #include "../../undocommands/movespline.h"
+#include "../../visualization/vistoolspline.h"
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
@@ -70,6 +71,8 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Sour
     connect(this, &VToolSpline::RefreshLine, controlPoint2, &VControlPointSpline::RefreshLine);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
     controlPoints.append(controlPoint2);
+
+    ShowFoot(false);
 
     if (typeCreation == Source::FromGui)
     {
@@ -172,7 +175,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::SplineTool, doc);
+    VDrawTool::AddRecord(id, Tool::Spline, doc);
     if (parse == Document::FullParse)
     {
         VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
@@ -186,6 +189,62 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
         return spl;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSpline VToolSpline::getSpline() const
+{
+    QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+    return *spline.data();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::setSpline(const VSpline &spl)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    QSharedPointer<VSpline> spline = qSharedPointerDynamicCast<VSpline>(obj);
+    *spline.data() = spl;
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolSpline *visual = new VisToolSpline(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+            visual->setPoint1Id(spl->GetP1().id());
+            visual->setPoint4Id(spl->GetP4().id());
+            visual->setAngle1(spl->GetAngle1());
+            visual->setAngle2(spl->GetAngle2());
+            visual->setKAsm1(spl->GetKasm1());
+            visual->setKAsm2(spl->GetKasm2());
+            visual->setKCurve(spl->GetKcurve());
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+    ShowFoot(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -223,48 +282,6 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogSpline>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolSpline::AddToFile()
-{
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
-    doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
-    doc->SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
-    doc->SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
-    doc->SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-    doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-    doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolSpline::RefreshDataInFile()
-{
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrPoint1, spl->GetP1().id());
-        doc->SetAttribute(domElement, AttrPoint4, spl->GetP4().id());
-        doc->SetAttribute(domElement, AttrAngle1, spl->GetAngle1());
-        doc->SetAttribute(domElement, AttrAngle2, spl->GetAngle2());
-        doc->SetAttribute(domElement, AttrKAsm1, spl->GetKasm1());
-        doc->SetAttribute(domElement, AttrKAsm2, spl->GetKasm2());
-        doc->SetAttribute(domElement, AttrKCurve, spl->GetKcurve());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,6 +331,23 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VSpline> spl = qSharedPointerDynamicCast<VSpline>(obj);
+    SCASSERT(spl.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrPoint1, spl->GetP1().id());
+    doc->SetAttribute(tag, AttrPoint4, spl->GetP4().id());
+    doc->SetAttribute(tag, AttrAngle1, spl->GetAngle1());
+    doc->SetAttribute(tag, AttrAngle2, spl->GetAngle2());
+    doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
+    doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
+    doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
@@ -345,4 +379,17 @@ void VToolSpline::RefreshGeometry()
 
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
+
+    if (vis != nullptr)
+    {
+        VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
+        visual->setPoint1Id(spl->GetP1().id());
+        visual->setPoint4Id(spl->GetP4().id());
+        visual->setAngle1(spl->GetAngle1());
+        visual->setAngle2(spl->GetAngle2());
+        visual->setKAsm1(spl->GetKasm1());
+        visual->setKAsm2(spl->GetKasm2());
+        visual->setKCurve(spl->GetKcurve());
+        visual->RefreshGeometry();
+    }
 }

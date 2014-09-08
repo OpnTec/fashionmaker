@@ -30,6 +30,8 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogpointofcontact.h"
 #include "../../geometry/vpointf.h"
+#include "../../container/vformula.h"
+#include "../../visualization/vistoolpointofcontact.h"
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
 
@@ -227,6 +229,16 @@ void VToolPointOfContact::FullUpdateFromFile()
         secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
     }
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+
+    if (vis != nullptr)
+    {
+        VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+        visual->setPoint1Id(firstPointId);
+        visual->setLineP2Id(secondPointId);
+        visual->setRadiusId(center);
+        visual->setRadius(arcRadius);
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -262,49 +274,6 @@ void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief AddToFile add tag with informations about tool into file.
- */
-void VToolPointOfContact::AddToFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
-
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrType, ToolType);
-    doc->SetAttribute(domElement, AttrName, point->name());
-    doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-
-    doc->SetAttribute(domElement, AttrRadius, arcRadius);
-    doc->SetAttribute(domElement, AttrCenter, center);
-    doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
-    doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
-
-    AddToCalculation(domElement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshDataInFile refresh attributes in file. If attributes don't exist create them.
- */
-void VToolPointOfContact::RefreshDataInFile()
-{
-    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrName, point->name());
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(point->mx()));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(point->my()));
-        doc->SetAttribute(domElement, AttrRadius, arcRadius);
-        doc->SetAttribute(domElement, AttrCenter, center);
-        doc->SetAttribute(domElement, AttrFirstPoint, firstPointId);
-        doc->SetAttribute(domElement, AttrSecondPoint, secondPointId);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolPointOfContact::RemoveReferens()
@@ -328,4 +297,122 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrType, ToolType);
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+
+    doc->SetAttribute(tag, AttrRadius, arcRadius);
+    doc->SetAttribute(tag, AttrCenter, center);
+    doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
+    doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setSecondPointId(const quint32 &value)
+{
+    secondPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolPointOfContact * visual = new VisToolPointOfContact(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(firstPointId);
+            visual->setLineP2Id(secondPointId);
+            visual->setRadiusId(center);
+            visual->setRadius(arcRadius);
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setFirstPointId(const quint32 &value)
+{
+    firstPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::getCenter() const
+{
+    return center;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setCenter(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        center = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolPointOfContact::getArcRadius() const
+{
+    VFormula radius(arcRadius, this->getData());
+    radius.setCheckZero(true);
+    radius.setToolId(id);
+    radius.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::setArcRadius(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        arcRadius = value.getFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
 }

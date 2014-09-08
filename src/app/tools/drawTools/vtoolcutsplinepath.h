@@ -44,23 +44,26 @@ public:
                        const quint32 &splinePathId, const quint32 &splPath1id, const quint32 &splPath2id,
                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog();
-    static void  Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-    static void  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &splinePathId,
-                        const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document &parse, const Source &typeCreation);
+    static VToolCutSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolCutSplinePath *Create(const quint32 _id, const QString &pointName, QString &formula,
+                                      const quint32 &splinePathId, const qreal &mx, const qreal &my,
+                                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                      const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrSplinePath;
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
+    virtual void  ShowVisualization(bool show);
 public slots:
     virtual void  FullUpdateFromFile();
     virtual void  CurveChoosed(quint32 id);
     virtual void  ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void  AddToFile();
-    virtual void  RefreshDataInFile();
     virtual void  SaveDialog(QDomElement &domElement);
     virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                PathDirection direction = PathDirection::Hide);
+    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 };

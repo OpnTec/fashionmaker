@@ -128,6 +128,12 @@ void VNodeSpline::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VNodeSpline::getTagName() const
+{
+    return VNodeSpline::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
@@ -147,7 +153,7 @@ void VNodeSpline::AddToFile()
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttribute(domElement, AttrIdObject, idNode);
-    if (idTool != 0)
+    if (idTool != NULL_ID)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
     }
@@ -165,7 +171,7 @@ void VNodeSpline::RefreshDataInFile()
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));
-        if (idTool != 0)
+        if (idTool != NULL_ID)
         {
             doc->SetAttribute(domElement, AttrIdTool, idTool);
         }

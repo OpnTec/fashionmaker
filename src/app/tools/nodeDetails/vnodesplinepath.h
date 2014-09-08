@@ -48,6 +48,9 @@ public:
     static const QString ToolType;
     virtual void DeleteNode();
     virtual void RestoreNode();
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
+    virtual QString getTagName() const;
 public slots:
     virtual void FullUpdateFromFile();
 protected:

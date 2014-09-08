@@ -213,44 +213,44 @@ QString DialogHistory::Record(const VToolRecord &tool)
     {
         switch ( tool.getTypeTool() )
         {
-            case Tool::ArrowTool:
+            case Tool::Arrow:
                 Q_UNREACHABLE();
                 break;
-            case Tool::SinglePointTool:
+            case Tool::SinglePoint:
             {
                 return QString(tr("%1 - Base point")).arg(PointName(tool.getId()));
             }
-            case Tool::EndLineTool:
+            case Tool::EndLine:
             {
                 return QString(tr("%1_%2 - Line from point %1 to point %2"))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)))
                         .arg(PointName(tool.getId()));
             }
-            case Tool::LineTool:
+            case Tool::Line:
             {
                 return QString(tr("%1_%2 - Line from point %1 to point %2"))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
             }
-            case Tool::AlongLineTool:
+            case Tool::AlongLine:
             {
                 return QString(tr("%3 - Point along line %1_%2"))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             }
-            case Tool::ShoulderPointTool:
+            case Tool::ShoulderPoint:
             {
                 return QString(tr("%1 - Point of shoulder")).arg(PointName(tool.getId()));
             }
-            case Tool::NormalTool:
+            case Tool::Normal:
             {
                 return QString(tr("%3 - normal to line %1_%2"))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             }
-            case Tool::BisectorTool:
+            case Tool::Bisector:
             {
                 return QString(tr("%4 - bisector of angle %1_%2_%3"))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
@@ -258,7 +258,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrThirdPoint)))
                         .arg(PointName(tool.getId()));
             }
-            case Tool::LineIntersectTool:
+            case Tool::LineIntersect:
             {
                 return QString(tr("%5 - intersection of lines %1_%2 and %3_%4"))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line1)))
@@ -267,19 +267,19 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line2)))
                         .arg(PointName(tool.getId()));
             }
-            case Tool::SplineTool:
+            case Tool::Spline:
             {
                 const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.getId());
                 SCASSERT(spl != nullptr);
                 return QString(tr("Curve %1_%2")).arg(PointName(spl->GetP1().id())).arg(PointName(spl->GetP4().id()));
             }
-            case Tool::ArcTool:
+            case Tool::Arc:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
                 SCASSERT(arc != nullptr);
                 return QString(tr("Arc with center in point %1")).arg(PointName(arc->GetCenter().id()));
             }
-            case Tool::SplinePathTool:
+            case Tool::SplinePath:
             {
                 const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
                 SCASSERT(splPath != nullptr);
@@ -331,7 +331,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
                         .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
             }
-            case Tool::CutArcTool:
+            case Tool::CutArc:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, VToolCutArc::AttrArc));
                 SCASSERT(arc != nullptr);
@@ -339,7 +339,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(PointName(tool.getId()))
                         .arg(PointName(arc->GetCenter().id()));
             }
-            case Tool::CutSplineTool:
+            case Tool::CutSpline:
             {
                 const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
                 const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
@@ -349,7 +349,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(PointName(spl->GetP1().id()))
                         .arg(PointName(spl->GetP4().id()));
             }
-            case Tool::CutSplinePathTool:
+            case Tool::CutSplinePath:
             {
                 const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
                 const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(splinePathId);
@@ -375,7 +375,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
-            case Tool::DetailTool:
+            case Tool::Detail:
                 break;
             case Tool::UnionDetails:
                 break;

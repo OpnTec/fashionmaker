@@ -31,6 +31,7 @@
 #include <QKeyEvent>
 #include "../../geometry/vpointf.h"
 #include "../../dialogs/tools/dialogline.h"
+#include "../../visualization/vistoolline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 
@@ -147,7 +148,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::LineTool, doc);
+    VDrawTool::AddRecord(id, Tool::Line, doc);
     if (parse == Document::FullParse)
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);
@@ -177,12 +178,27 @@ void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::getTagName() const
+{
+    return VToolLine::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
 void VToolLine::FullUpdateFromFile()
 {
     RefreshGeometry();
+
+    if (vis != nullptr)
+    {
+        VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
+        visual->setPoint1Id(firstPoint);
+        visual->setPoint2Id(secondPoint);
+        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -254,11 +270,8 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(TagName);
-    doc->SetAttribute(domElement, VDomDocument::AttrId, id);
-    doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
-    doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
-    doc->SetAttribute(domElement, AttrTypeLine, typeLine);
-
+    QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
+    SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
 
@@ -271,9 +284,12 @@ void VToolLine::RefreshDataInFile()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrFirstPoint, firstPoint);
-        doc->SetAttribute(domElement, AttrSecondPoint, secondPoint);
-        doc->SetAttribute(domElement, AttrTypeLine, typeLine);
+        QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
+        SaveOptions(domElement, obj);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 
@@ -364,6 +380,87 @@ void VToolLine::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    Q_UNUSED(obj)
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+    doc->SetAttribute(tag, AttrFirstPoint, firstPoint);
+    doc->SetAttribute(tag, AttrSecondPoint, secondPoint);
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLine::getSecondPoint() const
+{
+    return secondPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::setSecondPoint(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        secondPoint = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::ShowVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            VisToolLine * visual = new VisToolLine(getData());
+            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+            scene->addItem(visual);
+
+            visual->setPoint1Id(firstPoint);
+            visual->setPoint2Id(secondPoint);
+            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->RefreshGeometry();
+            vis = visual;
+        }
+        else
+        {
+            VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
+            if (visual != nullptr)
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLine::getFirstPoint() const
+{
+    return firstPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::setFirstPoint(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        firstPoint = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -42,6 +42,8 @@ public:
     void         setLineP1Id(const quint32 &value);
     void         setLineP2Id(const quint32 &value);
     void         setLength(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
 private:
     Q_DISABLE_COPY(VisToolShoulderPoint)
     quint32              lineP1Id;

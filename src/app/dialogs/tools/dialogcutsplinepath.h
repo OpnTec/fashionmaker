@@ -36,6 +36,8 @@ namespace Ui
     class DialogCutSplinePath;
 }
 
+class VisToolCutSplinePath;
+
 /**
  * @brief The DialogCutSplinePath class dialog for ToolCutSplinePath.
  */
@@ -61,6 +63,7 @@ public slots:
      */
     void         DeployFormulaTextEdit();
 protected:
+    virtual void ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -71,9 +74,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogCutSplinePath *ui;
 
-    /** @brief pointName name of created point */
-    QString      pointName;
-
     /** @brief formula string with formula */
     QString      formula;
 
@@ -82,6 +82,8 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
+
+    VisToolCutSplinePath *path;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

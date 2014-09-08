@@ -42,6 +42,8 @@ public:
 
     void         setLineP1Id(const quint32 &value);
     void         setLineP2Id(const quint32 &value);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolHeight)};
 private:
     Q_DISABLE_COPY(VisToolHeight)
     //base point in parent class

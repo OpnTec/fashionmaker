@@ -70,6 +70,12 @@ void VAbstractNode::RestoreNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::ShowVisualization(bool show)
+{
+    Q_UNUSED(show)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToModeling add tag to modeling tag current pattern peace.
  * @param domElement tag.
@@ -129,4 +135,10 @@ void VAbstractNode::RestoreReferens()
     {
         doc->IncrementReferens(idNode);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+
 }

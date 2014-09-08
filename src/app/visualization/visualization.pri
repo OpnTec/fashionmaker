@@ -1,7 +1,6 @@
 HEADERS += \
     visualization/vgraphicssimpletextitem.h \
     visualization/vcontrolpointspline.h \
-    visualization/vsimplesplinepath.h \
     visualization/vsimplecurve.h \
     visualization/visline.h \
     visualization/vistoolline.h \
@@ -19,12 +18,14 @@ HEADERS += \
     visualization/vistoolarc.h \
     visualization/vispath.h \
     visualization/vistoolcutarc.h \
-    visualization/vistoolspline.h
+    visualization/vistoolspline.h \
+    visualization/vistoolcutspline.h \
+    visualization/vistoolsplinepath.h \
+    visualization/vistoolcutsplinepath.h
 
 SOURCES += \
     visualization/vgraphicssimpletextitem.cpp \
     visualization/vcontrolpointspline.cpp \
-    visualization/vsimplesplinepath.cpp \
     visualization/vsimplecurve.cpp \
     visualization/visline.cpp \
     visualization/vistoolline.cpp \
@@ -42,4 +43,7 @@ SOURCES += \
     visualization/vistoolarc.cpp \
     visualization/vispath.cpp \
     visualization/vistoolcutarc.cpp \
-    visualization/vistoolspline.cpp
+    visualization/vistoolspline.cpp \
+    visualization/vistoolcutspline.cpp \
+    visualization/vistoolsplinepath.cpp \
+    visualization/vistoolcutsplinepath.cpp

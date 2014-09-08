@@ -31,6 +31,8 @@
 #include <QMessageBox>
 #include "../undocommands/deltool.h"
 #include "../widgets/vapplication.h"
+#include "../geometry/vpointf.h"
+#include "../undocommands/savetooloptions.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -82,13 +84,18 @@ const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDot
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine),
+      vis(nullptr)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
     connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VPattern::LiteParseTree);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractTool::~VAbstractTool()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -290,6 +297,42 @@ Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractTool::getLineType() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::setTypeLine(const QString &value)
+{
+    typeLine = value;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, quint32> VAbstractTool::PointsList() const
+{
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();
+    QMap<QString, quint32> list;
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    {
+        if (i.key() != id)
+        {
+            QSharedPointer<VGObject> obj = i.value();
+            if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
+            {
+                const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(i.key());
+                list[point->name()] = i.key();
+            }
+        }
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VAbstractTool::ConfirmDeletion()
 {
     QMessageBox msgBox;
@@ -299,6 +342,26 @@ int VAbstractTool::ConfirmDeletion()
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.setIcon(QMessageBox::Question);
     return msgBox.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
+{
+    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    if (oldDomElement.isElement())
+    {
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+
+        SaveOptions(newDomElement, obj);
+
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

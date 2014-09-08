@@ -37,6 +37,8 @@
 #   include <QtMath> // for M_PI on Windows
 #endif /*Q_OS_WIN32*/
 
+#include "../container/vformula.h"
+
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -248,6 +250,13 @@ QString VArc::GetFormulaF1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VArc::SetFormulaF1(const VFormula &value)
+{
+    d->formulaF1 = value.getFormula(FormulaType::FromUser);
+    d->f1 = value.getDoubleValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetF1 return formula for start angle.
  * @return string with formula.
@@ -265,6 +274,13 @@ qreal VArc::GetF1() const
 QString VArc::GetFormulaF2() const
 {
     return d->formulaF2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::SetFormulaF2(const VFormula &value)
+{
+    d->formulaF2 = value.getFormula(FormulaType::FromUser);
+    d->f2 = value.getDoubleValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -288,6 +304,13 @@ QString VArc::GetFormulaRadius() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VArc::SetFormulaRadius(const VFormula &value)
+{
+    d->formulaRadius = value.getFormula(FormulaType::FromUser);
+    d->radius = value.getDoubleValue();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetRadius return formula for radius.
  * @return string with formula.
@@ -305,4 +328,10 @@ qreal VArc::GetRadius() const
 VPointF VArc::GetCenter() const
 {
     return d->center;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::SetCenter(const VPointF &value)
+{
+    d->center = value;
 }

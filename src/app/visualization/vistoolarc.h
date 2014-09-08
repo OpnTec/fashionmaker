@@ -43,6 +43,8 @@ public:
     void         setRadius(const QString &expression);
     void         setF1(const QString &expression);
     void         setF2(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolArc)};
 private:
     Q_DISABLE_COPY(VisToolArc)
     QGraphicsEllipseItem *arcCenter;

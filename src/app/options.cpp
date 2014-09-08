@@ -29,6 +29,9 @@
 #include "options.h"
 #include <QString>
 
+//Same regexp in pattern.xsd shema file. Don't forget synchronize.
+const QString nameRegExp = QStringLiteral("^([^0-9-*/^+=\\s\\(\\)%:;!.,]){1,1}([^-*/^+=\\s\\(\\)%:;!.,]){0,}$");
+
 // Keep synchronize all names with initialization in VApllication class.
 //measurements
 const QString headGirth_M                   = QStringLiteral("head_girth");

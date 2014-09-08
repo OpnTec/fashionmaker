@@ -43,6 +43,8 @@ public:
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
                         const QPointF &splinePoint, QGraphicsItem * parent = nullptr);
     virtual void      paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    virtual int       type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.

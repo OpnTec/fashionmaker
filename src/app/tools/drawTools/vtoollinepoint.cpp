@@ -107,3 +107,58 @@ void VToolLinePoint::SetFactor(qreal factor)
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VToolLinePoint::getAngle() const
+{
+    return angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::setAngle(const qreal &value)
+{
+    angle = value;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolLinePoint::getBasePointId() const
+{
+    return basePointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::setBasePointId(const quint32 &value)
+{
+    if (value != NULL_ID)
+    {
+        basePointId = value;
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula VToolLinePoint::getFormulaLength() const
+{
+    VFormula fLength(formulaLength, this->getData());
+    fLength.setCheckZero(true);
+    fLength.setToolId(id);
+    fLength.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+
+    return fLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::setFormulaLength(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        formulaLength = value.getFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        SaveOption(obj);
+    }
+}

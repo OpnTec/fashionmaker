@@ -39,6 +39,8 @@ public:
     VisPath(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisPath();
 
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::Path)};
 protected:
     virtual void InitPen();
     virtual void AddOnScene();

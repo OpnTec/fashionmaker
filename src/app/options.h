@@ -37,30 +37,38 @@
 
 class QString;
 
+static const quint32 null_id = 0;
+
 #define SceneSize 50000
 #define DefPointRadius 2.0//mm
-#define NULL_ID 0//use this value for initialization variables that keeps id values. 0 mean uknown id value.
+#define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
+
+extern const QString nameRegExp;
 
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
-enum class Tool : char
+enum class Tool : unsigned char
 {
-    ArrowTool,
-    SinglePointTool,
-    EndLineTool,
-    LineTool,
-    AlongLineTool,
-    ShoulderPointTool,
-    NormalTool,
-    BisectorTool,
-    LineIntersectTool,
-    SplineTool,
-    CutSplineTool,
-    CutArcTool,
-    ArcTool,
-    SplinePathTool,
-    CutSplinePathTool,
+    Arrow,
+    Point,
+    LinePoint,
+    AbstractSpline,
+    Cut,
+    SinglePoint,
+    EndLine,
+    Line,
+    AlongLine,
+    ShoulderPoint,
+    Normal,
+    Bisector,
+    LineIntersect,
+    Spline,
+    CutSpline,
+    CutArc,
+    Arc,
+    SplinePath,
+    CutSplinePath,
     PointOfContact,
-    DetailTool,
+    Detail,
     NodePoint,
     NodeArc,
     NodeSpline,
@@ -69,6 +77,32 @@ enum class Tool : char
     Triangle,
     PointOfIntersection,
     UnionDetails
+};
+
+enum class Vis : unsigned char
+{
+    ControlPointSpline = 29, // increase this value if need more positions in Tool enum
+    GraphicsSimpleTextItem,
+    SimpleSplinePath,
+    Line,
+    Path,
+    ToolAlongLine,
+    ToolArc,
+    ToolBisector,
+    ToolCutArc,
+    ToolEndLine,
+    ToolHeight,
+    ToolLine,
+    ToolLineIntersect,
+    ToolNormal,
+    ToolPointOfContact,
+    ToolPointOfIntersection,
+    ToolShoulderPoint,
+    ToolSpline,
+    ToolTriangle,
+    ToolCutSpline,
+    ToolSplinePath,
+    ToolCutSplinePath
 };
 
 enum class Source : char { FromGui, FromFile, FromTool };

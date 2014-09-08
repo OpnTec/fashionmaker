@@ -42,20 +42,20 @@
  * @param parent parent widget
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), pointName(QString()), typeLine(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), typeLine(QString()),
       formulaLength(QString()), formulaAngle(QString()), basePointId(NULL_ID), formulaBaseHeight(0),
       formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
     InitFormulaUI(ui);
+    ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    flagName = false;
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);

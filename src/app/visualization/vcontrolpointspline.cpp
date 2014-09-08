@@ -127,7 +127,7 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
     #ifndef QT_NO_CURSOR
         QPixmap pixmap(QLatin1String("://cursor/cursor-arrow-closehand.png"));
@@ -140,7 +140,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
     #ifndef QT_NO_CURSOR
