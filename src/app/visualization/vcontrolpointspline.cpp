@@ -29,6 +29,7 @@
 #include "vcontrolpointspline.h"
 #include "../tools/vabstracttool.h"
 
+#include <QGraphicsSceneMouseEvent>
 #include <QPen>
 #include <QStyleOptionGraphicsItem>
 #include "../widgets/vapplication.h"
