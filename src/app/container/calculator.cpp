@@ -34,8 +34,6 @@
 
 using namespace qmu;
 
-int Calculator::iVal = -1;
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Calculator class constructor. Make easy initialization math parser.
@@ -56,6 +54,9 @@ Calculator::Calculator(const VContainer *data)
 {
     InitCharacterSets();
     setAllowSubexpressions(false);//Only one expression per time
+
+    SetArgSep(',');
+    SetDecSep('.');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -114,7 +115,6 @@ Calculator::Calculator(const QString &formula, bool fromUser)
 Calculator::~Calculator()
 {
     delete [] vVarVal;
-    Calculator::iVal = -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,29 +220,9 @@ void Calculator::InitCharacterSets()
 // This could as well be a function performing database queries.
 qreal* Calculator::AddVariable(const QString &a_szName, void *a_pUserData)
 {
-    // I don't want dynamic allocation here, so i used this static buffer
-    // If you want dynamic allocation you must allocate all variables dynamically
-    // in order to delete them later on. Or you find other ways to keep track of
-    // variables that have been created implicitely.
-    static qreal afValBuf[100];
-
-    ++iVal;
-
     Q_UNUSED(a_szName)
     Q_UNUSED(a_pUserData)
-    //  qDebug() << "Generating new variable \""
-    //           << a_szName << "\" (slots left: "
-    //           << 99-iVal << ")"
-    //           << " User data pointer is:"
-    //           << QString::number(a_pUserData, 16);
-    afValBuf[iVal] = 0;
 
-    if (iVal>=99)
-    {
-        throw qmu::QmuParserError( "Variable buffer overflow." );
-    }
-    else
-    {
-        return &afValBuf[iVal];
-    }
+    static qreal value = 0;
+    return &value;
 }
