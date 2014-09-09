@@ -1623,11 +1623,10 @@ void VPattern::CheckTagExists(const QString &tag)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetLabelBase(unsigned int index) const
 {
-    QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
-    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString checkedLocale = qApp->getSettings()->value("configuration/label_language", defaultLocale).toString();
+    QString checkedLocale = qApp->getSettings()->value("configuration/label_language",
+                                                       QLocale::system().bcp47Name()).toString();
 
-    QStringList list{"de", "en" , "fr" , "ru" , "uk"};
+    QStringList list = VApplication::LabelLanguages();
 
     QStringList alphabet;
     switch(list.indexOf(checkedLocale))
@@ -1659,6 +1658,24 @@ QString VPattern::GetLabelBase(unsigned int index) const
         case 4: // uk
         {
             QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,І,Ї,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Є,Ю,Я");
+            alphabet = al.split(",");
+            break;
+        }
+        case 5: // hr
+        {
+            QString al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
+            alphabet = al.split(",");
+            break;
+        }
+        case 6: // sr
+        {
+            QString al = QStringLiteral("А,Б,В,Г,Д,Ђ,Е,Ж,З,И,Ј,К,Л,Љ,М,Н,Њ,О,П,Р,С,Т,Ћ,У,Ф,Х,Ц,Ч,Џ,Ш");
+            alphabet = al.split(",");
+            break;
+        }
+        case 7: // bs
+        {
+            QString al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
             alphabet = al.split(",");
             break;
         }

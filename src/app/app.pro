@@ -78,14 +78,14 @@ OTHER_FILES += \
     share/resources/icon/64x64/icon64x64.ico
 
 TRANSLATIONS += share/translations/valentina.ts \
-                share/translations/valentina_ru.ts \
-                share/translations/valentina_uk.ts \
-                share/translations/valentina_de.ts \
-                share/translations/valentina_cs.ts \
+                share/translations/valentina_ru_RU.ts \
+                share/translations/valentina_uk_UA.ts \
+                share/translations/valentina_de_DE.ts \
+                share/translations/valentina_cs_CZ.ts \
                 share/translations/valentina_he_IL.ts \
-                share/translations/valentina_fr.ts \
-                share/translations/valentina_it.ts \
-                share/translations/valentina_nl.ts
+                share/translations/valentina_fr_FR.ts \
+                share/translations/valentina_it_IT.ts \
+                share/translations/valentina_nl_NL.ts
 
 unix {
     *-g++{

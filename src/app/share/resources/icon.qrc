@@ -34,17 +34,17 @@
         <file>icon/32x32/arc_cut.png</file>
         <file>icon/config.png</file>
         <file>icon/pattern_config.png</file>
-        <file>icon/flags/cs.png</file>
-        <file>icon/flags/de.png</file>
-        <file>icon/flags/en.png</file>
-        <file>icon/flags/fr.png</file>
-        <file>icon/flags/he_IL.png</file>
-        <file>icon/flags/ru.png</file>
-        <file>icon/flags/uk.png</file>
+        <file>icon/flags/CzechRepublic.png</file>
+        <file>icon/flags/Germany.png</file>
+        <file>icon/flags/UnitedStates.png</file>
+        <file>icon/flags/France.png</file>
+        <file>icon/flags/Israel.png</file>
+        <file>icon/flags/Russia.png</file>
+        <file>icon/flags/Ukraine.png</file>
         <file>icon/Graduation.png</file>
         <file>icon/individual.png</file>
-        <file>icon/flags/nl.png</file>
-        <file>icon/flags/it.png</file>
+        <file>icon/flags/Netherlands.png</file>
+        <file>icon/flags/Italy.png</file>
         <file>icon/community_config.png</file>
         <file>icon/32x32/arrowLeft.png</file>
         <file>icon/32x32/arrowRight.png</file>

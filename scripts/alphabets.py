@@ -74,12 +74,14 @@ FRENCH_ALPHABET      = set(u'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY
 HAKASS_ALPHABET      = set(u'абвгғдеёжзиiйклмнңoӧпрстуӱфхцчӌшщъыьэюяАБВГҒДЕЁЖЗИIЙКЛМНҢOӦПРСТУӰФХЦЧӋШЩЪЫЬЭЮЯ')                               #HAKASS ALPHABET
 HANTY_ALPHABET       = set(u'аӓӑбвгдеёәӛжзийкқлӆмнңн̆оӧөӫпрстуӱўфхҳцчҷшщъыьэєє̈юю̆яя̆АӒӐБВГДЕЁӘӚЖЗИЙКҚЛӅМНҢН̆ОӦӨӪПРСТУӰЎФХҲЦЧҶШЩЪЫЬЭЄЄ̈ЮЮ̆ЯЯ̆')     #HANTY ALPHABET
 CROATIAN_ALPHABET    = set(u'abcčćddžðefghijklljmnnjoprsštuvzžABCČĆDDžÐEFGHIJKLLjMNNjOPRSŠTUVZŽ')                                           #CROATIAN ALPHABET
+BOSNIAN_ALPHABET     = set(u'abcčćddžðefghijklljmnnjoprsštuvzžABCČĆDDžÐEFGHIJKLLjMNNjOPRSŠTUVZŽ')                                           #BOSNIAN ALPHABET
 CZECH_ALPHABET       = set(u'aábcčdďeéěfghchiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHChIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ')                       #CZECH ALPHABET
 CHUVASH_ALPHABET     = set(u'аăбвгдеёĕжзийклмнопрсçтуӳфхцчшщьыъэюяАĂБВГДЕЁĔЖЗИЙКЛМНОПРСÇТУӲФХЦЧШЩЬЫЪЭЮЯ')                                   #CHUVASH ALPHABET
 SWEDISH_ALPHABET     = set(u'aåäbcdefghijklmnoöpqrstuvwxyzAÅÄBCDEFGHIJKLMNOÖPQRSTUVWXYZ')                                                   #SWEDISH ALPHABET
 ESPERANTO_ALPHABET   = set(u'abcĉdefgĝhĥijĵklmnoprsŝtuŭvzABCĈDEFGĜHĤIJĴKLMNOPRSŜTUŬVZ')                                                     #ESPERANTO ALPHABET
 ESTONIAN_ALPHABET    = set(u'abcdefghijklmnopqrsšzžtuvwõäöüxyABCDEFGHIJKLMNOPQRSŠZŽTUVWÕÄÖÜXY')                                             #ESTONIAN ALPHABET
 YAKUTIAN_ALPHABET    = set(u'абвгҕддьеёжзийклмнҥньоөпрсһтуүфхцчшщъыьэАБВГҔДДьЕЁЖЗИЙКЛМНҤНьОӨПРСҺТУҮФХЦЧШЩЪЫЬЭ')                             #YAKUTIAN ALPHABET
+MONTENEGRIN_ALPHABET = set(u'abcčćddžðefghijklljmnnjoprsštuvzžABCČĆDDžÐEFGHIJKLLjMNNjOPRSŠTUVZŽ')                                           #MONTENEGRIN ALPHABET
 
 UTF8Writer = codecs.getwriter('utf8')
 sys.stdout = UTF8Writer(sys.stdout)
@@ -91,7 +93,7 @@ DANISH_ALPHABET, INDONESIAN_ALPHABET, IRISH_ALPHABET, ICELANDIC_ALPHABET, SPANIS
 CATALAN_ALPHABET, KYRGYZ_ALPHABET, LATIN_ALPHABET, LATVIAN_ALPHABET, LITHUANIAN_ALPHABET, MACEDONIAN_ALPHABET, MALTESE_ALPHABET, MARI_ALPHABET, MOLDAVIAN_ALPHABET, MONGOLIAN_ALPHABET,
 GERMAN_ALPHABET, NORWEGIAN_ALPHABET, OSETIAN_ALPHABET, POLISH_ALPHABET, PORTUGUESE_ALPHABET, ROMANIAN_ALPHABET, SERBIAN_ALPHABET, SLOVAK_ALPHABET, SLOVENIAN_ALPHABET, TAJIK_ALPHABET, TATAR_ALPHABET,
 TUVIN_ALPHABET, TURKISH_ALPHABET, UDMURT_ALPHABET, UZBEK_ALPHABET, UKRAINIAN_ALPHABET, FARSI_ALPHABET, PHILIPPINES_ALPHABET, FINNISH_ALPHABET, FRENCH_ALPHABET, HAKASS_ALPHABET,HANTY_ALPHABET,
-CROATIAN_ALPHABET, CZECH_ALPHABET, CHUVASH_ALPHABET, SWEDISH_ALPHABET, ESPERANTO_ALPHABET, ESTONIAN_ALPHABET, YAKUTIAN_ALPHABET)
+BOSNIAN_ALPHABET, CROATIAN_ALPHABET, CZECH_ALPHABET, CHUVASH_ALPHABET, SWEDISH_ALPHABET, ESPERANTO_ALPHABET, ESTONIAN_ALPHABET, YAKUTIAN_ALPHABET, MONTENEGRIN_ALPHABET)
 
 L = list(SYMBOLS)
 print ''.join(L)

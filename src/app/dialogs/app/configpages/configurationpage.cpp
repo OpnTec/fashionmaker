@@ -166,9 +166,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     langCombo = new QComboBox;
 
     // format systems language
-    QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
-    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString checkedLocale = settings->value("configuration/locale", defaultLocale).toString();
+    QString checkedLocale = settings->value("configuration/locale", QLocale::system().name()).toString();
 
     QString m_langPath = qApp->translationsPath();
     QDir dir(m_langPath);
@@ -178,19 +176,21 @@ QGroupBox *ConfigurationPage::LangGroup()
     {
         // get locale extracted by filename
         QString locale;
-        locale = fileNames.at(i);                  // "valentina_de.qm"
-        locale.truncate(locale.lastIndexOf('.'));   // "valentina_de"
-        locale.remove(0, locale.indexOf('_') + 1);   // "de"
+        locale = fileNames.at(i);                  // "valentina_de_De.qm"
+        locale.truncate(locale.lastIndexOf('.'));   // "valentina_de_De"
+        locale.remove(0, locale.indexOf('_') + 1);   // "de_De"
 
-        QString lang = QLocale(locale).nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg(locale));
+        QLocale loc = QLocale(locale);
+        QString lang = loc.nativeLanguageName();
+        QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg(QLocale::countryToString(loc.country())));
 
         langCombo->addItem(ico, lang, locale);
     }
 
-    QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg("en"));
-    QString lang = QLocale("en").nativeLanguageName();
-    langCombo->addItem(ico, lang, "en");
+    // English language is internal and doens't have own *.qm file.
+    QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
+    QString lang = QLocale("en_US").nativeLanguageName();
+    langCombo->addItem(ico, lang, "en_US");
 
     // set default translators and language checked
     qint32 index = langCombo->findData(checkedLocale);
@@ -244,10 +244,10 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *labelName = new QLabel(tr("Label language"));
     labelCombo = new QComboBox;
 
-    QString checkedLabelLocale = settings->value("configuration/label_language", defaultLocale).toString();
+    QString checkedLabelLocale = settings->value("configuration/label_language",
+                                                 QLocale::system().bcp47Name()).toString();
 
-    QStringList list{"de", "en" , "fr" , "ru" , "uk"};
-    SetLabelComboBox(list);
+    SetLabelComboBox(VApplication::LabelLanguages());
 
     index = labelCombo->findData(checkedLabelLocale);
     if (index != -1)
@@ -278,8 +278,7 @@ void ConfigurationPage::SetLabelComboBox(const QStringList &list)
 {
     for (int i = 0; i < list.size(); ++i)
     {
-        QString lang = QLocale(list.at(i)).nativeLanguageName();
-        QIcon ico(QString("%1/%2.png").arg("://icon/flags").arg(list.at(i)));
-        labelCombo->addItem(ico, lang, list.at(i));
+        QLocale loc = QLocale(list.at(i));
+        labelCombo->addItem(loc.nativeLanguageName(), list.at(i));
     }
 }

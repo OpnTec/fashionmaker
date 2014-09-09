@@ -98,6 +98,8 @@ public:
 
     static void        setOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
     static void        restoreOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
+
+    static QStringList LabelLanguages();
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;

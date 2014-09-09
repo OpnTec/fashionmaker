@@ -32,6 +32,7 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QCommandLineParser>
+#include <QLibraryInfo>
 #include "tablewindow.h"
 #include "version.h"
 
@@ -145,9 +146,7 @@ int main(int argc, char *argv[])
 
     app.OpenSettings();
 
-    QString defaultLocale = QLocale::system().name();       // e.g. "de_DE"
-    defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"
-    QString checkedLocale = qApp->getSettings()->value("configuration/locale", defaultLocale).toString();
+    QString checkedLocale = qApp->getSettings()->value("configuration/locale", QLocale::system().name()).toString();
 
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
