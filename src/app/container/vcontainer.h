@@ -175,9 +175,9 @@ public:
     template <typename T>
     void               AddVariable(const QString& name, T *var)
     {
-        if(d->variables.contains(name))
+        if (d->variables.contains(name))
         {
-            if(d->variables.value(name)->GetType() == var->GetType())
+            if (d->variables.value(name)->GetType() == var->GetType())
             {
                 d->variables[name].clear();
             }

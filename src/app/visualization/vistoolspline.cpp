@@ -112,8 +112,3 @@ void VisToolSpline::setKCurve(const qreal &value)
 {
     kCurve = value;
 }
-
-
-
-
-

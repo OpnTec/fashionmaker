@@ -24,7 +24,8 @@
 #include "vpropertyexplorer_global.h"
 #include "vabstractpropertyfactory.h"
 
-namespace VPE {
+namespace VPE
+{
 
 class VProperty;
 

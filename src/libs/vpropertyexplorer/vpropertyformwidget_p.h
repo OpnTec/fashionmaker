@@ -26,12 +26,15 @@
 #include <QList>
 #include "vproperty.h"
 
-namespace VPE {
+namespace VPE
+{
 
-class VPropertyFormWidgetPrivate {
+class VPropertyFormWidgetPrivate
+{
 public:
     //! Stores either another VPropertyFormWidget (then Editor is null) or an editor widget (then FormWidget is null)
-    struct SEditorWidget {
+    struct SEditorWidget
+    {
         SEditorWidget() : FormWidget(nullptr), Editor(nullptr) {}
         SEditorWidget(VPropertyFormWidget* form_widget) : FormWidget(form_widget), Editor(nullptr) {}
         SEditorWidget(QWidget* editor_widget) : FormWidget(nullptr), Editor(editor_widget) {}
@@ -46,7 +49,8 @@ public:
     //! Binds the properties to their editors
     QList<SEditorWidget> EditorWidgets;
 
-    //! Determines the behaviour of the editors. If this is true, when a focus out event etc. happens, the data will be submitted to the VProperty. If false, you will have to call commitData() yourself.
+    //! Determines the behaviour of the editors. If this is true, when a focus out event etc. happens, the data will be
+    //! submitted to the VProperty. If false, you will have to call commitData() yourself.
     bool UpdateEditors;
 
     //! Default constructor

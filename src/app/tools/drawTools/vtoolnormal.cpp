@@ -353,4 +353,3 @@ void VToolNormal::ShowVisualization(bool show)
         vis = nullptr;
     }
 }
-

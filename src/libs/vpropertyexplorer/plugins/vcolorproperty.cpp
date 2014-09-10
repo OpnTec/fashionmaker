@@ -34,18 +34,25 @@ VColorProperty::VColorProperty(const QString &name) :
 //! Get the data how it should be displayed
 QVariant VColorProperty::data (int column, int role) const
 {
-    if(column == DPC_Data && (Qt::DisplayRole == role))
+    if (column == DPC_Data && (Qt::DisplayRole == role))
+    {
         return VColorPropertyEditor::getColorString(d_ptr->VariantValue.value<QColor>());
-    else if(Qt::EditRole == role)
+    }
+    else if (Qt::EditRole == role)
+    {
         return QVariant();
-    else if(column == DPC_Data && (Qt::DecorationRole == role))
+    }
+    else if (column == DPC_Data && (Qt::DecorationRole == role))
+    {
         return VColorPropertyEditor::getColorPixmap(d_ptr->VariantValue.value<QColor>());
+    }
     else
         return VProperty::data(column, role);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate)
+QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+                                      const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options);
     Q_UNUSED(delegate);
@@ -59,8 +66,10 @@ QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewIte
 bool VColorProperty::setEditorData(QWidget* editor)
 {
     VColorPropertyEditor* tmpWidget = qobject_cast<VColorPropertyEditor*>(editor);
-    if(tmpWidget)
+    if (tmpWidget)
+    {
         tmpWidget->setColor(d_ptr->VariantValue.value<QColor>());
+    }
     else
         return false;
 
@@ -71,8 +80,10 @@ bool VColorProperty::setEditorData(QWidget* editor)
 QVariant VColorProperty::getEditorData(QWidget* editor) const
 {
     VColorPropertyEditor* tmpWidget = qobject_cast<VColorPropertyEditor*>(editor);
-    if(tmpWidget)
+    if (tmpWidget)
+    {
         return tmpWidget->getColor();
+    }
 
     return QVariant();
 }

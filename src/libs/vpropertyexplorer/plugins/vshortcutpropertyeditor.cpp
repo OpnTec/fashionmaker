@@ -51,13 +51,15 @@ VShortcutEditWidget::~VShortcutEditWidget()
 
 bool VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj == LineEdit) {
-        if (event->type() == QEvent::KeyPress) {
+    if (obj == LineEdit)
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
             QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
 
             int keys = keyEvent->key();
 
-            if(keys != Qt::Key_Shift &&
+            if (keys != Qt::Key_Shift &&
                keys != Qt::Key_Control &&
                keys != Qt::Key_Meta &&
                keys != Qt::Key_AltGr &&
@@ -83,8 +85,6 @@ QKeySequence VShortcutEditWidget::getShortcut()
     return CurrentKeySequence;
 }
 
-
-
 void VShortcutEditWidget::setShortcut(const QString &shortcut, bool emit_signal)
 {
     setShortcut(QKeySequence::fromString(shortcut), emit_signal);
@@ -92,11 +92,14 @@ void VShortcutEditWidget::setShortcut(const QString &shortcut, bool emit_signal)
 
 void VShortcutEditWidget::setShortcut(const QKeySequence &shortcut, bool emit_signal)
 {
-    if(shortcut != CurrentKeySequence) {
+    if (shortcut != CurrentKeySequence)
+    {
         CurrentKeySequence = shortcut;
         LineEdit->setText(CurrentKeySequence.toString());
-        if(emit_signal)
+        if (emit_signal)
+        {
             emit dataChangedByUser(CurrentKeySequence, this);
+        }
     }
 }
 

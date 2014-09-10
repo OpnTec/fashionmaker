@@ -38,7 +38,7 @@ VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     ToolButton->setText(tr("..."));
     ToolButton->setFixedWidth(20);
     ToolButton->installEventFilter(this);
-    setFocusProxy(ToolButton);	// Make the ToolButton the focus proxy
+    setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
     connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
 
@@ -73,7 +73,7 @@ void VFileEditWidget::setFile(const QString &value, bool emit_signal)
         CurrentFilePath = value;
         FileLineEdit->setText(CurrentFilePath);
 
-        if(emit_signal)
+        if (emit_signal)
         {
             emit dataChangedByUser(CurrentFilePath, this);
             emit commitData(this);
@@ -101,36 +101,46 @@ QString VFileEditWidget::getFile()
 
 void VFileEditWidget::onToolButtonClicked()
 {
-    QString filepath = (Directory ? QFileDialog::getExistingDirectory(0, tr("Directory"), CurrentFilePath) : QFileDialog::getOpenFileName(0, tr("Open File"), CurrentFilePath, FileDialogFilter));
-    if (!filepath.isNull())
+    QString filepath = (Directory ? QFileDialog::getExistingDirectory(0, tr("Directory"), CurrentFilePath)
+                                  : QFileDialog::getOpenFileName(0, tr("Open File"), CurrentFilePath,
+                                                                 FileDialogFilter));
+    if (filepath.isNull() == false)
+    {
         setFile(filepath, true);
+    }
 }
 
 
 bool VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
 {
-    if(ev->type() == QEvent::DragEnter || ev->type() == QEvent::Drop)
+    if (ev->type() == QEvent::DragEnter || ev->type() == QEvent::Drop)
     {
         ev->ignore();
-        if(ev->type() == QEvent::DragEnter)
+        if (ev->type() == QEvent::DragEnter)
+        {
             dragEnterEvent(static_cast<QDragEnterEvent*>(ev));
-        else if(ev->type() == QEvent::Drop)
+        }
+        else if (ev->type() == QEvent::Drop)
+        {
             dropEvent(static_cast<QDropEvent*>(ev));
+        }
 
-        if(ev->isAccepted())
+        if (ev->isAccepted())
+        {
             return true;
+        }
         else
             return QWidget::eventFilter(obj, ev);
     }
-    else if(obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
+    else if (obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
     {
         // Ignore the event, so that eventually the delegate gets the event.
         ev->ignore();
         return true;
     }
-    else if(obj == FileLineEdit)
+    else if (obj == FileLineEdit)
     {
-        if(ev->type() == QEvent::FocusOut)
+        if (ev->type() == QEvent::FocusOut)
         {
             setFile(FileLineEdit->text(), true);
             // We don't return true here because we still want the line edit to catch the event as well
@@ -150,7 +160,7 @@ bool VFileEditWidget::isDirectory()
 void VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
 {
     QString tmpFileName;
-    if(checkMimeData(event->mimeData(), tmpFileName))
+    if (checkMimeData(event->mimeData(), tmpFileName))
     {
         event->accept();
         event->acceptProposedAction();
@@ -170,7 +180,7 @@ void VFileEditWidget::dragLeaveEvent(QDragLeaveEvent* event)
 void VFileEditWidget::dropEvent(QDropEvent* event)
 {
     QString tmpFileName;
-    if(checkMimeData(event->mimeData(), tmpFileName))
+    if (checkMimeData(event->mimeData(), tmpFileName))
     {
         setFile(tmpFileName);
         emit dataChangedByUser(getFile(), this);
@@ -189,10 +199,12 @@ bool VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const
         QFileInfo tmpFileInfo;
 
         foreach(QUrl tmpUrl, tmpUrlList)
-            if(QFile::exists(tmpUrl.toLocalFile()))
-            { tmpFileInfo = QFileInfo(tmpUrl.toLocalFile()); break; }
+            if (QFile::exists(tmpUrl.toLocalFile()))
+            {
+                tmpFileInfo = QFileInfo(tmpUrl.toLocalFile()); break;
+            }
 
-        if(checkFileFilter(tmpFileInfo.fileName()))
+        if (checkFileFilter(tmpFileInfo.fileName()))
         {
             file = tmpFileInfo.absoluteFilePath();
             return true;
@@ -204,21 +216,26 @@ bool VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const
 
 bool VFileEditWidget::checkFileFilter(const QString& file) const
 {
-    if(FilterList.isEmpty())
+    if (FilterList.isEmpty())
+    {
         return true;
+    }
 
     QFileInfo tmpFileInfo(file);
 
-    if((Directory && !tmpFileInfo.isDir()) || (!Directory && !tmpFileInfo.isFile()))
+    if ((Directory && !tmpFileInfo.isDir()) || (!Directory && !tmpFileInfo.isFile()))
+    {
         return false;
+    }
 
     foreach(QString tmpFilter, FilterList)
     {
         QRegExp tmpRegExpFilter(tmpFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
-        if(tmpRegExpFilter.exactMatch(file))
+        if (tmpRegExpFilter.exactMatch(file))
+        {
             return true;
+        }
     }
 
     return false;
 }
-

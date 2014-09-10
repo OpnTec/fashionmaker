@@ -29,17 +29,18 @@
 
 #include "vproperty.h"
 
-namespace VPE {
+namespace VPE
+{
 
 class VPropertyModelPrivate;
 class VPropertySet;
 
-//! \brief	This is the base model for managing all the properties
-//!			and passing them to the view.
+//! \brief  This is the base model for managing all the properties
+//!         and passing them to the view.
 //!
-//!	When you create your own "proxy models", this is the place to
-//!	start: just subclass VPropertyModel and extend the new class.
-//!	Have a look at existing examples of proxies.
+//! When you create your own "proxy models", this is the place to
+//! start: just subclass VPropertyModel and extend the new class.
+//! Have a look at existing examples of proxies.
 //!
 //! <strong>Note that in this context, the term "proxy model" does not refer
 //! to VProxyModel as that is another concept.</strong>
@@ -61,7 +62,8 @@ public:
     virtual ~VPropertyModel();
 
     //! Adds the property to the model and attaches it to the parentid
-    //! \param emitsignals If this is set to false, this function will not call beginInsertRows() and endInsertRows(), so it has to be called from a subclass
+    //! \param emitsignals If this is set to false, this function will not call beginInsertRows() and endInsertRows(),
+    //! so it has to be called from a subclass
     virtual bool addProperty(VProperty* property, const QString& id, const QString& parentid = QString(),
                              bool emitsignals = true);
 
@@ -96,8 +98,6 @@ public:
     //! Returns the number of columns
     virtual int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
 
-
-
     //! Gets a property by its ModelIndex
     //! \param index The modelIndex of the property.
     //! \return Returns the property with the given index, or NULL if none such property exists
@@ -110,23 +110,29 @@ public:
     //! \return Returns the ID under which the property is stored within the model
     virtual QString getPropertyID(VProperty* prop) const;
 
-    //! Returns a const pointer to the property set managed by this model. If you want to manipulate the property set, either use the methods provided by the model or use takePropertySet() and setPropertySet().
+    //! Returns a const pointer to the property set managed by this model. If you want to manipulate the property set,
+    //! either use the methods provided by the model or use takePropertySet() and setPropertySet().
     //! \return A constant pointer to the property set or NULL if there currently is none.
     virtual const VPropertySet* getPropertySet() const;
 
     //! Clears the model, deletes the property set managed by this model.
-    //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset model signals
+    //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset
+    //! model signals
     virtual void clear(bool emit_signals = true);
 
-    //! Removes the current property set and returns it. If new_property_set is set, the old one will be replaced by the new one
+    //! Removes the current property set and returns it. If new_property_set is set, the old one will be replaced by the
+    //! new one
     //! \param new_property_set The new property set to replace the old one with. Default: NULL
-    //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset model signals
+    //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset
+    //! model signals
     //! \return A constant pointer to the property set or NULL if there currently is none.
     virtual VPropertySet* takePropertySet(VPropertySet* new_property_set = nullptr, bool emit_signals = true);
 
-    //! Sets a new property set. The model will take ownership of the property set. The old property set will be deleted.
+    //! Sets a new property set. The model will take ownership of the property set. The old property set will be
+    //! deleted.
     //! \param property_set The new property set. Setting this to NULL has the same effect as calling clear.
-    //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset model signals
+    //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset
+    //! model signals
     //! \return A constant pointer to the property set or NULL if there currently is none.
     virtual void setPropertySet(VPropertySet* property_set, bool emit_signals = true);
 

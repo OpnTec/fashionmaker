@@ -27,12 +27,14 @@
 #include <QString>
 #include <QObject>
 
-namespace VPE {
+namespace VPE
+{
 
 class VProperty;
 class VPropertySet;
 
-class VPropertyModelPrivate {
+class VPropertyModelPrivate
+{
 public:
     //! The property set holding the properties
     VPropertySet* Properties;

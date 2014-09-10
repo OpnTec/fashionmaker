@@ -397,4 +397,3 @@ void VToolLineIntersect::setP1Line1(const quint32 &value)
         SaveOption(obj);
     }
 }
-

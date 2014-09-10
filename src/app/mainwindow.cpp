@@ -767,7 +767,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::customEvent(QEvent *event)
 {
-    if(event->type() == UNDO_EVENT)
+    if (event->type() == UNDO_EVENT)
     {
         qApp->getUndoStack()->undo();
     }

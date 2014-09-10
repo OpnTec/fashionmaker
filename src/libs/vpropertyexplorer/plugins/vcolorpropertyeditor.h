@@ -29,7 +29,8 @@
 #include <QLabel>
 #include <QSpacerItem>
 
-namespace VPE{
+namespace VPE
+{
 
 class VPROPERTYEXPLORERSHARED_EXPORT VColorPropertyEditor : public QWidget
 {

@@ -24,7 +24,8 @@
 #include <QTreeView>
 #include "vpropertyexplorer_global.h"
 
-namespace VPE {
+namespace VPE
+{
 
 class VPropertyTreeViewPrivate;
 

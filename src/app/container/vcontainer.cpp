@@ -437,7 +437,7 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
     QHash<QString, QSharedPointer<VInternalVariable> >::const_iterator i;
     for (i = d->variables.constBegin(); i != d->variables.constEnd(); ++i)
     {
-        if(i.value()->GetType() == type)
+        if (i.value()->GetType() == type)
         {
             QSharedPointer<T> var = GetVariable<T>(i.key());
             map.insert(qApp->VarToUser(i.key()), var);

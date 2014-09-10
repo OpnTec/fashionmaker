@@ -37,25 +37,34 @@ VEnumProperty::VEnumProperty(const QString& name)
 //! Get the data how it should be displayed
 QVariant VEnumProperty::data (int column, int role) const
 {
-    if(EnumerationLiterals.empty())
+    if (EnumerationLiterals.empty())
+    {
         return QVariant();
+    }
 
     int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
 
-    if(tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
+    if (tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
+    {
         tmpIndex = 0;
+    }
 
-    if(column == DPC_Data && Qt::DisplayRole == role)
+    if (column == DPC_Data && Qt::DisplayRole == role)
+    {
         return EnumerationLiterals.at(tmpIndex);
-    else if(column == DPC_Data && Qt::EditRole == role)
+    }
+    else if (column == DPC_Data && Qt::EditRole == role)
+    {
         return tmpIndex;
+    }
     else
         return VProperty::data(column, role);
 }
 
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate)
+QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                     const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options);
     Q_UNUSED(delegate);
@@ -74,8 +83,10 @@ QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewIte
 QVariant VEnumProperty::getEditorData(QWidget* editor) const
 {
     QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
-    if(tmpEditor)
+    if (tmpEditor)
+    {
         return tmpEditor->currentIndex();
+    }
 
     return QVariant(0);
 }
@@ -97,8 +108,10 @@ void VEnumProperty::setValue(const QVariant& value)
 {
     int tmpIndex = value.toInt();
 
-    if(tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
+    if (tmpIndex < 0 || tmpIndex >= EnumerationLiterals.count())
+    {
         tmpIndex = 0;
+    }
 
     VProperty::d_ptr->VariantValue = tmpIndex;
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
@@ -121,14 +134,18 @@ VProperty* VEnumProperty::clone(bool include_children, VProperty* container) con
 
 void VEnumProperty::setSetting(const QString& key, const QVariant& value)
 {
-    if(key == "literals")
+    if (key == "literals")
+    {
         setLiterals(value.toString().split(";;"));
+    }
 }
 
 QVariant VEnumProperty::getSetting(const QString& key) const
 {
-    if(key == "literals")
+    if (key == "literals")
+    {
         return getLiterals().join(";;");
+    }
     else
         return VProperty::getSetting(key);
 }

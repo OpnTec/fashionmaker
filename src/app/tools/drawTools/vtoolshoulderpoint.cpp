@@ -397,4 +397,3 @@ void VToolShoulderPoint::setP2Line(const quint32 &value)
         SaveOption(obj);
     }
 }
-

@@ -34,7 +34,7 @@ const int VIntegerProperty::StandardMin = -1000000;
 const int VIntegerProperty::StandardMax = 1000000;
 
 VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VProperty(name, QVariant::Int), min(StandardMin), max(StandardMax), singleStep(1.0)
+    : VProperty(name, QVariant::Int), minValue(StandardMin), maxValue(StandardMax), singleStep(1.0)
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -42,21 +42,22 @@ VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVar
 }
 
 VIntegerProperty::VIntegerProperty(const QString &name)
-    : VProperty(name), min(StandardMin), max(StandardMax)
+    : VProperty(name), minValue(StandardMin), maxValue(StandardMax)
 {
     VProperty::d_ptr->VariantValue.setValue(0);
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate)
+QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                        const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options);
     Q_UNUSED(delegate);
 
     QSpinBox* tmpEditor = new QSpinBox(parent);
-    tmpEditor->setMinimum(min);
-    tmpEditor->setMaximum(max);
+    tmpEditor->setMinimum(minValue);
+    tmpEditor->setMaximum(maxValue);
     tmpEditor->setSingleStep(singleStep);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setValue(VProperty::d_ptr->VariantValue.toInt());
@@ -71,37 +72,51 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
 QVariant VIntegerProperty::getEditorData(QWidget* editor) const
 {
     QSpinBox* tmpEditor = qobject_cast<QSpinBox*>(editor);
-    if(tmpEditor)
+    if (tmpEditor)
+    {
         return tmpEditor->value();
+    }
 
     return QVariant(0);
 }
 
 void VIntegerProperty::setSettings(int minimum, int maxiumum, int singleStep)
 {
-    min = minimum;
-    max = maxiumum;
+    minValue = minimum;
+    maxValue = maxiumum;
     this->singleStep = singleStep;
 }
 
 void VIntegerProperty::setSetting(const QString& key, const QVariant& value)
 {
-    if(key == QLatin1String("Min"))
-        setSettings(value.toInt(), max);
-    else if(key == QLatin1String("Max"))
-        setSettings(min, value.toInt());
-    else if(key == QLatin1String("Step"))
+    if (key == QLatin1String("Min"))
+    {
+        setSettings(value.toInt(), maxValue);
+    }
+    else if (key == QLatin1String("Max"))
+    {
+        setSettings(minValue, value.toInt());
+    }
+    else if (key == QLatin1String("Step"))
+    {
         setSettings(singleStep, value.toInt());
+    }
 }
 
 QVariant VIntegerProperty::getSetting(const QString& key) const
 {
-    if(key == QLatin1String("Min"))
-        return min;
-    if(key == QLatin1String("Max"))
-        return max;
-    if(key == QLatin1String("Step"))
+    if (key == QLatin1String("Min"))
+    {
+        return minValue;
+    }
+    if (key == QLatin1String("Max"))
+    {
+        return maxValue;
+    }
+    if (key == QLatin1String("Step"))
+    {
         return singleStep;
+    }
     else
         return VProperty::getSetting(key);
 }
@@ -128,10 +143,6 @@ void VIntegerProperty::valueChanged(int i)
     QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }
 
-
-
-
-
 const double VDoubleProperty::StandardPrecision = 5;
 
 VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings)
@@ -152,13 +163,14 @@ VDoubleProperty::VDoubleProperty(const QString &name)
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate)
+QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                       const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options);
     Q_UNUSED(delegate);
     QDoubleSpinBox* tmpEditor = new QDoubleSpinBox(parent);
-    tmpEditor->setMinimum(min);
-    tmpEditor->setMaximum(max);
+    tmpEditor->setMinimum(minValue);
+    tmpEditor->setMaximum(maxValue);
     tmpEditor->setDecimals(Precision);
     tmpEditor->setSingleStep(singleStep);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -174,42 +186,60 @@ QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewI
 QVariant VDoubleProperty::getEditorData(QWidget* editor) const
 {
     QDoubleSpinBox* tmpEditor = qobject_cast<QDoubleSpinBox*>(editor);
-    if(tmpEditor)
+    if (tmpEditor)
+    {
         return tmpEditor->value();
+    }
 
     return QVariant(0);
 }
 
 void VDoubleProperty::setSettings(double minimum, double maxiumum, double singleStep, int precision)
 {
-    min = minimum;
-    max = maxiumum;
+    minValue = minimum;
+    maxValue = maxiumum;
     this->singleStep = singleStep;
     Precision = precision;
 }
 
 void VDoubleProperty::setSetting(const QString& key, const QVariant& value)
 {
-    if(key == QLatin1String("Min"))
-        setSettings(value.toDouble(), max, singleStep, Precision);
-    else if(key == QLatin1String("Max"))
-        setSettings(min, value.toDouble(), singleStep, Precision);
-    else if(key == QLatin1String("Step"))
-        setSettings(min, max, value.toDouble(), Precision);
-    else if(key == QLatin1String("Precision"))
-        setSettings(min, max, singleStep, value.toDouble());
+    if (key == QLatin1String("Min"))
+    {
+        setSettings(value.toDouble(), maxValue, singleStep, Precision);
+    }
+    else if (key == QLatin1String("Max"))
+    {
+        setSettings(minValue, value.toDouble(), singleStep, Precision);
+    }
+    else if (key == QLatin1String("Step"))
+    {
+        setSettings(minValue, maxValue, value.toDouble(), Precision);
+    }
+    else if (key == QLatin1String("Precision"))
+    {
+        setSettings(minValue, maxValue, singleStep, value.toDouble());
+    }
 }
 
 QVariant VDoubleProperty::getSetting(const QString& key) const
 {
-    if(key == QLatin1String("Min"))
-        return min;
-    if(key == QLatin1String("Max"))
-        return max;
-    if(key == QLatin1String("Step"))
+    if (key == QLatin1String("Min"))
+    {
+        return minValue;
+    }
+    if (key == QLatin1String("Max"))
+    {
+        return maxValue;
+    }
+    if (key == QLatin1String("Step"))
+    {
         return singleStep;
-    if(key == QLatin1String("Precision"))
+    }
+    if (key == QLatin1String("Precision"))
+    {
         return Precision;
+    }
     else
         return VProperty::getSetting(key);
 }

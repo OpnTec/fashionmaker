@@ -41,7 +41,7 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent) :
     ToolButton->setText(tr("..."));
     ToolButton->setFixedWidth(20);
     ToolButton->installEventFilter(this);
-    setFocusProxy(ToolButton);	// Make the ToolButton the focus proxy
+    setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
     connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
 
@@ -65,7 +65,7 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent) :
     layout->addItem(Spacer);
     layout->addWidget(ToolButton);
     //TextLabel->hide();
-    //ColorLabel->hide();	// for now, we just use the standard display and only add the button
+    //ColorLabel->hide();   // for now, we just use the standard display and only add the button
 }
 
 void VColorPropertyEditor::setColor(const QColor& color_)
@@ -101,7 +101,8 @@ void VColorPropertyEditor::onToolButtonClicked()
     bool ok = false;
     QRgb oldRgba = Color.rgba();
     QRgb newRgba = QColorDialog::getRgba(oldRgba, &ok, this);
-    if (ok && newRgba != oldRgba) {
+    if (ok && newRgba != oldRgba)
+    {
         setColor(QColor::fromRgba(newRgba));
         emit dataChangedByUser(Color, this);
         UserChangeEvent *event = new UserChangeEvent();
@@ -111,7 +112,7 @@ void VColorPropertyEditor::onToolButtonClicked()
 
 bool VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 {
-    if(obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
+    if (obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
     {
         // Ignore the event, so that eventually the delegate gets the event.
         ev->ignore();
@@ -126,8 +127,6 @@ VColorPropertyEditor::~VColorPropertyEditor()
 {
     //
 }
-
-
 
 QColor VColorPropertyEditor::getColor()
 {

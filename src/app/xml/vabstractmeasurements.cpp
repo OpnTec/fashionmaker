@@ -201,7 +201,7 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
     switch (from)
     {
         case Unit::Mm:
-            switch(to)
+            switch (to)
             {
                 case Unit::Mm:
                     return value;
@@ -214,7 +214,7 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
             }
             break;
         case Unit::Cm:
-            switch(to)
+            switch (to)
             {
                 case Unit::Mm:
                     return value * 10.0;
@@ -227,7 +227,7 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
             }
             break;
         case Unit::Inch:
-            switch(to)
+            switch (to)
             {
                 case Unit::Mm:
                     return value * 25.4;

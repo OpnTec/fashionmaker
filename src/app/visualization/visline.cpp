@@ -60,7 +60,7 @@ qreal VisLine::CorrectAngle(const qreal &angle) const
         ang = angle - 360 * qFloor(angle/360);
     }
 
-    switch(qFloor((qAbs(ang)+22.5)/45))
+    switch (qFloor((qAbs(ang)+22.5)/45))
     {
         case 0: // <22.5
             return 0;
@@ -86,7 +86,7 @@ qreal VisLine::CorrectAngle(const qreal &angle) const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 {
-    if(this->scene() == nullptr)
+    if (this->scene() == nullptr)
     {
         QLineF line = QLineF(firstPoint, Visualization::scenePos);
         line.setAngle(angle);

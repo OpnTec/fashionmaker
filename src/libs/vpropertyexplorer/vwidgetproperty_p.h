@@ -28,9 +28,11 @@
 #include <QPointer>
 #include <QWidget>
 
-namespace VPE {
+namespace VPE
+{
 
-class VWidgetPropertyPrivate : public VPropertyPrivate {
+class VWidgetPropertyPrivate : public VPropertyPrivate
+{
 public:
     //! The widget to show
     QPointer<QWidget> Widget;
@@ -44,9 +46,12 @@ public:
         : VPropertyPrivate(), Widget(nullptr) {}
 
     //! Destructor
-    ~VWidgetPropertyPrivate() {
-        if(Widget)
+    ~VWidgetPropertyPrivate()
+    {
+        if (Widget)
+        {
             Widget->deleteLater();
+        }
     }
 };
 

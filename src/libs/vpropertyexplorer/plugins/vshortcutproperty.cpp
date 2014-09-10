@@ -42,7 +42,7 @@ VShortcutProperty::~VShortcutProperty()
 
 QVariant VShortcutProperty::data (int column, int role) const
 {
-    if(column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
         return d_ptr->VariantValue;
     }
@@ -57,8 +57,10 @@ QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionVie
     Q_UNUSED(options);
 
     VShortcutEditWidget* tmpWidget = new VShortcutEditWidget(parent);
-    if(delegate)
+    if (delegate)
+    {
         VShortcutEditWidget::connect(tmpWidget, SIGNAL(commitData(QWidget*)), delegate, SIGNAL(commitData(QWidget*)));
+    }
 
     return tmpWidget;
     return nullptr;
@@ -68,8 +70,10 @@ QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionVie
 bool VShortcutProperty::setEditorData(QWidget* editor)
 {
     VShortcutEditWidget* tmpWidget = qobject_cast<VShortcutEditWidget*>(editor);
-    if(tmpWidget)
+    if (tmpWidget)
+    {
         tmpWidget->setShortcut(d_ptr->VariantValue.toString(), false);
+    }
     else
         return false;
 
@@ -80,8 +84,10 @@ bool VShortcutProperty::setEditorData(QWidget* editor)
 QVariant VShortcutProperty::getEditorData(QWidget* editor) const
 {
     VShortcutEditWidget* tmpWidget = qobject_cast<VShortcutEditWidget*>(editor);
-    if(tmpWidget)
+    if (tmpWidget)
+    {
         return tmpWidget->getShortcutAsString();
+    }
 
     return QVariant();
 }
@@ -101,4 +107,3 @@ void VShortcutProperty::setValue(const QVariant &value)
 {
     VProperty::setValue(QKeySequence::fromString(value.toString()).toString());
 }
-

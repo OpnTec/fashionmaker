@@ -28,7 +28,8 @@
 #include <QLineEdit>
 #include <QMimeData>
 
-namespace VPE{
+namespace VPE
+{
 
 
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutEditWidget : public QWidget

@@ -25,7 +25,8 @@
 
 #include <QStyledItemDelegate>
 
-namespace VPE {
+namespace VPE
+{
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyDelegate : public QStyledItemDelegate
 {

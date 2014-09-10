@@ -27,7 +27,8 @@
 
 class QFormLayout;
 
-namespace VPE {
+namespace VPE
+{
 
 class VPropertyFormWidgetPrivate;
 class VPropertySet;
@@ -38,7 +39,8 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormWidget : public QGroupBox
     Q_OBJECT
 public:
     //! Constructor
-    VPropertyFormWidget(const QString& title, const QString& description, const QList<VProperty*>& properties, QWidget* parent);
+    VPropertyFormWidget(const QString& title, const QString& description, const QList<VProperty*>& properties,
+                        QWidget* parent);
 
     //! Constructor
     VPropertyFormWidget(VProperty* parent_property, QWidget* parent);
@@ -69,7 +71,8 @@ public slots:
     void loadData(int row);
 
     //! Sets the update behaviour
-    //! \param auto_commit If set to true, whenever an event like focusOut is triggered on an editor, the data will be submitted to the property.
+    //! \param auto_commit If set to true, whenever an event like focusOut is triggered on an editor, the data will be
+    //! submitted to the property.
     void setCommitBehaviour(bool auto_commit = true);
 
 signals:
@@ -92,6 +95,6 @@ protected:
 
 };
 
-}	// Namespace VPE
+}   // Namespace VPE
 
 #endif // VPROPERTYFORMWIDGET_H

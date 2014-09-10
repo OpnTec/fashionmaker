@@ -267,4 +267,3 @@ void VMainGraphicsView::setShowToolOptions(bool value)
 {
     showToolOptions = value;
 }
-

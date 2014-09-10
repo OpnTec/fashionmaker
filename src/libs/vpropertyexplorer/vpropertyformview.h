@@ -25,7 +25,8 @@
 #include <QPointer>
 #include "vpropertyformwidget.h"
 
-namespace VPE {
+namespace VPE
+{
 
 class VProperty;
 class VPropertyModel;
@@ -57,7 +58,8 @@ public slots:
     //! \param model The model to use
     void setModel(VPropertyModel* model);
 
-    //! Set the property set to use. Note that if using a property set directly, adding and removing properties to the property set leads to undifined behaviour for the property set misses notification signals.
+    //! Set the property set to use. Note that if using a property set directly, adding and removing properties to the
+    //! property set leads to undifined behaviour for the property set misses notification signals.
     //! \param model The property set to use
     void setPropertySet(VPropertySet* property_set);
 
@@ -96,6 +98,6 @@ protected:
 
 };
 
-}	// Namespace VPE
+}   // Namespace VPE
 
 #endif // VPROPERTYFORMVIEW_H

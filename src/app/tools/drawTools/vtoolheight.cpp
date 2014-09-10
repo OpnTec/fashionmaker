@@ -338,4 +338,3 @@ void VToolHeight::setP1LineId(const quint32 &value)
         SaveOption(obj);
     }
 }
-

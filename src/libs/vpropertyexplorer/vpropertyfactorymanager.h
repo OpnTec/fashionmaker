@@ -24,7 +24,8 @@
 #include "vpropertyexplorer_global.h"
 #include <QObject>
 
-namespace VPE {
+namespace VPE
+{
 
 class VAbstractPropertyFactory;
 class VPropertyFactoryManagerPrivate;
@@ -47,8 +48,10 @@ public:
 
     //! Removes a factory from the manager.
     //! \param factory The factory to unregister
-    //! \param type The type from which to remove the factory. If this is empty, all the types the factory is registered for are being removed
-    //! \param delete_if_unused Determines whether the factory should be deleted, if it not used anymore by this manager. Default: true. Otherwise, if the factory is unused by this manager, ownership is being passed on.
+    //! \param type The type from which to remove the factory. If this is empty, all the types the factory is registered
+    //! for are being removed
+    //! \param delete_if_unused Determines whether the factory should be deleted, if it not used anymore by this
+    //! manager. Default: true. Otherwise, if the factory is unused by this manager, ownership is being passed on.
     void unregisterFactory(VAbstractPropertyFactory* factory, const QString& type = QString(),
                            bool delete_if_unused = true);
 

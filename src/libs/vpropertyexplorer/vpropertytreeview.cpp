@@ -38,15 +38,19 @@ VPropertyTreeView::VPropertyTreeView(VPropertyModel *model, QWidget *parent)
 {
     init();
 
-    if(model)
+    if (model)
+    {
         setModel(model);
+    }
 }
 
 VPropertyTreeView::VPropertyTreeView(VPropertyTreeViewPrivate *d, bool init_, QWidget *parent)
     : QTreeView(parent), d_ptr(d)
 {
-    if(init_)
+    if (init_)
+    {
         init();
+    }
 }
 
 VPropertyTreeView::~VPropertyTreeView()
@@ -73,5 +77,3 @@ void VPropertyTreeView::init()
 
     setEditTriggers(QAbstractItemView::CurrentChanged | QAbstractItemView::SelectedClicked);
 }
-
-

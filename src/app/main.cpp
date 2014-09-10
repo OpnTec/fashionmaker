@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
     //Before we load pattern show window.
     w.show();
 
-    for(int i=0;i<args.size();++i)
+    for (int i=0;i<args.size();++i)
     {
         if (i == 0)
         {

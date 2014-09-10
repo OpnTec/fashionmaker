@@ -26,14 +26,17 @@
 #include <QMap>
 #include <QString>
 
-namespace VPE {
+namespace VPE
+{
 
 class VProperty;
 
-class VPropertySetPrivate {
+class VPropertySetPrivate
+{
 public:
     //! Property map (ID, Property)
-    QMap<QString, VProperty*> Properties; // All the Properties managed by this model are being stored in this map for quick access
+    QMap<QString, VProperty*> Properties; // All the Properties managed by this model are being stored in this map for
+    //quick access
 
     //! List containing the root properties
     QList<VProperty*> RootProperties;

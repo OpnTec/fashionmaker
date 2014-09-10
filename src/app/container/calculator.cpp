@@ -190,7 +190,7 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
 
         if (found == false)
         {
-            throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN , i.value(), formula, i.key());
+            throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
         }
         ++i;
     }

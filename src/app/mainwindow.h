@@ -237,7 +237,7 @@ private:
     QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
     void               OpenPattern(const QString &filePath);
     QComboBox          *SetGradationList(const QString &label, const QStringList &list);
-    void               ChangePP(int index , bool zoomBestFit = true);
+    void               ChangePP(int index, bool zoomBestFit = true);
     /**
      * @brief EndVisualization try show dialog after and working with tool visualization.
      */

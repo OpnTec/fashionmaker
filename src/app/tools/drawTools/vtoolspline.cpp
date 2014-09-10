@@ -354,7 +354,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 void VToolSpline::RefreshGeometry()
 {
     //this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    if(isHovered)
+    if (isHovered)
     {
         this->setPath(ToolPath(PathDirection::Show));
     }

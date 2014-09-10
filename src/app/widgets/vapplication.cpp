@@ -2075,13 +2075,13 @@ void VApplication::restoreOverrideCursor(const QString &pixmapPath, int hotX, in
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VApplication::LabelLanguages()
 {
-    QStringList list{"de" , // German
-                     "en" , // English
-                     "fr" , // French
-                     "ru" , // Russian
-                     "uk" , // Ukrainian
-                     "hr" , // Croatian
-                     "sr" , // Serbian
+    QStringList list{"de", // German
+                     "en", // English
+                     "fr", // French
+                     "ru", // Russian
+                     "uk", // Ukrainian
+                     "hr", // Croatian
+                     "sr", // Serbian
                      "bs"   // Bosnian
                     };
     return list;

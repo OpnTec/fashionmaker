@@ -28,15 +28,16 @@
 
 #include "vproperty.h"
 
-namespace VPE {
+namespace VPE
+{
 
 // Forward declaration
 class VPropertySetPrivate;
 
 // todo: better description
-//! \brief	VPropertySet is a simple class for managing a set of properties.
-//!			If you don't need all the Model-functionality, chose this class
-//!			over VPropertyModel.
+//! \brief  VPropertySet is a simple class for managing a set of properties.
+//!         If you don't need all the Model-functionality, chose this class
+//!         over VPropertyModel.
 //!
 
 //!
@@ -49,15 +50,19 @@ public:
     //! Destructor
     virtual ~VPropertySet();
 
-    //! Adds the property to the model and attaches it to the parentid. Note that if the property has a parent which is not part of this set, it will be removed from that parent.
+    //! Adds the property to the model and attaches it to the parentid. Note that if the property has a parent which is
+    //! not part of this set, it will be removed from that parent.
     //! \param property The property to add
-    //! \param id The property ID. If id is empty, the property will not be accessable by it's id but still be added. If the property was filed under another ID before, that will no longer be valid.
-    //! \param parentid The property's ID to which to add the property as child. Pass empty string to add it to the root properties.
+    //! \param id The property ID. If id is empty, the property will not be accessable by it's id but still be added.
+    //! If the property was filed under another ID before, that will no longer be valid.
+    //! \param parentid The property's ID to which to add the property as child. Pass empty string to add it to the
+    //! root properties.
     virtual bool addProperty(VProperty* property, const QString& id, const QString& parentid);
 
     //! Adds the property to the model and attaches it to the parent property.
     //! \param property The property to add
-    //! \param id The property ID. If id is empty, the property will not be accessable by it's id but still be added. If the property was filed under another ID before, that will no longer be valid.
+    //! \param id The property ID. If id is empty, the property will not be accessable by it's id but still be added.
+    //! If the property was filed under another ID before, that will no longer be valid.
     //! \param parentid The property to which to add the property as child. Pass NULL to add it to the root properties.
     virtual bool addProperty(VProperty* property, const QString& id, VProperty* parent_property = nullptr);
 

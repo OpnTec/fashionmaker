@@ -26,7 +26,8 @@
 #include <QMap>
 #include <QString>
 
-namespace VPE {
+namespace VPE
+{
 
 class VPropertyDelegate;
 

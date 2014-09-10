@@ -37,17 +37,21 @@ VObjectProperty::VObjectProperty(const QString& name)
 //! Get the data how it should be displayed
 QVariant VObjectProperty::data (int column, int role) const
 {
-    if(objects.empty())
+    if (objects.empty())
+    {
         return QVariant();
+    }
 
     QComboBox* tmpEditor = qobject_cast<QComboBox*>(VProperty::d_ptr->editor);
 
-    if(column == DPC_Data && Qt::DisplayRole == role)
+    if (column == DPC_Data && Qt::DisplayRole == role)
     {
         return VProperty::d_ptr->VariantValue;
     }
-    else if(column == DPC_Data && Qt::EditRole == role)
+    else if (column == DPC_Data && Qt::EditRole == role)
+    {
         return tmpEditor->currentIndex();
+    }
     else
         return VProperty::data(column, role);
 }
@@ -71,11 +75,13 @@ QWidget* VObjectProperty::createEditor(QWidget * parent, const QStyleOptionViewI
 
 bool VObjectProperty::setEditorData(QWidget *editor)
 {
-    if(!editor)
+    if (!editor)
+    {
         return false;
+    }
 
     QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
-    if(tmpEditor)
+    if (tmpEditor)
     {
         quint32 objId = VProperty::d_ptr->VariantValue.toUInt();
         qint32 tmpIndex = tmpEditor->findData(objId);
@@ -97,8 +103,10 @@ bool VObjectProperty::setEditorData(QWidget *editor)
 QVariant VObjectProperty::getEditorData(QWidget* editor) const
 {
     QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
-    if(tmpEditor)
+    if (tmpEditor)
+    {
         return tmpEditor->itemData(tmpEditor->currentIndex());
+    }
 
     return QVariant(0);
 }

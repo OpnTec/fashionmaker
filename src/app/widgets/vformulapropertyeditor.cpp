@@ -52,7 +52,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent) :
     ToolButton->setText(tr("..."));
     ToolButton->setFixedWidth(20);
     ToolButton->installEventFilter(this);
-    setFocusProxy(ToolButton);	// Make the ToolButton the focus proxy
+    setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
     connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
 
@@ -105,7 +105,7 @@ void VFormulaPropertyEditor::onToolButtonClicked()
 //---------------------------------------------------------------------------------------------------------------------
 bool VFormulaPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 {
-    if(obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
+    if (obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
     {
         // Ignore the event, so that eventually the delegate gets the event.
         ev->ignore();

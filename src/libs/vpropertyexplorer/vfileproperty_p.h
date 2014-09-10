@@ -25,9 +25,11 @@
 
 #include "vproperty_p.h"
 
-namespace VPE {
+namespace VPE
+{
 
-class VFilePropertyPrivate : public VPropertyPrivate {
+class VFilePropertyPrivate : public VPropertyPrivate
+{
 public:
     //! File filters
     QString FileFilters;

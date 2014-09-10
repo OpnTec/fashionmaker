@@ -62,18 +62,26 @@ VFormulaProperty::VFormulaProperty(const QString &name) :
 //! Get the data how it should be displayed
 QVariant VFormulaProperty::data (int column, int role) const
 {
-    if(column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    {
         return getValue();
+    }
     else
+    {
         return VProperty::data(column, role);
+    }
 }
 
 Qt::ItemFlags VFormulaProperty::flags(int column) const
 {
-    if(column == DPC_Name || column == DPC_Data)
+    if (column == DPC_Name || column == DPC_Data)
+    {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    }
     else
+    {
         return Qt::NoItemFlags;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,7 +105,7 @@ QWidget* VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewI
 bool VFormulaProperty::setEditorData(QWidget* editor)
 {
     VFormulaPropertyEditor* tmpWidget = qobject_cast<VFormulaPropertyEditor*>(editor);
-    if(tmpWidget)
+    if (tmpWidget)
     {
         VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
         tmpWidget->setFormula(formula);
@@ -113,7 +121,7 @@ bool VFormulaProperty::setEditorData(QWidget* editor)
 QVariant VFormulaProperty::getEditorData(QWidget* editor) const
 {
     VFormulaPropertyEditor* tmpWidget = qobject_cast<VFormulaPropertyEditor*>(editor);
-    if(tmpWidget)
+    if (tmpWidget)
     {
         QVariant value;
         value.setValue(tmpWidget->getFormula());
@@ -132,19 +140,22 @@ QString VFormulaProperty::type() const
 //---------------------------------------------------------------------------------------------------------------------
 VProperty *VFormulaProperty::clone(bool include_children, VProperty *container) const
 {
-    if(!container) {
+    if (!container)
+    {
         container = new VFormulaProperty(getName());
 
-        if(!include_children) {
+        if (!include_children)
+        {
             QList<VProperty*> tmpChildren = container->getChildren();
-            foreach(VProperty* tmpChild, tmpChildren) {
+            foreach (VProperty* tmpChild, tmpChildren)
+            {
                 container->removeChild(tmpChild);
                 delete tmpChild;
             }
         }
     }
 
-    return VProperty::clone(false, container);	// Child
+    return VProperty::clone(false, container);  // Child
 
 }
 
@@ -173,8 +184,10 @@ VFormula VFormulaProperty::getFormula() const
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::setFormula(const VFormula &formula)
 {
-    if(d_ptr->Children.count() < 2)
+    if (d_ptr->Children.count() < 2)
+    {
         return;
+    }
 
     QVariant value;
     value.setValue(formula);

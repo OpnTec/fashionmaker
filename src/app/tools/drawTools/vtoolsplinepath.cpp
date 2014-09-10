@@ -417,7 +417,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
  */
 void VToolSplinePath::RefreshGeometry()
 {
-    if(isHovered)
+    if (isHovered)
     {
         this->setPath(ToolPath(PathDirection::Show));
     }

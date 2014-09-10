@@ -27,7 +27,8 @@
 
 class QComboBox;
 
-namespace VPE{
+namespace VPE
+{
 
 class VPROPERTYEXPLORERSHARED_EXPORT VObjectProperty : public VProperty
 {
@@ -45,8 +46,10 @@ public:
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
     //! \options Render options
-    //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate);
+    //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
+    //! slots.
+    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+                                  const QAbstractItemDelegate* delegate);
 
     //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
     virtual bool setEditorData(QWidget* editor);
@@ -68,7 +71,8 @@ public:
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
-    //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried to fill all the data into container. This can also be used when subclassing this function.
+    //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
+    //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
     virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
@@ -80,7 +84,8 @@ protected:
     QMap<QString, quint32> objects;
 
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
-    // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other members by reimplementing the VPropertyPrivate class without touching this header file.
+    // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
+    //members by reimplementing the VPropertyPrivate class without touching this header file.
 };
 
 }

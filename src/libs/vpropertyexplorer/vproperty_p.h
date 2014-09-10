@@ -27,9 +27,11 @@
 #include <QString>
 #include "vproperty.h"
 
-namespace VPE {
+namespace VPE
+{
 
-class VPropertyPrivate {
+class VPropertyPrivate
+{
 public:
     //! The property's value.
     //! This does not have to be used by subclasses, but it makes sense in cases where QVariant supports

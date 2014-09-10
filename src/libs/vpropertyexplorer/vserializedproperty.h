@@ -30,7 +30,8 @@
 #include "vproperty.h"
 #include "vpropertyset.h"
 
-namespace VPE {
+namespace VPE
+{
 
 
 class VPROPERTYEXPLORERSHARED_EXPORT VSerializedProperty

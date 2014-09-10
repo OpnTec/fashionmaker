@@ -45,7 +45,7 @@ VProperty::~VProperty()
 {
     setParent(nullptr);
 
-    while(!d_ptr->Children.isEmpty())
+    while (!d_ptr->Children.isEmpty())
     {
         VProperty* tmpChild = d_ptr->Children.takeLast();
         delete tmpChild;
@@ -62,12 +62,18 @@ QString VProperty::type() const
 //! Get the data how it should be displayed
 QVariant VProperty::data (int column, int role) const
 {
-    if(column == DPC_Name && Qt::DisplayRole == role)
+    if (column == DPC_Name && Qt::DisplayRole == role)
+    {
         return QVariant(d_ptr->Name);
-    else if(column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    }
+    else if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    {
         return d_ptr->VariantValue;
-    else if(Qt::ToolTipRole == role)
+    }
+    else if (Qt::ToolTipRole == role)
+    {
         return QVariant(d_ptr->Description);
+    }
     else
         return QVariant();
 }
@@ -75,7 +81,7 @@ QVariant VProperty::data (int column, int role) const
 bool VProperty::setData(const QVariant &data, int role)
 {
     bool tmpResult = false;
-    if(Qt::EditRole == role)
+    if (Qt::EditRole == role)
     {
         tmpResult = (d_ptr->VariantValue != data);
         setValue(data);
@@ -84,7 +90,8 @@ bool VProperty::setData(const QVariant &data, int role)
     return tmpResult;
 }
 
-bool VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, const QAbstractItemDelegate *delegate) const
+bool VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
+                      const QAbstractItemDelegate *delegate) const
 {
     Q_UNUSED(painter);
     Q_UNUSED(option);
@@ -95,7 +102,8 @@ bool VProperty::paint(QPainter *painter, const QStyleOptionViewItem &option, con
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate)
+QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                 const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options);
     Q_UNUSED(delegate);
@@ -111,12 +119,15 @@ QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& o
 
 bool VProperty::setEditorData(QWidget* editor)
 {
-    if(!editor)
+    if (!editor)
+    {
         return false;
+    }
 
     QByteArray n = editor->metaObject()->userProperty().name();
 
-    if (!n.isEmpty()) {
+    if (!n.isEmpty())
+    {
         editor->blockSignals(true);
         editor->setProperty(n, d_ptr->VariantValue);
         editor->blockSignals(false);
@@ -129,13 +140,17 @@ bool VProperty::setEditorData(QWidget* editor)
 //! Gets the data from the widget
 QVariant VProperty::getEditorData(QWidget* editor) const
 {
-    if(!editor)
+    if (!editor)
+    {
         return QVariant();
+    }
 
     QByteArray n = editor->metaObject()->userProperty().name();
 
     if (!n.isEmpty())
+    {
         return editor->property(n);
+    }
     else
         return QVariant();
 }
@@ -143,10 +158,14 @@ QVariant VProperty::getEditorData(QWidget* editor) const
 //! Returns item flags
 Qt::ItemFlags VProperty::flags(int column) const
 {
-    if(column == DPC_Name)
+    if (column == DPC_Name)
+    {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-    else if(column == DPC_Data)
+    }
+    else if (column == DPC_Data)
+    {
         return Qt::ItemIsEnabled | Qt::ItemIsEditable | Qt::ItemIsSelectable;
+    }
     else
         return Qt::NoItemFlags;
 }
@@ -161,7 +180,6 @@ void VProperty::setValue(const QVariant &value)
         setEditorData(d_ptr->editor);
     }
 }
-
 
 QVariant VProperty::getValue() const
 {
@@ -202,9 +220,6 @@ QString VProperty::getDescription() const
     return d_ptr->Description;
 }
 
-
-
-
 //! Returns a reference to the list of children
 QList<VProperty*>& VProperty::getChildren()
 {
@@ -220,8 +235,10 @@ const QList<VProperty*>& VProperty::getChildren() const
 //! Returns the child at a certain row
 VProperty* VProperty::getChild(int row) const
 {
-    if(row >= 0 && row < getRowCount())
+    if (row >= 0 && row < getRowCount())
+    {
         return d_ptr->Children.at(row);
+    }
     else
         return nullptr;
 }
@@ -241,25 +258,33 @@ VProperty* VProperty::getParent() const
 //! Sets the parent of this property
 void VProperty::setParent(VProperty* parent)
 {
-    if(d_ptr->Parent == parent)
+    if (d_ptr->Parent == parent)
+    {
         return;
+    }
 
     VProperty* oldParent = d_ptr->Parent;
     d_ptr->Parent = parent;
 
-    if(oldParent)
+    if (oldParent)
+    {
         oldParent->removeChild(this);
+    }
 
-    if(d_ptr->Parent && d_ptr->Parent->getChildRow(this) == -1)
+    if (d_ptr->Parent && d_ptr->Parent->getChildRow(this) == -1)
+    {
         d_ptr->Parent->addChild(this);
+    }
 }
 
 int VProperty::addChild(VProperty *child)
 {
-    if(child && child->getParent() != this)
+    if (child && child->getParent() != this)
+    {
         child->setParent(this);
+    }
 
-    if(!d_ptr->Children.contains(child) && child != nullptr)
+    if (!d_ptr->Children.contains(child) && child != nullptr)
     {
         d_ptr->Children.push_back(child);
         return d_ptr->Children.count()-1;
@@ -275,8 +300,10 @@ void VProperty::removeChild(VProperty* child)
 {
     d_ptr->Children.removeAll(child);
 
-    if(child && child->getParent() == this)
+    if (child && child->getParent() == this)
+    {
         child->setParent(nullptr);
+    }
 }
 
 //! Returns the row the child has
@@ -284,7 +311,6 @@ int VProperty::getChildRow(VProperty* child) const
 {
     return d_ptr->Children.indexOf(child);
 }
-
 
 //! Returns whether the views have to update the parent of this property if it changes
 bool VProperty::getUpdateParent() const
@@ -309,7 +335,8 @@ void VProperty::setUpdateBehaviour(bool update_parent, bool update_children)
 void VProperty::setSettings(const QMap<QString, QVariant>& settings)
 {
     QMap<QString, QVariant>::const_iterator tmpIterator = settings.constBegin();
-    for (; tmpIterator != settings.constEnd(); ++tmpIterator) {
+    for (; tmpIterator != settings.constEnd(); ++tmpIterator)
+    {
         setSetting(tmpIterator.key(), tmpIterator.value());
     }
 }
@@ -346,8 +373,10 @@ QStringList VProperty::getSettingKeys() const
 
 VProperty* VProperty::clone(bool include_children, VProperty* container) const
 {
-    if(!container)
+    if (!container)
+    {
         container = new VProperty(getName(), d_ptr->PropertyVariantType);
+    }
 
     container->setName(getName());
     container->setDescription(getDescription());
@@ -356,7 +385,8 @@ VProperty* VProperty::clone(bool include_children, VProperty* container) const
     container->setUpdateBehaviour(getUpdateParent(), getUpdateChildren());
     container->setPropertyType(propertyType());
 
-    if(include_children) {
+    if (include_children)
+    {
         foreach(VProperty* tmpChild, d_ptr->Children)
             container->addChild(tmpChild->clone(true));
     }

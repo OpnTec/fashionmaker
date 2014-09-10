@@ -27,7 +27,7 @@ using namespace VPE;
 #include <QStringList>
 
 QVector3DProperty::QVector3DProperty(const QString& name)
-    : VProperty(name, QVariant::String)	// todo: QVariant::Vector3D??
+    : VProperty(name, QVariant::String) // todo: QVariant::Vector3D??
 {
     QVariant tmpFloat(0); tmpFloat.convert(QVariant::Double);
     VDoubleProperty* tmpX = new VDoubleProperty("X"); addChild(tmpX); tmpX->setUpdateBehaviour(true, false);
@@ -40,7 +40,7 @@ QVector3DProperty::QVector3DProperty(const QString& name)
 //! Get the data how it should be displayed
 QVariant QVector3DProperty::data (int column, int role) const
 {
-    if(column == DPC_Data && Qt::DisplayRole == role)
+    if (column == DPC_Data && Qt::DisplayRole == role)
     {
         Vector3D tmpVect = getVector();
         return QString("(%1, %2, %3)").arg(QString::number(tmpVect.X),
@@ -54,8 +54,10 @@ QVariant QVector3DProperty::data (int column, int role) const
 //! Returns item flags
 Qt::ItemFlags QVector3DProperty::flags(int column) const
 {
-    if(column == DPC_Name || column == DPC_Data)
+    if (column == DPC_Name || column == DPC_Data)
+    {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    }
     else
         return Qt::NoItemFlags;
 }
@@ -66,8 +68,10 @@ Vector3D QVector3DProperty::getVector() const
 {
     Vector3D tmpVect;
 
-    if(d_ptr->Children.count() < 3)
+    if (d_ptr->Children.count() < 3)
+    {
         return tmpVect;
+    }
 
     tmpVect.X = d_ptr->Children.at(0)->getValue().toFloat();
     tmpVect.Y = d_ptr->Children.at(1)->getValue().toFloat();
@@ -84,8 +88,10 @@ void QVector3DProperty::setVector(const Vector3D &vect)
 
 void QVector3DProperty::setVector(float x, float y, float z)
 {
-    if(d_ptr->Children.count() < 3)
+    if (d_ptr->Children.count() < 3)
+    {
         return;
+    }
 
     QVariant tmpX(x); tmpX.convert(QVariant::Double);
     QVariant tmpY(y); tmpY.convert(QVariant::Double);
@@ -102,25 +108,29 @@ QString QVector3DProperty::type() const
 
 VProperty* QVector3DProperty::clone(bool include_children, VProperty* container) const
 {
-    if(!container) {
+    if (!container)
+    {
         container = new QVector3DProperty(getName());
 
-        if(!include_children) {
+        if (!include_children)
+        {
             QList<VProperty*> tmpChildren = container->getChildren();
-            foreach(VProperty* tmpChild, tmpChildren) {
+            foreach (VProperty* tmpChild, tmpChildren)
+            {
                 container->removeChild(tmpChild);
                 delete tmpChild;
             }
         }
     }
 
-    return VProperty::clone(false, container);	// Child
+    return VProperty::clone(false, container);  // Child
 }
 
 void QVector3DProperty::setValue(const QVariant &value)
 {
     QStringList tmpStrings = value.toString().split(",");
-    if(tmpStrings.count() == 3) {
+    if (tmpStrings.count() == 3)
+    {
         setVector(tmpStrings[0].toDouble(), tmpStrings[1].toDouble(), tmpStrings[2].toDouble());
     }
 

@@ -61,8 +61,10 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
 QVariant VPE::VStringProperty::getEditorData(QWidget *editor) const
 {
     QLineEdit* tmpEditor = qobject_cast<QLineEdit*>(editor);
-    if(tmpEditor)
+    if (tmpEditor)
+    {
         return tmpEditor->text();
+    }
 
     return QVariant(QStringLiteral(""));
 }
@@ -74,18 +76,26 @@ void VPE::VStringProperty::setReadOnly(bool readOnly)
 
 void VPE::VStringProperty::setSetting(const QString &key, const QVariant &value)
 {
-    if(key == QLatin1String("ReadOnly"))
+    if (key == QLatin1String("ReadOnly"))
+    {
         setReadOnly(value.toBool());
-    if(key == QLatin1String("TypeForParent"))
+    }
+    if (key == QLatin1String("TypeForParent"))
+    {
         setTypeForParent(value.toInt());
+    }
 }
 
 QVariant VPE::VStringProperty::getSetting(const QString &key) const
 {
-    if(key == QLatin1String("ReadOnly"))
+    if (key == QLatin1String("ReadOnly"))
+    {
         return readOnly;
+    }
     else if (key == QLatin1String("TypeForParent"))
+    {
         return typeForParent;
+    }
     else
         return VProperty::getSetting(key);
 }
@@ -121,4 +131,3 @@ void VStringProperty::setTypeForParent(int value)
 {
     typeForParent = value;
 }
-

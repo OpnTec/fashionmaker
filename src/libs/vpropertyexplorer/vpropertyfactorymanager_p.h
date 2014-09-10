@@ -26,11 +26,13 @@
 #include <QMap>
 #include <QString>
 
-namespace VPE {
+namespace VPE
+{
 
 class VAbstractPropertyFactory;
 
-class VPropertyFactoryManagerPrivate {
+class VPropertyFactoryManagerPrivate
+{
 public:
     QMap<QString, VAbstractPropertyFactory*> Factories;
 

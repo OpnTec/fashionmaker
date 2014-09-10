@@ -28,7 +28,8 @@
 #include <QLineEdit>
 #include <QMimeData>
 
-namespace VPE{
+namespace VPE
+{
 
 
 class VPROPERTYEXPLORERSHARED_EXPORT VFileEditWidget : public QWidget
@@ -84,8 +85,6 @@ protected:
     void dragMoveEvent(QDragMoveEvent* event);
     void dragLeaveEvent(QDragLeaveEvent* event);
     void dropEvent(QDropEvent* event);
-
-
 
     //! This function checks the mime data, if it is compatible with the filters
     virtual bool checkMimeData(const QMimeData* data, QString& getFile) const;

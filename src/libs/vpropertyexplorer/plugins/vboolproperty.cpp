@@ -41,27 +41,38 @@ VBoolProperty::VBoolProperty(const QString& name) :
     d_ptr->VariantValue.convert(QVariant::Bool);
 
     // I'm not sure, how Qt handles the translations...
-    if(TrueText.isNull()) TrueText = QObject::tr("True");
-    if(TrueText.isNull()) FalseText = QObject::tr("False");
+    if (TrueText.isNull())
+    {
+        TrueText = QObject::tr("True");
+    }
+    if (TrueText.isNull())
+    {
+        FalseText = QObject::tr("False");
+    }
 }
 
 
 //! Get the data how it should be displayed
 QVariant VBoolProperty::data (int column, int role) const
 {
-    if(column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    {
         return d_ptr->VariantValue.toBool() ? TrueText : FalseText;
-    if(column == DPC_Data && Qt::CheckStateRole == role)
+    }
+    if (column == DPC_Data && Qt::CheckStateRole == role)
+    {
         return d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked;
+    }
     else
         return VProperty::data(column, role);
 }
 
 bool VBoolProperty::setData(const QVariant &data, int role)
 {
-    if(Qt::CheckStateRole == role)
+    if (Qt::CheckStateRole == role)
     {
-        d_ptr->VariantValue = (Qt::Checked == static_cast<Qt::CheckState>(data.toInt())); return true;
+        d_ptr->VariantValue = (Qt::Checked == static_cast<Qt::CheckState>(data.toInt()));
+        return true;
     }
 
     return false;
@@ -70,8 +81,10 @@ bool VBoolProperty::setData(const QVariant &data, int role)
 //! Returns item flags
 Qt::ItemFlags VBoolProperty::flags(int column) const
 {
-    if(column == DPC_Data)
+    if (column == DPC_Data)
+    {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
+    }
     else
         return VProperty::flags(column);
 }

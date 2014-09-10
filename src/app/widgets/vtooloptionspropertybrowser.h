@@ -41,8 +41,6 @@ class QGraphicsItem;
 class QScrollArea;
 class VFormula;
 
-using namespace VPE;
-
 class VToolOptionsPropertyBrowser : public QObject
 {
     Q_OBJECT
@@ -50,19 +48,19 @@ public:
     VToolOptionsPropertyBrowser(QDockWidget *parent);
 public slots:
     void itemClicked(QGraphicsItem *item);
-    void userChangedData(VProperty* property);
+    void userChangedData(VPE::VProperty* property);
     void UpdateOptions();
 private:
     Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
 
-    VPropertyModel* PropertyModel;
-    VPropertyFormView* formView;
+    VPE::VPropertyModel* PropertyModel;
+    VPE::VPropertyFormView* formView;
 
     QGraphicsItem *currentItem;
-    QMap<VProperty *, QString> propertyToId;
-    QMap<QString, VProperty *> idToProperty;
+    QMap<VPE::VProperty *, QString> propertyToId;
+    QMap<QString, VPE::VProperty *> idToProperty;
 
-    void AddProperty(VProperty *property, const QString &id);
+    void AddProperty(VPE::VProperty *property, const QString &id);
     void ShowItemOptions(QGraphicsItem *item);
 
     template<class Tool>
@@ -78,24 +76,24 @@ private:
 
     QStringList PropertiesList() const;
 
-    void ChangeDataToolSinglePoint(VProperty *property);
-    void ChangeDataToolEndLine(VProperty *property);
-    void ChangeDataToolAlongLine(VProperty *property);
-    void ChangeDataToolArc(VProperty *property);
-    void ChangeDataToolBisector(VProperty *property);
-    void ChangeDataToolCutArc(VProperty *property);
-    void ChangeDataToolCutSpline(VProperty *property);
-    void ChangeDataToolCutSplinePath(VProperty *property);
-    void ChangeDataToolHeight(VProperty *property);
-    void ChangeDataToolLine(VProperty *property);
-    void ChangeDataToolLineIntersect(VProperty *property);
-    void ChangeDataToolNormal(VProperty *property);
-    void ChangeDataToolPointOfContact(VProperty *property);
-    void ChangeDataToolPointOfIntersection(VProperty *property);
-    void ChangeDataToolShoulderPoint(VProperty *property);
-    void ChangeDataToolSpline(VProperty *property);
-    void ChangeDataToolSplinePath(VProperty *property);
-    void ChangeDataToolTriangle(VProperty *property);
+    void ChangeDataToolSinglePoint(VPE::VProperty *property);
+    void ChangeDataToolEndLine(VPE::VProperty *property);
+    void ChangeDataToolAlongLine(VPE::VProperty *property);
+    void ChangeDataToolArc(VPE::VProperty *property);
+    void ChangeDataToolBisector(VPE::VProperty *property);
+    void ChangeDataToolCutArc(VPE::VProperty *property);
+    void ChangeDataToolCutSpline(VPE::VProperty *property);
+    void ChangeDataToolCutSplinePath(VPE::VProperty *property);
+    void ChangeDataToolHeight(VPE::VProperty *property);
+    void ChangeDataToolLine(VPE::VProperty *property);
+    void ChangeDataToolLineIntersect(VPE::VProperty *property);
+    void ChangeDataToolNormal(VPE::VProperty *property);
+    void ChangeDataToolPointOfContact(VPE::VProperty *property);
+    void ChangeDataToolPointOfIntersection(VPE::VProperty *property);
+    void ChangeDataToolShoulderPoint(VPE::VProperty *property);
+    void ChangeDataToolSpline(VPE::VProperty *property);
+    void ChangeDataToolSplinePath(VPE::VProperty *property);
+    void ChangeDataToolTriangle(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);

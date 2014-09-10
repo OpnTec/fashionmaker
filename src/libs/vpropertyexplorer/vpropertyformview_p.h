@@ -25,7 +25,8 @@
 
 #include "vpropertyformwidget_p.h"
 
-namespace VPE {
+namespace VPE
+{
 
 class VPropertyModel;
 class VPropertySet;

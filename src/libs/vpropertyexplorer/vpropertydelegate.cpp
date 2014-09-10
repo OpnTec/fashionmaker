@@ -38,10 +38,11 @@ VPropertyDelegate::~VPropertyDelegate()
     //
 }
 
-QWidget* VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+QWidget* VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionViewItem& option,
+                                          const QModelIndex& index) const
 {
     QWidget* tmpWidget = nullptr;
-    if(index.isValid())
+    if (index.isValid())
     {
         VProperty* tmpProperty = reinterpret_cast<VProperty*>(index.internalPointer());
         tmpWidget = tmpProperty->createEditor(parent, option, this);
@@ -55,28 +56,32 @@ QWidget* VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionVie
 void VPropertyDelegate::setEditorData (QWidget * editor, const QModelIndex & index) const
 {
     bool done = false;
-    if(index.isValid() && editor)
+    if (index.isValid() && editor)
     {
         VProperty* tmpProperty = reinterpret_cast<VProperty*>(index.internalPointer());
         done = tmpProperty->setEditorData(editor);
     }
 
-    if(!done)
+    if (!done)
+    {
         QStyledItemDelegate::setEditorData(editor, index);
+    }
 }
 
 //! Updates the index data
 void VPropertyDelegate::setModelData (QWidget * editor, QAbstractItemModel * model, const QModelIndex & index) const
 {
     QVariant tmpData;
-    if(index.isValid() && editor)
+    if (index.isValid() && editor)
     {
         VProperty* tmpProperty = reinterpret_cast<VProperty*>(index.internalPointer());
         tmpData = tmpProperty->getEditorData(editor);
     }
 
-    if(tmpData.isNull())
+    if (tmpData.isNull())
+    {
         QStyledItemDelegate::setModelData(editor, model, index);
+    }
     else
         model->setData(index, tmpData);
 }
@@ -86,8 +91,10 @@ QSize VPropertyDelegate::sizeHint (const QStyleOptionViewItem& option, const QMo
     QSize tmpStandardSizeHint = QStyledItemDelegate::sizeHint(option, index);
     tmpStandardSizeHint.setHeight(tmpStandardSizeHint.height() + 1);
 
-    if(RowHeight > 0)
+    if (RowHeight > 0)
+    {
         return QSize(tmpStandardSizeHint.width(), AddRowHeight ? tmpStandardSizeHint.height() + RowHeight : RowHeight);
+    }
     else
         return tmpStandardSizeHint;
 }
@@ -101,11 +108,15 @@ void VPropertyDelegate::setRowHeight(int height, bool add_to_standard)
 void VPropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     bool done = false;
-    if(index.isValid() && index.column() == 1)
+    if (index.isValid() && index.column() == 1)
+    {
         done = reinterpret_cast<VProperty*>(index.internalPointer())->paint(painter, option, index, this);
+    }
 
-    if(!done)
+    if (!done)
+    {
         QStyledItemDelegate::paint(painter, option, index);
+    }
 
     QColor tmpPenColor = static_cast<QRgb>(QApplication::style()->styleHint(QStyle::SH_Table_GridLineColor, &option));
 
@@ -115,6 +126,3 @@ void VPropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
     painter->drawLine(option.rect.x(), option.rect.bottom(), option.rect.right(), option.rect.bottom());
     painter->setPen(tmpOldPen);
 }
-
-
-

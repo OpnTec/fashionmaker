@@ -393,4 +393,3 @@ void VToolBisector::setFirstPointId(const quint32 &value)
         SaveOption(obj);
     }
 }
-

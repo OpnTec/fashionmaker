@@ -155,7 +155,7 @@ void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line,
     axis.setLength(arrow_step);
 
     int steps = qFloor(line.length()/arrow_step);
-    for(int i=0; i<steps; ++i)
+    for (int i=0; i<steps; ++i)
     {
         DrawArrow(axis, path, arrow_size);
         axis.setLength(axis.length()+arrow_step);

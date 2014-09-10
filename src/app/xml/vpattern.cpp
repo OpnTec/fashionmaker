@@ -723,7 +723,7 @@ void VPattern::LiteParseTree(const Document &parse)
     try
     {
         emit SetEnabledGUI(true);
-        switch(parse)
+        switch (parse)
         {
             case Document::LitePPParse:
                 ParseCurrentPP();
@@ -832,7 +832,7 @@ void VPattern::ClearScene()
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::customEvent(QEvent *event)
 {
-    if(event->type() == UNDO_EVENT)
+    if (event->type() == UNDO_EVENT)
     {
         qApp->getUndoStack()->undo();
     }
@@ -1629,7 +1629,7 @@ QString VPattern::GetLabelBase(unsigned int index) const
     QStringList list = VApplication::LabelLanguages();
 
     QStringList alphabet;
-    switch(list.indexOf(checkedLocale))
+    switch (list.indexOf(checkedLocale))
     {
         case 0: // de
         {
@@ -2369,7 +2369,7 @@ QString VPattern::GenerateLabel(const LabelType &type) const
     {
         QString name;
         int i = 0;
-        for(;;)
+        for (;;)
         {
             name = GetLabelBase(drawList.size() + i);
             if (data->IsUnique(name))

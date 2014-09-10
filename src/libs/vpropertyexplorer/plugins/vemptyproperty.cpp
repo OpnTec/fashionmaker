@@ -42,18 +42,25 @@ VEmptyProperty::~VEmptyProperty()
 //! Get the data how it should be displayed
 QVariant VEmptyProperty::data (int column, int role) const
 {
-    if(column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
+    {
         return QVariant();
-    else if(role == Qt::BackgroundRole)
-        return QBrush(QColor(217,217,217));
-    else if(role == Qt::FontRole)
-    { QFont tmpFont; tmpFont.setBold(true); return tmpFont; }
+    }
+    else if (role == Qt::BackgroundRole)
+    {
+        return QBrush(QColor(217, 217, 217));
+    }
+    else if (role == Qt::FontRole)
+    {
+        QFont tmpFont; tmpFont.setBold(true); return tmpFont;
+    }
     else
         return VProperty::data(column, role);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options, const QAbstractItemDelegate* delegate)
+QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
+                                      const QAbstractItemDelegate* delegate)
 {
     Q_UNUSED(options);
     Q_UNUSED(parent);

@@ -33,7 +33,8 @@ VSerializedProperty::VSerializedProperty()
 VSerializedProperty::VSerializedProperty(const VProperty* property, const VPropertySet* set)
     : ID(), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant())
 {
-    if(set) {
+    if (set)
+    {
         ID = set->getPropertyID(property);
 
         initChildren(property, set);
@@ -58,12 +59,13 @@ VPE::VSerializedProperty::~VSerializedProperty()
 
 void VSerializedProperty::initChildren(const VProperty *property, const VPropertySet *set)
 {
-    if(property && set) {
+    if (property && set)
+    {
         const QList<VProperty*>& tmpChildren = property->getChildren();
-        foreach(const VProperty* tmpChild, tmpChildren) {
+        foreach(const VProperty* tmpChild, tmpChildren)
+        {
             QString tmpChildID = set->getPropertyID(property);
             Children.append(VSerializedProperty(tmpChild, tmpChildID, set));
         }
     }
 }
-

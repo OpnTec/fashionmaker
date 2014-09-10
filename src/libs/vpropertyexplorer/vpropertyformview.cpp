@@ -67,16 +67,21 @@ void VPropertyFormView::setModel(VPropertyModel *model)
 
     // Set model
     static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model = model;
-    if(model) {
+    if (model)
+    {
         // Set the property list
-        if(model->getPropertySet())
+        if (model->getPropertySet())
+        {
             d_ptr->Properties = model->getPropertySet()->getRootProperties();
+        }
 
         // Connect signals // todo: more signals neccesary!!!
         connect(model, SIGNAL(destroyed()), this, SLOT(modelDestroyed()));
-        connect(model, SIGNAL(rowsInserted(const QModelIndex&, int, int)), this, SLOT(rowsInserted(QModelIndex,int,int)));
+        connect(model, SIGNAL(rowsInserted(const QModelIndex&, int, int)), this,
+                SLOT(rowsInserted(QModelIndex, int, int)));
         connect(model, SIGNAL(modelReset()), this, SLOT(modelReset()));
-        connect(model, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), this, SLOT(rowsRemoved(QModelIndex,int,int)));
+        connect(model, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), this,
+                SLOT(rowsRemoved(QModelIndex, int, int)));
     }
 
     // Build the widget
@@ -90,7 +95,8 @@ void VPropertyFormView::setPropertySet(VPropertySet* property_set)
 
     // Set property set
     static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet = property_set;
-    if(property_set) {
+    if (property_set)
+    {
         // Set the property list
         d_ptr->Properties = property_set->getRootProperties();
     }
@@ -130,8 +136,10 @@ void VPropertyFormView::modelDestroyed()
 
 void VPropertyFormView::dataChanged(const QModelIndex &top_left, const QModelIndex &bottom_right)
 {
-    if(static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
+    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
+    {
         return;
+    }
     // todo: handle data changes
 }
 
@@ -139,7 +147,8 @@ void VPropertyFormView::dataSubmitted(VProperty *property)
 {
     VPropertyModel* tmpModel = static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model;
 
-    if(tmpModel && d_ptr->UpdateEditors) {
+    if (tmpModel && d_ptr->UpdateEditors)
+    {
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = true;
         tmpModel->onDataChangedByModel(property);
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = false;
@@ -149,8 +158,10 @@ void VPropertyFormView::dataSubmitted(VProperty *property)
 void VPropertyFormView::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event)
-    if(static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild)
+    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild)
+    {
         build();
+    }
     static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = false;
 }
 
@@ -159,22 +170,29 @@ void VPropertyFormView::updatePropertyList()
     VPropertyModel* tmpModel = static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model;
     VPropertySet* tmpSet = static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet;
 
-    if(tmpModel && tmpModel->getPropertySet())
+    if (tmpModel && tmpModel->getPropertySet())
+    {
         d_ptr->Properties = tmpModel->getPropertySet()->getRootProperties();
-    else if(tmpSet)
+    }
+    else if (tmpSet)
+    {
         d_ptr->Properties = tmpSet->getRootProperties();
+    }
     else
         d_ptr->Properties.clear();
 
-    if(isVisible())
+    if (isVisible())
+    {
         build();
+    }
     else
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = true;
 }
 
 void VPropertyFormView::removeModelAndSet()
 {
-    if(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model) {
+    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model)
+    {
         disconnect(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model, 0, this, 0);
         static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model = nullptr;
     }
@@ -186,14 +204,17 @@ void VPropertyFormView::removeModelAndSet()
 
 void VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widget)
 {
-    if(!widget)
+    if (!widget)
+    {
         return;
+    }
 
     connect(widget, &VPropertyFormWidget::propertyDataSubmitted, this, &VPropertyFormView::dataSubmitted,
             Qt::UniqueConnection);
     QList<VPropertyFormWidget*> tmpList = widget->getChildPropertyFormWidgets();
 
-    foreach(VPropertyFormWidget* tmpEditorWidget, tmpList) {
+    foreach(VPropertyFormWidget* tmpEditorWidget, tmpList)
+    {
         connectPropertyFormWidget(tmpEditorWidget);
     }
 }
