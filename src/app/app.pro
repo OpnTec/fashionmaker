@@ -579,14 +579,14 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 win32:RC_FILE = share/resources/valentina.rc
 
 INSTALL_TRANSLATIONS += \
-    share/translations/valentina_ru.qm \
-    share/translations/valentina_uk.qm \
-    share/translations/valentina_de.qm \
-    share/translations/valentina_cs.qm \
+    share/translations/valentina_ru_RU.qm \
+    share/translations/valentina_uk_UA.qm \
+    share/translations/valentina_de_DE.qm \
+    share/translations/valentina_cs_CZ.qm \
     share/translations/valentina_he_IL.qm \
-    share/translations/valentina_fr.qm \
-    share/translations/valentina_it.qm \
-    share/translations/valentina_nl.qm
+    share/translations/valentina_fr_FR.qm \
+    share/translations/valentina_it_IT.qm \
+    share/translations/valentina_nl_NL.qm
 
 INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
 
