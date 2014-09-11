@@ -52,14 +52,17 @@ public:
         :QSharedData(incr), id(incr.id)
     {}
 
-    virtual  ~VIncrementData() {}
+    virtual  ~VIncrementData();
 
     /** @brief id each increment have unique identificator */
     quint32 id;
 };
 
+VIncrementData::~VIncrementData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VINCREMENT_P_H

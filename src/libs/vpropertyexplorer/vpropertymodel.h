@@ -106,7 +106,6 @@ public:
     //! Returns the ID of the property within the model
     //! The concept of property IDs is, that the object that manages the properties
     //! and not the properties themselves handle the IDs.
-    //! \param property
     //! \return Returns the ID under which the property is stored within the model
     virtual QString getPropertyID(VProperty* prop) const;
 
@@ -133,7 +132,6 @@ public:
     //! \param property_set The new property set. Setting this to NULL has the same effect as calling clear.
     //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset
     //! model signals
-    //! \return A constant pointer to the property set or NULL if there currently is none.
     virtual void setPropertySet(VPropertySet* property_set, bool emit_signals = true);
 
     //! Removes a property from the model and returns it

@@ -124,7 +124,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
  * <li>the value stored in #mc_iSizeVal number of bytecode entries.</li>
  * </ul>
  *
- * @param a_pVal Value to be added.
+ * @param a_fVal Value to be added.
  * @throw nothrow
  */
 void QmuParserByteCode::AddVal(qreal a_fVal)
@@ -144,7 +144,7 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
-    std::size_t sz = m_vRPN.size();
+    int sz = m_vRPN.size();
     qreal &x = m_vRPN[sz-2].Val.data2,
           &y = m_vRPN[sz-1].Val.data2;
     switch (a_Oprt)
@@ -230,7 +230,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
 
     if (m_bEnableOptimizer)
     {
-        std::size_t sz = m_vRPN.size();
+        int sz = m_vRPN.size();
 
         // Check for foldable constants like:
         //   cmVAL cmVAL cmADD
@@ -413,12 +413,12 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
 {
     if (a_iArgc>=0)
     {
-        m_iStackPos = m_iStackPos - a_iArgc + 1;
+        m_iStackPos = m_iStackPos - static_cast<unsigned int>(a_iArgc) + 1;
     }
     else
     {
         // function with unlimited number of arguments
-        m_iStackPos = m_iStackPos + a_iArgc + 1;
+        m_iStackPos = static_cast<unsigned int>(static_cast<int>(m_iStackPos) + a_iArgc + 1);
     }
     m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
@@ -438,7 +438,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
  */
 void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
 {
-    m_iStackPos = m_iStackPos - a_iArgc + 1;
+    m_iStackPos = static_cast<unsigned int>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
     m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
 
     SToken tok;
@@ -458,7 +458,7 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
  */
 void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx)
 {
-    m_iStackPos = m_iStackPos - a_iArgc + 1;
+    m_iStackPos = static_cast<unsigned int>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
 
     SToken tok;
     tok.Cmd = cmFUNC_STR;

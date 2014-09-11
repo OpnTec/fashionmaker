@@ -52,14 +52,17 @@ public:
         :QSharedData(var), id(var.id), parentId(var.parentId)
     {}
 
-    virtual  ~VCurveLengthData() {}
+    virtual  ~VCurveLengthData();
 
     quint32 id;
     quint32 parentId;
 };
 
+VCurveLengthData::~VCurveLengthData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VCURVELENGTH_P_H

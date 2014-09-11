@@ -58,8 +58,6 @@ const QStringList QmuParserBase::c_DefaultOprt{"<=", ">=", "!=", "==", "<", ">",
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Constructor.
- * @param a_szFormula the formula to interpret.
- * @throw ParserException if a_szFormula is null.
  */
 QmuParserBase::QmuParserBase()
     :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
@@ -369,7 +367,7 @@ void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Set the formula.
- * @param a_strFormula Formula as string_type
+ * @param a_sExpr Formula as string_type
  * @throw ParserException in case of syntax errors.
  *
  * Triggers first time calculation thus the creation of the bytecode and scanning of used variables.
@@ -491,7 +489,7 @@ void QmuParserBase::DefineOprt( const QString &a_sName, fun_type2 a_pFun, unsign
         }
     }
 
-    AddCallback(a_sName, QmuParserCallback(a_pFun, a_bAllowOpt, a_iPrec, a_eAssociativity), m_OprtDef,
+    AddCallback(a_sName, QmuParserCallback(a_pFun, a_bAllowOpt, static_cast<int>(a_iPrec), a_eAssociativity), m_OprtDef,
                 ValidOprtChars() );
 }
 
@@ -655,6 +653,7 @@ const varmap_type& QmuParserBase::GetUsedVar() const
     }
     catch (const QmuParserError &e)
     {
+        Q_UNUSED(e)
         // Make sure to stay in string parse mode, dont call ReInit()
         // because it deletes the array with the used variables
         m_pParseFormula = &QmuParserBase::ParseString;
@@ -722,7 +721,7 @@ QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Apply a function token.
- * @param iArgCount Number of Arguments actually gathered used only for multiarg functions.
+ * @param a_iArgCount Number of Arguments actually gathered used only for multiarg functions.
  * @post The result is pushed to the value stack
  * @post The function token is removed from the stack
  * @throw QmuParserError if Argument count does not mach function requirements.
@@ -893,8 +892,8 @@ void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type>
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Apply a binary operator.
- * @param a_stOpt The operator stack
- * @param a_stVal The value stack
+ * @param stOpt The operator stack
+ * @param stVal The value stack
  */
 void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_type> &stVal) const
 {
@@ -1015,7 +1014,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wfloat-equal"
 #endif
-                Stack[sidx]  = Stack[sidx] && Stack[sidx+1];
+                Stack[sidx] = static_cast<bool>(Stack[sidx]) && static_cast<bool>(Stack[sidx+1]);
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic pop
 #endif
@@ -1026,7 +1025,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wfloat-equal"
 #endif
-                Stack[sidx]  = Stack[sidx] || Stack[sidx+1];
+                Stack[sidx] = static_cast<bool>(Stack[sidx]) || static_cast<bool>(Stack[sidx+1]);
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic pop
 #endif
@@ -1335,6 +1334,9 @@ void QmuParserBase::CreateRPN() const
                 }
                 ++stArgCount.top();
                 // fallthrough intentional (no break!)
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
             case cmEND:
                 ApplyRemainingOprt(stOpt, stVal);
                 break;
@@ -1391,6 +1393,9 @@ void QmuParserBase::CreateRPN() const
             case cmIF:
                 m_nIfElseCounter++;
                 // fallthrough intentional (no break!)
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
             case cmLE:
             case cmGE:
             case cmNEQ:
@@ -1554,7 +1559,7 @@ qreal QmuParserBase::ParseString() const
 *
 * @param a_iErrc [in] The error code of type #EErrorCodes.
 * @param a_iPos [in] The position where the error was detected.
-* @param a_strTok [in] The token string representation associated with the error.
+* @param a_sTok [in] The token string representation associated with the error.
 * @throw ParserException always throws thats the only purpose of this function.
 */
 void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok) const

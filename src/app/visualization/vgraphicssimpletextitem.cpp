@@ -122,7 +122,7 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     this->setBrush(Qt::black);
 
     //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+    VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -152,7 +152,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
-        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
     }
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }

@@ -97,7 +97,7 @@ public:
     VPattern           *getCurrentDocument()const;
 
     static void        setOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
-    static void        restoreOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
+    static void        restoreOverrideCursor(const QString & pixmapPath);
 
     static QStringList LabelLanguages();
 private:

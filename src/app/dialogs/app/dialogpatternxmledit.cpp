@@ -96,6 +96,7 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
 
 bool DialogPatternXmlEdit::CheckChanges(QString &message, QDomNode testRoot)
 {
+    Q_UNUSED(testRoot)
     message="OK";
     return true;
 }
@@ -893,6 +894,7 @@ void DialogPatternXmlEdit::ButtonSetClicked()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternXmlEdit::NameTextEdited(QString newtext)
 {
+    Q_UNUSED(newtext)
     //QMessageBox::information(this, "nameTextEdited", QString("%1").arg(newtext));
     ui->pushButton_Set_Values->setEnabled(true);
     ui->pushButton_Cancel_Values->setEnabled(true);
@@ -901,6 +903,7 @@ void DialogPatternXmlEdit::NameTextEdited(QString newtext)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternXmlEdit::ValueTextEdited(QString newtext)
 {
+    Q_UNUSED(newtext)
     //QMessageBox::information(this, "valueTextEdited", QString("%1").arg(newtext));
     ui->pushButton_Set_Values->setEnabled(true);
     ui->pushButton_Cancel_Values->setEnabled(true);

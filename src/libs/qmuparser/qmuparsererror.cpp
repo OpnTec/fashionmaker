@@ -127,10 +127,10 @@ QmuParserError::QmuParserError ( const QString &sMsg )
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Construct an error object.
- * @param [in] a_iErrc the error code.
+ * @param [in] iErrc the error code.
  * @param [in] sTok The token string related to this error.
  * @param [in] sExpr The expression related to the error.
- * @param [in] a_iPos the position in the expression where the error occured.
+ * @param [in] iPos the position in the expression where the error occured.
  */
 QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const QString &sExpr, int iPos )
     : QException(), m_sMsg(), m_sExpr ( sExpr ), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
@@ -144,8 +144,8 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const Q
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Construct an error object.
- * @param [in] iErrc the error code.
- * @param [in] iPos the position in the expression where the error occured.
+ * @param [in] a_iErrc the error code.
+ * @param [in] a_iPos the position in the expression where the error occured.
  * @param [in] sTok The token string related to this error.
  */
 QmuParserError::QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok )

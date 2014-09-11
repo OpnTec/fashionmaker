@@ -67,7 +67,7 @@ public:
           radius(arc.radius), formulaRadius(arc.formulaRadius), center(arc.center)
     {}
 
-    virtual ~VArcData() {}
+    virtual ~VArcData();
 
     /** @brief f1 start angle in degree. */
     qreal              f1;
@@ -91,8 +91,11 @@ public:
     VPointF            center;
 };
 
+VArcData::~VArcData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VARC_P_H

@@ -37,3 +37,7 @@ VExceptionUndo::VExceptionUndo(const QString &what)
 VExceptionUndo::VExceptionUndo(const VExceptionUndo &e)
     :VException(e)
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+VExceptionUndo::~VExceptionUndo() noexcept (true)
+{}

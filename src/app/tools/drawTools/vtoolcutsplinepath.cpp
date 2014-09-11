@@ -347,7 +347,6 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
  * @brief RefreshCurve refresh curve on scene.
  * @param curve curve.
  * @param curveId curve id.
- * @param tr point type.
  */
 void VToolCutSplinePath::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                       PathDirection direction)

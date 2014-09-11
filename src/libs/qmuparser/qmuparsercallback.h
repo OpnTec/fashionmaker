@@ -77,6 +77,7 @@ public:
     QmuParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti);
     QmuParserCallback();
     QmuParserCallback(const QmuParserCallback &a_Fun);
+    QmuParserCallback &operator=(const QmuParserCallback &a_Fun);
 
     QmuParserCallback* Clone() const;
     bool               IsOptimizable() const;

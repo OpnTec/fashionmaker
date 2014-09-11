@@ -204,7 +204,7 @@ void VDrawTool::SetFactor(qreal factor)
  * Try calculate formula. If find error show dialog that allow user try fix formula. If user can't throw exception. In
  * successes case return result calculation and fixed formula string. If formula ok don't touch formula.
  *
- * @param toolId[in] tool's id.
+ * @param toolId [in] tool's id.
  * @param formula [in|out] string with formula.
  * @param data [in] container with variables. Need for math parser.
  * @throw QmuParserError.

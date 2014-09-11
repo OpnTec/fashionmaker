@@ -85,7 +85,7 @@ public:
         this->kAsm2 = QLineF ( this->p4.toQPointF(), this->p3 ).length()/L;
     }
 
-    virtual ~VSplineData() {}
+    virtual ~VSplineData();
 
     /** @brief p1 first spline point. */
     VPointF        p1;
@@ -115,8 +115,11 @@ public:
     qreal          kCurve;
 };
 
+VSplineData::~VSplineData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VSPLINE_P_H

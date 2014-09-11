@@ -140,5 +140,6 @@ void VAbstractNode::RestoreReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-
+    Q_UNUSED(tag)
+    Q_UNUSED(obj)
 }

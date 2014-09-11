@@ -95,4 +95,43 @@ unix {
     INSTALLS += target
 }
 
-QMAKE_CXXFLAGS += -gdwarf-3
+CONFIG(debug, debug|release){
+    # Debug
+    unix {
+        *-g++{
+        QMAKE_CXXFLAGS += \
+            -isystem "/usr/include/qt5" \
+            -isystem "/usr/include/qt5/QtWidgets" \
+            -isystem "/usr/include/qt5/QtXml" \
+            -isystem "/usr/include/qt5/QtGui" \
+            -isystem "/usr/include/qt5/QtXmlPatterns" \
+            -isystem "/usr/include/qt5/QtCore" \
+            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+            $$GCC_CXXFLAGS
+        }
+        #Turn on Clang warnings
+        clang*{
+        QMAKE_CXXFLAGS += \
+            -isystem "/usr/include/qt5" \
+            -isystem "/usr/include/qt5/QtWidgets" \
+            -isystem "/usr/include/qt5/QtXml" \
+            -isystem "/usr/include/qt5/QtGui" \
+            -isystem "/usr/include/qt5/QtCore" \
+            -isystem "/usr/include/qt5/QtXmlPatterns" \
+            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+            $$CLANG_CXXFLAGS
+        }
+    } else {
+        *-g++{#Don't use additional GCC keys on Windows system.
+        QMAKE_CXXFLAGS += -O0 -Wall -Wextra -pedantic
+        }
+    }
+
+}else{
+    # Release
+    *-g++{
+    QMAKE_CXXFLAGS += -O2
+    }
+
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}

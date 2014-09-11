@@ -547,3 +547,7 @@ const QHash<QString, QSharedPointer<VInternalVariable> > *VContainer::DataVariab
 {
     return &d->variables;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VContainerData::~VContainerData()
+{}

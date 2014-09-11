@@ -56,7 +56,7 @@ public:
         :QSharedData(var), base(var.base), ksize(var.ksize), kheight(var.kheight), description(var.description)
     {}
 
-    virtual ~VVariableData() {}
+    virtual ~VVariableData();
 
     /** @brief base value in base size and height */
     qreal   base;
@@ -71,8 +71,11 @@ public:
     QString description;
 };
 
+VVariableData::~VVariableData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VVARIABLE_P_H

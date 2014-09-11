@@ -2052,7 +2052,7 @@ void VApplication::setOverrideCursor(const QString &pixmapPath, int hotX, int ho
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::restoreOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
+void VApplication::restoreOverrideCursor(const QString &pixmapPath)
 {
 #ifndef QT_NO_CURSOR
     QPixmap oldPixmap;

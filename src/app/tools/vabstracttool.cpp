@@ -246,7 +246,6 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DeleteTool full delete object form scene and file.
- * @param tool tool
  */
 void VAbstractTool::DeleteTool(bool ask)
 {

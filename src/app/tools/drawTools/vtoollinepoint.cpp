@@ -36,7 +36,7 @@
  * @param data container with variables.
  * @param id object id in container.
  * @param typeLine line type.
- * @param formulaLength string with length formula.
+ * @param formula string with length formula.
  * @param basePointId id base line point.
  * @param angle line angle.
  * @param parent parent object.

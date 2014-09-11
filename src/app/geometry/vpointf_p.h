@@ -62,7 +62,7 @@ public:
         :_mx(mx), _my(my), _x(point.x()), _y(point.y())
     {}
 
-    virtual ~VPointFData() {}
+    virtual ~VPointFData();
 
     /** @brief _mx offset name respect to x */
     qreal   _mx;
@@ -77,8 +77,11 @@ public:
     qreal   _y;
 };
 
+VPointFData::~VPointFData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VPOINTF_P_H

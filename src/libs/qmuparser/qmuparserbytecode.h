@@ -102,8 +102,8 @@ public:
     void          EnableOptimizer(bool bStat);
     void          Finalize();
     void          clear();
-    std::size_t   GetMaxStackSize() const;
-    int GetSize() const;
+    int           GetMaxStackSize() const;
+    int           GetSize() const;
     const SToken* GetBase() const;
     void          AsciiDump();
 private:
@@ -117,12 +117,12 @@ private:
     unsigned m_iStackPos;
 
     /** @brief Maximum size needed for the stack. */
-    std::size_t m_iMaxStackSize;
+    unsigned m_iMaxStackSize;
 
     /** @brief The actual rpn storage. */
-    rpn_type  m_vRPN;
+    rpn_type m_vRPN;
 
-    bool m_bEnableOptimizer;
+    bool     m_bEnableOptimizer;
 
     void ConstantFolding(ECmdCode a_Oprt);
 };
@@ -134,9 +134,9 @@ inline void QmuParserByteCode::EnableOptimizer(bool bStat)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline std::size_t QmuParserByteCode::GetMaxStackSize() const
+inline int QmuParserByteCode::GetMaxStackSize() const
 {
-    return m_iMaxStackSize+1;
+    return static_cast<int>(m_iMaxStackSize+1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

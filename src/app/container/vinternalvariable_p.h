@@ -49,7 +49,7 @@ public:
         :QSharedData(var), type(var.type), value(var.value), name(var.name)
     {}
 
-    virtual ~VInternalVariableData() {}
+    virtual ~VInternalVariableData();
 
     VarType type;
 
@@ -59,8 +59,11 @@ public:
     QString name;
 };
 
+VInternalVariableData::~VInternalVariableData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VINTERNALVARIABLE_P_H

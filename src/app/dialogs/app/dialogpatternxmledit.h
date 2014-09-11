@@ -76,7 +76,6 @@ public:
     QDomNode GetDocNode();
     /**
      * @brief SetDocNode set tree element DomNode
-     * @param node
      */
     inline void SetDocNode(QDomNode node)
     {
@@ -312,38 +311,30 @@ public:
     /**
      * @brief ApplyAttributeChange change or add attribute for node
      * @param domElement : node containing attribute
-     * @param name
-     * @param value
      * @return true on success
      */
     bool ApplyAttributeChange(QDomNode domElement, QString name, QString value);
     /**
      * @brief ApplyNodeChange Change name or text content of node
      * @param domElement node
-     * @param name
      * @param value text content of node
      * @return true on success
      */
     bool ApplyNodeChange(QDomNode domElement, QString name, QString value);
     /**
      * @brief ApplyNodeAdd add node as child of domElement and set DocNode of treeElement
-     * @param domElement
      * @param treeElement the XMLTreeElement of added node
-     * @param name
-     * @param value
      * @return true on success
      */
     bool ApplyNodeAdd(QDomNode domElement, VXMLTreeElement* treeElement, QString name, QString value);
     /**
      * @brief ApplyAttributeDelete delete attribute for node
-     * @param domElement
      * @param name attribute name
      * @return true on success
      */
     bool ApplyAttributeDelete(QDomNode domElement, QString name);
     /**
      * @brief ApplyNodeDelete delete node domElement
-     * @param domElement
      * @return true on success
      */
     bool ApplyNodeDelete(QDomNode domElement);

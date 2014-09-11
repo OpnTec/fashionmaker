@@ -52,7 +52,7 @@ public:
         :QSharedData(obj), _id(obj._id), type(obj.type), idObject(obj.idObject), _name(obj._name), mode(obj.mode)
     {}
 
-    virtual ~VGObjectData() {}
+    virtual ~VGObjectData();
 
     /** @brief _id id in container. Ned for arcs, spline and spline paths. */
     quint32 _id;
@@ -70,8 +70,11 @@ public:
     Draw    mode;
 };
 
+VGObjectData::~VGObjectData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VGOBJECT_P_H

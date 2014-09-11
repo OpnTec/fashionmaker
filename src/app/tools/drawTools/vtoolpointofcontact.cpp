@@ -41,7 +41,7 @@ const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");
  * @param doc dom document container.
  * @param data container with variables.
  * @param id object id in container.
- * @param arcRadius string with formula radius arc.
+ * @param radius string with formula radius arc.
  * @param center id center arc point.
  * @param firstPointId id first line point.
  * @param secondPointId id second line point.
@@ -85,7 +85,7 @@ void VToolPointOfContact::setDialog()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FindPoint return point intersection line and arc.
- * @param arcRadius string with formula arc radius.
+ * @param radius string with formula arc radius.
  * @param center center arc point.
  * @param firstPoint first line point.
  * @param secondPoint second line point.
@@ -150,7 +150,7 @@ VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphi
 /**
  * @brief Create help create tool.
  * @param _id tool id, 0 if tool doesn't exist yet.
- * @param arcRadius string with formula radius arc.
+ * @param radius string with formula radius arc.
  * @param center id center arc point.
  * @param firstPointId id first line point.
  * @param secondPointId id second line point.

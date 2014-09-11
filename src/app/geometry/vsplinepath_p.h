@@ -54,7 +54,7 @@ public:
         : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve), maxCountPoints(splPath.maxCountPoints)
     {}
 
-    virtual ~VSplinePathData() {}
+    virtual ~VSplinePathData();
 
     /**
      * @brief path list spline point.
@@ -70,8 +70,11 @@ public:
     qint32        maxCountPoints;
 };
 
+VSplinePathData::~VSplinePathData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VSPLINEPATH_P_H

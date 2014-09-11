@@ -245,7 +245,7 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdatePathPoint update spline path in pattern file.
- * @brief doc dom document container.
+ * @param doc dom document container.
  * @param node tag in file.
  * @param path spline path.
  */

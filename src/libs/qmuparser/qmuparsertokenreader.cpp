@@ -306,7 +306,7 @@ void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
  * @brief Extract all characters that belong to a certain charset.
  *
  * @param a_szCharSet [in] Const char array of the characters allowed in the token.
- * @param a_strTok [out]  The string that consists entirely of characters listed in a_szCharSet.
+ * @param a_sTok [out]  The string that consists entirely of characters listed in a_szCharSet.
  * @param a_iPos [in] Position in the string from where to start reading.
  * @return The Position of the first character not listed in a_szCharSet.
  * @throw nothrow
@@ -316,7 +316,7 @@ int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
     const std::wstring a_szCharSetStd = a_szCharSet.toStdWString();
 
-    int iEnd = static_cast<int>(m_strFormulaStd.find_first_not_of ( a_szCharSetStd, a_iPos ));
+    int iEnd = static_cast<int>(m_strFormulaStd.find_first_not_of ( a_szCharSetStd, static_cast<std::size_t>(a_iPos) ));
 
     if ( iEnd == static_cast<int>(string_type::npos) )
     {
@@ -346,7 +346,7 @@ int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) c
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
     const std::wstring oprtCharsStd = m_pParser->ValidInfixOprtChars().toStdWString();
 
-    int iEnd = static_cast<int>( m_strFormulaStd.find_first_not_of ( oprtCharsStd, a_iPos ) );
+    int iEnd = static_cast<int>( m_strFormulaStd.find_first_not_of ( oprtCharsStd, static_cast<std::size_t>(a_iPos) ) );
     if ( iEnd == static_cast<int>( string_type::npos ) )
     {
         iEnd = static_cast<int>( m_strFormulaStd.length() );
@@ -1015,7 +1015,7 @@ bool QmuParserTokenReader::IsString ( token_type &a_Tok )
  *
  * @param a_iErrc [in] The error code of type #EErrorCodes.
  * @param a_iPos [in] The position where the error was detected.
- * @param a_strTok [in] The token string representation associated with the error.
+ * @param a_sTok [in] The token string representation associated with the error.
  * @throw ParserException always throws thats the only purpose of this function.
  */
 void Q_NORETURN QmuParserTokenReader::Error ( EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok ) const

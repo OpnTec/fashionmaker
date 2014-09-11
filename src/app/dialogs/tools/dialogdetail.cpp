@@ -100,6 +100,7 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
                 break;
             case (SceneObject::Line):
             case (SceneObject::Detail):
+            case (SceneObject::Unknown):
             default:
                 qDebug()<<tr("Got wrong scene object. Ignore.");
                 break;

@@ -52,7 +52,7 @@ public:
         :QSharedData(m), gui_text(m.gui_text), _tagName(m._tagName)
     {}
 
-    virtual  ~VMeasurementData() {}
+    virtual  ~VMeasurementData();
 
     /** @brief description description measurement */
     QString        gui_text;
@@ -60,8 +60,11 @@ public:
     QString        _tagName;
 };
 
+VMeasurementData::~VMeasurementData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VMEASUREMENT_P_H

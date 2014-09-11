@@ -373,7 +373,8 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-
+    Q_UNUSED(tag)
+    Q_UNUSED(obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -441,7 +442,6 @@ void VToolDetail::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddNode add node to the file.
- * @param dom document container
  * @param domElement tag in xml tree.
  * @param node node of detail.
  */
@@ -490,7 +490,7 @@ QString VToolDetail::getTagName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::ShowVisualization(bool show)
 {
-
+    Q_UNUSED(show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

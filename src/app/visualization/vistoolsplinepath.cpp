@@ -66,7 +66,7 @@ void VisToolSplinePath::RefreshGeometry()
         {
             for (int i = 0; i < pathPoints.size(); ++i)
             {
-                QGraphicsEllipseItem *point = this->getPoint(i);
+                QGraphicsEllipseItem *point = this->getPoint(static_cast<unsigned>(i));
                 DrawPoint(point, pathPoints.at(i).P().toQPointF(), supportColor);
             }
 
@@ -113,13 +113,10 @@ void VisToolSplinePath::setMode(const Mode &value)
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsEllipseItem *VisToolSplinePath::getPoint(unsigned int i)
 {
-    if (points.size() == 0)
+    SCASSERT(i >= 0)
+    if (static_cast<unsigned int>(points.size() - 1) >= i && points.isEmpty() == false)
     {
-        nullptr;
-    }
-    else if (static_cast<unsigned int>(points.size() - 1) >= i && points.isEmpty() == false)
-    {
-        return points.at(i);
+        return points.at(static_cast<int>(i));
     }
     else
     {

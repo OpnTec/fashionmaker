@@ -52,14 +52,17 @@ public:
         :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id)
     {}
 
-    virtual  ~VLineAngleData() {}
+    virtual  ~VLineAngleData();
 
     quint32 p1Id;
     quint32 p2Id;
 };
 
+VLineAngleData::~VLineAngleData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VLINEANGLE_P_H

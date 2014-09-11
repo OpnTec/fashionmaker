@@ -41,6 +41,7 @@ class UserChangeEvent : public QEvent
 {
 public:
     UserChangeEvent() : QEvent(static_cast<QEvent::Type>(MyCustomEventType)) {}
+    virtual ~UserChangeEvent();
 };
 
 class VPropertyPrivate;

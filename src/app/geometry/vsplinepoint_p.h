@@ -62,7 +62,7 @@ public:
           kAsm2(point.kAsm2)
     {}
 
-    virtual ~VSplinePointData() {}
+    virtual ~VSplinePointData();
 
     /** @brief pSpline point. */
     VPointF        pSpline;
@@ -80,8 +80,11 @@ public:
     qreal          kAsm2;
 };
 
+VSplinePointData::~VSplinePointData()
+{}
+
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 #endif // VSPLINEPOINT_P_H

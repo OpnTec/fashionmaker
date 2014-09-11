@@ -218,12 +218,12 @@ public:
      * Member variables not necessary for variable tokens will be invalidated.
      * @throw nothrow
      */
-    QmuParserToken& SetString ( const TString &a_strTok, std::size_t a_iSize )
+    QmuParserToken& SetString ( const TString &a_strTok, int a_iSize )
     {
         m_iCode = cmSTRING;
         m_iType = tpSTR;
         m_strTok = a_strTok;
-        m_iIdx = static_cast<int> ( a_iSize );
+        m_iIdx = a_iSize;
 
         m_pTok = 0;
         m_pCallback.reset ( 0 );

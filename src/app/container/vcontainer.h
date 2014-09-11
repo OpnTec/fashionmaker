@@ -58,7 +58,7 @@ public:
           variables(data.variables), details(data.details)
     {}
 
-    virtual ~VContainerData() {}
+    virtual ~VContainerData();
 
     QString        sizeName;
     QString        heightName;
@@ -78,7 +78,7 @@ public:
 };
 
 #ifdef Q_CC_GNU
-    #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 
 /**
