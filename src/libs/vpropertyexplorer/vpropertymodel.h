@@ -159,6 +159,9 @@ protected:
 
     //! The model data
     VPropertyModelPrivate* d_ptr;
+
+private:
+    Q_DISABLE_COPY(VPropertyModel)
 };
 
 }

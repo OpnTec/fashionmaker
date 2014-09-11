@@ -93,6 +93,8 @@ protected:
     //! Commits data of an editor
     void commitData(QWidget* editor);
 
+private:
+    Q_DISABLE_COPY(VPropertyFormWidget)
 };
 
 }   // Namespace VPE

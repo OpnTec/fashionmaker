@@ -69,15 +69,19 @@ public:
 
     //! Constructor passing name and type
     VPropertyPrivate(const QString& name, QVariant::Type type)
-        : VariantValue(type), Name(name), PropertyVariantType(type), UpdateParent(false), UpdateChildren(false),
-          Parent(nullptr), editor(nullptr), type(Property::Simple)
+        : VariantValue(type), Name(name), Description(QString()), IsEmpty(false), PropertyVariantType(type),
+          UpdateParent(false), UpdateChildren(false), Parent(nullptr), editor(nullptr), type(Property::Simple),
+          Children(QList<VProperty*>())
     {}
 
     //! Constructor
     VPropertyPrivate()
-        : VariantValue(), Name(), PropertyVariantType(QVariant::Invalid), UpdateParent(false), UpdateChildren(false),
-          Parent(nullptr), editor(nullptr)
+        : VariantValue(), Name(), Description(QString()), IsEmpty(false), PropertyVariantType(QVariant::Invalid),
+          UpdateParent(false), UpdateChildren(false), Parent(nullptr), editor(nullptr), type(Property::Simple),
+          Children(QList<VProperty*>())
     {}
+private:
+    Q_DISABLE_COPY(VPropertyPrivate)
 };
 
 }

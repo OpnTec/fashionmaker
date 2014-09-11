@@ -80,26 +80,19 @@ QVariant VIntegerProperty::getEditorData(QWidget* editor) const
     return QVariant(0);
 }
 
-void VIntegerProperty::setSettings(int minimum, int maxiumum, int singleStep)
-{
-    minValue = minimum;
-    maxValue = maxiumum;
-    this->singleStep = singleStep;
-}
-
 void VIntegerProperty::setSetting(const QString& key, const QVariant& value)
 {
     if (key == QLatin1String("Min"))
     {
-        setSettings(value.toInt(), maxValue);
+        maxValue = value.toInt();
     }
     else if (key == QLatin1String("Max"))
     {
-        setSettings(minValue, value.toInt());
+        minValue = value.toInt();
     }
     else if (key == QLatin1String("Step"))
     {
-        setSettings(singleStep, value.toInt());
+        singleStep = value.toInt();
     }
 }
 
@@ -194,31 +187,23 @@ QVariant VDoubleProperty::getEditorData(QWidget* editor) const
     return QVariant(0);
 }
 
-void VDoubleProperty::setSettings(double minimum, double maxiumum, double singleStep, int precision)
-{
-    minValue = minimum;
-    maxValue = maxiumum;
-    this->singleStep = singleStep;
-    Precision = precision;
-}
-
 void VDoubleProperty::setSetting(const QString& key, const QVariant& value)
 {
     if (key == QLatin1String("Min"))
     {
-        setSettings(value.toDouble(), maxValue, singleStep, Precision);
+        minValue = value.toDouble();
     }
     else if (key == QLatin1String("Max"))
     {
-        setSettings(minValue, value.toDouble(), singleStep, Precision);
+        maxValue = value.toDouble();
     }
     else if (key == QLatin1String("Step"))
     {
-        setSettings(minValue, maxValue, value.toDouble(), Precision);
+        singleStep = value.toDouble();
     }
     else if (key == QLatin1String("Precision"))
     {
-        setSettings(minValue, maxValue, singleStep, value.toDouble());
+        Precision = value.toDouble();
     }
 }
 

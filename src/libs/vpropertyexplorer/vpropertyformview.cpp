@@ -136,6 +136,8 @@ void VPropertyFormView::modelDestroyed()
 
 void VPropertyFormView::dataChanged(const QModelIndex &top_left, const QModelIndex &bottom_right)
 {
+    Q_UNUSED(top_left)
+    Q_UNUSED(bottom_right)
     if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
     {
         return;

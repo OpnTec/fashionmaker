@@ -32,16 +32,12 @@ struct VPROPERTYEXPLORERSHARED_EXPORT Vector3D
 {
 public:
     Vector3D()
-    {
-        X = Y = Z = 0;
-    }
+        :X(0), Y(0), Z(0)
+    {}
 
     Vector3D(const Vector3D& other)
-    {
-        X = other.X;
-        Y = other.Y;
-        Z = other.Z;
-    }
+        :X(other.X), Y(other.Y), Z(other.Z)
+    {}
 
     ~Vector3D() {}
 

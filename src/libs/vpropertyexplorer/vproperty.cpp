@@ -411,5 +411,6 @@ void VProperty::UpdateParent(const QVariant &value)
 
 void VProperty::ValueChildChanged(const QVariant &value, int typeForParent)
 {
-
+    Q_UNUSED(value)
+    Q_UNUSED(typeForParent)
 }

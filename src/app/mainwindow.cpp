@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs{nullptr, nullptr, nullptr, nullptr, nullptr},
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
-      gradationSizes(nullptr)
+      gradationSizes(nullptr), toolOptions(nullptr)
 {
     CreateActions();
     CreateMenus();

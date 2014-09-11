@@ -79,7 +79,7 @@ private:
     QGraphicsView*        _view;
     Qt::KeyboardModifiers _modifiers;
     double                _zoom_factor_base;
-    QPointF                target_scene_pos;
+    QPointF               target_scene_pos;
     QPointF               target_viewport_pos;
 
     bool eventFilter(QObject* object, QEvent* event);

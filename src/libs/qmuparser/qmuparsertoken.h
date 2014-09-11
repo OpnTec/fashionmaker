@@ -327,6 +327,23 @@ public:
     }
 
     //------------------------------------------------------------------------------
+    template < class FunctionPtr >
+    FunctionPtr union_cast( void* objectPtr ) const
+    {
+        union
+        {
+            void* obj;
+            FunctionPtr func;
+        } var;
+
+        Q_STATIC_ASSERT_X(sizeof(void *) == sizeof(void (*)(void)),
+                          "object pointer and function pointer sizes must equal");
+
+        var.obj = objectPtr;
+        return var.func;
+    }
+
+    //------------------------------------------------------------------------------
     /**
      * @brief Return the address of the callback function assoziated with function and operator tokens.
      *
@@ -343,8 +360,8 @@ public:
      */
     generic_fun_type GetFuncAddr() const
     {
-        return ( m_pCallback.get() ) ? reinterpret_cast<generic_fun_type> ( m_pCallback->GetAddr() ) :
-                                                      reinterpret_cast<generic_fun_type> (0);
+        return ( union_cast<generic_fun_type>( m_pCallback.get() ) ) ?
+                    union_cast<generic_fun_type>( m_pCallback->GetAddr() ) : union_cast<generic_fun_type>(0);
     }
 
     //------------------------------------------------------------------------------

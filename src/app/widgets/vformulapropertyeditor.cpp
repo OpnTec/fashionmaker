@@ -41,8 +41,8 @@ using namespace VPE;
 
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
-VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent) :
-    QWidget(parent)
+VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
+    : QWidget(parent), formula(VFormula()), ToolButton(nullptr), TextLabel(nullptr), Spacer(nullptr)
 {
     setAutoFillBackground(true);
 

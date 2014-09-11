@@ -40,7 +40,7 @@ static const int MyCustomEventType = 1099;
 class UserChangeEvent : public QEvent
 {
 public:
-    UserChangeEvent() : QEvent((QEvent::Type)MyCustomEventType) {}
+    UserChangeEvent() : QEvent(static_cast<QEvent::Type>(MyCustomEventType)) {}
 };
 
 class VPropertyPrivate;
@@ -210,6 +210,7 @@ protected:
 private:
     // Provide access functions for the d_ptr
     Q_DECLARE_PRIVATE(VProperty)
+    Q_DISABLE_COPY(VProperty)
 };
 
 }

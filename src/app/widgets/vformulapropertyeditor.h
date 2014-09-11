@@ -68,6 +68,7 @@ private slots:
     void onToolButtonClicked();
 
 private:
+    Q_DISABLE_COPY(VFormulaPropertyEditor)
     VFormula formula;
     QToolButton* ToolButton;
     QLabel* TextLabel;

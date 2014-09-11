@@ -79,7 +79,7 @@ bool VFormula::operator==(const VFormula &formula) const
     if (this->formula == formula.getFormula() && this->value == formula.getStringValue() &&
         this->checkZero == formula.getCheckZero() && this->data == formula.getData() &&
         this->toolId == formula.getToolId() && this->postfix == formula.getPostfix() &&
-        this->_error == formula.error() && this->dValue == formula.getDoubleValue())
+        this->_error == formula.error() && qFuzzyCompare(this->dValue, formula.getDoubleValue()))
     {
         isEqual = true;
     }

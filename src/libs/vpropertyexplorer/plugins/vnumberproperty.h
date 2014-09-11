@@ -48,11 +48,6 @@ public:
     //! Gets the data from the widget
     virtual QVariant getEditorData(QWidget* editor) const;
 
-    //! Sets the settings of a basic integer property
-    //! \param minimum The minimum value
-    //! \param maxiumum The maximum value
-    virtual void setSettings(int minimum, int maxiumum, int singleStep = 1.0);
-
     //! Sets the settings. Available settings:
     //!
     //! key: "Min" - value: Minimum number as integer
@@ -103,12 +98,6 @@ public:
 
     //! Gets the data from the widget
     virtual QVariant getEditorData(QWidget* editor) const;
-
-    //! Sets the settings of a double property
-    //! \param minimum The minimum value
-    //! \param maxiumum The maximum value
-    //! \param precision The number of decimal places
-    virtual void setSettings(double minimum, double maxiumum, double singleStep, int precision);
 
     //! Sets the settings. Available settings:
     //!

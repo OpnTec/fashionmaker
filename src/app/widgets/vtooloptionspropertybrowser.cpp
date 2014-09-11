@@ -43,8 +43,7 @@ using namespace VPE;
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
-    :QObject(parent),
-      currentItem(nullptr),
+    :QObject(parent), PropertyModel(nullptr), formView(nullptr), currentItem(nullptr),
       propertyToId(QMap<VProperty *, QString>()),
       idToProperty(QMap<QString, VProperty *>())
 {
@@ -58,7 +57,7 @@ VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
 
     parent->setWidget(scroll);
 
-    connect(PropertyModel, SIGNAL(onDataChangedByEditor(VProperty*)), this, SLOT(userChangedData(VProperty*)));
+    connect(PropertyModel, &VPropertyModel::onDataChangedByEditor, this, &VToolOptionsPropertyBrowser::userChangedData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
