@@ -1968,9 +1968,7 @@ void MainWindow::CreateMenus()
     separatorAct->setSeparator(true);
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
 
-    //Add docks
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetHistory->toggleViewAction());
-    ui->dockWidgetHistory->close();//Default don't show hostory
+    //Add dock
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
 
     separatorAct = new QAction(this);
@@ -1981,8 +1979,6 @@ void MainWindow::CreateMenus()
 
 void MainWindow::AddDocks()
 {
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetHistory->toggleViewAction());
-    ui->dockWidgetHistory->close();//Default don't show hostory
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
 
     separatorAct = new QAction(this);
