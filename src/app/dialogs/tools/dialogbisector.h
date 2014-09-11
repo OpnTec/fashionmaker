@@ -110,7 +110,6 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                formulaBaseHeight;
     VisToolBisector    *line;
-    bool               prepare;
 
 };
 

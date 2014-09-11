@@ -303,7 +303,7 @@ QVector<QPointF> VSpline::GetPoints (const QPointF &p1, const QPointF &p2, const
  * @param p4 last spline point.
  * @return length.
  */
-qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const
+qreal VSpline::LengthBezier ( const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 )
 {
     QPainterPath splinePath;
     QVector<QPointF> points = GetPoints (p1, p2, p3, p4);

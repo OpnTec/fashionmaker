@@ -153,11 +153,10 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
 
     const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
-    bool found = false;
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
-        found = false;
+        bool found = false;
         if (vars->contains(i.value()))
         {
             QSharedPointer<VInternalVariable> var = vars->value(i.value());

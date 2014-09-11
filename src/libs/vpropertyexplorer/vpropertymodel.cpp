@@ -85,7 +85,7 @@ VProperty* VPropertyModel::createProperty(const QString& id, const QString& name
 {
     VProperty* tmpProp = new VProperty(name);
     tmpProp->setValue(data);
-    if (tmpProp && addProperty(tmpProp, id, parentid))
+    if (addProperty(tmpProp, id, parentid))
     {
         return tmpProp;
     }

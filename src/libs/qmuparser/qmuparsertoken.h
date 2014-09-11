@@ -328,7 +328,7 @@ public:
 
     //------------------------------------------------------------------------------
     template < class FunctionPtr >
-    FunctionPtr union_cast( void* objectPtr ) const
+    static FunctionPtr union_cast( void* objectPtr )
     {
         union
         {

@@ -132,7 +132,7 @@ bool VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
         else
             return QWidget::eventFilter(obj, ev);
     }
-    else if (obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
+    else if (obj == ToolButton && ev->type() == QEvent::KeyPress)
     {
         // Ignore the event, so that eventually the delegate gets the event.
         ev->ignore();

@@ -63,7 +63,6 @@ QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionVie
     }
 
     return tmpWidget;
-    return nullptr;
 }
 
 

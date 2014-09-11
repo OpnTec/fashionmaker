@@ -200,13 +200,13 @@ public:
     void               ClearDetails();
     static void        ClearUniqueNames();
 
-    void               SetSize(qreal size);
+    static void        SetSize(qreal size);
     void               SetSizeName(const QString &name);
-    void               SetHeight(qreal height);
+    static void        SetHeight(qreal height);
     void               SetHeightName(const QString &name);
-    qreal              size() const;
-    QString            SizeName()const;
-    qreal              height() const;
+    static qreal       size();
+    QString            SizeName() const;
+    static qreal       height();
     QString            HeightName()const;
 
     bool               VariableExist(const QString& name);

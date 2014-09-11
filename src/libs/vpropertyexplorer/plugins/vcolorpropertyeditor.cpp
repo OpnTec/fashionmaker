@@ -112,7 +112,7 @@ void VColorPropertyEditor::onToolButtonClicked()
 
 bool VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
 {
-    if (obj == ToolButton && (ev->type() == QEvent::KeyPress || ev->type() == QEvent::KeyPress))
+    if (obj == ToolButton && ev->type() == QEvent::KeyPress)
     {
         // Ignore the event, so that eventually the delegate gets the event.
         ev->ignore();

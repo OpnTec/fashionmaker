@@ -77,7 +77,7 @@ protected:
     static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:
     QSharedDataPointer<VSplineData> d;
-    qreal          LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 ) const;
+    static qreal   LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
     static void    PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
                                   qint16 level, QVector<qreal> &px, QVector<qreal> &py);
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);

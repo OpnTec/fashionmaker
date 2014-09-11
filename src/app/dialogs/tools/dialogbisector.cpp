@@ -44,7 +44,7 @@
 DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogBisector), number(0), typeLine(QString()),
       formula(QString()), firstPointId(NULL_ID), secondPointId(NULL_ID), thirdPointId(NULL_ID), formulaBaseHeight(0),
-      line(nullptr), prepare(false)
+      line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);

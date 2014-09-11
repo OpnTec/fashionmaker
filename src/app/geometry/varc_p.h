@@ -54,13 +54,9 @@ public:
     {}
 
     VArcData(VPointF center, qreal radius, qreal f1, qreal f2)
-        : f1(f1), formulaF1(QStringLiteral("")), f2(f2), formulaF2(QStringLiteral("")), radius(radius),
-          formulaRadius(QStringLiteral("")), center(center)
-    {
-        formulaF1 = QString("%1").arg(f1);
-        formulaF2 = QString("%1").arg(f2);
-        formulaRadius = QString("%1").arg(radius);
-    }
+        : f1(f1), formulaF1(QString("%1").arg(f1)), f2(f2), formulaF2(QString("%1").arg(f2)), radius(radius),
+          formulaRadius(QString("%1").arg(radius)), center(center)
+    {}
 
     VArcData(const VArcData &arc)
         : QSharedData(arc), f1(arc.f1), formulaF1(arc.formulaF1), f2(arc.f2), formulaF2(arc.formulaF2),

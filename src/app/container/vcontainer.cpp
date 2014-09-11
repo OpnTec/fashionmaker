@@ -495,7 +495,7 @@ void VContainer::SetHeightName(const QString &name)
  * @brief size return size
  * @return size in mm
  */
-qreal VContainer::size() const
+qreal VContainer::size()
 {
     return _size;
 }
@@ -511,7 +511,7 @@ QString VContainer::SizeName() const
  * @brief height return height
  * @return height in pattern units
  */
-qreal VContainer::height() const
+qreal VContainer::height()
 {
     return _height;
 }
