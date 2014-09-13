@@ -80,6 +80,8 @@ public:
           UpdateParent(false), UpdateChildren(false), Parent(nullptr), editor(nullptr), type(Property::Simple),
           Children(QList<VProperty*>())
     {}
+
+    virtual ~VPropertyPrivate();
 private:
     Q_DISABLE_COPY(VPropertyPrivate)
 };

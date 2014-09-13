@@ -74,8 +74,6 @@ inline VContainer VDataTool::getData() const
  */
 inline void VDataTool::setData(const VContainer *value)
 {
-    data.ClearVariables();
-    data.ClearGObjects();
     data = *value;
 }
 

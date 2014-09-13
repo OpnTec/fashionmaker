@@ -417,3 +417,6 @@ void VProperty::ValueChildChanged(const QVariant &value, int typeForParent)
 
 UserChangeEvent::~UserChangeEvent()
 {}
+
+VPE::VPropertyPrivate::~VPropertyPrivate()
+{}

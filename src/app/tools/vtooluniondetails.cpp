@@ -184,6 +184,9 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
                 VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
+
+                delete p4;
+                delete p1;
             }
         }
         break;
@@ -231,8 +234,10 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                         path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1()+180,
                                                   splinePath->at(i-1).KAsm2(), spl.GetAngle1()));
                     }
-                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
-                                                  splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
+                                              splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    delete p4;
+                    delete p1;
                 }
                 while (k>=0)
                 {
@@ -391,8 +396,8 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                         path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1()+180,
                                                   splinePath->at(i-1).KAsm2(), spl.GetAngle1()));
                     }
-                        path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
-                                                  splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
+                                              splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
                 }
 
                 while (k>=0)
