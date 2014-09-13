@@ -38,6 +38,7 @@
 #include <QCoreApplication>
 #include <QHash>
 #include <QSet>
+#include <QSharedPointer>
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -116,7 +117,6 @@ public:
         {
             throw VExceptionBadId(tr("Can't cast object"), id);
         }
-        return QSharedPointer<T>();
     }
 
     const QSharedPointer<VGObject> GetGObject(quint32 id) const;

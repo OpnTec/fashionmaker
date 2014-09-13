@@ -77,7 +77,6 @@ private slots:
 private:
     QColor Color;
     QToolButton* ToolButton;
-    QLineEdit* Lineedit;
     QLabel* TextLabel;
     QLabel* ColorLabel;
     QSpacerItem* Spacer;

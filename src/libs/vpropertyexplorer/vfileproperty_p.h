@@ -45,7 +45,12 @@ public:
     //! Constructor
     VFilePropertyPrivate()
         : VPropertyPrivate(), FileFilters(), Directory(false) {}
+
+    virtual ~VFilePropertyPrivate();
 };
+
+VFilePropertyPrivate::~VFilePropertyPrivate()
+{}
 
 }
 

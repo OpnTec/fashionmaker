@@ -1111,7 +1111,7 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.cpp" line="104"/>
+        <location filename="../../dialogs/tools/dialogdetail.cpp" line="105"/>
         <source>Got wrong scene object. Ignore.</source>
         <translation>Falsches scene object. Wird ignoriert.</translation>
     </message>
@@ -1560,7 +1560,7 @@
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="367"/>
         <location filename="../../dialogs/app/dialogincrements.ui" line="454"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="538"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="539"/>
         <source>Description</source>
         <translation>Beschreibung</translation>
     </message>
@@ -1656,51 +1656,51 @@
         <translation>Bogen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="66"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="454"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="510"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="67"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="455"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="511"/>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="104"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="105"/>
         <source>male</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="105"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="106"/>
         <source>female</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="429"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="430"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="433"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="434"/>
         <source>Individual measurements (*.vit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="438"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="478"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="439"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="479"/>
         <source>Open file</source>
         <translation type="unfinished">Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="462"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="494"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="463"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="495"/>
         <source>Wrong units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="477"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="478"/>
         <source>Standard measurements (*.vst)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="533"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="534"/>
         <source>Name_%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2364,94 +2364,94 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="180"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="424"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="430"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="676"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="181"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="425"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="431"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="677"/>
         <source>No changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="180"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="181"/>
         <source>Cannot delete previously created node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="424"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="425"/>
         <source>No changes left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="430"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="431"/>
         <source>Cannot undo change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="460"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="481"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="461"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="482"/>
         <source>&lt;no value&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="468"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="470"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="469"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="471"/>
         <source>Unchanged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="676"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="677"/>
         <source>Cannot delete previously created attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="718"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="719"/>
         <source>Node Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="718"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="777"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="719"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="778"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="723"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="724"/>
         <source>Node Value (may be empty)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="723"/>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="784"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="724"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="785"/>
         <source>Value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="776"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="777"/>
         <source>Attribute Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="783"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="784"/>
         <source>Attribute Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="917"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="920"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="1034"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="1037"/>
         <source>Root node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="1039"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="1042"/>
         <source>Node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="1046"/>
+        <location filename="../../dialogs/app/dialogpatternxmledit.cpp" line="1049"/>
         <source>Attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3414,42 +3414,42 @@
         <translation type="vanished">Schnittteil</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="850"/>
+        <location filename="../../mainwindow.ui" line="829"/>
         <source>New</source>
         <translation>Neu</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="856"/>
+        <location filename="../../mainwindow.ui" line="835"/>
         <source>Create a new pattern</source>
         <translation>Neues Schnittmuster erstellen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="859"/>
+        <location filename="../../mainwindow.ui" line="838"/>
         <source>Ctrl+N</source>
         <translation>Strg+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="869"/>
+        <location filename="../../mainwindow.ui" line="848"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="875"/>
+        <location filename="../../mainwindow.ui" line="854"/>
         <source>Open file with pattern</source>
         <translation>Datei mit Schnittmuster öffnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="888"/>
+        <location filename="../../mainwindow.ui" line="867"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="894"/>
+        <location filename="../../mainwindow.ui" line="873"/>
         <source>Save pattern</source>
         <translation>Schnittmuster speichern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="897"/>
+        <location filename="../../mainwindow.ui" line="876"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
@@ -3564,190 +3564,189 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="836"/>
+        <location filename="../../mainwindow.ui" line="815"/>
         <source>Tool options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="853"/>
+        <location filename="../../mainwindow.ui" line="832"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="872"/>
+        <location filename="../../mainwindow.ui" line="851"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="891"/>
+        <location filename="../../mainwindow.ui" line="870"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="910"/>
+        <location filename="../../mainwindow.ui" line="889"/>
         <source>Save &amp;As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="913"/>
+        <location filename="../../mainwindow.ui" line="892"/>
         <source>Save not yet saved pattern</source>
         <translation>Speichere ungesichertes Schnittmuster</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="916"/>
+        <location filename="../../mainwindow.ui" line="895"/>
         <source>Ctrl+Shift+S</source>
         <translation>Strg+Umschalt+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="934"/>
+        <location filename="../../mainwindow.ui" line="913"/>
         <source>Draw</source>
         <translation>Zeichnen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="937"/>
+        <location filename="../../mainwindow.ui" line="916"/>
         <source>Draw mode</source>
         <translation>Zeichnenmodus</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="940"/>
+        <location filename="../../mainwindow.ui" line="919"/>
         <source>Ctrl+W</source>
         <translation>Strg+W</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="955"/>
+        <location filename="../../mainwindow.ui" line="934"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="958"/>
+        <location filename="../../mainwindow.ui" line="937"/>
         <source>Details mode</source>
         <translation>Detailmodus</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="961"/>
+        <location filename="../../mainwindow.ui" line="940"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="976"/>
-        <location filename="../../mainwindow.ui" line="979"/>
+        <location filename="../../mainwindow.ui" line="955"/>
+        <location filename="../../mainwindow.ui" line="958"/>
         <source>Pointer tools</source>
         <translation>Zeigerwerkzeuge</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="988"/>
+        <location filename="../../mainwindow.ui" line="967"/>
         <source>New pattern piece</source>
         <translation>Neues Schnittteil</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="991"/>
+        <location filename="../../mainwindow.ui" line="970"/>
         <source>Add new pattern piece</source>
         <translation>Neues Schnittteil hinzufügen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="994"/>
+        <location filename="../../mainwindow.ui" line="973"/>
         <source>Ctrl+Shift+N</source>
         <translation>Strg+Umschalt+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1003"/>
-        <location filename="../../mainwindow.ui" line="1006"/>
+        <location filename="../../mainwindow.ui" line="982"/>
+        <location filename="../../mainwindow.ui" line="985"/>
         <source>Change the label of pattern piece</source>
         <translation>Das Label eines Schnittteils ändern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1018"/>
+        <location filename="../../mainwindow.ui" line="997"/>
         <source>Table of variables</source>
         <translation>Variablentabelle</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1021"/>
+        <location filename="../../mainwindow.ui" line="1000"/>
         <source>Tables of variables</source>
         <translation>Variablentabellen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1024"/>
+        <location filename="../../mainwindow.ui" line="1003"/>
         <source>Ctrl+T</source>
         <translation>Strg+T</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="821"/>
-        <location filename="../../mainwindow.ui" line="1036"/>
+        <location filename="../../mainwindow.ui" line="1015"/>
         <source>History</source>
         <translation>Chronik</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1039"/>
+        <location filename="../../mainwindow.ui" line="1018"/>
         <source>Ctrl+H</source>
         <translation>Strg+H</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1048"/>
+        <location filename="../../mainwindow.ui" line="1027"/>
         <source>Export pattern (layout)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1059"/>
+        <location filename="../../mainwindow.ui" line="1038"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1069"/>
+        <location filename="../../mainwindow.ui" line="1048"/>
         <source>&amp;About Valentina</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1079"/>
+        <location filename="../../mainwindow.ui" line="1058"/>
         <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1082"/>
+        <location filename="../../mainwindow.ui" line="1061"/>
         <source>Exit the application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1090"/>
+        <location filename="../../mainwindow.ui" line="1069"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1095"/>
+        <location filename="../../mainwindow.ui" line="1074"/>
         <source>Pattern properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1108"/>
+        <location filename="../../mainwindow.ui" line="1087"/>
         <source>Zoom In</source>
         <translation type="unfinished">Vergrößern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1111"/>
+        <location filename="../../mainwindow.ui" line="1090"/>
         <source>zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1124"/>
+        <location filename="../../mainwindow.ui" line="1103"/>
         <source>Zoom Out</source>
         <translation type="unfinished">Verkleinern</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1127"/>
+        <location filename="../../mainwindow.ui" line="1106"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1132"/>
+        <location filename="../../mainwindow.ui" line="1111"/>
         <source>Edit pattern XML code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1145"/>
+        <location filename="../../mainwindow.ui" line="1124"/>
         <source>ZoomOriginal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1158"/>
+        <location filename="../../mainwindow.ui" line="1137"/>
         <source>ZoomFitBest</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3756,12 +3755,12 @@
         <translation type="vanished">Layout</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1051"/>
+        <location filename="../../mainwindow.ui" line="1030"/>
         <source>Create layout</source>
         <translation>Layout erstellen</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1054"/>
+        <location filename="../../mainwindow.ui" line="1033"/>
         <source>Ctrl+L</source>
         <translation>Strg+L</translation>
     </message>
@@ -3779,7 +3778,7 @@
         <translation type="vanished">Beenden</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1085"/>
+        <location filename="../../mainwindow.ui" line="1064"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
@@ -3854,7 +3853,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2067"/>
+        <location filename="../../mainwindow.cpp" line="2063"/>
         <source>Pattern piece:</source>
         <translation>Schnittteil:</translation>
     </message>
@@ -3871,7 +3870,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Fehler beim Erstellen eines Schnittmusters mit dem Namen </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2069"/>
+        <location filename="../../mainwindow.cpp" line="2065"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Es muss ein neues Label für das Schnittteil eingegeben werden.</translation>
     </message>
@@ -3975,42 +3974,42 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2137"/>
+        <location filename="../../mainwindow.cpp" line="2133"/>
         <source>Wrong units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2138"/>
+        <location filename="../../mainwindow.cpp" line="2134"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2149"/>
+        <location filename="../../mainwindow.cpp" line="2145"/>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2163"/>
+        <location filename="../../mainwindow.cpp" line="2159"/>
         <source>File loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2177"/>
+        <location filename="../../mainwindow.cpp" line="2173"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2178"/>
+        <location filename="../../mainwindow.cpp" line="2174"/>
         <source>could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2191"/>
+        <location filename="../../mainwindow.cpp" line="2187"/>
         <source>Standard measurements (*.vst)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2195"/>
+        <location filename="../../mainwindow.cpp" line="2191"/>
         <source>Individual measurements (*.vit)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4060,7 +4059,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../mainwindow.cpp" line="1299"/>
-        <location filename="../../mainwindow.cpp" line="2197"/>
+        <location filename="../../mainwindow.cpp" line="2193"/>
         <source>Open file</source>
         <translation>Datei öffnen</translation>
     </message>
@@ -6790,12 +6789,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="339"/>
+        <location filename="../../tools/vabstracttool.cpp" line="338"/>
         <source>Confirm the deletion.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="340"/>
+        <location filename="../../tools/vabstracttool.cpp" line="339"/>
         <source>Do you really want delete?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7085,183 +7084,183 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="376"/>
+        <location filename="../../xml/vpattern.cpp" line="374"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
         <translation type="unfinished">Kann das Tool mit id = %1 nicht in der Tabelle finden.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="706"/>
+        <location filename="../../xml/vpattern.cpp" line="704"/>
         <source>Error no unique id.</source>
         <translation type="unfinished">Fehler keine eindeutige id.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="751"/>
-        <location filename="../../xml/vpattern.cpp" line="775"/>
+        <location filename="../../xml/vpattern.cpp" line="749"/>
+        <location filename="../../xml/vpattern.cpp" line="773"/>
         <source>Error parsing file.</source>
         <translation type="unfinished">Fehler beim Parsen der Datei.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="757"/>
+        <location filename="../../xml/vpattern.cpp" line="755"/>
         <source>Error can&apos;t convert value.</source>
         <translation type="unfinished">Fehler Wert kann nicht konvertiert werden.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="763"/>
+        <location filename="../../xml/vpattern.cpp" line="761"/>
         <source>Error empty parameter.</source>
         <translation type="unfinished">Fehler leerer parameter.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="769"/>
+        <location filename="../../xml/vpattern.cpp" line="767"/>
         <source>Error wrong id.</source>
         <translation type="unfinished">Fehler falsche Id.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="784"/>
+        <location filename="../../xml/vpattern.cpp" line="782"/>
         <source>Critical error!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="784"/>
+        <location filename="../../xml/vpattern.cpp" line="782"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1004"/>
+        <location filename="../../xml/vpattern.cpp" line="997"/>
         <source>Error creating or updating detail</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren des Details</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1116"/>
+        <location filename="../../xml/vpattern.cpp" line="1108"/>
         <source>Error creating or updating single point</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Einzelpunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1149"/>
-        <location filename="../../xml/vpattern.cpp" line="1155"/>
+        <location filename="../../xml/vpattern.cpp" line="1141"/>
+        <location filename="../../xml/vpattern.cpp" line="1147"/>
         <source>Error creating or updating point of end line</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Punktes am Ende einer Linie</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1180"/>
-        <location filename="../../xml/vpattern.cpp" line="1186"/>
+        <location filename="../../xml/vpattern.cpp" line="1172"/>
+        <location filename="../../xml/vpattern.cpp" line="1178"/>
         <source>Error creating or updating point along line</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Punktes auf einer Linie</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1212"/>
-        <location filename="../../xml/vpattern.cpp" line="1218"/>
+        <location filename="../../xml/vpattern.cpp" line="1204"/>
+        <location filename="../../xml/vpattern.cpp" line="1210"/>
         <source>Error creating or updating point of shoulder</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Schulterpunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1244"/>
-        <location filename="../../xml/vpattern.cpp" line="1250"/>
+        <location filename="../../xml/vpattern.cpp" line="1236"/>
+        <location filename="../../xml/vpattern.cpp" line="1242"/>
         <source>Error creating or updating point of normal</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Punktes einer Normalen</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1276"/>
-        <location filename="../../xml/vpattern.cpp" line="1282"/>
+        <location filename="../../xml/vpattern.cpp" line="1268"/>
+        <location filename="../../xml/vpattern.cpp" line="1274"/>
         <source>Error creating or updating point of bisector</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren einer Winkelhalbierenden</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1301"/>
+        <location filename="../../xml/vpattern.cpp" line="1293"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Linienschnittpunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1327"/>
-        <location filename="../../xml/vpattern.cpp" line="1333"/>
+        <location filename="../../xml/vpattern.cpp" line="1319"/>
+        <location filename="../../xml/vpattern.cpp" line="1325"/>
         <source>Error creating or updating point of contact</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Berührungpunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1351"/>
+        <location filename="../../xml/vpattern.cpp" line="1343"/>
         <source>Error creating or updating modeling point</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren beim Modellieren eines Punktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1369"/>
+        <location filename="../../xml/vpattern.cpp" line="1361"/>
         <source>Error creating or updating height</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren der Größe</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1388"/>
+        <location filename="../../xml/vpattern.cpp" line="1380"/>
         <source>Error creating or updating triangle</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Dreiecks</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1405"/>
+        <location filename="../../xml/vpattern.cpp" line="1397"/>
         <source>Error creating or updating point of intersection</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Schnittpunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1428"/>
-        <location filename="../../xml/vpattern.cpp" line="1434"/>
+        <location filename="../../xml/vpattern.cpp" line="1420"/>
+        <location filename="../../xml/vpattern.cpp" line="1426"/>
         <source>Error creating or updating cut spline point</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines geschnittenen Splinepunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1458"/>
-        <location filename="../../xml/vpattern.cpp" line="1464"/>
+        <location filename="../../xml/vpattern.cpp" line="1450"/>
+        <location filename="../../xml/vpattern.cpp" line="1456"/>
         <source>Error creating or updating cut spline path point</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Punktes eines geschnittenen Splinepfades</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1487"/>
-        <location filename="../../xml/vpattern.cpp" line="1493"/>
+        <location filename="../../xml/vpattern.cpp" line="1479"/>
+        <location filename="../../xml/vpattern.cpp" line="1485"/>
         <source>Error creating or updating cut arc point</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines geschnittenen Bogenpunktes</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1529"/>
+        <location filename="../../xml/vpattern.cpp" line="1521"/>
         <source>Error creating or updating line</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren einer Linie</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1742"/>
+        <location filename="../../xml/vpattern.cpp" line="1734"/>
         <source>Error creating or updating simple curve</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren einer einfachen Kurve</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1786"/>
+        <location filename="../../xml/vpattern.cpp" line="1778"/>
         <source>Error creating or updating curve path</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren eines Kurvenpfades</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1803"/>
+        <location filename="../../xml/vpattern.cpp" line="1795"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktuallisieren der Modellierung einer einfachen Kurve</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1820"/>
+        <location filename="../../xml/vpattern.cpp" line="1812"/>
         <source>Error creating or updating modeling curve path</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren der Modellierung eines Kurvenpfades</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1875"/>
-        <location filename="../../xml/vpattern.cpp" line="1881"/>
+        <location filename="../../xml/vpattern.cpp" line="1867"/>
+        <location filename="../../xml/vpattern.cpp" line="1873"/>
         <source>Error creating or updating simple arc</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualsieren eines einfachen Bogens</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1900"/>
+        <location filename="../../xml/vpattern.cpp" line="1892"/>
         <source>Error creating or updating modeling arc</source>
         <translation type="unfinished">Fehler beim Erstellen oder Aktualisieren der Modellierung eines Bogens</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1945"/>
+        <location filename="../../xml/vpattern.cpp" line="1937"/>
         <source>Error creating or updating union details</source>
         <translation type="unfinished">Fehler beim Vereinigen der Details</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="2000"/>
+        <location filename="../../xml/vpattern.cpp" line="1992"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation type="unfinished">Falsche Parameter id übermittelt. Erwarte id &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="2436"/>
+        <location filename="../../xml/vpattern.cpp" line="2428"/>
         <source>This id is not unique.</source>
         <translation type="unfinished">Diese Id ist kein Unikat.</translation>
     </message>
@@ -7302,12 +7301,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolDetail</name>
     <message>
-        <location filename="../../tools/vtooldetail.cpp" line="401"/>
+        <location filename="../../tools/vtooldetail.cpp" line="402"/>
         <source>Options</source>
         <translation>Optionen</translation>
     </message>
     <message>
-        <location filename="../../tools/vtooldetail.cpp" line="402"/>
+        <location filename="../../tools/vtooldetail.cpp" line="403"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -7315,170 +7314,170 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="845"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="844"/>
         <source>Base point</source>
         <translation type="unfinished">Startpunkt</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="847"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="861"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="874"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="898"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="910"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="921"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="932"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="943"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="964"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="975"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="993"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1004"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1014"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1060"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="846"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="860"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="873"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="897"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="909"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="920"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="931"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="942"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="963"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="974"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="992"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1003"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1013"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1059"/>
         <source>Point label</source>
         <translation type="unfinished">Bezeichnung des Punktes</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="849"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="848"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="859"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="858"/>
         <source>Point at distance and angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="861"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="874"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="898"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="943"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="953"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="975"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1014"/>
+        <source>Line type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="862"/>
         <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="875"/>
         <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="899"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="944"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="954"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="976"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="910"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="921"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="932"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="973"/>
         <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1015"/>
-        <source>Line type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="863"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="876"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="900"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="911"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="922"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="933"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="974"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1016"/>
         <source>Length</source>
         <translation type="unfinished">Länge</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="864"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="863"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="872"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="871"/>
         <source>Point at distance along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="884"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="883"/>
         <source>Arc</source>
         <translation type="unfinished">Bogen</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="886"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="994"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="885"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="993"/>
         <source>Radius</source>
         <translation type="unfinished">Radius</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="887"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="886"/>
         <source>First angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="888"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="887"/>
         <source>Second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="896"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="895"/>
         <source>Point along bisector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="908"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="907"/>
         <source>Cut arc tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="919"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="918"/>
         <source>Tool for segmenting a curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="930"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="929"/>
         <source>Tool segment a pathed curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="941"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="940"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="952"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="951"/>
         <source>Line between points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="962"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="961"/>
         <source>Point at line intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="972"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="971"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="978"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="977"/>
         <source>Additional angle degrees</source>
         <translation type="unfinished">Zusätzlicher Winkel</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="991"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="990"/>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1002"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1001"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1012"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1011"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1024"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1023"/>
         <source>Curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1026"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1043"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1025"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1042"/>
         <source>Curve factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1041"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1040"/>
         <source>Tool for path curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1058"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1057"/>
         <source>Tool triangle</source>
         <translation type="unfinished"></translation>
     </message>

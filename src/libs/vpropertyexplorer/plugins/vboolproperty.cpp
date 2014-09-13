@@ -45,7 +45,7 @@ VBoolProperty::VBoolProperty(const QString& name) :
     {
         TrueText = QObject::tr("True");
     }
-    if (TrueText.isNull())
+    if (FalseText.isNull())
     {
         FalseText = QObject::tr("False");
     }

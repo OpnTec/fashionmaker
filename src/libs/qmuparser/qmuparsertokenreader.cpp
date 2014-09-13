@@ -413,7 +413,7 @@ bool QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok )
                 }
 
                 m_iSynFlags  = noBC | noOPT | noARG_SEP | noPOSTOP | noASSIGN | noIF | noELSE;
-                m_iSynFlags |= ( ( i != cmEND ) && ( i != cmBC ) ) ? noEND : 0;
+                m_iSynFlags |= noEND ;
             }
             else if (i == cmBO)
             {

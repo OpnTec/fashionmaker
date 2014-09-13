@@ -42,7 +42,7 @@ VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVar
 }
 
 VIntegerProperty::VIntegerProperty(const QString &name)
-    : VProperty(name), minValue(StandardMin), maxValue(StandardMax)
+    : VProperty(name), minValue(StandardMin), maxValue(StandardMax), singleStep(1.0)
 {
     VProperty::d_ptr->VariantValue.setValue(0);
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);

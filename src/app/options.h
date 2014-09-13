@@ -35,6 +35,8 @@
 #   include <Windows.h>
 #endif /*Q_OS_WIN32*/
 
+#include <QtGlobal>
+
 class QString;
 
 static const quint32 null_id = 0;
