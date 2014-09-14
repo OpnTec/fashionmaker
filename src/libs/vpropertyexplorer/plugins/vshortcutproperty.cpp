@@ -24,7 +24,7 @@
 
 #include "vshortcutpropertyeditor.h"
 
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 
 using namespace VPE;
@@ -80,9 +80,9 @@ bool VShortcutProperty::setEditorData(QWidget* editor)
 }
 
 
-QVariant VShortcutProperty::getEditorData(QWidget* editor) const
+QVariant VShortcutProperty::getEditorData(const QWidget *editor) const
 {
-    VShortcutEditWidget* tmpWidget = qobject_cast<VShortcutEditWidget*>(editor);
+    const VShortcutEditWidget* tmpWidget = qobject_cast<const VShortcutEditWidget*>(editor);
     if (tmpWidget)
     {
         return tmpWidget->getShortcutAsString();

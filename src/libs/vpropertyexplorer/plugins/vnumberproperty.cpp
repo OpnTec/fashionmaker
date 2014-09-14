@@ -25,7 +25,7 @@
 #include <QSizePolicy>
 #include <QCoreApplication>
 
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 using namespace VPE;
 
@@ -69,9 +69,9 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
 }
 
 //! Gets the data from the widget
-QVariant VIntegerProperty::getEditorData(QWidget* editor) const
+QVariant VIntegerProperty::getEditorData(const QWidget *editor) const
 {
-    QSpinBox* tmpEditor = qobject_cast<QSpinBox*>(editor);
+    const QSpinBox* tmpEditor = qobject_cast<const QSpinBox*>(editor);
     if (tmpEditor)
     {
         return tmpEditor->value();
@@ -176,9 +176,9 @@ QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewI
 }
 
 //! Gets the data from the widget
-QVariant VDoubleProperty::getEditorData(QWidget* editor) const
+QVariant VDoubleProperty::getEditorData(const QWidget *editor) const
 {
-    QDoubleSpinBox* tmpEditor = qobject_cast<QDoubleSpinBox*>(editor);
+    const QDoubleSpinBox* tmpEditor = qobject_cast<const QDoubleSpinBox*>(editor);
     if (tmpEditor)
     {
         return tmpEditor->value();

@@ -71,7 +71,7 @@ QWidget* VEmptyProperty::createEditor(QWidget * parent, const QStyleOptionViewIt
 
 
 //! Gets the data from the widget
-QVariant VEmptyProperty::getEditorData(QWidget* editor) const
+QVariant VEmptyProperty::getEditorData(const QWidget *editor) const
 {
     Q_UNUSED(editor);
 

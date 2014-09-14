@@ -118,9 +118,9 @@ bool VFormulaProperty::setEditorData(QWidget* editor)
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Gets the data from the widget
-QVariant VFormulaProperty::getEditorData(QWidget* editor) const
+QVariant VFormulaProperty::getEditorData(const QWidget *editor) const
 {
-    VFormulaPropertyEditor* tmpWidget = qobject_cast<VFormulaPropertyEditor*>(editor);
+    const VFormulaPropertyEditor* tmpWidget = qobject_cast<const VFormulaPropertyEditor*>(editor);
     if (tmpWidget)
     {
         QVariant value;

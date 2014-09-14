@@ -21,9 +21,9 @@
 #ifndef VPOINTFPROPERTY_H
 #define VPOINTFPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 namespace VPE
 {

@@ -21,8 +21,8 @@
 #ifndef VNUMBERPROPERTY_H
 #define VNUMBERPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
-#include "vproperty.h"
+#include "../vpropertyexplorer_global.h"
+#include "../vproperty.h"
 
 namespace VPE
 {
@@ -46,7 +46,7 @@ public:
                                   const QAbstractItemDelegate* delegate);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Sets the settings. Available settings:
     //!
@@ -97,7 +97,7 @@ public:
                                   const QAbstractItemDelegate* delegate);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Sets the settings. Available settings:
     //!

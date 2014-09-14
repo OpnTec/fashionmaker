@@ -21,7 +21,7 @@
 #ifndef VWIDGETROPERTY_H
 #define VWIDGETROPERTY_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
 #include "vemptyproperty.h"
 

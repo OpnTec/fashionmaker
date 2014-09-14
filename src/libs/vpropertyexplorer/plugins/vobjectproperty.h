@@ -21,7 +21,7 @@
 #ifndef VOBJECTPROPERTY_H
 #define VOBJECTPROPERTY_H
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 #include <QStringList>
 
@@ -55,7 +55,7 @@ public:
     virtual bool setEditorData(QWidget* editor);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Sets the objects list
     void setObjectsList(const QMap<QString, quint32> &objects);

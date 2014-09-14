@@ -345,7 +345,7 @@ bool VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
     return false;
 }
 
-void VPropertyFormWidget::commitData(QWidget *editor)
+void VPropertyFormWidget::commitData(const QWidget *editor)
 {
     if (!editor)
     {

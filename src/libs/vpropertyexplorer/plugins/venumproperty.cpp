@@ -19,7 +19,7 @@
  *************************************************************************/
 
 #include "venumproperty.h"
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 #include <QComboBox>
 #include <QCoreApplication>
@@ -80,9 +80,9 @@ QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewIte
 }
 
 //! Gets the data from the widget
-QVariant VEnumProperty::getEditorData(QWidget* editor) const
+QVariant VEnumProperty::getEditorData(const QWidget *editor) const
 {
-    QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
+    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
     {
         return tmpEditor->currentIndex();

@@ -23,7 +23,7 @@
 #include <QLineEdit>
 #include <QSizePolicy>
 
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 using namespace VPE;
 
@@ -58,9 +58,9 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     return d_ptr->editor;
 }
 
-QVariant VPE::VStringProperty::getEditorData(QWidget *editor) const
+QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
 {
-    QLineEdit* tmpEditor = qobject_cast<QLineEdit*>(editor);
+    const QLineEdit* tmpEditor = qobject_cast<const QLineEdit*>(editor);
     if (tmpEditor)
     {
         return tmpEditor->text();

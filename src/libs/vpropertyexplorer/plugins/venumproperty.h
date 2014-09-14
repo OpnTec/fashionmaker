@@ -21,7 +21,7 @@
 #ifndef VENUMPROPERTY_H
 #define VENUMPROPERTY_H
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 #include <QStringList>
 
@@ -50,7 +50,7 @@ public:
                                   const QAbstractItemDelegate* delegate);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Sets the enumeration literals
     virtual void setLiterals(const QStringList &literals);

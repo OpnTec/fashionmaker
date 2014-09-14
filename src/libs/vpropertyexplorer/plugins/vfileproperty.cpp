@@ -24,7 +24,7 @@
 
 #include "vfilepropertyeditor.h"
 
-#include "vfileproperty_p.h"
+#include "../vfileproperty_p.h"
 
 using namespace VPE;
 
@@ -108,9 +108,9 @@ bool VFileProperty::setEditorData(QWidget* editor)
 }
 
 
-QVariant VFileProperty::getEditorData(QWidget* editor) const
+QVariant VFileProperty::getEditorData(const QWidget *editor) const
 {
-    VFileEditWidget* tmpWidget = qobject_cast<VFileEditWidget*>(editor);
+    const VFileEditWidget* tmpWidget = qobject_cast<const VFileEditWidget*>(editor);
     if (tmpWidget)
     {
         return tmpWidget->getFile();

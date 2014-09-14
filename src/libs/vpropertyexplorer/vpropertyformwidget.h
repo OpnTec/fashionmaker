@@ -91,7 +91,7 @@ protected:
     bool eventFilter(QObject *object, QEvent *event);
 
     //! Commits data of an editor
-    void commitData(QWidget* editor);
+    void commitData(const QWidget* editor);
 
 private:
     Q_DISABLE_COPY(VPropertyFormWidget)

@@ -112,10 +112,7 @@ VProperty *VPropertySet::takeProperty(const QString &id)
 void VPropertySet::removeProperty(const QString &id)
 {
     VProperty* tmpProp = takeProperty(id);
-    if (tmpProp)
-    {
-        delete tmpProp;
-    }
+    delete tmpProp;
 }
 
 void VPropertySet::removeProperty(VProperty* prop, bool delete_property)

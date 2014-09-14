@@ -22,7 +22,7 @@
 
 using namespace VPE;
 
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 #include "vnumberproperty.h"
 #include <QPointF>
 

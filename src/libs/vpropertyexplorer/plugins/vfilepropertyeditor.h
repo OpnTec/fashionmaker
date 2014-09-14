@@ -21,7 +21,7 @@
 #ifndef VFILEPROPERTYEDITOR_H
 #define VFILEPROPERTYEDITOR_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
 #include <QWidget>
 #include <QToolButton>
@@ -42,7 +42,7 @@ public:
 
 
     //! This function returns the file currently set to this editor
-    QString getFile();
+    QString getFile() const;
 
     //! Needed for proper event handling
     bool eventFilter(QObject* obj, QEvent* ev);

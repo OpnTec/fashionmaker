@@ -27,7 +27,7 @@
 #include <QObject>
 #include <QSpinBox>
 
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 using namespace VPE;
 

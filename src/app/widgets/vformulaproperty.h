@@ -57,7 +57,7 @@ public:
     virtual bool setEditorData(QWidget* editor);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Returns a string containing the type of the property
     virtual QString type() const;

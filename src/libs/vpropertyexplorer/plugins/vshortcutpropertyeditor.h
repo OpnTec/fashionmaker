@@ -21,7 +21,7 @@
 #ifndef VSHORTCUTPROPERTYEDITOR_H
 #define VSHORTCUTPROPERTYEDITOR_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
 #include <QWidget>
 #include <QToolButton>
@@ -44,7 +44,7 @@ public:
     bool eventFilter(QObject* obj, QEvent* evenvt);
 
     //! Returns the currently set shortcut
-    QString getShortcutAsString();
+    QString getShortcutAsString() const;
 
     //! Returns the currently set shortcut
     QKeySequence getShortcut();

@@ -26,7 +26,7 @@
 #include <QApplication>
 #include <QColorDialog>
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 using namespace VPE;
 
@@ -128,7 +128,7 @@ VColorPropertyEditor::~VColorPropertyEditor()
     //
 }
 
-QColor VColorPropertyEditor::getColor()
+QColor VColorPropertyEditor::getColor() const
 {
     return Color;
 }

@@ -21,8 +21,8 @@
 #ifndef VSTRINGPROPERTY_H
 #define VSTRINGPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
-#include "vproperty.h"
+#include "../vpropertyexplorer_global.h"
+#include "../vproperty.h"
 
 namespace VPE
 {
@@ -45,7 +45,7 @@ public:
                                   const QAbstractItemDelegate* delegate);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     void         setReadOnly(bool readOnly);
 

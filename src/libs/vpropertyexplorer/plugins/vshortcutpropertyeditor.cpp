@@ -75,7 +75,7 @@ bool VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
-QString VShortcutEditWidget::getShortcutAsString()
+QString VShortcutEditWidget::getShortcutAsString() const
 {
     return CurrentKeySequence.toString();
 }

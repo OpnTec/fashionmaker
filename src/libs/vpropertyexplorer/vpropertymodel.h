@@ -107,7 +107,7 @@ public:
     //! The concept of property IDs is, that the object that manages the properties
     //! and not the properties themselves handle the IDs.
     //! \return Returns the ID under which the property is stored within the model
-    virtual QString getPropertyID(VProperty* prop) const;
+    virtual QString getPropertyID(const VProperty* prop) const;
 
     //! Returns a const pointer to the property set managed by this model. If you want to manipulate the property set,
     //! either use the methods provided by the model or use takePropertySet() and setPropertySet().

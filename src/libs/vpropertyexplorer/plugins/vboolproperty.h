@@ -21,7 +21,7 @@
 #ifndef VBOOLPROPERTY_H
 #define VBOOLPROPERTY_H
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 namespace VPE
 {

@@ -21,7 +21,7 @@
 #ifndef VCOLORPROPERTYEDITOR_H
 #define VCOLORPROPERTYEDITOR_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
 #include <QWidget>
 #include <QToolButton>
@@ -45,7 +45,7 @@ public:
 
 
     //! Returns the color currently set
-    QColor getColor();
+    QColor getColor() const;
 
     //! A little helper function generating an image to represent a color
     //! \param color The color to fill the image with

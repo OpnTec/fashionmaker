@@ -40,11 +40,7 @@ VPropertyModel::VPropertyModel(QObject * parent) :
 
 VPropertyModel::~VPropertyModel()
 {
-    if (d_ptr->Properties)
-    {
-        delete d_ptr->Properties;
-    }
-
+    delete d_ptr->Properties;
     delete d_ptr;
 }
 
@@ -273,7 +269,7 @@ VProperty* VPropertyModel::getProperty(const QModelIndex &index) const
     return nullptr;
 }
 
-QString VPropertyModel::getPropertyID(VProperty *prop) const
+QString VPropertyModel::getPropertyID(const VProperty *prop) const
 {
     return d_ptr->Properties != nullptr ? d_ptr->Properties->getPropertyID(prop) : QString();
 }
@@ -337,10 +333,7 @@ VPropertySet *VPropertyModel::takePropertySet(VPropertySet *new_property_set, bo
 void VPropertyModel::setPropertySet(VPropertySet *property_set, bool emit_signals)
 {
     VPropertySet* tmpOldPropertySet = takePropertySet(property_set, emit_signals);
-    if (tmpOldPropertySet)
-    {
-        delete tmpOldPropertySet;
-    }
+    delete tmpOldPropertySet;
 }
 
 VProperty *VPropertyModel::takeProperty(const QString &id)

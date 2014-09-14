@@ -138,7 +138,7 @@ bool VProperty::setEditorData(QWidget* editor)
 }
 
 //! Gets the data from the widget
-QVariant VProperty::getEditorData(QWidget* editor) const
+QVariant VProperty::getEditorData(const QWidget* editor) const
 {
     if (!editor)
     {

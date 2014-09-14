@@ -21,7 +21,7 @@
 #include "vcolorproperty.h"
 #include "vcolorpropertyeditor.h"
 
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 using namespace VPE;
 
@@ -77,9 +77,9 @@ bool VColorProperty::setEditorData(QWidget* editor)
 }
 
 //! Gets the data from the widget
-QVariant VColorProperty::getEditorData(QWidget* editor) const
+QVariant VColorProperty::getEditorData(const QWidget *editor) const
 {
-    VColorPropertyEditor* tmpWidget = qobject_cast<VColorPropertyEditor*>(editor);
+    const VColorPropertyEditor* tmpWidget = qobject_cast<const VColorPropertyEditor*>(editor);
     if (tmpWidget)
     {
         return tmpWidget->getColor();

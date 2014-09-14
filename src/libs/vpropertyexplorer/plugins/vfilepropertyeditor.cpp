@@ -93,7 +93,7 @@ void VFileEditWidget::setDirectory(bool dir)
     Directory = dir;
 }
 
-QString VFileEditWidget::getFile()
+QString VFileEditWidget::getFile() const
 {
     return CurrentFilePath;
 }

@@ -21,7 +21,7 @@
 #ifndef VEMPTYPROPERTY_H
 #define VEMPTYPROPERTY_H
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 namespace VPE
 {
@@ -47,7 +47,7 @@ public:
                                   const QAbstractItemDelegate* delegate);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Returns item flags
     virtual Qt::ItemFlags flags(int column = DPC_Name) const;

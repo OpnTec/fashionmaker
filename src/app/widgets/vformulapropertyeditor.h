@@ -49,7 +49,7 @@ public:
     virtual ~VFormulaPropertyEditor();
 
     //! Returns the formula currently set
-    VFormula getFormula();
+    VFormula getFormula() const;
 
     //! Needed for proper event handling
     bool eventFilter(QObject *obj, QEvent *ev);

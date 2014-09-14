@@ -122,7 +122,7 @@ VFormulaPropertyEditor::~VFormulaPropertyEditor()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VFormulaPropertyEditor::getFormula()
+VFormula VFormulaPropertyEditor::getFormula() const
 {
     return formula;
 }

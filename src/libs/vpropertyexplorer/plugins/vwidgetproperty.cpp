@@ -21,7 +21,7 @@
 #include "vwidgetproperty.h"
 
 
-#include "vwidgetproperty_p.h"
+#include "../vwidgetproperty_p.h"
 
 using namespace VPE;
 

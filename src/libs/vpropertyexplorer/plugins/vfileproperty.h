@@ -21,9 +21,9 @@
 #ifndef VFILEPROPERTY_H
 #define VFILEPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 #include <QPointer>
 
@@ -65,7 +65,7 @@ public:
     virtual bool setEditorData(QWidget* editor);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Sets the settings. Available settings:
     //!

@@ -19,7 +19,7 @@
  *************************************************************************/
 
 #include "vobjectproperty.h"
-#include "vproperty_p.h"
+#include "../vproperty_p.h"
 
 #include <QComboBox>
 #include <QCoreApplication>
@@ -100,9 +100,9 @@ bool VObjectProperty::setEditorData(QWidget *editor)
 }
 
 //! Gets the data from the widget
-QVariant VObjectProperty::getEditorData(QWidget* editor) const
+QVariant VObjectProperty::getEditorData(const QWidget *editor) const
 {
-    QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
+    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
     {
         return tmpEditor->itemData(tmpEditor->currentIndex());

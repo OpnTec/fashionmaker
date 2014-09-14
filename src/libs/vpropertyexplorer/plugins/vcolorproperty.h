@@ -21,9 +21,9 @@
 #ifndef VCOLORPROPERTY_H
 #define VCOLORPROPERTY_H
 
-#include "vpropertyexplorer_global.h"
+#include "../vpropertyexplorer_global.h"
 
-#include "vproperty.h"
+#include "../vproperty.h"
 
 namespace VPE
 {
@@ -49,7 +49,7 @@ public:
     virtual bool setEditorData(QWidget* editor);
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const;
 
     //! Returns a string containing the type of the property
     virtual QString type() const;
