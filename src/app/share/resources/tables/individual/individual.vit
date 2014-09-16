@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <vit>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
     <personal>
         <family-name/>
         <given-name/>
@@ -62,6 +62,10 @@
             <back_waist_slope value="0.0"/>
             <front_neck_to_upper_chest_height value="0.0"/>
             <front_neck_to_bust_height value="0.0"/>
+            <front_waist_to_upper_chest value="0.0"/>
+            <front_waist_to_lower_breast value="0.0"/>
+            <back_waist_to_upper_chest value="0.0"/>
+            <strap_length value="0.0"/>
         </torso>
         <arm>
             <armscye_girth value="0.0"/>

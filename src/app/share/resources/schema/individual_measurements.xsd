@@ -273,6 +273,26 @@
 												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
 											</xs:complexType>
 										</xs:element>
+										<xs:element name="front_waist_to_upper_chest">
+											<xs:complexType>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="front_waist_to_lower_breast">
+											<xs:complexType>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="back_waist_to_upper_chest">
+											<xs:complexType>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="strap_length">
+											<xs:complexType>
+												<xs:attribute name="value" type="xs:double" use="required"></xs:attribute>
+											</xs:complexType>
+										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>

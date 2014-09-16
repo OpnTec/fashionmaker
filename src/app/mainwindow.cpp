@@ -2127,6 +2127,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         if (qApp->patternType() == MeasurementsType::Standard)
         {
             VStandardMeasurements m(pattern);
+            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", path);
             m.setContent(path);
             if (m.MUnit() == Unit::Inch)
             {
@@ -2137,6 +2138,10 @@ void MainWindow::LoadPattern(const QString &fileName)
             }
             m.SetSize();
             m.SetHeight();
+        }
+        else
+        {
+            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", path);
         }
         ToolBarOption();
     }

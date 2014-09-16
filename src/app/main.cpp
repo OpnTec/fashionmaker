@@ -84,6 +84,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
+                messageBox.exec();
                 break;
             case QtCriticalMsg:
                 messageBox.setIcon(QMessageBox::Critical);
@@ -91,6 +92,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
+                messageBox.exec();
+                abort();
                 break;
             case QtFatalMsg:
                 messageBox.setIcon(QMessageBox::Critical);
@@ -98,15 +101,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
                         context.function);
+                messageBox.exec();
+                abort();
                 break;
             default:
                 break;
-        }
-
-        const int ret = messageBox.exec();
-        if (ret == QMessageBox::Cancel)
-        {
-            abort();
         }
     }
     else

@@ -146,6 +146,8 @@ private:
     void               CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
                                             QMap<int, QString> &numbers);
     void               BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
+    void               InitMeasurement(const QString &name, const VTranslation &m, const VTranslation &g,
+                                       const VTranslation &d);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -3208,151 +3208,151 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1524"/>
+        <location filename="../../widgets/vapplication.cpp" line="1205"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1525"/>
+        <location filename="../../widgets/vapplication.cpp" line="1206"/>
         <source>cos</source>
         <comment>cosine function</comment>
         <translation>cos</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1526"/>
+        <location filename="../../widgets/vapplication.cpp" line="1207"/>
         <source>tan</source>
         <comment>tangens function</comment>
         <translation>tan</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1527"/>
+        <location filename="../../widgets/vapplication.cpp" line="1208"/>
         <source>asin</source>
         <comment>arcus sine function</comment>
         <translation>asin</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1528"/>
+        <location filename="../../widgets/vapplication.cpp" line="1209"/>
         <source>acos</source>
         <comment>arcus cosine function</comment>
         <translation>acos</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1529"/>
+        <location filename="../../widgets/vapplication.cpp" line="1210"/>
         <source>atan</source>
         <comment>arcus tangens function</comment>
         <translation>atan</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1530"/>
+        <location filename="../../widgets/vapplication.cpp" line="1211"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation>sinh</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1531"/>
+        <location filename="../../widgets/vapplication.cpp" line="1212"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation>cosh</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1532"/>
+        <location filename="../../widgets/vapplication.cpp" line="1213"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation>tanh</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1533"/>
+        <location filename="../../widgets/vapplication.cpp" line="1214"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation>asibh</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1534"/>
+        <location filename="../../widgets/vapplication.cpp" line="1215"/>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
         <translation>acosh</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1535"/>
+        <location filename="../../widgets/vapplication.cpp" line="1216"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation>atanh</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1536"/>
+        <location filename="../../widgets/vapplication.cpp" line="1217"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation>log2</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1537"/>
+        <location filename="../../widgets/vapplication.cpp" line="1218"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation>log10</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1538"/>
+        <location filename="../../widgets/vapplication.cpp" line="1219"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation>log</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1539"/>
+        <location filename="../../widgets/vapplication.cpp" line="1220"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation>ln</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1540"/>
+        <location filename="../../widgets/vapplication.cpp" line="1221"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation>exp</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1541"/>
+        <location filename="../../widgets/vapplication.cpp" line="1222"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation>sqrt</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1542"/>
+        <location filename="../../widgets/vapplication.cpp" line="1223"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation>sign</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1543"/>
+        <location filename="../../widgets/vapplication.cpp" line="1224"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation>rint</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1544"/>
+        <location filename="../../widgets/vapplication.cpp" line="1225"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation>abs</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1545"/>
+        <location filename="../../widgets/vapplication.cpp" line="1226"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation>min</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1546"/>
+        <location filename="../../widgets/vapplication.cpp" line="1227"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation>max</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1547"/>
+        <location filename="../../widgets/vapplication.cpp" line="1228"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation>sum</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1548"/>
+        <location filename="../../widgets/vapplication.cpp" line="1229"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
@@ -4057,37 +4057,37 @@
         <translation type="vanished">Мерки используют другие единицы измерения нежели лекало. Ето леколо требует мерки в %1</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2133"/>
+        <location filename="../../mainwindow.cpp" line="2134"/>
         <source>Wrong units.</source>
         <translation>Неправильные единицы измерения.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2134"/>
+        <location filename="../../mainwindow.cpp" line="2135"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2145"/>
+        <location filename="../../mainwindow.cpp" line="2150"/>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2173"/>
+        <location filename="../../mainwindow.cpp" line="2178"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation>Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2174"/>
+        <location filename="../../mainwindow.cpp" line="2179"/>
         <source>could not be found. Do you want to update the file location</source>
         <translation>не может быть найден. Вы хотите обновить путь к файлу</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2187"/>
+        <location filename="../../mainwindow.cpp" line="2192"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Стандартные мерки (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2191"/>
+        <location filename="../../mainwindow.cpp" line="2196"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Индивидуальные мерки (*.vit)</translation>
     </message>
@@ -4121,7 +4121,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не могу прочитать файл %1:\n%2. </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2159"/>
+        <location filename="../../mainwindow.cpp" line="2164"/>
         <source>File loaded</source>
         <translation>Файл загружен</translation>
     </message>
@@ -4167,7 +4167,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../mainwindow.cpp" line="1299"/>
-        <location filename="../../mainwindow.cpp" line="2193"/>
+        <location filename="../../mainwindow.cpp" line="2198"/>
         <source>Open file</source>
         <translation>Открыть файл</translation>
     </message>
@@ -4304,75 +4304,47 @@ Do you want to save your changes?</source>
 <context>
     <name>Measurements</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="283"/>
+        <location filename="../../widgets/vapplication.cpp" line="292"/>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Огол</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="285"/>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват головы</translation>
+        <translation type="vanished">Обхват головы</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="286"/>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват головы</translation>
+        <translation type="vanished">Обхват головы</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="292"/>
+        <location filename="../../widgets/vapplication.cpp" line="299"/>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="294"/>
-        <source>Mid-neck girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="295"/>
-        <source>Around middle part of Neck</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="301"/>
+        <location filename="../../widgets/vapplication.cpp" line="306"/>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ош</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="303"/>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват шеи</translation>
+        <translation type="vanished">Обхват шеи</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="304"/>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="310"/>
-        <source>head_and_neck_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Обхват шеи</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="312"/>
-        <source>Head and Neck length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="313"/>
-        <source>Vertical Distance from Crown to Nape</source>
-        <comment>Full measurement description</comment>
+        <source>head_and_neck_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4382,9 +4354,1594 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="322"/>
-        <source>Front Center length</source>
+        <location filename="../../widgets/vapplication.cpp" line="327"/>
+        <source>center_back_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дтс</translation>
+    </message>
+    <message>
+        <source>Back Center length</source>
         <comment>Full measurement name</comment>
+        <translation type="vanished">Длина спины до талии с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <source>Back Neck Center to Back Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина спины до талии с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="334"/>
+        <source>shoulder_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Шп</translation>
+    </message>
+    <message>
+        <source>Shoulder length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Длина плечевого ската</translation>
+    </message>
+    <message>
+        <source>NeckPoint to ShoulderTip</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина плечевого ската</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="340"/>
+        <source>side_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дб</translation>
+    </message>
+    <message>
+        <source>Side Waist length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Длина боковой части</translation>
+    </message>
+    <message>
+        <source>Armpit to Waist side</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина боковой части</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="346"/>
+        <source>trunk_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="355"/>
+        <source>shoulder_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="362"/>
+        <source>upper_chest_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ОгI</translation>
+    </message>
+    <message>
+        <source>Upper Chest girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват груди первый</translation>
+    </message>
+    <message>
+        <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват груди первый</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="370"/>
+        <source>bust_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ОгII</translation>
+    </message>
+    <message>
+        <source>Bust girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват груди второй</translation>
+    </message>
+    <message>
+        <source>Around fullest part of Bust, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват груди второй</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="377"/>
+        <source>under_bust_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ОгIII</translation>
+    </message>
+    <message>
+        <source>Under Bust girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват груди третий</translation>
+    </message>
+    <message>
+        <source>Around Chest below the Bust, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват груди третий</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="384"/>
+        <source>waist_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>От</translation>
+    </message>
+    <message>
+        <source>Waist girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват талии</translation>
+    </message>
+    <message>
+        <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват талии.</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="393"/>
+        <source>high_hip_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="400"/>
+        <source>hip_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Об</translation>
+    </message>
+    <message>
+        <source>Hip girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <source>Around Hip, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="407"/>
+        <source>upper_front_chest_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Шг1</translation>
+    </message>
+    <message>
+        <source>Front Upper Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Ширина груди первая</translation>
+    </message>
+    <message>
+        <source>Across Front UpperChest, smallest width from armscye to armscye</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Ширина груди первая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="414"/>
+        <source>front_chest_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Шг2</translation>
+    </message>
+    <message>
+        <source>Front Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Ширина груди вторая</translation>
+    </message>
+    <message>
+        <source>Across Front Chest, from armfold to armfold</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Ширина груди вторая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="421"/>
+        <source>across_front_shoulder_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>dпл</translation>
+    </message>
+    <message>
+        <source>Front Across Shoulder width</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Плечевой диаметр</translation>
+    </message>
+    <message>
+        <source>From ShoulderTip to ShoulderTip, across Front</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Плечевой диаметр</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="428"/>
+        <source>across_back_shoulder_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="435"/>
+        <source>upper_back_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="442"/>
+        <source>back_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Шс</translation>
+    </message>
+    <message>
+        <source>Back Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Ширина спины</translation>
+    </message>
+    <message>
+        <source>Across Back Chest, from armfold to armfold</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Ширина спины</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="449"/>
+        <source>bustpoint_to_bustpoint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Цг</translation>
+    </message>
+    <message>
+        <source>BustPoint to BustPoint</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние между сосковыми точками</translation>
+    </message>
+    <message>
+        <source>Distance between BustPoints, across Chest</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние между сосковыми точками</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="456"/>
+        <source>halter_bustpoint_to_bustpoint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="463"/>
+        <source>neck_to_bustpoint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вг</translation>
+    </message>
+    <message>
+        <source>NeckPoint to BustPoint</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
+    </message>
+    <message>
+        <source>From NeckPoint to BustPoint</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="470"/>
+        <source>crotch_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="477"/>
+        <source>rise_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дпс</translation>
+    </message>
+    <message>
+        <source>Rise height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от линии талии до подъягодичной складки</translation>
+    </message>
+    <message>
+        <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от линии талии до подъягодичной складки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="484"/>
+        <source>shoulder_drop</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="491"/>
+        <source>shoulder_slope_degrees</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="498"/>
+        <source>front_shoulder_slope_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="505"/>
+        <source>back_shoulder_slope_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="512"/>
+        <source>front_shoulder_to_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="519"/>
+        <source>back_shoulder_to_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="526"/>
+        <source>front_neck_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="533"/>
+        <source>back_neck_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="540"/>
+        <source>front_upper_chest_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="546"/>
+        <source>back_upper_chest_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="553"/>
+        <source>front_waist_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="559"/>
+        <source>back_waist_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="565"/>
+        <source>front_upper_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="572"/>
+        <source>back_upper_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="579"/>
+        <source>front_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="586"/>
+        <source>back_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="592"/>
+        <source>chest_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="599"/>
+        <source>back_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="606"/>
+        <source>front_waist_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="613"/>
+        <source>back_waist_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="620"/>
+        <source>front_neck_to_upper_chest_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="627"/>
+        <source>front_neck_to_bust_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="634"/>
+        <source>front_waist_to_upper_chest</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дпер</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="641"/>
+        <source>front_waist_to_lower_breast</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дпг</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="648"/>
+        <source>back_waist_to_upper_chest</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дст</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="655"/>
+        <source>strap_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дбр</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="663"/>
+        <source>armscye_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="669"/>
+        <source>elbow_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Олк</translation>
+    </message>
+    <message>
+        <source>Elbow Girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват локтя</translation>
+    </message>
+    <message>
+        <source>Around Elbow with elbow bent</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват локтя</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="676"/>
+        <source>upper_arm_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Оп</translation>
+    </message>
+    <message>
+        <source>Upperarm Girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват плеча</translation>
+    </message>
+    <message>
+        <source>Around UpperArm</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват плеча</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="682"/>
+        <source>wrist_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Озап</translation>
+    </message>
+    <message>
+        <source>Wrist girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват запястья</translation>
+    </message>
+    <message>
+        <source>Around Wrist</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват запястья</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="688"/>
+        <source>scye_depth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="695"/>
+        <source>shoulder_and_arm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дзап</translation>
+    </message>
+    <message>
+        <source>Shoulder and Arm length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
+    </message>
+    <message>
+        <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="702"/>
+        <source>underarm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="709"/>
+        <source>cervicale_to_wrist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="716"/>
+        <source>shoulder_to_elbow_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дрлок</translation>
+    </message>
+    <message>
+        <source>Elbow length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Длина руки до локтя</translation>
+    </message>
+    <message>
+        <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина руки до локтя</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="723"/>
+        <source>arm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дрзап</translation>
+    </message>
+    <message>
+        <source>Arm length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Длина рукава до линии обхвата запястья</translation>
+    </message>
+    <message>
+        <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина рукава до линии обхвата запястья</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="731"/>
+        <source>hand_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="737"/>
+        <source>hand_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="744"/>
+        <source>hand_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Окис</translation>
+    </message>
+    <message>
+        <source>Hand girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват кисти</translation>
+    </message>
+    <message>
+        <source>Around Hand</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват кисти</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="751"/>
+        <source>thigh_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Обед</translation>
+    </message>
+    <message>
+        <source>Thigh girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват бедра</translation>
+    </message>
+    <message>
+        <source>Around Thigh</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват бедра</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="757"/>
+        <source>mid_thigh_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="763"/>
+        <source>knee_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Ок</translation>
+    </message>
+    <message>
+        <source>Knee girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват колена</translation>
+    </message>
+    <message>
+        <source>Around Knee</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват колена</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="769"/>
+        <source>calf_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Ои</translation>
+    </message>
+    <message>
+        <source>Calf girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват икры</translation>
+    </message>
+    <message>
+        <source>Around Calf</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват икры</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="775"/>
+        <source>ankle_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Ощ</translation>
+    </message>
+    <message>
+        <source>Ankle girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват щиколотки</translation>
+    </message>
+    <message>
+        <source>Around Ankle</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват щиколотки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="781"/>
+        <source>knee_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вк</translation>
+    </message>
+    <message>
+        <source>Knee height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота коленной точки</translation>
+    </message>
+    <message>
+        <source>Knee to Floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота коленной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="787"/>
+        <source>ankle_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="794"/>
+        <source>foot_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="801"/>
+        <source>foot_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="809"/>
+        <source>height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="815"/>
+        <source>cervicale_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вшт</translation>
+    </message>
+    <message>
+        <source>Nape height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота точки основания шеи сзади</translation>
+    </message>
+    <message>
+        <source>Nape to Floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота точки основания шеи сзади</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="821"/>
+        <source>cervicale_to_knee_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="827"/>
+        <source>waist_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Влт</translation>
+    </message>
+    <message>
+        <source>Waist height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота линии талии</translation>
+    </message>
+    <message>
+        <source>Waist side to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота линии талии</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="833"/>
+        <source>high_hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="839"/>
+        <source>hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="842"/>
+        <source>Hip side to Floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="845"/>
+        <source>waist_to_hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="851"/>
+        <source>waist_to_knee_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="857"/>
+        <source>crotch_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дн</translation>
+    </message>
+    <message>
+        <source>Crotch height/Inseam</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Длина ноги по внутренней поверхности</translation>
+    </message>
+    <message>
+        <source>Crotch to Floor along inside leg</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина ноги по внутренней поверхности</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="865"/>
+        <source>size</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Сг</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Размер</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Размер</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="870"/>
+        <source>height_front_neck_base_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Втос</translation>
+    </message>
+    <message>
+        <source>Height front neck base point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота точки основания шеи спереди</translation>
+    </message>
+    <message>
+        <source>Height of the point base of the neck in front</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота точки основания шеи спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="877"/>
+        <source>height_base_neck_side_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Втош</translation>
+    </message>
+    <message>
+        <source>Height base neck side point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <source>Height of the base of the neck side point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="884"/>
+        <source>height_shoulder_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впт</translation>
+    </message>
+    <message>
+        <source>Height shoulder point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота плечевой точки</translation>
+    </message>
+    <message>
+        <source>The height of the shoulder point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота плечевой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="891"/>
+        <source>height_nipple_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вст</translation>
+    </message>
+    <message>
+        <source>Height nipple point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота сосковой точки</translation>
+    </message>
+    <message>
+        <source>Height nipple point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота сосковой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="897"/>
+        <source>height_back_angle_axilla</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Взу</translation>
+    </message>
+    <message>
+        <source>Height back angle axilla</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота заднего угла подмышечной впадины</translation>
+    </message>
+    <message>
+        <source>Height back angle axilla</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота заднего угла подмышечной впадины</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="903"/>
+        <source>height_scapular_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Влоп</translation>
+    </message>
+    <message>
+        <source>Height scapular point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота лопаточной точки</translation>
+    </message>
+    <message>
+        <source>Height scapular point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота лопаточной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="909"/>
+        <source>height_under_buttock_folds</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впс</translation>
+    </message>
+    <message>
+        <source>Height under buttock folds</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота подъягодичной складки</translation>
+    </message>
+    <message>
+        <source>Height under buttock folds</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота подъягодичной складки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="916"/>
+        <source>hips_excluding_protruding_abdomen</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ОбI</translation>
+    </message>
+    <message>
+        <source>Hips excluding protruding abdomen</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <source>Hips excluding protruding abdomen</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="923"/>
+        <source>girth_foot_instep</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Ос</translation>
+    </message>
+    <message>
+        <source>Girth foot instep</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват подъема стопы</translation>
+    </message>
+    <message>
+        <source>Girth foot instep</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват подъема стопы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="929"/>
+        <source>side_waist_to_floor</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дсб</translation>
+    </message>
+    <message>
+        <source>Side waist to floor</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от линии талии до пола сбоку</translation>
+    </message>
+    <message>
+        <source>The distance from the side waist to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от линии талии до пола сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="936"/>
+        <source>front_waist_to_floor</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дсп</translation>
+    </message>
+    <message>
+        <source>Front waist to floor</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от линии талии до пола спереди</translation>
+    </message>
+    <message>
+        <source>The distance from the front waist to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от линии талии до пола спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="943"/>
+        <source>arc_through_groin_area</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дпоб</translation>
+    </message>
+    <message>
+        <source>Arc through groin area</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Дуга через паховую область</translation>
+    </message>
+    <message>
+        <source>Arc through groin area</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Дуга через паховую область</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="949"/>
+        <source>waist_to_plane_seat</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вс</translation>
+    </message>
+    <message>
+        <source>Waist to plane seat</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от линии талии до плоскости сидения</translation>
+    </message>
+    <message>
+        <source>The distance from the waist to the plane seat</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от линии талии до плоскости сидения</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="956"/>
+        <source>neck_to_radial_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Длуч</translation>
+    </message>
+    <message>
+        <source>Neck to radial point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+    </message>
+    <message>
+        <source>The distance from the base of the neck to the side of the radial point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="963"/>
+        <source>neck_to_third_finger</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ДIIIп</translation>
+    </message>
+    <message>
+        <source>Neck to third finger</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
+    </message>
+    <message>
+        <source>Distance from the base of the neck side point to the end of the third finger</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="970"/>
+        <source>neck_to_first_line_chest_circumference</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впрп</translation>
+    </message>
+    <message>
+        <source>Neck to first line chest circumference</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
+    </message>
+    <message>
+        <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="978"/>
+        <source>front_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дтп</translation>
+    </message>
+    <message>
+        <source>Front waist length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
+    </message>
+    <message>
+        <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="985"/>
+        <source>arc_through_shoulder_joint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дп</translation>
+    </message>
+    <message>
+        <source>Arc through shoulder joint</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Дуга через высшую точку плечевого сустава</translation>
+    </message>
+    <message>
+        <source>Arc through the highest point of the shoulder joint</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Дуга через высшую точку плечевого сустава</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="992"/>
+        <source>neck_to_back_line_chest_circumference</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впрз</translation>
+    </message>
+    <message>
+        <source>Neck to back line chest circumference</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1001"/>
+        <source>waist_to_neck_side</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ДтсI</translation>
+    </message>
+    <message>
+        <source>Waist to neck side</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <source>The distance from the waist to the back base of the neck side point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1008"/>
+        <source>arc_length_upper_body</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Двчт</translation>
+    </message>
+    <message>
+        <source>Arc length upper body</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
+    </message>
+    <message>
+        <source>Arc length of the upper body through the base of the neck side point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1015"/>
+        <source>chest_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Шг</translation>
+    </message>
+    <message>
+        <source>Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Ширина груди</translation>
+    </message>
+    <message>
+        <source>Chest width</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Ширина груди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1021"/>
+        <source>anteroposterior_diameter_hands</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>dпзр</translation>
+    </message>
+    <message>
+        <source>Anteroposterior diameter hands</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Передне-задний диаметр руки</translation>
+    </message>
+    <message>
+        <source>Anteroposterior diameter of the hands</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Передне-задний диаметр руки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1028"/>
+        <source>height_clavicular_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вкт</translation>
+    </message>
+    <message>
+        <source>Height clavicular point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота ключичной точки</translation>
+    </message>
+    <message>
+        <source>Height clavicular point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота ключичной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1034"/>
+        <source>height_armhole_slash</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впрк</translation>
+    </message>
+    <message>
+        <source>Height armhole slash</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
+    </message>
+    <message>
+        <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1042"/>
+        <source>slash_shoulder_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впк</translation>
+    </message>
+    <message>
+        <source>Slash shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота плеча косая</translation>
+    </message>
+    <message>
+        <source>Slash shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота плеча косая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1048"/>
+        <source>half_girth_neck</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Сш</translation>
+    </message>
+    <message>
+        <source>Half girth neck</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват шеи</translation>
+    </message>
+    <message>
+        <source>Half girth neck</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1054"/>
+        <source>half_girth_neck_for_shirts</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Сш1</translation>
+    </message>
+    <message>
+        <source>Half girth neck for shirts</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват шеи для сорочек</translation>
+    </message>
+    <message>
+        <source>Half girth neck for shirts</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват шеи для сорочек</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1061"/>
+        <source>half_girth_chest_first</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>СгI</translation>
+    </message>
+    <message>
+        <source>Half girth chest first</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват груди первый</translation>
+    </message>
+    <message>
+        <source>Half girth chest first</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват груди первый</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1067"/>
+        <source>half_girth_chest_second</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>СгII</translation>
+    </message>
+    <message>
+        <source>Half girth chest second</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват груди второй</translation>
+    </message>
+    <message>
+        <source>Half girth chest second</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват груди второй</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1073"/>
+        <source>half_girth_chest_third</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>СгIII</translation>
+    </message>
+    <message>
+        <source>Half girth chest third</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват груди третий</translation>
+    </message>
+    <message>
+        <source>Half girth chest third</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват груди третий</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1079"/>
+        <source>half_girth_waist</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Ст</translation>
+    </message>
+    <message>
+        <source>Half girth waist</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват талии</translation>
+    </message>
+    <message>
+        <source>Half girth waist</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват талии</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1085"/>
+        <source>half_girth_hips_considering_protruding_abdomen</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Сб</translation>
+    </message>
+    <message>
+        <source>Half girth hips considering protruding abdomen</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <source>Half girth hips considering protruding abdomen</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1093"/>
+        <source>half_girth_hips_excluding_protruding_abdomen</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>СбI</translation>
+    </message>
+    <message>
+        <source>Half girth hips excluding protruding abdomen</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Полуобхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <source>Half girth hips excluding protruding abdomen</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Полуобхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1101"/>
+        <source>girth_knee_flexed_feet</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Окс</translation>
+    </message>
+    <message>
+        <source>Girth knee flexed feet</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Обхват колена в согнутом положении ноги</translation>
+    </message>
+    <message>
+        <source>Girth knee flexed feet</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Обхват колена в согнутом положении ноги</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1107"/>
+        <source>neck_transverse_diameter</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>dш</translation>
+    </message>
+    <message>
+        <source>Neck transverse diameter</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Поперечный диаметр шеи</translation>
+    </message>
+    <message>
+        <source>Neck transverse diameter</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Поперечный диаметр шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1113"/>
+        <source>front_slash_shoulder_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Впкп</translation>
+    </message>
+    <message>
+        <source>Front slash shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота плеча косая спереди</translation>
+    </message>
+    <message>
+        <source>Front slash shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота плеча косая спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1120"/>
+        <source>neck_to_front_waist_line</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дтн1</translation>
+    </message>
+    <message>
+        <source>Neck to front waist line</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от точки основания шеи до линии талии спереди</translation>
+    </message>
+    <message>
+        <source>The distance from the base of the neck to the waist line front</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от точки основания шеи до линии талии спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1127"/>
+        <source>hand_vertical_diameter</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>dвр</translation>
+    </message>
+    <message>
+        <source>Hand vertical diameter</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Вертикальный диаметр руки</translation>
+    </message>
+    <message>
+        <source>Hand vertical diameter</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Вертикальный диаметр руки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1133"/>
+        <source>neck_to_knee_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дшк</translation>
+    </message>
+    <message>
+        <source>Neck to knee point</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от шейной точки до колена</translation>
+    </message>
+    <message>
+        <source>Distance from neck to knee point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от шейной точки до колена</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1140"/>
+        <source>waist_to_knee</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дтк</translation>
+    </message>
+    <message>
+        <source>Waist to knee</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от линии талии до колена</translation>
+    </message>
+    <message>
+        <source>The distance from the waist to the knee</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от линии талии до колена</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1147"/>
+        <source>shoulder_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вп</translation>
+    </message>
+    <message>
+        <source>Shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота плеча</translation>
+    </message>
+    <message>
+        <source>Shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота плеча</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1153"/>
+        <source>head_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Вгол</translation>
+    </message>
+    <message>
+        <source>Head height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Высота головы</translation>
+    </message>
+    <message>
+        <source>Head height</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Высота головы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1159"/>
+        <source>body_position</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Пкор</translation>
+    </message>
+    <message>
+        <source>Body position</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Положение корпуса</translation>
+    </message>
+    <message>
+        <source>Body position</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Положение корпуса</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1165"/>
+        <source>arc_behind_shoulder_girdle</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дпз</translation>
+    </message>
+    <message>
+        <source>Arc behind shoulder girdle</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Дуга плечевого пояса сзади</translation>
+    </message>
+    <message>
+        <source>Arc behind the shoulder girdle</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Дуга плечевого пояса сзади</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1172"/>
+        <source>neck_to_neck_base</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Дшош</translation>
+    </message>
+    <message>
+        <source>Neck to neck base</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
+    </message>
+    <message>
+        <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1179"/>
+        <source>depth_waist_first</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>Гт1</translation>
+    </message>
+    <message>
+        <source>Depth waist first</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Глубина талии первая</translation>
+    </message>
+    <message>
+        <source>Depth waist first</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Глубина талии первая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1185"/>
+        <source>depth_waist_second</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation>ГтII</translation>
+    </message>
+    <message>
+        <source>Depth waist second</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Глубина талии вторая</translation>
+    </message>
+    <message>
+        <source>Depth waist second</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Глубина талии вторая</translation>
+    </message>
+</context>
+<context>
+    <name>MeasurementsDescriptions</name>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="295"/>
+        <source>Around fullest part of Head</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Обхват головы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="302"/>
+        <source>Around middle part of Neck</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="309"/>
+        <source>Around Neck at base</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Обхват шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="315"/>
+        <source>Vertical Distance from Crown to Nape</source>
+        <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4395,2235 +5952,1566 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="330"/>
-        <source>center_back_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтс</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="332"/>
-        <source>Back Center length</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина спины до талии с учетом выступа лопаток</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="333"/>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Длина спины до талии с учетом выступа лопаток</translation>
+        <translation type="unfinished">Длина спины до талии с учетом выступа лопаток</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="340"/>
-        <source>shoulder_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="342"/>
-        <source>Shoulder length</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина плечевого ската</translation>
+        <location filename="../../widgets/vapplication.cpp" line="337"/>
+        <source>NeckPoint to ShoulderTip</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Длина плечевого ската</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="343"/>
-        <source>NeckPoint to ShoulderTip</source>
+        <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>Длина плечевого ската</translation>
+        <translation type="unfinished">Длина боковой части</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="349"/>
-        <source>side_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дб</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="351"/>
-        <source>Side Waist length</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина боковой части</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="352"/>
-        <source>Armpit to Waist side</source>
-        <comment>Full measurement description</comment>
-        <translation>Длина боковой части</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="358"/>
-        <source>trunk_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="360"/>
-        <source>Trunk length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="361"/>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="370"/>
-        <source>shoulder_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="372"/>
-        <source>Shoulder girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="373"/>
+        <location filename="../../widgets/vapplication.cpp" line="358"/>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="380"/>
-        <source>upper_chest_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОгI</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="382"/>
-        <source>Upper Chest girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват груди первый</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="383"/>
+        <location filename="../../widgets/vapplication.cpp" line="365"/>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват груди первый</translation>
+        <translation type="unfinished">Обхват груди первый</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="390"/>
-        <source>bust_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОгII</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="392"/>
-        <source>Bust girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват груди второй</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="393"/>
+        <location filename="../../widgets/vapplication.cpp" line="373"/>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват груди второй</translation>
+        <translation type="unfinished">Обхват груди второй</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="400"/>
-        <source>under_bust_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОгIII</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="402"/>
-        <source>Under Bust girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват груди третий</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="403"/>
+        <location filename="../../widgets/vapplication.cpp" line="380"/>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват груди третий</translation>
+        <translation type="unfinished">Обхват груди третий</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="410"/>
-        <source>waist_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>От</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="412"/>
-        <source>Waist girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват талии</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="413"/>
+        <location filename="../../widgets/vapplication.cpp" line="387"/>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват талии.</translation>
+        <translation type="unfinished">Обхват талии.</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="421"/>
-        <source>high_hip_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="423"/>
-        <source>HighHip girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="424"/>
+        <location filename="../../widgets/vapplication.cpp" line="396"/>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="430"/>
-        <source>hip_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Об</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="432"/>
-        <source>Hip girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="433"/>
+        <location filename="../../widgets/vapplication.cpp" line="403"/>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват бедер с учетом выступания живота</translation>
+        <translation type="unfinished">Обхват бедер с учетом выступания живота</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="439"/>
-        <source>upper_front_chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шг1</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="441"/>
-        <source>Front Upper Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation>Ширина груди первая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="442"/>
+        <location filename="../../widgets/vapplication.cpp" line="410"/>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина груди первая</translation>
+        <translation type="unfinished">Ширина груди первая</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="449"/>
-        <source>front_chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шг2</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="451"/>
-        <source>Front Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation>Ширина груди вторая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="452"/>
+        <location filename="../../widgets/vapplication.cpp" line="417"/>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина груди вторая</translation>
+        <translation type="unfinished">Ширина груди вторая</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="459"/>
-        <source>across_front_shoulder_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dпл</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="461"/>
-        <source>Front Across Shoulder width</source>
-        <comment>Full measurement name</comment>
-        <translation>Плечевой диаметр</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="462"/>
+        <location filename="../../widgets/vapplication.cpp" line="424"/>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
-        <translation>Плечевой диаметр</translation>
+        <translation type="unfinished">Плечевой диаметр</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="469"/>
-        <source>across_back_shoulder_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="471"/>
-        <source>Back Across Shoulder width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="472"/>
+        <location filename="../../widgets/vapplication.cpp" line="431"/>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="481"/>
-        <source>Back Upper Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="482"/>
+        <location filename="../../widgets/vapplication.cpp" line="438"/>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="479"/>
-        <source>upper_back_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="489"/>
-        <source>back_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шс</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="491"/>
-        <source>Back Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation>Ширина спины</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="492"/>
+        <location filename="../../widgets/vapplication.cpp" line="445"/>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина спины</translation>
+        <translation type="unfinished">Ширина спины</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="499"/>
-        <source>bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Цг</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="501"/>
-        <source>BustPoint to BustPoint</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние между сосковыми точками</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="502"/>
+        <location filename="../../widgets/vapplication.cpp" line="452"/>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние между сосковыми точками</translation>
+        <translation type="unfinished">Расстояние между сосковыми точками</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="509"/>
-        <source>halter_bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="511"/>
-        <source>Halter Bustpoint to Bustpoint</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="512"/>
+        <location filename="../../widgets/vapplication.cpp" line="459"/>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="519"/>
-        <source>neck_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вг</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="521"/>
-        <source>NeckPoint to BustPoint</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="522"/>
+        <location filename="../../widgets/vapplication.cpp" line="466"/>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="528"/>
-        <source>crotch_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="530"/>
-        <source>Crotch length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="531"/>
+        <location filename="../../widgets/vapplication.cpp" line="473"/>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="538"/>
-        <source>rise_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпс</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="540"/>
-        <source>Rise height</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до подъягодичной складки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="541"/>
+        <location filename="../../widgets/vapplication.cpp" line="480"/>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до подъягодичной складки</translation>
+        <translation type="unfinished">Расстояние от линии талии до подъягодичной складки</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="548"/>
-        <source>shoulder_drop</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="550"/>
-        <source>Shoulder Drop</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="551"/>
+        <location filename="../../widgets/vapplication.cpp" line="487"/>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="558"/>
-        <source>shoulder_slope_degrees</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="560"/>
-        <source>Shoulder Slope degrees</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="561"/>
+        <location filename="../../widgets/vapplication.cpp" line="494"/>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="568"/>
-        <source>front_shoulder_slope_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="570"/>
-        <source>Front Shoulder Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="571"/>
+        <location filename="../../widgets/vapplication.cpp" line="501"/>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="577"/>
-        <source>back_shoulder_slope_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="579"/>
-        <source>Back Shoulder Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="580"/>
+        <location filename="../../widgets/vapplication.cpp" line="508"/>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="586"/>
-        <source>front_shoulder_to_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="588"/>
-        <source>Front Full Length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="589"/>
+        <location filename="../../widgets/vapplication.cpp" line="515"/>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="596"/>
-        <source>back_shoulder_to_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="598"/>
-        <source>Back Full Length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="599"/>
+        <location filename="../../widgets/vapplication.cpp" line="522"/>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="606"/>
-        <source>front_neck_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="608"/>
-        <source>Front Neck arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="609"/>
+        <location filename="../../widgets/vapplication.cpp" line="529"/>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="616"/>
-        <source>back_neck_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="618"/>
-        <source>Back Neck arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="619"/>
+        <location filename="../../widgets/vapplication.cpp" line="536"/>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="625"/>
-        <source>front_upper_chest_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="627"/>
-        <source>front_upper-bust_arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="628"/>
+        <location filename="../../widgets/vapplication.cpp" line="543"/>
         <source>front_upper-bust_arc</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="634"/>
-        <source>back_upper_chest_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="636"/>
-        <source>Back UpperBust arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="637"/>
+        <location filename="../../widgets/vapplication.cpp" line="549"/>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="643"/>
-        <source>front_waist_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="645"/>
-        <source>Front Waist arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="646"/>
+        <location filename="../../widgets/vapplication.cpp" line="556"/>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="652"/>
-        <source>back_waist_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="654"/>
-        <source>Back Waist arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="655"/>
+        <location filename="../../widgets/vapplication.cpp" line="562"/>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="661"/>
-        <source>front_upper_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="663"/>
-        <source>Front UpperHip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="664"/>
+        <location filename="../../widgets/vapplication.cpp" line="568"/>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="670"/>
-        <source>back_upper_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="672"/>
-        <source>Back UpperHip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="673"/>
+        <location filename="../../widgets/vapplication.cpp" line="575"/>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="679"/>
-        <source>front_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="681"/>
-        <source>Front Hip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="682"/>
+        <location filename="../../widgets/vapplication.cpp" line="582"/>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="688"/>
-        <source>back_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="690"/>
-        <source>Back Hip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="691"/>
+        <location filename="../../widgets/vapplication.cpp" line="589"/>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="697"/>
-        <source>chest_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="699"/>
-        <source>Chest Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="700"/>
+        <location filename="../../widgets/vapplication.cpp" line="595"/>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="706"/>
-        <source>back_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="708"/>
-        <source>Back Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="709"/>
+        <location filename="../../widgets/vapplication.cpp" line="602"/>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="715"/>
-        <source>front_waist_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="717"/>
-        <source>Front Waist Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="718"/>
+        <location filename="../../widgets/vapplication.cpp" line="609"/>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="725"/>
-        <source>back_waist_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="727"/>
-        <source>Back Waist Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="728"/>
+        <location filename="../../widgets/vapplication.cpp" line="616"/>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="735"/>
-        <source>front_neck_to_upper_chest_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="737"/>
-        <source>Front UpperChest height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="738"/>
+        <location filename="../../widgets/vapplication.cpp" line="623"/>
         <source>Front Neck Center straight down to UpperChest line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="745"/>
-        <source>front_neck_to_bust_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="747"/>
-        <source>Bust height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="748"/>
+        <location filename="../../widgets/vapplication.cpp" line="630"/>
         <source>Front Neck Center straight down to Bust line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="756"/>
-        <source>armscye_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <location filename="../../widgets/vapplication.cpp" line="637"/>
+        <source>Front Upper chest waist</source>
+        <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="758"/>
-        <source>Armscye Girth</source>
-        <comment>Full measurement name</comment>
+        <location filename="../../widgets/vapplication.cpp" line="644"/>
+        <source>Front waist to lower breast</source>
+        <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="759"/>
+        <location filename="../../widgets/vapplication.cpp" line="651"/>
+        <source>Back waist to upper chest</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="658"/>
+        <source>Strap length</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="666"/>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="765"/>
-        <source>elbow_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Олк</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="767"/>
-        <source>Elbow Girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват локтя</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="768"/>
+        <location filename="../../widgets/vapplication.cpp" line="672"/>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват локтя</translation>
+        <translation type="unfinished">Обхват локтя</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="774"/>
-        <source>upper_arm_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Оп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="776"/>
-        <source>Upperarm Girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват плеча</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="777"/>
+        <location filename="../../widgets/vapplication.cpp" line="679"/>
         <source>Around UpperArm</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват плеча</translation>
+        <translation type="unfinished">Обхват плеча</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="783"/>
-        <source>wrist_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Озап</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="785"/>
-        <source>Wrist girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват запястья</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="786"/>
+        <location filename="../../widgets/vapplication.cpp" line="685"/>
         <source>Around Wrist</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват запястья</translation>
+        <translation type="unfinished">Обхват запястья</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="792"/>
-        <source>scye_depth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="794"/>
-        <source>Armscye depth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="795"/>
+        <location filename="../../widgets/vapplication.cpp" line="691"/>
         <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="802"/>
-        <source>shoulder_and_arm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дзап</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="804"/>
-        <source>Shoulder and Arm length</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="805"/>
+        <location filename="../../widgets/vapplication.cpp" line="698"/>
         <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="812"/>
-        <source>underarm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="814"/>
-        <source>Underarm length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="815"/>
+        <location filename="../../widgets/vapplication.cpp" line="705"/>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="822"/>
-        <source>cervicale_to_wrist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="824"/>
-        <source>Nape to wrist length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="825"/>
+        <location filename="../../widgets/vapplication.cpp" line="712"/>
         <source>Nape to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="832"/>
-        <source>shoulder_to_elbow_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дрлок</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="834"/>
-        <source>Elbow length</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина руки до локтя</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="835"/>
+        <location filename="../../widgets/vapplication.cpp" line="719"/>
         <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Длина руки до локтя</translation>
+        <translation type="unfinished">Длина руки до локтя</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="842"/>
-        <source>arm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дрзап</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="844"/>
-        <source>Arm length</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина рукава до линии обхвата запястья</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="845"/>
+        <location filename="../../widgets/vapplication.cpp" line="726"/>
         <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Длина рукава до линии обхвата запястья</translation>
+        <translation type="unfinished">Длина рукава до линии обхвата запястья</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="853"/>
-        <source>hand_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="855"/>
-        <source>Hand width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="856"/>
+        <location filename="../../widgets/vapplication.cpp" line="734"/>
         <source>Hand side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="862"/>
-        <source>hand_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="864"/>
-        <source>Hand length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="865"/>
+        <location filename="../../widgets/vapplication.cpp" line="740"/>
         <source>Hand Middle Finger tip to wrist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="871"/>
-        <source>hand_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Окис</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="873"/>
-        <source>Hand girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват кисти</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="874"/>
+        <location filename="../../widgets/vapplication.cpp" line="747"/>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват кисти</translation>
+        <translation type="unfinished">Обхват кисти</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="881"/>
-        <source>thigh_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Обед</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="883"/>
-        <source>Thigh girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват бедра</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="884"/>
+        <location filename="../../widgets/vapplication.cpp" line="754"/>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват бедра</translation>
+        <translation type="unfinished">Обхват бедра</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="890"/>
-        <source>mid_thigh_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="892"/>
-        <source>Midthigh girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="893"/>
+        <location filename="../../widgets/vapplication.cpp" line="760"/>
         <source>Around MidThigh</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="899"/>
-        <source>knee_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ок</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="901"/>
-        <source>Knee girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват колена</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="902"/>
+        <location filename="../../widgets/vapplication.cpp" line="766"/>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват колена</translation>
+        <translation type="unfinished">Обхват колена</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="908"/>
-        <source>calf_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ои</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="910"/>
-        <source>Calf girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват икры</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="911"/>
+        <location filename="../../widgets/vapplication.cpp" line="772"/>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват икры</translation>
+        <translation type="unfinished">Обхват икры</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="917"/>
-        <source>ankle_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ощ</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="919"/>
-        <source>Ankle girth</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват щиколотки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="920"/>
+        <location filename="../../widgets/vapplication.cpp" line="778"/>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват щиколотки</translation>
+        <translation type="unfinished">Обхват щиколотки</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="926"/>
-        <source>knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вк</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="928"/>
-        <source>Knee height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота коленной точки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="929"/>
+        <location filename="../../widgets/vapplication.cpp" line="784"/>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Высота коленной точки</translation>
+        <translation type="unfinished">Высота коленной точки</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="935"/>
-        <source>ankle_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="937"/>
-        <source>Ankle height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="938"/>
+        <location filename="../../widgets/vapplication.cpp" line="790"/>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="945"/>
-        <source>foot_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="947"/>
-        <source>Foot width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="948"/>
+        <location filename="../../widgets/vapplication.cpp" line="797"/>
         <source>Widest part of Foot side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="954"/>
-        <source>foot_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="956"/>
-        <source>Foot length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="957"/>
+        <location filename="../../widgets/vapplication.cpp" line="804"/>
         <source>Tip of Longest Toe straight to back of heel</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="965"/>
-        <source>height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="967"/>
-        <source>Total Height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="968"/>
+        <location filename="../../widgets/vapplication.cpp" line="812"/>
         <source>Top of head to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="974"/>
-        <source>cervicale_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вшт</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="976"/>
-        <source>Nape height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота точки основания шеи сзади</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="977"/>
+        <location filename="../../widgets/vapplication.cpp" line="818"/>
         <source>Nape to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Высота точки основания шеи сзади</translation>
+        <translation type="unfinished">Высота точки основания шеи сзади</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="983"/>
-        <source>cervicale_to_knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="985"/>
-        <source>Nape to knee height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="986"/>
+        <location filename="../../widgets/vapplication.cpp" line="824"/>
         <source>Nape to Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="992"/>
-        <source>waist_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Влт</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="994"/>
-        <source>Waist height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота линии талии</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="995"/>
+        <location filename="../../widgets/vapplication.cpp" line="830"/>
         <source>Waist side to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Высота линии талии</translation>
+        <translation type="unfinished">Высота линии талии</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1001"/>
-        <source>high_hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1003"/>
-        <source>HighHip height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1004"/>
+        <location filename="../../widgets/vapplication.cpp" line="836"/>
         <source>HighHip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1010"/>
-        <source>hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1012"/>
-        <source>Hip height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1013"/>
-        <source>Hip side to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1019"/>
-        <source>waist_to_hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1021"/>
-        <source>Waist to Hip height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1022"/>
+        <location filename="../../widgets/vapplication.cpp" line="848"/>
         <source>Waist side to Hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1028"/>
-        <source>waist_to_knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1030"/>
-        <source>Waist to Knee height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1031"/>
+        <location filename="../../widgets/vapplication.cpp" line="854"/>
         <source>Waist side to Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1037"/>
-        <source>crotch_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дн</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1039"/>
-        <source>Crotch height/Inseam</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина ноги по внутренней поверхности</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1040"/>
+        <location filename="../../widgets/vapplication.cpp" line="860"/>
         <source>Crotch to Floor along inside leg</source>
         <comment>Full measurement description</comment>
-        <translation>Длина ноги по внутренней поверхности</translation>
+        <translation type="unfinished">Длина ноги по внутренней поверхности</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1047"/>
-        <source>size</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сг</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1048"/>
-        <source>Size</source>
-        <comment>Full measurement name</comment>
-        <translation>Размер</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1049"/>
+        <location filename="../../widgets/vapplication.cpp" line="867"/>
         <source>Size</source>
         <comment>Full measurement description</comment>
-        <translation>Размер</translation>
+        <translation type="unfinished">Размер</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1055"/>
-        <source>height_front_neck_base_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Втос</translation>
+        <location filename="../../widgets/vapplication.cpp" line="873"/>
+        <source>Height of the point base of the neck in front</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота точки основания шеи спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="880"/>
+        <source>Height of the base of the neck side point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="887"/>
+        <source>The height of the shoulder point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота плечевой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="894"/>
+        <source>Height nipple point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота сосковой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="900"/>
+        <source>Height back angle axilla</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота заднего угла подмышечной впадины</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="906"/>
+        <source>Height scapular point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота лопаточной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="912"/>
+        <source>Height under buttock folds</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота подъягодичной складки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="919"/>
+        <source>Hips excluding protruding abdomen</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Обхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="926"/>
+        <source>Girth foot instep</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Обхват подъема стопы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="932"/>
+        <source>The distance from the side waist to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от линии талии до пола сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="939"/>
+        <source>The distance from the front waist to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от линии талии до пола спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="946"/>
+        <source>Arc through groin area</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Дуга через паховую область</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="952"/>
+        <source>The distance from the waist to the plane seat</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от линии талии до плоскости сидения</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="959"/>
+        <source>The distance from the base of the neck to the side of the radial point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="966"/>
+        <source>Distance from the base of the neck side point to the end of the third finger</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="974"/>
+        <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="981"/>
+        <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="988"/>
+        <source>Arc through the highest point of the shoulder joint</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Дуга через высшую точку плечевого сустава</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="996"/>
+        <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1004"/>
+        <source>The distance from the waist to the back base of the neck side point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1011"/>
+        <source>Arc length of the upper body through the base of the neck side point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1018"/>
+        <source>Chest width</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Ширина груди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1024"/>
+        <source>Anteroposterior diameter of the hands</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Передне-задний диаметр руки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1031"/>
+        <source>Height clavicular point</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота ключичной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1037"/>
+        <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1045"/>
+        <source>Slash shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота плеча косая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1051"/>
+        <source>Half girth neck</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Полуобхват шеи</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1057"/>
-        <source>Height front neck base point</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота точки основания шеи спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1058"/>
-        <source>Height of the point base of the neck in front</source>
+        <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
-        <translation>Высота точки основания шеи спереди</translation>
+        <translation type="unfinished">Полуобхват шеи для сорочек</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1065"/>
-        <source>height_base_neck_side_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Втош</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1067"/>
-        <source>Height base neck side point</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота точки основания шеи сбоку</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1068"/>
-        <source>Height of the base of the neck side point</source>
+        <location filename="../../widgets/vapplication.cpp" line="1064"/>
+        <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
-        <translation>Высота точки основания шеи сбоку</translation>
+        <translation type="unfinished">Полуобхват груди первый</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1075"/>
-        <source>height_shoulder_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впт</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1077"/>
-        <source>Height shoulder point</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота плечевой точки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1078"/>
-        <source>The height of the shoulder point</source>
+        <location filename="../../widgets/vapplication.cpp" line="1070"/>
+        <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
-        <translation>Высота плечевой точки</translation>
+        <translation type="unfinished">Полуобхват груди второй</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1084"/>
-        <source>height_nipple_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вст</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1086"/>
-        <source>Height nipple point</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота сосковой точки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1087"/>
-        <source>Height nipple point</source>
+        <location filename="../../widgets/vapplication.cpp" line="1076"/>
+        <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
-        <translation>Высота сосковой точки</translation>
+        <translation type="unfinished">Полуобхват груди третий</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1093"/>
-        <source>height_back_angle_axilla</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Взу</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1095"/>
-        <source>Height back angle axilla</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота заднего угла подмышечной впадины</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1096"/>
-        <source>Height back angle axilla</source>
+        <location filename="../../widgets/vapplication.cpp" line="1082"/>
+        <source>Half girth waist</source>
         <comment>Full measurement description</comment>
-        <translation>Высота заднего угла подмышечной впадины</translation>
+        <translation type="unfinished">Полуобхват талии</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1102"/>
-        <source>height_scapular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Влоп</translation>
+        <location filename="../../widgets/vapplication.cpp" line="1089"/>
+        <source>Half girth hips considering protruding abdomen</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Полуобхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1097"/>
+        <source>Half girth hips excluding protruding abdomen</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Полуобхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1104"/>
-        <source>Height scapular point</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота лопаточной точки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1105"/>
-        <source>Height scapular point</source>
+        <source>Girth knee flexed feet</source>
         <comment>Full measurement description</comment>
-        <translation>Высота лопаточной точки</translation>
+        <translation type="unfinished">Обхват колена в согнутом положении ноги</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1111"/>
-        <source>height_under_buttock_folds</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впс</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1113"/>
-        <source>Height under buttock folds</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота подъягодичной складки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1114"/>
-        <source>Height under buttock folds</source>
+        <location filename="../../widgets/vapplication.cpp" line="1110"/>
+        <source>Neck transverse diameter</source>
         <comment>Full measurement description</comment>
-        <translation>Высота подъягодичной складки</translation>
+        <translation type="unfinished">Поперечный диаметр шеи</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1120"/>
-        <source>hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОбI</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1122"/>
-        <source>Hips excluding protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват бедер без учета выступания живота</translation>
+        <location filename="../../widgets/vapplication.cpp" line="1116"/>
+        <source>Front slash shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота плеча косая спереди</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1123"/>
-        <source>Hips excluding protruding abdomen</source>
+        <source>The distance from the base of the neck to the waist line front</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват бедер без учета выступания живота</translation>
+        <translation type="unfinished">Расстояние от точки основания шеи до линии талии спереди</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1129"/>
-        <source>girth_foot_instep</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ос</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1131"/>
-        <source>Girth foot instep</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват подъема стопы</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1132"/>
-        <source>Girth foot instep</source>
+        <location filename="../../widgets/vapplication.cpp" line="1130"/>
+        <source>Hand vertical diameter</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват подъема стопы</translation>
+        <translation type="unfinished">Вертикальный диаметр руки</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1138"/>
-        <source>side_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дсб</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1140"/>
-        <source>Side waist to floor</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до пола сбоку</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1141"/>
-        <source>The distance from the side waist to floor</source>
+        <location filename="../../widgets/vapplication.cpp" line="1136"/>
+        <source>Distance from neck to knee point</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до пола сбоку</translation>
+        <translation type="unfinished">Расстояние от шейной точки до колена</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1148"/>
-        <source>front_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дсп</translation>
+        <location filename="../../widgets/vapplication.cpp" line="1143"/>
+        <source>The distance from the waist to the knee</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от линии талии до колена</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1150"/>
+        <source>Shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота плеча</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1156"/>
+        <source>Head height</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Высота головы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1162"/>
+        <source>Body position</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Положение корпуса</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1168"/>
+        <source>Arc behind the shoulder girdle</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Дуга плечевого пояса сзади</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1175"/>
+        <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1182"/>
+        <source>Depth waist first</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Глубина талии первая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1188"/>
+        <source>Depth waist second</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished">Глубина талии вторая</translation>
+    </message>
+</context>
+<context>
+    <name>MeasurementsFullNames</name>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="294"/>
+        <source>Head girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват головы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="301"/>
+        <source>Mid-neck girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="308"/>
+        <source>Neck Base girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="314"/>
+        <source>Head and Neck length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="322"/>
+        <source>Front Center length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="329"/>
+        <source>Back Center length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина спины до талии с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="336"/>
+        <source>Shoulder length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина плечевого ската</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="342"/>
+        <source>Side Waist length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина боковой части</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="348"/>
+        <source>Trunk length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="357"/>
+        <source>Shoulder girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="364"/>
+        <source>Upper Chest girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват груди первый</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="372"/>
+        <source>Bust girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват груди второй</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="379"/>
+        <source>Under Bust girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват груди третий</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="386"/>
+        <source>Waist girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват талии</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="395"/>
+        <source>HighHip girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="402"/>
+        <source>Hip girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="409"/>
+        <source>Front Upper Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Ширина груди первая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="416"/>
+        <source>Front Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Ширина груди вторая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="423"/>
+        <source>Front Across Shoulder width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Плечевой диаметр</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="430"/>
+        <source>Back Across Shoulder width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="437"/>
+        <source>Back Upper Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="444"/>
+        <source>Back Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Ширина спины</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="451"/>
+        <source>BustPoint to BustPoint</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние между сосковыми точками</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="458"/>
+        <source>Halter Bustpoint to Bustpoint</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="465"/>
+        <source>NeckPoint to BustPoint</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="472"/>
+        <source>Crotch length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="479"/>
+        <source>Rise height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от линии талии до подъягодичной складки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="486"/>
+        <source>Shoulder Drop</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="493"/>
+        <source>Shoulder Slope degrees</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="500"/>
+        <source>Front Shoulder Balance</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="507"/>
+        <source>Back Shoulder Balance</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="514"/>
+        <source>Front Full Length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="521"/>
+        <source>Back Full Length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="528"/>
+        <source>Front Neck arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="535"/>
+        <source>Back Neck arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="542"/>
+        <source>front_upper-bust_arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="548"/>
+        <source>Back UpperBust arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="555"/>
+        <source>Front Waist arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="561"/>
+        <source>Back Waist arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="567"/>
+        <source>Front UpperHip arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="574"/>
+        <source>Back UpperHip arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="581"/>
+        <source>Front Hip arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="588"/>
+        <source>Back Hip arc</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="594"/>
+        <source>Chest Balance</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="601"/>
+        <source>Back Balance</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="608"/>
+        <source>Front Waist Balance</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="615"/>
+        <source>Back Waist Balance</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="622"/>
+        <source>Front UpperChest height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="629"/>
+        <source>Bust height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="636"/>
+        <source>Front Upper chest waist</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="643"/>
+        <source>Front waist to lower breast</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="650"/>
+        <source>Back waist to upper chest</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="657"/>
+        <source>Strap length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="665"/>
+        <source>Armscye Girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="671"/>
+        <source>Elbow Girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват локтя</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="678"/>
+        <source>Upperarm Girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват плеча</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="684"/>
+        <source>Wrist girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват запястья</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="690"/>
+        <source>Armscye depth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="697"/>
+        <source>Shoulder and Arm length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="704"/>
+        <source>Underarm length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="711"/>
+        <source>Nape to wrist length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="718"/>
+        <source>Elbow length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина руки до локтя</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="725"/>
+        <source>Arm length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина рукава до линии обхвата запястья</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="733"/>
+        <source>Hand width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="739"/>
+        <source>Hand length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="746"/>
+        <source>Hand girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват кисти</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="753"/>
+        <source>Thigh girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват бедра</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="759"/>
+        <source>Midthigh girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="765"/>
+        <source>Knee girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват колена</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="771"/>
+        <source>Calf girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват икры</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="777"/>
+        <source>Ankle girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват щиколотки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="783"/>
+        <source>Knee height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота коленной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="789"/>
+        <source>Ankle height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="796"/>
+        <source>Foot width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="803"/>
+        <source>Foot length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="811"/>
+        <source>Total Height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="817"/>
+        <source>Nape height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота точки основания шеи сзади</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="823"/>
+        <source>Nape to knee height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="829"/>
+        <source>Waist height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота линии талии</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="835"/>
+        <source>HighHip height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="841"/>
+        <source>Hip height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="847"/>
+        <source>Waist to Hip height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="853"/>
+        <source>Waist to Knee height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="859"/>
+        <source>Crotch height/Inseam</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина ноги по внутренней поверхности</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="866"/>
+        <source>Size</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Размер</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="872"/>
+        <source>Height front neck base point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота точки основания шеи спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="879"/>
+        <source>Height base neck side point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="886"/>
+        <source>Height shoulder point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота плечевой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="893"/>
+        <source>Height nipple point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота сосковой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="899"/>
+        <source>Height back angle axilla</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота заднего угла подмышечной впадины</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="905"/>
+        <source>Height scapular point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота лопаточной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="911"/>
+        <source>Height under buttock folds</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота подъягодичной складки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="918"/>
+        <source>Hips excluding protruding abdomen</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="925"/>
+        <source>Girth foot instep</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват подъема стопы</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="931"/>
+        <source>Side waist to floor</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от линии талии до пола сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="938"/>
         <source>Front waist to floor</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до пола спереди</translation>
+        <translation type="unfinished">Расстояние от линии талии до пола спереди</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1151"/>
-        <source>The distance from the front waist to floor</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до пола спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1158"/>
-        <source>arc_through_groin_area</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпоб</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1160"/>
+        <location filename="../../widgets/vapplication.cpp" line="945"/>
         <source>Arc through groin area</source>
         <comment>Full measurement name</comment>
-        <translation>Дуга через паховую область</translation>
+        <translation type="unfinished">Дуга через паховую область</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="951"/>
+        <source>Waist to plane seat</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от линии талии до плоскости сидения</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="958"/>
+        <source>Neck to radial point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="965"/>
+        <source>Neck to third finger</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="972"/>
+        <source>Neck to first line chest circumference</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="980"/>
+        <source>Front waist length</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="987"/>
+        <source>Arc through shoulder joint</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Дуга через высшую точку плечевого сустава</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="994"/>
+        <source>Neck to back line chest circumference</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1003"/>
+        <source>Waist to neck side</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1010"/>
+        <source>Arc length upper body</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1017"/>
+        <source>Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Ширина груди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1023"/>
+        <source>Anteroposterior diameter hands</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Передне-задний диаметр руки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1030"/>
+        <source>Height clavicular point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота ключичной точки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1036"/>
+        <source>Height armhole slash</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1044"/>
+        <source>Slash shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота плеча косая</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1050"/>
+        <source>Half girth neck</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1056"/>
+        <source>Half girth neck for shirts</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват шеи для сорочек</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1063"/>
+        <source>Half girth chest first</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват груди первый</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1069"/>
+        <source>Half girth chest second</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват груди второй</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1075"/>
+        <source>Half girth chest third</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват груди третий</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1081"/>
+        <source>Half girth waist</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват талии</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1087"/>
+        <source>Half girth hips considering protruding abdomen</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват бедер с учетом выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1095"/>
+        <source>Half girth hips excluding protruding abdomen</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Полуобхват бедер без учета выступания живота</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1103"/>
+        <source>Girth knee flexed feet</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Обхват колена в согнутом положении ноги</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1109"/>
+        <source>Neck transverse diameter</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Поперечный диаметр шеи</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1115"/>
+        <source>Front slash shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота плеча косая спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1122"/>
+        <source>Neck to front waist line</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от точки основания шеи до линии талии спереди</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1129"/>
+        <source>Hand vertical diameter</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Вертикальный диаметр руки</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1135"/>
+        <source>Neck to knee point</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от шейной точки до колена</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1142"/>
+        <source>Waist to knee</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Расстояние от линии талии до колена</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1149"/>
+        <source>Shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота плеча</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1155"/>
+        <source>Head height</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Высота головы</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1161"/>
-        <source>Arc through groin area</source>
-        <comment>Full measurement description</comment>
-        <translation>Дуга через паховую область</translation>
+        <source>Body position</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Положение корпуса</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1167"/>
-        <source>waist_to_plane_seat</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дс</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1169"/>
-        <source>Waist to plane seat</source>
+        <source>Arc behind shoulder girdle</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до плоскости сидения</translation>
+        <translation type="unfinished">Дуга плечевого пояса сзади</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1170"/>
-        <source>The distance from the waist to the plane seat</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до плоскости сидения</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1177"/>
-        <source>neck_to_radial_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Длуч</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1179"/>
-        <source>Neck to radial point</source>
+        <location filename="../../widgets/vapplication.cpp" line="1174"/>
+        <source>Neck to neck base</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+        <translation type="unfinished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1180"/>
-        <source>The distance from the base of the neck to the side of the radial point</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+        <location filename="../../widgets/vapplication.cpp" line="1181"/>
+        <source>Depth waist first</source>
+        <comment>Full measurement name</comment>
+        <translation type="unfinished">Глубина талии первая</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1187"/>
-        <source>neck_to_third_finger</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ДIIIп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1189"/>
-        <source>Neck to third finger</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1190"/>
-        <source>Distance from the base of the neck side point to the end of the third finger</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1197"/>
-        <source>neck_to_first_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впрп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1199"/>
-        <source>Neck to first line chest circumference</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1200"/>
-        <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1207"/>
-        <source>front_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1209"/>
-        <source>Front waist length</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1210"/>
-        <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1217"/>
-        <source>arc_through_shoulder_joint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1219"/>
-        <source>Arc through shoulder joint</source>
-        <comment>Full measurement name</comment>
-        <translation>Дуга через высшую точку плечевого сустава</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1220"/>
-        <source>Arc through the highest point of the shoulder joint</source>
-        <comment>Full measurement description</comment>
-        <translation>Дуга через высшую точку плечевого сустава</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1227"/>
-        <source>neck_to_back_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впрз</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1229"/>
-        <source>Neck to back line chest circumference</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1230"/>
-        <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1238"/>
-        <source>waist_to_neck_side</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ДтсI</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1240"/>
-        <source>Waist to neck side</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1241"/>
-        <source>The distance from the waist to the back base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1248"/>
-        <source>arc_length_upper_body</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Двчт</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1250"/>
-        <source>Arc length upper body</source>
-        <comment>Full measurement name</comment>
-        <translation>Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1251"/>
-        <source>Arc length of the upper body through the base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation>Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1258"/>
-        <source>chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шг</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1260"/>
-        <source>Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation>Ширина груди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1261"/>
-        <source>Chest width</source>
-        <comment>Full measurement description</comment>
-        <translation>Ширина груди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1267"/>
-        <source>anteroposterior_diameter_hands</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dпзр</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1269"/>
-        <source>Anteroposterior diameter hands</source>
-        <comment>Full measurement name</comment>
-        <translation>Передне-задний диаметр руки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1270"/>
-        <source>Anteroposterior diameter of the hands</source>
-        <comment>Full measurement description</comment>
-        <translation>Передне-задний диаметр руки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1277"/>
-        <source>height_clavicular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вкт</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1279"/>
-        <source>Height clavicular point</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота ключичной точки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1280"/>
-        <source>Height clavicular point</source>
-        <comment>Full measurement description</comment>
-        <translation>Высота ключичной точки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1286"/>
-        <source>height_armhole_slash</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впрк</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1288"/>
-        <source>Height armhole slash</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1289"/>
-        <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1296"/>
-        <source>slash_shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впк</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1298"/>
-        <source>Slash shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота плеча косая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1299"/>
-        <source>Slash shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation>Высота плеча косая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1305"/>
-        <source>half_girth_neck</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сш</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1307"/>
-        <source>Half girth neck</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1308"/>
-        <source>Half girth neck</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1314"/>
-        <source>half_girth_neck_for_shirts</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сш1</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1316"/>
-        <source>Half girth neck for shirts</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват шеи для сорочек</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1317"/>
-        <source>Half girth neck for shirts</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват шеи для сорочек</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1323"/>
-        <source>half_girth_chest_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СгI</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1325"/>
-        <source>Half girth chest first</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват груди первый</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1326"/>
-        <source>Half girth chest first</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват груди первый</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1332"/>
-        <source>half_girth_chest_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СгII</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1334"/>
-        <source>Half girth chest second</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват груди второй</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1335"/>
-        <source>Half girth chest second</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват груди второй</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1341"/>
-        <source>half_girth_chest_third</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СгIII</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1343"/>
-        <source>Half girth chest third</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват груди третий</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1344"/>
-        <source>Half girth chest third</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват груди третий</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1350"/>
-        <source>half_girth_waist</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ст</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1352"/>
-        <source>Half girth waist</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват талии</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1353"/>
-        <source>Half girth waist</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват талии</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1359"/>
-        <source>half_girth_hips_considering_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сб</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1361"/>
-        <source>Half girth hips considering protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1363"/>
-        <source>Half girth hips considering protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1370"/>
-        <source>half_girth_hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СбI</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1372"/>
-        <source>Half girth hips excluding protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation>Полуобхват бедер без учета выступания живота</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1374"/>
-        <source>Half girth hips excluding protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation>Полуобхват бедер без учета выступания живота</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1381"/>
-        <source>girth_knee_flexed_feet</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Окс</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1383"/>
-        <source>Girth knee flexed feet</source>
-        <comment>Full measurement name</comment>
-        <translation>Обхват колена в согнутом положении ноги</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1384"/>
-        <source>Girth knee flexed feet</source>
-        <comment>Full measurement description</comment>
-        <translation>Обхват колена в согнутом положении ноги</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1390"/>
-        <source>neck_transverse_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dш</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1392"/>
-        <source>Neck transverse diameter</source>
-        <comment>Full measurement name</comment>
-        <translation>Поперечный диаметр шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1393"/>
-        <source>Neck transverse diameter</source>
-        <comment>Full measurement description</comment>
-        <translation>Поперечный диаметр шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1399"/>
-        <source>front_slash_shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впкп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1401"/>
-        <source>Front slash shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота плеча косая спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1402"/>
-        <source>Front slash shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation>Высота плеча косая спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1408"/>
-        <source>neck_to_front_waist_line</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтн1</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1410"/>
-        <source>Neck to front waist line</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи до линии талии спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1411"/>
-        <source>The distance from the base of the neck to the waist line front</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи до линии талии спереди</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1418"/>
-        <source>hand_vertical_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dвр</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1420"/>
-        <source>Hand vertical diameter</source>
-        <comment>Full measurement name</comment>
-        <translation>Вертикальный диаметр руки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1421"/>
-        <source>Hand vertical diameter</source>
-        <comment>Full measurement description</comment>
-        <translation>Вертикальный диаметр руки</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1427"/>
-        <source>neck_to_knee_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дшк</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1429"/>
-        <source>Neck to knee point</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от шейной точки до колена</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1430"/>
-        <source>Distance from neck to knee point</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от шейной точки до колена</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1436"/>
-        <source>waist_to_knee</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтк</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1438"/>
-        <source>Waist to knee</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до колена</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1439"/>
-        <source>The distance from the waist to the knee</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до колена</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1446"/>
-        <source>shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вп</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1448"/>
-        <source>Shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота плеча</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1449"/>
-        <source>Shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation>Высота плеча</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1455"/>
-        <source>head_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вгол</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1457"/>
-        <source>Head height</source>
-        <comment>Full measurement name</comment>
-        <translation>Высота головы</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1458"/>
-        <source>Head height</source>
-        <comment>Full measurement description</comment>
-        <translation>Высота головы</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1464"/>
-        <source>body_position</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Пкор</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1466"/>
-        <source>Body position</source>
-        <comment>Full measurement name</comment>
-        <translation>Положение корпуса</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1467"/>
-        <source>Body position</source>
-        <comment>Full measurement description</comment>
-        <translation>Положение корпуса</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1473"/>
-        <source>arc_behind_shoulder_girdle</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпз</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1475"/>
-        <source>Arc behind shoulder girdle</source>
-        <comment>Full measurement name</comment>
-        <translation>Дуга плечевого пояса сзади</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1476"/>
-        <source>Arc behind the shoulder girdle</source>
-        <comment>Full measurement description</comment>
-        <translation>Дуга плечевого пояса сзади</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1482"/>
-        <source>neck_to_neck_base</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дшош</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1484"/>
-        <source>Neck to neck base</source>
-        <comment>Full measurement name</comment>
-        <translation>Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1485"/>
-        <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
-        <comment>Full measurement description</comment>
-        <translation>Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1492"/>
-        <source>depth_waist_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Гт1</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1494"/>
-        <source>Depth waist first</source>
-        <comment>Full measurement name</comment>
-        <translation>Глубина талии первая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1495"/>
-        <source>Depth waist first</source>
-        <comment>Full measurement description</comment>
-        <translation>Глубина талии первая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1501"/>
-        <source>depth_waist_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ГтII</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1503"/>
         <source>Depth waist second</source>
         <comment>Full measurement name</comment>
-        <translation>Глубина талии вторая</translation>
-    </message>
-    <message>
-        <location filename="../../widgets/vapplication.cpp" line="1504"/>
-        <source>Depth waist second</source>
-        <comment>Full measurement description</comment>
-        <translation>Глубина талии вторая</translation>
+        <translation type="unfinished">Глубина талии вторая</translation>
     </message>
 </context>
 <context>
@@ -6737,19 +7625,19 @@ Do you want to save your changes?</source>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1554"/>
+        <location filename="../../widgets/vapplication.cpp" line="1235"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1555"/>
+        <location filename="../../widgets/vapplication.cpp" line="1236"/>
         <source>mm</source>
         <comment>millimeter</comment>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1556"/>
+        <location filename="../../widgets/vapplication.cpp" line="1237"/>
         <source>in</source>
         <comment>inch</comment>
         <translation>дюйм</translation>
@@ -6773,18 +7661,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="464"/>
+        <location filename="../../xml/vdomdocument.cpp" line="465"/>
         <source>mm</source>
         <translation type="unfinished">мм</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="474"/>
-        <location filename="../../xml/vdomdocument.cpp" line="494"/>
+        <location filename="../../xml/vdomdocument.cpp" line="475"/>
+        <location filename="../../xml/vdomdocument.cpp" line="495"/>
         <source>cm</source>
         <translation type="unfinished">см</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="484"/>
+        <location filename="../../xml/vdomdocument.cpp" line="485"/>
         <source>inch</source>
         <translation type="unfinished">дюймы</translation>
     </message>
@@ -7064,13 +7952,13 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../container/vcontainer.cpp" line="110"/>
         <location filename="../../container/vcontainer.cpp" line="128"/>
-        <location filename="../../container/vcontainer.h" line="106"/>
+        <location filename="../../container/vcontainer.h" line="107"/>
         <location filename="../../container/vcontainer.h" line="149"/>
         <source>Can&apos;t find object</source>
         <translation>Не могу найти объект</translation>
     </message>
     <message>
-        <location filename="../../container/vcontainer.h" line="117"/>
+        <location filename="../../container/vcontainer.h" line="118"/>
         <location filename="../../container/vcontainer.h" line="144"/>
         <source>Can&apos;t cast object</source>
         <translation>Не можете привести объект</translation>
@@ -7130,13 +8018,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../xml/vdomdocument.cpp" line="394"/>
-        <source>Validation error in line %1 column %2</source>
-        <translation>Ошибка валидации линия %1 столбик %2</translation>
+        <source>Validation error file %3 in line %1 column %2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../xml/vdomdocument.cpp" line="419"/>
-        <source>Parsing error in line %1 column %2</source>
+        <source>Parsing error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Validation error in line %1 column %2</source>
+        <translation type="vanished">Ошибка валидации линия %1 столбик %2</translation>
     </message>
     <message>
         <source>Parcing error in line %1 column %2</source>
@@ -7502,6 +8394,11 @@ Do you want to save your changes?</source>
         <source>This id is not unique.</source>
         <translation>Этот id не уникальный.</translation>
     </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="2494"/>
+        <source>File error.</source>
+        <translation type="unfinished">Ошибка файла.</translation>
+    </message>
 </context>
 <context>
     <name>VSplinePath</name>
@@ -7737,31 +8634,31 @@ Do you want to save your changes?</source>
 <context>
     <name>Variables</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1514"/>
+        <location filename="../../widgets/vapplication.cpp" line="1195"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Линия_</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1515"/>
+        <location filename="../../widgets/vapplication.cpp" line="1196"/>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
         <translation>УголЛинии_</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1516"/>
+        <location filename="../../widgets/vapplication.cpp" line="1197"/>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Дуга_</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1517"/>
+        <location filename="../../widgets/vapplication.cpp" line="1198"/>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Спл_</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1518"/>
+        <location filename="../../widgets/vapplication.cpp" line="1199"/>
         <source>SplPath</source>
         <translation>СлСпл_</translation>
     </message>
@@ -7785,12 +8682,12 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="178"/>
+        <location filename="../../main.cpp" line="177"/>
         <source>Pattern making program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="181"/>
+        <location filename="../../main.cpp" line="180"/>
         <source>Pattern file.</source>
         <translation type="unfinished"></translation>
     </message>

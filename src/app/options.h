@@ -128,10 +128,12 @@ enum class GSizes : unsigned char { ALL,
                                     S42=42, S44=44, S46=46, S48=48, S50=50, S52=52, S54=54, S56=56 };
 
 // measurements
+//head and neck
 extern const QString headGirth_M;
 extern const QString midNeckGirth_M;
 extern const QString neckBaseGirth_M;
 extern const QString headAndNeckLength_M;
+//torso
 extern const QString centerFrontWaistLength_M;
 extern const QString centerBackWaistLength_M;
 extern const QString shoulderLength_M;
@@ -177,6 +179,11 @@ extern const QString frontWaistSlope_M;
 extern const QString backWaistSlope_M;
 extern const QString frontNeckToUpperChestHeight_M;
 extern const QString frontNeckToBustHeight_M;
+extern const QString frontWaistToUpperChest_M;
+extern const QString frontWaistToLowerBreast_M;
+extern const QString backWaistToUpperChest_M;
+extern const QString strapLength_M;
+//arm
 extern const QString armscyeGirth_M;
 extern const QString elbowGirth_M;
 extern const QString upperArmGirth_M;
@@ -187,9 +194,11 @@ extern const QString underarmLength_M;
 extern const QString cervicaleToWristLength_M;
 extern const QString shoulderToElbowLength_M;
 extern const QString armLength_M;
+//hand
 extern const QString handWidth_M;
 extern const QString handLength_M;
 extern const QString handGirth_M;
+//leg
 extern const QString thighGirth_M;
 extern const QString midThighGirth_M;
 extern const QString kneeGirth_M;
@@ -197,8 +206,10 @@ extern const QString calfGirth_M;
 extern const QString ankleGirth_M;
 extern const QString kneeHeight_M;
 extern const QString ankleHeight_M;
+//foot
 extern const QString footWidth_M;
 extern const QString footLength_M;
+//heights
 extern const QString height_M;
 extern const QString cervicaleHeight_M;
 extern const QString cervicaleToKneeHeight_M;

@@ -32,12 +32,14 @@
 //Same regexp in pattern.xsd shema file. Don't forget synchronize.
 const QString nameRegExp = QStringLiteral("^([^0-9-*/^+=\\s\\(\\)%:;!.,]){1,1}([^-*/^+=\\s\\(\\)%:;!.,]){0,}$");
 
-// Keep synchronize all names with initialization in VApllication class.
+// Keep synchronize all names with initialization in VApllication class!!!!!
 //measurements
+//head and neck
 const QString headGirth_M                   = QStringLiteral("head_girth");
 const QString midNeckGirth_M                = QStringLiteral("mid_neck_girth");
 const QString neckBaseGirth_M               = QStringLiteral("neck_base_girth");
 const QString headAndNeckLength_M           = QStringLiteral("head_and_neck_length");
+//torso
 const QString centerFrontWaistLength_M      = QStringLiteral("center_front_waist_length");
 const QString centerBackWaistLength_M       = QStringLiteral("center_back_waist_length");
 const QString shoulderLength_M              = QStringLiteral("shoulder_length");
@@ -83,6 +85,11 @@ const QString frontWaistSlope_M             = QStringLiteral("front_waist_slope"
 const QString backWaistSlope_M              = QStringLiteral("back_waist_slope");
 const QString frontNeckToUpperChestHeight_M = QStringLiteral("front_neck_to_upper_chest_height");
 const QString frontNeckToBustHeight_M       = QStringLiteral("front_neck_to_bust_height");
+const QString frontWaistToUpperChest_M      = QStringLiteral("front_waist_to_upper_chest");
+const QString frontWaistToLowerBreast_M     = QStringLiteral("front_waist_to_lower_breast");
+const QString backWaistToUpperChest_M       = QStringLiteral("back_waist_to_upper_chest");
+const QString strapLength_M                 = QStringLiteral("strap_length");
+//arm
 const QString armscyeGirth_M                = QStringLiteral("armscye_girth");
 const QString elbowGirth_M                  = QStringLiteral("elbow_girth");
 const QString upperArmGirth_M               = QStringLiteral("upper_arm_girth");
@@ -93,9 +100,11 @@ const QString underarmLength_M              = QStringLiteral("underarm_length");
 const QString cervicaleToWristLength_M      = QStringLiteral("cervicale_to_wrist_length");
 const QString shoulderToElbowLength_M       = QStringLiteral("shoulder_to_elbow_length");
 const QString armLength_M                   = QStringLiteral("arm_length");
+//hand
 const QString handWidth_M                   = QStringLiteral("hand_width");
 const QString handLength_M                  = QStringLiteral("hand_length");
 const QString handGirth_M                   = QStringLiteral("hand_girth");
+//leg
 const QString thighGirth_M                  = QStringLiteral("thigh_girth");
 const QString midThighGirth_M               = QStringLiteral("mid_thigh_girth");
 const QString kneeGirth_M                   = QStringLiteral("knee_girth");
@@ -103,8 +112,10 @@ const QString calfGirth_M                   = QStringLiteral("calf_girth");
 const QString ankleGirth_M                  = QStringLiteral("ankle_girth");
 const QString kneeHeight_M                  = QStringLiteral("knee_height");
 const QString ankleHeight_M                 = QStringLiteral("ankle_height");
+//foot
 const QString footWidth_M                   = QStringLiteral("foot_width");
 const QString footLength_M                  = QStringLiteral("foot_length");
+//heights
 const QString height_M                      = QStringLiteral("height");
 const QString cervicaleHeight_M             = QStringLiteral("cervicale_height");
 const QString cervicaleToKneeHeight_M       = QStringLiteral("cervicale_to_knee_height");

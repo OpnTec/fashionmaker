@@ -391,8 +391,8 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
         pattern.close();
         fileSchema.close();
         VException e(messageHandler.statusMessage());
-        e.AddMoreInformation(tr("Validation error in line %1 column %2").arg(messageHandler.line())
-                             .arg(messageHandler.column()));
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(messageHandler.line())
+                             .arg(messageHandler.column()).arg(fileName));
         throw e;
     }
     pattern.close();
@@ -416,7 +416,8 @@ void VDomDocument::setContent(const QString &fileName)
     {
         file.close();
         VException e(errorMsg);
-        e.AddMoreInformation(tr("Parsing error in line %1 column %2").arg(errorLine).arg(errorColumn));
+        e.AddMoreInformation(tr("Parsing error file %3 in line %1 column %2").arg(errorLine).arg(errorColumn)
+                             .arg(fileName));
         throw e;
     }
 }

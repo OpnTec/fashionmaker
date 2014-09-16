@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vst>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<description>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</description>
 	<unit>mm</unit>
 	<size base="500"/>
@@ -58,6 +58,10 @@
             <back_waist_slope value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <front_neck_to_upper_chest_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <front_neck_to_bust_height value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <front_waist_to_upper_chest value="0.0" size_increase="0" height_increase="0"/><!--Дпер(Длина переда от линии талии вверх по центру до начала ложбины)-->
+            <front_waist_to_lower_breast value="0.0" size_increase="0" height_increase="0"/><!--Дпг(Длина от талии до основания грудных желез)-->
+            <back_waist_to_upper_chest value="0.0" size_increase="0" height_increase="0"/><!--Дст(Длина спинки по спине от линии талии вверх до выступающего уголка лопатки)-->
+            <strap_length value="0.0" size_increase="0" height_increase="0"/><!--Дбр(Длина бретели от выступающего уголка лопатки вертикально до начала грудной железы)-->
         </torso>
         <arm>
             <armscye_girth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
@@ -112,7 +116,7 @@
 			<side_waist_to_floor value="1120" size_increase="0" height_increase ="44"/><!--Дсб(Расстояние от линии талии до пола сбоку)-->
 			<front_waist_to_floor value="1110" size_increase="0" height_increase ="43"/><!--Дсп(Расстояние от линии талии до пола спереди)-->
 			<arc_through_groin_area value="783" size_increase="14" height_increase ="15"/><!--Дпоб(Дуга через паховую область)-->
-			<waist_to_plane_seat value="260" size_increase="1" height_increase ="6"/><!--Дс(Расстояние от линии талии до плоскости сидения)-->
+			<waist_to_plane_seat value="260" size_increase="1" height_increase ="6"/><!--Вс(Расстояние от линии талии до плоскости сидения)-->
 			<neck_to_radial_point value="500" size_increase="2" height_increase ="15"/><!--Длуч(Расстояние от точки основания шеи сбоку до лучевой точки)-->
 			<neck_to_third_finger value="970" size_increase="2" height_increase ="29"/><!--ДIIIп(Расстояние от точки основания шеи сбоку до конца третьего пальца)-->
 			<neck_to_first_line_chest_circumference value="214" size_increase="3" height_increase ="3"/><!--Впрп(Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди)-->

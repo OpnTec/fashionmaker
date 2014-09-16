@@ -2471,18 +2471,29 @@ void VPattern::PrepareForParse(const Document &parse)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::UpdateMeasurements()
 {
-    const QString path = MPath();
-    if (MType() == MeasurementsType::Standard)
+    try
     {
-        VStandardMeasurements m(data);
-        m.setContent(path);
-        m.Measurements();
+        const QString path = MPath();
+        if (MType() == MeasurementsType::Standard)
+        {
+            VStandardMeasurements m(data);
+            ValidateXML("://schema/standard_measurements.xsd", path);
+            m.setContent(path);
+            m.Measurements();
+        }
+        else
+        {
+            VIndividualMeasurements m(data);
+            ValidateXML("://schema/individual_measurements.xsd", path);
+            m.setContent(path);
+            m.Measurements();
+        }
     }
-    else
+    catch (VException &e)
     {
-        VIndividualMeasurements m(data);
-        m.setContent(path);
-        m.Measurements();
+        e.CriticalMessageBox(tr("File error."), qApp->getMainWindow());
+        emit ClearMainWindow();
+        return;
     }
 }
 

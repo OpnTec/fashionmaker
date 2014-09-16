@@ -51,6 +51,7 @@ VAbstractMeasurements::~VAbstractMeasurements()
  */
 void VAbstractMeasurements::Measurements()
 {
+    //Set of measurements common for both standard.
     //head and neck
     Measurement(headGirth_M);
     Measurement(midNeckGirth_M);
@@ -102,6 +103,10 @@ void VAbstractMeasurements::Measurements()
     Measurement(backWaistSlope_M);
     Measurement(frontNeckToUpperChestHeight_M);
     Measurement(frontNeckToBustHeight_M);
+    Measurement(frontWaistToUpperChest_M);
+    Measurement(frontWaistToLowerBreast_M);
+    Measurement(backWaistToUpperChest_M);
+    Measurement(strapLength_M);
     //arm
     Measurement(armscyeGirth_M);
     Measurement(elbowGirth_M);
@@ -251,7 +256,7 @@ void VAbstractMeasurements::Measurement(const QString &tag)
     const QDomNodeList nodeList = this->elementsByTagName(tag);
     if (nodeList.isEmpty())
     {
-        qDebug()<<"Measurement" << tag <<"doesn't exist"<<Q_FUNC_INFO;
+        qWarning()<<"Measurement" << tag <<"doesn't exist";
         return;
     }
     else
