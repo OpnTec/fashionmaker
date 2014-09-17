@@ -539,8 +539,8 @@ void VApplication::InitMeasurements()
     //=================================================================================================================
     m = VTranslation::translate("Measurements", "front_upper_chest_arc",
                                 "Short measurement name. Don't use math symbols in name!!!!");
-    g = VTranslation::translate("MeasurementsFullNames", "front_upper-bust_arc", "Full measurement name");
-    d = VTranslation::translate("MeasurementsDescriptions", "front_upper-bust_arc", "Full measurement description");
+    g = VTranslation::translate("MeasurementsFullNames", "Front upper-bust arc", "Full measurement name");
+    d = VTranslation::translate("MeasurementsDescriptions", "Front upper-bust arc", "Full measurement description");
     InitMeasurement(frontUpperChestArc_M, m, g, d);
     //=================================================================================================================
     m = VTranslation::translate("Measurements", "back_upper_chest_arc",
@@ -839,7 +839,7 @@ void VApplication::InitMeasurements()
     m = VTranslation::translate("Measurements", "hip_height",
                                 "Short measurement name. Don't use math symbols in name!!!!");
     g = VTranslation::translate("MeasurementsFullNames", "Hip height", "Full measurement name");
-    d = VTranslation::translate("Measurements", "Hip side to Floor", "Full measurement description");
+    d = VTranslation::translate("MeasurementsDescriptions", "Hip side to Floor", "Full measurement description");
     InitMeasurement(hipHeight_M, m, g, d);
     //=================================================================================================================
     m = VTranslation::translate("Measurements", "waist_to_hip_height",

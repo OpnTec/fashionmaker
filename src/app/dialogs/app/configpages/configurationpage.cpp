@@ -223,7 +223,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     QString checkedUnit = settings->value("configuration/unit", "cm").toString();
 
     this->unitCombo->addItem(tr("Centimeters"), "cm");
-    this->unitCombo->addItem(tr("Milimiters"), "mm");
+    this->unitCombo->addItem(tr("Millimiters"), "mm");
     this->unitCombo->addItem(tr("Inches"), "in");
 
     // set default unit

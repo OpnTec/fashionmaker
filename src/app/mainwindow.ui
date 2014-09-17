@@ -40,7 +40,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -76,7 +76,7 @@
            <string>Point along perpendicular</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -102,7 +102,7 @@
            <string>Special point on shoulder.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -128,7 +128,7 @@
            <string>Tool triangle.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -154,7 +154,7 @@
            <string>Perpendicular point along line</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -180,7 +180,7 @@
            <string>Point along bisector</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -206,7 +206,7 @@
            <string>Point at intersection of arc and line.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -232,7 +232,7 @@
            <string>Tool to make point from x &amp; y of two other points.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -258,7 +258,7 @@
            <string>Point at distance and angle</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -284,7 +284,7 @@
            <string>Point at distance along line</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -334,7 +334,7 @@
            <string>Line between points</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -360,7 +360,7 @@
            <string>Point at line intersection</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -410,7 +410,7 @@
            <string>Curve tool.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -436,7 +436,7 @@
            <string>Tool for path curve.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -462,7 +462,7 @@
            <string>Tool for segmenting a curve.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -488,7 +488,7 @@
            <string>Tool segment a pathed curve.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -538,7 +538,7 @@
            <string>Arc tool.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -564,7 +564,7 @@
            <string>Cut arc tool.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -611,7 +611,7 @@
            <string>Tool new detail.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -637,7 +637,7 @@
            <string>Tool for union two details.</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -1084,7 +1084,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Zoom In</string>
+    <string>Zoom in</string>
    </property>
    <property name="toolTip">
     <string>zoom in</string>
@@ -1100,7 +1100,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Zoom Out</string>
+    <string>Zoom out</string>
    </property>
    <property name="toolTip">
     <string>Zoom out</string>
@@ -1121,7 +1121,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>ZoomOriginal</string>
+    <string>Original zoom </string>
+   </property>
+   <property name="toolTip">
+    <string>Original Zoom </string>
    </property>
   </action>
   <action name="actionZoomFitBest">
@@ -1134,7 +1137,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>ZoomFitBest</string>
+    <string>Zoom fit best</string>
    </property>
   </action>
  </widget>

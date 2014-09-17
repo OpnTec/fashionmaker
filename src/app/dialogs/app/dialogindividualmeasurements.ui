@@ -72,7 +72,7 @@
        <item>
         <widget class="QToolButton" name="toolButtonOpenExist">
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset theme="document-open">
@@ -220,7 +220,7 @@
        <item>
         <widget class="QToolButton" name="toolButtonOpenNew">
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset theme="document-new">

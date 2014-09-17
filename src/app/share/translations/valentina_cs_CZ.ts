@@ -208,7 +208,7 @@
     </message>
     <message>
         <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="226"/>
-        <source>Milimiters</source>
+        <source>Millimiters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -307,10 +307,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="95"/>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="115"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogalongline.ui" line="112"/>
@@ -323,9 +321,8 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="153"/>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogalongline.ui" line="192"/>
@@ -436,14 +433,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="95"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="115"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="280"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="300"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="465"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="485"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="112"/>
@@ -458,11 +449,8 @@
         <translation>Hodnota poloměru</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="147"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="332"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="517"/>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="186"/>
@@ -596,10 +584,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="92"/>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="112"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogbisector.ui" line="109"/>
@@ -612,102 +598,102 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="144"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="147"/>
         <source>_</source>
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="224"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="241"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="244"/>
         <source>First point</source>
         <translation>První bod</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="248"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="251"/>
         <source>First point of angle</source>
         <translation>První bod úhlu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="265"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="268"/>
         <source>Second point</source>
         <translation>Druhý bod</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="275"/>
         <source>Second point of angle</source>
         <translation>Druhý bod úhlu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="289"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="292"/>
         <source>Third point</source>
         <translation>Třetí bod</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="296"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="299"/>
         <source>Third point of angle</source>
         <translation>Třetí bod úhlu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="307"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="310"/>
         <source>Type of line</source>
         <translation type="unfinished">Typ čáry</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="314"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="317"/>
         <source>Show line from second point to this point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="325"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Input data</source>
         <translation>Vstupní data</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="338"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="341"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="354"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="357"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="367"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="370"/>
         <source>Increments</source>
         <translation>Přídavky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="383"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="386"/>
         <source>Length of lines</source>
         <translation>Délka čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="399"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="402"/>
         <source>Length of arcs</source>
         <translation>Délka oblouků</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="415"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="418"/>
         <source>Length of curves</source>
         <translation>Délka křivek</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="431"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="434"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Úhel čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="442"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="445"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation type="unfinished"></translation>
     </message>
@@ -735,10 +721,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="89"/>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="109"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogcutarc.ui" line="106"/>
@@ -751,72 +735,72 @@
         <translation type="unfinished">Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="141"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="144"/>
         <source>_</source>
         <translation type="unfinished">_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="180"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="183"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="218"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="221"/>
         <source>Arc</source>
         <translation type="unfinished">Oblouk</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="225"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="228"/>
         <source>Selected curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="242"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="245"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="256"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="259"/>
         <source>Input data</source>
         <translation type="unfinished">Vstupní data</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="269"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="272"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="285"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="288"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="298"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="301"/>
         <source>Increments</source>
         <translation type="unfinished">Přídavky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="314"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="317"/>
         <source>Length of lines</source>
         <translation type="unfinished">Délka čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="330"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="333"/>
         <source>Length of arcs</source>
         <translation type="unfinished">Délka oblouků</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="346"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="349"/>
         <source>Length of curves</source>
         <translation type="unfinished">Délka křivek</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="362"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="365"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Úhel čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="373"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="376"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation type="unfinished"></translation>
     </message>
@@ -834,10 +818,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="89"/>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="109"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogcutspline.ui" line="106"/>
@@ -850,72 +832,72 @@
         <translation type="unfinished">Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="141"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="144"/>
         <source>_</source>
         <translation type="unfinished">_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="180"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="183"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="218"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="221"/>
         <source>Curve</source>
         <translation type="unfinished">Křivka</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="225"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="228"/>
         <source>Selected curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="242"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="245"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="256"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="259"/>
         <source>Input data</source>
         <translation type="unfinished">Vstupní data</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="269"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="272"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="285"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="288"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="298"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="301"/>
         <source>Increments</source>
         <translation type="unfinished">Přídavky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="314"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="317"/>
         <source>Length of lines</source>
         <translation type="unfinished">Délka čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="330"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="333"/>
         <source>Length of arcs</source>
         <translation type="unfinished">Délka oblouků</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="346"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="349"/>
         <source>Length of curves</source>
         <translation type="unfinished">Délka křivek</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="362"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="365"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Úhel čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="373"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="376"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation type="unfinished"></translation>
     </message>
@@ -933,10 +915,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="89"/>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="109"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="106"/>
@@ -949,72 +929,72 @@
         <translation type="unfinished">Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="141"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="144"/>
         <source>_</source>
         <translation type="unfinished">_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="180"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="183"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="218"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="221"/>
         <source>Curve</source>
         <translation type="unfinished">Křivka</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="225"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="228"/>
         <source>Selected curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="242"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="245"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="256"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="259"/>
         <source>Input data</source>
         <translation type="unfinished">Vstupní data</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="269"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="272"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="285"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="288"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="298"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="301"/>
         <source>Increments</source>
         <translation type="unfinished">Přídavky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="314"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="317"/>
         <source>Length of lines</source>
         <translation type="unfinished">Délka čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="330"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="333"/>
         <source>Length of arcs</source>
         <translation type="unfinished">Délka oblouků</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="346"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="349"/>
         <source>Length of curves</source>
         <translation type="unfinished">Délka křivek</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="362"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="365"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Úhel čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="373"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="376"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1098,10 +1078,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="98"/>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="118"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="115"/>
@@ -1114,57 +1092,57 @@
         <translation type="unfinished">Hodnota prvního úhlu</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="150"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="153"/>
         <source>_</source>
         <translation type="unfinished">_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="189"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="227"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="230"/>
         <source>Input data</source>
         <translation type="unfinished">Vstupní data</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="240"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="243"/>
         <source>Size and height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="256"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="259"/>
         <source>Standard table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="269"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="272"/>
         <source>Increments</source>
         <translation type="unfinished">Přídavky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="285"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="288"/>
         <source>Length of lines</source>
         <translation type="unfinished">Délka čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="301"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="304"/>
         <source>Length of arcs</source>
         <translation type="unfinished">Délka oblouků</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="320"/>
         <source>Length of curves</source>
         <translation type="unfinished">Délka křivek</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="336"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Úhel čar</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="344"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="347"/>
         <source>Variables</source>
         <translation type="unfinished">Proměnné</translation>
     </message>
@@ -1182,12 +1160,8 @@
         <translation>Délka</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="98"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="118"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="277"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="297"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogendline.ui" line="115"/>
@@ -1201,10 +1175,8 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="150"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="329"/>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogendline.ui" line="186"/>
@@ -1505,11 +1477,8 @@
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="82"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="462"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="477"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="52"/>
@@ -1673,10 +1642,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.ui" line="75"/>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.ui" line="223"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/app/dialogindividualmeasurements.ui" line="109"/>
@@ -1737,7 +1704,7 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="250"/>
-        <source>Milimiters</source>
+        <source>Millimiters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1880,18 +1847,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="95"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="115"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="313"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="330"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="347"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="364"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="387"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="404"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="421"/>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="438"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialognormal.ui" line="112"/>
@@ -1904,9 +1861,8 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="147"/>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialognormal.ui" line="186"/>
@@ -2032,188 +1988,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="122"/>
-        <source>92</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="141"/>
-        <source>146</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="160"/>
-        <source>98</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="179"/>
-        <source>152</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="204"/>
-        <source>104</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="223"/>
-        <source>158</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="242"/>
-        <source>110</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="261"/>
-        <source>164</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="280"/>
-        <source>116</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="299"/>
-        <source>170</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="318"/>
-        <source>122</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="337"/>
-        <source>176</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="356"/>
-        <source>128</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="375"/>
-        <source>182</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="394"/>
-        <source>134</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="413"/>
-        <source>188</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="432"/>
-        <source>140</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="451"/>
-        <source>194</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../dialogs/app/dialogpatternproperties.ui" line="468"/>
         <source>All sizes (cm)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="496"/>
-        <source>22</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="515"/>
-        <source>40</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="534"/>
-        <source>24</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="553"/>
-        <source>42</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="572"/>
-        <source>26</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="591"/>
-        <source>44</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="610"/>
-        <source>28</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="629"/>
-        <source>46</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="648"/>
-        <source>30</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="667"/>
-        <source>48</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="686"/>
-        <source>32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="705"/>
-        <source>50</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="724"/>
-        <source>34</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="743"/>
-        <source>52</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="762"/>
-        <source>36</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="781"/>
-        <source>54</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="800"/>
-        <source>38</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogpatternproperties.ui" line="819"/>
-        <source>56</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2256,7 +2032,7 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialogpatternxmledit.ui" line="208"/>
-        <source>Remove attibute</source>
+        <source>Remove attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2410,10 +2186,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="95"/>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="115"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="112"/>
@@ -2426,9 +2200,8 @@
         <translation>Hodnota poloměru</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="147"/>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="186"/>
@@ -2573,10 +2346,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="95"/>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="115"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="112"/>
@@ -2589,9 +2360,8 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="147"/>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="186"/>
@@ -3192,27 +2962,8 @@
         <translation type="vanished">Nástroj bod na koncové čáře.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="79"/>
-        <location filename="../../mainwindow.ui" line="105"/>
-        <location filename="../../mainwindow.ui" line="131"/>
-        <location filename="../../mainwindow.ui" line="157"/>
-        <location filename="../../mainwindow.ui" line="183"/>
-        <location filename="../../mainwindow.ui" line="209"/>
-        <location filename="../../mainwindow.ui" line="235"/>
-        <location filename="../../mainwindow.ui" line="261"/>
-        <location filename="../../mainwindow.ui" line="287"/>
-        <location filename="../../mainwindow.ui" line="337"/>
-        <location filename="../../mainwindow.ui" line="363"/>
-        <location filename="../../mainwindow.ui" line="413"/>
-        <location filename="../../mainwindow.ui" line="439"/>
-        <location filename="../../mainwindow.ui" line="465"/>
-        <location filename="../../mainwindow.ui" line="491"/>
-        <location filename="../../mainwindow.ui" line="541"/>
-        <location filename="../../mainwindow.ui" line="567"/>
-        <location filename="../../mainwindow.ui" line="614"/>
-        <location filename="../../mainwindow.ui" line="640"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <source>Tool point of shoulder.</source>
@@ -3633,8 +3384,27 @@
     </message>
     <message>
         <location filename="../../mainwindow.ui" line="1087"/>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1124"/>
+        <source>Original zoom </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1127"/>
+        <source>Original Zoom </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1140"/>
+        <source>Zoom fit best</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Zoom In</source>
-        <translation type="unfinished">Přiblížit</translation>
+        <translation type="obsolete">Přiblížit</translation>
     </message>
     <message>
         <location filename="../../mainwindow.ui" line="1090"/>
@@ -3642,11 +3412,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1103"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Oddálit</translation>
+        <translation type="obsolete">Oddálit</translation>
     </message>
     <message>
+        <location filename="../../mainwindow.ui" line="1103"/>
         <location filename="../../mainwindow.ui" line="1106"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
@@ -3654,16 +3424,6 @@
     <message>
         <location filename="../../mainwindow.ui" line="1111"/>
         <source>Edit pattern XML code</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1124"/>
-        <source>ZoomOriginal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1137"/>
-        <source>ZoomFitBest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4491,12 +4251,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="842"/>
-        <source>Hip side to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../widgets/vapplication.cpp" line="845"/>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
@@ -5033,7 +4787,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="543"/>
-        <source>front_upper-bust_arc</source>
+        <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -5298,6 +5052,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="836"/>
         <source>HighHip side to Floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="842"/>
+        <source>Hip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -5828,7 +5588,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="542"/>
-        <source>front_upper-bust_arc</source>
+        <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>

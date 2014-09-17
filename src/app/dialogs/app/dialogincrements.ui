@@ -79,7 +79,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>...</string>
+            <string notr="true">...</string>
            </property>
            <property name="icon">
             <iconset theme="document-open">
@@ -108,7 +108,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="pagePersonalInformation">
           <property name="enabled">
@@ -459,7 +459,7 @@
        <item row="1" column="0">
         <widget class="QToolButton" name="toolButtonAdd">
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset theme="list-add">
@@ -474,7 +474,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset theme="list-remove">

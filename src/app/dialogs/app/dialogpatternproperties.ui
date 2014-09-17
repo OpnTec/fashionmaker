@@ -119,7 +119,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>92</string>
+                 <string notr="true">92</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -138,7 +138,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>146</string>
+                 <string notr="true">146</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -157,7 +157,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>98</string>
+                 <string notr="true">98</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -176,7 +176,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>152</string>
+                 <string notr="true">152</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -201,7 +201,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>104</string>
+                 <string notr="true">104</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -220,7 +220,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>158</string>
+                 <string notr="true">158</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -239,7 +239,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>110</string>
+                 <string notr="true">110</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -258,7 +258,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>164</string>
+                 <string notr="true">164</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -277,7 +277,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>116</string>
+                 <string notr="true">116</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -296,7 +296,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>170</string>
+                 <string notr="true">170</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -315,7 +315,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>122</string>
+                 <string notr="true">122</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -334,7 +334,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>176</string>
+                 <string notr="true">176</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -353,7 +353,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>128</string>
+                 <string notr="true">128</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -372,7 +372,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>182</string>
+                 <string notr="true">182</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -391,7 +391,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>134</string>
+                 <string notr="true">134</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -410,7 +410,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>188</string>
+                 <string notr="true">188</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -429,7 +429,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>140</string>
+                 <string notr="true">140</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -448,7 +448,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>194</string>
+                 <string notr="true">194</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -493,7 +493,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>22</string>
+                 <string notr="true">22</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -512,7 +512,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>40</string>
+                 <string notr="true">40</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -531,7 +531,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>24</string>
+                 <string notr="true">24</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -550,7 +550,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>42</string>
+                 <string notr="true">42</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -569,7 +569,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>26</string>
+                 <string notr="true">26</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -588,7 +588,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>44</string>
+                 <string notr="true">44</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -607,7 +607,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>28</string>
+                 <string notr="true">28</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -626,7 +626,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>46</string>
+                 <string notr="true">46</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -645,7 +645,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>30</string>
+                 <string notr="true">30</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -664,7 +664,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>48</string>
+                 <string notr="true">48</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -683,7 +683,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>32</string>
+                 <string notr="true">32</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -702,7 +702,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>50</string>
+                 <string notr="true">50</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -721,7 +721,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>34</string>
+                 <string notr="true">34</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -740,7 +740,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>52</string>
+                 <string notr="true">52</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -759,7 +759,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>36</string>
+                 <string notr="true">36</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -778,7 +778,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>54</string>
+                 <string notr="true">54</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -797,7 +797,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>38</string>
+                 <string notr="true">38</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>
@@ -816,7 +816,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>56</string>
+                 <string notr="true">56</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>

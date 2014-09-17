@@ -205,7 +205,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>Remove attibute</string>
+              <string>Remove attribute</string>
              </property>
             </widget>
            </item>

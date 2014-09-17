@@ -92,7 +92,7 @@
         <string>Insert variable into formula</string>
        </property>
        <property name="text">
-        <string>...</string>
+        <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
@@ -112,7 +112,7 @@
         <string>Calculate value</string>
        </property>
        <property name="text">
-        <string>...</string>
+        <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
@@ -144,7 +144,7 @@
         <string>Value of length</string>
        </property>
        <property name="text">
-        <string>_</string>
+        <string notr="true">_</string>
        </property>
       </widget>
      </item>
@@ -186,7 +186,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string/>
+        <string notr="true"/>
        </property>
        <property name="icon">
         <iconset theme="go-down">

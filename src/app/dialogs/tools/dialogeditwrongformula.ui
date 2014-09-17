@@ -95,7 +95,7 @@
         <string>Insert variable into formula</string>
        </property>
        <property name="text">
-        <string>...</string>
+        <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
@@ -115,7 +115,7 @@
         <string>Calculate value</string>
        </property>
        <property name="text">
-        <string>...</string>
+        <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
@@ -145,6 +145,9 @@
        </property>
        <property name="toolTip">
         <string>Value of first angle</string>
+       </property>
+       <property name="whatsThis">
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>_</string>
@@ -189,7 +192,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string/>
+        <string notr="true"/>
        </property>
        <property name="icon">
         <iconset theme="go-down">
