@@ -1198,7 +1198,8 @@ void VApplication::InitVariables()
     variables.insert(angleLine_, VTranslation::translate("Variables", "AngleLine_", "Left symbol _ in name"));
     variables.insert(arc_, VTranslation::translate("Variables", "Arc_", "Left symbol _ in name"));
     variables.insert(spl_, VTranslation::translate("Variables", "Spl_", "Left symbol _ in name"));
-    variables.insert(splPath, VTranslation::translate("Variables", "SplPath"));
+    variables.insert(splPath, VTranslation::translate("Variables", "SplPath",
+                                                      "Do not add symbol _ to the end of name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

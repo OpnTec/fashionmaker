@@ -3134,7 +3134,7 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+1207"/>
+        <location filename="../../widgets/vapplication.cpp" line="+1208"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
@@ -4236,7 +4236,7 @@ Do you want to save your changes?</source>
 <context>
     <name>Measurements</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="-937"/>
+        <location filename="../../widgets/vapplication.cpp" line="-938"/>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Огол</translation>
@@ -7567,7 +7567,7 @@ Do you want to save your changes?</source>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+48"/>
+        <location filename="../../widgets/vapplication.cpp" line="+49"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation>см</translation>
@@ -7853,7 +7853,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="-1132"/>
+        <location filename="../../widgets/vapplication.cpp" line="-1133"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
     </message>
@@ -8612,7 +8612,17 @@ Do you want to save your changes?</source>
     <message>
         <location line="+1"/>
         <source>SplPath</source>
-        <translation>СлСпл_</translation>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation>СлСпл</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to enf of name</comment>
+        <translation type="vanished">СлСпл</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <translation type="vanished">СлСпл</translation>
     </message>
 </context>
 <context>

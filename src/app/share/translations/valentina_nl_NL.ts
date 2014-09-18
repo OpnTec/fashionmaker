@@ -2662,151 +2662,151 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1207"/>
+        <location filename="../../widgets/vapplication.cpp" line="1208"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1208"/>
+        <location filename="../../widgets/vapplication.cpp" line="1209"/>
         <source>cos</source>
         <comment>cosine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1209"/>
+        <location filename="../../widgets/vapplication.cpp" line="1210"/>
         <source>tan</source>
         <comment>tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1210"/>
+        <location filename="../../widgets/vapplication.cpp" line="1211"/>
         <source>asin</source>
         <comment>arcus sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1211"/>
+        <location filename="../../widgets/vapplication.cpp" line="1212"/>
         <source>acos</source>
         <comment>arcus cosine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1212"/>
+        <location filename="../../widgets/vapplication.cpp" line="1213"/>
         <source>atan</source>
         <comment>arcus tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1213"/>
+        <location filename="../../widgets/vapplication.cpp" line="1214"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1214"/>
+        <location filename="../../widgets/vapplication.cpp" line="1215"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1215"/>
+        <location filename="../../widgets/vapplication.cpp" line="1216"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1216"/>
+        <location filename="../../widgets/vapplication.cpp" line="1217"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1217"/>
+        <location filename="../../widgets/vapplication.cpp" line="1218"/>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1218"/>
+        <location filename="../../widgets/vapplication.cpp" line="1219"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1219"/>
+        <location filename="../../widgets/vapplication.cpp" line="1220"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1220"/>
+        <location filename="../../widgets/vapplication.cpp" line="1221"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1221"/>
+        <location filename="../../widgets/vapplication.cpp" line="1222"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1222"/>
+        <location filename="../../widgets/vapplication.cpp" line="1223"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1223"/>
+        <location filename="../../widgets/vapplication.cpp" line="1224"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1224"/>
+        <location filename="../../widgets/vapplication.cpp" line="1225"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1225"/>
+        <location filename="../../widgets/vapplication.cpp" line="1226"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1226"/>
+        <location filename="../../widgets/vapplication.cpp" line="1227"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1227"/>
+        <location filename="../../widgets/vapplication.cpp" line="1228"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1228"/>
+        <location filename="../../widgets/vapplication.cpp" line="1229"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1229"/>
+        <location filename="../../widgets/vapplication.cpp" line="1230"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1230"/>
+        <location filename="../../widgets/vapplication.cpp" line="1231"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1231"/>
+        <location filename="../../widgets/vapplication.cpp" line="1232"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation type="unfinished"></translation>
@@ -6024,19 +6024,19 @@ Do you want to save your changes?</source>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1237"/>
+        <location filename="../../widgets/vapplication.cpp" line="1238"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1238"/>
+        <location filename="../../widgets/vapplication.cpp" line="1239"/>
         <source>mm</source>
         <comment>millimeter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1239"/>
+        <location filename="../../widgets/vapplication.cpp" line="1240"/>
         <source>in</source>
         <comment>inch</comment>
         <translation type="unfinished"></translation>
@@ -6087,7 +6087,7 @@ Do you want to save your changes?</source>
 <context>
     <name>STDescriptions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1245"/>
+        <location filename="../../widgets/vapplication.cpp" line="1246"/>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
         <translation type="unfinished"></translation>
@@ -6856,6 +6856,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="1201"/>
         <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
