@@ -1,10 +1,10 @@
 Pattern making program
-Copyright (C) 2013-2014  Roman Telezhynskyi <dismine@gmail.com>
-Valentina Web page: http://www.valentina-project.org/
-Valentina main repository: https://bitbucket.org/dismine/valentina/overview
-Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list
-PPA for Ubuntu 14.04(develop): https://launchpad.net/~dismine/+archive/valentina-dev
-Help translate https://www.transifex.com/organization/valentina
+Copyright (C) 2013-2014  Roman Telezhynskyi <dismine@gmail.com>    
+Valentina Web page: http://www.valentina-project.org/    
+Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
+Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    
+PPA for Ubuntu 14.04(develop): https://launchpad.net/~dismine/+archive/valentina-dev    
+Help translate https://www.transifex.com/organization/valentina    
 
 Valentina
 ==========
@@ -25,16 +25,16 @@ Building the sources requires Qt 5.2.1 or later.
 
 Compiling Valentina
 ====================
-Prerequisites:
-   * Qt 5.2.1 or later (On Unix development packages needed)
-   * mercurial
-   * On Unix:
-     - ccache
+Prerequisites:   
+   * Qt 5.2.1 or later (On Unix development packages needed)   
+   * mercurial   
+   * On Unix:   
+     - ccache   
      - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
        clang (clang 3.4 recommended)
-     - xpdf package (tool pdftops). 
-   * On Windows:
-     - MinGW or Visual Studio
+     - xpdf package (tool pdftops).    
+   * On Windows:   
+     - MinGW or Visual Studio   
      - Xpdf is an open source viewer for Portable Document Format (PDF) 
      files. Website http://www.foolabs.com/xpdf/. Put tool pdftops.exe 
      in the same directory with Valentina's binary file.
