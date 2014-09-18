@@ -35,9 +35,9 @@
    VIT_VERSION is (major << 16) + (minor << 8) + patch.
 */
 // version without patch part
-#define VIT_MIN_VERSION 0x000100
+#define VIT_MIN_VERSION 0x000200
 // max support version of format
-#define VIT_VERSION 0x000100
+#define VIT_VERSION 0x000200
 
 enum class SexType : char { Male, Female };
 

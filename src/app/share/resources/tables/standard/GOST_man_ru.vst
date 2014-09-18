@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vst>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<description>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</description>
+	<id>0</id>
 	<unit>mm</unit>
 	<size base="500"/>
 	<height base="1760"/>

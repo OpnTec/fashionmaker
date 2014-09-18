@@ -31,6 +31,7 @@
 #include "../widgets/vapplication.h"
 
 const QString VStandardMeasurements::TagDescription      = QStringLiteral("description");
+const QString VStandardMeasurements::TagId               = QStringLiteral("id");
 const QString VStandardMeasurements::TagSize             = QStringLiteral("size");
 const QString VStandardMeasurements::TagHeight           = QStringLiteral("height");
 const QString VStandardMeasurements::AttrSize_increase   = QStringLiteral("size_increase");
@@ -56,6 +57,17 @@ QString VStandardMeasurements::Description()
         qWarning()<<"Empty description in standard table."<<Q_FUNC_INFO;
     }
     return desc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VStandardMeasurements::Id()
+{
+    const QString id = UniqueTagText(TagId, "");
+    if (id.isEmpty())
+    {
+        qWarning()<<"Empty id value in standard table."<<Q_FUNC_INFO;
+    }
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

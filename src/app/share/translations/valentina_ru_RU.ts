@@ -3134,7 +3134,7 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+1205"/>
+        <location filename="../../widgets/vapplication.cpp" line="+1207"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
@@ -7625,6 +7625,15 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>STDescriptions</name>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="+6"/>
+        <source>Standard figures of men 1st group, chest 100 cm</source>
+        <comment>Standard table description</comment>
+        <translation>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</translation>
+    </message>
+</context>
+<context>
     <name>SaveDetailOptions</name>
     <message>
         <location filename="../../undocommands/savedetailoptions.cpp" line="+37"/>
@@ -7836,7 +7845,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="-1126"/>
+        <location filename="../../widgets/vapplication.cpp" line="-1132"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
     </message>

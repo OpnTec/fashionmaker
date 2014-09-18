@@ -57,7 +57,8 @@ VApplication::VApplication(int &argc, char **argv)
       _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), measurements(QMap<QString, VTranslation>()),
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
-      postfixOperators(QMap<QString, VTranslation>()), undoStack(nullptr), sceneView(nullptr), currentScene(nullptr),
+      postfixOperators(QMap<QString, VTranslation>()), stDescriptions(QMap<QString, VTranslation>()),
+      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr),
       autoSaveTimer(nullptr), mainWindow(nullptr), openingPattern(false), settings(nullptr), doc(nullptr)
 {
     undoStack = new QUndoStack(this);
@@ -67,6 +68,7 @@ VApplication::VApplication(int &argc, char **argv)
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
+    InitSTDescriptions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1238,6 +1240,14 @@ void VApplication::InitPostfixOperators()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitSTDescriptions()
+{
+    stDescriptions.insert("0", VTranslation::translate("STDescriptions",
+                                                       "Standard figures of men 1st group, chest 100 cm",
+                                                       "Standard table description"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, VTranslation>::const_iterator i = measurements.constBegin();
@@ -1766,4 +1776,18 @@ QStringList VApplication::LabelLanguages()
                      "bs"   // Bosnian
                     };
     return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::STDescription(const QString &id) const
+{
+    if (stDescriptions.contains(id))
+    {
+        return stDescriptions.value(id).translate();
+    }
+    else
+    {
+        qWarning()<<"Unknown id number. Got"<<id;
+    }
+    return QString();
 }

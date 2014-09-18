@@ -2738,151 +2738,151 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1205"/>
+        <location filename="../../widgets/vapplication.cpp" line="1207"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1206"/>
+        <location filename="../../widgets/vapplication.cpp" line="1208"/>
         <source>cos</source>
         <comment>cosine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1207"/>
+        <location filename="../../widgets/vapplication.cpp" line="1209"/>
         <source>tan</source>
         <comment>tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1208"/>
+        <location filename="../../widgets/vapplication.cpp" line="1210"/>
         <source>asin</source>
         <comment>arcus sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1209"/>
+        <location filename="../../widgets/vapplication.cpp" line="1211"/>
         <source>acos</source>
         <comment>arcus cosine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1210"/>
+        <location filename="../../widgets/vapplication.cpp" line="1212"/>
         <source>atan</source>
         <comment>arcus tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1211"/>
+        <location filename="../../widgets/vapplication.cpp" line="1213"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1212"/>
+        <location filename="../../widgets/vapplication.cpp" line="1214"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1213"/>
+        <location filename="../../widgets/vapplication.cpp" line="1215"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1214"/>
+        <location filename="../../widgets/vapplication.cpp" line="1216"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1215"/>
+        <location filename="../../widgets/vapplication.cpp" line="1217"/>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1216"/>
+        <location filename="../../widgets/vapplication.cpp" line="1218"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1217"/>
+        <location filename="../../widgets/vapplication.cpp" line="1219"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1218"/>
+        <location filename="../../widgets/vapplication.cpp" line="1220"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1219"/>
+        <location filename="../../widgets/vapplication.cpp" line="1221"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1220"/>
+        <location filename="../../widgets/vapplication.cpp" line="1222"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1221"/>
+        <location filename="../../widgets/vapplication.cpp" line="1223"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1222"/>
+        <location filename="../../widgets/vapplication.cpp" line="1224"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1223"/>
+        <location filename="../../widgets/vapplication.cpp" line="1225"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1224"/>
+        <location filename="../../widgets/vapplication.cpp" line="1226"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1225"/>
+        <location filename="../../widgets/vapplication.cpp" line="1227"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1226"/>
+        <location filename="../../widgets/vapplication.cpp" line="1228"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1227"/>
+        <location filename="../../widgets/vapplication.cpp" line="1229"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1228"/>
+        <location filename="../../widgets/vapplication.cpp" line="1230"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1229"/>
+        <location filename="../../widgets/vapplication.cpp" line="1231"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation type="unfinished"></translation>
@@ -3597,799 +3597,799 @@ Do you want to save your changes?</source>
 <context>
     <name>Measurements</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="292"/>
+        <location filename="../../widgets/vapplication.cpp" line="294"/>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="299"/>
+        <location filename="../../widgets/vapplication.cpp" line="301"/>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="306"/>
+        <location filename="../../widgets/vapplication.cpp" line="308"/>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="312"/>
+        <location filename="../../widgets/vapplication.cpp" line="314"/>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="320"/>
+        <location filename="../../widgets/vapplication.cpp" line="322"/>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="327"/>
+        <location filename="../../widgets/vapplication.cpp" line="329"/>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="334"/>
+        <location filename="../../widgets/vapplication.cpp" line="336"/>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="340"/>
+        <location filename="../../widgets/vapplication.cpp" line="342"/>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="346"/>
+        <location filename="../../widgets/vapplication.cpp" line="348"/>
         <source>trunk_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="355"/>
+        <location filename="../../widgets/vapplication.cpp" line="357"/>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="362"/>
+        <location filename="../../widgets/vapplication.cpp" line="364"/>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="370"/>
+        <location filename="../../widgets/vapplication.cpp" line="372"/>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="377"/>
+        <location filename="../../widgets/vapplication.cpp" line="379"/>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="384"/>
+        <location filename="../../widgets/vapplication.cpp" line="386"/>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="393"/>
+        <location filename="../../widgets/vapplication.cpp" line="395"/>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="400"/>
+        <location filename="../../widgets/vapplication.cpp" line="402"/>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="407"/>
+        <location filename="../../widgets/vapplication.cpp" line="409"/>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="414"/>
+        <location filename="../../widgets/vapplication.cpp" line="416"/>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="421"/>
+        <location filename="../../widgets/vapplication.cpp" line="423"/>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="428"/>
+        <location filename="../../widgets/vapplication.cpp" line="430"/>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="435"/>
+        <location filename="../../widgets/vapplication.cpp" line="437"/>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="442"/>
+        <location filename="../../widgets/vapplication.cpp" line="444"/>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="449"/>
+        <location filename="../../widgets/vapplication.cpp" line="451"/>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="456"/>
+        <location filename="../../widgets/vapplication.cpp" line="458"/>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="463"/>
+        <location filename="../../widgets/vapplication.cpp" line="465"/>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="470"/>
+        <location filename="../../widgets/vapplication.cpp" line="472"/>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="477"/>
+        <location filename="../../widgets/vapplication.cpp" line="479"/>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="484"/>
+        <location filename="../../widgets/vapplication.cpp" line="486"/>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="491"/>
+        <location filename="../../widgets/vapplication.cpp" line="493"/>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="498"/>
+        <location filename="../../widgets/vapplication.cpp" line="500"/>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="505"/>
+        <location filename="../../widgets/vapplication.cpp" line="507"/>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="512"/>
+        <location filename="../../widgets/vapplication.cpp" line="514"/>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="519"/>
+        <location filename="../../widgets/vapplication.cpp" line="521"/>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="526"/>
+        <location filename="../../widgets/vapplication.cpp" line="528"/>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="533"/>
+        <location filename="../../widgets/vapplication.cpp" line="535"/>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="540"/>
+        <location filename="../../widgets/vapplication.cpp" line="542"/>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="546"/>
+        <location filename="../../widgets/vapplication.cpp" line="548"/>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="553"/>
+        <location filename="../../widgets/vapplication.cpp" line="555"/>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="559"/>
+        <location filename="../../widgets/vapplication.cpp" line="561"/>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="565"/>
+        <location filename="../../widgets/vapplication.cpp" line="567"/>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="572"/>
+        <location filename="../../widgets/vapplication.cpp" line="574"/>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="579"/>
+        <location filename="../../widgets/vapplication.cpp" line="581"/>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="586"/>
+        <location filename="../../widgets/vapplication.cpp" line="588"/>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="592"/>
+        <location filename="../../widgets/vapplication.cpp" line="594"/>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="599"/>
+        <location filename="../../widgets/vapplication.cpp" line="601"/>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="606"/>
+        <location filename="../../widgets/vapplication.cpp" line="608"/>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="613"/>
+        <location filename="../../widgets/vapplication.cpp" line="615"/>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="620"/>
+        <location filename="../../widgets/vapplication.cpp" line="622"/>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="627"/>
+        <location filename="../../widgets/vapplication.cpp" line="629"/>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="634"/>
+        <location filename="../../widgets/vapplication.cpp" line="636"/>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="641"/>
+        <location filename="../../widgets/vapplication.cpp" line="643"/>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="648"/>
+        <location filename="../../widgets/vapplication.cpp" line="650"/>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="655"/>
+        <location filename="../../widgets/vapplication.cpp" line="657"/>
         <source>strap_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="663"/>
+        <location filename="../../widgets/vapplication.cpp" line="665"/>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="669"/>
+        <location filename="../../widgets/vapplication.cpp" line="671"/>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="676"/>
+        <location filename="../../widgets/vapplication.cpp" line="678"/>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="682"/>
+        <location filename="../../widgets/vapplication.cpp" line="684"/>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="688"/>
+        <location filename="../../widgets/vapplication.cpp" line="690"/>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="695"/>
+        <location filename="../../widgets/vapplication.cpp" line="697"/>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="702"/>
+        <location filename="../../widgets/vapplication.cpp" line="704"/>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="709"/>
+        <location filename="../../widgets/vapplication.cpp" line="711"/>
         <source>cervicale_to_wrist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="716"/>
+        <location filename="../../widgets/vapplication.cpp" line="718"/>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="723"/>
+        <location filename="../../widgets/vapplication.cpp" line="725"/>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="731"/>
+        <location filename="../../widgets/vapplication.cpp" line="733"/>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="737"/>
+        <location filename="../../widgets/vapplication.cpp" line="739"/>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="744"/>
+        <location filename="../../widgets/vapplication.cpp" line="746"/>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="751"/>
+        <location filename="../../widgets/vapplication.cpp" line="753"/>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="757"/>
+        <location filename="../../widgets/vapplication.cpp" line="759"/>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="763"/>
+        <location filename="../../widgets/vapplication.cpp" line="765"/>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="769"/>
+        <location filename="../../widgets/vapplication.cpp" line="771"/>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="775"/>
+        <location filename="../../widgets/vapplication.cpp" line="777"/>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="781"/>
+        <location filename="../../widgets/vapplication.cpp" line="783"/>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="787"/>
+        <location filename="../../widgets/vapplication.cpp" line="789"/>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="794"/>
+        <location filename="../../widgets/vapplication.cpp" line="796"/>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="801"/>
+        <location filename="../../widgets/vapplication.cpp" line="803"/>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="809"/>
+        <location filename="../../widgets/vapplication.cpp" line="811"/>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="815"/>
+        <location filename="../../widgets/vapplication.cpp" line="817"/>
         <source>cervicale_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="821"/>
+        <location filename="../../widgets/vapplication.cpp" line="823"/>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="827"/>
+        <location filename="../../widgets/vapplication.cpp" line="829"/>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="833"/>
+        <location filename="../../widgets/vapplication.cpp" line="835"/>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="839"/>
+        <location filename="../../widgets/vapplication.cpp" line="841"/>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="845"/>
+        <location filename="../../widgets/vapplication.cpp" line="847"/>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="851"/>
+        <location filename="../../widgets/vapplication.cpp" line="853"/>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="857"/>
+        <location filename="../../widgets/vapplication.cpp" line="859"/>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="865"/>
+        <location filename="../../widgets/vapplication.cpp" line="867"/>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="870"/>
+        <location filename="../../widgets/vapplication.cpp" line="872"/>
         <source>height_front_neck_base_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="877"/>
+        <location filename="../../widgets/vapplication.cpp" line="879"/>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="884"/>
+        <location filename="../../widgets/vapplication.cpp" line="886"/>
         <source>height_shoulder_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="891"/>
+        <location filename="../../widgets/vapplication.cpp" line="893"/>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="897"/>
+        <location filename="../../widgets/vapplication.cpp" line="899"/>
         <source>height_back_angle_axilla</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="903"/>
+        <location filename="../../widgets/vapplication.cpp" line="905"/>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="909"/>
+        <location filename="../../widgets/vapplication.cpp" line="911"/>
         <source>height_under_buttock_folds</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="916"/>
+        <location filename="../../widgets/vapplication.cpp" line="918"/>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="923"/>
+        <location filename="../../widgets/vapplication.cpp" line="925"/>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="929"/>
+        <location filename="../../widgets/vapplication.cpp" line="931"/>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="936"/>
+        <location filename="../../widgets/vapplication.cpp" line="938"/>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="943"/>
+        <location filename="../../widgets/vapplication.cpp" line="945"/>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="949"/>
+        <location filename="../../widgets/vapplication.cpp" line="951"/>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="956"/>
+        <location filename="../../widgets/vapplication.cpp" line="958"/>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="963"/>
+        <location filename="../../widgets/vapplication.cpp" line="965"/>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="970"/>
+        <location filename="../../widgets/vapplication.cpp" line="972"/>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="978"/>
+        <location filename="../../widgets/vapplication.cpp" line="980"/>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="985"/>
+        <location filename="../../widgets/vapplication.cpp" line="987"/>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="992"/>
+        <location filename="../../widgets/vapplication.cpp" line="994"/>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1001"/>
+        <location filename="../../widgets/vapplication.cpp" line="1003"/>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1008"/>
+        <location filename="../../widgets/vapplication.cpp" line="1010"/>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1015"/>
+        <location filename="../../widgets/vapplication.cpp" line="1017"/>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1021"/>
+        <location filename="../../widgets/vapplication.cpp" line="1023"/>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1028"/>
+        <location filename="../../widgets/vapplication.cpp" line="1030"/>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1034"/>
+        <location filename="../../widgets/vapplication.cpp" line="1036"/>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1042"/>
+        <location filename="../../widgets/vapplication.cpp" line="1044"/>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1048"/>
+        <location filename="../../widgets/vapplication.cpp" line="1050"/>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1054"/>
+        <location filename="../../widgets/vapplication.cpp" line="1056"/>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1061"/>
+        <location filename="../../widgets/vapplication.cpp" line="1063"/>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1067"/>
+        <location filename="../../widgets/vapplication.cpp" line="1069"/>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1073"/>
+        <location filename="../../widgets/vapplication.cpp" line="1075"/>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1079"/>
+        <location filename="../../widgets/vapplication.cpp" line="1081"/>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1085"/>
+        <location filename="../../widgets/vapplication.cpp" line="1087"/>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1093"/>
+        <location filename="../../widgets/vapplication.cpp" line="1095"/>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1101"/>
+        <location filename="../../widgets/vapplication.cpp" line="1103"/>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1107"/>
+        <location filename="../../widgets/vapplication.cpp" line="1109"/>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1113"/>
+        <location filename="../../widgets/vapplication.cpp" line="1115"/>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1120"/>
+        <location filename="../../widgets/vapplication.cpp" line="1122"/>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1127"/>
+        <location filename="../../widgets/vapplication.cpp" line="1129"/>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1133"/>
+        <location filename="../../widgets/vapplication.cpp" line="1135"/>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1140"/>
+        <location filename="../../widgets/vapplication.cpp" line="1142"/>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1147"/>
+        <location filename="../../widgets/vapplication.cpp" line="1149"/>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1153"/>
+        <location filename="../../widgets/vapplication.cpp" line="1155"/>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1159"/>
+        <location filename="../../widgets/vapplication.cpp" line="1161"/>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1165"/>
+        <location filename="../../widgets/vapplication.cpp" line="1167"/>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1172"/>
+        <location filename="../../widgets/vapplication.cpp" line="1174"/>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1179"/>
+        <location filename="../../widgets/vapplication.cpp" line="1181"/>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1185"/>
+        <location filename="../../widgets/vapplication.cpp" line="1187"/>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
@@ -4398,799 +4398,799 @@ Do you want to save your changes?</source>
 <context>
     <name>MeasurementsDescriptions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="295"/>
+        <location filename="../../widgets/vapplication.cpp" line="297"/>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="302"/>
+        <location filename="../../widgets/vapplication.cpp" line="304"/>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="309"/>
+        <location filename="../../widgets/vapplication.cpp" line="311"/>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="315"/>
+        <location filename="../../widgets/vapplication.cpp" line="317"/>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="323"/>
+        <location filename="../../widgets/vapplication.cpp" line="325"/>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="330"/>
+        <location filename="../../widgets/vapplication.cpp" line="332"/>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="337"/>
+        <location filename="../../widgets/vapplication.cpp" line="339"/>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="343"/>
+        <location filename="../../widgets/vapplication.cpp" line="345"/>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="349"/>
+        <location filename="../../widgets/vapplication.cpp" line="351"/>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="358"/>
+        <location filename="../../widgets/vapplication.cpp" line="360"/>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="365"/>
+        <location filename="../../widgets/vapplication.cpp" line="367"/>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="373"/>
+        <location filename="../../widgets/vapplication.cpp" line="375"/>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="380"/>
+        <location filename="../../widgets/vapplication.cpp" line="382"/>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="387"/>
+        <location filename="../../widgets/vapplication.cpp" line="389"/>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="396"/>
+        <location filename="../../widgets/vapplication.cpp" line="398"/>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="403"/>
+        <location filename="../../widgets/vapplication.cpp" line="405"/>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="410"/>
+        <location filename="../../widgets/vapplication.cpp" line="412"/>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="417"/>
+        <location filename="../../widgets/vapplication.cpp" line="419"/>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="424"/>
+        <location filename="../../widgets/vapplication.cpp" line="426"/>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="431"/>
+        <location filename="../../widgets/vapplication.cpp" line="433"/>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="438"/>
+        <location filename="../../widgets/vapplication.cpp" line="440"/>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="445"/>
+        <location filename="../../widgets/vapplication.cpp" line="447"/>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="452"/>
+        <location filename="../../widgets/vapplication.cpp" line="454"/>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="459"/>
+        <location filename="../../widgets/vapplication.cpp" line="461"/>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="466"/>
+        <location filename="../../widgets/vapplication.cpp" line="468"/>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="473"/>
+        <location filename="../../widgets/vapplication.cpp" line="475"/>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="480"/>
+        <location filename="../../widgets/vapplication.cpp" line="482"/>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="487"/>
+        <location filename="../../widgets/vapplication.cpp" line="489"/>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="494"/>
+        <location filename="../../widgets/vapplication.cpp" line="496"/>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="501"/>
+        <location filename="../../widgets/vapplication.cpp" line="503"/>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="508"/>
+        <location filename="../../widgets/vapplication.cpp" line="510"/>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="515"/>
+        <location filename="../../widgets/vapplication.cpp" line="517"/>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="522"/>
+        <location filename="../../widgets/vapplication.cpp" line="524"/>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="529"/>
+        <location filename="../../widgets/vapplication.cpp" line="531"/>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="536"/>
+        <location filename="../../widgets/vapplication.cpp" line="538"/>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="543"/>
+        <location filename="../../widgets/vapplication.cpp" line="545"/>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="549"/>
+        <location filename="../../widgets/vapplication.cpp" line="551"/>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="556"/>
+        <location filename="../../widgets/vapplication.cpp" line="558"/>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="562"/>
+        <location filename="../../widgets/vapplication.cpp" line="564"/>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="568"/>
+        <location filename="../../widgets/vapplication.cpp" line="570"/>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="575"/>
+        <location filename="../../widgets/vapplication.cpp" line="577"/>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="582"/>
+        <location filename="../../widgets/vapplication.cpp" line="584"/>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="589"/>
+        <location filename="../../widgets/vapplication.cpp" line="591"/>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="595"/>
+        <location filename="../../widgets/vapplication.cpp" line="597"/>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="602"/>
+        <location filename="../../widgets/vapplication.cpp" line="604"/>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="609"/>
+        <location filename="../../widgets/vapplication.cpp" line="611"/>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="616"/>
+        <location filename="../../widgets/vapplication.cpp" line="618"/>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="623"/>
+        <location filename="../../widgets/vapplication.cpp" line="625"/>
         <source>Front Neck Center straight down to UpperChest line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="630"/>
+        <location filename="../../widgets/vapplication.cpp" line="632"/>
         <source>Front Neck Center straight down to Bust line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="637"/>
+        <location filename="../../widgets/vapplication.cpp" line="639"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="644"/>
+        <location filename="../../widgets/vapplication.cpp" line="646"/>
         <source>Front waist to lower breast</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="651"/>
+        <location filename="../../widgets/vapplication.cpp" line="653"/>
         <source>Back waist to upper chest</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="658"/>
+        <location filename="../../widgets/vapplication.cpp" line="660"/>
         <source>Strap length</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="666"/>
+        <location filename="../../widgets/vapplication.cpp" line="668"/>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="672"/>
+        <location filename="../../widgets/vapplication.cpp" line="674"/>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="679"/>
+        <location filename="../../widgets/vapplication.cpp" line="681"/>
         <source>Around UpperArm</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="685"/>
+        <location filename="../../widgets/vapplication.cpp" line="687"/>
         <source>Around Wrist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="691"/>
+        <location filename="../../widgets/vapplication.cpp" line="693"/>
         <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="698"/>
+        <location filename="../../widgets/vapplication.cpp" line="700"/>
         <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="705"/>
+        <location filename="../../widgets/vapplication.cpp" line="707"/>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="712"/>
+        <location filename="../../widgets/vapplication.cpp" line="714"/>
         <source>Nape to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="719"/>
+        <location filename="../../widgets/vapplication.cpp" line="721"/>
         <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="726"/>
+        <location filename="../../widgets/vapplication.cpp" line="728"/>
         <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="734"/>
+        <location filename="../../widgets/vapplication.cpp" line="736"/>
         <source>Hand side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="740"/>
+        <location filename="../../widgets/vapplication.cpp" line="742"/>
         <source>Hand Middle Finger tip to wrist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="747"/>
+        <location filename="../../widgets/vapplication.cpp" line="749"/>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="754"/>
+        <location filename="../../widgets/vapplication.cpp" line="756"/>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="760"/>
+        <location filename="../../widgets/vapplication.cpp" line="762"/>
         <source>Around MidThigh</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="766"/>
+        <location filename="../../widgets/vapplication.cpp" line="768"/>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="772"/>
+        <location filename="../../widgets/vapplication.cpp" line="774"/>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="778"/>
+        <location filename="../../widgets/vapplication.cpp" line="780"/>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="784"/>
+        <location filename="../../widgets/vapplication.cpp" line="786"/>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="790"/>
+        <location filename="../../widgets/vapplication.cpp" line="792"/>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="797"/>
+        <location filename="../../widgets/vapplication.cpp" line="799"/>
         <source>Widest part of Foot side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="804"/>
+        <location filename="../../widgets/vapplication.cpp" line="806"/>
         <source>Tip of Longest Toe straight to back of heel</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="812"/>
+        <location filename="../../widgets/vapplication.cpp" line="814"/>
         <source>Top of head to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="818"/>
+        <location filename="../../widgets/vapplication.cpp" line="820"/>
         <source>Nape to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="824"/>
+        <location filename="../../widgets/vapplication.cpp" line="826"/>
         <source>Nape to Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="830"/>
+        <location filename="../../widgets/vapplication.cpp" line="832"/>
         <source>Waist side to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="836"/>
+        <location filename="../../widgets/vapplication.cpp" line="838"/>
         <source>HighHip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="842"/>
+        <location filename="../../widgets/vapplication.cpp" line="844"/>
         <source>Hip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="848"/>
+        <location filename="../../widgets/vapplication.cpp" line="850"/>
         <source>Waist side to Hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="854"/>
+        <location filename="../../widgets/vapplication.cpp" line="856"/>
         <source>Waist side to Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="860"/>
+        <location filename="../../widgets/vapplication.cpp" line="862"/>
         <source>Crotch to Floor along inside leg</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="867"/>
+        <location filename="../../widgets/vapplication.cpp" line="869"/>
         <source>Size</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="873"/>
+        <location filename="../../widgets/vapplication.cpp" line="875"/>
         <source>Height of the point base of the neck in front</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="880"/>
+        <location filename="../../widgets/vapplication.cpp" line="882"/>
         <source>Height of the base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="887"/>
+        <location filename="../../widgets/vapplication.cpp" line="889"/>
         <source>The height of the shoulder point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="894"/>
+        <location filename="../../widgets/vapplication.cpp" line="896"/>
         <source>Height nipple point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="900"/>
+        <location filename="../../widgets/vapplication.cpp" line="902"/>
         <source>Height back angle axilla</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="906"/>
+        <location filename="../../widgets/vapplication.cpp" line="908"/>
         <source>Height scapular point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="912"/>
+        <location filename="../../widgets/vapplication.cpp" line="914"/>
         <source>Height under buttock folds</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="919"/>
+        <location filename="../../widgets/vapplication.cpp" line="921"/>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="926"/>
+        <location filename="../../widgets/vapplication.cpp" line="928"/>
         <source>Girth foot instep</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="932"/>
+        <location filename="../../widgets/vapplication.cpp" line="934"/>
         <source>The distance from the side waist to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="939"/>
+        <location filename="../../widgets/vapplication.cpp" line="941"/>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="946"/>
+        <location filename="../../widgets/vapplication.cpp" line="948"/>
         <source>Arc through groin area</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="952"/>
+        <location filename="../../widgets/vapplication.cpp" line="954"/>
         <source>The distance from the waist to the plane seat</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="959"/>
+        <location filename="../../widgets/vapplication.cpp" line="961"/>
         <source>The distance from the base of the neck to the side of the radial point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="966"/>
+        <location filename="../../widgets/vapplication.cpp" line="968"/>
         <source>Distance from the base of the neck side point to the end of the third finger</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="974"/>
+        <location filename="../../widgets/vapplication.cpp" line="976"/>
         <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="981"/>
+        <location filename="../../widgets/vapplication.cpp" line="983"/>
         <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="988"/>
+        <location filename="../../widgets/vapplication.cpp" line="990"/>
         <source>Arc through the highest point of the shoulder joint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="996"/>
+        <location filename="../../widgets/vapplication.cpp" line="998"/>
         <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1004"/>
+        <location filename="../../widgets/vapplication.cpp" line="1006"/>
         <source>The distance from the waist to the back base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1011"/>
+        <location filename="../../widgets/vapplication.cpp" line="1013"/>
         <source>Arc length of the upper body through the base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1018"/>
+        <location filename="../../widgets/vapplication.cpp" line="1020"/>
         <source>Chest width</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1024"/>
+        <location filename="../../widgets/vapplication.cpp" line="1026"/>
         <source>Anteroposterior diameter of the hands</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1031"/>
+        <location filename="../../widgets/vapplication.cpp" line="1033"/>
         <source>Height clavicular point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1037"/>
+        <location filename="../../widgets/vapplication.cpp" line="1039"/>
         <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1045"/>
+        <location filename="../../widgets/vapplication.cpp" line="1047"/>
         <source>Slash shoulder height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1051"/>
+        <location filename="../../widgets/vapplication.cpp" line="1053"/>
         <source>Half girth neck</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1057"/>
+        <location filename="../../widgets/vapplication.cpp" line="1059"/>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1064"/>
+        <location filename="../../widgets/vapplication.cpp" line="1066"/>
         <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1070"/>
+        <location filename="../../widgets/vapplication.cpp" line="1072"/>
         <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1076"/>
+        <location filename="../../widgets/vapplication.cpp" line="1078"/>
         <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1082"/>
+        <location filename="../../widgets/vapplication.cpp" line="1084"/>
         <source>Half girth waist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1089"/>
+        <location filename="../../widgets/vapplication.cpp" line="1091"/>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1097"/>
+        <location filename="../../widgets/vapplication.cpp" line="1099"/>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1104"/>
+        <location filename="../../widgets/vapplication.cpp" line="1106"/>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1110"/>
+        <location filename="../../widgets/vapplication.cpp" line="1112"/>
         <source>Neck transverse diameter</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1116"/>
+        <location filename="../../widgets/vapplication.cpp" line="1118"/>
         <source>Front slash shoulder height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1123"/>
+        <location filename="../../widgets/vapplication.cpp" line="1125"/>
         <source>The distance from the base of the neck to the waist line front</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1130"/>
+        <location filename="../../widgets/vapplication.cpp" line="1132"/>
         <source>Hand vertical diameter</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1136"/>
+        <location filename="../../widgets/vapplication.cpp" line="1138"/>
         <source>Distance from neck to knee point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1143"/>
+        <location filename="../../widgets/vapplication.cpp" line="1145"/>
         <source>The distance from the waist to the knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1150"/>
+        <location filename="../../widgets/vapplication.cpp" line="1152"/>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1156"/>
+        <location filename="../../widgets/vapplication.cpp" line="1158"/>
         <source>Head height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1162"/>
+        <location filename="../../widgets/vapplication.cpp" line="1164"/>
         <source>Body position</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1168"/>
+        <location filename="../../widgets/vapplication.cpp" line="1170"/>
         <source>Arc behind the shoulder girdle</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1175"/>
+        <location filename="../../widgets/vapplication.cpp" line="1177"/>
         <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1182"/>
+        <location filename="../../widgets/vapplication.cpp" line="1184"/>
         <source>Depth waist first</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1188"/>
+        <location filename="../../widgets/vapplication.cpp" line="1190"/>
         <source>Depth waist second</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
@@ -5199,799 +5199,799 @@ Do you want to save your changes?</source>
 <context>
     <name>MeasurementsFullNames</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="294"/>
+        <location filename="../../widgets/vapplication.cpp" line="296"/>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="301"/>
+        <location filename="../../widgets/vapplication.cpp" line="303"/>
         <source>Mid-neck girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="308"/>
+        <location filename="../../widgets/vapplication.cpp" line="310"/>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="314"/>
+        <location filename="../../widgets/vapplication.cpp" line="316"/>
         <source>Head and Neck length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="322"/>
+        <location filename="../../widgets/vapplication.cpp" line="324"/>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="329"/>
+        <location filename="../../widgets/vapplication.cpp" line="331"/>
         <source>Back Center length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="336"/>
+        <location filename="../../widgets/vapplication.cpp" line="338"/>
         <source>Shoulder length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="342"/>
+        <location filename="../../widgets/vapplication.cpp" line="344"/>
         <source>Side Waist length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="348"/>
+        <location filename="../../widgets/vapplication.cpp" line="350"/>
         <source>Trunk length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="357"/>
+        <location filename="../../widgets/vapplication.cpp" line="359"/>
         <source>Shoulder girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="364"/>
+        <location filename="../../widgets/vapplication.cpp" line="366"/>
         <source>Upper Chest girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="372"/>
+        <location filename="../../widgets/vapplication.cpp" line="374"/>
         <source>Bust girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="379"/>
+        <location filename="../../widgets/vapplication.cpp" line="381"/>
         <source>Under Bust girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="386"/>
+        <location filename="../../widgets/vapplication.cpp" line="388"/>
         <source>Waist girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="395"/>
+        <location filename="../../widgets/vapplication.cpp" line="397"/>
         <source>HighHip girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="402"/>
+        <location filename="../../widgets/vapplication.cpp" line="404"/>
         <source>Hip girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="409"/>
+        <location filename="../../widgets/vapplication.cpp" line="411"/>
         <source>Front Upper Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="416"/>
+        <location filename="../../widgets/vapplication.cpp" line="418"/>
         <source>Front Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="423"/>
+        <location filename="../../widgets/vapplication.cpp" line="425"/>
         <source>Front Across Shoulder width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="430"/>
+        <location filename="../../widgets/vapplication.cpp" line="432"/>
         <source>Back Across Shoulder width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="437"/>
+        <location filename="../../widgets/vapplication.cpp" line="439"/>
         <source>Back Upper Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="444"/>
+        <location filename="../../widgets/vapplication.cpp" line="446"/>
         <source>Back Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="451"/>
+        <location filename="../../widgets/vapplication.cpp" line="453"/>
         <source>BustPoint to BustPoint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="458"/>
+        <location filename="../../widgets/vapplication.cpp" line="460"/>
         <source>Halter Bustpoint to Bustpoint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="465"/>
+        <location filename="../../widgets/vapplication.cpp" line="467"/>
         <source>NeckPoint to BustPoint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="472"/>
+        <location filename="../../widgets/vapplication.cpp" line="474"/>
         <source>Crotch length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="479"/>
+        <location filename="../../widgets/vapplication.cpp" line="481"/>
         <source>Rise height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="486"/>
+        <location filename="../../widgets/vapplication.cpp" line="488"/>
         <source>Shoulder Drop</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="493"/>
+        <location filename="../../widgets/vapplication.cpp" line="495"/>
         <source>Shoulder Slope degrees</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="500"/>
+        <location filename="../../widgets/vapplication.cpp" line="502"/>
         <source>Front Shoulder Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="507"/>
+        <location filename="../../widgets/vapplication.cpp" line="509"/>
         <source>Back Shoulder Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="514"/>
+        <location filename="../../widgets/vapplication.cpp" line="516"/>
         <source>Front Full Length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="521"/>
+        <location filename="../../widgets/vapplication.cpp" line="523"/>
         <source>Back Full Length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="528"/>
+        <location filename="../../widgets/vapplication.cpp" line="530"/>
         <source>Front Neck arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="535"/>
+        <location filename="../../widgets/vapplication.cpp" line="537"/>
         <source>Back Neck arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="542"/>
+        <location filename="../../widgets/vapplication.cpp" line="544"/>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="548"/>
+        <location filename="../../widgets/vapplication.cpp" line="550"/>
         <source>Back UpperBust arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="555"/>
+        <location filename="../../widgets/vapplication.cpp" line="557"/>
         <source>Front Waist arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="561"/>
+        <location filename="../../widgets/vapplication.cpp" line="563"/>
         <source>Back Waist arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="567"/>
+        <location filename="../../widgets/vapplication.cpp" line="569"/>
         <source>Front UpperHip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="574"/>
+        <location filename="../../widgets/vapplication.cpp" line="576"/>
         <source>Back UpperHip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="581"/>
+        <location filename="../../widgets/vapplication.cpp" line="583"/>
         <source>Front Hip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="588"/>
+        <location filename="../../widgets/vapplication.cpp" line="590"/>
         <source>Back Hip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="594"/>
+        <location filename="../../widgets/vapplication.cpp" line="596"/>
         <source>Chest Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="601"/>
+        <location filename="../../widgets/vapplication.cpp" line="603"/>
         <source>Back Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="608"/>
+        <location filename="../../widgets/vapplication.cpp" line="610"/>
         <source>Front Waist Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="615"/>
+        <location filename="../../widgets/vapplication.cpp" line="617"/>
         <source>Back Waist Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="622"/>
+        <location filename="../../widgets/vapplication.cpp" line="624"/>
         <source>Front UpperChest height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="629"/>
+        <location filename="../../widgets/vapplication.cpp" line="631"/>
         <source>Bust height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="636"/>
+        <location filename="../../widgets/vapplication.cpp" line="638"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="643"/>
+        <location filename="../../widgets/vapplication.cpp" line="645"/>
         <source>Front waist to lower breast</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="650"/>
+        <location filename="../../widgets/vapplication.cpp" line="652"/>
         <source>Back waist to upper chest</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="657"/>
+        <location filename="../../widgets/vapplication.cpp" line="659"/>
         <source>Strap length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="665"/>
+        <location filename="../../widgets/vapplication.cpp" line="667"/>
         <source>Armscye Girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="671"/>
+        <location filename="../../widgets/vapplication.cpp" line="673"/>
         <source>Elbow Girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="678"/>
+        <location filename="../../widgets/vapplication.cpp" line="680"/>
         <source>Upperarm Girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="684"/>
+        <location filename="../../widgets/vapplication.cpp" line="686"/>
         <source>Wrist girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="690"/>
+        <location filename="../../widgets/vapplication.cpp" line="692"/>
         <source>Armscye depth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="697"/>
+        <location filename="../../widgets/vapplication.cpp" line="699"/>
         <source>Shoulder and Arm length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="704"/>
+        <location filename="../../widgets/vapplication.cpp" line="706"/>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="711"/>
+        <location filename="../../widgets/vapplication.cpp" line="713"/>
         <source>Nape to wrist length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="718"/>
+        <location filename="../../widgets/vapplication.cpp" line="720"/>
         <source>Elbow length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="725"/>
+        <location filename="../../widgets/vapplication.cpp" line="727"/>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="733"/>
+        <location filename="../../widgets/vapplication.cpp" line="735"/>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="739"/>
+        <location filename="../../widgets/vapplication.cpp" line="741"/>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="746"/>
+        <location filename="../../widgets/vapplication.cpp" line="748"/>
         <source>Hand girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="753"/>
+        <location filename="../../widgets/vapplication.cpp" line="755"/>
         <source>Thigh girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="759"/>
+        <location filename="../../widgets/vapplication.cpp" line="761"/>
         <source>Midthigh girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="765"/>
+        <location filename="../../widgets/vapplication.cpp" line="767"/>
         <source>Knee girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="771"/>
+        <location filename="../../widgets/vapplication.cpp" line="773"/>
         <source>Calf girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="777"/>
+        <location filename="../../widgets/vapplication.cpp" line="779"/>
         <source>Ankle girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="783"/>
+        <location filename="../../widgets/vapplication.cpp" line="785"/>
         <source>Knee height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="789"/>
+        <location filename="../../widgets/vapplication.cpp" line="791"/>
         <source>Ankle height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="796"/>
+        <location filename="../../widgets/vapplication.cpp" line="798"/>
         <source>Foot width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="803"/>
+        <location filename="../../widgets/vapplication.cpp" line="805"/>
         <source>Foot length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="811"/>
+        <location filename="../../widgets/vapplication.cpp" line="813"/>
         <source>Total Height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="817"/>
+        <location filename="../../widgets/vapplication.cpp" line="819"/>
         <source>Nape height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="823"/>
+        <location filename="../../widgets/vapplication.cpp" line="825"/>
         <source>Nape to knee height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="829"/>
+        <location filename="../../widgets/vapplication.cpp" line="831"/>
         <source>Waist height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="835"/>
+        <location filename="../../widgets/vapplication.cpp" line="837"/>
         <source>HighHip height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="841"/>
+        <location filename="../../widgets/vapplication.cpp" line="843"/>
         <source>Hip height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="847"/>
+        <location filename="../../widgets/vapplication.cpp" line="849"/>
         <source>Waist to Hip height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="853"/>
+        <location filename="../../widgets/vapplication.cpp" line="855"/>
         <source>Waist to Knee height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="859"/>
+        <location filename="../../widgets/vapplication.cpp" line="861"/>
         <source>Crotch height/Inseam</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="866"/>
+        <location filename="../../widgets/vapplication.cpp" line="868"/>
         <source>Size</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="872"/>
+        <location filename="../../widgets/vapplication.cpp" line="874"/>
         <source>Height front neck base point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="879"/>
+        <location filename="../../widgets/vapplication.cpp" line="881"/>
         <source>Height base neck side point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="886"/>
+        <location filename="../../widgets/vapplication.cpp" line="888"/>
         <source>Height shoulder point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="893"/>
+        <location filename="../../widgets/vapplication.cpp" line="895"/>
         <source>Height nipple point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="899"/>
+        <location filename="../../widgets/vapplication.cpp" line="901"/>
         <source>Height back angle axilla</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="905"/>
+        <location filename="../../widgets/vapplication.cpp" line="907"/>
         <source>Height scapular point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="911"/>
+        <location filename="../../widgets/vapplication.cpp" line="913"/>
         <source>Height under buttock folds</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="918"/>
+        <location filename="../../widgets/vapplication.cpp" line="920"/>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="925"/>
+        <location filename="../../widgets/vapplication.cpp" line="927"/>
         <source>Girth foot instep</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="931"/>
+        <location filename="../../widgets/vapplication.cpp" line="933"/>
         <source>Side waist to floor</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="938"/>
+        <location filename="../../widgets/vapplication.cpp" line="940"/>
         <source>Front waist to floor</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="945"/>
+        <location filename="../../widgets/vapplication.cpp" line="947"/>
         <source>Arc through groin area</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="951"/>
+        <location filename="../../widgets/vapplication.cpp" line="953"/>
         <source>Waist to plane seat</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="958"/>
+        <location filename="../../widgets/vapplication.cpp" line="960"/>
         <source>Neck to radial point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="965"/>
+        <location filename="../../widgets/vapplication.cpp" line="967"/>
         <source>Neck to third finger</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="972"/>
+        <location filename="../../widgets/vapplication.cpp" line="974"/>
         <source>Neck to first line chest circumference</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="980"/>
+        <location filename="../../widgets/vapplication.cpp" line="982"/>
         <source>Front waist length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="987"/>
+        <location filename="../../widgets/vapplication.cpp" line="989"/>
         <source>Arc through shoulder joint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="994"/>
+        <location filename="../../widgets/vapplication.cpp" line="996"/>
         <source>Neck to back line chest circumference</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1003"/>
+        <location filename="../../widgets/vapplication.cpp" line="1005"/>
         <source>Waist to neck side</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1010"/>
+        <location filename="../../widgets/vapplication.cpp" line="1012"/>
         <source>Arc length upper body</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1017"/>
+        <location filename="../../widgets/vapplication.cpp" line="1019"/>
         <source>Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1023"/>
+        <location filename="../../widgets/vapplication.cpp" line="1025"/>
         <source>Anteroposterior diameter hands</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1030"/>
+        <location filename="../../widgets/vapplication.cpp" line="1032"/>
         <source>Height clavicular point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1036"/>
+        <location filename="../../widgets/vapplication.cpp" line="1038"/>
         <source>Height armhole slash</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1044"/>
+        <location filename="../../widgets/vapplication.cpp" line="1046"/>
         <source>Slash shoulder height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1050"/>
+        <location filename="../../widgets/vapplication.cpp" line="1052"/>
         <source>Half girth neck</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1056"/>
+        <location filename="../../widgets/vapplication.cpp" line="1058"/>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1063"/>
+        <location filename="../../widgets/vapplication.cpp" line="1065"/>
         <source>Half girth chest first</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1069"/>
+        <location filename="../../widgets/vapplication.cpp" line="1071"/>
         <source>Half girth chest second</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1075"/>
+        <location filename="../../widgets/vapplication.cpp" line="1077"/>
         <source>Half girth chest third</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1081"/>
+        <location filename="../../widgets/vapplication.cpp" line="1083"/>
         <source>Half girth waist</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1087"/>
+        <location filename="../../widgets/vapplication.cpp" line="1089"/>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1095"/>
+        <location filename="../../widgets/vapplication.cpp" line="1097"/>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1103"/>
+        <location filename="../../widgets/vapplication.cpp" line="1105"/>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1109"/>
+        <location filename="../../widgets/vapplication.cpp" line="1111"/>
         <source>Neck transverse diameter</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1115"/>
+        <location filename="../../widgets/vapplication.cpp" line="1117"/>
         <source>Front slash shoulder height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1122"/>
+        <location filename="../../widgets/vapplication.cpp" line="1124"/>
         <source>Neck to front waist line</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1129"/>
+        <location filename="../../widgets/vapplication.cpp" line="1131"/>
         <source>Hand vertical diameter</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1135"/>
+        <location filename="../../widgets/vapplication.cpp" line="1137"/>
         <source>Neck to knee point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1142"/>
+        <location filename="../../widgets/vapplication.cpp" line="1144"/>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1149"/>
+        <location filename="../../widgets/vapplication.cpp" line="1151"/>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1155"/>
+        <location filename="../../widgets/vapplication.cpp" line="1157"/>
         <source>Head height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1161"/>
+        <location filename="../../widgets/vapplication.cpp" line="1163"/>
         <source>Body position</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1167"/>
+        <location filename="../../widgets/vapplication.cpp" line="1169"/>
         <source>Arc behind shoulder girdle</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1174"/>
+        <location filename="../../widgets/vapplication.cpp" line="1176"/>
         <source>Neck to neck base</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1181"/>
+        <location filename="../../widgets/vapplication.cpp" line="1183"/>
         <source>Depth waist first</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1187"/>
+        <location filename="../../widgets/vapplication.cpp" line="1189"/>
         <source>Depth waist second</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
@@ -6100,19 +6100,19 @@ Do you want to save your changes?</source>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1235"/>
+        <location filename="../../widgets/vapplication.cpp" line="1237"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1236"/>
+        <location filename="../../widgets/vapplication.cpp" line="1238"/>
         <source>mm</source>
         <comment>millimeter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1237"/>
+        <location filename="../../widgets/vapplication.cpp" line="1239"/>
         <source>in</source>
         <comment>inch</comment>
         <translation type="unfinished"></translation>
@@ -6157,6 +6157,15 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../undocommands/renamepp.cpp" line="40"/>
         <source>Rename pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>STDescriptions</name>
+    <message>
+        <location filename="../../widgets/vapplication.cpp" line="1245"/>
+        <source>Standard figures of men 1st group, chest 100 cm</source>
+        <comment>Standard table description</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6345,32 +6354,32 @@ Do you want to save your changes?</source>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="111"/>
+        <location filename="../../widgets/vapplication.cpp" line="113"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="116"/>
+        <location filename="../../widgets/vapplication.cpp" line="118"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="121"/>
+        <location filename="../../widgets/vapplication.cpp" line="123"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="126"/>
+        <location filename="../../widgets/vapplication.cpp" line="128"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="131"/>
+        <location filename="../../widgets/vapplication.cpp" line="133"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="136"/>
+        <location filename="../../widgets/vapplication.cpp" line="138"/>
         <source>Something&apos;s wrong!!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6897,31 +6906,31 @@ Do you want to save your changes?</source>
 <context>
     <name>Variables</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1195"/>
+        <location filename="../../widgets/vapplication.cpp" line="1197"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1196"/>
+        <location filename="../../widgets/vapplication.cpp" line="1198"/>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1197"/>
+        <location filename="../../widgets/vapplication.cpp" line="1199"/>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1198"/>
+        <location filename="../../widgets/vapplication.cpp" line="1200"/>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="1199"/>
+        <location filename="../../widgets/vapplication.cpp" line="1201"/>
         <source>SplPath</source>
         <translation type="unfinished"></translation>
     </message>

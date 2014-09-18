@@ -35,9 +35,9 @@
    VST_VERSION is (major << 16) + (minor << 8) + patch.
 */
 // version without patch part
-#define VST_MIN_VERSION 0x000100
+#define VST_MIN_VERSION 0x000300
 // max support version of format
-#define VST_VERSION 0x000100
+#define VST_VERSION 0x000300
 
 class VStandardMeasurements:public VAbstractMeasurements
 {
@@ -45,10 +45,12 @@ public:
     VStandardMeasurements(VContainer *data);
     virtual ~VStandardMeasurements();
     QString      Description();
+    QString      Id();
     void         SetSize();
     void         SetHeight();
     static const QString TagMeasurement;
     static const QString TagDescription;
+    static const QString TagId;
     static const QString TagSize;
     static const QString TagHeight;
     static const QString AttrSize_increase;

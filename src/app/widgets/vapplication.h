@@ -100,6 +100,7 @@ public:
     static void        restoreOverrideCursor(const QString & pixmapPath);
 
     static QStringList LabelLanguages();
+    QString            STDescription(const QString &id)const;
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -112,6 +113,7 @@ private:
     QMap<QString, VTranslation> variables;
     QMap<QString, VTranslation> functions;
     QMap<QString, VTranslation> postfixOperators;
+    QMap<QString, VTranslation> stDescriptions;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
     VMainGraphicsScene *currentScene;
@@ -137,6 +139,7 @@ private:
     void               InitVariables();
     void               InitFunctions();
     void               InitPostfixOperators();
+    void               InitSTDescriptions();
     bool               MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool               VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool               PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token,

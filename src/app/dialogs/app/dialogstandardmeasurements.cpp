@@ -170,7 +170,15 @@ void DialogStandardMeasurements::LoadStandardTables()
             }
             else
             {
-                ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
+                const QString trDesc = qApp->STDescription(m.Id());
+                if (trDesc.isEmpty() == false)
+                {
+                    ui->comboBoxTables->addItem(trDesc, QVariant(fi.absoluteFilePath()));
+                }
+                else if (m.Description().isEmpty() == false)
+                {
+                    ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
+                }
             }
         }
         catch (VException &e)
