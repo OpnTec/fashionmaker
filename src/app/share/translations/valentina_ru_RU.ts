@@ -282,7 +282,7 @@
         <translation>Создано %3 в %4</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+7"/>
         <source>Web site : %1</source>
         <translation>Веб сайт : %1</translation>
     </message>
@@ -3282,6 +3282,14 @@
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
+    </message>
+</context>
+<context>
+    <name>InternalStrings</name>
+    <message>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="-24"/>
+        <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
+        <translation>Программа предоставляется КАК ЕСТЬ без ГАРАНТИЙ ЛЮБОГО РОДА, ВКЛЮЧАЯ ГАРАНТИЙ ДИЗАЙНА, КОММЕРЧЕСКОЙ ЦЕННОСТИ И ПРИГОДНОСТИ ДЛЯ КОНКРЕТНЫХ ЦЕЛЕЙ.</translation>
     </message>
 </context>
 <context>

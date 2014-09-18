@@ -274,17 +274,17 @@
         <translation type="unfinished">Compilé sur %3 à %4</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="51"/>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="54"/>
         <source>Web site : %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="70"/>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="73"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="70"/>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="73"/>
         <source>Cannot open your default browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3009,6 +3009,14 @@
         <location filename="../../widgets/vapplication.cpp" line="1231"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InternalStrings</name>
+    <message>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="49"/>
+        <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

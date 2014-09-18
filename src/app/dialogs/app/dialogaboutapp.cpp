@@ -46,7 +46,10 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
     ui->label_Valentina_Built->setText(tr("Built on %3 at %4").arg(date.toString()).arg(__TIME__));
 
-    ui->label_Legal_Stuff->setText(WARRANTY);
+    ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
+                                                           "The program is provided AS IS with NO WARRANTY OF ANY "
+                                                           "KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY "
+                                                           "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, &DialogAboutApp::webButtonClicked );

@@ -36,15 +36,15 @@ extern const int MINOR_VERSION;
 extern const int DEBUG_VERSION;
 
 extern const QString APP_VERSION;
-extern const QString WARRANTY;
 
-// Don't forget change version number in manifest file.
+// Don't forget change version number in manifest file /src/app/share/resources/valentina.exe.manifest.
+// Change version number in version.cpp also.
 
-#define VER_FILEVERSION             0,2,2,0
-#define VER_FILEVERSION_STR         "0.2.2.0\0"
+#define VER_FILEVERSION             0,2,8,0
+#define VER_FILEVERSION_STR         "0.2.8.0\0"
 
-#define VER_PRODUCTVERSION          0,2,2,0
-#define VER_PRODUCTVERSION_STR      "0.2\0"
+#define VER_PRODUCTVERSION          VER_FILEVERSION
+#define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
 
 #define VER_COMPANYNAME_STR         "ValentinaTeam"
 #define VER_FILEDESCRIPTION_STR     "Patternmaking program."

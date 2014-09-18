@@ -278,17 +278,17 @@
         <translation>Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="51"/>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="54"/>
         <source>Web site : %1</source>
         <translation>Веб сайт : %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="70"/>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="73"/>
         <source>Warning</source>
         <translation>Попердження</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="70"/>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="73"/>
         <source>Cannot open your default browser</source>
         <translation>Не можу відкрити браузер по замовчуванню</translation>
     </message>
@@ -3062,6 +3062,14 @@
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
+    </message>
+</context>
+<context>
+    <name>InternalStrings</name>
+    <message>
+        <location filename="../../dialogs/app/dialogaboutapp.cpp" line="49"/>
+        <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
+        <translation>Програма надається ЯК Є без ГАРАНТІЙ БУДЬ-ЯКОГО РОДУ, ВКЛЮЧАЮЧИ ГАРАНТІЙ ДИЗАЙНУ, КОМЕРЦІЙНОЇ ЦІННОСТІ І ПРИДАТНОСТІ ДЛЯ КОНКРЕТНИХ ЦІЛЕЙ.</translation>
     </message>
 </context>
 <context>
