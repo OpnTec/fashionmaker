@@ -131,7 +131,7 @@ void QVector3DProperty::setValue(const QVariant &value)
     QStringList tmpStrings = value.toString().split(",");
     if (tmpStrings.count() == 3)
     {
-        setVector(tmpStrings[0].toDouble(), tmpStrings[1].toDouble(), tmpStrings[2].toDouble());
+        setVector(tmpStrings[0].toFloat(), tmpStrings[1].toFloat(), tmpStrings[2].toFloat());
     }
 
 }

@@ -30,8 +30,8 @@
 
 using namespace VPE;
 
-VColorPropertyEditor::VColorPropertyEditor(QWidget *parent) :
-    QWidget(parent)
+VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
+    : QWidget(parent), Color(), ToolButton(nullptr), TextLabel(nullptr), ColorLabel(nullptr), Spacer(nullptr)
 {
     setAutoFillBackground(true);
 

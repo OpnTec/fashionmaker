@@ -47,7 +47,7 @@ public:
 
     //! Constructor
     VPropertyModelPrivate()
-        : Properties(nullptr)
+        : Properties(nullptr), HeadlineProperty(QString()), HeadlineValue(QString())
     {
         //: The text that appears in the first column header
         HeadlineProperty = QObject::tr("Property");
@@ -55,6 +55,9 @@ public:
         //: The text that appears in the second column header
         HeadlineValue = QObject::tr("Value");
     }
+
+private:
+    Q_DISABLE_COPY(VPropertyModelPrivate)
 };
 
 }

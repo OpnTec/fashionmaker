@@ -75,6 +75,7 @@ private slots:
     void onToolButtonClicked();
 
 private:
+    Q_DISABLE_COPY(VColorPropertyEditor)
     QColor Color;
     QToolButton* ToolButton;
     QLabel* TextLabel;

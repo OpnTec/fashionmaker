@@ -49,7 +49,8 @@ SOURCES += \
     vstandardpropertyfactory.cpp \
     plugins/vstringproperty.cpp \
     plugins/vpointfproperty.cpp \
-    plugins/vobjectproperty.cpp
+    plugins/vobjectproperty.cpp \
+    stable.cpp
 
 HEADERS +=\
         vpropertyexplorer_global.h \
@@ -88,12 +89,30 @@ HEADERS +=\
     plugins/vstringproperty.h \
     plugins/vpointfproperty.h \
     plugins/vobjectproperty.h \
-    vproperties.h
+    vproperties.h \
+    stable.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
+
+    *-g++{
+        QMAKE_CXX = ccache g++
+    }
+
+    clang*{
+        QMAKE_CXX = ccache clang++
+    }
 }
+
+CONFIG += precompile_header
+# Precompiled headers (PCH)
+PRECOMPILED_HEADER = stable.h
+win32-msvc* {
+    PRECOMPILED_SOURCE = stable.cpp
+}
+
+include(../../../Valentina.pri)
 
 CONFIG(debug, debug|release){
     # Debug

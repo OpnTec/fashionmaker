@@ -26,7 +26,7 @@
 using namespace VPE;
 
 VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent), CurrentKeySequence(), LineEdit(nullptr)
 {
     // Create the line edit widget
     LineEdit = new QLineEdit(this);

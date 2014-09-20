@@ -69,6 +69,8 @@ win32-msvc* {
     PRECOMPILED_SOURCE = stable.cpp
 }
 
+include(../../../Valentina.pri)
+
 CONFIG(debug, debug|release){
     # Debug
     unix {

@@ -55,12 +55,16 @@ public:
 
     //! Default constructor
     VPropertyFormWidgetPrivate()
-        : UpdateEditors(true)
+        : Properties(QList<VProperty*>()), EditorWidgets(QList<SEditorWidget>()), UpdateEditors(true)
     {}
 
     //! Constructor
     VPropertyFormWidgetPrivate(const QList<VProperty*>& properties)
-        : Properties(properties), UpdateEditors(true) {}
+        : Properties(properties), EditorWidgets(QList<SEditorWidget>()), UpdateEditors(true)
+    {}
+
+    virtual ~VPropertyFormWidgetPrivate()
+    {}
 };
 
 }

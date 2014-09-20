@@ -48,15 +48,24 @@ public:
 
     VPropertyFormViewPrivate()
         : VPropertyFormWidgetPrivate(), Model(NULL), PropertySet(NULL), NeedsRebuild(false),
-          IgnoreDataChangedSignal(false) {}
+          IgnoreDataChangedSignal(false)
+    {}
 
     VPropertyFormViewPrivate(VPropertyModel* prop_model)
         : VPropertyFormWidgetPrivate(), Model(prop_model), PropertySet(NULL), NeedsRebuild(false),
-          IgnoreDataChangedSignal(false) {}
+          IgnoreDataChangedSignal(false)
+    {}
 
     VPropertyFormViewPrivate(VPropertySet* prop_set)
         : VPropertyFormWidgetPrivate(), Model(NULL), PropertySet(prop_set), NeedsRebuild(false),
-          IgnoreDataChangedSignal(false) {}
+          IgnoreDataChangedSignal(false)
+    {}
+
+    virtual ~VPropertyFormViewPrivate()
+    {}
+
+private:
+    Q_DISABLE_COPY(VPropertyFormViewPrivate)
 };
 
 }

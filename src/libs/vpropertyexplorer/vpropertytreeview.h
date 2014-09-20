@@ -59,6 +59,9 @@ protected:
 
     //! The protected data
     VPropertyTreeViewPrivate* d_ptr;
+
+private:
+    Q_DISABLE_COPY(VPropertyTreeView)
 };
 
 }

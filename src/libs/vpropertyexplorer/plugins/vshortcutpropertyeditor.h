@@ -78,6 +78,9 @@ protected:
 
     //! The line to display and edit the key sequence
     QLineEdit* LineEdit;
+
+private:
+    Q_DISABLE_COPY(VShortcutEditWidget)
 };
 
 }

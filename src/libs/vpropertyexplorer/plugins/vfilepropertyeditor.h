@@ -101,6 +101,9 @@ protected:
 
     //! Specifies whether it is being looked for a directory (true) or a file (false, default)
     bool Directory;
+
+private:
+    Q_DISABLE_COPY(VFileEditWidget)
 };
 
 }

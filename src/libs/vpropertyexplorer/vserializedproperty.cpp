@@ -23,15 +23,15 @@
 using namespace VPE;
 
 VSerializedProperty::VSerializedProperty()
-    : ID(), Type(), Value()
-{
-}
+    : ID(), Type(), Value(), Children()
+{}
 
 /*! Creates a new VSerializedProperty from an existing property
 
 */
 VSerializedProperty::VSerializedProperty(const VProperty* property, const VPropertySet* set)
-    : ID(), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant())
+    : ID(), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant()),
+      Children()
 {
     if (set)
     {
@@ -42,20 +42,19 @@ VSerializedProperty::VSerializedProperty(const VProperty* property, const VPrope
 }
 
 VSerializedProperty::VSerializedProperty(const VProperty *property, const QString &id, const VPropertySet *set)
-    : ID(id), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant())
+    : ID(id), Type(property ? property->type() : QString()), Value(property ? property->getValue() : QVariant()),
+      Children()
 {
     initChildren(property, set);
 }
 
 VSerializedProperty::VSerializedProperty(const QString &id, const QString &type, const QVariant &value)
-    : ID(id), Type(type), Value(value)
+    : ID(id), Type(type), Value(value), Children()
 {
 }
 
 VPE::VSerializedProperty::~VSerializedProperty()
-{
-    //
-}
+{}
 
 void VSerializedProperty::initChildren(const VProperty *property, const VPropertySet *set)
 {

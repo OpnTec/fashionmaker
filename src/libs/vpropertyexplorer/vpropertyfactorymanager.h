@@ -83,6 +83,8 @@ protected:
 
     //! The default manager
     static VPropertyFactoryManager* DefaultManager;
+private:
+    Q_DISABLE_COPY(VPropertyFactoryManager)
 };
 
 }

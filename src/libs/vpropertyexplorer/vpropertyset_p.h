@@ -43,8 +43,11 @@ public:
 
     //! Constructor
     VPropertySetPrivate()
-    {
-    }
+        : Properties(QMap<QString, VProperty*>()), RootProperties(QList<VProperty*>())
+    {}
+
+private:
+    Q_DISABLE_COPY(VPropertySetPrivate)
 };
 
 }

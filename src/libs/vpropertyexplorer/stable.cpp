@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vpropertyfactorymanager_p.h
- **  @author hedgeware <internal(at)hedgeware.net>
- **  @date
+ **  @file   stable.cpp
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   20 9, 2014
  **
  **  @brief
  **  @copyright
@@ -18,27 +18,5 @@
  **
  *************************************************************************/
 
-#ifndef VPROPERTYFACTORYMANAGER_P_H
-#define VPROPERTYFACTORYMANAGER_P_H
-
-// ONLY INCLUDE THIS IN .CPP FILES
-
-#include <QMap>
-#include <QString>
-
-namespace VPE
-{
-
-class VAbstractPropertyFactory;
-
-class VPropertyFactoryManagerPrivate
-{
-public:
-    VPropertyFactoryManagerPrivate():Factories(QMap<QString, VAbstractPropertyFactory*>()){}
-    QMap<QString, VAbstractPropertyFactory*> Factories;
-
-};
-
-}
-
-#endif // VPROPERTYFACTORYMANAGER_P_H
+// Build the precompiled headers.
+#include "stable.h"

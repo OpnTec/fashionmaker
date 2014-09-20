@@ -56,9 +56,9 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
     Q_UNUSED(delegate);
 
     QSpinBox* tmpEditor = new QSpinBox(parent);
-    tmpEditor->setMinimum(minValue);
-    tmpEditor->setMaximum(maxValue);
-    tmpEditor->setSingleStep(singleStep);
+    tmpEditor->setMinimum(static_cast<int>(minValue));
+    tmpEditor->setMaximum(static_cast<int>(maxValue));
+    tmpEditor->setSingleStep(static_cast<int>(singleStep));
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setValue(VProperty::d_ptr->VariantValue.toInt());
     connect(tmpEditor, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
@@ -203,7 +203,7 @@ void VDoubleProperty::setSetting(const QString& key, const QVariant& value)
     }
     else if (key == QLatin1String("Precision"))
     {
-        Precision = value.toDouble();
+        Precision = value.toInt();
     }
 }
 

@@ -30,7 +30,8 @@
 using namespace VPE;
 
 VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
-    : QWidget(parent), Directory(is_directory)
+    : QWidget(parent), CurrentFilePath(), ToolButton(nullptr), FileLineEdit(nullptr), FileDialogFilter(), FilterList(),
+      Directory(is_directory)
 {
     // Create the tool button,ToolButton = new QToolButton(this);
     ToolButton = new QToolButton(this);
