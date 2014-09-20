@@ -37,7 +37,7 @@ enum class Property : char{Simple, Complex};
 
 static const int MyCustomEventType = 1099;
 
-class UserChangeEvent : public QEvent
+class VPROPERTYEXPLORERSHARED_EXPORT UserChangeEvent : public QEvent
 {
 public:
     UserChangeEvent() : QEvent(static_cast<QEvent::Type>(MyCustomEventType)) {}

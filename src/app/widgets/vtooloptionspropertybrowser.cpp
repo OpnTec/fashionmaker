@@ -650,8 +650,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersect(VProperty *propert
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolLineIntersect *i = qgraphicsitem_cast<VToolLineIntersect *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 0: // VAbstractTool::AttrName
@@ -725,8 +723,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersection(VProperty *p
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolPointOfIntersection *i = qgraphicsitem_cast<VToolPointOfIntersection *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 0: // VAbstractTool::AttrName
@@ -823,8 +819,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolTriangle(VProperty *property)
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolTriangle *i = qgraphicsitem_cast<VToolTriangle *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 0: // VAbstractTool::AttrName
