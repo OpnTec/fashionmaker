@@ -94,7 +94,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                         context.function);
                 messageBox.exec();
                 abort();
-                break;
             case QtFatalMsg:
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
@@ -103,7 +102,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                         context.function);
                 messageBox.exec();
                 abort();
-                break;
             default:
                 break;
         }

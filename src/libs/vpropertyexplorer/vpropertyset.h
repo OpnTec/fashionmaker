@@ -129,6 +129,8 @@ protected:
 
     //! The data
     VPropertySetPrivate* d_ptr;
+private:
+    Q_DISABLE_COPY(VPropertySet)
 };
 
 }
