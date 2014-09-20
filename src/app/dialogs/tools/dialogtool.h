@@ -221,7 +221,7 @@ protected:
     void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
-    void             Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, const QString &postfix,
+    void             Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
                           bool checkZero = true);
     void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value) const;
     void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value,

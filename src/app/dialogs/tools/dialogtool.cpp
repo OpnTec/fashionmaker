@@ -413,15 +413,12 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @brief Eval evaluate formula and show result
  * @param text formula
  * @param flag flag state of formula
- * @param timer timer of formula
  * @param label label for signal error
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
  */
-void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *label, const QString& postfix,
-                      bool checkZero)
+void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
 {
-    SCASSERT(timer != nullptr);
     SCASSERT(label != nullptr);
     SCASSERT(labelEditFormula != nullptr);
     if (text.isEmpty())
@@ -484,7 +481,6 @@ void DialogTool::Eval(const QString &text, bool &flag, QTimer *timer, QLabel *la
         }
     }
     CheckState();
-    //timer->stop();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -834,7 +830,7 @@ void DialogTool::EvalFormula()
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation, postfix);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

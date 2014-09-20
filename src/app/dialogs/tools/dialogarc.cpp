@@ -298,6 +298,7 @@ void DialogArc::LineAngles()
 void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
+    labelResultCalculation = ui->labelResultRadius;
     ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius);
 }
 
@@ -308,6 +309,7 @@ void DialogArc::RadiusChanged()
 void DialogArc::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
+    labelResultCalculation = ui->labelResultF1;
     ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1);
 }
 
@@ -318,6 +320,7 @@ void DialogArc::F1Changed()
 void DialogArc::F2Changed()
 {
     labelEditFormula = ui->labelEditF2;
+    labelResultCalculation = ui->labelResultF2;
     ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2);
 }
 
@@ -341,7 +344,7 @@ void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, timerRadius, ui->labelResultRadius, postfix);
+    Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -352,7 +355,7 @@ void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
     const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditF1->toPlainText(), flagF1, timerF1, ui->labelResultF1, postfix, false);
+    Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, postfix, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,7 +366,7 @@ void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
     const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditF2->toPlainText(), flagF2, timerF2, ui->labelResultF2, postfix, false);
+    Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, postfix, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -102,7 +102,7 @@ void DialogEditWrongFormula::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, timerFormula, labelResultCalculation, postfix, checkZero);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
