@@ -3,9 +3,9 @@
  
   !define MUI_PRODUCT "Valentina"
   !define MUI_FILE "valentina"
-  !define MUI_VERSION "0.2.2"
+  !define MUI_VERSION "0.2.8-alpha"
   !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
-  !define WEBSITE_LINK "https://bitbucket.org/dismine/valentina"
+  !define WEBSITE_LINK "http://www.valentina-project.org/"
   !define PUBLISHER "Roman Telezhynskyi"
   CRCCheck On
  
@@ -18,6 +18,7 @@
 ;General
 
   Name "${MUI_BRANDINGTEXT}"
+  Icon "valentina\${MUI_FILE}.ico"
   Caption "${MUI_BRANDINGTEXT}"
   SetCompressor bzip2
   OutFile "${MUI_FILE}-install-v.${MUI_VERSION}_32bit.exe"
@@ -78,6 +79,8 @@
   !define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
   !define MUI_LANGDLL_REGISTRY_KEY "Software\${MUI_PRODUCT}" 
   !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+  !define REG_UNINSTALL "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
+  !define REGISTRY_ROOT "HKCU"
    
 ;--------------------------------
 ;Language
@@ -145,6 +148,29 @@
 
   Function .onInit
   !insertmacro MUI_LANGDLL_DISPLAY ;This has to come after the language macros
+  
+  ReadRegStr $R0 "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "UninstallString"
+  StrCmp $R0 "" done
+ 
+  MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
+  "${MUI_PRODUCT} is already installed. $\n$\nClick `OK` to remove the \
+  previous version or `Cancel` to cancel this upgrade." \
+  IDOK uninst
+  Abort
+ 
+  ;Run the uninstaller
+  uninst:
+    ClearErrors
+    ExecWait '$R0 _?=$INSTDIR' ;Do not copy the uninstaller to a temp file
+
+    IfErrors no_remove_uninstaller done
+      ;You can either use Delete /REBOOTOK in the uninstaller or add some code
+      ;here to remove the uninstaller. Use a registry key to check
+      ;whether the user has chosen to uninstall. If you are using an uninstaller
+      ;components page, make sure all sections are uninstalled.
+  no_remove_uninstaller:
+ 
+  done:
   FunctionEnd
 
 ;--------------------------------
@@ -191,21 +217,20 @@ Section "Valentina  (required)"
  
 ;write uninstall information to the registry
   !define UNINSTALLER_NAME "Uninstall.exe"
-  !define REG_UNINSTALL "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
 
-  WriteRegStr HKCU "${REG_UNINSTALL}" "DisplayName" "${MUI_PRODUCT}"
-  WriteRegStr HKCU "${REG_UNINSTALL}" "DisplayIcon" "$\"$INSTDIR\${MUI_FILE}.exe$\""
-  WriteRegStr HKCU "${REG_UNINSTALL}" "Publisher" "${PUBLISHER}"
-  WriteRegStr HKCU "${REG_UNINSTALL}" "DisplayVersion" "${MUI_VERSION}"
-  WriteRegDWord HKCU "${REG_UNINSTALL}" "EstimatedSize" 51,4 ;MB
-  WriteRegStr HKCU "${REG_UNINSTALL}" "HelpLink" "${WEBSITE_LINK}"
-  WriteRegStr HKCU "${REG_UNINSTALL}" "URLInfoAbout" "${WEBSITE_LINK}"
-  WriteRegStr HKCU "${REG_UNINSTALL}" "InstallLocation" "$\"$INSTDIR$\""
-  WriteRegStr HKCU "${REG_UNINSTALL}" "InstallSource" "$\"$EXEDIR$\""
-  WriteRegDWord HKCU "${REG_UNINSTALL}" "NoModify" 1
-  WriteRegDWord HKCU "${REG_UNINSTALL}" "NoRepair" 1
-  WriteRegStr HKCU "${REG_UNINSTALL}" "UninstallString" "$\"$INSTDIR\${UNINSTALLER_NAME}$\""
-  WriteRegStr HKCU "${REG_UNINSTALL}" "Comments" "Uninstalls ${MUI_PRODUCT}."
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayName" "${MUI_PRODUCT}"
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayIcon" "$\"$INSTDIR\${MUI_FILE}.exe$\""
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Publisher" "${PUBLISHER}"
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayVersion" "${MUI_VERSION}"
+  WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "EstimatedSize" 51,4 ;MB
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "HelpLink" "${WEBSITE_LINK}"
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "URLInfoAbout" "${WEBSITE_LINK}"
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "InstallLocation" "$\"$INSTDIR$\""
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "InstallSource" "$\"$EXEDIR$\""
+  WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "NoModify" 1
+  WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "NoRepair" 1
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "UninstallString" "$\"$INSTDIR\${UNINSTALLER_NAME}$\""
+  WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Comments" "Uninstalls ${MUI_PRODUCT}."
  
   WriteUninstaller "$INSTDIR\${UNINSTALLER_NAME}"
   
@@ -231,8 +256,8 @@ Section "Uninstall"
   RmDir  "${START_LINK_DIR}"
  
 ;Delete Uninstaller And Unistall Registry Entries
-  DeleteRegKey HKCU "SOFTWARE\${MUI_PRODUCT}"
-  DeleteRegKey HKCU "${REG_UNINSTALL}"  
+  DeleteRegKey "${REGISTRY_ROOT}" "SOFTWARE\${MUI_PRODUCT}"
+  DeleteRegKey "${REGISTRY_ROOT}" "${REG_UNINSTALL}"  
   
   ${unregisterExtension} ".val" "Valentina_File"
  
