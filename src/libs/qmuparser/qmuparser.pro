@@ -105,9 +105,5 @@ CONFIG(debug, debug|release){
 
 }else{
     # Release
-    *-g++{
-    QMAKE_CXXFLAGS += -O2
-    }
-
     DEFINES += QT_NO_DEBUG_OUTPUT
 }

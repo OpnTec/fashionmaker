@@ -144,10 +144,6 @@ CONFIG(debug, debug|release){
     DEFINES += "LOC_REV=0"
 }else{
     # Release
-    *-g++{
-    QMAKE_CXXFLAGS += -O2
-    }
-
     DEFINES += QT_NO_DEBUG_OUTPUT
 
     #local revision number for using in version
