@@ -286,7 +286,7 @@ void VToolArc::ShowVisualization(bool show)
             const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
 
             visual->setPoint1Id(arc->GetCenter().id());
-            visual->setRadius(arc->GetFormulaRadius());
+            visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
             visual->setF1(arc->GetFormulaF1());
             visual->setF2(arc->GetFormulaF2());
             visual->RefreshGeometry();
@@ -372,7 +372,7 @@ void VToolArc::RefreshGeometry()
         VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
 
         visual->setPoint1Id(arc->GetCenter().id());
-        visual->setRadius(arc->GetFormulaRadius());
+        visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
         visual->setF1(arc->GetFormulaF1());
         visual->setF2(arc->GetFormulaF2());
         visual->RefreshGeometry();

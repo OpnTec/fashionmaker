@@ -66,6 +66,8 @@ private:
     void          InitVariables(const VContainer *data, const QMap<int, QString> &tokens, const QString &formula);
     void          InitCharacterSets();
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
+    void          SetSepForEval();
+    void          SetSepForTr(bool fromUser);
 };
 
 #endif // CALCULATOR_H

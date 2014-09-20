@@ -216,7 +216,7 @@ void VToolNormal::FullUpdateFromFile()
         VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
         visual->setPoint1Id(basePointId);
         visual->setPoint2Id(secondPointId);
-        visual->setLength(formulaLength);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
         visual->setAngle(angle);
         visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
         visual->RefreshGeometry();
@@ -332,7 +332,7 @@ void VToolNormal::ShowVisualization(bool show)
 
             visual->setPoint1Id(basePointId);
             visual->setPoint2Id(secondPointId);
-            visual->setLength(formulaLength);
+            visual->setLength(qApp->FormulaToUser(formulaLength));
             visual->setAngle(angle);
             visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
             visual->RefreshGeometry();

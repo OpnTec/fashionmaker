@@ -55,8 +55,7 @@ Calculator::Calculator(const VContainer *data)
     InitCharacterSets();
     setAllowSubexpressions(false);//Only one expression per time
 
-    SetArgSep(',');
-    SetDecSep('.');
+    SetSepForEval();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,30 +81,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     setAllowSubexpressions(false);//Only one expression per time
     SetVarFactory(AddVariable, this);
 
-    // Add unary operators
-    if (fromUser)
-    {
-        bool osSeparatorValue = qApp->getSettings()->value("configuration/osSeparator", 1).toBool();
-
-        if (osSeparatorValue)
-        {
-            QLocale loc = QLocale::system();
-            SetDecSep(loc.decimalPoint().toLatin1());
-            SetThousandsSep(loc.groupSeparator().toLatin1());
-            SetArgSep(';');
-        }
-        else
-        {
-            SetArgSep(',');
-            SetDecSep('.');
-        }
-    }
-    else
-    {
-
-        SetArgSep(',');
-        SetDecSep('.');
-    }
+    SetSepForTr(fromUser);
 
     SetExpr(formula);
     //Need run for making tokens. Don't catch exception here, because we want know if formula has error.
@@ -126,6 +102,7 @@ Calculator::~Calculator()
 qreal Calculator::EvalFormula(const QString &formula)
 {
     SetVarFactory(AddVariable, this);
+    SetSepForEval();//Reset separators options
 
     SetExpr(formula);
 
@@ -214,7 +191,7 @@ void Calculator::InitCharacterSets()
     DefineOprtChars(symbols + QStringLiteral("+-*^/?<>=#!$%&|~'_"));
 }
 
-//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 // Factory function for creating new parser variables
 // This could as well be a function performing database queries.
 qreal* Calculator::AddVariable(const QString &a_szName, void *a_pUserData)
@@ -224,4 +201,39 @@ qreal* Calculator::AddVariable(const QString &a_szName, void *a_pUserData)
 
     static qreal value = 0;
     return &value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Calculator::SetSepForEval()
+{
+    SetArgSep(',');
+    SetDecSep('.');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Calculator::SetSepForTr(bool fromUser)
+{
+    if (fromUser)
+    {
+        bool osSeparatorValue = qApp->getSettings()->value("configuration/osSeparator", 1).toBool();
+
+        if (osSeparatorValue)
+        {
+            QLocale loc = QLocale::system();
+            SetDecSep(loc.decimalPoint().toLatin1());
+            SetThousandsSep(loc.groupSeparator().toLatin1());
+            SetArgSep(';');
+        }
+        else
+        {
+            SetArgSep(',');
+            SetDecSep('.');
+        }
+    }
+    else
+    {
+
+        SetArgSep(',');
+        SetDecSep('.');
+    }
 }

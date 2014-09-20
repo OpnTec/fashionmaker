@@ -194,7 +194,7 @@ void VToolCutArc::ShowVisualization(bool show)
             scene->addItem(visual);
 
             visual->setPoint1Id(curveCutId);
-            visual->setLength(formula);
+            visual->setLength(qApp->FormulaToUser(formula));
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -226,7 +226,7 @@ void VToolCutArc::FullUpdateFromFile()
     {
         VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
         visual->setPoint1Id(curveCutId);
-        visual->setLength(formula);
+        visual->setLength(qApp->FormulaToUser(formula));
         visual->RefreshGeometry();
     }
 }

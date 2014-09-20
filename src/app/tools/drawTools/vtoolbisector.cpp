@@ -238,7 +238,7 @@ void VToolBisector::FullUpdateFromFile()
         visual->setPoint1Id(firstPointId);
         visual->setPoint2Id(basePointId);
         visual->setPoint3Id(thirdPointId);
-        visual->setLength(formulaLength);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
         visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
         visual->RefreshGeometry();
     }
@@ -355,7 +355,7 @@ void VToolBisector::ShowVisualization(bool show)
             visual->setPoint1Id(firstPointId);
             visual->setPoint2Id(basePointId);
             visual->setPoint3Id(thirdPointId);
-            visual->setLength(formulaLength);
+            visual->setLength(qApp->FormulaToUser(formulaLength));
             visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;

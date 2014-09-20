@@ -191,8 +191,8 @@ void VToolEndLine::FullUpdateFromFile()
     {
         VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
         visual->setPoint1Id(basePointId);
-        visual->setLength(formulaLength);
-        visual->setAngle(formulaAngle);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setAngle(qApp->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
         visual->RefreshGeometry();
     }
@@ -287,8 +287,8 @@ void VToolEndLine::ShowVisualization(bool show)
             scene->addItem(visual);
 
             visual->setPoint1Id(basePointId);
-            visual->setLength(formulaLength);
-            visual->setAngle(formulaAngle);
+            visual->setLength(qApp->FormulaToUser(formulaLength));
+            visual->setAngle(qApp->FormulaToUser(formulaAngle));
             visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;

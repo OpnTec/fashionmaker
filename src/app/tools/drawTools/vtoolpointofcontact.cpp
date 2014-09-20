@@ -236,7 +236,7 @@ void VToolPointOfContact::FullUpdateFromFile()
         visual->setPoint1Id(firstPointId);
         visual->setLineP2Id(secondPointId);
         visual->setRadiusId(center);
-        visual->setRadius(arcRadius);
+        visual->setRadius(qApp->FormulaToUser(arcRadius));
         visual->RefreshGeometry();
     }
 }
@@ -344,7 +344,7 @@ void VToolPointOfContact::ShowVisualization(bool show)
             visual->setPoint1Id(firstPointId);
             visual->setLineP2Id(secondPointId);
             visual->setRadiusId(center);
-            visual->setRadius(arcRadius);
+            visual->setRadius(qApp->FormulaToUser(arcRadius));
             visual->RefreshGeometry();
             vis = visual;
         }

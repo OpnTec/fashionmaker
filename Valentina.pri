@@ -42,7 +42,6 @@ defineTest(copyToDestdir) {
 
 
 GCC_CXXFLAGS += \
-            -O0 \
             -Wall \
             -Wextra \
             -pedantic \
@@ -84,7 +83,6 @@ GCC_CXXFLAGS += \
             -ftrapv
 
 CLANG_CXXFLAGS += \
-            -O0 \
             -fparse-all-comments \
             -Wabi \
             -Wabstract-final-class \
