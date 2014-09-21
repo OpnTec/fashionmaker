@@ -48,7 +48,8 @@
 	dh_fixperms
 	dh_makeshlibs
 	dh_installdeb
-	dh_shlibdeps -Llibqmuparser2 -l$(CURDIR)/debian/tmp/usr/lib
+	dh_shlibdeps -Llibqmuparser2 -l$(CURDIR)/debian/tmp/usr/lib -Llibvpropertyexplorer -l$(CURDIR)/debian/tmp/usr/lib
+	dh_shlibdeps 
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

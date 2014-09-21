@@ -1,10 +1,10 @@
 debian/usr/share/pixmaps/valentina.png
 debian/valentina/usr/bin/valentina
-debian/valentina/usr/share/valentina/translations/valentina_ru.qm
-debian/valentina/usr/share/valentina/translations/valentina_uk.qm
-debian/valentina/usr/share/valentina/translations/valentina_de.qm
-debian/valentina/usr/share/valentina/translations/valentina_cs.qm
+debian/valentina/usr/share/valentina/translations/valentina_ru_RU.qm
+debian/valentina/usr/share/valentina/translations/valentina_uk_UA.qm
+debian/valentina/usr/share/valentina/translations/valentina_de_DE.qm
+debian/valentina/usr/share/valentina/translations/valentina_cs_CZ.qm
 debian/valentina/usr/share/valentina/translations/valentina_he_IL.qm
-debian/valentina/usr/share/valentina/translations/valentina_fr.qm
-debian/valentina/usr/share/valentina/translations/valentina_it.qm
-debian/valentina/usr/share/valentina/translations/valentina_nl.qm
+debian/valentina/usr/share/valentina/translations/valentina_fr_FR.qm
+debian/valentina/usr/share/valentina/translations/valentina_it_IT.qm
+debian/valentina/usr/share/valentina/translations/valentina_nl_NL.qm
