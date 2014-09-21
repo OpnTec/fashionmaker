@@ -146,7 +146,11 @@ int main(int argc, char *argv[])
     QString checkedLocale = qApp->getSettings()->value("configuration/locale", QLocale::system().name()).toString();
 
     QTranslator qtTranslator;
+#if defined(Q_OS_WIN)
+    qtTranslator.load("qt_" + checkedLocale, QCoreApplication::applicationDirPath());
+#else
     qtTranslator.load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
