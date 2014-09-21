@@ -307,10 +307,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogalongline.ui" line="112"/>
         <source>Calculate value</source>
         <translation>לחשב ערך</translation>
@@ -319,10 +315,6 @@
         <location filename="../../dialogs/tools/dialogalongline.ui" line="150"/>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogalongline.ui" line="192"/>
@@ -433,10 +425,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="112"/>
         <location filename="../../dialogs/tools/dialogarc.ui" line="297"/>
         <location filename="../../dialogs/tools/dialogarc.ui" line="482"/>
@@ -447,10 +435,6 @@
         <location filename="../../dialogs/tools/dialogarc.ui" line="144"/>
         <source>Value of radius</source>
         <translation>ערך הרדיוס</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="186"/>
@@ -566,10 +550,6 @@
         <location filename="../../dialogs/tools/dialogbisector.ui" line="89"/>
         <source>Insert marked variable into the formula</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogbisector.ui" line="109"/>
@@ -705,10 +685,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogcutarc.ui" line="106"/>
         <source>Calculate value</source>
         <translation>לחשב ערך</translation>
@@ -802,10 +778,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogcutspline.ui" line="106"/>
         <source>Calculate value</source>
         <translation>לחשב ערך</translation>
@@ -897,10 +869,6 @@
         <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="14"/>
         <source>Cut curve path</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="106"/>
@@ -1062,10 +1030,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="115"/>
         <source>Calculate value</source>
         <translation type="unfinished">לחשב ערך</translation>
@@ -1144,10 +1108,6 @@
         <translation>אורך</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogendline.ui" line="115"/>
         <location filename="../../dialogs/tools/dialogendline.ui" line="294"/>
         <source>Calculate value</source>
@@ -1157,10 +1117,6 @@
         <location filename="../../dialogs/tools/dialogendline.ui" line="147"/>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogendline.ui" line="186"/>
@@ -1418,6 +1374,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="265"/>
+        <source>Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="342"/>
         <location filename="../../dialogs/app/dialogincrements.ui" line="429"/>
         <source>Name</source>
@@ -1447,10 +1408,6 @@
         <location filename="../../dialogs/app/dialogincrements.cpp" line="539"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="52"/>
@@ -1486,11 +1443,6 @@
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="232"/>
         <source>Sex</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="265"/>
-        <source>Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1608,10 +1560,6 @@
         <location filename="../../dialogs/app/dialogindividualmeasurements.ui" line="209"/>
         <source>Path:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../dialogs/app/dialogindividualmeasurements.ui" line="109"/>
@@ -1815,10 +1763,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialognormal.ui" line="112"/>
         <source>Calculate value</source>
         <translation>לחשב ערך</translation>
@@ -1827,10 +1771,6 @@
         <location filename="../../dialogs/tools/dialognormal.ui" line="144"/>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="obsolete">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialognormal.ui" line="186"/>
@@ -2154,10 +2094,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="112"/>
         <source>Calculate value</source>
         <translation>לחשב ערך</translation>
@@ -2166,10 +2102,6 @@
         <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="144"/>
         <source>Value of radius</source>
         <translation>ערך הרדיוס</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="186"/>
@@ -2310,10 +2242,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="112"/>
         <source>Calculate value</source>
         <translation>לחשב ערך</translation>
@@ -2322,10 +2250,6 @@
         <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="144"/>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="186"/>
@@ -2568,55 +2492,51 @@
 <context>
     <name>DialogTool</name>
     <message>
-        <source>Line</source>
-        <translation type="vanished">קו</translation>
-    </message>
-    <message>
         <location filename="../../dialogs/tools/dialogtool.cpp" line="387"/>
         <location filename="../../dialogs/tools/dialogtool.cpp" line="404"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="431"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="451"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="474"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="428"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="448"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="471"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="432"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="429"/>
         <source>Empty field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="452"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="449"/>
         <source>Value can&apos;t be 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="468"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="465"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="962"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="958"/>
         <source>Height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="967"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="963"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="993"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="989"/>
         <source>Line length</source>
         <translation>אורך הקו</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1001"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="997"/>
         <source>Arc length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1009"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1005"/>
         <source>Curve length</source>
         <translation>אורך העקומה</translation>
     </message>
@@ -2918,12 +2838,48 @@
         <translation>נקודה</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
+        <location filename="../../mainwindow.ui" line="258"/>
+        <source>Point at distance and angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="102"/>
+        <source>Special point on shoulder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="206"/>
+        <source>Point at intersection of arc and line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="180"/>
+        <source>Point along bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="76"/>
+        <source>Point along perpendicular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="284"/>
+        <source>Point at distance along line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="154"/>
+        <source>Perpendicular point along line</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mainwindow.ui" line="128"/>
         <source>Tool triangle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="232"/>
+        <source>Tool to make point from x &amp; y of two other points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2937,8 +2893,14 @@
         <translation>קו</translation>
     </message>
     <message>
-        <source>Tool to create a point at the intersection of 2 lines.</source>
-        <translation type="vanished">כלי ליצירת נקודה בהצטלבות של 2 קווים.</translation>
+        <location filename="../../mainwindow.ui" line="334"/>
+        <source>Line between points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="360"/>
+        <source>Point at line intersection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mainwindow.ui" line="398"/>
@@ -2986,6 +2948,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mainwindow.ui" line="564"/>
+        <source>Cut arc tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../mainwindow.ui" line="602"/>
         <source>Tools for creating details.</source>
         <translation type="unfinished"></translation>
@@ -2998,110 +2965,6 @@
     <message>
         <location filename="../../mainwindow.ui" line="611"/>
         <source>Tool new detail.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="vanished">קובץ</translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="829"/>
-        <source>New</source>
-        <translation>חדש</translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="835"/>
-        <source>Create a new pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="838"/>
-        <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="848"/>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="854"/>
-        <source>Open file with pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="867"/>
-        <source>Save</source>
-        <translation type="unfinished">שמור</translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="873"/>
-        <source>Save pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="876"/>
-        <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1242"/>
-        <source>Save as</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="258"/>
-        <source>Point at distance and angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="102"/>
-        <source>Special point on shoulder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="206"/>
-        <source>Point at intersection of arc and line.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="180"/>
-        <source>Point along bisector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="76"/>
-        <source>Point along perpendicular</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="284"/>
-        <source>Point at distance along line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="154"/>
-        <source>Perpendicular point along line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="232"/>
-        <source>Tool to make point from x &amp; y of two other points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="334"/>
-        <source>Line between points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="360"/>
-        <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="564"/>
-        <source>Cut arc tool.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3160,8 +3023,104 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mainwindow.ui" line="889"/>
+        <source>Save &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1027"/>
+        <source>Export pattern (layout)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1038"/>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1048"/>
+        <source>&amp;About Valentina</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1058"/>
+        <source>E&amp;xit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1061"/>
+        <source>Exit the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1069"/>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1087"/>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1124"/>
+        <source>Original zoom </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1127"/>
+        <source>Original Zoom </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1140"/>
+        <source>Zoom fit best</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1090"/>
+        <source>zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1103"/>
+        <location filename="../../mainwindow.ui" line="1106"/>
+        <source>Zoom out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1111"/>
+        <source>Edit pattern XML code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1074"/>
+        <source>Pattern properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="829"/>
+        <source>New</source>
+        <translation>חדש</translation>
+    </message>
+    <message>
         <location filename="../../mainwindow.ui" line="832"/>
         <source>&amp;New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="835"/>
+        <source>Create a new pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="838"/>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="848"/>
+        <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3170,13 +3129,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mainwindow.ui" line="854"/>
+        <source>Open file with pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="867"/>
+        <source>Save</source>
+        <translation type="unfinished">שמור</translation>
+    </message>
+    <message>
         <location filename="../../mainwindow.ui" line="870"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="889"/>
-        <source>Save &amp;As...</source>
+        <location filename="../../mainwindow.ui" line="873"/>
+        <source>Save pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="876"/>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1242"/>
+        <source>Save as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3272,77 +3251,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1027"/>
-        <source>Export pattern (layout)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1038"/>
-        <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1048"/>
-        <source>&amp;About Valentina</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1058"/>
-        <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1061"/>
-        <source>Exit the application</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1069"/>
-        <source>Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1074"/>
-        <source>Pattern properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1087"/>
-        <source>Zoom in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1124"/>
-        <source>Original zoom </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1127"/>
-        <source>Original Zoom </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1140"/>
-        <source>Zoom fit best</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1090"/>
-        <source>zoom in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1103"/>
-        <location filename="../../mainwindow.ui" line="1106"/>
-        <source>Zoom out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.ui" line="1111"/>
-        <source>Edit pattern XML code</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../mainwindow.ui" line="1030"/>
         <source>Create layout</source>
         <translation type="unfinished"></translation>
@@ -3365,67 +3273,6 @@
     <message>
         <location filename="../../mainwindow.cpp" line="128"/>
         <source>Pattern piece %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="792"/>
-        <source>Size: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1236"/>
-        <source>pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1240"/>
-        <source>/pattern.val</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1394"/>
-        <source>Critical error!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1394"/>
-        <source>Error parsing file (std::bad_alloc).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1428"/>
-        <source>Bad id.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1792"/>
-        <source>File saved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1829"/>
-        <source>untitled.val</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1905"/>
-        <source>Unsaved change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1905"/>
-        <source>The pattern has been modified.
-Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1955"/>
-        <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="1961"/>
-        <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3526,6 +3373,41 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mainwindow.cpp" line="792"/>
+        <source>Size: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1236"/>
+        <source>pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1394"/>
+        <source>Critical error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1394"/>
+        <source>Error parsing file (std::bad_alloc).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1428"/>
+        <source>Bad id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1955"/>
+        <source>&amp;Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1961"/>
+        <source>&amp;Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../mainwindow.cpp" line="2134"/>
         <source>Wrong units.</source>
         <translation type="unfinished"></translation>
@@ -3538,11 +3420,6 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../mainwindow.cpp" line="2150"/>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mainwindow.cpp" line="2164"/>
-        <source>File loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3566,8 +3443,9 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</source>
-        <translation type="vanished">&lt;h1&gt;%1&lt;/h1&gt; %2 &lt;br/&gt;&lt;br/&gt; %3 &lt;br/&gt;&lt;br/&gt; %4</translation>
+        <location filename="../../mainwindow.cpp" line="2164"/>
+        <source>File loaded</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mainwindow.cpp" line="787"/>
@@ -3583,6 +3461,32 @@ Do you want to save your changes?</source>
         <location filename="../../mainwindow.cpp" line="1231"/>
         <location filename="../../mainwindow.cpp" line="1286"/>
         <source>Pattern files (*.val)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1240"/>
+        <source>/pattern.val</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1792"/>
+        <source>File saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1829"/>
+        <source>untitled.val</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1905"/>
+        <source>Unsaved change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="1905"/>
+        <source>The pattern has been modified.
+Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6514,7 +6418,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../widgets/vformulapropertyeditor.cpp" line="52"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6755,170 +6659,170 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="844"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="838"/>
         <source>Base point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="846"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="860"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="873"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="897"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="909"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="920"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="931"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="942"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="963"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="974"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="992"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1003"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1013"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1059"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="840"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="854"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="867"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="891"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="903"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="914"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="925"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="936"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="957"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="968"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="986"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="997"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1007"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1053"/>
         <source>Point label</source>
         <translation type="unfinished">תווית הנקודה</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="848"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="842"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="858"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="852"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="861"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="874"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="898"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="943"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="953"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="975"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1014"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="855"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="868"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="892"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="937"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="947"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="969"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1008"/>
         <source>Line type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="862"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="875"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="899"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="910"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="921"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="932"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="973"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1015"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="856"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="869"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="893"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="904"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="915"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="926"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="967"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1009"/>
         <source>Length</source>
         <translation type="unfinished">אורך</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="863"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="857"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="871"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="865"/>
         <source>Point at distance along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="883"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="877"/>
         <source>Arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="885"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="993"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="879"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="987"/>
         <source>Radius</source>
         <translation type="unfinished">רדיוס</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="886"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="880"/>
         <source>First angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="887"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="881"/>
         <source>Second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="895"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="889"/>
         <source>Point along bisector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="907"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="901"/>
         <source>Cut arc tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="918"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="912"/>
         <source>Tool for segmenting a curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="929"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="923"/>
         <source>Tool segment a pathed curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="940"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="934"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="951"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="945"/>
         <source>Line between points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="961"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="955"/>
         <source>Point at line intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="971"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="965"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="977"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="971"/>
         <source>Additional angle degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="990"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="984"/>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1001"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="995"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1011"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1005"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1023"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1017"/>
         <source>Curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1025"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1042"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1019"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1036"/>
         <source>Curve factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1040"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1034"/>
         <source>Tool for path curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1057"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1051"/>
         <source>Tool triangle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6975,12 +6879,12 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="177"/>
+        <location filename="../../main.cpp" line="175"/>
         <source>Pattern making program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="180"/>
+        <location filename="../../main.cpp" line="178"/>
         <source>Pattern file.</source>
         <translation type="unfinished"></translation>
     </message>

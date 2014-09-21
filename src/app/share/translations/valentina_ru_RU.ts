@@ -2930,7 +2930,7 @@
     <message>
         <location filename="../../dialogs/tools/dialogtool.cpp" line="+387"/>
         <location line="+17"/>
-        <location line="+27"/>
+        <location line="+24"/>
         <location line="+20"/>
         <location line="+23"/>
         <source>Error</source>
@@ -2976,7 +2976,7 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location line="+494"/>
+        <location line="+493"/>
         <source>Height</source>
         <translation>Рост</translation>
     </message>
@@ -8401,7 +8401,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="+844"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="+838"/>
         <source>Base point</source>
         <translation>Базовая точка</translation>
     </message>
@@ -8644,7 +8644,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+177"/>
+        <location filename="../../main.cpp" line="+175"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>
