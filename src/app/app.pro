@@ -146,7 +146,7 @@ CONFIG(debug, debug|release){
     # Release
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    QMAKE_CXXFLAGS_RELEASE += -g
+    unix:QMAKE_CXXFLAGS_RELEASE += -g
 
     #local revision number for using in version
     HG_REV=$$system(hg parents --template '{rev}')

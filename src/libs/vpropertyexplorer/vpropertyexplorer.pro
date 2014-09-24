@@ -150,8 +150,7 @@ CONFIG(debug, debug|release){
     # Release
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    QMAKE_CXXFLAGS_RELEASE += -g
-
+    unix:QMAKE_CXXFLAGS_RELEASE += -g
     unix:QMAKE_POST_LINK += objcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
     unix:QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)/$(TARGET) &&
     unix:QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(DESTDIR)/$(TARGET).debug $(DESTDIR)/$(TARGET)
