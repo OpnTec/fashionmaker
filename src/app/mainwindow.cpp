@@ -265,6 +265,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
+        ui->view->itemClicked(nullptr);
     }
     else
     {
@@ -306,6 +307,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogTool::UpdateList);
         connect(ui->view, &VMainGraphicsView::MouseRelease, this, &MainWindow::ClickEndVisualization);
+        ui->view->itemClicked(nullptr);
     }
     else
     {
