@@ -28,6 +28,10 @@
 
 #include "addtocalc.h"
 #include "../xml/vpattern.h"
+#include "../tools/vabstracttool.h"
+#include "../widgets/vapplication.h"
+#include "../widgets/vmaingraphicsscene.h"
+#include "../widgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
@@ -75,6 +79,7 @@ void AddToCalc::undo()
         doc->setCursor(0);
     }
     emit NeedFullParsing();
+    VAbstractTool::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,4 +116,5 @@ void AddToCalc::redo()
         return;
     }
     RedoFullParsing();
+    VAbstractTool::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
 }
