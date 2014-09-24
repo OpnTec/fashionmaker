@@ -1999,7 +1999,7 @@
     <message>
         <location line="+28"/>
         <source>Additional angle degrees</source>
-        <translation>Дополнительные угол градусы</translation>
+        <translation>Доп. угол градусы</translation>
     </message>
     <message>
         <location line="+208"/>
@@ -8530,7 +8530,7 @@ Do you want to save your changes?</source>
     <message>
         <location line="+6"/>
         <source>Additional angle degrees</source>
-        <translation>Дополнительные угол градусы</translation>
+        <translation>Доп. угол градусы</translation>
     </message>
     <message>
         <location line="+13"/>

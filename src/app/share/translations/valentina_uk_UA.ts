@@ -7470,7 +7470,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="971"/>
         <source>Additional angle degrees</source>
-        <translation>Додатковий кут градуси</translation>
+        <translation>Дод. кут градуси</translation>
     </message>
     <message>
         <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="984"/>
