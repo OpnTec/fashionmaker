@@ -6154,7 +6154,7 @@ Do you want to save your changes?</source>
         <location line="+7"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
-        <translation>Front Upper chest waist</translation>
+        <translation>Длина переда от линии талии вверх по центру до начала ложбины</translation>
     </message>
     <message>
         <location line="+7"/>

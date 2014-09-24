@@ -5115,7 +5115,7 @@ Do you want to save your changes?</source>
         <location filename="../../widgets/vapplication.cpp" line="639"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
-        <translation>Front Upper chest waist</translation>
+        <translation>Довжина переду від лінії талії вгору по центру до початку ложбини</translation>
     </message>
     <message>
         <location filename="../../widgets/vapplication.cpp" line="646"/>
