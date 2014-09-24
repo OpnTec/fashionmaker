@@ -20,7 +20,7 @@
 <context>
     <name>AddToCalc</name>
     <message>
-        <location filename="../../undocommands/addtocalc.cpp" line="+36"/>
+        <location filename="../../undocommands/addtocalc.cpp" line="+40"/>
         <source>Add object</source>
         <translation>Добавить объект</translation>
     </message>
@@ -392,12 +392,17 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
     <message>
-        <location line="-114"/>
+        <location line="-126"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -580,7 +585,12 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables</source>
         <translation>Переменные</translation>
     </message>
@@ -696,12 +706,17 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
     <message>
-        <location line="-117"/>
+        <location line="-129"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -840,7 +855,12 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
@@ -945,7 +965,12 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
@@ -1050,7 +1075,12 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
@@ -1202,7 +1232,12 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables</source>
         <translation>Переменные</translation>
     </message>
@@ -1299,9 +1334,18 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Variables</source>
+        <translation>Переменные</translation>
+    </message>
+    <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
+        <translation type="vanished">Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
     <message>
         <source>Angle of line</source>
@@ -1312,7 +1356,7 @@
         <translation type="vanished">Угол</translation>
     </message>
     <message>
-        <location line="-117"/>
+        <location line="-129"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -1517,7 +1561,7 @@
     <name>DialogIncrements</name>
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="+20"/>
-        <location line="+360"/>
+        <location line="+367"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
@@ -1526,7 +1570,7 @@
         <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
-        <location line="-328"/>
+        <location line="-335"/>
         <location line="+238"/>
         <source>Measurements</source>
         <translation>Мерки</translation>
@@ -1562,26 +1606,31 @@
         <translation>Стать</translation>
     </message>
     <message>
-        <location line="+110"/>
-        <location line="+87"/>
+        <location line="+64"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <location line="+102"/>
         <source>Name</source>
         <translation>Обозначение</translation>
     </message>
     <message>
-        <location line="-82"/>
-        <location line="+87"/>
+        <location line="-97"/>
+        <location line="+102"/>
         <source>The calculated value</source>
         <translation>Расчитаное значение</translation>
     </message>
     <message>
-        <location line="-82"/>
-        <location line="+87"/>
+        <location line="-97"/>
+        <location line="+102"/>
         <source>Base value</source>
         <translation>Базовое значение</translation>
     </message>
     <message>
-        <location line="-82"/>
-        <location line="+87"/>
+        <location line="-97"/>
+        <location line="+102"/>
         <source>In sizes</source>
         <translation>В размерах</translation>
     </message>
@@ -1590,9 +1639,9 @@
         <translation type="vanished">В ростах</translation>
     </message>
     <message>
-        <location line="-77"/>
-        <location line="+87"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="+539"/>
+        <location line="-92"/>
+        <location line="+102"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="+556"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1609,18 +1658,18 @@
         <translation type="vanished">...</translation>
     </message>
     <message>
-        <location line="-189"/>
+        <location line="-211"/>
         <source>Email</source>
         <translation>E-mail</translation>
     </message>
     <message>
-        <location line="+97"/>
-        <location line="+87"/>
+        <location line="+104"/>
+        <location line="+102"/>
         <source>In heights</source>
         <translation>В ростах</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+26"/>
         <source>Lines</source>
         <translation>Линии</translation>
     </message>
@@ -1666,14 +1715,14 @@
         <translation type="obsolete">Обозначение %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="-472"/>
-        <location line="+388"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="-489"/>
+        <location line="+405"/>
         <location line="+56"/>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
     <message>
-        <location line="-406"/>
+        <location line="-418"/>
         <source>male</source>
         <translation>мужчина</translation>
     </message>
@@ -1683,7 +1732,7 @@
         <translation>женщина</translation>
     </message>
     <message>
-        <location line="+324"/>
+        <location line="+336"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation>Мерки используют другие единицы измерения нежели лекало. Это лекало требует мерки в %1</translation>
     </message>
@@ -2080,7 +2129,12 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
@@ -2540,12 +2594,17 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula.</source>
         <translation>Переменные - кликнете дважды для вставки в формулу.</translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="-87"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
@@ -2713,12 +2772,17 @@
         <translation>Уголы линий</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="-87"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
@@ -2976,7 +3040,7 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location line="+493"/>
+        <location line="+505"/>
         <source>Height</source>
         <translation>Рост</translation>
     </message>
@@ -3590,7 +3654,7 @@
         <translation>Свойства лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="+1242"/>
+        <location filename="../../mainwindow.cpp" line="+1244"/>
         <source>Save as</source>
         <translation>Сохранить как</translation>
     </message>
@@ -3856,7 +3920,7 @@
         <translation>Чертеж:</translation>
     </message>
     <message>
-        <location line="-1935"/>
+        <location line="-1937"/>
         <source>Pattern piece %1</source>
         <translation>Чертеж %1</translation>
     </message>
@@ -3865,7 +3929,7 @@
         <translation type="vanished">Ошибка создания чертежа с именем</translation>
     </message>
     <message>
-        <location line="+1937"/>
+        <location line="+1939"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введите новое имя для чертежа.</translation>
     </message>
@@ -7588,7 +7652,7 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../mainwindow.cpp" line="-1284"/>
+        <location filename="../../mainwindow.cpp" line="-1286"/>
         <source>Create new pattern piece to start working.</source>
         <translation>Создайте новый чертеж  для начала работы.</translation>
     </message>
@@ -8644,7 +8708,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+175"/>
+        <location filename="../../main.cpp" line="+179"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>

@@ -62,6 +62,12 @@ bool VInternalVariable::Filter(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VInternalVariable::IsNotUsed() const
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VInternalVariable::GetValue() const
 {
     return d->value;

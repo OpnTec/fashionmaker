@@ -77,6 +77,11 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);// in sizes
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);// in heights
 
+    if (qApp->patternType() == MeasurementsType::Standard)
+    {
+        ui->checkBoxHideEmpty->setChecked(true);
+    }
+
     FillMeasurements();
     FillIncrements();
     FillLengthLines();
@@ -134,6 +139,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     ui->tabWidget->setCurrentIndex(0);
 
     connect(ui->toolButtonOpenMeasurements, &QToolButton::clicked, this, &DialogIncrements::OpenTable);
+    connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogIncrements::ShowMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,6 +155,10 @@ void DialogIncrements::FillMeasurements()
     for (iMap = table.constBegin(); iMap != table.constEnd(); ++iMap)
     {
         QSharedPointer<VMeasurement> m = iMap.value();
+        if (ui->checkBoxHideEmpty->isChecked() && m->IsNotUsed())
+        {
+            continue; // skip this measurement
+        }
         currentRow++;
 
         QTableWidgetItem *item = new QTableWidgetItem(QString(iMap.key()));
@@ -210,6 +220,7 @@ void DialogIncrements::FillMeasurements()
     ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetMeasurements->resizeColumnsToContents();
     ui->tableWidgetMeasurements->resizeRowsToContents();
+    ui->tableWidgetMeasurements->setRowCount(currentRow);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,10 +351,7 @@ void DialogIncrements::FillLengthArcs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update information in tables form file
- */
-void DialogIncrements::FullUpdateFromFile()
+void DialogIncrements::ShowMeasurements()
 {
     if (qApp->patternType() == MeasurementsType::Individual)
     {
@@ -356,6 +364,15 @@ void DialogIncrements::FullUpdateFromFile()
     {
         ui->tableWidgetMeasurements->blockSignals(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update information in tables form file
+ */
+void DialogIncrements::FullUpdateFromFile()
+{
+    ShowMeasurements();
 
     ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->clearContents();

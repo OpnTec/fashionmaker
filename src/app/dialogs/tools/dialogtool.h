@@ -36,6 +36,7 @@
 #include <QRadioButton>
 #include "../../widgets/vapplication.h"
 #include <QPushButton>
+#include <QCheckBox>
 
 class QDoubleSpinBox;
 class QLabel;
@@ -187,6 +188,8 @@ protected:
 
     QRadioButton     *radioButtonAngleLine;
 
+    QCheckBox        *checkBoxHideEmpty;
+
     /** @brief lineStyles list supported line styles. */
     QStringList      lineStyles;
     const QColor     okColor;
@@ -259,6 +262,7 @@ protected:
         radioButtonLengthArc = ui->radioButtonLengthArc;
         radioButtonLengthCurve = ui->radioButtonLengthSpline;
         radioButtonAngleLine = ui->radioButtonAngleLine;
+        checkBoxHideEmpty = ui->checkBoxHideEmpty;
 
         connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
 
@@ -279,6 +283,7 @@ protected:
         connect(radioButtonLengthArc, &QRadioButton::clicked, this, &DialogTool::LengthArcs);
         connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
         connect(radioButtonAngleLine, &QRadioButton::clicked, this, &DialogTool::AngleLines);
+        connect(checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogTool::Measurements);
     }
     template <typename T>
     /**

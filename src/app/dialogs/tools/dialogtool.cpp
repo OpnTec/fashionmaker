@@ -62,9 +62,9 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       listWidget(nullptr), labelResultCalculation(nullptr), labelDescription(nullptr), labelEditNamePoint(nullptr),
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
-      radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), lineStyles(VAbstractTool::Styles()),
-      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr), toolId(toolId), prepare(false),
-      pointName(QString())
+      radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), checkBoxHideEmpty(nullptr),
+      lineStyles(VAbstractTool::Styles()), okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
+      toolId(toolId), prepare(false), pointName(QString())
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -863,6 +863,8 @@ void DialogTool::SizeHeight()
  */
 void DialogTool::Measurements()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(true);
     ShowVariable(data->DataMeasurements());
 }
 
@@ -872,6 +874,8 @@ void DialogTool::Measurements()
  */
 void DialogTool::LengthLines()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataLengthLines());
 }
 
@@ -881,6 +885,8 @@ void DialogTool::LengthLines()
  */
 void DialogTool::LengthArcs()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataLengthArcs());
 }
 
@@ -890,12 +896,16 @@ void DialogTool::LengthArcs()
  */
 void DialogTool::LengthCurves()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataLengthSplines());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::AngleLines()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataAngleLines());
 }
 
@@ -905,6 +915,8 @@ void DialogTool::AngleLines()
  */
 void DialogTool::Increments()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataIncrements());
 }
 
@@ -1068,6 +1080,7 @@ template <class key, class val>
 void DialogTool::ShowVariable(const QMap<key, val> var)
 {
     SCASSERT(listWidget != nullptr);
+    SCASSERT(checkBoxHideEmpty != nullptr);
     listWidget->blockSignals(true);
     listWidget->clear();
 
@@ -1075,6 +1088,10 @@ void DialogTool::ShowVariable(const QMap<key, val> var)
     while (iMap.hasNext())
     {
         iMap.next();
+        if (checkBoxHideEmpty->isEnabled() && checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
+        {
+            continue; //skip this measurement
+        }
         if (iMap.value()->Filter(toolId) == false)
         {// If we create this variable don't show
             QListWidgetItem *item = new QListWidgetItem(iMap.key());

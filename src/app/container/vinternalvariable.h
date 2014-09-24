@@ -54,6 +54,8 @@ public:
     void         SetType(const VarType &type);
 
     virtual bool Filter(quint32 id);
+
+    virtual bool IsNotUsed() const;
 private:
     QSharedDataPointer<VInternalVariableData> d;
 };

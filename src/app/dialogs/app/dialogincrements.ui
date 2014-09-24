@@ -39,7 +39,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabStandard">
       <property name="sizePolicy">
@@ -108,7 +108,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="pagePersonalInformation">
           <property name="enabled">
@@ -289,7 +289,14 @@
           <attribute name="label">
            <string>Measurements</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QCheckBox" name="checkBoxHideEmpty">
+             <property name="text">
+              <string>Hide empty measurements</string>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QTableWidget" name="tableWidgetMeasurements">
              <property name="enabled">
@@ -380,6 +387,21 @@
        <string>Increments</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="1">
+        <widget class="QToolButton" name="toolButtonRemove">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="list-remove">
+           <normaloff/>
+          </iconset>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0" colspan="3">
         <widget class="QTableWidget" name="tableWidgetIncrement">
          <property name="alternatingRowColors">
@@ -463,21 +485,6 @@
          </property>
          <property name="icon">
           <iconset theme="list-add">
-           <normaloff/>
-          </iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QToolButton" name="toolButtonRemove">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string notr="true">...</string>
-         </property>
-         <property name="icon">
-          <iconset theme="list-remove">
            <normaloff/>
           </iconset>
          </property>

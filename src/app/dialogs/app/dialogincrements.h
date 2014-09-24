@@ -61,6 +61,7 @@ public slots:
     void                 SaveSex(int index);
     void                 SaveBirthDate(const QDate & date);
     void                 OpenTable();
+    void                 ShowMeasurements();
 signals:
     /**
      * @brief FullUpdateTree signal update data for dom document

@@ -35,7 +35,6 @@
 VVariable::VVariable()
     :VInternalVariable(), d(new VVariableData)
 {
-    Init();
     VInternalVariable::SetValue(d->base);
 }
 
@@ -52,7 +51,6 @@ VVariable::VVariable(const QString &name, const qreal &base, const qreal &ksize,
 VVariable::VVariable(const QString &name, const qreal &base, const QString &description)
     :d(new VVariableData(base, description))
 {
-    Init();
     VInternalVariable::SetValue(base);
     SetName(name);
 }
@@ -98,12 +96,15 @@ void VVariable::SetValue(const qreal &size, const qreal &height)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VVariable::Init()
+bool VVariable::IsNotUsed() const
 {
-    if (qApp->patternUnit() != Unit::Inch)
+    if (qFuzzyCompare(d->base+1, 0+1) && qFuzzyCompare(d->ksize+1, 0+1) && qFuzzyCompare(d->kheight+1, 0+1))
     {
-        d->ksize = VAbstractMeasurements::UnitConvertor(50.0, Unit::Cm, qApp->patternUnit());
-        d->kheight = VAbstractMeasurements::UnitConvertor(176.0, Unit::Cm, qApp->patternUnit());
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

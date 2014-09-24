@@ -20,7 +20,7 @@
 <context>
     <name>AddToCalc</name>
     <message>
-        <location filename="../../undocommands/addtocalc.cpp" line="36"/>
+        <location filename="../../undocommands/addtocalc.cpp" line="40"/>
         <source>Add object</source>
         <translation>Додати обєкт</translation>
     </message>
@@ -380,7 +380,12 @@
         <translation>Кути ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="412"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="414"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="424"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -560,7 +565,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="732"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="734"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="744"/>
         <source>Variables</source>
         <translation>Змінні</translation>
     </message>
@@ -672,7 +682,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="445"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="447"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="457"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -816,7 +831,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="376"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="378"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="388"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -921,7 +941,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="376"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="378"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="388"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -1026,7 +1051,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="376"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="378"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="388"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -1178,7 +1208,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="347"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="349"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="359"/>
         <source>Variables</source>
         <translation>Змінні</translation>
     </message>
@@ -1267,9 +1302,18 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="576"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="578"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="588"/>
+        <source>Variables</source>
+        <translation>Змінні</translation>
+    </message>
+    <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Змінні - клікніть двічі для вставки в формулу</translation>
+        <translation type="vanished">Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
     <message>
         <source>Angle of line</source>
@@ -1485,7 +1529,7 @@
     <name>DialogIncrements</name>
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="20"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="380"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="387"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
@@ -1530,26 +1574,31 @@
         <translation>Стать</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="342"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="429"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="296"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="349"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="451"/>
         <source>Name</source>
         <translation>Позначення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="347"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="434"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="354"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="456"/>
         <source>The calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="352"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="439"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="359"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="461"/>
         <source>Base value</source>
         <translation>Базове значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="357"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="444"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="364"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="466"/>
         <source>In sizes</source>
         <translation>В розмірах</translation>
     </message>
@@ -1558,9 +1607,9 @@
         <translation type="vanished">В ростах</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="367"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="454"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="539"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="374"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="476"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="556"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1578,18 +1627,18 @@
         <translation>E-mail</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="362"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="449"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="369"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="471"/>
         <source>In heights</source>
         <translation>В ростах</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="490"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="497"/>
         <source>Lines</source>
         <translation>Лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="515"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="522"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
@@ -1598,12 +1647,12 @@
         <translation type="obsolete">Довжина лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="529"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="536"/>
         <source>Curves</source>
         <translation>Криві</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="554"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="561"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
@@ -1612,12 +1661,12 @@
         <translation type="obsolete">Довжина кривої</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="568"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="575"/>
         <source>Arcs</source>
         <translation>Дуги</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="593"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="600"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -1631,50 +1680,50 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialogincrements.cpp" line="67"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="455"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="511"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="472"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="528"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="105"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="110"/>
         <source>male</source>
         <translation>чоловік</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="106"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="111"/>
         <source>female</source>
         <translation>жінка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="430"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="447"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation>Мірки використовують інші одиниці виміри ніж лекало. Це лекало потребує мірок в %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="434"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="451"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="439"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="479"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="456"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="496"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="463"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="495"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="480"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="512"/>
         <source>Wrong units.</source>
         <translation>Неправильні одиниці виміру.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="478"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="495"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Стандартні мірки (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="534"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="551"/>
         <source>Name_%1</source>
         <translation>Name_%1</translation>
     </message>
@@ -1687,9 +1736,9 @@
         <translation type="obsolete">Розраховане значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="520"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="559"/>
-        <location filename="../../dialogs/app/dialogincrements.ui" line="598"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="527"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="566"/>
+        <location filename="../../dialogs/app/dialogincrements.ui" line="605"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
@@ -2024,7 +2073,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="617"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="619"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="629"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -2328,7 +2382,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="457"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="459"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="469"/>
         <source>Variables - Click twice to insert into formula.</source>
         <translation>Змінні - клікніть двічі для вставки в формулу.</translation>
     </message>
@@ -2493,7 +2552,12 @@
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="484"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="486"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="496"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -2756,27 +2820,27 @@
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="958"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="970"/>
         <source>Height</source>
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="963"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="975"/>
         <source>Size</source>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="989"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1001"/>
         <source>Line length</source>
         <translation>Довжина лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="997"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1009"/>
         <source>Arc length</source>
         <translation>Довжина дуги</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1005"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1017"/>
         <source>Curve length</source>
         <translation>Довжина кривої</translation>
     </message>
@@ -3366,7 +3430,7 @@
         <translation>Властивості лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1242"/>
+        <location filename="../../mainwindow.cpp" line="1244"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
@@ -3578,7 +3642,7 @@
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="675"/>
+        <location filename="../../mainwindow.cpp" line="677"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -3607,119 +3671,119 @@
         <translation type="vanished">Помилка збереження змін!!!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="399"/>
-        <location filename="../../mainwindow.cpp" line="424"/>
+        <location filename="../../mainwindow.cpp" line="401"/>
+        <location filename="../../mainwindow.cpp" line="426"/>
         <source>Select point</source>
         <translation>Виберість точку</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="411"/>
+        <location filename="../../mainwindow.cpp" line="413"/>
         <source>Select first point</source>
         <translation>Виберіть першу точку</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="436"/>
+        <location filename="../../mainwindow.cpp" line="438"/>
         <source>Select point of shoulder</source>
         <translation>Виберіть точку плеча</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="449"/>
-        <location filename="../../mainwindow.cpp" line="552"/>
+        <location filename="../../mainwindow.cpp" line="451"/>
+        <location filename="../../mainwindow.cpp" line="554"/>
         <source>Select first point of line</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="462"/>
+        <location filename="../../mainwindow.cpp" line="464"/>
         <source>Select first point of angle</source>
         <translation>Виберіть першу точку кута</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="475"/>
+        <location filename="../../mainwindow.cpp" line="477"/>
         <source>Select first point of first line</source>
         <translation>Виберіть першу точку першої лінії</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="488"/>
+        <location filename="../../mainwindow.cpp" line="490"/>
         <source>Select first point curve</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="514"/>
+        <location filename="../../mainwindow.cpp" line="516"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="526"/>
+        <location filename="../../mainwindow.cpp" line="528"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="792"/>
+        <location filename="../../mainwindow.cpp" line="794"/>
         <source>Size: </source>
         <translation>Розмір:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1236"/>
+        <location filename="../../mainwindow.cpp" line="1238"/>
         <source>pattern</source>
         <translation>Лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1394"/>
+        <location filename="../../mainwindow.cpp" line="1396"/>
         <source>Critical error!</source>
         <translation>Критична помилка!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1394"/>
+        <location filename="../../mainwindow.cpp" line="1396"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Помилка парсінгу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1428"/>
+        <location filename="../../mainwindow.cpp" line="1430"/>
         <source>Bad id.</source>
         <translation>Поганий id.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1955"/>
+        <location filename="../../mainwindow.cpp" line="1957"/>
         <source>&amp;Undo</source>
         <translation>&amp;Відмінити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1961"/>
+        <location filename="../../mainwindow.cpp" line="1963"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2134"/>
+        <location filename="../../mainwindow.cpp" line="2136"/>
         <source>Wrong units.</source>
         <translation>Неправильні одиниці виміру.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2135"/>
+        <location filename="../../mainwindow.cpp" line="2137"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation>Програма не підтримує стандарнту таблицю з дюймами.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2150"/>
+        <location filename="../../mainwindow.cpp" line="2152"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2178"/>
+        <location filename="../../mainwindow.cpp" line="2180"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation>Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2179"/>
+        <location filename="../../mainwindow.cpp" line="2181"/>
         <source>could not be found. Do you want to update the file location</source>
         <translation>не може бути знайдений. Ви хочете оновити шлях до файлу</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2192"/>
+        <location filename="../../mainwindow.cpp" line="2194"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Стандартні мірки (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2196"/>
+        <location filename="../../mainwindow.cpp" line="2198"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Індивідуальні мірки (*.vit)</translation>
     </message>
@@ -3736,12 +3800,12 @@
         <translation type="vanished">Помилка. Креслення з таким імям уже існує.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2063"/>
+        <location filename="../../mainwindow.cpp" line="2065"/>
         <source>Pattern piece:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2065"/>
+        <location filename="../../mainwindow.cpp" line="2067"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введить нове ім&apos;я для креслення.</translation>
     </message>
@@ -3786,8 +3850,8 @@
         <translation type="obsolete">Помилка збереження файлу. Не можу зберегти файл.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1299"/>
-        <location filename="../../mainwindow.cpp" line="2198"/>
+        <location filename="../../mainwindow.cpp" line="1301"/>
+        <location filename="../../mainwindow.cpp" line="2200"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
@@ -3828,7 +3892,7 @@
         <translation type="vanished">Помилка!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="565"/>
+        <location filename="../../mainwindow.cpp" line="567"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
     </message>
@@ -3842,37 +3906,37 @@
         <translation type="vanished">Помилка створення лекала з ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="501"/>
+        <location filename="../../mainwindow.cpp" line="503"/>
         <source>Select simple curve</source>
         <translation>Виберіть просту криву</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="539"/>
+        <location filename="../../mainwindow.cpp" line="541"/>
         <source>Select curve path</source>
         <translation>Виберіть складну криву</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="590"/>
+        <location filename="../../mainwindow.cpp" line="592"/>
         <source>Select base point</source>
         <translation>Виберіть базову точку</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="603"/>
+        <location filename="../../mainwindow.cpp" line="605"/>
         <source>Select first point of axis</source>
         <translation>Виберіть першу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="617"/>
+        <location filename="../../mainwindow.cpp" line="619"/>
         <source>Select point vertically</source>
         <translation>Виберіть точку по вертикалі</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="630"/>
+        <location filename="../../mainwindow.cpp" line="632"/>
         <source>Select detail</source>
         <translation>Виберіть деталь</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="654"/>
+        <location filename="../../mainwindow.cpp" line="656"/>
         <source>Select arc</source>
         <translation>Виберіть дугу</translation>
     </message>
@@ -3885,28 +3949,28 @@
         <translation type="vanished">Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="787"/>
+        <location filename="../../mainwindow.cpp" line="789"/>
         <source>Height: </source>
         <translation>Зріст:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="856"/>
+        <location filename="../../mainwindow.cpp" line="858"/>
         <source>Pattern Piece: </source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1231"/>
-        <location filename="../../mainwindow.cpp" line="1286"/>
+        <location filename="../../mainwindow.cpp" line="1233"/>
+        <location filename="../../mainwindow.cpp" line="1288"/>
         <source>Pattern files (*.val)</source>
         <translation>Файл лекала (*.val)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1240"/>
+        <location filename="../../mainwindow.cpp" line="1242"/>
         <source>/pattern.val</source>
         <translation>/викрійка.val</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1792"/>
+        <location filename="../../mainwindow.cpp" line="1794"/>
         <source>File saved</source>
         <translation>Файл збережено</translation>
     </message>
@@ -3915,17 +3979,17 @@
         <translation type="vanished">Не можу зберегти лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1829"/>
+        <location filename="../../mainwindow.cpp" line="1831"/>
         <source>untitled.val</source>
         <translation>безімений.val</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1905"/>
+        <location filename="../../mainwindow.cpp" line="1907"/>
         <source>Unsaved change</source>
         <translation>Незбережені зміни</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1905"/>
+        <location filename="../../mainwindow.cpp" line="1907"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
         <translation>Лекало було змінено. Ви хочете зберегти ваші зміни?</translation>
@@ -3940,7 +4004,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не можу прочитати файл%1:\n%2. </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2164"/>
+        <location filename="../../mainwindow.cpp" line="2166"/>
         <source>File loaded</source>
         <translation>Файл завантажено</translation>
     </message>
@@ -3961,24 +4025,24 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Не можу відкрити файл викрійки. Ім&apos;я файлу пусте</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1361"/>
-        <location filename="../../mainwindow.cpp" line="1385"/>
+        <location filename="../../mainwindow.cpp" line="1363"/>
+        <location filename="../../mainwindow.cpp" line="1387"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1367"/>
+        <location filename="../../mainwindow.cpp" line="1369"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1373"/>
-        <location filename="../../mainwindow.cpp" line="1434"/>
+        <location filename="../../mainwindow.cpp" line="1375"/>
+        <location filename="../../mainwindow.cpp" line="1436"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1379"/>
+        <location filename="../../mainwindow.cpp" line="1381"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
@@ -7584,12 +7648,12 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="175"/>
+        <location filename="../../main.cpp" line="179"/>
         <source>Pattern making program.</source>
         <translation>Програма створення викрійок.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="178"/>
+        <location filename="../../main.cpp" line="182"/>
         <source>Pattern file.</source>
         <translation>Файл лекала.</translation>
     </message>

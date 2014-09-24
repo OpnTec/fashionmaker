@@ -57,9 +57,10 @@ public:
     void    SetDescription(const QString &desc);
 
     void    SetValue(const qreal &size, const qreal &height);
+
+    virtual bool IsNotUsed() const;
 private:
     QSharedDataPointer<VVariableData> d;
-    void    Init();
 };
 
 #endif // VVARIABLE_H
