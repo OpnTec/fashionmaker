@@ -573,7 +573,7 @@
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="toolTip">
-        <string>Variables - Click twice to insert into formula</string>
+        <string>Variables</string>
        </property>
       </widget>
      </item>
