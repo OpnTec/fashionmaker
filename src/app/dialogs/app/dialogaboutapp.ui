@@ -188,9 +188,6 @@
          <property name="horizontalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
-         </property>
          <property name="autoFormatting">
           <set>QTextEdit::AutoNone</set>
          </property>

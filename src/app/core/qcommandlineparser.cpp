@@ -40,9 +40,9 @@
 **
 ****************************************************************************/
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
-
 #include "qcommandlineparser.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
 
 #include <QCoreApplication>
 #include <QHash>
@@ -51,6 +51,13 @@
 #include <stdlib.h>
 
 typedef QHash<QString, int> NameHash_t;
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+    #pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
+#endif
 
 class QCommandLineParserPrivate
 {
@@ -944,5 +951,9 @@ QString QCommandLineParserPrivate::helpText() const
     }
     return text;
 }
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif //QT_VERSION < QT_VERSION_CHECK(5, 2, 1)

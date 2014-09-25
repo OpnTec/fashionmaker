@@ -42,12 +42,19 @@
 #ifndef QCOMMANDLINEPARSER_H
 #define QCOMMANDLINEPARSER_H
 
+#include <QtGlobal>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
 
 #include <QStringList>
 #include <QCoreApplication>
 
 #include "qcommandlineoption.h"
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
 
 class QCommandLineParserPrivate;
 class QCoreApplication;
@@ -100,6 +107,10 @@ private:
 
     QCommandLineParserPrivate * const d;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif //QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
 

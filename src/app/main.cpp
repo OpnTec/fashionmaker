@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(theme);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.1");
+    QT_REQUIRE_VERSION(argc, argv, "5.0.2");
 
     VApplication app(argc, argv);
 #ifdef QT_DEBUG

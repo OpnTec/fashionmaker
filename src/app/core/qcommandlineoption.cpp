@@ -40,11 +40,16 @@
 **
 ****************************************************************************/
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
-
 #include "qcommandlineoption.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
+
 #include <QSet>
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
 
 class QCommandLineOptionPrivate : public QSharedData
 {
@@ -67,6 +72,10 @@ public:
     //! The list of default values used for this option.
     QStringList defaultValues;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 /*!
     \since 5.2

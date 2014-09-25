@@ -42,10 +42,17 @@
 #ifndef QCOMMANDLINEOPTION_H
 #define QCOMMANDLINEOPTION_H
 
+#include <QtGlobal>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
 
 #include <QStringList>
 #include <QSharedData>
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
 
 class QCommandLineOptionPrivate;
 
@@ -79,6 +86,10 @@ public:
 private:
     QSharedDataPointer<QCommandLineOptionPrivate> d;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif //QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
 
