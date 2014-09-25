@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vsimplecurve.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 #include <QStyleOptionGraphicsItem>

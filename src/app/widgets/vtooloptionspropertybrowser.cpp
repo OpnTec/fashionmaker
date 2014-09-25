@@ -28,7 +28,7 @@
 
 #include "vtooloptionspropertybrowser.h"
 #include "tools/drawTools/drawtools.h"
-#include "widgets/vapplication.h"
+#include "core/vapplication.h"
 #include "widgets/vmaingraphicsview.h"
 #include "visualization/vgraphicssimpletextitem.h"
 #include "visualization/vcontrolpointspline.h"

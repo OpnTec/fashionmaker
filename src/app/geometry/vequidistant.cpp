@@ -31,7 +31,7 @@
 #include "vpointf.h"
 #include "vspline.h"
 #include "vsplinepath.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include <QDebug>
 #include <QPainterPath>
 #include "../container/vcontainer.h"

@@ -29,7 +29,6 @@
 #include "vabstractcurve.h"
 
 #include <QPainterPath>
-#include <QtMath>
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode)

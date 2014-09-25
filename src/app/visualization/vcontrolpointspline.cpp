@@ -32,7 +32,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 #include <QStyleOptionGraphicsItem>
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

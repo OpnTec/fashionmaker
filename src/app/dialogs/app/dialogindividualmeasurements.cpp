@@ -34,7 +34,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QDesktopWidget>
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------

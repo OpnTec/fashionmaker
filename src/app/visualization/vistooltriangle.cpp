@@ -30,7 +30,6 @@
 #include "../geometry/vpointf.h"
 #include "../container/vcontainer.h"
 #include "../tools/drawTools/vtooltriangle.h"
-#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)

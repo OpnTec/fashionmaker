@@ -28,7 +28,7 @@
 
 #include "pathpage.h"
 #include "../../../options.h"
-#include "../../../widgets/vapplication.h"
+#include "../../../core/vapplication.h"
 #include <QDir>
 #include <QGroupBox>
 #include <QLabel>

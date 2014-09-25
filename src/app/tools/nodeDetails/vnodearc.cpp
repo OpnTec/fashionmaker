@@ -28,7 +28,7 @@
 
 #include "vnodearc.h"
 
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../geometry/varc.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>

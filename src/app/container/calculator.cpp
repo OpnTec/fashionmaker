@@ -29,7 +29,7 @@
 #include "calculator.h"
 #include <QDebug>
 #include <QSettings>
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "vcontainer.h"
 
 using namespace qmu;

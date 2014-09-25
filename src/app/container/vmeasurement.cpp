@@ -28,7 +28,7 @@
 
 #include "vmeasurement.h"
 #include "vmeasurement_p.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../xml/vabstractmeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------

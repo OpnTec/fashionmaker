@@ -30,7 +30,7 @@
 #include <QDebug>
 #include "../../xml/vpattern.h"
 #include "../../undocommands/adddetnode.h"
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");

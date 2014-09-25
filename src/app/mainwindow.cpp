@@ -38,8 +38,8 @@
 #include "version.h"
 #include "xml/vstandardmeasurements.h"
 #include "xml/vindividualmeasurements.h"
-#include "widgets/vapplication.h"
-#include "widgets/undoevent.h"
+#include "core/vapplication.h"
+#include "core/undoevent.h"
 #include "undocommands/renamepp.h"
 #include "vtooloptionspropertybrowser.h"
 

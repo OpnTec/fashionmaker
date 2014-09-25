@@ -28,7 +28,7 @@
 
 #include "vnodesplinepath.h"
 
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../geometry/vsplinepath.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>

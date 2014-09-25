@@ -28,7 +28,7 @@
 
 #include "vnodepoint.h"
 
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../geometry/vpointf.h"
 #include "../../visualization/vgraphicssimpletextitem.h"
 #include <QPen>

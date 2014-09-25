@@ -27,11 +27,17 @@
  *************************************************************************/
 
 #include "mainwindow.h"
-#include "widgets/vapplication.h"
+#include "core/vapplication.h"
 #include <QTextCodec>
 #include <QMessageBox>
 #include <QThread>
-#include <QCommandLineParser>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
+    #include "core/qcommandlineparser.h"
+#else
+    #include <QCommandLineParser>
+#endif
+
 #include <QLibraryInfo>
 #include "tablewindow.h"
 #include "version.h"

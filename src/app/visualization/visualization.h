@@ -31,7 +31,7 @@
 
 #include <QObject>
 #include <QGraphicsItem>
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
 
 class VContainer;

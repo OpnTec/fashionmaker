@@ -29,7 +29,7 @@
 #include "vlineangle.h"
 #include "vlineangle_p.h"
 #include "../geometry/vpointf.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 #include <QLineF>
 

@@ -32,7 +32,7 @@
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolline.h"
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 

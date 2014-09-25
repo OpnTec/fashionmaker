@@ -30,7 +30,7 @@
 #include <QGraphicsView>
 #include <QMessageBox>
 #include "../undocommands/deltool.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../geometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
 

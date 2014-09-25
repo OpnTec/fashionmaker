@@ -28,7 +28,7 @@
 
 #include "communitypage.h"
 #include "../../../options.h"
-#include "../../../widgets/vapplication.h"
+#include "../../../core/vapplication.h"
 #include <QGroupBox>
 #include <QLabel>
 #include <QSettings>

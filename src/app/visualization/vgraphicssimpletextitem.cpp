@@ -33,7 +33,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

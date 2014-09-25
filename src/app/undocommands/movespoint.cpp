@@ -31,7 +31,7 @@
 #include <QDomElement>
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,

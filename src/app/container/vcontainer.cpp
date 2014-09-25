@@ -28,7 +28,7 @@
 
 #include "vcontainer.h"
 #include <QDebug>
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
 #include <QLineF>

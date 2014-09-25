@@ -29,7 +29,7 @@
 #include "vformula.h"
 #include "../container/calculator.h"
 #include "../container/vcontainer.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------

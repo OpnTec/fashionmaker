@@ -34,7 +34,7 @@
 #include "../../geometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
 #include "../../../libs/qmuparser/qmuparsererror.h"
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../xml/vdomdocument.h"
 #include <QTimer>
 #include <QCloseEvent>

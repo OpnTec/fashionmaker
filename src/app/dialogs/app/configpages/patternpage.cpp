@@ -28,7 +28,7 @@
 
 #include "patternpage.h"
 #include "../../../options.h"
-#include "../../../widgets/vapplication.h"
+#include "../../../core/vapplication.h"
 #include "../../../widgets/vmaingraphicsview.h"
 #include <QGroupBox>
 #include <QLabel>

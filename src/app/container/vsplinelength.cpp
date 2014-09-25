@@ -28,7 +28,7 @@
 
 #include "vsplinelength.h"
 #include "../geometry/vabstractcurve.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplineLength::VSplineLength()

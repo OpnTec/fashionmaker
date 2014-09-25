@@ -28,7 +28,7 @@
 
 #include "vvariable.h"
 #include "vvariable_p.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../xml/vabstractmeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------

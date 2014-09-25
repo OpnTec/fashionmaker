@@ -37,7 +37,7 @@
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionundo.h"
-#include "../widgets/undoevent.h"
+#include "../core/undoevent.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
 #include "../../libs/qmuparser/qmuparsererror.h"
@@ -45,7 +45,6 @@
 
 #include <QMessageBox>
 #include <QUndoStack>
-#include <QtMath>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");

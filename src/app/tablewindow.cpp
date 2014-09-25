@@ -31,7 +31,7 @@
 #include "widgets/vtablegraphicsview.h"
 #include <QtSvg>
 #include <QPrinter>
-#include "widgets/vapplication.h"
+#include "core/vapplication.h"
 
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"

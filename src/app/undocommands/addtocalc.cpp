@@ -29,7 +29,7 @@
 #include "addtocalc.h"
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../widgets/vmaingraphicsview.h"
 

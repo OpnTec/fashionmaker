@@ -30,7 +30,7 @@
 #include "ui_dialogpatternproperties.h"
 #include <QPushButton>
 #include "../../xml/vpattern.h"
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 
 #define MAX_HEIGHTS 18
 #define MAX_SIZES 18

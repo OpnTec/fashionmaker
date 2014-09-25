@@ -40,8 +40,6 @@
 #include <QProcess>
 #include <QUndoStack>
 
-#include <QtMath>
-
 const qreal VApplication::PrintDPI = 96.0;
 
 #define DefWidth 1.2//mm

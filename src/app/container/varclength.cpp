@@ -28,7 +28,7 @@
 
 #include "varclength.h"
 #include "../geometry/vabstractcurve.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcLength::VArcLength()

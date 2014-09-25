@@ -32,7 +32,7 @@
 #include <QPushButton>
 #include <QDesktopWidget>
 #include "../../xml/vstandardmeasurements.h"
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------

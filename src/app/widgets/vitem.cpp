@@ -30,7 +30,7 @@
 
 #include <QGraphicsScene>
 #include <QDebug>
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

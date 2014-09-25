@@ -28,7 +28,7 @@
 
 #include "vcurvelength.h"
 #include "vcurvelength_p.h"
-#include "../widgets/vapplication.h"
+#include "../core/vapplication.h"
 #include "../geometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------

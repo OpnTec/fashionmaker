@@ -34,7 +34,7 @@
 #include <QLineEdit>
 #include <QListWidget>
 #include <QRadioButton>
-#include "../../widgets/vapplication.h"
+#include "../../core/vapplication.h"
 #include <QPushButton>
 #include <QCheckBox>
 

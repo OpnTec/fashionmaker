@@ -32,7 +32,6 @@
 #include "../tools/vabstracttool.h"
 
 #include <QGraphicsScene>
-#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
