@@ -33,6 +33,7 @@
 #include "../core/vapplication.h"
 #include "../geometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
+#include "../widgets/vmaingraphicsview.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -249,16 +250,20 @@ QPointF VAbstractTool::addVector(const QPointF &p, const QPointF &p1, const QPoi
  */
 void VAbstractTool::DeleteTool(bool ask)
 {
-    if (ask)
+    if (_referens <= 1)
     {
-        if (ConfirmDeletion() == QMessageBox::Cancel)
+        qApp->getSceneView()->itemClicked(nullptr);
+        if (ask)
         {
-            return;
+            if (ConfirmDeletion() == QMessageBox::Cancel)
+            {
+                return;
+            }
         }
+        DelTool *delTool = new DelTool(doc, id);
+        connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+        qApp->getUndoStack()->push(delTool);
     }
-    DelTool *delTool = new DelTool(doc, id);
-    connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -33,6 +33,7 @@
 #include "../options.h"
 #include "vtranslation.h"
 #include <QSettings>
+#include "../widgets/vmaingraphicsview.h"
 
 class VApplication;// used in define
 class QUndoStack;

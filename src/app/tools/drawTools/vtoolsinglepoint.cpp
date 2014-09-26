@@ -168,17 +168,21 @@ void VToolSinglePoint::decrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::DeleteTool(bool ask)
 {
-    if (ask)
+    if (_referens <= 1)
     {
-        if (ConfirmDeletion() == QMessageBox::Cancel)
+        qApp->getSceneView()->itemClicked(nullptr);
+        if (ask)
         {
-            return;
+            if (ConfirmDeletion() == QMessageBox::Cancel)
+            {
+                return;
+            }
         }
-    }
 
-    DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
-    connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(deletePP);
+        DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
+        connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+        qApp->getUndoStack()->push(deletePP);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -36,7 +36,6 @@
 #include "../../dialogs/tools/dialogtool.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"
-#include "../../widgets/vmaingraphicsview.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
@@ -138,7 +137,6 @@ protected:
             }
             if (selectedAction == actionRemove)
             {
-                qApp->getSceneView()->itemClicked(nullptr);
                 DeleteTool();
             }
         }
