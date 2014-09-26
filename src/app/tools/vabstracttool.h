@@ -103,7 +103,7 @@ public:
     const VContainer        *getData() const;
 
     QString                 getLineType() const;
-    void                    setTypeLine(const QString &value);
+    virtual void            setTypeLine(const QString &value);
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;

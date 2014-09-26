@@ -446,6 +446,15 @@ void VToolLine::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::setTypeLine(const QString &value)
+{
+    typeLine = value;
+
+    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLine::getFirstPoint() const
 {
     return firstPoint;
