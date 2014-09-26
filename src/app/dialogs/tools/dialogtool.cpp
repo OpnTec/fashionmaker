@@ -601,6 +601,12 @@ void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowL
        buttonGrowLength->setIcon(QIcon::fromTheme("go-down",
                                                   QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
     }
+
+    // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
+    // This code prevent this.
+    setUpdatesEnabled(false);
+    repaint();
+    setUpdatesEnabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
