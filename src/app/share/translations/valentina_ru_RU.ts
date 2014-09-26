@@ -3040,7 +3040,7 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location line="+505"/>
+        <location line="+511"/>
         <source>Height</source>
         <translation>Рост</translation>
     </message>
@@ -3198,7 +3198,7 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+1208"/>
+        <location filename="../../core/vapplication.cpp" line="+1206"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
@@ -4300,7 +4300,7 @@ Do you want to save your changes?</source>
 <context>
     <name>Measurements</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="-938"/>
+        <location filename="../../core/vapplication.cpp" line="-938"/>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Огол</translation>
@@ -7631,7 +7631,7 @@ Do you want to save your changes?</source>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+49"/>
+        <location filename="../../core/vapplication.cpp" line="+49"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation>см</translation>
@@ -7647,6 +7647,59 @@ Do you want to save your changes?</source>
         <source>in</source>
         <comment>inch</comment>
         <translation>дюйм</translation>
+    </message>
+</context>
+<context>
+    <name>QCommandLineParser</name>
+    <message>
+        <location filename="../../core/qcommandlineparser.cpp" line="+290"/>
+        <source>Displays version information.</source>
+        <translation>Показать информацию о версии.</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Displays this help.</source>
+        <translation>Показать эту справку.</translation>
+    </message>
+    <message>
+        <location line="+92"/>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation>Неизвестный параметр &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unknown options: %1.</source>
+        <translation>Неизвестные параметры: %1.</translation>
+    </message>
+    <message>
+        <location line="+92"/>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation>Пропущено значение после &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation>Неожиданое значение после &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <location line="+401"/>
+        <source>[options]</source>
+        <translation>[параметры]</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Usage: %1</source>
+        <translation>Использование: %1</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Options:</source>
+        <translation>Параметры:</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Arguments:</source>
+        <translation>Аргументы:</translation>
     </message>
 </context>
 <context>
@@ -7699,7 +7752,7 @@ Do you want to save your changes?</source>
 <context>
     <name>STDescriptions</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+6"/>
+        <location filename="../../core/vapplication.cpp" line="+6"/>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
         <translation>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</translation>
@@ -7917,7 +7970,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="-1133"/>
+        <location filename="../../core/vapplication.cpp" line="-1133"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
     </message>
@@ -8205,6 +8258,19 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VFormulaProperty</name>
+    <message>
+        <location filename="../../widgets/vformulaproperty.cpp" line="+47"/>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Formula</source>
+        <translation>Формула</translation>
+    </message>
+</context>
+<context>
     <name>VFormulaPropertyEditor</name>
     <message>
         <location filename="../../widgets/vformulapropertyeditor.cpp" line="+52"/>
@@ -8226,7 +8292,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="+374"/>
+        <location filename="../../xml/vpattern.cpp" line="+373"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
         <translation>Не могу найти инструмент с id = %1 в таблице.</translation>
     </message>
@@ -8650,7 +8716,7 @@ Do you want to save your changes?</source>
 <context>
     <name>Variables</name>
     <message>
-        <location filename="../../widgets/vapplication.cpp" line="+1059"/>
+        <location filename="../../core/vapplication.cpp" line="+1059"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Линия_</translation>
@@ -8692,7 +8758,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VisToolEndLine</name>
     <message>
-        <location filename="../../visualization/vistoolendline.cpp" line="+65"/>
+        <location filename="../../visualization/vistoolendline.cpp" line="+64"/>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Точка на конце отрезка&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
     </message>
@@ -8708,7 +8774,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+179"/>
+        <location filename="../../main.cpp" line="+185"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>

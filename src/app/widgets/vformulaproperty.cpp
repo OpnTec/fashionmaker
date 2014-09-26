@@ -44,13 +44,13 @@ VFormulaProperty::VFormulaProperty(const QString &name) :
 {
     d_ptr->type = Property::Complex;
 
-    VStringProperty* tmpValue = new VStringProperty(QStringLiteral("Value"));
+    VStringProperty* tmpValue = new VStringProperty(tr("Value"));
     addChild(tmpValue);
     tmpValue->setUpdateBehaviour(true, false);
     tmpValue->setReadOnly(true);
     tmpValue->setTypeForParent(static_cast<int>(ChildType::Value));
 
-    VStringProperty* tmpFormula = new VStringProperty(QStringLiteral("Formula"));
+    VStringProperty* tmpFormula = new VStringProperty(tr("Formula"));
     addChild(tmpFormula);
     tmpFormula->setUpdateBehaviour(true, false);
     tmpFormula->setTypeForParent(static_cast<int>(ChildType::Formula));
