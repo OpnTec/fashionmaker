@@ -26,7 +26,7 @@ Building the sources requires Qt 5.2.1 or later.
 Compiling Valentina
 ====================
 Prerequisites:   
-   * Qt 5.2.1 or later (On Unix development packages needed)   
+   * Qt 5.0.2 or later (On Unix development packages needed)   
    * mercurial   
    * On Unix:   
      - ccache   
@@ -34,7 +34,7 @@ Prerequisites:
        clang (clang 3.4 recommended)
      - xpdf package (tool pdftops).    
    * On Windows:   
-     - MinGW or Visual Studio   
+     - MinGW  
      - Xpdf is an open source viewer for Portable Document Format (PDF) 
      files. Website http://www.foolabs.com/xpdf/. Put tool pdftops.exe 
      in the same directory with Valentina's binary file.
