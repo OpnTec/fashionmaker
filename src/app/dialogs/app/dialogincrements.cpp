@@ -220,7 +220,7 @@ void DialogIncrements::FillMeasurements()
     ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetMeasurements->resizeColumnsToContents();
     ui->tableWidgetMeasurements->resizeRowsToContents();
-    ui->tableWidgetMeasurements->setRowCount(currentRow);
+    ui->tableWidgetMeasurements->setRowCount(currentRow+1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
