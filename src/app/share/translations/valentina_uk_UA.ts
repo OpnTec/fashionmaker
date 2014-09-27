@@ -4093,7 +4093,7 @@ Do you want to save your changes?</source>
         <location filename="../../core/vapplication.cpp" line="320"/>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>center_front_waist_length</translation>
+        <translation>Дпт</translation>
     </message>
     <message>
         <location filename="../../core/vapplication.cpp" line="327"/>
@@ -4423,7 +4423,7 @@ Do you want to save your changes?</source>
         <location filename="../../core/vapplication.cpp" line="702"/>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>underarm_length</translation>
+        <translation>Втр</translation>
     </message>
     <message>
         <location filename="../../core/vapplication.cpp" line="709"/>
@@ -4904,7 +4904,7 @@ Do you want to save your changes?</source>
         <location filename="../../core/vapplication.cpp" line="323"/>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Front Neck Center over tape at Bustline to Front Waist Center</translation>
+        <translation>Довжина переду до талії</translation>
     </message>
     <message>
         <location filename="../../core/vapplication.cpp" line="330"/>
@@ -5239,7 +5239,7 @@ Do you want to save your changes?</source>
         <location filename="../../core/vapplication.cpp" line="705"/>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
-        <translation>Armpit to Wrist, with arm straight and hanging at side</translation>
+        <translation>Внутрішня довжина рукава (з окатом)</translation>
     </message>
     <message>
         <location filename="../../core/vapplication.cpp" line="712"/>
@@ -5710,7 +5710,7 @@ Do you want to save your changes?</source>
         <location filename="../../core/vapplication.cpp" line="322"/>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Front Center length</translation>
+        <translation>Довжина переду до талії</translation>
     </message>
     <message>
         <location filename="../../core/vapplication.cpp" line="329"/>
@@ -6040,7 +6040,7 @@ Do you want to save your changes?</source>
         <location filename="../../core/vapplication.cpp" line="704"/>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
-        <translation>Довжина пахви</translation>
+        <translation>Внутрішня довжина рукава (з окатом)</translation>
     </message>
     <message>
         <location filename="../../core/vapplication.cpp" line="711"/>

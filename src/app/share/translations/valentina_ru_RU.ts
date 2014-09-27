@@ -4347,7 +4347,7 @@ Do you want to save your changes?</source>
         <location line="+8"/>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>center_front_waist_length</translation>
+        <translation>Дпт</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -4867,7 +4867,7 @@ Do you want to save your changes?</source>
         <location line="+7"/>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>underarm_length</translation>
+        <translation>Втр</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -5943,7 +5943,7 @@ Do you want to save your changes?</source>
         <location line="+8"/>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Front Neck Center over tape at Bustline to Front Waist Center</translation>
+        <translation>Длина переда до талии</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -6278,7 +6278,7 @@ Do you want to save your changes?</source>
         <location line="+7"/>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
-        <translation>Armpit to Wrist, with arm straight and hanging at side</translation>
+        <translation>Внутренняя длина рукава (с окатом)</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -6749,7 +6749,7 @@ Do you want to save your changes?</source>
         <location line="+8"/>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Front Center length</translation>
+        <translation>Длина переда до талии</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -7079,7 +7079,7 @@ Do you want to save your changes?</source>
         <location line="+7"/>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина подмышки</translation>
+        <translation>Внутренняя длина рукава (с окатом)</translation>
     </message>
     <message>
         <location line="+7"/>

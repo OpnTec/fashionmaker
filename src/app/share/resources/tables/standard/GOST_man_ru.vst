@@ -14,7 +14,7 @@
             <head_and_neck_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
         </head_and_neck>
         <torso>
-            <center_front_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <center_front_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Дпт(Длина переда до талии) Не используется в этой таблице-->
             <center_back_waist_length value="438" size_increase="2" height_increase ="10"/><!--Дтс(Длина спины до талии с учетом выступа лопаток)-->
             <shoulder_length value="160" size_increase="1" height_increase ="4"/><!--Шп(Длина плечевого ската)-->
             <side_waist_length value="0.0" size_increase="0" height_increase="0"/><!--Дб(Длина боковой части)-->
@@ -71,10 +71,10 @@
             <wrist_girth value="180" size_increase="4" height_increase ="0"/><!--Озап(Обхват запястья)-->
             <scye_depth value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <shoulder_and_arm_length value="768" size_increase="2" height_increase ="24"/><!--Дзап(Расстояние от точки основания шеи сбоку до линии обхвата запястья)-->
-            <underarm_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
+            <underarm_length value="0.0" size_increase="0" height_increase="0"/><!--Втр(Внутренняя длина рукава (с окатом)) Не используется в этой таблице-->
             <cervicale_to_wrist_length value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
             <shoulder_to_elbow_length value="338" size_increase="2" height_increase ="12"/><!--Дрлок(Длина руки до локтя)-->
-            <arm_length value="594" size_increase="3" height_increase ="19"/><!--Дрзап(Длина рукава до линии обхвата запястья)-->
+            <arm_length value="594" size_increase="3" height_increase ="19"/><!--Дрзап(Длина рукава от плеча до линии обхвата запястья)-->
         </arm>
         <hand>
             <hand_width value="0.0" size_increase="0" height_increase="0"/><!--Нету перевода-->
@@ -114,7 +114,7 @@
 			<height_under_buttock_folds value="811" size_increase="-1" height_increase ="36"/><!--Впс(Высота подъягодичной складки)-->
 			<hips_excluding_protruding_abdomen value="964" size_increase="24" height_increase ="12"/><!--ОбI(Обхват бедер без учета выступания живота)-->
 			<girth_foot_instep value="350" size_increase="2" height_increase ="8"/><!--Ос(Обхват подъема стопы)-->
-			<side_waist_to_floor value="1120" size_increase="0" height_increase ="44"/><!--Дсб(Расстояние от линии талии до пола сбоку)-->
+			<side_waist_to_floor value="1120" size_increase="0" height_increase ="44"/><!--Дсб(Расстояние от линии талии до пола сбоку (длина брюк))-->
 			<front_waist_to_floor value="1110" size_increase="0" height_increase ="43"/><!--Дсп(Расстояние от линии талии до пола спереди)-->
 			<arc_through_groin_area value="783" size_increase="14" height_increase ="15"/><!--Дпоб(Дуга через паховую область)-->
 			<waist_to_plane_seat value="260" size_increase="1" height_increase ="6"/><!--Вс(Расстояние от линии талии до плоскости сидения)-->
