@@ -291,10 +291,9 @@ void VToolSplinePath::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolSplinePath *visual = new VisToolSplinePath(getData());
+            VisToolSplinePath *visual = new VisToolSplinePath(getData(), this);
             VMainGraphicsScene *scene = qApp->getCurrentScene();
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
 
             QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
             visual->setPath(*splPath.data());

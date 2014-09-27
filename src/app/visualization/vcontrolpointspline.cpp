@@ -60,6 +60,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
     this->setPos(controlPoint);
+    this->setZValue(100);
 
     QPointF p1, p2;
     VAbstractTool::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
