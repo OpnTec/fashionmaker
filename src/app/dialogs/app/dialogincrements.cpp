@@ -165,10 +165,7 @@ void DialogIncrements::FillMeasurements()
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFont(QFont("Times", 12, QFont::Bold));
         item->setToolTip(m->GetGuiText());
-        // set the item non-editable (view only), and non-selectable
-        Qt::ItemFlags flags = item->flags();
-        flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
+        SetItemViewOnly(item);
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 0, item);
 
@@ -177,50 +174,41 @@ void DialogIncrements::FillMeasurements()
             QTableWidgetItem *item = new QTableWidgetItem(QString()
                                                           .setNum(data->GetTableValue(qApp->VarFromUser(iMap.key()))));
             item->setTextAlignment(Qt::AlignHCenter);
-            // set the item non-editable (view only), and non-selectable
-            Qt::ItemFlags flags = item->flags();
-            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-            item->setFlags(flags);
+            SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
         }
 
         item = new QTableWidgetItem(QString().setNum(m->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            SetItemViewOnly(item);
+        }
         ui->tableWidgetMeasurements->setItem(currentRow, 2, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
             QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
-            // set the item non-editable (view only), and non-selectable
-            Qt::ItemFlags flags = item->flags();
-            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-            item->setFlags(flags);
+            SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 3, item);// in sizes
 
             item = new QTableWidgetItem(QString().setNum(m->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
-            // set the item non-editable (view only), and non-selectable
-            flags = item->flags();
-            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-            item->setFlags(flags);
+            SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 4, item);// in heights
         }
 
         item = new QTableWidgetItem(m->GetDescription());
         item->setToolTip(m->GetDescription());
-        item->setTextAlignment(Qt::AlignHCenter);
-        // set the item non-editable (view only), and non-selectable
-        flags = item->flags();
-        flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
+        SetItemViewOnly(item);
         item->setTextAlignment(Qt::AlignLeft);
         ui->tableWidgetMeasurements->setItem(currentRow, 5, item);
     }
+    ui->tableWidgetMeasurements->setRowCount(currentRow+1);
     ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
     ui->tableWidgetMeasurements->resizeColumnsToContents();
     ui->tableWidgetMeasurements->resizeRowsToContents();
-    ui->tableWidgetMeasurements->setRowCount(currentRow+1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -258,10 +246,7 @@ void DialogIncrements::FillIncrements()
         {
             item = new QTableWidgetItem(QString().setNum(data->GetTableValue(iMap.value())));
             item->setTextAlignment(Qt::AlignHCenter);
-            // set the item non-editable (view only), and non-selectable
-            Qt::ItemFlags flags = item->flags();
-            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-            item->setFlags(flags);
+            SetItemViewOnly(item);
             ui->tableWidgetIncrement->setItem(currentRow, 1, item);
         }
 
@@ -348,6 +333,15 @@ void DialogIncrements::FillLengthSplines()
 void DialogIncrements::FillLengthArcs()
 {
     FillTable(data->DataLengthArcs(), ui->tableWidgetArcs);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SetItemViewOnly(QTableWidgetItem *item)
+{
+    // set the item non-editable (view only), and non-selectable
+    Qt::ItemFlags flags = item->flags();
+    flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
