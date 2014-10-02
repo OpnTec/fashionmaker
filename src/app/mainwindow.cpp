@@ -435,7 +435,7 @@ void MainWindow::ToolAlongLine(bool checked)
 void MainWindow::ToolShoulderPoint(bool checked)
 {
     SetToolButtonWithApply<DialogShoulderPoint>(checked, Tool::ShoulderPoint, ":/cursor/shoulder_cursor.png",
-                                                tr("Select point of shoulder"),
+                                                tr("Select point"),
                                                 &MainWindow::ClosedDialogWithApply<VToolShoulderPoint>,
                                                 &MainWindow::ApplyDialog<VToolShoulderPoint>);
 }

@@ -78,7 +78,7 @@ void VToolShoulderPoint::setDialog()
     dialogTool->setFormula(formulaLength);
     dialogTool->setP1Line(basePointId);
     dialogTool->setP2Line(p2Line);
-    dialogTool->setPShoulder(pShoulder);
+    dialogTool->setP3(pShoulder);
     dialogTool->setPointName(p->name());
 }
 
@@ -137,7 +137,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
     QString formula = dialogTool->getFormula();
     const quint32 p1Line = dialogTool->getP1Line();
     const quint32 p2Line = dialogTool->getP2Line();
-    const quint32 pShoulder = dialogTool->getPShoulder();
+    const quint32 pShoulder = dialogTool->getP3();
     const QString typeLine = dialogTool->getTypeLine();
     const QString pointName = dialogTool->getPointName();
     VToolShoulderPoint * point = nullptr;
@@ -304,7 +304,7 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1Line()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2Line()));
-    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getPShoulder()));
+    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getP3()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

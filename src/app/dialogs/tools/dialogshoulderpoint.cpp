@@ -60,7 +60,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
     FillComboBoxTypeLine(ui->comboBoxLineType);
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
-    FillComboBoxPoints(ui->comboBoxPShoulder);
+    FillComboBoxPoints(ui->comboBoxP3);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogShoulderPoint::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
@@ -72,7 +72,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
             this, &DialogShoulderPoint::PointNameChanged);
     connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogShoulderPoint::PointNameChanged);
-    connect(ui->comboBoxPShoulder, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP3, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogShoulderPoint::PointNameChanged);
 
     line = new VisToolShoulderPoint(data);
@@ -90,7 +90,7 @@ void DialogShoulderPoint::PointNameChanged()
     QSet<quint32> set;
     set.insert(getCurrentObjectId(ui->comboBoxP1Line));
     set.insert(getCurrentObjectId(ui->comboBoxP2Line));
-    set.insert(getCurrentObjectId(ui->comboBoxPShoulder));
+    set.insert(getCurrentObjectId(ui->comboBoxP3));
 
     QColor color = okColor;
     if (set.size() != 3)
@@ -105,7 +105,7 @@ void DialogShoulderPoint::PointNameChanged()
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
-    ChangeColor(ui->labelPointShoulder, color);
+    ChangeColor(ui->labelThirdPoint, color);
     CheckState();
 }
 
@@ -149,7 +149,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
             switch (number)
             {
                 case 0:
-                    if (SetObject(id, ui->comboBoxPShoulder, tr("Select first point of line")))
+                    if (SetObject(id, ui->comboBoxP3, tr("Select first point of line")))
                     {
                         number++;
                         line->VisualMode(id);
@@ -189,7 +189,7 @@ void DialogShoulderPoint::SaveData()
     formula.replace("\n", " ");
     p1Line = getCurrentObjectId(ui->comboBoxP1Line);
     p2Line = getCurrentObjectId(ui->comboBoxP2Line);
-    pShoulder = getCurrentObjectId(ui->comboBoxPShoulder);
+    pShoulder = getCurrentObjectId(ui->comboBoxP3);
 
     line->setPoint1Id(pShoulder);
     line->setLineP1Id(p1Line);
@@ -204,9 +204,9 @@ void DialogShoulderPoint::SaveData()
  * @brief setPShoulder set id shoulder point
  * @param value id
  */
-void DialogShoulderPoint::setPShoulder(const quint32 &value)
+void DialogShoulderPoint::setP3(const quint32 &value)
 {
-    setPointId(ui->comboBoxPShoulder, pShoulder, value);
+    setPointId(ui->comboBoxP3, pShoulder, value);
     line->setPoint1Id(pShoulder);
 }
 

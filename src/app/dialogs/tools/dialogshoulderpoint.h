@@ -63,8 +63,8 @@ public:
     quint32        getP2Line() const;
     void           setP2Line(const quint32 &value);
 
-    quint32        getPShoulder() const;
-    void           setPShoulder(const quint32 &value);
+    quint32        getP3() const;
+    void           setP3(const quint32 &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -166,7 +166,7 @@ inline quint32 DialogShoulderPoint::getP2Line() const
  * @brief getPShoulder return id shoulder point
  * @return id
  */
-inline quint32 DialogShoulderPoint::getPShoulder() const
+inline quint32 DialogShoulderPoint::getP3() const
 {
     return pShoulder;
 }

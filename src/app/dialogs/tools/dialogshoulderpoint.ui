@@ -299,7 +299,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QLabel" name="labelPointShoulder">
+          <widget class="QLabel" name="labelThirdPoint">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -307,12 +307,12 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Point of shoulder</string>
+            <string>Third point</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxPShoulder">
+          <widget class="QComboBox" name="comboBoxP3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -527,7 +527,7 @@
   <tabstop>lineEditNamePoint</tabstop>
   <tabstop>comboBoxP1Line</tabstop>
   <tabstop>comboBoxP2Line</tabstop>
-  <tabstop>comboBoxPShoulder</tabstop>
+  <tabstop>comboBoxP3</tabstop>
   <tabstop>comboBoxLineType</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
