@@ -297,6 +297,11 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 {
+    if (item != nullptr && item->isEnabled()==false)
+    {
+        return;
+    }
+
     if (currentItem == item)
     {
         UpdateOptions();

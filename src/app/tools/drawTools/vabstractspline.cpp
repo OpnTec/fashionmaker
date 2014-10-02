@@ -80,22 +80,11 @@ void VAbstractSpline::Disable(bool disable)
  */
 void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
-    bool selectable = false;
-    if (nameActivDraw == newName)
-    {
-        selectable = true;
-        currentColor = Qt::black;
-    }
-    else
-    {
-        selectable = false;
-        currentColor = Qt::gray;
-    }
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
-    this->setAcceptHoverEvents (selectable);
-    emit setEnabledPoint(selectable);
     VDrawTool::ChangedActivDraw(newName);
+    const bool selectable = (nameActivDraw == newName);
+    this->setEnabled(selectable);
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    emit setEnabledPoint(selectable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

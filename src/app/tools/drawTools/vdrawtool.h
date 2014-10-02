@@ -54,7 +54,6 @@ public:
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void setDialog() {}
     virtual void DialogLinkDestroy();
-    void         ignoreContextMenu(bool enable);
     static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
@@ -64,8 +63,6 @@ public slots:
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
 protected:
-    /** @brief ignoreContextMenuEvent ignore or not context menu events. */
-    bool         ignoreContextMenuEvent;
 
     /** @brief ignoreFullUpdate ignore or not full updates. */
     bool         ignoreFullUpdate;
@@ -95,50 +92,48 @@ protected:
     {
         SCASSERT(tool != nullptr);
         SCASSERT(event != nullptr);
-        if (ignoreContextMenuEvent == false)
+
+        QMenu menu;
+        QAction *actionOption = menu.addAction(tr("Options"));
+        QAction *actionRemove = nullptr;
+        actionRemove = menu.addAction(tr("Delete"));
+        if (showRemove)
         {
-            QMenu menu;
-            QAction *actionOption = menu.addAction(tr("Options"));
-            QAction *actionRemove = nullptr;
-            actionRemove = menu.addAction(tr("Delete"));
-            if (showRemove)
-            {
-                if (_referens > 1)
-                {
-                    actionRemove->setEnabled(false);
-                }
-                else
-                {
-                    actionRemove->setEnabled(true);
-                }
-            }
-            else
+            if (_referens > 1)
             {
                 actionRemove->setEnabled(false);
             }
-
-            QAction *selectedAction = menu.exec(event->screenPos());
-            if (selectedAction == actionOption)
+            else
             {
-                qApp->getSceneView()->itemClicked(nullptr);
-                dialog = new Dialog(getData(), id, qApp->getMainWindow());
-                dialog->setModal(true);
-
-                connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
-                connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
-                if (ignoreFullUpdate == false)
-                {
-                    connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
-                }
-
-                tool->setDialog();
-
-                dialog->show();
+                actionRemove->setEnabled(true);
             }
-            if (selectedAction == actionRemove)
+        }
+        else
+        {
+            actionRemove->setEnabled(false);
+        }
+
+        QAction *selectedAction = menu.exec(event->screenPos());
+        if (selectedAction == actionOption)
+        {
+            qApp->getSceneView()->itemClicked(nullptr);
+            dialog = new Dialog(getData(), id, qApp->getMainWindow());
+            dialog->setModal(true);
+
+            connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
+            connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
+            if (ignoreFullUpdate == false)
             {
-                DeleteTool();
+                connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
             }
+
+            tool->setDialog();
+
+            dialog->show();
+        }
+        if (selectedAction == actionRemove)
+        {
+            DeleteTool();
         }
     }
     template <typename Item>
@@ -182,15 +177,5 @@ protected:
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ignoreContextMenu set ignore contect menu tool.
- * @param enable true - ignore.
- */
-inline void VDrawTool::ignoreContextMenu(bool enable)
-{
-    ignoreContextMenuEvent = enable;
-}
 
 #endif // VDRAWTOOL_H

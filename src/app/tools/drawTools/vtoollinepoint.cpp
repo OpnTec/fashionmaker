@@ -63,16 +63,8 @@ VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &i
  */
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
-    if (nameActivDraw == newName)
-    {
-        currentColor = Qt::black;
-    }
-    else
-    {
-        currentColor = Qt::gray;
-    }
-    mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
     VToolPoint::ChangedActivDraw(newName);
+    this->setEnabled(nameActivDraw == newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

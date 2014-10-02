@@ -132,27 +132,9 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
  */
 void VToolPoint::ChangedActivDraw(const QString &newName)
 {
-    bool selectable = false;
-    if (nameActivDraw == newName)
-    {
-        selectable = true;
-        currentColor = baseColor;
-    }
-    else
-    {
-        selectable = false;
-        currentColor = Qt::gray;
-    }
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
-    this->setAcceptHoverEvents (selectable);
-    namePoint->setFlag(QGraphicsItem::ItemIsMovable, selectable);
-    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, selectable);
-    namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, selectable);
-    namePoint->setBrush(QBrush(currentColor));
-    namePoint->setAcceptHoverEvents(selectable);
-    lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     VDrawTool::ChangedActivDraw(newName);
+    this->setEnabled(nameActivDraw == newName);
+    namePoint->setBrush(QBrush(currentColor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

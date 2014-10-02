@@ -237,20 +237,8 @@ void VToolLine::Disable(bool disable)
  */
 void VToolLine::ChangedActivDraw(const QString &newName)
 {
-    bool selectable = false;
-    if (nameActivDraw == newName)
-    {
-        selectable = true;
-        currentColor = Qt::black;
-    }
-    else
-    {
-        selectable = false;
-        currentColor = Qt::gray;
-    }
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
-    this->setAcceptHoverEvents (selectable);
     VDrawTool::ChangedActivDraw(newName);
+    this->setEnabled(nameActivDraw == newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

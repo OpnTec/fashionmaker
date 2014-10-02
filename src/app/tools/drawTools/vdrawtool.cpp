@@ -46,7 +46,7 @@ qreal VDrawTool::factor = 1;
  * @param id object id in container.
  */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
-    :VAbstractTool(doc, data, id), ignoreContextMenuEvent(false), ignoreFullUpdate(false),
+    :VAbstractTool(doc, data, id), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivPP()), dialog(nullptr)
 {
     connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
@@ -83,11 +83,11 @@ void VDrawTool::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
     {
-        ignoreContextMenuEvent = false;
+        currentColor = Qt::black;
     }
     else
     {
-        ignoreContextMenuEvent = true;
+        currentColor = Qt::gray;
     }
 }
 
