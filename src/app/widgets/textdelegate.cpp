@@ -79,7 +79,7 @@ void TextDelegate::setEditorData(QWidget *editor, const QModelIndex &index) cons
     SCASSERT(lineEdit != nullptr);
     if ( lastText != text && text.isEmpty() == false)
     {
-        //Here need save text, but method is const, so, we use signal instead.
+        //Here need save text, but this method is const, so, we use signal instead.
         emit SaveText(text);
     }
     lineEdit->setText(text);
@@ -129,7 +129,7 @@ void TextDelegate::commitAndCloseEditor()
     QLineEdit *lineEdit = qobject_cast<QLineEdit*>(sender());
     SCASSERT(lineEdit != nullptr);
     QString text = lineEdit->text();
-    if ( lastText != text && text.isEmpty() == false && data->VariableExist(text) == false)
+    if ( lastText != text && text.isEmpty() == false && data->IsUnique(text))
     {
         lastText = text;
         emit commitData(lineEdit);

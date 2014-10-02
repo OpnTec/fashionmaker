@@ -38,6 +38,7 @@
 #include <QtGlobal>
 
 class QString;
+class QStringList;
 
 static const quint32 null_id = 0;
 
@@ -303,6 +304,8 @@ extern const QString min_F;
 extern const QString max_F;
 extern const QString sum_F;
 extern const QString avg_F;
+
+extern const QStringList builInFunctions;
 
 // Postfix operators
 extern const QString cm_Oprt;

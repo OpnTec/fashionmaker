@@ -414,7 +414,7 @@ const QMap<QString, QSharedPointer<VLineAngle> > VContainer::DataAngleLines() co
 //---------------------------------------------------------------------------------------------------------------------
 bool VContainer::IsUnique(const QString &name)
 {
-    return !uniqueNames.contains(name);
+    return (!uniqueNames.contains(name) && !builInFunctions.contains(name));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

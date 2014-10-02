@@ -53,6 +53,7 @@ signals:
     void    SaveText(const QString &text) const;
 public slots:
     void    commitAndCloseEditor();
+private slots:
     void    InitText(const QString &text);
 private:
     Q_DISABLE_COPY(TextDelegate)

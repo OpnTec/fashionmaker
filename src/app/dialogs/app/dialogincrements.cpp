@@ -544,7 +544,7 @@ void DialogIncrements::clickedToolButtonAdd()
     {
         name = QString(tr("Name_%1")).arg(num);
         num++;
-    } while (data->VariableExist(name));
+    } while (data->IsUnique(name)==false);
 
     const quint32 id = data->getNextId();
     const QString description(tr("Description"));

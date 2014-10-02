@@ -164,6 +164,11 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
             }
         }
 
+        if (builInFunctions.contains(i.value()))
+        {// We found built-in function
+            found = true;
+        }
+
         if (found == false)
         {
             throw qmu::QmuParserError (ecUNASSIGNABLE_TOKEN, i.value(), formula, i.key());
