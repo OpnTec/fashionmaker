@@ -29,11 +29,17 @@ namespace VPE
 
 class VProperty;
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+#endif
+
 class VPROPERTYEXPLORERSHARED_EXPORT VAbstractPropertyFactory
 {
 public:
     //! Empty virtual destructor
-    virtual ~VAbstractPropertyFactory() {}
+    virtual ~VAbstractPropertyFactory()
+    {}
 
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string
@@ -41,6 +47,10 @@ public:
     //! \return Returns the created property or NULL if it couldn't be be created
     virtual VProperty* createProperty(const QString& type, const QString &name) = 0;
 };
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 }
 

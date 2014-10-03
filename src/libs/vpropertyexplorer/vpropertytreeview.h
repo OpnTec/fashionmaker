@@ -40,7 +40,7 @@ public:
     explicit VPropertyTreeView(QWidget *parent = 0);
 
     //! The destructor, taking a model and setting it to the tree view
-    //! \param The model to set as model for this tree view
+    //! \param model The model to set as model for this tree view
     VPropertyTreeView(VPropertyModel* model, QWidget *parent = 0);
 
     //! Destructor

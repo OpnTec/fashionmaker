@@ -31,6 +31,11 @@
 namespace VPE
 {
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+#endif
+
 class VWidgetPropertyPrivate : public VPropertyPrivate
 {
 public:
@@ -46,7 +51,7 @@ public:
         : VPropertyPrivate(), Widget(nullptr) {}
 
     //! Destructor
-    ~VWidgetPropertyPrivate()
+    virtual ~VWidgetPropertyPrivate()
     {
         if (Widget)
         {
@@ -54,6 +59,10 @@ public:
         }
     }
 };
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 }
 

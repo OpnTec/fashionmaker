@@ -31,6 +31,11 @@ namespace VPE
 class VPropertyModel;
 class VPropertySet;
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+#endif
+
 class VPropertyFormViewPrivate : public VPropertyFormWidgetPrivate
 {
 public:
@@ -67,6 +72,10 @@ public:
 private:
     Q_DISABLE_COPY(VPropertyFormViewPrivate)
 };
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 }
 

@@ -29,6 +29,11 @@
 namespace VPE
 {
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+#endif
+
 class VPropertyFormWidgetPrivate
 {
 public:
@@ -66,6 +71,10 @@ public:
     virtual ~VPropertyFormWidgetPrivate()
     {}
 };
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 }
 

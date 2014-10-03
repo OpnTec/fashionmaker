@@ -80,7 +80,7 @@ void VColorPropertyEditor::setColor(const QColor& color_)
 
 QPixmap VColorPropertyEditor::getColorPixmap(const QColor& color, unsigned int size)
 {
-    QImage tmpImgage(size, size, QImage::Format_ARGB32_Premultiplied);
+    QImage tmpImgage(static_cast<int>(size), static_cast<int>(size), QImage::Format_ARGB32_Premultiplied);
     tmpImgage.fill(static_cast<unsigned int>(color.rgb()));
     return QPixmap::fromImage(tmpImgage);
     // todo: support alpha channel

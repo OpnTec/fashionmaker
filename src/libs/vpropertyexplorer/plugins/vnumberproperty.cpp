@@ -139,7 +139,7 @@ void VIntegerProperty::valueChanged(int i)
 const double VDoubleProperty::StandardPrecision = 5;
 
 VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VIntegerProperty(name), Precision(StandardPrecision)
+    : VIntegerProperty(name), Precision(static_cast<int>(StandardPrecision))
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -148,7 +148,7 @@ VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVaria
 }
 
 VDoubleProperty::VDoubleProperty(const QString &name)
-    : VIntegerProperty(name), Precision(StandardPrecision)
+    : VIntegerProperty(name), Precision(static_cast<int>(StandardPrecision))
 {
     VProperty::d_ptr->VariantValue.setValue(0);
     VProperty::d_ptr->VariantValue.convert(QVariant::Double);

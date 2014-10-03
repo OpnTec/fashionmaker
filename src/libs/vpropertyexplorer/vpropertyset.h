@@ -63,7 +63,8 @@ public:
     //! \param property The property to add
     //! \param id The property ID. If id is empty, the property will not be accessable by it's id but still be added.
     //! If the property was filed under another ID before, that will no longer be valid.
-    //! \param parentid The property to which to add the property as child. Pass NULL to add it to the root properties.
+    //! \param parent_property The property to which to add the property as child. Pass NULL to add it to the root
+    //! properties.
     virtual bool addProperty(VProperty* property, const QString& id, VProperty* parent_property = nullptr);
 
     //! Checks whether a property belongs to this set and returns the result

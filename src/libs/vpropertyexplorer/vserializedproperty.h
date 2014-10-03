@@ -49,9 +49,6 @@ public:
     //! Constructor
     VSerializedProperty(const QString& id, const QString& type, const QVariant& value);
 
-    //! Destructor
-    ~VSerializedProperty();
-
     //! The property type
     QString ID;
 

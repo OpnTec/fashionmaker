@@ -64,8 +64,9 @@ signals:
 
 public slots:
     //! Sets the current file, does not check if it is valid
-    //! \param file The new filepath the widget should show
-    //! \emit_signal If true, this will emit the dataChangedByUser()-signal (if file differs from the current file)
+    //! \param getFile The new filepath the widget should show
+    //! \param emit_signal If true, this will emit the dataChangedByUser()-signal (if file differs from the current
+    //! file)
     void setFile(const QString &getFile, bool emit_signal = false);
 
     //! Sets a filter for the file field

@@ -113,7 +113,7 @@ QWidget* VProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& o
     factory->registerEditor(QVariant::String, lineCreator);
     QItemEditorFactory::setDefaultFactory(factory);
 
-    d_ptr->editor = factory->createEditor(d_ptr->PropertyVariantType, parent);
+    d_ptr->editor = factory->createEditor(static_cast<int>(d_ptr->PropertyVariantType), parent);
     return d_ptr->editor;
 }
 
@@ -174,7 +174,7 @@ Qt::ItemFlags VProperty::flags(int column) const
 void VProperty::setValue(const QVariant &value)
 {
     d_ptr->VariantValue = value;
-    d_ptr->VariantValue.convert(d_ptr->PropertyVariantType);
+    d_ptr->VariantValue.convert(static_cast<int>(d_ptr->PropertyVariantType));
     if (d_ptr->editor != nullptr)
     {
         setEditorData(d_ptr->editor);

@@ -53,9 +53,6 @@ VSerializedProperty::VSerializedProperty(const QString &id, const QString &type,
 {
 }
 
-VPE::VSerializedProperty::~VSerializedProperty()
-{}
-
 void VSerializedProperty::initChildren(const VProperty *property, const VPropertySet *set)
 {
     if (property && set)
