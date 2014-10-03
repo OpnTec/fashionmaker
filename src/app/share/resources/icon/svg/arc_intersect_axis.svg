@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="32"
+   height="32"
+   id="svg5205">
+  <defs
+     id="defs5207" />
+  <metadata
+     id="metadata5210">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <path
+       d="M 30.805759,31.162423 1.3434073,1.3135335"
+       id="path3013"
+       style="fill:none;stroke:#ff0034;stroke-width:2.01399994;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4.02799988, 2.01399994;stroke-dashoffset:5.03499985;marker-start:none" />
+    <path
+       d="m 111.11678,231.10817 a 26.263966,25.253813 0 1 1 -52.527932,0 26.263966,25.253813 0 1 1 52.527932,0 z"
+       transform="matrix(0.06450027,0,0,0.06850076,21.859997,11.927334)"
+       id="path2985-2-9-1"
+       style="fill:#000000;fill-opacity:1;stroke:#370000;stroke-width:23.55934906;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-opacity:0.93950177;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="M 7.1075859,18.787199 A 8.4838076,8.6177635 0 1 1 13.92473,3.0134182"
+       transform="matrix(-1.0714089,-0.73248946,0.6825459,-1.0577162,14.331185,26.40714)"
+       id="path5237"
+       style="fill:none;stroke:#370000;stroke-width:2.00008368;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.94117647;stroke-dasharray:none;stroke-dashoffset:6.6461998" />
+    <path
+       d="m 111.11678,231.10817 a 26.263966,25.253813 0 1 1 -52.527932,0 26.263966,25.253813 0 1 1 52.527932,0 z"
+       transform="matrix(0.06450027,0,0,0.06850076,11.058919,0.95341968)"
+       id="path2985-2-9-1-5"
+       style="fill:#f73208;fill-opacity:1;stroke:#f73208;stroke-width:23.55934906;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+  </g>
+</svg>
