@@ -45,6 +45,7 @@
 
 #include <QMessageBox>
 #include <QUndoStack>
+#include <QtCore/qmath.h>
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");

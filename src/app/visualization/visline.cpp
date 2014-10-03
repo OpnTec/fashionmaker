@@ -28,6 +28,7 @@
 
 #include "visline.h"
 #include "../tools/drawTools/vdrawtool.h"
+#include <QtCore/qmath.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 VisLine::VisLine(const VContainer *data, QGraphicsItem *parent)

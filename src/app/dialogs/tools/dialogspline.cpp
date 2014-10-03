@@ -32,6 +32,7 @@
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolspline.h"
+#include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

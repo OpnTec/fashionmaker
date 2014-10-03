@@ -26,6 +26,7 @@
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
+#include <QtCore/qmath.h>
 
 using namespace std;
 

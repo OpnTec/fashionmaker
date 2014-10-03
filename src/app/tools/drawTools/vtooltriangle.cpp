@@ -30,6 +30,7 @@
 #include "../../dialogs/tools/dialogtriangle.h"
 #include "../../geometry/vpointf.h"
 #include "../../visualization/vistooltriangle.h"
+#include <QtCore/qmath.h>
 
 const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 

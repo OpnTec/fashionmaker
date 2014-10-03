@@ -90,9 +90,11 @@ TRANSLATIONS += share/translations/valentina.ts \
 
 unix {
     *-g++{
+        QMAKE_CC = ccache gcc
         QMAKE_CXX = ccache g++
     }
     clang*{
+        QMAKE_CC = ccache clang
         QMAKE_CXX = ccache clang++
     }
 }

@@ -32,6 +32,7 @@
 #include <QSharedData>
 #include "../options.h"
 #include "vpointf.h"
+#include <QDebug>
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push

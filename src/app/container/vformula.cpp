@@ -30,6 +30,7 @@
 #include "../container/calculator.h"
 #include "../container/vcontainer.h"
 #include "../core/vapplication.h"
+#include <QDebug>
 
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------

@@ -34,6 +34,7 @@
 #include "../../visualization/vistoolendline.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

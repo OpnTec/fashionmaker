@@ -23,6 +23,7 @@
 #include "qmuparser.h"
 
 #include <QtGlobal>
+#include <QtCore/qmath.h>
 
 using namespace std;
 

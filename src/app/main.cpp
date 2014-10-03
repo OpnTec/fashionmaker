@@ -38,6 +38,7 @@
     #include <QCommandLineParser>
 #endif
 
+#include <QtXml>
 #include <QLibraryInfo>
 #include "tablewindow.h"
 #include "version.h"

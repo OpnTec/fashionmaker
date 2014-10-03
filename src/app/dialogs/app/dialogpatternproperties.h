@@ -31,6 +31,7 @@
 
 #include <QDialog>
 #include "../../options.h"
+#include <QMap>
 
 class VPattern;
 class QCheckBox;

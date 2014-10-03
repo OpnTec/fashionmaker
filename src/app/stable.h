@@ -35,10 +35,10 @@
 #endif
 
 /* Add C includes here */
-#include <csignal>
 
 #if defined __cplusplus
 /* Add C++ includes here */
+#include <csignal>
 
 /*In all cases we need include core header for getting defined values*/
 #ifdef QT_CORE_LIB

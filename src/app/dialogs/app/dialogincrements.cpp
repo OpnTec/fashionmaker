@@ -39,6 +39,7 @@
 #include <QCloseEvent>
 #include <QTableWidget>
 #include <QSettings>
+#include <QTableWidgetItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

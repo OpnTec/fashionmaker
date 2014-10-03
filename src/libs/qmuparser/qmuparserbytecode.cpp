@@ -26,6 +26,8 @@
 #include <QString>
 #include <QDebug>
 #include "qmuparsertoken.h"
+#include <QtCore/qmath.h>
+#include <QtGlobal>
 
 namespace qmu
 {

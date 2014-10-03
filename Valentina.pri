@@ -449,4 +449,6 @@ CLANG_CXXFLAGS += \
             -Wweak-template-vtables \
             -Wweak-vtables \
             -Wwrite-strings \
-            -Wzero-length-array
+            -Wzero-length-array \
+            -Qunused-arguments \
+            -fcolor-diagnostics
