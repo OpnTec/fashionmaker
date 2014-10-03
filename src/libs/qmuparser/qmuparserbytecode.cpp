@@ -97,7 +97,7 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 void QmuParserByteCode::AddVar(qreal *a_pVar)
 {
     ++m_iStackPos;
-    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     // optimization does not apply
     SToken tok;
@@ -125,7 +125,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
 void QmuParserByteCode::AddVal(qreal a_fVal)
 {
     ++m_iStackPos;
-    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     // If optimization does not apply
     SToken tok;
@@ -415,7 +415,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
         // function with unlimited number of arguments
         m_iStackPos = static_cast<unsigned int>(static_cast<int>(m_iStackPos) + a_iArgc + 1);
     }
-    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     SToken tok;
     tok.Cmd = cmFUNC;
@@ -434,7 +434,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
 void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
 {
     m_iStackPos = static_cast<unsigned int>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
-    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     SToken tok;
     tok.Cmd = cmFUNC_BULK;
@@ -462,7 +462,7 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
     tok.Fun.ptr = a_pFun;
     m_vRPN.push_back(tok);
 
-    m_iMaxStackSize = qMax(m_iMaxStackSize, static_cast<size_t>(m_iStackPos));
+    m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
