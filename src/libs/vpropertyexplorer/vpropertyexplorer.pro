@@ -106,11 +106,13 @@ unix {
     }
 }
 
-CONFIG += precompile_header
-# Precompiled headers (PCH)
-PRECOMPILED_HEADER = stable.h
-win32-msvc* {
-    PRECOMPILED_SOURCE = stable.cpp
+unix:!macx:!clang*{
+    CONFIG += precompile_header
+    # Precompiled headers (PCH)
+    PRECOMPILED_HEADER = stable.h
+    win32-msvc* {
+        PRECOMPILED_SOURCE = stable.cpp
+    }
 }
 
 include(../../../Valentina.pri)
