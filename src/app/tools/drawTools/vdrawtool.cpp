@@ -45,8 +45,8 @@ qreal VDrawTool::factor = 1;
  * @param data container with variables.
  * @param id object id in container.
  */
-VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id)
-    :VAbstractTool(doc, data, id), ignoreFullUpdate(false),
+VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), ignoreFullUpdate(false),
       nameActivDraw(doc->GetNameActivPP()), dialog(nullptr)
 {
     connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);

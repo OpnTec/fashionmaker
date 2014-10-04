@@ -57,6 +57,12 @@ VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolLinePoint::~VToolLinePoint()
+{
+    delete mainLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
  * @param newName new name active pattern peace.

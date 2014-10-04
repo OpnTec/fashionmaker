@@ -2448,11 +2448,11 @@ void VPattern::PrepareForParse(const Document &parse)
     if (parse == Document::FullParse)
     {
         TestUniqueId();
+        sceneDraw->clear();
+        sceneDetail->clear();
         data->Clear();
         UpdateMeasurements();
         nameActivPP.clear();
-        sceneDraw->clear();
-        sceneDetail->clear();
         patternPieces.clear();
         tools.clear();
         cursor = 0;

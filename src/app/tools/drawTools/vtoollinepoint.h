@@ -41,6 +41,7 @@ class VToolLinePoint : public VToolPoint
 public:
     VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
                    const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
+    virtual ~VToolLinePoint();
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
     VFormula          getFormulaLength() const;

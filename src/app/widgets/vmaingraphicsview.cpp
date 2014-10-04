@@ -42,10 +42,14 @@
 //---------------------------------------------------------------------------------------------------------------------
 GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
   : QObject(view), _view(view), _modifiers(Qt::ControlModifier), _zoom_factor_base(1.0015),
-    target_scene_pos(QPointF()), target_viewport_pos(QPointF()), _numScheduledScalings(0)
+    target_scene_pos(QPointF()), target_viewport_pos(QPointF()), _numScheduledScalings(0), anim(nullptr)
 {
   _view->viewport()->installEventFilter(this);
   _view->setMouseTracking(true);
+  anim = new QTimeLine(300, this);
+  anim->setUpdateInterval(20);
+  connect(anim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::scrollingTime, Qt::UniqueConnection);
+  connect(anim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished, Qt::UniqueConnection);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,7 +105,7 @@ void GraphicsViewZoom::animFinished()
     {
         _numScheduledScalings++;
     }
-    sender()->~QObject();
+    anim->stop();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,10 +144,6 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
             _numScheduledScalings = numSteps;       // previously scheduled scalings
         }
 
-        QTimeLine *anim = new QTimeLine(300, this);
-        anim->setUpdateInterval(20);
-        connect(anim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::scrollingTime);
-        connect(anim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
         anim->start();
         return true;
     }

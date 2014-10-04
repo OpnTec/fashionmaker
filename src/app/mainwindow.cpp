@@ -2091,12 +2091,12 @@ QString MainWindow::PatternPieceName(const QString &text)
 MainWindow::~MainWindow()
 {
     CancelTool();
-    delete ui;
 
     delete pattern;
     delete doc;
     delete sceneDetails;
     delete sceneDraw;
+    delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

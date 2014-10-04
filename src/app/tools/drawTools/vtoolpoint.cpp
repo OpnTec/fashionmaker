@@ -60,6 +60,10 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolPoint::~VToolPoint()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     /* From question on StackOverflow
@@ -315,7 +319,7 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
     {
         case Qt::Key_Delete:
             DeleteTool();
-            break;
+            return; //Leave this method immediately after call!!!
         default:
             break;
     }

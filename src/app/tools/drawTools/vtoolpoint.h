@@ -43,7 +43,7 @@ class VToolPoint: public VDrawTool, public QGraphicsEllipseItem
     Q_OBJECT
 public:
     VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VToolPoint(){}
+    virtual ~VToolPoint();
     virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     QString                 name() const;
     void                    setName(const QString &name);

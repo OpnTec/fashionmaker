@@ -65,6 +65,10 @@ VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolEndLine::~VToolEndLine()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */

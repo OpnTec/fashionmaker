@@ -180,7 +180,7 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
     {
         case Qt::Key_Delete:
             DeleteTool();
-            break;
+            return; //Leave this method immediately after call!!!
         default:
             break;
     }

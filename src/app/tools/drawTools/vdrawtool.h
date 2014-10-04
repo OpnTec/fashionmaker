@@ -45,7 +45,7 @@ class VDrawTool : public VAbstractTool
     Q_OBJECT
 public:
 
-    VDrawTool(VPattern *doc, VContainer *data, quint32 id);
+    VDrawTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual      ~VDrawTool();
 
     /** @brief factor scene scale factor. */
@@ -134,6 +134,7 @@ protected:
         if (selectedAction == actionRemove)
         {
             DeleteTool();
+            return; //Leave this method immediately after call!!!
         }
     }
     template <typename Item>

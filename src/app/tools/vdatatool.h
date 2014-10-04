@@ -42,7 +42,7 @@ class VDataTool : public QObject
     Q_OBJECT
 public:
     VDataTool(VContainer *data, QObject *parent = nullptr);
-    virtual ~VDataTool(){}
+    virtual ~VDataTool();
     VDataTool             &operator= (const VDataTool &tool);
     VContainer            getData() const;
     void                  setData(const VContainer *value);

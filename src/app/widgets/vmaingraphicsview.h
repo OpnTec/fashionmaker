@@ -62,6 +62,9 @@
  * (see QWheelEvent::angleDelta).
  * The default zoom factor base is 1.0015.
  */
+
+class QTimeLine;
+
 class GraphicsViewZoom : public QObject
 {
     Q_OBJECT
@@ -81,6 +84,7 @@ private:
     double                _zoom_factor_base;
     QPointF               target_scene_pos;
     QPointF               target_viewport_pos;
+    QTimeLine            *anim;
 
     bool eventFilter(QObject* object, QEvent* event);
 private:
