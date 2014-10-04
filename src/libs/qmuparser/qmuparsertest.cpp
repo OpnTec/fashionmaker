@@ -25,6 +25,7 @@
 #include <QString>
 #include <QDebug>
 #include "qmuparsererror.h"
+#include <QtCore/qmath.h>
 
 using namespace std;
 
