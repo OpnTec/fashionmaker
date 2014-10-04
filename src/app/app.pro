@@ -253,7 +253,15 @@ INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
 CONFIG(release, debug|release){
-    unix:QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-    unix:QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
-    unix:QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+    unix:macx{
+        # On Mac
+        QMAKE_POST_LINK += gobjcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
+        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
+        QMAKE_POST_LINK += gobjcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+    } else {
+        # On Linux
+        unix:QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
+        unix:QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
+        unix:QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+    }
 }
