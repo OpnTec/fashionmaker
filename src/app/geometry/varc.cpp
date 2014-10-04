@@ -32,6 +32,7 @@
 #include <QLineF>
 #include <QPainterPath>
 #include <QPointF>
+#include <QtCore/qmath.h>
 
 #include "../container/vformula.h"
 

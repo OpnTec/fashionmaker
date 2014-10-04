@@ -33,6 +33,7 @@
 #include "../options.h"
 #include "vpointf.h"
 #include <QLineF>
+#include <QtCore/qmath.h>
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
