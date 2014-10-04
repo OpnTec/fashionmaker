@@ -40,6 +40,10 @@ VAbstractSpline::VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QG
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VAbstractSpline::~VAbstractSpline()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     /* From question on StackOverflow
@@ -175,7 +179,7 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool(this);
+            DeleteTool();
             break;
         default:
             break;

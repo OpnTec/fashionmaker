@@ -307,7 +307,16 @@ void  VToolSinglePoint::FullUpdateFromFile()
 void VToolSinglePoint::ChangedActivDraw(const QString &newName)
 {
     VToolPoint::ChangedActivDraw(newName);
-    this->setEnabled(nameActivDraw == newName);
+    if (nameActivDraw == newName)
+    {
+        this->setEnabled(true);
+        setColorLabel(Qt::black);
+    }
+    else
+    {
+        this->setEnabled(false);
+        setColorLabel(Qt::gray);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

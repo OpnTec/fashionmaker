@@ -64,3 +64,12 @@ void VisToolLine::setPoint2Id(const quint32 &value)
 {
     point2Id = value;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+{
+    SCASSERT (lineItem != nullptr);
+
+    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
+    lineItem->setLine(line);
+}

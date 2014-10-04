@@ -239,6 +239,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
     this->setEnabled(nameActivDraw == newName);
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,7 +349,7 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool(this);
+            DeleteTool();
             break;
         default:
             break;

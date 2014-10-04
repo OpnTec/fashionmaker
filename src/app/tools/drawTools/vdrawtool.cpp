@@ -83,7 +83,7 @@ void VDrawTool::ChangedActivDraw(const QString &newName)
 {
     if (nameActivDraw == newName)
     {
-        currentColor = Qt::black;
+        currentColor = baseColor;
     }
     else
     {

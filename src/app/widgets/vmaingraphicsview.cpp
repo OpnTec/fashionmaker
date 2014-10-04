@@ -235,6 +235,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
                         if (list.at(i)->type() <= VSimpleCurve::Type && list.at(i)->type() > QGraphicsItem::UserType)
                         {
                             emit itemClicked(list.at(i));
+                            break;
                         }
                     }
                 }

@@ -297,12 +297,15 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 {
-    if (item != nullptr && item->isEnabled()==false)
+    if (item != nullptr)
     {
-        return;
+        if (item->isEnabled()==false)
+        {
+            return;
+        }
     }
 
-    if (currentItem == item)
+    if (currentItem == item && item != nullptr)
     {
         UpdateOptions();
         return;
@@ -312,10 +315,14 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
     propertyToId.clear();
     idToProperty.clear();
 
-    VAbstractTool *previousTool = dynamic_cast<VAbstractTool *>(currentItem);
-    if (previousTool != nullptr)
+
+    if (currentItem != nullptr)
     {
-        previousTool->ShowVisualization(false); // hide for previous tool
+        VAbstractTool *previousTool = dynamic_cast<VAbstractTool *>(currentItem);
+        if (previousTool != nullptr)
+        {
+            previousTool->ShowVisualization(false); // hide for previous tool
+        }
     }
 
     currentItem = item;

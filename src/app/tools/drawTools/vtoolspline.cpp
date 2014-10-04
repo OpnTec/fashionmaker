@@ -85,6 +85,10 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Sour
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolSpline::~VToolSpline()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */

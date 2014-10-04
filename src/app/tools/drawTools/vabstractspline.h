@@ -38,6 +38,7 @@ class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
     Q_OBJECT
 public:
     VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
+    virtual ~VAbstractSpline();
     static const QString TagName;
     virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     virtual int      type() const {return Type;}
@@ -82,6 +83,8 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event);
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
+private:
+    Q_DISABLE_COPY(VAbstractSpline)
 };
 
 #endif // VABSTRACTSPLINE_H

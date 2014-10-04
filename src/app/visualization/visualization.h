@@ -74,7 +74,7 @@ protected:
     qreal        FindVal(const QString &expression);
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
-    void         DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
+    virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
 
     template <typename Item>

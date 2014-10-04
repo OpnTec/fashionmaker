@@ -38,9 +38,9 @@ class VToolSpline:public VAbstractSpline
 {
     Q_OBJECT
 public:
-
-                 VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                              QGraphicsItem * parent = nullptr );
+    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                 QGraphicsItem * parent = nullptr );
+    virtual ~VToolSpline();
     virtual void setDialog();
     static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
@@ -64,6 +64,7 @@ protected:
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
+    Q_DISABLE_COPY(VToolSpline)
     void         RefreshGeometry ();
 };
 
