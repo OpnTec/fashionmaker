@@ -156,9 +156,9 @@ CONFIG(debug, debug|release){
     unix:QMAKE_CXXFLAGS_RELEASE += -g
     unix:macx{
         # On Mac
-        QMAKE_POST_LINK += gobjcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
-        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)/$(TARGET) &&
-        QMAKE_POST_LINK += gobjcopy --add-gnu-debuglink $(DESTDIR)/$(TARGET).debug $(DESTDIR)/$(TARGET)
+        QMAKE_POST_LINK += gobjcopy --only-keep-debug $(DESTDIR)$(TARGET) $(DESTDIR)$(TARGET).debug &&
+        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)$(TARGET) &&
+        QMAKE_POST_LINK += gobjcopy --add-gnu-debuglink $(DESTDIR)$(TARGET).debug $(DESTDIR)$(TARGET)
     } else {
         # On Linux
         unix:QMAKE_POST_LINK += objcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
