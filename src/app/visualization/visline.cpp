@@ -99,7 +99,7 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
     line.setAngle(angle);
 
     QRectF scRect = this->scene()->sceneRect();
-    qreal diagonal = sqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
+    qreal diagonal = qSqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
     line.setLength(diagonal);
     if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
     {

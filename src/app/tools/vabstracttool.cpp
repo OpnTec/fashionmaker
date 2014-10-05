@@ -34,6 +34,7 @@
 #include "../geometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
 #include "../widgets/vmaingraphicsview.h"
+#include <QtCore/qmath.h>
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -205,7 +206,7 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
         }
     }
     // find distance from projection to points of intersection
-    qreal k = sqrt (radius * radius - d * d);
+    qreal k = qSqrt (radius * radius - d * d);
     qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
     // add to projection a vectors aimed to points of intersection
     p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
