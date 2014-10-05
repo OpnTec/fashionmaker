@@ -256,7 +256,7 @@ CONFIG(release, debug|release){
     unix:macx{
         # On Mac
         QMAKE_POST_LINK += gobjcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
+        QMAKE_POST_LINK += strip $(TARGET) &&
         QMAKE_POST_LINK += gobjcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
     } else {
         # On Linux
