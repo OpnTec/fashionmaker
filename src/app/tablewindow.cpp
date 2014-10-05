@@ -32,6 +32,7 @@
 #include <QtSvg>
 #include <QPrinter>
 #include "core/vapplication.h"
+#include <QtCore/qmath.h>
 
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"

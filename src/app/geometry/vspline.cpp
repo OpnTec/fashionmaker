@@ -30,6 +30,7 @@
 #include "vspline_p.h"
 #include <QDebug>
 #include <QPainterPath>
+#include <QtCore/qmath.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
