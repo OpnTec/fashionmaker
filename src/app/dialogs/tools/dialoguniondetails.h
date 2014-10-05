@@ -48,8 +48,8 @@ public:
 
     quint32          getD1() const;
     quint32          getD2() const;
-    ptrdiff_t        getIndexD1() const;
-    ptrdiff_t        getIndexD2() const;
+    int        getIndexD1() const;
+    int        getIndexD2() const;
 public slots:
     void             ChosenObject(quint32 id, const SceneObject &type);
     virtual void     UpdateList();
@@ -60,10 +60,10 @@ private:
     Ui::DialogUnionDetails *ui;
 
     /** @brief indexD1 index edge first detail */
-    ptrdiff_t        indexD1;
+    int        indexD1;
 
     /** @brief indexD2 index edge second detail */
-    ptrdiff_t        indexD2;
+    int        indexD2;
 
     /** @brief d1 id first detail */
     quint32           d1;
@@ -85,7 +85,7 @@ private:
 
     bool             CheckObject(const quint32 &id, const quint32 &idDetail) const;
     void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                   ptrdiff_t &index);
+                                   int &index);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ inline quint32 DialogUnionDetails::getD2() const
  * @brief getIndexD1 return index edge first detail
  * @return index
  */
-inline ptrdiff_t DialogUnionDetails::getIndexD1() const
+inline int DialogUnionDetails::getIndexD1() const
 {
     return indexD1;
 }
@@ -123,7 +123,7 @@ inline ptrdiff_t DialogUnionDetails::getIndexD1() const
  * @brief getIndexD2 return index edge second detail
  * @return index
  */
-inline ptrdiff_t DialogUnionDetails::getIndexD2() const
+inline int DialogUnionDetails::getIndexD2() const
 {
     return indexD2;
 }

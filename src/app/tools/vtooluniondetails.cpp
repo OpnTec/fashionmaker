@@ -90,7 +90,7 @@ VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quin
  * @param angle angle rotation.
  */
 void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
-                                       const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx,
+                                       const VDetail &det, const int &i, const quint32 &idTool, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
 {
     quint32 id = 0, idObject = 0;
@@ -273,7 +273,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
  * @param pRotate point rotation.
  * @param angle angle rotation.
  */
-void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
+void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const int &i,
                                      quint32 &idCount, const qreal &dx, const qreal &dy, const quint32 &pRotate,
                                      const qreal &angle)
 {
@@ -518,11 +518,11 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, doc);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         tools->insert(id, unionDetails);
-        for (ptrdiff_t i = 0; i < d1.CountNode(); ++i)
+        for (int i = 0; i < d1.CountNode(); ++i)
         {
             doc->IncrementReferens(d1.at(i).getId());
         }
-        for (ptrdiff_t i = 0; i < d2.CountNode(); ++i)
+        for (int i = 0; i < d2.CountNode(); ++i)
         {
             doc->IncrementReferens(d2.at(i).getId());
         }
@@ -650,7 +650,7 @@ void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const q
         VNodeDetail node1;
         VNodeDetail node2;
         d2.NodeOnEdge(indexD2, node1, node2);
-        ptrdiff_t k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
+        int k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
         if (k == d2.RemoveEdge(indexD2).CountNode()-1)
         {
             j = 0;
@@ -778,7 +778,7 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, VDetail &d)
 {
     QDomElement det = doc->createElement(TagDetail);
 
-    for (ptrdiff_t i = 0; i < d.CountNode(); ++i)
+    for (int i = 0; i < d.CountNode(); ++i)
     {
         AddNode(det, d.at(i));
     }
@@ -818,7 +818,7 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
                 if (domElement.tagName() == VToolUnionDetails::TagDetail)
                 {
                     doc->removeAllChilds(domElement);//delete all nodes in detail
-                    for (ptrdiff_t i = 0; i < d.CountNode(); ++i)
+                    for (int i = 0; i < d.CountNode(); ++i)
                     {
                         AddNode(domElement, d.at(i));//rewrite nodes of detail
                     }

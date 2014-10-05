@@ -76,7 +76,7 @@ VToolDetail::VToolDetail(VPattern *doc, VContainer *data, const quint32 &id, con
     :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
 {
     VDetail detail = data->GetDetail(id);
-    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
+    for (int i = 0; i< detail.CountNode(); ++i)
     {
         switch (detail.at(i).getTypeTool())
         {
@@ -148,7 +148,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     VDetail detail = dialogTool->getDetails();
     VDetail det;
     qApp->getUndoStack()->beginMacro("add detail");
-    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
+    for (int i = 0; i< detail.CountNode(); ++i)
     {
         quint32 id = 0;
         switch (detail.at(i).getTypeTool())
@@ -285,7 +285,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrClosed, detail.getClosed());
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
 
-    for (ptrdiff_t i = 0; i < detail.CountNode(); ++i)
+    for (int i = 0; i < detail.CountNode(); ++i)
     {
        AddNode(doc, domElement, detail.at(i));
     }
@@ -310,7 +310,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         doc->RemoveAllChild(domElement);
-        for (ptrdiff_t i = 0; i < det.CountNode(); ++i)
+        for (int i = 0; i < det.CountNode(); ++i)
         {
            AddNode(doc, domElement, det.at(i));
         }
@@ -434,7 +434,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolDetail::RemoveReferens()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
+    for (int i = 0; i< detail.CountNode(); ++i)
     {
         doc->DecrementReferens(detail.at(i).getId());
     }

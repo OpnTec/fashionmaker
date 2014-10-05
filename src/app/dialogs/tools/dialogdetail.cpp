@@ -192,7 +192,7 @@ void DialogDetail::setDetails(const VDetail &value)
 {
     details = value;
     ui.listWidget->clear();
-    for (ptrdiff_t i = 0; i < details.CountNode(); ++i)
+    for (int i = 0; i < details.CountNode(); ++i)
     {
         NewItem(details.at(i).getId(), details.at(i).getTypeTool(), details.at(i).getTypeNode(), details.at(i).getMx(),
                 details.at(i).getMy());

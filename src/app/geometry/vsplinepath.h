@@ -143,13 +143,13 @@ public:
      * @param indx index in list.
      * @return spline point.
      */
-    VSplinePoint  &operator[](ptrdiff_t indx);
+    VSplinePoint  &operator[](int indx);
     /**
      * @brief at return spline point by index.
      * @param indx index in list.
      * @return spline point.
      */
-    const VSplinePoint &at(ptrdiff_t indx) const;
+    const VSplinePoint &at(int indx) const;
     /**
      * @brief CutSplinePath cut spline path into two. This method don't return two spline path. You must create spline
      * paths by yourself.

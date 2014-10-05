@@ -93,13 +93,13 @@ public:
      * @param indx index node in list.
      * @return node
      */
-    VNodeDetail &  operator[](ptrdiff_t indx);
+    VNodeDetail &  operator[](int indx);
     /**
      * @brief at find node by index in list.
      * @param indx index node in list.
      * @return const node.
      */
-    const VNodeDetail & at ( ptrdiff_t indx ) const;
+    const VNodeDetail & at ( int indx ) const;
     /**
      * @brief getName return detail name.
      * @return name.
@@ -175,7 +175,7 @@ public:
      * @param id object (arc, point, spline, splinePath) id.
      * @return index in list or -1 id can't find.
      */
-    ptrdiff_t      indexOfNode(const quint32 &id) const;
+    int      indexOfNode(const quint32 &id) const;
     /**
      * @brief id return id detail in list data.
      * @return id.
@@ -201,7 +201,7 @@ public:
      * @param p2 id second point.
      * @return edge index or -1 if points don't located on edge
      */
-    ptrdiff_t      Edge(const quint32 &p1, const quint32 &p2)const;
+    int      Edge(const quint32 &p1, const quint32 &p2)const;
     /**
      * @brief NodeOnEdge return nodes located on edge with index.
      * @param index index of edge.

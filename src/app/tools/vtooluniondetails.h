@@ -69,9 +69,9 @@ public:
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
     static void  AddToNewDetail(QObject *tool, VPattern *doc, VContainer *data, VDetail &newDetail,
-                                const VDetail &det, const ptrdiff_t &i, const quint32 &idTool, const qreal &dx = 0,
+                                const VDetail &det, const int &i, const quint32 &idTool, const qreal &dx = 0,
                                 const qreal &dy = 0, const quint32 &pRotate = 0, const qreal &angle = 0);
-    static void  UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const ptrdiff_t &i,
+    static void  UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const int &i,
                               quint32 &idCount, const qreal &dx = 0, const qreal &dy = 0, const quint32 &pRotate = 0,
                               const qreal &angle = 0);
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,

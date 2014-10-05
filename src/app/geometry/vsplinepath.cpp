@@ -172,13 +172,13 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint & VSplinePath::operator[](ptrdiff_t indx)
+VSplinePoint & VSplinePath::operator[](int indx)
 {
     return d->path[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VSplinePoint &VSplinePath::at(ptrdiff_t indx) const
+const VSplinePoint &VSplinePath::at(int indx) const
 {
     return d->path[indx];
 }

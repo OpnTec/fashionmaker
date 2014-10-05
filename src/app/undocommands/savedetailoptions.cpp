@@ -50,7 +50,7 @@ void SaveDetailOptions::undo()
     {
         SaveDet(domElement, oldDet);
         doc->RemoveAllChild(domElement);
-        for (ptrdiff_t i = 0; i < oldDet.CountNode(); ++i)
+        for (int i = 0; i < oldDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
         }
@@ -85,7 +85,7 @@ void SaveDetailOptions::redo()
     {
         SaveDet(domElement, newDet);
         doc->RemoveAllChild(domElement);
-        for (ptrdiff_t i = 0; i < newDet.CountNode(); ++i)
+        for (int i = 0; i < newDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, newDet.at(i));
         }

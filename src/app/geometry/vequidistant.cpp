@@ -43,7 +43,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
     VDetail detail = data->GetDetail(idDetail);
     QVector<QPointF> points;
     QVector<QPointF> pointsEkv;
-    for (ptrdiff_t i = 0; i< detail.CountNode(); ++i)
+    for (int i = 0; i< detail.CountNode(); ++i)
     {
         switch (detail.at(i).getTypeTool())
         {
