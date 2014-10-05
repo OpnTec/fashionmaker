@@ -151,7 +151,7 @@ CONFIG(debug, debug|release){
     # Release
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    unix:QMAKE_CXXFLAGS_RELEASE += -g
+    unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g
 
     #local revision number for using in version
     HG_REV=$$system(hg parents --template '{rev}')
@@ -253,15 +253,10 @@ INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
 CONFIG(release, debug|release){
-    unix:macx{
-        # On Mac
-        QMAKE_POST_LINK += gobjcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-        QMAKE_POST_LINK += strip $(TARGET) &&
-        QMAKE_POST_LINK += gobjcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
-    } else {
+    unix:!macx{
         # On Linux
-        unix:QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-        unix:QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
-        unix:QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+        QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
+        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
+        QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
     }
 }

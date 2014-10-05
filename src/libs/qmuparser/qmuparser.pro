@@ -110,16 +110,11 @@ CONFIG(debug, debug|release){
     # Release
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    unix:QMAKE_CXXFLAGS_RELEASE += -g
-    unix:macx{
-        # On Mac
-        QMAKE_POST_LINK += gobjcopy --only-keep-debug $(DESTDIR)$(TARGET) $(DESTDIR)$(TARGET).debug &&
-        QMAKE_POST_LINK += strip -x $(DESTDIR)$(TARGET) &&
-        QMAKE_POST_LINK += gobjcopy --add-gnu-debuglink $(DESTDIR)$(TARGET).debug $(DESTDIR)$(TARGET)
-    } else {
+    unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g
+    unix:!macx{
         # On Linux
-        unix:QMAKE_POST_LINK += objcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
-        unix:QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)/$(TARGET) &&
-        unix:QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(DESTDIR)/$(TARGET).debug $(DESTDIR)/$(TARGET)
+        QMAKE_POST_LINK += objcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
+        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)/$(TARGET) &&
+        QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(DESTDIR)/$(TARGET).debug $(DESTDIR)/$(TARGET)
     }
 }
