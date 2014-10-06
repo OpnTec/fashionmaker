@@ -1641,7 +1641,7 @@
     <message>
         <location line="-92"/>
         <location line="+102"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="+556"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="+551"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1715,14 +1715,14 @@
         <translation type="obsolete">Обозначение %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="-489"/>
-        <location line="+405"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="-483"/>
+        <location line="+399"/>
         <location line="+56"/>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
     <message>
-        <location line="-418"/>
+        <location line="-412"/>
         <source>male</source>
         <translation>мужчина</translation>
     </message>
@@ -1732,7 +1732,7 @@
         <translation>женщина</translation>
     </message>
     <message>
-        <location line="+336"/>
+        <location line="+330"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation>Мерки используют другие единицы измерения нежели лекало. Это лекало требует мерки в %1</translation>
     </message>
@@ -2686,12 +2686,11 @@
     <name>DialogShoulderPoint</name>
     <message>
         <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="+14"/>
-        <location line="+296"/>
         <source>Point of shoulder</source>
         <translation>Точка плеча</translation>
     </message>
     <message>
-        <location line="-238"/>
+        <location line="+58"/>
         <source>Length</source>
         <translation>Длина</translation>
     </message>
@@ -2743,7 +2742,12 @@
         <translation>Вторая точка</translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+33"/>
+        <source>Third point</source>
+        <translation type="unfinished">Третья точка</translation>
+    </message>
+    <message>
+        <location line="+33"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -2897,7 +2901,7 @@
         <translation>Коэффициент кривизны кривой</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogspline.cpp" line="+91"/>
+        <location filename="../../dialogs/tools/dialogspline.cpp" line="+92"/>
         <source>Select last point of curve</source>
         <translation>Выберить последнюю точку кривой</translation>
     </message>
@@ -3198,7 +3202,7 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="+1206"/>
+        <location filename="../../core/vapplication.cpp" line="+1207"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
@@ -3654,7 +3658,7 @@
         <translation>Свойства лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="+1244"/>
+        <location filename="../../mainwindow.cpp" line="+1245"/>
         <source>Save as</source>
         <translation>Сохранить как</translation>
     </message>
@@ -3944,21 +3948,21 @@
     <message>
         <location line="-1666"/>
         <location line="+25"/>
+        <location line="+12"/>
         <source>Select point</source>
         <translation>Выберить точку</translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-25"/>
         <source>Select first point</source>
         <translation>Выберить первую точку</translation>
     </message>
     <message>
-        <location line="+25"/>
         <source>Select point of shoulder</source>
-        <translation>Выберить точку плеча</translation>
+        <translation type="vanished">Выберить точку плеча</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+38"/>
         <location line="+103"/>
         <source>Select first point of line</source>
         <translation>Выберить первую точку линии</translation>
@@ -7793,7 +7797,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../tablewindow.cpp" line="+259"/>
+        <location filename="../../tablewindow.cpp" line="+260"/>
         <source>Save layout</source>
         <translation>Создать раскладку</translation>
     </message>
@@ -7953,7 +7957,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="+338"/>
+        <location filename="../../tools/vabstracttool.cpp" line="+344"/>
         <source>Confirm the deletion.</source>
         <translation>Подтвердить удаление.</translation>
     </message>
@@ -8215,7 +8219,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VDrawTool</name>
     <message>
-        <location filename="../../tools/drawTools/vdrawtool.h" line="+102"/>
+        <location filename="../../tools/drawTools/vdrawtool.h" line="+97"/>
         <source>Options</source>
         <translation>Параметры</translation>
     </message>
@@ -8249,7 +8253,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VFormula</name>
     <message>
-        <location filename="../../container/vformula.cpp" line="+37"/>
+        <location filename="../../container/vformula.cpp" line="+38"/>
         <location line="+6"/>
         <location line="+175"/>
         <location line="+38"/>
@@ -8292,7 +8296,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="+373"/>
+        <location filename="../../xml/vpattern.cpp" line="+374"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
         <translation>Не могу найти инструмент с id = %1 в таблице.</translation>
     </message>
@@ -8531,7 +8535,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="+838"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="+850"/>
         <source>Base point</source>
         <translation>Базовая точка</translation>
     </message>
@@ -8774,7 +8778,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+185"/>
+        <location filename="../../main.cpp" line="+186"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>
