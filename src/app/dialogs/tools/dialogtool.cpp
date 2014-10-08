@@ -345,12 +345,13 @@ void DialogTool::PutValHere(QLineEdit *lineEdit, QListWidget *listWidget)
     SCASSERT(lineEdit != nullptr);
     SCASSERT(listWidget != nullptr);
     QListWidgetItem *item = listWidget->currentItem();
-    SCASSERT(item != nullptr);
-
-    int pos = lineEdit->cursorPosition();
-    lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
-    lineEdit->setFocus();
-    lineEdit->setCursorPosition(pos + item->text().size());
+    if (item != nullptr)
+    {
+        int pos = lineEdit->cursorPosition();
+        lineEdit->setText(lineEdit->text().insert(lineEdit->cursorPosition(), item->text()));
+        lineEdit->setFocus();
+        lineEdit->setCursorPosition(pos + item->text().size());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -359,11 +360,12 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
     SCASSERT(plainTextEdit != nullptr);
     SCASSERT(listWidget != nullptr);
     QListWidgetItem *item = listWidget->currentItem();
-    SCASSERT(item != nullptr);
-
-    QTextCursor cursor = plainTextEdit->textCursor();
-    cursor.insertText(item->text());
-    plainTextEdit->setTextCursor(cursor);
+    if (item != nullptr)
+    {
+        QTextCursor cursor = plainTextEdit->textCursor();
+        cursor.insertText(item->text());
+        plainTextEdit->setTextCursor(cursor);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
