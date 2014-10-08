@@ -389,9 +389,16 @@ void DialogIncrements::FullUpdateFromFile()
 void DialogIncrements::SaveGivenName()
 {
     m->setGivenName(ui->lineEditGivenName->text());
-    if (m->SaveDocument(doc->MPath()) == false)
+    QString error;
+    if (m->SaveDocument(doc->MPath(), error) == false)
     {
-        qDebug()<<"Can't save GivenName";
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save GivenName"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
 }
 
@@ -400,9 +407,16 @@ void DialogIncrements::SaveFamilyName()
 {
 
     m->setFamilyName(ui->lineEditFamilyName->text());
-    if (m->SaveDocument(doc->MPath()) == false)
+    QString error;
+    if (m->SaveDocument(doc->MPath(), error) == false)
     {
-        qDebug()<<"Can't save FamilyName";
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save FamilyName"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
 }
 
@@ -410,9 +424,16 @@ void DialogIncrements::SaveFamilyName()
 void DialogIncrements::SaveEmail()
 {
     m->setMail(ui->lineEditMail->text());
-    if (m->SaveDocument(doc->MPath()) == false)
+    QString error;
+    if (m->SaveDocument(doc->MPath(), error) == false)
     {
-        qDebug()<<"Can't save Email";
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save Email"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
 }
 
@@ -420,9 +441,16 @@ void DialogIncrements::SaveEmail()
 void DialogIncrements::SaveSex(int index)
 {
     m->setSex(m->StrToGender(ui->comboBoxSex->itemData(index).toString()));
-    if (m->SaveDocument(doc->MPath()) == false)
+    QString error;
+    if (m->SaveDocument(doc->MPath(), error) == false)
     {
-        qDebug()<<"Can't save Sex";
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save Sex"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
 }
 
@@ -430,9 +458,16 @@ void DialogIncrements::SaveSex(int index)
 void DialogIncrements::SaveBirthDate(const QDate & date)
 {
     m->setBirthDate(date);
-    if (m->SaveDocument(doc->MPath()) == false)
+    QString error;
+    if (m->SaveDocument(doc->MPath(), error) == false)
     {
-        qDebug()<<"Can't save BirthDate";
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save BirthDate"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
 }
 
@@ -734,7 +769,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             QDomElement domElement = list.at(0).toElement();
             if (domElement.isElement() == false)
             {
-                qDebug()<<"Cant't find measurement "<<tag<<Q_FUNC_INFO;
+                qDebug()<<"Can't find measurement "<<tag<<Q_FUNC_INFO;
                 return;
             }
 
@@ -755,9 +790,16 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             base = VAbstractMeasurements::UnitConvertor(base, qApp->patternUnit(), m->MUnit());
 
             m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, QString("%1").arg(base));
-            if (m->SaveDocument(doc->MPath()) == false)
+            QString error;
+            if (m->SaveDocument(doc->MPath(), error) == false)
             {
-                qDebug()<<"Can't save measurement";
+                QMessageBox messageBox;
+                messageBox.setIcon(QMessageBox::Warning);
+                messageBox.setInformativeText(tr("Can't save measurement"));
+                messageBox.setDefaultButton(QMessageBox::Ok);
+                messageBox.setDetailedText(error);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
             }
 
             data->ClearVariables();

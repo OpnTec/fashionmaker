@@ -123,6 +123,7 @@ void DialogIndividualMeasurements::DialogAccepted()
             m.save(out, indent);
             iMeasur.close();
         }
+        iMeasur.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
     }
     catch (VException &e)
     {

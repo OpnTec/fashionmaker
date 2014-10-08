@@ -34,6 +34,8 @@
 
 #ifdef Q_OS_WIN32
 #   include <Windows.h>
+
+extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 #endif /*Q_OS_WIN32*/
 
 class QString;

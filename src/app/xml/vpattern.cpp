@@ -693,7 +693,7 @@ MeasurementsType VPattern::MType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::SaveDocument(const QString &fileName)
+bool VPattern::SaveDocument(const QString &fileName, QString &error)
 {
     try
     {
@@ -706,7 +706,7 @@ bool VPattern::SaveDocument(const QString &fileName)
     }
     GarbageCollector();
 
-    return VDomDocument::SaveDocument(fileName);
+    return VDomDocument::SaveDocument(fileName, error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

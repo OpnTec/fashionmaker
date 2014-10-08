@@ -42,6 +42,7 @@
 #include "core/undoevent.h"
 #include "undocommands/renamepp.h"
 #include "vtooloptionspropertybrowser.h"
+#include "options.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -55,6 +56,7 @@
 #include <QProcess>
 #include <QSettings>
 #include <QTimer>
+#include <QtGlobal>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1342,6 +1344,11 @@ void MainWindow::Clear()
     QApplication::restoreOverrideCursor();
 #endif
     Layout();
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
 }
 
 void MainWindow::FullParseFile()
@@ -1786,7 +1793,8 @@ void MainWindow::MinimumScrollBar()
 bool MainWindow::SavePattern(const QString &fileName)
 {
     QFileInfo tempInfo(fileName);
-    const bool result = doc->SaveDocument(fileName);
+    QString error;
+    const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
         if (tempInfo.suffix() != "autosave")
@@ -1795,6 +1803,16 @@ bool MainWindow::SavePattern(const QString &fileName)
             helpLabel->setText(tr("File saved"));
             qApp->getUndoStack()->clear();
         }
+    }
+    else
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
     }
     return result;
 }
@@ -2110,6 +2128,10 @@ void MainWindow::LoadPattern(const QString &fileName)
     VAbstractTool::NewSceneRect(sceneDraw, ui->view);
     VAbstractTool::NewSceneRect(sceneDetails, ui->view);
 
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+
     qApp->setOpeningPattern();//Begin opening file
     try
     {
@@ -2154,6 +2176,10 @@ void MainWindow::LoadPattern(const QString &fileName)
         Clear();
         return;
     }
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
 
     FullParseFile();
 

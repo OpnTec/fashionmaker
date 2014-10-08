@@ -158,7 +158,7 @@ public:
     static const QString IncrementKgrowth;
     static const QString IncrementDescription;
 
-    virtual bool   SaveDocument(const QString &fileName);
+    virtual bool   SaveDocument(const QString &fileName, QString &error);
     QStringList    getPatternPieces() const;
     QRectF         ActiveDrawBoundingRect() const;
     quint32        GetParametrId(const QDomElement& domElement) const;

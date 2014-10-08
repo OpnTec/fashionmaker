@@ -30,6 +30,7 @@
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionbadid.h"
+#include "../options.h"
 
 #include <QAbstractMessageHandler>
 #include <QXmlSchema>
@@ -504,7 +505,7 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::SaveDocument(const QString &fileName)
+bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
 {
     if (fileName.isEmpty())
     {
@@ -525,8 +526,14 @@ bool VDomDocument::SaveDocument(const QString &fileName)
     }
     //Replace temp file our
     bool result = false;
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+
     QFile patternFile(fileName);
-    // We need here temporary file because we need restore document after error of copying temp file.
+    patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
+    // We need here temporary file because we want restore document after error of copying temp file.
     QTemporaryFile tempOfPattern;
     if (tempOfPattern.open())
     {
@@ -536,8 +543,9 @@ bool VDomDocument::SaveDocument(const QString &fileName)
     {
         if ( tempFile.copy(patternFile.fileName()) == false )
         {
-            qDebug()<<"Could not copy temp file to document file"<<Q_FUNC_INFO;
+            error = tr("Could not copy temp file to document file");
             tempOfPattern.copy(fileName);
+            tempFile.remove();
             result = false;
         }
         else
@@ -548,9 +556,14 @@ bool VDomDocument::SaveDocument(const QString &fileName)
     }
     else
     {
-        qDebug()<<"Could not remove document file"<<Q_FUNC_INFO;
+        error = tr("Could not remove document file");
         result = false;
     }
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup--; // turn off check permission again
+#endif /*Q_OS_WIN32*/
+
     return result;
 }
 
