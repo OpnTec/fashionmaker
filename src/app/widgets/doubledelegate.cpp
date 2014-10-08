@@ -40,11 +40,18 @@
  * @return editor to be used for editing the data item.
  */
 //cppcheck-suppress unusedFunction
+DoubleSpinBoxDelegate::DoubleSpinBoxDelegate(QObject *parent): QItemDelegate(parent), lastValue(-10001.0)
+{
+    //Little hack. Help save value in const method.
+    connect(this, &DoubleSpinBoxDelegate::NewLastValue, this, &DoubleSpinBoxDelegate::SetLastValue);
+}
+
 QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                                              const QModelIndex &index ) const
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
+    emit NewLastValue(-10001.0);//Here need reset value to default because we begin work with new item
     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
     editor->setMinimum(-10000.0);
     editor->setMaximum(10000.0);
@@ -118,4 +125,10 @@ void DoubleSpinBoxDelegate::commitAndCloseEditor()
         emit commitData(spinBox);
     }
     emit closeEditor(spinBox);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DoubleSpinBoxDelegate::SetLastValue(const qreal &newLastValue)
+{
+    lastValue = newLastValue;
 }

@@ -43,13 +43,21 @@ public:
      * @brief DoubleSpinBoxDelegate constructor.
      * @param parent parent object.
      */
-    DoubleSpinBoxDelegate(QObject *parent = nullptr): QItemDelegate(parent), lastValue(-10001.0){}
+    DoubleSpinBoxDelegate(QObject *parent = nullptr);
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     void    setEditorData(QWidget *editor, const QModelIndex &index) const;
     void    setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
     void    updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+signals:
+    /**
+     * @brief NewLastValue help reset last value in const method (hack).
+     * @param text text.
+     */
+    void    NewLastValue(const qreal &newLastValue) const;
 public slots:
     void    commitAndCloseEditor();
+private slots:
+    void    SetLastValue(const qreal &newLastValue);
 private:
     /** @brief lastValue last saved value. */
     qreal lastValue;
