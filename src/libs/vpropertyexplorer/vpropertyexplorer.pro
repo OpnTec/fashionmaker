@@ -96,7 +96,7 @@ unix {
     isEmpty(PREFIX) {
      PREFIX = /usr/lib
     }
-    target.path = $$PREFIX/
+    target.path = $$PREFIX/lib
     INSTALLS += target
 
     *-g++{

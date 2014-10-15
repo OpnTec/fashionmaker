@@ -196,7 +196,7 @@ isEmpty(PREFIX) {
 DATADIR =$$PREFIX/share
 DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
-target.path = $$PREFIX/
+target.path = $$PREFIX/bin
 desktop.path = $$DATADIR/applications/
 desktop.files += ../../dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/
