@@ -193,11 +193,10 @@ unix {
 isEmpty(PREFIX) {
   PREFIX = /usr
 }
-BINDIR = $$PREFIX/bin
 DATADIR =$$PREFIX/share
 DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
-target.path = $$BINDIR
+target.path = $$PREFIX/
 desktop.path = $$DATADIR/applications/
 desktop.files += ../../dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/

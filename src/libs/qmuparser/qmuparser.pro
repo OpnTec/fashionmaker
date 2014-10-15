@@ -50,7 +50,10 @@ HEADERS += \
 VERSION = 2.2.4
 
 unix {
-    target.path = /usr/lib
+    isEmpty(PREFIX) {
+     PREFIX = /usr/lib
+    }
+    target.path = $$PREFIX/
     INSTALLS += target
 
     *-g++{

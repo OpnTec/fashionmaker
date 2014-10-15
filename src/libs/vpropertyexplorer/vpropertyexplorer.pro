@@ -93,7 +93,10 @@ HEADERS +=\
     stable.h
 
 unix {
-    target.path = /usr/lib
+    isEmpty(PREFIX) {
+     PREFIX = /usr/lib
+    }
+    target.path = $$PREFIX/
     INSTALLS += target
 
     *-g++{
