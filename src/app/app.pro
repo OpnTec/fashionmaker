@@ -113,12 +113,12 @@ CONFIG(debug, debug|release){
     unix {
         *-g++{
         QMAKE_CXXFLAGS += \
-            -isystem "/usr/include/qt5" \
-            -isystem "/usr/include/qt5/QtWidgets" \
-            -isystem "/usr/include/qt5/QtXml" \
-            -isystem "/usr/include/qt5/QtGui" \
-            -isystem "/usr/include/qt5/QtXmlPatterns" \
-            -isystem "/usr/include/qt5/QtCore" \
+            -isystem "$$[QT_INSTALL_HEADERS]" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtWidgets" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtXml" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
             -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
@@ -127,12 +127,12 @@ CONFIG(debug, debug|release){
         #Turn on Clang warnings
         clang*{
         QMAKE_CXXFLAGS += \
-            -isystem "/usr/include/qt5" \
-            -isystem "/usr/include/qt5/QtWidgets" \
-            -isystem "/usr/include/qt5/QtXml" \
-            -isystem "/usr/include/qt5/QtGui" \
-            -isystem "/usr/include/qt5/QtCore" \
-            -isystem "/usr/include/qt5/QtXmlPatterns" \
+            -isystem "$$[QT_INSTALL_HEADERS]" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtWidgets" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtXml" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
+            -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
             -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
