@@ -196,7 +196,11 @@ isEmpty(PREFIX) {
 DATADIR =$$PREFIX/share
 DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 #MAKE INSTALL
+unix:!macx{
 target.path = $$PREFIX/bin
+}else{
+target.path = $$PREFIX/
+}
 desktop.path = $$DATADIR/applications/
 desktop.files += ../../dist/$${TARGET}.desktop
 pixmaps.path = $$DATADIR/pixmaps/
