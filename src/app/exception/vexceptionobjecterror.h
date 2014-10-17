@@ -41,7 +41,7 @@ class VExceptionObjectError : public VException
 public:
     VExceptionObjectError(const QString &what, const QDomElement &domElement);
     VExceptionObjectError(const VExceptionObjectError &e);
-    virtual ~VExceptionObjectError() noexcept (true) {}
+    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) {}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         TagText() const;

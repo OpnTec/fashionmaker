@@ -140,7 +140,7 @@ public:
     QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
     QmuParserError& operator= ( const QmuParserError &a_Obj );
-    virtual ~QmuParserError() noexcept (true){}
+    virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true){}
 
     void           SetFormula ( const QString &a_strFormula );
     const QString& GetExpr() const;
@@ -148,7 +148,7 @@ public:
     int            GetPos() const;
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
-    virtual void   raise() const;
+    Q_NORETURN virtual void   raise() const;
     virtual QmuParserError *clone() const;
 private:
     QString m_sMsg;      ///< The message string

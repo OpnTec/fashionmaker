@@ -29,7 +29,7 @@
 #ifndef VFORMULAPROPERTY_H
 #define VFORMULAPROPERTY_H
 
-#include "../libs/vpropertyexplorer/vproperty.h"
+#include "../../libs/vpropertyexplorer/vproperty.h"
 
 class VFormula;
 

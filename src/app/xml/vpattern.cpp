@@ -299,8 +299,8 @@ void VPattern::Parse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
-    QStringList tags{TagDraw, TagIncrements, TagAuthor, TagDescription, TagNotes, TagMeasurements, TagVersion,
-                TagGradation};
+    QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
+                                        << TagMeasurements << TagVersion << TagGradation;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -640,7 +640,7 @@ Unit VPattern::MUnit() const
     QDomElement element = list.at(0).toElement();
     if (element.isElement())
     {
-        QStringList units{"mm", "cm", "inch"};
+        QStringList units = QStringList() <<"mm" << "cm" << "inch";
         QString unit = GetParametrString(element, AttrUnit);
         switch (units.indexOf(unit))
         {
@@ -672,7 +672,7 @@ MeasurementsType VPattern::MType() const
     if (element.isElement())
     {
         QString type = GetParametrString(element, AttrType);
-        QStringList types{"standard", "individual"};
+        QStringList types = QStringList() << "standard" << "individual";
         switch (types.indexOf(type))
         {
             case 0:// standard
@@ -844,7 +844,7 @@ void VPattern::customEvent(QEvent *event)
  */
 void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
-    QStringList tags{TagCalculation, TagModeling, TagDetails};
+    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails;
     QDomNode domNode = node.firstChild();
     while (domNode.isNull() == false)
     {
@@ -895,7 +895,7 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
     {
         scene = sceneDetail;
     }
-    QStringList tags{TagPoint, TagLine, TagSpline, TagArc, TagTools};
+    QStringList tags = QStringList() << TagPoint << TagLine << TagSpline << TagArc << TagTools;
     const QDomNodeList nodeList = node.childNodes();
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -948,8 +948,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
         detail.setWidth(GetParametrDouble(domElement, VToolDetail::AttrWidth, "10.0"));
         detail.setClosed(GetParametrUInt(domElement, VToolDetail::AttrClosed, "1"));
 
-        QStringList types{VToolDetail::NodePoint, VToolDetail::NodeArc, VToolDetail::NodeSpline,
-                    VToolDetail::NodeSplinePath};
+        QStringList types = QStringList() << VToolDetail::NodePoint << VToolDetail::NodeArc << VToolDetail::NodeSpline
+                                          << VToolDetail::NodeSplinePath;
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
         for (qint32 i = 0; i < num; ++i)
@@ -1071,11 +1071,13 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
     qreal my = 0;
     QString typeLine;
 
-    QStringList points{VToolSinglePoint::ToolType, VToolEndLine::ToolType, VToolAlongLine::ToolType,
-                VToolShoulderPoint::ToolType, VToolNormal::ToolType, VToolBisector::ToolType,
-                VToolLineIntersect::ToolType, VToolPointOfContact::ToolType, VNodePoint::ToolType,
-                VToolHeight::ToolType, VToolTriangle::ToolType, VToolPointOfIntersection::ToolType,
-                VToolCutSpline::ToolType, VToolCutSplinePath::ToolType, VToolCutArc::ToolType};
+    QStringList points = QStringList() << VToolSinglePoint::ToolType << VToolEndLine::ToolType
+                                       << VToolAlongLine::ToolType << VToolShoulderPoint::ToolType
+                                       << VToolNormal::ToolType << VToolBisector::ToolType
+                                       << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType
+                                       << VNodePoint::ToolType << VToolHeight::ToolType << VToolTriangle::ToolType
+                                       << VToolPointOfIntersection::ToolType << VToolCutSpline::ToolType
+                                       << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1549,7 +1551,7 @@ void VPattern::CheckTagExists(const QString &tag)
     QDomNodeList list = elementsByTagName(tag);
     if (list.size() == 0)
     {
-        QStringList tags{TagVersion, TagAuthor, TagDescription, TagNotes, TagGradation};
+        QStringList tags = QStringList() << TagVersion << TagAuthor << TagDescription << TagNotes << TagGradation;
         QDomElement pattern = documentElement();
         switch (tags.indexOf(tag))
         {
@@ -1710,8 +1712,8 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     quint32 idObject = 0;
     quint32 idTool = 0;
 
-    QStringList splines{VToolSpline::ToolType, VToolSplinePath::ToolType, VNodeSpline::ToolType,
-                VNodeSplinePath::ToolType};
+    QStringList splines = QStringList() << VToolSpline::ToolType << VToolSplinePath::ToolType << VNodeSpline::ToolType
+                                        << VNodeSplinePath::ToolType;
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::ToolType
@@ -1836,7 +1838,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
     quint32 id = 0;
-    QStringList arcs{VToolArc::ToolType, VNodeArc::ToolType};
+    QStringList arcs = QStringList() << VToolArc::ToolType << VNodeArc::ToolType;
 
     switch (arcs.indexOf(type))
     {
@@ -2037,7 +2039,7 @@ QMap<GHeights, bool> VPattern::GetGradationHeights() const
         return map;
     }
 
-    QStringList gTags{TagHeights, TagSizes};
+    QStringList gTags = QStringList() << TagHeights << TagSizes;
     QDomNode domNode = tags.at(0).firstChild();
     while (domNode.isNull() == false)
     {
@@ -2102,7 +2104,7 @@ void VPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
         return;
     }
 
-    QStringList gTags{TagHeights, TagSizes};
+    QStringList gTags = QStringList() << TagHeights << TagSizes;
     QDomNode domNode = tags.at(0).firstChild();
     while (domNode.isNull() == false)
     {
@@ -2178,7 +2180,7 @@ QMap<GSizes, bool> VPattern::GetGradationSizes() const
         return map;
     }
 
-    QStringList gTags{TagHeights, TagSizes};
+    QStringList gTags = QStringList() << TagHeights << TagSizes;
     QDomNode domNode = tags.at(0).firstChild();
     while (domNode.isNull() == false)
     {
@@ -2243,7 +2245,7 @@ void VPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
         return;
     }
 
-    QStringList gTags{TagHeights, TagSizes};
+    QStringList gTags = QStringList() << TagHeights << TagSizes;
     QDomNode domNode = tags.at(0).firstChild();
     while (domNode.isNull() == false)
     {

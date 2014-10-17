@@ -48,7 +48,7 @@ VToolRecord::VToolRecord(const quint32 &id, const Tool &typeTool, const QString 
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolRecord::VToolRecord::operator==(const VToolRecord &record) const
+bool VToolRecord::operator==(const VToolRecord &record) const
 {
     bool isEqual = false;
     if (id == record.getId() && typeTool == record.getTypeTool() && nameDraw == record.getNameDraw())

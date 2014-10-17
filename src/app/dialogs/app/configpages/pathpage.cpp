@@ -135,7 +135,7 @@ void PathPage::InitTable()
     pathTable->setSelectionMode(QAbstractItemView::SingleSelection);
     pathTable->setShowGrid(false);
 
-    QStringList tableHeader{tr("Type"), tr("Path")};
+    QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
     pathTable->setHorizontalHeaderLabels(tableHeader);
 
     QString path;

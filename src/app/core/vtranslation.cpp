@@ -72,7 +72,7 @@ VTranslation::VTranslation(const VTranslation &tr)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslation::VTranslation::translate() const
+QString VTranslation::translate() const
 {
     return QCoreApplication::translate(mcontext.toUtf8().constData(), msourceText.toUtf8().constData(),
                                        mdisambiguation.toUtf8().constData(), mn);

@@ -75,7 +75,6 @@ RESOURCES += \
 
 OTHER_FILES += \
     share/resources/valentina.rc \
-    share/resources/valentina.exe.manifest \
     share/resources/icon/64x64/icon64x64.ico
 
 TRANSLATIONS += share/translations/valentina.ts \

@@ -29,9 +29,9 @@
 #include "vdrawtool.h"
 
 #include <qmuparsererror.h>
-#include "dialogs/tools/dialogeditwrongformula.h"
-#include "dialogs/app/dialogundo.h"
-#include "container/calculator.h"
+#include "../dialogs/tools/dialogeditwrongformula.h"
+#include "../dialogs/app/dialogundo.h"
+#include "../container/calculator.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
 #include "../../exception/vexceptionundo.h"

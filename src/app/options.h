@@ -33,6 +33,7 @@
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN32
+#define NOMINMAX
 #   include <Windows.h>
 
 extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
@@ -369,5 +370,20 @@ extern const QString in_Oprt;
 #else // define but disable this function if debugging is not set
 #define SCASSERT(cond) qt_noop();
 #endif /* QT_NO_DEBUG */
+
+// Detect whether the compiler supports C++11 noexcept exception specifications.
+#  if   defined(__clang__)
+#    if __has_feature(cxx_noexcept)
+#      define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
+#    endif
+#  elif defined(__GNUC__)
+#    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
+#      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
+#    endif
+#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
+#    define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
+#  else
+#    define V_NOEXCEPT_EXPR(x)
+#  endif
 
 #endif // OPTIONS_H

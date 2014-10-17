@@ -36,7 +36,7 @@ class VExceptionUndo : public VException
 public:
     VExceptionUndo(const QString &what);
     VExceptionUndo(const VExceptionUndo &e);
-    virtual ~VExceptionUndo() noexcept (true);
+    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true);
 };
 
 #endif // VEXCEPTIONUNDO_H

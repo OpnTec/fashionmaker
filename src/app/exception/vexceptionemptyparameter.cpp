@@ -59,7 +59,7 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParamete
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionEmptyParameter::~VExceptionEmptyParameter() noexcept (true)
+VExceptionEmptyParameter::~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

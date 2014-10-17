@@ -303,7 +303,7 @@ private:
     // cppcheck-suppress functionStatic
     int TestIfThenElse();
 
-    static void Abort();
+    static void Q_NORETURN Abort();
 };
 } // namespace Test
 } // namespace qmu

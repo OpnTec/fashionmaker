@@ -37,6 +37,30 @@
 
 #define QMUP_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+//// Is noexcept supported?
+//#if defined(__clang__) && defined(__has_feature) && __has_feature(cxx_noexcept) || \
+//    defined(__GXX_EXPERIMENTAL_CXX0X__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46 || \
+//    defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
+//#  define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
+//#else
+//#  define QMUP_NOEXCEPT_EXPR(x)
+//#endif
+
+// Detect whether the compiler supports C++11 noexcept exception specifications.
+#  if   defined(__clang__)
+#    if __has_feature(cxx_noexcept)
+#      define QMUP_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
+#    endif
+#  elif defined(__GNUC__)
+#    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
+#      define QMUP_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
+#    endif
+#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
+#    define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
+#  else
+#    define QMUP_NOEXCEPT_EXPR(x)
+#  endif
+
 /** @brief If this macro is defined mathematical exceptions (div by zero) will be thrown as exceptions. */
 //#define QMUP_MATH_EXCEPTIONS
 

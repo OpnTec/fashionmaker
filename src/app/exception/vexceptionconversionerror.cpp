@@ -50,7 +50,7 @@ VExceptionConversionError::VExceptionConversionError(const VExceptionConversionE
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError::~VExceptionConversionError() noexcept (true)
+VExceptionConversionError::~VExceptionConversionError() V_NOEXCEPT_EXPR (true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

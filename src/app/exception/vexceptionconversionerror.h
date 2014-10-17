@@ -39,7 +39,7 @@ class VExceptionConversionError : public VException
 public:
     VExceptionConversionError(const QString &what, const QString &str);
     VExceptionConversionError(const VExceptionConversionError &e);
-    virtual         ~VExceptionConversionError() noexcept (true);
+    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true);
     virtual QString ErrorMessage() const;
     QString         String() const;
 protected:

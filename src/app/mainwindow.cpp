@@ -68,10 +68,15 @@ MainWindow::MainWindow(QWidget *parent)
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       isInitialized(false), dialogTable(nullptr), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
-      currentToolBoxIndex(0), drawMode(true), recentFileActs{nullptr, nullptr, nullptr, nullptr, nullptr},
+      currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
       gradationSizes(nullptr), toolOptions(nullptr)
 {
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
+        recentFileActs[i] = nullptr;
+    }
+
     CreateActions();
     CreateMenus();
     ToolBarDraws();
@@ -889,13 +894,13 @@ void MainWindow::ToolBarTools()
     QKeySequence::ZoomOut). For examle "+" is Qt::Key_Plus + Qt::KeypadModifier for keypad.
     Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
 
-    const QList<QKeySequence> zoomInShortcuts = {QKeySequence::ZoomIn,
-                                                 Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier};
+    const QList<QKeySequence> zoomInShortcuts = QList<QKeySequence>() << QKeySequence::ZoomIn
+                                                << Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier;
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomIn);
 
-    const QList<QKeySequence> zoomOutShortcuts = {QKeySequence::ZoomOut,
-                                                 Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier};
+    const QList<QKeySequence> zoomOutShortcuts = QList<QKeySequence>() << QKeySequence::ZoomOut
+                                                 << Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier;
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOut);
 

@@ -40,7 +40,7 @@ public:
     VExceptionBadId(const QString &what, const quint32 &id);
     VExceptionBadId(const QString &what, const QString &key);
     VExceptionBadId(const VExceptionBadId &e);
-    virtual         ~VExceptionBadId() noexcept (true){}
+    virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true){}
     virtual QString ErrorMessage() const;
     quint32         BadId() const;
     QString         BadKey() const;

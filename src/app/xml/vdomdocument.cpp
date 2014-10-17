@@ -236,7 +236,7 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
     {
         parametr = GetParametrString(domElement, name, defValue);
 
-        QStringList bools {QLatin1String("true"), QLatin1String("false")};
+        QStringList bools = QStringList() << QLatin1String("true") << QLatin1String("false");
         switch (bools.indexOf(parametr))
         {
             case 0: // true
@@ -426,7 +426,7 @@ void VDomDocument::setContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::StrToUnits(const QString &unit)
 {
-    QStringList units{UnitMM, UnitCM, UnitINCH};
+    QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH;
     Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {

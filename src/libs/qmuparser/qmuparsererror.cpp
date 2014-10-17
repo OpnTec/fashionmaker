@@ -24,6 +24,10 @@
 
 #include <QTextStream>
 
+#ifdef Q_OS_WIN
+#include <assert.h>
+#endif
+
 namespace qmu
 {
 const QmuParserErrorMsg QmuParserErrorMsg::m_Instance;

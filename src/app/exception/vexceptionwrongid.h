@@ -41,7 +41,7 @@ class VExceptionWrongId : public VException
 public:
     VExceptionWrongId(const QString &what, const QDomElement &domElement);
     VExceptionWrongId(const VExceptionWrongId &e);
-    virtual ~VExceptionWrongId() noexcept (true){}
+    virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true){}
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         TagText() const;

@@ -39,5 +39,5 @@ VExceptionUndo::VExceptionUndo(const VExceptionUndo &e)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionUndo::~VExceptionUndo() noexcept (true)
+VExceptionUndo::~VExceptionUndo() V_NOEXCEPT_EXPR (true)
 {}

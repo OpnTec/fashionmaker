@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtooloptionspropertybrowser.h"
-#include "tools/drawTools/drawtools.h"
-#include "core/vapplication.h"
-#include "widgets/vmaingraphicsview.h"
-#include "visualization/vgraphicssimpletextitem.h"
-#include "visualization/vcontrolpointspline.h"
-#include "../libs/vpropertyexplorer/vproperties.h"
+#include "../tools/drawTools/drawtools.h"
+#include "../core/vapplication.h"
+#include "vmaingraphicsview.h"
+#include "../visualization/vgraphicssimpletextitem.h"
+#include "../visualization/vcontrolpointspline.h"
+#include "../../libs/vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
 #include "../container/vformula.h"
 
@@ -1291,32 +1291,32 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolTriangle()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VToolOptionsPropertyBrowser::PropertiesList() const
 {
-    QStringList attr{VAbstractTool::AttrName,       /* 0 */
-                QLatin1String("position"),          /* 1 */
-                VAbstractTool::AttrBasePoint,       /* 2 */
-                VAbstractTool::AttrTypeLine,        /* 3 */
-                VAbstractTool::AttrLength,          /* 4 */
-                VAbstractTool::AttrAngle,           /* 5 */
-                VAbstractTool::AttrFirstPoint,      /* 6 */
-                VAbstractTool::AttrSecondPoint,     /* 7 */
-                VAbstractTool::AttrRadius,          /* 8 */
-                VAbstractTool::AttrAngle1,          /* 9 */
-                VAbstractTool::AttrAngle2,          /* 10 */
-                VAbstractTool::AttrCenter,          /* 11 */
-                VAbstractTool::AttrThirdPoint,      /* 12 */
-                VToolCutArc::AttrArc,               /* 13 */
-                VToolCutSpline::AttrSpline,         /* 14 */
-                VToolCutSplinePath::AttrSplinePath, /* 15 */
-                VAbstractTool::AttrP1Line,          /* 16 */
-                VAbstractTool::AttrP2Line,          /* 17 */
-                VAbstractTool::AttrP1Line1,         /* 18 */
-                VAbstractTool::AttrP2Line1,         /* 19 */
-                VAbstractTool::AttrP1Line2,         /* 20 */
-                VAbstractTool::AttrP2Line2,         /* 21 */
-                VAbstractTool::AttrAngle,           /* 22 */
-                VAbstractTool::AttrPShoulder,       /* 23 */
-                VAbstractTool::AttrAxisP1,          /* 24 */
-                VAbstractTool::AttrAxisP2,          /* 25 */
-                VAbstractTool::AttrKCurve};         /* 26 */
+    QStringList attr = QStringList() << VAbstractTool::AttrName            /* 0 */
+                                     << QLatin1String("position")          /* 1 */
+                                     << VAbstractTool::AttrBasePoint       /* 2 */
+                                     << VAbstractTool::AttrTypeLine        /* 3 */
+                                     << VAbstractTool::AttrLength          /* 4 */
+                                     << VAbstractTool::AttrAngle           /* 5 */
+                                     << VAbstractTool::AttrFirstPoint      /* 6 */
+                                     << VAbstractTool::AttrSecondPoint     /* 7 */
+                                     << VAbstractTool::AttrRadius          /* 8 */
+                                     << VAbstractTool::AttrAngle1          /* 9 */
+                                     << VAbstractTool::AttrAngle2          /* 10 */
+                                     << VAbstractTool::AttrCenter          /* 11 */
+                                     << VAbstractTool::AttrThirdPoint      /* 12 */
+                                     << VToolCutArc::AttrArc               /* 13 */
+                                     << VToolCutSpline::AttrSpline         /* 14 */
+                                     << VToolCutSplinePath::AttrSplinePath /* 15 */
+                                     << VAbstractTool::AttrP1Line          /* 16 */
+                                     << VAbstractTool::AttrP2Line          /* 17 */
+                                     << VAbstractTool::AttrP1Line1         /* 18 */
+                                     << VAbstractTool::AttrP2Line1         /* 19 */
+                                     << VAbstractTool::AttrP1Line2         /* 20 */
+                                     << VAbstractTool::AttrP2Line2         /* 21 */
+                                     << VAbstractTool::AttrAngle           /* 22 */
+                                     << VAbstractTool::AttrPShoulder       /* 23 */
+                                     << VAbstractTool::AttrAxisP1          /* 24 */
+                                     << VAbstractTool::AttrAxisP2          /* 25 */
+                                     << VAbstractTool::AttrKCurve;         /* 26 */
     return attr;
 }

@@ -41,7 +41,7 @@ class VExceptionEmptyParameter : public VException
 public:
     VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
     VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
-    virtual         ~VExceptionEmptyParameter() noexcept (true);
+    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true);
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         Name() const;
