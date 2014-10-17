@@ -144,7 +144,10 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
             _numScheduledScalings = numSteps;       // previously scheduled scalings
         }
 
-        anim->start();
+        if (anim->state() != QTimeLine::Running)
+        {
+            anim->start();
+        }
         return true;
     }
   }
