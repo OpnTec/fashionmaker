@@ -52,6 +52,18 @@ VException::VException(const VException &e):what(e.What()), moreInfo(e.MoreInfor
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VException &VException::operator=(const VException &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    this->what = e.What();
+    this->moreInfo = e.MoreInformation();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return error message

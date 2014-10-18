@@ -45,6 +45,7 @@ class VException : public QException
 public:
     VException(const QString &what);
     VException(const VException &e);
+    VException &operator=(const VException &e);
     virtual ~VException() V_NOEXCEPT_EXPR (true){}
 
     Q_NORETURN virtual void raise() const;

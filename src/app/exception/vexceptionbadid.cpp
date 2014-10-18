@@ -56,6 +56,19 @@ VExceptionBadId::VExceptionBadId(const VExceptionBadId &e)
     :VException(e), id(e.BadId()), key(e.BadKey()){}
 
 //---------------------------------------------------------------------------------------------------------------------
+VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    this->id = e.BadId();
+    this->key = e.BadKey();
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ErrorMessage return main error message
  * @return main error message
