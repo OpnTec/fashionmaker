@@ -37,15 +37,6 @@
 
 #define QMUP_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-//// Is noexcept supported?
-//#if defined(__clang__) && defined(__has_feature) && __has_feature(cxx_noexcept) || \
-//    defined(__GXX_EXPERIMENTAL_CXX0X__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46 || \
-//    defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
-//#  define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
-//#else
-//#  define QMUP_NOEXCEPT_EXPR(x)
-//#endif
-
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)
 #    if __has_feature(cxx_noexcept)

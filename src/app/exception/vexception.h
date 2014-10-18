@@ -45,9 +45,9 @@ class VException : public QException
 public:
     VException(const QString &what);
     VException(const VException &e);
-    Q_NORETURN virtual ~VException() V_NOEXCEPT_EXPR (true){}
+    virtual ~VException() V_NOEXCEPT_EXPR (true){}
 
-    Q_NORETURN virtual void    raise() const;
+    Q_NORETURN virtual void raise() const;
     // cppcheck-suppress unusedFunction
     virtual VException *clone() const;
     virtual QString ErrorMessage() const;
