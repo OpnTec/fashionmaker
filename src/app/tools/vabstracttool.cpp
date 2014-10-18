@@ -206,7 +206,7 @@ qint32 VAbstractTool::LineIntersectCircle(const QPointF &center, qreal radius, c
         }
     }
     // find distance from projection to points of intersection
-    qreal k = qSqrt (radius * radius - d * d);
+    qreal k = qSqrt (qAbs(radius * radius - d * d));
     qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
     // add to projection a vectors aimed to points of intersection
     p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);

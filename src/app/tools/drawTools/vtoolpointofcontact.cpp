@@ -95,27 +95,31 @@ void VToolPointOfContact::setDialog()
 QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &center, const QPointF &firstPoint,
                                        const QPointF &secondPoint)
 {
-    QPointF pArc;
-    qreal s = 0.0, s_x, s_y, step = 0.01, distans;
-    while ( s < 1)
+    QPointF p1, p2;
+    qint32 res = LineIntersectCircle(center, radius, QLineF(firstPoint, secondPoint), p1, p2);
+    switch (res)
     {
-        s_x = secondPoint.x()-(qAbs(secondPoint.x()-firstPoint.x()))*s;
-        s_y = secondPoint.y()-(qAbs(secondPoint.y()-firstPoint.y()))*s;
-        distans = QLineF(center.x(), center.y(), s_x, s_y).length();
-        if (fabs(distans*10 - radius*10) < 0.1)
-        {
-            pArc.rx() = s_x;
-            pArc.ry() = s_y;
+        case 0:
+            return QPointF();
             break;
-        }
-        if (distans<radius)
-        {
-            pArc.rx() = s_x;
-            pArc.ry() = s_y;
-        }
-        s = s + step;
+        case 1:
+            return p1;
+            break;
+        case 2:
+            if (QLineF(firstPoint, p1).length() <= QLineF(firstPoint, p2).length())
+            {
+                return p1;
+            }
+            else
+            {
+                return p2;
+            }
+            break;
+        default:
+            qDebug() << "Unxpected value" << res;
+            return QPointF();
+            break;
     }
-    return pArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
