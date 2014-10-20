@@ -106,6 +106,7 @@ public slots:
     void               ToolPointOfIntersection(bool checked);
     void               ToolUnionDetails(bool checked);
     void               ToolCutArc(bool checked);
+    void               ToolLineIntersectAxis(bool checked);
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);

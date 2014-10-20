@@ -21,6 +21,8 @@ HEADERS += \
     dialogs/tools/dialogcutsplinepath.h \
     dialogs/tools/dialoguniondetails.h \
     dialogs/tools/dialogcutarc.h \
+    dialogs/tools/dialogeditwrongformula.h \
+    dialogs/tools/dialoglineintersectaxis.h \
     dialogs/app/dialogincrements.h \
     dialogs/app/dialoghistory.h \
     dialogs/app/configdialog.h \
@@ -30,7 +32,6 @@ HEADERS += \
     dialogs/app/dialogstandardmeasurements.h \
     dialogs/app/dialogindividualmeasurements.h \
     dialogs/app/dialogaboutapp.h \
-    dialogs/tools/dialogeditwrongformula.h \
     dialogs/app/dialogpatternxmledit.h \
     dialogs/app/configpages/configurationpage.h \
     dialogs/app/configpages/patternpage.h \
@@ -60,6 +61,8 @@ SOURCES += \
     dialogs/tools/dialogcutsplinepath.cpp \
     dialogs/tools/dialoguniondetails.cpp \
     dialogs/tools/dialogcutarc.cpp \
+    dialogs/tools/dialogeditwrongformula.cpp \
+    dialogs/tools/dialoglineintersectaxis.cpp \
     dialogs/app/dialogincrements.cpp \
     dialogs/app/dialoghistory.cpp \
     dialogs/app/configdialog.cpp \
@@ -69,7 +72,6 @@ SOURCES += \
     dialogs/app/dialogindividualmeasurements.cpp \
     dialogs/app/dialogaboutapp.cpp \
     dialogs/app/dialogpatternxmledit.cpp \
-    dialogs/tools/dialogeditwrongformula.cpp \
     dialogs/app/configpages/configurationpage.cpp \
     dialogs/app/configpages/patternpage.cpp \
     dialogs/app/configpages/communitypage.cpp \
@@ -97,6 +99,8 @@ FORMS += \
     dialogs/tools/dialogcutsplinepath.ui \
     dialogs/tools/dialoguniondetails.ui \
     dialogs/tools/dialogcutarc.ui \
+    dialogs/tools/dialogeditwrongformula.ui \
+    dialogs/tools/dialoglineintersectaxis.ui \
     dialogs/app/dialogincrements.ui \
     dialogs/app/dialoghistory.ui \
     dialogs/app/dialogpatternproperties.ui \
@@ -105,5 +109,4 @@ FORMS += \
     dialogs/app/dialogindividualmeasurements.ui \
     dialogs/app/dialogaboutapp.ui \
     dialogs/app/dialogpatternxmledit.ui \
-    dialogs/tools/dialogeditwrongformula.ui \
-    dialogs/app/dialogundo.ui
+    dialogs/app/dialogundo.ui \

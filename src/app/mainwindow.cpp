@@ -666,6 +666,16 @@ void MainWindow::ToolCutArc(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolLineIntersectAxis(bool checked)
+{
+    SetToolButtonWithApply<DialogLineIntersectAxis>(checked, Tool::LineIntersectAxis,
+                                                    ":/cursor/line_intersect_axis_cursor.png",
+                                                    tr("Select first point of line"),
+                                                    &MainWindow::ClosedDialogWithApply<VToolLineIntersectAxis>,
+                                                    &MainWindow::ApplyDialog<VToolLineIntersectAxis>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief About show widows about.
  */
@@ -930,6 +940,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
     connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
     connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
+    connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1066,6 +1077,11 @@ void MainWindow::CancelTool()
             break;
         case Tool::CutArc:
             ui->toolButtonArcCutPoint->setChecked(false);
+            currentScene->setFocus(Qt::OtherFocusReason);
+            currentScene->clearSelection();
+            break;
+        case Tool::LineIntersectAxis:
+            ui->toolButtonLineIntersectAxis->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
@@ -1772,6 +1788,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonSplineCutPoint->setEnabled(drawTools);
     ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
     ui->toolButtonArcCutPoint->setEnabled(drawTools);
+    ui->toolButtonLineIntersectAxis->setEnabled(drawTools);
 
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);

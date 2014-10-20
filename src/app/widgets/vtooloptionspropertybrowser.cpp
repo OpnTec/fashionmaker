@@ -131,6 +131,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             currentItem = item->parentItem();
             ShowItemOptions(currentItem);
             break;
+        case VToolLineIntersectAxis::Type:
+            ShowOptionsToolLineIntersectAxis(item);
+            break;
         default:
             break;
     }
@@ -205,6 +208,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VControlPointSpline::Type:
             ShowItemOptions(currentItem->parentItem());
+            break;
+        case VToolLineIntersectAxis::Type:
+            UpdateOptionsToolLineIntersectAxis();
             break;
         default:
             break;
@@ -287,6 +293,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolTriangle::Type:
             ChangeDataToolTriangle(prop);
+            break;
+        case VToolLineIntersectAxis::Type:
+            ChangeDataToolLineIntersectAxis(prop);
             break;
         default:
             break;
@@ -843,6 +852,33 @@ void VToolOptionsPropertyBrowser::ChangeDataToolTriangle(VProperty *property)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersectAxis(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolLineIntersectAxis *i = qgraphicsitem_cast<VToolLineIntersectAxis *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // VAbstractTool::AttrName
+            SetPointName<VToolLineIntersectAxis>(value.toString());
+            break;
+        case 3: // VAbstractTool::AttrTypeLine
+            i->setTypeLine(value.toString());
+            break;
+        case 5: // VAbstractTool::AttrAngle
+            i->setFormulaAngle(value.value<VFormula>());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
@@ -1066,6 +1102,18 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTriangle(QGraphicsItem *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem *item)
+{
+    VToolLineIntersectAxis *i = qgraphicsitem_cast<VToolLineIntersectAxis *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Point intersection line and axis"));
+
+    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyLineType(i, tr("Line type"));
+    AddPropertyFormula(tr("Angle"), i->getFormulaAngle(), VAbstractTool::AttrAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
 {
     VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem);
@@ -1286,6 +1334,21 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolTriangle()
     VToolTriangle *i = qgraphicsitem_cast<VToolTriangle *>(currentItem);
 
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
+{
+    VToolLineIntersectAxis *i = qgraphicsitem_cast<VToolLineIntersectAxis *>(currentItem);
+    idToProperty[VAbstractTool::AttrName]->setValue(i->name());
+
+    QStringList styles = VAbstractTool::Styles();
+    qint32 index = styles.indexOf(i->getLineType());
+    idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+
+    QVariant valueAngle;
+    valueAngle.setValue(i->getFormulaAngle());
+    idToProperty[VAbstractTool::AttrAngle]->setValue(valueAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

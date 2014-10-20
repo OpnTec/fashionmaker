@@ -112,7 +112,7 @@ void DialogEndLine::FormulaTextChanged()
 void DialogEndLine::AngleTextChanged()
 {
     labelEditFormula = ui->labelEditAngle;
-    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula);
+    ValFormulaChanged(flagError, ui->plainTextEditAngle, timerFormula);
     labelEditFormula = ui->labelEditFormula;
 }
 

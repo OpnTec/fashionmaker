@@ -49,6 +49,7 @@
 #include "tools/dialoguniondetails.h"
 #include "tools/dialogtriangle.h"
 #include "tools/dialogpointofintersection.h"
+#include "tools/dialoglineintersectaxis.h"
 
 #include "app/dialoghistory.h"
 #include "app/dialogincrements.h"

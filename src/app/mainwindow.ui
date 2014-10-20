@@ -40,7 +40,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -289,6 +289,32 @@
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QToolButton" name="toolButtonLineIntersectAxis">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point of intersection line and axis</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/line_intersect_axis.png</normaloff>:/icon/32x32/line_intersect_axis.png</iconset>
           </property>
           <property name="iconSize">
            <size>

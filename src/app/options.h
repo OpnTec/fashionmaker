@@ -80,7 +80,9 @@ enum class Tool : unsigned char
     NodeSplinePath,
     Height,
     Triangle,
+    LineIntersectAxis,
     PointOfIntersection,
+
     UnionDetails
 };
 
@@ -107,7 +109,8 @@ enum class Vis : unsigned char
     ToolTriangle,
     ToolCutSpline,
     ToolSplinePath,
-    ToolCutSplinePath
+    ToolCutSplinePath,
+    ToolLineIntersectAxis
 };
 
 enum class Source : char { FromGui, FromFile, FromTool };

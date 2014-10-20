@@ -58,5 +58,6 @@
         <file>icon/path_config.png</file>
         <file>icon/16x16/info.png</file>
         <file>icon/16x16/measurement.png</file>
+        <file>icon/32x32/line_intersect_axis.png</file>
     </qresource>
 </RCC>

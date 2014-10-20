@@ -1077,7 +1077,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType
                                        << VNodePoint::ToolType << VToolHeight::ToolType << VToolTriangle::ToolType
                                        << VToolPointOfIntersection::ToolType << VToolCutSpline::ToolType
-                                       << VToolCutSplinePath::ToolType << VToolCutArc::ToolType;
+                                       << VToolCutSplinePath::ToolType << VToolCutArc::ToolType
+                                       << VToolLineIntersectAxis::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1485,6 +1486,42 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (qmu::QmuParserError &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+                throw excep;
+            }
+            break;
+        case 15: //VToolLineIntersectAxis::ToolType
+            try
+            {
+                PointsCommonAttributes(domElement, id, name, mx, my, typeLine);
+
+                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, "0");
+                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, "0");
+                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, "0");
+
+                const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
+                QString angleFix = angle;
+
+                VToolLineIntersectAxis::Create(id, name, typeLine, angleFix, basePointId, firstPointId, secondPointId,
+                                               mx, my, scene, this, data, parse, Source::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (angleFix != angle)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
+                    haveLiteChange();
+                }
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
+                                            domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
+                                            domElement);
                 excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
