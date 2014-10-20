@@ -1,7 +1,7 @@
 ; NSIS installer script for Valentina
 ; --------------- Headers --------------
 !include "MUI2.nsh"
-!include "FileAssociation.nsh"
+!include "headers\FileAssociation.nsh"
   
 ; --------------- General --------------
 CRCCheck force
@@ -170,6 +170,8 @@ FunctionEnd
 Function un.onInit
   !insertmacro MUI_UNGETLANGUAGE
 FunctionEnd
+
+Page instfiles "" createInstFiles
  
 ;-------------- Installer -------------------------
 Section "Valentina  (required)"
@@ -242,5 +244,11 @@ DeleteRegKey "${REGISTRY_ROOT}" "SOFTWARE\${MUI_PRODUCT}"
 DeleteRegKey "${REGISTRY_ROOT}" "${REG_UNINSTALL}"  
 
 SectionEnd
+
+;-------------- Taskbar Progress for Windows 7+ -------------
+;Need install additional plug-in (http://nsis.sourceforge.net/TaskbarProgress_plug-in)
+Function createInstFiles
+w7tbp::Start
+FunctionEnd
  
 ;eof
