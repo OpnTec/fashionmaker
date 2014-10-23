@@ -1616,12 +1616,7 @@ void MainWindow::UpdateSizesList(const QStringList &list)
  */
 void MainWindow::NewPattern()
 {
-    if (this->isWindowModified() || curFile.isEmpty() == false)
-    {
-        QProcess *v = new QProcess(this);
-        v->startDetached(QCoreApplication::applicationFilePath ());
-        delete v;
-    }
+    OpenNewValentina();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2059,6 +2054,15 @@ void MainWindow::PropertyBrowser()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::OpenNewValentina(const QString &fileName) const
+{
+    if (this->isWindowModified() || curFile.isEmpty() == false)
+    {
+        VApplication::NewValentina(fileName);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
@@ -2166,6 +2170,9 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
+    //We have unsaved changes or load more then one file per time
+    OpenNewValentina(fileName);
+
     // On this stage scene empty. Fit scene size to view size
     VAbstractTool::NewSceneRect(sceneDraw, ui->view);
     VAbstractTool::NewSceneRect(sceneDetails, ui->view);

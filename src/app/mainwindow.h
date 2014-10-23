@@ -252,6 +252,7 @@ private:
 
     void               AddDocks();
     void               PropertyBrowser();
+    void               OpenNewValentina(const QString &fileName = QString())const;
 };
 
 #endif // MAINWINDOW_H

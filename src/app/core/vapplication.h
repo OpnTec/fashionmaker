@@ -55,7 +55,7 @@ class VApplication : public QApplication
 public:
     VApplication(int &argc, char ** argv);
     virtual ~VApplication() {}
-    static void        NewValentina(const QString &fileName);
+    static void        NewValentina(const QString &fileName = QString());
     static void        CheckFactor(qreal &oldFactor, const qreal &Newfactor);
     virtual bool       notify(QObject * receiver, QEvent * event);
     Unit               patternUnit() const;

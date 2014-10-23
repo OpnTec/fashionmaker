@@ -195,14 +195,7 @@ int main(int argc, char *argv[])
 
     for (int i=0;i<args.size();++i)
     {
-        if (i == 0)
-        {
-            w.LoadPattern(args.at(i));
-        }
-        else
-        {
-            VApplication::NewValentina(args.at(i));
-        }
+        w.LoadPattern(args.at(i));
     }
 
     return app.exec();

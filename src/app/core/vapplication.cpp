@@ -80,7 +80,14 @@ void VApplication::NewValentina(const QString &fileName)
     QProcess *v = new QProcess();
     QStringList arguments;
     arguments << fileName;
-    v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+    if (fileName.isEmpty())
+    {
+        v->startDetached(QCoreApplication::applicationFilePath());
+    }
+    else
+    {
+        v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+    }
     delete v;
 }
 
