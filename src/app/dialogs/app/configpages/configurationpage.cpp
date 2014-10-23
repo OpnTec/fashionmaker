@@ -135,7 +135,7 @@ QGroupBox *ConfigurationPage::SaveGroup()
 
     autoTime = new QSpinBox();
     bool ok = true;
-    qint32 autoTimeValue = settings->value("configuration/autosave/time", 5).toInt(&ok);
+    qint32 autoTimeValue = settings->value("configuration/autosave/time", 1).toInt(&ok);
     if (ok == false)
     {
         autoTimeValue = 5;

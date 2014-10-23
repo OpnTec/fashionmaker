@@ -2131,7 +2131,7 @@ void MainWindow::InitAutoSave()
     if (autoSave)
     {
         bool ok = true;
-        qint32 autoTime = qApp->getSettings()->value("configuration/autosave/time", 5).toInt(&ok);
+        qint32 autoTime = qApp->getSettings()->value("configuration/autosave/time", 1).toInt(&ok);
         if (ok == false)
         {
             autoTime = 5;
