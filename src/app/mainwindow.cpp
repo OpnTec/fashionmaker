@@ -57,6 +57,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QtGlobal>
+#include <QDesktopWidget>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1920,8 +1921,9 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
-    QPoint pos = qApp->getSettings()->value("pos", QPoint(10, 10)).toPoint();
-    QSize size = qApp->getSettings()->value("size", QSize(1000, 800)).toSize();
+    QRect geomentry = VApplication::desktop()->availableGeometry(this);
+    QPoint pos = qApp->getSettings()->value("pos", geomentry.topLeft()).toPoint();
+    QSize size = qApp->getSettings()->value("size", geomentry.size()).toSize();
     resize(size);
     move(pos);
 
