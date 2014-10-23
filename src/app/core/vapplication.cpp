@@ -40,6 +40,7 @@
 #include <QProcess>
 #include <QUndoStack>
 #include <QtCore/qmath.h>
+#include <QTemporaryFile>
 
 const qreal VApplication::PrintDPI = 96.0;
 
