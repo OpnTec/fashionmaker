@@ -33,8 +33,12 @@
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN32
-#define NOMINMAX
-#   include <Windows.h>
+#   if defined( Q_CC_MSVC )        // MSVC USED
+#       ifndef NOMINMAX
+#           define NOMINMAX        // DISABLE min/max MACROS
+#       endif
+#   endif /*Q_CC_MSVC*/
+#   include <windows.h>
 
 extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 #endif /*Q_OS_WIN32*/

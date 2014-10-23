@@ -38,6 +38,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QProcess>
+#include <QTemporaryFile>
 #include <QUndoStack>
 #include <QtCore/qmath.h>
 

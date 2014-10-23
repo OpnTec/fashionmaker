@@ -29,18 +29,6 @@ BEGIN
 
     BLOCK "VarFileInfo"
     BEGIN
-        /* The following line should only be modified for localized versions.     */
-        /* It consists of any number of WORD,WORD pairs, with each pair           */
-        /* describing a language,codepage combination supported by the file.      */
-        /*                                                                        */
-        /* For example, a file might have values "0x409,1252" indicating that it  */
-        /* supports English language (0x409) in the Windows ANSI codepage (1252). */
-        VALUE "Translation", 0x0409, 1252, //U.S. English
-        VALUE "Translation", 0x0405, 1200, //Czech
-        VALUE "Translation", 0x0407, 1200, //German
-        VALUE "Translation", 0x040C, 1200, //French
-        VALUE "Translation", 0x040D, 1200, //Hebrew
-        VALUE "Translation", 0x0413, 1200, //Dutch
-        VALUE "Translation", 0x0419, 1200  //Russian
+        VALUE "Translation", 0x0409, 0x04E4 //U.S. English
     END
 END
