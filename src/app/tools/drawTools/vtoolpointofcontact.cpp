@@ -96,7 +96,7 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
                                        const QPointF &secondPoint)
 {
     QPointF p1, p2;
-    qint32 res = LineIntersectCircle(center, radius, QLineF(firstPoint, secondPoint), p1, p2);
+    qint32 res = VGObject::LineIntersectCircle(center, radius, QLineF(firstPoint, secondPoint), p1, p2);
     switch (res)
     {
         case 0:

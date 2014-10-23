@@ -208,8 +208,8 @@ void DialogHeight::PointNameChanged()
     const QSharedPointer<VPointF> p2Line = data->GeometricObject<VPointF>(p2LineId);
 
     QColor color = okColor;
-    if (set.size() != 3 || VAbstractTool::ClosestPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()),
-                                                       basePoint->toQPointF()) == QPointF())
+    if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line->toQPointF(), p2Line->toQPointF()),
+                                                  basePoint->toQPointF()) == QPointF())
     {
         flagError = false;
         color = errorColor;

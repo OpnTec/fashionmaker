@@ -29,6 +29,11 @@
 #include "vgobject.h"
 #include "vgobject_p.h"
 
+#include <QLineF>
+#include <QPointF>
+#include <QRectF>
+#include <QtCore/qmath.h>
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGObject default constructor.
@@ -171,4 +176,166 @@ quint32 VGObject::id() const
 void VGObject::setId(const quint32 &id)
 {
     d->_id = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &angle)
+{
+    QLineF line = QLineF();
+    line.setP1(p1);
+    line.setLength(length);
+    line.setAngle(angle);
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect)
+{
+    qreal diagonal = qSqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
+    QLineF line = BuildLine(firstPoint, diagonal, angle);
+
+    return LineIntersectRect(scRect, line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VGObject::BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect)
+{
+    QPointF endP1 = BuildRay(p, angle+180, scRect);
+    QPointF endP2 = BuildRay(p, angle, scRect);
+    return QLineF(endP1, endP2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VGObject::BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect)
+{
+    QLineF line(p1, p2);
+    return BuildAxis(p1, line.angle(), scRect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineIntersectRect find point intersection line and rect.
+ * @param rec rect.
+ * @param line line.
+ * @return point intersection.
+ */
+QPointF VGObject::LineIntersectRect(QRectF rec, QLineF line)
+{
+    qreal x1, y1, x2, y2;
+    rec.getCoords(&x1, &y1, &x2, &y2);
+    QPointF point;
+    QLineF::IntersectType type = line.intersect(QLineF(QPointF(x1, y1), QPointF(x1, y2)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
+        return point;
+    }
+    type = line.intersect(QLineF(QPointF(x1, y1), QPointF(x2, y1)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
+        return point;
+    }
+    type = line.intersect(QLineF(QPointF(x1, y2), QPointF(x2, y2)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
+        return point;
+    }
+    type = line.intersect(QLineF(QPointF(x2, y1), QPointF(x2, y2)), &point);
+    if ( type == QLineF::BoundedIntersection )
+    {
+        return point;
+    }
+    Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "There is no point of intersection.");
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineIntersectCircle find point intersection line and circle.
+ * @param center arc center.
+ * @param radius arc radius.
+ * @param line line
+ * @param p1 first intersection point.
+ * @param p2 second intersection point.
+ * @return 0 - intersection doesn't exist, 1 - one intersection point, 2 - two intersection points.
+ */
+qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1, QPointF &p2)
+{
+    //coefficient for equation of segment
+    qreal a = 0, b = 0, c = 0;
+    LineCoefficients(line, &a, &b, &c);
+    // projection center of circle on to line
+    QPointF p = ClosestPoint (line, center);
+    // how many solutions?
+    qint32 flag = 0;
+    qreal d = QLineF (center, p).length();
+    if (qFuzzyCompare(d, radius))
+    {
+        flag = 1;
+    }
+    else
+    {
+        if (radius > d)
+        {
+            flag = 2;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    // find distance from projection to points of intersection
+    qreal k = qSqrt (qAbs(radius * radius - d * d));
+    qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
+    // add to projection a vectors aimed to points of intersection
+    p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
+    p2 = addVector (p, QPointF (0, 0), QPointF (b, - a), k / t);
+    return flag;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClosestPoint find point projection of point onto line.
+ * @param line line.
+ * @return point on line or extended line if origin size too small.
+ */
+QPointF VGObject::ClosestPoint(const QLineF &line, const QPointF &point)
+{
+    qreal a = 0, b = 0, c = 0;
+    LineCoefficients(line, &a, &b, &c);
+    qreal x = point.x() + a;
+    qreal y = b + point.y();
+    QLineF lin (point, QPointF(x, y));
+    QPointF p;
+    QLineF::IntersectType intersect = line.intersect(lin, &p);
+    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
+    {
+        return p;
+    }
+    else
+    {
+        return QPointF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VGObject::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k)
+{
+    return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LineCoefficients coefficient for equation of segment. Segment equestion ax+by+c=0.
+ * @param line line
+ * @param a a value
+ * @param b b value
+ * @param c c value
+ */
+void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
+{
+    //coefficient for equation of segment
+    QPointF p1 = line.p1();
+    *a = line.p2().y() - p1.y();
+    *b = p1.x() - line.p2().x();
+    *c = - *a * p1.x() - *b * p1.y();
 }

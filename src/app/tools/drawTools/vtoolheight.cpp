@@ -184,7 +184,7 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
  */
 QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
 {
-    return VAbstractTool::ClosestPoint(line, point);
+    return VGObject::ClosestPoint(line, point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

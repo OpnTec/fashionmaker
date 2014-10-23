@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vispath.h
+ **  @file   vistoolcurveintersectaxis.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 8, 2014
+ **  @date   21 10, 2014
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef VISPATH_H
-#define VISPATH_H
+#ifndef VISTOOLCURVEINTERSECTAXIS_H
+#define VISTOOLCURVEINTERSECTAXIS_H
 
-#include "visualization.h"
-#include <QGraphicsPathItem>
+#include "visline.h"
 
-class VisPath : public Visualization, public QGraphicsPathItem
+class QGraphicsEllipseItem;
+
+class VisToolCurveIntersectAxis : public VisLine
 {
     Q_OBJECT
 public:
-    VisPath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisPath();
+    VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolCurveIntersectAxis();
+
+    virtual void RefreshGeometry();
+
+    QString      Angle() const;
+    void         setAngle(const QString &expression);
+    void         setAxisPointId(const quint32 &value);
 
     virtual int  type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Path)};
-protected:
-    virtual void InitPen();
-    virtual void AddOnScene();
+    enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
 private:
-    Q_DISABLE_COPY(VisPath)
+    Q_DISABLE_COPY(VisToolCurveIntersectAxis)
+    quint32              axisPointId;
+    qreal                angle;
+    QGraphicsEllipseItem *point;
+    QGraphicsEllipseItem *basePoint;
+    QGraphicsLineItem    *baseLine;
+    QGraphicsLineItem    *axisLine;
+    QGraphicsPathItem    *visCurve;
 };
 
-#endif // VISPATH_H
+#endif // VISTOOLCURVEINTERSECTAXIS_H

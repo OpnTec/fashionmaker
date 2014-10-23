@@ -63,7 +63,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     this->setZValue(100);
 
     QPointF p1, p2;
-    VAbstractTool::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+    VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
     controlLine->setPen(QPen(Qt::red, qApp->toPixel(qApp->widthHairLine())));
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
@@ -156,7 +156,7 @@ void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePointPosi
     if (this->indexSpline == indexSpline && this->position == pos)
     {
         QPointF p1, p2;
-        VAbstractTool::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+        VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
         controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
     }
 }

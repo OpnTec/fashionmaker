@@ -258,6 +258,29 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, ComboBoxCutSpline cut) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxCurves(QComboBox *box) const
+{
+    SCASSERT(box != nullptr);
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
+    QMap<QString, quint32> list;
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    {
+        if (i.key() != toolId)
+        {
+            QSharedPointer<VGObject> obj = i.value();
+            if ((obj->getType() == GOType::Arc || obj->getType() == GOType::Spline ||
+                    obj->getType() == GOType::SplinePath) && obj->getMode() == Draw::Calculation)
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(i.key());
+                list[curve->name()] = i.key();
+            }
+        }
+    }
+    FillList(box, list);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillComboBoxTypeLine fill comboBox list of type lines
  * @param box comboBox
@@ -541,6 +564,15 @@ void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, c
     SCASSERT(box != nullptr);
     FillComboBoxSplinesPath(box, cut);
     splinePathId = value;
+    ChangeCurrentData(box, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::setCurrentCurveId(QComboBox *box, quint32 &curveId, const quint32 &value) const
+{
+    SCASSERT(box != nullptr);
+    FillComboBoxCurves(box);
+    curveId = value;
     ChangeCurrentData(box, value);
 }
 

@@ -50,6 +50,7 @@
 #include "tools/dialogtriangle.h"
 #include "tools/dialogpointofintersection.h"
 #include "tools/dialoglineintersectaxis.h"
+#include "tools/dialogcurveintersectaxis.h"
 
 #include "app/dialoghistory.h"
 #include "app/dialogincrements.h"

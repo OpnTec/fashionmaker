@@ -102,7 +102,7 @@ void VisToolBisector::RefreshGeometry()
                 {
                     qreal angle = VToolBisector::BisectorAngle(first->toQPointF(), second->toQPointF(),
                                                                third->toQPointF());
-                    QLineF mainLine = Line(second->toQPointF(), length, angle);
+                    QLineF mainLine = VGObject::BuildLine(second->toQPointF(), length, angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
 
                     DrawPoint(point, mainLine.p2(), mainColor);
@@ -112,7 +112,8 @@ void VisToolBisector::RefreshGeometry()
                     qreal angle = VToolBisector::BisectorAngle(first->toQPointF(), second->toQPointF(),
                                                                third->toQPointF());
                     QPointF endRay = Ray(second->toQPointF(), angle);
-                    QLineF mainLine = Line(second->toQPointF(), QLineF(second->toQPointF(), endRay).length(), angle);
+                    QLineF mainLine = VGObject::BuildLine(second->toQPointF(),
+                                                          QLineF(second->toQPointF(), endRay).length(), angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
                 }
             }

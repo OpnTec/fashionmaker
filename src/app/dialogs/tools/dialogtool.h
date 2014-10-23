@@ -213,6 +213,7 @@ protected:
     void             FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxSplinesPath(QComboBox *box,
                                              ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
+    void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box) const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
@@ -233,6 +234,7 @@ protected:
                                      ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc) const;
     void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
+    void             setCurrentCurveId(QComboBox *box, quint32 &curveId, const quint32 &value) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);

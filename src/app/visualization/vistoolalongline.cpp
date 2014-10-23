@@ -81,7 +81,7 @@ void VisToolAlongLine::RefreshGeometry()
 
             if (qFuzzyCompare(1 + length, 1 + 0) == false)
             {
-                QLineF mainLine = Line(first->toQPointF(), length, line->line().angle());
+                QLineF mainLine = VGObject::BuildLine(first->toQPointF(), length, line->line().angle());
                 DrawLine(this, mainLine, mainColor, lineStyle);
 
                 DrawPoint(point, mainLine.p2(), mainColor);

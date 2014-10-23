@@ -48,5 +48,6 @@
 #include "vtoolcutsplinepath.h"
 #include "vtoolcutarc.h"
 #include "vtoollineintersectaxis.h"
+#include "vtoolcurveintersectaxis.h"
 
 #endif // DRAWTOOLS_H

@@ -35,6 +35,7 @@
 enum class PathDirection : char { Hide, Show };
 
 class QPainterPath;
+class QLineF;
 
 class VAbstractCurve :public VGObject
 {
@@ -45,6 +46,7 @@ public:
     virtual QVector<QPointF> GetPoints() const =0;
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual qreal            GetLength() const =0;
+    virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 };

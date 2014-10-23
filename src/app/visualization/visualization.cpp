@@ -177,3 +177,13 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
     lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
     lineItem->setLine(line);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+                             Qt::PenStyle style, Qt::PenCapStyle cap)
+{
+    SCASSERT (pathItem != nullptr);
+
+    pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style, cap));
+    pathItem->setPath(path);
+}

@@ -94,7 +94,8 @@ void VisToolShoulderPoint::RefreshGeometry()
                 {
                     qreal angle = QLineF(second->toQPointF(), third->toQPointF()).angle();
                     QPointF endRay = Ray(second->toQPointF(), angle);
-                    QLineF mainLine = Line(second->toQPointF(), QLineF(second->toQPointF(), endRay).length(), angle);
+                    QLineF mainLine = VGObject::BuildLine(second->toQPointF(),
+                                                          QLineF(second->toQPointF(), endRay).length(), angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
                 }
             }

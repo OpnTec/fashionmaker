@@ -45,7 +45,6 @@ public:
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
 protected:
-    QLineF       Line(const QPointF &p1, const qreal& length, const qreal &angle);
     qreal        CorrectAngle(const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
     QPointF      Ray(const QPointF &firstPoint) const;

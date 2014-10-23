@@ -43,16 +43,6 @@ VisLine::~VisLine()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VisLine::Line(const QPointF &p1, const qreal &length, const qreal &angle)
-{
-    QLineF line = QLineF();
-    line.setP1(p1);
-    line.setLength(length);
-    line.setAngle(angle);
-    return line;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal VisLine::CorrectAngle(const qreal &angle) const
 {
     qreal ang = angle;
@@ -94,18 +84,15 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
         return line.p2();// We can't find ray because item doesn't have scene. We will return cursor position on scene.
     }
 
-    QLineF line = QLineF();
-    line.setP1(firstPoint);
-    line.setAngle(angle);
-
     QRectF scRect = this->scene()->sceneRect();
-    qreal diagonal = qSqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
-    line.setLength(diagonal);
     if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
     {
-        line.setAngle(CorrectAngle(line.angle()));
+        return VGObject::BuildRay(firstPoint, CorrectAngle(angle), scRect);
     }
-    return VAbstractTool::LineIntersectRect(scRect, line);
+    else
+    {
+        return VGObject::BuildRay(firstPoint, angle, scRect);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

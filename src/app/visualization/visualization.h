@@ -76,6 +76,8 @@ protected:
                            Qt::PenStyle style = Qt::SolidLine);
     virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine);
+    void         DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &path, const QColor &color,
+                          Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item>
     void         AddItem(Item *item)

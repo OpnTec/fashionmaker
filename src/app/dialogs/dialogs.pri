@@ -37,7 +37,8 @@ HEADERS += \
     dialogs/app/configpages/patternpage.h \
     dialogs/app/configpages/communitypage.h \
     dialogs/app/configpages/pathpage.h \
-    dialogs/app/dialogundo.h
+    dialogs/app/dialogundo.h \
+    dialogs/tools/dialogcurveintersectaxis.h
 
 SOURCES += \
     dialogs/tools/dialogtriangle.cpp \
@@ -76,7 +77,8 @@ SOURCES += \
     dialogs/app/configpages/patternpage.cpp \
     dialogs/app/configpages/communitypage.cpp \
     dialogs/app/configpages/pathpage.cpp \
-    dialogs/app/dialogundo.cpp
+    dialogs/app/dialogundo.cpp \
+    dialogs/tools/dialogcurveintersectaxis.cpp
 
 FORMS += \
     dialogs/tools/dialogtriangle.ui \
@@ -110,3 +112,4 @@ FORMS += \
     dialogs/app/dialogaboutapp.ui \
     dialogs/app/dialogpatternxmledit.ui \
     dialogs/app/dialogundo.ui \
+    dialogs/tools/dialogcurveintersectaxis.ui

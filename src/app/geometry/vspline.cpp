@@ -97,43 +97,6 @@ qreal VSpline::GetLength () const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CrossingSplLine check intersection spline with line.
- * @param line line.
- * @param intersectionPoint intersection point.
- * @return result intersection.
- */
-// cppcheck-suppress unusedFunction
-QLineF::IntersectType VSpline::CrossingSplLine ( const QLineF &line, QPointF *intersectionPoint ) const
-{
-    QVector<qreal> px;
-    QVector<qreal> py;
-    px.append ( GetP1 ().x () );
-    py.append ( GetP1 ().y () );
-    QVector<qreal>& wpx = px;
-    QVector<qreal>& wpy = py;
-    PointBezier_r ( GetP1 ().x (), GetP1 ().y (), GetP2 ().x (), GetP2 ().y (),
-                    GetP3 ().x (), GetP3 ().y (), GetP4 ().x (), GetP4 ().y (),
-                    0, wpx, wpy);
-    px.append ( GetP4 ().x () );
-    py.append ( GetP4 ().y () );
-    qint32 i = 0;
-    QPointF crosPoint;
-    QLineF::IntersectType type = QLineF::NoIntersection;
-    for ( i = 0; i < px.count()-1; ++i )
-    {
-        type = line.intersect(QLineF ( QPointF ( px.at(i), py.at(i) ),
-                                       QPointF ( px.at(i+1), py.at(i+1) )), &crosPoint);
-        if ( type == QLineF::BoundedIntersection )
-        {
-            *intersectionPoint = crosPoint;
-            return type;
-        }
-    }
-    throw "Can't found point of intersection spline and line.";
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal VSpline::LengthT(qreal t) const
 {
     if (t < 0 || t > 1)

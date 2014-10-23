@@ -22,5 +22,7 @@
         <file>cursor/cursor-arrow-closehand.png</file>
         <file>cursor/cursor-arrow-openhand.png</file>
         <file>cursor/line_intersect_axis_cursor.png</file>
+        <file>cursor/arc_intersect_axis_cursor.png</file>
+        <file>cursor/curve_intersect_axis_cursor.png</file>
     </qresource>
 </RCC>

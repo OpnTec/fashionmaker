@@ -57,7 +57,7 @@ void VisToolEndLine::RefreshGeometry()
     }
     else
     {
-        line = Line(first->toQPointF(), length, angle);
+        line = VGObject::BuildLine(first->toQPointF(), length, angle);
         DrawPoint(point, line.p2(), mainColor);
     }
     DrawLine(this, line, mainColor, lineStyle);

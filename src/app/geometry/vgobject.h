@@ -35,6 +35,9 @@
 #include <QSharedDataPointer>
 
 class VGObjectData;
+class QLineF;
+class QPointF;
+class QRectF;
 
 /**
  * @brief The VGObject class keep information graphical objects.
@@ -62,6 +65,18 @@ public:
 
     quint32         id() const;
     virtual void    setId(const quint32 &id);
+
+    static QLineF  BuildLine(const QPointF &p1, const qreal& length, const qreal &angle);
+    static QPointF BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect);
+    static QLineF  BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect);
+    static QLineF  BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect);
+
+    static QPointF LineIntersectRect(QRectF rec, QLineF line);
+    static qint32  LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
+                                       QPointF &p2);
+    static QPointF ClosestPoint(const QLineF &line, const QPointF &point);
+    static QPointF addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
+    static void    LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
 private:
     QSharedDataPointer<VGObjectData> d;
 };

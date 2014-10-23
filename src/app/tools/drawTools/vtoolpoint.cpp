@@ -256,8 +256,9 @@ void VToolPoint::RefreshLine()
     {
         QRectF nameRec = namePoint->sceneBoundingRect();
         QPointF p1, p2;
-        LineIntersectCircle(QPointF(), radius/factor, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
-        QPointF pRec = LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
+        VGObject::LineIntersectCircle(QPointF(), radius/factor, QLineF(QPointF(), nameRec.center() - scenePos()), p1,
+                                      p2);
+        QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - scenePos()));
         if (currentColor == Qt::gray)
         {

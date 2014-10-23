@@ -51,13 +51,7 @@ public:
     VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractTool();
     static void             NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
-    static QPointF          LineIntersectRect(QRectF rec, QLineF line);
-    static qint32           LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
-                                                QPointF &p2);
-    static QPointF          ClosestPoint(const QLineF &line, const QPointF &point);
-    static QPointF          addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
     quint32                 getId() const;
-    static void             LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
     static const QString    AttrType;
     static const QString    AttrMx;
     static const QString    AttrMy;
@@ -91,6 +85,7 @@ public:
     static const QString    AttrPSpline;
     static const QString    AttrAxisP1;
     static const QString    AttrAxisP2;
+    static const QString    AttrCurve;
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;
     static const QString    TypeLineDashLine;
