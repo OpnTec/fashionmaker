@@ -952,6 +952,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
     connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
+    connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1098,6 +1099,7 @@ void MainWindow::CancelTool()
             break;
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(false);
+            ui->toolButtonArcIntersectAxis->setChecked(false);
             currentScene->setFocus(Qt::OtherFocusReason);
             currentScene->clearSelection();
             break;
@@ -1806,6 +1808,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonArcCutPoint->setEnabled(drawTools);
     ui->toolButtonLineIntersectAxis->setEnabled(drawTools);
     ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
+    ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
 
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
