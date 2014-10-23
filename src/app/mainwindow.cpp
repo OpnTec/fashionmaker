@@ -786,6 +786,19 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (MaybeSave())
     {
         WriteSettings();
+
+        //File was closed correct.
+        QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+        restoreFiles.removeAll(curFile);
+        qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+
+        // Remove autosave file
+        QFile autofile(curFile +".autosave");
+        if (autofile.exists())
+        {
+            autofile.remove();
+        }
+
         event->accept();
         qApp->closeAllWindows();
     }
@@ -1899,6 +1912,11 @@ void MainWindow::setCurrentFile(const QString &fileName)
 
         qApp->getSettings()->setValue("recentFileList", files);
         UpdateRecentFileActions();
+
+        QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+        restoreFiles.removeAll(fileName);
+        restoreFiles.prepend(fileName);
+        qApp->getSettings()->setValue("restoreFileList", restoreFiles);
     }
     shownName+="[*]";
     setWindowTitle(shownName);
@@ -2247,6 +2265,52 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     //Fit scene size to best size for first show
     ZoomFirstShow();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ReopenFilesAfterCrash()
+{
+    QStringList files = qApp->getSettings()->value("restoreFileList").toStringList();
+    if (files.size() > 0)
+    {
+        QStringList restoreFiles;
+        for (int i = 0; i < files.size(); ++i)
+        {
+            QFile file(files.at(i) +".autosave");
+            if (file.exists())
+            {
+                restoreFiles.append(files.at(i));
+            }
+        }
+        files.clear();
+        qApp->getSettings()->setValue("restoreFileList", files);
+
+        if (restoreFiles.size() > 0)
+        {
+            QMessageBox::StandardButton reply;
+            QString mes=QString(tr("Valentina didn't shut down correctly. "
+                                   "Do you want reopen files (%1) you had open?")).arg(restoreFiles.size());
+            reply = QMessageBox::question(this, tr("Reopen files."), mes, QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::Yes);
+            if (reply == QMessageBox::Yes)
+            {
+                for (int i = 0; i < restoreFiles.size(); ++i)
+                {
+                    QString error;
+                    if (VApplication::SafeCopy(restoreFiles.at(i) +".autosave", restoreFiles.at(i), error))
+                    {
+                        QFile autoFile(restoreFiles.at(i) +".autosave");
+                        autoFile.remove();
+                        LoadPattern(restoreFiles.at(i));
+                    }
+                    else
+                    {
+                        qDebug()<< "Could not copy "<<restoreFiles.at(i) +".autosave"<<"to"<<restoreFiles.at(i)<<error;
+                    }
+                }
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

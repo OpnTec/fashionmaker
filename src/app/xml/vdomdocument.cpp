@@ -31,6 +31,7 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionbadid.h"
 #include "../options.h"
+#include "../core/vapplication.h"
 
 #include <QAbstractMessageHandler>
 #include <QXmlSchema>
@@ -524,45 +525,9 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
         save(out, indent);
         tempFile.close();
     }
-    //Replace temp file our
-    bool result = false;
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-
-    QFile patternFile(fileName);
-    patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    // We need here temporary file because we want restore document after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
-    {
-        patternFile.copy(tempOfPattern.fileName());
-    }
-    if ( patternFile.exists() == false || patternFile.remove() )
-    {
-        if ( tempFile.copy(patternFile.fileName()) == false )
-        {
-            error = tr("Could not copy temp file to document file");
-            tempOfPattern.copy(fileName);
-            tempFile.remove();
-            result = false;
-        }
-        else
-        {
-            tempFile.remove();
-            result = true;
-        }
-    }
-    else
-    {
-        error = tr("Could not remove document file");
-        result = false;
-    }
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup--; // turn off check permission again
-#endif /*Q_OS_WIN32*/
+    //Copy document to file
+    bool result = VApplication::SafeCopy(temp, fileName, error);
+    tempFile.remove();//Clear temp file
 
     return result;
 }

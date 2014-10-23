@@ -102,6 +102,7 @@ public:
 
     static QStringList LabelLanguages();
     QString            STDescription(const QString &id)const;
+    static bool        SafeCopy(const QString &source, const QString &destination, QString &error);
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;

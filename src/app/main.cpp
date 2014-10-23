@@ -192,6 +192,8 @@ int main(int argc, char *argv[])
     //Before we load pattern show window.
     w.show();
 
+    w.ReopenFilesAfterCrash();
+
     for (int i=0;i<args.size();++i)
     {
         w.LoadPattern(args.at(i));

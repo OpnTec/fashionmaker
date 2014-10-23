@@ -56,6 +56,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow();
     void               LoadPattern(const QString &curFile);
+    void               ReopenFilesAfterCrash();
 public slots:
     void               mouseMove(const QPointF &scenePos);
 
