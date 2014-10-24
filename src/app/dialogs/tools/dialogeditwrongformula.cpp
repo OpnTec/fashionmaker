@@ -32,7 +32,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0),
-      checkZero(false), postfix(QStringLiteral("")), restoreCursor(false)
+      checkZero(false), postfix(QString()), restoreCursor(false)
 {
     ui->setupUi(this);
     InitVariables(ui);

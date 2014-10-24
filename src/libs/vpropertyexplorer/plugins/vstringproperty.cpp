@@ -32,14 +32,14 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
     : VProperty(name, QVariant::String), readOnly(false), typeForParent(0)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(QStringLiteral(""));
+    d_ptr->VariantValue.setValue(QString());
     d_ptr->VariantValue.convert(QVariant::String);
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
     : VProperty(name), readOnly(false), typeForParent(0)
 {
-    d_ptr->VariantValue.setValue(QStringLiteral(""));
+    d_ptr->VariantValue.setValue(QString());
     d_ptr->VariantValue.convert(QVariant::String);
 }
 
@@ -66,7 +66,7 @@ QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
         return tmpEditor->text();
     }
 
-    return QVariant(QStringLiteral(""));
+    return QVariant(QString());
 }
 
 void VPE::VStringProperty::setReadOnly(bool readOnly)

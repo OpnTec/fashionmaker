@@ -36,13 +36,13 @@
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
     :formula(QString()), value(QString(tr("Error"))), checkZero(true), data(nullptr), toolId(NULL_ID),
-      postfix(QStringLiteral("")), _error(true), dValue(0)
+      postfix(QString()), _error(true), dValue(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
     :formula(qApp->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container),
-      toolId(NULL_ID), postfix(QStringLiteral("")), _error(true), dValue(0)
+      toolId(NULL_ID), postfix(QString()), _error(true), dValue(0)
 {
     this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
     Eval();
