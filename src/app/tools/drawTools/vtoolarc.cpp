@@ -230,7 +230,7 @@ VFormula VToolArc::getFormulaF1() const
     VFormula f1(arc->GetFormulaF1(), getData());
     f1.setCheckZero(false);
     f1.setToolId(id);
-    f1.setPostfix(QStringLiteral("°"));
+    f1.setPostfix(degreeSymbol);
     return f1;
 }
 
@@ -255,7 +255,7 @@ VFormula VToolArc::getFormulaF2() const
     VFormula f2(arc->GetFormulaF2(), getData());
     f2.setCheckZero(false);
     f2.setToolId(id);
-    f2.setPostfix(QStringLiteral("°"));
+    f2.setPostfix(degreeSymbol);
     return f2;
 }
 

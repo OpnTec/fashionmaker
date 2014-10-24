@@ -216,13 +216,14 @@ QString VApplication::pathToTables() const
     }
     else
     {
+        const QString stPath = QStringLiteral("/tables/standard");
         #ifdef Q_OS_WIN
-            return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
+            return QApplication::applicationDirPath() + stPath;
         #else
             #ifdef QT_DEBUG
-                return QApplication::applicationDirPath() + QStringLiteral("/tables/standard");
+                return QApplication::applicationDirPath() + stPath;
             #else
-                QDir dir(QApplication::applicationDirPath() + QStringLiteral("/tables/standard"));
+                QDir dir(QApplication::applicationDirPath() + stPath);
                 if (dir.exists())
                 {
                     return dir.absolutePath();
@@ -239,13 +240,14 @@ QString VApplication::pathToTables() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::translationsPath() const
 {
+    const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + QStringLiteral("/translations");
+    return QApplication::applicationDirPath() + trPath;
 #else
 #ifdef QT_DEBUG
-    return QApplication::applicationDirPath() + QStringLiteral("/translations");
+    return QApplication::applicationDirPath() + trPath;
     #else
-        QDir dir(QApplication::applicationDirPath() + QStringLiteral("/translations"));
+        QDir dir(QApplication::applicationDirPath() + trPath);
         if (dir.exists())
         {
             return dir.absolutePath();

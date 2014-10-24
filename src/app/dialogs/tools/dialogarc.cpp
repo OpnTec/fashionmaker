@@ -354,8 +354,7 @@ void DialogArc::EvalRadius()
 void DialogArc::EvalF1()
 {
     labelEditFormula = ui->labelEditF1;
-    const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, postfix, false);
+    Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, degreeSymbol, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -365,8 +364,7 @@ void DialogArc::EvalF1()
 void DialogArc::EvalF2()
 {
     labelEditFormula = ui->labelEditF2;
-    const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, postfix, false);
+    Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

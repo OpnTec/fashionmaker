@@ -262,7 +262,7 @@ VFormula VToolEndLine::getFormulaAngle() const
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
     fAngle.setToolId(id);
-    fAngle.setPostfix(QStringLiteral("°"));
+    fAngle.setPostfix(degreeSymbol);
     return fAngle;
 }
 

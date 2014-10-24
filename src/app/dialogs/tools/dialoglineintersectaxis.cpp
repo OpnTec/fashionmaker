@@ -239,8 +239,7 @@ void DialogLineIntersectAxis::PutAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::EvalAngle()
 {
-    const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, postfix, false);
+    Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, degreeSymbol, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

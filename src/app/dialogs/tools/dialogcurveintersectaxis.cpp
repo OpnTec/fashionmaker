@@ -220,8 +220,7 @@ void DialogCurveIntersectAxis::PutAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::EvalAngle()
 {
-    const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, postfix, false);
+    Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, degreeSymbol, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

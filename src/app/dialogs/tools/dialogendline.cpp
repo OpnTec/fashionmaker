@@ -97,8 +97,7 @@ void DialogEndLine::PutAngle()
 void DialogEndLine::EvalAngle()
 {
     labelEditFormula = ui->labelEditAngle;
-    const QString postfix = QStringLiteral("°");
-    Eval(ui->plainTextEditAngle->toPlainText(), flagError, ui->labelResultCalculationAngle, postfix, false);
+    Eval(ui->plainTextEditAngle->toPlainText(), flagError, ui->labelResultCalculationAngle, degreeSymbol, false);
     labelEditFormula = ui->labelEditFormula;
 }
 
