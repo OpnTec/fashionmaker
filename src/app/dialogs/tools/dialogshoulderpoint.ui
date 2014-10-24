@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>488</width>
-    <height>540</height>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -249,7 +249,7 @@
            <item row="1" column="1">
             <widget class="QComboBox" name="comboBoxP1Line">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -278,7 +278,7 @@
            <item row="2" column="1">
             <widget class="QComboBox" name="comboBoxP2Line">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -307,7 +307,7 @@
            <item row="3" column="1">
             <widget class="QComboBox" name="comboBoxP3">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>

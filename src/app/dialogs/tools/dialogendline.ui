@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>417</width>
-    <height>542</height>
+    <height>538</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -157,6 +157,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditFormula">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -339,6 +345,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_10">
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditAngle">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
