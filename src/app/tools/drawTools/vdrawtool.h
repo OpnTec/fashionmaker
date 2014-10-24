@@ -94,9 +94,9 @@ protected:
         SCASSERT(event != nullptr);
 
         QMenu menu;
-        QAction *actionOption = menu.addAction(tr("Options"));
+        QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
         QAction *actionRemove = nullptr;
-        actionRemove = menu.addAction(tr("Delete"));
+        actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
         if (showRemove)
         {
             if (_referens > 1)

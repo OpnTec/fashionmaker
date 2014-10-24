@@ -52,5 +52,11 @@
         <file alias="16x16/actions/application-exit.png">icons/win.icon.theme/16x16/actions/application-exit.png</file>
         <file alias="24x24/actions/application-exit.png">icons/win.icon.theme/24x24/actions/application-exit.png</file>
         <file alias="32x32/actions/application-exit.png">icons/win.icon.theme/32x32/actions/application-exit.png</file>
+        <file alias="16x16/actions/preferences-other.png">icons/win.icon.theme/16x16/actions/preferences-other.png</file>
+        <file alias="24x24/actions/preferences-other.png">icons/win.icon.theme/24x24/actions/preferences-other.png</file>
+        <file alias="32x32/actions/preferences-other.png">icons/win.icon.theme/32x32/actions/preferences-other.png</file>
+        <file alias="16x16/actions/edit-delete.png">icons/win.icon.theme/16x16/actions/edit-delete.png</file>
+        <file alias="24x24/actions/edit-delete.png">icons/win.icon.theme/24x24/actions/edit-delete.png</file>
+        <file alias="32x32/actions/edit-delete.png">icons/win.icon.theme/32x32/actions/edit-delete.png</file>
     </qresource>
 </RCC>
