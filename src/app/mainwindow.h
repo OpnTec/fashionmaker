@@ -59,8 +59,8 @@ public:
     void               ReopenFilesAfterCrash();
 public slots:
     void               mouseMove(const QPointF &scenePos);
+    void               ArrowTool();
 
-    void               ActionAroowTool();
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);
     void               ActionNewPP();
@@ -206,7 +206,6 @@ private:
     void               ToolBarTools();
     void               InitToolButtons();
     void               CancelTool();
-    void               ArrowTool();
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
     void               SaveCurrentScene();

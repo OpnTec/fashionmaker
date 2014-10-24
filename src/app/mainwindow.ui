@@ -864,6 +864,9 @@
    </attribute>
   </widget>
   <widget class="QToolBar" name="toolBarTools">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="windowTitle">
     <string>Toolbar tools</string>
    </property>
@@ -877,6 +880,7 @@
    <addaction name="actionZoomOut"/>
    <addaction name="actionZoomOriginal"/>
    <addaction name="actionZoomFitBest"/>
+   <addaction name="actionStopTool"/>
   </widget>
   <widget class="QDockWidget" name="dockWidgetToolOptions">
    <property name="minimumSize">
@@ -1215,6 +1219,23 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+=</string>
+   </property>
+  </action>
+  <action name="actionStopTool">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="process-stop"/>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+   <property name="toolTip">
+    <string>Stop using tool</string>
    </property>
   </action>
  </widget>

@@ -1018,6 +1018,7 @@ void MainWindow::CancelTool()
         case Tool::Arrow:
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
+            ui->actionStopTool->setEnabled(true);
             break;
         case Tool::SinglePoint:
             Q_UNREACHABLE();
@@ -1145,20 +1146,12 @@ void  MainWindow::ArrowTool()
 {
     CancelTool();
     ui->actionArrowTool->setChecked(true);
+    ui->actionStopTool->setEnabled(false);
     tool = Tool::Arrow;
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
     ui->view->setShowToolOptions(true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ActionAroowTool set arrow tool. Cansel tool what was before.
- */
-void MainWindow::ActionAroowTool()
-{
-    ArrowTool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2097,7 +2090,8 @@ void MainWindow::CreateActions()
 {
     ui->setupUi(this);
 
-    connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ActionAroowTool);
+    connect(ui->actionStopTool, &QAction::triggered, this, &MainWindow::ArrowTool);
+    connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ArrowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
     connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewPP);
