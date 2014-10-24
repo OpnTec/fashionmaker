@@ -709,7 +709,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolNormal(VProperty *property)
         case 0: // VAbstractTool::AttrName
             SetPointName<VToolNormal>(value.toString());
             break;
-        case 22: // VAbstractTool::AttrAngle
+        case 5: // VAbstractTool::AttrAngle
             i->setAngle(value.toDouble());
             break;
         case 3: // VAbstractTool::AttrTypeLine
@@ -803,7 +803,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
     SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
-        case 26: // VAbstractTool::AttrKCurve
+        case 25: // VAbstractTool::AttrKCurve
         {
             VSpline spl = i->getSpline();
             spl.SetKcurve(value.toDouble());
@@ -828,7 +828,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
     SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
-        case 26: // VAbstractTool::AttrKCurve
+        case 25: // VAbstractTool::AttrKCurve
         {
             VSplinePath splPath = i->getSplinePath();
             splPath.setKCurve(value.toDouble());
@@ -1054,7 +1054,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
 
     VDoubleProperty* itemAngle = new VDoubleProperty(tr("Additional angle degrees"));
     itemAngle->setValue(i->getAngle());
-    itemAngle->setSetting("Min", 0);
+    itemAngle->setSetting("Min", -360);
     itemAngle->setSetting("Max", 360);
     itemAngle->setSetting("Precision", 3);
     AddProperty(itemAngle, VAbstractTool::AttrAngle);
@@ -1439,10 +1439,9 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << VAbstractTool::AttrP2Line1         /* 19 */
                                      << VAbstractTool::AttrP1Line2         /* 20 */
                                      << VAbstractTool::AttrP2Line2         /* 21 */
-                                     << VAbstractTool::AttrAngle           /* 22 */
-                                     << VAbstractTool::AttrPShoulder       /* 23 */
-                                     << VAbstractTool::AttrAxisP1          /* 24 */
-                                     << VAbstractTool::AttrAxisP2          /* 25 */
-                                     << VAbstractTool::AttrKCurve;         /* 26 */
+                                     << VAbstractTool::AttrPShoulder       /* 22 */
+                                     << VAbstractTool::AttrAxisP1          /* 23 */
+                                     << VAbstractTool::AttrAxisP2          /* 24 */
+                                     << VAbstractTool::AttrKCurve;         /* 25 */
     return attr;
 }
