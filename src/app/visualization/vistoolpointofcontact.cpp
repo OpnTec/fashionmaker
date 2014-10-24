@@ -50,12 +50,12 @@ VisToolPointOfContact::~VisToolPointOfContact()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfContact::RefreshGeometry()
 {
-    if (point1Id > 0)
+    if (point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
-        if (lineP2Id <= 0)
+        if (lineP2Id <= NULL_ID)
         {
             DrawLine(this, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
@@ -65,7 +65,7 @@ void VisToolPointOfContact::RefreshGeometry()
             DrawPoint(lineP2, second->toQPointF(), supportColor);
             DrawLine(this, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
-            if (radiusId <= 0)
+            if (radiusId <= NULL_ID)
             {
                 return;
             }

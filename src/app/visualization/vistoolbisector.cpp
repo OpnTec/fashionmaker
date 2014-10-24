@@ -71,12 +71,12 @@ VisToolBisector::~VisToolBisector()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::RefreshGeometry()
 {
-    if (point1Id > 0)
+    if (point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
-        if (point2Id <= 0)
+        if (point2Id <= NULL_ID)
         {
             DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
@@ -87,7 +87,7 @@ void VisToolBisector::RefreshGeometry()
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
-            if (point3Id <= 0)
+            if (point3Id <= NULL_ID)
             {
                 DrawLine(line2, QLineF(second->toQPointF(), Visualization::scenePos), supportColor);
             }

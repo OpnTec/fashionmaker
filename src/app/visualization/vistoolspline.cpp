@@ -50,12 +50,12 @@ VisToolSpline::~VisToolSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
-    if (point1Id > 0)
+    if (point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
-        if (point4Id <= 0)
+        if (point4Id <= NULL_ID)
         {
             DrawLine(line, QLineF(first->toQPointF(), Visualization::scenePos), mainColor);
         }

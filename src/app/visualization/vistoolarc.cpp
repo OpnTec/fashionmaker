@@ -45,7 +45,7 @@ VisToolArc::~VisToolArc()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::RefreshGeometry()
 {
-    if (point1Id > 0)
+    if (point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(arcCenter, first->toQPointF(), supportColor);

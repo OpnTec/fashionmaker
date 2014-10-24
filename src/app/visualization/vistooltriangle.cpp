@@ -56,12 +56,12 @@ VisToolTriangle::~VisToolTriangle()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolTriangle::RefreshGeometry()
 {
-    if (point1Id > 0)
+    if (point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
-        if (point2Id <= 0)
+        if (point2Id <= NULL_ID)
         {
             DrawAimedAxis(axis, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
@@ -72,7 +72,7 @@ void VisToolTriangle::RefreshGeometry()
 
             DrawAimedAxis(axis, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
-            if (hypotenuseP1Id <= 0)
+            if (hypotenuseP1Id <= NULL_ID)
             {
                 return;
             }
@@ -81,7 +81,7 @@ void VisToolTriangle::RefreshGeometry()
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(hypotenuseP1Id);
                 DrawPoint(hypotenuseP1, third->toQPointF(), supportColor);
 
-                if (hypotenuseP2Id <= 0)
+                if (hypotenuseP2Id <= NULL_ID)
                 {
                     DrawLine(this, QLineF(third->toQPointF(), Visualization::scenePos), supportColor, Qt::DashLine);
 

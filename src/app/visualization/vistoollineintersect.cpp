@@ -52,12 +52,12 @@ VisToolLineIntersect::~VisToolLineIntersect()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersect::RefreshGeometry()
 {
-    if (point1Id > 0)
+    if (point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
-        if (line1P2Id <= 0)
+        if (line1P2Id <= NULL_ID)
         {
             DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
@@ -68,7 +68,7 @@ void VisToolLineIntersect::RefreshGeometry()
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
-            if (line2P1Id <= 0)
+            if (line2P1Id <= NULL_ID)
             {
                 return;
             }
@@ -77,7 +77,7 @@ void VisToolLineIntersect::RefreshGeometry()
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(line2P1Id);
                 DrawPoint(line2P1, third->toQPointF(), supportColor);
 
-                if (line2P2Id <= 0)
+                if (line2P2Id <= NULL_ID)
                 {
                     DrawLine(this, QLineF(third->toQPointF(), Visualization::scenePos), supportColor);
 
