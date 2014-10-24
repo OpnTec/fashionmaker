@@ -22,8 +22,8 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
       <widget class="QLabel" name="labelEditNamePoint">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -36,14 +36,10 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="1">
       <widget class="QLineEdit" name="lineEditNamePoint"/>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
+     <item row="1" column="0">
       <widget class="QLabel" name="labelAxisP1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -56,18 +52,14 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxAxisP1">
        <property name="toolTip">
         <string>First point of line</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
-     <item>
+     <item row="2" column="0">
       <widget class="QLabel" name="labelAxisP2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -80,18 +72,14 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="2" column="1">
       <widget class="QComboBox" name="comboBoxAxisP2">
        <property name="toolTip">
         <string>First point of line</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_7">
-     <item>
+     <item row="3" column="0">
       <widget class="QLabel" name="labelFirstPoint">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -104,18 +92,14 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="3" column="1">
       <widget class="QComboBox" name="comboBoxFirstPoint">
        <property name="toolTip">
         <string>First point of line</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <item>
+     <item row="4" column="0">
       <widget class="QLabel" name="labelSecondPoint">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -128,7 +112,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="4" column="1">
       <widget class="QComboBox" name="comboBoxSecondPoint">
        <property name="toolTip">
         <string>First point of line</string>

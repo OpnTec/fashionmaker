@@ -396,8 +396,8 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
           <widget class="QLabel" name="label_3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -410,18 +410,14 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="1">
           <widget class="QComboBox" name="comboBoxBasePoint">
            <property name="toolTip">
             <string>First point of line</string>
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
+         <item row="1" column="0">
           <widget class="QLabel" name="labelEditNamePoint">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -434,21 +430,17 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="1">
           <widget class="QLineEdit" name="lineEditNamePoint"/>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
+         <item row="2" column="0">
           <widget class="QLabel" name="label_7">
            <property name="text">
             <string>Type of line</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="2" column="1">
           <widget class="QComboBox" name="comboBoxLineType">
            <property name="toolTip">
             <string>Show line from first point to this point</string>
@@ -628,9 +620,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>comboBoxBasePoint</tabstop>
-  <tabstop>lineEditNamePoint</tabstop>
-  <tabstop>comboBoxLineType</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
