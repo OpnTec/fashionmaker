@@ -56,6 +56,7 @@ public slots:
     virtual void            SetFactor(qreal factor);
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void                    Disable(bool disable);
+    void                    DeleteFromLabel();
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;

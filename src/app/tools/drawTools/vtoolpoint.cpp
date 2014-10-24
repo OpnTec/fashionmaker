@@ -48,6 +48,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
+    connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
     namePoint->setBrush(Qt::black);
     lineName = new QGraphicsLineItem(this);
     lineName->setPen(QPen(Qt::black));
@@ -180,6 +181,12 @@ void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 void VToolPoint::Disable(bool disable)
 {
     DisableItem(this, disable);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::DeleteFromLabel()
+{
+    DeleteTool(); //Leave this method immediately after call!!!
 }
 
 //---------------------------------------------------------------------------------------------------------------------

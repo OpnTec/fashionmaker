@@ -58,6 +58,7 @@ signals:
      * @param event context menu event.
      */
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    void         DeleteTool();
 protected:
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event );
@@ -65,6 +66,7 @@ protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event );
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void keyReleaseEvent ( QKeyEvent * event );
 private:
     /** @brief fontSize label font size. */
     qint32       fontSize;

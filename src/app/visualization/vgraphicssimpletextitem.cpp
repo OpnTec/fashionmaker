@@ -46,6 +46,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
     font.setPointSize(font.pointSize()+20);
@@ -155,4 +156,18 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
     }
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            emit DeleteTool();
+            return; //Leave this method immediately after call!!!
+        default:
+            break;
+    }
+    QGraphicsSimpleTextItem::keyReleaseEvent ( event );
 }
