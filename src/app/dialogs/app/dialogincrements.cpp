@@ -71,6 +71,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         }
     }
 
+    ShowUnits();
+
     TextDelegate *textDelegate = new TextDelegate(nameRegExp, data, ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);// name
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
@@ -343,6 +345,33 @@ void DialogIncrements::SetItemViewOnly(QTableWidgetItem *item)
     Qt::ItemFlags flags = item->flags();
     flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
     item->setFlags(flags);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ShowUnits()
+{
+    ShowHeaderUnits(ui->tableWidgetIncrement, 2);// base value
+    ShowHeaderUnits(ui->tableWidgetIncrement, 3);// in sizes
+    ShowHeaderUnits(ui->tableWidgetIncrement, 4);// in heights
+
+    ShowHeaderUnits(ui->tableWidgetMeasurements, 2);// base value
+    ShowHeaderUnits(ui->tableWidgetMeasurements, 3);// in sizes
+    ShowHeaderUnits(ui->tableWidgetMeasurements, 4);// in heights
+
+    ShowHeaderUnits(ui->tableWidgetLines, 1);// lengths
+    ShowHeaderUnits(ui->tableWidgetSplines, 1);// lengths
+    ShowHeaderUnits(ui->tableWidgetArcs, 1);// lengths
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column)
+{
+    SCASSERT(table != nullptr);
+
+    const QString unit = VDomDocument::UnitsToStr(qApp->patternUnit());
+    const QString header = table->horizontalHeaderItem(column)->text();
+    const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
+    table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

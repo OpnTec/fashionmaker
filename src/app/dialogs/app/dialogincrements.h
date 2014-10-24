@@ -105,6 +105,8 @@ private:
                                             const qreal &ksize, const qreal &kheight, const QString &description);
     void                 HideColumns(QTableWidget *table);
     void                 SetItemViewOnly(QTableWidgetItem *item);
+    void                 ShowUnits();
+    void                 ShowHeaderUnits(QTableWidget *table, int column);
 };
 
 #endif // DIALOGINCREMENTS_H
