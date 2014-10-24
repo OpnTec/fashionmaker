@@ -928,17 +928,27 @@ void MainWindow::ToolBarTools()
     QKeySequence::ZoomOut). For examle "+" is Qt::Key_Plus + Qt::KeypadModifier for keypad.
     Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
 
-    const QList<QKeySequence> zoomInShortcuts = QList<QKeySequence>() << QKeySequence::ZoomIn
-                                                << Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier;
+    QList<QKeySequence> zoomInShortcuts;
+    zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
+    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomIn);
 
-    const QList<QKeySequence> zoomOutShortcuts = QList<QKeySequence>() << QKeySequence::ZoomOut
-                                                 << Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier;
+    QList<QKeySequence> zoomOutShortcuts;
+    zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
+    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOut);
 
+    QList<QKeySequence> zoomOriginalShortcuts;
+    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
+    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
     connect(ui->actionZoomOriginal, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOriginal);
+
+    QList<QKeySequence> zoomFitBestShortcuts;
+    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 }
 

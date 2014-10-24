@@ -791,6 +791,8 @@
     <addaction name="actionHistory"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
+    <addaction name="actionZoomFitBest"/>
+    <addaction name="actionZoomOriginal"/>
     <addaction name="separator"/>
     <addaction name="actionPattern_properties"/>
     <addaction name="actionEdit_pattern_code"/>
@@ -1210,6 +1212,9 @@
    </property>
    <property name="text">
     <string>Zoom fit best</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+=</string>
    </property>
   </action>
  </widget>
