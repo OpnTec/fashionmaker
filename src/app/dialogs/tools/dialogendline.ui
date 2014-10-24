@@ -169,6 +169,9 @@
          <height>0</height>
         </size>
        </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
+       </property>
        <property name="lineWrapMode">
         <enum>QPlainTextEdit::NoWrap</enum>
        </property>
@@ -347,6 +350,9 @@
          <width>4</width>
          <height>0</height>
         </size>
+       </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
        </property>
        <property name="lineWrapMode">
         <enum>QPlainTextEdit::NoWrap</enum>
