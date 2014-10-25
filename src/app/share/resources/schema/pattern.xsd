@@ -107,7 +107,7 @@
 																			     <xs:attribute name="p1Line" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="p2Line" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="length" type="xs:string"></xs:attribute>
-																			     <xs:attribute name="angle" type="xs:double"></xs:attribute>
+																			     <xs:attribute name="angle" type="xs:string"></xs:attribute>
 																			     <xs:attribute name="typeLine" type="xs:string"></xs:attribute>
 																			     <xs:attribute name="splinePath" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="spline" type="xs:unsignedInt"></xs:attribute>
