@@ -89,7 +89,6 @@ void GraphicsViewZoom::scrollingTime(qreal x)
     {
         factor = factor*-13.8;
     }
-
     _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() + factor));
 }
 
@@ -105,6 +104,20 @@ void GraphicsViewZoom::animFinished()
         _numScheduledScalings++;
     }
     anim->stop();
+
+    /*
+     * In moust cases cursor position on view doesn't change, but for scene after scrolling position will be different.
+     * We are goint to check changes and save new value.
+     * If don't do that we will zoom using old value cursor position on scene. It is not what we expect.
+     * Almoust the same we do in method GraphicsViewZoom::eventFilter.
+     */
+    QPoint pos = _view->mapFromGlobal(QCursor::pos());
+    QPointF delta = target_scene_pos - _view->mapToScene(pos);
+    if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
+    {
+      target_viewport_pos = pos;
+      target_scene_pos = _view->mapToScene(pos);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,6 +125,11 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
 {
   if (event->type() == QEvent::MouseMove)
   {
+    /*
+     * Here we are saving cursor position on view and scene.
+     * This data need for gentle_zoom().
+     * Almoust the same we do in method GraphicsViewZoom::animFinished.
+     */
     QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
     QPointF delta = target_viewport_pos - mouse_event->pos();
     if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
