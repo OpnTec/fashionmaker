@@ -1942,11 +1942,8 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
-    QRect geomentry = VApplication::desktop()->availableGeometry(this);
-    QPoint pos = qApp->getSettings()->value("pos", geomentry.topLeft()).toPoint();
-    QSize size = qApp->getSettings()->value("size", geomentry.size()).toSize();
-    resize(size);
-    move(pos);
+    restoreGeometry(qApp->getSettings()->value("geometry").toByteArray());
+    restoreState(qApp->getSettings()->value("windowState").toByteArray());
 
     // Scene antialiasing
     bool graphOutputValue = qApp->getSettings()->value("pattern/graphicalOutput", 1).toBool();
@@ -1969,8 +1966,8 @@ void MainWindow::ReadSettings()
  */
 void MainWindow::WriteSettings()
 {
-    qApp->getSettings()->setValue("pos", pos());
-    qApp->getSettings()->setValue("size", size());
+    qApp->getSettings()->setValue("geometry", saveGeometry());
+    qApp->getSettings()->setValue("windowState", saveState());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
