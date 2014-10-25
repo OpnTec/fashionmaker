@@ -68,7 +68,6 @@ void GraphicsViewZoom::gentle_zoom(double factor)
 void GraphicsViewZoom::set_modifiers(Qt::KeyboardModifiers modifiers)
 {
   _modifiers = modifiers;
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,11 +83,11 @@ void GraphicsViewZoom::scrollingTime(qreal x)
     qreal factor = 1.0;
     if (_numScheduledScalings < 0)
     {
-        factor = factor*2.8;
+        factor = factor*13.8;
     }
     else
     {
-        factor = factor*-2.8;
+        factor = factor*-13.8;
     }
 
     _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() + factor));
