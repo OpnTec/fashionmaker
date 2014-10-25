@@ -1,7 +1,8 @@
 ; NSIS installer script for Valentina
 ; --------------- Headers --------------
 !include "MUI2.nsh"
-!include "headers\FileAssociation.nsh"
+!include "headers\fileassoc.nsh"
+!include "FileFunc.nsh"
   
 ; --------------- General --------------
 CRCCheck force
@@ -21,7 +22,7 @@ Icon "valentina\${MUI_FILE}.ico"
 Caption "${MUI_BRANDINGTEXT}"
 OutFile "${MUI_FILE}-install-v.${MUI_VERSION}_32bit.exe"  ; Resulting installer filename
 InstallDirRegKey HKCU "$LOCALAPPDATA\${MUI_PRODUCT}" ""   ; Get installation folder from registry if available
-LicenseData "valentina\LICENSE"
+LicenseData "valentina\LICENSE_GPL.txt"
 RequestExecutionLevel user                                ; Request application privileges for Windows Vista
   
 ShowInstDetails show
@@ -46,7 +47,7 @@ ShowUninstDetails show
 ;-------------- Install Pages -------------
 
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_LICENSE "valentina\license"
+!insertmacro MUI_PAGE_LICENSE "valentina\LICENSE_GPL.txt"
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
@@ -56,7 +57,7 @@ ShowUninstDetails show
     !define MUI_FINISHPAGE_RUN_CHECKED
     !define MUI_FINISHPAGE_RUN_TEXT "Launch ${MUI_PRODUCT}"
     !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
-    !define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\README"
+    !define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\README.txt"
 !insertmacro MUI_PAGE_FINISH
 
 ;-------------- Uninstall Pages -------------
@@ -147,6 +148,12 @@ Function checkAlreadyInstalled
 	UnInstall:
     ClearErrors
     ExecWait '$R0 _?=$INSTDIR' ;Do not copy the uninstaller to a temp file
+    
+    ;uninstall.exe is still here
+    ;Delete Files 
+	RMDir /r "$INSTDIR\*.*" 
+    ;Remove the installation directory
+    RMDir "$INSTDIR"
 
     IfErrors no_remove_uninstaller done
       ;You can either use Delete /REBOOTOK in the uninstaller or add some code
@@ -170,8 +177,6 @@ FunctionEnd
 Function un.onInit
   !insertmacro MUI_UNGETLANGUAGE
 FunctionEnd
-
-Page instfiles "" createInstFiles
  
 ;-------------- Installer -------------------------
 Section "Valentina  (required)"
@@ -182,9 +187,9 @@ SetOutPath "$INSTDIR" ; Set output path to the installation directory.
 File /r "c:\pack\valentina\*.*"
 
 ;create start-menu items  
-!define START_LINK_DIR "$STARTMENU\Programs\${MUI_PRODUCT}"
-!define START_LINK_RUN "$STARTMENU\Programs\${MUI_PRODUCT}\${MUI_PRODUCT}.lnk"
-!define START_LINK_UNINSTALLER "$STARTMENU\Programs\${MUI_PRODUCT}\Uninstall ${MUI_PRODUCT}.lnk"
+!define START_LINK_DIR "$SMPROGRAMS\${MUI_PRODUCT}"
+!define START_LINK_RUN "$SMPROGRAMS\${MUI_PRODUCT}\${MUI_PRODUCT}.lnk"
+!define START_LINK_UNINSTALLER "$SMPROGRAMS\${MUI_PRODUCT}\Uninstall ${MUI_PRODUCT}.lnk"
 
 # In your main installer section...
 SetShellVarContext current
@@ -199,13 +204,21 @@ CreateShortCut "$DESKTOP\${MUI_PRODUCT}.lnk" "$INSTDIR\${MUI_FILE}.exe" ""
 !define UNINSTALLER_NAME "Uninstall.exe"
   
 ; File associations
-${RegisterExtension} "$INSTDIR\${MUI_FILE}.exe" ".val" "Valentina_File"  
+!insertmacro APP_ASSOCIATE "val" "valentina.pattern" "Valentina pattern file" "$INSTDIR\${MUI_FILE}.exe,0" "Open with Valentina" "$\"$INSTDIR\${MUI_FILE}.exe$\" $\"%1$\""
+; Example of association icon with file type
+; !insertmacro APP_ASSOCIATE "osapp" "OSA.osapp" "Plugin Package" "$INSTDIR\PluginIcon.ico" "Open" "$INSTDIR\PluginInstaller.exe $\"%1$\""
+!insertmacro UPDATEFILEASSOC 
 
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayName" "${MUI_PRODUCT}"
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayIcon" "$\"$INSTDIR\${MUI_FILE}.exe$\""
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Publisher" "${PUBLISHER}"
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayVersion" "${MUI_VERSION}"
-WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "EstimatedSize" 51,4 ;MB
+
+; Run GetSize after coping all files
+${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
+IntFmt $0 "0x%08X" $0
+WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "EstimatedSize" "$0"
+
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "HelpLink" "${WEBSITE_LINK}"
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "URLInfoAbout" "${WEBSITE_LINK}"
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "InstallLocation" "$\"$INSTDIR$\""
@@ -218,8 +231,7 @@ WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Comments" "Uninstalls ${MUI_P
 WriteUninstaller "$INSTDIR\${UNINSTALLER_NAME}" ; Location of the uninstaller
  
 SectionEnd 
- 
- 
+
 ;--------------------------------    
 ;Uninstaller Section  
 Section "Uninstall"
@@ -237,18 +249,12 @@ Delete "${START_LINK_DIR}\*.*"
 RmDir  "${START_LINK_DIR}"
 
 ; Removing file associations  
-${UnRegisterExtension} ".val" "Valentina_File"  
+!insertmacro APP_UNASSOCIATE "val" "valentina.pattern"  
  
 ;Delete Uninstaller And Unistall Registry Entries
 DeleteRegKey "${REGISTRY_ROOT}" "SOFTWARE\${MUI_PRODUCT}"
 DeleteRegKey "${REGISTRY_ROOT}" "${REG_UNINSTALL}"  
 
 SectionEnd
-
-;-------------- Taskbar Progress for Windows 7+ -------------
-;Need install additional plug-in (http://nsis.sourceforge.net/TaskbarProgress_plug-in)
-Function createInstFiles
-w7tbp::Start
-FunctionEnd
  
 ;eof
