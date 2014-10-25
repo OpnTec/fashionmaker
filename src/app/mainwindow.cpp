@@ -1385,7 +1385,7 @@ void MainWindow::Clear()
     doc->clear();
     sceneDraw->clear();
     sceneDetails->clear();
-    CancelTool();
+    ArrowTool();
     comboBoxDraws->clear();
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
