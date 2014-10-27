@@ -46,6 +46,7 @@ class VToolOptionsPropertyBrowser : public QObject
     Q_OBJECT
 public:
     VToolOptionsPropertyBrowser(QDockWidget *parent);
+    void ClearPropertyBrowser();
 public slots:
     void itemClicked(QGraphicsItem *item);
     void userChangedData(VPE::VProperty* property);

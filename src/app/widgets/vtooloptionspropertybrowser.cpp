@@ -61,6 +61,15 @@ VToolOptionsPropertyBrowser::VToolOptionsPropertyBrowser(QDockWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
+{
+    PropertyModel->clear();
+    propertyToId.clear();
+    idToProperty.clear();
+    currentItem = nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     switch (item->type())

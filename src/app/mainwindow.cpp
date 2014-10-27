@@ -1409,6 +1409,7 @@ void MainWindow::Clear()
 
 void MainWindow::FullParseFile()
 {
+    toolOptions->ClearPropertyBrowser();
     try
     {
         SetEnabledGUI(true);
