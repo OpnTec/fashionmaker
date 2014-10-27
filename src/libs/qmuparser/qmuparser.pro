@@ -4,12 +4,22 @@
 #
 #-------------------------------------------------
 
+# File with common stuff for whole project
+include(../../../Valentina.pri)
+
+# We don't need gui library.
 QT       -= gui
 
+# Name of library
 TARGET = qmuparser
+
+# We want create library
 TEMPLATE = lib
 
+# Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
+
+# We use C++11 standard
 CONFIG += c++11
 
 DEFINES += QMUPARSER_LIBRARY
@@ -49,73 +59,56 @@ HEADERS += \
 
 VERSION = 2.2.4
 
-unix {
-    isEmpty(PREFIX) {
-     PREFIX = /usr/lib
+# Set "make install" command for Unix-like systems.
+unix{
+    isEmpty(PREFIX){
+        PREFIX = $$DEFAULT_PREFIX/lib
     }
+}
+
+unix:!macx{
     target.path = $$PREFIX/lib
     INSTALLS += target
-
-    *-g++{
-        QMAKE_CC = ccache gcc
-        QMAKE_CXX = ccache g++
-    }
-    clang*{
-        QMAKE_CC = ccache clang
-        QMAKE_CXX = ccache clang++
-    }
 }
 
-unix:!macx:!clang*{
-    CONFIG += precompile_header
-    # Precompiled headers (PCH)
-    PRECOMPILED_HEADER = stable.h
-    win32-msvc* {
-        PRECOMPILED_SOURCE = stable.cpp
-    }
-}
+# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+$$enable_ccache()
 
-include(../../../Valentina.pri)
+# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
+$$set_PCH()
 
 CONFIG(debug, debug|release){
-    # Debug
+    # Debug mode
     unix {
+        #Turn on compilers warnings.
         *-g++{
         QMAKE_CXXFLAGS += \
-            -isystem "$$[QT_INSTALL_HEADERS]" \
-            -isystem "$$[QT_INSTALL_HEADERS]/QtWidgets" \
-            -isystem "$$[QT_INSTALL_HEADERS]/QtXml" \
-            -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
-            -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
-            -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
+            # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$GCC_CXXFLAGS
+            $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
         }
-        #Turn on Clang warnings
         clang*{
         QMAKE_CXXFLAGS += \
-            -isystem "/usr/include/qt5" \
-            -isystem "/usr/include/qt5/QtWidgets" \
-            -isystem "/usr/include/qt5/QtXml" \
-            -isystem "/usr/include/qt5/QtGui" \
-            -isystem "/usr/include/qt5/QtCore" \
-            -isystem "/usr/include/qt5/QtXmlPatterns" \
+            # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_CXXFLAGS
+            $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
         }
     } else {
-        *-g++{#Don't use additional GCC keys on Windows system.
-        QMAKE_CXXFLAGS += -O0 -Wall -Wextra -pedantic
+        *-g++{
+            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
         }
     }
 
 }else{
-    # Release
+    # Release mode
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g
     unix:!macx{
-        # On Linux
+        # Turn on debug symbols in release mode on Unix systems.
+        # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
+        QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+
+        # Strip debug symbols.
         QMAKE_POST_LINK += objcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
         QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)/$(TARGET) &&
         QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(DESTDIR)/$(TARGET).debug $(DESTDIR)/$(TARGET)
