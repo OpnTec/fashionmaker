@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), parentNode(QDomNode())
+    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode())
 {
     setText(tr("Delete tool"));
     nodeId = id;
