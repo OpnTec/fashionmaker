@@ -723,7 +723,6 @@ void MainWindow::ShowToolTip(const QString &toolTip)
 void MainWindow::tableClosed()
 {
     show();
-    MinimumScrollBar();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
