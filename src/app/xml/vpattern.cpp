@@ -792,6 +792,9 @@ void VPattern::LiteParseTree(const Document &parse)
     nameActivPP = namePP;
     setCurrentData();
     emit FullUpdateFromFile();
+    // Recalculate scene rect
+    VAbstractTool::NewSceneRect(sceneDraw, qApp->getSceneView());
+    VAbstractTool::NewSceneRect(sceneDetail, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
