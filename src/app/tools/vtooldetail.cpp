@@ -281,8 +281,8 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrName, detail.getName());
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(detail.getMx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(detail.getMy()));
-    doc->SetAttribute(domElement, AttrSupplement, detail.getSeamAllowance());
-    doc->SetAttribute(domElement, AttrClosed, detail.getClosed());
+    doc->SetAttribute(domElement, AttrSupplement, static_cast<quint8>(detail.getSeamAllowance()));
+    doc->SetAttribute(domElement, AttrClosed, static_cast<quint8>(detail.getClosed()));
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
 
     for (int i = 0; i < detail.CountNode(); ++i)
@@ -306,8 +306,8 @@ void VToolDetail::RefreshDataInFile()
     {
         VDetail det = VAbstractTool::data.GetDetail(id);
         doc->SetAttribute(domElement, AttrName, det.getName());
-        doc->SetAttribute(domElement, AttrSupplement, QString().setNum(det.getSeamAllowance()));
-        doc->SetAttribute(domElement, AttrClosed, QString().setNum(det.getClosed()));
+        doc->SetAttribute(domElement, AttrSupplement, QString().setNum(static_cast<quint8>(det.getSeamAllowance())));
+        doc->SetAttribute(domElement, AttrClosed, QString().setNum(static_cast<quint8>(det.getClosed())));
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         doc->RemoveAllChild(domElement);
         for (int i = 0; i < det.CountNode(); ++i)
