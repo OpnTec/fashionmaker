@@ -115,7 +115,7 @@ void DialogHistory::cellClicked(int row, int column)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedCursor changed cursor of input. Cursor show after what record we will insert new object
+ * @brief ChangedCursor changed cursor of input. Cursor show after which record we will insert new object
  * @param id id of object
  */
 void DialogHistory::ChangedCursor(quint32 id)
@@ -155,7 +155,7 @@ void DialogHistory::FillTable()
     SCASSERT(history != nullptr);
     qint32 currentRow = -1;
     qint32 count = 0;
-    ui->tableWidget->setRowCount(history->size());
+    ui->tableWidget->setRowCount(history->size());//Make row count max possible number
     for (qint32 i = 0; i< history->size(); ++i)
     {
         const VToolRecord tool = history->at(i);
@@ -182,7 +182,7 @@ void DialogHistory::FillTable()
             ++count;
         }
     }
-    ui->tableWidget->setRowCount(count);
+    ui->tableWidget->setRowCount(count);//Real row count
     if (history->size()>0)
     {
         cursorRow = currentRow;
