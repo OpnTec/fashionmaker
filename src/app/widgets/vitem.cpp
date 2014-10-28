@@ -62,7 +62,7 @@ VItem::VItem(int numInList, QGraphicsItem *parent):QGraphicsPathItem (parent), n
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief checkItemChange change item change. If detail create colission or moved out paper emit signal.
+ * @brief checkItemChange check item change. If detail create colission or moved out paper emit signal.
  */
 void VItem::checkItemChange()
 {
