@@ -1522,7 +1522,8 @@ void MainWindow::SetEnabledGUI(bool enabled)
     {
         if (enabled == false)
         {
-            CancelTool();
+            ArrowTool();
+            qApp->getUndoStack()->clear();
         }
         comboBoxDraws->setEnabled(enabled);
         ui->actionOptionDraw->setEnabled(enabled);
@@ -1538,6 +1539,9 @@ void MainWindow::SetEnabledGUI(bool enabled)
         ui->actionDraw->setEnabled(enabled);
         ui->actionDetails->setEnabled(enabled);
         ui->actionTable->setEnabled(enabled);
+        ui->actionLayout->setEnabled(enabled);
+        ui->actionZoomFitBest->setEnabled(enabled);
+        ui->actionZoomOriginal->setEnabled(enabled);
         guiEnabled = enabled;
 
         sceneDraw->SetDisable(!enabled);
