@@ -2754,3 +2754,20 @@ QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
     }
     return recTool;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VToolRecord> VPattern::getLocalHistory()
+{
+    QVector<VToolRecord> historyPP;
+    for (qint32 i = 0; i< history.size(); ++i)
+    {
+        const VToolRecord tool = history.at(i);
+        if (tool.getNameDraw() != GetNameActivPP())
+        {
+            continue;
+        }
+        historyPP.append(tool);
+    }
+    return historyPP;
+}

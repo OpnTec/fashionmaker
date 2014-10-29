@@ -150,18 +150,13 @@ void DialogHistory::UpdateHistory()
 void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
-    const QVector<VToolRecord> *history = doc->getHistory();
-    SCASSERT(history != nullptr);
+    QVector<VToolRecord> history = doc->getLocalHistory();
     qint32 currentRow = -1;
     qint32 count = 0;
-    ui->tableWidget->setRowCount(history->size());//Make row count max possible number
-    for (qint32 i = 0; i< history->size(); ++i)
+    ui->tableWidget->setRowCount(history.size());//Make row count max possible number
+    for (qint32 i = 0; i< history.size(); ++i)
     {
-        const VToolRecord tool = history->at(i);
-        if (tool.getNameDraw() != doc->GetNameActivPP())
-        {
-            continue;
-        }
+        const VToolRecord tool = history.at(i);
         const QString historyRecord = Record(tool);
         if (historyRecord.isEmpty() ==false)
         {
@@ -417,7 +412,7 @@ void DialogHistory::InitialTable()
  */
 void DialogHistory::ShowPoint()
 {
-    QVector<VToolRecord> *history = doc->getHistory();
+    const QVector<VToolRecord> *history = doc->getHistory();
     if (history->size()>0)
     {
         QTableWidgetItem *item = ui->tableWidget->item(0, 1);

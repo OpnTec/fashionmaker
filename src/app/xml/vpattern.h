@@ -72,6 +72,7 @@ public:
     QHash<quint32, VDataTool*>* getTools();
     VDataTool*     getTool(const quint32 &id);
     QVector<VToolRecord> *getHistory();
+    QVector<VToolRecord> getLocalHistory();
     quint32        getCursor() const;
     void           setCursor(const quint32 &value);
     void           setCurrentData();
