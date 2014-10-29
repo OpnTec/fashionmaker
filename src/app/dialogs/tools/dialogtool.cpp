@@ -388,6 +388,7 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
         QTextCursor cursor = plainTextEdit->textCursor();
         cursor.insertText(item->text());
         plainTextEdit->setTextCursor(cursor);
+        plainTextEdit->setFocus();
     }
 }
 
