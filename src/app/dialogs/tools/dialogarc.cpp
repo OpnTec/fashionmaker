@@ -57,6 +57,10 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     this->formulaBaseHeightF1 = ui->plainTextEditF1->height();
     this->formulaBaseHeightF2 = ui->plainTextEditF2->height();
 
+    ui->plainTextEditFormula->installEventFilter(this);
+    ui->plainTextEditF1->installEventFilter(this);
+    ui->plainTextEditF2->installEventFilter(this);
+
     timerRadius = new QTimer(this);
     connect(timerRadius, &QTimer::timeout, this, &DialogArc::EvalRadius);
 

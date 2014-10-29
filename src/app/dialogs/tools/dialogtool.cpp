@@ -402,6 +402,27 @@ void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::eventFilter(QObject *object, QEvent *event)
+{
+    QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object);
+    if (plainTextEdit != nullptr)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
+        {
+            // Ignore Enter key
+            return true;
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return QDialog::eventFilter(object, event);
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ValFormulaChanged handle change formula
  * @param flag flag state of formula

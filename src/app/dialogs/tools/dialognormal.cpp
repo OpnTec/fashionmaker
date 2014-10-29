@@ -48,6 +48,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
     flagFormula = false;

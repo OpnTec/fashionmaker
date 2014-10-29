@@ -52,6 +52,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     labelEditNamePoint = ui->labelEditNamePoint;
 
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
     flagFormula = false;

@@ -55,6 +55,9 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
 
+    ui->plainTextEditFormula->installEventFilter(this);
+    ui->plainTextEditAngle->installEventFilter(this);
+
     InitOkCancelApply(ui);
     flagFormula = false;
     CheckState();
