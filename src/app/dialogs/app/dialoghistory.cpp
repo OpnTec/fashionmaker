@@ -367,6 +367,20 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 }
                 return record;
             }
+            case Tool::LineIntersectAxis:
+            {
+                return QString(tr("%1 - point of intersection line %2_%3 and axis through point %4"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)));
+            }
+            case Tool::CurveIntersectAxis:
+            {
+                return QString(tr("%1 - point of intersection curve and axis through point %2"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)));
+            }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Detail:
