@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), cursor(NULL_ID)
+    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID)
 {
     setText(tr("Delete tool"));
     nodeId = id;
@@ -46,12 +46,12 @@ DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
         {
             if (i == 0)
             {
-                cursor = NULL_ID;
+                siblingId = NULL_ID;
             }
             else
             {
                 const VToolRecord tool = history.at(i-1);
-                cursor = tool.getId();
+                siblingId = tool.getId();
             }
         }
     }
@@ -76,18 +76,7 @@ DelTool::~DelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::undo()
 {
-    if (cursor == NULL_ID)
-    {
-        parentNode.appendChild(xml);
-    }
-    else
-    {
-        QDomElement refElement = doc->elementById(QString().setNum(cursor));
-        if (refElement.isElement())
-        {
-            parentNode.insertAfter(xml, refElement);
-        }
-    }
+    UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
 }
 

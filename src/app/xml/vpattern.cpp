@@ -211,6 +211,7 @@ bool VPattern::GetActivDrawElement(QDomElement &element) const
                 }
             }
         }
+        element = QDomElement();
     }
     return false;
 }

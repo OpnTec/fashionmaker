@@ -43,7 +43,7 @@ public:
 private:
     Q_DISABLE_COPY(DelTool)
     QDomNode parentNode;
-    quint32 cursor;
+    quint32 siblingId;
 };
 
 #endif // DELTOOL_H

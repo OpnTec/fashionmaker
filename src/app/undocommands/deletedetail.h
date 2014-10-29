@@ -43,6 +43,7 @@ public:
 private:
     Q_DISABLE_COPY(DeleteDetail)
     QDomNode parentNode;
+    quint32 siblingId;
 };
 
 #endif // DELETEDETAIL_H

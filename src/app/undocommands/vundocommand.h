@@ -65,6 +65,7 @@ protected:
     quint32     nodeId;
     bool        redoFlag;
     void        RedoFullParsing();
+    void        UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

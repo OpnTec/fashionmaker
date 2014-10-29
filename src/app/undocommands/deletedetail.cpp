@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode())
+    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID)
 {
     setText(tr("Delete tool"));
     nodeId = id;
@@ -41,6 +41,16 @@ DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
     {
         xml = domElement.cloneNode().toElement();
         parentNode = domElement.parentNode();
+        QDomNode previousDetail = domElement.previousSibling();
+        if (previousDetail.isNull())
+        {
+            siblingId = NULL_ID;
+        }
+        else
+        {
+            // Better save id of previous detail instead of reference to node.
+            siblingId = doc->GetParametrUInt(previousDetail.toElement(), VPattern::AttrId, NULL_ID_STR);
+        }
     }
     else
     {
@@ -56,7 +66,7 @@ DeleteDetail::~DeleteDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void DeleteDetail::undo()
 {
-    parentNode.appendChild(xml);
+    UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
 }
 
@@ -68,14 +78,15 @@ void DeleteDetail::redo()
     {
         parentNode.removeChild(domElement);
 
-        //When UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
+        // UnionDetails delete two old details and create one new.
+        // So when UnionDetail delete detail we can't use FullParsing. So we hide detail on scene directly.
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(nodeId));
         SCASSERT(toolDet != nullptr);
         toolDet->hide();
 
-        emit NeedFullParsing();
+        emit NeedFullParsing(); // Doesn't work when UnionDetail delete detail.
     }
     else
     {

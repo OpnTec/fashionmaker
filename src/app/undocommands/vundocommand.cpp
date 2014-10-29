@@ -49,3 +49,24 @@ void VUndoCommand::RedoFullParsing()
     }
     redoFlag = true;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const
+{
+    if (siblingId == NULL_ID)
+    {
+        parentNode.appendChild(xml);
+    }
+    else
+    {
+        const QDomElement refElement = doc->elementById(QString().setNum(siblingId));
+        if (refElement.isElement())
+        {
+            parentNode.insertAfter(xml, refElement);
+        }
+        else
+        {
+            qDebug()<<"Can't find sibling node.";
+        }
+    }
+}
