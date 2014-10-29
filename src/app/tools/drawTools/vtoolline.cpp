@@ -470,8 +470,8 @@ void VToolLine::RefreshGeometry()
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement())
     {
-        firstPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, "0");
-        secondPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, "0");
+        firstPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        secondPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
         typeLine = doc->GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
     }
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
