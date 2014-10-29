@@ -229,6 +229,7 @@ void DialogNormal::setFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formula);
     line->setLength(formula);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

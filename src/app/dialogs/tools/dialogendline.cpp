@@ -189,6 +189,7 @@ void DialogEndLine::setFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaLength);
     line->setLength(formulaLength);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,6 +208,7 @@ void DialogEndLine::setAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
     line->setAngle(formulaAngle);
+    MoveCursorToEnd(ui->plainTextEditAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

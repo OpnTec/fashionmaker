@@ -101,6 +101,7 @@ void DialogCutSplinePath::setFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formula);
     path->setLength(formula);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

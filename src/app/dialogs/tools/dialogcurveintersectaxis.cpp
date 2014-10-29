@@ -120,6 +120,7 @@ void DialogCurveIntersectAxis::setAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
     line->setAngle(formulaAngle);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

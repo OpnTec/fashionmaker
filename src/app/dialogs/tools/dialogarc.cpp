@@ -143,6 +143,7 @@ void DialogArc::SetF2(const QString &value)
     }
     ui->plainTextEditF2->setPlainText(f2);
     path->setF2(f2);
+    MoveCursorToEnd(ui->plainTextEditF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,6 +161,7 @@ void DialogArc::SetF1(const QString &value)
     }
     ui->plainTextEditF1->setPlainText(f1);
     path->setF1(f1);
+    MoveCursorToEnd(ui->plainTextEditF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -177,6 +179,7 @@ void DialogArc::SetRadius(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(radius);
     path->setRadius(radius);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

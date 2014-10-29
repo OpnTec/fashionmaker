@@ -393,6 +393,15 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
+{
+    SCASSERT(plainTextEdit != nullptr);
+    QTextCursor cursor = plainTextEdit->textCursor();
+    cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+    plainTextEdit->setTextCursor(cursor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ValFormulaChanged handle change formula
  * @param flag flag state of formula

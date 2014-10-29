@@ -259,6 +259,7 @@ void DialogPointOfContact::setRadius(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(radius);
     line->setRadius(radius);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
