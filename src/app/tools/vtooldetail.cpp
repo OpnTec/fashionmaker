@@ -399,8 +399,8 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
-    QAction *actionOption = menu.addAction(tr("Options"));
-    QAction *actionRemove = menu.addAction(tr("Delete"));
+    QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (_referens > 1)
     {
         actionRemove->setEnabled(false);
