@@ -57,7 +57,6 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     connect(this, &DialogHistory::ShowHistoryTool, doc, &VPattern::ShowHistoryTool);
     connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
-    connect(doc, &VPattern::ChangedActivPP, this, &DialogHistory::UpdateHistory);
     ShowPoint();
 }
 
@@ -183,7 +182,7 @@ void DialogHistory::FillTable()
         }
     }
     ui->tableWidget->setRowCount(count);//Real row count
-    if (history->size()>0)
+    if (count>0)
     {
         cursorRow = currentRow;
         QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);

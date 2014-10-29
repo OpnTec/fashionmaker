@@ -1744,6 +1744,7 @@ void MainWindow::ActionHistory(bool checked)
     {
         dialogHistory = new DialogHistory(pattern, doc, this);
         dialogHistory->setWindowFlags(Qt::Window);
+        connect(this, &MainWindow::RefreshHistory, dialogHistory, &DialogHistory::UpdateHistory);
         connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
         dialogHistory->show();
     }
@@ -2392,6 +2393,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
     {
         doc->ChangeActivPP(comboBoxDraws->itemText(index));
         doc->setCurrentData();
+        emit RefreshHistory();
         if (drawMode)
         {
             ArrowTool();

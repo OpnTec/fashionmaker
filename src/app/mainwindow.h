@@ -133,6 +133,7 @@ signals:
      * @param description pattern description.
      */
     void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile, const QString &description);
+    void               RefreshHistory();
 protected:
     virtual void       keyPressEvent(QKeyEvent *event);
     virtual void       showEvent(QShowEvent *event);
