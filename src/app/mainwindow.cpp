@@ -2258,19 +2258,22 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     FullParseFile();
 
-    bool patternModified = this->isWindowModified();
-    setCurrentFile(fileName);
-    if (patternModified)
-    {
-        //For situation where was fixed wrong formula need return for document status was modified.
-        PatternWasModified(!patternModified);
+    if (guiEnabled)
+    { // No errors occurred
+        bool patternModified = this->isWindowModified();
+        setCurrentFile(fileName);
+        if (patternModified)
+        {
+            //For situation where was fixed wrong formula need return for document status was modified.
+            PatternWasModified(!patternModified);
+        }
+        helpLabel->setText(tr("File loaded"));
+
+        qApp->setOpeningPattern();// End opening file
+
+        //Fit scene size to best size for first show
+        ZoomFirstShow();
     }
-    helpLabel->setText(tr("File loaded"));
-
-    qApp->setOpeningPattern();// End opening file
-
-    //Fit scene size to best size for first show
-    ZoomFirstShow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

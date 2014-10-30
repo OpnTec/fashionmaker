@@ -285,6 +285,7 @@ private:
     void           ParseCurrentPP();
     void           CheckTagExists(const QString &tag);
     QString        GetLabelBase(unsigned int index)const;
+    void           ToolExists(const quint32 &id) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

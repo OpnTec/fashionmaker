@@ -366,16 +366,18 @@ void VPattern::Parse(const Document &parse)
  */
 VDataTool *VPattern::getTool(const quint32 &id)
 {
-    if (tools.contains(id))
+    ToolExists(id);
+    return tools.value(id);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ToolExists(const quint32 &id) const
+{
+    if (tools.contains(id) == false)
     {
-        return tools.value(id);
+        throw VExceptionBadId(tr("Can't find tool in table."), id);
     }
-    else
-    {
-        const QString error = QString(tr("Can't find tool id = %1 in table.")).arg(id);
-        throw VException(error);
-    }
-    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,6 +432,7 @@ void VPattern::setCurrentData()
             }
             if (tools.size() > 0)
             {
+                ToolExists(id);
                 const VDataTool *vTool = tools.value(id);
                 *data = vTool->getData();
             }
@@ -460,6 +463,7 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
     SCASSERT(data != nullptr);
+    ToolExists(id);
     VDataTool *tool = tools.value(id);
     SCASSERT(tool != nullptr);
     tool->VDataTool::setData(data);
@@ -473,6 +477,7 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 void VPattern::IncrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    ToolExists(id);
     VDataTool *tool = tools.value(id);
     SCASSERT(tool != nullptr);
     tool->incrementReferens();
@@ -486,6 +491,7 @@ void VPattern::IncrementReferens(quint32 id) const
 void VPattern::DecrementReferens(quint32 id) const
 {
     Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    ToolExists(id);
     VDataTool *tool = tools.value(id);
     SCASSERT(tool != nullptr);
     tool->decrementReferens();
