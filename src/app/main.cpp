@@ -187,12 +187,12 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
     parser.process(app);
-    const QStringList args = parser.positionalArguments();
+    QStringList args = parser.positionalArguments();
 
     //Before we load pattern show window.
     w.show();
 
-    w.ReopenFilesAfterCrash();
+    w.ReopenFilesAfterCrash(args);
 
     for (int i=0;i<args.size();++i)
     {

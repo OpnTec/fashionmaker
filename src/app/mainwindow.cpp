@@ -2274,7 +2274,7 @@ void MainWindow::LoadPattern(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ReopenFilesAfterCrash()
+void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 {
     QStringList files = qApp->getSettings()->value("restoreFileList").toStringList();
     if (files.size() > 0)
@@ -2308,6 +2308,7 @@ void MainWindow::ReopenFilesAfterCrash()
                         QFile autoFile(restoreFiles.at(i) +".autosave");
                         autoFile.remove();
                         LoadPattern(restoreFiles.at(i));
+                        args.removeAll(restoreFiles.at(i));// Do not open file twice after we restore him.
                     }
                     else
                     {
