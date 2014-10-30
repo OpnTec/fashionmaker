@@ -775,6 +775,18 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>plainTextEditFormula</tabstop>
+  <tabstop>toolButtonPutHereRadius</tabstop>
+  <tabstop>toolButtonEqualRadius</tabstop>
+  <tabstop>pushButtonGrowLength</tabstop>
+  <tabstop>plainTextEditF1</tabstop>
+  <tabstop>toolButtonPutHereF1</tabstop>
+  <tabstop>toolButtonEqualF1</tabstop>
+  <tabstop>pushButtonGrowLengthF1</tabstop>
+  <tabstop>plainTextEditF2</tabstop>
+  <tabstop>toolButtonPutHereF2</tabstop>
+  <tabstop>toolButtonEqualF2</tabstop>
+  <tabstop>pushButtonGrowLengthF2</tabstop>
   <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
@@ -783,13 +795,8 @@
   <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>radioButtonAngleLine</tabstop>
+  <tabstop>checkBoxHideEmpty</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>toolButtonPutHereRadius</tabstop>
-  <tabstop>toolButtonPutHereF1</tabstop>
-  <tabstop>toolButtonPutHereF2</tabstop>
-  <tabstop>toolButtonEqualRadius</tabstop>
-  <tabstop>toolButtonEqualF1</tabstop>
-  <tabstop>toolButtonEqualF2</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

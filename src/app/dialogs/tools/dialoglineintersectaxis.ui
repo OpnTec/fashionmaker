@@ -479,9 +479,9 @@
  </widget>
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
-  <tabstop>pushButtonGrowLengthAngle</tabstop>
   <tabstop>toolButtonPutHereAngle</tabstop>
   <tabstop>toolButtonEqualAngle</tabstop>
+  <tabstop>pushButtonGrowLengthAngle</tabstop>
   <tabstop>comboBoxAxisPoint</tabstop>
   <tabstop>comboBoxFirstLinePoint</tabstop>
   <tabstop>comboBoxSecondLinePoint</tabstop>

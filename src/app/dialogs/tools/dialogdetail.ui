@@ -295,8 +295,14 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>lineEditNameDetail</tabstop>
   <tabstop>listWidget</tabstop>
+  <tabstop>doubleSpinBoxBiasX</tabstop>
+  <tabstop>doubleSpinBoxBiasY</tabstop>
+  <tabstop>lineEditNameDetail</tabstop>
+  <tabstop>checkBoxSeams</tabstop>
+  <tabstop>doubleSpinBoxSeams</tabstop>
+  <tabstop>checkBoxClosed</tabstop>
+  <tabstop>toolButtonDelete</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

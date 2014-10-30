@@ -103,6 +103,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditNamePoint</tabstop>
+  <tabstop>comboBoxFirstPoint</tabstop>
+  <tabstop>comboBoxSecondPoint</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
  </resources>

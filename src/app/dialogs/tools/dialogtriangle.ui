@@ -133,6 +133,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditNamePoint</tabstop>
+  <tabstop>comboBoxAxisP1</tabstop>
+  <tabstop>comboBoxAxisP2</tabstop>
+  <tabstop>comboBoxFirstPoint</tabstop>
+  <tabstop>comboBoxSecondPoint</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
  </resources>

@@ -145,6 +145,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboBoxFirstPoint</tabstop>
+  <tabstop>comboBoxSecondPoint</tabstop>
+  <tabstop>comboBoxLineType</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
  </resources>

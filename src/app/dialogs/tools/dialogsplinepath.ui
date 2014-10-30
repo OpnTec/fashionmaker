@@ -203,8 +203,8 @@
   <tabstop>doubleSpinBoxAngle1</tabstop>
   <tabstop>doubleSpinBoxKasm2</tabstop>
   <tabstop>doubleSpinBoxAngle2</tabstop>
-  <tabstop>doubleSpinBoxKcurve</tabstop>
   <tabstop>listWidget</tabstop>
+  <tabstop>doubleSpinBoxKcurve</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
