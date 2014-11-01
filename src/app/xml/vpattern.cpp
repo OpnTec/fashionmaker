@@ -711,7 +711,6 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error)
         e.CriticalMessageBox(tr("Error no unique id."), qApp->getMainWindow());
         return false;
     }
-    GarbageCollector();
 
     return VDomDocument::SaveDocument(fileName, error);
 }
@@ -2578,29 +2577,6 @@ void VPattern::UpdateMeasurements()
         e.CriticalMessageBox(tr("File error."), qApp->getMainWindow());
         emit ClearMainWindow();
         return;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::GarbageCollector()
-{
-    QHashIterator<quint32, VDataTool*> t(tools);
-    while (t.hasNext())
-    {
-        t.next();
-        VDataTool *tool = t.value();
-        if (tool->referens() <= 1)
-        {
-            QDomElement domElement = elementById(QString().setNum(t.key()));
-            if (domElement.isElement())
-            {
-                QDomNode parent = domElement.parentNode();
-                if (parent.isNull() == false && parent.toElement().tagName() == TagModeling)
-                {
-                    parent.removeChild(domElement);
-                }
-            }
-        }
     }
 }
 
