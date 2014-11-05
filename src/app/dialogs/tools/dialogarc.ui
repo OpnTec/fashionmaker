@@ -525,9 +525,6 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <property name="leftMargin">
-      <number>9</number>
-     </property>
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditF2">
        <property name="sizePolicy">
@@ -783,10 +780,8 @@
   <tabstop>toolButtonPutHereF1</tabstop>
   <tabstop>toolButtonEqualF1</tabstop>
   <tabstop>pushButtonGrowLengthF1</tabstop>
-  <tabstop>plainTextEditF2</tabstop>
   <tabstop>toolButtonPutHereF2</tabstop>
   <tabstop>toolButtonEqualF2</tabstop>
-  <tabstop>pushButtonGrowLengthF2</tabstop>
   <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
