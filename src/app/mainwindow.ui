@@ -779,6 +779,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionRepotBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
@@ -1229,13 +1230,23 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="process-stop"/>
+    <iconset theme="process-stop">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Stop</string>
    </property>
    <property name="toolTip">
     <string>Stop using tool</string>
+   </property>
+  </action>
+  <action name="actionRepotBug">
+   <property name="text">
+    <string>Repot Bug...</string>
+   </property>
+   <property name="toolTip">
+    <string>Report bug</string>
    </property>
   </action>
  </widget>

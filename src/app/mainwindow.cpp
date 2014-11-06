@@ -58,6 +58,7 @@
 #include <QTimer>
 #include <QtGlobal>
 #include <QDesktopWidget>
+#include <QDesktopServices>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1374,6 +1375,12 @@ void MainWindow::Preferences()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::RepotBug()
+{
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/issues/new"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -2107,6 +2114,7 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
+    connect(ui->actionRepotBug, &QAction::triggered, this, &MainWindow::RepotBug);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);

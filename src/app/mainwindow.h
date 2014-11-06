@@ -76,6 +76,7 @@ public slots:
     bool               Save();
     void               Open();
     void               Preferences();
+    void               RepotBug();
     void               NewPattern();
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
