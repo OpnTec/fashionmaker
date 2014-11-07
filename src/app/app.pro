@@ -233,7 +233,7 @@ macx{
     # Some macx stuff
     QMAKE_MAC_SDK = macosx
 
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     # Path to resources in app bundle
     RESOURCES_DIR = "Contents/Resources"
     FRAMEWORKS_DIR = "Contents/Frameworks"
@@ -310,7 +310,7 @@ macx{
     frameworks.files += $$files($${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/*)
     message( framework files $$frameworks.files )
     # logo on macx.
-    ICON = share/resources/icon/64x64/icon64x64.ico
+    ICON = ../../dist/Valentina.icns
 
 
     # Copy to bundle standard measurements files
@@ -319,7 +319,6 @@ macx{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        icons \
         frameworks
 
 
@@ -367,7 +366,6 @@ else:unix: LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvproper
 INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
-message( $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET} )
 
 # Strip after you link all libaries.
 CONFIG(release, debug|release){
