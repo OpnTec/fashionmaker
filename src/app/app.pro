@@ -180,6 +180,9 @@ isEmpty(PREFIX){
     PREFIX = $$DEFAULT_PREFIX
 }
 
+# Keep path to all files with standard measurements we support right now
+INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
+
 # Prefix for binary file.
 unix:!macx{
     # Add to this variable all translation files that you want install with program.
@@ -194,8 +197,7 @@ unix:!macx{
         share/translations/valentina_it_IT.qm \
         share/translations/valentina_nl_NL.qm
 
-    # Keep path to all files with standard measurements we support right now
-    INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
+
 
     DATADIR =$$PREFIX/share
     DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
@@ -226,14 +228,15 @@ unix:!macx{
         translations \
         standard
     }
-}else{
+}
+macx{
     # Some macx stuff
-    QMAKE_MAC_SDK = "/Developer/SDKs/MacOSX10.6.sdk"
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = "10.5"
+    QMAKE_MAC_SDK = macosx
 
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     # Path to resources in app bundle
     RESOURCES_DIR = "Contents/Resources"
-
+    FRAMEWORKS_DIR = "Contents/Frameworks"
     # On macx we will use app bundle. Bundle doesn't need bin directory inside.
     # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
     target.path = $$PREFIX/
@@ -302,10 +305,13 @@ unix:!macx{
         TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
         QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
     }
-
+    frameworks.path = $$FRAMEWORKS_DIR
+    frameworks.files += $$files($${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/*)
+    frameworks.files += $$files($${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/*)
+    message( framework files $$frameworks.files )
     # logo on macx.
-    icon.files = "Valentina.icns"
-    icon.path  = $$RESOURCES_DIR
+    ICON = ../../dist/Valentina.icns
+
 
     # Copy to bundle standard measurements files
     standard.path = $$RESOURCES_DIR/tables/standard/
@@ -313,7 +319,9 @@ unix:!macx{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        icons \
+        frameworks
+
+
 }
 
 # Run generation *.qm file for available *.ts files each time you run qmake.
@@ -358,6 +366,7 @@ else:unix: LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvproper
 INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
+
 # Strip after you link all libaries.
 CONFIG(release, debug|release){
     unix:!macx{
@@ -366,4 +375,10 @@ CONFIG(release, debug|release){
         QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
         QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
     }
+}
+
+
+macx{
+   # run macdeployqt to include all qt libraries in packet
+   QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
 }
