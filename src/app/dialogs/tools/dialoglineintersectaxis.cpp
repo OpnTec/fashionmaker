@@ -218,21 +218,34 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case (1):
-                    if (SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
+                    if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
                     {
-                        number++;
-                        line->setPoint2Id(id);
-                        line->RefreshGeometry();
+                        if (SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
+                        {
+                            number++;
+                            line->setPoint2Id(id);
+                            line->RefreshGeometry();
+                        }
                     }
                     break;
                 case (2):
-                    if (SetObject(id, ui->comboBoxAxisPoint, ""))
+                {
+                    QSet<quint32> set;
+                    set.insert(getCurrentObjectId(ui->comboBoxFirstLinePoint));
+                    set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
+                    set.insert(id);
+
+                    if (set.size() == 3)
                     {
-                        basePointId = id;
-                        line->setAxisPointId(id);
-                        line->RefreshGeometry();
-                        prepare = true;
+                        if (SetObject(id, ui->comboBoxAxisPoint, ""))
+                        {
+                            basePointId = id;
+                            line->setAxisPointId(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                        }
                     }
+                }
                     break;
                 default:
                     break;
