@@ -324,7 +324,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Standard table</string>
+            <string>Measurements</string>
            </property>
           </widget>
          </item>
