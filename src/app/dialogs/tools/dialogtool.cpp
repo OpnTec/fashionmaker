@@ -732,7 +732,10 @@ void DialogTool::NamePointChanged()
     {
         QString name = edit->text();
         name.replace(" ", "");
-        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false))
+        QRegExpValidator v(QRegExp(nameRegExp), this);
+        int pos = 0;
+        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false) ||
+                v.validate(name, pos) == QValidator::Invalid)
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);

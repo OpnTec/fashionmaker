@@ -194,7 +194,7 @@ void Calculator::InitCharacterSets()
 
     // Defining identifier character sets
     DefineNameChars(QStringLiteral("0123456789_") + symbols.join(""));
-    DefineOprtChars(symbols.join("") + QStringLiteral("+-*^/?<>=#!$%&|~'_"));
+    DefineOprtChars(symbols.join("") + QStringLiteral("+-*^/?<>=#!$%&|~_"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
