@@ -70,6 +70,7 @@ public slots:
     void         EvalAngle();
     void         AngleTextChanged();
     void         DeployAngleTextEdit();
+    virtual void PointNameChanged();
 protected:
     virtual void ShowVisualization();
     /**

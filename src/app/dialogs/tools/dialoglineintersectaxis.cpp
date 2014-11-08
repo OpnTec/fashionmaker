@@ -66,6 +66,14 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogLineIntersectAxis::AngleTextChanged);
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogLineIntersectAxis::DeployAngleTextEdit);
     connect(timerFormula, &QTimer::timeout, this, &DialogLineIntersectAxis::EvalAngle);
+    connect(ui->comboBoxFirstLinePoint,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersectAxis::PointNameChanged);
+    connect(ui->comboBoxSecondLinePoint,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersectAxis::PointNameChanged);
+    connect(ui->comboBoxAxisPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersectAxis::PointNameChanged);
 
     line = new VisToolLineIntersectAxis(data);
 }
@@ -255,6 +263,31 @@ void DialogLineIntersectAxis::AngleTextChanged()
 void DialogLineIntersectAxis::DeployAngleTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersectAxis::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxFirstLinePoint));
+    set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
+    set.insert(getCurrentObjectId(ui->comboBoxAxisPoint));
+
+    QColor color = okColor;
+    if (set.size() != 3)
+    {
+        flagError = false;
+        color = errorColor;
+    }
+    else
+    {
+        flagError = true;
+        color = okColor;
+    }
+    ChangeColor(ui->labelFirstLinePoint, color);
+    ChangeColor(ui->labelSecondLinePoint, color);
+    ChangeColor(ui->labelAxisPoint, color);
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
