@@ -110,6 +110,10 @@ qreal Calculator::EvalFormula(const QString &formula)
     result = Eval();
 
     QMap<int, QString> tokens = this->GetTokens();
+
+    // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
+    RemoveAll(tokens, "-");
+
     if (tokens.isEmpty())
     {
         return result;
@@ -241,5 +245,18 @@ void Calculator::SetSepForTr(bool fromUser)
 
         SetArgSep(',');
         SetDecSep('.');
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Calculator::RemoveAll(QMap<int, QString> &map, const QString &val)
+{
+    QList<int> listKeys = map.keys(val);
+    if (listKeys.size() > 0)
+    {
+        for (int i = 0; i < listKeys.size(); ++i)
+        {
+            map.remove(listKeys.at(i));
+        }
     }
 }
