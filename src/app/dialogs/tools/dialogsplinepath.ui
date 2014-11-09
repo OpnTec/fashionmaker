@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Curve path</string>
+   <string>Curved path</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
