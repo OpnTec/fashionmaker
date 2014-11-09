@@ -773,6 +773,10 @@ void QmuParserBase::ApplyFunc( QStack<token_type> &a_stOpt, QStack<token_type> &
     QVector<token_type> stArg;
     for (int i=0; i<iArgNumerical; ++i)
     {
+        if (a_stVal.isEmpty())// Check if stack is empty like in origin muparser.
+        {
+            Error(ecUNASSIGNABLE_TOKEN, m_pTokenReader->GetPos(), funTok.GetAsString());
+        }
         stArg.push_back( a_stVal.pop() );
         if ( stArg.back().GetType()==tpSTR && funTok.GetType()!=tpSTR )
         {
