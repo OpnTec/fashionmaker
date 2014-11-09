@@ -157,22 +157,35 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
+                    if (getCurrentObjectId(ui->comboBoxP3) != id)
                     {
-                        number++;
-                        line->setLineP1Id(id);
-                        line->RefreshGeometry();
+                        if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
+                        {
+                            number++;
+                            line->setLineP1Id(id);
+                            line->RefreshGeometry();
+                        }
                     }
                     break;
                 case 2:
-                    if (SetObject(id, ui->comboBoxP2Line, ""))
+                {
+                    QSet<quint32> set;
+                    set.insert(getCurrentObjectId(ui->comboBoxP3));
+                    set.insert(getCurrentObjectId(ui->comboBoxP1Line));
+                    set.insert(id);
+
+                    if (set.size() == 3)
                     {
-                        line->setLineP2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
+                        if (SetObject(id, ui->comboBoxP2Line, ""))
+                        {
+                            line->setLineP2Id(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                            this->setModal(true);
+                            this->show();
+                        }
                     }
+                }
                     break;
                 default:
                     break;

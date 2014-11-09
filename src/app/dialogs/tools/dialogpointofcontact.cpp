@@ -171,22 +171,35 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
+                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        number++;
-                        line->setLineP2Id(id);
-                        line->RefreshGeometry();
+                        if (SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
+                        {
+                            number++;
+                            line->setLineP2Id(id);
+                            line->RefreshGeometry();
+                        }
                     }
                     break;
                 case 2:
-                    if (SetObject(id, ui->comboBoxCenter, ""))
+                {
+                    QSet<quint32> set;
+                    set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
+                    set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
+                    set.insert(id);
+
+                    if (set.size() == 3)
                     {
-                        line->setRadiusId(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
+                        if (SetObject(id, ui->comboBoxCenter, ""))
+                        {
+                            line->setRadiusId(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                            this->setModal(true);
+                            this->show();
+                        }
                     }
+                }
                     break;
                 default:
                     break;

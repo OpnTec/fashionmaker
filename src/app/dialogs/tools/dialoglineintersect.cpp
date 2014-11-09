@@ -99,12 +99,15 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxP2Line1, tr("Select first point of second line")))
+                    if (getCurrentObjectId(ui->comboBoxP1Line1) != id)
                     {
-                        number++;
-                        p2Line1 = id;
-                        line->setLine1P2Id(id);
-                        line->RefreshGeometry();
+                        if (SetObject(id, ui->comboBoxP2Line1, tr("Select first point of second line")))
+                        {
+                            number++;
+                            p2Line1 = id;
+                            line->setLine1P2Id(id);
+                            line->RefreshGeometry();
+                        }
                     }
                     break;
                 case 2:
@@ -117,29 +120,40 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 3:
-                    if (SetObject(id, ui->comboBoxP2Line2, ""))
+                {
+                    QSet<quint32> set;
+                    set.insert(getCurrentObjectId(ui->comboBoxP1Line1));
+                    set.insert(getCurrentObjectId(ui->comboBoxP2Line1));
+                    set.insert(getCurrentObjectId(ui->comboBoxP1Line2));
+                    set.insert(id);
+
+                    if (set.size() >= 3)
                     {
-                        p2Line2 = id;
-                        line->setLine2P2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        flagPoint = CheckIntersecion();
-                        CheckState();
-                        this->setModal(true);
-                        this->show();
-                        connect(ui->comboBoxP1Line1,
-                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                &DialogLineIntersect::P1Line1Changed);
-                        connect(ui->comboBoxP2Line1,
-                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                &DialogLineIntersect::P2Line1Changed);
-                        connect(ui->comboBoxP1Line2,
-                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                &DialogLineIntersect::P1Line2Changed);
-                        connect(ui->comboBoxP2Line2,
-                                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                &DialogLineIntersect::P2Line2Changed);
+                        if (SetObject(id, ui->comboBoxP2Line2, ""))
+                        {
+                            p2Line2 = id;
+                            line->setLine2P2Id(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                            flagPoint = CheckIntersecion();
+                            CheckState();
+                            this->setModal(true);
+                            this->show();
+                            connect(ui->comboBoxP1Line1,
+                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                    &DialogLineIntersect::P1Line1Changed);
+                            connect(ui->comboBoxP2Line1,
+                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                    &DialogLineIntersect::P2Line1Changed);
+                            connect(ui->comboBoxP1Line2,
+                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                    &DialogLineIntersect::P1Line2Changed);
+                            connect(ui->comboBoxP2Line2,
+                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                    &DialogLineIntersect::P2Line2Changed);
+                        }
                     }
+                }
                     break;
                 default:
                     break;

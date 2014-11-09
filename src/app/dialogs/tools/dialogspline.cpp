@@ -97,29 +97,32 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                     break;
                 case 1:
                 {
-                    const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
-                    qint32 index = ui->comboBoxP4->findText(point->name());
-                    if ( index != -1 )
-                    { // -1 for not found
-                        ui->comboBoxP4->setCurrentIndex(index);
-                        emit ToolTip("");
-                        index = ui->comboBoxP1->currentIndex();
-                        quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
-
-                        QPointF p1 = data->GeometricObject<VPointF>(p1Id)->toQPointF();
-                        QPointF p4 = data->GeometricObject<VPointF>(id)->toQPointF();
-
-                        ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
-                        ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
-
-                        path->setPoint4Id(id);
-                        path->RefreshGeometry();
-                        prepare = true;
-                        DialogAccepted();
-                    }
-                    else
+                    if (getCurrentObjectId(ui->comboBoxP1) != id)
                     {
-                        qWarning()<<"Can't find object by name"<<point->name();
+                        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
+                        qint32 index = ui->comboBoxP4->findText(point->name());
+                        if ( index != -1 )
+                        { // -1 for not found
+                            ui->comboBoxP4->setCurrentIndex(index);
+                            emit ToolTip("");
+                            index = ui->comboBoxP1->currentIndex();
+                            quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
+
+                            QPointF p1 = data->GeometricObject<VPointF>(p1Id)->toQPointF();
+                            QPointF p4 = data->GeometricObject<VPointF>(id)->toQPointF();
+
+                            ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
+                            ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
+
+                            path->setPoint4Id(id);
+                            path->RefreshGeometry();
+                            prepare = true;
+                            DialogAccepted();
+                        }
+                        else
+                        {
+                            qWarning()<<"Can't find object by name"<<point->name();
+                        }
                     }
                     break;
                 }
