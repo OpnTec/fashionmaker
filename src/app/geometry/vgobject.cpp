@@ -183,8 +183,8 @@ QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &
 {
     QLineF line = QLineF();
     line.setP1(p1);
+    line.setAngle(angle);// First set angle than length. Length can have negative value.
     line.setLength(length);
-    line.setAngle(angle);
     return line;
 }
 
