@@ -1873,7 +1873,6 @@ bool MainWindow::SavePattern(const QString &fileName)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
-            qApp->getUndoStack()->clear();
         }
     }
     else
