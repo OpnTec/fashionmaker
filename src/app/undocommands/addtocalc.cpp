@@ -48,7 +48,7 @@ AddToCalc::~AddToCalc()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::undo()
 {
-    doc->ChangeActivPP(nameActivDraw);
+    doc->ChangeActivPP(nameActivDraw);//User will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -80,12 +80,13 @@ void AddToCalc::undo()
     }
     emit NeedFullParsing();
     VAbstractTool::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::redo()
 {
-    doc->ChangeActivPP(nameActivDraw);
+    doc->ChangeActivPP(nameActivDraw);//User will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -117,4 +118,15 @@ void AddToCalc::redo()
     }
     RedoFullParsing();
     VAbstractTool::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AddToCalc::RedoFullParsing()
+{
+    if (redoFlag)
+    {
+        emit NeedFullParsing();
+        doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+    }
+    redoFlag = true;
 }

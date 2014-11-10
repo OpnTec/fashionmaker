@@ -39,6 +39,8 @@ public:
     virtual ~AddToCalc();
     virtual void undo();
     virtual void redo();
+protected:
+    virtual void RedoFullParsing();
 private:
     Q_DISABLE_COPY(AddToCalc)
     const QString     nameActivDraw;

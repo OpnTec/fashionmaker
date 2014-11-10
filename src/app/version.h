@@ -37,7 +37,6 @@ extern const int DEBUG_VERSION;
 
 extern const QString APP_VERSION;
 
-// Don't forget change version number in manifest file /src/app/share/resources/valentina.exe.manifest.
 // Change version number in version.cpp also.
 
 #define VER_FILEVERSION             0,2,8,0

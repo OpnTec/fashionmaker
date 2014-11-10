@@ -127,6 +127,7 @@ public slots:
     void               ClickEndVisualization();
     void               Layout();
     void               UpdateGradation();
+    void               GlobalChangePP(const QString &patternPiece);
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.

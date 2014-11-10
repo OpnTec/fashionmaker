@@ -42,8 +42,9 @@ public:
     virtual void redo();
 private:
     Q_DISABLE_COPY(DelTool)
-    QDomNode parentNode;
-    quint32 siblingId;
+    QDomNode      parentNode;
+    quint32       siblingId;
+    const QString nameActivDraw;
 };
 
 #endif // DELTOOL_H

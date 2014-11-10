@@ -115,6 +115,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
     connect(doc, &VPattern::CheckLayout, this, &MainWindow::Layout);
+    connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
     qApp->setCurrentDocument(doc);
 
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
@@ -1484,7 +1485,23 @@ void MainWindow::FullParseFile()
     comboBoxDraws->blockSignals(false);
     ui->actionPattern_properties->setEnabled(true);
 
-    qint32 index = comboBoxDraws->findText(patternPiece);
+    GlobalChangePP(patternPiece);
+
+    if (comboBoxDraws->count() > 0)
+    {
+        SetEnableTool(true);
+    }
+    else
+    {
+        SetEnableTool(false);
+    }
+    SetEnableWidgets(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::GlobalChangePP(const QString &patternPiece)
+{
+    const qint32 index = comboBoxDraws->findText(patternPiece);
     try
     {
         if ( index != -1 )
@@ -1508,18 +1525,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         return;
     }
-
-    if (comboBoxDraws->count() > 0)
-    {
-        SetEnableTool(true);
-    }
-    else
-    {
-        SetEnableTool(false);
-    }
-    SetEnableWidgets(true);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetEnabledGUI(bool enabled)

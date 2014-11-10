@@ -59,14 +59,7 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
     }
     else
     {
-        const QDomElement refElement = doc->elementById(QString().setNum(siblingId));
-        if (refElement.isElement())
-        {
-            parentNode.insertAfter(xml, refElement);
-        }
-        else
-        {
-            qDebug()<<"Can't find sibling node.";
-        }
+        const QDomElement refElement = doc->NodeById(siblingId);
+        parentNode.insertAfter(xml, refElement);
     }
 }

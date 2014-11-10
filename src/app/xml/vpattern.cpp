@@ -2741,7 +2741,7 @@ QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VToolRecord> VPattern::getLocalHistory()
+QVector<VToolRecord> VPattern::getLocalHistory() const
 {
     QVector<VToolRecord> historyPP;
     for (qint32 i = 0; i< history.size(); ++i)
@@ -2754,4 +2754,46 @@ QVector<VToolRecord> VPattern::getLocalHistory()
         historyPP.append(tool);
     }
     return historyPP;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VPattern::SiblingNodeId(const quint32 &nodeId) const
+{
+    quint32 siblingId = NULL_ID;
+
+    const QVector<VToolRecord> history = getLocalHistory();
+    for (qint32 i = 0; i < history.size(); ++i)
+    {
+        const VToolRecord tool = history.at(i);
+        if (nodeId == tool.getId())
+        {
+            if (i == 0)
+            {
+                siblingId = NULL_ID;
+            }
+            else
+            {
+                for (qint32 j = i; j > 0; --j)
+                {
+                    const VToolRecord tool = history.at(j-1);
+                    switch ( tool.getTypeTool() )
+                    {
+                        case Tool::Detail:
+                        case Tool::UnionDetails:
+                        case Tool::NodeArc:
+                        case Tool::NodePoint:
+                        case Tool::NodeSpline:
+                        case Tool::NodeSplinePath:
+                            continue;
+                            break;
+                        default:
+                            siblingId = tool.getId();
+                            j = 0;// break loop
+                            break;
+                    }
+                }
+            }
+        }
+    }
+    return siblingId;
 }

@@ -109,6 +109,10 @@ public:
     QString        Minor() const;
     QString        Patch() const;
     static void    RemoveAllChild(QDomElement &domElement);
+
+    QDomNode       ParentNodeById(const quint32 &nodeId);
+    QDomElement    CloneNodeById(const quint32 &nodeId);
+    QDomElement    NodeById(const quint32 &nodeId);
 protected:
     /** @brief data container with data. */
     VContainer     *data;
