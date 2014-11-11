@@ -252,7 +252,6 @@ QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
     {
         return point;
     }
-    Q_ASSERT_X(type == QLineF::BoundedIntersection, Q_FUNC_INFO, "There is no point of intersection.");
     return point;
 }
 
