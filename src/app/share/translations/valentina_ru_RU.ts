@@ -233,7 +233,7 @@
 <context>
     <name>DelTool</name>
     <message>
-        <location filename="../../undocommands/deltool.cpp" line="+38"/>
+        <location filename="../../undocommands/deltool.cpp" line="+39"/>
         <source>Delete tool</source>
         <translation>Удалить инструмент</translation>
     </message>
@@ -332,22 +332,22 @@
         <translation>Расчитать значение</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+117"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="-132"/>
+        <location line="-137"/>
         <source>Insert variable into the formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
-        <location line="+100"/>
+        <location line="+103"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+44"/>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
@@ -357,7 +357,7 @@
         <translation>Первая точка линии</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+7"/>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
@@ -367,7 +367,7 @@
         <translation>Вторая точка линии</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+7"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -377,14 +377,18 @@
         <translation>Показать линию с первой точки до этой</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+22"/>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
     </message>
     <message>
         <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <location line="+74"/>
@@ -431,7 +435,7 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.cpp" line="+144"/>
+        <location filename="../../dialogs/tools/dialogalongline.cpp" line="+142"/>
         <source>Select second point of line</source>
         <translation>Выберить вторую точку линии</translation>
     </message>
@@ -463,13 +467,13 @@
     </message>
     <message>
         <location line="+20"/>
-        <location line="+185"/>
+        <location line="+188"/>
         <location line="+185"/>
         <source>Calculate value</source>
         <translation>Расчитать значение</translation>
     </message>
     <message>
-        <location line="-338"/>
+        <location line="-341"/>
         <source>Value of radius</source>
         <translation>Значение радиуса</translation>
     </message>
@@ -478,9 +482,9 @@
         <translation type="vanished">_</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+45"/>
         <location line="+185"/>
-        <location line="+188"/>
+        <location line="+185"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -493,7 +497,7 @@
         <translation type="vanished">Первый угол дуги против часовой стрелки</translation>
     </message>
     <message>
-        <location line="-282"/>
+        <location line="-279"/>
         <source>Insert variable into formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
@@ -521,7 +525,7 @@
         <translation>Значение второго угла</translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+80"/>
         <source>Center point</source>
         <translation>Центральная точка</translation>
     </message>
@@ -545,7 +549,7 @@
         <translation type="obsolete">Размер и рост</translation>
     </message>
     <message>
-        <location line="-371"/>
+        <location line="-368"/>
         <source>First angle</source>
         <translation>Первый угол</translation>
     </message>
@@ -555,9 +559,13 @@
         <translation>Второй угол</translation>
     </message>
     <message>
-        <location line="+202"/>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
+    </message>
+    <message>
+        <location line="+199"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -595,7 +603,7 @@
         <translation>Переменные</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.cpp" line="+250"/>
+        <location filename="../../dialogs/tools/dialogarc.cpp" line="+257"/>
         <source>Value of angle of line.</source>
         <translation>Значение угла линии.</translation>
     </message>
@@ -641,17 +649,17 @@
         <translation>Расчитать значение</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+80"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+40"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+16"/>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
@@ -661,7 +669,7 @@
         <translation>Первая точка угла</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
@@ -671,7 +679,7 @@
         <translation>Вторая точка угла</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>Third point</source>
         <translation>Третья точка</translation>
     </message>
@@ -681,7 +689,7 @@
         <translation>Третья точка угла</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+7"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -691,14 +699,18 @@
         <translation>Показать линию с первой точки до этой</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+22"/>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
     </message>
     <message>
         <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <location line="+77"/>
@@ -745,14 +757,128 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.cpp" line="+153"/>
+        <location filename="../../dialogs/tools/dialogbisector.cpp" line="+154"/>
         <source>Select second point of angle</source>
         <translation>Выберить вторую точку угла</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Select third point of angle</source>
         <translation>Выберить третью точку угла</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCurveIntersectAxis</name>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="+14"/>
+        <source>Curve intersect axis</source>
+        <translation>Пересичение кривой и оси</translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>Angle</source>
+        <translation>Угол</translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Calculate value</source>
+        <translation>Расчитать значение</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Value of angle</source>
+        <translation>Значение угла</translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Axis point</source>
+        <translation>Точка оси</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+20"/>
+        <source>First point of line</source>
+        <translation>Первая точка линии</translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>Curve</source>
+        <translation>Кривая</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Point label</source>
+        <translation>Имя точки</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Type of line</source>
+        <translation>Тип линии</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show line from first point to this point</source>
+        <translation>Показать линию с первой точки до этой</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Input data</source>
+        <translation>Входные данные</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Size and height</source>
+        <translation>Размер и рост</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Increments</source>
+        <translation>Прибавки</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Length of lines</source>
+        <translation>Длина линий</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Length of arcs</source>
+        <translation>Длина дуг</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Length of curves</source>
+        <translation>Длина кривых</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Variables</source>
+        <translation>Переменные</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.cpp" line="+191"/>
+        <source>Select axis point</source>
+        <translation>Выберить точку оси</translation>
     </message>
 </context>
 <context>
@@ -795,12 +921,12 @@
         <translation>_</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+40"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -810,12 +936,12 @@
         <translation>Выбраная кривая</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+12"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -826,8 +952,12 @@
     </message>
     <message>
         <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -905,12 +1035,12 @@
         <translation>_</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+40"/>
         <source>Curve</source>
         <translation>Кривая</translation>
     </message>
@@ -920,12 +1050,12 @@
         <translation>Выбраная кривая</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+12"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -936,8 +1066,12 @@
     </message>
     <message>
         <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1015,12 +1149,12 @@
         <translation>_</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+40"/>
         <source>Curve</source>
         <translation>Кривая</translation>
     </message>
@@ -1030,12 +1164,12 @@
         <translation>Выбраная сложная кривая</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+12"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -1046,8 +1180,12 @@
     </message>
     <message>
         <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1089,29 +1227,29 @@
     <name>DialogDetail</name>
     <message>
         <location filename="../../dialogs/tools/dialogdetail.ui" line="+14"/>
-        <location line="+176"/>
+        <location line="+185"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location line="-139"/>
+        <location line="-148"/>
         <source>Bias X</source>
         <translation>Смещение по Х</translation>
     </message>
     <message>
-        <location line="+23"/>
-        <location line="+40"/>
+        <location line="+29"/>
+        <location line="+43"/>
         <location line="+135"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
-        <location line="-158"/>
+        <location line="-161"/>
         <source>Bias Y</source>
         <translation>Смещение по Y</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+35"/>
         <source>Options</source>
         <translation>Параметры</translation>
     </message>
@@ -1187,7 +1325,7 @@
         <translation>_</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1202,9 +1340,13 @@
         <translation>Размер и рост</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1260,7 +1402,7 @@
     </message>
     <message>
         <location line="+95"/>
-        <location line="+179"/>
+        <location line="+188"/>
         <source>Calculate value</source>
         <translation>Расчитать значение</translation>
     </message>
@@ -1269,7 +1411,7 @@
         <translation type="vanished">...</translation>
     </message>
     <message>
-        <location line="-147"/>
+        <location line="-156"/>
         <source>Value of length</source>
         <translation>Значение длины</translation>
     </message>
@@ -1278,13 +1420,13 @@
         <translation type="vanished">_</translation>
     </message>
     <message>
-        <location line="+39"/>
-        <location line="+179"/>
+        <location line="+48"/>
+        <location line="+188"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="-108"/>
+        <location line="-117"/>
         <source>Angle</source>
         <translation>Угол</translation>
     </message>
@@ -1294,7 +1436,7 @@
         <translation>Значение угла</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+86"/>
         <source>Base point</source>
         <translation>Базовая точка</translation>
     </message>
@@ -1304,12 +1446,12 @@
         <translation>Первая точка линии</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+10"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -1325,8 +1467,12 @@
     </message>
     <message>
         <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <location line="+77"/>
@@ -1397,20 +1543,20 @@
         <translation>Рост</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+24"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+16"/>
         <source>Base point</source>
         <translation>Базовая точка</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+17"/>
+        <location line="+13"/>
         <location line="+7"/>
-        <location line="+24"/>
+        <location line="+20"/>
         <source>First point of line</source>
         <translation>Первая точка линии</translation>
     </message>
@@ -1420,7 +1566,7 @@
         <translation>Вторая точка линии</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+14"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -1435,7 +1581,7 @@
         <translation>Выберить первую точку линии</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Select second point of line</source>
         <translation>Выберить вторую точку линии</translation>
     </message>
@@ -1449,12 +1595,12 @@
     </message>
     <message>
         <location line="+37"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="+412"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="+420"/>
         <source>Tool</source>
         <translation>Инструмент</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="-191"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="-205"/>
         <source>%1 - Base point</source>
         <translation>%1 - Базовая точка</translation>
     </message>
@@ -1515,6 +1661,16 @@
         <translation>%1 - разрезает сложную кривую %2</translation>
     </message>
     <message>
+        <location line="+17"/>
+        <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
+        <translation>%1 - точка пересечения линии %2_%3 и оси через точку %4</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>%1 - point of intersection curve and axis through point %2</source>
+        <translation>%1 - точка пересечения кривой и оси через точку %2</translation>
+    </message>
+    <message>
         <source>%1 - cut curve point %2</source>
         <translation type="obsolete">%1 - разрезает сложную кривую %2</translation>
     </message>
@@ -1523,7 +1679,7 @@
         <translation type="vanished">Получено неправильный тип инструмента. Игнорируем.</translation>
     </message>
     <message>
-        <location line="-87"/>
+        <location line="-112"/>
         <source>Curve %1_%2</source>
         <translation>Кривая %1_%2</translation>
     </message>
@@ -1536,13 +1692,13 @@
         <location line="-53"/>
         <location line="+90"/>
         <location line="+72"/>
-        <location line="+20"/>
+        <location line="+34"/>
         <location line="+7"/>
         <source>Can&apos;t create record.</source>
         <translation>Не могу создать запись.</translation>
     </message>
     <message>
-        <location line="-119"/>
+        <location line="-133"/>
         <source>Arc with center in point %1</source>
         <translation>Дуга c центром в точке %1</translation>
     </message>
@@ -1641,7 +1797,7 @@
     <message>
         <location line="-92"/>
         <location line="+102"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="+551"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="+615"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1715,14 +1871,14 @@
         <translation type="obsolete">Обозначение %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="-483"/>
-        <location line="+399"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="-547"/>
+        <location line="+463"/>
         <location line="+56"/>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
     <message>
-        <location line="-412"/>
+        <location line="-474"/>
         <source>male</source>
         <translation>мужчина</translation>
     </message>
@@ -1732,7 +1888,32 @@
         <translation>женщина</translation>
     </message>
     <message>
-        <location line="+330"/>
+        <location line="+312"/>
+        <source>Could not save GivenName</source>
+        <translation>Не удалось сохранить имя</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Could not save FamilyName</source>
+        <translation>Не удалось сохранить фамилию</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Could not save Email</source>
+        <translation>Не удалось сохранить Email</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Could not save Sex</source>
+        <translation>Не удалось сохранить стать</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Could not save BirthDate</source>
+        <translation>Не удалось сохранить дату рождения</translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation>Мерки используют другие единицы измерения нежели лекало. Это лекало требует мерки в %1</translation>
     </message>
@@ -1762,6 +1943,11 @@
         <location line="+56"/>
         <source>Name_%1</source>
         <translation>Имя_%1</translation>
+    </message>
+    <message>
+        <location line="+217"/>
+        <source>Can&apos;t save measurement</source>
+        <translation>Не удалось сохранить мерки</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble value.</source>
@@ -1841,7 +2027,7 @@
         <translation>Пожайлуста попробуйте снова или смените файл</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+26"/>
         <location line="+82"/>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
@@ -1898,17 +2084,17 @@
         <translation>Линия</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+24"/>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -1967,14 +2153,139 @@
         <translation>Выберить вторую точку первой линии</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+10"/>
         <source>Select first point of second line</source>
         <translation>Выберить первую точку второй линии</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>Select second point of second line</source>
         <translation>Выберить вторую точку второй линии</translation>
+    </message>
+</context>
+<context>
+    <name>DialogLineIntersectAxis</name>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="+14"/>
+        <source>Line intersect axis</source>
+        <translation>Пересечение линии и оси</translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>Angle</source>
+        <translation>Угол</translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Calculate value</source>
+        <translation>Расчитать значение</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Value of angle</source>
+        <translation>Значение угла</translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Axis point</source>
+        <translation>Точка оси</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+20"/>
+        <location line="+20"/>
+        <source>First point of line</source>
+        <translation>Первая точка линии</translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>First line point</source>
+        <translation>Первая точка линии</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Second line point</source>
+        <translation>Вторая точка линии</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Point label</source>
+        <translation>Имя точки</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Type of line</source>
+        <translation>Тип линии</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show line from first point to this point</source>
+        <translation>Показать линию с первой точки до этой</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Input data</source>
+        <translation>Входные данные</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Size and height</source>
+        <translation>Размер и рост</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Increments</source>
+        <translation>Прибавки</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Length of lines</source>
+        <translation>Длина линий</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Length of arcs</source>
+        <translation>Длина дуг</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Length of curves</source>
+        <translation>Длина кривых</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Variables</source>
+        <translation>Переменные</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.cpp" line="+213"/>
+        <source>Select second point of line</source>
+        <translation>Выберить вторую точку линии</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Select axis point</source>
+        <translation>Выберить точку оси</translation>
     </message>
 </context>
 <context>
@@ -1985,27 +2296,27 @@
         <translation>Мерки</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+21"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Пожалуйста, выберите тип лекала.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+26"/>
         <source>Graduation</source>
         <translation>Градация</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+23"/>
         <source>Use for creation pattern standard measurement table</source>
         <translation>Лекало со стандартной таблицей</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+26"/>
         <source>Individual</source>
         <translation>Индивиндуальные</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+23"/>
         <source>Use for creation pattern individual measurements</source>
         <translation>Лекало с индивидуальных мерок</translation>
     </message>
@@ -2036,12 +2347,12 @@
         <translation type="vanished">_</translation>
     </message>
     <message>
-        <location line="+100"/>
+        <location line="+99"/>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+16"/>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
@@ -2051,7 +2362,7 @@
         <translation>Доп. угол градусы</translation>
     </message>
     <message>
-        <location line="+208"/>
+        <location line="+211"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -2064,27 +2375,27 @@
         <translation type="vanished">Формула расчета длины перпендикуляра</translation>
     </message>
     <message>
-        <location line="-388"/>
+        <location line="-386"/>
         <source>Calculate value</source>
         <translation>Расчитать значение</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+115"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="-132"/>
+        <location line="-135"/>
         <source>Insert variable into formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+97"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+296"/>
+        <location line="+291"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -2099,9 +2410,13 @@
         <translation>Размер и рост</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -2139,7 +2454,7 @@
         <translation>Переменные - кликнете дважды для вставки в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.cpp" line="+141"/>
+        <location filename="../../dialogs/tools/dialognormal.cpp" line="+142"/>
         <source>Select second point of line</source>
         <translation>Выберить вторую точку линии</translation>
     </message>
@@ -2536,12 +2851,12 @@
         <translation type="vanished">_</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+45"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+56"/>
         <source>Center of arc</source>
         <translation>Центр дуги</translation>
     </message>
@@ -2550,32 +2865,32 @@
         <translation type="vanished">Формула расчета радиуса дуги</translation>
     </message>
     <message>
-        <location line="-132"/>
+        <location line="-133"/>
         <source>Calculate value</source>
         <translation>Расчитать значение</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+117"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="-132"/>
+        <location line="-137"/>
         <source>Insert variable into formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+185"/>
         <source>Top of the line</source>
         <translation>Начало линии</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>End of the line</source>
         <translation>Конец линии</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+25"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -2584,12 +2899,11 @@
         <translation type="obsolete">Размер и рост</translation>
     </message>
     <message>
-        <location line="+29"/>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+106"/>
         <source>Angle of lines</source>
         <translation>Уголы линий</translation>
     </message>
@@ -2614,7 +2928,12 @@
         <translation>Размер и рост</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
+        <location line="+29"/>
         <source>Length of lines</source>
         <translation>Длина линий</translation>
     </message>
@@ -2629,13 +2948,13 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="+166"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="+167"/>
         <source>Select second point of line</source>
         <translation>Выберить вторую точку линии</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="-167"/>
-        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="+7"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="-157"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="+9"/>
         <source>Select point of center of arc</source>
         <translation>Выберите точку центра дуги</translation>
     </message>
@@ -2652,27 +2971,27 @@
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>vertical point</source>
         <translation>Точка вертикали</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+20"/>
         <source>horizontal point</source>
         <translation>Точка горизонтали</translation>
     </message>
     <message>
-        <location line="-17"/>
+        <location line="-13"/>
         <source>First point of angle</source>
         <translation>Первая точка угла</translation>
     </message>
     <message>
-        <location line="-58"/>
+        <location line="-54"/>
         <source>Point of intersection</source>
         <translation>Точка пересечения</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+74"/>
         <source>Second point of angle</source>
         <translation>Вторая точка угла</translation>
     </message>
@@ -2717,37 +3036,37 @@
         <translation>Расчитать значение</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+117"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="-132"/>
+        <location line="-137"/>
         <source>Insert variable into formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+97"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+56"/>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>Third point</source>
-        <translation type="unfinished">Третья точка</translation>
+        <translation>Третья точка</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+29"/>
         <source>Type of line</source>
         <translation>Тип линии</translation>
     </message>
@@ -2757,7 +3076,7 @@
         <translation>Показать линию с первой точки к нашей</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+9"/>
         <source>Input data</source>
         <translation>Входные данные</translation>
     </message>
@@ -2766,12 +3085,11 @@
         <translation type="obsolete">Размер и рост</translation>
     </message>
     <message>
-        <location line="+29"/>
         <source>Standard table</source>
-        <translation>Стандартная таблица</translation>
+        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+106"/>
         <source>Angle of lines</source>
         <translation>Уголы линий</translation>
     </message>
@@ -2796,7 +3114,12 @@
         <translation>Размер и рост</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+16"/>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
+        <location line="+29"/>
         <source>Length of lines</source>
         <translation>Длина линий</translation>
     </message>
@@ -2811,12 +3134,12 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="+152"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="+153"/>
         <source>Select first point of line</source>
         <translation>Выберить первую точку линии</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Select second point of line</source>
         <translation>Выберить вторую точку линии</translation>
     </message>
@@ -2909,8 +3232,12 @@
 <context>
     <name>DialogSplinePath</name>
     <message>
-        <location filename="../../dialogs/tools/dialogsplinepath.ui" line="+14"/>
         <source>Curve path</source>
+        <translation type="vanished">Сложная кривая</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogsplinepath.ui" line="+14"/>
+        <source>Curved path</source>
         <translation>Сложная кривая</translation>
     </message>
     <message>
@@ -2996,7 +3323,7 @@
         <translation type="obsolete">Не могу найти точку за именем</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="+387"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="+443"/>
         <location line="+17"/>
         <location line="+24"/>
         <location line="+20"/>
@@ -3044,7 +3371,7 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location line="+511"/>
+        <location line="+523"/>
         <source>Height</source>
         <translation>Рост</translation>
     </message>
@@ -3086,30 +3413,30 @@
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+16"/>
         <source>First point of axis</source>
         <translation>Первая точка оси</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+24"/>
-        <location line="+24"/>
-        <location line="+24"/>
+        <location line="+20"/>
+        <location line="+20"/>
+        <location line="+20"/>
         <source>First point of line</source>
         <translation>Первая точка линии</translation>
     </message>
     <message>
-        <location line="-55"/>
+        <location line="-47"/>
         <source>Second point of axis</source>
         <translation>Вторая точка оси</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+20"/>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+20"/>
         <source>Second point</source>
         <translation>Вторая точка</translation>
     </message>
@@ -3119,12 +3446,12 @@
         <translation>Выберить вторую точку оси</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Select first point</source>
         <translation>Выберить первую точку</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+17"/>
         <source>Select second point</source>
         <translation>Выберить вторую точку</translation>
     </message>
@@ -3202,7 +3529,7 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="+1207"/>
+        <location filename="../../core/vapplication.cpp" line="+1218"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
@@ -3383,11 +3710,14 @@
         <translation>Инструмент точка перпендикуляра</translation>
     </message>
     <message>
+        <location line="+237"/>
+        <location line="+227"/>
+        <location line="+99"/>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="-537"/>
         <source>Special point on shoulder.</source>
         <translation>Инструмент точка плеча.</translation>
     </message>
@@ -3421,7 +3751,7 @@
         <translation>Инструмент угольник.</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+220"/>
         <source>Tools for creating lines.</source>
         <translation>Инструменты создания линий.</translation>
     </message>
@@ -3457,7 +3787,7 @@
         <translation type="obsolete">Инструмент сложная кривая.</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+148"/>
         <source>Tools for creating arcs.</source>
         <translation>Инструменты создания дуг.</translation>
     </message>
@@ -3471,7 +3801,7 @@
         <translation type="obsolete">Инструмент дуга.</translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+96"/>
         <source>Tools for creating details.</source>
         <translation>Инструменты создания деталей.</translation>
     </message>
@@ -3498,7 +3828,7 @@
         <translation type="obsolete">Чертеж</translation>
     </message>
     <message>
-        <location line="+326"/>
+        <location line="+333"/>
         <source>Details mode</source>
         <translation>Режим деталей</translation>
     </message>
@@ -3519,7 +3849,7 @@
         <translation>Добавить новый чертеж</translation>
     </message>
     <message>
-        <location line="-816"/>
+        <location line="-895"/>
         <source>Perpendicular point along line</source>
         <translation>Перпендикулярная точка вдоль линии</translation>
     </message>
@@ -3529,7 +3859,7 @@
         <translation>Инструмент, чтобы сделать точку от х и у двух других точек.</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+128"/>
         <source>Line between points</source>
         <translation>Линия между точками</translation>
     </message>
@@ -3559,7 +3889,12 @@
         <translation>Инструмент разрезания кривой.</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="-178"/>
+        <source>Point of intersection line and axis</source>
+        <translation>Точка пересечения линии и оси</translation>
+    </message>
+    <message>
+        <location line="+277"/>
         <source>Arc tool.</source>
         <translation>Инструмент дуга.</translation>
     </message>
@@ -3569,7 +3904,7 @@
         <translation>Инструмент разрезания дуги.</translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+96"/>
         <source>Tool for union two details.</source>
         <translation>Инструмент объединения двух деталей.</translation>
     </message>
@@ -3584,12 +3919,12 @@
         <translation>&amp;Помощь</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>&amp;Pattern piece</source>
         <translation>&amp;Чертеж</translation>
     </message>
     <message>
-        <location line="+114"/>
+        <location line="+120"/>
         <source>New</source>
         <translation>Новое</translation>
     </message>
@@ -3658,12 +3993,12 @@
         <translation>Свойства лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="+1245"/>
+        <location filename="../../mainwindow.cpp" line="+1304"/>
         <source>Save as</source>
         <translation>Сохранить как</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="-346"/>
+        <location filename="../../mainwindow.ui" line="-350"/>
         <source>Measurements</source>
         <translation>Мерки</translation>
     </message>
@@ -3688,12 +4023,12 @@
         <translation>Панель инструментов настройки</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+14"/>
         <source>Toolbar tools</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+22"/>
         <source>Tool options</source>
         <translation>Параметры инструметнов</translation>
     </message>
@@ -3799,11 +4134,36 @@
         <translation>Уместить</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Ctrl+=</source>
+        <translation>Ctrl+=</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Stop</source>
+        <translation>Стоп</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Stop using tool</source>
+        <translation>Прекратить использование инструмента</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Repot Bug...</source>
+        <translation>Сообщить об ошибке...</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Report bug</source>
+        <translation>Сообщить об ошибке</translation>
+    </message>
+    <message>
         <source>Zoom In</source>
         <translation type="vanished">Увеличить</translation>
     </message>
     <message>
-        <location line="-50"/>
+        <location line="-80"/>
         <source>zoom in</source>
         <translation>приблизить</translation>
     </message>
@@ -3878,7 +4238,7 @@
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="-567"/>
+        <location filename="../../mainwindow.cpp" line="-596"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -3919,12 +4279,12 @@
         <translation type="vanished">Ошибка. Чертеж с таким именем уже сущевствует.</translation>
     </message>
     <message>
-        <location line="+1388"/>
+        <location line="+1461"/>
         <source>Pattern piece:</source>
         <translation>Чертеж:</translation>
     </message>
     <message>
-        <location line="-1937"/>
+        <location line="-2030"/>
         <source>Pattern piece %1</source>
         <translation>Чертеж %1</translation>
     </message>
@@ -3933,7 +4293,7 @@
         <translation type="vanished">Ошибка создания чертежа с именем</translation>
     </message>
     <message>
-        <location line="+1939"/>
+        <location line="+2032"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введите новое имя для чертежа.</translation>
     </message>
@@ -3946,7 +4306,7 @@
         <translation type="vanished">Не могу сохранить новое имя чертежа</translation>
     </message>
     <message>
-        <location line="-1666"/>
+        <location line="-1759"/>
         <location line="+25"/>
         <location line="+12"/>
         <source>Select point</source>
@@ -3964,11 +4324,12 @@
     <message>
         <location line="+38"/>
         <location line="+103"/>
+        <location line="+111"/>
         <source>Select first point of line</source>
         <translation>Выберить первую точку линии</translation>
     </message>
     <message>
-        <location line="-90"/>
+        <location line="-201"/>
         <source>Select first point of angle</source>
         <translation>Выберить первую точку угла</translation>
     </message>
@@ -4013,17 +4374,22 @@
         <translation>Выберить дугу</translation>
     </message>
     <message>
-        <location line="+138"/>
+        <location line="+19"/>
+        <source>Select curve</source>
+        <translation>Выберите кривую</translation>
+    </message>
+    <message>
+        <location line="+151"/>
         <source>Size: </source>
         <translation>Размеры: </translation>
     </message>
     <message>
-        <location line="+444"/>
+        <location line="+461"/>
         <source>pattern</source>
         <translation>Чертеж</translation>
     </message>
     <message>
-        <location line="+158"/>
+        <location line="+170"/>
         <source>Critical error!</source>
         <translation>Критическая ошибка!</translation>
     </message>
@@ -4033,17 +4399,22 @@
         <translation>Ошибка парсинга файла (std::bad_alloc).</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+50"/>
         <source>Bad id.</source>
         <translation>Плохой id.</translation>
     </message>
     <message>
-        <location line="+364"/>
+        <location line="+357"/>
         <source>File saved</source>
         <translation>Файл сохранен</translation>
     </message>
     <message>
-        <location line="+163"/>
+        <location line="+7"/>
+        <source>Could not save file</source>
+        <translation>Не удалось сохранить файл</translation>
+    </message>
+    <message>
+        <location line="+168"/>
         <source>&amp;Undo</source>
         <translation>&amp;Отменить</translation>
     </message>
@@ -4057,7 +4428,7 @@
         <translation type="vanished">Мерки используют другие единицы измерения нежели лекало. Ето леколо требует мерки в %1</translation>
     </message>
     <message>
-        <location line="+173"/>
+        <location line="+191"/>
         <source>Wrong units.</source>
         <translation>Неправильные единицы измерения.</translation>
     </message>
@@ -4072,7 +4443,17 @@
         <translation>Ошибка файла.</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+50"/>
+        <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
+        <translation>Валентина не была закрыта корректно. Вы хотите восстановить файлы (%1) которые былы открыты раньше?</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Reopen files.</source>
+        <translation>Повторно открыть файлы.</translation>
+    </message>
+    <message>
+        <location line="+30"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation>Файл мерок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
     </message>
@@ -4096,12 +4477,12 @@
         <translation type="vanished">Не могу сохранить лекало</translation>
     </message>
     <message>
-        <location line="-367"/>
+        <location line="-442"/>
         <source>untitled.val</source>
         <translation>без_имени.val</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+79"/>
         <source>Unsaved change</source>
         <translation>Не сохраненные изменения</translation>
     </message>
@@ -4121,7 +4502,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не могу прочитать файл %1:\n%2. </translation>
     </message>
     <message>
-        <location line="+259"/>
+        <location line="+283"/>
         <source>File loaded</source>
         <translation>Файл загружен</translation>
     </message>
@@ -4166,8 +4547,8 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Ошибка сохранения файла. Не могу сохранить файл.</translation>
     </message>
     <message>
-        <location line="-865"/>
-        <location line="+899"/>
+        <location line="-922"/>
+        <location line="+1004"/>
         <source>Open file</source>
         <translation>Открыть файл</translation>
     </message>
@@ -4206,7 +4587,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location line="-1633"/>
+        <location line="-1787"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Выберить точки, дуги, кривые за часовой стрелкой.</translation>
     </message>
@@ -4234,7 +4615,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Создано %3 в %4</translation>
     </message>
     <message>
-        <location line="+170"/>
+        <location line="+202"/>
         <source>Height: </source>
         <translation>Рост:</translation>
     </message>
@@ -4244,7 +4625,7 @@ Do you want to save your changes?</source>
         <translation>Чертеж:</translation>
     </message>
     <message>
-        <location line="+375"/>
+        <location line="+392"/>
         <location line="+55"/>
         <source>Pattern files (*.val)</source>
         <translation>Файл лекала (*.val)</translation>
@@ -4271,7 +4652,7 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Не могу открыть файл лекала. Имя файла пустое</translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+133"/>
         <location line="+24"/>
         <source>Error parsing file.</source>
         <translation>Ошибка парсинга файла.</translation>
@@ -4283,12 +4664,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+61"/>
+        <location line="+77"/>
         <source>Error empty parameter.</source>
         <translation>Ошибка, пустой параметр.</translation>
     </message>
     <message>
-        <location line="-55"/>
+        <location line="-71"/>
         <source>Error wrong id.</source>
         <translation>Ошибка, неправильный id.</translation>
     </message>
@@ -7709,7 +8090,7 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../mainwindow.cpp" line="-1286"/>
+        <location filename="../../mainwindow.cpp" line="-1348"/>
         <source>Create new pattern piece to start working.</source>
         <translation>Создайте новый чертеж  для начала работы.</translation>
     </message>
@@ -7724,7 +8105,7 @@ Do you want to save your changes?</source>
         <translation>Переместить деталь</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="+465"/>
+        <location filename="../../xml/vdomdocument.cpp" line="+467"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
@@ -7957,7 +8338,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="+344"/>
+        <location filename="../../tools/vabstracttool.cpp" line="+233"/>
         <source>Confirm the deletion.</source>
         <translation>Подтвердить удаление.</translation>
     </message>
@@ -7974,7 +8355,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="-1133"/>
+        <location filename="../../core/vapplication.cpp" line="-1135"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
     </message>
@@ -8002,6 +8383,16 @@ Do you want to save your changes?</source>
         <location line="+5"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Что то не так!!!</translation>
+    </message>
+    <message>
+        <location line="+1684"/>
+        <source>Could not copy temp file to document file</source>
+        <translation>Не удалось скопировать временный файл в выходной файл</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Could not remove document file</source>
+        <translation>Не удалось удалить файл документа.</translation>
     </message>
     <message>
         <source>Something wrong!!</source>
@@ -8098,6 +8489,11 @@ Do you want to save your changes?</source>
         <location line="+25"/>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation>Ошибка разбора файла %3 в строке %1 столбца %2</translation>
+    </message>
+    <message>
+        <location line="+203"/>
+        <source>Couldn&apos;t get node</source>
+        <translation>Не удалось получить узел.</translation>
     </message>
     <message>
         <source>Validation error in line %1 column %2</source>
@@ -8245,7 +8641,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VException</name>
     <message>
-        <location filename="../../exception/vexception.cpp" line="+73"/>
+        <location filename="../../exception/vexception.cpp" line="+85"/>
         <source>Critical error!</source>
         <translation>Критическая ошибка!</translation>
     </message>
@@ -8296,12 +8692,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="+374"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
-        <translation>Не могу найти инструмент с id = %1 в таблице.</translation>
+        <translation type="vanished">Не могу найти инструмент с id = %1 в таблице.</translation>
     </message>
     <message>
-        <location line="+330"/>
+        <location filename="../../xml/vpattern.cpp" line="+711"/>
         <source>Error no unique id.</source>
         <translation>Ошибка не уникальный id.</translation>
     </message>
@@ -8310,7 +8705,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="-332"/>
+        <source>Can&apos;t find tool in table.</source>
+        <translation>Не могу найти инструмент в таблице.</translation>
+    </message>
+    <message>
+        <location line="+376"/>
         <location line="+24"/>
         <source>Error parsing file.</source>
         <translation>Ошибка парсинга файла.</translation>
@@ -8341,12 +8741,12 @@ Do you want to save your changes?</source>
         <translation>Ошибка парсинга файла (std::bad_alloc).</translation>
     </message>
     <message>
-        <location line="+215"/>
+        <location line="+218"/>
         <source>Error creating or updating detail</source>
         <translation>Ошибка создания или обновления детали</translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+114"/>
         <source>Error creating or updating single point</source>
         <translation>Ошибка создания или обновления базовой точки</translation>
     </message>
@@ -8418,7 +8818,7 @@ Do you want to save your changes?</source>
         <translation>Ошибка создания или обновления точки разрезания сплайна</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+25"/>
         <location line="+6"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Ошибка создания или обновления точки разрезания сложного сплайна</translation>
@@ -8430,7 +8830,19 @@ Do you want to save your changes?</source>
         <translation>Ошибка создания или обновления точки разрезания дуги</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+28"/>
+        <location line="+7"/>
+        <source>Error creating or updating point of intersection line and axis</source>
+        <translation>Ошибка создания или обновления точки пересечения линии и оси</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <location line="+7"/>
+        <source>Error creating or updating point of intersection curve and axis</source>
+        <translation>Ошибка создания или обновления точки пересечения кривой и оси</translation>
+    </message>
+    <message>
+        <location line="+37"/>
         <source>Error creating or updating line</source>
         <translation>Ошибка создания или обновления линии</translation>
     </message>
@@ -8535,7 +8947,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="+850"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="+931"/>
         <source>Base point</source>
         <translation>Базовая точка</translation>
     </message>
@@ -8554,11 +8966,13 @@ Do you want to save your changes?</source>
         <location line="+11"/>
         <location line="+10"/>
         <location line="+46"/>
+        <location line="+10"/>
+        <location line="+12"/>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <location line="-211"/>
+        <location line="-233"/>
         <source>Position</source>
         <translation>Положение</translation>
     </message>
@@ -8575,11 +8989,13 @@ Do you want to save your changes?</source>
         <location line="+10"/>
         <location line="+22"/>
         <location line="+39"/>
+        <location line="+56"/>
+        <location line="+12"/>
         <source>Line type</source>
         <translation>Тип линии</translation>
     </message>
     <message>
-        <location line="-152"/>
+        <location line="-220"/>
         <location line="+13"/>
         <location line="+24"/>
         <location line="+11"/>
@@ -8592,11 +9008,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location line="-152"/>
+        <location line="+208"/>
+        <location line="+12"/>
         <source>Angle</source>
         <translation>Угол</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="-212"/>
         <source>Point at distance along line</source>
         <translation>Инструмент точка вдоль линии</translation>
     </message>
@@ -8702,6 +9120,12 @@ Do you want to save your changes?</source>
         <source>Tool triangle</source>
         <translation>Инструмент треугольник</translation>
     </message>
+    <message>
+        <location line="+10"/>
+        <location line="+12"/>
+        <source>Point intersection line and axis</source>
+        <translation>Точка пересечения линии и оси</translation>
+    </message>
 </context>
 <context>
     <name>VToolTriangle</name>
@@ -8720,7 +9144,7 @@ Do you want to save your changes?</source>
 <context>
     <name>Variables</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="+1059"/>
+        <location filename="../../core/vapplication.cpp" line="-634"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Линия_</translation>
@@ -8760,11 +9184,27 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VisToolCurveIntersectAxis</name>
+    <message>
+        <location filename="../../visualization/vistoolcurveintersectaxis.cpp" line="+81"/>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угола, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+</context>
+<context>
     <name>VisToolEndLine</name>
     <message>
         <location filename="../../visualization/vistoolendline.cpp" line="+64"/>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Точка на конце отрезка&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolLineIntersectAxis</name>
+    <message>
+        <location filename="../../visualization/vistoollineintersectaxis.cpp" line="+96"/>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - &quot;фиксация угола, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
     </message>
 </context>
 <context>
@@ -8778,7 +9218,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+186"/>
+        <location filename="../../main.cpp" line="+185"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>

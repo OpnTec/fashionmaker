@@ -225,7 +225,7 @@
 <context>
     <name>DelTool</name>
     <message>
-        <location filename="../../undocommands/deltool.cpp" line="38"/>
+        <location filename="../../undocommands/deltool.cpp" line="39"/>
         <source>Delete tool</source>
         <translation>Supprimer l&apos;outil</translation>
     </message>
@@ -317,97 +317,101 @@
         <translation>Longueur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="192"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="195"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="229"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="238"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="239"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="246"/>
         <source>First point of line</source>
         <translation>Premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="256"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="253"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="263"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="260"/>
         <source>Second point of line</source>
         <translation>Deuxième point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="274"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="267"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="287"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="280"/>
         <source>Show line from first point to this point</source>
         <translation>Afficher la ligne du premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="298"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="289"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="311"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="302"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="327"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="318"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="340"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="331"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="353"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="344"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="369"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="360"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="385"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="376"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="401"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="392"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="414"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="405"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="424"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="415"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.cpp" line="144"/>
+        <location filename="../../dialogs/tools/dialogalongline.cpp" line="142"/>
         <source>Select second point of line</source>
         <translation>Choisir le deuxième point d&apos;une ligne</translation>
     </message>
@@ -431,8 +435,8 @@
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="112"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="297"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="482"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="300"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="485"/>
         <source>Calculate value</source>
         <translation>Calculer la valeur</translation>
     </message>
@@ -442,39 +446,44 @@
         <translation>Rayon</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="186"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="371"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="189"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="374"/>
         <location filename="../../dialogs/tools/dialogarc.ui" line="559"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="277"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="280"/>
         <source>Insert variable into formula</source>
         <translation>Ajouter une variable dans la formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="329"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="332"/>
         <source>Value of first angle</source>
         <translation>Valeur du premier angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="257"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="644"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="260"/>
         <source>First angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="442"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="445"/>
         <source>Second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="462"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="465"/>
         <source>Insert marked variable into formula</source>
         <translation>Ajouter les variables sélectionnées dans la formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="514"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="517"/>
         <source>Value of second angle</source>
         <translation>Valeur du deuxième angle</translation>
     </message>
@@ -499,9 +508,8 @@
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="644"/>
         <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <translation type="vanished">Tableau des mesures</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="657"/>
@@ -539,7 +547,7 @@
         <translation>Variables</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.cpp" line="250"/>
+        <location filename="../../dialogs/tools/dialogarc.cpp" line="257"/>
         <source>Value of angle of line.</source>
         <translation>Angle de la ligne</translation>
     </message>
@@ -577,114 +585,232 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="229"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="245"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="251"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="252"/>
         <source>First point of angle</source>
         <translation>Premier point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="268"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="265"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="275"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="272"/>
         <source>Second point of angle</source>
         <translation>Deuxième point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="292"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="285"/>
         <source>Third point</source>
         <translation>Troisième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="299"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="292"/>
         <source>Third point of angle</source>
         <translation>Troisième point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="310"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="299"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="306"/>
         <source>Show line from second point to this point</source>
         <translation>Afficher la ligne du deuxième point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="328"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="315"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="341"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="357"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="344"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="370"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="357"/>
         <source>Increments</source>
         <translation>Evolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="386"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="373"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="402"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="389"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="418"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="405"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="434"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="421"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="447"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="434"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="457"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="444"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.cpp" line="153"/>
+        <location filename="../../dialogs/tools/dialogbisector.cpp" line="154"/>
         <source>Select second point of angle</source>
         <translation>Choisir le deuxième point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.cpp" line="160"/>
+        <location filename="../../dialogs/tools/dialogbisector.cpp" line="163"/>
         <source>Select third point of angle</source>
         <translation>Choisir le troisième point de l&apos;angle</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCurveIntersectAxis</name>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="14"/>
+        <source>Curve intersect axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="65"/>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="102"/>
+        <source>Calculate value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="134"/>
+        <source>Value of angle</source>
+        <translation type="unfinished">Valeur de l&apos;angle</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="182"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="225"/>
+        <source>Axis point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="232"/>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="252"/>
+        <source>First point of line</source>
+        <translation type="unfinished">Premier point de la ligne</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="245"/>
+        <source>Curve</source>
+        <translation type="unfinished">Courbe</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="265"/>
+        <source>Point label</source>
+        <translation type="unfinished">Désignation du point</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="282"/>
+        <source>Type of line</source>
+        <translation type="unfinished">Type de ligne</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="289"/>
+        <source>Show line from first point to this point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="298"/>
+        <source>Input data</source>
+        <translation type="unfinished">Données</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="311"/>
+        <source>Size and height</source>
+        <translation type="unfinished">Taille et stature</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="327"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="340"/>
+        <source>Increments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="356"/>
+        <source>Length of lines</source>
+        <translation type="unfinished">Longueur des lignes</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="372"/>
+        <source>Length of arcs</source>
+        <translation type="unfinished">Longueur des arcs</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="388"/>
+        <source>Length of curves</source>
+        <translation type="unfinished">Longueur des courbes</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="404"/>
+        <source>Angle of lines</source>
+        <translation type="unfinished">Angle des lignes</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="417"/>
+        <source>Hide empty measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="427"/>
+        <source>Variables</source>
+        <translation type="unfinished">Variables</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.cpp" line="191"/>
+        <source>Select axis point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -715,72 +841,76 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="226"/>
         <source>Arc</source>
         <translation>Arc</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="228"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="233"/>
         <source>Selected curve</source>
         <translation>Courbe selectionnée</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="246"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="259"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="258"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="271"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="288"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="287"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="301"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="300"/>
         <source>Increments</source>
         <translation>Evolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="316"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="332"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="348"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="364"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="378"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="377"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="388"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="387"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
@@ -813,72 +943,76 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="226"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="228"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="233"/>
         <source>Selected curve</source>
         <translation>Courbe sélectionnée</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="246"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="259"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="258"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="271"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="288"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="287"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="301"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="300"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="316"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="332"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="348"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="364"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="378"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="377"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="388"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="387"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
@@ -911,72 +1045,76 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="226"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="228"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="233"/>
         <source>Selected curve path</source>
         <translation>Chemin de courbe sélectionné</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="246"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="259"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="258"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="271"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="288"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="287"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="301"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="300"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="316"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="332"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="348"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="364"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="378"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="377"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="388"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="387"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
@@ -985,7 +1123,7 @@
     <name>DialogDetail</name>
     <message>
         <location filename="../../dialogs/tools/dialogdetail.ui" line="14"/>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="190"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="199"/>
         <source>Detail</source>
         <translation>Détail</translation>
     </message>
@@ -995,44 +1133,44 @@
         <translation>Biais X</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="74"/>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="114"/>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="249"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="80"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="123"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="258"/>
         <source>cm</source>
         <translation>Cm</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="91"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="97"/>
         <source>Bias Y</source>
         <translation>Biais Y</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="123"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="132"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="177"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="186"/>
         <source>Name of detail</source>
         <translation>Nom du détail</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="199"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="208"/>
         <source>Seam allowance</source>
         <translation>Marge de couture</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="220"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="229"/>
         <source>Width</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="258"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="267"/>
         <source>Closed</source>
         <translation>Fermé</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="271"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="280"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -1075,57 +1213,61 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="192"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="195"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul entier dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="230"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="233"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="243"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="246"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="259"/>
-        <source>Standard table</source>
-        <translation>Tableau standard</translation>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="262"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="272"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau standard</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="275"/>
         <source>Increments</source>
         <translation>Incréments</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="288"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="291"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="304"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="307"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="320"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="323"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="336"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="339"/>
         <source>Angle of lines</source>
         <translation>Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="352"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="359"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="362"/>
         <source>Variables</source>
         <translation>Variables</translation>
     </message>
@@ -1144,7 +1286,7 @@
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogendline.ui" line="115"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="294"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="303"/>
         <source>Calculate value</source>
         <translation>Valeur calculée</translation>
     </message>
@@ -1154,93 +1296,97 @@
         <translation>Longueur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="186"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="195"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="383"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="257"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="266"/>
         <source>Angle</source>
         <translation>Angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="326"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="335"/>
         <source>Value of angle</source>
         <translation>Valeur de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="403"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="421"/>
         <source>Base point</source>
         <translation>Point de départ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="410"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="428"/>
         <source>First point of line</source>
         <translation>Premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="427"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="441"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="441"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="451"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="448"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="458"/>
         <source>Show line from first point to this point</source>
         <translation>Montrer la ligne du premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="459"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="469"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="472"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="482"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="488"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="498"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="501"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="511"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="517"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="527"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="533"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="543"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="549"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="559"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="565"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="575"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="578"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="588"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="588"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="598"/>
         <source>Variables</source>
         <translation type="unfinished">Variables</translation>
     </message>
@@ -1257,35 +1403,35 @@
         <translation>Stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="35"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="38"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="55"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="54"/>
         <source>Base point</source>
         <translation>Point de départ</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="62"/>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="79"/>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="86"/>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="110"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="61"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="74"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="81"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="101"/>
         <source>First point of line</source>
         <translation>Premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="103"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="94"/>
         <source>Second point of line</source>
         <translation>Deuxième point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="121"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="108"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="128"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="115"/>
         <source>Show line from first point to our point</source>
         <translation>Montrer la ligne du premier point jusqu&apos;à ce point</translation>
     </message>
@@ -1295,7 +1441,7 @@
         <translation>Choisir le premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.cpp" line="154"/>
+        <location filename="../../dialogs/tools/dialogheight.cpp" line="156"/>
         <source>Select second point of line</source>
         <translation>Choisir le deuxième point de la ligne</translation>
     </message>
@@ -1309,104 +1455,114 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialoghistory.ui" line="54"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="412"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="420"/>
         <source>Tool</source>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="210"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="300"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="372"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="392"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="399"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="204"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="294"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="366"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="400"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="407"/>
         <source>Can&apos;t create record.</source>
         <translation>Ne peut pat créer d&apos;enregistrement</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="221"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="215"/>
         <source>%1 - Base point</source>
         <translation>%1 - Point de départ</translation>
     </message>
     <message>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="219"/>
         <location filename="../../dialogs/app/dialoghistory.cpp" line="225"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="231"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Ligne du point %1 au point %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="237"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="231"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Point le long d&apos;une ligne %1_%2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="244"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="238"/>
         <source>%1 - Point of shoulder</source>
         <translation>%1 - Point d&apos;épaule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="248"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="242"/>
         <source>%3 - normal to line %1_%2</source>
         <translation>%3 - normal à la ligne %1_%2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="255"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="249"/>
         <source>%4 - bisector of angle %1_%2_%3</source>
         <translation>%4 - bissectrice de l&apos;angle %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="263"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="257"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
         <translation>%5 - intersection des lignes %1_%2 et %3_%4</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="274"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="268"/>
         <source>Curve %1_%2</source>
         <translation>Courbe %1_%2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="280"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="274"/>
         <source>Arc with center in point %1</source>
         <translation>Arc centré sur le point %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="291"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="285"/>
         <source>Curve point %1</source>
         <translation>Point de courbe %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="306"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="300"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation>%4 - point de contact de l&apos;arc avec le centre au point %1 et à la ligne %2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="314"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="308"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation>Point de la perpendiculaire du point %1 à la ligne %2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="321"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="315"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Triangle : axe %1_%2, points %3 et %4</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="329"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="323"/>
         <source>%1 - point of intersection %2 and %3</source>
         <translation>%1 - point d&apos;intersection %2 et %3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="338"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="332"/>
         <source>%1 - cut arc with center %2</source>
         <translation>%1 - couper l&apos;arc avec le centre %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="347"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="341"/>
         <source>%1 - cut curve %2_%3</source>
         <translation>%1 - couper la courbe %2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="361"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="355"/>
         <source>%1 - cut curve path %2</source>
         <translation>%1 - coup le chemin de la courbe %2</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="372"/>
+        <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="380"/>
+        <source>%1 - point of intersection curve and axis through point %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1449,7 +1605,7 @@
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="374"/>
         <location filename="../../dialogs/app/dialogincrements.ui" line="476"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="551"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="615"/>
         <source>Description</source>
         <translation>Description</translation>
     </message>
@@ -1539,52 +1695,82 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialogincrements.cpp" line="68"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="467"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="523"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="531"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="587"/>
         <source>File error.</source>
         <translation>Erreur de fichier.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="111"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="113"/>
         <source>male</source>
         <translation>homme</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="112"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="114"/>
         <source>female</source>
         <translation>femme</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="442"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="426"/>
+        <source>Could not save GivenName</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="444"/>
+        <source>Could not save FamilyName</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="461"/>
+        <source>Could not save Email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="478"/>
+        <source>Could not save Sex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="495"/>
+        <source>Could not save BirthDate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="506"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="446"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="510"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Mesure Individuelles (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="451"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="491"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="515"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="555"/>
         <source>Open file</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="475"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="507"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="539"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="571"/>
         <source>Wrong units.</source>
         <translation>Mauvaise unité.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="490"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="554"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Mesures standard (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="546"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="610"/>
         <source>Name_%1</source>
         <translation>Nom_%1</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="827"/>
+        <source>Can&apos;t save measurement</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1641,39 +1827,39 @@
         <translation>Essayez de nouveau ou changer de fichier</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="129"/>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="211"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="130"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="212"/>
         <source>File error.</source>
         <translation>Erreur de fichier.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="196"/>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="228"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="197"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="229"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Mesures individuelles (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="199"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="200"/>
         <source>Open file</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="227"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="228"/>
         <source>Where save measurements?</source>
         <translation>Où sauvegarder les mesures ? </translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="249"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="250"/>
         <source>Centimeters</source>
         <translation>Centimètres</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="250"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="251"/>
         <source>Millimiters</source>
         <translation type="unfinished">Millimètres</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="251"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="252"/>
         <source>Inches</source>
         <translation>Pouces</translation>
     </message>
@@ -1686,22 +1872,22 @@
         <translation>Ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="62"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="53"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="95"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="82"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="128"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="111"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="147"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="130"/>
         <source>Show line from first point to this point</source>
         <translation>Visualiser la ligne du premier points à ce point</translation>
     </message>
@@ -1751,14 +1937,139 @@
         <translation>Choisir le deuxième point de la première ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="102"/>
+        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="104"/>
         <source>Select first point of second line</source>
         <translation>Choisir le premier point de la deuxième ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="111"/>
+        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="114"/>
         <source>Select second point of second line</source>
         <translation>Choisir le deuxième point de la deuxième ligne</translation>
+    </message>
+</context>
+<context>
+    <name>DialogLineIntersectAxis</name>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="14"/>
+        <source>Line intersect axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="65"/>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="102"/>
+        <source>Calculate value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="134"/>
+        <source>Value of angle</source>
+        <translation type="unfinished">Valeur de l&apos;angle</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="182"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="222"/>
+        <source>Axis point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="229"/>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="249"/>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="269"/>
+        <source>First point of line</source>
+        <translation type="unfinished">Premier point de la ligne</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="242"/>
+        <source>First line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="262"/>
+        <source>Second line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="282"/>
+        <source>Point label</source>
+        <translation type="unfinished">Désignation du point</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="299"/>
+        <source>Type of line</source>
+        <translation type="unfinished">Type de ligne</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="306"/>
+        <source>Show line from first point to this point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="315"/>
+        <source>Input data</source>
+        <translation type="unfinished">Données</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="328"/>
+        <source>Size and height</source>
+        <translation type="unfinished">Taille et stature</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="344"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="357"/>
+        <source>Increments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="373"/>
+        <source>Length of lines</source>
+        <translation type="unfinished">Longueur des lignes</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="389"/>
+        <source>Length of arcs</source>
+        <translation type="unfinished">Longueur des arcs</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="405"/>
+        <source>Length of curves</source>
+        <translation type="unfinished">Longueur des courbes</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="421"/>
+        <source>Angle of lines</source>
+        <translation type="unfinished">Angle des lignes</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="434"/>
+        <source>Hide empty measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="444"/>
+        <source>Variables</source>
+        <translation type="unfinished">Variables</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.cpp" line="213"/>
+        <source>Select second point of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.cpp" line="223"/>
+        <source>Select axis point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1769,27 +2080,27 @@
         <translation>Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="48"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Choisisez un type de patron&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="89"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="76"/>
         <source>Graduation</source>
         <translation>Graduation</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="106"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="99"/>
         <source>Use for creation pattern standard measurement table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="147"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="125"/>
         <source>Individual</source>
         <translation>Individuel</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="164"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="148"/>
         <source>Use for creation pattern individual measurements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1822,92 +2133,96 @@
         <translation>Longueur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul entier dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="227"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="243"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="264"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="259"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="292"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="287"/>
         <source>Additional angle degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="482"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="480"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="489"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="487"/>
         <source>Show line from first point to this point</source>
         <translation>Montrer la ligne du premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="500"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="498"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="513"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="511"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="529"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="527"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="542"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="540"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="558"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="556"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="574"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="572"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="590"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="588"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="606"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="604"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="619"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="617"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="629"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="627"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.cpp" line="141"/>
+        <location filename="../../dialogs/tools/dialognormal.cpp" line="142"/>
         <source>Select second point of line</source>
         <translation>Choisir le second point d&apos;une ligne</translation>
     </message>
@@ -2158,88 +2473,92 @@
         <translation>Rayon</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul entier dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="229"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="245"/>
         <source>Center of arc</source>
         <translation>Centre de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="263"/>
-        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="173"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="264"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="176"/>
         <source>Select point of center of arc</source>
         <translation>Choisir le point central de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="280"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="277"/>
         <source>Top of the line</source>
         <translation>Sommet de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="313"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="306"/>
         <source>End of the line</source>
         <translation>Fin de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="340"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="331"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="353"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="344"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="369"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="360"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="382"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="373"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="398"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="389"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="414"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="405"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="430"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="421"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="446"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="437"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="459"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="450"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="469"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="460"/>
         <source>Variables - Click twice to insert into formula.</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="166"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="167"/>
         <source>Select second point of line</source>
         <translation>Choisir le second point d&apos;une ligne</translation>
     </message>
@@ -2257,22 +2576,22 @@
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="65"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="61"/>
         <source>vertical point</source>
         <translation>Point vertical</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="72"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="68"/>
         <source>First point of angle</source>
         <translation>Premier point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="89"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="81"/>
         <source>horizontal point</source>
         <translation>point horizontal</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="96"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="88"/>
         <source>Second point of angle</source>
         <translation>Second point de l&apos;angle</translation>
     </message>
@@ -2310,97 +2629,101 @@
         <translation>Longueur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voir le calcul entier dans une boite de dialogue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="229"/>
         <source>Point label</source>
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="245"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="277"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="274"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="310"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="303"/>
         <source>Third point</source>
         <translation type="unfinished">Troisième point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="343"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="332"/>
         <source>Type of line</source>
         <translation>Type de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="356"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="345"/>
         <source>Show line from first point to our point</source>
         <translation>Montrer la ligne du premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="367"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="354"/>
         <source>Input data</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="380"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="367"/>
         <source>Size and height</source>
         <translation>Taille et stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="396"/>
-        <source>Standard table</source>
-        <translation>Tableau des mesures</translation>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="383"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Mesures</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="409"/>
+        <source>Standard table</source>
+        <translation type="vanished">Tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="396"/>
         <source>Increments</source>
         <translation>Évolutions</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="425"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="412"/>
         <source>Length of lines</source>
         <translation>Longueur des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="441"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="428"/>
         <source>Length of arcs</source>
         <translation>Longueur des arcs</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="457"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="444"/>
         <source>Length of curves</source>
         <translation>Longueur des courbes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="473"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="460"/>
         <source>Angle of lines</source>
         <translation type="unfinished">Angle des lignes</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="486"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="473"/>
         <source>Hide empty measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="496"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="483"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variables - Double-cliquer pour ajouter à une formule</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="152"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="153"/>
         <source>Select first point of line</source>
         <translation>Sélectionnez le premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="159"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="162"/>
         <source>Select second point of line</source>
         <translation>Choisir le second point d&apos;une ligne</translation>
     </message>
@@ -2489,9 +2812,13 @@
 <context>
     <name>DialogSplinePath</name>
     <message>
-        <location filename="../../dialogs/tools/dialogsplinepath.ui" line="14"/>
         <source>Curve path</source>
-        <translation>Chemin de la courbe</translation>
+        <translation type="vanished">Chemin de la courbe</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogsplinepath.ui" line="14"/>
+        <source>Curved path</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogsplinepath.ui" line="33"/>
@@ -2560,51 +2887,51 @@
 <context>
     <name>DialogTool</name>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="387"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="404"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="428"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="448"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="471"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="443"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="460"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="484"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="504"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="527"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="429"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="485"/>
         <source>Empty field</source>
         <translation>Champ vide</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="449"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="505"/>
         <source>Value can&apos;t be 0</source>
         <translation>La valeur ne peut pas être 0</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="465"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="521"/>
         <source>Value</source>
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="976"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1044"/>
         <source>Height</source>
         <translation>Stature</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="981"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1049"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1007"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1075"/>
         <source>Line length</source>
         <translation>Longueur de ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1015"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1083"/>
         <source>Arc length</source>
         <translation>Longueur d&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1023"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1091"/>
         <source>Curve length</source>
         <translation>Longueur de courbe</translation>
     </message>
@@ -2622,30 +2949,30 @@
         <translation>Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="55"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="51"/>
         <source>First point of axis</source>
         <translation>Premier point de l&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="62"/>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="86"/>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="110"/>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="134"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="58"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="78"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="98"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="118"/>
         <source>First point of line</source>
         <translation>Premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="79"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="71"/>
         <source>Second point of axis</source>
         <translation>Deuxième point de l&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="103"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="91"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="127"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="111"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
@@ -2655,12 +2982,12 @@
         <translation>Choisir le deuxième point de l&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="101"/>
+        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="103"/>
         <source>Select first point</source>
         <translation>Choisir le premier point</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="109"/>
+        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="120"/>
         <source>Select second point</source>
         <translation>Choisir le deuxième point</translation>
     </message>
@@ -2730,152 +3057,152 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1207"/>
+        <location filename="../../core/vapplication.cpp" line="1218"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1208"/>
+        <location filename="../../core/vapplication.cpp" line="1219"/>
         <source>cos</source>
         <comment>cosine function</comment>
         <translation>cos</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1209"/>
+        <location filename="../../core/vapplication.cpp" line="1220"/>
         <source>tan</source>
         <comment>tangens function</comment>
         <translation>tan
 </translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1210"/>
+        <location filename="../../core/vapplication.cpp" line="1221"/>
         <source>asin</source>
         <comment>arcus sine function</comment>
         <translation>asin</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1211"/>
+        <location filename="../../core/vapplication.cpp" line="1222"/>
         <source>acos</source>
         <comment>arcus cosine function</comment>
         <translation>acos</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1212"/>
+        <location filename="../../core/vapplication.cpp" line="1223"/>
         <source>atan</source>
         <comment>arcus tangens function</comment>
         <translation>atan</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1213"/>
+        <location filename="../../core/vapplication.cpp" line="1224"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation>sinh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1214"/>
+        <location filename="../../core/vapplication.cpp" line="1225"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation>cosh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1215"/>
+        <location filename="../../core/vapplication.cpp" line="1226"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation>tanh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1216"/>
+        <location filename="../../core/vapplication.cpp" line="1227"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation>asinh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1217"/>
+        <location filename="../../core/vapplication.cpp" line="1228"/>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
         <translation>acosh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1218"/>
+        <location filename="../../core/vapplication.cpp" line="1229"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation>atanh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1219"/>
+        <location filename="../../core/vapplication.cpp" line="1230"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation>log2</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1220"/>
+        <location filename="../../core/vapplication.cpp" line="1231"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation>log10</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1221"/>
+        <location filename="../../core/vapplication.cpp" line="1232"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation>log</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1222"/>
+        <location filename="../../core/vapplication.cpp" line="1233"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation>ln</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1223"/>
+        <location filename="../../core/vapplication.cpp" line="1234"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation>exp</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1224"/>
+        <location filename="../../core/vapplication.cpp" line="1235"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation>sqrt</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1225"/>
+        <location filename="../../core/vapplication.cpp" line="1236"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation>signe</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1226"/>
+        <location filename="../../core/vapplication.cpp" line="1237"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation>rint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1227"/>
+        <location filename="../../core/vapplication.cpp" line="1238"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation>abs</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1228"/>
+        <location filename="../../core/vapplication.cpp" line="1239"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation>min</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1229"/>
+        <location filename="../../core/vapplication.cpp" line="1240"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation>max</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1230"/>
+        <location filename="../../core/vapplication.cpp" line="1241"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation>somme</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1231"/>
+        <location filename="../../core/vapplication.cpp" line="1242"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>moyenne</translation>
@@ -2952,418 +3279,455 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="322"/>
+        <location filename="../../mainwindow.ui" line="348"/>
         <source>Tools for creating lines.</source>
         <translation>Outil pour créer des lignes.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="325"/>
+        <location filename="../../mainwindow.ui" line="351"/>
         <source>Line</source>
         <translation>Ligne</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="334"/>
+        <location filename="../../mainwindow.ui" line="360"/>
         <source>Line between points</source>
         <translation>Ligne entre plusieurs points</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="360"/>
+        <location filename="../../mainwindow.ui" line="386"/>
         <source>Point at line intersection</source>
         <translation>Point à l&apos;intersection de ligne
 </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="398"/>
+        <location filename="../../mainwindow.ui" line="424"/>
         <source>Tools for creating curves.</source>
         <translation>Outil pour créer des courbes.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="401"/>
+        <location filename="../../mainwindow.ui" line="427"/>
         <source>Curve</source>
         <translation>Courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="410"/>
+        <location filename="../../mainwindow.ui" line="436"/>
         <source>Curve tool.</source>
         <translation>Outils courbe.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="436"/>
+        <location filename="../../mainwindow.ui" line="462"/>
         <source>Tool for path curve.</source>
         <translation>Outil pour chemin de courbe.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="488"/>
+        <location filename="../../mainwindow.ui" line="514"/>
         <source>Tool segment a pathed curve.</source>
         <translation>Outil segment d&apos;une courbe le long d&apos;un chemin.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="462"/>
+        <location filename="../../mainwindow.ui" line="488"/>
         <source>Tool for segmenting a curve.</source>
         <translation>Outil pour segmenter une courbe.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="526"/>
+        <location filename="../../mainwindow.ui" line="310"/>
+        <source>Point of intersection line and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="313"/>
+        <location filename="../../mainwindow.ui" line="540"/>
+        <location filename="../../mainwindow.ui" line="639"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="575"/>
         <source>Tools for creating arcs.</source>
         <translation>Outils pour créer des arcs.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="529"/>
+        <location filename="../../mainwindow.ui" line="578"/>
         <source>Arc</source>
         <translation>Arc</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="538"/>
+        <location filename="../../mainwindow.ui" line="587"/>
         <source>Arc tool.</source>
         <translation>Outil arc.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="564"/>
+        <location filename="../../mainwindow.ui" line="613"/>
         <source>Cut arc tool.</source>
         <translation>Outil Coupe Arc</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="602"/>
+        <location filename="../../mainwindow.ui" line="674"/>
         <source>Tools for creating details.</source>
         <translation>Outils pour créer des détails.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="605"/>
+        <location filename="../../mainwindow.ui" line="677"/>
         <source>Detail</source>
         <translation>Détail</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="611"/>
+        <location filename="../../mainwindow.ui" line="683"/>
         <source>Tool new detail.</source>
         <translation>Outil nouveau détail.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="637"/>
+        <location filename="../../mainwindow.ui" line="709"/>
         <source>Tool for union two details.</source>
         <translation>outil d&apos;union de deux détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="693"/>
+        <location filename="../../mainwindow.ui" line="765"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="708"/>
+        <location filename="../../mainwindow.ui" line="780"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="715"/>
+        <location filename="../../mainwindow.ui" line="788"/>
         <source>&amp;Pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="728"/>
+        <location filename="../../mainwindow.ui" line="803"/>
         <source>Measurements</source>
         <translation>Mesures</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="739"/>
+        <location filename="../../mainwindow.ui" line="814"/>
         <source>Toolbar files</source>
         <translation>Barre d&apos;outil fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="757"/>
+        <location filename="../../mainwindow.ui" line="832"/>
         <source>ToolBar modes</source>
         <translation>Barre d&apos;outils modes</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="771"/>
+        <location filename="../../mainwindow.ui" line="846"/>
         <source>Toolbar pattern</source>
         <translation>Barre d&apos;outil patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="783"/>
+        <location filename="../../mainwindow.ui" line="858"/>
         <source>Toolbar options</source>
         <translation>Barre d&apos;outils options</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="794"/>
+        <location filename="../../mainwindow.ui" line="872"/>
         <source>Toolbar tools</source>
         <translation>Barre d&apos;outils Outils</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="815"/>
+        <location filename="../../mainwindow.ui" line="894"/>
         <source>Tool options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="889"/>
+        <location filename="../../mainwindow.ui" line="968"/>
         <source>Save &amp;As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1027"/>
+        <location filename="../../mainwindow.ui" line="1106"/>
         <source>Export pattern (layout)</source>
         <translation>Exporter le patron (agencement)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1038"/>
+        <location filename="../../mainwindow.ui" line="1117"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1048"/>
+        <location filename="../../mainwindow.ui" line="1127"/>
         <source>&amp;About Valentina</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1058"/>
+        <location filename="../../mainwindow.ui" line="1137"/>
         <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1061"/>
+        <location filename="../../mainwindow.ui" line="1140"/>
         <source>Exit the application</source>
         <translation>Quitter l&apos;&apos;application</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1069"/>
+        <location filename="../../mainwindow.ui" line="1148"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1087"/>
+        <location filename="../../mainwindow.ui" line="1166"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1124"/>
+        <location filename="../../mainwindow.ui" line="1203"/>
         <source>Original zoom </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1127"/>
+        <location filename="../../mainwindow.ui" line="1206"/>
         <source>Original Zoom </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1140"/>
+        <location filename="../../mainwindow.ui" line="1219"/>
         <source>Zoom fit best</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1090"/>
+        <location filename="../../mainwindow.ui" line="1222"/>
+        <source>Ctrl+=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1238"/>
+        <source>Stop</source>
+        <translation type="unfinished">Arrêter</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1241"/>
+        <source>Stop using tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1246"/>
+        <source>Repot Bug...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1249"/>
+        <source>Report bug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1169"/>
         <source>zoom in</source>
         <translation>zoom avant</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1103"/>
-        <location filename="../../mainwindow.ui" line="1106"/>
+        <location filename="../../mainwindow.ui" line="1182"/>
+        <location filename="../../mainwindow.ui" line="1185"/>
         <source>Zoom out</source>
         <translation>Zoom arrière</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1111"/>
+        <location filename="../../mainwindow.ui" line="1190"/>
         <source>Edit pattern XML code</source>
         <translation>Editer le code XML du patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1074"/>
+        <location filename="../../mainwindow.ui" line="1153"/>
         <source>Pattern properties</source>
         <translation>Propriétés du patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="829"/>
+        <location filename="../../mainwindow.ui" line="908"/>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="832"/>
+        <location filename="../../mainwindow.ui" line="911"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="835"/>
+        <location filename="../../mainwindow.ui" line="914"/>
         <source>Create a new pattern</source>
         <translation>Créer un nouveau patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="838"/>
+        <location filename="../../mainwindow.ui" line="917"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="848"/>
+        <location filename="../../mainwindow.ui" line="927"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="851"/>
+        <location filename="../../mainwindow.ui" line="930"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="854"/>
+        <location filename="../../mainwindow.ui" line="933"/>
         <source>Open file with pattern</source>
         <translation>Ouvrir un fichier de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="867"/>
+        <location filename="../../mainwindow.ui" line="946"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="870"/>
+        <location filename="../../mainwindow.ui" line="949"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="873"/>
+        <location filename="../../mainwindow.ui" line="952"/>
         <source>Save pattern</source>
         <translation>Enregistrer le patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="876"/>
+        <location filename="../../mainwindow.ui" line="955"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1245"/>
+        <location filename="../../mainwindow.cpp" line="1304"/>
         <source>Save as</source>
         <translation>Enregistrer sous</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="892"/>
+        <location filename="../../mainwindow.ui" line="971"/>
         <source>Save not yet saved pattern</source>
         <translation>Enregistrer le patron en cours</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="895"/>
+        <location filename="../../mainwindow.ui" line="974"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="913"/>
+        <location filename="../../mainwindow.ui" line="992"/>
         <source>Draw</source>
         <translation>Dessin</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="916"/>
+        <location filename="../../mainwindow.ui" line="995"/>
         <source>Draw mode</source>
         <translation>Mode dessin</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="919"/>
+        <location filename="../../mainwindow.ui" line="998"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="934"/>
+        <location filename="../../mainwindow.ui" line="1013"/>
         <source>Details</source>
         <translation>Détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="937"/>
+        <location filename="../../mainwindow.ui" line="1016"/>
         <source>Details mode</source>
         <translation>Mode détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="940"/>
+        <location filename="../../mainwindow.ui" line="1019"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="955"/>
-        <location filename="../../mainwindow.ui" line="958"/>
+        <location filename="../../mainwindow.ui" line="1034"/>
+        <location filename="../../mainwindow.ui" line="1037"/>
         <source>Pointer tools</source>
         <translation>Outil pointeur</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="967"/>
+        <location filename="../../mainwindow.ui" line="1046"/>
         <source>New pattern piece</source>
         <translation>Nouveau élément de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="970"/>
+        <location filename="../../mainwindow.ui" line="1049"/>
         <source>Add new pattern piece</source>
         <translation>Ajouter un nouveau élément de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="973"/>
+        <location filename="../../mainwindow.ui" line="1052"/>
         <source>Ctrl+Shift+N</source>
         <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="982"/>
-        <location filename="../../mainwindow.ui" line="985"/>
+        <location filename="../../mainwindow.ui" line="1061"/>
+        <location filename="../../mainwindow.ui" line="1064"/>
         <source>Change the label of pattern piece</source>
         <translation>Changer la désignation de l&apos;élément de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="997"/>
+        <location filename="../../mainwindow.ui" line="1076"/>
         <source>Table of variables</source>
         <translation>Tableau des variables</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1000"/>
+        <location filename="../../mainwindow.ui" line="1079"/>
         <source>Tables of variables</source>
         <translation>Tableaux des variables</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1003"/>
+        <location filename="../../mainwindow.ui" line="1082"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1015"/>
+        <location filename="../../mainwindow.ui" line="1094"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1018"/>
+        <location filename="../../mainwindow.ui" line="1097"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1030"/>
+        <location filename="../../mainwindow.ui" line="1109"/>
         <source>Create layout</source>
         <translation>Créer une mise en page</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1033"/>
+        <location filename="../../mainwindow.ui" line="1112"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="678"/>
+        <location filename="../../mainwindow.cpp" line="708"/>
         <source>About Qt</source>
         <translation>A propos de Qt</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1064"/>
+        <location filename="../../mainwindow.ui" line="1143"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="129"/>
+        <location filename="../../mainwindow.cpp" line="139"/>
         <source>Pattern piece %1</source>
         <translation>Élément de patron %1</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2066"/>
+        <location filename="../../mainwindow.cpp" line="2169"/>
         <source>Pattern piece:</source>
         <translation>Élément de patron:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2068"/>
+        <location filename="../../mainwindow.cpp" line="2171"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Saisir une nouvelle désignation pour cet élément de patron.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="402"/>
-        <location filename="../../mainwindow.cpp" line="427"/>
-        <location filename="../../mainwindow.cpp" line="439"/>
+        <location filename="../../mainwindow.cpp" line="412"/>
+        <location filename="../../mainwindow.cpp" line="437"/>
+        <location filename="../../mainwindow.cpp" line="449"/>
         <source>Select point</source>
         <translation>Choisir un point</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="414"/>
+        <location filename="../../mainwindow.cpp" line="424"/>
         <source>Select first point</source>
         <translation>Choisir le premier point</translation>
     </message>
@@ -3372,219 +3736,240 @@
         <translation type="vanished">Sélectionnez le point d&apos;épaule </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="452"/>
-        <location filename="../../mainwindow.cpp" line="555"/>
+        <location filename="../../mainwindow.cpp" line="462"/>
+        <location filename="../../mainwindow.cpp" line="565"/>
+        <location filename="../../mainwindow.cpp" line="676"/>
         <source>Select first point of line</source>
         <translation>Choisir le premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="465"/>
+        <location filename="../../mainwindow.cpp" line="475"/>
         <source>Select first point of angle</source>
         <translation>Choisir le premier point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="478"/>
+        <location filename="../../mainwindow.cpp" line="488"/>
         <source>Select first point of first line</source>
         <translation>Choisir le premier point de la première ligne</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="491"/>
+        <location filename="../../mainwindow.cpp" line="501"/>
         <source>Select first point curve</source>
         <translation>Choisir le premier point de la courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="504"/>
+        <location filename="../../mainwindow.cpp" line="514"/>
         <source>Select simple curve</source>
         <translation>Choisir une courbe simple</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="517"/>
+        <location filename="../../mainwindow.cpp" line="527"/>
         <source>Select point of center of arc</source>
         <translation>Choisir le point central de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="529"/>
+        <location filename="../../mainwindow.cpp" line="539"/>
         <source>Select point of curve path</source>
         <translation>Choisir un point sur la courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="542"/>
+        <location filename="../../mainwindow.cpp" line="552"/>
         <source>Select curve path</source>
         <translation>Choisir le chemin de courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="568"/>
+        <location filename="../../mainwindow.cpp" line="578"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Choisir points, arcs et courbes dans le sens horaire.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="593"/>
+        <location filename="../../mainwindow.cpp" line="603"/>
         <source>Select base point</source>
         <translation>Choisir le point de départ</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="606"/>
+        <location filename="../../mainwindow.cpp" line="616"/>
         <source>Select first point of axis</source>
         <translation>Choisir le premier point de l&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="620"/>
+        <location filename="../../mainwindow.cpp" line="630"/>
         <source>Select point vertically</source>
         <translation>Choisir le point verticallement</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="633"/>
+        <location filename="../../mainwindow.cpp" line="643"/>
         <source>Select detail</source>
         <translation>Choisir les détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="657"/>
+        <location filename="../../mainwindow.cpp" line="667"/>
         <source>Select arc</source>
         <translation>Choisir un arc</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="795"/>
+        <location filename="../../mainwindow.cpp" line="686"/>
+        <source>Select curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="837"/>
         <source>Size: </source>
         <translation>Taille :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1239"/>
+        <location filename="../../mainwindow.cpp" line="1298"/>
         <source>pattern</source>
         <translation>parton</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1397"/>
+        <location filename="../../mainwindow.cpp" line="1468"/>
         <source>Critical error!</source>
         <translation>Erreur critique!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1397"/>
+        <location filename="../../mainwindow.cpp" line="1468"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Erreur d&apos;interprétation de fichier.(std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1431"/>
+        <location filename="../../mainwindow.cpp" line="1518"/>
         <source>Bad id.</source>
         <translation>Mauvais id.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1958"/>
+        <location filename="../../mainwindow.cpp" line="1882"/>
+        <source>Could not save file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="2050"/>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1964"/>
+        <location filename="../../mainwindow.cpp" line="2056"/>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2137"/>
+        <location filename="../../mainwindow.cpp" line="2247"/>
         <source>Wrong units.</source>
         <translation>Mauvaises unités de mesure.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2138"/>
+        <location filename="../../mainwindow.cpp" line="2248"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation>L&apos;application ne supporte pas la table de mesure standard en pouces.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2153"/>
+        <location filename="../../mainwindow.cpp" line="2263"/>
         <source>File error.</source>
         <translation>Erreur de fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2181"/>
+        <location filename="../../mainwindow.cpp" line="2313"/>
+        <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="2315"/>
+        <source>Reopen files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="2345"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2182"/>
+        <location filename="../../mainwindow.cpp" line="2346"/>
         <source>could not be found. Do you want to update the file location</source>
         <translation>Ne peut être trouvé. voulez vous mettre à jour le chemin du fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2195"/>
+        <location filename="../../mainwindow.cpp" line="2359"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Mesures standard (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2199"/>
+        <location filename="../../mainwindow.cpp" line="2363"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Mesures individuelles (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2167"/>
+        <location filename="../../mainwindow.cpp" line="2283"/>
         <source>File loaded</source>
         <translation>Fichier chargé</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="790"/>
+        <location filename="../../mainwindow.cpp" line="832"/>
         <source>Height: </source>
         <translation>Stature :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="859"/>
+        <location filename="../../mainwindow.cpp" line="901"/>
         <source>Pattern Piece: </source>
         <translation>Élément de patron :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1234"/>
-        <location filename="../../mainwindow.cpp" line="1289"/>
+        <location filename="../../mainwindow.cpp" line="1293"/>
+        <location filename="../../mainwindow.cpp" line="1348"/>
         <source>Pattern files (*.val)</source>
         <translation>Fichier de patron (*.val)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1243"/>
+        <location filename="../../mainwindow.cpp" line="1302"/>
         <source>/pattern.val</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1795"/>
+        <location filename="../../mainwindow.cpp" line="1875"/>
         <source>File saved</source>
         <translation>Fichier suvegardé</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1832"/>
+        <location filename="../../mainwindow.cpp" line="1921"/>
         <source>untitled.val</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1908"/>
+        <location filename="../../mainwindow.cpp" line="2000"/>
         <source>Unsaved change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1908"/>
+        <location filename="../../mainwindow.cpp" line="2000"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
         <translation>Le patron a été changé.
 Voulez vous sauvegarder les changements ? </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1302"/>
-        <location filename="../../mainwindow.cpp" line="2201"/>
+        <location filename="../../mainwindow.cpp" line="1361"/>
+        <location filename="../../mainwindow.cpp" line="2365"/>
         <source>Open file</source>
         <translation>Ouvrir fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1364"/>
-        <location filename="../../mainwindow.cpp" line="1388"/>
+        <location filename="../../mainwindow.cpp" line="1435"/>
+        <location filename="../../mainwindow.cpp" line="1459"/>
         <source>Error parsing file.</source>
         <translation>Erreur d&apos;interprétation de fichier.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1370"/>
+        <location filename="../../mainwindow.cpp" line="1441"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Erreur : valeur non convertissable.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1376"/>
-        <location filename="../../mainwindow.cpp" line="1437"/>
+        <location filename="../../mainwindow.cpp" line="1447"/>
+        <location filename="../../mainwindow.cpp" line="1524"/>
         <source>Error empty parameter.</source>
         <translation>Erreur : paramètre vide.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1382"/>
+        <location filename="../../mainwindow.cpp" line="1453"/>
         <source>Error wrong id.</source>
         <translation>Erreur : mauvais id.</translation>
     </message>
@@ -3592,799 +3977,799 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>Measurements</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="293"/>
+        <location filename="../../core/vapplication.cpp" line="304"/>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="300"/>
+        <location filename="../../core/vapplication.cpp" line="311"/>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="307"/>
+        <location filename="../../core/vapplication.cpp" line="318"/>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="313"/>
+        <location filename="../../core/vapplication.cpp" line="324"/>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="321"/>
+        <location filename="../../core/vapplication.cpp" line="332"/>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="328"/>
+        <location filename="../../core/vapplication.cpp" line="339"/>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="335"/>
+        <location filename="../../core/vapplication.cpp" line="346"/>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="341"/>
+        <location filename="../../core/vapplication.cpp" line="352"/>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="347"/>
+        <location filename="../../core/vapplication.cpp" line="358"/>
         <source>trunk_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="356"/>
+        <location filename="../../core/vapplication.cpp" line="367"/>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="363"/>
+        <location filename="../../core/vapplication.cpp" line="374"/>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="371"/>
+        <location filename="../../core/vapplication.cpp" line="382"/>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="378"/>
+        <location filename="../../core/vapplication.cpp" line="389"/>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="385"/>
+        <location filename="../../core/vapplication.cpp" line="396"/>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="394"/>
+        <location filename="../../core/vapplication.cpp" line="405"/>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="401"/>
+        <location filename="../../core/vapplication.cpp" line="412"/>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="408"/>
+        <location filename="../../core/vapplication.cpp" line="419"/>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="415"/>
+        <location filename="../../core/vapplication.cpp" line="426"/>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="422"/>
+        <location filename="../../core/vapplication.cpp" line="433"/>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Largeur d&apos;épaule de face</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="429"/>
+        <location filename="../../core/vapplication.cpp" line="440"/>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Largeur d&apos;épaule de dos</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="436"/>
+        <location filename="../../core/vapplication.cpp" line="447"/>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="443"/>
+        <location filename="../../core/vapplication.cpp" line="454"/>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="450"/>
+        <location filename="../../core/vapplication.cpp" line="461"/>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="457"/>
+        <location filename="../../core/vapplication.cpp" line="468"/>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="464"/>
+        <location filename="../../core/vapplication.cpp" line="475"/>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="471"/>
+        <location filename="../../core/vapplication.cpp" line="482"/>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="478"/>
+        <location filename="../../core/vapplication.cpp" line="489"/>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="485"/>
+        <location filename="../../core/vapplication.cpp" line="496"/>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="492"/>
+        <location filename="../../core/vapplication.cpp" line="503"/>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="499"/>
+        <location filename="../../core/vapplication.cpp" line="510"/>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="506"/>
+        <location filename="../../core/vapplication.cpp" line="517"/>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="513"/>
+        <location filename="../../core/vapplication.cpp" line="524"/>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="520"/>
+        <location filename="../../core/vapplication.cpp" line="531"/>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="527"/>
+        <location filename="../../core/vapplication.cpp" line="538"/>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="534"/>
+        <location filename="../../core/vapplication.cpp" line="545"/>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="541"/>
+        <location filename="../../core/vapplication.cpp" line="552"/>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="547"/>
+        <location filename="../../core/vapplication.cpp" line="558"/>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="554"/>
+        <location filename="../../core/vapplication.cpp" line="565"/>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="560"/>
+        <location filename="../../core/vapplication.cpp" line="571"/>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="566"/>
+        <location filename="../../core/vapplication.cpp" line="577"/>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="573"/>
+        <location filename="../../core/vapplication.cpp" line="584"/>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="580"/>
+        <location filename="../../core/vapplication.cpp" line="591"/>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="587"/>
+        <location filename="../../core/vapplication.cpp" line="598"/>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="593"/>
+        <location filename="../../core/vapplication.cpp" line="604"/>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="600"/>
+        <location filename="../../core/vapplication.cpp" line="611"/>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="607"/>
+        <location filename="../../core/vapplication.cpp" line="618"/>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="614"/>
+        <location filename="../../core/vapplication.cpp" line="625"/>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="621"/>
+        <location filename="../../core/vapplication.cpp" line="632"/>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="628"/>
+        <location filename="../../core/vapplication.cpp" line="639"/>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="635"/>
+        <location filename="../../core/vapplication.cpp" line="646"/>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="642"/>
+        <location filename="../../core/vapplication.cpp" line="653"/>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="649"/>
+        <location filename="../../core/vapplication.cpp" line="660"/>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="656"/>
+        <location filename="../../core/vapplication.cpp" line="667"/>
         <source>strap_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="664"/>
+        <location filename="../../core/vapplication.cpp" line="675"/>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="670"/>
+        <location filename="../../core/vapplication.cpp" line="681"/>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="677"/>
+        <location filename="../../core/vapplication.cpp" line="688"/>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="683"/>
+        <location filename="../../core/vapplication.cpp" line="694"/>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="689"/>
+        <location filename="../../core/vapplication.cpp" line="700"/>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="696"/>
+        <location filename="../../core/vapplication.cpp" line="707"/>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="703"/>
+        <location filename="../../core/vapplication.cpp" line="714"/>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="710"/>
+        <location filename="../../core/vapplication.cpp" line="721"/>
         <source>cervicale_to_wrist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="717"/>
+        <location filename="../../core/vapplication.cpp" line="728"/>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="724"/>
+        <location filename="../../core/vapplication.cpp" line="735"/>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="732"/>
+        <location filename="../../core/vapplication.cpp" line="743"/>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="738"/>
+        <location filename="../../core/vapplication.cpp" line="749"/>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="745"/>
+        <location filename="../../core/vapplication.cpp" line="756"/>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="752"/>
+        <location filename="../../core/vapplication.cpp" line="763"/>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="758"/>
+        <location filename="../../core/vapplication.cpp" line="769"/>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="764"/>
+        <location filename="../../core/vapplication.cpp" line="775"/>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="770"/>
+        <location filename="../../core/vapplication.cpp" line="781"/>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="776"/>
+        <location filename="../../core/vapplication.cpp" line="787"/>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Tour de cheville</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="782"/>
+        <location filename="../../core/vapplication.cpp" line="793"/>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="788"/>
+        <location filename="../../core/vapplication.cpp" line="799"/>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Taille de cheville</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="795"/>
+        <location filename="../../core/vapplication.cpp" line="806"/>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="802"/>
+        <location filename="../../core/vapplication.cpp" line="813"/>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="810"/>
+        <location filename="../../core/vapplication.cpp" line="821"/>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="816"/>
+        <location filename="../../core/vapplication.cpp" line="827"/>
         <source>cervicale_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="822"/>
+        <location filename="../../core/vapplication.cpp" line="833"/>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="828"/>
+        <location filename="../../core/vapplication.cpp" line="839"/>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="834"/>
+        <location filename="../../core/vapplication.cpp" line="845"/>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="840"/>
+        <location filename="../../core/vapplication.cpp" line="851"/>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="846"/>
+        <location filename="../../core/vapplication.cpp" line="857"/>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="852"/>
+        <location filename="../../core/vapplication.cpp" line="863"/>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="858"/>
+        <location filename="../../core/vapplication.cpp" line="869"/>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="866"/>
+        <location filename="../../core/vapplication.cpp" line="877"/>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="871"/>
+        <location filename="../../core/vapplication.cpp" line="882"/>
         <source>height_front_neck_base_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="878"/>
+        <location filename="../../core/vapplication.cpp" line="889"/>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="885"/>
+        <location filename="../../core/vapplication.cpp" line="896"/>
         <source>height_shoulder_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="892"/>
+        <location filename="../../core/vapplication.cpp" line="903"/>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="898"/>
+        <location filename="../../core/vapplication.cpp" line="909"/>
         <source>height_back_angle_axilla</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="904"/>
+        <location filename="../../core/vapplication.cpp" line="915"/>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="910"/>
+        <location filename="../../core/vapplication.cpp" line="921"/>
         <source>height_under_buttock_folds</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="917"/>
+        <location filename="../../core/vapplication.cpp" line="928"/>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="924"/>
+        <location filename="../../core/vapplication.cpp" line="935"/>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="930"/>
+        <location filename="../../core/vapplication.cpp" line="941"/>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="937"/>
+        <location filename="../../core/vapplication.cpp" line="948"/>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="944"/>
+        <location filename="../../core/vapplication.cpp" line="955"/>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="950"/>
+        <location filename="../../core/vapplication.cpp" line="961"/>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="957"/>
+        <location filename="../../core/vapplication.cpp" line="968"/>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="964"/>
+        <location filename="../../core/vapplication.cpp" line="975"/>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="971"/>
+        <location filename="../../core/vapplication.cpp" line="982"/>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="979"/>
+        <location filename="../../core/vapplication.cpp" line="990"/>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="986"/>
+        <location filename="../../core/vapplication.cpp" line="997"/>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="993"/>
+        <location filename="../../core/vapplication.cpp" line="1004"/>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1002"/>
+        <location filename="../../core/vapplication.cpp" line="1013"/>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1009"/>
+        <location filename="../../core/vapplication.cpp" line="1020"/>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1016"/>
+        <location filename="../../core/vapplication.cpp" line="1027"/>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1022"/>
+        <location filename="../../core/vapplication.cpp" line="1033"/>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1029"/>
+        <location filename="../../core/vapplication.cpp" line="1040"/>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1035"/>
+        <location filename="../../core/vapplication.cpp" line="1046"/>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1043"/>
+        <location filename="../../core/vapplication.cpp" line="1054"/>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1049"/>
+        <location filename="../../core/vapplication.cpp" line="1060"/>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1055"/>
+        <location filename="../../core/vapplication.cpp" line="1066"/>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1062"/>
+        <location filename="../../core/vapplication.cpp" line="1073"/>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1068"/>
+        <location filename="../../core/vapplication.cpp" line="1079"/>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1074"/>
+        <location filename="../../core/vapplication.cpp" line="1085"/>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1080"/>
+        <location filename="../../core/vapplication.cpp" line="1091"/>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1086"/>
+        <location filename="../../core/vapplication.cpp" line="1097"/>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1094"/>
+        <location filename="../../core/vapplication.cpp" line="1105"/>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1102"/>
+        <location filename="../../core/vapplication.cpp" line="1113"/>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1108"/>
+        <location filename="../../core/vapplication.cpp" line="1119"/>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1114"/>
+        <location filename="../../core/vapplication.cpp" line="1125"/>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1121"/>
+        <location filename="../../core/vapplication.cpp" line="1132"/>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1128"/>
+        <location filename="../../core/vapplication.cpp" line="1139"/>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1134"/>
+        <location filename="../../core/vapplication.cpp" line="1145"/>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1141"/>
+        <location filename="../../core/vapplication.cpp" line="1152"/>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1148"/>
+        <location filename="../../core/vapplication.cpp" line="1159"/>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1154"/>
+        <location filename="../../core/vapplication.cpp" line="1165"/>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1160"/>
+        <location filename="../../core/vapplication.cpp" line="1171"/>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1166"/>
+        <location filename="../../core/vapplication.cpp" line="1177"/>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1173"/>
+        <location filename="../../core/vapplication.cpp" line="1184"/>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1180"/>
+        <location filename="../../core/vapplication.cpp" line="1191"/>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1186"/>
+        <location filename="../../core/vapplication.cpp" line="1197"/>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation type="unfinished"></translation>
@@ -4393,799 +4778,799 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>MeasurementsDescriptions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="296"/>
+        <location filename="../../core/vapplication.cpp" line="307"/>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="303"/>
+        <location filename="../../core/vapplication.cpp" line="314"/>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="310"/>
+        <location filename="../../core/vapplication.cpp" line="321"/>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="316"/>
+        <location filename="../../core/vapplication.cpp" line="327"/>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="324"/>
+        <location filename="../../core/vapplication.cpp" line="335"/>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="331"/>
+        <location filename="../../core/vapplication.cpp" line="342"/>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="338"/>
+        <location filename="../../core/vapplication.cpp" line="349"/>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="344"/>
+        <location filename="../../core/vapplication.cpp" line="355"/>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="350"/>
+        <location filename="../../core/vapplication.cpp" line="361"/>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="359"/>
+        <location filename="../../core/vapplication.cpp" line="370"/>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="366"/>
+        <location filename="../../core/vapplication.cpp" line="377"/>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="374"/>
+        <location filename="../../core/vapplication.cpp" line="385"/>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="381"/>
+        <location filename="../../core/vapplication.cpp" line="392"/>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="388"/>
+        <location filename="../../core/vapplication.cpp" line="399"/>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="397"/>
+        <location filename="../../core/vapplication.cpp" line="408"/>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="404"/>
+        <location filename="../../core/vapplication.cpp" line="415"/>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="411"/>
+        <location filename="../../core/vapplication.cpp" line="422"/>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="418"/>
+        <location filename="../../core/vapplication.cpp" line="429"/>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="425"/>
+        <location filename="../../core/vapplication.cpp" line="436"/>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="432"/>
+        <location filename="../../core/vapplication.cpp" line="443"/>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="439"/>
+        <location filename="../../core/vapplication.cpp" line="450"/>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="446"/>
+        <location filename="../../core/vapplication.cpp" line="457"/>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="453"/>
+        <location filename="../../core/vapplication.cpp" line="464"/>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="460"/>
+        <location filename="../../core/vapplication.cpp" line="471"/>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="467"/>
+        <location filename="../../core/vapplication.cpp" line="478"/>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="474"/>
+        <location filename="../../core/vapplication.cpp" line="485"/>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="481"/>
+        <location filename="../../core/vapplication.cpp" line="492"/>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="488"/>
+        <location filename="../../core/vapplication.cpp" line="499"/>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="495"/>
+        <location filename="../../core/vapplication.cpp" line="506"/>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="502"/>
+        <location filename="../../core/vapplication.cpp" line="513"/>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="509"/>
+        <location filename="../../core/vapplication.cpp" line="520"/>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="516"/>
+        <location filename="../../core/vapplication.cpp" line="527"/>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="523"/>
+        <location filename="../../core/vapplication.cpp" line="534"/>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="530"/>
+        <location filename="../../core/vapplication.cpp" line="541"/>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="537"/>
+        <location filename="../../core/vapplication.cpp" line="548"/>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="544"/>
+        <location filename="../../core/vapplication.cpp" line="555"/>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="550"/>
+        <location filename="../../core/vapplication.cpp" line="561"/>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="557"/>
+        <location filename="../../core/vapplication.cpp" line="568"/>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="563"/>
+        <location filename="../../core/vapplication.cpp" line="574"/>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="569"/>
+        <location filename="../../core/vapplication.cpp" line="580"/>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="576"/>
+        <location filename="../../core/vapplication.cpp" line="587"/>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="583"/>
+        <location filename="../../core/vapplication.cpp" line="594"/>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="590"/>
+        <location filename="../../core/vapplication.cpp" line="601"/>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="596"/>
+        <location filename="../../core/vapplication.cpp" line="607"/>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="603"/>
+        <location filename="../../core/vapplication.cpp" line="614"/>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="610"/>
+        <location filename="../../core/vapplication.cpp" line="621"/>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="617"/>
+        <location filename="../../core/vapplication.cpp" line="628"/>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="624"/>
+        <location filename="../../core/vapplication.cpp" line="635"/>
         <source>Front Neck Center straight down to UpperChest line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="631"/>
+        <location filename="../../core/vapplication.cpp" line="642"/>
         <source>Front Neck Center straight down to Bust line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="638"/>
+        <location filename="../../core/vapplication.cpp" line="649"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="645"/>
+        <location filename="../../core/vapplication.cpp" line="656"/>
         <source>Front waist to lower breast</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="652"/>
+        <location filename="../../core/vapplication.cpp" line="663"/>
         <source>Back waist to upper chest</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="659"/>
+        <location filename="../../core/vapplication.cpp" line="670"/>
         <source>Strap length</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="667"/>
+        <location filename="../../core/vapplication.cpp" line="678"/>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="673"/>
+        <location filename="../../core/vapplication.cpp" line="684"/>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="680"/>
+        <location filename="../../core/vapplication.cpp" line="691"/>
         <source>Around UpperArm</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="686"/>
+        <location filename="../../core/vapplication.cpp" line="697"/>
         <source>Around Wrist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="692"/>
+        <location filename="../../core/vapplication.cpp" line="703"/>
         <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="699"/>
+        <location filename="../../core/vapplication.cpp" line="710"/>
         <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="706"/>
+        <location filename="../../core/vapplication.cpp" line="717"/>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="713"/>
+        <location filename="../../core/vapplication.cpp" line="724"/>
         <source>Nape to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="720"/>
+        <location filename="../../core/vapplication.cpp" line="731"/>
         <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="727"/>
+        <location filename="../../core/vapplication.cpp" line="738"/>
         <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="735"/>
+        <location filename="../../core/vapplication.cpp" line="746"/>
         <source>Hand side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="741"/>
+        <location filename="../../core/vapplication.cpp" line="752"/>
         <source>Hand Middle Finger tip to wrist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="748"/>
+        <location filename="../../core/vapplication.cpp" line="759"/>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="755"/>
+        <location filename="../../core/vapplication.cpp" line="766"/>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="761"/>
+        <location filename="../../core/vapplication.cpp" line="772"/>
         <source>Around MidThigh</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="767"/>
+        <location filename="../../core/vapplication.cpp" line="778"/>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="773"/>
+        <location filename="../../core/vapplication.cpp" line="784"/>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="779"/>
+        <location filename="../../core/vapplication.cpp" line="790"/>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="785"/>
+        <location filename="../../core/vapplication.cpp" line="796"/>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="791"/>
+        <location filename="../../core/vapplication.cpp" line="802"/>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="798"/>
+        <location filename="../../core/vapplication.cpp" line="809"/>
         <source>Widest part of Foot side to side</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="805"/>
+        <location filename="../../core/vapplication.cpp" line="816"/>
         <source>Tip of Longest Toe straight to back of heel</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="813"/>
+        <location filename="../../core/vapplication.cpp" line="824"/>
         <source>Top of head to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="819"/>
+        <location filename="../../core/vapplication.cpp" line="830"/>
         <source>Nape to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="825"/>
+        <location filename="../../core/vapplication.cpp" line="836"/>
         <source>Nape to Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="831"/>
+        <location filename="../../core/vapplication.cpp" line="842"/>
         <source>Waist side to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="837"/>
+        <location filename="../../core/vapplication.cpp" line="848"/>
         <source>HighHip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="843"/>
+        <location filename="../../core/vapplication.cpp" line="854"/>
         <source>Hip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="849"/>
+        <location filename="../../core/vapplication.cpp" line="860"/>
         <source>Waist side to Hip</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="855"/>
+        <location filename="../../core/vapplication.cpp" line="866"/>
         <source>Waist side to Knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="861"/>
+        <location filename="../../core/vapplication.cpp" line="872"/>
         <source>Crotch to Floor along inside leg</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="868"/>
+        <location filename="../../core/vapplication.cpp" line="879"/>
         <source>Size</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished">Taille</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="874"/>
+        <location filename="../../core/vapplication.cpp" line="885"/>
         <source>Height of the point base of the neck in front</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="881"/>
+        <location filename="../../core/vapplication.cpp" line="892"/>
         <source>Height of the base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="888"/>
+        <location filename="../../core/vapplication.cpp" line="899"/>
         <source>The height of the shoulder point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="895"/>
+        <location filename="../../core/vapplication.cpp" line="906"/>
         <source>Height nipple point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="901"/>
+        <location filename="../../core/vapplication.cpp" line="912"/>
         <source>Height back angle axilla</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="907"/>
+        <location filename="../../core/vapplication.cpp" line="918"/>
         <source>Height scapular point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="913"/>
+        <location filename="../../core/vapplication.cpp" line="924"/>
         <source>Height under buttock folds</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="920"/>
+        <location filename="../../core/vapplication.cpp" line="931"/>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="927"/>
+        <location filename="../../core/vapplication.cpp" line="938"/>
         <source>Girth foot instep</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="933"/>
+        <location filename="../../core/vapplication.cpp" line="944"/>
         <source>The distance from the side waist to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="940"/>
+        <location filename="../../core/vapplication.cpp" line="951"/>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="947"/>
+        <location filename="../../core/vapplication.cpp" line="958"/>
         <source>Arc through groin area</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="953"/>
+        <location filename="../../core/vapplication.cpp" line="964"/>
         <source>The distance from the waist to the plane seat</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="960"/>
+        <location filename="../../core/vapplication.cpp" line="971"/>
         <source>The distance from the base of the neck to the side of the radial point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="967"/>
+        <location filename="../../core/vapplication.cpp" line="978"/>
         <source>Distance from the base of the neck side point to the end of the third finger</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="975"/>
+        <location filename="../../core/vapplication.cpp" line="986"/>
         <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="982"/>
+        <location filename="../../core/vapplication.cpp" line="993"/>
         <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="989"/>
+        <location filename="../../core/vapplication.cpp" line="1000"/>
         <source>Arc through the highest point of the shoulder joint</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="997"/>
+        <location filename="../../core/vapplication.cpp" line="1008"/>
         <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1005"/>
+        <location filename="../../core/vapplication.cpp" line="1016"/>
         <source>The distance from the waist to the back base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1012"/>
+        <location filename="../../core/vapplication.cpp" line="1023"/>
         <source>Arc length of the upper body through the base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1019"/>
+        <location filename="../../core/vapplication.cpp" line="1030"/>
         <source>Chest width</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1025"/>
+        <location filename="../../core/vapplication.cpp" line="1036"/>
         <source>Anteroposterior diameter of the hands</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1032"/>
+        <location filename="../../core/vapplication.cpp" line="1043"/>
         <source>Height clavicular point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1038"/>
+        <location filename="../../core/vapplication.cpp" line="1049"/>
         <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1046"/>
+        <location filename="../../core/vapplication.cpp" line="1057"/>
         <source>Slash shoulder height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1052"/>
+        <location filename="../../core/vapplication.cpp" line="1063"/>
         <source>Half girth neck</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1058"/>
+        <location filename="../../core/vapplication.cpp" line="1069"/>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1065"/>
+        <location filename="../../core/vapplication.cpp" line="1076"/>
         <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1071"/>
+        <location filename="../../core/vapplication.cpp" line="1082"/>
         <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1077"/>
+        <location filename="../../core/vapplication.cpp" line="1088"/>
         <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1083"/>
+        <location filename="../../core/vapplication.cpp" line="1094"/>
         <source>Half girth waist</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1090"/>
+        <location filename="../../core/vapplication.cpp" line="1101"/>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1098"/>
+        <location filename="../../core/vapplication.cpp" line="1109"/>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1105"/>
+        <location filename="../../core/vapplication.cpp" line="1116"/>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1111"/>
+        <location filename="../../core/vapplication.cpp" line="1122"/>
         <source>Neck transverse diameter</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1117"/>
+        <location filename="../../core/vapplication.cpp" line="1128"/>
         <source>Front slash shoulder height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1124"/>
+        <location filename="../../core/vapplication.cpp" line="1135"/>
         <source>The distance from the base of the neck to the waist line front</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1131"/>
+        <location filename="../../core/vapplication.cpp" line="1142"/>
         <source>Hand vertical diameter</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1137"/>
+        <location filename="../../core/vapplication.cpp" line="1148"/>
         <source>Distance from neck to knee point</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1144"/>
+        <location filename="../../core/vapplication.cpp" line="1155"/>
         <source>The distance from the waist to the knee</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1151"/>
+        <location filename="../../core/vapplication.cpp" line="1162"/>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1157"/>
+        <location filename="../../core/vapplication.cpp" line="1168"/>
         <source>Head height</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1163"/>
+        <location filename="../../core/vapplication.cpp" line="1174"/>
         <source>Body position</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1169"/>
+        <location filename="../../core/vapplication.cpp" line="1180"/>
         <source>Arc behind the shoulder girdle</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1176"/>
+        <location filename="../../core/vapplication.cpp" line="1187"/>
         <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1183"/>
+        <location filename="../../core/vapplication.cpp" line="1194"/>
         <source>Depth waist first</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1189"/>
+        <location filename="../../core/vapplication.cpp" line="1200"/>
         <source>Depth waist second</source>
         <comment>Full measurement description</comment>
         <translation type="unfinished"></translation>
@@ -5194,799 +5579,799 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>MeasurementsFullNames</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="295"/>
+        <location filename="../../core/vapplication.cpp" line="306"/>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="302"/>
+        <location filename="../../core/vapplication.cpp" line="313"/>
         <source>Mid-neck girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="309"/>
+        <location filename="../../core/vapplication.cpp" line="320"/>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="315"/>
+        <location filename="../../core/vapplication.cpp" line="326"/>
         <source>Head and Neck length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="323"/>
+        <location filename="../../core/vapplication.cpp" line="334"/>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="330"/>
+        <location filename="../../core/vapplication.cpp" line="341"/>
         <source>Back Center length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="337"/>
+        <location filename="../../core/vapplication.cpp" line="348"/>
         <source>Shoulder length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="343"/>
+        <location filename="../../core/vapplication.cpp" line="354"/>
         <source>Side Waist length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="349"/>
+        <location filename="../../core/vapplication.cpp" line="360"/>
         <source>Trunk length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="358"/>
+        <location filename="../../core/vapplication.cpp" line="369"/>
         <source>Shoulder girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="365"/>
+        <location filename="../../core/vapplication.cpp" line="376"/>
         <source>Upper Chest girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="373"/>
+        <location filename="../../core/vapplication.cpp" line="384"/>
         <source>Bust girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="380"/>
+        <location filename="../../core/vapplication.cpp" line="391"/>
         <source>Under Bust girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="387"/>
+        <location filename="../../core/vapplication.cpp" line="398"/>
         <source>Waist girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="396"/>
+        <location filename="../../core/vapplication.cpp" line="407"/>
         <source>HighHip girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="403"/>
+        <location filename="../../core/vapplication.cpp" line="414"/>
         <source>Hip girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="410"/>
+        <location filename="../../core/vapplication.cpp" line="421"/>
         <source>Front Upper Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="417"/>
+        <location filename="../../core/vapplication.cpp" line="428"/>
         <source>Front Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="424"/>
+        <location filename="../../core/vapplication.cpp" line="435"/>
         <source>Front Across Shoulder width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="431"/>
+        <location filename="../../core/vapplication.cpp" line="442"/>
         <source>Back Across Shoulder width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="438"/>
+        <location filename="../../core/vapplication.cpp" line="449"/>
         <source>Back Upper Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="445"/>
+        <location filename="../../core/vapplication.cpp" line="456"/>
         <source>Back Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="452"/>
+        <location filename="../../core/vapplication.cpp" line="463"/>
         <source>BustPoint to BustPoint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="459"/>
+        <location filename="../../core/vapplication.cpp" line="470"/>
         <source>Halter Bustpoint to Bustpoint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="466"/>
+        <location filename="../../core/vapplication.cpp" line="477"/>
         <source>NeckPoint to BustPoint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="473"/>
+        <location filename="../../core/vapplication.cpp" line="484"/>
         <source>Crotch length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="480"/>
+        <location filename="../../core/vapplication.cpp" line="491"/>
         <source>Rise height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="487"/>
+        <location filename="../../core/vapplication.cpp" line="498"/>
         <source>Shoulder Drop</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="494"/>
+        <location filename="../../core/vapplication.cpp" line="505"/>
         <source>Shoulder Slope degrees</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="501"/>
+        <location filename="../../core/vapplication.cpp" line="512"/>
         <source>Front Shoulder Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="508"/>
+        <location filename="../../core/vapplication.cpp" line="519"/>
         <source>Back Shoulder Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="515"/>
+        <location filename="../../core/vapplication.cpp" line="526"/>
         <source>Front Full Length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="522"/>
+        <location filename="../../core/vapplication.cpp" line="533"/>
         <source>Back Full Length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="529"/>
+        <location filename="../../core/vapplication.cpp" line="540"/>
         <source>Front Neck arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="536"/>
+        <location filename="../../core/vapplication.cpp" line="547"/>
         <source>Back Neck arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="543"/>
+        <location filename="../../core/vapplication.cpp" line="554"/>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="549"/>
+        <location filename="../../core/vapplication.cpp" line="560"/>
         <source>Back UpperBust arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="556"/>
+        <location filename="../../core/vapplication.cpp" line="567"/>
         <source>Front Waist arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="562"/>
+        <location filename="../../core/vapplication.cpp" line="573"/>
         <source>Back Waist arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="568"/>
+        <location filename="../../core/vapplication.cpp" line="579"/>
         <source>Front UpperHip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="575"/>
+        <location filename="../../core/vapplication.cpp" line="586"/>
         <source>Back UpperHip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="582"/>
+        <location filename="../../core/vapplication.cpp" line="593"/>
         <source>Front Hip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="589"/>
+        <location filename="../../core/vapplication.cpp" line="600"/>
         <source>Back Hip arc</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="595"/>
+        <location filename="../../core/vapplication.cpp" line="606"/>
         <source>Chest Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="602"/>
+        <location filename="../../core/vapplication.cpp" line="613"/>
         <source>Back Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="609"/>
+        <location filename="../../core/vapplication.cpp" line="620"/>
         <source>Front Waist Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="616"/>
+        <location filename="../../core/vapplication.cpp" line="627"/>
         <source>Back Waist Balance</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="623"/>
+        <location filename="../../core/vapplication.cpp" line="634"/>
         <source>Front UpperChest height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="630"/>
+        <location filename="../../core/vapplication.cpp" line="641"/>
         <source>Bust height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="637"/>
+        <location filename="../../core/vapplication.cpp" line="648"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="644"/>
+        <location filename="../../core/vapplication.cpp" line="655"/>
         <source>Front waist to lower breast</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="651"/>
+        <location filename="../../core/vapplication.cpp" line="662"/>
         <source>Back waist to upper chest</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="658"/>
+        <location filename="../../core/vapplication.cpp" line="669"/>
         <source>Strap length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="666"/>
+        <location filename="../../core/vapplication.cpp" line="677"/>
         <source>Armscye Girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="672"/>
+        <location filename="../../core/vapplication.cpp" line="683"/>
         <source>Elbow Girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="679"/>
+        <location filename="../../core/vapplication.cpp" line="690"/>
         <source>Upperarm Girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="685"/>
+        <location filename="../../core/vapplication.cpp" line="696"/>
         <source>Wrist girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="691"/>
+        <location filename="../../core/vapplication.cpp" line="702"/>
         <source>Armscye depth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="698"/>
+        <location filename="../../core/vapplication.cpp" line="709"/>
         <source>Shoulder and Arm length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="705"/>
+        <location filename="../../core/vapplication.cpp" line="716"/>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="712"/>
+        <location filename="../../core/vapplication.cpp" line="723"/>
         <source>Nape to wrist length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="719"/>
+        <location filename="../../core/vapplication.cpp" line="730"/>
         <source>Elbow length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="726"/>
+        <location filename="../../core/vapplication.cpp" line="737"/>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="734"/>
+        <location filename="../../core/vapplication.cpp" line="745"/>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="740"/>
+        <location filename="../../core/vapplication.cpp" line="751"/>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="747"/>
+        <location filename="../../core/vapplication.cpp" line="758"/>
         <source>Hand girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="754"/>
+        <location filename="../../core/vapplication.cpp" line="765"/>
         <source>Thigh girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="760"/>
+        <location filename="../../core/vapplication.cpp" line="771"/>
         <source>Midthigh girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="766"/>
+        <location filename="../../core/vapplication.cpp" line="777"/>
         <source>Knee girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="772"/>
+        <location filename="../../core/vapplication.cpp" line="783"/>
         <source>Calf girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="778"/>
+        <location filename="../../core/vapplication.cpp" line="789"/>
         <source>Ankle girth</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="784"/>
+        <location filename="../../core/vapplication.cpp" line="795"/>
         <source>Knee height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="790"/>
+        <location filename="../../core/vapplication.cpp" line="801"/>
         <source>Ankle height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="797"/>
+        <location filename="../../core/vapplication.cpp" line="808"/>
         <source>Foot width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="804"/>
+        <location filename="../../core/vapplication.cpp" line="815"/>
         <source>Foot length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="812"/>
+        <location filename="../../core/vapplication.cpp" line="823"/>
         <source>Total Height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="818"/>
+        <location filename="../../core/vapplication.cpp" line="829"/>
         <source>Nape height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="824"/>
+        <location filename="../../core/vapplication.cpp" line="835"/>
         <source>Nape to knee height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="830"/>
+        <location filename="../../core/vapplication.cpp" line="841"/>
         <source>Waist height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="836"/>
+        <location filename="../../core/vapplication.cpp" line="847"/>
         <source>HighHip height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="842"/>
+        <location filename="../../core/vapplication.cpp" line="853"/>
         <source>Hip height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="848"/>
+        <location filename="../../core/vapplication.cpp" line="859"/>
         <source>Waist to Hip height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="854"/>
+        <location filename="../../core/vapplication.cpp" line="865"/>
         <source>Waist to Knee height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="860"/>
+        <location filename="../../core/vapplication.cpp" line="871"/>
         <source>Crotch height/Inseam</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="867"/>
+        <location filename="../../core/vapplication.cpp" line="878"/>
         <source>Size</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished">Taille</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="873"/>
+        <location filename="../../core/vapplication.cpp" line="884"/>
         <source>Height front neck base point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="880"/>
+        <location filename="../../core/vapplication.cpp" line="891"/>
         <source>Height base neck side point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="887"/>
+        <location filename="../../core/vapplication.cpp" line="898"/>
         <source>Height shoulder point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="894"/>
+        <location filename="../../core/vapplication.cpp" line="905"/>
         <source>Height nipple point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="900"/>
+        <location filename="../../core/vapplication.cpp" line="911"/>
         <source>Height back angle axilla</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="906"/>
+        <location filename="../../core/vapplication.cpp" line="917"/>
         <source>Height scapular point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="912"/>
+        <location filename="../../core/vapplication.cpp" line="923"/>
         <source>Height under buttock folds</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="919"/>
+        <location filename="../../core/vapplication.cpp" line="930"/>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="926"/>
+        <location filename="../../core/vapplication.cpp" line="937"/>
         <source>Girth foot instep</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="932"/>
+        <location filename="../../core/vapplication.cpp" line="943"/>
         <source>Side waist to floor</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="939"/>
+        <location filename="../../core/vapplication.cpp" line="950"/>
         <source>Front waist to floor</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="946"/>
+        <location filename="../../core/vapplication.cpp" line="957"/>
         <source>Arc through groin area</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="952"/>
+        <location filename="../../core/vapplication.cpp" line="963"/>
         <source>Waist to plane seat</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="959"/>
+        <location filename="../../core/vapplication.cpp" line="970"/>
         <source>Neck to radial point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="966"/>
+        <location filename="../../core/vapplication.cpp" line="977"/>
         <source>Neck to third finger</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="973"/>
+        <location filename="../../core/vapplication.cpp" line="984"/>
         <source>Neck to first line chest circumference</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="981"/>
+        <location filename="../../core/vapplication.cpp" line="992"/>
         <source>Front waist length</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="988"/>
+        <location filename="../../core/vapplication.cpp" line="999"/>
         <source>Arc through shoulder joint</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="995"/>
+        <location filename="../../core/vapplication.cpp" line="1006"/>
         <source>Neck to back line chest circumference</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1004"/>
+        <location filename="../../core/vapplication.cpp" line="1015"/>
         <source>Waist to neck side</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1011"/>
+        <location filename="../../core/vapplication.cpp" line="1022"/>
         <source>Arc length upper body</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1018"/>
+        <location filename="../../core/vapplication.cpp" line="1029"/>
         <source>Chest width</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1024"/>
+        <location filename="../../core/vapplication.cpp" line="1035"/>
         <source>Anteroposterior diameter hands</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1031"/>
+        <location filename="../../core/vapplication.cpp" line="1042"/>
         <source>Height clavicular point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1037"/>
+        <location filename="../../core/vapplication.cpp" line="1048"/>
         <source>Height armhole slash</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1045"/>
+        <location filename="../../core/vapplication.cpp" line="1056"/>
         <source>Slash shoulder height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1051"/>
+        <location filename="../../core/vapplication.cpp" line="1062"/>
         <source>Half girth neck</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1057"/>
+        <location filename="../../core/vapplication.cpp" line="1068"/>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1064"/>
+        <location filename="../../core/vapplication.cpp" line="1075"/>
         <source>Half girth chest first</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1070"/>
+        <location filename="../../core/vapplication.cpp" line="1081"/>
         <source>Half girth chest second</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1076"/>
+        <location filename="../../core/vapplication.cpp" line="1087"/>
         <source>Half girth chest third</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1082"/>
+        <location filename="../../core/vapplication.cpp" line="1093"/>
         <source>Half girth waist</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1088"/>
+        <location filename="../../core/vapplication.cpp" line="1099"/>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1096"/>
+        <location filename="../../core/vapplication.cpp" line="1107"/>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1104"/>
+        <location filename="../../core/vapplication.cpp" line="1115"/>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1110"/>
+        <location filename="../../core/vapplication.cpp" line="1121"/>
         <source>Neck transverse diameter</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1116"/>
+        <location filename="../../core/vapplication.cpp" line="1127"/>
         <source>Front slash shoulder height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1123"/>
+        <location filename="../../core/vapplication.cpp" line="1134"/>
         <source>Neck to front waist line</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1130"/>
+        <location filename="../../core/vapplication.cpp" line="1141"/>
         <source>Hand vertical diameter</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1136"/>
+        <location filename="../../core/vapplication.cpp" line="1147"/>
         <source>Neck to knee point</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1143"/>
+        <location filename="../../core/vapplication.cpp" line="1154"/>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1150"/>
+        <location filename="../../core/vapplication.cpp" line="1161"/>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1156"/>
+        <location filename="../../core/vapplication.cpp" line="1167"/>
         <source>Head height</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1162"/>
+        <location filename="../../core/vapplication.cpp" line="1173"/>
         <source>Body position</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1168"/>
+        <location filename="../../core/vapplication.cpp" line="1179"/>
         <source>Arc behind shoulder girdle</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1175"/>
+        <location filename="../../core/vapplication.cpp" line="1186"/>
         <source>Neck to neck base</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1182"/>
+        <location filename="../../core/vapplication.cpp" line="1193"/>
         <source>Depth waist first</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1188"/>
+        <location filename="../../core/vapplication.cpp" line="1199"/>
         <source>Depth waist second</source>
         <comment>Full measurement name</comment>
         <translation type="unfinished"></translation>
@@ -6095,19 +6480,19 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1237"/>
+        <location filename="../../core/vapplication.cpp" line="1248"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1238"/>
+        <location filename="../../core/vapplication.cpp" line="1249"/>
         <source>mm</source>
         <comment>millimeter</comment>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1239"/>
+        <location filename="../../core/vapplication.cpp" line="1250"/>
         <source>in</source>
         <comment>inch</comment>
         <translation>in</translation>
@@ -6169,7 +6554,7 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../mainwindow.cpp" line="96"/>
+        <location filename="../../mainwindow.cpp" line="105"/>
         <source>Create new pattern piece to start working.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6184,18 +6569,18 @@ Voulez vous sauvegarder les changements ? </translation>
         <translation>Déplacer le détail</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="465"/>
+        <location filename="../../xml/vdomdocument.cpp" line="467"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="475"/>
-        <location filename="../../xml/vdomdocument.cpp" line="495"/>
+        <location filename="../../xml/vdomdocument.cpp" line="477"/>
+        <location filename="../../xml/vdomdocument.cpp" line="497"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="485"/>
+        <location filename="../../xml/vdomdocument.cpp" line="487"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6211,7 +6596,7 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>STDescriptions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1245"/>
+        <location filename="../../core/vapplication.cpp" line="1256"/>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
         <translation type="unfinished"></translation>
@@ -6389,12 +6774,12 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../tools/vabstracttool.cpp" line="233"/>
         <source>Confirm the deletion.</source>
         <translation>Confirmer la suppression</translation>
     </message>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="345"/>
+        <location filename="../../tools/vabstracttool.cpp" line="234"/>
         <source>Do you really want delete?</source>
         <translation>Voulez vous vraiment supprimer ? </translation>
     </message>
@@ -6402,34 +6787,44 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="112"/>
+        <location filename="../../core/vapplication.cpp" line="121"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Erreur d&apos;interprétation du fichier. Fin du programme.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="117"/>
+        <location filename="../../core/vapplication.cpp" line="126"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Erreur d&apos;identifiant. Fin du programme.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="122"/>
+        <location filename="../../core/vapplication.cpp" line="131"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Erreur : valeur non convertissable. Fin du programme.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="127"/>
+        <location filename="../../core/vapplication.cpp" line="136"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Erreur : paramètre vide. Fin du programme.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="132"/>
+        <location filename="../../core/vapplication.cpp" line="141"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Erreur : mauvais identifiant. Fin du programme.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="137"/>
+        <location filename="../../core/vapplication.cpp" line="146"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Quel que chose ne va pas</translation>
+    </message>
+    <message>
+        <location filename="../../core/vapplication.cpp" line="1830"/>
+        <source>Could not copy temp file to document file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../core/vapplication.cpp" line="1841"/>
+        <source>Could not remove document file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6457,46 +6852,51 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>VDomDocument</name>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="204"/>
+        <location filename="../../xml/vdomdocument.cpp" line="206"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="233"/>
+        <location filename="../../xml/vdomdocument.cpp" line="235"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="280"/>
+        <location filename="../../xml/vdomdocument.cpp" line="282"/>
         <source>Got empty parameter</source>
         <translation>Paramètre vide</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="305"/>
+        <location filename="../../xml/vdomdocument.cpp" line="307"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Conversion du paramètre impossible vers toDouble.</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="358"/>
-        <location filename="../../xml/vdomdocument.cpp" line="408"/>
+        <location filename="../../xml/vdomdocument.cpp" line="360"/>
+        <location filename="../../xml/vdomdocument.cpp" line="410"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="366"/>
+        <location filename="../../xml/vdomdocument.cpp" line="368"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="394"/>
+        <location filename="../../xml/vdomdocument.cpp" line="396"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="419"/>
+        <location filename="../../xml/vdomdocument.cpp" line="421"/>
         <source>Parsing error file %3 in line %1 column %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../xml/vdomdocument.cpp" line="624"/>
+        <source>Couldn&apos;t get node</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6521,7 +6921,7 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>VException</name>
     <message>
-        <location filename="../../exception/vexception.cpp" line="73"/>
+        <location filename="../../exception/vexception.cpp" line="85"/>
         <source>Critical error!</source>
         <translation>Erreur critique!</translation>
     </message>
@@ -6561,188 +6961,204 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>VPattern</name>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="374"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
-        <translation>Identifiant d&apos;outil non trouvé = %1 dans la table.</translation>
+        <translation type="vanished">Identifiant d&apos;outil non trouvé = %1 dans la table.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="704"/>
+        <location filename="../../xml/vpattern.cpp" line="379"/>
+        <source>Can&apos;t find tool in table.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="711"/>
         <source>Error no unique id.</source>
         <translation>Erreur : id non unique.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="749"/>
-        <location filename="../../xml/vpattern.cpp" line="773"/>
+        <location filename="../../xml/vpattern.cpp" line="755"/>
+        <location filename="../../xml/vpattern.cpp" line="779"/>
         <source>Error parsing file.</source>
         <translation>Erreur d&apos;interprétation de fichier.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="755"/>
+        <location filename="../../xml/vpattern.cpp" line="761"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Erreur : valeur non convertissable.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="761"/>
+        <location filename="../../xml/vpattern.cpp" line="767"/>
         <source>Error empty parameter.</source>
         <translation>Erreur : paramètre vide.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="767"/>
+        <location filename="../../xml/vpattern.cpp" line="773"/>
         <source>Error wrong id.</source>
         <translation>Erreur : mauvais id.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="782"/>
+        <location filename="../../xml/vpattern.cpp" line="788"/>
         <source>Critical error!</source>
         <translation>Erreur Critique!</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="782"/>
+        <location filename="../../xml/vpattern.cpp" line="788"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Erreur d&apos;interprétation de fichier. (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="997"/>
+        <location filename="../../xml/vpattern.cpp" line="1006"/>
         <source>Error creating or updating detail</source>
         <translation>Erreur : Création ou mise à jour du détail</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1108"/>
+        <location filename="../../xml/vpattern.cpp" line="1120"/>
         <source>Error creating or updating single point</source>
         <translation>Erreur lors de la création ou de la mise à jour d&apos;un point seul</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1141"/>
-        <location filename="../../xml/vpattern.cpp" line="1147"/>
+        <location filename="../../xml/vpattern.cpp" line="1153"/>
+        <location filename="../../xml/vpattern.cpp" line="1159"/>
         <source>Error creating or updating point of end line</source>
         <translation>Erreur lors de la création ou de la mise à jour d&apos;un point de fin de ligne</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1172"/>
-        <location filename="../../xml/vpattern.cpp" line="1178"/>
+        <location filename="../../xml/vpattern.cpp" line="1184"/>
+        <location filename="../../xml/vpattern.cpp" line="1190"/>
         <source>Error creating or updating point along line</source>
         <translation>Erreur lors de la création ou de la mise à jour d&apos;un point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1204"/>
-        <location filename="../../xml/vpattern.cpp" line="1210"/>
+        <location filename="../../xml/vpattern.cpp" line="1216"/>
+        <location filename="../../xml/vpattern.cpp" line="1222"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Erreur : Création ou mise à jour du point d&apos;épaule</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1236"/>
-        <location filename="../../xml/vpattern.cpp" line="1242"/>
+        <location filename="../../xml/vpattern.cpp" line="1248"/>
+        <location filename="../../xml/vpattern.cpp" line="1254"/>
         <source>Error creating or updating point of normal</source>
         <translation>Erreur lors de la création ou de la mise à jour d&apos;un point de la normale</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1268"/>
-        <location filename="../../xml/vpattern.cpp" line="1274"/>
+        <location filename="../../xml/vpattern.cpp" line="1280"/>
+        <location filename="../../xml/vpattern.cpp" line="1286"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Erreur : Création ou mise à jour du point de bisection</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1293"/>
+        <location filename="../../xml/vpattern.cpp" line="1305"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Erreur : Création ou mise à jour du point d&apos;intersection de ligne</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1319"/>
-        <location filename="../../xml/vpattern.cpp" line="1325"/>
+        <location filename="../../xml/vpattern.cpp" line="1331"/>
+        <location filename="../../xml/vpattern.cpp" line="1337"/>
         <source>Error creating or updating point of contact</source>
         <translation>Erreur : Création ou mise à jour du point de contact</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1343"/>
+        <location filename="../../xml/vpattern.cpp" line="1355"/>
         <source>Error creating or updating modeling point</source>
         <translation>Erreur : Création ou mise à jour du point de modélisation</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1361"/>
+        <location filename="../../xml/vpattern.cpp" line="1373"/>
         <source>Error creating or updating height</source>
         <translation>Erreur : Création ou mise à jour de la taille</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1380"/>
+        <location filename="../../xml/vpattern.cpp" line="1392"/>
         <source>Error creating or updating triangle</source>
         <translation>Erreur lors de la création ou de la mise à jour d&apos;un triangle</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1397"/>
+        <location filename="../../xml/vpattern.cpp" line="1409"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Erreur : Création ou mise à jour du point d&apos;intersection</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1420"/>
-        <location filename="../../xml/vpattern.cpp" line="1426"/>
+        <location filename="../../xml/vpattern.cpp" line="1432"/>
+        <location filename="../../xml/vpattern.cpp" line="1438"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Erreur : Création ou mise à jour du point de découpe de crannelure </translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1450"/>
-        <location filename="../../xml/vpattern.cpp" line="1456"/>
+        <location filename="../../xml/vpattern.cpp" line="1463"/>
+        <location filename="../../xml/vpattern.cpp" line="1469"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Erreur : Création ou mise à jour du point du chemine de cannelure</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1479"/>
-        <location filename="../../xml/vpattern.cpp" line="1485"/>
+        <location filename="../../xml/vpattern.cpp" line="1492"/>
+        <location filename="../../xml/vpattern.cpp" line="1498"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Erreur lors de la création ou de la mise à jour d&apos;un point de découpe d&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1521"/>
+        <location filename="../../xml/vpattern.cpp" line="1526"/>
+        <location filename="../../xml/vpattern.cpp" line="1533"/>
+        <source>Error creating or updating point of intersection line and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="1560"/>
+        <location filename="../../xml/vpattern.cpp" line="1567"/>
+        <source>Error creating or updating point of intersection curve and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="1604"/>
         <source>Error creating or updating line</source>
         <translation>Erreur lors de la création ou de la mise à jour de la ligne</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1734"/>
+        <location filename="../../xml/vpattern.cpp" line="1817"/>
         <source>Error creating or updating simple curve</source>
         <translation>Erreur lors de la création ou de la mise à jour de la courbe</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1778"/>
+        <location filename="../../xml/vpattern.cpp" line="1861"/>
         <source>Error creating or updating curve path</source>
         <translation>Erreur lors de la création ou de la mise à jour du chemin de la courbe</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1795"/>
+        <location filename="../../xml/vpattern.cpp" line="1878"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Erreur lors de la création ou de la mise à jour de la courbe simple</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1812"/>
+        <location filename="../../xml/vpattern.cpp" line="1895"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Erreur lors de la création ou de la mise à jour du chemin de la coubre</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1867"/>
-        <location filename="../../xml/vpattern.cpp" line="1873"/>
+        <location filename="../../xml/vpattern.cpp" line="1950"/>
+        <location filename="../../xml/vpattern.cpp" line="1956"/>
         <source>Error creating or updating simple arc</source>
         <translation>Erreur : Création ou mise à jour d&apos;un arc simple</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1892"/>
+        <location filename="../../xml/vpattern.cpp" line="1975"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Erreur : Création ou mise à jour d&apos;un arc modelé</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1937"/>
+        <location filename="../../xml/vpattern.cpp" line="2020"/>
         <source>Error creating or updating union details</source>
         <translation>Erreur : Création ou mise à jour d&apos;un union de détails</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1992"/>
+        <location filename="../../xml/vpattern.cpp" line="2075"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Mauvais id . Seul les id &gt; 0 sont autorisés</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="2428"/>
+        <location filename="../../xml/vpattern.cpp" line="2511"/>
         <source>This id is not unique.</source>
         <translation>Cet idientifiant n&apos;est pas unique.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="2494"/>
+        <location filename="../../xml/vpattern.cpp" line="2577"/>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6796,205 +7212,225 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="850"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="931"/>
         <source>Base point</source>
         <translation type="unfinished">Point de départ</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="852"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="866"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="879"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="903"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="915"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="926"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="937"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="948"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="969"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="980"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="998"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1009"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1019"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1065"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="933"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="947"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="960"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="984"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="996"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1007"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1018"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1029"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1050"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1061"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1079"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1090"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1100"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1146"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1156"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1168"/>
         <source>Point label</source>
         <translation type="unfinished">Désignation du point</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="854"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="935"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="864"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="945"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished">Point à distance et angle</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="867"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="880"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="904"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="949"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="959"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="981"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1020"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="948"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="961"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="985"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1030"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1040"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1062"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1101"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1157"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1169"/>
         <source>Line type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="868"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="881"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="905"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="916"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="927"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="938"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="979"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1021"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="949"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="962"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="986"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="997"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1008"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1019"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1060"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1102"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="869"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="950"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1158"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1170"/>
         <source>Angle</source>
         <translation type="unfinished">Angle</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="877"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="958"/>
         <source>Point at distance along line</source>
         <translation type="unfinished">Point à distance le long d&apos;un ligne</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="889"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="970"/>
         <source>Arc</source>
         <translation type="unfinished">Arc</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="891"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="999"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="972"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1080"/>
         <source>Radius</source>
         <translation type="unfinished">Rayon</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="892"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="973"/>
         <source>First angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="893"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="974"/>
         <source>Second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="901"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="982"/>
         <source>Point along bisector</source>
         <translation type="unfinished">point le long d&apos;une bissectrice</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="913"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="994"/>
         <source>Cut arc tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="924"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1005"/>
         <source>Tool for segmenting a curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="935"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1016"/>
         <source>Tool segment a pathed curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="946"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1027"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished">Point perpendiculaire le long d&apos;une ligne</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="957"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1038"/>
         <source>Line between points</source>
         <translation type="unfinished">Ligne entre plusieurs points</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="967"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1048"/>
         <source>Point at line intersection</source>
         <translation type="unfinished">Point à l&apos;intersection de ligne
 </translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="977"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1058"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished">Point le long d&apos;une perpendiculaire</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="983"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1064"/>
         <source>Additional angle degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="996"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1077"/>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1007"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1088"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1017"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1098"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1029"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1110"/>
         <source>Curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1031"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1048"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1112"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1129"/>
         <source>Curve factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1046"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1127"/>
         <source>Tool for path curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1063"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1144"/>
         <source>Tool triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1154"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1166"/>
+        <source>Point intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Variables</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1196"/>
+        <location filename="../../core/vapplication.cpp" line="1207"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1197"/>
+        <location filename="../../core/vapplication.cpp" line="1208"/>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1198"/>
+        <location filename="../../core/vapplication.cpp" line="1209"/>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1199"/>
+        <location filename="../../core/vapplication.cpp" line="1210"/>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1200"/>
+        <location filename="../../core/vapplication.cpp" line="1211"/>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCurveIntersectAxis</name>
+    <message>
+        <location filename="../../visualization/vistoolcurveintersectaxis.cpp" line="81"/>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7003,6 +7439,14 @@ Voulez vous sauvegarder les changements ? </translation>
     <message>
         <location filename="../../visualization/vistoolendline.cpp" line="64"/>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolLineIntersectAxis</name>
+    <message>
+        <location filename="../../visualization/vistoollineintersectaxis.cpp" line="96"/>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7017,12 +7461,12 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="186"/>
+        <location filename="../../main.cpp" line="185"/>
         <source>Pattern making program.</source>
         <translation>Programme de réalisation de patrons</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="189"/>
+        <location filename="../../main.cpp" line="188"/>
         <source>Pattern file.</source>
         <translation>Fichier Patron</translation>
     </message>
