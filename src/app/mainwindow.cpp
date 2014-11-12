@@ -1387,6 +1387,10 @@ void MainWindow::RepotBug()
  */
 void MainWindow::Clear()
 {
+    ui->actionDetails->setChecked(false);
+    ui->actionDetails->setEnabled(false);
+    ui->actionDraw->setChecked(true);
+    ui->actionDraw->setEnabled(false);
     setCurrentFile("");
     pattern->Clear();
     doc->clear();
@@ -1396,9 +1400,15 @@ void MainWindow::Clear()
     comboBoxDraws->clear();
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
+    ui->actionSaveAs->setEnabled(false);
     ui->actionPattern_properties->setEnabled(false);
     ui->actionZoomIn->setEnabled(false);
     ui->actionZoomOut->setEnabled(false);
+    ui->actionZoomFitBest->setEnabled(false);
+    ui->actionZoomOriginal->setEnabled(false);
+    ui->actionHistory->setEnabled(false);
+    ui->actionTable->setEnabled(false);
+    ui->actionEdit_pattern_code->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -2123,6 +2133,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
+    connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::Clear);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
@@ -2286,6 +2297,8 @@ void MainWindow::LoadPattern(const QString &fileName)
 
         //Fit scene size to best size for first show
         ZoomFirstShow();
+
+        ui->actionDraw->setChecked(true);
     }
 }
 
