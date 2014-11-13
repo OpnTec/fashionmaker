@@ -36,23 +36,6 @@
 #   include <QtCore>
 #endif
 
-//In Windows you can't use same header in all modes.
-#if defined(Q_OS_WIN)
-#   if defined(QT_NO_DEBUG)//release mode
-
-#       ifdef QT_WIDGETS_LIB
-#           include <QtWidgets>
-#       endif
-
-#   endif/*QT_NO_DEBUG*/
-#else
-
-#   ifdef QT_WIDGETS_LIB
-#       include <QtWidgets>
-#   endif
-
-#endif/*Q_OS_WIN*/
-
 #endif /*__cplusplus*/
 
 #endif // STABLE_H

@@ -145,9 +145,17 @@ CONFIG(debug, debug|release){
     # Release mode
     DEFINES += QT_NO_DEBUG_OUTPUT
 
+    !unix:*-g++{
+        QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
+    }
+
     # Turn on debug symbols in release mode on Unix systems.
     # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-    unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+    !macx:!win32-msvc*{
+        QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+        QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+        QMAKE_LFLAGS_RELEASE =
+    }
 
     #local revision number for using in version
     HG_REV=$$system(hg parents --template '{rev}')
@@ -369,11 +377,18 @@ DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
 # Strip after you link all libaries.
 CONFIG(release, debug|release){
+    win32:!win32-msvc*{
+        # Strip debug symbols.
+        QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
+        QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
+        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+    }
+
     unix:!macx{
         # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+        QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
+        QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
+        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
     }
 }
 

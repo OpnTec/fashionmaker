@@ -123,6 +123,48 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// Catch exception and create report. Use if program build with Mingw compiler.
+// See more about catcher https://github.com/jrfonseca/drmingw/blob/master/README.md
+void DrMingw()
+{
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    // Put exchndl.dll near binary file
+    QFile drmingw("exchndl.dll");
+    if(drmingw.exists())
+    {// If don't want create reports just delete exchndl.dll from installer
+        LoadLibrary(L"exchndl.dll");
+    }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Check if last run was crash.
+// Each new crash we will lose old crashes reports if don't move them in save place.
+// See more about catcher https://github.com/jrfonseca/drmingw/blob/master/README.md
+void CollectReport()
+{
+    // Seek file "binary_name.RPT"
+    const QString reportName = QString("%1/%2.RPT").arg(qApp->applicationDirPath())
+            .arg(QFileInfo(qApp->arguments().at(0)).baseName());
+    QFile reportFile(reportName);
+    if (reportFile.exists())
+    { // Hooray we have found crash
+        const QString reportsDir = QString("%1/reports").arg(qApp->applicationDirPath());
+        QDir reports(reportsDir);
+        if (reports.exists() == false)
+        {
+            reports.mkpath("."); // Create directory for reports if need
+        }
+
+        const QDateTime now = QDateTime::currentDateTime();
+        const QString timestamp = now.toString(QLatin1String("yyyyMMdd-hhmmsszzz"));
+        const QString filename = QString("%1/reports/crash-%2.RPT").arg(qApp->applicationDirPath()).arg(timestamp);
+        reportFile.copy(filename); // Collect new crash
+        reportFile.remove(); // Clear after yourself
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(cursor);
@@ -133,6 +175,12 @@ int main(int argc, char *argv[])
     QT_REQUIRE_VERSION(argc, argv, "5.0.2");
 
     VApplication app(argc, argv);
+
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    DrMingw();
+    CollectReport();
+#endif
+
 #ifdef QT_DEBUG
     // Because our "noisy" message handler uses the GUI subsystem for message
     // boxes, we can't install it until after the QApplication is constructed.  But it

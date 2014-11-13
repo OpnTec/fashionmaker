@@ -103,14 +103,20 @@ CONFIG(debug, debug|release){
     # Release mode
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    unix:!macx{
+    !unix:*-g++{
+        QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
+    }
+
+    !macx:!win32-msvc*{
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
         QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+        QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+        QMAKE_LFLAGS_RELEASE =
 
         # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug $(DESTDIR)/$(TARGET) $(DESTDIR)/$(TARGET).debug &&
-        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(DESTDIR)/$(TARGET) &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(DESTDIR)/$(TARGET).debug $(DESTDIR)/$(TARGET)
+        QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
+        QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
+        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
     }
 }
