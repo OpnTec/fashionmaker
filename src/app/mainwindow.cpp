@@ -166,6 +166,17 @@ void MainWindow::ActionNewPP()
         }
         else
         {
+            QMessageBox::StandardButton ret;
+            ret = QMessageBox::question(this, tr("Individual measurements is under development"),
+                                        tr("There is no way create individual measurements file independent on the "
+                                           "pattern file.\nFor opening pattern need keep both files: pattern and "
+                                           "measurements. Do you want continue?"),
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+            if (ret == QMessageBox::No)
+            {
+                return;
+            }
+
             qApp->setPatternType(MeasurementsType::Individual);
             DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
             if (indMeasurements.exec() == QDialog::Accepted)
