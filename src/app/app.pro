@@ -182,154 +182,150 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
 
-# Set "make install" command for Unix-like systems.
-unix{
-isEmpty(PREFIX){
-    PREFIX = $$DEFAULT_PREFIX
-}
-
 # Keep path to all files with standard measurements we support right now
 INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
 
-# Prefix for binary file.
-unix:!macx{
-    # Add to this variable all translation files that you want install with program.
-    # For generation *.qm file first you need create *.ts. See section TRANSLATIONS.
-    INSTALL_TRANSLATIONS += \
-        share/translations/valentina_ru_RU.qm \
-        share/translations/valentina_uk_UA.qm \
-        share/translations/valentina_de_DE.qm \
-        share/translations/valentina_cs_CZ.qm \
-        share/translations/valentina_he_IL.qm \
-        share/translations/valentina_fr_FR.qm \
-        share/translations/valentina_it_IT.qm \
-        share/translations/valentina_nl_NL.qm
+# Add to this variable all translation files that you want install with program.
+# For generation *.qm file first you need create *.ts. See section TRANSLATIONS.
+INSTALL_TRANSLATIONS += \
+    share/translations/valentina_ru_RU.qm \
+    share/translations/valentina_uk_UA.qm \
+    share/translations/valentina_de_DE.qm \
+    share/translations/valentina_cs_CZ.qm \
+    share/translations/valentina_he_IL.qm \
+    share/translations/valentina_fr_FR.qm \
+    share/translations/valentina_it_IT.qm \
+    share/translations/valentina_nl_NL.qm
 
-
-
-    DATADIR =$$PREFIX/share
-    DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
-
-    # Path to bin file after installation
-    target.path = $$PREFIX/bin
-
-    # .desctop file
-    desktop.path = $$DATADIR/applications/
-    desktop.files += ../../dist/$${TARGET}.desktop
-
-    # logo
-    pixmaps.path = $$DATADIR/pixmaps/
-    pixmaps.files += ../../dist/$${TARGET}.png
-
-    # Path to translation files after installation
-    translations.path = $$DATADIR/$${TARGET}/translations/
-    translations.files = $$INSTALL_TRANSLATIONS
-
-    # Path to standard measurement after installation
-    standard.path = $$DATADIR/$${TARGET}/tables/standard/
-    standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
-
-    INSTALLS += \
-        target \
-        desktop \
-        pixmaps \
-        translations \
-        standard
-    }
-}
-macx{
-    # Some macx stuff
-    QMAKE_MAC_SDK = macosx
-
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
-    # Path to resources in app bundle
-    RESOURCES_DIR = "Contents/Resources"
-    FRAMEWORKS_DIR = "Contents/Frameworks"
-    # On macx we will use app bundle. Bundle doesn't need bin directory inside.
-    # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
-    target.path = $$PREFIX/
-
-    # Copy in bundle translation files.
-    exists(share/translations/valentina_ru_RU.qm){
-        TRANSLATION_ru_RU.files += \
-            share/translations/valentina_ru_RU.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_ru_RU.path = "$$RESOURCES_DIR/translations/ru_RU.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_ru_RU
+# Set "make install" command for Unix-like systems.
+unix{
+    # Prefix for binary file.
+    isEmpty(PREFIX){
+        PREFIX = $$DEFAULT_PREFIX
     }
 
-    exists(share/translations/valentina_uk_UA.qm){
-        TRANSLATION_uk_UA.files += \
-            share/translations/valentina_uk_UA.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_uk_UA.path = "$$RESOURCES_DIR/translations/uk_UA.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_uk_UA
+    unix:!macx{
+        DATADIR =$$PREFIX/share
+        DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
+
+        # Path to bin file after installation
+        target.path = $$PREFIX/bin
+
+        # .desctop file
+        desktop.path = $$DATADIR/applications/
+        desktop.files += ../../dist/$${TARGET}.desktop
+
+        # logo
+        pixmaps.path = $$DATADIR/pixmaps/
+        pixmaps.files += ../../dist/$${TARGET}.png
+
+        # Path to translation files after installation
+        translations.path = $$DATADIR/$${TARGET}/translations/
+        translations.files = $$INSTALL_TRANSLATIONS
+
+        # Path to standard measurement after installation
+        standard.path = $$DATADIR/$${TARGET}/tables/standard/
+        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+
+        INSTALLS += \
+            target \
+            desktop \
+            pixmaps \
+            translations \
+            standard
     }
+    macx{
+        # Some macx stuff
+        QMAKE_MAC_SDK = macosx
 
-    exists(share/translations/valentina_de_DE.qm){
-        TRANSLATION_de_DE.files += \
-            share/translations/valentina_de_DE.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_de_DE.path = "$$RESOURCES_DIR/translations/de_DE.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_de_DE
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+        # Path to resources in app bundle
+        RESOURCES_DIR = "Contents/Resources"
+        FRAMEWORKS_DIR = "Contents/Frameworks"
+        # On macx we will use app bundle. Bundle doesn't need bin directory inside.
+        # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
+        target.path = $$PREFIX/
+
+        # Copy in bundle translation files.
+        exists(share/translations/valentina_ru_RU.qm){
+            TRANSLATION_ru_RU.files += \
+                share/translations/valentina_ru_RU.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_ru_RU.path = "$$RESOURCES_DIR/translations/ru_RU.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_ru_RU
+        }
+
+        exists(share/translations/valentina_uk_UA.qm){
+            TRANSLATION_uk_UA.files += \
+                share/translations/valentina_uk_UA.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_uk_UA.path = "$$RESOURCES_DIR/translations/uk_UA.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_uk_UA
+        }
+
+        exists(share/translations/valentina_de_DE.qm){
+            TRANSLATION_de_DE.files += \
+                share/translations/valentina_de_DE.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_de_DE.path = "$$RESOURCES_DIR/translations/de_DE.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_de_DE
+        }
+
+        exists(share/translations/valentina_cs_CZ.qm){
+            TRANSLATION_cs_CZ.files += \
+                share/translations/valentina_cs_CZ.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_cs_CZ.path = "$$RESOURCES_DIR/translations/cs_CZ.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_cs_CZ
+        }
+
+        exists(share/translations/valentina_he_IL.qm){
+            TRANSLATION_he_IL.files += \
+                share/translations/valentina_he_IL.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_he_IL.path = "$$RESOURCES_DIR/translations/he_IL.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_he_IL
+        }
+
+        exists(share/translations/valentina_fr_FR.qm){
+            TRANSLATION_fr_FR.files += \
+                share/translations/valentina_fr_FR.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_fr_FR.path = "$$RESOURCES_DIR/translations/fr_FR.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_fr_FR
+        }
+
+        exists(share/translations/valentina_it_IT.qm){
+            TRANSLATION_it_IT.files += \
+                share/translations/valentina_it_IT.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_it_IT.path = "$$RESOURCES_DIR/translations/it_IT.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_it_IT
+        }
+
+        exists(share/translations/valentina_nl_NL.qm){
+            TRANSLATION_nl_NL.files += \
+                share/translations/valentina_nl_NL.qm \
+                share/translations/Localizable.strings
+            TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
+        }
+        frameworks.path = $$FRAMEWORKS_DIR
+        frameworks.files += $$files($${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/*)
+        frameworks.files += $$files($${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/*)
+        message( framework files $$frameworks.files )
+        # logo on macx.
+        ICON = ../../dist/Valentina.icns
+
+
+        # Copy to bundle standard measurements files
+        standard.path = $$RESOURCES_DIR/tables/standard/
+        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+
+        QMAKE_BUNDLE_DATA += \
+            standard \
+            frameworks
     }
-
-    exists(share/translations/valentina_cs_CZ.qm){
-        TRANSLATION_cs_CZ.files += \
-            share/translations/valentina_cs_CZ.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_cs_CZ.path = "$$RESOURCES_DIR/translations/cs_CZ.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_cs_CZ
-    }
-
-    exists(share/translations/valentina_he_IL.qm){
-        TRANSLATION_he_IL.files += \
-            share/translations/valentina_he_IL.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_he_IL.path = "$$RESOURCES_DIR/translations/he_IL.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_he_IL
-    }
-
-    exists(share/translations/valentina_fr_FR.qm){
-        TRANSLATION_fr_FR.files += \
-            share/translations/valentina_fr_FR.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_fr_FR.path = "$$RESOURCES_DIR/translations/fr_FR.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_fr_FR
-    }
-
-    exists(share/translations/valentina_it_IT.qm){
-        TRANSLATION_it_IT.files += \
-            share/translations/valentina_it_IT.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_it_IT.path = "$$RESOURCES_DIR/translations/it_IT.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_it_IT
-    }
-
-    exists(share/translations/valentina_nl_NL.qm){
-        TRANSLATION_nl_NL.files += \
-            share/translations/valentina_nl_NL.qm \
-            share/translations/Localizable.strings
-        TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
-        QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
-    }
-    frameworks.path = $$FRAMEWORKS_DIR
-    frameworks.files += $$files($${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/*)
-    frameworks.files += $$files($${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/*)
-    message( framework files $$frameworks.files )
-    # logo on macx.
-    ICON = ../../dist/Valentina.icns
-
-
-    # Copy to bundle standard measurements files
-    standard.path = $$RESOURCES_DIR/tables/standard/
-    standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
-
-    QMAKE_BUNDLE_DATA += \
-        standard \
-        frameworks
-
-
 }
 
 # Run generation *.qm file for available *.ts files each time you run qmake.
@@ -344,6 +340,7 @@ macx{
 for(DIR, INSTALL_TRANSLATIONS) {
      #add these absolute paths to a variable which
      #ends up as 'mkcommands = path1 path2 path3 ...'
+
      tr_path += $${PWD}/$$DIR
 }
 
