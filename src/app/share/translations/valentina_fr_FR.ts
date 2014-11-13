@@ -3402,305 +3402,315 @@
         <translation>Mesures</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="814"/>
+        <location filename="../../mainwindow.ui" line="809"/>
+        <source>Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="821"/>
         <source>Toolbar files</source>
         <translation>Barre d&apos;outil fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="832"/>
+        <location filename="../../mainwindow.ui" line="839"/>
         <source>ToolBar modes</source>
         <translation>Barre d&apos;outils modes</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="846"/>
+        <location filename="../../mainwindow.ui" line="853"/>
         <source>Toolbar pattern</source>
         <translation>Barre d&apos;outil patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="858"/>
+        <location filename="../../mainwindow.ui" line="865"/>
         <source>Toolbar options</source>
         <translation>Barre d&apos;outils options</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="872"/>
+        <location filename="../../mainwindow.ui" line="879"/>
         <source>Toolbar tools</source>
         <translation>Barre d&apos;outils Outils</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="894"/>
+        <location filename="../../mainwindow.ui" line="901"/>
         <source>Tool options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="968"/>
+        <location filename="../../mainwindow.ui" line="975"/>
         <source>Save &amp;As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1106"/>
+        <location filename="../../mainwindow.ui" line="1113"/>
         <source>Export pattern (layout)</source>
         <translation>Exporter le patron (agencement)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1117"/>
+        <location filename="../../mainwindow.ui" line="1124"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1127"/>
+        <location filename="../../mainwindow.ui" line="1134"/>
         <source>&amp;About Valentina</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1137"/>
+        <location filename="../../mainwindow.ui" line="1144"/>
         <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1140"/>
+        <location filename="../../mainwindow.ui" line="1147"/>
         <source>Exit the application</source>
         <translation>Quitter l&apos;&apos;application</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1148"/>
+        <location filename="../../mainwindow.ui" line="1155"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1166"/>
+        <location filename="../../mainwindow.ui" line="1173"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1203"/>
+        <location filename="../../mainwindow.ui" line="1210"/>
         <source>Original zoom </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1206"/>
+        <location filename="../../mainwindow.ui" line="1213"/>
         <source>Original Zoom </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1219"/>
+        <location filename="../../mainwindow.ui" line="1226"/>
         <source>Zoom fit best</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1222"/>
+        <location filename="../../mainwindow.ui" line="1229"/>
         <source>Ctrl+=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1238"/>
+        <location filename="../../mainwindow.ui" line="1245"/>
         <source>Stop</source>
         <translation type="unfinished">Arrêter</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1241"/>
+        <location filename="../../mainwindow.ui" line="1248"/>
         <source>Stop using tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1246"/>
+        <location filename="../../mainwindow.ui" line="1253"/>
         <source>Repot Bug...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1249"/>
+        <location filename="../../mainwindow.ui" line="1256"/>
         <source>Report bug</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1169"/>
+        <location filename="../../mainwindow.ui" line="1261"/>
+        <source>Close window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1176"/>
         <source>zoom in</source>
         <translation>zoom avant</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1182"/>
-        <location filename="../../mainwindow.ui" line="1185"/>
+        <location filename="../../mainwindow.ui" line="1189"/>
+        <location filename="../../mainwindow.ui" line="1192"/>
         <source>Zoom out</source>
         <translation>Zoom arrière</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1190"/>
+        <location filename="../../mainwindow.ui" line="1197"/>
         <source>Edit pattern XML code</source>
         <translation>Editer le code XML du patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1153"/>
+        <location filename="../../mainwindow.ui" line="1160"/>
         <source>Pattern properties</source>
         <translation>Propriétés du patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="908"/>
+        <location filename="../../mainwindow.ui" line="915"/>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="911"/>
+        <location filename="../../mainwindow.ui" line="918"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="914"/>
+        <location filename="../../mainwindow.ui" line="921"/>
         <source>Create a new pattern</source>
         <translation>Créer un nouveau patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="917"/>
+        <location filename="../../mainwindow.ui" line="924"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="927"/>
+        <location filename="../../mainwindow.ui" line="934"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="930"/>
+        <location filename="../../mainwindow.ui" line="937"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="933"/>
+        <location filename="../../mainwindow.ui" line="940"/>
         <source>Open file with pattern</source>
         <translation>Ouvrir un fichier de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="946"/>
+        <location filename="../../mainwindow.ui" line="953"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="949"/>
+        <location filename="../../mainwindow.ui" line="956"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="952"/>
+        <location filename="../../mainwindow.ui" line="959"/>
         <source>Save pattern</source>
         <translation>Enregistrer le patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="955"/>
+        <location filename="../../mainwindow.ui" line="962"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1304"/>
+        <location filename="../../mainwindow.cpp" line="1303"/>
         <source>Save as</source>
         <translation>Enregistrer sous</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="971"/>
+        <location filename="../../mainwindow.ui" line="978"/>
         <source>Save not yet saved pattern</source>
         <translation>Enregistrer le patron en cours</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="974"/>
+        <location filename="../../mainwindow.ui" line="981"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="992"/>
+        <location filename="../../mainwindow.ui" line="999"/>
         <source>Draw</source>
         <translation>Dessin</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="995"/>
+        <location filename="../../mainwindow.ui" line="1002"/>
         <source>Draw mode</source>
         <translation>Mode dessin</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="998"/>
+        <location filename="../../mainwindow.ui" line="1005"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1013"/>
+        <location filename="../../mainwindow.ui" line="1020"/>
         <source>Details</source>
         <translation>Détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1016"/>
+        <location filename="../../mainwindow.ui" line="1023"/>
         <source>Details mode</source>
         <translation>Mode détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1019"/>
+        <location filename="../../mainwindow.ui" line="1026"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1034"/>
-        <location filename="../../mainwindow.ui" line="1037"/>
+        <location filename="../../mainwindow.ui" line="1041"/>
+        <location filename="../../mainwindow.ui" line="1044"/>
         <source>Pointer tools</source>
         <translation>Outil pointeur</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1046"/>
+        <location filename="../../mainwindow.ui" line="1053"/>
         <source>New pattern piece</source>
         <translation>Nouveau élément de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1049"/>
+        <location filename="../../mainwindow.ui" line="1056"/>
         <source>Add new pattern piece</source>
         <translation>Ajouter un nouveau élément de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1052"/>
+        <location filename="../../mainwindow.ui" line="1059"/>
         <source>Ctrl+Shift+N</source>
         <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1061"/>
-        <location filename="../../mainwindow.ui" line="1064"/>
+        <location filename="../../mainwindow.ui" line="1068"/>
+        <location filename="../../mainwindow.ui" line="1071"/>
         <source>Change the label of pattern piece</source>
         <translation>Changer la désignation de l&apos;élément de patron</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1076"/>
+        <location filename="../../mainwindow.ui" line="1083"/>
         <source>Table of variables</source>
         <translation>Tableau des variables</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1079"/>
+        <location filename="../../mainwindow.ui" line="1086"/>
         <source>Tables of variables</source>
         <translation>Tableaux des variables</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1082"/>
+        <location filename="../../mainwindow.ui" line="1089"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1094"/>
+        <location filename="../../mainwindow.ui" line="1101"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1097"/>
+        <location filename="../../mainwindow.ui" line="1104"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1109"/>
+        <location filename="../../mainwindow.ui" line="1116"/>
         <source>Create layout</source>
         <translation>Créer une mise en page</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1112"/>
+        <location filename="../../mainwindow.ui" line="1119"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="708"/>
+        <location filename="../../mainwindow.cpp" line="719"/>
         <source>About Qt</source>
         <translation>A propos de Qt</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1143"/>
+        <location filename="../../mainwindow.ui" line="1150"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
@@ -3710,24 +3720,24 @@
         <translation>Élément de patron %1</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2169"/>
+        <location filename="../../mainwindow.cpp" line="2212"/>
         <source>Pattern piece:</source>
         <translation>Élément de patron:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2171"/>
+        <location filename="../../mainwindow.cpp" line="2214"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Saisir une nouvelle désignation pour cet élément de patron.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="412"/>
-        <location filename="../../mainwindow.cpp" line="437"/>
-        <location filename="../../mainwindow.cpp" line="449"/>
+        <location filename="../../mainwindow.cpp" line="423"/>
+        <location filename="../../mainwindow.cpp" line="448"/>
+        <location filename="../../mainwindow.cpp" line="460"/>
         <source>Select point</source>
         <translation>Choisir un point</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="424"/>
+        <location filename="../../mainwindow.cpp" line="435"/>
         <source>Select first point</source>
         <translation>Choisir le premier point</translation>
     </message>
@@ -3736,240 +3746,251 @@
         <translation type="vanished">Sélectionnez le point d&apos;épaule </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="462"/>
-        <location filename="../../mainwindow.cpp" line="565"/>
-        <location filename="../../mainwindow.cpp" line="676"/>
+        <location filename="../../mainwindow.cpp" line="473"/>
+        <location filename="../../mainwindow.cpp" line="576"/>
+        <location filename="../../mainwindow.cpp" line="687"/>
         <source>Select first point of line</source>
         <translation>Choisir le premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="475"/>
+        <location filename="../../mainwindow.cpp" line="486"/>
         <source>Select first point of angle</source>
         <translation>Choisir le premier point de l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="488"/>
+        <location filename="../../mainwindow.cpp" line="499"/>
         <source>Select first point of first line</source>
         <translation>Choisir le premier point de la première ligne</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="501"/>
+        <location filename="../../mainwindow.cpp" line="512"/>
         <source>Select first point curve</source>
         <translation>Choisir le premier point de la courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="514"/>
+        <location filename="../../mainwindow.cpp" line="525"/>
         <source>Select simple curve</source>
         <translation>Choisir une courbe simple</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="527"/>
+        <location filename="../../mainwindow.cpp" line="538"/>
         <source>Select point of center of arc</source>
         <translation>Choisir le point central de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="539"/>
+        <location filename="../../mainwindow.cpp" line="550"/>
         <source>Select point of curve path</source>
         <translation>Choisir un point sur la courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="552"/>
+        <location filename="../../mainwindow.cpp" line="563"/>
         <source>Select curve path</source>
         <translation>Choisir le chemin de courbe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="578"/>
+        <location filename="../../mainwindow.cpp" line="589"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Choisir points, arcs et courbes dans le sens horaire.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="603"/>
+        <location filename="../../mainwindow.cpp" line="614"/>
         <source>Select base point</source>
         <translation>Choisir le point de départ</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="616"/>
+        <location filename="../../mainwindow.cpp" line="627"/>
         <source>Select first point of axis</source>
         <translation>Choisir le premier point de l&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="630"/>
+        <location filename="../../mainwindow.cpp" line="641"/>
         <source>Select point vertically</source>
         <translation>Choisir le point verticallement</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="643"/>
+        <location filename="../../mainwindow.cpp" line="654"/>
         <source>Select detail</source>
         <translation>Choisir les détails</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="667"/>
+        <location filename="../../mainwindow.cpp" line="678"/>
         <source>Select arc</source>
         <translation>Choisir un arc</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="686"/>
+        <location filename="../../mainwindow.cpp" line="697"/>
         <source>Select curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="837"/>
+        <location filename="../../mainwindow.cpp" line="836"/>
         <source>Size: </source>
         <translation>Taille :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1298"/>
+        <location filename="../../mainwindow.cpp" line="1297"/>
         <source>pattern</source>
         <translation>parton</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1468"/>
+        <location filename="../../mainwindow.cpp" line="1510"/>
         <source>Critical error!</source>
         <translation>Erreur critique!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1468"/>
+        <location filename="../../mainwindow.cpp" line="1510"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Erreur d&apos;interprétation de fichier.(std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1518"/>
+        <location filename="../../mainwindow.cpp" line="1560"/>
         <source>Bad id.</source>
         <translation>Mauvais id.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1882"/>
+        <location filename="../../mainwindow.cpp" line="1924"/>
         <source>Could not save file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2050"/>
+        <location filename="../../mainwindow.cpp" line="2092"/>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2056"/>
+        <location filename="../../mainwindow.cpp" line="2098"/>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2247"/>
+        <location filename="../../mainwindow.cpp" line="2290"/>
         <source>Wrong units.</source>
         <translation>Mauvaises unités de mesure.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2248"/>
+        <location filename="../../mainwindow.cpp" line="2291"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation>L&apos;application ne supporte pas la table de mesure standard en pouces.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2263"/>
+        <location filename="../../mainwindow.cpp" line="2306"/>
         <source>File error.</source>
         <translation>Erreur de fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2313"/>
+        <location filename="../../mainwindow.cpp" line="2358"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2315"/>
+        <location filename="../../mainwindow.cpp" line="2360"/>
         <source>Reopen files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2345"/>
+        <location filename="../../mainwindow.cpp" line="2390"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2346"/>
+        <location filename="../../mainwindow.cpp" line="2391"/>
         <source>could not be found. Do you want to update the file location</source>
         <translation>Ne peut être trouvé. voulez vous mettre à jour le chemin du fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2359"/>
+        <location filename="../../mainwindow.cpp" line="2404"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Mesures standard (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2363"/>
+        <location filename="../../mainwindow.cpp" line="2408"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Mesures individuelles (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2283"/>
+        <location filename="../../mainwindow.cpp" line="2326"/>
         <source>File loaded</source>
         <translation>Fichier chargé</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="832"/>
+        <location filename="../../mainwindow.cpp" line="170"/>
+        <source>Individual measurements is under development</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="171"/>
+        <source>There is no way create individual measurements file independent on the pattern file.
+For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="831"/>
         <source>Height: </source>
         <translation>Stature :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="901"/>
+        <location filename="../../mainwindow.cpp" line="900"/>
         <source>Pattern Piece: </source>
         <translation>Élément de patron :</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1293"/>
-        <location filename="../../mainwindow.cpp" line="1348"/>
+        <location filename="../../mainwindow.cpp" line="1292"/>
+        <location filename="../../mainwindow.cpp" line="1347"/>
         <source>Pattern files (*.val)</source>
         <translation>Fichier de patron (*.val)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1302"/>
+        <location filename="../../mainwindow.cpp" line="1301"/>
         <source>/pattern.val</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1875"/>
+        <location filename="../../mainwindow.cpp" line="1917"/>
         <source>File saved</source>
         <translation>Fichier suvegardé</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1921"/>
+        <location filename="../../mainwindow.cpp" line="1963"/>
         <source>untitled.val</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2000"/>
+        <location filename="../../mainwindow.cpp" line="2042"/>
         <source>Unsaved change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2000"/>
+        <location filename="../../mainwindow.cpp" line="2042"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
         <translation>Le patron a été changé.
 Voulez vous sauvegarder les changements ? </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1361"/>
-        <location filename="../../mainwindow.cpp" line="2365"/>
+        <location filename="../../mainwindow.cpp" line="1360"/>
+        <location filename="../../mainwindow.cpp" line="2410"/>
         <source>Open file</source>
         <translation>Ouvrir fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1435"/>
-        <location filename="../../mainwindow.cpp" line="1459"/>
+        <location filename="../../mainwindow.cpp" line="1477"/>
+        <location filename="../../mainwindow.cpp" line="1501"/>
         <source>Error parsing file.</source>
         <translation>Erreur d&apos;interprétation de fichier.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1441"/>
+        <location filename="../../mainwindow.cpp" line="1483"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Erreur : valeur non convertissable.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1447"/>
-        <location filename="../../mainwindow.cpp" line="1524"/>
+        <location filename="../../mainwindow.cpp" line="1489"/>
+        <location filename="../../mainwindow.cpp" line="1566"/>
         <source>Error empty parameter.</source>
         <translation>Erreur : paramètre vide.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1453"/>
+        <location filename="../../mainwindow.cpp" line="1495"/>
         <source>Error wrong id.</source>
         <translation>Erreur : mauvais id.</translation>
     </message>
@@ -7461,12 +7482,12 @@ Voulez vous sauvegarder les changements ? </translation>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="185"/>
+        <location filename="../../main.cpp" line="233"/>
         <source>Pattern making program.</source>
         <translation>Programme de réalisation de patrons</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="188"/>
+        <location filename="../../main.cpp" line="236"/>
         <source>Pattern file.</source>
         <translation>Fichier Patron</translation>
     </message>

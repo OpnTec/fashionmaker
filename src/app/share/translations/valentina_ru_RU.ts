@@ -3828,7 +3828,7 @@
         <translation type="obsolete">Чертеж</translation>
     </message>
     <message>
-        <location line="+333"/>
+        <location line="+340"/>
         <source>Details mode</source>
         <translation>Режим деталей</translation>
     </message>
@@ -3849,7 +3849,7 @@
         <translation>Добавить новый чертеж</translation>
     </message>
     <message>
-        <location line="-895"/>
+        <location line="-902"/>
         <source>Perpendicular point along line</source>
         <translation>Перпендикулярная точка вдоль линии</translation>
     </message>
@@ -3924,7 +3924,7 @@
         <translation>&amp;Чертеж</translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+127"/>
         <source>New</source>
         <translation>Новое</translation>
     </message>
@@ -3993,17 +3993,22 @@
         <translation>Свойства лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="+1304"/>
+        <location filename="../../mainwindow.cpp" line="+1303"/>
         <source>Save as</source>
         <translation>Сохранить как</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="-350"/>
+        <location filename="../../mainwindow.ui" line="-357"/>
         <source>Measurements</source>
         <translation>Мерки</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+6"/>
+        <source>Window</source>
+        <translation>Окно</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Toolbar files</source>
         <translation>Панель инструментов файлы</translation>
     </message>
@@ -4159,11 +4164,16 @@
         <translation>Сообщить об ошибке</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Close window</source>
+        <translation>Закрыть окно</translation>
+    </message>
+    <message>
         <source>Zoom In</source>
         <translation type="vanished">Увеличить</translation>
     </message>
     <message>
-        <location line="-80"/>
+        <location line="-85"/>
         <source>zoom in</source>
         <translation>приблизить</translation>
     </message>
@@ -4238,7 +4248,7 @@
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="-596"/>
+        <location filename="../../mainwindow.cpp" line="-584"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -4279,12 +4289,12 @@
         <translation type="vanished">Ошибка. Чертеж с таким именем уже сущевствует.</translation>
     </message>
     <message>
-        <location line="+1461"/>
+        <location line="+1493"/>
         <source>Pattern piece:</source>
         <translation>Чертеж:</translation>
     </message>
     <message>
-        <location line="-2030"/>
+        <location line="-2073"/>
         <source>Pattern piece %1</source>
         <translation>Чертеж %1</translation>
     </message>
@@ -4293,7 +4303,7 @@
         <translation type="vanished">Ошибка создания чертежа с именем</translation>
     </message>
     <message>
-        <location line="+2032"/>
+        <location line="+2075"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введите новое имя для чертежа.</translation>
     </message>
@@ -4306,7 +4316,7 @@
         <translation type="vanished">Не могу сохранить новое имя чертежа</translation>
     </message>
     <message>
-        <location line="-1759"/>
+        <location line="-1791"/>
         <location line="+25"/>
         <location line="+12"/>
         <source>Select point</source>
@@ -4322,7 +4332,19 @@
         <translation type="vanished">Выберить точку плеча</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="-265"/>
+        <source>Individual measurements is under development</source>
+        <translation>Индивидуальные мерки находится в стадии разработки</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>There is no way create individual measurements file independent on the pattern file.
+For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
+        <translation>У вас не будет возможности создать файл с индивидуальными мерками независимо от файла лекала.
+Для того что бы отрыть файл лекала сохраните оба вайла: выкройку и мерки. Вы хотите продолжить?</translation>
+    </message>
+    <message>
+        <location line="+302"/>
         <location line="+103"/>
         <location line="+111"/>
         <source>Select first point of line</source>
@@ -4379,7 +4401,7 @@
         <translation>Выберите кривую</translation>
     </message>
     <message>
-        <location line="+151"/>
+        <location line="+139"/>
         <source>Size: </source>
         <translation>Размеры: </translation>
     </message>
@@ -4389,7 +4411,7 @@
         <translation>Чертеж</translation>
     </message>
     <message>
-        <location line="+170"/>
+        <location line="+213"/>
         <source>Critical error!</source>
         <translation>Критическая ошибка!</translation>
     </message>
@@ -4428,7 +4450,7 @@
         <translation type="vanished">Мерки используют другие единицы измерения нежели лекало. Ето леколо требует мерки в %1</translation>
     </message>
     <message>
-        <location line="+191"/>
+        <location line="+192"/>
         <source>Wrong units.</source>
         <translation>Неправильные единицы измерения.</translation>
     </message>
@@ -4443,7 +4465,7 @@
         <translation>Ошибка файла.</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+52"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Валентина не была закрыта корректно. Вы хотите восстановить файлы (%1) которые былы открыты раньше?</translation>
     </message>
@@ -4477,7 +4499,7 @@
         <translation type="vanished">Не могу сохранить лекало</translation>
     </message>
     <message>
-        <location line="-442"/>
+        <location line="-445"/>
         <source>untitled.val</source>
         <translation>без_имени.val</translation>
     </message>
@@ -4502,7 +4524,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не могу прочитать файл %1:\n%2. </translation>
     </message>
     <message>
-        <location line="+283"/>
+        <location line="+284"/>
         <source>File loaded</source>
         <translation>Файл загружен</translation>
     </message>
@@ -4547,8 +4569,8 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Ошибка сохранения файла. Не могу сохранить файл.</translation>
     </message>
     <message>
-        <location line="-922"/>
-        <location line="+1004"/>
+        <location line="-966"/>
+        <location line="+1050"/>
         <source>Open file</source>
         <translation>Открыть файл</translation>
     </message>
@@ -4587,7 +4609,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ошибка!</translation>
     </message>
     <message>
-        <location line="-1787"/>
+        <location line="-1821"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Выберить точки, дуги, кривые за часовой стрелкой.</translation>
     </message>
@@ -4615,7 +4637,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Создано %3 в %4</translation>
     </message>
     <message>
-        <location line="+202"/>
+        <location line="+190"/>
         <source>Height: </source>
         <translation>Рост:</translation>
     </message>
@@ -4652,7 +4674,7 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Не могу открыть файл лекала. Имя файла пустое</translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+176"/>
         <location line="+24"/>
         <source>Error parsing file.</source>
         <translation>Ошибка парсинга файла.</translation>
@@ -8090,7 +8112,7 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../mainwindow.cpp" line="-1348"/>
+        <location filename="../../mainwindow.cpp" line="-1390"/>
         <source>Create new pattern piece to start working.</source>
         <translation>Создайте новый чертеж  для начала работы.</translation>
     </message>
@@ -9218,7 +9240,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+185"/>
+        <location filename="../../main.cpp" line="+233"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>
