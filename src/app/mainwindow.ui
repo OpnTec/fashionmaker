@@ -1260,9 +1260,6 @@
    <property name="text">
     <string>Close window</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+W</string>
-   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
