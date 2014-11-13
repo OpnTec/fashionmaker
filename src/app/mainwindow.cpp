@@ -786,19 +786,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
     {
-        WriteSettings();
-
-        //File was closed correct.
-        QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
-        restoreFiles.removeAll(curFile);
-        qApp->getSettings()->setValue("restoreFileList", restoreFiles);
-
-        // Remove autosave file
-        QFile autofile(curFile +".autosave");
-        if (autofile.exists())
-        {
-            autofile.remove();
-        }
+        FileClosedCorrect();
 
         event->accept();
         qApp->closeAllWindows();
@@ -1421,9 +1409,42 @@ void MainWindow::Clear()
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
-
+    qApp->getUndoStack()->clear();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::FileClosedCorrect()
+{
+    WriteSettings();
+
+    //File was closed correct.
+    QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+    restoreFiles.removeAll(curFile);
+    qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+
+    // Remove autosave file
+    QFile autofile(curFile +".autosave");
+    if (autofile.exists())
+    {
+        autofile.remove();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ResetWindow()
+{
+    if (MaybeSave())
+    {
+        FileClosedCorrect();
+    }
+    else
+    {
+        return;
+    }
+    Clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
     toolOptions->ClearPropertyBrowser();
@@ -2133,7 +2154,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
-    connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::Clear);
+    connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.

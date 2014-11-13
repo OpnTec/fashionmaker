@@ -81,6 +81,7 @@ public slots:
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
     void               Clear();
+    void               ResetWindow();
 
     void               currentPPChanged(int index);
     void               OptionDraw();
@@ -256,6 +257,7 @@ private:
     void               AddDocks();
     void               PropertyBrowser();
     void               OpenNewValentina(const QString &fileName = QString())const;
+    void               FileClosedCorrect();
 };
 
 #endif // MAINWINDOW_H
