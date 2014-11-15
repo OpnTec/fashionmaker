@@ -58,9 +58,11 @@ private:
     bool      langChanged;
     bool      unitChanged;
     bool      labelLangChanged;
+    QCheckBox *sendReportCheck;
 
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
+    QGroupBox *SendGroup();
     void      SetLabelComboBox(const QStringList &list);
 };
 

@@ -34,6 +34,7 @@
 #include "../exception/vexceptionwrongid.h"
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
+#include "../version.h"
 
 #include <QDebug>
 #include <QDir>
@@ -44,6 +45,7 @@
 #include <QTemporaryFile>
 
 const qreal VApplication::PrintDPI = 96.0;
+const QString VApplication::GistFileName = QStringLiteral("gist.json");
 
 #define DefWidth 1.2//mm
 
@@ -1848,3 +1850,152 @@ bool VApplication::SafeCopy(const QString &source, const QString &destination, Q
 
     return result;
 }
+
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+//---------------------------------------------------------------------------------------------------------------------
+// Catch exception and create report. Use if program build with Mingw compiler.
+// See more about catcher https://github.com/jrfonseca/drmingw/blob/master/README.md
+void VApplication::DrMingw()
+{
+    QFile drmingw("exchndl.dll");
+    if(drmingw.exists())
+    {// If don't want create reports just delete exchndl.dll from installer
+        LoadLibrary(L"exchndl.dll");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::CollectReports() const
+{
+    // Seek file "binary_name.RPT"
+    const QString reportName = QString("%1/%2.RPT").arg(applicationDirPath())
+            .arg(QFileInfo(arguments().at(0)).baseName());
+    QFile reportFile(reportName);
+    if (reportFile.exists())
+    { // Hooray we have found crash
+        if (settings == nullptr)
+        {
+            return;// Settings was not opened.
+        }
+
+        if (settings->value("configuration/send_report/state", 1).toBool())
+        { // Try send report
+            // Remove gist.json file before close app.
+            connect(this, &VApplication::aboutToQuit, this, &VApplication::CleanGist, Qt::UniqueConnection);
+            SendReport(reportName);
+        }
+        else
+        { // Just collect report to /reports directory
+            CollectReport(reportName);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::CollectReport(const QString &reportName) const
+{
+    const QString reportsDir = QString("%1/reports").arg(qApp->applicationDirPath());
+    QDir reports(reportsDir);
+    if (reports.exists() == false)
+    {
+        reports.mkpath("."); // Create directory for reports if need
+    }
+
+    const QDateTime now = QDateTime::currentDateTime();
+    const QString timestamp = now.toString(QLatin1String("yyyyMMdd-hhmmsszzz"));
+    const QString filename = QString("%1/reports/crash-%2.RPT").arg(qApp->applicationDirPath()).arg(timestamp);
+
+    QFile reportFile(reportName);
+    reportFile.copy(filename); // Collect new crash
+    reportFile.remove(); // Clear after yourself
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::CleanGist() const
+{
+    QFile gistFile(GistFileName);
+    if (gistFile.exists())
+    {
+        gistFile.remove();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::SendReport(const QString &reportName) const
+{
+    QString content;
+    QFile reportFile(reportName);
+    if (!reportFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        return;
+    }
+
+    QTextStream in(&reportFile);
+    while (!in.atEnd())
+    {
+        content.append(in.readLine()+"\r\n");// Windows end of line
+    }
+    reportFile.close();
+
+    // Additional information
+    content.append(QString("-------------------------------")+"\r\n");
+    content.append(QString("Version:%1").arg(APP_VERSION)+"\r\n");
+    content.append(QString("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR)+"\r\n");
+    content.append(QString("Built on %3 at %4").arg(__DATE__).arg(__TIME__)+"\r\n");
+
+    // Creating json with report
+    // Example:
+    //{
+    //  "description":"Crash report",
+    //  "public":"true",
+    //  "files":{
+    //      "file1.txt":{
+    //          "content":"Report text here"
+    //      }
+    //  }
+    //}
+
+    // Useful to know when crash was created
+    const QDateTime now = QDateTime::currentDateTime();
+    const QString timestamp = now.toString(QLatin1String("yyyy/MM/dd hh:mm:ss:zzz"));
+    const QString report = QString("Crash report was created %2").arg(timestamp);
+
+    QJsonObject reportObject;
+    reportObject.insert(QStringLiteral("description"), QJsonValue(report));
+    reportObject.insert(QStringLiteral("public"), QJsonValue(QString("true")));
+
+    QJsonObject contentObject;
+    contentObject.insert(QStringLiteral("content"), QJsonValue(content));
+
+    QJsonObject fileObject;
+    fileObject.insert(QFileInfo(reportName).fileName(), QJsonValue(contentObject));
+    reportObject.insert(QStringLiteral("files"), QJsonValue(fileObject));
+
+    QFile gistFile(GistFileName);
+    if (!gistFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+    {
+        qDebug("Couldn't open gist file.");
+        return;
+    }
+
+    // Save data to file
+    QJsonDocument saveRep(reportObject);
+    gistFile.write(saveRep.toJson());
+    gistFile.close();
+
+    QFile curlFile("curl.exe");
+    if (curlFile.exists())
+    {// Trying send report
+        // Change token 28df778e0ef75e3724f7b9622fb70b9c69187779 if need
+        QString arg = QString("curl.exe -k -H \"Authorization: bearer 28df778e0ef75e3724f7b9622fb70b9c69187779\" "
+                              "-H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "
+                              "--data @gist.json https://api.github.com/gists");
+        QProcess::startDetached(arg);
+        reportFile.remove();// Clear after yourself
+    }
+    else
+    {// We can not send than just collect
+        CollectReport(reportName);
+    }
+}
+#endif //defined(Q_OS_WIN) && defined(Q_CC_GNU)
