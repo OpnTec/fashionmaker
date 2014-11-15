@@ -109,7 +109,7 @@ public:
     void               CollectReports() const;
 private slots:
     void               CleanGist() const;
-#endif
+#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -166,7 +166,7 @@ private:
 
     void               CollectReport(const QString &reportName) const;
     void               SendReport(const QString &reportName) const;
-#endif
+#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 };
 
 //---------------------------------------------------------------------------------------------------------------------
