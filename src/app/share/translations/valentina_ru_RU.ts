@@ -147,7 +147,7 @@
 <context>
     <name>ConfigurationPage</name>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="+84"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="+89"/>
         <source>Setup user interface language updated and will be used the next time start</source>
         <translation>Настройки языка интерфейса пользователя оновлены и будут задействованы при следующем запуске</translation>
     </message>
@@ -212,11 +212,26 @@
         <translation>Миллиметры</translation>
     </message>
     <message>
+        <location line="+56"/>
+        <source>Send crash reports</source>
+        <translation>Отсылка отчета об ошибках</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Send crash reports (recommended)</source>
+        <translation>Отсылка отчета об ошибках (рекомендуется)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation>После каждого падения Valentina собирает информацию которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt; которую мы собираем.</translation>
+    </message>
+    <message>
         <source>Milimiters</source>
         <translation type="vanished">Milimiters</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-61"/>
         <source>Inches</source>
         <translation>Дюймы</translation>
     </message>
@@ -3529,7 +3544,7 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="+1218"/>
+        <location filename="../../core/vapplication.cpp" line="+1220"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
@@ -9240,7 +9255,7 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="+233"/>
+        <location filename="../../main.cpp" line="+191"/>
         <source>Pattern making program.</source>
         <translation>Программа создания выкроек.</translation>
     </message>
