@@ -4,7 +4,7 @@ Valentina Web page: http://www.valentina-project.org/
 Valentina user manual https://bitbucket.org/dismine/valentina/wiki/manual/Content    
 Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
 Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    
-PPA for Ubuntu 14.04(develop): https://launchpad.net/~dismine/+archive/valentina-dev    
+PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
 Help translate https://www.transifex.com/organization/valentina    
 
 Valentina
