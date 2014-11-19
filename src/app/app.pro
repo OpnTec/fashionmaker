@@ -305,13 +305,14 @@ macx{
         TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
         QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
     }
-    frameworks.path = $$FRAMEWORKS_DIR
-    frameworks.files += $$files($${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/*)
-    frameworks.files += $$files($${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/*)
-    message( framework files $$frameworks.files )
+    qmuparser.path = $$FRAMEWORKS_DIR
+    qmuparser.files = $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/
+    vpropertyexplorer.path = $$FRAMEWORKS_DIR
+    vpropertyexplorer.files = $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/
+
+
     # logo on macx.
     ICON = ../../dist/Valentina.icns
-
 
     # Copy to bundle standard measurements files
     standard.path = $$RESOURCES_DIR/tables/standard/
@@ -319,7 +320,8 @@ macx{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        frameworks
+        qmuparser \
+        vpropertyexplorer
 
 
 }
