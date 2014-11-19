@@ -107,7 +107,7 @@ TRANSLATIONS += share/translations/valentina.ts \
                 share/translations/valentina_nl_NL.ts
 
 # Set using ccache. Function enable_ccache() defined in Valentina.pri.
-$$enable_ccache()
+#$$enable_ccache()
 
 # Set precompiled headers. Function set_PCH() defined in Valentina.pri.
 $$set_PCH()
