@@ -44,14 +44,17 @@
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent)
     : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), labelCombo(nullptr),
-      unitCombo(nullptr), osOptionCheck(nullptr), langChanged(false), unitChanged(false), labelLangChanged(false)
+      unitCombo(nullptr), osOptionCheck(nullptr), langChanged(false), unitChanged(false), labelLangChanged(false),
+      sendReportCheck(nullptr)
 {
     QGroupBox *saveGroup = SaveGroup();
     QGroupBox *langGroup = LangGroup();
+    QGroupBox *sendGroup = SendGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(saveGroup);
     mainLayout->addWidget(langGroup);
+    mainLayout->addWidget(sendGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -75,6 +78,8 @@ void ConfigurationPage::Apply()
     }
 
     qApp->getSettings()->setValue("configuration/osSeparator", osOptionCheck->isChecked());
+
+    qApp->getSettings()->setValue("configuration/send_report/state", sendReportCheck->isChecked());
 
     if (langChanged)
     {
@@ -271,6 +276,35 @@ QGroupBox *ConfigurationPage::LangGroup()
     langGroup->setLayout(langLayout);
 
     return langGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGroupBox *ConfigurationPage::SendGroup()
+{
+    QSettings *settings = qApp->getSettings();
+    SCASSERT(settings != nullptr);
+
+    QGroupBox *sendGroup = new QGroupBox(tr("Send crash reports"));
+
+    sendReportCheck = new QCheckBox(tr("Send crash reports (recommended)"));
+    bool sendReportValue = settings->value("configuration/send_report/state", 1).toBool();
+    sendReportCheck->setChecked(sendReportValue);
+
+    QLabel *description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
+                                        "problem. We do not collect any personal information. Find more about what "
+                                        "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
+                                        "Crash_reports\">kind of information</a> we collect."));
+    description->setTextFormat(Qt::RichText);
+    description->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    description->setOpenExternalLinks(true);
+    description->setWordWrap(true);
+
+    QVBoxLayout *sendLayout = new QVBoxLayout;
+    sendLayout->addWidget(sendReportCheck);
+    sendLayout->addWidget(description);
+
+    sendGroup->setLayout(sendLayout);
+    return sendGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

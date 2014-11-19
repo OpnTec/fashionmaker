@@ -2,6 +2,7 @@
 ; --------------- Headers --------------
 !include "MUI2.nsh"
 !include "headers\fileassoc.nsh"
+!include "headers\fileversion.nsh"
 !include "FileFunc.nsh"
   
 ; --------------- General --------------
@@ -11,7 +12,10 @@ SetCompressor /FINAL /SOLID lzma
 
 !define MUI_PRODUCT "Valentina"
 !define MUI_FILE "valentina"
-!define MUI_VERSION "0.2.8-alpha"
+
+!insertmacro GetPEVersionLocal "c:\pack\valentina\valentina.exe" ver
+!define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}-alpha"
+
 !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
 !define WEBSITE_LINK "http://www.valentina-project.org/"
 !define PUBLISHER "Roman Telezhynskyi"
@@ -20,7 +24,10 @@ InstallDir "$LOCALAPPDATA\${MUI_PRODUCT}"                 ; Default installation
 Name "${MUI_BRANDINGTEXT}"                                ; Name displayed on installer
 Icon "valentina\${MUI_FILE}.ico"
 Caption "${MUI_BRANDINGTEXT}"
-OutFile "${MUI_FILE}-install-v.${MUI_VERSION}_32bit.exe"  ; Resulting installer filename
+
+!define /date MYTIMESTAMP "%Y%m%d%H%M%S"
+OutFile "${MUI_FILE}_${MUI_VERSION}-${MYTIMESTAMP}_i386.exe"  ; Resulting installer filename
+
 InstallDirRegKey HKCU "$LOCALAPPDATA\${MUI_PRODUCT}" ""   ; Get installation folder from registry if available
 LicenseData "valentina\LICENSE_GPL.txt"
 RequestExecutionLevel user                                ; Request application privileges for Windows Vista

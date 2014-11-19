@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Curve path</string>
+   <string>Curved path</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
@@ -203,8 +203,8 @@
   <tabstop>doubleSpinBoxAngle1</tabstop>
   <tabstop>doubleSpinBoxKasm2</tabstop>
   <tabstop>doubleSpinBoxAngle2</tabstop>
-  <tabstop>doubleSpinBoxKcurve</tabstop>
   <tabstop>listWidget</tabstop>
+  <tabstop>doubleSpinBoxKcurve</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

@@ -48,6 +48,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -145,13 +146,16 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        line->setPoint2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
+                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        {
+                            line->setPoint2Id(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                            this->setModal(true);
+                            this->show();
+                        }
                     }
                     break;
                 default:
@@ -229,6 +233,7 @@ void DialogNormal::setFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formula);
     line->setLength(formula);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

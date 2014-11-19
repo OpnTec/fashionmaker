@@ -147,79 +147,94 @@
 <context>
     <name>ConfigurationPage</name>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="84"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="89"/>
         <source>Setup user interface language updated and will be used the next time start</source>
         <translation>Налаштування мови інтерфейсу користувача оновлені і будуть застосовані наступного запуску</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="93"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="98"/>
         <source>Default unit updated and will be used the next pattern creation</source>
         <translation>Одиниці виміру оновленні і будуть використані при наступному створенні лекала</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="128"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="133"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="130"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="135"/>
         <source>Auto-save modified pattern</source>
         <translation>Авто збереження модифіковане лекало</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="134"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="139"/>
         <source>Interval:</source>
         <translation>Інтервал:</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="145"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="150"/>
         <source>min</source>
         <translation>хв</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="164"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="169"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="165"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="170"/>
         <source>GUI language</source>
         <translation>Мова інтерфейсу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="209"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="214"/>
         <source>Decimal separator parts</source>
         <translation>Розділювач десяткової частини</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="211"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="216"/>
         <source>With OS options (%1)</source>
         <translation>З параметрами ОС (%1)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="221"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="226"/>
         <source>Default unit</source>
         <translation>Одиниця виміру по замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="225"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="230"/>
         <source>Centimeters</source>
         <translation>Сантиметри</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="226"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="231"/>
         <source>Millimiters</source>
         <translation>Міліметри</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="227"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="232"/>
         <source>Inches</source>
         <translation>Дюйми</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="244"/>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="249"/>
         <source>Label language</source>
         <translation>Мова назви точки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="287"/>
+        <source>Send crash reports</source>
+        <translation>Надсилати звіти про помилки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="289"/>
+        <source>Send crash reports (recommended)</source>
+        <translation>Надсилати звіти про помилки (рекомендується)</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/configpages/configurationpage.cpp" line="293"/>
+        <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation>Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информацію&lt;/a&gt; яку ми збираємо.</translation>
     </message>
     <message>
         <source>With OS options (.)</source>
@@ -229,7 +244,7 @@
 <context>
     <name>DelTool</name>
     <message>
-        <location filename="../../undocommands/deltool.cpp" line="38"/>
+        <location filename="../../undocommands/deltool.cpp" line="39"/>
         <source>Delete tool</source>
         <translation>Видалити деталь</translation>
     </message>
@@ -320,7 +335,7 @@
         <translation>Розрахунок довжини</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="229"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
@@ -330,67 +345,71 @@
         <translation>Вставте значення в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="192"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="195"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="238"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="239"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="246"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="256"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="253"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="263"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="260"/>
         <source>Second point of line</source>
         <translation>Друга точка лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="274"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="267"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="287"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="280"/>
         <source>Show line from first point to this point</source>
         <translation>Показати лінію від першої точки до даної</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="311"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="302"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="327"/>
-        <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="318"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="401"/>
+        <source>Standard table</source>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="392"/>
         <source>Angle of lines</source>
         <translation>Кути ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="414"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="405"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="424"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="415"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="298"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="289"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
@@ -399,27 +418,27 @@
         <translation type="obsolete">Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="340"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="331"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="353"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="344"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="369"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="360"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.ui" line="385"/>
+        <location filename="../../dialogs/tools/dialogalongline.ui" line="376"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogalongline.cpp" line="144"/>
+        <location filename="../../dialogs/tools/dialogalongline.cpp" line="142"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -447,8 +466,8 @@
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="112"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="297"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="482"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="300"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="485"/>
         <source>Calculate value</source>
         <translation>Розрахувати значення</translation>
     </message>
@@ -458,8 +477,8 @@
         <translation>Значення радіусу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="186"/>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="371"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="189"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="374"/>
         <location filename="../../dialogs/tools/dialogarc.ui" line="559"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
@@ -473,12 +492,12 @@
         <translation type="vanished">Перший кут дуги проти годинникової стрілки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="277"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="280"/>
         <source>Insert variable into formula</source>
         <translation>Вставте значення в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="329"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="332"/>
         <source>Value of first angle</source>
         <translation>Значення першого кута</translation>
     </message>
@@ -491,12 +510,12 @@
         <translation type="vanished">Другий кут дуги проти годинникової стрілки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="462"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="465"/>
         <source>Insert marked variable into formula</source>
         <translation>Вставити позначену змінну у формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="514"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="517"/>
         <source>Value of second angle</source>
         <translation>Значення другого кута</translation>
     </message>
@@ -525,19 +544,23 @@
         <translation type="obsolete">Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="257"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="260"/>
         <source>First angle</source>
         <translation>Перший кут</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="442"/>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="445"/>
         <source>Second angle</source>
         <translation>Другий кут</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.ui" line="644"/>
         <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogarc.ui" line="644"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogarc.ui" line="657"/>
@@ -575,7 +598,7 @@
         <translation>Змінні</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogarc.cpp" line="250"/>
+        <location filename="../../dialogs/tools/dialogarc.cpp" line="257"/>
         <source>Value of angle of line.</source>
         <translation>Значення кута лінії.</translation>
     </message>
@@ -617,82 +640,86 @@
         <translation>Розрахувати значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="229"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="245"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="251"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="252"/>
         <source>First point of angle</source>
         <translation>Перша точка кута</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="268"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="265"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="275"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="272"/>
         <source>Second point of angle</source>
         <translation>Друга точка кута</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="292"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="285"/>
         <source>Third point</source>
         <translation>Третя точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="299"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="292"/>
         <source>Third point of angle</source>
         <translation>Третя точка кута</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="310"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="299"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="306"/>
         <source>Show line from second point to this point</source>
         <translation>Показати лінію від першої точки до даної</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="341"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="357"/>
-        <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="344"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="434"/>
+        <source>Standard table</source>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="421"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="447"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="434"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="457"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="444"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="328"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="315"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
@@ -701,34 +728,148 @@
         <translation type="obsolete">Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="370"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="357"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="386"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="373"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="402"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="389"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.ui" line="418"/>
+        <location filename="../../dialogs/tools/dialogbisector.ui" line="405"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.cpp" line="153"/>
+        <location filename="../../dialogs/tools/dialogbisector.cpp" line="154"/>
         <source>Select second point of angle</source>
         <translation>Виберіть другу точку кута</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogbisector.cpp" line="160"/>
+        <location filename="../../dialogs/tools/dialogbisector.cpp" line="163"/>
         <source>Select third point of angle</source>
         <translation>Виберіть третю точку кута</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCurveIntersectAxis</name>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="14"/>
+        <source>Curve intersect axis</source>
+        <translation>Перетин кривої і осі</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="65"/>
+        <source>Angle</source>
+        <translation>Кут</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="102"/>
+        <source>Calculate value</source>
+        <translation>Розрахувати значення</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="134"/>
+        <source>Value of angle</source>
+        <translation>Значення кута</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="182"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="225"/>
+        <source>Axis point</source>
+        <translation>Точка осі</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="232"/>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="252"/>
+        <source>First point of line</source>
+        <translation>Перша точка лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="245"/>
+        <source>Curve</source>
+        <translation>Крива</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="265"/>
+        <source>Point label</source>
+        <translation>Ім&apos;я точки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="282"/>
+        <source>Type of line</source>
+        <translation>Тип лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="289"/>
+        <source>Show line from first point to this point</source>
+        <translation>Показати лінію від першої точки до даної</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="298"/>
+        <source>Input data</source>
+        <translation>Вхідні данні</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="311"/>
+        <source>Size and height</source>
+        <translation>Розмір і зріст</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="327"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="340"/>
+        <source>Increments</source>
+        <translation>Прибавки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="356"/>
+        <source>Length of lines</source>
+        <translation>Довжина ліній</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="372"/>
+        <source>Length of arcs</source>
+        <translation>Довжина дуг</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="388"/>
+        <source>Length of curves</source>
+        <translation>Довжина кривих</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="404"/>
+        <source>Angle of lines</source>
+        <translation>Кути ліній</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="417"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.ui" line="427"/>
+        <source>Variables</source>
+        <translation>Змінні</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcurveintersectaxis.cpp" line="191"/>
+        <source>Select axis point</source>
+        <translation>Виберіть точку осі</translation>
     </message>
 </context>
 <context>
@@ -771,72 +912,76 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="226"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="228"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="233"/>
         <source>Selected curve</source>
         <translation>Вибрана крива</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="246"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="259"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="258"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="271"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="288"/>
-        <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="287"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="301"/>
+        <source>Standard table</source>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="300"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="316"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="332"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="348"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="364"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="378"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="377"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutarc.ui" line="388"/>
+        <location filename="../../dialogs/tools/dialogcutarc.ui" line="387"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -881,72 +1026,76 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="226"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="228"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="233"/>
         <source>Selected curve</source>
         <translation>Вибрана крива</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="246"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="259"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="258"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="271"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="288"/>
-        <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="287"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="301"/>
+        <source>Standard table</source>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="300"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="316"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="332"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="348"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="364"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="378"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="377"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutspline.ui" line="388"/>
+        <location filename="../../dialogs/tools/dialogcutspline.ui" line="387"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -991,72 +1140,76 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="183"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="186"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="221"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="226"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="228"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="233"/>
         <source>Selected curve path</source>
         <translation>Вибрана складна крива</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="245"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="246"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="259"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="258"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="271"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="288"/>
-        <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="287"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="301"/>
+        <source>Standard table</source>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="300"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="317"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="316"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="333"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="332"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="348"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="364"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="378"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="377"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="388"/>
+        <location filename="../../dialogs/tools/dialogcutsplinepath.ui" line="387"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
@@ -1065,7 +1218,7 @@
     <name>DialogDetail</name>
     <message>
         <location filename="../../dialogs/tools/dialogdetail.ui" line="14"/>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="190"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="199"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
@@ -1075,44 +1228,44 @@
         <translation>Зміщення по Х</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="74"/>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="114"/>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="249"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="80"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="123"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="258"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="91"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="97"/>
         <source>Bias Y</source>
         <translation>Зміщення по Y</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="123"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="132"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="199"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="208"/>
         <source>Seam allowance</source>
         <translation>Прибавка на шви</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="271"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="280"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="177"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="186"/>
         <source>Name of detail</source>
         <translation>Ім&apos;я деталі</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="220"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="229"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogdetail.ui" line="258"/>
+        <location filename="../../dialogs/tools/dialogdetail.ui" line="267"/>
         <source>Closed</source>
         <translation>Замкнена</translation>
     </message>
@@ -1163,57 +1316,61 @@
         <translation>_</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="192"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="195"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="230"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="233"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="243"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="246"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="259"/>
         <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <translation type="vanished">Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="272"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="262"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="275"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="288"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="291"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="304"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="307"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="320"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="323"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="336"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="339"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="349"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="352"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="359"/>
+        <location filename="../../dialogs/tools/dialogeditwrongformula.ui" line="362"/>
         <source>Variables</source>
         <translation>Змінні</translation>
     </message>
@@ -1236,7 +1393,7 @@
     </message>
     <message>
         <location filename="../../dialogs/tools/dialogendline.ui" line="115"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="294"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="303"/>
         <source>Calculate value</source>
         <translation>Розрахувати значення</translation>
     </message>
@@ -1246,68 +1403,72 @@
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="186"/>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="365"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="195"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="383"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="257"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="266"/>
         <source>Angle</source>
         <translation>Кут</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="326"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="335"/>
         <source>Value of angle</source>
         <translation>Значення кута</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="403"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="421"/>
         <source>Base point</source>
         <translation>Базова точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="410"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="428"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="427"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="441"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="441"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="451"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="448"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="458"/>
         <source>Show line from first point to this point</source>
         <translation>Показати лінію від першої точки до даної</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="472"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="482"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="488"/>
-        <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="498"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="565"/>
+        <source>Standard table</source>
+        <translation type="vanished">Стандартна таблиця</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="575"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="578"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="588"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="588"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="598"/>
         <source>Variables</source>
         <translation>Змінні</translation>
     </message>
@@ -1324,7 +1485,7 @@
         <translation type="vanished">Кут</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="459"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="469"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
@@ -1333,22 +1494,22 @@
         <translation type="obsolete">Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="501"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="511"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="517"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="527"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="533"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="543"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogendline.ui" line="549"/>
+        <location filename="../../dialogs/tools/dialogendline.ui" line="559"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
@@ -1365,35 +1526,35 @@
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="35"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="38"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="55"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="54"/>
         <source>Base point</source>
         <translation>Базова точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="62"/>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="79"/>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="86"/>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="110"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="61"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="74"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="81"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="101"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="103"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="94"/>
         <source>Second point of line</source>
         <translation>Друга точка лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="121"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="108"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.ui" line="128"/>
+        <location filename="../../dialogs/tools/dialogheight.ui" line="115"/>
         <source>Show line from first point to our point</source>
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
@@ -1403,7 +1564,7 @@
         <translation>Виберість першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogheight.cpp" line="154"/>
+        <location filename="../../dialogs/tools/dialogheight.cpp" line="156"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -1417,70 +1578,80 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialoghistory.ui" line="54"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="412"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="420"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="221"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="215"/>
         <source>%1 - Base point</source>
         <translation>%1 - Базова точка</translation>
     </message>
     <message>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="219"/>
         <location filename="../../dialogs/app/dialoghistory.cpp" line="225"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="231"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Лінія від точки %1 до точки %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="237"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="231"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Точка вздовж лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="244"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="238"/>
         <source>%1 - Point of shoulder</source>
         <translation>%1 - точка плеча</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="248"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="242"/>
         <source>%3 - normal to line %1_%2</source>
         <translation>%3 - перпендикуляр до лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="255"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="249"/>
         <source>%4 - bisector of angle %1_%2_%3</source>
         <translation>%4 - бісектриса кута %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="306"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="300"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation>%4 - точка перетину дуги з центром в точці %1 і лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="314"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="308"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation>Точка перпендикуляра з точки %1 до лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="329"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="323"/>
         <source>%1 - point of intersection %2 and %3</source>
         <translation>%1 - перитину %2 і %3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="338"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="332"/>
         <source>%1 - cut arc with center %2</source>
         <translation>%1 - розразає дугу з центром в точці %2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="347"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="341"/>
         <source>%1 - cut curve %2_%3</source>
         <translation>%1 - розрізає криву %2_%3</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="361"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="355"/>
         <source>%1 - cut curve path %2</source>
         <translation>%1 - розрізає складну криву %2</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="372"/>
+        <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
+        <translation>%1 - точка перетину лінії %2_%3 і осі через точку %4</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="380"/>
+        <source>%1 - point of intersection curve and axis through point %2</source>
+        <translation>%1 - точка перетину кривої і осі через точку %2</translation>
     </message>
     <message>
         <source>%1 - cut curve point %2</source>
@@ -1491,36 +1662,36 @@
         <translation type="vanished">Отримано не правильний тип інструменту. Ігнорується.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="274"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="268"/>
         <source>Curve %1_%2</source>
         <translation>Крива %1_%2</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="263"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="257"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
         <translation>%5 - перетин ліній %1_%2 і %3_%4</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="210"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="300"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="372"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="392"/>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="399"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="204"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="294"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="366"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="400"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="407"/>
         <source>Can&apos;t create record.</source>
         <translation>Не можу створити запис.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="280"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="274"/>
         <source>Arc with center in point %1</source>
         <translation>Дуга з центром в точці %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="291"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="285"/>
         <source>Curve point %1</source>
         <translation>Точка кривої %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialoghistory.cpp" line="321"/>
+        <location filename="../../dialogs/app/dialoghistory.cpp" line="315"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Трикутник: вісь %1_%2, точки %3 і %4</translation>
     </message>
@@ -1609,7 +1780,7 @@
     <message>
         <location filename="../../dialogs/app/dialogincrements.ui" line="374"/>
         <location filename="../../dialogs/app/dialogincrements.ui" line="476"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="551"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="615"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
@@ -1680,52 +1851,82 @@
     </message>
     <message>
         <location filename="../../dialogs/app/dialogincrements.cpp" line="68"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="467"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="523"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="531"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="587"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="111"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="113"/>
         <source>male</source>
         <translation>чоловік</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="112"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="114"/>
         <source>female</source>
         <translation>жінка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="442"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="426"/>
+        <source>Could not save GivenName</source>
+        <translation>Не вдалося зебрегти імя</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="444"/>
+        <source>Could not save FamilyName</source>
+        <translation>Не вдалося збергети прізвище</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="461"/>
+        <source>Could not save Email</source>
+        <translation>Не вдалося зберегти Email</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="478"/>
+        <source>Could not save Sex</source>
+        <translation>Не вдалося зберегти стать</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="495"/>
+        <source>Could not save BirthDate</source>
+        <translation>Не вдалося зберегти Дату народження</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="506"/>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
         <translation>Мірки використовують інші одиниці виміри ніж лекало. Це лекало потребує мірок в %1</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="446"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="510"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="451"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="491"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="515"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="555"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="475"/>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="507"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="539"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="571"/>
         <source>Wrong units.</source>
         <translation>Неправильні одиниці виміру.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="490"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="554"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Стандартні мірки (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogincrements.cpp" line="546"/>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="610"/>
         <source>Name_%1</source>
         <translation>Name_%1</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/app/dialogincrements.cpp" line="827"/>
+        <source>Can&apos;t save measurement</source>
+        <translation>Не вдалося зберегти мірки</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble value.</source>
@@ -1805,39 +2006,39 @@
         <translation>Будь ласка спробуйте знову чи змініть файл</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="129"/>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="211"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="130"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="212"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="196"/>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="228"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="197"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="229"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="199"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="200"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="227"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="228"/>
         <source>Where save measurements?</source>
         <translation>Де зберегти мірки?</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="249"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="250"/>
         <source>Centimeters</source>
         <translation>Сантиметри</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="250"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="251"/>
         <source>Millimiters</source>
         <translation>Міліметри</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="251"/>
+        <location filename="../../dialogs/app/dialogindividualmeasurements.cpp" line="252"/>
         <source>Inches</source>
         <translation>Дюйми</translation>
     </message>
@@ -1850,22 +2051,22 @@
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="62"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="53"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="95"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="82"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="128"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="111"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogline.ui" line="147"/>
+        <location filename="../../dialogs/tools/dialogline.ui" line="130"/>
         <source>Show line from first point to this point</source>
         <translation>Показати лінію від першої точки до даної</translation>
     </message>
@@ -1919,14 +2120,139 @@
         <translation>Виберіть другу точка першої лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="102"/>
+        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="104"/>
         <source>Select first point of second line</source>
         <translation>Виберіть першу точку другої лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="111"/>
+        <location filename="../../dialogs/tools/dialoglineintersect.cpp" line="114"/>
         <source>Select second point of second line</source>
         <translation>Виберіть другу точку другої лінії</translation>
+    </message>
+</context>
+<context>
+    <name>DialogLineIntersectAxis</name>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="14"/>
+        <source>Line intersect axis</source>
+        <translation>Перетин лінії і осі</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="65"/>
+        <source>Angle</source>
+        <translation>Кут</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="102"/>
+        <source>Calculate value</source>
+        <translation>Розрахувати значення</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="134"/>
+        <source>Value of angle</source>
+        <translation>Значення кута</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="182"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="222"/>
+        <source>Axis point</source>
+        <translation>Точка осі</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="229"/>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="249"/>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="269"/>
+        <source>First point of line</source>
+        <translation>Перша точка лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="242"/>
+        <source>First line point</source>
+        <translation>Перша точка лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="262"/>
+        <source>Second line point</source>
+        <translation>Друга точка лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="282"/>
+        <source>Point label</source>
+        <translation>Ім&apos;я точки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="299"/>
+        <source>Type of line</source>
+        <translation>Тип лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="306"/>
+        <source>Show line from first point to this point</source>
+        <translation>Показати лінію від першої точки до даної</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="315"/>
+        <source>Input data</source>
+        <translation>Вхідні данні</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="328"/>
+        <source>Size and height</source>
+        <translation>Розмір і зріст</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="344"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="357"/>
+        <source>Increments</source>
+        <translation>Прибавки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="373"/>
+        <source>Length of lines</source>
+        <translation>Довжина ліній</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="389"/>
+        <source>Length of arcs</source>
+        <translation>Довжина дуг</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="405"/>
+        <source>Length of curves</source>
+        <translation>Довжина кривих</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="421"/>
+        <source>Angle of lines</source>
+        <translation>Кути ліній</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="434"/>
+        <source>Hide empty measurements</source>
+        <translation>Сховати пусті мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.ui" line="444"/>
+        <source>Variables</source>
+        <translation>Змінні</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.cpp" line="213"/>
+        <source>Select second point of line</source>
+        <translation>Виберіть другу точку лінії</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialoglineintersectaxis.cpp" line="223"/>
+        <source>Select axis point</source>
+        <translation>Виберіть точку осі</translation>
     </message>
 </context>
 <context>
@@ -1937,27 +2263,27 @@
         <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="48"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="50"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Будь ласка, виберіть тип лекала.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="89"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="76"/>
         <source>Graduation</source>
         <translation>Градація</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="106"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="99"/>
         <source>Use for creation pattern standard measurement table</source>
         <translation>Лекало зі стандартною таблицею</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="147"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="125"/>
         <source>Individual</source>
         <translation>Індивідуальні</translation>
     </message>
     <message>
-        <location filename="../../dialogs/app/dialogmeasurements.ui" line="164"/>
+        <location filename="../../dialogs/app/dialogmeasurements.ui" line="148"/>
         <source>Use for creation pattern individual measurements</source>
         <translation>Лекало з індивідуальними мірками</translation>
     </message>
@@ -1980,24 +2306,29 @@
         <translation>Значення довжини</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="243"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="264"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="259"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="292"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="287"/>
         <source>Additional angle degrees</source>
         <translation>Додатковий кут градуси</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="500"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="498"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="527"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
     </message>
     <message>
         <source>Size and growth</source>
@@ -2013,7 +2344,7 @@
         <translation>Розрахувати значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="227"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
@@ -2023,67 +2354,66 @@
         <translation>Вставте змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="482"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="480"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="489"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="487"/>
         <source>Show line from first point to this point</source>
         <translation>Показати лінію від першої точки до даної</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="513"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="511"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="529"/>
         <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <translation type="vanished">Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="542"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="540"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="558"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="556"/>
         <source>Length of lines</source>
         <translation>Довжини ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="574"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="572"/>
         <source>Length of arcs</source>
         <translation>Довжини дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="590"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="588"/>
         <source>Length of curves</source>
         <translation>Довжини кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="606"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="604"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="619"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="617"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.ui" line="629"/>
+        <location filename="../../dialogs/tools/dialognormal.ui" line="627"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialognormal.cpp" line="141"/>
+        <location filename="../../dialogs/tools/dialognormal.cpp" line="142"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -2324,12 +2654,12 @@
         <translation>Значення радіусу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="245"/>
         <source>Center of arc</source>
         <translation>Центер дуги</translation>
     </message>
@@ -2343,7 +2673,7 @@
         <translation>Розрахувати значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="229"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
@@ -2353,17 +2683,17 @@
         <translation>Вставте змінну в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="280"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="277"/>
         <source>Top of the line</source>
         <translation>Початок лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="313"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="306"/>
         <source>End of the line</source>
         <translation>Кінець лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="340"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="331"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
@@ -2372,58 +2702,62 @@
         <translation type="obsolete">Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="369"/>
         <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <translation type="vanished">Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="446"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="437"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="459"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="450"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="469"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="460"/>
         <source>Variables - Click twice to insert into formula.</source>
         <translation>Змінні - клікніть двічі для вставки в формулу.</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="382"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="373"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="353"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="344"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="398"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="360"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="389"/>
         <source>Length of lines</source>
         <translation>Довжини ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="414"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="405"/>
         <source>Length of arcs</source>
         <translation>Довжини дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="430"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="421"/>
         <source>Length of curves</source>
         <translation>Довжини кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="166"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="167"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="263"/>
-        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="173"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.ui" line="264"/>
+        <location filename="../../dialogs/tools/dialogpointofcontact.cpp" line="176"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
@@ -2440,17 +2774,17 @@
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="65"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="61"/>
         <source>vertical point</source>
         <translation>Точка по вертикалі</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="89"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="81"/>
         <source>horizontal point</source>
         <translation>Точка по горизонталі</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="72"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="68"/>
         <source>First point of angle</source>
         <translation>Перша точка кута</translation>
     </message>
@@ -2460,7 +2794,7 @@
         <translation>Точка перетину</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="96"/>
+        <location filename="../../dialogs/tools/dialogpointofintersection.ui" line="88"/>
         <source>Second point of angle</source>
         <translation>Друга точка кута</translation>
     </message>
@@ -2497,7 +2831,7 @@
         <translation>Розрахувати значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="224"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="229"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
@@ -2507,37 +2841,37 @@
         <translation>Вставте значення в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="186"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="244"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="245"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="277"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="274"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="310"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="303"/>
         <source>Third point</source>
-        <translation type="unfinished">Третя точка</translation>
+        <translation>Третя точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="343"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="332"/>
         <source>Type of line</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="356"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="345"/>
         <source>Show line from first point to our point</source>
         <translation>Показати лінію від першої точки до нашої точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="367"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="354"/>
         <source>Input data</source>
         <translation>Вхідні данні</translation>
     </message>
@@ -2546,57 +2880,61 @@
         <translation type="obsolete">Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="396"/>
         <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <translation type="vanished">Стандартна таблиця</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="473"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="460"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="486"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="473"/>
         <source>Hide empty measurements</source>
         <translation>Сховати пусті мірки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="496"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="483"/>
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="409"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="396"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="380"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="367"/>
         <source>Size and height</source>
         <translation>Розмір і зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="425"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="383"/>
+        <source>Measurements</source>
+        <translation>Мірки</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="412"/>
         <source>Length of lines</source>
         <translation>Довжини лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="441"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="428"/>
         <source>Length of arcs</source>
         <translation>Довжина дуг</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="457"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.ui" line="444"/>
         <source>Length of curves</source>
         <translation>Довжни кривих</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="152"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="153"/>
         <source>Select first point of line</source>
         <translation>Виберість першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="159"/>
+        <location filename="../../dialogs/tools/dialogshoulderpoint.cpp" line="162"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
@@ -2689,8 +3027,12 @@
 <context>
     <name>DialogSplinePath</name>
     <message>
-        <location filename="../../dialogs/tools/dialogsplinepath.ui" line="14"/>
         <source>Curve path</source>
+        <translation type="vanished">Складна крива</translation>
+    </message>
+    <message>
+        <location filename="../../dialogs/tools/dialogsplinepath.ui" line="14"/>
+        <source>Curved path</source>
         <translation>Складна крива</translation>
     </message>
     <message>
@@ -2776,11 +3118,11 @@
         <translation type="obsolete">Не можу знайти точку за ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="387"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="404"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="428"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="448"/>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="471"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="443"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="460"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="484"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="504"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="527"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
@@ -2809,42 +3151,42 @@
         <translation type="vanished">Не можу знайти об&apos;єкт за ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="429"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="485"/>
         <source>Empty field</source>
         <translation>Пусте поле</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="449"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="505"/>
         <source>Value can&apos;t be 0</source>
         <translation>Значення не може бути 0</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="465"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="521"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="976"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1044"/>
         <source>Height</source>
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="981"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1049"/>
         <source>Size</source>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1007"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1075"/>
         <source>Line length</source>
         <translation>Довжина лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1015"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1083"/>
         <source>Arc length</source>
         <translation>Довжина дуги</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtool.cpp" line="1023"/>
+        <location filename="../../dialogs/tools/dialogtool.cpp" line="1091"/>
         <source>Curve length</source>
         <translation>Довжина кривої</translation>
     </message>
@@ -2866,30 +3208,30 @@
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="55"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="51"/>
         <source>First point of axis</source>
         <translation>Перша точка вісі</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="62"/>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="86"/>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="110"/>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="134"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="58"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="78"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="98"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="118"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="79"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="71"/>
         <source>Second point of axis</source>
         <translation>Друга точка вісі</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="103"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="91"/>
         <source>First point</source>
         <translation>Перша точка</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.ui" line="127"/>
+        <location filename="../../dialogs/tools/dialogtriangle.ui" line="111"/>
         <source>Second point</source>
         <translation>Друга точка</translation>
     </message>
@@ -2899,12 +3241,12 @@
         <translation>Виберіть другу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="101"/>
+        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="103"/>
         <source>Select first point</source>
         <translation>Виберість першу точку</translation>
     </message>
     <message>
-        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="109"/>
+        <location filename="../../dialogs/tools/dialogtriangle.cpp" line="120"/>
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
     </message>
@@ -2982,151 +3324,151 @@
 <context>
     <name>Functions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1207"/>
+        <location filename="../../core/vapplication.cpp" line="1220"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation>sin</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1208"/>
+        <location filename="../../core/vapplication.cpp" line="1221"/>
         <source>cos</source>
         <comment>cosine function</comment>
         <translation>cos</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1209"/>
+        <location filename="../../core/vapplication.cpp" line="1222"/>
         <source>tan</source>
         <comment>tangens function</comment>
         <translation>tan</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1210"/>
+        <location filename="../../core/vapplication.cpp" line="1223"/>
         <source>asin</source>
         <comment>arcus sine function</comment>
         <translation>asin</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1211"/>
+        <location filename="../../core/vapplication.cpp" line="1224"/>
         <source>acos</source>
         <comment>arcus cosine function</comment>
         <translation>acos</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1212"/>
+        <location filename="../../core/vapplication.cpp" line="1225"/>
         <source>atan</source>
         <comment>arcus tangens function</comment>
         <translation>atan</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1213"/>
+        <location filename="../../core/vapplication.cpp" line="1226"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation>sinh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1214"/>
+        <location filename="../../core/vapplication.cpp" line="1227"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation>cosh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1215"/>
+        <location filename="../../core/vapplication.cpp" line="1228"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation>tanh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1216"/>
+        <location filename="../../core/vapplication.cpp" line="1229"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation>asibh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1217"/>
+        <location filename="../../core/vapplication.cpp" line="1230"/>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
         <translation>acosh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1218"/>
+        <location filename="../../core/vapplication.cpp" line="1231"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation>atanh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1219"/>
+        <location filename="../../core/vapplication.cpp" line="1232"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation>log2</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1220"/>
+        <location filename="../../core/vapplication.cpp" line="1233"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation>log10</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1221"/>
+        <location filename="../../core/vapplication.cpp" line="1234"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation>log</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1222"/>
+        <location filename="../../core/vapplication.cpp" line="1235"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation>ln</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1223"/>
+        <location filename="../../core/vapplication.cpp" line="1236"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation>exp</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1224"/>
+        <location filename="../../core/vapplication.cpp" line="1237"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation>sqrt</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1225"/>
+        <location filename="../../core/vapplication.cpp" line="1238"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation>sign</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1226"/>
+        <location filename="../../core/vapplication.cpp" line="1239"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation>rint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1227"/>
+        <location filename="../../core/vapplication.cpp" line="1240"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation>abs</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1228"/>
+        <location filename="../../core/vapplication.cpp" line="1241"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation>min</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1229"/>
+        <location filename="../../core/vapplication.cpp" line="1242"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation>max</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1230"/>
+        <location filename="../../core/vapplication.cpp" line="1243"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation>sum</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1231"/>
+        <location filename="../../core/vapplication.cpp" line="1244"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
@@ -3197,12 +3539,12 @@
         <translation>Інструмент трикутник.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="322"/>
+        <location filename="../../mainwindow.ui" line="348"/>
         <source>Tools for creating lines.</source>
         <translation>Інструменти для створення ліній.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="325"/>
+        <location filename="../../mainwindow.ui" line="351"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
@@ -3215,12 +3557,12 @@
         <translation type="obsolete">Інструмент точка перетину ліній.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="398"/>
+        <location filename="../../mainwindow.ui" line="424"/>
         <source>Tools for creating curves.</source>
         <translation>Інструменти для створення кривих.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="401"/>
+        <location filename="../../mainwindow.ui" line="427"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
@@ -3233,12 +3575,12 @@
         <translation type="obsolete">Інструмент складна крива.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="526"/>
+        <location filename="../../mainwindow.ui" line="575"/>
         <source>Tools for creating arcs.</source>
         <translation>Інструменти для створення дуг.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="529"/>
+        <location filename="../../mainwindow.ui" line="578"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -3247,17 +3589,17 @@
         <translation type="obsolete">Інструмент дуга.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="602"/>
+        <location filename="../../mainwindow.ui" line="674"/>
         <source>Tools for creating details.</source>
         <translation>Інструменти для створення деталей.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="605"/>
+        <location filename="../../mainwindow.ui" line="677"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="611"/>
+        <location filename="../../mainwindow.ui" line="683"/>
         <source>Tool new detail.</source>
         <translation>Інструмент нова деталь.</translation>
     </message>
@@ -3274,23 +3616,23 @@
         <translation type="obsolete">Креслення</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="937"/>
+        <location filename="../../mainwindow.ui" line="1023"/>
         <source>Details mode</source>
         <translation>Режим деталей</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="955"/>
-        <location filename="../../mainwindow.ui" line="958"/>
+        <location filename="../../mainwindow.ui" line="1041"/>
+        <location filename="../../mainwindow.ui" line="1044"/>
         <source>Pointer tools</source>
         <translation>Інструмент вказівник</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="967"/>
+        <location filename="../../mainwindow.ui" line="1053"/>
         <source>New pattern piece</source>
         <translation>Нове креслення</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="970"/>
+        <location filename="../../mainwindow.ui" line="1056"/>
         <source>Add new pattern piece</source>
         <translation>Додати нове креслення</translation>
     </message>
@@ -3305,122 +3647,134 @@
         <translation>Інструменд для створення точки з двух х и у координат двух інших точок.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="334"/>
+        <location filename="../../mainwindow.ui" line="360"/>
         <source>Line between points</source>
         <translation>Лінія між двома точками</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="360"/>
+        <location filename="../../mainwindow.ui" line="386"/>
         <source>Point at line intersection</source>
         <translation>Точка перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="410"/>
+        <location filename="../../mainwindow.ui" line="436"/>
         <source>Curve tool.</source>
         <translation>Інструмент крива.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="436"/>
+        <location filename="../../mainwindow.ui" line="462"/>
         <source>Tool for path curve.</source>
         <translation>Інструмент складна крива.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="488"/>
+        <location filename="../../mainwindow.ui" line="514"/>
         <source>Tool segment a pathed curve.</source>
         <translation>Інструмент розрізання складної кривої.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="462"/>
+        <location filename="../../mainwindow.ui" line="488"/>
         <source>Tool for segmenting a curve.</source>
         <translation>Інструмент розрізання кривої.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="538"/>
+        <location filename="../../mainwindow.ui" line="310"/>
+        <source>Point of intersection line and axis</source>
+        <translation>Точка на перетині лінії і осі</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="313"/>
+        <location filename="../../mainwindow.ui" line="540"/>
+        <location filename="../../mainwindow.ui" line="639"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="587"/>
         <source>Arc tool.</source>
         <translation>Інструмент дуга.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="564"/>
+        <location filename="../../mainwindow.ui" line="613"/>
         <source>Cut arc tool.</source>
         <translation>Інструмент розрізання дуги.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="637"/>
+        <location filename="../../mainwindow.ui" line="709"/>
         <source>Tool for union two details.</source>
         <translation>Інструмент обєднання двух деталей.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="693"/>
+        <location filename="../../mainwindow.ui" line="765"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="708"/>
+        <location filename="../../mainwindow.ui" line="780"/>
         <source>&amp;Help</source>
         <translation>&amp;Допомога</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="715"/>
+        <location filename="../../mainwindow.ui" line="788"/>
         <source>&amp;Pattern piece</source>
         <translation>&amp;Креслення</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="829"/>
+        <location filename="../../mainwindow.ui" line="915"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="832"/>
+        <location filename="../../mainwindow.ui" line="918"/>
         <source>&amp;New</source>
         <translation>&amp;Новий</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="835"/>
+        <location filename="../../mainwindow.ui" line="921"/>
         <source>Create a new pattern</source>
         <translation>Створити нове лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="838"/>
+        <location filename="../../mainwindow.ui" line="924"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="848"/>
+        <location filename="../../mainwindow.ui" line="934"/>
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="851"/>
+        <location filename="../../mainwindow.ui" line="937"/>
         <source>&amp;Open</source>
         <translation>&amp;Відкрити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="854"/>
+        <location filename="../../mainwindow.ui" line="940"/>
         <source>Open file with pattern</source>
         <translation>Відкрити файл з лекалами</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="867"/>
+        <location filename="../../mainwindow.ui" line="953"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="870"/>
+        <location filename="../../mainwindow.ui" line="956"/>
         <source>&amp;Save</source>
         <translation>&amp;Зберегти</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="873"/>
+        <location filename="../../mainwindow.ui" line="959"/>
         <source>Save pattern</source>
         <translation>Зберегти лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="876"/>
+        <location filename="../../mainwindow.ui" line="962"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="889"/>
+        <location filename="../../mainwindow.ui" line="975"/>
         <source>Save &amp;As...</source>
         <translation>Зберегти &amp;як...</translation>
     </message>
@@ -3429,157 +3783,192 @@
         <translation type="vanished">Нашатування...</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1074"/>
+        <location filename="../../mainwindow.ui" line="1160"/>
         <source>Pattern properties</source>
         <translation>Властивості лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1245"/>
+        <location filename="../../mainwindow.cpp" line="1303"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="728"/>
+        <location filename="../../mainwindow.ui" line="803"/>
         <source>Measurements</source>
         <translation>Мірки</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="739"/>
+        <location filename="../../mainwindow.ui" line="809"/>
+        <source>Window</source>
+        <translation>Вікно</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="821"/>
         <source>Toolbar files</source>
         <translation>Панель інструментів файли</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="757"/>
+        <location filename="../../mainwindow.ui" line="839"/>
         <source>ToolBar modes</source>
         <translation>Панель інструментів режими</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="771"/>
+        <location filename="../../mainwindow.ui" line="853"/>
         <source>Toolbar pattern</source>
         <translation>Панель інструметнів лекала</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="783"/>
+        <location filename="../../mainwindow.ui" line="865"/>
         <source>Toolbar options</source>
         <translation>Панель інструментів налаштування</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="794"/>
+        <location filename="../../mainwindow.ui" line="879"/>
         <source>Toolbar tools</source>
         <translation>Панель інструментів</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="815"/>
+        <location filename="../../mainwindow.ui" line="901"/>
         <source>Tool options</source>
         <translation>Параметри інструментів</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="892"/>
+        <location filename="../../mainwindow.ui" line="978"/>
         <source>Save not yet saved pattern</source>
         <translation>Зберегти ще не збережене лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="895"/>
+        <location filename="../../mainwindow.ui" line="981"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="913"/>
+        <location filename="../../mainwindow.ui" line="999"/>
         <source>Draw</source>
         <translation>Малювання</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="916"/>
+        <location filename="../../mainwindow.ui" line="1002"/>
         <source>Draw mode</source>
         <translation>Режим малювання</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="919"/>
+        <location filename="../../mainwindow.ui" line="1005"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="934"/>
+        <location filename="../../mainwindow.ui" line="1020"/>
         <source>Details</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="940"/>
+        <location filename="../../mainwindow.ui" line="1026"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="973"/>
+        <location filename="../../mainwindow.ui" line="1059"/>
         <source>Ctrl+Shift+N</source>
         <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="982"/>
-        <location filename="../../mainwindow.ui" line="985"/>
+        <location filename="../../mainwindow.ui" line="1068"/>
+        <location filename="../../mainwindow.ui" line="1071"/>
         <source>Change the label of pattern piece</source>
         <translation>Змінити ім&apos;я креслення</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1027"/>
+        <location filename="../../mainwindow.ui" line="1113"/>
         <source>Export pattern (layout)</source>
         <translation>Експорт креслення (розкладка)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1038"/>
+        <location filename="../../mainwindow.ui" line="1124"/>
         <source>About &amp;Qt</source>
         <translation>Про &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1048"/>
+        <location filename="../../mainwindow.ui" line="1134"/>
         <source>&amp;About Valentina</source>
         <translation>&amp;Про Valentina</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1058"/>
+        <location filename="../../mainwindow.ui" line="1144"/>
         <source>E&amp;xit</source>
         <translation>&amp;Вихід</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1061"/>
+        <location filename="../../mainwindow.ui" line="1147"/>
         <source>Exit the application</source>
         <translation>Закрити програму</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1064"/>
+        <location filename="../../mainwindow.ui" line="1150"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1069"/>
+        <location filename="../../mainwindow.ui" line="1155"/>
         <source>Preferences</source>
         <translation>Властивості</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1087"/>
+        <location filename="../../mainwindow.ui" line="1173"/>
         <source>Zoom in</source>
         <translation>Збільшити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1124"/>
+        <location filename="../../mainwindow.ui" line="1210"/>
         <source>Original zoom </source>
         <translation>Початковий масштаб</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1127"/>
+        <location filename="../../mainwindow.ui" line="1213"/>
         <source>Original Zoom </source>
         <translation>Початковий масштаб</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1140"/>
+        <location filename="../../mainwindow.ui" line="1226"/>
         <source>Zoom fit best</source>
         <translation>Помістити все</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1229"/>
+        <source>Ctrl+=</source>
+        <translation>Ctrl+=</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1245"/>
+        <source>Stop</source>
+        <translation>Зупинити</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1248"/>
+        <source>Stop using tool</source>
+        <translation>Зупинити використання інструменту</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1253"/>
+        <source>Repot Bug...</source>
+        <translation>Повідомити про помилку...</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1256"/>
+        <source>Report bug</source>
+        <translation>Повідомити про помилку</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.ui" line="1261"/>
+        <source>Close window</source>
+        <translation>Закрити вікно</translation>
     </message>
     <message>
         <source>Zoom In</source>
         <translation type="obsolete">Збільшити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1090"/>
+        <location filename="../../mainwindow.ui" line="1176"/>
         <source>zoom in</source>
         <translation>наблизити</translation>
     </message>
@@ -3588,13 +3977,13 @@
         <translation type="obsolete">Зменшити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1103"/>
-        <location filename="../../mainwindow.ui" line="1106"/>
+        <location filename="../../mainwindow.ui" line="1189"/>
+        <location filename="../../mainwindow.ui" line="1192"/>
         <source>Zoom out</source>
         <translation>Зменшити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1111"/>
+        <location filename="../../mainwindow.ui" line="1197"/>
         <source>Edit pattern XML code</source>
         <translation>Редагувати XML код креслення</translation>
     </message>
@@ -3607,27 +3996,27 @@
         <translation type="obsolete">Інструмент вказівник</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="997"/>
+        <location filename="../../mainwindow.ui" line="1083"/>
         <source>Table of variables</source>
         <translation>Таблиця змінних</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1000"/>
+        <location filename="../../mainwindow.ui" line="1086"/>
         <source>Tables of variables</source>
         <translation>Таблиці змінних</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1003"/>
+        <location filename="../../mainwindow.ui" line="1089"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1015"/>
+        <location filename="../../mainwindow.ui" line="1101"/>
         <source>History</source>
         <translation>Історія</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1018"/>
+        <location filename="../../mainwindow.ui" line="1104"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
@@ -3636,17 +4025,17 @@
         <translation type="vanished">Розкладки</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1030"/>
+        <location filename="../../mainwindow.ui" line="1116"/>
         <source>Create layout</source>
         <translation>Створити розкладку</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.ui" line="1033"/>
+        <location filename="../../mainwindow.ui" line="1119"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="678"/>
+        <location filename="../../mainwindow.cpp" line="719"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -3675,14 +4064,14 @@
         <translation type="vanished">Помилка збереження змін!!!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="402"/>
-        <location filename="../../mainwindow.cpp" line="427"/>
-        <location filename="../../mainwindow.cpp" line="439"/>
+        <location filename="../../mainwindow.cpp" line="423"/>
+        <location filename="../../mainwindow.cpp" line="448"/>
+        <location filename="../../mainwindow.cpp" line="460"/>
         <source>Select point</source>
         <translation>Виберість точку</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="414"/>
+        <location filename="../../mainwindow.cpp" line="435"/>
         <source>Select first point</source>
         <translation>Виберіть першу точку</translation>
     </message>
@@ -3691,103 +4080,136 @@
         <translation type="vanished">Виберіть точку плеча</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="452"/>
-        <location filename="../../mainwindow.cpp" line="555"/>
+        <location filename="../../mainwindow.cpp" line="170"/>
+        <source>Individual measurements is under development</source>
+        <translation>Індивідуальні мірки знаходяться в стадії розробки</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="171"/>
+        <source>There is no way create individual measurements file independent on the pattern file.
+For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
+        <translation>У вас не буде можливості створити файл індивідуальних мірок незалежно від файлу викройки.
+Для того щоб відкрити файл викройки зберігайте обидва файли: викройку і індивідуальні мірки. Ви хочете продовжити створення?</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="473"/>
+        <location filename="../../mainwindow.cpp" line="576"/>
+        <location filename="../../mainwindow.cpp" line="687"/>
         <source>Select first point of line</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="465"/>
+        <location filename="../../mainwindow.cpp" line="486"/>
         <source>Select first point of angle</source>
         <translation>Виберіть першу точку кута</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="478"/>
+        <location filename="../../mainwindow.cpp" line="499"/>
         <source>Select first point of first line</source>
         <translation>Виберіть першу точку першої лінії</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="491"/>
+        <location filename="../../mainwindow.cpp" line="512"/>
         <source>Select first point curve</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="517"/>
+        <location filename="../../mainwindow.cpp" line="538"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="529"/>
+        <location filename="../../mainwindow.cpp" line="550"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="795"/>
+        <location filename="../../mainwindow.cpp" line="697"/>
+        <source>Select curve</source>
+        <translation>Вибрати криву</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="836"/>
         <source>Size: </source>
         <translation>Розмір:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1239"/>
+        <location filename="../../mainwindow.cpp" line="1297"/>
         <source>pattern</source>
         <translation>Лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1397"/>
+        <location filename="../../mainwindow.cpp" line="1510"/>
         <source>Critical error!</source>
         <translation>Критична помилка!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1397"/>
+        <location filename="../../mainwindow.cpp" line="1510"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Помилка парсінгу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1431"/>
+        <location filename="../../mainwindow.cpp" line="1560"/>
         <source>Bad id.</source>
         <translation>Поганий id.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1958"/>
+        <location filename="../../mainwindow.cpp" line="1924"/>
+        <source>Could not save file</source>
+        <translation>Не вдалося зберегти файл</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="2092"/>
         <source>&amp;Undo</source>
         <translation>&amp;Відмінити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1964"/>
+        <location filename="../../mainwindow.cpp" line="2098"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2137"/>
+        <location filename="../../mainwindow.cpp" line="2290"/>
         <source>Wrong units.</source>
         <translation>Неправильні одиниці виміру.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2138"/>
+        <location filename="../../mainwindow.cpp" line="2291"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation>Програма не підтримує стандарнту таблицю з дюймами.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2153"/>
+        <location filename="../../mainwindow.cpp" line="2306"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2181"/>
+        <location filename="../../mainwindow.cpp" line="2358"/>
+        <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
+        <translation>Валентина не була закрита правильно. Ви хочете знову відкрити ці файли (%1)?</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="2360"/>
+        <source>Reopen files.</source>
+        <translation>Відкрити знову файли.</translation>
+    </message>
+    <message>
+        <location filename="../../mainwindow.cpp" line="2390"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
         <translation>Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2182"/>
+        <location filename="../../mainwindow.cpp" line="2391"/>
         <source>could not be found. Do you want to update the file location</source>
         <translation>не може бути знайдений. Ви хочете оновити шлях до файлу</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2195"/>
+        <location filename="../../mainwindow.cpp" line="2404"/>
         <source>Standard measurements (*.vst)</source>
         <translation>Стандартні мірки (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2199"/>
+        <location filename="../../mainwindow.cpp" line="2408"/>
         <source>Individual measurements (*.vit)</source>
         <translation>Індивідуальні мірки (*.vit)</translation>
     </message>
@@ -3804,12 +4226,12 @@
         <translation type="vanished">Помилка. Креслення з таким імям уже існує.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2066"/>
+        <location filename="../../mainwindow.cpp" line="2212"/>
         <source>Pattern piece:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2068"/>
+        <location filename="../../mainwindow.cpp" line="2214"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введить нове ім&apos;я для креслення.</translation>
     </message>
@@ -3854,8 +4276,8 @@
         <translation type="obsolete">Помилка збереження файлу. Не можу зберегти файл.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1302"/>
-        <location filename="../../mainwindow.cpp" line="2201"/>
+        <location filename="../../mainwindow.cpp" line="1360"/>
+        <location filename="../../mainwindow.cpp" line="2410"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
@@ -3896,12 +4318,12 @@
         <translation type="vanished">Помилка!</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="568"/>
+        <location filename="../../mainwindow.cpp" line="589"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation>Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="129"/>
+        <location filename="../../mainwindow.cpp" line="139"/>
         <source>Pattern piece %1</source>
         <translation>Креслення %1</translation>
     </message>
@@ -3910,37 +4332,37 @@
         <translation type="vanished">Помилка створення лекала з ім&apos;ям</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="504"/>
+        <location filename="../../mainwindow.cpp" line="525"/>
         <source>Select simple curve</source>
         <translation>Виберіть просту криву</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="542"/>
+        <location filename="../../mainwindow.cpp" line="563"/>
         <source>Select curve path</source>
         <translation>Виберіть складну криву</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="593"/>
+        <location filename="../../mainwindow.cpp" line="614"/>
         <source>Select base point</source>
         <translation>Виберіть базову точку</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="606"/>
+        <location filename="../../mainwindow.cpp" line="627"/>
         <source>Select first point of axis</source>
         <translation>Виберіть першу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="620"/>
+        <location filename="../../mainwindow.cpp" line="641"/>
         <source>Select point vertically</source>
         <translation>Виберіть точку по вертикалі</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="633"/>
+        <location filename="../../mainwindow.cpp" line="654"/>
         <source>Select detail</source>
         <translation>Виберіть деталь</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="657"/>
+        <location filename="../../mainwindow.cpp" line="678"/>
         <source>Select arc</source>
         <translation>Виберіть дугу</translation>
     </message>
@@ -3953,28 +4375,28 @@
         <translation type="vanished">Зібрано %3 в %4</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="790"/>
+        <location filename="../../mainwindow.cpp" line="831"/>
         <source>Height: </source>
         <translation>Зріст:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="859"/>
+        <location filename="../../mainwindow.cpp" line="900"/>
         <source>Pattern Piece: </source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1234"/>
-        <location filename="../../mainwindow.cpp" line="1289"/>
+        <location filename="../../mainwindow.cpp" line="1292"/>
+        <location filename="../../mainwindow.cpp" line="1347"/>
         <source>Pattern files (*.val)</source>
         <translation>Файл лекала (*.val)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1243"/>
+        <location filename="../../mainwindow.cpp" line="1301"/>
         <source>/pattern.val</source>
         <translation>/викрійка.val</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1795"/>
+        <location filename="../../mainwindow.cpp" line="1917"/>
         <source>File saved</source>
         <translation>Файл збережено</translation>
     </message>
@@ -3983,17 +4405,17 @@
         <translation type="vanished">Не можу зберегти лекало</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1832"/>
+        <location filename="../../mainwindow.cpp" line="1963"/>
         <source>untitled.val</source>
         <translation>безімений.val</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1908"/>
+        <location filename="../../mainwindow.cpp" line="2042"/>
         <source>Unsaved change</source>
         <translation>Незбережені зміни</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1908"/>
+        <location filename="../../mainwindow.cpp" line="2042"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
         <translation>Лекало було змінено. Ви хочете зберегти ваші зміни?</translation>
@@ -4008,7 +4430,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не можу прочитати файл%1:\n%2. </translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="2167"/>
+        <location filename="../../mainwindow.cpp" line="2326"/>
         <source>File loaded</source>
         <translation>Файл завантажено</translation>
     </message>
@@ -4029,24 +4451,24 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Не можу відкрити файл викрійки. Ім&apos;я файлу пусте</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1364"/>
-        <location filename="../../mainwindow.cpp" line="1388"/>
+        <location filename="../../mainwindow.cpp" line="1477"/>
+        <location filename="../../mainwindow.cpp" line="1501"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1370"/>
+        <location filename="../../mainwindow.cpp" line="1483"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1376"/>
-        <location filename="../../mainwindow.cpp" line="1437"/>
+        <location filename="../../mainwindow.cpp" line="1489"/>
+        <location filename="../../mainwindow.cpp" line="1566"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="1382"/>
+        <location filename="../../mainwindow.cpp" line="1495"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
@@ -4070,511 +4492,511 @@ Do you want to save your changes?</source>
 <context>
     <name>Measurements</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="293"/>
+        <location filename="../../core/vapplication.cpp" line="306"/>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Огол</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="300"/>
+        <location filename="../../core/vapplication.cpp" line="313"/>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>mid_neck_girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="307"/>
+        <location filename="../../core/vapplication.cpp" line="320"/>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ош</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="313"/>
+        <location filename="../../core/vapplication.cpp" line="326"/>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>head_and_neck_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="321"/>
+        <location filename="../../core/vapplication.cpp" line="334"/>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпт</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="328"/>
+        <location filename="../../core/vapplication.cpp" line="341"/>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дтс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="335"/>
+        <location filename="../../core/vapplication.cpp" line="348"/>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="341"/>
+        <location filename="../../core/vapplication.cpp" line="354"/>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дб</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="347"/>
+        <location filename="../../core/vapplication.cpp" line="360"/>
         <source>trunk_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>trunk_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="356"/>
+        <location filename="../../core/vapplication.cpp" line="369"/>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>shoulder_girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="363"/>
+        <location filename="../../core/vapplication.cpp" line="376"/>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ОгI</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="371"/>
+        <location filename="../../core/vapplication.cpp" line="384"/>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ОгII</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="378"/>
+        <location filename="../../core/vapplication.cpp" line="391"/>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ОгIII</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="385"/>
+        <location filename="../../core/vapplication.cpp" line="398"/>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>От</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="394"/>
+        <location filename="../../core/vapplication.cpp" line="407"/>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>high_hip_girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="401"/>
+        <location filename="../../core/vapplication.cpp" line="414"/>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Об</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="408"/>
+        <location filename="../../core/vapplication.cpp" line="421"/>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шг1</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="415"/>
+        <location filename="../../core/vapplication.cpp" line="428"/>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шг2</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="422"/>
+        <location filename="../../core/vapplication.cpp" line="435"/>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>dпл</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="429"/>
+        <location filename="../../core/vapplication.cpp" line="442"/>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>across_back_shoulder_width</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="436"/>
+        <location filename="../../core/vapplication.cpp" line="449"/>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>upper_back_width</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="443"/>
+        <location filename="../../core/vapplication.cpp" line="456"/>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="450"/>
+        <location filename="../../core/vapplication.cpp" line="463"/>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Цг</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="457"/>
+        <location filename="../../core/vapplication.cpp" line="470"/>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>halter_bustpoint_to_bustpoint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="464"/>
+        <location filename="../../core/vapplication.cpp" line="477"/>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вг</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="471"/>
+        <location filename="../../core/vapplication.cpp" line="484"/>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>crotch_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="478"/>
+        <location filename="../../core/vapplication.cpp" line="491"/>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="485"/>
+        <location filename="../../core/vapplication.cpp" line="498"/>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>shoulder_drop</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="492"/>
+        <location filename="../../core/vapplication.cpp" line="505"/>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>shoulder_slope_degrees</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="499"/>
+        <location filename="../../core/vapplication.cpp" line="512"/>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_shoulder_slope_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="506"/>
+        <location filename="../../core/vapplication.cpp" line="519"/>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_shoulder_slope_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="513"/>
+        <location filename="../../core/vapplication.cpp" line="526"/>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_shoulder_to_waist_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="520"/>
+        <location filename="../../core/vapplication.cpp" line="533"/>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_shoulder_to_waist_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="527"/>
+        <location filename="../../core/vapplication.cpp" line="540"/>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_neck_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="534"/>
+        <location filename="../../core/vapplication.cpp" line="547"/>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_neck_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="541"/>
+        <location filename="../../core/vapplication.cpp" line="554"/>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_upper_chest_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="547"/>
+        <location filename="../../core/vapplication.cpp" line="560"/>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_upper_chest_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="554"/>
+        <location filename="../../core/vapplication.cpp" line="567"/>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_waist_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="560"/>
+        <location filename="../../core/vapplication.cpp" line="573"/>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_waist_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="566"/>
+        <location filename="../../core/vapplication.cpp" line="579"/>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_upper_hip_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="573"/>
+        <location filename="../../core/vapplication.cpp" line="586"/>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_upper_hip_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="580"/>
+        <location filename="../../core/vapplication.cpp" line="593"/>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_hip_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="587"/>
+        <location filename="../../core/vapplication.cpp" line="600"/>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_hip_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="593"/>
+        <location filename="../../core/vapplication.cpp" line="606"/>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>chest_slope</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="600"/>
+        <location filename="../../core/vapplication.cpp" line="613"/>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_slope</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="607"/>
+        <location filename="../../core/vapplication.cpp" line="620"/>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_waist_slope</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="614"/>
+        <location filename="../../core/vapplication.cpp" line="627"/>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>back_waist_slope</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="621"/>
+        <location filename="../../core/vapplication.cpp" line="634"/>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_neck_to_upper_chest_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="628"/>
+        <location filename="../../core/vapplication.cpp" line="641"/>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>front_neck_to_bust_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="635"/>
+        <location filename="../../core/vapplication.cpp" line="648"/>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпер</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="642"/>
+        <location filename="../../core/vapplication.cpp" line="655"/>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпг</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="649"/>
+        <location filename="../../core/vapplication.cpp" line="662"/>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дст</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="656"/>
+        <location filename="../../core/vapplication.cpp" line="669"/>
         <source>strap_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дбр</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="664"/>
+        <location filename="../../core/vapplication.cpp" line="677"/>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>armscye_girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="670"/>
+        <location filename="../../core/vapplication.cpp" line="683"/>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Олк</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="677"/>
+        <location filename="../../core/vapplication.cpp" line="690"/>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Оп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="683"/>
+        <location filename="../../core/vapplication.cpp" line="696"/>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Озап</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="689"/>
+        <location filename="../../core/vapplication.cpp" line="702"/>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>scye_depth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="696"/>
+        <location filename="../../core/vapplication.cpp" line="709"/>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дзап</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="703"/>
+        <location filename="../../core/vapplication.cpp" line="716"/>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Втр</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="710"/>
+        <location filename="../../core/vapplication.cpp" line="723"/>
         <source>cervicale_to_wrist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>cervicale_to_wrist_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="717"/>
+        <location filename="../../core/vapplication.cpp" line="730"/>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дрлок</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="724"/>
+        <location filename="../../core/vapplication.cpp" line="737"/>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дрзап</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="732"/>
+        <location filename="../../core/vapplication.cpp" line="745"/>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>hand_width</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="738"/>
+        <location filename="../../core/vapplication.cpp" line="751"/>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>hand_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="745"/>
+        <location filename="../../core/vapplication.cpp" line="758"/>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Окис</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="752"/>
+        <location filename="../../core/vapplication.cpp" line="765"/>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Обед</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="758"/>
+        <location filename="../../core/vapplication.cpp" line="771"/>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>mid_thigh_girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="764"/>
+        <location filename="../../core/vapplication.cpp" line="777"/>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="770"/>
+        <location filename="../../core/vapplication.cpp" line="783"/>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ои</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="776"/>
+        <location filename="../../core/vapplication.cpp" line="789"/>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ощ</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="782"/>
+        <location filename="../../core/vapplication.cpp" line="795"/>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вк</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="788"/>
+        <location filename="../../core/vapplication.cpp" line="801"/>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ankle_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="795"/>
+        <location filename="../../core/vapplication.cpp" line="808"/>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>foot_width</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="802"/>
+        <location filename="../../core/vapplication.cpp" line="815"/>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>foot_length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="810"/>
+        <location filename="../../core/vapplication.cpp" line="823"/>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Р</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="816"/>
+        <location filename="../../core/vapplication.cpp" line="829"/>
         <source>cervicale_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вшт</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="822"/>
+        <location filename="../../core/vapplication.cpp" line="835"/>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>cervicale_to_knee_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="828"/>
+        <location filename="../../core/vapplication.cpp" line="841"/>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Влт</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="834"/>
+        <location filename="../../core/vapplication.cpp" line="847"/>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>high_hip_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="840"/>
+        <location filename="../../core/vapplication.cpp" line="853"/>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>hip_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="846"/>
+        <location filename="../../core/vapplication.cpp" line="859"/>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>waist_to_hip_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="852"/>
+        <location filename="../../core/vapplication.cpp" line="865"/>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>waist_to_knee_height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="858"/>
+        <location filename="../../core/vapplication.cpp" line="871"/>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дн</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="866"/>
+        <location filename="../../core/vapplication.cpp" line="879"/>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Сг</translation>
@@ -4590,289 +5012,289 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Розмір</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="871"/>
+        <location filename="../../core/vapplication.cpp" line="884"/>
         <source>height_front_neck_base_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Втос</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="878"/>
+        <location filename="../../core/vapplication.cpp" line="891"/>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Втош</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="885"/>
+        <location filename="../../core/vapplication.cpp" line="898"/>
         <source>height_shoulder_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впт</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="892"/>
+        <location filename="../../core/vapplication.cpp" line="905"/>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вст</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="898"/>
+        <location filename="../../core/vapplication.cpp" line="911"/>
         <source>height_back_angle_axilla</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Взу</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="904"/>
+        <location filename="../../core/vapplication.cpp" line="917"/>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Влоп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="910"/>
+        <location filename="../../core/vapplication.cpp" line="923"/>
         <source>height_under_buttock_folds</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="917"/>
+        <location filename="../../core/vapplication.cpp" line="930"/>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ОбI</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="924"/>
+        <location filename="../../core/vapplication.cpp" line="937"/>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ос</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="930"/>
+        <location filename="../../core/vapplication.cpp" line="943"/>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дсб</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="937"/>
+        <location filename="../../core/vapplication.cpp" line="950"/>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дсп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="944"/>
+        <location filename="../../core/vapplication.cpp" line="957"/>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпоб</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="950"/>
+        <location filename="../../core/vapplication.cpp" line="963"/>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="957"/>
+        <location filename="../../core/vapplication.cpp" line="970"/>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Длуч</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="964"/>
+        <location filename="../../core/vapplication.cpp" line="977"/>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ДIIIп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="971"/>
+        <location filename="../../core/vapplication.cpp" line="984"/>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впрп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="979"/>
+        <location filename="../../core/vapplication.cpp" line="992"/>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дтп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="986"/>
+        <location filename="../../core/vapplication.cpp" line="999"/>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="993"/>
+        <location filename="../../core/vapplication.cpp" line="1006"/>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впрз</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1002"/>
+        <location filename="../../core/vapplication.cpp" line="1015"/>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ДтсI</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1009"/>
+        <location filename="../../core/vapplication.cpp" line="1022"/>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Двчт</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1016"/>
+        <location filename="../../core/vapplication.cpp" line="1029"/>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шг</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1022"/>
+        <location filename="../../core/vapplication.cpp" line="1035"/>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>dпзр</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1029"/>
+        <location filename="../../core/vapplication.cpp" line="1042"/>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вкт</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1035"/>
+        <location filename="../../core/vapplication.cpp" line="1048"/>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впрк</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1043"/>
+        <location filename="../../core/vapplication.cpp" line="1056"/>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впк</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1049"/>
+        <location filename="../../core/vapplication.cpp" line="1062"/>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Сш</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1055"/>
+        <location filename="../../core/vapplication.cpp" line="1068"/>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Сш1</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1062"/>
+        <location filename="../../core/vapplication.cpp" line="1075"/>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>СгI</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1068"/>
+        <location filename="../../core/vapplication.cpp" line="1081"/>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>СгII</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1074"/>
+        <location filename="../../core/vapplication.cpp" line="1087"/>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>СгIII</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1080"/>
+        <location filename="../../core/vapplication.cpp" line="1093"/>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ст</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1086"/>
+        <location filename="../../core/vapplication.cpp" line="1099"/>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Сб</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1094"/>
+        <location filename="../../core/vapplication.cpp" line="1107"/>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>СбI</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1102"/>
+        <location filename="../../core/vapplication.cpp" line="1115"/>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Окс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1108"/>
+        <location filename="../../core/vapplication.cpp" line="1121"/>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>dш</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1114"/>
+        <location filename="../../core/vapplication.cpp" line="1127"/>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впкп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1121"/>
+        <location filename="../../core/vapplication.cpp" line="1134"/>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дтн1</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1128"/>
+        <location filename="../../core/vapplication.cpp" line="1141"/>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>dвр</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1134"/>
+        <location filename="../../core/vapplication.cpp" line="1147"/>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дшк</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1141"/>
+        <location filename="../../core/vapplication.cpp" line="1154"/>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дтк</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1148"/>
+        <location filename="../../core/vapplication.cpp" line="1161"/>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вп</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1154"/>
+        <location filename="../../core/vapplication.cpp" line="1167"/>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вгол</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1160"/>
+        <location filename="../../core/vapplication.cpp" line="1173"/>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Пкор</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1166"/>
+        <location filename="../../core/vapplication.cpp" line="1179"/>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпз</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1173"/>
+        <location filename="../../core/vapplication.cpp" line="1186"/>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дшош</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1180"/>
+        <location filename="../../core/vapplication.cpp" line="1193"/>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Гт1</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1186"/>
+        <location filename="../../core/vapplication.cpp" line="1199"/>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ГтII</translation>
@@ -4881,211 +5303,211 @@ Do you want to save your changes?</source>
 <context>
     <name>MeasurementsDescriptions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="296"/>
+        <location filename="../../core/vapplication.cpp" line="309"/>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
         <translation>Обхват голови</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="303"/>
+        <location filename="../../core/vapplication.cpp" line="316"/>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
         <translation>Навколо середньої частини шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="310"/>
+        <location filename="../../core/vapplication.cpp" line="323"/>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
         <translation>Обхват шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="316"/>
+        <location filename="../../core/vapplication.cpp" line="329"/>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
         <translation>Вертикальна відстань від тімені до затилку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="324"/>
+        <location filename="../../core/vapplication.cpp" line="337"/>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation>Довжина переду до талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="331"/>
+        <location filename="../../core/vapplication.cpp" line="344"/>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation>Довжина спини до талії з урахуванням виступу лопаток</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="338"/>
+        <location filename="../../core/vapplication.cpp" line="351"/>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
         <translation>Довжина плечового скату</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="344"/>
+        <location filename="../../core/vapplication.cpp" line="357"/>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
         <translation>Довжина бокової частини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="350"/>
+        <location filename="../../core/vapplication.cpp" line="363"/>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
         <translation>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="359"/>
+        <location filename="../../core/vapplication.cpp" line="372"/>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
         <translation>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="366"/>
+        <location filename="../../core/vapplication.cpp" line="379"/>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
         <translation>Обхват грудей перший</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="374"/>
+        <location filename="../../core/vapplication.cpp" line="387"/>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation>Обхват грудей другий</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="381"/>
+        <location filename="../../core/vapplication.cpp" line="394"/>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation>Обхват грудей третій</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="388"/>
+        <location filename="../../core/vapplication.cpp" line="401"/>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
         <translation>Обхват талії.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="397"/>
+        <location filename="../../core/vapplication.cpp" line="410"/>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation>Around HighHip, parallel to floor</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="404"/>
+        <location filename="../../core/vapplication.cpp" line="417"/>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
         <translation>Обхват стегон з урахуванням виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="411"/>
+        <location filename="../../core/vapplication.cpp" line="424"/>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation>Ширина грудей перша</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="418"/>
+        <location filename="../../core/vapplication.cpp" line="431"/>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
         <translation>Ширина грудей друга</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="425"/>
+        <location filename="../../core/vapplication.cpp" line="438"/>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
         <translation>Плечовий діаметр</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="432"/>
+        <location filename="../../core/vapplication.cpp" line="445"/>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
         <translation>Around HighHip, parallel to floor</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="439"/>
+        <location filename="../../core/vapplication.cpp" line="452"/>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
         <translation>Across Back UpperChest, smallest width from armscye to armscye</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="446"/>
+        <location filename="../../core/vapplication.cpp" line="459"/>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
         <translation>Ширина спини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="453"/>
+        <location filename="../../core/vapplication.cpp" line="466"/>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
         <translation>Відстань між сосковими точками</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="460"/>
+        <location filename="../../core/vapplication.cpp" line="473"/>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
         <translation>Distance from Bustpoint, behind neck, down to Bustpoint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="467"/>
+        <location filename="../../core/vapplication.cpp" line="480"/>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї збоку до соскової точки (висота грудей)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="474"/>
+        <location filename="../../core/vapplication.cpp" line="487"/>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation>From Front Waist Center, down to crotch, up to Back Waist Center</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="481"/>
+        <location filename="../../core/vapplication.cpp" line="494"/>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від лінії талії до під сідничної складки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="488"/>
+        <location filename="../../core/vapplication.cpp" line="501"/>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
         <translation>Vertical Distance from NeckPoint level to ShoulderTip level</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="495"/>
+        <location filename="../../core/vapplication.cpp" line="508"/>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
         <translation>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="502"/>
+        <location filename="../../core/vapplication.cpp" line="515"/>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
         <translation>ShoulderTip to Front Waist Center</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="509"/>
+        <location filename="../../core/vapplication.cpp" line="522"/>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
         <translation>ShoulderTip to Back Waist Center</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="516"/>
+        <location filename="../../core/vapplication.cpp" line="529"/>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint straight down front chest to Waistline</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="523"/>
+        <location filename="../../core/vapplication.cpp" line="536"/>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
         <translation>Back NeckPoint straight down back chest to Waistline</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="530"/>
+        <location filename="../../core/vapplication.cpp" line="543"/>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint to NeckPoint through Front Neck Center</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="537"/>
+        <location filename="../../core/vapplication.cpp" line="550"/>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint to NeckPoint across Nape</translation>
@@ -5096,589 +5518,589 @@ Do you want to save your changes?</source>
         <translation type="vanished">front_upper-bust_arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="544"/>
+        <location filename="../../core/vapplication.cpp" line="557"/>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
         <translation>Front upper-bust arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="550"/>
+        <location filename="../../core/vapplication.cpp" line="563"/>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
         <translation>Back UpperBust side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="557"/>
+        <location filename="../../core/vapplication.cpp" line="570"/>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation>Front Waist side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="563"/>
+        <location filename="../../core/vapplication.cpp" line="576"/>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
         <translation>Back Waist side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="569"/>
+        <location filename="../../core/vapplication.cpp" line="582"/>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation>Front UpperHip side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="576"/>
+        <location filename="../../core/vapplication.cpp" line="589"/>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
         <translation>Back UpperHip side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="583"/>
+        <location filename="../../core/vapplication.cpp" line="596"/>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation>Front Hip side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="590"/>
+        <location filename="../../core/vapplication.cpp" line="603"/>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
         <translation>Back Hip side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="596"/>
+        <location filename="../../core/vapplication.cpp" line="609"/>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint to Front ArmfoldPoint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="603"/>
+        <location filename="../../core/vapplication.cpp" line="616"/>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint to Back ArmfoldPoint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="610"/>
+        <location filename="../../core/vapplication.cpp" line="623"/>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint across Front Chest to Waist side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="617"/>
+        <location filename="../../core/vapplication.cpp" line="630"/>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint across Back Chest to Waist side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="624"/>
+        <location filename="../../core/vapplication.cpp" line="637"/>
         <source>Front Neck Center straight down to UpperChest line</source>
         <comment>Full measurement description</comment>
         <translation>Front Neck Center straight down to UpperChest line</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="631"/>
+        <location filename="../../core/vapplication.cpp" line="644"/>
         <source>Front Neck Center straight down to Bust line</source>
         <comment>Full measurement description</comment>
         <translation>Front Neck Center straight down to Bust line</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="638"/>
+        <location filename="../../core/vapplication.cpp" line="651"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
         <translation>Довжина переду від лінії талії вгору по центру до початку ложбини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="645"/>
+        <location filename="../../core/vapplication.cpp" line="658"/>
         <source>Front waist to lower breast</source>
         <comment>Full measurement description</comment>
         <translation>Довжина від талії до основи грудних залоз</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="652"/>
+        <location filename="../../core/vapplication.cpp" line="665"/>
         <source>Back waist to upper chest</source>
         <comment>Full measurement description</comment>
         <translation>Довжина спинки по спині від лінії талії вверх до виступаючого кута лопатки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="659"/>
+        <location filename="../../core/vapplication.cpp" line="672"/>
         <source>Strap length</source>
         <comment>Full measurement description</comment>
         <translation>Довжина бретелі від виступаючого куточка лопатки вертикально до початку грудної залози</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="667"/>
+        <location filename="../../core/vapplication.cpp" line="680"/>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
         <translation>Around Armscye</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="673"/>
+        <location filename="../../core/vapplication.cpp" line="686"/>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
         <translation>Обхват локтя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="680"/>
+        <location filename="../../core/vapplication.cpp" line="693"/>
         <source>Around UpperArm</source>
         <comment>Full measurement description</comment>
         <translation>Обхват плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="686"/>
+        <location filename="../../core/vapplication.cpp" line="699"/>
         <source>Around Wrist</source>
         <comment>Full measurement description</comment>
         <translation>Обхват зап&apos;ястя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="692"/>
+        <location filename="../../core/vapplication.cpp" line="705"/>
         <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
         <comment>Full measurement description</comment>
         <translation>Nape straight down to UnderBust line (same as Back UpperBust height)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="699"/>
+        <location filename="../../core/vapplication.cpp" line="712"/>
         <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї збоку до лінії обхвату зап&apos;ястя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="706"/>
+        <location filename="../../core/vapplication.cpp" line="719"/>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
         <translation>Внутрішня довжина рукава (з окатом)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="713"/>
+        <location filename="../../core/vapplication.cpp" line="726"/>
         <source>Nape to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation>Nape to Wrist, with elbow bent and hand on hip</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="720"/>
+        <location filename="../../core/vapplication.cpp" line="733"/>
         <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation>Довжина руки до локтя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="727"/>
+        <location filename="../../core/vapplication.cpp" line="740"/>
         <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
         <translation>Довжина рукава до лінії обхвату зап&apos;ястя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="735"/>
+        <location filename="../../core/vapplication.cpp" line="748"/>
         <source>Hand side to side</source>
         <comment>Full measurement description</comment>
         <translation>Рука з боку в бік</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="741"/>
+        <location filename="../../core/vapplication.cpp" line="754"/>
         <source>Hand Middle Finger tip to wrist</source>
         <comment>Full measurement description</comment>
         <translation>Hand Middle Finger tip to wrist</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="748"/>
+        <location filename="../../core/vapplication.cpp" line="761"/>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
         <translation>Обхват кисті</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="755"/>
+        <location filename="../../core/vapplication.cpp" line="768"/>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
         <translation>Обхват стегна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="761"/>
+        <location filename="../../core/vapplication.cpp" line="774"/>
         <source>Around MidThigh</source>
         <comment>Full measurement description</comment>
         <translation>Around MidThigh</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="767"/>
+        <location filename="../../core/vapplication.cpp" line="780"/>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
         <translation>Обхват коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="773"/>
+        <location filename="../../core/vapplication.cpp" line="786"/>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
         <translation>Обхват ікри</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="779"/>
+        <location filename="../../core/vapplication.cpp" line="792"/>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
         <translation>Обхват щиколотки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="785"/>
+        <location filename="../../core/vapplication.cpp" line="798"/>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
         <translation>Висота колінної точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="791"/>
+        <location filename="../../core/vapplication.cpp" line="804"/>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
         <translation>Ankle to Floor</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="798"/>
+        <location filename="../../core/vapplication.cpp" line="811"/>
         <source>Widest part of Foot side to side</source>
         <comment>Full measurement description</comment>
         <translation>Widest part of Foot side to side</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="805"/>
+        <location filename="../../core/vapplication.cpp" line="818"/>
         <source>Tip of Longest Toe straight to back of heel</source>
         <comment>Full measurement description</comment>
         <translation>Кінчик довгого пальця прямо до задньої частини каблука</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="813"/>
+        <location filename="../../core/vapplication.cpp" line="826"/>
         <source>Top of head to floor</source>
         <comment>Full measurement description</comment>
         <translation>Верх голови до підлоги</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="819"/>
+        <location filename="../../core/vapplication.cpp" line="832"/>
         <source>Nape to Floor</source>
         <comment>Full measurement description</comment>
         <translation>Висота точки основи шиї ззаду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="825"/>
+        <location filename="../../core/vapplication.cpp" line="838"/>
         <source>Nape to Knee</source>
         <comment>Full measurement description</comment>
         <translation>Довжина з потилицю до коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="831"/>
+        <location filename="../../core/vapplication.cpp" line="844"/>
         <source>Waist side to floor</source>
         <comment>Full measurement description</comment>
         <translation>Висота лінії талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="837"/>
+        <location filename="../../core/vapplication.cpp" line="850"/>
         <source>HighHip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation>HighHip side to Floor</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="843"/>
+        <location filename="../../core/vapplication.cpp" line="856"/>
         <source>Hip side to Floor</source>
         <comment>Full measurement description</comment>
         <translation>Бічна сторона ступні</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="849"/>
+        <location filename="../../core/vapplication.cpp" line="862"/>
         <source>Waist side to Hip</source>
         <comment>Full measurement description</comment>
         <translation>Waist side to Hip</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="855"/>
+        <location filename="../../core/vapplication.cpp" line="868"/>
         <source>Waist side to Knee</source>
         <comment>Full measurement description</comment>
         <translation>Waist side to Knee</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="861"/>
+        <location filename="../../core/vapplication.cpp" line="874"/>
         <source>Crotch to Floor along inside leg</source>
         <comment>Full measurement description</comment>
         <translation>Довжина ноги по внутрішній поверхні</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="868"/>
+        <location filename="../../core/vapplication.cpp" line="881"/>
         <source>Size</source>
         <comment>Full measurement description</comment>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="874"/>
+        <location filename="../../core/vapplication.cpp" line="887"/>
         <source>Height of the point base of the neck in front</source>
         <comment>Full measurement description</comment>
         <translation>Висота точки основи шиї спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="881"/>
+        <location filename="../../core/vapplication.cpp" line="894"/>
         <source>Height of the base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation>Висота точки основи шиї збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="888"/>
+        <location filename="../../core/vapplication.cpp" line="901"/>
         <source>The height of the shoulder point</source>
         <comment>Full measurement description</comment>
         <translation>Висота плечової точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="895"/>
+        <location filename="../../core/vapplication.cpp" line="908"/>
         <source>Height nipple point</source>
         <comment>Full measurement description</comment>
         <translation>Висота соскової точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="901"/>
+        <location filename="../../core/vapplication.cpp" line="914"/>
         <source>Height back angle axilla</source>
         <comment>Full measurement description</comment>
         <translation>Висота заднього кута пахвової западини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="907"/>
+        <location filename="../../core/vapplication.cpp" line="920"/>
         <source>Height scapular point</source>
         <comment>Full measurement description</comment>
         <translation>Висота лопаточной точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="913"/>
+        <location filename="../../core/vapplication.cpp" line="926"/>
         <source>Height under buttock folds</source>
         <comment>Full measurement description</comment>
         <translation>Висота під сідничної складки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="920"/>
+        <location filename="../../core/vapplication.cpp" line="933"/>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation>Обхват стегон без урахування виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="927"/>
+        <location filename="../../core/vapplication.cpp" line="940"/>
         <source>Girth foot instep</source>
         <comment>Full measurement description</comment>
         <translation>Обхват підйому стопи</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="933"/>
+        <location filename="../../core/vapplication.cpp" line="946"/>
         <source>The distance from the side waist to floor</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від лінії талії до підлоги збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="940"/>
+        <location filename="../../core/vapplication.cpp" line="953"/>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від лінії талії до підлоги спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="947"/>
+        <location filename="../../core/vapplication.cpp" line="960"/>
         <source>Arc through groin area</source>
         <comment>Full measurement description</comment>
         <translation>Дуга через пахову область</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="953"/>
+        <location filename="../../core/vapplication.cpp" line="966"/>
         <source>The distance from the waist to the plane seat</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від лінії талії до площини сидіння</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="960"/>
+        <location filename="../../core/vapplication.cpp" line="973"/>
         <source>The distance from the base of the neck to the side of the radial point</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї збоку до променевої точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="967"/>
+        <location filename="../../core/vapplication.cpp" line="980"/>
         <source>Distance from the base of the neck side point to the end of the third finger</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї збоку до кінця третього пальця</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="975"/>
+        <location filename="../../core/vapplication.cpp" line="988"/>
         <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї збоку до лінії обхвату грудей першого спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="982"/>
+        <location filename="../../core/vapplication.cpp" line="995"/>
         <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї збоку до лінії талії спереду (обхват талії спереду)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="989"/>
+        <location filename="../../core/vapplication.cpp" line="1002"/>
         <source>Arc through the highest point of the shoulder joint</source>
         <comment>Full measurement description</comment>
         <translation>Дуга через вищу точку плечового суглоба</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="997"/>
+        <location filename="../../core/vapplication.cpp" line="1010"/>
         <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї ззаду до лінії обхватів грудей першого і другого з урахуванням виступу лопаток</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1005"/>
+        <location filename="../../core/vapplication.cpp" line="1018"/>
         <source>The distance from the waist to the back base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від лінії талії ззаду до точки основи шиї збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1012"/>
+        <location filename="../../core/vapplication.cpp" line="1025"/>
         <source>Arc length of the upper body through the base of the neck side point</source>
         <comment>Full measurement description</comment>
         <translation>Довжина дуги верхньої частини тулуба через точку підстави шиї збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1019"/>
+        <location filename="../../core/vapplication.cpp" line="1032"/>
         <source>Chest width</source>
         <comment>Full measurement description</comment>
         <translation>Ширина грудей</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1025"/>
+        <location filename="../../core/vapplication.cpp" line="1038"/>
         <source>Anteroposterior diameter of the hands</source>
         <comment>Full measurement description</comment>
         <translation>Передньо-задній діаметр руки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1032"/>
+        <location filename="../../core/vapplication.cpp" line="1045"/>
         <source>Height clavicular point</source>
         <comment>Full measurement description</comment>
         <translation>Висота ключичної точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1038"/>
+        <location filename="../../core/vapplication.cpp" line="1051"/>
         <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від шийної точки до рівня заднього кута пахвової западини спереду (коса висота пройми)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1046"/>
+        <location filename="../../core/vapplication.cpp" line="1059"/>
         <source>Slash shoulder height</source>
         <comment>Full measurement description</comment>
         <translation>Коса висота плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1052"/>
+        <location filename="../../core/vapplication.cpp" line="1065"/>
         <source>Half girth neck</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1058"/>
+        <location filename="../../core/vapplication.cpp" line="1071"/>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват шиї для сорочок</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1065"/>
+        <location filename="../../core/vapplication.cpp" line="1078"/>
         <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват грудей перший</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1071"/>
+        <location filename="../../core/vapplication.cpp" line="1084"/>
         <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват грудей другий</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1077"/>
+        <location filename="../../core/vapplication.cpp" line="1090"/>
         <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват грудей третій</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1083"/>
+        <location filename="../../core/vapplication.cpp" line="1096"/>
         <source>Half girth waist</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1090"/>
+        <location filename="../../core/vapplication.cpp" line="1103"/>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват стегон з урахуванням виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1098"/>
+        <location filename="../../core/vapplication.cpp" line="1111"/>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
         <translation>Півобхват стегон без урахування виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1105"/>
+        <location filename="../../core/vapplication.cpp" line="1118"/>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement description</comment>
         <translation>Обхват коліна в зігнутому положенні ноги</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1111"/>
+        <location filename="../../core/vapplication.cpp" line="1124"/>
         <source>Neck transverse diameter</source>
         <comment>Full measurement description</comment>
         <translation>Поперечний діаметр шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1117"/>
+        <location filename="../../core/vapplication.cpp" line="1130"/>
         <source>Front slash shoulder height</source>
         <comment>Full measurement description</comment>
         <translation>Коса висота плеча переду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1124"/>
+        <location filename="../../core/vapplication.cpp" line="1137"/>
         <source>The distance from the base of the neck to the waist line front</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від точки основи шиї до лінії талії спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1131"/>
+        <location filename="../../core/vapplication.cpp" line="1144"/>
         <source>Hand vertical diameter</source>
         <comment>Full measurement description</comment>
         <translation>Вертикальний діаметр руки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1137"/>
+        <location filename="../../core/vapplication.cpp" line="1150"/>
         <source>Distance from neck to knee point</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від шийної точки до коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1144"/>
+        <location filename="../../core/vapplication.cpp" line="1157"/>
         <source>The distance from the waist to the knee</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від лінії талії до коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1151"/>
+        <location filename="../../core/vapplication.cpp" line="1164"/>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
         <translation>Висота плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1157"/>
+        <location filename="../../core/vapplication.cpp" line="1170"/>
         <source>Head height</source>
         <comment>Full measurement description</comment>
         <translation>Висота голови</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1163"/>
+        <location filename="../../core/vapplication.cpp" line="1176"/>
         <source>Body position</source>
         <comment>Full measurement description</comment>
         <translation>Положення корпусу</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1169"/>
+        <location filename="../../core/vapplication.cpp" line="1182"/>
         <source>Arc behind the shoulder girdle</source>
         <comment>Full measurement description</comment>
         <translation>Дуга плечового пояса ззаду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1176"/>
+        <location filename="../../core/vapplication.cpp" line="1189"/>
         <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
         <comment>Full measurement description</comment>
         <translation>Відстань від шийної точки до точки основи шиї збоку по лінії вимірювання обхвату шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1183"/>
+        <location filename="../../core/vapplication.cpp" line="1196"/>
         <source>Depth waist first</source>
         <comment>Full measurement description</comment>
         <translation>Глибина талії перша</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1189"/>
+        <location filename="../../core/vapplication.cpp" line="1202"/>
         <source>Depth waist second</source>
         <comment>Full measurement description</comment>
         <translation>Глибина талії друга</translation>
@@ -5687,799 +6109,799 @@ Do you want to save your changes?</source>
 <context>
     <name>MeasurementsFullNames</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="295"/>
+        <location filename="../../core/vapplication.cpp" line="308"/>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват голови</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="302"/>
+        <location filename="../../core/vapplication.cpp" line="315"/>
         <source>Mid-neck girth</source>
         <comment>Full measurement name</comment>
         <translation>Половина обхвата шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="309"/>
+        <location filename="../../core/vapplication.cpp" line="322"/>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="315"/>
+        <location filename="../../core/vapplication.cpp" line="328"/>
         <source>Head and Neck length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина шиї і голови</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="323"/>
+        <location filename="../../core/vapplication.cpp" line="336"/>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина переду до талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="330"/>
+        <location filename="../../core/vapplication.cpp" line="343"/>
         <source>Back Center length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина спини до талії з урахуванням виступу лопаток</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="337"/>
+        <location filename="../../core/vapplication.cpp" line="350"/>
         <source>Shoulder length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина плечового ската</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="343"/>
+        <location filename="../../core/vapplication.cpp" line="356"/>
         <source>Side Waist length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина бічної частини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="349"/>
+        <location filename="../../core/vapplication.cpp" line="362"/>
         <source>Trunk length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина тулуба</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="358"/>
+        <location filename="../../core/vapplication.cpp" line="371"/>
         <source>Shoulder girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="365"/>
+        <location filename="../../core/vapplication.cpp" line="378"/>
         <source>Upper Chest girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват грудей перший</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="373"/>
+        <location filename="../../core/vapplication.cpp" line="386"/>
         <source>Bust girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват грудей другий</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="380"/>
+        <location filename="../../core/vapplication.cpp" line="393"/>
         <source>Under Bust girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват грудей третій</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="387"/>
+        <location filename="../../core/vapplication.cpp" line="400"/>
         <source>Waist girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="396"/>
+        <location filename="../../core/vapplication.cpp" line="409"/>
         <source>HighHip girth</source>
         <comment>Full measurement name</comment>
         <translation>HighHip girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="403"/>
+        <location filename="../../core/vapplication.cpp" line="416"/>
         <source>Hip girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват стегон з урахуванням виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="410"/>
+        <location filename="../../core/vapplication.cpp" line="423"/>
         <source>Front Upper Chest width</source>
         <comment>Full measurement name</comment>
         <translation>Ширина грудей перша</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="417"/>
+        <location filename="../../core/vapplication.cpp" line="430"/>
         <source>Front Chest width</source>
         <comment>Full measurement name</comment>
         <translation>Ширина грудей друга</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="424"/>
+        <location filename="../../core/vapplication.cpp" line="437"/>
         <source>Front Across Shoulder width</source>
         <comment>Full measurement name</comment>
         <translation>Плечевий діаметр</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="431"/>
+        <location filename="../../core/vapplication.cpp" line="444"/>
         <source>Back Across Shoulder width</source>
         <comment>Full measurement name</comment>
         <translation>Back Across Shoulder width</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="438"/>
+        <location filename="../../core/vapplication.cpp" line="451"/>
         <source>Back Upper Chest width</source>
         <comment>Full measurement name</comment>
         <translation>Back Upper Chest width</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="445"/>
+        <location filename="../../core/vapplication.cpp" line="458"/>
         <source>Back Chest width</source>
         <comment>Full measurement name</comment>
         <translation>Ширина спини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="452"/>
+        <location filename="../../core/vapplication.cpp" line="465"/>
         <source>BustPoint to BustPoint</source>
         <comment>Full measurement name</comment>
         <translation>Відстань між сосковими точками</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="459"/>
+        <location filename="../../core/vapplication.cpp" line="472"/>
         <source>Halter Bustpoint to Bustpoint</source>
         <comment>Full measurement name</comment>
         <translation>Halter Bustpoint to Bustpoint</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="466"/>
+        <location filename="../../core/vapplication.cpp" line="479"/>
         <source>NeckPoint to BustPoint</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї збоку до соскової точки (висота грудей)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="473"/>
+        <location filename="../../core/vapplication.cpp" line="486"/>
         <source>Crotch length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина промежини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="480"/>
+        <location filename="../../core/vapplication.cpp" line="493"/>
         <source>Rise height</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від лінії талії до под&apos;ягодічной складки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="487"/>
+        <location filename="../../core/vapplication.cpp" line="500"/>
         <source>Shoulder Drop</source>
         <comment>Full measurement name</comment>
         <translation>Shoulder Drop</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="494"/>
+        <location filename="../../core/vapplication.cpp" line="507"/>
         <source>Shoulder Slope degrees</source>
         <comment>Full measurement name</comment>
         <translation>Схил плеча в градусах</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="501"/>
+        <location filename="../../core/vapplication.cpp" line="514"/>
         <source>Front Shoulder Balance</source>
         <comment>Full measurement name</comment>
         <translation>Передній баланс плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="508"/>
+        <location filename="../../core/vapplication.cpp" line="521"/>
         <source>Back Shoulder Balance</source>
         <comment>Full measurement name</comment>
         <translation>Задній баланс плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="515"/>
+        <location filename="../../core/vapplication.cpp" line="528"/>
         <source>Front Full Length</source>
         <comment>Full measurement name</comment>
         <translation>Повна передня довжина</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="522"/>
+        <location filename="../../core/vapplication.cpp" line="535"/>
         <source>Back Full Length</source>
         <comment>Full measurement name</comment>
         <translation>Повна задня довжина</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="529"/>
+        <location filename="../../core/vapplication.cpp" line="542"/>
         <source>Front Neck arc</source>
         <comment>Full measurement name</comment>
         <translation>Передня дуга шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="536"/>
+        <location filename="../../core/vapplication.cpp" line="549"/>
         <source>Back Neck arc</source>
         <comment>Full measurement name</comment>
         <translation>Задня дуга шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="543"/>
+        <location filename="../../core/vapplication.cpp" line="556"/>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
         <translation>Front upper-bust arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="549"/>
+        <location filename="../../core/vapplication.cpp" line="562"/>
         <source>Back UpperBust arc</source>
         <comment>Full measurement name</comment>
         <translation>Back UpperBust arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="556"/>
+        <location filename="../../core/vapplication.cpp" line="569"/>
         <source>Front Waist arc</source>
         <comment>Full measurement name</comment>
         <translation>Передня дуга талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="562"/>
+        <location filename="../../core/vapplication.cpp" line="575"/>
         <source>Back Waist arc</source>
         <comment>Full measurement name</comment>
         <translation>Задня дуга талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="568"/>
+        <location filename="../../core/vapplication.cpp" line="581"/>
         <source>Front UpperHip arc</source>
         <comment>Full measurement name</comment>
         <translation>Front UpperHip arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="575"/>
+        <location filename="../../core/vapplication.cpp" line="588"/>
         <source>Back UpperHip arc</source>
         <comment>Full measurement name</comment>
         <translation>Back UpperHip arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="582"/>
+        <location filename="../../core/vapplication.cpp" line="595"/>
         <source>Front Hip arc</source>
         <comment>Full measurement name</comment>
         <translation>Front Hip arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="589"/>
+        <location filename="../../core/vapplication.cpp" line="602"/>
         <source>Back Hip arc</source>
         <comment>Full measurement name</comment>
         <translation>Back Hip arc</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="595"/>
+        <location filename="../../core/vapplication.cpp" line="608"/>
         <source>Chest Balance</source>
         <comment>Full measurement name</comment>
         <translation>Баланс грудей</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="602"/>
+        <location filename="../../core/vapplication.cpp" line="615"/>
         <source>Back Balance</source>
         <comment>Full measurement name</comment>
         <translation>Задній баланс</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="609"/>
+        <location filename="../../core/vapplication.cpp" line="622"/>
         <source>Front Waist Balance</source>
         <comment>Full measurement name</comment>
         <translation>Передній баланс талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="616"/>
+        <location filename="../../core/vapplication.cpp" line="629"/>
         <source>Back Waist Balance</source>
         <comment>Full measurement name</comment>
         <translation>Задній баланс талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="623"/>
+        <location filename="../../core/vapplication.cpp" line="636"/>
         <source>Front UpperChest height</source>
         <comment>Full measurement name</comment>
         <translation>Front UpperChest height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="630"/>
+        <location filename="../../core/vapplication.cpp" line="643"/>
         <source>Bust height</source>
         <comment>Full measurement name</comment>
         <translation>Висота бюста</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="637"/>
+        <location filename="../../core/vapplication.cpp" line="650"/>
         <source>Front Upper chest waist</source>
         <comment>Full measurement name</comment>
         <translation>Довжина переду від лінії талії вгору по центру до початку улоговини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="644"/>
+        <location filename="../../core/vapplication.cpp" line="657"/>
         <source>Front waist to lower breast</source>
         <comment>Full measurement name</comment>
         <translation>Довжина від талії до підстави грудних залоз</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="651"/>
+        <location filename="../../core/vapplication.cpp" line="664"/>
         <source>Back waist to upper chest</source>
         <comment>Full measurement name</comment>
         <translation>Довжина спинки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="658"/>
+        <location filename="../../core/vapplication.cpp" line="671"/>
         <source>Strap length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина бретелі</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="666"/>
+        <location filename="../../core/vapplication.cpp" line="679"/>
         <source>Armscye Girth</source>
         <comment>Full measurement name</comment>
         <translation>Armscye Girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="672"/>
+        <location filename="../../core/vapplication.cpp" line="685"/>
         <source>Elbow Girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват локтя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="679"/>
+        <location filename="../../core/vapplication.cpp" line="692"/>
         <source>Upperarm Girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="685"/>
+        <location filename="../../core/vapplication.cpp" line="698"/>
         <source>Wrist girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват зап&apos;ястя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="691"/>
+        <location filename="../../core/vapplication.cpp" line="704"/>
         <source>Armscye depth</source>
         <comment>Full measurement name</comment>
         <translation>Armscye depth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="698"/>
+        <location filename="../../core/vapplication.cpp" line="711"/>
         <source>Shoulder and Arm length</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї збоку до лінії обхвату зап&apos;ястя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="705"/>
+        <location filename="../../core/vapplication.cpp" line="718"/>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
         <translation>Внутрішня довжина рукава (з окатом)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="712"/>
+        <location filename="../../core/vapplication.cpp" line="725"/>
         <source>Nape to wrist length</source>
         <comment>Full measurement name</comment>
         <translation>Nape to wrist length</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="719"/>
+        <location filename="../../core/vapplication.cpp" line="732"/>
         <source>Elbow length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина руки до ліктя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="726"/>
+        <location filename="../../core/vapplication.cpp" line="739"/>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина рукава до лінії обхвату зап&apos;ястя</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="734"/>
+        <location filename="../../core/vapplication.cpp" line="747"/>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
         <translation>Ширина руки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="740"/>
+        <location filename="../../core/vapplication.cpp" line="753"/>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина руки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="747"/>
+        <location filename="../../core/vapplication.cpp" line="760"/>
         <source>Hand girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват кисті</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="754"/>
+        <location filename="../../core/vapplication.cpp" line="767"/>
         <source>Thigh girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват стегна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="760"/>
+        <location filename="../../core/vapplication.cpp" line="773"/>
         <source>Midthigh girth</source>
         <comment>Full measurement name</comment>
         <translation>Midthigh girth</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="766"/>
+        <location filename="../../core/vapplication.cpp" line="779"/>
         <source>Knee girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="772"/>
+        <location filename="../../core/vapplication.cpp" line="785"/>
         <source>Calf girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват ікри</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="778"/>
+        <location filename="../../core/vapplication.cpp" line="791"/>
         <source>Ankle girth</source>
         <comment>Full measurement name</comment>
         <translation>Обхват щиколотки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="784"/>
+        <location filename="../../core/vapplication.cpp" line="797"/>
         <source>Knee height</source>
         <comment>Full measurement name</comment>
         <translation>Висота колінної точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="790"/>
+        <location filename="../../core/vapplication.cpp" line="803"/>
         <source>Ankle height</source>
         <comment>Full measurement name</comment>
         <translation>Висота щиколотки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="797"/>
+        <location filename="../../core/vapplication.cpp" line="810"/>
         <source>Foot width</source>
         <comment>Full measurement name</comment>
         <translation>Ширина ноги</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="804"/>
+        <location filename="../../core/vapplication.cpp" line="817"/>
         <source>Foot length</source>
         <comment>Full measurement name</comment>
         <translation>Довжина ноги</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="812"/>
+        <location filename="../../core/vapplication.cpp" line="825"/>
         <source>Total Height</source>
         <comment>Full measurement name</comment>
         <translation>Загальна висота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="818"/>
+        <location filename="../../core/vapplication.cpp" line="831"/>
         <source>Nape height</source>
         <comment>Full measurement name</comment>
         <translation>Висота точки основи шиї ззаду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="824"/>
+        <location filename="../../core/vapplication.cpp" line="837"/>
         <source>Nape to knee height</source>
         <comment>Full measurement name</comment>
         <translation>Потилиця до висоти коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="830"/>
+        <location filename="../../core/vapplication.cpp" line="843"/>
         <source>Waist height</source>
         <comment>Full measurement name</comment>
         <translation>Висота лінії талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="836"/>
+        <location filename="../../core/vapplication.cpp" line="849"/>
         <source>HighHip height</source>
         <comment>Full measurement name</comment>
         <translation>HighHip height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="842"/>
+        <location filename="../../core/vapplication.cpp" line="855"/>
         <source>Hip height</source>
         <comment>Full measurement name</comment>
         <translation>Hip height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="848"/>
+        <location filename="../../core/vapplication.cpp" line="861"/>
         <source>Waist to Hip height</source>
         <comment>Full measurement name</comment>
         <translation>Waist to Hip height</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="854"/>
+        <location filename="../../core/vapplication.cpp" line="867"/>
         <source>Waist to Knee height</source>
         <comment>Full measurement name</comment>
         <translation>Талія до висоти коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="860"/>
+        <location filename="../../core/vapplication.cpp" line="873"/>
         <source>Crotch height/Inseam</source>
         <comment>Full measurement name</comment>
         <translation>Довжина ноги по внутрішній поверхні</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="867"/>
+        <location filename="../../core/vapplication.cpp" line="880"/>
         <source>Size</source>
         <comment>Full measurement name</comment>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="873"/>
+        <location filename="../../core/vapplication.cpp" line="886"/>
         <source>Height front neck base point</source>
         <comment>Full measurement name</comment>
         <translation>Висота точки основи шиї спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="880"/>
+        <location filename="../../core/vapplication.cpp" line="893"/>
         <source>Height base neck side point</source>
         <comment>Full measurement name</comment>
         <translation>Висота точки основи шиї збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="887"/>
+        <location filename="../../core/vapplication.cpp" line="900"/>
         <source>Height shoulder point</source>
         <comment>Full measurement name</comment>
         <translation>Висота плечової точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="894"/>
+        <location filename="../../core/vapplication.cpp" line="907"/>
         <source>Height nipple point</source>
         <comment>Full measurement name</comment>
         <translation>Висота соскової точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="900"/>
+        <location filename="../../core/vapplication.cpp" line="913"/>
         <source>Height back angle axilla</source>
         <comment>Full measurement name</comment>
         <translation>Висота заднього кута пахвової западини</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="906"/>
+        <location filename="../../core/vapplication.cpp" line="919"/>
         <source>Height scapular point</source>
         <comment>Full measurement name</comment>
         <translation>Висота лопаточной точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="912"/>
+        <location filename="../../core/vapplication.cpp" line="925"/>
         <source>Height under buttock folds</source>
         <comment>Full measurement name</comment>
         <translation>Висота под&apos;ягодічной складки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="919"/>
+        <location filename="../../core/vapplication.cpp" line="932"/>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation>Обхват стегон без урахування виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="926"/>
+        <location filename="../../core/vapplication.cpp" line="939"/>
         <source>Girth foot instep</source>
         <comment>Full measurement name</comment>
         <translation>Обхват підйому стопи</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="932"/>
+        <location filename="../../core/vapplication.cpp" line="945"/>
         <source>Side waist to floor</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від лінії талії до підлоги збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="939"/>
+        <location filename="../../core/vapplication.cpp" line="952"/>
         <source>Front waist to floor</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від лінії талії до підлоги спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="946"/>
+        <location filename="../../core/vapplication.cpp" line="959"/>
         <source>Arc through groin area</source>
         <comment>Full measurement name</comment>
         <translation>Дуга через пахову область</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="952"/>
+        <location filename="../../core/vapplication.cpp" line="965"/>
         <source>Waist to plane seat</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від лінії талії до площини сидіння</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="959"/>
+        <location filename="../../core/vapplication.cpp" line="972"/>
         <source>Neck to radial point</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї збоку до променевої точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="966"/>
+        <location filename="../../core/vapplication.cpp" line="979"/>
         <source>Neck to third finger</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї збоку до кінця третього пальця</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="973"/>
+        <location filename="../../core/vapplication.cpp" line="986"/>
         <source>Neck to first line chest circumference</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї збоку до лінії обхвату грудей першого спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="981"/>
+        <location filename="../../core/vapplication.cpp" line="994"/>
         <source>Front waist length</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї збоку до лінії талії спереду (довжина талії спереду)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="988"/>
+        <location filename="../../core/vapplication.cpp" line="1001"/>
         <source>Arc through shoulder joint</source>
         <comment>Full measurement name</comment>
         <translation>Дуга через вищу точку плечового суглоба</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="995"/>
+        <location filename="../../core/vapplication.cpp" line="1008"/>
         <source>Neck to back line chest circumference</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї ззаду до лінії обхватів грудей першого і другого з урахуванням виступу лопаток</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1004"/>
+        <location filename="../../core/vapplication.cpp" line="1017"/>
         <source>Waist to neck side</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від лінії талії ззаду до точки основи шиї збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1011"/>
+        <location filename="../../core/vapplication.cpp" line="1024"/>
         <source>Arc length upper body</source>
         <comment>Full measurement name</comment>
         <translation>Довжина дуги верхньої частини тулуба через точку підстави шиї збоку</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1018"/>
+        <location filename="../../core/vapplication.cpp" line="1031"/>
         <source>Chest width</source>
         <comment>Full measurement name</comment>
         <translation>Ширина грудей</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1024"/>
+        <location filename="../../core/vapplication.cpp" line="1037"/>
         <source>Anteroposterior diameter hands</source>
         <comment>Full measurement name</comment>
         <translation>Передньо-задній діаметр руки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1031"/>
+        <location filename="../../core/vapplication.cpp" line="1044"/>
         <source>Height clavicular point</source>
         <comment>Full measurement name</comment>
         <translation>Висота ключичній точки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1037"/>
+        <location filename="../../core/vapplication.cpp" line="1050"/>
         <source>Height armhole slash</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від шийної точки до рівня заднього кута пахвової западини спереду (висота пройми коса)</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1045"/>
+        <location filename="../../core/vapplication.cpp" line="1058"/>
         <source>Slash shoulder height</source>
         <comment>Full measurement name</comment>
         <translation>Висота плеча коса</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1051"/>
+        <location filename="../../core/vapplication.cpp" line="1064"/>
         <source>Half girth neck</source>
         <comment>Full measurement name</comment>
         <translation>Полуобхват шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1057"/>
+        <location filename="../../core/vapplication.cpp" line="1070"/>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement name</comment>
         <translation>Полуобхват шиї для сорочок</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1064"/>
+        <location filename="../../core/vapplication.cpp" line="1077"/>
         <source>Half girth chest first</source>
         <comment>Full measurement name</comment>
         <translation>Напівобхват грудей перший</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1070"/>
+        <location filename="../../core/vapplication.cpp" line="1083"/>
         <source>Half girth chest second</source>
         <comment>Full measurement name</comment>
         <translation>Напівобхват грудей другий</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1076"/>
+        <location filename="../../core/vapplication.cpp" line="1089"/>
         <source>Half girth chest third</source>
         <comment>Full measurement name</comment>
         <translation>Напівобхват грудей третій</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1082"/>
+        <location filename="../../core/vapplication.cpp" line="1095"/>
         <source>Half girth waist</source>
         <comment>Full measurement name</comment>
         <translation>Полуобхват талії</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1088"/>
+        <location filename="../../core/vapplication.cpp" line="1101"/>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation>Полуобхват стегон з урахуванням виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1096"/>
+        <location filename="../../core/vapplication.cpp" line="1109"/>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
         <translation>Полуобхват стегон без урахування виступу живота</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1104"/>
+        <location filename="../../core/vapplication.cpp" line="1117"/>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement name</comment>
         <translation>Обхват коліна в зігнутому положенні ноги</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1110"/>
+        <location filename="../../core/vapplication.cpp" line="1123"/>
         <source>Neck transverse diameter</source>
         <comment>Full measurement name</comment>
         <translation>Поперечний діаметр шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1116"/>
+        <location filename="../../core/vapplication.cpp" line="1129"/>
         <source>Front slash shoulder height</source>
         <comment>Full measurement name</comment>
         <translation>Висота плеча коса спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1123"/>
+        <location filename="../../core/vapplication.cpp" line="1136"/>
         <source>Neck to front waist line</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від точки основи шиї до лінії талії спереду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1130"/>
+        <location filename="../../core/vapplication.cpp" line="1143"/>
         <source>Hand vertical diameter</source>
         <comment>Full measurement name</comment>
         <translation>Вертикальний діаметр руки</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1136"/>
+        <location filename="../../core/vapplication.cpp" line="1149"/>
         <source>Neck to knee point</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від шийної точки до коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1143"/>
+        <location filename="../../core/vapplication.cpp" line="1156"/>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від лінії талії до коліна</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1150"/>
+        <location filename="../../core/vapplication.cpp" line="1163"/>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
         <translation>Висота плеча</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1156"/>
+        <location filename="../../core/vapplication.cpp" line="1169"/>
         <source>Head height</source>
         <comment>Full measurement name</comment>
         <translation>Висота голови</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1162"/>
+        <location filename="../../core/vapplication.cpp" line="1175"/>
         <source>Body position</source>
         <comment>Full measurement name</comment>
         <translation>Положення корпусу</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1168"/>
+        <location filename="../../core/vapplication.cpp" line="1181"/>
         <source>Arc behind shoulder girdle</source>
         <comment>Full measurement name</comment>
         <translation>Дуга плечового пояса ззаду</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1175"/>
+        <location filename="../../core/vapplication.cpp" line="1188"/>
         <source>Neck to neck base</source>
         <comment>Full measurement name</comment>
         <translation>Відстань від шийної точки до точки основи шиї збоку по лінії вимірювання обхвату шиї</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1182"/>
+        <location filename="../../core/vapplication.cpp" line="1195"/>
         <source>Depth waist first</source>
         <comment>Full measurement name</comment>
         <translation>Глибина талії перша</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1188"/>
+        <location filename="../../core/vapplication.cpp" line="1201"/>
         <source>Depth waist second</source>
         <comment>Full measurement name</comment>
         <translation>Глибина талії друга</translation>
@@ -6596,19 +7018,19 @@ Do you want to save your changes?</source>
 <context>
     <name>PostfixOperators</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1237"/>
+        <location filename="../../core/vapplication.cpp" line="1250"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1238"/>
+        <location filename="../../core/vapplication.cpp" line="1251"/>
         <source>mm</source>
         <comment>millimeter</comment>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1239"/>
+        <location filename="../../core/vapplication.cpp" line="1252"/>
         <source>in</source>
         <comment>inch</comment>
         <translation>дюйм</translation>
@@ -6670,7 +7092,7 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../mainwindow.cpp" line="96"/>
+        <location filename="../../mainwindow.cpp" line="105"/>
         <source>Create new pattern piece to start working.</source>
         <translation>Створіть нове креслення для початку роботи.</translation>
     </message>
@@ -6685,18 +7107,18 @@ Do you want to save your changes?</source>
         <translation>Перемістити деталь</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="465"/>
+        <location filename="../../xml/vdomdocument.cpp" line="467"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="475"/>
-        <location filename="../../xml/vdomdocument.cpp" line="495"/>
+        <location filename="../../xml/vdomdocument.cpp" line="477"/>
+        <location filename="../../xml/vdomdocument.cpp" line="497"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="485"/>
+        <location filename="../../xml/vdomdocument.cpp" line="487"/>
         <source>inch</source>
         <translation>дюйми</translation>
     </message>
@@ -6712,7 +7134,7 @@ Do you want to save your changes?</source>
 <context>
     <name>STDescriptions</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1245"/>
+        <location filename="../../core/vapplication.cpp" line="1258"/>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
         <translation>Типові фігури чоловіків 1ї повнотної групи, обхват грудей 100 см</translation>
@@ -6905,12 +7327,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../tools/vabstracttool.cpp" line="233"/>
         <source>Confirm the deletion.</source>
         <translation>Підтвердіть видалення.</translation>
     </message>
     <message>
-        <location filename="../../tools/vabstracttool.cpp" line="345"/>
+        <location filename="../../tools/vabstracttool.cpp" line="234"/>
         <source>Do you really want delete?</source>
         <translation>Ви дійсно хочете видалити?</translation>
     </message>
@@ -6922,34 +7344,44 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка!</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="112"/>
+        <location filename="../../core/vapplication.cpp" line="123"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="117"/>
+        <location filename="../../core/vapplication.cpp" line="128"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="122"/>
+        <location filename="../../core/vapplication.cpp" line="133"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Помилка конвертації значення. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="127"/>
+        <location filename="../../core/vapplication.cpp" line="138"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Помилка пустий параметр. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="132"/>
+        <location filename="../../core/vapplication.cpp" line="143"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="137"/>
+        <location filename="../../core/vapplication.cpp" line="148"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Щось не так!!</translation>
+    </message>
+    <message>
+        <location filename="../../core/vapplication.cpp" line="1832"/>
+        <source>Could not copy temp file to document file</source>
+        <translation>Не вдалося зкопіювати тимчасовий файл до файлу документа</translation>
+    </message>
+    <message>
+        <location filename="../../core/vapplication.cpp" line="1843"/>
+        <source>Could not remove document file</source>
+        <translation>Не вдалося видалити файл документа</translation>
     </message>
     <message>
         <source>Something wrong!!</source>
@@ -7004,48 +7436,53 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не можу конвертувати  toLongLong параметру</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="204"/>
+        <location filename="../../xml/vdomdocument.cpp" line="206"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Не можу конвертувати toUInt параметр</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="233"/>
+        <location filename="../../xml/vdomdocument.cpp" line="235"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Не вдається перетворити параметр toBool</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="280"/>
+        <location filename="../../xml/vdomdocument.cpp" line="282"/>
         <source>Got empty parameter</source>
         <translation>Отримано пустий параметр</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="305"/>
+        <location filename="../../xml/vdomdocument.cpp" line="307"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Не можу конвертувати toDouble параметру</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="358"/>
-        <location filename="../../xml/vdomdocument.cpp" line="408"/>
+        <location filename="../../xml/vdomdocument.cpp" line="360"/>
+        <location filename="../../xml/vdomdocument.cpp" line="410"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Не можу відкрити файл%1: 
 %2.</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="366"/>
+        <location filename="../../xml/vdomdocument.cpp" line="368"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Не можу відкрити файл схеми %1:\n%2.</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="394"/>
+        <location filename="../../xml/vdomdocument.cpp" line="396"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Помилка валідації файлу %3 в рядку %1 стовпця %2</translation>
     </message>
     <message>
-        <location filename="../../xml/vdomdocument.cpp" line="419"/>
+        <location filename="../../xml/vdomdocument.cpp" line="421"/>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation>Помилка розбору файлу %3 в рядку %1 стовпця %2</translation>
+    </message>
+    <message>
+        <location filename="../../xml/vdomdocument.cpp" line="624"/>
+        <source>Couldn&apos;t get node</source>
+        <translation>Не вдалося отримати вузол</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -7185,7 +7622,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VException</name>
     <message>
-        <location filename="../../exception/vexception.cpp" line="73"/>
+        <location filename="../../exception/vexception.cpp" line="85"/>
         <source>Critical error!</source>
         <translation>Критична помилка!</translation>
     </message>
@@ -7236,12 +7673,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="374"/>
         <source>Can&apos;t find tool id = %1 in table.</source>
-        <translation>Не можу знайти інструмент з id = %1 в таблиці.</translation>
+        <translation type="vanished">Не можу знайти інструмент з id = %1 в таблиці.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="704"/>
+        <location filename="../../xml/vpattern.cpp" line="711"/>
         <source>Error no unique id.</source>
         <translation>Помилка не унікальний id.</translation>
     </message>
@@ -7250,178 +7686,195 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Помилка!</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="749"/>
-        <location filename="../../xml/vpattern.cpp" line="773"/>
+        <location filename="../../xml/vpattern.cpp" line="379"/>
+        <source>Can&apos;t find tool in table.</source>
+        <translation>Не можу знайти інструмент в таблиці.</translation>
+    </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="755"/>
+        <location filename="../../xml/vpattern.cpp" line="779"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="755"/>
+        <location filename="../../xml/vpattern.cpp" line="761"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="761"/>
+        <location filename="../../xml/vpattern.cpp" line="767"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="767"/>
+        <location filename="../../xml/vpattern.cpp" line="773"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="782"/>
+        <location filename="../../xml/vpattern.cpp" line="788"/>
         <source>Critical error!</source>
         <translation>Критична помилка!</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="782"/>
+        <location filename="../../xml/vpattern.cpp" line="788"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Помилка парсінгу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="997"/>
+        <location filename="../../xml/vpattern.cpp" line="1006"/>
         <source>Error creating or updating detail</source>
         <translation>Помилка створення чи оновлення деталі</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1108"/>
+        <location filename="../../xml/vpattern.cpp" line="1120"/>
         <source>Error creating or updating single point</source>
         <translation>Помилка створення чи оновлення простої точки</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1141"/>
-        <location filename="../../xml/vpattern.cpp" line="1147"/>
+        <location filename="../../xml/vpattern.cpp" line="1153"/>
+        <location filename="../../xml/vpattern.cpp" line="1159"/>
         <source>Error creating or updating point of end line</source>
         <translation>Помилка створення чи оновлення точки кінця відрізку</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1172"/>
-        <location filename="../../xml/vpattern.cpp" line="1178"/>
+        <location filename="../../xml/vpattern.cpp" line="1184"/>
+        <location filename="../../xml/vpattern.cpp" line="1190"/>
         <source>Error creating or updating point along line</source>
         <translation>Помилка створення чи оновлення точки вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1204"/>
-        <location filename="../../xml/vpattern.cpp" line="1210"/>
+        <location filename="../../xml/vpattern.cpp" line="1216"/>
+        <location filename="../../xml/vpattern.cpp" line="1222"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Помилка створення чи оновлення точки плеча</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1236"/>
-        <location filename="../../xml/vpattern.cpp" line="1242"/>
+        <location filename="../../xml/vpattern.cpp" line="1248"/>
+        <location filename="../../xml/vpattern.cpp" line="1254"/>
         <source>Error creating or updating point of normal</source>
         <translation>Помилка створення чи оновлення точки нормалі</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1268"/>
-        <location filename="../../xml/vpattern.cpp" line="1274"/>
+        <location filename="../../xml/vpattern.cpp" line="1280"/>
+        <location filename="../../xml/vpattern.cpp" line="1286"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Помилка створення чи оновлення точки бісектриси</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1293"/>
+        <location filename="../../xml/vpattern.cpp" line="1305"/>
         <source>Error creating or updating point of lineintersection</source>
         <translation>Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1319"/>
-        <location filename="../../xml/vpattern.cpp" line="1325"/>
+        <location filename="../../xml/vpattern.cpp" line="1331"/>
+        <location filename="../../xml/vpattern.cpp" line="1337"/>
         <source>Error creating or updating point of contact</source>
         <translation>Помилка створення чи оновлення точки дотику</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1343"/>
+        <location filename="../../xml/vpattern.cpp" line="1355"/>
         <source>Error creating or updating modeling point</source>
         <translation>Помилка створення чи оновлення модельної точки</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1361"/>
+        <location filename="../../xml/vpattern.cpp" line="1373"/>
         <source>Error creating or updating height</source>
         <translation>Помилка створення чи оновлення висоти</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1380"/>
+        <location filename="../../xml/vpattern.cpp" line="1392"/>
         <source>Error creating or updating triangle</source>
         <translation>Помилка створення чи оновлення трикутника</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1397"/>
+        <location filename="../../xml/vpattern.cpp" line="1409"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Помилка створення чи оновлення точки перетину</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1420"/>
-        <location filename="../../xml/vpattern.cpp" line="1426"/>
+        <location filename="../../xml/vpattern.cpp" line="1432"/>
+        <location filename="../../xml/vpattern.cpp" line="1438"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Помилка створення чи оновлення точки розрізання кривої</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1450"/>
-        <location filename="../../xml/vpattern.cpp" line="1456"/>
+        <location filename="../../xml/vpattern.cpp" line="1463"/>
+        <location filename="../../xml/vpattern.cpp" line="1469"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Помилка створення чи оновлення точки розрізаня складної кривої</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1479"/>
-        <location filename="../../xml/vpattern.cpp" line="1485"/>
+        <location filename="../../xml/vpattern.cpp" line="1492"/>
+        <location filename="../../xml/vpattern.cpp" line="1498"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Помилка створення чи оновлення точки розрізання дуги</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1521"/>
+        <location filename="../../xml/vpattern.cpp" line="1526"/>
+        <location filename="../../xml/vpattern.cpp" line="1533"/>
+        <source>Error creating or updating point of intersection line and axis</source>
+        <translation>Помилка створення чи оновлення точки перетину лінії і осі</translation>
+    </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="1560"/>
+        <location filename="../../xml/vpattern.cpp" line="1567"/>
+        <source>Error creating or updating point of intersection curve and axis</source>
+        <translation>Помилка створення чи оновлення точки перетину кривої і осі</translation>
+    </message>
+    <message>
+        <location filename="../../xml/vpattern.cpp" line="1604"/>
         <source>Error creating or updating line</source>
         <translation>Помилка створення чи оновлення лінії</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1734"/>
+        <location filename="../../xml/vpattern.cpp" line="1817"/>
         <source>Error creating or updating simple curve</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1778"/>
+        <location filename="../../xml/vpattern.cpp" line="1861"/>
         <source>Error creating or updating curve path</source>
         <translation>Помилка створення чи оновлення шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1795"/>
+        <location filename="../../xml/vpattern.cpp" line="1878"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Помилка створення чи оновлення модельної кривої</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1812"/>
+        <location filename="../../xml/vpattern.cpp" line="1895"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Помилка створення чи оновлення модельного шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1867"/>
-        <location filename="../../xml/vpattern.cpp" line="1873"/>
+        <location filename="../../xml/vpattern.cpp" line="1950"/>
+        <location filename="../../xml/vpattern.cpp" line="1956"/>
         <source>Error creating or updating simple arc</source>
         <translation>Помилка створення чи оновлення дуги</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1892"/>
+        <location filename="../../xml/vpattern.cpp" line="1975"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Помилка створення чи оновлення модельної дуги</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1937"/>
+        <location filename="../../xml/vpattern.cpp" line="2020"/>
         <source>Error creating or updating union details</source>
         <translation>Помилка створення чи оновлення об&apos;єднання деталей</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="1992"/>
+        <location filename="../../xml/vpattern.cpp" line="2075"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="2428"/>
+        <location filename="../../xml/vpattern.cpp" line="2511"/>
         <source>This id is not unique.</source>
         <translation>Цей id не унікальний.</translation>
     </message>
     <message>
-        <location filename="../../xml/vpattern.cpp" line="2494"/>
+        <location filename="../../xml/vpattern.cpp" line="2577"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
@@ -7475,172 +7928,184 @@ Do you want to save your changes?</source>
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="850"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="931"/>
         <source>Base point</source>
         <translation>Базова точка</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="852"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="866"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="879"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="903"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="915"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="926"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="937"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="948"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="969"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="980"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="998"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1009"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1019"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1065"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="933"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="947"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="960"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="984"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="996"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1007"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1018"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1029"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1050"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1061"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1079"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1090"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1100"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1146"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1156"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1168"/>
         <source>Point label</source>
         <translation>Ім&apos;я точки</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="854"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="935"/>
         <source>Position</source>
         <translation>Позиція</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="864"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="945"/>
         <source>Point at distance and angle</source>
         <translation>Інструмент точка на кінці лінії</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="867"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="880"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="904"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="949"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="959"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="981"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1020"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="948"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="961"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="985"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1030"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1040"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1062"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1101"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1157"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1169"/>
         <source>Line type</source>
         <translation>Тип лінії</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="868"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="881"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="905"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="916"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="927"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="938"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="979"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1021"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="949"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="962"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="986"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="997"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1008"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1019"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1060"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1102"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="869"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="950"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1158"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1170"/>
         <source>Angle</source>
         <translation>Кут</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="877"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="958"/>
         <source>Point at distance along line</source>
         <translation>Інструмент точка вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="889"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="970"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="891"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="999"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="972"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1080"/>
         <source>Radius</source>
         <translation>Радіус</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="892"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="973"/>
         <source>First angle</source>
         <translation>Перший кут</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="893"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="974"/>
         <source>Second angle</source>
         <translation>Другий кут</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="901"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="982"/>
         <source>Point along bisector</source>
         <translation>Інструмент точка бісектриси кута</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="913"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="994"/>
         <source>Cut arc tool</source>
         <translation>Інструмент розрізання дуги</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="924"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1005"/>
         <source>Tool for segmenting a curve</source>
         <translation>Інструмент для сегментації кривої</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="935"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1016"/>
         <source>Tool segment a pathed curve</source>
         <translation>Інструмент для сегментації складної кривої</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="946"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1027"/>
         <source>Perpendicular point along line</source>
         <translation>Перпендикулярна точка вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="957"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1038"/>
         <source>Line between points</source>
         <translation>Лінія між двома точками</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="967"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1048"/>
         <source>Point at line intersection</source>
         <translation>Точка перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="977"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1058"/>
         <source>Point along perpendicular</source>
         <translation>Інструмент точка перпендикуляра</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="983"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1064"/>
         <source>Additional angle degrees</source>
         <translation>Дод. кут градуси</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="996"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1077"/>
         <source>Point at intersection of arc and line</source>
         <translation>Точка на перетині дуги та лінії</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1007"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1088"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation>Інструменд для створення точки з двух х и у координат двух інших точок</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1017"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1098"/>
         <source>Special point on shoulder</source>
         <translation>Спеціальна точка на плече</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1029"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1110"/>
         <source>Curve tool</source>
         <translation>Інструмент крива</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1031"/>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1048"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1112"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1129"/>
         <source>Curve factor</source>
         <translation>Коефіцієнт кривої</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1046"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1127"/>
         <source>Tool for path curve</source>
         <translation>Інструмент для створення складної кривої</translation>
     </message>
     <message>
-        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1063"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1144"/>
         <source>Tool triangle</source>
         <translation>Інструмент трикутник</translation>
+    </message>
+    <message>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1154"/>
+        <location filename="../../widgets/vtooloptionspropertybrowser.cpp" line="1166"/>
+        <source>Point intersection line and axis</source>
+        <translation>Точка на перетині лінії і осі</translation>
     </message>
 </context>
 <context>
@@ -7660,31 +8125,31 @@ Do you want to save your changes?</source>
 <context>
     <name>Variables</name>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1196"/>
+        <location filename="../../core/vapplication.cpp" line="1209"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Лінія_</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1197"/>
+        <location filename="../../core/vapplication.cpp" line="1210"/>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
         <translation>КутЛінії_</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1198"/>
+        <location filename="../../core/vapplication.cpp" line="1211"/>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Дуга_</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1199"/>
+        <location filename="../../core/vapplication.cpp" line="1212"/>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation>Спл_</translation>
     </message>
     <message>
-        <location filename="../../core/vapplication.cpp" line="1200"/>
+        <location filename="../../core/vapplication.cpp" line="1213"/>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation>СкСпл</translation>
@@ -7700,11 +8165,27 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VisToolCurveIntersectAxis</name>
+    <message>
+        <location filename="../../visualization/vistoolcurveintersectaxis.cpp" line="81"/>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;Перетин кривої і осі&lt;/b&gt;: кут =%1°; &lt;b&gt;Shift&lt;/b&gt; - фіксація кута, &lt;b&gt;Enter&lt;/b&gt; - завершення створення</translation>
+    </message>
+</context>
+<context>
     <name>VisToolEndLine</name>
     <message>
         <location filename="../../visualization/vistoolendline.cpp" line="64"/>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Точка на кінці відрізка&lt;/b&gt;: кут =%1°; &lt;b&gt;Shift&lt;/b&gt; - фіксація кута, &lt;b&gt;Enter&lt;/b&gt; - завершення створення</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolLineIntersectAxis</name>
+    <message>
+        <location filename="../../visualization/vistoollineintersectaxis.cpp" line="96"/>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;Перетин лінії і осі&lt;/b&gt;: кут =%1°; &lt;b&gt;Shift&lt;/b&gt; - фіксація кута, &lt;b&gt;Enter&lt;/b&gt; - завершення створення</translation>
     </message>
 </context>
 <context>
@@ -7718,12 +8199,12 @@ Do you want to save your changes?</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../main.cpp" line="186"/>
+        <location filename="../../main.cpp" line="191"/>
         <source>Pattern making program.</source>
         <translation>Програма створення викрійок.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="189"/>
+        <location filename="../../main.cpp" line="194"/>
         <source>Pattern file.</source>
         <translation>Файл лекала.</translation>
     </message>

@@ -525,9 +525,6 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <property name="leftMargin">
-      <number>9</number>
-     </property>
      <item>
       <widget class="QPlainTextEdit" name="plainTextEditF2">
        <property name="sizePolicy">
@@ -644,7 +641,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Standard table</string>
+            <string>Measurements</string>
            </property>
           </widget>
          </item>
@@ -775,6 +772,16 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>plainTextEditFormula</tabstop>
+  <tabstop>toolButtonPutHereRadius</tabstop>
+  <tabstop>toolButtonEqualRadius</tabstop>
+  <tabstop>pushButtonGrowLength</tabstop>
+  <tabstop>plainTextEditF1</tabstop>
+  <tabstop>toolButtonPutHereF1</tabstop>
+  <tabstop>toolButtonEqualF1</tabstop>
+  <tabstop>pushButtonGrowLengthF1</tabstop>
+  <tabstop>toolButtonPutHereF2</tabstop>
+  <tabstop>toolButtonEqualF2</tabstop>
   <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
@@ -783,13 +790,8 @@
   <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>radioButtonAngleLine</tabstop>
+  <tabstop>checkBoxHideEmpty</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>toolButtonPutHereRadius</tabstop>
-  <tabstop>toolButtonPutHereF1</tabstop>
-  <tabstop>toolButtonPutHereF2</tabstop>
-  <tabstop>toolButtonEqualRadius</tabstop>
-  <tabstop>toolButtonEqualF1</tabstop>
-  <tabstop>toolButtonEqualF2</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

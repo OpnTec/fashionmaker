@@ -98,7 +98,7 @@
 																			     <xs:attribute name="mx" type="xs:double"></xs:attribute>
 																			     <xs:attribute name="my" type="xs:double"></xs:attribute>
 																			     <xs:attribute name="type" type="xs:string"></xs:attribute>
-																			     <xs:attribute name="name" type="xs:string"></xs:attribute>
+																			     <xs:attribute name="name" type="shortName"></xs:attribute>
 																			     <xs:attribute name="firstPoint" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="secondPoint" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="thirdPoint" type="xs:unsignedInt"></xs:attribute>
@@ -267,7 +267,7 @@
          </xs:element>
 	<xs:simpleType name="shortName">
 		<xs:restriction base="xs:string">   
-			<xs:pattern value="^([^0-9-*/^+=\s\(\)%:;!.,]){1,1}([^-*/^+=\s\(\)%:;!.,]){0,}$"/>
+			<xs:pattern value="^([^0-9-*/^+=\s\(\)%:;!.,`'\&quot;]){1,1}([^-*/^+=\s\(\)%:;!.,`'\&quot;]){0,}$"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="units">

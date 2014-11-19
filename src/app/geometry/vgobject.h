@@ -71,7 +71,7 @@ public:
     static QLineF  BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect);
     static QLineF  BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect);
 
-    static QPointF LineIntersectRect(QRectF rec, QLineF line);
+    static QPointF LineIntersectRect(const QRectF &rec, const QLineF &line);
     static qint32  LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
                                        QPointF &p2);
     static QPointF ClosestPoint(const QLineF &line, const QPointF &point);

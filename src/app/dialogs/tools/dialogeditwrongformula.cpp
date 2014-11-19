@@ -38,6 +38,7 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     InitVariables(ui);
     InitFormulaUI(ui);
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancel(ui);
     flagFormula = false;
@@ -123,6 +124,7 @@ void DialogEditWrongFormula::setFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

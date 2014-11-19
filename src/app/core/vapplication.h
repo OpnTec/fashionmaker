@@ -103,6 +103,13 @@ public:
     static QStringList LabelLanguages();
     QString            STDescription(const QString &id)const;
     static bool        SafeCopy(const QString &source, const QString &destination, QString &error);
+
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    static void        DrMingw();
+    void               CollectReports() const;
+private slots:
+    void               CleanGist() const;
+#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -153,6 +160,13 @@ private:
     void               BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
     void               InitMeasurement(const QString &name, const VTranslation &m, const VTranslation &g,
                                        const VTranslation &d);
+
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    static const QString GistFileName;
+
+    void               CollectReport(const QString &reportName) const;
+    void               SendReport(const QString &reportName) const;
+#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

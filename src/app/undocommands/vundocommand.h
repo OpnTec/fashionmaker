@@ -60,11 +60,12 @@ signals:
     void NeedFullParsing();
     void NeedLiteParsing(const Document &parse);
 protected:
-    QDomElement xml;
-    VPattern    *doc;
-    quint32     nodeId;
-    bool        redoFlag;
-    void        RedoFullParsing();
+    QDomElement  xml;
+    VPattern     *doc;
+    quint32      nodeId;
+    bool         redoFlag;
+    virtual void RedoFullParsing();
+    void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

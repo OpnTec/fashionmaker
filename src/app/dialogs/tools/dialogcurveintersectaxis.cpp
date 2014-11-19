@@ -48,6 +48,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -120,6 +121,7 @@ void DialogCurveIntersectAxis::setAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
     line->setAngle(formulaAngle);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

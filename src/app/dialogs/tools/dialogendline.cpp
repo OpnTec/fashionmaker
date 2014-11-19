@@ -55,6 +55,9 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
 
+    ui->plainTextEditFormula->installEventFilter(this);
+    ui->plainTextEditAngle->installEventFilter(this);
+
     InitOkCancelApply(ui);
     flagFormula = false;
     CheckState();
@@ -189,6 +192,7 @@ void DialogEndLine::setFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaLength);
     line->setLength(formulaLength);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,6 +211,7 @@ void DialogEndLine::setAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
     line->setAngle(formulaAngle);
+    MoveCursorToEnd(ui->plainTextEditAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

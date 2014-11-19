@@ -60,11 +60,17 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimum">
+            <double>-900.990000000000009</double>
+           </property>
            <property name="maximum">
             <double>900.990000000000009</double>
            </property>
            <property name="singleStep">
             <double>0.100000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -99,6 +105,9 @@
              <horstretch>1</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimum">
+            <double>-900.990000000000009</double>
            </property>
            <property name="maximum">
             <double>900.990000000000009</double>
@@ -295,8 +304,14 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>lineEditNameDetail</tabstop>
   <tabstop>listWidget</tabstop>
+  <tabstop>doubleSpinBoxBiasX</tabstop>
+  <tabstop>doubleSpinBoxBiasY</tabstop>
+  <tabstop>lineEditNameDetail</tabstop>
+  <tabstop>checkBoxSeams</tabstop>
+  <tabstop>doubleSpinBoxSeams</tabstop>
+  <tabstop>checkBoxClosed</tabstop>
+  <tabstop>toolButtonDelete</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

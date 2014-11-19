@@ -104,13 +104,16 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        line->setPoint2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
+                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                        {
+                            line->setPoint2Id(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                            this->setModal(true);
+                            this->show();
+                        }
                     }
                     break;
                 default:

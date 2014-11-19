@@ -388,7 +388,38 @@ void DialogTool::PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidg
         QTextCursor cursor = plainTextEdit->textCursor();
         cursor.insertText(item->text());
         plainTextEdit->setTextCursor(cursor);
+        plainTextEdit->setFocus();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
+{
+    SCASSERT(plainTextEdit != nullptr);
+    QTextCursor cursor = plainTextEdit->textCursor();
+    cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+    plainTextEdit->setTextCursor(cursor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::eventFilter(QObject *object, QEvent *event)
+{
+    QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object);
+    if (plainTextEdit != nullptr)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
+        {
+            // Ignore Enter key
+            return true;
+        }
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return QDialog::eventFilter(object, event);
+    }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -701,7 +732,10 @@ void DialogTool::NamePointChanged()
     {
         QString name = edit->text();
         name.replace(" ", "");
-        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false))
+        QRegExpValidator v(QRegExp(nameRegExp), this);
+        int pos = 0;
+        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false) ||
+                v.validate(name, pos) == QValidator::Invalid)
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);

@@ -58,6 +58,7 @@
 #include <QTimer>
 #include <QtGlobal>
 #include <QDesktopWidget>
+#include <QDesktopServices>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -114,6 +115,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
     connect(doc, &VPattern::CheckLayout, this, &MainWindow::Layout);
+    connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
     qApp->setCurrentDocument(doc);
 
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
@@ -164,6 +166,17 @@ void MainWindow::ActionNewPP()
         }
         else
         {
+            QMessageBox::StandardButton ret;
+            ret = QMessageBox::question(this, tr("Individual measurements is under development"),
+                                        tr("There is no way create individual measurements file independent on the "
+                                           "pattern file.\nFor opening pattern need keep both files: pattern and "
+                                           "measurements. Do you want continue?"),
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+            if (ret == QMessageBox::No)
+            {
+                return;
+            }
+
             qApp->setPatternType(MeasurementsType::Individual);
             DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
             if (indMeasurements.exec() == QDialog::Accepted)
@@ -723,7 +736,6 @@ void MainWindow::ShowToolTip(const QString &toolTip)
 void MainWindow::tableClosed()
 {
     show();
-    MinimumScrollBar();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -785,19 +797,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
     {
-        WriteSettings();
-
-        //File was closed correct.
-        QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
-        restoreFiles.removeAll(curFile);
-        qApp->getSettings()->setValue("restoreFileList", restoreFiles);
-
-        // Remove autosave file
-        QFile autofile(curFile +".autosave");
-        if (autofile.exists())
-        {
-            autofile.remove();
-        }
+        FileClosedCorrect();
 
         event->accept();
         qApp->closeAllWindows();
@@ -1375,11 +1375,21 @@ void MainWindow::Preferences()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::RepotBug()
+{
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/issues/new"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
 void MainWindow::Clear()
 {
+    ui->actionDetails->setChecked(false);
+    ui->actionDetails->setEnabled(false);
+    ui->actionDraw->setChecked(true);
+    ui->actionDraw->setEnabled(false);
     setCurrentFile("");
     pattern->Clear();
     doc->clear();
@@ -1389,9 +1399,15 @@ void MainWindow::Clear()
     comboBoxDraws->clear();
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
+    ui->actionSaveAs->setEnabled(false);
     ui->actionPattern_properties->setEnabled(false);
     ui->actionZoomIn->setEnabled(false);
     ui->actionZoomOut->setEnabled(false);
+    ui->actionZoomFitBest->setEnabled(false);
+    ui->actionZoomOriginal->setEnabled(false);
+    ui->actionHistory->setEnabled(false);
+    ui->actionTable->setEnabled(false);
+    ui->actionEdit_pattern_code->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -1404,9 +1420,42 @@ void MainWindow::Clear()
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
-
+    qApp->getUndoStack()->clear();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::FileClosedCorrect()
+{
+    WriteSettings();
+
+    //File was closed correct.
+    QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+    restoreFiles.removeAll(curFile);
+    qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+
+    // Remove autosave file
+    QFile autofile(curFile +".autosave");
+    if (autofile.exists())
+    {
+        autofile.remove();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ResetWindow()
+{
+    if (MaybeSave())
+    {
+        FileClosedCorrect();
+    }
+    else
+    {
+        return;
+    }
+    Clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
     toolOptions->ClearPropertyBrowser();
@@ -1478,7 +1527,23 @@ void MainWindow::FullParseFile()
     comboBoxDraws->blockSignals(false);
     ui->actionPattern_properties->setEnabled(true);
 
-    qint32 index = comboBoxDraws->findText(patternPiece);
+    GlobalChangePP(patternPiece);
+
+    if (comboBoxDraws->count() > 0)
+    {
+        SetEnableTool(true);
+    }
+    else
+    {
+        SetEnableTool(false);
+    }
+    SetEnableWidgets(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::GlobalChangePP(const QString &patternPiece)
+{
+    const qint32 index = comboBoxDraws->findText(patternPiece);
     try
     {
         if ( index != -1 )
@@ -1502,18 +1567,7 @@ void MainWindow::FullParseFile()
         SetEnabledGUI(false);
         return;
     }
-
-    if (comboBoxDraws->count() > 0)
-    {
-        SetEnableTool(true);
-    }
-    else
-    {
-        SetEnableTool(false);
-    }
-    SetEnableWidgets(true);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetEnabledGUI(bool enabled)
@@ -1522,7 +1576,8 @@ void MainWindow::SetEnabledGUI(bool enabled)
     {
         if (enabled == false)
         {
-            CancelTool();
+            ArrowTool();
+            qApp->getUndoStack()->clear();
         }
         comboBoxDraws->setEnabled(enabled);
         ui->actionOptionDraw->setEnabled(enabled);
@@ -1538,6 +1593,9 @@ void MainWindow::SetEnabledGUI(bool enabled)
         ui->actionDraw->setEnabled(enabled);
         ui->actionDetails->setEnabled(enabled);
         ui->actionTable->setEnabled(enabled);
+        ui->actionLayout->setEnabled(enabled);
+        ui->actionZoomFitBest->setEnabled(enabled);
+        ui->actionZoomOriginal->setEnabled(enabled);
         guiEnabled = enabled;
 
         sceneDraw->SetDisable(!enabled);
@@ -1741,6 +1799,7 @@ void MainWindow::ActionHistory(bool checked)
     {
         dialogHistory = new DialogHistory(pattern, doc, this);
         dialogHistory->setWindowFlags(Qt::Window);
+        connect(this, &MainWindow::RefreshHistory, dialogHistory, &DialogHistory::UpdateHistory);
         connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
         dialogHistory->show();
     }
@@ -1856,7 +1915,6 @@ bool MainWindow::SavePattern(const QString &fileName)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
-            qApp->getUndoStack()->clear();
         }
     }
     else
@@ -2103,9 +2161,11 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
+    connect(ui->actionRepotBug, &QAction::triggered, this, &MainWindow::RepotBug);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
+    connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
@@ -2254,23 +2314,28 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     FullParseFile();
 
-    bool patternModified = this->isWindowModified();
-    setCurrentFile(fileName);
-    if (patternModified)
-    {
-        //For situation where was fixed wrong formula need return for document status was modified.
-        PatternWasModified(!patternModified);
+    if (guiEnabled)
+    { // No errors occurred
+        bool patternModified = this->isWindowModified();
+        setCurrentFile(fileName);
+        if (patternModified)
+        {
+            //For situation where was fixed wrong formula need return for document status was modified.
+            PatternWasModified(!patternModified);
+        }
+        helpLabel->setText(tr("File loaded"));
+
+        qApp->setOpeningPattern();// End opening file
+
+        //Fit scene size to best size for first show
+        ZoomFirstShow();
+
+        ui->actionDraw->setChecked(true);
     }
-    helpLabel->setText(tr("File loaded"));
-
-    qApp->setOpeningPattern();// End opening file
-
-    //Fit scene size to best size for first show
-    ZoomFirstShow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ReopenFilesAfterCrash()
+void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 {
     QStringList files = qApp->getSettings()->value("restoreFileList").toStringList();
     if (files.size() > 0)
@@ -2304,6 +2369,7 @@ void MainWindow::ReopenFilesAfterCrash()
                         QFile autoFile(restoreFiles.at(i) +".autosave");
                         autoFile.remove();
                         LoadPattern(restoreFiles.at(i));
+                        args.removeAll(restoreFiles.at(i));// Do not open file twice after we restore him.
                     }
                     else
                     {
@@ -2389,6 +2455,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
     {
         doc->ChangeActivPP(comboBoxDraws->itemText(index));
         doc->setCurrentData();
+        emit RefreshHistory();
         if (drawMode)
         {
             ArrowTool();

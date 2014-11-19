@@ -33,21 +33,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), cursor(doc->getCursor())
+    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID),
+      nameActivDraw(doc->GetNameActivPP())
 {
     setText(tr("Delete tool"));
     nodeId = id;
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        xml = domElement.cloneNode().toElement();
-        parentNode = domElement.parentNode();
-    }
-    else
-    {
-        qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
-        return;
-    }
+    siblingId = doc->SiblingNodeId(nodeId);
+    parentNode = doc->ParentNodeById(nodeId);
+    xml = doc->CloneNodeById(nodeId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,33 +50,16 @@ DelTool::~DelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::undo()
 {
-    if (cursor <= 0)
-    {
-        parentNode.appendChild(xml);
-    }
-    else
-    {
-        QDomElement refElement = doc->elementById(QString().setNum(cursor));
-        if (refElement.isElement())
-        {
-            parentNode.insertAfter(xml, refElement);
-        }
-    }
+    UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
+    doc->SetCurrentPP(nameActivDraw);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::redo()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
-    if (domElement.isElement())
-    {
-        parentNode.removeChild(domElement);
-        emit NeedFullParsing();
-    }
-    else
-    {
-        qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
-        return;
-    }
+    QDomElement domElement = doc->NodeById(nodeId);
+    parentNode.removeChild(domElement);
+    emit NeedFullParsing();
+    doc->SetCurrentPP(nameActivDraw);
 }

@@ -210,10 +210,10 @@
  </widget>
  <tabstops>
   <tabstop>comboBoxP1</tabstop>
-  <tabstop>comboBoxP4</tabstop>
   <tabstop>doubleSpinBoxKasm1</tabstop>
-  <tabstop>doubleSpinBoxKasm2</tabstop>
   <tabstop>spinBoxAngle1</tabstop>
+  <tabstop>comboBoxP4</tabstop>
+  <tabstop>doubleSpinBoxKasm2</tabstop>
   <tabstop>spinBoxAngle2</tabstop>
   <tabstop>doubleSpinBoxKcurve</tabstop>
   <tabstop>buttonBox</tabstop>

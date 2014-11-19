@@ -600,3 +600,28 @@ void VDomDocument::RemoveAllChild(QDomElement &domElement)
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomNode VDomDocument::ParentNodeById(const quint32 &nodeId)
+{
+    QDomElement domElement = NodeById(nodeId);
+    return domElement.parentNode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VDomDocument::CloneNodeById(const quint32 &nodeId)
+{
+    QDomElement domElement = NodeById(nodeId);
+    return domElement.cloneNode().toElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VDomDocument::NodeById(const quint32 &nodeId)
+{
+    QDomElement domElement = elementById(QString().setNum(nodeId));
+    if (domElement.isNull() || domElement.isElement() == false)
+    {
+        throw VExceptionBadId(tr("Couldn't get node"), nodeId);
+    }
+    return domElement;
+}

@@ -779,6 +779,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionRepotBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
@@ -803,9 +804,16 @@
     </property>
     <addaction name="actionTable"/>
    </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+    <addaction name="actionCloseWindow"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPatternPiece"/>
    <addaction name="menuMeasurements"/>
+   <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -1229,13 +1237,28 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="process-stop"/>
+    <iconset theme="process-stop">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Stop</string>
    </property>
    <property name="toolTip">
     <string>Stop using tool</string>
+   </property>
+  </action>
+  <action name="actionRepotBug">
+   <property name="text">
+    <string>Repot Bug...</string>
+   </property>
+   <property name="toolTip">
+    <string>Report bug</string>
+   </property>
+  </action>
+  <action name="actionCloseWindow">
+   <property name="text">
+    <string>Close window</string>
    </property>
   </action>
  </widget>

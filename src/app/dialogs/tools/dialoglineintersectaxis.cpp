@@ -48,6 +48,7 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -65,6 +66,14 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogLineIntersectAxis::AngleTextChanged);
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogLineIntersectAxis::DeployAngleTextEdit);
     connect(timerFormula, &QTimer::timeout, this, &DialogLineIntersectAxis::EvalAngle);
+    connect(ui->comboBoxFirstLinePoint,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersectAxis::PointNameChanged);
+    connect(ui->comboBoxSecondLinePoint,
+            static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersectAxis::PointNameChanged);
+    connect(ui->comboBoxAxisPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogLineIntersectAxis::PointNameChanged);
 
     line = new VisToolLineIntersectAxis(data);
 }
@@ -121,6 +130,7 @@ void DialogLineIntersectAxis::setAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
     line->setAngle(formulaAngle);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,21 +218,34 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case (1):
-                    if (SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
+                    if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
                     {
-                        number++;
-                        line->setPoint2Id(id);
-                        line->RefreshGeometry();
+                        if (SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
+                        {
+                            number++;
+                            line->setPoint2Id(id);
+                            line->RefreshGeometry();
+                        }
                     }
                     break;
                 case (2):
-                    if (SetObject(id, ui->comboBoxAxisPoint, ""))
+                {
+                    QSet<quint32> set;
+                    set.insert(getCurrentObjectId(ui->comboBoxFirstLinePoint));
+                    set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
+                    set.insert(id);
+
+                    if (set.size() == 3)
                     {
-                        basePointId = id;
-                        line->setAxisPointId(id);
-                        line->RefreshGeometry();
-                        prepare = true;
+                        if (SetObject(id, ui->comboBoxAxisPoint, ""))
+                        {
+                            basePointId = id;
+                            line->setAxisPointId(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                        }
                     }
+                }
                     break;
                 default:
                     break;
@@ -253,6 +276,31 @@ void DialogLineIntersectAxis::AngleTextChanged()
 void DialogLineIntersectAxis::DeployAngleTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersectAxis::PointNameChanged()
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxFirstLinePoint));
+    set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
+    set.insert(getCurrentObjectId(ui->comboBoxAxisPoint));
+
+    QColor color = okColor;
+    if (set.size() != 3)
+    {
+        flagError = false;
+        color = errorColor;
+    }
+    else
+    {
+        flagError = true;
+        color = okColor;
+    }
+    ChangeColor(ui->labelFirstLinePoint, color);
+    ChangeColor(ui->labelSecondLinePoint, color);
+    ChangeColor(ui->labelAxisPoint, color);
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

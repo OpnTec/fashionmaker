@@ -171,16 +171,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
                 splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
                                               spl1.GetAngle1()));
                 VSplinePoint cutPoint;
-//                if (typeCreation == Source::FromGui)
-//                {
-//                    cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(),
-//                                            spl1.GetAngle2());
-//                }
-//                else
-//                {
-                    cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(),
-                                            spl1.GetAngle2()+180);
-//                }
+                cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(), spl1.GetAngle2()+180);
                 splPath1->append(cutPoint);
                 continue;
             }
@@ -200,6 +191,8 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
             splPath2->append(splPath->at(i));
         }
     }
+    splPath1->setKCurve(splPath->getKCurve());
+    splPath2->setKCurve(splPath->getKCurve());
 
     splPath1->setMaxCountPoints(splPath->CountPoint());
     splPath2->setMaxCountPoints(splPath->CountPoint());

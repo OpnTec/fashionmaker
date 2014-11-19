@@ -27,6 +27,8 @@ defineTest(copyToDestdir) {
     DDIR = $$2
     mkpath($$DDIR)
 
+    message("----------------------------------------------begin------------------------------------------------")
+    message("Copy to" $$DDIR "after link")
     for(FILE, files) {
 
         # Replace slashes in paths with backslashes for Windows
@@ -35,9 +37,11 @@ defineTest(copyToDestdir) {
             DDIR ~= s,/,\\,g
         }
         QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+        message("Command:" $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t))
     }
 
     export(QMAKE_POST_LINK)
+    message("----------------------------------------------end---------------------------------------------------")
 }
 
 # We use precompiled headers for more fast compilation source code.
@@ -525,10 +529,12 @@ GCC_DEBUG_CXXFLAGS += \
     -Wall \
     -Wextra \
     -pedantic \
+    -fno-omit-frame-pointer # Need for exchndl.dll
 
 CLANG_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
     -Wextra \
     -pedantic \
+    -fno-omit-frame-pointer # Need for exchndl.dll
 }

@@ -57,7 +57,6 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     connect(this, &DialogHistory::ShowHistoryTool, doc, &VPattern::ShowHistoryTool);
     connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
-    connect(doc, &VPattern::ChangedActivPP, this, &DialogHistory::UpdateHistory);
     ShowPoint();
 }
 
@@ -115,7 +114,7 @@ void DialogHistory::cellClicked(int row, int column)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedCursor changed cursor of input. Cursor show after what record we will insert new object
+ * @brief ChangedCursor changed cursor of input. Cursor show after which record we will insert new object
  * @param id id of object
  */
 void DialogHistory::ChangedCursor(quint32 id)
@@ -151,18 +150,13 @@ void DialogHistory::UpdateHistory()
 void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
-    const QVector<VToolRecord> *history = doc->getHistory();
-    SCASSERT(history != nullptr);
+    QVector<VToolRecord> history = doc->getLocalHistory();
     qint32 currentRow = -1;
     qint32 count = 0;
-    ui->tableWidget->setRowCount(history->size());
-    for (qint32 i = 0; i< history->size(); ++i)
+    ui->tableWidget->setRowCount(history.size());//Make row count max possible number
+    for (qint32 i = 0; i< history.size(); ++i)
     {
-        const VToolRecord tool = history->at(i);
-        if (tool.getNameDraw() != doc->GetNameActivPP())
-        {
-            continue;
-        }
+        const VToolRecord tool = history.at(i);
         const QString historyRecord = Record(tool);
         if (historyRecord.isEmpty() ==false)
         {
@@ -182,8 +176,8 @@ void DialogHistory::FillTable()
             ++count;
         }
     }
-    ui->tableWidget->setRowCount(count);
-    if (history->size()>0)
+    ui->tableWidget->setRowCount(count);//Real row count
+    if (count>0)
     {
         cursorRow = currentRow;
         QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
@@ -373,6 +367,20 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 }
                 return record;
             }
+            case Tool::LineIntersectAxis:
+            {
+                return QString(tr("%1 - point of intersection line %2_%3 and axis through point %4"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)));
+            }
+            case Tool::CurveIntersectAxis:
+            {
+                return QString(tr("%1 - point of intersection curve and axis through point %2"))
+                        .arg(PointName(tool.getId()))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)));
+            }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Detail:
@@ -418,7 +426,7 @@ void DialogHistory::InitialTable()
  */
 void DialogHistory::ShowPoint()
 {
-    QVector<VToolRecord> *history = doc->getHistory();
+    const QVector<VToolRecord> *history = doc->getHistory();
     if (history->size()>0)
     {
         QTableWidgetItem *item = ui->tableWidget->item(0, 1);

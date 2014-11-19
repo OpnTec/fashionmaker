@@ -61,6 +61,7 @@ void VisToolCutSplinePath::RefreshGeometry()
             QPointF spl1p2, spl1p3, spl2p2, spl2p3;
             qint32 p1 = 0, p2 = 0;
 
+            // TODO make refactoring. CutSplPath repeat twice. Here and in VToolCutSpline.
             const QPointF cutPoint = splPath->CutSplinePath(length, p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
             VPointF p = VPointF(cutPoint);
 
@@ -102,6 +103,9 @@ void VisToolCutSplinePath::RefreshGeometry()
                     spPath2.append(splPath->at(i));
                 }
             }
+
+            spPath1.setKCurve(splPath->getKCurve());
+            spPath2.setKCurve(splPath->getKCurve());
 
             DrawPoint(point, cutPoint, mainColor);
 

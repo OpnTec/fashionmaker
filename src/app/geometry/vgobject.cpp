@@ -33,6 +33,7 @@
 #include <QPointF>
 #include <QRectF>
 #include <QtCore/qmath.h>
+#include <climits>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -183,25 +184,32 @@ QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &
 {
     QLineF line = QLineF();
     line.setP1(p1);
+    line.setAngle(angle);// First set angle than length. Length can have negative value.
     line.setLength(length);
-    line.setAngle(angle);
     return line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect)
 {
-    qreal diagonal = qSqrt(pow(scRect.height(), 2) + pow(scRect.width(), 2));
-    QLineF line = BuildLine(firstPoint, diagonal, angle);
+    QRectF rect = scRect;
+    if (rect.contains(firstPoint) == false)
+    {
+        // If point outside of scene rect use the biggest rect that can be.
+        QRectF rectangle(INT_MIN, INT_MIN, INT_MAX, INT_MAX);
+        rect = rect.united(rectangle);
+    }
+    const qreal diagonal = qSqrt(pow(rect.height(), 2) + pow(rect.width(), 2));
+    const QLineF line = BuildLine(firstPoint, diagonal, angle);
 
-    return LineIntersectRect(scRect, line);
+    return LineIntersectRect(rect, line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VGObject::BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect)
 {
-    QPointF endP1 = BuildRay(p, angle+180, scRect);
-    QPointF endP2 = BuildRay(p, angle, scRect);
+    const QPointF endP1 = BuildRay(p, angle+180, scRect);
+    const QPointF endP2 = BuildRay(p, angle, scRect);
     return QLineF(endP1, endP2);
 }
 
@@ -219,7 +227,7 @@ QLineF VGObject::BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &s
  * @param line line.
  * @return point intersection.
  */
-QPointF VGObject::LineIntersectRect(QRectF rec, QLineF line)
+QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
 {
     qreal x1, y1, x2, y2;
     rec.getCoords(&x1, &y1, &x2, &y2);
@@ -244,7 +252,6 @@ QPointF VGObject::LineIntersectRect(QRectF rec, QLineF line)
     {
         return point;
     }
-    Q_ASSERT_X(type != QLineF::BoundedIntersection, Q_FUNC_INFO, "There is no point of intersection.");
     return point;
 }
 

@@ -72,6 +72,7 @@ public:
     QHash<quint32, VDataTool*>* getTools();
     VDataTool*     getTool(const quint32 &id);
     QVector<VToolRecord> *getHistory();
+    QVector<VToolRecord> getLocalHistory() const;
     quint32        getCursor() const;
     void           setCursor(const quint32 &value);
     void           setCurrentData();
@@ -182,6 +183,8 @@ public:
     void                 SetVersion();
 
     QString              GenerateLabel(const LabelType &type)const;
+
+    quint32              SiblingNodeId(const quint32 &nodeId) const;
 signals:
     /**
      * @brief ChangedActivDraw change active pattern peace.
@@ -218,6 +221,7 @@ signals:
     void           UndoCommand();
     void           SetEnabledGUI(bool enabled);
     void           CheckLayout();
+    void           SetCurrentPP(const QString &patterPiece);
 public slots:
     void           LiteParseTree(const Document &parse);
     void           haveLiteChange();
@@ -270,7 +274,6 @@ private:
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document &parse);
     void           UpdateMeasurements();
-    void           GarbageCollector();
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
                                           qreal &my, QString &typeLine);
@@ -284,6 +287,7 @@ private:
     void           ParseCurrentPP();
     void           CheckTagExists(const QString &tag);
     QString        GetLabelBase(unsigned int index)const;
+    void           ToolExists(const quint32 &id) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

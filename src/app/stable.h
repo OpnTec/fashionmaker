@@ -54,23 +54,7 @@
 #endif
 
 //In Windows you can't use same header in all modes.
-#if defined(Q_OS_WIN)
-#   if defined(QT_NO_DEBUG)//release mode
-
-#       ifdef QT_WIDGETS_LIB
-#           include <QtWidgets>
-#       endif
-
-#       ifdef QT_SVG_LIB
-#           include <QtSvg/QtSvg>
-#       endif
-
-#       ifdef QT_PRINTSUPPORT_LIB
-#           include <QtPrintSupport>
-#       endif
-#   endif/*QT_NO_DEBUG*/
-#else
-
+#if !defined(Q_OS_WIN)
 #   ifdef QT_WIDGETS_LIB
 #       include <QtWidgets>
 #   endif

@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
     QT_REQUIRE_VERSION(argc, argv, "5.0.2");
 
     VApplication app(argc, argv);
+
 #ifdef QT_DEBUG
     // Because our "noisy" message handler uses the GUI subsystem for message
     // boxes, we can't install it until after the QApplication is constructed.  But it
@@ -149,6 +150,11 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(APP_VERSION);
 
     app.OpenSettings();
+
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    VApplication::DrMingw();
+    app.CollectReports();
+#endif
 
     QString checkedLocale = qApp->getSettings()->value("configuration/locale", QLocale::system().name()).toString();
 
@@ -187,12 +193,12 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
     parser.process(app);
-    const QStringList args = parser.positionalArguments();
+    QStringList args = parser.positionalArguments();
 
     //Before we load pattern show window.
     w.show();
 
-    w.ReopenFilesAfterCrash();
+    w.ReopenFilesAfterCrash(args);
 
     for (int i=0;i<args.size();++i)
     {

@@ -333,6 +333,8 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData(){}
+    void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
+    bool             eventFilter(QObject *object, QEvent *event);
 private:
     void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 };

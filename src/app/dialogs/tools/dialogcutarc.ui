@@ -284,7 +284,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Standard table</string>
+            <string>Measurements</string>
            </property>
           </widget>
          </item>
@@ -414,6 +414,24 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>plainTextEditFormula</tabstop>
+  <tabstop>toolButtonPutHere</tabstop>
+  <tabstop>toolButtonEqual</tabstop>
+  <tabstop>pushButtonGrowLength</tabstop>
+  <tabstop>comboBoxArc</tabstop>
+  <tabstop>lineEditNamePoint</tabstop>
+  <tabstop>radioButtonSizeGrowth</tabstop>
+  <tabstop>radioButtonStandardTable</tabstop>
+  <tabstop>radioButtonIncrements</tabstop>
+  <tabstop>radioButtonLengthLine</tabstop>
+  <tabstop>radioButtonLengthArc</tabstop>
+  <tabstop>radioButtonLengthSpline</tabstop>
+  <tabstop>radioButtonAngleLine</tabstop>
+  <tabstop>checkBoxHideEmpty</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
  </resources>

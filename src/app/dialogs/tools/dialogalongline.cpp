@@ -52,6 +52,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     labelEditNamePoint = ui->labelEditNamePoint;
 
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
     flagFormula = false;
@@ -138,10 +139,11 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            const QString toolTip = tr("Select second point of line");
             switch (number)
             {
                 case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
+                    if (SetObject(id, ui->comboBoxFirstPoint, toolTip))
                     {
                         number++;
                         line->VisualMode(id);
@@ -150,11 +152,18 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                 case 1:
                     if (SetObject(id, ui->comboBoxSecondPoint, ""))
                     {
-                        line->setPoint2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
+                        if (flagError)
+                        {
+                            line->setPoint2Id(id);
+                            line->RefreshGeometry();
+                            prepare = true;
+                            this->setModal(true);
+                            this->show();
+                        }
+                        else
+                        {
+                            emit ToolTip(toolTip);
+                        }
                     }
                     break;
                 default:
@@ -218,6 +227,7 @@ void DialogAlongLine::setFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formula);
     line->setLength(formula);
+    MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
