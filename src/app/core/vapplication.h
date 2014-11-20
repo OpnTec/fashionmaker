@@ -40,6 +40,7 @@ class QUndoStack;
 class VMainGraphicsView;
 class VMainGraphicsScene;
 class VPattern;
+class QFile;
 
 #if defined(qApp)
 #undef qApp
@@ -54,7 +55,7 @@ class VApplication : public QApplication
     Q_OBJECT
 public:
     VApplication(int &argc, char ** argv);
-    virtual ~VApplication() {}
+    virtual ~VApplication();
     static void        NewValentina(const QString &fileName = QString());
     static void        CheckFactor(qreal &oldFactor, const qreal &Newfactor);
     virtual bool       notify(QObject * receiver, QEvent * event);
@@ -103,13 +104,19 @@ public:
     static QStringList LabelLanguages();
     QString            STDescription(const QString &id)const;
     static bool        SafeCopy(const QString &source, const QString &destination, QString &error);
+    void               StartLogging();
+    QTextStream       *LogFile();
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static void        DrMingw();
     void               CollectReports() const;
+#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
+
 private slots:
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     void               CleanGist() const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
+
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
@@ -143,6 +150,8 @@ private:
     QSettings          *settings;
 
     VPattern           *doc;
+    QFile              *log;
+    QTextStream        *out;
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();
@@ -166,7 +175,11 @@ private:
 
     void               CollectReport(const QString &reportName) const;
     void               SendReport(const QString &reportName) const;
+    QString            ReadFileForSending(QFile &file)const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
+
+    QString            LogDirPath()const;
+    QString            LogPath()const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

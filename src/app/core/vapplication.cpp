@@ -43,6 +43,97 @@
 #include <QUndoStack>
 #include <QtCore/qmath.h>
 #include <QTemporaryFile>
+#include <QFile>
+#include <QStandardPaths>
+#include <QMessageBox>
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
+    if ((type == QtDebugMsg) && msg.contains("::connect"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // this is another one that doesn't make sense as just a debug message.  pretty serious
+    // sign of a problem
+    // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
+    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
+    // is something that can easily happen if you are debugging and the application is paused.
+    // As it is so common, not worth popping up a dialog.
+    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
+            && QString(msg).contains("Cowardly refusing"))
+    {
+        type = QtDebugMsg;
+    }
+
+    // only the GUI thread should display message boxes.  If you are
+    // writing a multithreaded application and the error happens on
+    // a non-GUI thread, you'll have to queue the message to the GUI
+    QCoreApplication *instance = QCoreApplication::instance();
+    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+
+    if (isGuiThread)
+    {
+        QString debugdate = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
+        QMessageBox messageBox;
+        switch (type)
+        {
+            case QtDebugMsg:
+                debugdate += QString(" [Debug] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
+                        .arg(context.line).arg(context.function);
+                break;
+            case QtWarningMsg:
+                debugdate += QString(" [Warning] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
+                        .arg(context.line).arg(context.function);
+                messageBox.setIcon(QMessageBox::Warning);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
+                break;
+            case QtCriticalMsg:
+                debugdate += QString(" [Critical] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
+                        .arg(context.line).arg(context.function);
+                messageBox.setIcon(QMessageBox::Critical);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
+                break;
+            case QtFatalMsg:
+                debugdate += QString(" [Fatal] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
+                        .arg(context.line).arg(context.function);
+                messageBox.setIcon(QMessageBox::Critical);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
+                break;
+            default:
+                break;
+        }
+
+        (*qApp->LogFile()) << debugdate <<  endl;
+
+        if (QtFatalMsg == type)
+        {
+            abort();
+        }
+    }
+    else
+    {
+        if (type != QtDebugMsg)
+        {
+            abort(); // be NOISY unless overridden!
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 
 const qreal VApplication::PrintDPI = 96.0;
 
@@ -64,8 +155,8 @@ VApplication::VApplication(int &argc, char **argv)
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
       postfixOperators(QMap<QString, VTranslation>()), stDescriptions(QMap<QString, VTranslation>()),
-      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr),
-      autoSaveTimer(nullptr), mainWindow(nullptr), openingPattern(false), settings(nullptr), doc(nullptr)
+      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr), mainWindow(nullptr),
+      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr), out(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -75,6 +166,19 @@ VApplication::VApplication(int &argc, char **argv)
     InitFunctions();
     InitPostfixOperators();
     InitSTDescriptions();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VApplication::~VApplication()
+{
+    qInstallMessageHandler(0); // Resore the message handler
+    delete out;
+
+    if (log != nullptr)
+    {
+        log->close();
+        delete log;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,6 +397,25 @@ void VApplication::InitMeasurement(const QString &name, const VTranslation &m, c
     measurements.insert(name, m);
     guiTexts.insert(name, g);
     descriptions.insert(name, d);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::LogDirPath() const
+{
+#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
+    const QString logDirPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(),
+                                                      QStandardPaths::LocateDirectory) + "Valentina";
+#else
+    const QString logDirPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(),
+                                                      QStandardPaths::LocateDirectory) + organizationName();
+#endif
+    return logDirPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::LogPath() const
+{
+    return LogDirPath() + "/valentina.log";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1854,6 +1977,34 @@ bool VApplication::SafeCopy(const QString &source, const QString &destination, Q
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::StartLogging()
+{
+    QDir logDir(LogDirPath());
+    if (logDir.exists() == false)
+    {
+        logDir.mkpath("."); // Create directory for log if need
+    }
+
+    log = new QFile(LogPath());
+    if (log->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+    {
+        out = new QTextStream(log);
+        qInstallMessageHandler(noisyFailureMsgHandler);
+    }
+    else
+    {
+        delete log;
+        qDebug() << "Error opening log file '" << LogPath() << "'. All debug output redirected to console.";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTextStream *VApplication::LogFile()
+{
+    return out;
+}
+
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
 //---------------------------------------------------------------------------------------------------------------------
 // Catch exception and create report. Use if program build with Mingw compiler.
@@ -1905,12 +2056,16 @@ void VApplication::CollectReport(const QString &reportName) const
     }
 
     const QDateTime now = QDateTime::currentDateTime();
-    const QString timestamp = now.toString(QLatin1String("yyyyMMdd-hhmmsszzz"));
-    const QString filename = QString("%1/reports/crash-%2.RPT").arg(qApp->applicationDirPath()).arg(timestamp);
+    const QString timestamp = now.toString(QLatin1String("yyyy.MM.dd-hh_mm_ss"));
+    QString filename = QString("%1/reports/crash-%2.RPT").arg(qApp->applicationDirPath()).arg(timestamp);
 
     QFile reportFile(reportName);
     reportFile.copy(filename); // Collect new crash
     reportFile.remove(); // Clear after yourself
+
+    filename = QString("%1/reports/log-%2.log").arg(qApp->applicationDirPath()).arg(timestamp);
+    QFile logFile(LogPath());
+    logFile.copy(filename); // Collect log
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1928,23 +2083,22 @@ void VApplication::SendReport(const QString &reportName) const
 {
     QString content;
     QFile reportFile(reportName);
-    if (!reportFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (reportFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        return;
+        content = ReadFileForSending(reportFile);
+        reportFile.close();
     }
-
-    QTextStream in(&reportFile);
-    while (!in.atEnd())
+    else
     {
-        content.append(in.readLine()+"\r\n");// Windows end of line
+        content = reportFile.errorString() + "\r\n";
     }
-    reportFile.close();
 
     // Additional information
     content.append(QString("-------------------------------")+"\r\n");
     content.append(QString("Version:%1").arg(APP_VERSION)+"\r\n");
     content.append(QString("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR)+"\r\n");
     content.append(QString("Built on %3 at %4").arg(__DATE__).arg(__TIME__)+"\r\n");
+    content.append("\r\n");
 
     // Creating json with report
     // Example:
@@ -1952,7 +2106,7 @@ void VApplication::SendReport(const QString &reportName) const
     //  "description":"Crash report",
     //  "public":"true",
     //  "files":{
-    //      "file1.txt":{
+    //      "valentina.RPT":{
     //          "content":"Report text here"
     //      }
     //  }
@@ -1967,12 +2121,29 @@ void VApplication::SendReport(const QString &reportName) const
     reportObject.insert(QStringLiteral("description"), QJsonValue(report));
     reportObject.insert(QStringLiteral("public"), QJsonValue(QString("true")));
 
-    QJsonObject contentObject;
-    contentObject.insert(QStringLiteral("content"), QJsonValue(content));
+    content.append("\r\n");
+    content.append(QString("-------------------------------")+"\r\n");
+    content.append(QString("Log:")+"\r\n");
 
+    QFile logFile(LogPath());
+    if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        content.append(ReadFileForSending(logFile));
+        logFile.close();
+    }
+    else
+    {
+        content = logFile.errorString() + "\r\n";
+    }
+
+    const QString contentSection = QStringLiteral("content");
+    QJsonObject contentObject;
+    contentObject.insert(contentSection, QJsonValue(content));
+
+    const QString filesSection = QStringLiteral("files");
     QJsonObject fileObject;
     fileObject.insert(QFileInfo(reportName).fileName(), QJsonValue(contentObject));
-    reportObject.insert(QStringLiteral("files"), QJsonValue(fileObject));
+    reportObject.insert(filesSection, QJsonValue(fileObject));
 
     QFile gistFile(GistFileName);
     if (!gistFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
@@ -2000,5 +2171,17 @@ void VApplication::SendReport(const QString &reportName) const
     {// We can not send than just collect
         CollectReport(reportName);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::ReadFileForSending(QFile &file) const
+{
+    QString content;
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        content.append(in.readLine()+"\r\n");// Windows end of line
+    }
+    return content;
 }
 #endif //defined(Q_OS_WIN) && defined(Q_CC_GNU)
