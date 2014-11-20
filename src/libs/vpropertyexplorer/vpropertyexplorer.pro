@@ -102,14 +102,16 @@ HEADERS +=\
     stable.h
 
 # Set "make install" command for Unix-like systems.
-unix{
-    isEmpty(PREFIX){
-        PREFIX = $$DEFAULT_PREFIX/lib
-    }
-}
-
 unix:!macx{
-    target.path = $$PREFIX/lib
+    isEmpty(PREFIX){
+        contains(QMAKE_HOST.arch, x86_64) {
+            PREFIX = $$DEFAULT_PREFIX/lib64
+        } else {
+            PREFIX = $$DEFAULT_PREFIX/lib
+        }
+    }
+
+    target.path = $$PREFIX
     INSTALLS += target
 }
 
