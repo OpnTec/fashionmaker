@@ -1409,6 +1409,7 @@ void MainWindow::Preferences()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::RepotBug()
 {
+    qCDebug(vMainWindow)<<"Reporting bug";
     QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/issues/new"));
 }
 
