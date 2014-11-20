@@ -28,6 +28,9 @@
 
 #include "adddet.h"
 #include "../xml/vpattern.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vUndoAddDetail, "v.undo.add.detail")
 
 //---------------------------------------------------------------------------------------------------------------------
 AddDet::AddDet(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
@@ -45,6 +48,8 @@ AddDet::~AddDet()
 // cppcheck-suppress unusedFunction
 void AddDet::undo()
 {
+    qCDebug(vUndoAddDetail)<<"Undo.";
+
     QDomElement element;
     if (doc->GetActivNodeElement(VPattern::TagDetails, element))
     {
@@ -53,19 +58,19 @@ void AddDet::undo()
         {
             if (element.removeChild(domElement).isNull())
             {
-                qDebug()<<"Can't delete node";
+                qCDebug(vUndoAddDetail)<<"Can't delete node";
                 return;
             }
         }
         else
         {
-            qDebug()<<"Can't get node by id = "<<nodeId<<Q_FUNC_INFO;
+            qCDebug(vUndoAddDetail)<<"Can't get node by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qDebug()<<"Can't find tag"<<VPattern::TagDetails<< Q_FUNC_INFO;
+        qCDebug(vUndoAddDetail)<<"Can't find tag"<<VPattern::TagDetails<<".";
         return;
     }
     emit NeedFullParsing();
@@ -75,6 +80,8 @@ void AddDet::undo()
 // cppcheck-suppress unusedFunction
 void AddDet::redo()
 {
+    qCDebug(vUndoAddDetail)<<"Redo.";
+
     QDomElement element;
     if (doc->GetActivNodeElement(VPattern::TagDetails, element))
     {
@@ -82,7 +89,7 @@ void AddDet::redo()
     }
     else
     {
-        qDebug()<<"Can't find tag"<<VPattern::TagDetails<< Q_FUNC_INFO;
+        qCDebug(vUndoAddDetail)<<"Can't find tag"<<VPattern::TagDetails<<".";
         return;
     }
     RedoFullParsing();

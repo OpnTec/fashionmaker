@@ -29,6 +29,9 @@
 #include "savedetailoptions.h"
 #include "../tools/nodeDetails/vabstractnode.h"
 #include <QGraphicsView>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vUndoSaveDetailOptions, "v.undo.save.detail.options")
 
 SaveDetailOptions::SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VPattern *doc, const quint32 &id,
                                      QGraphicsScene *scene, QUndoCommand *parent)
@@ -45,6 +48,8 @@ SaveDetailOptions::~SaveDetailOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::undo()
 {
+    qCDebug(vUndoSaveDetailOptions)<<"Undo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -72,7 +77,7 @@ void SaveDetailOptions::undo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoSaveDetailOptions)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }
@@ -80,6 +85,8 @@ void SaveDetailOptions::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::redo()
 {
+    qCDebug(vUndoSaveDetailOptions)<<"Redo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -107,7 +114,7 @@ void SaveDetailOptions::redo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoSaveDetailOptions)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }

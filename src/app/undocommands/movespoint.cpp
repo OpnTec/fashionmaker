@@ -32,6 +32,9 @@
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vUndoMoveSPoint, "v.undo.move.spoint")
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
@@ -50,7 +53,7 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
     }
     else
     {
-        qDebug()<<"Can't find spoint with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoMoveSPoint)<<"Can't find spoint with id ="<<nodeId<<".";
         return;
     }
 }
@@ -62,12 +65,16 @@ MoveSPoint::~MoveSPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::undo()
 {
+    qCDebug(vUndoMoveSPoint)<<"Undo.";
+
     Do(oldX, oldY);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::redo()
 {
+    qCDebug(vUndoMoveSPoint)<<"Redo.";
+
     Do(newX, newY);
 }
 
@@ -110,7 +117,7 @@ void MoveSPoint::Do(double x, double y)
     }
     else
     {
-        qDebug()<<"Can't find spoint with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoMoveSPoint)<<"Can't find spoint with id ="<<nodeId<<".";
         return;
     }
 }

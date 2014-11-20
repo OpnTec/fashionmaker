@@ -32,6 +32,9 @@
 #include <QSpacerItem>
 #include <QApplication>
 #include "../options.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vExcep, "v.excep")
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -100,6 +103,7 @@ void VException::CriticalMessageBox(const QString &situation, QWidget * parent) 
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
+    qCDebug(vExcep)<<"Critical error!"<<situation<<ErrorMessage()<<DetailedInformation();
     msgBox.exec();
 }
 

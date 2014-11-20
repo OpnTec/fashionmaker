@@ -29,6 +29,9 @@
 #include "movesplinepath.h"
 #include <QDomElement>
 #include "../tools/drawTools/vtoolsplinepath.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vUndoMoveSplinePath, "v.undo.move.splinepath")
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
@@ -48,12 +51,16 @@ MoveSplinePath::~MoveSplinePath()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::undo()
 {
+    qCDebug(vUndoMoveSplinePath)<<"Undo.";
+
     Do(oldSplinePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::redo()
 {
+    qCDebug(vUndoMoveSplinePath)<<"Redo.";
+
     Do(newSplinePath);
 }
 
@@ -95,7 +102,7 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
     }
     else
     {
-        qDebug()<<"Can't find spline path with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoMoveSplinePath)<<"Can't find spline path with id ="<<nodeId<<".";
         return;
     }
 }

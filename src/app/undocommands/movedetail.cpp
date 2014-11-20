@@ -32,6 +32,9 @@
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vUndoMoveDetail, "v.undo.move.detail")
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
@@ -50,7 +53,7 @@ MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const qu
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoMoveDetail)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }
@@ -62,6 +65,8 @@ MoveDetail::~MoveDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::undo()
 {
+    qCDebug(vUndoMoveDetail)<<"Undo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -74,7 +79,7 @@ void MoveDetail::undo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoMoveDetail)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }
@@ -82,6 +87,8 @@ void MoveDetail::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::redo()
 {
+    qCDebug(vUndoMoveDetail)<<"Redo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -98,7 +105,7 @@ void MoveDetail::redo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndoMoveDetail)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }

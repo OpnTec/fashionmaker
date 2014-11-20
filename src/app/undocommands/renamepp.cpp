@@ -31,7 +31,9 @@
 #include <QComboBox>
 #include "../options.h"
 #include "../xml/vpattern.h"
+#include <QLoggingCategory>
 
+Q_LOGGING_CATEGORY(vUndoRenamePP, "v.undo.rename.pp")
 
 //---------------------------------------------------------------------------------------------------------------------
 RenamePP::RenamePP(VPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
@@ -46,16 +48,23 @@ RenamePP::RenamePP(VPattern *doc, const QString &newPPname, QComboBox *combo, QU
 RenamePP::~RenamePP()
 {}
 
+//---------------------------------------------------------------------------------------------------------------------
 void RenamePP::undo()
 {
+    qCDebug(vUndoRenamePP)<<"Undo.";
+
     ChangeName(newPPname, oldPPname);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void RenamePP::redo()
 {
+    qCDebug(vUndoRenamePP)<<"Redo.";
+
     ChangeName(oldPPname, newPPname);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool RenamePP::mergeWith(const QUndoCommand *command)
 {
     const RenamePP *renameCommand = static_cast<const RenamePP *>(command);
@@ -86,6 +95,6 @@ void RenamePP::ChangeName(const QString &oldName, const QString &newName)
     }
     else
     {
-        qWarning()<<"Can't change pattern piece name";
+        qCWarning(vUndoRenamePP)<<"Can't change pattern piece name";
     }
 }

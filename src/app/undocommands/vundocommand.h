@@ -31,7 +31,6 @@
 
 #include <QUndoCommand>
 #include <QDomElement>
-
 #include "../xml/vpattern.h"
 
 enum class UndoCommand: char { AddPatternPiece,

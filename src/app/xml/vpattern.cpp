@@ -46,6 +46,9 @@
 #include <QMessageBox>
 #include <QUndoStack>
 #include <QtCore/qmath.h>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vPatt, "v.pattern")
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -298,6 +301,7 @@ bool VPattern::ChangeNamePP(const QString& oldName, const QString &newName)
  */
 void VPattern::Parse(const Document &parse)
 {
+    qCDebug(vPatt)<<"Parsing pattern.";
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
@@ -369,7 +373,6 @@ VDataTool *VPattern::getTool(const quint32 &id)
     ToolExists(id);
     return tools.value(id);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ToolExists(const quint32 &id) const

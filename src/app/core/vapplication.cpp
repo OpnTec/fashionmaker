@@ -46,6 +46,9 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QMessageBox>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vApp, "v.application")
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -171,6 +174,7 @@ VApplication::VApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VApplication::~VApplication()
 {
+    qCDebug(vApp)<<"Application closing.";
     qInstallMessageHandler(0); // Resore the message handler
     delete out;
 
@@ -188,6 +192,8 @@ VApplication::~VApplication()
  */
 void VApplication::NewValentina(const QString &fileName)
 {
+    qCDebug(vApp)<<"Open new detached process.";
+
     QProcess *v = new QProcess();
     QStringList arguments;
     arguments << fileName;
@@ -1980,6 +1986,8 @@ bool VApplication::SafeCopy(const QString &source, const QString &destination, Q
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::StartLogging()
 {
+    QLoggingCategory::setFilterRules("*.debug=true\n");
+
     QDir logDir(LogDirPath());
     if (logDir.exists() == false)
     {

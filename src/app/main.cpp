@@ -68,7 +68,13 @@ int main(int argc, char *argv[])
     // Run creation log after sending crash report
     app.StartLogging();
 
+    qDebug()<<"Version:"<<APP_VERSION;
+    qDebug()<<"Based on Qt "<<QT_VERSION_STR<<"(32 bit)";
+    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
+    qDebug()<<"Command-line arguments:"<<app.arguments();
+
     QString checkedLocale = qApp->getSettings()->value("configuration/locale", QLocale::system().name()).toString();
+    qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator qtTranslator;
 #if defined(Q_OS_WIN)

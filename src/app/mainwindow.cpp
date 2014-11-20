@@ -59,6 +59,9 @@
 #include <QtGlobal>
 #include <QDesktopWidget>
 #include <QDesktopServices>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -795,6 +798,7 @@ void MainWindow::showEvent( QShowEvent *event )
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    qCDebug(vMainWindow)<<"Closing main window";
     if (MaybeSave())
     {
         FileClosedCorrect();
@@ -804,6 +808,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     else
     {
+        qCDebug(vMainWindow)<<"Closing canceled.";
         event->ignore();
     }
 }
@@ -1152,6 +1157,7 @@ void  MainWindow::ArrowTool()
     ui->view->setCursor(cur);
     helpLabel->setText("");
     ui->view->setShowToolOptions(true);
+    qCDebug(vMainWindow)<<"Enabled arrow tool.";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1217,6 +1223,7 @@ void MainWindow::ActionDraw(bool checked)
 {
     if (checked)
     {
+        qCDebug(vMainWindow)<<"Show draw scene";
         ui->actionDetails->setChecked(false);
         SaveCurrentScene();
 
@@ -1253,6 +1260,7 @@ void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
     {
+        qCDebug(vMainWindow)<<"Show details scene";
         ui->actionDraw->setChecked(false);
         SaveCurrentScene();
 
@@ -1311,7 +1319,19 @@ bool MainWindow::SaveAs()
     {
         fileName += ".val";
     }
-    return SavePattern(fileName);
+    QString error;
+    bool result = SavePattern(fileName, error);
+    if (result == false)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+    }
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1327,12 +1347,23 @@ bool MainWindow::Save()
     }
     else
     {
-        bool result = SavePattern(curFile);
+        QString error;
+        bool result = SavePattern(curFile, error);
         if (result)
         {
             QString autofile = curFile +".autosave";
             QFile file(autofile);
             file.remove();
+        }
+        else
+        {
+            QMessageBox messageBox;
+            messageBox.setIcon(QMessageBox::Warning);
+            messageBox.setInformativeText(tr("Could not save file"));
+            messageBox.setDefaultButton(QMessageBox::Ok);
+            messageBox.setDetailedText(error);
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.exec();
         }
         return result;
     }
@@ -1357,6 +1388,7 @@ void MainWindow::Open()
         //Absolute path to last open file
         dir = QFileInfo(files.first()).absolutePath();
     }
+    qCDebug(vMainWindow)<<"Run QFileDialog::getOpenFileName: dir ="<<dir<<".";
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
     OpenPattern(filePath);
 }
@@ -1386,6 +1418,8 @@ void MainWindow::RepotBug()
  */
 void MainWindow::Clear()
 {
+    qCDebug(vMainWindow)<<"Reseting main window";
+
     ui->actionDetails->setChecked(false);
     ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
@@ -1439,6 +1473,7 @@ void MainWindow::FileClosedCorrect()
     {
         autofile.remove();
     }
+    qCDebug(vMainWindow)<<"File"<<curFile<<"closed correct.";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1458,6 +1493,8 @@ void MainWindow::ResetWindow()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
+    qCDebug(vMainWindow)<<"Full parsing file";
+
     toolOptions->ClearPropertyBrowser();
     try
     {
@@ -1904,10 +1941,10 @@ void MainWindow::MinimumScrollBar()
  * @param fileName pattern file name.
  * @return true if all is good.
  */
-bool MainWindow::SavePattern(const QString &fileName)
+bool MainWindow::SavePattern(const QString &fileName, QString &error)
 {
+    qCDebug(vMainWindow)<<"Saving pattern file"<<fileName<<".";
     QFileInfo tempInfo(fileName);
-    QString error;
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
@@ -1915,17 +1952,12 @@ bool MainWindow::SavePattern(const QString &fileName)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
+            qCDebug(vMainWindow)<<"File"<<fileName<<"saved.";
         }
     }
     else
     {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save file"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
+        qCDebug(vMainWindow)<<"Could not save file"<<fileName<<"."<<error<<".";
     }
     return result;
 }
@@ -1936,13 +1968,13 @@ bool MainWindow::SavePattern(const QString &fileName)
  */
 void MainWindow::AutoSavePattern()
 {
+    qCDebug(vMainWindow)<<"Autosaving pattern.";
+
     if (curFile.isEmpty() == false && this->isWindowModified() == true)
     {
         QString autofile = curFile +".autosave";
-        if (SavePattern(autofile) == false)
-        {
-            qDebug()<<"Can not save pattern"<<Q_FUNC_INFO;
-        }
+        QString error;
+        SavePattern(autofile, error);
     }
 }
 
@@ -2180,7 +2212,7 @@ void MainWindow::CreateActions()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitAutoSave()
 {
-    //Autosaving file each 5 minutes
+    //Autosaving file each 1 minutes
     delete autoSaveTimer;
     autoSaveTimer = nullptr;
 
@@ -2196,10 +2228,10 @@ void MainWindow::InitAutoSave()
         qint32 autoTime = qApp->getSettings()->value("configuration/autosave/time", 1).toInt(&ok);
         if (ok == false)
         {
-            autoTime = 5;
+            autoTime = 1;
         }
         autoSaveTimer->start(autoTime*60000);
-
+        qCDebug(vMainWindow)<<"Autosaving each"<<autoTime<<"minutes.";
     }
     qApp->setAutoSaveTimer(autoSaveTimer);
 }
@@ -2252,6 +2284,8 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
+    qCDebug(vMainWindow)<<"Loading new file"<<fileName<<".";
+
     //We have unsaved changes or load more then one file per time
     OpenNewValentina(fileName);
 
@@ -2289,6 +2323,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             {
                 QMessageBox::critical(this, tr("Wrong units."),
                                       tr("Application doesn't support standard table with inches."));
+                qCDebug(vMainWindow)<<"Application doesn't support standard table with inches.";
                 Clear();
                 return;
             }
@@ -2324,6 +2359,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             PatternWasModified(!patternModified);
         }
         helpLabel->setText(tr("File loaded"));
+        qCDebug(vMainWindow)<<"File loaded.";
 
         qApp->setOpeningPattern();// End opening file
 
@@ -2340,6 +2376,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
     QStringList files = qApp->getSettings()->value("restoreFileList").toStringList();
     if (files.size() > 0)
     {
+        qCDebug(vMainWindow)<<"Reopen files after crash.";
+
         QStringList restoreFiles;
         for (int i = 0; i < files.size(); ++i)
         {
@@ -2361,6 +2399,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                                           QMessageBox::Yes);
             if (reply == QMessageBox::Yes)
             {
+                qCDebug(vMainWindow)<<"User said Yes.";
+
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
                     QString error;
@@ -2373,7 +2413,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                     }
                     else
                     {
-                        qDebug()<< "Could not copy "<<restoreFiles.at(i) +".autosave"<<"to"<<restoreFiles.at(i)<<error;
+                        qCDebug(vMainWindow) << "Could not copy "<<restoreFiles.at(i) +".autosave"<<"to"
+                                             <<restoreFiles.at(i)<<error;
                     }
                 }
             }

@@ -32,6 +32,9 @@
 #include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../widgets/vmaingraphicsview.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vUndoAddToCalc, "v.undo.add.to.calc")
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
@@ -48,6 +51,8 @@ AddToCalc::~AddToCalc()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::undo()
 {
+    qCDebug(vUndoAddToCalc)<<"Undo.";
+
     doc->ChangeActivPP(nameActivDraw);//User will not see this change
     doc->setCursor(cursor);
 
@@ -59,19 +64,19 @@ void AddToCalc::undo()
         {
             if (calcElement.removeChild(domElement).isNull())
             {
-                qDebug()<<"Can't delete node";
+                qCDebug(vUndoAddToCalc)<<"Can't delete node.";
                 return;
             }
         }
         else
         {
-            qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
+            qCDebug(vUndoAddToCalc)<<"Can't get tool by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        qCDebug(vUndoAddToCalc)<<"Can't find tag Calculation.";
         return;
     }
     if (cursor > 0)
@@ -86,6 +91,8 @@ void AddToCalc::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::redo()
 {
+    qCDebug(vUndoAddToCalc)<<"Redo.";
+
     doc->ChangeActivPP(nameActivDraw);//User will not see this change
     doc->setCursor(cursor);
 
@@ -106,14 +113,14 @@ void AddToCalc::redo()
             }
             else
             {
-                qDebug()<<"Can not find the element after which you want to insert."<< Q_FUNC_INFO;
+                qCDebug(vUndoAddToCalc)<<"Can not find the element after which you want to insert.";
                 return;
             }
         }
     }
     else
     {
-        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        qCDebug(vUndoAddToCalc)<<"Can't find tag Calculation.";
         return;
     }
     RedoFullParsing();
