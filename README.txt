@@ -27,7 +27,7 @@ Building the sources requires Qt 5.2.1 or later.
 Compiling Valentina
 ====================
 Prerequisites:   
-   * Qt 5.0.2 or later (On Unix development packages needed)   
+   * Qt 5.2.1 or later (On Unix development packages needed)   
    * mercurial   
    * On Unix:   
      - ccache   
