@@ -143,7 +143,6 @@ CONFIG(debug, debug|release){
     DEFINES += "LOC_REV=0"
 }else{
     # Release mode
-    DEFINES += QT_NO_DEBUG_OUTPUT
 
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll

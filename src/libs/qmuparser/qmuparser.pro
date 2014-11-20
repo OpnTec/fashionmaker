@@ -101,7 +101,6 @@ CONFIG(debug, debug|release){
 
 }else{
     # Release mode
-    DEFINES += QT_NO_DEBUG_OUTPUT
 
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
