@@ -1931,7 +1931,7 @@ QString VApplication::STDescription(const QString &id) const
     }
     else
     {
-        qWarning()<<"Unknown id number. Got"<<id;
+        qDebug()<<"Unknown id number. Got"<<id;
     }
     return QString();
 }
