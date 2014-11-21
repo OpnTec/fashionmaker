@@ -126,11 +126,13 @@ private:
 
     VisToolArc    *path;
 
-    void          EvalRadius();
-    void          EvalF1();
-    void          EvalF2();
-    void          ShowLineAngles();
+    qreal         angleF1;
+    qreal         angleF2;
 
+    void          EvalRadius();
+    void          EvalF();
+    void          ShowLineAngles();
+    void          CheckAngles();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

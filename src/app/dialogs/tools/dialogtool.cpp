@@ -473,10 +473,13 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
  */
-void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
+qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
 {
     SCASSERT(label != nullptr);
     SCASSERT(labelEditFormula != nullptr);
+
+    qreal result = 0;
+
     if (text.isEmpty())
     {
         flag = false;
@@ -493,7 +496,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QStr
             formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
             Calculator *cal = new Calculator(data);
-            const qreal result = cal->EvalFormula(formula);
+            result = cal->EvalFormula(formula);
             delete cal;
 
             //if result equal 0
@@ -537,6 +540,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QStr
         }
     }
     CheckState();
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

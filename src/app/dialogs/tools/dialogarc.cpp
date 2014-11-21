@@ -45,8 +45,9 @@
  */
 DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
-      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(NULL_ID), radius(QString()), f1(QString()),
-      f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr)
+      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(NULL_ID), radius(QString()),
+      f1(QString()), f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr),
+      angleF1(0), angleF2(0)
 {
     ui->setupUi(this);
 
@@ -65,10 +66,10 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     connect(timerRadius, &QTimer::timeout, this, &DialogArc::EvalRadius);
 
     timerF1 = new QTimer(this);
-    connect(timerF1, &QTimer::timeout, this, &DialogArc::EvalF1);
+    connect(timerF1, &QTimer::timeout, this, &DialogArc::EvalF);
 
     timerF2 = new QTimer(this);
-    connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF2);
+    connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF);
 
     InitOkCancelApply(ui);
 
@@ -81,8 +82,8 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     connect(ui->toolButtonPutHereF2, &QPushButton::clicked, this, &DialogArc::PutF2);
 
     connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
-    connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF1);
-    connect(ui->toolButtonEqualF2, &QPushButton::clicked, this, &DialogArc::EvalF2);
+    connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF);
+    connect(ui->toolButtonEqualF2, &QPushButton::clicked, this, &DialogArc::EvalF);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
     connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArc::F1Changed);
@@ -356,22 +357,17 @@ void DialogArc::EvalRadius()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief EvalF1 calculate value of first angle
+ * @brief EvalF1 calculate value of angle
  */
-void DialogArc::EvalF1()
+void DialogArc::EvalF()
 {
     labelEditFormula = ui->labelEditF1;
-    Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, degreeSymbol, false);
-}
+    angleF1 = Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, degreeSymbol, false);
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief EvalF2 calculate value of second angle
- */
-void DialogArc::EvalF2()
-{
     labelEditFormula = ui->labelEditF2;
-    Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
+    angleF2 = Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
+
+    CheckAngles();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -393,4 +389,21 @@ void DialogArc::ShowLineAngles()
         ui->listWidget->addItem(item);
     }
     ui->listWidget->setCurrentRow (0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::CheckAngles()
+{
+    if (qFuzzyCompare(angleF1 + 1, angleF2 + 1))
+    {
+        flagF1 = false;
+        ChangeColor(ui->labelEditF1, Qt::red);
+        ui->labelResultF1->setToolTip(tr("Angles equal"));
+
+        flagF2 = false;
+        ChangeColor(ui->labelEditF2, Qt::red);
+        ui->labelResultF2->setToolTip(tr("Angles equal"));
+    }
+
+    DialogArc::CheckState();
 }
