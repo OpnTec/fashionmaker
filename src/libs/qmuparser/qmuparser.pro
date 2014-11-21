@@ -67,9 +67,15 @@ unix:!macx{
         } else {
             PREFIX = $$DEFAULT_PREFIX/lib
         }
+        target.path = $$PREFIX
+    } else {
+        contains(QMAKE_HOST.arch, x86_64) {
+            target.path = $$PREFIX/lib64
+        } else {
+            target.path = $$PREFIX/lib
+        }
     }
 
-    target.path = $$PREFIX
     INSTALLS += target
 }
 

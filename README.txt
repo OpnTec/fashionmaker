@@ -45,7 +45,7 @@ The installed toolchains have to match the one Qt was compiled with.
 You can build Valentina with
 
     cd $SOURCE_DIRECTORY
-    qmake -r
+    qmake Valentina.pro -r (or qmake-qt5, depending on your platform)
     make (or mingw32-make or nmake or jom, depending on your platform)
 
 Note:In order to build and use Valentina, the PATH environment variable 
@@ -60,6 +60,14 @@ Control Panel|System|Advanced|Environment variables menu.
 You may also need to ensure that the locations of your compiler and 
 other build tools are listed in the PATH variable. This will depend on 
 your choice of software development environment.
+
+Unix systems:
+Default prefix for command "make install" is /usr. For using another 
+prefix build with qmake command:
+
+qmake PREFIX=/usr/local Valentina.pro -r
+
+where /usr/local is a new prefix for installation.
 
 LICENSING
 ==========
