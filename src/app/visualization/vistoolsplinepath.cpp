@@ -82,7 +82,15 @@ void VisToolSplinePath::RefreshGeometry()
 
             DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
         }
-        Visualization::toolTip = QString(tr("<b>Curve path</b>: <b>Enter</b> - finish creation"));
+        if (path.CountPoint() < 3)
+        {
+            Visualization::toolTip = QString(tr("<b>Curve path</b>: select three or more points"));
+        }
+        else
+        {
+            Visualization::toolTip = QString(tr("<b>Curve path</b>: select three or more points, "
+                                                "<b>Enter</b> - finish creation"));
+        }
     }
 }
 
