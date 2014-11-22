@@ -31,6 +31,7 @@
 #include <QSettings>
 #include "../core/vapplication.h"
 #include "vcontainer.h"
+#include "../core/vsettings.h"
 
 using namespace qmu;
 
@@ -52,6 +53,7 @@ using namespace qmu;
 Calculator::Calculator(const VContainer *data)
     :QmuParser(), vVarVal(nullptr), data(data)
 {
+    SCASSERT(data != nullptr)
     InitCharacterSets();
     setAllowSubexpressions(false);//Only one expression per time
 
@@ -88,6 +90,7 @@ Calculator::Calculator(const QString &formula, bool fromUser)
     Eval();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Calculator::~Calculator()
 {
     delete [] vVarVal;
@@ -112,7 +115,7 @@ qreal Calculator::EvalFormula(const QString &formula)
     QMap<int, QString> tokens = this->GetTokens();
 
     // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
-    RemoveAll(tokens, "-");
+    RemoveAll(tokens, QStringLiteral("-"));
 
     if (tokens.isEmpty())
     {
@@ -132,6 +135,7 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
         vVarVal = new qreal[2];
     }
 
+    SCASSERT(data != nullptr)
     const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
 
     QMap<int, QString>::const_iterator i = tokens.constBegin();
@@ -225,7 +229,7 @@ void Calculator::SetSepForTr(bool fromUser)
 {
     if (fromUser)
     {
-        bool osSeparatorValue = qApp->getSettings()->value("configuration/osSeparator", 1).toBool();
+        const bool osSeparatorValue = qApp->getSettings()->GetOsSeparator();
 
         if (osSeparatorValue)
         {
