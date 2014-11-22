@@ -29,6 +29,7 @@
 #include "pathpage.h"
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
+#include "../../../core/vsettings.h"
 #include <QDir>
 #include <QGroupBox>
 #include <QLabel>
@@ -61,8 +62,8 @@ PathPage::PathPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::Apply()
 {
-    qApp->getSettings()->setValue("paths/individual_measurements", pathTable->item(0, 1)->text());
-    qApp->getSettings()->setValue("paths/pattern", pathTable->item(1, 1)->text());
+    qApp->getSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
+    qApp->getSettings()->SetPathPattern(pathTable->item(1, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,15 +139,11 @@ void PathPage::InitTable()
     QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
     pathTable->setHorizontalHeaderLabels(tableHeader);
 
-    QString path;
-
     pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-    path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
-    pathTable->setItem(0, 1, new QTableWidgetItem(path));
+    pathTable->setItem(0, 1, new QTableWidgetItem(qApp->getSettings()->GetPathIndividualMeasurements()));
 
     pathTable->setItem(1, 0, new QTableWidgetItem(tr("Patterns")));
-    path = qApp->getSettings()->value("paths/pattern", QDir::homePath()).toString();
-    pathTable->setItem(1, 1, new QTableWidgetItem(path));
+    pathTable->setItem(1, 1, new QTableWidgetItem(qApp->getSettings()->GetPathPattern()));
 
     pathTable->verticalHeader()->setDefaultSectionSize(20);
     pathTable->resizeColumnsToContents();

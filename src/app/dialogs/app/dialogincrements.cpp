@@ -32,6 +32,7 @@
 #include "../../widgets/textdelegate.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
+#include "../../core/vsettings.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -510,7 +511,7 @@ void DialogIncrements::OpenTable()
         const QString filter(tr("Individual measurements (*.vit)"));
 
         //Use standard path to individual measurements
-        QString path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
+        const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
 
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())

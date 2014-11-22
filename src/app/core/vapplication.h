@@ -32,7 +32,6 @@
 #include <QApplication>
 #include "../options.h"
 #include "vtranslation.h"
-#include <QSettings>
 #include "../widgets/vmaingraphicsview.h"
 
 class VApplication;// used in define
@@ -41,6 +40,7 @@ class VMainGraphicsView;
 class VMainGraphicsScene;
 class VPattern;
 class QFile;
+class VSettings;
 
 #if defined(qApp)
 #undef qApp
@@ -90,8 +90,10 @@ public:
     void               setMainWindow(QWidget *value);
     bool               getOpeningPattern() const;
     void               setOpeningPattern();
+
     void               OpenSettings();
-    QSettings          *getSettings();
+    VSettings          *getSettings();
+
     VMainGraphicsScene *getCurrentScene() const;
     void               setCurrentScene(VMainGraphicsScene *value);
 
@@ -147,7 +149,7 @@ private:
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
-    QSettings          *settings;
+    VSettings          *settings;
 
     VPattern           *doc;
     QFile              *log;

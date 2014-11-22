@@ -30,6 +30,7 @@
 #include "../container/calculator.h"
 #include "../container/vcontainer.h"
 #include "../core/vapplication.h"
+#include "../core/vsettings.h"
 #include <QDebug>
 
 //VFormula
@@ -239,7 +240,7 @@ void VFormula::Eval()
             else
             {
                 QLocale loc;
-                if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
+                if (qApp->getSettings()->GetOsSeparator())
                 {
                     loc = QLocale::system();
                 }

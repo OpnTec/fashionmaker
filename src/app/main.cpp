@@ -28,15 +28,16 @@
 
 #include "mainwindow.h"
 #include "core/vapplication.h"
+#include "core/vsettings.h"
+#include "tablewindow.h"
+#include "version.h"
+
 #include <QTextCodec>
 #include <QMessageBox>
 #include <QThread>
 #include <QCommandLineParser>
-
 #include <QtXml>
 #include <QLibraryInfo>
-#include "tablewindow.h"
-#include "version.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
@@ -73,7 +74,7 @@ int main(int argc, char *argv[])
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
     qDebug()<<"Command-line arguments:"<<app.arguments();
 
-    QString checkedLocale = qApp->getSettings()->value("configuration/locale", QLocale::system().name()).toString();
+    const QString checkedLocale = qApp->getSettings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator qtTranslator;

@@ -29,6 +29,7 @@
 #include "configurationpage.h"
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
+#include "../../../core/vsettings.h"
 #include <QDir>
 #include <QGroupBox>
 #include <QLabel>
@@ -62,46 +63,38 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::Apply()
 {
-    qApp->getSettings()->setValue("configuration/autosave/state", autoSaveCheck->isChecked());
-    qApp->getSettings()->setValue("configuration/autosave/time", autoTime->value());
+    qApp->getSettings()->SetAutosaveState(autoSaveCheck->isChecked());
+    qApp->getSettings()->SetAutosaveTime(autoTime->value());
 
     QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
     SCASSERT(autoSaveTimer);
 
-    if (autoSaveCheck->isChecked())
-    {
-        autoSaveTimer->start(autoTime->value()*60000);
-    }
-    else
-    {
-        autoSaveTimer->stop();
-    }
+    autoSaveCheck->isChecked() ? autoSaveTimer->start(autoTime->value()*60000) : autoSaveTimer->stop();
 
-    qApp->getSettings()->setValue("configuration/osSeparator", osOptionCheck->isChecked());
-
-    qApp->getSettings()->setValue("configuration/send_report/state", sendReportCheck->isChecked());
+    qApp->getSettings()->SetOsSeparator(osOptionCheck->isChecked());
+    qApp->getSettings()->SetSendReportState(sendReportCheck->isChecked());
 
     if (langChanged)
     {
-        QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
-        qApp->getSettings()->setValue("configuration/locale", locale);
+        const QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
+        qApp->getSettings()->SetLocale(locale);
         langChanged = false;
-        QString text = tr("Setup user interface language updated and will be used the next time start") + " " +
-                          QApplication::applicationName();
+        const QString text = tr("Setup user interface language updated and will be used the next time start") + " " +
+                                QApplication::applicationName();
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
     if (this->unitChanged)
     {
-        QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
-        qApp->getSettings()->setValue("configuration/unit", unit);
+        const QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
+        qApp->getSettings()->SetUnit(unit);
         this->unitChanged = false;
-        QString text = tr("Default unit updated and will be used the next pattern creation");
+        const QString text = tr("Default unit updated and will be used the next pattern creation");
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
     if (labelLangChanged)
     {
-        QString locale = qvariant_cast<QString>(labelCombo->itemData(labelCombo->currentIndex()));
-        qApp->getSettings()->setValue("configuration/label_language", locale);
+        const QString locale = qvariant_cast<QString>(labelCombo->itemData(labelCombo->currentIndex()));
+        qApp->getSettings()->SetLabelLanguage(locale);
         labelLangChanged = false;
     }
 }
@@ -127,31 +120,19 @@ void ConfigurationPage::LabelLangChanged()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SaveGroup()
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-
     QGroupBox *saveGroup = new QGroupBox(tr("Save"));
 
     autoSaveCheck = new QCheckBox(tr("Auto-save modified pattern"));
-    bool autoSaveValue = settings->value("configuration/autosave/state", 1).toBool();
-    autoSaveCheck->setChecked(autoSaveValue);
-
-    QLabel *intervalLabel = new QLabel(tr("Interval:"));
+    autoSaveCheck->setChecked(qApp->getSettings()->GetAutosaveState());
 
     autoTime = new QSpinBox();
-    bool ok = true;
-    qint32 autoTimeValue = settings->value("configuration/autosave/time", 1).toInt(&ok);
-    if (ok == false)
-    {
-        autoTimeValue = 5;
-    }
     autoTime->setRange(1, 60);
-    autoTime->setValue(autoTimeValue);
+    autoTime->setValue(qApp->getSettings()->GetAutosaveTime());
     autoTime->setSuffix(tr("min"));
 
     QHBoxLayout *autosaveLayout = new QHBoxLayout;
     autosaveLayout->addWidget(autoSaveCheck);
-    autosaveLayout->addWidget(intervalLabel);
+    autosaveLayout->addWidget(new QLabel(tr("Interval:")));
     autosaveLayout->addWidget(autoTime);
 
     QVBoxLayout *saveLayout = new QVBoxLayout;
@@ -163,19 +144,12 @@ QGroupBox *ConfigurationPage::SaveGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::LangGroup()
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-
     QGroupBox *langGroup = new QGroupBox(tr("Language"));
     QLabel *guiLabel = new QLabel(tr("GUI language"));
     langCombo = new QComboBox;
 
-    // format systems language
-    QString checkedLocale = settings->value("configuration/locale", QLocale::system().name()).toString();
-
-    QString m_langPath = qApp->translationsPath();
-    QDir dir(m_langPath);
-    QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
+    QDir dir(qApp->translationsPath());
+    const QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
 
     for (int i = 0; i < fileNames.size(); ++i)
     {
@@ -198,7 +172,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     langCombo->addItem(ico, lang, "en_US");
 
     // set default translators and language checked
-    qint32 index = langCombo->findData(checkedLocale);
+    qint32 index = langCombo->findData(qApp->getSettings()->GetLocale());
     if (index != -1)
     {
         langCombo->setCurrentIndex(index);
@@ -214,8 +188,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
-    bool osOptionValue = settings->value("configuration/osSeparator", 1).toBool();
-    osOptionCheck->setChecked(osOptionValue);
+    osOptionCheck->setChecked(qApp->getSettings()->GetOsSeparator());
 
     QHBoxLayout *separatorLayout = new QHBoxLayout;
     separatorLayout->addWidget(separatorLabel);
@@ -225,14 +198,12 @@ QGroupBox *ConfigurationPage::LangGroup()
     this->unitCombo = new QComboBox;
     QLabel *unitLabel = new QLabel(tr("Default unit"));
 
-    QString checkedUnit = settings->value("configuration/unit", "cm").toString();
-
     this->unitCombo->addItem(tr("Centimeters"), "cm");
     this->unitCombo->addItem(tr("Millimiters"), "mm");
     this->unitCombo->addItem(tr("Inches"), "in");
 
     // set default unit
-    qint32 indexUnit = this->unitCombo->findData(checkedUnit);
+    qint32 indexUnit = this->unitCombo->findData(qApp->getSettings()->GetUnit());
     if (indexUnit != -1)
     {
         this->unitCombo->setCurrentIndex(indexUnit);
@@ -249,12 +220,9 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *labelName = new QLabel(tr("Label language"));
     labelCombo = new QComboBox;
 
-    QString checkedLabelLocale = settings->value("configuration/label_language",
-                                                 QLocale::system().bcp47Name()).toString();
-
     SetLabelComboBox(VApplication::LabelLanguages());
 
-    index = labelCombo->findData(checkedLabelLocale);
+    index = labelCombo->findData(qApp->getSettings()->GetLabelLanguage());
     if (index != -1)
     {
         labelCombo->setCurrentIndex(index);
@@ -281,14 +249,10 @@ QGroupBox *ConfigurationPage::LangGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SendGroup()
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-
     QGroupBox *sendGroup = new QGroupBox(tr("Send crash reports"));
 
     sendReportCheck = new QCheckBox(tr("Send crash reports (recommended)"));
-    bool sendReportValue = settings->value("configuration/send_report/state", 1).toBool();
-    sendReportCheck->setChecked(sendReportValue);
+    sendReportCheck->setChecked(qApp->getSettings()->GetSendReportState());
 
     QLabel *description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
                                         "problem. We do not collect any personal information. Find more about what "

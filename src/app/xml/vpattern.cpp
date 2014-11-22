@@ -38,6 +38,7 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionundo.h"
 #include "../core/undoevent.h"
+#include "../core/vsettings.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
 #include "../../libs/qmuparser/qmuparsererror.h"
@@ -1701,13 +1702,9 @@ void VPattern::CheckTagExists(const QString &tag)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetLabelBase(unsigned int index) const
 {
-    QString checkedLocale = qApp->getSettings()->value("configuration/label_language",
-                                                       QLocale::system().bcp47Name()).toString();
-
     QStringList list = VApplication::LabelLanguages();
-
     QStringList alphabet;
-    switch (list.indexOf(checkedLocale))
+    switch (list.indexOf(qApp->getSettings()->GetLabelLanguage()))
     {
         case 0: // de
         {
@@ -2378,15 +2375,7 @@ void VPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetAuthor() const
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-#ifdef Q_OS_WIN
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
-#else
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
-#endif
-
-    return UniqueTagText(TagAuthor, user);
+    return UniqueTagText(TagAuthor, qApp->getSettings()->GetUser());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

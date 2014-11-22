@@ -40,6 +40,7 @@
 #include "xml/vindividualmeasurements.h"
 #include "core/vapplication.h"
 #include "core/undoevent.h"
+#include "core/vsettings.h"
 #include "undocommands/renamepp.h"
 #include "vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -1298,11 +1299,10 @@ void MainWindow::ActionDetails(bool checked)
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
-    QString path = qApp->getSettings()->value("paths/pattern", QDir::homePath()).toString();
     QString dir;
     if (curFile.isEmpty())
     {
-        dir = path + "/" + tr("pattern") + ".val";
+        dir = qApp->getSettings()->GetPathPattern() + "/" + tr("pattern") + ".val";
     }
     else
     {
@@ -1377,7 +1377,7 @@ void MainWindow::Open()
 {
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
-    const QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
+    const QStringList files = qApp->getSettings()->GetRecentFileList();
     QString dir;
     if (files.isEmpty())
     {
@@ -1464,9 +1464,9 @@ void MainWindow::FileClosedCorrect()
     WriteSettings();
 
     //File was closed correct.
-    QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+    QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
     restoreFiles.removeAll(curFile);
-    qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+    qApp->getSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
     QFile autofile(curFile +".autosave");
@@ -1997,7 +1997,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     }
     else
     {
-        QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
+        QStringList files = qApp->getSettings()->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
         while (files.size() > MaxRecentFiles)
@@ -2005,13 +2005,13 @@ void MainWindow::setCurrentFile(const QString &fileName)
             files.removeLast();
         }
 
-        qApp->getSettings()->setValue("recentFileList", files);
+        qApp->getSettings()->SetRecentFileList(files);
         UpdateRecentFileActions();
 
-        QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+        QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
-        qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+        qApp->getSettings()->SetRestoreFileList(restoreFiles);
     }
     shownName+="[*]";
     setWindowTitle(shownName);
@@ -2034,22 +2034,16 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
-    restoreGeometry(qApp->getSettings()->value("geometry").toByteArray());
-    restoreState(qApp->getSettings()->value("windowState").toByteArray());
+    restoreGeometry(qApp->getSettings()->GetGeometry());
+    restoreState(qApp->getSettings()->GetWindowState());
 
     // Scene antialiasing
-    bool graphOutputValue = qApp->getSettings()->value("pattern/graphicalOutput", 1).toBool();
+    const bool graphOutputValue = qApp->getSettings()->GetGraphicalOutput();
     ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
-    bool ok = true;
-    qint32 count = qApp->getSettings()->value("pattern/undo", 0).toInt(&ok);
-    if (ok == false)
-    {
-        count = 0;
-    }
-    qApp->getUndoStack()->setUndoLimit(count);
+    qApp->getUndoStack()->setUndoLimit(qApp->getSettings()->GetUndoCount());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2058,8 +2052,8 @@ void MainWindow::ReadSettings()
  */
 void MainWindow::WriteSettings()
 {
-    qApp->getSettings()->setValue("geometry", saveGeometry());
-    qApp->getSettings()->setValue("windowState", saveState());
+    qApp->getSettings()->SetGeometry(saveGeometry());
+    qApp->getSettings()->SetWindowState(saveState());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2090,9 +2084,8 @@ bool MainWindow::MaybeSave()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateRecentFileActions()
 {
-    QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
-
-    int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
+    const QStringList files = qApp->getSettings()->GetRecentFileList();
+    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
@@ -2222,15 +2215,9 @@ void MainWindow::InitAutoSave()
     connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     autoSaveTimer->stop();
 
-    bool autoSave = qApp->getSettings()->value("configuration/autosave/state", 1).toBool();
-    if (autoSave)
+    if (qApp->getSettings()->GetAutosaveState())
     {
-        bool ok = true;
-        qint32 autoTime = qApp->getSettings()->value("configuration/autosave/time", 1).toInt(&ok);
-        if (ok == false)
-        {
-            autoTime = 1;
-        }
+        const qint32 autoTime = qApp->getSettings()->GetAutosaveTime();
         autoSaveTimer->start(autoTime*60000);
         qCDebug(vMainWindow)<<"Autosaving each"<<autoTime<<"minutes.";
     }
@@ -2374,7 +2361,7 @@ void MainWindow::LoadPattern(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 {
-    QStringList files = qApp->getSettings()->value("restoreFileList").toStringList();
+    QStringList files = qApp->getSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
         qCDebug(vMainWindow)<<"Reopen files after crash.";
@@ -2389,7 +2376,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
             }
         }
         files.clear();
-        qApp->getSettings()->setValue("restoreFileList", files);
+        qApp->getSettings()->SetRestoreFileList(files);
 
         if (restoreFiles.size() > 0)
         {

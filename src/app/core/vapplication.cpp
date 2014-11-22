@@ -35,6 +35,7 @@
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"
+#include "vsettings.h"
 
 #include <QDebug>
 #include <QDir>
@@ -1652,10 +1653,8 @@ QString VApplication::FormulaFromUser(const QString &formula)
         }
     }
 
-    bool osSeparatorValue = getSettings()->value("configuration/osSeparator", 1).toBool();
-
     QLocale loc = QLocale::system();
-    if (loc != QLocale(QLocale::C) && osSeparatorValue)
+    if (loc != QLocale(QLocale::C) && getSettings()->GetOsSeparator())
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
@@ -1768,10 +1767,8 @@ QString VApplication::FormulaToUser(const QString &formula)
         }
     }
 
-    bool osSeparatorValue = getSettings()->value("configuration/osSeparator", 1).toBool();
-
     QLocale loc = QLocale::system();
-    if (loc != QLocale::C && osSeparatorValue)
+    if (loc != QLocale::C && getSettings()->GetOsSeparator())
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
@@ -1838,7 +1835,7 @@ void VApplication::setOpeningPattern()
  */
 void VApplication::OpenSettings()
 {
-    settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                              QApplication::applicationName(), this);
 }
 
@@ -1847,7 +1844,7 @@ void VApplication::OpenSettings()
  * @brief VApplication::getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
  */
-QSettings *VApplication::getSettings()
+VSettings *VApplication::getSettings()
 {
     SCASSERT(settings != nullptr);
     return settings;
@@ -2040,7 +2037,7 @@ void VApplication::CollectReports() const
             return;// Settings was not opened.
         }
 
-        if (settings->value("configuration/send_report/state", 1).toBool())
+        if (settings->GetSendReportState())
         { // Try send report
             // Remove gist.json file before close app.
             connect(this, &VApplication::aboutToQuit, this, &VApplication::CleanGist, Qt::UniqueConnection);

@@ -35,6 +35,7 @@
 #include "../../tools/vabstracttool.h"
 #include "../../../libs/qmuparser/qmuparsererror.h"
 #include "../../core/vapplication.h"
+#include "../../core/vsettings.h"
 #include "../../xml/vdomdocument.h"
 #include <QTimer>
 #include <QCloseEvent>
@@ -512,7 +513,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             else
             {
                 QLocale loc;
-                if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
+                if (qApp->getSettings()->GetOsSeparator())
                 {
                     loc = QLocale::system();
                 }

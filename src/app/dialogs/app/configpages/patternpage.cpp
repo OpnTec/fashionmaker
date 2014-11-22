@@ -29,6 +29,7 @@
 #include "patternpage.h"
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
+#include "../../../core/vsettings.h"
 #include "../../../widgets/vmaingraphicsview.h"
 #include <QGroupBox>
 #include <QLabel>
@@ -57,35 +58,27 @@ PatternPage::PatternPage(QWidget *parent):
 //---------------------------------------------------------------------------------------------------------------------
 void PatternPage::Apply()
 {
-    qApp->getSettings()->setValue("pattern/user", userName->text());
+    qApp->getSettings()->SetUser(userName->text());
 
     // Scene antialiasing
-    qApp->getSettings()->setValue("pattern/graphicalOutput", graphOutputCheck->isChecked());
+    qApp->getSettings()->SetGraphicalOutput(graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputCheck->isChecked());
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
      * prints a warning and does nothing.*/
-    qApp->getSettings()->setValue("pattern/undo", undoCount->value());
+    qApp->getSettings()->SetUndoCount(undoCount->value());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::UserGroup()
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-
     QGroupBox *userGroup = new QGroupBox(tr("User"));
     QLabel *nameLabel = new QLabel(tr("User name"));
 
     userName = new QLineEdit;
-#ifdef Q_OS_WIN
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
-#else
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
-#endif
-    userName->setText(user);
+    userName->setText(qApp->getSettings()->GetUser());
 
     QHBoxLayout *nameLayout = new QHBoxLayout;
     nameLayout->addWidget(nameLabel);
@@ -103,8 +96,7 @@ QGroupBox *PatternPage::GraphOutputGroup()
     QGroupBox *graphOutputGroup = new QGroupBox(tr("Graphical output"));
 
     graphOutputCheck = new QCheckBox(tr("Use antialiasing"));
-    bool graphOutputValue = qApp->getSettings()->value("pattern/graphicalOutput", 1).toBool();
-    graphOutputCheck->setChecked(graphOutputValue);
+    graphOutputCheck->setChecked(qApp->getSettings()->GetGraphicalOutput());
 
     QHBoxLayout *graphLayout = new QHBoxLayout;
     graphLayout->addWidget(graphOutputCheck);
@@ -122,13 +114,7 @@ QGroupBox *PatternPage::UndoGroup()
     QLabel *undoLabel = new QLabel(tr("Count steps (0 - no limit)"));
     undoCount = new QSpinBox;
     undoCount->setMinimum(0);
-    bool ok = true;
-    qint32 count = qApp->getSettings()->value("pattern/undo", 0).toInt(&ok);
-    if (ok == false)
-    {
-        count = 0;
-    }
-    undoCount->setValue(count);
+    undoCount->setValue(qApp->getSettings()->GetUndoCount());
 
     QHBoxLayout *countLayout = new QHBoxLayout;
     countLayout->addWidget(undoLabel);
