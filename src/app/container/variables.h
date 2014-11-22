@@ -29,12 +29,12 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-#include "vinternalvariable.h"
-#include "vmeasurement.h"
-#include "vincrement.h"
-#include "varclength.h"
-#include "vsplinelength.h"
-#include "vlinelength.h"
-#include "vlineangle.h"
+#include "variables/vinternalvariable.h"
+#include "variables/vmeasurement.h"
+#include "variables/vincrement.h"
+#include "variables/varclength.h"
+#include "variables/vsplinelength.h"
+#include "variables/vlinelength.h"
+#include "variables/vlineangle.h"
 
 #endif // VARIABLES_H
