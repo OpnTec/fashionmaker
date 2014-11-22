@@ -47,7 +47,7 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
       timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(NULL_ID), radius(QString()),
       f1(QString()), f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr),
-      angleF1(0), angleF2(0)
+      angleF1(INT_MIN), angleF2(INT_MIN)
 {
     ui->setupUi(this);
 
@@ -352,7 +352,17 @@ void DialogArc::EvalRadius()
 {
     labelEditFormula = ui->labelEditRadius;
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
+    const qreal radius = Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
+
+    if (radius < 0)
+    {
+        flagRadius = false;
+        ChangeColor(labelEditFormula, Qt::red);
+        ui->labelResultRadius->setText(tr("Error"));
+        ui->labelResultRadius->setToolTip(tr("Radius can't be negative"));
+
+        DialogArc::CheckState();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,14 +404,21 @@ void DialogArc::ShowLineAngles()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::CheckAngles()
 {
+    if (angleF1 == INT_MIN || angleF2 == INT_MIN)
+    {
+        return;
+    }
+
     if (qFuzzyCompare(angleF1 + 1, angleF2 + 1))
     {
         flagF1 = false;
         ChangeColor(ui->labelEditF1, Qt::red);
+        ui->labelResultF1->setText(tr("Error"));
         ui->labelResultF1->setToolTip(tr("Angles equal"));
 
         flagF2 = false;
         ChangeColor(ui->labelEditF2, Qt::red);
+        ui->labelResultF2->setText(tr("Error"));
         ui->labelResultF2->setToolTip(tr("Angles equal"));
     }
 

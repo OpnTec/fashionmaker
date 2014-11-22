@@ -458,7 +458,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
                 Changes += currentChange->element->GettreeNodeName();
                 Changes += "/";
                 Changes += (currentChange->element->GettreeNodeValueSet()) ?
-                            currentChange->element->GettreeNodeValue(): QString(tr("<no value>"));
+                            currentChange->element->GettreeNodeValue(): tr("<no value>");
                 Changes += "\n";
             }
             else
@@ -466,9 +466,9 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
                 if (currentChange->type == DialogPatternXmlEdit::ChangeTypeModify)
                 {
                     Changes += QString("Modified type %1 : ").arg(nodetype);
-                    Changes += (currentChange->changedText) ? *currentChange->newText : QString(tr("Unchanged"));
+                    Changes += (currentChange->changedText) ? *currentChange->newText : tr("Unchanged");
                     Changes += "/";
-                    Changes += (currentChange->changedValue) ? *currentChange->newValue: QString(tr("Unchanged"));
+                    Changes += (currentChange->changedValue) ? *currentChange->newValue: tr("Unchanged");
                     Changes += "\n";
                 }
                 else
@@ -479,7 +479,7 @@ void DialogPatternXmlEdit::ButtonApplyChangesClicked()
                         Changes += currentChange->element->GettreeNodeName();
                         Changes += "/";
                         Changes += (currentChange->element->GettreeNodeValueSet()) ?
-                                    currentChange->element->GettreeNodeValue(): QString(tr("<no value>"));
+                                    currentChange->element->GettreeNodeValue(): tr("<no value>");
                         Changes += "\n";
                     }
                 }

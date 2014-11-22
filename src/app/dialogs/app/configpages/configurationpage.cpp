@@ -86,8 +86,8 @@ void ConfigurationPage::Apply()
         QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
         qApp->getSettings()->setValue("configuration/locale", locale);
         langChanged = false;
-        QString text = QString(tr("Setup user interface language updated and will be used the next time start") + " " +
-                               QApplication::applicationName());
+        QString text = tr("Setup user interface language updated and will be used the next time start") + " " +
+                          QApplication::applicationName();
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
     if (this->unitChanged)
@@ -95,7 +95,7 @@ void ConfigurationPage::Apply()
         QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
         qApp->getSettings()->setValue("configuration/unit", unit);
         this->unitChanged = false;
-        QString text = QString(tr("Default unit updated and will be used the next pattern creation"));
+        QString text = tr("Default unit updated and will be used the next pattern creation");
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
     if (labelLangChanged)

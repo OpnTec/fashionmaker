@@ -441,6 +441,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
         labelResultCalculation->setText(tr("Error"));
+        labelResultCalculation->setToolTip(tr("Empty field"));
         return;
     }
     timer->start(1000);
@@ -458,6 +459,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
         labelResultCalculation->setText(tr("Error"));
+        labelResultCalculation->setToolTip(tr("Empty field"));
         return;
     }
     timer->setSingleShot(true);
@@ -478,7 +480,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
     SCASSERT(label != nullptr);
     SCASSERT(labelEditFormula != nullptr);
 
-    qreal result = 0;
+    qreal result = INT_MIN;//Value can be 0, so use max imposible value
 
     if (text.isEmpty())
     {
@@ -908,7 +910,7 @@ void DialogTool::EvalFormula()
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

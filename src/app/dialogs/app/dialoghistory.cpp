@@ -201,7 +201,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
     if (domElem.isElement() == false)
     {
         qDebug()<<"Can't find element by id"<<Q_FUNC_INFO;
-        return QString(tr("Can't create record."));
+        return tr("Can't create record.");
     }
     try
     {
@@ -291,7 +291,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 else
                 {
                     qDebug()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
-                    return QString(tr("Can't create record."));
+                    return tr("Can't create record.");
                 }
                 return record;
             }
@@ -397,14 +397,14 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 break;
             default:
                 qDebug()<<"Got wrong tool type. Ignore.";
-                return QString(tr("Can't create record."));
+                return tr("Can't create record.");
                 break;
         }
     }
     catch (const VExceptionBadId &e)
     {
         qDebug()<<e.ErrorMessage()<<Q_FUNC_INFO;
-        return QString(tr("Can't create record."));
+        return tr("Can't create record.");
     }
     return QString();
 }
