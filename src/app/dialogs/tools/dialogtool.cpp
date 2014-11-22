@@ -87,7 +87,7 @@ DialogTool::~DialogTool()
  */
 void DialogTool::closeEvent(QCloseEvent *event)
 {
-    DialogClosed(QDialog::Rejected);
+    DialogRejected();
     event->accept();
 }
 

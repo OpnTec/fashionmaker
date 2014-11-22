@@ -114,6 +114,13 @@ void DialogEditWrongFormula::CheckState()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::setFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);

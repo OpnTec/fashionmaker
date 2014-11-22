@@ -185,6 +185,13 @@ void DialogNormal::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setSecondPointId set id of second point
  * @param value id

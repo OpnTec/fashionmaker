@@ -241,6 +241,15 @@ void DialogArc::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArc::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    ui->plainTextEditF1->blockSignals(true);
+    ui->plainTextEditF2->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ValChenged show description angles of lines
  * @param row number of row

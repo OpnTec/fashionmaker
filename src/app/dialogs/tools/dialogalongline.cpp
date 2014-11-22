@@ -191,6 +191,13 @@ void DialogAlongLine::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setSecondPointId set id second point of line
  * @param value id

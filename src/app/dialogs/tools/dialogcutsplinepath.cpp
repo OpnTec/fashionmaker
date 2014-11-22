@@ -153,6 +153,13 @@ void DialogCutSplinePath::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
