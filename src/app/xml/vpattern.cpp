@@ -752,7 +752,7 @@ void VPattern::LiteParseTree(const Document &parse)
                 Parse(parse);
                 break;
             case Document::FullParse:
-                qWarning()<<"Lite parsing doesn't support full parsing";
+                qCWarning(vXML)<<"Lite parsing doesn't support full parsing";
                 break;
             default:
                 break;

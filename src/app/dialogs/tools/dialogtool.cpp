@@ -49,6 +49,8 @@
 #include <QPushButton>
 #include <QDoubleSpinBox>
 
+Q_LOGGING_CATEGORY(vDialog, "v.dialog")
+
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
 //---------------------------------------------------------------------------------------------------------------------

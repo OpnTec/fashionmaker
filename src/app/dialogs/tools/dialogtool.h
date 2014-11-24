@@ -37,6 +37,9 @@
 #include "../../core/vapplication.h"
 #include <QPushButton>
 #include <QCheckBox>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
 class QDoubleSpinBox;
 class QLabel;
