@@ -90,28 +90,24 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         switch (type)
         {
             case QtDebugMsg:
-                debugdate += QString(" [Debug] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
-                        .arg(context.line).arg(context.function);
+                debugdate += QString(" [Debug] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
                 break;
             case QtWarningMsg:
-                debugdate += QString(" [Warning] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
-                        .arg(context.line).arg(context.function);
+                debugdate += QString(" [Warning] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
                 messageBox.setIcon(QMessageBox::Warning);
                 messageBox.setInformativeText(msg);
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 messageBox.exec();
                 break;
             case QtCriticalMsg:
-                debugdate += QString(" [Critical] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
-                        .arg(context.line).arg(context.function);
+                debugdate += QString(" [Critical] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 messageBox.exec();
                 break;
             case QtFatalMsg:
-                debugdate += QString(" [Fatal] %1: %2 (%3:%4, %5)").arg(context.category).arg(msg).arg(context.file)
-                        .arg(context.line).arg(context.function);
+                debugdate += QString(" [Fatal] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
                 messageBox.setStandardButtons(QMessageBox::Ok);
