@@ -31,9 +31,6 @@
 #include <QDomElement>
 #include <QGraphicsView>
 #include "../xml/vpattern.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoMoveSpline, "v.undo.move.spline")
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
@@ -53,7 +50,7 @@ MoveSpline::~MoveSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::undo()
 {
-    qCDebug(vUndoMoveSpline)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     Do(oldSpline);
 }
@@ -61,7 +58,7 @@ void MoveSpline::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::redo()
 {
-    qCDebug(vUndoMoveSpline)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     Do(newSpline);
 }
@@ -107,7 +104,7 @@ void MoveSpline::Do(const VSpline &spl)
     }
     else
     {
-        qCDebug(vUndoMoveSpline)<<"Can't find spline with id ="<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't find spline with id ="<<nodeId<<".";
         return;
     }
 }

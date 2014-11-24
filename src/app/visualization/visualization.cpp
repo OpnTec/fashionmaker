@@ -32,6 +32,8 @@
 
 #include <QGraphicsEllipseItem>
 
+Q_LOGGING_CATEGORY(vVis, "v.visualization")
+
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
     :QObject(), data(data), factor(VDrawTool::factor), scenePos(QPointF()),

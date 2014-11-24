@@ -33,6 +33,9 @@
 #include <QGraphicsItem>
 #include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(vVis)
 
 class VContainer;
 

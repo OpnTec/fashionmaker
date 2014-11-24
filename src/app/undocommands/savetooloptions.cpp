@@ -29,9 +29,6 @@
 #include "savetooloptions.h"
 #include "../options.h"
 #include "../xml/vpattern.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoSaveToolOptions, "v.undo.save.tool.options")
 
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VPattern *doc, const quint32 &id,
@@ -49,7 +46,7 @@ SaveToolOptions::~SaveToolOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::undo()
 {
-    qCDebug(vUndoSaveToolOptions)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
@@ -60,7 +57,7 @@ void SaveToolOptions::undo()
     }
     else
     {
-        qCDebug(vUndoSaveToolOptions)<<"Can't find tool with id ="<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't find tool with id ="<<nodeId<<".";
         return;
     }
 }
@@ -68,7 +65,7 @@ void SaveToolOptions::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::redo()
 {
-    qCDebug(vUndoSaveToolOptions)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
@@ -79,7 +76,7 @@ void SaveToolOptions::redo()
     }
     else
     {
-        qCDebug(vUndoSaveToolOptions)<<"Can't find tool with id ="<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't find tool with id ="<<nodeId<<".";
         return;
     }
 }

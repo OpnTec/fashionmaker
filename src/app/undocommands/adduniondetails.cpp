@@ -28,9 +28,6 @@
 
 #include "adduniondetails.h"
 #include "../xml/vpattern.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoAddUnionDetails, "v.undo.add.union.details")
 
 //---------------------------------------------------------------------------------------------------------------------
 AddUnionDetails::AddUnionDetails(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
@@ -47,7 +44,7 @@ AddUnionDetails::~AddUnionDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void AddUnionDetails::undo()
 {
-    qCDebug(vUndoAddUnionDetails)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
@@ -57,19 +54,19 @@ void AddUnionDetails::undo()
         {
             if (modelingElement.removeChild(domElement).isNull())
             {
-                qCDebug(vUndoAddUnionDetails)<<"Can't delete node.";
+                qCDebug(vUndo)<<"Can't delete node.";
                 return;
             }
         }
         else
         {
-            qCDebug(vUndoAddUnionDetails)<<"Can't get node by id = "<<nodeId<<".";
+            qCDebug(vUndo)<<"Can't get node by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qCDebug(vUndoAddUnionDetails)<<"Can't find tag"<<VPattern::TagModeling<<".";
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
     emit NeedFullParsing();
@@ -78,7 +75,7 @@ void AddUnionDetails::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddUnionDetails::redo()
 {
-    qCDebug(vUndoAddUnionDetails)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
@@ -87,7 +84,7 @@ void AddUnionDetails::redo()
     }
     else
     {
-        qCDebug(vUndoAddUnionDetails)<<"Can't find tag"<<VPattern::TagModeling<<".";
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
     RedoFullParsing();

@@ -32,9 +32,6 @@
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoMoveSPoint, "v.undo.move.spoint")
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
@@ -43,6 +40,10 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
 {
     setText(tr("Move single point"));
     nodeId = id;
+    qCDebug(vUndo)<<"SPoint id"<<nodeId;
+
+    qCDebug(vUndo)<<"SPoint newX"<<newX;
+    qCDebug(vUndo)<<"SPoint newY"<<newY;
 
     SCASSERT(scene != nullptr);
     QDomElement domElement = doc->elementById(QString().setNum(id));
@@ -50,10 +51,13 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
     {
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrX, "0.0"));
         oldY = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrY, "0.0"));
+
+        qCDebug(vUndo)<<"SPoint oldX"<<oldX;
+        qCDebug(vUndo)<<"SPoint oldY"<<oldY;
     }
     else
     {
-        qCDebug(vUndoMoveSPoint)<<"Can't find spoint with id ="<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't find spoint with id ="<<nodeId<<".";
         return;
     }
 }
@@ -65,7 +69,7 @@ MoveSPoint::~MoveSPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::undo()
 {
-    qCDebug(vUndoMoveSPoint)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     Do(oldX, oldY);
 }
@@ -73,7 +77,7 @@ void MoveSPoint::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::redo()
 {
-    qCDebug(vUndoMoveSPoint)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     Do(newX, newY);
 }
@@ -90,8 +94,11 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
         return false;
     }
 
+    qCDebug(vUndo)<<"Mergin undo.";
     newX = moveCommand->getNewX();
     newY = moveCommand->getNewY();
+    qCDebug(vUndo)<<"SPoint newX"<<newX;
+    qCDebug(vUndo)<<"SPoint newY"<<newY;
     return true;
 }
 
@@ -104,6 +111,9 @@ int MoveSPoint::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::Do(double x, double y)
 {
+    qCDebug(vUndo)<<"Move to x"<<x;
+    qCDebug(vUndo)<<"Move to y"<<y;
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -117,7 +127,7 @@ void MoveSPoint::Do(double x, double y)
     }
     else
     {
-        qCDebug(vUndoMoveSPoint)<<"Can't find spoint with id ="<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't find spoint with id ="<<nodeId<<".";
         return;
     }
 }

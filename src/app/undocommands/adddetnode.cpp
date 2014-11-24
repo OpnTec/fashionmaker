@@ -28,9 +28,6 @@
 
 #include "adddetnode.h"
 #include "../xml/vpattern.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoAddDetailNode, "v.undo.add.detail.node")
 
 //---------------------------------------------------------------------------------------------------------------------
 AddDetNode::AddDetNode(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
@@ -47,7 +44,7 @@ AddDetNode::~AddDetNode()
 //---------------------------------------------------------------------------------------------------------------------
 void AddDetNode::undo()
 {
-    qCDebug(vUndoAddDetailNode)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
@@ -57,19 +54,19 @@ void AddDetNode::undo()
         {
             if (modelingElement.removeChild(domElement).isNull())
             {
-               qCDebug(vUndoAddDetailNode)<<"Can't delete node.";
+               qCDebug(vUndo)<<"Can't delete node.";
                 return;
             }
         }
         else
         {
-            qCDebug(vUndoAddDetailNode)<<"Can't get node by id = "<<nodeId<<".";
+            qCDebug(vUndo)<<"Can't get node by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qCDebug(vUndoAddDetailNode)<<"Can't find tag"<<VPattern::TagModeling<<".";
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
 }
@@ -77,7 +74,7 @@ void AddDetNode::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddDetNode::redo()
 {
-    qCDebug(vUndoAddDetailNode)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
@@ -86,7 +83,7 @@ void AddDetNode::redo()
     }
     else
     {
-        qCDebug(vUndoAddDetailNode)<<"Can't find tag"<<VPattern::TagModeling<<".";
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
 }

@@ -28,6 +28,8 @@
 
 #include "vdatatool.h"
 
+Q_LOGGING_CATEGORY(vTool, "v.tool")
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VDataTool constructor.

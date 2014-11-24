@@ -29,9 +29,6 @@
 #include "deletepatternpiece.h"
 #include "../xml/vpattern.h"
 #include "addpatternpiece.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoDeletePP, "v.undo.delete.pp")
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent)
@@ -54,7 +51,7 @@ DeletePatternPiece::~DeletePatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::undo()
 {
-    qCDebug(vUndoDeletePP)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     QDomElement rootElement = doc->documentElement();
     QDomNode previousPP = doc->GetPPElement(previousPPName);
@@ -67,7 +64,7 @@ void DeletePatternPiece::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::redo()
 {
-    qCDebug(vUndoDeletePP)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     QDomElement rootElement = doc->documentElement();
     QDomElement patternPiece = doc->GetPPElement(namePP);

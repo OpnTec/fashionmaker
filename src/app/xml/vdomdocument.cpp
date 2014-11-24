@@ -39,7 +39,6 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QTemporaryFile>
-#include <QLoggingCategory>
 
 //This class need for validation pattern file using XSD shema
 class MessageHandler : public QAbstractMessageHandler
@@ -91,7 +90,7 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
     m_sourceLocation = sourceLocation;
 }
 
-Q_LOGGING_CATEGORY(vDocument, "v.document")
+Q_LOGGING_CATEGORY(vXML, "v.xml")
 
 const QString VDomDocument::AttrId     = QStringLiteral("id");
 const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
@@ -357,7 +356,7 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
  */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
-    qCDebug(vDocument)<<"Validation xml file"<<fileName<<".";
+    qCDebug(vXML)<<"Validation xml file"<<fileName<<".";
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {

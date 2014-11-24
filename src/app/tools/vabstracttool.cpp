@@ -241,6 +241,7 @@ int VAbstractTool::ConfirmDeletion()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
+    qCDebug(vTool)<<"Saving tool options";
     QDomElement oldDomElement = doc->elementById(QString().setNum(id));
     if (oldDomElement.isElement())
     {
@@ -254,7 +255,7 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 

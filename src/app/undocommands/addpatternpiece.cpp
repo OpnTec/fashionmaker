@@ -28,9 +28,6 @@
 
 #include "addpatternpiece.h"
 #include "../xml/vpattern.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoAddPP, "v.undo.add.pp")
 
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
@@ -49,7 +46,7 @@ AddPatternPiece::~AddPatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()
 {
-    qCDebug(vUndoAddPP)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     if (doc->CountPP() <= 1)
     {
@@ -67,7 +64,7 @@ void AddPatternPiece::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::redo()
 {
-    qCDebug(vUndoAddPP)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     if (doc->CountPP() == 0 && mPath.isEmpty() == false)
     {

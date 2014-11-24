@@ -31,7 +31,10 @@
 
 #include <QUndoCommand>
 #include <QDomElement>
+#include <QLoggingCategory>
 #include "../xml/vpattern.h"
+
+Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
 enum class UndoCommand: char { AddPatternPiece,
                                AddToCalc,

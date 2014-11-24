@@ -47,9 +47,6 @@
 #include <QMessageBox>
 #include <QUndoStack>
 #include <QtCore/qmath.h>
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vPatt, "v.pattern")
 
 const QString VPattern::TagPattern      = QStringLiteral("pattern");
 const QString VPattern::TagCalculation  = QStringLiteral("calculation");
@@ -302,7 +299,7 @@ bool VPattern::ChangeNamePP(const QString& oldName, const QString &newName)
  */
 void VPattern::Parse(const Document &parse)
 {
-    qCDebug(vPatt)<<"Parsing pattern.";
+    qCDebug(vXML)<<"Parsing pattern.";
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
@@ -412,9 +409,14 @@ void VPattern::setCurrentData()
     {
         if (CountPP() > 1)//don't need upadate data if we have only one pattern piece
         {
+            qCDebug(vXML)<<"Setting current data";
+            qCDebug(vXML)<<"Current PP name"<<nameActivPP;
+            qCDebug(vXML)<<"PP count"<<CountPP();
+
             quint32 id = 0;
             if (history.size() == 0)
             {
+                qCDebug(vXML)<<"History is empty!";
                 return;
             }
             for (qint32 i = 0; i < history.size(); ++i)
@@ -425,12 +427,17 @@ void VPattern::setCurrentData()
                     id = tool.getId();
                 }
             }
-            if (id == 0)
+            qCDebug(vXML)<<"Resoring data from tool with id"<<id;
+            if (id == NULL_ID)
             {
+                qCDebug(vXML)<<"Could not find record for this current pattern piece"<<nameActivPP;
+
                 const VToolRecord tool = history.at(history.size()-1);
                 id = tool.getId();
-                if (id == 0)
+                qCDebug(vXML)<<"Taking record with id"<<id<<"from PP"<<tool.getNameDraw();
+                if (id == NULL_ID)
                 {
+                    qCDebug(vXML)<<"Bad id for last record in history.";
                     return;
                 }
             }
@@ -439,6 +446,11 @@ void VPattern::setCurrentData()
                 ToolExists(id);
                 const VDataTool *vTool = tools.value(id);
                 *data = vTool->getData();
+                qCDebug(vXML)<<"Data successfully updated.";
+            }
+            else
+            {
+                qCDebug(vXML)<<"List of tools is empty!";
             }
         }
     }
@@ -800,11 +812,13 @@ void VPattern::LiteParseTree(const Document &parse)
 
     // Restore name current pattern piece
     nameActivPP = namePP;
+    qCDebug(vXML)<<"Current pattern piece"<<nameActivPP;
     setCurrentData();
     emit FullUpdateFromFile();
     // Recalculate scene rect
     VAbstractTool::NewSceneRect(sceneDraw, qApp->getSceneView());
     VAbstractTool::NewSceneRect(sceneDetail, qApp->getSceneView());
+    qCDebug(vXML)<<"Scene size updated.";
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -30,9 +30,6 @@
 #include "../xml/vpattern.h"
 #include <QGraphicsItem>
 #include "../tools/vtooldetail.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoDeleteTool, "v.undo.delete.tool")
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
@@ -53,7 +50,7 @@ DelTool::~DelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::undo()
 {
-    qCDebug(vUndoDeleteTool)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
@@ -63,7 +60,7 @@ void DelTool::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::redo()
 {
-    qCDebug(vUndoDeleteTool)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);

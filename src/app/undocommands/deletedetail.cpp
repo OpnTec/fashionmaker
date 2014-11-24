@@ -29,9 +29,6 @@
 #include "deletedetail.h"
 #include "../xml/vpattern.h"
 #include "../tools/vtooldetail.h"
-#include <QLoggingCategory>
-
-Q_LOGGING_CATEGORY(vUndoDeleteDetail, "v.undo.delete.detail")
 
 //---------------------------------------------------------------------------------------------------------------------
 DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
@@ -57,7 +54,7 @@ DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
     }
     else
     {
-        qCDebug(vUndoDeleteDetail)<<"Can't get detail by id ="<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't get detail by id ="<<nodeId<<".";
         return;
     }
 }
@@ -69,7 +66,7 @@ DeleteDetail::~DeleteDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void DeleteDetail::undo()
 {
-    qCDebug(vUndoDeleteDetail)<<"Undo.";
+    qCDebug(vUndo)<<"Undo.";
 
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
@@ -78,7 +75,7 @@ void DeleteDetail::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DeleteDetail::redo()
 {
-    qCDebug(vUndoDeleteDetail)<<"Redo.";
+    qCDebug(vUndo)<<"Redo.";
 
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
@@ -97,7 +94,7 @@ void DeleteDetail::redo()
     }
     else
     {
-        qCDebug(vUndoDeleteDetail)<<"Can't get detail by id = "<<nodeId<<".";
+        qCDebug(vUndo)<<"Can't get detail by id = "<<nodeId<<".";
         return;
     }
 }
