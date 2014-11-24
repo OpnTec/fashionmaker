@@ -2463,13 +2463,16 @@ QString VPattern::GenerateLabel(const LabelType &type) const
             }
             ++i;
         }
+        qCDebug(vXML)<<"Point label:"<<name;
         return name;
     }
     else if (type == LabelType::NewLabel)
     {
         if (drawList.isEmpty())
         {
-            return GetLabelBase(0);
+            const QString label = GetLabelBase(0);
+            qCDebug(vXML)<<"Point label:"<<label;
+            return label;
         }
 
         int index = 0;
@@ -2496,8 +2499,10 @@ QString VPattern::GenerateLabel(const LabelType &type) const
                 break;
             }
         } while (data->IsUnique(name) == false);
+        qCDebug(vXML)<<"Point label:"<<name;
         return name;
     }
+    qCDebug(vXML)<<"Got unknow type"<<static_cast<char>(type);
     return QString();
 }
 

@@ -140,23 +140,30 @@ MainWindow::MainWindow(QWidget *parent)
  */
 void MainWindow::ActionNewPP()
 {
+    qCDebug(vMainWindow)<<"New PP.";
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+    qCDebug(vMainWindow)<<"Generated PP name:"<<patternPieceName;
     QString path;
     if (comboBoxDraws->count() == 0)
     {
+        qCDebug(vMainWindow)<<"First PP";
         DialogMeasurements measurements(this);
         if (measurements.exec() == QDialog::Rejected)
         {
+            qCDebug(vMainWindow)<<"Creation PP was canceled";
             return;
         }
         if (measurements.type() == MeasurementsType::Standard)
         {
+            qCDebug(vMainWindow)<<"PP with standard measurements";
             qApp->setPatternType(MeasurementsType::Standard);
             DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
             if (stMeasurements.exec() == QDialog::Accepted)
             {
                 patternPieceName = stMeasurements.name();
+                qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
                 path = stMeasurements.tablePath();
+                qCDebug(vMainWindow)<<"Table path:"<<path;
                 VStandardMeasurements m(pattern);
                 m.setContent(path);
                 m.SetSize();
@@ -165,11 +172,13 @@ void MainWindow::ActionNewPP()
             }
             else
             {
+                qCDebug(vMainWindow)<<"Selection standard measurements canceled.";
                 return;
             }
         }
         else
         {
+            qCDebug(vMainWindow)<<"PP with individual measurements.";
             QMessageBox::StandardButton ret;
             ret = QMessageBox::question(this, tr("Individual measurements is under development"),
                                         tr("There is no way create individual measurements file independent on the "
@@ -186,13 +195,16 @@ void MainWindow::ActionNewPP()
             if (indMeasurements.exec() == QDialog::Accepted)
             {
                 patternPieceName = indMeasurements.name();
+                qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
                 path = indMeasurements.tablePath();
+                qCDebug(vMainWindow)<<"Table path:"<<path;
                 VIndividualMeasurements m(pattern);
                 m.setContent(path);
                 m.Measurements();
             }
             else
             {
+                qCDebug(vMainWindow)<<"Selection individual measurements canceled.";
                 return;
             }
         }
@@ -204,16 +216,19 @@ void MainWindow::ActionNewPP()
     }
     else
     {
+        qCDebug(vMainWindow)<<"PP count"<<comboBoxDraws->count();
         patternPieceName = PatternPieceName(patternPieceName);
+        qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
         if (patternPieceName.isEmpty())
         {
+            qCDebug(vMainWindow)<<"Name empty.";
             return;
         }
         path = doc->MPath();
     }
     if (doc->appendPP(patternPieceName) == false)
     {
-        qDebug()<<"Error creating pattern piece with the name "<<patternPieceName<<".";
+        qCDebug(vMainWindow)<<"Error creating pattern piece with the name "<<patternPieceName<<".";
         return;
     }
     comboBoxDraws->blockSignals(true);

@@ -34,6 +34,9 @@
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
 #include "../../container/vcontainer.h"
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vStMeasur, "v.st.measurements")
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const QString &patternPieceName,
@@ -57,6 +60,7 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
         connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogRejected);
     }
 
+    qCDebug(vStMeasur)<<"Pattern piece name"<<_name;
     ui->lineEditName->setText(_name);
 
     LoadStandardTables();
@@ -143,6 +147,7 @@ void DialogStandardMeasurements::CheckState()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::LoadStandardTables()
 {
+    qCDebug(vStMeasur)<<"Loading standard table.";
     QStringList filters{"*.vst"};
     QDir tablesDir(qApp->pathToTables());
     tablesDir.setNameFilters(filters);
@@ -151,11 +156,13 @@ void DialogStandardMeasurements::LoadStandardTables()
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
     {
+        qCDebug(vStMeasur)<<"Can't find standard measurements in path"<<qApp->pathToTables();
         ui->comboBoxTables->clear();
         CheckState();
         return;
     }
 
+    qCDebug(vStMeasur)<<"Was found"<<allFiles.size()<<"tables.";
     for (int i = 0; i < allFiles.size(); ++i)
     {
         QFileInfo fi(allFiles.at(i));
@@ -166,24 +173,27 @@ void DialogStandardMeasurements::LoadStandardTables()
             m.setContent(fi.absoluteFilePath());
             if (m.MUnit() == Unit::Inch)
             {
-                qWarning()<<"We do not support inches for standard table. Ignore table"<<fi.absoluteFilePath()<<".";
+                qCWarning(vStMeasur)<<"We do not support inches for standard table. Ignore table"
+                                    <<fi.absoluteFilePath()<<".";
             }
             else
             {
                 const QString trDesc = qApp->STDescription(m.Id());
                 if (trDesc.isEmpty() == false)
                 {
+                    qCDebug(vStMeasur)<<"Adding user table from"<<fi.absoluteFilePath();
                     ui->comboBoxTables->addItem(trDesc, QVariant(fi.absoluteFilePath()));
                 }
                 else if (m.Description().isEmpty() == false)
                 {
+                    qCDebug(vStMeasur)<<"Adding table with id"<<m.Id()<<"from"<<fi.absoluteFilePath();
                     ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
                 }
             }
         }
         catch (VException &e)
         {
-            qDebug()<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            qCDebug(vStMeasur)<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
             continue;
         }
     }

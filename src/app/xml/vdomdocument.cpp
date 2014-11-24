@@ -375,7 +375,14 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     MessageHandler messageHandler;
     QXmlSchema sch;
     sch.setMessageHandler(&messageHandler);
-    sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
+    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()))==false)
+    {
+        pattern.close();
+        fileSchema.close();
+        const QString errorMsg(tr("Could not load schema file.").arg(fileSchema.fileName()));
+        throw VException(errorMsg);
+    }
+    qCDebug(vXML)<<"Schema loaded.";
 
     bool errorOccurred = false;
     if (sch.isValid() == false)
