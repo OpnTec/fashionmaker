@@ -4,6 +4,14 @@
 #export DH_VERBOSE=1
 
   APPNAME := Valentina
+
+  DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+  ifeq ($(DEB_HOST_ARCH),amd64)
+    LIBPATH:= /debian/tmp/usr/lib64
+  else
+	LIBPATH:= /debian/tmp/usr/lib
+  endif
+
   builddir:
 	mkdir -p builddir
 	  
@@ -48,7 +56,7 @@
 	dh_fixperms
 	dh_makeshlibs
 	dh_installdeb
-	dh_shlibdeps -Llibqmuparser2 -l$(CURDIR)/debian/tmp/usr/lib -Llibvpropertyexplorer -l$(CURDIR)/debian/tmp/usr/lib
+	dh_shlibdeps -Llibqmuparser2 -l$(CURDIR)$(LIBPATH) -Llibvpropertyexplorer -l$(CURDIR)$(LIBPATH)
 	dh_shlibdeps 
 	dh_gencontrol
 	dh_md5sums
