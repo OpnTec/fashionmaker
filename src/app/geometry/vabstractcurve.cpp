@@ -90,8 +90,7 @@ QVector<QPointF> VAbstractCurve::IntersectLine(const QLineF &line) const
     for ( qint32 i = 0; i < points.count()-1; ++i )
     {
         QPointF crosPoint;
-        QLineF::IntersectType type = QLineF::NoIntersection;
-        type = line.intersect(QLineF ( points.at(i), points.at(i+1)), &crosPoint);
+        QLineF::IntersectType type = line.intersect(QLineF ( points.at(i), points.at(i+1)), &crosPoint);
         if ( type == QLineF::BoundedIntersection )
         {
             intersections.append(crosPoint);
