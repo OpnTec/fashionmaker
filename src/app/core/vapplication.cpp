@@ -2098,7 +2098,7 @@ void VApplication::SendReport(const QString &reportName) const
     }
     else
     {
-        content = reportFile.errorString() + "\r\n";
+        content = "RPT file error:" + reportFile.errorString() + "\r\n";
     }
 
     // Additional information
@@ -2129,8 +2129,7 @@ void VApplication::SendReport(const QString &reportName) const
     reportObject.insert(QStringLiteral("description"), QJsonValue(report));
     reportObject.insert(QStringLiteral("public"), QJsonValue(QString("true")));
 
-    content.append("\r\n");
-    content.append(QString("-------------------------------")+"\r\n");
+    content.append(QString("\r\n-------------------------------\r\n"));
     content.append(QString("Log:")+"\r\n");
 
     QFile logFile(LogPath());
@@ -2141,7 +2140,7 @@ void VApplication::SendReport(const QString &reportName) const
     }
     else
     {
-        content = logFile.errorString() + "\r\n";
+        content.append("\r\n Log file error:" + logFile.errorString() + "\r\n");
     }
 
     const QString contentSection = QStringLiteral("content");
