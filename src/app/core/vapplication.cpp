@@ -190,19 +190,35 @@ VApplication::~VApplication()
 void VApplication::NewValentina(const QString &fileName)
 {
     qCDebug(vApp)<<"Open new detached process.";
-
-    QProcess *v = new QProcess();
-    QStringList arguments;
-    arguments << fileName;
     if (fileName.isEmpty())
     {
-        v->startDetached(QCoreApplication::applicationFilePath());
+        qCDebug(vApp)<<"New process without arguments. program ="<<QCoreApplication::applicationFilePath();
+        // Path can contain spaces.
+        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
+        {
+            qCDebug(vApp)<<"The process was started successfully.";
+        }
+        else
+        {
+            qCWarning(vApp)<<"The operation timed out or an error occurred.";
+        }
     }
     else
     {
-        v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+        QStringList arguments;
+        arguments << fileName;
+        qCDebug(vApp)<<"New process with arguments. program ="<<QCoreApplication::applicationFilePath()
+                     <<", arguments = "<<arguments;
+        // Path can contain spaces.
+        if(QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\"", arguments))
+        {
+            qCDebug(vApp)<<"The process was started successfully.";
+        }
+        else
+        {
+            qCWarning(vApp)<<"The operation timed out or an error occurred.";
+        }
     }
-    delete v;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
