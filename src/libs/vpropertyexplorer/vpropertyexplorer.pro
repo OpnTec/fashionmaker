@@ -102,14 +102,22 @@ HEADERS +=\
     stable.h
 
 # Set "make install" command for Unix-like systems.
-unix{
-    isEmpty(PREFIX){
-        PREFIX = $$DEFAULT_PREFIX/lib
-    }
-}
-
 unix:!macx{
-    target.path = $$PREFIX/lib
+    isEmpty(PREFIX){
+        contains(QMAKE_HOST.arch, x86_64) {
+            PREFIX = $$DEFAULT_PREFIX/lib64
+        } else {
+            PREFIX = $$DEFAULT_PREFIX/lib
+        }
+        target.path = $$PREFIX
+    } else {
+        contains(QMAKE_HOST.arch, x86_64) {
+            target.path = $$PREFIX/lib64
+        } else {
+            target.path = $$PREFIX/lib
+        }
+    }
+
     INSTALLS += target
 }
 
@@ -143,7 +151,6 @@ CONFIG(debug, debug|release){
 
 }else{
     # Release mode
-    DEFINES += QT_NO_DEBUG_OUTPUT
 
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll

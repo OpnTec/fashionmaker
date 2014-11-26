@@ -186,6 +186,8 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     }
     det.setName(detail.getName());
     det.setWidth(detail.getWidth());
+    det.setClosed(detail.getClosed());
+    det.setSeamAllowance(detail.getSeamAllowance());
     Create(0, det, scene, doc, data, Document::FullParse, Source::FromGui);
 }
 

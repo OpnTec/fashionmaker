@@ -48,6 +48,8 @@ AddToCalc::~AddToCalc()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     doc->ChangeActivPP(nameActivDraw);//User will not see this change
     doc->setCursor(cursor);
 
@@ -59,19 +61,19 @@ void AddToCalc::undo()
         {
             if (calcElement.removeChild(domElement).isNull())
             {
-                qDebug()<<"Can't delete node";
+                qCDebug(vUndo)<<"Can't delete node.";
                 return;
             }
         }
         else
         {
-            qDebug()<<"Can't get tool by id = "<<nodeId<<Q_FUNC_INFO;
+            qCDebug(vUndo)<<"Can't get tool by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find tag Calculation.";
         return;
     }
     if (cursor > 0)
@@ -86,6 +88,8 @@ void AddToCalc::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddToCalc::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     doc->ChangeActivPP(nameActivDraw);//User will not see this change
     doc->setCursor(cursor);
 
@@ -106,14 +110,14 @@ void AddToCalc::redo()
             }
             else
             {
-                qDebug()<<"Can not find the element after which you want to insert."<< Q_FUNC_INFO;
+                qCDebug(vUndo)<<"Can not find the element after which you want to insert.";
                 return;
             }
         }
     }
     else
     {
-        qDebug()<<"Can't find tag Calculation"<< Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find tag Calculation.";
         return;
     }
     RedoFullParsing();

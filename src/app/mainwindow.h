@@ -228,7 +228,7 @@ private:
     void               ClosedDialogWithApply(int result);
     template <typename DrawTool>
     void               ApplyDialog();
-    bool               SavePattern(const QString &curFile);
+    bool               SavePattern(const QString &curFile, QString &error);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);
     QString            strippedName(const QString &fullFileName);

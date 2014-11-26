@@ -35,6 +35,7 @@
 #include "../../tools/vabstracttool.h"
 #include "../../../libs/qmuparser/qmuparsererror.h"
 #include "../../core/vapplication.h"
+#include "../../core/vsettings.h"
 #include "../../xml/vdomdocument.h"
 #include <QTimer>
 #include <QCloseEvent>
@@ -47,6 +48,8 @@
 #include <QSettings>
 #include <QPushButton>
 #include <QDoubleSpinBox>
+
+Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -86,7 +89,7 @@ DialogTool::~DialogTool()
  */
 void DialogTool::closeEvent(QCloseEvent *event)
 {
-    DialogClosed(QDialog::Rejected);
+    DialogRejected();
     event->accept();
 }
 
@@ -441,6 +444,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
         labelResultCalculation->setText(tr("Error"));
+        labelResultCalculation->setToolTip(tr("Empty field"));
         return;
     }
     timer->start(1000);
@@ -458,6 +462,7 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
         labelResultCalculation->setText(tr("Error"));
+        labelResultCalculation->setToolTip(tr("Empty field"));
         return;
     }
     timer->setSingleShot(true);
@@ -473,10 +478,13 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
  */
-void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
+qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero)
 {
     SCASSERT(label != nullptr);
     SCASSERT(labelEditFormula != nullptr);
+
+    qreal result = INT_MIN;//Value can be 0, so use max imposible value
+
     if (text.isEmpty())
     {
         flag = false;
@@ -493,7 +501,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QStr
             formula.replace("\n", " ");
             formula = qApp->FormulaFromUser(formula);
             Calculator *cal = new Calculator(data);
-            const qreal result = cal->EvalFormula(formula);
+            result = cal->EvalFormula(formula);
             delete cal;
 
             //if result equal 0
@@ -507,7 +515,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QStr
             else
             {
                 QLocale loc;
-                if (qApp->getSettings()->value("configuration/osSeparator", 1).toBool())
+                if (qApp->getSettings()->GetOsSeparator())
                 {
                     loc = QLocale::system();
                 }
@@ -537,6 +545,7 @@ void DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QStr
         }
     }
     CheckState();
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -904,7 +913,7 @@ void DialogTool::EvalFormula()
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix);
+    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

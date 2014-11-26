@@ -28,99 +28,16 @@
 
 #include "mainwindow.h"
 #include "core/vapplication.h"
-#include <QTextCodec>
-#include <QMessageBox>
-#include <QThread>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 1)
-    #include "core/qcommandlineparser.h"
-#else
-    #include <QCommandLineParser>
-#endif
-
-#include <QtXml>
-#include <QLibraryInfo>
+#include "core/vsettings.h"
 #include "tablewindow.h"
 #include "version.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
-    if ((type == QtDebugMsg) && msg.contains("::connect"))
-    {
-        type = QtWarningMsg;
-    }
-
-    // this is another one that doesn't make sense as just a debug message.  pretty serious
-    // sign of a problem
-    // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
-    {
-        type = QtWarningMsg;
-    }
-
-    // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
-    // is something that can easily happen if you are debugging and the application is paused.
-    // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
-            && QString(msg).contains("Cowardly refusing"))
-    {
-        type = QtDebugMsg;
-    }
-
-    // only the GUI thread should display message boxes.  If you are
-    // writing a multithreaded application and the error happens on
-    // a non-GUI thread, you'll have to queue the message to the GUI
-    QCoreApplication *instance = QCoreApplication::instance();
-    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
-
-    if (isGuiThread)
-    {
-        QByteArray localMsg = msg.toLocal8Bit();
-        QMessageBox messageBox;
-        switch (type)
-        {
-            case QtDebugMsg:
-                fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                        context.function);
-                return;
-            case QtWarningMsg:
-                messageBox.setIcon(QMessageBox::Warning);
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                        context.function);
-                messageBox.exec();
-                break;
-            case QtCriticalMsg:
-                messageBox.setIcon(QMessageBox::Critical);
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                        context.function);
-                messageBox.exec();
-                abort();
-            case QtFatalMsg:
-                messageBox.setIcon(QMessageBox::Critical);
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
-                        context.function);
-                messageBox.exec();
-                abort();
-            default:
-                break;
-        }
-    }
-    else
-    {
-        if (type != QtDebugMsg)
-        {
-            abort(); // be NOISY unless overridden!
-        }
-    }
-}
+#include <QTextCodec>
+#include <QMessageBox>
+#include <QThread>
+#include <QCommandLineParser>
+#include <QtXml>
+#include <QLibraryInfo>
 
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
@@ -130,18 +47,10 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(theme);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.0.2");
+    QT_REQUIRE_VERSION(argc, argv, "5.2.1");
 
     VApplication app(argc, argv);
 
-#ifdef QT_DEBUG
-    // Because our "noisy" message handler uses the GUI subsystem for message
-    // boxes, we can't install it until after the QApplication is constructed.  But it
-    // is good to be the very next thing to run, to start catching warnings ASAP.
-    {
-        qInstallMessageHandler(noisyFailureMsgHandler);
-    }
-#endif
     app.setApplicationDisplayName(VER_PRODUCTNAME_STR);
     app.setApplicationName(VER_INTERNALNAME_STR);
     app.setOrganizationName(VER_COMPANYNAME_STR);
@@ -152,11 +61,21 @@ int main(int argc, char *argv[])
     app.OpenSettings();
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    // Catch and send report
     VApplication::DrMingw();
     app.CollectReports();
 #endif
 
-    QString checkedLocale = qApp->getSettings()->value("configuration/locale", QLocale::system().name()).toString();
+    // Run creation log after sending crash report
+    app.StartLogging();
+
+    qDebug()<<"Version:"<<APP_VERSION;
+    qDebug()<<"Based on Qt "<<QT_VERSION_STR<<"(32 bit)";
+    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
+    qDebug()<<"Command-line arguments:"<<app.arguments();
+
+    const QString checkedLocale = qApp->getSettings()->GetLocale();
+    qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator qtTranslator;
 #if defined(Q_OS_WIN)

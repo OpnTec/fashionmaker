@@ -50,7 +50,7 @@ MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const qu
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }
@@ -62,6 +62,8 @@ MoveDetail::~MoveDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -74,7 +76,7 @@ void MoveDetail::undo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }
@@ -82,6 +84,8 @@ void MoveDetail::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -98,7 +102,7 @@ void MoveDetail::redo()
     }
     else
     {
-        qDebug()<<"Can't find detail with id ="<< nodeId << Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find detail with id ="<<nodeId<<".";
         return;
     }
 }

@@ -214,6 +214,13 @@ void DialogShoulderPoint::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setPShoulder set id shoulder point
  * @param value id

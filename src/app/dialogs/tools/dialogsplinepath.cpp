@@ -236,8 +236,11 @@ void DialogSplinePath::ShowDialog(bool click)
 {
     if (click == false)
     {
-        emit ToolTip("");
-        DialogAccepted();
+        if (path.CountPoint() >= 3)
+        {
+            emit ToolTip("");
+            DialogAccepted();
+        }
     }
 }
 

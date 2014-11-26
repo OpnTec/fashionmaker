@@ -269,3 +269,10 @@ void DialogCurveIntersectAxis::SaveData()
     line->setLineStyle(VAbstractTool::LineStyle(typeLine));
     line->RefreshGeometry();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}

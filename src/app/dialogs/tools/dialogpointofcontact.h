@@ -80,6 +80,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData();
+    virtual void   closeEvent(QCloseEvent *event);
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
 

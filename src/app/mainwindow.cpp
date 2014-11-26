@@ -40,6 +40,7 @@
 #include "xml/vindividualmeasurements.h"
 #include "core/vapplication.h"
 #include "core/undoevent.h"
+#include "core/vsettings.h"
 #include "undocommands/renamepp.h"
 #include "vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -59,6 +60,9 @@
 #include <QtGlobal>
 #include <QDesktopWidget>
 #include <QDesktopServices>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -136,23 +140,30 @@ MainWindow::MainWindow(QWidget *parent)
  */
 void MainWindow::ActionNewPP()
 {
+    qCDebug(vMainWindow)<<"New PP.";
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+    qCDebug(vMainWindow)<<"Generated PP name:"<<patternPieceName;
     QString path;
     if (comboBoxDraws->count() == 0)
     {
+        qCDebug(vMainWindow)<<"First PP";
         DialogMeasurements measurements(this);
         if (measurements.exec() == QDialog::Rejected)
         {
+            qCDebug(vMainWindow)<<"Creation PP was canceled";
             return;
         }
         if (measurements.type() == MeasurementsType::Standard)
         {
+            qCDebug(vMainWindow)<<"PP with standard measurements";
             qApp->setPatternType(MeasurementsType::Standard);
             DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
             if (stMeasurements.exec() == QDialog::Accepted)
             {
                 patternPieceName = stMeasurements.name();
+                qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
                 path = stMeasurements.tablePath();
+                qCDebug(vMainWindow)<<"Table path:"<<path;
                 VStandardMeasurements m(pattern);
                 m.setContent(path);
                 m.SetSize();
@@ -161,11 +172,13 @@ void MainWindow::ActionNewPP()
             }
             else
             {
+                qCDebug(vMainWindow)<<"Selection standard measurements canceled.";
                 return;
             }
         }
         else
         {
+            qCDebug(vMainWindow)<<"PP with individual measurements.";
             QMessageBox::StandardButton ret;
             ret = QMessageBox::question(this, tr("Individual measurements is under development"),
                                         tr("There is no way create individual measurements file independent on the "
@@ -182,13 +195,16 @@ void MainWindow::ActionNewPP()
             if (indMeasurements.exec() == QDialog::Accepted)
             {
                 patternPieceName = indMeasurements.name();
+                qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
                 path = indMeasurements.tablePath();
+                qCDebug(vMainWindow)<<"Table path:"<<path;
                 VIndividualMeasurements m(pattern);
                 m.setContent(path);
                 m.Measurements();
             }
             else
             {
+                qCDebug(vMainWindow)<<"Selection individual measurements canceled.";
                 return;
             }
         }
@@ -200,16 +216,19 @@ void MainWindow::ActionNewPP()
     }
     else
     {
+        qCDebug(vMainWindow)<<"PP count"<<comboBoxDraws->count();
         patternPieceName = PatternPieceName(patternPieceName);
+        qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
         if (patternPieceName.isEmpty())
         {
+            qCDebug(vMainWindow)<<"Name empty.";
             return;
         }
         path = doc->MPath();
     }
     if (doc->appendPP(patternPieceName) == false)
     {
-        qDebug()<<"Error creating pattern piece with the name "<<patternPieceName<<".";
+        qCDebug(vMainWindow)<<"Error creating pattern piece with the name "<<patternPieceName<<".";
         return;
     }
     comboBoxDraws->blockSignals(true);
@@ -795,6 +814,7 @@ void MainWindow::showEvent( QShowEvent *event )
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    qCDebug(vMainWindow)<<"Closing main window";
     if (MaybeSave())
     {
         FileClosedCorrect();
@@ -804,6 +824,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     else
     {
+        qCDebug(vMainWindow)<<"Closing canceled.";
         event->ignore();
     }
 }
@@ -1152,6 +1173,7 @@ void  MainWindow::ArrowTool()
     ui->view->setCursor(cur);
     helpLabel->setText("");
     ui->view->setShowToolOptions(true);
+    qCDebug(vMainWindow)<<"Enabled arrow tool.";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1217,6 +1239,7 @@ void MainWindow::ActionDraw(bool checked)
 {
     if (checked)
     {
+        qCDebug(vMainWindow)<<"Show draw scene";
         ui->actionDetails->setChecked(false);
         SaveCurrentScene();
 
@@ -1253,6 +1276,7 @@ void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
     {
+        qCDebug(vMainWindow)<<"Show details scene";
         ui->actionDraw->setChecked(false);
         SaveCurrentScene();
 
@@ -1290,11 +1314,10 @@ void MainWindow::ActionDetails(bool checked)
 bool MainWindow::SaveAs()
 {
     QString filters(tr("Pattern files (*.val)"));
-    QString path = qApp->getSettings()->value("paths/pattern", QDir::homePath()).toString();
     QString dir;
     if (curFile.isEmpty())
     {
-        dir = path + "/" + tr("pattern") + ".val";
+        dir = qApp->getSettings()->GetPathPattern() + "/" + tr("pattern") + ".val";
     }
     else
     {
@@ -1311,7 +1334,19 @@ bool MainWindow::SaveAs()
     {
         fileName += ".val";
     }
-    return SavePattern(fileName);
+    QString error;
+    bool result = SavePattern(fileName, error);
+    if (result == false)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+    }
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1327,12 +1362,23 @@ bool MainWindow::Save()
     }
     else
     {
-        bool result = SavePattern(curFile);
+        QString error;
+        bool result = SavePattern(curFile, error);
         if (result)
         {
             QString autofile = curFile +".autosave";
             QFile file(autofile);
             file.remove();
+        }
+        else
+        {
+            QMessageBox messageBox;
+            messageBox.setIcon(QMessageBox::Warning);
+            messageBox.setInformativeText(tr("Could not save file"));
+            messageBox.setDefaultButton(QMessageBox::Ok);
+            messageBox.setDetailedText(error);
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.exec();
         }
         return result;
     }
@@ -1346,7 +1392,7 @@ void MainWindow::Open()
 {
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
-    const QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
+    const QStringList files = qApp->getSettings()->GetRecentFileList();
     QString dir;
     if (files.isEmpty())
     {
@@ -1357,6 +1403,7 @@ void MainWindow::Open()
         //Absolute path to last open file
         dir = QFileInfo(files.first()).absolutePath();
     }
+    qCDebug(vMainWindow)<<"Run QFileDialog::getOpenFileName: dir ="<<dir<<".";
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
     OpenPattern(filePath);
 }
@@ -1377,6 +1424,7 @@ void MainWindow::Preferences()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::RepotBug()
 {
+    qCDebug(vMainWindow)<<"Reporting bug";
     QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/issues/new"));
 }
 
@@ -1386,6 +1434,8 @@ void MainWindow::RepotBug()
  */
 void MainWindow::Clear()
 {
+    qCDebug(vMainWindow)<<"Reseting main window";
+
     ui->actionDetails->setChecked(false);
     ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
@@ -1429,9 +1479,9 @@ void MainWindow::FileClosedCorrect()
     WriteSettings();
 
     //File was closed correct.
-    QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+    QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
     restoreFiles.removeAll(curFile);
-    qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+    qApp->getSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
     QFile autofile(curFile +".autosave");
@@ -1439,6 +1489,7 @@ void MainWindow::FileClosedCorrect()
     {
         autofile.remove();
     }
+    qCDebug(vMainWindow)<<"File"<<curFile<<"closed correct.";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1458,6 +1509,8 @@ void MainWindow::ResetWindow()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
+    qCDebug(vMainWindow)<<"Full parsing file";
+
     toolOptions->ClearPropertyBrowser();
     try
     {
@@ -1904,10 +1957,10 @@ void MainWindow::MinimumScrollBar()
  * @param fileName pattern file name.
  * @return true if all is good.
  */
-bool MainWindow::SavePattern(const QString &fileName)
+bool MainWindow::SavePattern(const QString &fileName, QString &error)
 {
+    qCDebug(vMainWindow)<<"Saving pattern file"<<fileName<<".";
     QFileInfo tempInfo(fileName);
-    QString error;
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
@@ -1915,17 +1968,12 @@ bool MainWindow::SavePattern(const QString &fileName)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
+            qCDebug(vMainWindow)<<"File"<<fileName<<"saved.";
         }
     }
     else
     {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save file"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
+        qCDebug(vMainWindow)<<"Could not save file"<<fileName<<"."<<error<<".";
     }
     return result;
 }
@@ -1936,13 +1984,13 @@ bool MainWindow::SavePattern(const QString &fileName)
  */
 void MainWindow::AutoSavePattern()
 {
+    qCDebug(vMainWindow)<<"Autosaving pattern.";
+
     if (curFile.isEmpty() == false && this->isWindowModified() == true)
     {
         QString autofile = curFile +".autosave";
-        if (SavePattern(autofile) == false)
-        {
-            qDebug()<<"Can not save pattern"<<Q_FUNC_INFO;
-        }
+        QString error;
+        SavePattern(autofile, error);
     }
 }
 
@@ -1964,7 +2012,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     }
     else
     {
-        QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
+        QStringList files = qApp->getSettings()->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
         while (files.size() > MaxRecentFiles)
@@ -1972,13 +2020,13 @@ void MainWindow::setCurrentFile(const QString &fileName)
             files.removeLast();
         }
 
-        qApp->getSettings()->setValue("recentFileList", files);
+        qApp->getSettings()->SetRecentFileList(files);
         UpdateRecentFileActions();
 
-        QStringList restoreFiles = qApp->getSettings()->value("restoreFileList").toStringList();
+        QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
-        qApp->getSettings()->setValue("restoreFileList", restoreFiles);
+        qApp->getSettings()->SetRestoreFileList(restoreFiles);
     }
     shownName+="[*]";
     setWindowTitle(shownName);
@@ -2001,22 +2049,16 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
-    restoreGeometry(qApp->getSettings()->value("geometry").toByteArray());
-    restoreState(qApp->getSettings()->value("windowState").toByteArray());
+    restoreGeometry(qApp->getSettings()->GetGeometry());
+    restoreState(qApp->getSettings()->GetWindowState());
 
     // Scene antialiasing
-    bool graphOutputValue = qApp->getSettings()->value("pattern/graphicalOutput", 1).toBool();
+    const bool graphOutputValue = qApp->getSettings()->GetGraphicalOutput();
     ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
-    bool ok = true;
-    qint32 count = qApp->getSettings()->value("pattern/undo", 0).toInt(&ok);
-    if (ok == false)
-    {
-        count = 0;
-    }
-    qApp->getUndoStack()->setUndoLimit(count);
+    qApp->getUndoStack()->setUndoLimit(qApp->getSettings()->GetUndoCount());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2025,8 +2067,8 @@ void MainWindow::ReadSettings()
  */
 void MainWindow::WriteSettings()
 {
-    qApp->getSettings()->setValue("geometry", saveGeometry());
-    qApp->getSettings()->setValue("windowState", saveState());
+    qApp->getSettings()->SetGeometry(saveGeometry());
+    qApp->getSettings()->SetWindowState(saveState());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2057,9 +2099,8 @@ bool MainWindow::MaybeSave()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateRecentFileActions()
 {
-    QStringList files = qApp->getSettings()->value("recentFileList").toStringList();
-
-    int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
+    const QStringList files = qApp->getSettings()->GetRecentFileList();
+    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
@@ -2180,7 +2221,7 @@ void MainWindow::CreateActions()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitAutoSave()
 {
-    //Autosaving file each 5 minutes
+    //Autosaving file each 1 minutes
     delete autoSaveTimer;
     autoSaveTimer = nullptr;
 
@@ -2189,17 +2230,11 @@ void MainWindow::InitAutoSave()
     connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     autoSaveTimer->stop();
 
-    bool autoSave = qApp->getSettings()->value("configuration/autosave/state", 1).toBool();
-    if (autoSave)
+    if (qApp->getSettings()->GetAutosaveState())
     {
-        bool ok = true;
-        qint32 autoTime = qApp->getSettings()->value("configuration/autosave/time", 1).toInt(&ok);
-        if (ok == false)
-        {
-            autoTime = 5;
-        }
+        const qint32 autoTime = qApp->getSettings()->GetAutosaveTime();
         autoSaveTimer->start(autoTime*60000);
-
+        qCDebug(vMainWindow)<<"Autosaving each"<<autoTime<<"minutes.";
     }
     qApp->setAutoSaveTimer(autoSaveTimer);
 }
@@ -2252,6 +2287,8 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
+    qCDebug(vMainWindow)<<"Loading new file"<<fileName<<".";
+
     //We have unsaved changes or load more then one file per time
     OpenNewValentina(fileName);
 
@@ -2289,6 +2326,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             {
                 QMessageBox::critical(this, tr("Wrong units."),
                                       tr("Application doesn't support standard table with inches."));
+                qCDebug(vMainWindow)<<"Application doesn't support standard table with inches.";
                 Clear();
                 return;
             }
@@ -2324,6 +2362,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             PatternWasModified(!patternModified);
         }
         helpLabel->setText(tr("File loaded"));
+        qCDebug(vMainWindow)<<"File loaded.";
 
         qApp->setOpeningPattern();// End opening file
 
@@ -2337,9 +2376,11 @@ void MainWindow::LoadPattern(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 {
-    QStringList files = qApp->getSettings()->value("restoreFileList").toStringList();
+    QStringList files = qApp->getSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
+        qCDebug(vMainWindow)<<"Reopen files after crash.";
+
         QStringList restoreFiles;
         for (int i = 0; i < files.size(); ++i)
         {
@@ -2350,7 +2391,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
             }
         }
         files.clear();
-        qApp->getSettings()->setValue("restoreFileList", files);
+        qApp->getSettings()->SetRestoreFileList(files);
 
         if (restoreFiles.size() > 0)
         {
@@ -2361,6 +2402,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                                           QMessageBox::Yes);
             if (reply == QMessageBox::Yes)
             {
+                qCDebug(vMainWindow)<<"User said Yes.";
+
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
                     QString error;
@@ -2373,7 +2416,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                     }
                     else
                     {
-                        qDebug()<< "Could not copy "<<restoreFiles.at(i) +".autosave"<<"to"<<restoreFiles.at(i)<<error;
+                        qCDebug(vMainWindow) << "Could not copy "<<restoreFiles.at(i) +".autosave"<<"to"
+                                             <<restoreFiles.at(i)<<error;
                     }
                 }
             }

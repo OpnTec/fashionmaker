@@ -226,6 +226,13 @@ void DialogPointOfContact::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setSecondPoint set id second point
  * @param value id

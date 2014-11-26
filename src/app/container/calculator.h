@@ -68,7 +68,7 @@ private:
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
     void          SetSepForEval();
     void          SetSepForTr(bool fromUser);
-    void          RemoveAll(QMap<int, QString> &map, const QString &val);
+    static void   RemoveAll(QMap<int, QString> &map, const QString &val);
 };
 
 #endif // CALCULATOR_H

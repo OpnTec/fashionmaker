@@ -32,6 +32,9 @@
 #include <QDomDocument>
 #include <QDebug>
 #include "../container/vcontainer.h"
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(vXML)
 
 /*
    can be used like #if (V_FORMAT_VERSION >= V_FORMAT_VERSION_CHECK(4, 4, 0))

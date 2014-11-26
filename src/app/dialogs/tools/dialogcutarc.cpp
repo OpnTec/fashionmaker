@@ -138,6 +138,13 @@ void DialogCutArc::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setArcId set id of arc
  * @param value id

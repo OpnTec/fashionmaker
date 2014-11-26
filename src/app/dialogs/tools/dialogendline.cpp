@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   dialogendline.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -289,6 +289,14 @@ void DialogEndLine::SaveData()
     line->setAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyle(typeLine));
     line->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::closeEvent(QCloseEvent *event)
+{
+    ui->plainTextEditFormula->blockSignals(true);
+    ui->plainTextEditAngle->blockSignals(true);
+    DialogTool::closeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

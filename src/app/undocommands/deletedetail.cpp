@@ -54,7 +54,7 @@ DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
     }
     else
     {
-        qDebug()<<"Can't get detail by id = "<<nodeId<<Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't get detail by id ="<<nodeId<<".";
         return;
     }
 }
@@ -66,6 +66,8 @@ DeleteDetail::~DeleteDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void DeleteDetail::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
 }
@@ -73,6 +75,8 @@ void DeleteDetail::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DeleteDetail::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     QDomElement domElement = doc->elementById(QString().setNum(nodeId));
     if (domElement.isElement())
     {
@@ -90,7 +94,7 @@ void DeleteDetail::redo()
     }
     else
     {
-        qDebug()<<"Can't get detail by id = "<<nodeId<<Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't get detail by id = "<<nodeId<<".";
         return;
     }
 }

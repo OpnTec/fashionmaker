@@ -32,6 +32,7 @@
 #include "../../widgets/textdelegate.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
+#include "../../core/vsettings.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -54,8 +55,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
 
+    qCDebug(vDialog)<<"Showing variables.";
     if (qApp->patternType() == MeasurementsType::Individual)
     {
+        qCDebug(vDialog)<<"Pattern with individual measurements.";
         const QString filePath = doc->MPath();
         try
         {
@@ -510,7 +513,7 @@ void DialogIncrements::OpenTable()
         const QString filter(tr("Individual measurements (*.vit)"));
 
         //Use standard path to individual measurements
-        QString path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
+        const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
 
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
@@ -598,6 +601,7 @@ void DialogIncrements::OpenTable()
  */
 void DialogIncrements::clickedToolButtonAdd()
 {
+    qCDebug(vDialog)<<"Add new increment";
     ui->tableWidgetIncrement->setFocus(Qt::OtherFocusReason);
     ui->tableWidgetIncrement->blockSignals(true);
     qint32 currentRow  = ui->tableWidgetIncrement->rowCount();
@@ -666,6 +670,7 @@ void DialogIncrements::clickedToolButtonRemove()
     qint32 row = item->row();
 
     QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
+    qCDebug(vDialog)<<"Remove increment"<<itemName->text();
     data->RemoveIncrement(itemName->text());
 
     quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
@@ -674,6 +679,10 @@ void DialogIncrements::clickedToolButtonRemove()
     {
         QDomNodeList list = doc->elementsByTagName(VPattern::TagIncrements);
         list.at(0).removeChild(domElement);
+    }
+    else
+    {
+        qCDebug(vDialog)<<"Could not find object with id"<<id;
     }
 
     ui->tableWidgetIncrement->removeRow(row);
@@ -699,6 +708,9 @@ void DialogIncrements::clickedToolButtonRemove()
 void DialogIncrements::AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base, const qreal &ksize,
                                           const qreal &kheight, const QString &description)
 {
+    qCDebug(vDialog)<<"Saving new increment to file.";
+    qCDebug(vDialog)<<QString("Increment: id(%1), name(%2), base(%3), ksize(%4), kheight(%5), description(%6)")
+                      .arg(id).arg(name).arg(base).arg(ksize).arg(kheight).arg(description);
     QDomElement element = doc->createElement(VPattern::TagIncrement);
 
     doc->SetAttribute(element, VDomDocument::AttrId, id);
@@ -730,42 +742,47 @@ void DialogIncrements::HideColumns(QTableWidget *table)
  */
 void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
 {
-
+    qCDebug(vDialog)<<"Increment changed.";
     const QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
     const QTableWidgetItem *item = ui->tableWidgetIncrement->item(row, column);
     const quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
     QDomElement domElement = doc->elementById(QString().setNum(id));
     if (domElement.isElement() == false)
     {
-        qDebug()<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;
+        qCDebug(vDialog)<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;
         return;
     }
     this->row = row;
     switch (column)
     {
         case 0: // VPattern::IncrementName
+            qCDebug(vDialog)<<"Changed name to"<<item->text();
             doc->SetAttribute(domElement, VPattern::IncrementName, item->text());
             data->ClearVariables(VarType::Increment);
             this->column = 2;
             emit FullUpdateTree(Document::LiteParse);
             break;
         case 2: // VPattern::IncrementBase
+            qCDebug(vDialog)<<"Changed base to"<<item->text();
             doc->SetAttribute(domElement, VPattern::IncrementBase, item->text());
             this->column = 3;
             emit FullUpdateTree(Document::LiteParse);
             break;
         case 3: // VPattern::IncrementKsize
+            qCDebug(vDialog)<<"Changed ksize to"<<item->text();
             doc->SetAttribute(domElement, VPattern::IncrementKsize, item->text());
             this->column = 4;
             emit FullUpdateTree(Document::LiteParse);
             break;
         case 4: // VPattern::IncrementKgrowth
+            qCDebug(vDialog)<<"Changed kheight to"<<item->text();
             doc->SetAttribute(domElement, VPattern::IncrementKgrowth, item->text());
             this->column = 5;
             emit FullUpdateTree(Document::LiteParse);
             break;
         case 5: // VPattern::IncrementDescription
         {
+            qCDebug(vDialog)<<"Changed description to"<<item->text();
             doc->SetAttribute(domElement, VPattern::IncrementDescription, item->text());
             QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(itemName->text());
             incr->SetDescription(item->text());
@@ -785,6 +802,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
 {
+    qCDebug(vDialog)<<"Measurement changed.";
     switch (column)
     {
         case 2:// value column
@@ -798,7 +816,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             QDomElement domElement = list.at(0).toElement();
             if (domElement.isElement() == false)
             {
-                qDebug()<<"Can't find measurement "<<tag<<Q_FUNC_INFO;
+                qCDebug(vDialog)<<"Can't find measurement "<<tag<<Q_FUNC_INFO;
                 return;
             }
 
@@ -808,12 +826,13 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             {
                 measur->SetBase(0);
                 item->setText("0");
-                qDebug()<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
+                qCDebug(vDialog)<<"Can't convert toDouble measurement value"<<Q_FUNC_INFO;
             }
             else
             {
                 measur->SetBase(base);
             }
+            qCDebug(vDialog)<<"Changed value to"<<base;
 
             // Convert value to measurements table unit
             base = VAbstractMeasurements::UnitConvertor(base, qApp->patternUnit(), m->MUnit());

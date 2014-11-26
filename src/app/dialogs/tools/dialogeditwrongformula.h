@@ -65,6 +65,7 @@ public slots:
     virtual void EvalFormula();
 protected:
     virtual void CheckState();
+    virtual void closeEvent(QCloseEvent *event);
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;

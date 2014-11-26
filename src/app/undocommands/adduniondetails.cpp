@@ -44,6 +44,8 @@ AddUnionDetails::~AddUnionDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void AddUnionDetails::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
@@ -52,19 +54,19 @@ void AddUnionDetails::undo()
         {
             if (modelingElement.removeChild(domElement).isNull())
             {
-                qDebug()<<"Can't delete node";
+                qCDebug(vUndo)<<"Can't delete node.";
                 return;
             }
         }
         else
         {
-            qDebug()<<"Can't get node by id = "<<nodeId<<Q_FUNC_INFO;
+            qCDebug(vUndo)<<"Can't get node by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qDebug()<<"Can't find tag"<<VPattern::TagModeling<< Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
     emit NeedFullParsing();
@@ -73,6 +75,8 @@ void AddUnionDetails::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddUnionDetails::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
@@ -80,7 +84,7 @@ void AddUnionDetails::redo()
     }
     else
     {
-        qDebug()<<"Can't find tag"<<VPattern::TagModeling<< Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
     RedoFullParsing();

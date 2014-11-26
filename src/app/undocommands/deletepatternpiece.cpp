@@ -51,6 +51,8 @@ DeletePatternPiece::~DeletePatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     QDomElement rootElement = doc->documentElement();
     QDomNode previousPP = doc->GetPPElement(previousPPName);
     rootElement.insertAfter(patternPiece, previousPP);
@@ -62,6 +64,8 @@ void DeletePatternPiece::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     QDomElement rootElement = doc->documentElement();
     QDomElement patternPiece = doc->GetPPElement(namePP);
     rootElement.removeChild(patternPiece);

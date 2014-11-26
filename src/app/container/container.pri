@@ -1,35 +1,35 @@
 SOURCES += \
     container/vcontainer.cpp \
     container/calculator.cpp \
-    container/vmeasurement.cpp \
-    container/vincrement.cpp \
-    container/vvariable.cpp \
-    container/vinternalvariable.cpp \
-    container/vlineangle.cpp \
-    container/varclength.cpp \
-    container/vcurvelength.cpp \
-    container/vlinelength.cpp \
-    container/vsplinelength.cpp \
+    container/variables/vmeasurement.cpp \
+    container/variables/vincrement.cpp \
+    container/variables/vvariable.cpp \
+    container/variables/vinternalvariable.cpp \
+    container/variables/vlineangle.cpp \
+    container/variables/varclength.cpp \
+    container/variables/vcurvelength.cpp \
+    container/variables/vlinelength.cpp \
+    container/variables/vsplinelength.cpp \
     container/vformula.cpp
- 
+
 HEADERS += \
     container/vcontainer.h \
     container/calculator.h \
-    container/vmeasurement.h \
-    container/vincrement.h \
-    container/vvariable.h \
-    container/vinternalvariable.h \
-    container/vlineangle.h \
+    container/variables/vmeasurement.h \
+    container/variables/vincrement.h \
+    container/variables/vvariable.h \
+    container/variables/vinternalvariable.h \
+    container/variables/vlineangle.h \
     container/variables.h \
-    container/vcurvelength.h \
-    container/varclength.h \
-    container/vlinelength.h \
-    container/vsplinelength.h \
-    container/vinternalvariable_p.h \
-    container/vvariable_p.h \
-    container/vincrement_p.h \
-    container/vcurvelength_p.h \
-    container/vlineangle_p.h \
-    container/vlinelength_p.h \
-    container/vmeasurement_p.h \
+    container/variables/vcurvelength.h \
+    container/variables/varclength.h \
+    container/variables/vlinelength.h \
+    container/variables/vsplinelength.h \
+    container/variables/vinternalvariable_p.h \
+    container/variables/vvariable_p.h \
+    container/variables/vincrement_p.h \
+    container/variables/vcurvelength_p.h \
+    container/variables/vlineangle_p.h \
+    container/variables/vlinelength_p.h \
+    container/variables/vmeasurement_p.h \
     container/vformula.h

@@ -46,6 +46,8 @@ AddPatternPiece::~AddPatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     if (doc->CountPP() <= 1)
     {
         emit ClearScene();
@@ -62,6 +64,8 @@ void AddPatternPiece::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     if (doc->CountPP() == 0 && mPath.isEmpty() == false)
     {
         doc->CreateEmptyFile(mPath);

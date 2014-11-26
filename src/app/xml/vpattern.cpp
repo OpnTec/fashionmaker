@@ -38,6 +38,7 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionundo.h"
 #include "../core/undoevent.h"
+#include "../core/vsettings.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
 #include "../../libs/qmuparser/qmuparsererror.h"
@@ -298,6 +299,7 @@ bool VPattern::ChangeNamePP(const QString& oldName, const QString &newName)
  */
 void VPattern::Parse(const Document &parse)
 {
+    qCDebug(vXML)<<"Parsing pattern.";
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
@@ -370,7 +372,6 @@ VDataTool *VPattern::getTool(const quint32 &id)
     return tools.value(id);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ToolExists(const quint32 &id) const
 {
@@ -408,9 +409,14 @@ void VPattern::setCurrentData()
     {
         if (CountPP() > 1)//don't need upadate data if we have only one pattern piece
         {
+            qCDebug(vXML)<<"Setting current data";
+            qCDebug(vXML)<<"Current PP name"<<nameActivPP;
+            qCDebug(vXML)<<"PP count"<<CountPP();
+
             quint32 id = 0;
             if (history.size() == 0)
             {
+                qCDebug(vXML)<<"History is empty!";
                 return;
             }
             for (qint32 i = 0; i < history.size(); ++i)
@@ -421,12 +427,17 @@ void VPattern::setCurrentData()
                     id = tool.getId();
                 }
             }
-            if (id == 0)
+            qCDebug(vXML)<<"Resoring data from tool with id"<<id;
+            if (id == NULL_ID)
             {
+                qCDebug(vXML)<<"Could not find record for this current pattern piece"<<nameActivPP;
+
                 const VToolRecord tool = history.at(history.size()-1);
                 id = tool.getId();
-                if (id == 0)
+                qCDebug(vXML)<<"Taking record with id"<<id<<"from PP"<<tool.getNameDraw();
+                if (id == NULL_ID)
                 {
+                    qCDebug(vXML)<<"Bad id for last record in history.";
                     return;
                 }
             }
@@ -435,6 +446,11 @@ void VPattern::setCurrentData()
                 ToolExists(id);
                 const VDataTool *vTool = tools.value(id);
                 *data = vTool->getData();
+                qCDebug(vXML)<<"Data successfully updated.";
+            }
+            else
+            {
+                qCDebug(vXML)<<"List of tools is empty!";
             }
         }
     }
@@ -736,7 +752,7 @@ void VPattern::LiteParseTree(const Document &parse)
                 Parse(parse);
                 break;
             case Document::FullParse:
-                qWarning()<<"Lite parsing doesn't support full parsing";
+                qCWarning(vXML)<<"Lite parsing doesn't support full parsing";
                 break;
             default:
                 break;
@@ -796,11 +812,13 @@ void VPattern::LiteParseTree(const Document &parse)
 
     // Restore name current pattern piece
     nameActivPP = namePP;
+    qCDebug(vXML)<<"Current pattern piece"<<nameActivPP;
     setCurrentData();
     emit FullUpdateFromFile();
     // Recalculate scene rect
     VAbstractTool::NewSceneRect(sceneDraw, qApp->getSceneView());
     VAbstractTool::NewSceneRect(sceneDetail, qApp->getSceneView());
+    qCDebug(vXML)<<"Scene size updated.";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1698,13 +1716,9 @@ void VPattern::CheckTagExists(const QString &tag)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetLabelBase(unsigned int index) const
 {
-    QString checkedLocale = qApp->getSettings()->value("configuration/label_language",
-                                                       QLocale::system().bcp47Name()).toString();
-
     QStringList list = VApplication::LabelLanguages();
-
     QStringList alphabet;
-    switch (list.indexOf(checkedLocale))
+    switch (list.indexOf(qApp->getSettings()->GetLabelLanguage()))
     {
         case 0: // de
         {
@@ -2375,15 +2389,7 @@ void VPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetAuthor() const
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-#ifdef Q_OS_WIN
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USERNAME").constData())).toString();
-#else
-    QString user = settings->value("pattern/user", QString::fromLocal8Bit(qgetenv("USER").constData())).toString();
-#endif
-
-    return UniqueTagText(TagAuthor, user);
+    return UniqueTagText(TagAuthor, qApp->getSettings()->GetUser());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2457,13 +2463,16 @@ QString VPattern::GenerateLabel(const LabelType &type) const
             }
             ++i;
         }
+        qCDebug(vXML)<<"Point label:"<<name;
         return name;
     }
     else if (type == LabelType::NewLabel)
     {
         if (drawList.isEmpty())
         {
-            return GetLabelBase(0);
+            const QString label = GetLabelBase(0);
+            qCDebug(vXML)<<"Point label:"<<label;
+            return label;
         }
 
         int index = 0;
@@ -2490,8 +2499,10 @@ QString VPattern::GenerateLabel(const LabelType &type) const
                 break;
             }
         } while (data->IsUnique(name) == false);
+        qCDebug(vXML)<<"Point label:"<<name;
         return name;
     }
+    qCDebug(vXML)<<"Got unknow type"<<static_cast<char>(type);
     return QString();
 }
 

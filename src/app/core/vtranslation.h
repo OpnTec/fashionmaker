@@ -38,7 +38,7 @@
  * I took idea from this article http://ololoepepe.blogspot.com/2013/08/qt.html.
  * As you know, if wrap string to a function translate, it will be marked for translation. No matter what namespace
  * contains this function. In class Translation used this circumstance.
- * It is mean never change name of method translate!!!!!.
+ * This mean never change name of method translate!!!!!.
  * Instead of using QT_TRANSLATE_NOOP3 macros we can store strings in QMap.
  * Example:
  * create map and fill up its

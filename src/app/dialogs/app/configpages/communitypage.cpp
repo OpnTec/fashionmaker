@@ -29,6 +29,7 @@
 #include "communitypage.h"
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
+#include "../../../core/vsettings.h"
 #include <QGroupBox>
 #include <QLabel>
 #include <QSettings>
@@ -57,17 +58,17 @@ CommunityPage::CommunityPage(QWidget *parent):
 //---------------------------------------------------------------------------------------------------------------------
 void CommunityPage::Apply()
 {
-    qApp->getSettings()->setValue("community/server", this->server->text());
-    qApp->getSettings()->setValue("community/serverSecure", this->secureComm->isChecked());
-    qApp->getSettings()->setValue("community/useProxy", this->useProxy->isChecked());
-    qApp->getSettings()->setValue("community/proxyAddress", this->proxyAddress->text());
-    qApp->getSettings()->setValue("community/proxyPort", this->proxyPort->text());
-    qApp->getSettings()->setValue("community/proxyUser", this->proxyUser->text());
-    qApp->getSettings()->setValue("community/proxyPass", this->proxyPass->text());
+    qApp->getSettings()->SetServer(this->server->text());
+    qApp->getSettings()->SetServerSecure(this->secureComm->isChecked());
+    qApp->getSettings()->SetProxy(this->useProxy->isChecked());
+    qApp->getSettings()->SetProxyAddress(this->proxyAddress->text());
+    qApp->getSettings()->SetProxyPort(this->proxyPort->text());
+    qApp->getSettings()->SetProxyUser(this->proxyUser->text());
+    qApp->getSettings()->SetProxyPass(this->proxyPass->text());
 
-    qApp->getSettings()->setValue("community/username", this->username->text());
-    qApp->getSettings()->setValue("community/savePassword", this->savePassword->isChecked());
-    qApp->getSettings()->setValue("community/userpassword", this->userpassword->text());
+    qApp->getSettings()->SetUsername(this->username->text());
+    qApp->getSettings()->SetSavePassword(this->savePassword->isChecked());
+    qApp->getSettings()->SetUserPassword(this->userpassword->text());
 
 }
 
@@ -99,17 +100,13 @@ void CommunityPage::PasswordCheckChanged()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *CommunityPage::ServerGroup()
 {
-    QSettings *settings = qApp->getSettings();
-    SCASSERT(settings != nullptr);
-
     QGroupBox *ServerGroup = new QGroupBox(tr("Server"));
     QFormLayout *serverLayout = new QFormLayout;
 
-    CommunityPage::add_lineedit(&this->server, serverLayout,
-           settings->value("community/server", "community.valentina-project.org").toString(), tr("Server name/IP"));
+    CommunityPage::add_lineedit(&this->server, serverLayout, qApp->getSettings()->GetServer(), tr("Server name/IP"));
 
-    CommunityPage::add_checkbox(&this->secureComm, serverLayout,
-           settings->value("community/serverSecure", 0).toBool(), tr("Secure connection"));
+    CommunityPage::add_checkbox(&this->secureComm, serverLayout, qApp->getSettings()->GetServerSecure(),
+                                tr("Secure connection"));
 
     ServerGroup->setLayout(serverLayout);
     return ServerGroup;
@@ -140,21 +137,12 @@ QGroupBox *CommunityPage::ProxyGroup()
 
     QFormLayout *proxyLayout = new QFormLayout;
 
-    CommunityPage::add_checkbox(&this->useProxy, proxyLayout,
-         qApp->getSettings()->value("community/useProxy", 0).toBool(), tr("Use Proxy"));
-
-    CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout,
-         qApp->getSettings()->value("community/proxyAddress", "").toString(), tr("Proxy address"));
-
-    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout,
-         qApp->getSettings()->value("community/proxyPort", "").toString(), tr("Proxy port"));
-
-    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout,
-         qApp->getSettings()->value("community/proxyUser", "").toString(), tr("Proxy user"));
-
-    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout,
-         qApp->getSettings()->value("community/proxyPass", "").toString(), tr("Proxy pass"));
-
+    CommunityPage::add_checkbox(&this->useProxy, proxyLayout, qApp->getSettings()->GetProxy(), tr("Use Proxy"));
+    CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout, qApp->getSettings()->GetProxyAddress(),
+                                tr("Proxy address"));
+    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, qApp->getSettings()->GetProxyPort(), tr("Proxy port"));
+    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, qApp->getSettings()->GetProxyUser(), tr("Proxy user"));
+    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, qApp->getSettings()->GetProxyPass(), tr("Proxy pass"));
     connect(this->useProxy, &QCheckBox::stateChanged, this, &CommunityPage::ProxyCheckChanged);
     this->ProxyCheckChanged();
 
@@ -169,14 +157,11 @@ QGroupBox *CommunityPage::UserGroup()
     QGroupBox *userGroup = new QGroupBox(tr("User settings"));
     QFormLayout *userLayout = new QFormLayout;
 
-    CommunityPage::add_lineedit(&this->username, userLayout,
-         qApp->getSettings()->value("community/username", "").toString(), tr("User Name"));
-
-    CommunityPage::add_checkbox(&this->savePassword, userLayout,
-         qApp->getSettings()->value("community/savePassword", 0).toBool(), tr("Save password"));
-
-    CommunityPage::add_lineedit(&this->userpassword, userLayout,
-         qApp->getSettings()->value("community/userpassword", "").toString(), tr("Password"));
+    CommunityPage::add_lineedit(&this->username, userLayout, qApp->getSettings()->GetUsername(), tr("User Name"));
+    CommunityPage::add_checkbox(&this->savePassword, userLayout, qApp->getSettings()->GetSavePassword(),
+                                tr("Save password"));
+    CommunityPage::add_lineedit(&this->userpassword, userLayout, qApp->getSettings()->GetUserPassword(),
+                                tr("Password"));
 
     connect(this->savePassword, &QCheckBox::stateChanged, this, &CommunityPage::PasswordCheckChanged);
     this->PasswordCheckChanged();

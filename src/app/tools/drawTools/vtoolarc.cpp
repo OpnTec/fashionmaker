@@ -214,10 +214,13 @@ void VToolArc::setFormulaRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-        arc->SetFormulaRadius(value);
-        SaveOption(obj);
+        if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
+        {
+            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+            QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+            arc->SetFormulaRadius(value);
+            SaveOption(obj);
+        }
     }
 }
 
@@ -241,8 +244,12 @@ void VToolArc::setFormulaF1(const VFormula &value)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-        arc->SetFormulaF1(value);
-        SaveOption(obj);
+
+        if (qFuzzyCompare(value.getDoubleValue() + 1, arc->GetF2() + 1)==false)// Angles can't be equal
+        {
+            arc->SetFormulaF1(value);
+            SaveOption(obj);
+        }
     }
 }
 
@@ -266,8 +273,11 @@ void VToolArc::setFormulaF2(const VFormula &value)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-        arc->SetFormulaF2(value);
-        SaveOption(obj);
+        if (qFuzzyCompare(value.getDoubleValue() + 1, arc->GetF1() + 1)==false)// Angles can't be equal
+        {
+            arc->SetFormulaF2(value);
+            SaveOption(obj);
+        }
     }
 }
 

@@ -29,13 +29,15 @@
 #include "dialogindividualmeasurements.h"
 #include "ui_dialogindividualmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
+#include "../../core/vapplication.h"
+#include "../../core/vsettings.h"
+#include "../../container/vcontainer.h"
+
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
 #include <QDesktopWidget>
-#include "../../core/vapplication.h"
-#include "../../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName,
@@ -195,7 +197,7 @@ void DialogIndividualMeasurements::CheckState()
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
-    QString path = qApp->getSettings()->value("paths/individual_measurements", QDir::homePath()).toString();
+    const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
     if (fileName.isEmpty())
@@ -251,9 +253,8 @@ void DialogIndividualMeasurements::InitUnits()
     ui->comboBoxUnits->addItem(tr("Millimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
     ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
 
-    const QString checkedUnit = qApp->getSettings()->value("configuration/unit", "cm").toString();
     // set default unit
-    const qint32 indexUnit = ui->comboBoxUnits->findData(checkedUnit);
+    const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->getSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxUnits->setCurrentIndex(indexUnit);

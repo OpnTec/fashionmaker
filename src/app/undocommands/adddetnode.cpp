@@ -44,6 +44,8 @@ AddDetNode::~AddDetNode()
 //---------------------------------------------------------------------------------------------------------------------
 void AddDetNode::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
@@ -52,19 +54,19 @@ void AddDetNode::undo()
         {
             if (modelingElement.removeChild(domElement).isNull())
             {
-                qDebug()<<"Can't delete node";
+               qCDebug(vUndo)<<"Can't delete node.";
                 return;
             }
         }
         else
         {
-            qDebug()<<"Can't get node by id = "<<nodeId<<Q_FUNC_INFO;
+            qCDebug(vUndo)<<"Can't get node by id = "<<nodeId<<".";
             return;
         }
     }
     else
     {
-        qDebug()<<"Can't find tag"<<VPattern::TagModeling<< Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
 }
@@ -72,6 +74,8 @@ void AddDetNode::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddDetNode::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
@@ -79,7 +83,7 @@ void AddDetNode::redo()
     }
     else
     {
-        qDebug()<<"Can't find tag"<<VPattern::TagModeling<< Q_FUNC_INFO;
+        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagModeling<<".";
         return;
     }
 }

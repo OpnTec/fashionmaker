@@ -90,6 +90,8 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
     m_sourceLocation = sourceLocation;
 }
 
+Q_LOGGING_CATEGORY(vXML, "v.xml")
+
 const QString VDomDocument::AttrId     = QStringLiteral("id");
 const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
 const QString VDomDocument::UnitMM     = QStringLiteral("mm");
@@ -354,6 +356,7 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
  */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
+    qCDebug(vXML)<<"Validation xml file"<<fileName<<".";
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
@@ -372,7 +375,14 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     MessageHandler messageHandler;
     QXmlSchema sch;
     sch.setMessageHandler(&messageHandler);
-    sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()));
+    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()))==false)
+    {
+        pattern.close();
+        fileSchema.close();
+        const QString errorMsg(tr("Could not load schema file.").arg(fileSchema.fileName()));
+        throw VException(errorMsg);
+    }
+    qCDebug(vXML)<<"Schema loaded.";
 
     bool errorOccurred = false;
     if (sch.isValid() == false)

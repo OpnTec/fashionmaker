@@ -35,6 +35,7 @@
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"
+#include "vsettings.h"
 
 #include <QDebug>
 #include <QDir>
@@ -43,6 +44,96 @@
 #include <QUndoStack>
 #include <QtCore/qmath.h>
 #include <QTemporaryFile>
+#include <QFile>
+#include <QStandardPaths>
+#include <QMessageBox>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(vApp, "v.application")
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
+    if ((type == QtDebugMsg) && msg.contains("::connect"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // this is another one that doesn't make sense as just a debug message.  pretty serious
+    // sign of a problem
+    // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
+    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
+    // is something that can easily happen if you are debugging and the application is paused.
+    // As it is so common, not worth popping up a dialog.
+    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
+            && QString(msg).contains("Cowardly refusing"))
+    {
+        type = QtDebugMsg;
+    }
+
+    // only the GUI thread should display message boxes.  If you are
+    // writing a multithreaded application and the error happens on
+    // a non-GUI thread, you'll have to queue the message to the GUI
+    QCoreApplication *instance = QCoreApplication::instance();
+    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+
+    if (isGuiThread)
+    {
+        QString debugdate = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
+        QMessageBox messageBox;
+        switch (type)
+        {
+            case QtDebugMsg:
+                debugdate += QString(" [Debug] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                break;
+            case QtWarningMsg:
+                debugdate += QString(" [Warning] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                messageBox.setIcon(QMessageBox::Warning);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
+                break;
+            case QtCriticalMsg:
+                debugdate += QString(" [Critical] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                messageBox.setIcon(QMessageBox::Critical);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
+                break;
+            case QtFatalMsg:
+                debugdate += QString(" [Fatal] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                messageBox.setIcon(QMessageBox::Critical);
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.exec();
+                break;
+            default:
+                break;
+        }
+
+        (*qApp->LogFile()) << debugdate <<  endl;
+
+        if (QtFatalMsg == type)
+        {
+            abort();
+        }
+    }
+    else
+    {
+        if (type != QtDebugMsg)
+        {
+            abort(); // be NOISY unless overridden!
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 
 const qreal VApplication::PrintDPI = 96.0;
 
@@ -64,8 +155,8 @@ VApplication::VApplication(int &argc, char **argv)
       guiTexts(QMap<QString, VTranslation>()), descriptions(QMap<QString, VTranslation>()),
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
       postfixOperators(QMap<QString, VTranslation>()), stDescriptions(QMap<QString, VTranslation>()),
-      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr),
-      autoSaveTimer(nullptr), mainWindow(nullptr), openingPattern(false), settings(nullptr), doc(nullptr)
+      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr), mainWindow(nullptr),
+      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr), out(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -78,24 +169,56 @@ VApplication::VApplication(int &argc, char **argv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VApplication::~VApplication()
+{
+    qCDebug(vApp)<<"Application closing.";
+    qInstallMessageHandler(0); // Resore the message handler
+    delete out;
+
+    if (log != nullptr)
+    {
+        log->close();
+        delete log;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NewValentina start Valentina in new process, send path to pattern file in argument.
  * @param fileName path to pattern file.
  */
 void VApplication::NewValentina(const QString &fileName)
 {
-    QProcess *v = new QProcess();
-    QStringList arguments;
-    arguments << fileName;
+    qCDebug(vApp)<<"Open new detached process.";
     if (fileName.isEmpty())
     {
-        v->startDetached(QCoreApplication::applicationFilePath());
+        qCDebug(vApp)<<"New process without arguments. program ="<<QCoreApplication::applicationFilePath();
+        // Path can contain spaces.
+        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
+        {
+            qCDebug(vApp)<<"The process was started successfully.";
+        }
+        else
+        {
+            qCWarning(vApp)<<"The operation timed out or an error occurred.";
+        }
     }
     else
     {
-        v->startDetached(QCoreApplication::applicationFilePath(), arguments);
+        QStringList arguments;
+        arguments << fileName;
+        qCDebug(vApp)<<"New process with arguments. program ="<<QCoreApplication::applicationFilePath()
+                     <<", arguments = "<<arguments;
+        // Path can contain spaces.
+        if(QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\"", arguments))
+        {
+            qCDebug(vApp)<<"The process was started successfully.";
+        }
+        else
+        {
+            qCWarning(vApp)<<"The operation timed out or an error occurred.";
+        }
     }
-    delete v;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,6 +416,25 @@ void VApplication::InitMeasurement(const QString &name, const VTranslation &m, c
     measurements.insert(name, m);
     guiTexts.insert(name, g);
     descriptions.insert(name, d);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::LogDirPath() const
+{
+#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
+    const QString logDirPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(),
+                                                      QStandardPaths::LocateDirectory) + "Valentina";
+#else
+    const QString logDirPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(),
+                                                      QStandardPaths::LocateDirectory) + organizationName();
+#endif
+    return logDirPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::LogPath() const
+{
+    return LogDirPath() + "/valentina.log";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1523,10 +1665,8 @@ QString VApplication::FormulaFromUser(const QString &formula)
         }
     }
 
-    bool osSeparatorValue = getSettings()->value("configuration/osSeparator", 1).toBool();
-
     QLocale loc = QLocale::system();
-    if (loc != QLocale(QLocale::C) && osSeparatorValue)
+    if (loc != QLocale(QLocale::C) && getSettings()->GetOsSeparator())
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
@@ -1639,10 +1779,8 @@ QString VApplication::FormulaToUser(const QString &formula)
         }
     }
 
-    bool osSeparatorValue = getSettings()->value("configuration/osSeparator", 1).toBool();
-
     QLocale loc = QLocale::system();
-    if (loc != QLocale::C && osSeparatorValue)
+    if (loc != QLocale::C && getSettings()->GetOsSeparator())
     {
         QList<int> nKeys = numbers.keys();
         QList<QString> nValues = numbers.values();
@@ -1709,7 +1847,7 @@ void VApplication::setOpeningPattern()
  */
 void VApplication::OpenSettings()
 {
-    settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
                              QApplication::applicationName(), this);
 }
 
@@ -1718,7 +1856,7 @@ void VApplication::OpenSettings()
  * @brief VApplication::getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
  */
-QSettings *VApplication::getSettings()
+VSettings *VApplication::getSettings()
 {
     SCASSERT(settings != nullptr);
     return settings;
@@ -1802,7 +1940,7 @@ QString VApplication::STDescription(const QString &id) const
     }
     else
     {
-        qWarning()<<"Unknown id number. Got"<<id;
+        qDebug()<<"Unknown id number. Got"<<id;
     }
     return QString();
 }
@@ -1854,6 +1992,43 @@ bool VApplication::SafeCopy(const QString &source, const QString &destination, Q
     return result;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::StartLogging()
+{
+#if (QT_VERSION < QT_VERSION_CHECK(5, 3, 0))
+    // In Qt 5.2 need manualy enable debug information for categories. This work
+    // because Qt doesn't provide debug information for categories itself. And in this
+    // case will show our messages. Another situation with Qt 5.3 that has many debug
+    // messages itself. We don't need this information and can turn on later if need.
+    // But here Qt already show our debug messages without enabling.
+    QLoggingCategory::setFilterRules("*.debug=true\n");
+#endif
+
+    QDir logDir(LogDirPath());
+    if (logDir.exists() == false)
+    {
+        logDir.mkpath("."); // Create directory for log if need
+    }
+
+    log = new QFile(LogPath());
+    if (log->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+    {
+        out = new QTextStream(log);
+        qInstallMessageHandler(noisyFailureMsgHandler);
+    }
+    else
+    {
+        delete log;
+        qDebug() << "Error opening log file '" << LogPath() << "'. All debug output redirected to console.";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTextStream *VApplication::LogFile()
+{
+    return out;
+}
+
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
 //---------------------------------------------------------------------------------------------------------------------
 // Catch exception and create report. Use if program build with Mingw compiler.
@@ -1881,7 +2056,7 @@ void VApplication::CollectReports() const
             return;// Settings was not opened.
         }
 
-        if (settings->value("configuration/send_report/state", 1).toBool())
+        if (settings->GetSendReportState())
         { // Try send report
             // Remove gist.json file before close app.
             connect(this, &VApplication::aboutToQuit, this, &VApplication::CleanGist, Qt::UniqueConnection);
@@ -1905,12 +2080,16 @@ void VApplication::CollectReport(const QString &reportName) const
     }
 
     const QDateTime now = QDateTime::currentDateTime();
-    const QString timestamp = now.toString(QLatin1String("yyyyMMdd-hhmmsszzz"));
-    const QString filename = QString("%1/reports/crash-%2.RPT").arg(qApp->applicationDirPath()).arg(timestamp);
+    const QString timestamp = now.toString(QLatin1String("yyyy.MM.dd-hh_mm_ss"));
+    QString filename = QString("%1/reports/crash-%2.RPT").arg(qApp->applicationDirPath()).arg(timestamp);
 
     QFile reportFile(reportName);
     reportFile.copy(filename); // Collect new crash
     reportFile.remove(); // Clear after yourself
+
+    filename = QString("%1/reports/log-%2.log").arg(qApp->applicationDirPath()).arg(timestamp);
+    QFile logFile(LogPath());
+    logFile.copy(filename); // Collect log
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1928,23 +2107,22 @@ void VApplication::SendReport(const QString &reportName) const
 {
     QString content;
     QFile reportFile(reportName);
-    if (!reportFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (reportFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        return;
+        content = ReadFileForSending(reportFile);
+        reportFile.close();
     }
-
-    QTextStream in(&reportFile);
-    while (!in.atEnd())
+    else
     {
-        content.append(in.readLine()+"\r\n");// Windows end of line
+        content = "RPT file error:" + reportFile.errorString() + "\r\n";
     }
-    reportFile.close();
 
     // Additional information
     content.append(QString("-------------------------------")+"\r\n");
     content.append(QString("Version:%1").arg(APP_VERSION)+"\r\n");
     content.append(QString("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR)+"\r\n");
     content.append(QString("Built on %3 at %4").arg(__DATE__).arg(__TIME__)+"\r\n");
+    content.append("\r\n");
 
     // Creating json with report
     // Example:
@@ -1952,7 +2130,7 @@ void VApplication::SendReport(const QString &reportName) const
     //  "description":"Crash report",
     //  "public":"true",
     //  "files":{
-    //      "file1.txt":{
+    //      "valentina.RPT":{
     //          "content":"Report text here"
     //      }
     //  }
@@ -1967,12 +2145,28 @@ void VApplication::SendReport(const QString &reportName) const
     reportObject.insert(QStringLiteral("description"), QJsonValue(report));
     reportObject.insert(QStringLiteral("public"), QJsonValue(QString("true")));
 
-    QJsonObject contentObject;
-    contentObject.insert(QStringLiteral("content"), QJsonValue(content));
+    content.append(QString("\r\n-------------------------------\r\n"));
+    content.append(QString("Log:")+"\r\n");
 
+    QFile logFile(LogPath());
+    if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        content.append(ReadFileForSending(logFile));
+        logFile.close();
+    }
+    else
+    {
+        content.append("\r\n Log file error:" + logFile.errorString() + "\r\n");
+    }
+
+    const QString contentSection = QStringLiteral("content");
+    QJsonObject contentObject;
+    contentObject.insert(contentSection, QJsonValue(content));
+
+    const QString filesSection = QStringLiteral("files");
     QJsonObject fileObject;
     fileObject.insert(QFileInfo(reportName).fileName(), QJsonValue(contentObject));
-    reportObject.insert(QStringLiteral("files"), QJsonValue(fileObject));
+    reportObject.insert(filesSection, QJsonValue(fileObject));
 
     QFile gistFile(GistFileName);
     if (!gistFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
@@ -2000,5 +2194,17 @@ void VApplication::SendReport(const QString &reportName) const
     {// We can not send than just collect
         CollectReport(reportName);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VApplication::ReadFileForSending(QFile &file) const
+{
+    QString content;
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        content.append(in.readLine()+"\r\n");// Windows end of line
+    }
+    return content;
 }
 #endif //defined(Q_OS_WIN) && defined(Q_CC_GNU)

@@ -50,6 +50,8 @@ DelTool::~DelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
     doc->SetCurrentPP(nameActivDraw);
@@ -58,6 +60,8 @@ void DelTool::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);
     emit NeedFullParsing();

@@ -4,7 +4,7 @@ Valentina Web page: http://www.valentina-project.org/
 Valentina user manual https://bitbucket.org/dismine/valentina/wiki/manual/Content    
 Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
 Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    
-PPA for Ubuntu 14.04(develop): https://launchpad.net/~dismine/+archive/valentina-dev    
+PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
 Help translate https://www.transifex.com/organization/valentina    
 
 Valentina
@@ -27,7 +27,7 @@ Building the sources requires Qt 5.2.1 or later.
 Compiling Valentina
 ====================
 Prerequisites:   
-   * Qt 5.0.2 or later (On Unix development packages needed)   
+   * Qt 5.2.1 or later (On Unix development packages needed)   
    * mercurial   
    * On Unix:   
      - ccache   
@@ -45,7 +45,7 @@ The installed toolchains have to match the one Qt was compiled with.
 You can build Valentina with
 
     cd $SOURCE_DIRECTORY
-    qmake -r
+    qmake Valentina.pro -r (or qmake-qt5, depending on your platform)
     make (or mingw32-make or nmake or jom, depending on your platform)
 
 Note:In order to build and use Valentina, the PATH environment variable 
@@ -60,6 +60,14 @@ Control Panel|System|Advanced|Environment variables menu.
 You may also need to ensure that the locations of your compiler and 
 other build tools are listed in the PATH variable. This will depend on 
 your choice of software development environment.
+
+Unix systems:
+Default prefix for command "make install" is /usr. For using another 
+prefix build with qmake command:
+
+qmake PREFIX=/usr/local Valentina.pro -r
+
+where /usr/local is a new prefix for installation.
 
 LICENSING
 ==========

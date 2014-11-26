@@ -32,7 +32,6 @@
 #include "../options.h"
 #include "../xml/vpattern.h"
 
-
 //---------------------------------------------------------------------------------------------------------------------
 RenamePP::RenamePP(VPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
     :VUndoCommand(QDomElement(), doc, parent), combo(combo), newPPname(newPPname), oldPPname(QString())
@@ -46,16 +45,23 @@ RenamePP::RenamePP(VPattern *doc, const QString &newPPname, QComboBox *combo, QU
 RenamePP::~RenamePP()
 {}
 
+//---------------------------------------------------------------------------------------------------------------------
 void RenamePP::undo()
 {
+    qCDebug(vUndo)<<"Undo.";
+
     ChangeName(newPPname, oldPPname);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void RenamePP::redo()
 {
+    qCDebug(vUndo)<<"Redo.";
+
     ChangeName(oldPPname, newPPname);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 bool RenamePP::mergeWith(const QUndoCommand *command)
 {
     const RenamePP *renameCommand = static_cast<const RenamePP *>(command);
@@ -86,6 +92,6 @@ void RenamePP::ChangeName(const QString &oldName, const QString &newName)
     }
     else
     {
-        qWarning()<<"Can't change pattern piece name";
+        qCWarning(vUndo)<<"Can't change pattern piece name";
     }
 }
