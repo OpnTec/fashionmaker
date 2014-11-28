@@ -198,31 +198,28 @@ void VApplication::NewValentina(const QString &fileName)
     qCDebug(vApp)<<"Open new detached process.";
     if (fileName.isEmpty())
     {
-        qCDebug(vApp)<<"New process without arguments. program ="<<QCoreApplication::applicationFilePath();
+        qCDebug(vApp)<<"New process without arguments. program ="<<qApp->applicationFilePath();
         // Path can contain spaces.
-        if (QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\""))
+        if (QProcess::startDetached("\""+qApp->applicationFilePath()+"\""))
         {
             qCDebug(vApp)<<"The process was started successfully.";
         }
         else
         {
-            qCWarning(vApp)<<"The operation timed out or an error occurred.";
+            qCWarning(vApp)<<"Could not run process. The operation timed out or an error occurred.";
         }
     }
     else
     {
-        QStringList arguments;
-        arguments << fileName;
-        qCDebug(vApp)<<"New process with arguments. program ="<<QCoreApplication::applicationFilePath()
-                     <<", arguments = "<<arguments;
-        // Path can contain spaces.
-        if(QProcess::startDetached("\""+QCoreApplication::applicationFilePath()+"\"", arguments))
+        const QString run = QString("\"%1\" \"%2\"").arg(qApp->applicationFilePath()).arg(fileName);
+        qCDebug(vApp)<<"New process with arguments. program ="<<run;
+        if(QProcess::startDetached(run))
         {
             qCDebug(vApp)<<"The process was started successfully.";
         }
         else
         {
-            qCWarning(vApp)<<"The operation timed out or an error occurred.";
+            qCWarning(vApp)<<"Could not run process. The operation timed out or an error occurred.";
         }
     }
 }
