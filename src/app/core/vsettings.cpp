@@ -68,7 +68,7 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetOsSeparator()
+bool VSettings::GetOsSeparator() const
 {
     return value(SettingConfigurationOsSeparator, 1).toBool();
 }
@@ -80,7 +80,7 @@ void VSettings::SetOsSeparator(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetAutosaveState()
+bool VSettings::GetAutosaveState() const
 {
     return value(SettingConfigurationAutosaveState, 1).toBool();
 }
@@ -92,7 +92,7 @@ void VSettings::SetAutosaveState(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetAutosaveTime()
+int VSettings::GetAutosaveTime() const
 {
     bool ok = false;
     int val = value(SettingConfigurationAutosaveTime, 1).toInt(&ok);
@@ -112,7 +112,7 @@ void VSettings::SetAutosaveTime(const int &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetSendReportState()
+bool VSettings::GetSendReportState() const
 {
     return value(SettingConfigurationSendReportState, 1).toBool();
 }
@@ -124,7 +124,7 @@ void VSettings::SetSendReportState(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetLocale()
+QString VSettings::GetLocale() const
 {
     return value(SettingConfigurationLocale, QLocale::system().name()).toString();
 }
@@ -136,7 +136,7 @@ void VSettings::SetLocale(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetUnit()
+QString VSettings::GetUnit() const
 {
     return value(SettingConfigurationUnit, "cm").toString();
 }
@@ -148,7 +148,7 @@ void VSettings::SetUnit(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetLabelLanguage()
+QString VSettings::GetLabelLanguage() const
 {
     return value(SettingConfigurationLabelLanguage, QLocale::system().bcp47Name()).toString();
 }
@@ -160,7 +160,7 @@ void VSettings::SetLabelLanguage(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetPathIndividualMeasurements()
+QString VSettings::GetPathIndividualMeasurements() const
 {
     return value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
 }
@@ -172,7 +172,7 @@ void VSettings::SetPathIndividualMeasurements(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetPathPattern()
+QString VSettings::GetPathPattern() const
 {
     return value(SettingPathsPattern, QDir::homePath()).toString();
 }
@@ -184,7 +184,7 @@ void VSettings::SetPathPattern(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetUser()
+QString VSettings::GetUser() const
 {
     QString user;
 #ifdef Q_OS_WIN
@@ -202,7 +202,7 @@ void VSettings::SetUser(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetGraphicalOutput()
+bool VSettings::GetGraphicalOutput() const
 {
     return value(SettingPatternGraphicalOutput, 1).toBool();
 }
@@ -214,7 +214,7 @@ void VSettings::SetGraphicalOutput(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetUndoCount()
+int VSettings::GetUndoCount() const
 {
     bool ok = false;
     int val = value(SettingPatternUndo, 0).toInt(&ok);
@@ -234,7 +234,7 @@ void VSettings::SetUndoCount(const int &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VSettings::GetRecentFileList()
+QStringList VSettings::GetRecentFileList() const
 {
     return value(SettingGeneralRecentFileList).toStringList();
 }
@@ -246,7 +246,7 @@ void VSettings::SetRecentFileList(const QStringList &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VSettings::GetRestoreFileList()
+QStringList VSettings::GetRestoreFileList() const
 {
     return value(SettingGeneralRestoreFileList).toStringList();
 }
@@ -258,7 +258,7 @@ void VSettings::SetRestoreFileList(const QStringList &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QByteArray VSettings::GetGeometry()
+QByteArray VSettings::GetGeometry() const
 {
     return value(SettingGeneralGeometry).toByteArray();
 }
@@ -270,7 +270,7 @@ void VSettings::SetGeometry(const QByteArray &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QByteArray VSettings::GetWindowState()
+QByteArray VSettings::GetWindowState() const
 {
     return value(SettingGeneralWindowState).toByteArray();
 }
@@ -282,7 +282,7 @@ void VSettings::SetWindowState(const QByteArray &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetServer()
+QString VSettings::GetServer() const
 {
     return value(SettingCommunityServer, "community.valentina-project.org").toString();
 }
@@ -294,7 +294,7 @@ void VSettings::SetServer(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetServerSecure()
+bool VSettings::GetServerSecure() const
 {
     return value(SettingCommunityServerSecure, 0).toBool();
 }
@@ -306,7 +306,7 @@ void VSettings::SetServerSecure(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetProxy()
+bool VSettings::GetProxy() const
 {
     return value(SettingCommunityUseProxy, 0).toBool();
 }
@@ -318,7 +318,7 @@ void VSettings::SetProxy(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetProxyAddress()
+QString VSettings::GetProxyAddress() const
 {
     return value(SettingCommunityProxyAddress).toString();
 }
@@ -330,7 +330,7 @@ void VSettings::SetProxyAddress(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetProxyPort()
+QString VSettings::GetProxyPort() const
 {
     return value(SettingCommunityProxyPort).toString();
 }
@@ -342,7 +342,7 @@ void VSettings::SetProxyPort(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetProxyUser()
+QString VSettings::GetProxyUser() const
 {
     return value(SettingCommunityProxyUser).toString();
 }
@@ -354,7 +354,7 @@ void VSettings::SetProxyUser(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetProxyPass()
+QString VSettings::GetProxyPass() const
 {
     return value(SettingCommunityProxyPass).toString();
 }
@@ -366,7 +366,7 @@ void VSettings::SetProxyPass(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetUsername()
+QString VSettings::GetUsername() const
 {
     return value(SettingCommunityUsername).toString();
 }
@@ -378,7 +378,7 @@ void VSettings::SetUsername(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetSavePassword()
+bool VSettings::GetSavePassword() const
 {
     return value(SettingCommunitySavePassword, 0).toBool();
 }
@@ -390,7 +390,7 @@ void VSettings::SetSavePassword(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetUserPassword()
+QString VSettings::GetUserPassword() const
 {
     return value(SettingCommunityUserPassword).toString();
 }

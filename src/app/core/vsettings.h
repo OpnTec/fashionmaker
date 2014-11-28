@@ -38,82 +38,82 @@ public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
-    bool GetOsSeparator();
+    bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
 
-    bool GetAutosaveState();
+    bool GetAutosaveState() const;
     void SetAutosaveState(const bool &value);
 
-    int  GetAutosaveTime();
+    int  GetAutosaveTime() const;
     void SetAutosaveTime(const int &value);
 
-    bool GetSendReportState();
+    bool GetSendReportState() const;
     void SetSendReportState(const bool &value);
 
-    QString GetLocale();
+    QString GetLocale() const;
     void SetLocale(const QString &value);
 
-    QString GetUnit();
+    QString GetUnit() const;
     void SetUnit(const QString &value);
 
-    QString GetLabelLanguage();
+    QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
 
-    QString GetPathIndividualMeasurements();
+    QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
-    QString GetPathPattern();
+    QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
 
-    QString GetUser();
+    QString GetUser() const;
     void SetUser(const QString &value);
 
-    bool GetGraphicalOutput();
+    bool GetGraphicalOutput() const;
     void SetGraphicalOutput(const bool &value);
 
-    int  GetUndoCount();
+    int  GetUndoCount() const;
     void SetUndoCount(const int &value);
 
-    QStringList GetRecentFileList();
+    QStringList GetRecentFileList() const;
     void SetRecentFileList(const QStringList &value);
 
-    QStringList GetRestoreFileList();
+    QStringList GetRestoreFileList() const;
     void SetRestoreFileList(const QStringList &value);
 
-    QByteArray GetGeometry();
+    QByteArray GetGeometry() const;
     void SetGeometry(const QByteArray &value);
 
-    QByteArray GetWindowState();
+    QByteArray GetWindowState() const;
     void SetWindowState(const QByteArray &value);
 
-    QString GetServer();
+    QString GetServer() const;
     void SetServer(const QString &value);
 
-    bool GetServerSecure();
+    bool GetServerSecure() const;
     void SetServerSecure(const bool &value);
 
-    bool GetProxy();
+    bool GetProxy() const;
     void SetProxy(const bool &value);
 
-    QString GetProxyAddress();
+    QString GetProxyAddress() const;
     void SetProxyAddress(const QString &value);
 
-    QString GetProxyPort();
+    QString GetProxyPort() const;
     void SetProxyPort(const QString &value);
 
-    QString GetProxyUser();
+    QString GetProxyUser() const;
     void SetProxyUser(const QString &value);
 
-    QString GetProxyPass();
+    QString GetProxyPass() const;
     void SetProxyPass(const QString &value);
 
-    QString GetUsername();
+    QString GetUsername() const;
     void SetUsername(const QString &value);
 
-    bool GetSavePassword();
+    bool GetSavePassword() const;
     void SetSavePassword(const bool &value);
 
-    QString GetUserPassword();
+    QString GetUserPassword() const;
     void SetUserPassword(const QString &value);
 
 private:
