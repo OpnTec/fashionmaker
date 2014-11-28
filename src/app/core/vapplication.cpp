@@ -48,6 +48,7 @@
 #include <QStandardPaths>
 #include <QMessageBox>
 #include <QLoggingCategory>
+#include <QLockFile>
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 
@@ -85,29 +86,33 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
     if (isGuiThread)
     {
-        QString debugdate = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
+        QString debugdate = "[" + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
         QMessageBox messageBox;
         switch (type)
         {
             case QtDebugMsg:
-                debugdate += QString(" [Debug] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                debugdate += QString(":DEBUG:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                        .arg(context.function).arg(context.category).arg(msg);
                 break;
             case QtWarningMsg:
-                debugdate += QString(" [Warning] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                        .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Warning);
                 messageBox.setInformativeText(msg);
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 messageBox.exec();
                 break;
             case QtCriticalMsg:
-                debugdate += QString(" [Critical] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                        .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 messageBox.exec();
                 break;
             case QtFatalMsg:
-                debugdate += QString(" [Fatal] %1: \"%2\" %3").arg(context.category).arg(msg).arg(context.function);
+                debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                        .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Critical);
                 messageBox.setInformativeText(msg);
                 messageBox.setStandardButtons(QMessageBox::Ok);
@@ -156,7 +161,7 @@ VApplication::VApplication(int &argc, char **argv)
       variables(QMap<QString, VTranslation>()), functions(QMap<QString, VTranslation>()),
       postfixOperators(QMap<QString, VTranslation>()), stDescriptions(QMap<QString, VTranslation>()),
       undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr), mainWindow(nullptr),
-      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr), out(nullptr)
+      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr), out(nullptr), logLock(nullptr)
 {
     undoStack = new QUndoStack(this);
 
@@ -179,6 +184,7 @@ VApplication::~VApplication()
     {
         log->close();
         delete log;
+        delete logLock;
     }
 }
 
@@ -434,7 +440,86 @@ QString VApplication::LogDirPath() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::LogPath() const
 {
-    return LogDirPath() + "/valentina.log";
+    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(qApp->applicationPid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::CreateLogDir() const
+{
+    QDir logDir(LogDirPath());
+    if (logDir.exists() == false)
+    {
+        logDir.mkpath("."); // Create directory for log if need
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::BeginLogging()
+{
+    log = new QFile(LogPath());
+    if (log->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+    {
+        out = new QTextStream(log);
+        qInstallMessageHandler(noisyFailureMsgHandler);
+        logLock = new QLockFile(LogPath()+".lock");
+        logLock->setStaleLockTime(0);
+        if (logLock->tryLock())
+        {
+            qCDebug(vApp) << "Log file"<<LogPath()<<"was locked.";
+        }
+        else
+        {
+            qCDebug(vApp) << "Failed to lock" << LogPath();
+            qCDebug(vApp) << "Error type:"<<logLock->error();
+        }
+    }
+    else
+    {
+        delete log;
+        qCDebug(vApp) << "Error opening log file '" << LogPath() << "'. All debug output redirected to console.";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::ClearOldLogs() const
+{
+    QStringList filters{"*.log"};
+    QDir logsDir(LogDirPath());
+    logsDir.setNameFilters(filters);
+    logsDir.setCurrent(LogDirPath());
+
+    const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
+    if (allFiles.isEmpty() == false)
+    {
+        qCDebug(vApp) << "Clearing old logs";
+        for (int i = 0; i < allFiles.size(); ++i)
+        {
+            QFileInfo info(allFiles.at(i));
+            QLockFile *lock = new QLockFile(info.absoluteFilePath() + ".lock");
+            if (lock->tryLock())
+            {
+                qCDebug(vApp) << "Locked file"<<info.absoluteFilePath();
+                QFile oldLog(allFiles.at(i));
+                if (oldLog.remove())
+                {
+                    qCDebug(vApp) << "Deleted"<<info.absoluteFilePath();
+                }
+                else
+                {
+                    qCDebug(vApp) << "Could not delete"<<info.absoluteFilePath();
+                }
+            }
+            else
+            {
+                qCDebug(vApp) << "Failed to lock"<<info.absoluteFilePath();
+            }
+            delete lock;
+        }
+    }
+    else
+    {
+        qCDebug(vApp) << "There are no old logs.";
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2004,23 +2089,9 @@ void VApplication::StartLogging()
     QLoggingCategory::setFilterRules("*.debug=true\n");
 #endif
 
-    QDir logDir(LogDirPath());
-    if (logDir.exists() == false)
-    {
-        logDir.mkpath("."); // Create directory for log if need
-    }
-
-    log = new QFile(LogPath());
-    if (log->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
-    {
-        out = new QTextStream(log);
-        qInstallMessageHandler(noisyFailureMsgHandler);
-    }
-    else
-    {
-        delete log;
-        qDebug() << "Error opening log file '" << LogPath() << "'. All debug output redirected to console.";
-    }
+    CreateLogDir();
+    BeginLogging();
+    ClearOldLogs();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

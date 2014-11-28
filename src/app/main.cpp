@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
     qDebug()<<"Based on Qt "<<QT_VERSION_STR<<"(32 bit)";
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
     qDebug()<<"Command-line arguments:"<<app.arguments();
+    qDebug()<<"Process ID:"<<app.applicationPid();
 
     const QString checkedLocale = qApp->getSettings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;

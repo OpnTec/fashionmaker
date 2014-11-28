@@ -41,6 +41,7 @@ class VMainGraphicsScene;
 class VPattern;
 class QFile;
 class VSettings;
+class QLockFile;
 
 #if defined(qApp)
 #undef qApp
@@ -154,6 +155,7 @@ private:
     VPattern           *doc;
     QFile              *log;
     QTextStream        *out;
+    QLockFile          *logLock;
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();
@@ -182,6 +184,9 @@ private:
 
     QString            LogDirPath()const;
     QString            LogPath()const;
+    void               CreateLogDir()const;
+    void               BeginLogging();
+    void               ClearOldLogs()const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
