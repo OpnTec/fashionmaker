@@ -61,6 +61,7 @@
 #include <QDesktopWidget>
 #include <QDesktopServices>
 #include <QLoggingCategory>
+#include <QLockFile>
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
@@ -2294,6 +2295,25 @@ void MainWindow::LoadPattern(const QString &fileName)
     //We have unsaved changes or load more then one file per time
     OpenNewValentina(fileName);
 
+    qCDebug(vMainWindow)<<"Loking file";
+    lock = new QLockFile(fileName+".lock");
+    lock->setStaleLockTime(0);
+    if (lock->tryLock())
+    {
+        qCDebug(vMainWindow) << "Pattern file"<<fileName<<"was locked.";
+    }
+    else
+    {
+        qCDebug(vMainWindow) << "Failed to lock" << fileName;
+        qCDebug(vMainWindow) << "Error type:"<<lock->error();
+        if (lock->error() == QLockFile::LockFailedError)
+        {
+            qCCritical(vMainWindow) << tr("This file already opened in another window.");
+            Clear();
+            return;
+        }
+    }
+
     // On this stage scene empty. Fit scene size to view size
     VAbstractTool::NewSceneRect(sceneDraw, ui->view);
     VAbstractTool::NewSceneRect(sceneDetails, ui->view);
@@ -2372,19 +2392,6 @@ void MainWindow::LoadPattern(const QString &fileName)
         ZoomFirstShow();
 
         ui->actionDraw->setChecked(true);
-
-        qCDebug(vMainWindow)<<"Loking file";
-        lock = new QLockFile(curFile+".lock");
-        lock->setStaleLockTime(0);
-        if (lock->tryLock())
-        {
-            qCDebug(vMainWindow) << "Log file"<<curFile<<"was locked.";
-        }
-        else
-        {
-            qCDebug(vMainWindow) << "Failed to lock" << curFile;
-            qCDebug(vMainWindow) << "Error type:"<<lock->error();
-        }
     }
 }
 
