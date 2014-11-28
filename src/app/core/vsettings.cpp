@@ -29,6 +29,8 @@
 #include "vsettings.h"
 
 #include <QDir>
+#include <QDebug>
+#include <QLocale>
 
 const QString VSettings::SettingConfigurationOsSeparator      = QStringLiteral("configuration/osSeparator");
 const QString VSettings::SettingConfigurationAutosaveState    = QStringLiteral("configuration/autosave/state");

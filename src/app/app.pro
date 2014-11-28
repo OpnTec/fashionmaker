@@ -107,7 +107,7 @@ TRANSLATIONS += share/translations/valentina.ts \
                 share/translations/valentina_nl_NL.ts
 
 # Set using ccache. Function enable_ccache() defined in Valentina.pri.
-$$enable_ccache()
+#$$enable_ccache()
 
 # Set precompiled headers. Function set_PCH() defined in Valentina.pri.
 $$set_PCH()
@@ -312,6 +312,7 @@ unix{
 
     qmuparser.path = $$FRAMEWORKS_DIR
     qmuparser.files = $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/
+    qmuparser.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
     vpropertyexplorer.path = $$FRAMEWORKS_DIR
     vpropertyexplorer.files = $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/
 
@@ -391,6 +392,7 @@ CONFIG(release, debug|release){
         QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
     }
 }
+
 
 
 macx{

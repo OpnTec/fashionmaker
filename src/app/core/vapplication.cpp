@@ -48,6 +48,8 @@
 #include <QStandardPaths>
 #include <QMessageBox>
 #include <QLoggingCategory>
+#include <QThread>
+#include <QDateTime>
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 
