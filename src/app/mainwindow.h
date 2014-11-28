@@ -242,7 +242,6 @@ private:
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
     QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
-    void               OpenPattern(const QString &filePath);
     QComboBox          *SetGradationList(const QString &label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
     /**
@@ -257,7 +256,7 @@ private:
 
     void               AddDocks();
     void               PropertyBrowser();
-    void               OpenNewValentina(const QString &fileName = QString())const;
+    bool               OpenNewValentina(const QString &fileName = QString())const;
     void               FileClosedCorrect();
     QStringList        GetUnlokedRestoreFileList()const;
 };

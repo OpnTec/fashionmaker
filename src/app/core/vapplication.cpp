@@ -98,31 +98,31 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                         .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Warning);
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.exec();
                 break;
             case QtCriticalMsg:
                 debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                         .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Critical);
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.exec();
                 break;
             case QtFatalMsg:
                 debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                         .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Critical);
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.exec();
                 break;
             default:
                 break;
         }
 
         (*qApp->LogFile()) << debugdate <<  endl;
+
+        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+        {
+            messageBox.setInformativeText(msg);
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.setWindowModality(Qt::ApplicationModal);
+            messageBox.setModal(true);
+            messageBox.exec();
+        }
 
         if (QtFatalMsg == type)
         {

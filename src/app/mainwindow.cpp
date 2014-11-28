@@ -764,7 +764,11 @@ void MainWindow::OpenRecentFile()
     QAction *action = qobject_cast<QAction *>(sender());
     if (action)
     {
-        OpenPattern(action->data().toString());
+        const QString filePath = action->data().toString();
+        if (filePath.isEmpty() == false)
+        {
+            LoadPattern(filePath);
+        }
     }
 }
 
@@ -1406,7 +1410,7 @@ void MainWindow::Open()
     }
     qCDebug(vMainWindow)<<"Run QFileDialog::getOpenFileName: dir ="<<dir<<".";
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
-    OpenPattern(filePath);
+    LoadPattern(filePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2157,6 +2161,7 @@ void MainWindow::CreateMenus()
     AddDocks();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddDocks()
 {
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
@@ -2176,12 +2181,14 @@ void MainWindow::PropertyBrowser()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::OpenNewValentina(const QString &fileName) const
+bool MainWindow::OpenNewValentina(const QString &fileName) const
 {
     if (this->isWindowModified() || curFile.isEmpty() == false)
     {
         VApplication::NewValentina(fileName);
+        return true;
     }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2293,7 +2300,17 @@ void MainWindow::LoadPattern(const QString &fileName)
     qCDebug(vMainWindow)<<"Loading new file"<<fileName<<".";
 
     //We have unsaved changes or load more then one file per time
-    OpenNewValentina(fileName);
+    if (OpenNewValentina(fileName))
+    {
+        return;
+    }
+
+    if (fileName.isEmpty())
+    {
+        qCDebug(vMainWindow) << "Got empty file.";
+        Clear();
+        return;
+    }
 
     qCDebug(vMainWindow)<<"Loking file";
     lock = new QLockFile(fileName+".lock");
@@ -2525,22 +2542,6 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
         }
     }
     return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::OpenPattern(const QString &filePath)
-{
-    if (filePath.isEmpty() == false && filePath != curFile)
-    {
-        if (curFile.isEmpty() && this->isWindowModified() == false)
-        {
-            LoadPattern(filePath);
-        }
-        else
-        {
-            VApplication::NewValentina(filePath);
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
