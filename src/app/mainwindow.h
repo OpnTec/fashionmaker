@@ -204,6 +204,7 @@ private:
     QComboBox          *gradationHeights;
     QComboBox          *gradationSizes;
     VToolOptionsPropertyBrowser *toolOptions;
+    QLockFile          *lock;
 
     void               ToolBarOption();
     void               ToolBarDraws();
@@ -258,6 +259,7 @@ private:
     void               PropertyBrowser();
     void               OpenNewValentina(const QString &fileName = QString())const;
     void               FileClosedCorrect();
+    QStringList        GetUnlokedRestoreFileList()const;
 };
 
 #endif // MAINWINDOW_H

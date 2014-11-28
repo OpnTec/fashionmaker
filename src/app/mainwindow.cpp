@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
-      gradationSizes(nullptr), toolOptions(nullptr)
+      gradationSizes(nullptr), toolOptions(nullptr), lock(nullptr)
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -1436,6 +1436,7 @@ void MainWindow::Clear()
 {
     qCDebug(vMainWindow)<<"Reseting main window";
 
+    delete lock; // Unlock pattern file
     ui->actionDetails->setChecked(false);
     ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
@@ -2273,6 +2274,7 @@ MainWindow::~MainWindow()
 {
     CancelTool();
 
+    delete lock; // Unlock pattern file
     delete pattern;
     delete doc;
     delete sceneDetails;
@@ -2370,13 +2372,57 @@ void MainWindow::LoadPattern(const QString &fileName)
         ZoomFirstShow();
 
         ui->actionDraw->setChecked(true);
+
+        qCDebug(vMainWindow)<<"Loking file";
+        lock = new QLockFile(curFile+".lock");
+        lock->setStaleLockTime(0);
+        if (lock->tryLock())
+        {
+            qCDebug(vMainWindow) << "Log file"<<curFile<<"was locked.";
+        }
+        else
+        {
+            qCDebug(vMainWindow) << "Failed to lock" << curFile;
+            qCDebug(vMainWindow) << "Error type:"<<lock->error();
+        }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList MainWindow::GetUnlokedRestoreFileList() const
+{
+    QStringList restoreFiles;
+    QStringList files = qApp->getSettings()->GetRestoreFileList();
+    if (files.size() > 0)
+    {
+        for (int i = 0; i < files.size(); ++i)
+        {
+            // Seeking file that realy need reopen
+            QLockFile *lock = new QLockFile(files.at(i)+".lock");
+            lock->setStaleLockTime(0);
+            if (lock->tryLock())
+            {
+                restoreFiles.append(files.at(i));
+            }
+            delete lock;
+        }
+
+        // Clearing list after filtering
+        for (int i = 0; i < restoreFiles.size(); ++i)
+        {
+            files.removeAll(restoreFiles.at(i));
+        }
+
+        qApp->getSettings()->SetRestoreFileList(files);
+
+    }
+    return restoreFiles;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 {
-    QStringList files = qApp->getSettings()->GetRestoreFileList();
+    const QStringList files = GetUnlokedRestoreFileList();
     if (files.size() > 0)
     {
         qCDebug(vMainWindow)<<"Reopen files after crash.";
@@ -2390,8 +2436,6 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                 restoreFiles.append(files.at(i));
             }
         }
-        files.clear();
-        qApp->getSettings()->SetRestoreFileList(files);
 
         if (restoreFiles.size() > 0)
         {
