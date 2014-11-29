@@ -49,6 +49,7 @@
 #include <QMessageBox>
 #include <QLoggingCategory>
 #include <QLockFile>
+#include <QtXmlPatterns>
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 
@@ -2089,6 +2090,9 @@ void VApplication::StartLogging()
     CreateLogDir();
     BeginLogging();
     ClearOldLogs();
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    ClearOldReports();
+#endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2098,6 +2102,34 @@ QTextStream *VApplication::LogFile()
 }
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::ClearOldReports() const
+{
+    const QString reportsDir = QString("%1/reports").arg(qApp->applicationDirPath());
+    QDir reports(reportsDir);
+    if (reports.exists())
+    {
+        QStringList filters{"*.log", "*.RPT"};
+        QDir logsDir(reportsDir);
+        logsDir.setNameFilters(filters);
+        logsDir.setCurrent(reportsDir);
+
+        const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
+        if (allFiles.isEmpty() == false)
+        {
+            const QDateTime now = QDateTime::currentDateTime();
+            for (int i = 0; i < allFiles.size(); ++i)
+            {
+                QFileInfo info(allFiles.at(i));
+                if (info.created().daysTo(now) > 30)
+                {
+                    QFile(allFiles.at(i)).remove();
+                }
+            }
+        }
+    }
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 // Catch exception and create report. Use if program build with Mingw compiler.
 // See more about catcher https://github.com/jrfonseca/drmingw/blob/master/README.md

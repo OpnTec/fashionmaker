@@ -107,8 +107,10 @@ public:
     static QStringList LabelLanguages();
     QString            STDescription(const QString &id)const;
     static bool        SafeCopy(const QString &source, const QString &destination, QString &error);
+
     void               StartLogging();
     QTextStream       *LogFile();
+
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static void        DrMingw();
@@ -180,6 +182,7 @@ private:
     void               CollectReport(const QString &reportName) const;
     void               SendReport(const QString &reportName) const;
     QString            ReadFileForSending(QFile &file)const;
+    void               ClearOldReports()const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 
     QString            LogDirPath()const;
