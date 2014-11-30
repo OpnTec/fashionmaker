@@ -193,10 +193,14 @@ QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &
 QPointF VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect)
 {
     QRectF rect = scRect;
+    if (rect.isValid() == false)
+    {
+        rect = QRectF(0, 0, 1200, 700);
+    }
     if (rect.contains(firstPoint) == false)
     {
-        // If point outside of scene rect use the biggest rect that can be.
-        QRectF rectangle(INT_MIN, INT_MIN, INT_MAX, INT_MAX);
+        // If point outside of scene rect create one around point and unite two rects.
+        QRectF rectangle(firstPoint.x()-rect.width()/2, firstPoint.y()-rect.height()/2, rect.width(), rect.height());
         rect = rect.united(rectangle);
     }
     const qreal diagonal = qSqrt(pow(rect.height(), 2) + pow(rect.width(), 2));
