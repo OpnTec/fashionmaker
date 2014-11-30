@@ -64,8 +64,8 @@ defineReplace(set_PCH){
 }
 
 defineReplace(enable_ccache){
-    # ccache support only Unix systems, except MacOS X.
-    unix:!macx{
+    # ccache support only Unix systems.
+    unix:{
         # This need for turn on ccache.
         *-g++{
             QMAKE_CC = ccache gcc
