@@ -107,9 +107,14 @@ TRANSLATIONS += share/translations/valentina.ts \
                 share/translations/valentina_nl_NL.ts
 
 # Set using ccache. Function enable_ccache() defined in Valentina.pri.
-!macx {
-  $$enable_ccache() #enabling ccache causes errors when using osx
+macx {
+    CONFIG(debug, debug|release){
+        $$enable_ccache()# Use only in debug mode on Mac
+    }
+} else {
+    $$enable_ccache()
 }
+
 # Set precompiled headers. Function set_PCH() defined in Valentina.pri.
 $$set_PCH()
 
