@@ -2131,6 +2131,63 @@ void VApplication::ClearOldReports() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VApplication::GatherLogs() const
+{
+    QTextStream *out = nullptr;
+    QFile *log = new QFile(QString("%1/valentina.log").arg(LogDirPath()));
+    if (log->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+    {
+        out = new QTextStream(log);
+
+        QStringList filters{"*.log"};
+        QDir logsDir(LogDirPath());
+        logsDir.setNameFilters(filters);
+        logsDir.setCurrent(LogDirPath());
+
+        const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
+        if (allFiles.isEmpty() == false)
+        {
+            for (int i = 0; i < allFiles.size(); ++i)
+            {
+                QFileInfo info(allFiles.at(i));
+                if (info.fileName() == "valentina.log")
+                {
+                    continue;
+                }
+                QLockFile *logLock = new QLockFile(info.absoluteFilePath()+".lock");
+                logLock->setStaleLockTime(0);
+                if (logLock->tryLock())
+                {
+                    *out <<"--------------------------" << endl;
+                    QFile logFile(info.absoluteFilePath());
+                    if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))
+                    {
+                        QTextStream in(&logFile);
+                        while (!in.atEnd())
+                        {
+                            *out << in.readLine() << endl;
+                        }
+                        logFile.close();
+                    }
+                    else
+                    {
+                        *out << "Log file error:" + logFile.errorString() << endl;
+                    }
+                }
+                delete logLock;
+            }
+        }
+        else
+        {
+            *out << "Could not find logs.";
+        }
+        log->close();
+    }
+    delete out;
+    delete log;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // Catch exception and create report. Use if program build with Mingw compiler.
 // See more about catcher https://github.com/jrfonseca/drmingw/blob/master/README.md
 void VApplication::DrMingw()
@@ -2188,7 +2245,8 @@ void VApplication::CollectReport(const QString &reportName) const
     reportFile.remove(); // Clear after yourself
 
     filename = QString("%1/reports/log-%2.log").arg(qApp->applicationDirPath()).arg(timestamp);
-    QFile logFile(LogPath());
+    GatherLogs();
+    QFile logFile(QString("%1/valentina.log").arg(LogDirPath()));
     logFile.copy(filename); // Collect log
 }
 
@@ -2248,7 +2306,8 @@ void VApplication::SendReport(const QString &reportName) const
     content.append(QString("\r\n-------------------------------\r\n"));
     content.append(QString("Log:")+"\r\n");
 
-    QFile logFile(LogPath());
+    GatherLogs();
+    QFile logFile(QString("%1/valentina.log").arg(LogDirPath()));
     if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         content.append(ReadFileForSending(logFile));

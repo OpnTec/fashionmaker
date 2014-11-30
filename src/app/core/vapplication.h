@@ -183,6 +183,7 @@ private:
     void               SendReport(const QString &reportName) const;
     QString            ReadFileForSending(QFile &file)const;
     void               ClearOldReports()const;
+    void               GatherLogs()const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 
     QString            LogDirPath()const;
