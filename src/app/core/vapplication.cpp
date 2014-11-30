@@ -48,6 +48,8 @@
 #include <QStandardPaths>
 #include <QMessageBox>
 #include <QLoggingCategory>
+#include <QThread>
+#include <QDateTime>
 #include <QLockFile>
 #include <QtXmlPatterns>
 
