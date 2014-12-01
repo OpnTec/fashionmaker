@@ -58,5 +58,8 @@
         <file alias="16x16/actions/edit-delete.png">icons/win.icon.theme/16x16/actions/edit-delete.png</file>
         <file alias="24x24/actions/edit-delete.png">icons/win.icon.theme/24x24/actions/edit-delete.png</file>
         <file alias="32x32/actions/edit-delete.png">icons/win.icon.theme/32x32/actions/edit-delete.png</file>
+        <file alias="16x16/actions/help-contents.png">icons/win.icon.theme/16x16/actions/help-contents.png</file>
+        <file alias="24x24/actions/help-contents.png">icons/win.icon.theme/24x24/actions/help-contents.png</file>
+        <file alias="32x32/actions/help-contents.png">icons/win.icon.theme/32x32/actions/help-contents.png</file>
     </qresource>
 </RCC>

@@ -779,6 +779,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionOnlineHelp"/>
     <addaction name="actionRepotBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
@@ -1259,6 +1260,17 @@
   <action name="actionCloseWindow">
    <property name="text">
     <string>Close window</string>
+   </property>
+  </action>
+  <action name="actionOnlineHelp">
+   <property name="icon">
+    <iconset theme="help-contents"/>
+   </property>
+   <property name="text">
+    <string>Online help</string>
+   </property>
+   <property name="toolTip">
+    <string>Show online help</string>
    </property>
   </action>
  </widget>

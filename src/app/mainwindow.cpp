@@ -1434,6 +1434,13 @@ void MainWindow::RepotBug()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::OnlineHelp()
+{
+    qCDebug(vMainWindow)<<"Showing online help";
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/Content"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -2212,6 +2219,7 @@ void MainWindow::CreateActions()
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionRepotBug, &QAction::triggered, this, &MainWindow::RepotBug);
+    connect(ui->actionOnlineHelp, &QAction::triggered, this, &MainWindow::OnlineHelp);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
