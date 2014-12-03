@@ -1,11 +1,14 @@
+# ADD TO EACH PATH $$PWD VARIABLE!!!!!!
+# This need for corect working file translations.pro
+
 HEADERS += \
-    core/vapplication.h \
-    core/vtranslation.h \
-    core/undoevent.h \
-    core/vsettings.h
+    $$PWD/vapplication.h \
+    $$PWD/vtranslation.h \
+    $$PWD/undoevent.h \
+    $$PWD/vsettings.h
 
 SOURCES += \
-    core/vapplication.cpp \
-    core/vtranslation.cpp \
-    core/undoevent.cpp \
-    core/vsettings.cpp
+    $$PWD/vapplication.cpp \
+    $$PWD/vtranslation.cpp \
+    $$PWD/undoevent.cpp \
+    $$PWD/vsettings.cpp

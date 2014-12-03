@@ -1,17 +1,20 @@
+# ADD TO EACH PATH $$PWD VARIABLE!!!!!!
+# This need for corect working file translations.pro
+
 HEADERS += \
-    exception/vexceptionobjecterror.h \
-    exception/vexceptionemptyparameter.h \
-    exception/vexceptionconversionerror.h \
-    exception/vexceptionbadid.h \
-    exception/vexception.h \
-    exception/vexceptionwrongid.h \
-    exception/vexceptionundo.h
+    $$PWD/vexceptionobjecterror.h \
+    $$PWD/vexceptionemptyparameter.h \
+    $$PWD/vexceptionconversionerror.h \
+    $$PWD/vexceptionbadid.h \
+    $$PWD/vexception.h \
+    $$PWD/vexceptionwrongid.h \
+    $$PWD/vexceptionundo.h
 
 SOURCES += \
-    exception/vexceptionobjecterror.cpp \
-    exception/vexceptionemptyparameter.cpp \
-    exception/vexceptionconversionerror.cpp \
-    exception/vexceptionbadid.cpp \
-    exception/vexception.cpp \
-    exception/vexceptionwrongid.cpp \
-    exception/vexceptionundo.cpp
+    $$PWD/vexceptionobjecterror.cpp \
+    $$PWD/vexceptionemptyparameter.cpp \
+    $$PWD/vexceptionconversionerror.cpp \
+    $$PWD/vexceptionbadid.cpp \
+    $$PWD/vexception.cpp \
+    $$PWD/vexceptionwrongid.cpp \
+    $$PWD/vexceptionundo.cpp

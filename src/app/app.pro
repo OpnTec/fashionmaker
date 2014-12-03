@@ -41,41 +41,10 @@ RCC_DIR = rcc
 UI_DIR = uic
 
 # Suport subdirectories. Just better project code tree.
-include(container/container.pri)
-include(dialogs/dialogs.pri)
-include(exception/exception.pri)
-include(geometry/geometry.pri)
-include(tools/tools.pri)
-include(widgets/widgets.pri)
-include(xml/xml.pri)
-include(undocommands/undocommands.pri)
-include(visualization/visualization.pri)
-include(core/core.pri)
+include(app.pri)
 
 # This include path help promoute VMainGraphicsView on main window. Without it compiler can't find path to custom view
 INCLUDEPATH += "$${PWD}/widgets"
-
-# Some source files
-SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-        tablewindow.cpp \
-        stable.cpp \
-        version.cpp \
-        options.cpp
-
-# Some header files
-HEADERS  += \
-        mainwindow.h \
-        options.h \
-        tablewindow.h \
-        stable.h \
-        version.h
-
-# Main forms
-FORMS    += \
-        mainwindow.ui \
-        tablewindow.ui
 
 # Resource files. This files will be included in binary.
 RESOURCES += \
@@ -89,22 +58,6 @@ RESOURCES += \
 OTHER_FILES += \
     share/resources/valentina.rc \ # For Windows system.
     share/resources/icon/64x64/icon64x64.ico # Valentina's logo.
-
-# Add here path to new translation file with name "valentina_*_*.ts" if you want to add new language.
-# Same paths in variable INSTALL_TRANSLATIONS.
-
-# File valentina.ts we use in transifex.com. It is empty translation file only with english inside. transifex.com use
-# this file like base for new language. Don't add path to valentina.ts to INSTALL_TRANSLATIONS variable.
-# When adding a translation here, also add it in the macx part.
-TRANSLATIONS += share/translations/valentina.ts \
-                share/translations/valentina_ru_RU.ts \
-                share/translations/valentina_uk_UA.ts \
-                share/translations/valentina_de_DE.ts \
-                share/translations/valentina_cs_CZ.ts \
-                share/translations/valentina_he_IL.ts \
-                share/translations/valentina_fr_FR.ts \
-                share/translations/valentina_it_IT.ts \
-                share/translations/valentina_nl_NL.ts
 
 # Set using ccache. Function enable_ccache() defined in Valentina.pri.
 macx {
@@ -190,17 +143,20 @@ win32:RC_FILE = share/resources/valentina.rc
 # Keep path to all files with standard measurements we support right now
 INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
 
+TRANSLATIONS_PATH = ../../share/translations
+
 # Add to this variable all translation files that you want install with program.
-# For generation *.qm file first you need create *.ts. See section TRANSLATIONS.
+# For generation *.qm file first you need create *.ts.
+# See section TRANSLATIONS in file ../../share/translations/translations.pro.
 INSTALL_TRANSLATIONS += \
-    share/translations/valentina_ru_RU.qm \
-    share/translations/valentina_uk_UA.qm \
-    share/translations/valentina_de_DE.qm \
-    share/translations/valentina_cs_CZ.qm \
-    share/translations/valentina_he_IL.qm \
-    share/translations/valentina_fr_FR.qm \
-    share/translations/valentina_it_IT.qm \
-    share/translations/valentina_nl_NL.qm
+    $${TRANSLATIONS_PATH}/valentina_ru_RU.qm \
+    $${TRANSLATIONS_PATH}/valentina_uk_UA.qm \
+    $${TRANSLATIONS_PATH}/valentina_de_DE.qm \
+    $${TRANSLATIONS_PATH}/valentina_cs_CZ.qm \
+    $${TRANSLATIONS_PATH}/valentina_he_IL.qm \
+    $${TRANSLATIONS_PATH}/valentina_fr_FR.qm \
+    $${TRANSLATIONS_PATH}/valentina_it_IT.qm \
+    $${TRANSLATIONS_PATH}/valentina_nl_NL.qm
 
 # Set "make install" command for Unix-like systems.
 unix{
@@ -252,66 +208,66 @@ unix{
         target.path = $$PREFIX/
 
         # Copy in bundle translation files.
-        exists(share/translations/valentina_ru_RU.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_ru_RU.qm){
             TRANSLATION_ru_RU.files += \
-                share/translations/valentina_ru_RU.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_ru_RU.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_ru_RU.path = "$$RESOURCES_DIR/translations/ru_RU.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_ru_RU
         }
 
-        exists(share/translations/valentina_uk_UA.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_uk_UA.qm){
             TRANSLATION_uk_UA.files += \
-                share/translations/valentina_uk_UA.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_uk_UA.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_uk_UA.path = "$$RESOURCES_DIR/translations/uk_UA.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_uk_UA
         }
 
-        exists(share/translations/valentina_de_DE.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_de_DE.qm){
             TRANSLATION_de_DE.files += \
-                share/translations/valentina_de_DE.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_de_DE.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_de_DE.path = "$$RESOURCES_DIR/translations/de_DE.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_de_DE
         }
 
-        exists(share/translations/valentina_cs_CZ.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_cs_CZ.qm){
             TRANSLATION_cs_CZ.files += \
-                share/translations/valentina_cs_CZ.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_cs_CZ.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_cs_CZ.path = "$$RESOURCES_DIR/translations/cs_CZ.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_cs_CZ
         }
 
-        exists(share/translations/valentina_he_IL.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_he_IL.qm){
             TRANSLATION_he_IL.files += \
-                share/translations/valentina_he_IL.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_he_IL.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_he_IL.path = "$$RESOURCES_DIR/translations/he_IL.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_he_IL
         }
 
-        exists(share/translations/valentina_fr_FR.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_fr_FR.qm){
             TRANSLATION_fr_FR.files += \
-                share/translations/valentina_fr_FR.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_fr_FR.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_fr_FR.path = "$$RESOURCES_DIR/translations/fr_FR.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_fr_FR
         }
 
-        exists(share/translations/valentina_it_IT.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_it_IT.qm){
             TRANSLATION_it_IT.files += \
-                share/translations/valentina_it_IT.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_it_IT.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_it_IT.path = "$$RESOURCES_DIR/translations/it_IT.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_it_IT
         }
 
-        exists(share/translations/valentina_nl_NL.qm){
+        exists($${TRANSLATIONS_PATH}/valentina_nl_NL.qm){
             TRANSLATION_nl_NL.files += \
-                share/translations/valentina_nl_NL.qm \
-                share/translations/Localizable.strings
+                $${TRANSLATIONS_PATH}/valentina_nl_NL.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
         }
@@ -339,12 +295,11 @@ unix{
 }
 
 # Run generation *.qm file for available *.ts files each time you run qmake.
-!isEmpty(TRANSLATIONS): {
-    for(_translation_name, TRANSLATIONS) {
-      _translation_name_qm = $$section(_translation_name,".", 0, 0).qm
+for(_translation_name, INSTALL_TRANSLATIONS) {
+  _translation_name_qm = $$basename(_translation_name)
+  _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
 
-      system($$shell_path($$[QT_INSTALL_BINS]/lrelease) $$shell_path($${PWD}/$$_translation_name) -qm $$shell_path($${PWD}/$$_translation_name_qm))
-    }
+  system($$shell_path($$[QT_INSTALL_BINS]/lrelease) -compress -removeidentical -nounfinished $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
 }
 
 for(DIR, INSTALL_TRANSLATIONS) {

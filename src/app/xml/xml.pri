@@ -1,15 +1,18 @@
+# ADD TO EACH PATH $$PWD VARIABLE!!!!!!
+# This need for corect working file translations.pro
+
 HEADERS += \
-    xml/vtoolrecord.h \
-    xml/vdomdocument.h \
-    xml/vpattern.h \
-    xml/vstandardmeasurements.h \
-    xml/vindividualmeasurements.h \
-    xml/vabstractmeasurements.h
+    $$PWD/vtoolrecord.h \
+    $$PWD/vdomdocument.h \
+    $$PWD/vpattern.h \
+    $$PWD/vstandardmeasurements.h \
+    $$PWD/vindividualmeasurements.h \
+    $$PWD/vabstractmeasurements.h
 
 SOURCES += \
-    xml/vtoolrecord.cpp \
-    xml/vdomdocument.cpp \
-    xml/vpattern.cpp \
-    xml/vstandardmeasurements.cpp \
-    xml/vindividualmeasurements.cpp \
-    xml/vabstractmeasurements.cpp
+    $$PWD/vtoolrecord.cpp \
+    $$PWD/vdomdocument.cpp \
+    $$PWD/vpattern.cpp \
+    $$PWD/vstandardmeasurements.cpp \
+    $$PWD/vindividualmeasurements.cpp \
+    $$PWD/vabstractmeasurements.cpp

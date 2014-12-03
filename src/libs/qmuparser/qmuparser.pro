@@ -33,29 +33,7 @@ MOC_DIR = moc
 # objecs files
 OBJECTS_DIR = obj
 
-SOURCES += \
-    qmuparser.cpp \
-    qmuparsertokenreader.cpp \
-    qmuparsererror.cpp \
-    qmuparsercallback.cpp \
-    qmuparserbytecode.cpp \
-    qmuparserbase.cpp \
-    qmuparsertest.cpp \
-    stable.cpp
-
-HEADERS += \
-    qmuparser.h\
-    qmuparser_global.h \
-    qmuparsertokenreader.h \
-    qmuparsertoken.h \
-    qmuparserfixes.h \
-    qmuparsererror.h \
-    qmuparserdef.h \
-    qmuparsercallback.h \
-    qmuparserbytecode.h \
-    qmuparserbase.h \
-    qmuparsertest.h \
-    stable.h
+include(qmuparser.pri)
 
 VERSION = 2.2.4
 
