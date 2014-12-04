@@ -535,8 +535,8 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             label->setText(tr("Error"));
             flag = false;
             ChangeColor(labelEditFormula, Qt::red);
-            emit ToolTip("Parser error: "+e.GetMsg());
-            label->setToolTip("Parser error: "+e.GetMsg());
+            emit ToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+            label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
                      << "Message:     " << e.GetMsg()  << "\n"
