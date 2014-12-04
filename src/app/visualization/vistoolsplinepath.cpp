@@ -84,11 +84,11 @@ void VisToolSplinePath::RefreshGeometry()
         }
         if (path.CountPoint() < 3)
         {
-            Visualization::toolTip = tr("<b>Curve path</b>: select three or more points");
+            Visualization::toolTip = tr("<b>Curved path</b>: select three or more points");
         }
         else
         {
-            Visualization::toolTip = tr("<b>Curve path</b>: select three or more points, "
+            Visualization::toolTip = tr("<b>Curved path</b>: select three or more points, "
                                         "<b>Enter</b> - finish creation");
         }
     }
