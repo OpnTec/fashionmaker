@@ -29,6 +29,7 @@
 #include <QVector>
 
 #include "qmuparserdef.h"
+#include "qmutranslation.h"
 
 /** @file
     @brief This file defines the error class used by the parser.
@@ -106,7 +107,7 @@ public:
 
 private:
     Q_DISABLE_COPY(QmuParserErrorMsg)
-    QVector<QString>  m_vErrMsg;  ///< A vector with the predefined error messages
+    QMap<int, QmuTranslation>  m_vErrMsg;  ///< A map with the predefined error messages
     static const self_type m_Instance;    ///< The instance pointer
 };
 
@@ -120,7 +121,7 @@ inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
 //---------------------------------------------------------------------------------------------------------------------
 inline QString QmuParserErrorMsg::operator[] ( int a_iIdx ) const
 {
-    return ( a_iIdx <  m_vErrMsg.size()  ) ? m_vErrMsg[a_iIdx] : QString();
+    return m_vErrMsg.value(a_iIdx).translate();
 }
 
 //---------------------------------------------------------------------------

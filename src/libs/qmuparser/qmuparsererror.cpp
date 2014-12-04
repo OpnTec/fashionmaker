@@ -38,56 +38,154 @@ QmuParserErrorMsg::~QmuParserErrorMsg()
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuParserErrorMsg::QmuParserErrorMsg()
-    : m_vErrMsg ( 0 )
+    : m_vErrMsg ()
 {
-    m_vErrMsg.resize ( ecCOUNT );
+    m_vErrMsg.clear();
 
-    m_vErrMsg[ecUNASSIGNABLE_TOKEN]     = "Unexpected token \"$TOK$\" found at position $POS$.";
-    m_vErrMsg[ecINTERNAL_ERROR]         = "Internal error";
-    m_vErrMsg[ecINVALID_NAME]           = "Invalid function-, variable- or constant name: \"$TOK$\".";
-    m_vErrMsg[ecINVALID_BINOP_IDENT]    = "Invalid binary operator identifier: \"$TOK$\".";
-    m_vErrMsg[ecINVALID_INFIX_IDENT]    = "Invalid infix operator identifier: \"$TOK$\".";
-    m_vErrMsg[ecINVALID_POSTFIX_IDENT]  = "Invalid postfix operator identifier: \"$TOK$\".";
-    m_vErrMsg[ecINVALID_FUN_PTR]        = "Invalid pointer to callback function.";
-    m_vErrMsg[ecEMPTY_EXPRESSION]       = "Expression is empty.";
-    m_vErrMsg[ecINVALID_VAR_PTR]        = "Invalid pointer to variable.";
-    m_vErrMsg[ecUNEXPECTED_OPERATOR]    = "Unexpected operator \"$TOK$\" found at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_EOF]         = "Unexpected end of expression at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_ARG_SEP]     = "Unexpected argument separator at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_PARENS]      = "Unexpected parenthesis \"$TOK$\" at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_FUN]         = "Unexpected function \"$TOK$\" at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_VAL]         = "Unexpected value \"$TOK$\" found at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_VAR]         = "Unexpected variable \"$TOK$\" found at position $POS$";
-    m_vErrMsg[ecUNEXPECTED_ARG]         = "Function arguments used without a function (position: $POS$)";
-    m_vErrMsg[ecMISSING_PARENS]         = "Missing parenthesis";
-    m_vErrMsg[ecTOO_MANY_PARAMS]        = "Too many parameters for function \"$TOK$\" at expression position $POS$";
-    m_vErrMsg[ecTOO_FEW_PARAMS]         = "Too few parameters for function \"$TOK$\" at expression position $POS$";
-    m_vErrMsg[ecDIV_BY_ZERO]            = "Divide by zero";
-    m_vErrMsg[ecDOMAIN_ERROR]           = "Domain error";
-    m_vErrMsg[ecNAME_CONFLICT]          = "Name conflict";
-    m_vErrMsg[ecOPT_PRI]                = "Invalid value for operator priority (must be greater or equal to zero).";
-    m_vErrMsg[ecBUILTIN_OVERLOAD]       = "user defined binary operator \"$TOK$\" conflicts with a built in operator.";
-    m_vErrMsg[ecUNEXPECTED_STR]         = "Unexpected string token found at position $POS$.";
-    m_vErrMsg[ecUNTERMINATED_STRING]    = "Unterminated string starting at position $POS$.";
-    m_vErrMsg[ecSTRING_EXPECTED]        = "String function called with a non string type of argument.";
-    m_vErrMsg[ecVAL_EXPECTED]           = "String value used where a numerical argument is expected.";
-    m_vErrMsg[ecOPRT_TYPE_CONFLICT]     = "No suitable overload for operator \"$TOK$\" at position $POS$.";
-    m_vErrMsg[ecSTR_RESULT]             = "Function result is a string.";
-    m_vErrMsg[ecGENERIC]                = "Parser error.";
-    m_vErrMsg[ecLOCALE]                 = "Decimal separator is identic to function argument separator.";
-    m_vErrMsg[ecUNEXPECTED_CONDITIONAL] = "The \"$TOK$\" operator must be preceeded by a closing bracket.";
-    m_vErrMsg[ecMISSING_ELSE_CLAUSE]    = "If-then-else operator is missing an else clause";
-    m_vErrMsg[ecMISPLACED_COLON]        = "Misplaced colon at position $POS$";
-
-#if defined(_DEBUG)
-    for ( int i = 0; i < ecCOUNT; ++i )
-    {
-        if ( m_vErrMsg[i].length() == false)
-        {
-            assert ( false );
-        }
-    }
-#endif
+    m_vErrMsg.insert(ecUNASSIGNABLE_TOKEN,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected token \"$TOK$\" found at position $POS$.",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecINTERNAL_ERROR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Internal error",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecINVALID_NAME,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Invalid function-, variable- or constant name: \"$TOK$\".",
+                                               "Math parser error messages. Left untouched \"$TOK$\""));
+    m_vErrMsg.insert(ecINVALID_BINOP_IDENT,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Invalid binary operator identifier: \"$TOK$\".",
+                                               "Math parser error messages. Left untouched \"$TOK$\""));
+    m_vErrMsg.insert(ecINVALID_INFIX_IDENT,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Invalid infix operator identifier: \"$TOK$\".",
+                                               "Math parser error messages. Left untouched \"$TOK$\""));
+    m_vErrMsg.insert(ecINVALID_POSTFIX_IDENT,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Invalid postfix operator identifier: \"$TOK$\".",
+                                               "Math parser error messages. Left untouched \"$TOK$\""));
+    m_vErrMsg.insert(ecINVALID_FUN_PTR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Invalid pointer to callback function.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecEMPTY_EXPRESSION,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Expression is empty.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecINVALID_VAR_PTR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Invalid pointer to variable.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecUNEXPECTED_OPERATOR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected operator \"$TOK$\" found at position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_EOF,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected end of expression at position $POS$",
+                                               "Math parser error messages. Left untouched $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_ARG_SEP,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected argument separator at position $POS$",
+                                               "Math parser error messages. Left untouched $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_PARENS,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected parenthesis \"$TOK$\" at position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_FUN,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected function \"$TOK$\" at position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_VAL,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected value \"$TOK$\" found at position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_VAR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected variable \"$TOK$\" found at position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecUNEXPECTED_ARG,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Function arguments used without a function (position: $POS$)",
+                                               "Math parser error messages. Left untouched $POS$"));
+    m_vErrMsg.insert(ecMISSING_PARENS,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Missing parenthesis",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecTOO_MANY_PARAMS,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                              "Too many parameters for function \"$TOK$\" at expression position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecTOO_FEW_PARAMS,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Too few parameters for function \"$TOK$\" at expression position $POS$",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecDIV_BY_ZERO,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Divide by zero",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecDOMAIN_ERROR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Domain error",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecNAME_CONFLICT,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Name conflict",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecOPT_PRI,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                              "Invalid value for operator priority (must be greater or equal to zero).",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecBUILTIN_OVERLOAD,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                           "user defined binary operator \"$TOK$\" conflicts with a built in operator.",
+                                               "Math parser error messages. Left untouched \"$TOK$\""));
+    m_vErrMsg.insert(ecUNEXPECTED_STR,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unexpected string token found at position $POS$.",
+                                               "Math parser error messages. Left untouched $POS$"));
+    m_vErrMsg.insert(ecUNTERMINATED_STRING,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Unterminated string starting at position $POS$.",
+                                               "Math parser error messages. Left untouched $POS$"));
+    m_vErrMsg.insert(ecSTRING_EXPECTED,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "String function called with a non string type of argument.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecVAL_EXPECTED,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "String value used where a numerical argument is expected.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecOPRT_TYPE_CONFLICT,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "No suitable overload for operator \"$TOK$\" at position $POS$.",
+                                               "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
+    m_vErrMsg.insert(ecSTR_RESULT,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Function result is a string.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecGENERIC,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Parser error.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecLOCALE,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Decimal separator is identic to function argument separator.",
+                                               "Math parser error messages."));
+    m_vErrMsg.insert(ecUNEXPECTED_CONDITIONAL,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "The \"$TOK$\" operator must be preceeded by a closing bracket.",
+                                               "Math parser error messages. Left untouched $TOK$"));
+    m_vErrMsg.insert(ecMISSING_ELSE_CLAUSE,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "If-then-else operator is missing an else clause",
+                                               "Math parser error messages. Do not translate operator name."));
+    m_vErrMsg.insert(ecMISPLACED_COLON,
+                     QmuTranslation::translate("QmuParserErrorMsg",
+                                               "Misplaced colon at position $POS$",
+                                               "Math parser error messages. Left untouched $POS$"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,8 +239,11 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const Q
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
+    qDebug()<<m_sMsg;
     m_sMsg.replace("$POS$", QString().setNum ( m_iPos ));
+    qDebug()<<m_sMsg;
     m_sMsg.replace("$TOK$", m_sTok );
+    qDebug()<<m_sMsg;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
