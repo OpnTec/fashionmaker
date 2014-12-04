@@ -35,7 +35,7 @@ OBJECTS_DIR = obj
 
 include(qmuparser.pri)
 
-VERSION = 2.2.4
+VERSION = 2.2.5
 
 # Set "make install" command for Unix-like systems.
 unix:!macx{
