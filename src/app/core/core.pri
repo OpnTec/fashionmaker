@@ -3,12 +3,10 @@
 
 HEADERS += \
     $$PWD/vapplication.h \
-    $$PWD/vtranslation.h \
     $$PWD/undoevent.h \
     $$PWD/vsettings.h
 
 SOURCES += \
     $$PWD/vapplication.cpp \
-    $$PWD/vtranslation.cpp \
     $$PWD/undoevent.cpp \
     $$PWD/vsettings.cpp

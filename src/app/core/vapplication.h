@@ -31,8 +31,8 @@
 
 #include <QApplication>
 #include "../options.h"
-#include "vtranslation.h"
 #include "../widgets/vmaingraphicsview.h"
+#include "../../libs/qmuparser/qmutranslation.h"
 
 class VApplication;// used in define
 class QUndoStack;
@@ -128,13 +128,13 @@ private:
     MeasurementsType   _patternType;
     qreal              _widthMainLine;
     qreal              _widthHairLine;
-    QMap<QString, VTranslation> measurements;
-    QMap<QString, VTranslation> guiTexts;
-    QMap<QString, VTranslation> descriptions;
-    QMap<QString, VTranslation> variables;
-    QMap<QString, VTranslation> functions;
-    QMap<QString, VTranslation> postfixOperators;
-    QMap<QString, VTranslation> stDescriptions;
+    QMap<QString, qmu::QmuTranslation> measurements;
+    QMap<QString, qmu::QmuTranslation> guiTexts;
+    QMap<QString, qmu::QmuTranslation> descriptions;
+    QMap<QString, qmu::QmuTranslation> variables;
+    QMap<QString, qmu::QmuTranslation> functions;
+    QMap<QString, qmu::QmuTranslation> postfixOperators;
+    QMap<QString, qmu::QmuTranslation> stDescriptions;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
     VMainGraphicsScene *currentScene;
@@ -173,8 +173,8 @@ private:
     void               CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
                                             QMap<int, QString> &numbers);
     void               BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
-    void               InitMeasurement(const QString &name, const VTranslation &m, const VTranslation &g,
-                                       const VTranslation &d);
+    void               InitMeasurement(const QString &name, const qmu::QmuTranslation &m, const qmu::QmuTranslation &g,
+                                       const qmu::QmuTranslation &d);
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static const QString GistFileName;
