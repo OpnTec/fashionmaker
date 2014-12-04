@@ -51,6 +51,7 @@ Q_DECLARE_METATYPE(QPE::Vector3D)   // todo
 
 class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 {
+    Q_OBJECT
 public:
     QVector3DProperty(const QString& name);
 
@@ -87,6 +88,8 @@ public:
     //! Returns the value of the property as a QVariant
     virtual QVariant getValue() const;
 
+private:
+    Q_DISABLE_COPY(QVector3DProperty)
 };
 
 }

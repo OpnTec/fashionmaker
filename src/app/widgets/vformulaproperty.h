@@ -35,7 +35,7 @@ class VFormula;
 
 class VFormulaProperty : public VPE::VProperty
 {
-
+    Q_OBJECT
 public:
     VFormulaProperty(const QString &name);
 

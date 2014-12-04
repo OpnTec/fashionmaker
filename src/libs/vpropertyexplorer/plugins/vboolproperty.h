@@ -29,6 +29,7 @@ namespace VPE
 //! The VBoolProperty can take two states: True or False.
 class VPROPERTYEXPLORERSHARED_EXPORT VBoolProperty : public VProperty
 {
+    Q_OBJECT
 public:
     //! Default constructor
     VBoolProperty(const QString& name);
@@ -64,6 +65,9 @@ protected:
 
     //! The (translatable) text displayed when the property is set to false (default: "False")
     static QVariant FalseText;
+
+private:
+    Q_DISABLE_COPY(VBoolProperty)
 };
 
 }

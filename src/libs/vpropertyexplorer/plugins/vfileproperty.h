@@ -32,6 +32,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VFileProperty : public VProperty
 {
+    Q_OBJECT
 public:
     VFileProperty(const QString &name);
 
@@ -93,6 +94,9 @@ public:
 
     //! Sets whether this is a file (false) or a directory (true)
     virtual void setDirectory(bool is_directory);
+
+private:
+    Q_DISABLE_COPY(VFileProperty)
 };
 
 }

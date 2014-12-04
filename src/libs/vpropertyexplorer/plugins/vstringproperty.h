@@ -31,6 +31,7 @@ namespace VPE
 //! Class for holding a string property
 class VPROPERTYEXPLORERSHARED_EXPORT VStringProperty : public VProperty
 {
+    Q_OBJECT
 public:
     VStringProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
@@ -76,6 +77,9 @@ public:
 protected:
     bool readOnly;
     int typeForParent;
+
+private:
+    Q_DISABLE_COPY(VStringProperty)
 };
 
 }

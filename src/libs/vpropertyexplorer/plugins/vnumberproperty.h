@@ -76,6 +76,9 @@ protected:
 
     static const int StandardMin;// = -1000000;
     static const int StandardMax;// = 1000000;
+
+private:
+    Q_DISABLE_COPY(VIntegerProperty)
 };
 
 
@@ -126,6 +129,9 @@ protected:
     int Precision;
 
     const static double StandardPrecision;// = 5;
+
+private:
+    Q_DISABLE_COPY(VDoubleProperty)
 };
 
 

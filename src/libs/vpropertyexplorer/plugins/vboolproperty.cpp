@@ -43,11 +43,11 @@ VBoolProperty::VBoolProperty(const QString& name) :
     // I'm not sure, how Qt handles the translations...
     if (TrueText.isNull())
     {
-        TrueText = QObject::tr("True");
+        TrueText = tr("True");
     }
     if (FalseText.isNull())
     {
-        FalseText = QObject::tr("False");
+        FalseText = tr("False");
     }
 }
 

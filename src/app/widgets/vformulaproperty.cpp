@@ -39,8 +39,8 @@ enum class ChildType : char {Invalid = 0, Value = 1, Formula = 2};
 using namespace VPE;
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormulaProperty::VFormulaProperty(const QString &name) :
-    VProperty(name, static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
+VFormulaProperty::VFormulaProperty(const QString &name)
+    : VProperty(name, static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
 {
     d_ptr->type = Property::Complex;
 

@@ -38,7 +38,7 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     // Create the tool button
     ToolButton = new QToolButton(this);
     ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
-    ToolButton->setText(tr("..."));
+    ToolButton->setText("...");
     ToolButton->setFixedWidth(20);
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
@@ -88,12 +88,7 @@ QPixmap VColorPropertyEditor::getColorPixmap(const QColor& color, unsigned int s
 
 QString VColorPropertyEditor::getColorString(const QColor& color)
 {
-    return QApplication::translate("QtPropertyExplorer", "[%1, %2, %3] (%4)", "Colors as string")
-                                 .arg(QString::number(color.red()))
-                                 .arg(QString::number(color.green()))
-                                 .arg(QString::number(color.blue()))
-                                 .arg(QString::number(color.alpha()));
-
+    return QString("[%1, %2, %3] (%4)").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha());
 }
 
 void VColorPropertyEditor::onToolButtonClicked()

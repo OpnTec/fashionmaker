@@ -28,6 +28,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VEmptyProperty : public VProperty
 {
+    Q_OBJECT
 public:
     //! Standard constructor, takes a name and a parent property as argument
     explicit VEmptyProperty(const QString& name);
@@ -65,6 +66,9 @@ public:
 protected:
     //! Protected constructor
     VEmptyProperty(VPropertyPrivate* d);
+
+private:
+    Q_DISABLE_COPY(VEmptyProperty)
 };
 
 }

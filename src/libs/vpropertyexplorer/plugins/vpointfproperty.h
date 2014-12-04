@@ -30,6 +30,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPointFProperty : public VProperty
 {
+    Q_OBJECT
 public:
     VPointFProperty(const QString& name);
 
@@ -66,6 +67,8 @@ public:
     //! Returns the value of the property as a QVariant
     virtual QVariant getValue() const;
 
+private:
+    Q_DISABLE_COPY(VPointFProperty)
 };
 
 }

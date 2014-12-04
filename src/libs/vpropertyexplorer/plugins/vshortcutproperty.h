@@ -30,6 +30,7 @@ namespace VPE
 //! This property can be used to handle key shortcuts
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutProperty : public VProperty
 {
+    Q_OBJECT
 public:
     VShortcutProperty(const QString &name);
 
@@ -65,6 +66,9 @@ public:
 
     //! Sets the value of the property
     virtual void setValue(const QVariant& value);
+
+private:
+    Q_DISABLE_COPY(VShortcutProperty)
 };
 
 }

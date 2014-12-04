@@ -95,7 +95,8 @@ protected:
     //! Function to handle newly created VPropertyWidgets
     virtual void connectPropertyFormWidget(VPropertyFormWidget* widget);
 
-
+private:
+    Q_DISABLE_COPY(VPropertyFormView)
 };
 
 }   // Namespace VPE

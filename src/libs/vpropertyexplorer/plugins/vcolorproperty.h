@@ -30,7 +30,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VColorProperty : public VProperty
 {
-
+    Q_OBJECT
 public:
     VColorProperty(const QString &name);
 
@@ -61,6 +61,8 @@ public:
     //! \return Returns the newly created property (or container, if it was not NULL)
     virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const;
 
+private:
+    Q_DISABLE_COPY(VColorProperty)
 };
 
 }
