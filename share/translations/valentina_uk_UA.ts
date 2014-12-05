@@ -497,15 +497,15 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
+        <translation>Помилка</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Радіус не може мати від&apos;ємне значення</translation>
     </message>
     <message>
         <source>Angles equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Кути однакові</translation>
     </message>
 </context>
 <context>
@@ -632,7 +632,7 @@
     </message>
     <message>
         <source>_</source>
-        <translation type="unfinished">_</translation>
+        <translation type="obsolete">_</translation>
     </message>
 </context>
 <context>
@@ -2604,6 +2604,10 @@
         <source>Curve length</source>
         <translation>Довжина кривої</translation>
     </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Помилка синтаксичного аналізу: %1</translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
@@ -3689,15 +3693,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Online help</source>
-        <translation type="unfinished"></translation>
+        <translation>Довідка в Інтернеті</translation>
     </message>
     <message>
         <source>Show online help</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати довідку</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей файл вже відкрито в іншому вікні.</translation>
     </message>
 </context>
 <context>
@@ -5898,30 +5902,202 @@ Do you want to save your changes?</source>
         <translation>дюйми</translation>
     </message>
     <message>
-        <source>True</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>False</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Property</source>
         <extracomment>The text that appears in the first column header</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Властивості</translation>
     </message>
     <message>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
 </context>
 <context>
-    <name>QtPropertyExplorer</name>
+    <name>QmuParserErrorMsg</name>
     <message>
-        <source>[%1, %2, %3] (%4)</source>
-        <comment>Colors as string</comment>
-        <translation type="unfinished"></translation>
+        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Несподіваний токен &quot;$TOK$&quot; знейдено в позиції $POS$.</translation>
+    </message>
+    <message>
+        <source>Internal error</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Внутрішня помилка</translation>
+    </message>
+    <message>
+        <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>Невірне ім&apos;я функції, змінної або константи: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>Невірний ідентифікатор бінарного оператора: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>Невірний ідентифікатор інфіксного оператора: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>Невірний ідентифікатор постфіксного оператора: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid pointer to callback function.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Невірний покажчик на функцію зворотного виклику.</translation>
+    </message>
+    <message>
+        <source>Expression is empty.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Вираз порожній.</translation>
+    </message>
+    <message>
+        <source>Invalid pointer to variable.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Невірний покажчик на змінну.</translation>
+    </message>
+    <message>
+        <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Несподіваний оператор &quot;$TOK$&quot; знайдено в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected end of expression at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Несподіваний кінець виразу в положенні $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected argument separator at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Несподіваний розділювач аргументів у позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Несподівана дужка &quot;$TOK$&quot;в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Несподівана функція &quot;$TOK$&quot;в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Несподіване значення &quot;$TOK$&quot; знайдено в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Несподівана змінна &quot;$TOK$&quot; знайдена в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Function arguments used without a function (position: $POS$)</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Аргументи функції використовуються без функції (позиція: $POS$)</translation>
+    </message>
+    <message>
+        <source>Missing parenthesis</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Відсутня дужка</translation>
+    </message>
+    <message>
+        <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Занадто багато параметрів для функції &quot;$TOK$&quot; у виразі в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Занадто мало параметрів для функції &quot;$TOK$&quot; у виразі в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>Divide by zero</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Ділення на нуль</translation>
+    </message>
+    <message>
+        <source>Domain error</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Помилка домену</translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Конфлікт імені</translation>
+    </message>
+    <message>
+        <source>Invalid value for operator priority (must be greater or equal to zero).</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Неправильне значення для визначення пріоритетів оператора (повинно бути більше або дорівнює нулю).</translation>
+    </message>
+    <message>
+        <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>назначений користувачем бінарний оператор &quot;$TOK$&quot; конфліктує з вбудованим оператором.</translation>
+    </message>
+    <message>
+        <source>Unexpected string token found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Несподіваний рядковий токен, що знаходиться в позиції $POS$.</translation>
+    </message>
+    <message>
+        <source>Unterminated string starting at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Незавершений рядок, починаючи з позиції $POS$.</translation>
+    </message>
+    <message>
+        <source>String function called with a non string type of argument.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Функція, що приймає рядковий тип, викликана з не рядковим типом аргументу.</translation>
+    </message>
+    <message>
+        <source>String value used where a numerical argument is expected.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Рядкове значення використовується там, де очікується числовий параметр.</translation>
+    </message>
+    <message>
+        <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation>Не знайдено підходящого перевантаження оператора &quot;$TOK$&quot;в позиції $POS$.</translation>
+    </message>
+    <message>
+        <source>Function result is a string.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Результат функції рядоковий.</translation>
+    </message>
+    <message>
+        <source>Parser error.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Помилка синтаксичного аналізу.</translation>
+    </message>
+    <message>
+        <source>Decimal separator is identic to function argument separator.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Десятковий роздільник ідентичний роздільнику аргументів функції.</translation>
+    </message>
+    <message>
+        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
+        <comment>Math parser error messages. Left untouched $TOK$</comment>
+        <translation type="vanished">&quot;$TOK$&quot; оператор повинен передувати закриваючій дужці.</translation>
+    </message>
+    <message>
+        <source>If-then-else operator is missing an else clause</source>
+        <comment>Math parser error messages. Do not translate operator name.</comment>
+        <translation>Для оператора If-then-else відсутній пункт else</translation>
+    </message>
+    <message>
+        <source>Misplaced colon at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Неправильне положення двокрапки в позиції $POS$</translation>
+    </message>
+    <message>
+        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>&quot;$TOK$&quot; оператор повинен передувати закриваючій дужці.</translation>
     </message>
 </context>
 <context>
@@ -6077,7 +6253,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель інструментів</translation>
     </message>
 </context>
 <context>
@@ -6330,7 +6506,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося відкрити файл схеми.</translation>
     </message>
 </context>
 <context>
@@ -6385,7 +6561,7 @@ Do you want to save your changes?</source>
     <name>VFormulaPropertyEditor</name>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
 </context>
 <context>
@@ -6400,25 +6576,36 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPE::VBoolProperty</name>
+    <message>
+        <source>True</source>
+        <translation>Вірно</translation>
+    </message>
+    <message>
+        <source>False</source>
+        <translation>Невірно</translation>
+    </message>
+</context>
+<context>
     <name>VPE::VColorPropertyEditor</name>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
     <name>VPE::VFileEditWidget</name>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Директорія</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити файл</translation>
     </message>
 </context>
 <context>
@@ -6815,12 +7002,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">&lt;b&gt;Складна крива&lt;/b&gt;: &lt;b&gt;Enter&lt;/b&gt; - завершення створення</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Curve path&lt;/b&gt;: select three or more points</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
+        <translation>&lt;b&gt;Складна крива&lt;/b&gt;: виберіть три чи більше точок</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Curve path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation>&lt;b&gt;Складна крива&lt;/b&gt;: виберіть три чи більше точок, &lt;b&gt;Enter&lt;/b&gt; - завершення створення</translation>
     </message>
 </context>
 <context>

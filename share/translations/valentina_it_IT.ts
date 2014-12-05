@@ -488,7 +488,7 @@
     </message>
     <message>
         <source>_</source>
-        <translation>_</translation>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>Bisector</source>
@@ -2386,6 +2386,10 @@
     </message>
     <message>
         <source>Curve length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5374,14 +5378,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>True</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>False</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Property</source>
         <extracomment>The text that appears in the first column header</extracomment>
         <translation type="unfinished"></translation>
@@ -5393,10 +5389,185 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>QtPropertyExplorer</name>
+    <name>QmuParserErrorMsg</name>
     <message>
-        <source>[%1, %2, %3] (%4)</source>
-        <comment>Colors as string</comment>
+        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid pointer to callback function.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expression is empty.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid pointer to variable.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected end of expression at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected argument separator at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function arguments used without a function (position: $POS$)</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing parenthesis</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Divide by zero</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Domain error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid value for operator priority (must be greater or equal to zero).</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected string token found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unterminated string starting at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>String function called with a non string type of argument.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>String value used where a numerical argument is expected.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function result is a string.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator is identic to function argument separator.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If-then-else operator is missing an else clause</source>
+        <comment>Math parser error messages. Do not translate operator name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misplaced colon at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5698,21 +5869,32 @@ Do you want to save your changes?</source>
     <name>VFormulaPropertyEditor</name>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
+    </message>
+</context>
+<context>
+    <name>VPE::VBoolProperty</name>
+    <message>
+        <source>True</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>False</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VPE::VColorPropertyEditor</name>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
     <name>VPE::VFileEditWidget</name>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Directory</source>
@@ -6082,11 +6264,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VisToolSplinePath</name>
     <message>
-        <source>&lt;b&gt;Curve path&lt;/b&gt;: select three or more points</source>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Curve path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

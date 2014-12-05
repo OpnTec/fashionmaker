@@ -177,7 +177,7 @@ QmuParserErrorMsg::QmuParserErrorMsg()
     m_vErrMsg.insert(ecUNEXPECTED_CONDITIONAL,
                      QmuTranslation::translate("QmuParserErrorMsg",
                                                "The \"$TOK$\" operator must be preceeded by a closing bracket.",
-                                               "Math parser error messages. Left untouched $TOK$"));
+                                               "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecMISSING_ELSE_CLAUSE,
                      QmuTranslation::translate("QmuParserErrorMsg",
                                                "If-then-else operator is missing an else clause",
