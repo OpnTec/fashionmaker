@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(icon);
     Q_INIT_RESOURCE(schema);
     Q_INIT_RESOURCE(theme);
+    Q_INIT_RESOURCE(flags);
 
     QT_REQUIRE_VERSION(argc, argv, "5.2.1");
 
