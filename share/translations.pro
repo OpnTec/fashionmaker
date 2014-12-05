@@ -30,4 +30,5 @@ TRANSLATIONS += translations/valentina.ts \
                 translations/valentina_he_IL.ts \
                 translations/valentina_fr_FR.ts \
                 translations/valentina_it_IT.ts \
-                translations/valentina_nl_NL.ts
+                translations/valentina_nl_NL.ts \
+                translations/valentina_id_ID.ts

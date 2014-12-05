@@ -156,7 +156,8 @@ INSTALL_TRANSLATIONS += \
     $${TRANSLATIONS_PATH}/valentina_he_IL.qm \
     $${TRANSLATIONS_PATH}/valentina_fr_FR.qm \
     $${TRANSLATIONS_PATH}/valentina_it_IT.qm \
-    $${TRANSLATIONS_PATH}/valentina_nl_NL.qm
+    $${TRANSLATIONS_PATH}/valentina_nl_NL.qm \
+    $${TRANSLATIONS_PATH}/valentina_id_ID.qm
 
 # Set "make install" command for Unix-like systems.
 unix{
@@ -270,6 +271,14 @@ unix{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_id_ID.qm){
+            TRANSLATION_id_ID.files += \
+                $${TRANSLATIONS_PATH}/valentina_id_ID.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_id_ID.path = "$$RESOURCES_DIR/translations/id_ID.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_id_ID
         }
 
     qmuparser.path = $$FRAMEWORKS_DIR

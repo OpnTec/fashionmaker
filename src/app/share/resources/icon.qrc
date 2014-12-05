@@ -61,5 +61,6 @@
         <file>icon/32x32/line_intersect_axis.png</file>
         <file>icon/32x32/arc_intersect_axis.png</file>
         <file>icon/32x32/curve_intersect_axis.png</file>
+        <file>icon/flags/Indonesia.png</file>
     </qresource>
 </RCC>
