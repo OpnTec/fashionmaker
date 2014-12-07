@@ -7,16 +7,18 @@
 
   DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
   ifeq ($(DEB_HOST_ARCH),amd64)
-    LIBPATH:= /debian/tmp/usr/lib64
+    LIBPATH:= /debian/tmp/usr/lib/x86_64-linux-gnu
+    PREFIX_LIB:= /usr/lib/x86_64-linux-gnu
   else
-	LIBPATH:= /debian/tmp/usr/lib
+    LIBPATH:= /debian/tmp/usr/lib/i386-linux-gnu
+    PREFIX_LIB:= /usr/lib/i386-linux-gnu
   endif
 
   builddir:
 	mkdir -p builddir
 	  
   builddir/Makefile: builddir
-	cd builddir && qmake PREFIX=/usr ../$(APPNAME).pro -r
+	cd builddir && qmake PREFIX=/usr PREFIX_LIB=$(PREFIX_LIB) ../$(APPNAME).pro -r
   build: build-stamp
   build-stamp: builddir/Makefile
 	dh_testdir
