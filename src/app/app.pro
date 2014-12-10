@@ -346,6 +346,14 @@ else:unix: LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvproper
 INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
+# IFC static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/ifc/$${DESTDIR}/ -lifc
+
+INCLUDEPATH += $$PWD/../libs/ifc
+DEPENDPATH += $$PWD/../libs/ifc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/ifc/$${DESTDIR}/ifc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/ifc/$${DESTDIR}/libifc.a
 
 # Strip after you link all libaries.
 CONFIG(release, debug|release){
