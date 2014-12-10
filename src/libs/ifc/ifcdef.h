@@ -31,6 +31,9 @@
 
 #include <csignal>
 
+enum class Unit : char { Mm, Cm, Inch };
+enum class MeasurementsType : char { Standard, Individual };
+
 static const quint32 null_id = 0;
 
 #define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.

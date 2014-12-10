@@ -29,7 +29,8 @@
 #ifndef VABSTRACTMEASUREMENTS_H
 #define VABSTRACTMEASUREMENTS_H
 
-#include "vdomdocument.h"
+#include "../libs/ifc/xml/vdomdocument.h"
+#include "../container/vcontainer.h"
 
 class VAbstractMeasurements : public VDomDocument
 {
@@ -42,6 +43,9 @@ public:
     static const QString AttrValue;
     static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
 protected:
+    /** @brief data container with data. */
+    VContainer     *data;
+
     void         Measurement(const QString &tag);
     virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;
 private:

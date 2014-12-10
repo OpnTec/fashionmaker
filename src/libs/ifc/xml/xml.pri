@@ -2,7 +2,9 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
-    $$PWD/vabstractconverter.h
+    $$PWD/vabstractconverter.h \
+    $$PWD/vdomdocument.h
 
 SOURCES += \
-    $$PWD/vabstractconverter.cpp
+    $$PWD/vabstractconverter.cpp \
+    $$PWD/vdomdocument.cpp

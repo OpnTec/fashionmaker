@@ -118,8 +118,6 @@ enum class Vis : unsigned char
 
 enum class Source : char { FromGui, FromFile, FromTool };
 enum class Draw : char { Calculation, Modeling };
-enum class Unit : char { Mm, Cm, Inch };
-enum class MeasurementsType : char { Standard, Individual };
 enum class NodeDetail : char { Contour, Modeling };
 enum class Contour : char { OpenContour, CloseContour };
 enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };

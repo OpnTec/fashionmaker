@@ -121,7 +121,7 @@ const QString VPattern::IncrementDescription = QStringLiteral("description");
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
                    VMainGraphicsScene *sceneDetail, QObject *parent)
-    : QObject(parent), VDomDocument(data), nameActivPP(QString()), tools(QHash<quint32, VDataTool*>()),
+    : QObject(parent), VDomDocument(), data(data), nameActivPP(QString()), tools(QHash<quint32, VDataTool*>()),
       history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), sceneDraw(sceneDraw),
       sceneDetail(sceneDetail)
 {

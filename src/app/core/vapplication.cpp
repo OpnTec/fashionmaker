@@ -2040,53 +2040,6 @@ QString VApplication::STDescription(const QString &id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::SafeCopy(const QString &source, const QString &destination, QString &error)
-{
-    bool result = false;
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-
-    QFile patternFile(destination);
-    patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    // We need here temporary file because we want restore document after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
-    {
-        if (patternFile.exists())
-        {
-            patternFile.copy(tempOfPattern.fileName());
-        }
-    }
-    if ( patternFile.exists() == false || patternFile.remove() )
-    {
-        QFile sourceFile(source);
-        if ( sourceFile.copy(patternFile.fileName()) == false )
-        {
-            error = tr("Could not copy temp file to document file");
-            tempOfPattern.copy(destination);
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
-    }
-    else
-    {
-        error = tr("Could not remove document file");
-        result = false;
-    }
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup--; // turn off check permission again
-#endif /*Q_OS_WIN32*/
-
-    return result;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VApplication::StartLogging()
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 3, 0))

@@ -29,8 +29,9 @@
 #ifndef VPATTERN_H
 #define VPATTERN_H
 
-#include "vdomdocument.h"
+#include "../libs/ifc/xml/vdomdocument.h"
 #include "vtoolrecord.h"
+#include "../container/vcontainer.h"
 
 class VDataTool;
 class VMainGraphicsScene;
@@ -232,6 +233,9 @@ protected:
     virtual void   customEvent(QEvent * event);
 private:
     Q_DISABLE_COPY(VPattern)
+
+    /** @brief data container with data. */
+    VContainer     *data;
 
     /** @brief nameActivDraw name current pattern peace. */
     QString        nameActivPP;

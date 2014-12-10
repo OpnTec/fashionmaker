@@ -2483,7 +2483,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
                     QString error;
-                    if (VApplication::SafeCopy(restoreFiles.at(i) +".autosave", restoreFiles.at(i), error))
+                    if (VDomDocument::SafeCopy(restoreFiles.at(i) +".autosave", restoreFiles.at(i), error))
                     {
                         QFile autoFile(restoreFiles.at(i) +".autosave");
                         autoFile.remove();
