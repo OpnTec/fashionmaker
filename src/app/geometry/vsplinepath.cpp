@@ -28,7 +28,7 @@
 
 #include "vsplinepath.h"
 #include "vsplinepath_p.h"
-#include "../exception/vexception.h"
+#include "../libs/ifc/exception/vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw mode)

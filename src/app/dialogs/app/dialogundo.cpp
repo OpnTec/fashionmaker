@@ -29,7 +29,7 @@
 #include "dialogundo.h"
 #include "ui_dialogundo.h"
 #include "../../core/vapplication.h"
-#include "../../exception/vexceptionundo.h"
+#include "../../libs/ifc/exception/vexceptionundo.h"
 #include <QCloseEvent>
 #include <QUndoStack>
 

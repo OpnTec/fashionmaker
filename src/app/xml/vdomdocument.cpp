@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vdomdocument.h"
-#include "../exception/vexceptionconversionerror.h"
-#include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionbadid.h"
+#include "../libs/ifc/exception/vexceptionconversionerror.h"
+#include "../libs/ifc/exception/vexceptionemptyparameter.h"
+#include "../libs/ifc/exception/vexceptionbadid.h"
 #include "../options.h"
 #include "../core/vapplication.h"
 

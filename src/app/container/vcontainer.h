@@ -32,7 +32,7 @@
 #include "variables.h"
 #include "../geometry/vdetail.h"
 #include "../geometry/vgobject.h"
-#include "../exception/vexceptionbadid.h"
+#include "../libs/ifc/exception/vexceptionbadid.h"
 #include "../geometry/vabstractcurve.h"
 
 #include <QCoreApplication>

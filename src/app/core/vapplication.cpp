@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vapplication.h"
-#include "../exception/vexceptionobjecterror.h"
-#include "../exception/vexceptionbadid.h"
-#include "../exception/vexceptionconversionerror.h"
-#include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionwrongid.h"
+#include "../libs/ifc/exception/vexceptionobjecterror.h"
+#include "../libs/ifc/exception/vexceptionbadid.h"
+#include "../libs/ifc/exception/vexceptionconversionerror.h"
+#include "../libs/ifc/exception/vexceptionemptyparameter.h"
+#include "../libs/ifc/exception/vexceptionwrongid.h"
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"

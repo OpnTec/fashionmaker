@@ -1,7 +1,6 @@
 # Suport subdirectories. Just better project code tree.
 include(container/container.pri)
 include(dialogs/dialogs.pri)
-include(exception/exception.pri)
 include(geometry/geometry.pri)
 include(tools/tools.pri)
 include(widgets/widgets.pri)

@@ -34,7 +34,7 @@
 #include "../container/calculator.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
-#include "../../exception/vexceptionundo.h"
+#include "../../libs/ifc/exception/vexceptionundo.h"
 
 qreal VDrawTool::factor = 1;
 
