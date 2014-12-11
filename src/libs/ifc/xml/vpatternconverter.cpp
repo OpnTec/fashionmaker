@@ -28,6 +28,9 @@
 
 #include "vpatternconverter.h"
 
+const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.1");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.1");
+
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
     :VAbstractConverter(fileName)
@@ -35,7 +38,35 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPatternConverter::~VPatternConverter()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::CurrentSchema()
 {
     return QStringLiteral("://schema/pattern/v0.1.1.xsd");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPatternConverter::MinVer() const
+{
+    return GetVersion(PatternMinVerStr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPatternConverter::MaxVer() const
+{
+    return GetVersion(PatternMaxVerStr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPatternConverter::MinVerStr() const
+{
+    return PatternMinVerStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPatternConverter::MaxVerStr() const
+{
+    return PatternMaxVerStr;
 }

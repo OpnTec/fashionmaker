@@ -37,6 +37,7 @@
 #include "../libs/ifc/exception/vexceptionconversionerror.h"
 #include "../libs/ifc/exception/vexceptionemptyparameter.h"
 #include "../libs/ifc/exception/vexceptionundo.h"
+#include "../libs/ifc/xml/vpatternconverter.h"
 #include "../core/undoevent.h"
 #include "../core/vsettings.h"
 #include "vstandardmeasurements.h"
@@ -146,7 +147,7 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     patternElement.appendChild(createComment("Valentina pattern format."));
 
     QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode(VAL_STR_VERSION);
+    QDomText newNodeText = createTextNode(VPatternConverter::PatternMaxVerStr);
     version.appendChild(newNodeText);
     patternElement.appendChild(version);
 
@@ -2431,13 +2432,13 @@ void VPattern::SetNotes(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetVersion() const
 {
-    return UniqueTagText(TagVersion, VAL_STR_VERSION);
+    return UniqueTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetVersion()
 {
-    setTagText(TagVersion, VAL_STR_VERSION);
+    setTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
     emit patternChanged(false);
 }
 

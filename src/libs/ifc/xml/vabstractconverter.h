@@ -36,16 +36,25 @@ class VAbstractConverter :public VDomDocument
 
 public:
     VAbstractConverter(const QString &fileName);
-    virtual ~VAbstractConverter(){}
+    virtual ~VAbstractConverter();
+
+protected:
+    int     GetVersion(const QString &version) const;
+
+    virtual int     MinVer() const =0;
+    virtual int     MaxVer() const =0;
+
+    virtual QString MinVerStr() const =0;
+    virtual QString MaxVerStr() const =0;
 
 private:
     Q_DISABLE_COPY(VAbstractConverter)
     QString fileName;
 
     QString GetVersionStr() const;
-    int     GetVersion(QString &version) const;
 
-    void    ValidateVersion(QString &version) const;
+    void    ValidateVersion(const QString &version) const;
+    void    CheckVersion(int ver) const;
 };
 
 #endif // VABSTRACTCONVERTER_H

@@ -35,8 +35,20 @@ class VPatternConverter : public VAbstractConverter
 {
 public:
     VPatternConverter(const QString &fileName);
+    virtual ~VPatternConverter();
 
     static QString CurrentSchema();
+    static const QString    PatternMaxVerStr;
+
+protected:
+    virtual int     MinVer() const;
+    virtual int     MaxVer() const;
+
+    virtual QString MinVerStr() const;
+    virtual QString MaxVerStr() const;
+private:
+    Q_DISABLE_COPY(VPatternConverter)
+    static const QString    PatternMinVerStr;
 };
 
 #endif // VPATTERNCONVERTER_H

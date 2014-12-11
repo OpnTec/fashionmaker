@@ -29,16 +29,19 @@
 #include "vabstractconverter.h"
 #include "exception/vexception.h"
 
-#include <QRegExpValidator>
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
     :VDomDocument(), fileName(fileName)
 {
     this->setXMLContent(fileName);
-    QString version = GetVersionStr();
+    const QString version = GetVersionStr();
     int ver = GetVersion(version);
+    CheckVersion(ver);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractConverter::~VAbstractConverter()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractConverter::GetVersionStr() const
@@ -69,7 +72,7 @@ QString VAbstractConverter::GetVersionStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractConverter::GetVersion(QString &version) const
+int VAbstractConverter::GetVersion(const QString &version) const
 {
     ValidateVersion(version);
 
@@ -100,13 +103,11 @@ int VAbstractConverter::GetVersion(QString &version) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::ValidateVersion(QString &version) const
+void VAbstractConverter::ValidateVersion(const QString &version) const
 {
-    int pos = 0;
     QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
-    QRegExpValidator v(rx, 0);
 
-    if (v.validate(version, pos) != QValidator::Acceptable)
+    if (rx.exactMatch(version) == false)
     {
         const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
         throw VException(errorMsg);
@@ -115,6 +116,22 @@ void VAbstractConverter::ValidateVersion(QString &version) const
     if (version == QLatin1String("0.0.0"))
     {
         const QString errorMsg(tr("Version \"0.0.0\" invalid."));
+        throw VException(errorMsg);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::CheckVersion(int ver) const
+{
+    if (ver < MinVer())
+    {
+        const QString errorMsg(tr("Invalid version. Minimum supported version is %1").arg(MinVerStr()));
+        throw VException(errorMsg);
+    }
+
+    if (ver > MaxVer())
+    {
+        const QString errorMsg(tr("Invalid version. Maximum supported version is %1").arg(MaxVerStr()));
         throw VException(errorMsg);
     }
 }
