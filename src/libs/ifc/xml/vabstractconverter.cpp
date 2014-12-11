@@ -37,8 +37,7 @@ VAbstractConverter::VAbstractConverter(const QString &fileName)
 {
     this->setXMLContent(fileName);
     QString version = GetVersionStr();
-    ValidateVersion(version);
-
+    int ver = GetVersion(version);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,19 +69,50 @@ QString VAbstractConverter::GetVersionStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::ValidateVersion(QString &versionStr) const
+int VAbstractConverter::GetVersion(QString &version) const
+{
+    ValidateVersion(version);
+
+    QStringList ver = version.split(".");
+
+    bool ok = false;
+    int major = ver.at(0).toInt(&ok);
+    if (ok == false)
+    {
+        return 0x0;
+    }
+
+    ok = false;
+    int minor = ver.at(1).toInt(&ok);
+    if (ok == false)
+    {
+        return 0x0;
+    }
+
+    ok = false;
+    int patch = ver.at(2).toInt(&ok);
+    if (ok == false)
+    {
+        return 0x0;
+    }
+
+    return (major<<16)|(minor<<8)|(patch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::ValidateVersion(QString &version) const
 {
     int pos = 0;
     QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
     QRegExpValidator v(rx, 0);
 
-    if (v.validate(versionStr, pos) != QValidator::Acceptable)
+    if (v.validate(version, pos) != QValidator::Acceptable)
     {
-        const QString errorMsg(tr("Version \"%1\" invalid.").arg(versionStr));
+        const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
         throw VException(errorMsg);
     }
 
-    if (versionStr == QLatin1String("0.0.0"))
+    if (version == QLatin1String("0.0.0"))
     {
         const QString errorMsg(tr("Version \"0.0.0\" invalid."));
         throw VException(errorMsg);
