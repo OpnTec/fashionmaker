@@ -29,12 +29,16 @@
 #include "vabstractconverter.h"
 #include "exception/vexception.h"
 
+#include <QRegExpValidator>
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
     :VDomDocument(), fileName(fileName)
 {
     this->setXMLContent(fileName);
     QString version = GetVersionStr();
+    ValidateVersion(version);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,4 +67,24 @@ QString VAbstractConverter::GetVersionStr() const
         }
     }
     return QString(QStringLiteral("0.0.0"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::ValidateVersion(QString &versionStr) const
+{
+    int pos = 0;
+    QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
+    QRegExpValidator v(rx, 0);
+
+    if (v.validate(versionStr, pos) != QValidator::Acceptable)
+    {
+        const QString errorMsg(tr("Version \"%1\" invalid.").arg(versionStr));
+        throw VException(errorMsg);
+    }
+
+    if (versionStr == QLatin1String("0.0.0"))
+    {
+        const QString errorMsg(tr("Version \"0.0.0\" invalid."));
+        throw VException(errorMsg);
+    }
 }

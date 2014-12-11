@@ -43,6 +43,7 @@ private:
     QString fileName;
 
     QString GetVersionStr() const;
+    void    ValidateVersion(QString &versionStr) const;
 };
 
 #endif // VABSTRACTCONVERTER_H
