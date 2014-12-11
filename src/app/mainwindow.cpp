@@ -2351,6 +2351,9 @@ void MainWindow::LoadPattern(const QString &fileName)
     qApp->setOpeningPattern();//Begin opening file
     try
     {
+        VPatternConverter converter(fileName);
+        converter.Convert();
+
         VDomDocument::ValidateXML(VPatternConverter::CurrentSchema, fileName);
         doc->setXMLContent(fileName);
 
