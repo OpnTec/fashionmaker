@@ -27,25 +27,22 @@
  *************************************************************************/
 
 #include "vpatternconverter.h"
+#include "exception/vexception.h"
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.1");
 const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.1");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.1.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
     :VAbstractConverter(fileName)
 {
+    QString schema = XSDSchema(ver);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::~VPatternConverter()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::CurrentSchema()
-{
-    return QStringLiteral("://schema/pattern/v0.1.1.xsd");
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 int VPatternConverter::MinVer() const
@@ -69,4 +66,22 @@ QString VPatternConverter::MinVerStr() const
 QString VPatternConverter::MaxVerStr() const
 {
     return PatternMaxVerStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPatternConverter::XSDSchema(int ver) const
+{
+    CheckVersion(ver);
+
+    switch(ver)
+    {
+        case (0x000101):
+            return CurrentSchema;
+        default:
+        {
+            const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
+            throw VException(errorMsg);
+            break;
+        }
+    }
 }

@@ -37,8 +37,8 @@ public:
     VPatternConverter(const QString &fileName);
     virtual ~VPatternConverter();
 
-    static QString CurrentSchema();
     static const QString    PatternMaxVerStr;
+    static const QString    CurrentSchema;
 
 protected:
     virtual int     MinVer() const;
@@ -46,6 +46,9 @@ protected:
 
     virtual QString MinVerStr() const;
     virtual QString MaxVerStr() const;
+
+    QString XSDSchema(int ver) const;
+
 private:
     Q_DISABLE_COPY(VPatternConverter)
     static const QString    PatternMinVerStr;

@@ -31,12 +31,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
-    :VDomDocument(), fileName(fileName)
+    :VDomDocument(), ver(0x0), fileName(fileName)
 {
     this->setXMLContent(fileName);
     const QString version = GetVersionStr();
-    int ver = GetVersion(version);
-    CheckVersion(ver);
+    ver = GetVersion(version);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
