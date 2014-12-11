@@ -44,6 +44,7 @@
 #include "undocommands/renamepp.h"
 #include "vtooloptionspropertybrowser.h"
 #include "options.h"
+#include "../libs/ifc/xml/vpatternconverter.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -2350,7 +2351,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     qApp->setOpeningPattern();//Begin opening file
     try
     {
-        VDomDocument::ValidateXML("://schema/pattern.xsd", fileName);
+        VDomDocument::ValidateXML(VPatternConverter::CurrentSchema(), fileName);
         doc->setContent(fileName);
 
         qApp->setPatternUnit(doc->MUnit());

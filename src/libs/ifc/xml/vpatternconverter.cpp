@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vabstractconverter.h
+ **  @file   vpatternconverter.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 12, 2014
+ **  @date   11 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,20 +26,16 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTCONVERTER_H
-#define VABSTRACTCONVERTER_H
+#include "vpatternconverter.h"
 
-#include "vdomdocument.h"
-
-class VAbstractConverter :public VDomDocument
+//---------------------------------------------------------------------------------------------------------------------
+VPatternConverter::VPatternConverter()
+    :VAbstractConverter()
 {
+}
 
-public:
-    VAbstractConverter();
-    virtual ~VAbstractConverter(){}
-
-private:
-    Q_DISABLE_COPY(VAbstractConverter)
-};
-
-#endif // VABSTRACTCONVERTER_H
+//---------------------------------------------------------------------------------------------------------------------
+QString VPatternConverter::CurrentSchema()
+{
+    return QStringLiteral("://schema/pattern/v0.1.1.xsd");
+}

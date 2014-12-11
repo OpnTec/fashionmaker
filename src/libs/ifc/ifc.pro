@@ -39,6 +39,10 @@ MOC_DIR = moc
 # objecs files
 OBJECTS_DIR = obj
 
+# Resource files. This files will be included in binary.
+RESOURCES += \
+    schema.qrc  # Schemas for validation xml files.
+
 # Set using ccache. Function enable_ccache() defined in Valentina.pri.
 $$enable_ccache()
 

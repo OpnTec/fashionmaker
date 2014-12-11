@@ -3,8 +3,10 @@
 
 HEADERS += \
     $$PWD/vabstractconverter.h \
-    $$PWD/vdomdocument.h
+    $$PWD/vdomdocument.h \
+    $$PWD/vpatternconverter.h
 
 SOURCES += \
     $$PWD/vabstractconverter.cpp \
-    $$PWD/vdomdocument.cpp
+    $$PWD/vdomdocument.cpp \
+    $$PWD/vpatternconverter.cpp

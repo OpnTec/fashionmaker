@@ -51,7 +51,6 @@ RESOURCES += \
     share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
     share/resources/cursor.qrc \ # Tools cursor icons.
     share/resources/theme.qrc \ # Windows theme icons.
-    share/resources/schema.qrc \ # Schemas for validation xml files.
     share/resources/measurements.qrc \ # For measurements files that we save as resource.
     share/resources/flags.qrc
 

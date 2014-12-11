@@ -28,7 +28,8 @@
 
 #include "vabstractconverter.h"
 
-
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter()
+    :VDomDocument()
 {
 }
