@@ -106,7 +106,7 @@ public:
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
-    void           setContent(const QString &fileName);
+    void           setXMLContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
     virtual bool   SaveDocument(const QString &fileName, QString &error);

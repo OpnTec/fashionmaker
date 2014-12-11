@@ -167,7 +167,7 @@ void MainWindow::ActionNewPP()
                 path = stMeasurements.tablePath();
                 qCDebug(vMainWindow)<<"Table path:"<<path;
                 VStandardMeasurements m(pattern);
-                m.setContent(path);
+                m.setXMLContent(path);
                 m.SetSize();
                 m.SetHeight();
                 m.Measurements();
@@ -201,7 +201,7 @@ void MainWindow::ActionNewPP()
                 path = indMeasurements.tablePath();
                 qCDebug(vMainWindow)<<"Table path:"<<path;
                 VIndividualMeasurements m(pattern);
-                m.setContent(path);
+                m.setXMLContent(path);
                 m.Measurements();
             }
             else
@@ -2352,7 +2352,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     try
     {
         VDomDocument::ValidateXML(VPatternConverter::CurrentSchema(), fileName);
-        doc->setContent(fileName);
+        doc->setXMLContent(fileName);
 
         qApp->setPatternUnit(doc->MUnit());
         qApp->setPatternType(doc->MType());
@@ -2369,7 +2369,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         {
             VStandardMeasurements m(pattern);
             VDomDocument::ValidateXML("://schema/standard_measurements.xsd", path);
-            m.setContent(path);
+            m.setXMLContent(path);
             if (m.MUnit() == Unit::Inch)
             {
                 QMessageBox::critical(this, tr("Wrong units."),

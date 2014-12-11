@@ -111,7 +111,7 @@ void DialogIndividualMeasurements::DialogAccepted()
     {
         VDomDocument::ValidateXML("://schema/individual_measurements.xsd", _tablePath);
         VIndividualMeasurements m(data);
-        m.setContent(_tablePath);
+        m.setXMLContent(_tablePath);
         const qint32 index = ui->comboBoxUnits->currentIndex();
         Unit unit = VDomDocument::StrToUnits(ui->comboBoxUnits->itemData(index).toString());
         m.setUnit(unit);
@@ -215,7 +215,7 @@ void DialogIndividualMeasurements::OpenTable()
         fileName.clear();
     }
     VIndividualMeasurements m(data);
-    m.setContent(fileName);
+    m.setXMLContent(fileName);
     ui->labelGivenName->setText(m.GivenName());
     ui->labelFamilyName->setText(m.FamilyName());
     ui->lineEditPathExistM->setText(fileName);

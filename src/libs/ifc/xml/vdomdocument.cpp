@@ -410,7 +410,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::setContent(const QString &fileName)
+void VDomDocument::setXMLContent(const QString &fileName)
 {
     QFile file(fileName);
     if (file.open(QIODevice::ReadOnly) == false)

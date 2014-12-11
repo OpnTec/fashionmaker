@@ -27,9 +27,40 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
+#include "exception/vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractConverter::VAbstractConverter()
-    :VDomDocument()
+VAbstractConverter::VAbstractConverter(const QString &fileName)
+    :VDomDocument(), fileName(fileName)
 {
+    this->setXMLContent(fileName);
+    QString version = GetVersionStr();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractConverter::GetVersionStr() const
+{
+    const QDomNodeList nodeList = this->elementsByTagName(TagVersion);
+    if (nodeList.isEmpty())
+    {
+        const QString errorMsg(tr("Couldn't get version information."));
+        throw VException(errorMsg);
+    }
+
+    if (nodeList.count() > 1)
+    {
+        const QString errorMsg(tr("Too many tags <%1> in file.").arg(TagVersion));
+        throw VException(errorMsg);
+    }
+
+    const QDomNode domNode = nodeList.at(0);
+    if (domNode.isNull() == false && domNode.isElement())
+    {
+        const QDomElement domElement = domNode.toElement();
+        if (domElement.isNull() == false)
+        {
+            return domElement.text();
+        }
+    }
+    return QString(QStringLiteral("0.0.0"));
 }

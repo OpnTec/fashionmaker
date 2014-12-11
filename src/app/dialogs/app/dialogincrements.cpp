@@ -64,7 +64,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         {
             VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
             m = new VIndividualMeasurements(data);
-            m->setContent(filePath);
+            m->setXMLContent(filePath);
         }
         catch (VException &e)
         {
@@ -527,7 +527,7 @@ void DialogIncrements::OpenTable()
             VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
 
             m1 = new VIndividualMeasurements(data);
-            m1->setContent(filePath);
+            m1->setXMLContent(filePath);
         }
         catch (VException &e)
         {
@@ -567,7 +567,7 @@ void DialogIncrements::OpenTable()
             VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
 
             m1 = new VStandardMeasurements(data);
-            m1->setContent(filePath);
+            m1->setXMLContent(filePath);
             Unit mUnit = m1->MUnit();
             if (qApp->patternUnit() != mUnit)
             {

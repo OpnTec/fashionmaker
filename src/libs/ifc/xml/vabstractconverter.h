@@ -35,11 +35,14 @@ class VAbstractConverter :public VDomDocument
 {
 
 public:
-    VAbstractConverter();
+    VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter(){}
 
 private:
     Q_DISABLE_COPY(VAbstractConverter)
+    QString fileName;
+
+    QString GetVersionStr() const;
 };
 
 #endif // VABSTRACTCONVERTER_H

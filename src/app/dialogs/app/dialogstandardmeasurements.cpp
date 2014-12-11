@@ -99,7 +99,7 @@ void DialogStandardMeasurements::DialogAccepted()
     {
         VDomDocument::ValidateXML("://schema/standard_measurements.xsd", _tablePath);
         VStandardMeasurements m(data);
-        m.setContent(_tablePath);
+        m.setXMLContent(_tablePath);
         qApp->setPatternUnit(m.MUnit());
     }
     catch (VException &e)
@@ -170,7 +170,7 @@ void DialogStandardMeasurements::LoadStandardTables()
         {
             VDomDocument::ValidateXML("://schema/standard_measurements.xsd", fi.absoluteFilePath());
             VStandardMeasurements m(data);
-            m.setContent(fi.absoluteFilePath());
+            m.setXMLContent(fi.absoluteFilePath());
             if (m.MUnit() == Unit::Inch)
             {
                 qCWarning(vStMeasur)<<"We do not support inches for standard table. Ignore table"

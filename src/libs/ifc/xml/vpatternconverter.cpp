@@ -29,8 +29,8 @@
 #include "vpatternconverter.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternConverter::VPatternConverter()
-    :VAbstractConverter()
+VPatternConverter::VPatternConverter(const QString &fileName)
+    :VAbstractConverter(fileName)
 {
 }
 

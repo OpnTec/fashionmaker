@@ -34,7 +34,7 @@
 class VPatternConverter : public VAbstractConverter
 {
 public:
-    VPatternConverter();
+    VPatternConverter(const QString &fileName);
 
     static QString CurrentSchema();
 };

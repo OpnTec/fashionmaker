@@ -2572,14 +2572,14 @@ void VPattern::UpdateMeasurements()
         {
             VStandardMeasurements m(data);
             ValidateXML("://schema/standard_measurements.xsd", path);
-            m.setContent(path);
+            m.setXMLContent(path);
             m.Measurements();
         }
         else
         {
             VIndividualMeasurements m(data);
             ValidateXML("://schema/individual_measurements.xsd", path);
-            m.setContent(path);
+            m.setXMLContent(path);
             m.Measurements();
         }
     }
