@@ -37,7 +37,8 @@ const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pa
 VPatternConverter::VPatternConverter(const QString &fileName)
     :VAbstractConverter(fileName)
 {
-    QString schema = XSDSchema(ver);
+    const QString schema = XSDSchema(ver);
+    ValidateXML(schema, fileName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
