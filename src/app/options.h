@@ -29,8 +29,8 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include <csignal>
 #include <QtGlobal>
+#include "../libs/ifc/ifcdef.h"
 
 #ifdef Q_OS_WIN32
 #   if defined( Q_CC_MSVC )        // MSVC USED
@@ -46,12 +46,8 @@ extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 class QString;
 class QStringList;
 
-static const quint32 null_id = 0;
-
 #define SceneSize 50000
 #define DefPointRadius 2.0//mm
-#define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
-#define NULL_ID_STR "0"
 
 extern const QString nameRegExp;
 extern const QString degreeSymbol;
@@ -122,8 +118,6 @@ enum class Vis : unsigned char
 
 enum class Source : char { FromGui, FromFile, FromTool };
 enum class Draw : char { Calculation, Modeling };
-enum class Unit : char { Mm, Cm, Inch };
-enum class MeasurementsType : char { Standard, Individual };
 enum class NodeDetail : char { Contour, Modeling };
 enum class Contour : char { OpenContour, CloseContour };
 enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
@@ -323,77 +317,5 @@ extern const QStringList builInFunctions;
 extern const QString cm_Oprt;
 extern const QString mm_Oprt;
 extern const QString in_Oprt;
-
-/*
- * This macros SCASSERT (for Stop and Continue Assert) will break into the debugger on the line of the assert and allow
- * you to continue afterwards should you choose to.
- * idea: Q_ASSERT no longer pauses debugger - http://qt-project.org/forums/viewthread/13148
- * Usefull links:
- * 1. What's the difference between __PRETTY_FUNCTION__, __FUNCTION__, __func__? -
- *    https://stackoverflow.com/questions/4384765/whats-the-difference-between-pretty-function-function-func
- *
- * 2. Windows Predefined Macros - http://msdn.microsoft.com/library/b0084kay.aspx
- *
- * 3. Windows DebugBreak function - http://msdn.microsoft.com/en-us/library/ms679297%28VS.85%29.aspx
- *
- * 4. Continue to debug after failed assertion on Linux? [C/C++] -
- * https://stackoverflow.com/questions/1721543/continue-to-debug-after-failed-assertion-on-linux-c-c
- */
-#ifndef QT_NO_DEBUG
-#ifdef Q_OS_WIN32
-#ifdef Q_CC_MSVC
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __FUNCSIG__, __FILE__, __LINE__);        \
-        DebugBreak();                                       \
-    }                                                       \
-}                                                           \
-
-#else
-
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        DebugBreak();                                       \
-    }                                                       \
-}                                                           \
-
-#endif /*Q_CC_MSVC*/
-#else
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        std::raise(SIGTRAP);                                \
-    }                                                       \
-}                                                           \
-
-#endif /* Q_OS_WIN32 */
-#else // define but disable this function if debugging is not set
-#define SCASSERT(cond) qt_noop();
-#endif /* QT_NO_DEBUG */
-
-// Detect whether the compiler supports C++11 noexcept exception specifications.
-#  if   defined(__clang__)
-#    if __has_feature(cxx_noexcept)
-#      define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
-#    endif
-#  elif defined(__GNUC__)
-#    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
-#      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
-#    endif
-#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
-#    define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
-#  else
-#    define V_NOEXCEPT_EXPR(x)
-#  endif
 
 #endif // OPTIONS_H

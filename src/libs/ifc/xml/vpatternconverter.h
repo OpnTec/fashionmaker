@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vabstractmeasurements.h
+ **  @file   vpatternconverter.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   18 6, 2014
+ **  @date   11 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,33 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTMEASUREMENTS_H
-#define VABSTRACTMEASUREMENTS_H
+#ifndef VPATTERNCONVERTER_H
+#define VPATTERNCONVERTER_H
 
-#include "../libs/ifc/xml/vdomdocument.h"
-#include "../container/vcontainer.h"
+#include "vabstractconverter.h"
 
-class VAbstractMeasurements : public VDomDocument
+class VPatternConverter : public VAbstractConverter
 {
 public:
-    VAbstractMeasurements(VContainer *data);
-    virtual ~VAbstractMeasurements();
-    virtual void Measurements();
-    Unit         MUnit() const;
-    static const QString TagUnit;
-    static const QString AttrValue;
-    static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
-protected:
-    /** @brief data container with data. */
-    VContainer     *data;
+    VPatternConverter(const QString &fileName);
+    virtual ~VPatternConverter();
 
-    void         Measurement(const QString &tag);
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;
+    static const QString    PatternMaxVerStr;
+    static const QString    CurrentSchema;
+
+protected:
+    virtual int     MinVer() const;
+    virtual int     MaxVer() const;
+
+    virtual QString MinVerStr() const;
+    virtual QString MaxVerStr() const;
+
+    QString         XSDSchema(int ver) const;
+    virtual void    ApplyPatches() const;
+
 private:
-    Q_DISABLE_COPY(VAbstractMeasurements)
+    Q_DISABLE_COPY(VPatternConverter)
+    static const QString    PatternMinVerStr;
 };
 
-#endif // VABSTRACTMEASUREMENTS_H
+#endif // VPATTERNCONVERTER_H

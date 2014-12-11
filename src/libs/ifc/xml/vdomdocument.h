@@ -31,8 +31,10 @@
 
 #include <QDomDocument>
 #include <QDebug>
-#include "../container/vcontainer.h"
 #include <QLoggingCategory>
+#include <QCoreApplication>
+
+#include "ifcdef.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
@@ -80,7 +82,7 @@ public:
     /**
      * @param data container with variables
      */
-    VDomDocument(VContainer *data);
+    VDomDocument();
     virtual ~VDomDocument();
     QDomElement    elementById(const QString& id);
     void           removeAllChilds(QDomElement &element);
@@ -104,7 +106,7 @@ public:
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
-    void           setContent(const QString &fileName);
+    void           setXMLContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
     virtual bool   SaveDocument(const QString &fileName, QString &error);
@@ -116,12 +118,12 @@ public:
     QDomNode       ParentNodeById(const quint32 &nodeId);
     QDomElement    CloneNodeById(const quint32 &nodeId);
     QDomElement    NodeById(const quint32 &nodeId);
-protected:
-    /** @brief data container with data. */
-    VContainer     *data;
+    static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
 
+protected:
     void           setTagText(const QString &tag, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
+
 private:
     Q_DISABLE_COPY(VDomDocument)
     /** @brief Map used for finding element by id. */

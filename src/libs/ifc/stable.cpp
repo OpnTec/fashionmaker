@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vabstractmeasurements.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   18 6, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,30 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTMEASUREMENTS_H
-#define VABSTRACTMEASUREMENTS_H
-
-#include "../libs/ifc/xml/vdomdocument.h"
-#include "../container/vcontainer.h"
-
-class VAbstractMeasurements : public VDomDocument
-{
-public:
-    VAbstractMeasurements(VContainer *data);
-    virtual ~VAbstractMeasurements();
-    virtual void Measurements();
-    Unit         MUnit() const;
-    static const QString TagUnit;
-    static const QString AttrValue;
-    static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
-protected:
-    /** @brief data container with data. */
-    VContainer     *data;
-
-    void         Measurement(const QString &tag);
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;
-private:
-    Q_DISABLE_COPY(VAbstractMeasurements)
-};
-
-#endif // VABSTRACTMEASUREMENTS_H
+// Build the precompiled headers.
+#include "stable.h"

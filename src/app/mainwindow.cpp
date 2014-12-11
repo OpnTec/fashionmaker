@@ -44,6 +44,7 @@
 #include "undocommands/renamepp.h"
 #include "vtooloptionspropertybrowser.h"
 #include "options.h"
+#include "../libs/ifc/xml/vpatternconverter.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -166,7 +167,7 @@ void MainWindow::ActionNewPP()
                 path = stMeasurements.tablePath();
                 qCDebug(vMainWindow)<<"Table path:"<<path;
                 VStandardMeasurements m(pattern);
-                m.setContent(path);
+                m.setXMLContent(path);
                 m.SetSize();
                 m.SetHeight();
                 m.Measurements();
@@ -200,7 +201,7 @@ void MainWindow::ActionNewPP()
                 path = indMeasurements.tablePath();
                 qCDebug(vMainWindow)<<"Table path:"<<path;
                 VIndividualMeasurements m(pattern);
-                m.setContent(path);
+                m.setXMLContent(path);
                 m.Measurements();
             }
             else
@@ -2350,8 +2351,11 @@ void MainWindow::LoadPattern(const QString &fileName)
     qApp->setOpeningPattern();//Begin opening file
     try
     {
-        VDomDocument::ValidateXML("://schema/pattern.xsd", fileName);
-        doc->setContent(fileName);
+        VPatternConverter converter(fileName);
+        converter.Convert();
+
+        VDomDocument::ValidateXML(VPatternConverter::CurrentSchema, fileName);
+        doc->setXMLContent(fileName);
 
         qApp->setPatternUnit(doc->MUnit());
         qApp->setPatternType(doc->MType());
@@ -2368,7 +2372,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         {
             VStandardMeasurements m(pattern);
             VDomDocument::ValidateXML("://schema/standard_measurements.xsd", path);
-            m.setContent(path);
+            m.setXMLContent(path);
             if (m.MUnit() == Unit::Inch)
             {
                 QMessageBox::critical(this, tr("Wrong units."),
@@ -2483,7 +2487,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
                     QString error;
-                    if (VApplication::SafeCopy(restoreFiles.at(i) +".autosave", restoreFiles.at(i), error))
+                    if (VDomDocument::SafeCopy(restoreFiles.at(i) +".autosave", restoreFiles.at(i), error))
                     {
                         QFile autoFile(restoreFiles.at(i) +".autosave");
                         autoFile.remove();

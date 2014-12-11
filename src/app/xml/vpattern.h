@@ -29,24 +29,15 @@
 #ifndef VPATTERN_H
 #define VPATTERN_H
 
-#include "vdomdocument.h"
+#include "../libs/ifc/xml/vdomdocument.h"
 #include "vtoolrecord.h"
+#include "../container/vcontainer.h"
 
 class VDataTool;
 class VMainGraphicsScene;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
-
-/*
-   VAL_VERSION is (major << 16) + (minor << 8) + patch.
-*/
-// version without patch part
-#define VAL_MIN_VERSION 0x000100
-// max support version of format
-#define VAL_VERSION 0x000101
-
-#define VAL_STR_VERSION "0.1.1"
 
 /**
  * @brief The VPattern class working with pattern file.
@@ -232,6 +223,9 @@ protected:
     virtual void   customEvent(QEvent * event);
 private:
     Q_DISABLE_COPY(VPattern)
+
+    /** @brief data container with data. */
+    VContainer     *data;
 
     /** @brief nameActivDraw name current pattern peace. */
     QString        nameActivPP;

@@ -31,7 +31,6 @@
 #include <QMessageBox>
 #include <QSpacerItem>
 #include <QApplication>
-#include "../options.h"
 #include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(vExcep, "v.excep")

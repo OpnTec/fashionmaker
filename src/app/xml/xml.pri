@@ -3,7 +3,6 @@
 
 HEADERS += \
     $$PWD/vtoolrecord.h \
-    $$PWD/vdomdocument.h \
     $$PWD/vpattern.h \
     $$PWD/vstandardmeasurements.h \
     $$PWD/vindividualmeasurements.h \
@@ -11,7 +10,6 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/vtoolrecord.cpp \
-    $$PWD/vdomdocument.cpp \
     $$PWD/vpattern.cpp \
     $$PWD/vstandardmeasurements.cpp \
     $$PWD/vindividualmeasurements.cpp \

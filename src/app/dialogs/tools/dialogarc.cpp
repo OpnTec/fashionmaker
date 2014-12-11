@@ -34,7 +34,7 @@
 
 #include "../../geometry/vpointf.h"
 #include "../../container/vcontainer.h"
-#include "../../xml/vdomdocument.h"
+#include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../visualization/vistoolarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------

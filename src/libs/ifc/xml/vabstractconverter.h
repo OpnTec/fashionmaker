@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vabstractmeasurements.h
+ **  @file   vabstractconverter.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   18 6, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,42 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTMEASUREMENTS_H
-#define VABSTRACTMEASUREMENTS_H
+#ifndef VABSTRACTCONVERTER_H
+#define VABSTRACTCONVERTER_H
 
-#include "../libs/ifc/xml/vdomdocument.h"
-#include "../container/vcontainer.h"
+#include "vdomdocument.h"
 
-class VAbstractMeasurements : public VDomDocument
+class VAbstractConverter :public VDomDocument
 {
-public:
-    VAbstractMeasurements(VContainer *data);
-    virtual ~VAbstractMeasurements();
-    virtual void Measurements();
-    Unit         MUnit() const;
-    static const QString TagUnit;
-    static const QString AttrValue;
-    static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
-protected:
-    /** @brief data container with data. */
-    VContainer     *data;
 
-    void         Measurement(const QString &tag);
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;
+public:
+    VAbstractConverter(const QString &fileName);
+    virtual ~VAbstractConverter();
+
+    void Convert() const;
+
+protected:
+    int     ver;
+    QString fileName;
+
+    int  GetVersion(const QString &version) const;
+    void CheckVersion(int ver) const;
+
+    virtual int     MinVer() const =0;
+    virtual int     MaxVer() const =0;
+
+    virtual QString MinVerStr() const =0;
+    virtual QString MaxVerStr() const =0;
+
+    virtual QString XSDSchema(int ver) const =0;
+    virtual void    ApplyPatches() const =0;
+
 private:
-    Q_DISABLE_COPY(VAbstractMeasurements)
+    Q_DISABLE_COPY(VAbstractConverter)
+
+    QString GetVersionStr() const;
+
+    void    ValidateVersion(const QString &version) const;
 };
 
-#endif // VABSTRACTMEASUREMENTS_H
+#endif // VABSTRACTCONVERTER_H

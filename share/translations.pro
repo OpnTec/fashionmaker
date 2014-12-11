@@ -10,11 +10,13 @@ TEMPLATE = app
 DEPENDPATH +=  \
             ../src/app \
             ../src/libs/qmuparser \
-            ../src/libs/vpropertyexplorer
+            ../src/libs/vpropertyexplorer \
+            ../src/libs/ifc
 
 include(../src/app/app.pri)
 include(../src/libs/qmuparser/qmuparser.pri)
 include(../src/libs/vpropertyexplorer/vpropertyexplorer.pri)
+include(../src/libs/ifc/ifc.pri)
 
 # Add here path to new translation file with name "valentina_*_*.ts" if you want to add new language.
 # Same paths in variable INSTALL_TRANSLATIONS (app.pro).

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vabstractmeasurements.h
+ **  @file   stable.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   18 6, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,30 +26,42 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTMEASUREMENTS_H
-#define VABSTRACTMEASUREMENTS_H
+#ifndef STABLE_H
+#define STABLE_H
 
-#include "../libs/ifc/xml/vdomdocument.h"
-#include "../container/vcontainer.h"
+/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
+#ifndef __clang__
+#pragma message("Compiling precompiled headers for IFC library.\n")
+#endif
 
-class VAbstractMeasurements : public VDomDocument
-{
-public:
-    VAbstractMeasurements(VContainer *data);
-    virtual ~VAbstractMeasurements();
-    virtual void Measurements();
-    Unit         MUnit() const;
-    static const QString TagUnit;
-    static const QString AttrValue;
-    static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
-protected:
-    /** @brief data container with data. */
-    VContainer     *data;
+/* Add C includes here */
 
-    void         Measurement(const QString &tag);
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) = 0;
-private:
-    Q_DISABLE_COPY(VAbstractMeasurements)
-};
+#if defined __cplusplus
+/* Add C++ includes here */
 
-#endif // VABSTRACTMEASUREMENTS_H
+#ifdef QT_CORE_LIB
+#include <QtCore>
+#endif
+
+#ifdef QT_XML_LIB
+#   include <QtXml>
+#endif
+
+//In Windows you can't use those headers in all modes.
+#if !defined(Q_OS_WIN)
+#   ifdef QT_PRINTSUPPORT_LIB
+#       include <QtPrintSupport>
+#   endif
+
+#   ifdef QT_XMLPATTERNS_LIB
+#       include <QtXmlPatterns>
+#   endif
+
+#   ifdef QT_NETWORK_LIB
+#       include <QtNetwork>
+#   endif
+#endif/*Q_OS_WIN*/
+
+#endif/*__cplusplus*/
+
+#endif // STABLE_H

@@ -30,7 +30,7 @@
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
 #include "../../geometry/vpointf.h"
-#include "../../exception/vexceptionobjecterror.h"
+#include "../../libs/ifc/exception/vexceptionobjecterror.h"
 #include "../../visualization/vistoolalongline.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");

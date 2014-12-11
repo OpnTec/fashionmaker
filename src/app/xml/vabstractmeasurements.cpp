@@ -33,7 +33,7 @@ const QString VAbstractMeasurements::AttrValue = QStringLiteral("value");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractMeasurements::VAbstractMeasurements(VContainer *data)
-    :VDomDocument(data)
+    :VDomDocument(), data(data)
 {
     SCASSERT(data != nullptr)
 }

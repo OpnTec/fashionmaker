@@ -32,11 +32,12 @@
 #include "../tools/vtooluniondetails.h"
 #include "../tools/drawTools/drawtools.h"
 #include "../tools/nodeDetails/nodedetails.h"
-#include "../exception/vexceptionobjecterror.h"
-#include "../exception/vexceptionwrongid.h"
-#include "../exception/vexceptionconversionerror.h"
-#include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionundo.h"
+#include "../libs/ifc/exception/vexceptionobjecterror.h"
+#include "../libs/ifc/exception/vexceptionwrongid.h"
+#include "../libs/ifc/exception/vexceptionconversionerror.h"
+#include "../libs/ifc/exception/vexceptionemptyparameter.h"
+#include "../libs/ifc/exception/vexceptionundo.h"
+#include "../libs/ifc/xml/vpatternconverter.h"
 #include "../core/undoevent.h"
 #include "../core/vsettings.h"
 #include "vstandardmeasurements.h"
@@ -121,7 +122,7 @@ const QString VPattern::IncrementDescription = QStringLiteral("description");
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
                    VMainGraphicsScene *sceneDetail, QObject *parent)
-    : QObject(parent), VDomDocument(data), nameActivPP(QString()), tools(QHash<quint32, VDataTool*>()),
+    : QObject(parent), VDomDocument(), data(data), nameActivPP(QString()), tools(QHash<quint32, VDataTool*>()),
       history(QVector<VToolRecord>()), cursor(0), patternPieces(QStringList()), mode(mode), sceneDraw(sceneDraw),
       sceneDetail(sceneDetail)
 {
@@ -146,7 +147,7 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     patternElement.appendChild(createComment("Valentina pattern format."));
 
     QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode(VAL_STR_VERSION);
+    QDomText newNodeText = createTextNode(VPatternConverter::PatternMaxVerStr);
     version.appendChild(newNodeText);
     patternElement.appendChild(version);
 
@@ -2431,13 +2432,13 @@ void VPattern::SetNotes(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetVersion() const
 {
-    return UniqueTagText(TagVersion, VAL_STR_VERSION);
+    return UniqueTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetVersion()
 {
-    setTagText(TagVersion, VAL_STR_VERSION);
+    setTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
     emit patternChanged(false);
 }
 
@@ -2572,14 +2573,14 @@ void VPattern::UpdateMeasurements()
         {
             VStandardMeasurements m(data);
             ValidateXML("://schema/standard_measurements.xsd", path);
-            m.setContent(path);
+            m.setXMLContent(path);
             m.Measurements();
         }
         else
         {
             VIndividualMeasurements m(data);
             ValidateXML("://schema/individual_measurements.xsd", path);
-            m.setContent(path);
+            m.setXMLContent(path);
             m.Measurements();
         }
     }

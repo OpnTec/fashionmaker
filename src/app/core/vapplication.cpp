@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vapplication.h"
-#include "../exception/vexceptionobjecterror.h"
-#include "../exception/vexceptionbadid.h"
-#include "../exception/vexceptionconversionerror.h"
-#include "../exception/vexceptionemptyparameter.h"
-#include "../exception/vexceptionwrongid.h"
+#include "../libs/ifc/exception/vexceptionobjecterror.h"
+#include "../libs/ifc/exception/vexceptionbadid.h"
+#include "../libs/ifc/exception/vexceptionconversionerror.h"
+#include "../libs/ifc/exception/vexceptionemptyparameter.h"
+#include "../libs/ifc/exception/vexceptionwrongid.h"
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"
@@ -2037,53 +2037,6 @@ QString VApplication::STDescription(const QString &id) const
         qDebug()<<"Unknown id number. Got"<<id;
     }
     return QString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VApplication::SafeCopy(const QString &source, const QString &destination, QString &error)
-{
-    bool result = false;
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
-
-    QFile patternFile(destination);
-    patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    // We need here temporary file because we want restore document after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
-    {
-        if (patternFile.exists())
-        {
-            patternFile.copy(tempOfPattern.fileName());
-        }
-    }
-    if ( patternFile.exists() == false || patternFile.remove() )
-    {
-        QFile sourceFile(source);
-        if ( sourceFile.copy(patternFile.fileName()) == false )
-        {
-            error = tr("Could not copy temp file to document file");
-            tempOfPattern.copy(destination);
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
-    }
-    else
-    {
-        error = tr("Could not remove document file");
-        result = false;
-    }
-
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup--; // turn off check permission again
-#endif /*Q_OS_WIN32*/
-
-    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

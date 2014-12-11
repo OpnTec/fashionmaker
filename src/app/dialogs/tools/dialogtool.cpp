@@ -36,7 +36,7 @@
 #include "../../../libs/qmuparser/qmuparsererror.h"
 #include "../../core/vapplication.h"
 #include "../../core/vsettings.h"
-#include "../../xml/vdomdocument.h"
+#include "../../libs/ifc/xml/vdomdocument.h"
 #include <QTimer>
 #include <QCloseEvent>
 #include <QShowEvent>
