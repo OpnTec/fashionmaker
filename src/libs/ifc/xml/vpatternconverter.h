@@ -47,7 +47,8 @@ protected:
     virtual QString MinVerStr() const;
     virtual QString MaxVerStr() const;
 
-    QString XSDSchema(int ver) const;
+    QString         XSDSchema(int ver) const;
+    virtual void    ApplyPatches() const;
 
 private:
     Q_DISABLE_COPY(VPatternConverter)

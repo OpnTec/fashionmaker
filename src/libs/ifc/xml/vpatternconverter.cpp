@@ -29,6 +29,8 @@
 #include "vpatternconverter.h"
 #include "exception/vexception.h"
 
+#include <QFile>
+
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.1");
 const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.1");
 const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.1.xsd");
@@ -84,5 +86,37 @@ QString VPatternConverter::XSDSchema(int ver) const
             throw VException(errorMsg);
             break;
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ApplyPatches() const
+{
+    try
+    {
+        switch(ver)
+        {
+            case (0x000101):
+                break;
+            default:
+                break;
+        }
+    }
+    catch (VException &e)
+    {
+        QString error;
+        const QString backupFileName = fileName +".backup";
+        if (SafeCopy(backupFileName, fileName, error) == false)
+        {
+            const QString errorMsg(tr("Error restoring backup file: %1.").arg(error));
+            VException excep(errorMsg);
+            excep.AddMoreInformation(e.ErrorMessage());
+            throw excep;
+        }
+
+        QFile file(backupFileName);
+        file.remove();
+
+        throw e;
     }
 }

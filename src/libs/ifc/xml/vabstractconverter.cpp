@@ -29,6 +29,8 @@
 #include "vabstractconverter.h"
 #include "exception/vexception.h"
 
+#include <QFile>
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
     :VDomDocument(), ver(0x0), fileName(fileName)
@@ -41,6 +43,28 @@ VAbstractConverter::VAbstractConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::~VAbstractConverter()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::Convert() const
+{
+    if (ver == MaxVer())
+    {
+        return;
+    }
+
+    QString error;
+    const QString backupFileName = fileName +".backup";
+    if (SafeCopy(fileName, backupFileName, error) == false)
+    {
+        const QString errorMsg(tr("Error creation backup file: %1.").arg(error));
+        throw VException(errorMsg);
+    }
+
+    ApplyPatches();
+
+    QFile file(backupFileName);
+    file.remove();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractConverter::GetVersionStr() const
