@@ -1411,6 +1411,10 @@ void MainWindow::Open()
     }
     qCDebug(vMainWindow)<<"Run QFileDialog::getOpenFileName: dir ="<<dir<<".";
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
+    if (filePath.isEmpty())
+    {
+        return;
+    }
     LoadPattern(filePath);
 }
 
