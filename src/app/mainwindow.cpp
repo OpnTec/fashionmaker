@@ -1905,7 +1905,10 @@ void MainWindow::ActionLayout(bool checked)
         listDetails.append(new VItem(path, listDetails.size()));
     }
     QString description = doc->GetDescription();
-    emit ModelChosen(listDetails, curFile, description);
+
+    QString fileName;
+    curFile.isEmpty() ? fileName = "unnamed" : fileName = curFile;
+    emit ModelChosen(listDetails, fileName, description);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

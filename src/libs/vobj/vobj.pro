@@ -1,28 +1,28 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-04-25T12:01:49
+# Project created by QtCreator 2014-12-12T14:55:06
 #
 #-------------------------------------------------
 
 # File with common stuff for whole project
 include(../../../Valentina.pri)
 
-# We don't need gui library.
-QT       -= gui
-
 # Name of library
-TARGET = qmuparser
+TARGET = vobj
 
 # We want create a library
 TEMPLATE = lib
 
+CONFIG += \
+    staticlib \# Making static library
+    c++11 # We use C++11 standard
+
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
-# We use C++11 standard
-CONFIG += c++11
+include(vobj.pri)
 
-DEFINES += QMUPARSER_LIBRARY
+# This is static library so no need in "make install"
 
 # directory for executable file
 DESTDIR = bin
@@ -32,23 +32,6 @@ MOC_DIR = moc
 
 # objecs files
 OBJECTS_DIR = obj
-
-include(qmuparser.pri)
-
-VERSION = 2.2.5
-
-# Set "make install" command for Unix-like systems.
-unix:!macx{
-    isEmpty(PREFIX_LIB){
-        contains(QMAKE_HOST.arch, x86_64) {
-            PREFIX_LIB = $$DEFAULT_PREFIX/lib64
-        } else {
-            PREFIX_LIB = $$DEFAULT_PREFIX/lib
-        }
-    }
-    target.path = $$PREFIX_LIB
-    INSTALLS += target
-}
 
 # Set using ccache. Function enable_ccache() defined in Valentina.pri.
 $$enable_ccache()
@@ -91,10 +74,5 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
         QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
         QMAKE_LFLAGS_RELEASE =
-
-        # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
-        QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
     }
 }

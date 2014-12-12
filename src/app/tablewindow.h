@@ -140,6 +140,7 @@ private:
     void                  EpsFile(const QString &name)const;
     void                  PsFile(const QString &name)const;
     void                  PdfToPs(const QStringList &params)const;
+    void                  ObjFile(const QString &name)const;
 };
 
 #endif // TABLEWINDOW_H

@@ -354,6 +354,16 @@ DEPENDPATH += $$PWD/../libs/ifc
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/ifc/$${DESTDIR}/ifc.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/ifc/$${DESTDIR}/libifc.a
 
+# VObj static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vobj/$${DESTDIR}/ -lvobj
+
+INCLUDEPATH += $$PWD/../libs/vobj
+DEPENDPATH += $$PWD/../libs/vobj
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vobj/$${DESTDIR}/vobj.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vobj/$${DESTDIR}/libvobj.a
+
+
 # Strip after you link all libaries.
 CONFIG(release, debug|release){
     win32:!win32-msvc*{

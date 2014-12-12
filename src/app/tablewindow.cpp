@@ -33,6 +33,7 @@
 #include <QPrinter>
 #include "core/vapplication.h"
 #include <QtCore/qmath.h>
+#include "../../libs/vobj/vobjpaintdevice.h"
 
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"
@@ -229,6 +230,7 @@ void TableWindow::saveScene()
     extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
     extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
     extByMessage[ tr("Images (*.png)") ] = ".png";
+    extByMessage[ tr("Wavefront OBJ (*.obj)") ] = ".obj";
 
     QProcess proc;
     proc.start(PDFTOPS);
@@ -280,7 +282,7 @@ void TableWindow::saveScene()
     shadowPaper->setVisible(false);
     paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
     QFileInfo fi( name );
-    QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps";
+    QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj";
     switch (suffix.indexOf(fi.suffix()))
     {
         case 0: //svg
@@ -299,6 +301,11 @@ void TableWindow::saveScene()
             break;
         case 4: //ps
             PsFile(name);
+            break;
+        case 5: //obj
+            paper->setVisible(false);
+            ObjFile(name);
+            paper->setVisible(true);
             break;
         default:
             qDebug() << "Can't recognize file suffix. File file "<<name<<Q_FUNC_INFO;
@@ -653,4 +660,17 @@ void TableWindow::PdfToPs(const QStringList &params) const
         QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
         msgBox.exec();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::ObjFile(const QString &name) const
+{
+    VObjPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(paper->rect().size().toSize());
+    generator.setResolution(static_cast<int>(qApp->PrintDPI));
+    QPainter painter;
+    painter.begin(&generator);
+    tableScene->render(&painter);
+    painter.end();
 }
