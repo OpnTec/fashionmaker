@@ -31,6 +31,14 @@
 
 #include <QFile>
 
+/*
+ * Version rules:
+ * 1. Version have three parts "major.minor.patch";
+ * 2. major part only for stable releases;
+ * 3. minor - 10 or more patch changes, or one big change;
+ * 4. patch - little change.
+ */
+
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.1");
 const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.1");
 const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.1.xsd");
