@@ -1889,9 +1889,14 @@ void MainWindow::ActionHistory(bool checked)
 void MainWindow::ActionLayout(bool checked)
 {
     Q_UNUSED(checked);
-    hide();
+    ActionDetails(true);//Get all list of details.
     QVector<VItem*> listDetails;
     const QHash<quint32, VDetail> *details = pattern->DataDetails();
+    if (details->count() == 0)
+    {
+        return;
+    }
+    hide();//Now we can hide window
     QHashIterator<quint32, VDetail> idetail(*details);
     while (idetail.hasNext())
     {
