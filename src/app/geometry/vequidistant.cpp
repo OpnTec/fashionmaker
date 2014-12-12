@@ -35,6 +35,7 @@
 #include <QDebug>
 #include <QPainterPath>
 #include "../container/vcontainer.h"
+#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
@@ -63,73 +64,21 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             case (Tool::NodeArc):
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(detail.at(i).getId());
-                qreal len1 = GetLengthContour(points, arc->GetPoints());
-                qreal lenReverse = GetLengthContour(points, GetReversePoint(arc->GetPoints()));
-                if (len1 <= lenReverse)
-                {
-                    points << arc->GetPoints();
-                    if (detail.getSeamAllowance() == true)
-                    {
-                        pointsEkv << biasPoints(arc->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
-                    }
-                }
-                else
-                {
-                    points << GetReversePoint(arc->GetPoints());
-                    if (detail.getSeamAllowance() == true)
-                    {
-                        pointsEkv << biasPoints(GetReversePoint(arc->GetPoints()), detail.at(i).getMx(),
-                                                detail.at(i).getMy());
-                    }
-                }
+                // Detail points clockwise, but arc we draw counterclockwise. Main contour need reverse.
+                const QVector<QPointF> reversedPoints = GetReversePoint(arc->GetPoints());
+                AddContour(reversedPoints, points, pointsEkv, detail, i);
             }
             break;
             case (Tool::NodeSpline):
             {
                 const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(detail.at(i).getId());
-                qreal len1 = GetLengthContour(points, spline->GetPoints());
-                qreal lenReverse = GetLengthContour(points, GetReversePoint(spline->GetPoints()));
-                if (len1 <= lenReverse)
-                {
-                    points << spline->GetPoints();
-                    if (detail.getSeamAllowance() == true)
-                    {
-                        pointsEkv << biasPoints(spline->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
-                    }
-                }
-                else
-                {
-                    points << GetReversePoint(spline->GetPoints());
-                    if (detail.getSeamAllowance() == true)
-                    {
-                        pointsEkv << biasPoints(GetReversePoint(spline->GetPoints()), detail.at(i).getMx(),
-                                                detail.at(i).getMy());
-                    }
-                }
+                AddContour(spline->GetPoints(), points, pointsEkv, detail, i);
             }
             break;
             case (Tool::NodeSplinePath):
             {
                 const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(detail.at(i).getId());
-                qreal len1 = GetLengthContour(points, splinePath->GetPoints());
-                qreal lenReverse = GetLengthContour(points, GetReversePoint(splinePath->GetPoints()));
-                if (len1 <= lenReverse)
-                {
-                    points << splinePath->GetPoints();
-                    if (detail.getSeamAllowance() == true)
-                    {
-                     pointsEkv << biasPoints(splinePath->GetPoints(), detail.at(i).getMx(), detail.at(i).getMy());
-                    }
-                }
-                else
-                {
-                    points << GetReversePoint(splinePath->GetPoints());
-                    if (detail.getSeamAllowance() == true)
-                    {
-                        pointsEkv << biasPoints(GetReversePoint(splinePath->GetPoints()), detail.at(i).getMx(),
-                                                detail.at(i).getMy());
-                    }
-                }
+                AddContour(splinePath->GetPoints(), points, pointsEkv, detail, i);
             }
             break;
             default:
@@ -167,7 +116,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
+int VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
 {
     qreal length = 0;
     QVector<QPointF> points;
@@ -177,7 +126,7 @@ qreal VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVec
         QLineF line(points.at(i), points.at(i+1));
         length += line.length();
     }
-    return length;
+    return qFloor(length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -450,4 +399,29 @@ QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );
     return pLine.p2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VEquidistant::AddContour(const QVector<QPointF> &nodePoints, QVector<QPointF> &points, QVector<QPointF> &pointsEkv,
+                              const VDetail &detail, int i)
+{
+    int len1 = GetLengthContour(points, nodePoints);
+    QVector<QPointF> reversedPoints = GetReversePoint(nodePoints);
+    int lenReverse = GetLengthContour(points, reversedPoints);
+    if (len1 <= lenReverse)
+    {
+        points << nodePoints;
+        if (detail.getSeamAllowance() == true)
+        {
+            pointsEkv << biasPoints(nodePoints, detail.at(i).getMx(), detail.at(i).getMy());
+        }
+    }
+    else
+    {
+        points << reversedPoints;
+        if (detail.getSeamAllowance() == true)
+        {
+            pointsEkv << biasPoints(reversedPoints, detail.at(i).getMx(), detail.at(i).getMy());
+        }
+    }
 }

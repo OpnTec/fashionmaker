@@ -56,7 +56,7 @@ private:
      * @param newPoints point whos we try to add to contour.
      * @return length length of contour.
      */
-    static qreal     GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
+    static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
     /**
      * @brief biasPoints bias point.
      * @param points vector of points.
@@ -114,6 +114,9 @@ private:
      * @return point of parallel line.
      */
     static QPointF   SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
+
+    static void      AddContour(const QVector<QPointF> &nodePoints, QVector<QPointF> &points,
+                                QVector<QPointF> &pointsEkv, const VDetail &detail, int i);
 };
 
 #endif // VEQUIDISTANT_H
