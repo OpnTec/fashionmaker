@@ -77,6 +77,14 @@ public:
     static QPointF ClosestPoint(const QLineF &line, const QPointF &point);
     static QPointF addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
     static void    LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
+    static bool    PointInSegment (const QPointF &t, const QPointF &p1, const QPointF &p2);
+    static bool    PointInBox (const QPointF &t, const QPointF &p1, const QPointF &p2);
+    /**
+     * @brief GetReversePoint return revers container of points.
+     * @param points container with points.
+     * @return reverced points.
+     */
+    static QVector<QPointF> GetReversePoints(const QVector<QPointF> &points);
 private:
     QSharedDataPointer<VGObjectData> d;
 };

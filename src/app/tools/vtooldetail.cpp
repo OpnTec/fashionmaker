@@ -503,7 +503,7 @@ void VToolDetail::ShowVisualization(bool show)
 void VToolDetail::RefreshGeometry()
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    QPainterPath path = VEquidistant().ContourPath(id, this->getData());
+    QPainterPath path = VEquidistant(this->getData()).ContourPath(id);
     this->setPath(path);
 
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -511,6 +511,7 @@ void VToolDetail::RefreshGeometry()
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::DeleteTool(bool ask)
 {
     DeleteDetail *delDet = new DeleteDetail(doc, id);

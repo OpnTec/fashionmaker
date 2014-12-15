@@ -181,7 +181,8 @@ QVector<QPointF> VArc::GetPoints() const
             points.append(line.p2());
         }
     } while (i <= angle);
-    return points;
+    // Detail points clockwise, but arc we draw counterclockwise. Main contour need reverse.
+    return GetReversePoints(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

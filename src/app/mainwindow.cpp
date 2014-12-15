@@ -1901,7 +1901,7 @@ void MainWindow::ActionLayout(bool checked)
     while (idetail.hasNext())
     {
         idetail.next();
-        QPainterPath path = VEquidistant().ContourPath(idetail.key(), pattern);
+        QPainterPath path = VEquidistant(pattern).ContourPath(idetail.key());
         listDetails.append(new VItem(path, listDetails.size()));
     }
     QString description = doc->GetDescription();

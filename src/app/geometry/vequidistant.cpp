@@ -38,7 +38,14 @@
 #include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
+VEquidistant::VEquidistant(const VContainer *data)
+    :data(data)
+{
+    SCASSERT(data != nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VEquidistant::ContourPath(const quint32 &idDetail) const
 {
     SCASSERT(data != nullptr);
     VDetail detail = data->GetDetail(idDetail);
@@ -62,23 +69,15 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             }
             break;
             case (Tool::NodeArc):
-            {
-                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(detail.at(i).getId());
-                // Detail points clockwise, but arc we draw counterclockwise. Main contour need reverse.
-                const QVector<QPointF> reversedPoints = GetReversePoint(arc->GetPoints());
-                AddContour(reversedPoints, points, pointsEkv, detail, i);
-            }
-            break;
             case (Tool::NodeSpline):
-            {
-                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(detail.at(i).getId());
-                AddContour(spline->GetPoints(), points, pointsEkv, detail, i);
-            }
-            break;
             case (Tool::NodeSplinePath):
             {
-                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(detail.at(i).getId());
-                AddContour(splinePath->GetPoints(), points, pointsEkv, detail, i);
+                const QSharedPointer<VAbstractCurve> curve=data->GeometricObject<VAbstractCurve>(detail.at(i).getId());
+
+                const QPointF begin = StartSegment(detail, i);
+                const QPointF end = EndSegment(detail, i);
+
+                AddContourPoints(curve->GetSegmentPoints(begin, end), points, pointsEkv, detail, i);
             }
             break;
             default:
@@ -113,6 +112,54 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
         path.setFillRule(Qt::WindingFill);
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VEquidistant::StartSegment(const VDetail &detail, const int &i) const
+{
+    QPointF begin;
+    if (detail.CountNode() > 1)
+    {
+        if (i == 0)
+        {
+            if (detail.at(detail.CountNode()-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(detail.at(detail.CountNode()-1).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (detail.at(i-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(detail.at(i-1).getId())->toQPointF();
+            }
+        }
+    }
+    return begin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VEquidistant::EndSegment(const VDetail &detail, const int &i) const
+{
+    QPointF end;
+    if (detail.CountNode() > 2)
+    {
+        if (i == detail.CountNode() - 1)
+        {
+            if (detail.at(0).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(detail.at(0).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (detail.at(i+1).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(detail.at(i+1).getId())->toQPointF();
+            }
+        }
+    }
+    return end;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,18 +368,6 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
-{
-    SCASSERT(points.size() > 0);
-    QVector<QPointF> reversePoints;
-    for (qint32 i = points.size() - 1; i >= 0; --i)
-    {
-        reversePoints.append(points.at(i));
-    }
-    return reversePoints;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)
 {
     SCASSERT(width > 0);
@@ -402,11 +437,11 @@ QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VEquidistant::AddContour(const QVector<QPointF> &nodePoints, QVector<QPointF> &points, QVector<QPointF> &pointsEkv,
+void VEquidistant::AddContourPoints(const QVector<QPointF> &nodePoints, QVector<QPointF> &points, QVector<QPointF> &pointsEkv,
                               const VDetail &detail, int i)
 {
     int len1 = GetLengthContour(points, nodePoints);
-    QVector<QPointF> reversedPoints = GetReversePoint(nodePoints);
+    QVector<QPointF> reversedPoints = VGObject::GetReversePoints(nodePoints);
     int lenReverse = GetLengthContour(points, reversedPoints);
     if (len1 <= lenReverse)
     {

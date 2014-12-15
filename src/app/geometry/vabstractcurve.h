@@ -43,12 +43,18 @@ public:
     VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
     VAbstractCurve(const VAbstractCurve &curve);
     VAbstractCurve& operator= (const VAbstractCurve &curve);
+
     virtual QVector<QPointF> GetPoints() const =0;
+    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end) const;
+
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual qreal            GetLength() const =0;
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
+private:
+    QVector<QPointF>         FromBegin(const QVector<QPointF> &points, const QPointF &begin) const;
+    QVector<QPointF>         ToEnd(const QVector<QPointF> &points, const QPointF &end) const;
 };
 
 #endif // VABSTRACTCURVE_H
