@@ -55,13 +55,6 @@ private:
     Q_DISABLE_COPY(VEquidistant)
     const VContainer *data;
     /**
-     * @brief GetLengthContour return length of contour.
-     * @param contour container with points of contour.
-     * @param newPoints point whos we try to add to contour.
-     * @return length length of contour.
-     */
-    static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
-    /**
      * @brief biasPoints bias point.
      * @param points vector of points.
      * @param mx offset respect to x.

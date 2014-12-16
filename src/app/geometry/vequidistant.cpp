@@ -77,7 +77,7 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail) const
                 const QPointF begin = StartSegment(detail, i);
                 const QPointF end = EndSegment(detail, i);
 
-                AddContourPoints(curve->GetSegmentPoints(begin, end), points, pointsEkv, detail, i);
+                AddContourPoints(curve->GetSegmentPoints(begin, end, points), points, pointsEkv, detail, i);
             }
             break;
             default:
@@ -160,20 +160,6 @@ QPointF VEquidistant::EndSegment(const VDetail &detail, const int &i) const
         }
     }
     return end;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
-{
-    qreal length = 0;
-    QVector<QPointF> points;
-    points << contour << newPoints;
-    for (qint32 i = 0; i < points.size()-1; ++i)
-    {
-        QLineF line(points.at(i), points.at(i+1));
-        length += line.length();
-    }
-    return qFloor(length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -437,12 +423,16 @@ QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VEquidistant::AddContourPoints(const QVector<QPointF> &nodePoints, QVector<QPointF> &points, QVector<QPointF> &pointsEkv,
-                              const VDetail &detail, int i)
+void VEquidistant::AddContourPoints(const QVector<QPointF> &nodePoints, QVector<QPointF> &points,
+                                    QVector<QPointF> &pointsEkv, const VDetail &detail, int i)
 {
-    int len1 = GetLengthContour(points, nodePoints);
+    /*
+     * Even if we made correction anticlockwise in method VAbstractCurve::GetSegmentPoints i decided left this check
+     * also here. I think it will make code more bullet proof. If it will slowdown creation contour delete correction.
+     */
+    int len1 = VGObject::GetLengthContour(points, nodePoints);
     QVector<QPointF> reversedPoints = VGObject::GetReversePoints(nodePoints);
-    int lenReverse = GetLengthContour(points, reversedPoints);
+    int lenReverse = VGObject::GetLengthContour(points, reversedPoints);
     if (len1 <= lenReverse)
     {
         points << nodePoints;

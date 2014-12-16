@@ -379,6 +379,11 @@ bool VGObject::PointInBox(const QPointF &t, const QPointF &p1, const QPointF &p2
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetReversePoint return revers container of points.
+ * @param points container with points.
+ * @return reverced points.
+ */
 QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
 {
     if (points.isEmpty())
@@ -391,4 +396,24 @@ QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
         reversePoints.append(points.at(i));
     }
     return reversePoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetLengthContour return length of contour.
+ * @param contour container with points of contour.
+ * @param newPoints point whos we try to add to contour.
+ * @return length length of contour.
+ */
+int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
+{
+    qreal length = 0;
+    QVector<QPointF> points;
+    points << contour << newPoints;
+    for (qint32 i = 0; i < points.size()-1; ++i)
+    {
+        QLineF line(points.at(i), points.at(i+1));
+        length += line.length();
+    }
+    return qFloor(length);
 }
