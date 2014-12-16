@@ -71,7 +71,6 @@ public:
     void           UpdateToolData(const quint32 &id, VContainer *data);
     void           IncrementReferens(quint32 id) const;
     void           DecrementReferens(quint32 id) const;
-    void           TestUniqueId() const;
     quint32        SPointActiveDraw();
     bool           isPatternModified() const;
     void           setPatternModified(bool value);
@@ -150,10 +149,9 @@ public:
     static const QString IncrementKgrowth;
     static const QString IncrementDescription;
 
-    virtual bool   SaveDocument(const QString &fileName, QString &error);
+    virtual bool   SaveDocument(const QString &fileName, QString &error) const;
     QStringList    getPatternPieces() const;
     QRectF         ActiveDrawBoundingRect() const;
-    quint32        GetParametrId(const QDomElement& domElement) const;
 
     QMap<GHeights, bool> GetGradationHeights() const;
     void                 SetGradationHeights(const QMap<GHeights, bool> &options);
@@ -265,7 +263,6 @@ private:
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      const Document &parse, const QString& type);
     void           ParseIncrementsElement(const QDomNode& node);
-    void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
     void           PrepareForParse(const Document &parse);
     void           UpdateMeasurements();
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);

@@ -30,6 +30,7 @@
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
 #include "exception/vexceptionbadid.h"
+#include "exception/vexceptionwrongid.h"
 
 #include <QAbstractMessageHandler>
 #include <QXmlSchema>
@@ -324,6 +325,36 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetParametrId return value id attribute.
+ * @param domElement tag in xml tree.
+ * @return id value.
+ */
+quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
+{
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    QString message = tr("Got wrong parameter id. Need only id > 0.");
+    try
+    {
+        id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);
+        if (id <= 0)
+        {
+            throw VExceptionWrongId(message, domElement);
+        }
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        VExceptionWrongId excep(message, domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const
 {
     const QDomNodeList nodeList = this->elementsByTagName(tagName);
@@ -344,6 +375,39 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
         }
     }
     return defVal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief TestUniqueId test exist unique id in pattern file. Each id must be unique.
+ */
+void VDomDocument::TestUniqueId() const
+{
+    QVector<quint32> vector;
+    CollectId(documentElement(), vector);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) const
+{
+    if (node.hasAttribute(VDomDocument::AttrId))
+    {
+        const quint32 id = GetParametrId(node);
+        if (vector.contains(id))
+        {
+            throw VExceptionWrongId(tr("This id is not unique."), node);
+        }
+        vector.append(id);
+    }
+
+    for (qint32 i=0; i<node.childNodes().length(); ++i)
+    {
+        const QDomNode n = node.childNodes().at(i);
+        if (n.isElement())
+        {
+            CollectId(n.toElement(), vector);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -514,7 +578,7 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
+bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
 {
     if (fileName.isEmpty())
     {
@@ -565,13 +629,12 @@ QString VDomDocument::Patch() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::setTagText(const QString &tag, const QString &text)
+bool VDomDocument::setTagText(const QString &tag, const QString &text)
 {
     const QDomNodeList nodeList = this->elementsByTagName(tag);
     if (nodeList.isEmpty())
     {
         qDebug()<<"Can't save tag "<<tag<<Q_FUNC_INFO;
-        return;
     }
     else
     {
@@ -587,10 +650,11 @@ void VDomDocument::setTagText(const QString &tag, const QString &text)
                 newTag.appendChild(newTagText);
 
                 parent.replaceChild(newTag, domElement);
-                return;
+                return true;
             }
         }
     }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

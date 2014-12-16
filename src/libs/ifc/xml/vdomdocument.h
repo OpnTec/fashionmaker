@@ -38,11 +38,6 @@
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
-/*
-   can be used like #if (V_FORMAT_VERSION >= V_FORMAT_VERSION_CHECK(4, 4, 0))
-*/
-#define V_FORMAT_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
-
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
@@ -104,12 +99,13 @@ public:
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+    quint32        GetParametrId(const QDomElement& domElement) const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
     void           setXMLContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
-    virtual bool   SaveDocument(const QString &fileName, QString &error);
+    virtual bool   SaveDocument(const QString &fileName, QString &error) const;
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
@@ -118,11 +114,15 @@ public:
     QDomNode       ParentNodeById(const quint32 &nodeId);
     QDomElement    CloneNodeById(const quint32 &nodeId);
     QDomElement    NodeById(const quint32 &nodeId);
+
     static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
 
 protected:
-    void           setTagText(const QString &tag, const QString &text);
+    bool           setTagText(const QString &tag, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
+
+    void           TestUniqueId() const;
+    void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
 private:
     Q_DISABLE_COPY(VDomDocument)
