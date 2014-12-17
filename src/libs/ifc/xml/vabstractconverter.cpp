@@ -28,6 +28,7 @@
 
 #include "vabstractconverter.h"
 #include "exception/vexception.h"
+#include "exception/vexceptionwrongid.h"
 
 #include <QFile>
 
@@ -45,7 +46,7 @@ VAbstractConverter::~VAbstractConverter()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Convert() const
+void VAbstractConverter::Convert()
 {
     if (ver == MaxVer())
     {
@@ -156,5 +157,42 @@ void VAbstractConverter::CheckVersion(int ver) const
     {
         const QString errorMsg(tr("Invalid version. Maximum supported version is %1").arg(MaxVerStr()));
         throw VException(errorMsg);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractConverter::SaveDocument(const QString &fileName, QString &error) const
+{
+    try
+    {
+        TestUniqueId();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        error = tr("Error no unique id.");
+        return false;
+    }
+
+    return VDomDocument::SaveDocument(fileName, error);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::Save() const
+{
+    QString error;
+    if (SaveDocument(fileName, error) == false)
+    {
+        VException e(error);
+        throw e;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::SetVersion(const QString &version)
+{
+    if (setTagText(TagVersion, version) == false)
+    {
+        VException e(tr("Could not change version."));
+        throw e;
     }
 }

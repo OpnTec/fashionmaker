@@ -42,21 +42,18 @@ class QLineF;
 class VEquidistant
 {
 public:
+    VEquidistant(const VContainer *data);
+    ~VEquidistant(){}
     /**
      * @brief ContourPath create painter path for detail.
      * @param idDetail id of detail.
      * @param data container with objects (points, arcs, splines).
      * @return return painter path of contour detail.
      */
-    QPainterPath     ContourPath(const quint32 &idDetail, const VContainer *data) const;
+    QPainterPath     ContourPath(const quint32 &idDetail) const;
 private:
-    /**
-     * @brief GetLengthContour return length of contour.
-     * @param contour container with points of contour.
-     * @param newPoints point whos we try to add to contour.
-     * @return length length of contour.
-     */
-    static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
+    Q_DISABLE_COPY(VEquidistant)
+    const VContainer *data;
     /**
      * @brief biasPoints bias point.
      * @param points vector of points.
@@ -86,12 +83,6 @@ private:
      */
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     /**
-     * @brief GetReversePoint return revers container of points.
-     * @param points container with points.
-     * @return reverced points.
-     */
-    static QVector<QPointF> GetReversePoint(const QVector<QPointF> &points);
-    /**
      * @brief EkvPoint return vector of points of equidistant two lines. Last point of two lines must be equal.
      * @param line1 first line.
      * @param line2 second line.
@@ -115,8 +106,8 @@ private:
      */
     static QPointF   SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 
-    static void      AddContour(const QVector<QPointF> &nodePoints, QVector<QPointF> &points,
-                                QVector<QPointF> &pointsEkv, const VDetail &detail, int i);
+    QPointF StartSegment(const VDetail &detail, const int &i) const;
+    QPointF EndSegment(const VDetail &detail, const int &i) const;
 };
 
 #endif // VEQUIDISTANT_H

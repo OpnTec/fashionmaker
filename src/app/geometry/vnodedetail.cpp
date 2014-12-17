@@ -35,8 +35,8 @@ VNodeDetail::VNodeDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my)
-    :d(new VNodeDetailData(id, typeTool, typeNode, mx, my))
+VNodeDetail::VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my, bool reverse)
+    :d(new VNodeDetailData(id, typeTool, typeNode, mx, my, reverse))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,4 +117,30 @@ qreal VNodeDetail::getMy() const
 void VNodeDetail::setMy(const qreal &value)
 {
     d->my = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VNodeDetail::getReverse() const
+{
+    if (getTypeTool() == Tool::NodePoint)
+    {
+        return false;
+    }
+    else
+    {
+        return d->reverse;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeDetail::setReverse(bool reverse)
+{
+    if (getTypeTool() == Tool::NodePoint)
+    {
+        d->reverse = false;
+    }
+    else
+    {
+        d->reverse = reverse;
+    }
 }

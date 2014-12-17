@@ -69,6 +69,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogDetail::BiasYChanged);
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
+    connect(ui.checkBoxReverse, &QCheckBox::clicked, this, &DialogDetail::ClickedReverse);
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
@@ -133,9 +134,10 @@ void DialogDetail::SaveData()
  * @param typeNode type of node in detail
  * @param mx offset respect to x
  * @param my offset respect to y
+ * @param reverse reverse list of points
  */
 void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
-                           qreal mx, qreal my)
+                           qreal mx, qreal my, bool reverse)
 {
     QString name;
     switch (typeTool)
@@ -171,14 +173,27 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
 
     QListWidgetItem *item = new QListWidgetItem(name);
     item->setFont(QFont("Times", 12, QFont::Bold));
-    VNodeDetail node(id, typeTool, typeNode, mx, my);
+    VNodeDetail node(id, typeTool, typeNode, mx, my, reverse);
     item->setData(Qt::UserRole, QVariant::fromValue(node));
     ui.listWidget->addItem(item);
     ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
+
     ui.doubleSpinBoxBiasX->blockSignals(true);
     ui.doubleSpinBoxBiasY->blockSignals(true);
+
     ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
     ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
+    if (node.getTypeTool() == Tool::NodePoint)
+    {
+        ui.checkBoxReverse->setChecked(false);
+        ui.checkBoxReverse->setEnabled(false);
+    }
+    else
+    {
+        ui.checkBoxReverse->setEnabled(true);
+        ui.checkBoxReverse->setChecked(node.getReverse());
+    }
+
     ui.doubleSpinBoxBiasX->blockSignals(false);
     ui.doubleSpinBoxBiasY->blockSignals(false);
 }
@@ -195,7 +210,7 @@ void DialogDetail::setDetails(const VDetail &value)
     for (int i = 0; i < details.CountNode(); ++i)
     {
         NewItem(details.at(i).getId(), details.at(i).getTypeTool(), details.at(i).getTypeNode(), details.at(i).getMx(),
-                details.at(i).getMy());
+                details.at(i).getMy(), details.at(i).getReverse());
     }
     ui.lineEditNameDetail->setText(details.getName());
     ui.checkBoxSeams->setChecked(details.getSeamAllowance());
@@ -261,6 +276,17 @@ void DialogDetail::ClickedClosed(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ClickedReverse(bool checked)
+{
+    qint32 row = ui.listWidget->currentRow();
+    QListWidgetItem *item = ui.listWidget->item( row );
+    SCASSERT(item != nullptr);
+    VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
+    node.setReverse(checked);
+    item->setData(Qt::UserRole, QVariant::fromValue(node));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ObjectChanged changed new object (point, arc, spline or spline path) form list
  * @param row number of row
@@ -271,10 +297,20 @@ void DialogDetail::ObjectChanged(int row)
     {
         return;
     }
-    QListWidgetItem *item = ui.listWidget->item( row );
-    VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
+    const QListWidgetItem *item = ui.listWidget->item( row );
+    const VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
     ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
+    if (node.getTypeTool() == Tool::NodePoint)
+    {
+        ui.checkBoxReverse->setChecked(false);
+        ui.checkBoxReverse->setEnabled(false);
+    }
+    else
+    {
+        ui.checkBoxReverse->setEnabled(true);
+        ui.checkBoxReverse->setChecked(node.getReverse());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

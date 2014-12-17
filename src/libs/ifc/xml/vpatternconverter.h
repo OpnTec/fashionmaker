@@ -48,11 +48,13 @@ protected:
     virtual QString MaxVerStr() const;
 
     QString         XSDSchema(int ver) const;
-    virtual void    ApplyPatches() const;
+    virtual void    ApplyPatches();
 
 private:
     Q_DISABLE_COPY(VPatternConverter)
     static const QString    PatternMinVerStr;
+
+    void ToV0_1_2();
 };
 
 #endif // VPATTERNCONVERTER_H

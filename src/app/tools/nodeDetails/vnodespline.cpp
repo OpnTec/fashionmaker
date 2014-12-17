@@ -220,9 +220,9 @@ void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VNodeSpline::RefreshGeometry()
 {
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    QPainterPath path;
-    path.addPath(spl->GetPath());
-    path.setFillRule( Qt::WindingFill );
-    this->setPath(path);
+//    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+//    QPainterPath path;
+//    path.addPath(spl->GetPath());
+//    path.setFillRule( Qt::WindingFill );
+//    this->setPath(path);
 }

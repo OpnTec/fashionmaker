@@ -38,7 +38,14 @@
 #include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer *data) const
+VEquidistant::VEquidistant(const VContainer *data)
+    :data(data)
+{
+    SCASSERT(data != nullptr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VEquidistant::ContourPath(const quint32 &idDetail) const
 {
     SCASSERT(data != nullptr);
     VDetail detail = data->GetDetail(idDetail);
@@ -62,23 +69,20 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
             }
             break;
             case (Tool::NodeArc):
-            {
-                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(detail.at(i).getId());
-                // Detail points clockwise, but arc we draw counterclockwise. Main contour need reverse.
-                const QVector<QPointF> reversedPoints = GetReversePoint(arc->GetPoints());
-                AddContour(reversedPoints, points, pointsEkv, detail, i);
-            }
-            break;
             case (Tool::NodeSpline):
-            {
-                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(detail.at(i).getId());
-                AddContour(spline->GetPoints(), points, pointsEkv, detail, i);
-            }
-            break;
             case (Tool::NodeSplinePath):
             {
-                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(detail.at(i).getId());
-                AddContour(splinePath->GetPoints(), points, pointsEkv, detail, i);
+                const QSharedPointer<VAbstractCurve> curve=data->GeometricObject<VAbstractCurve>(detail.at(i).getId());
+
+                const QPointF begin = StartSegment(detail, i);
+                const QPointF end = EndSegment(detail, i);
+
+                QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, detail.at(i).getReverse());
+                points << nodePoints;
+                if (detail.getSeamAllowance() == true)
+                {
+                    pointsEkv << biasPoints(nodePoints, detail.at(i).getMx(), detail.at(i).getMy());
+                }
             }
             break;
             default:
@@ -116,17 +120,51 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail, const VContainer
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VEquidistant::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
+QPointF VEquidistant::StartSegment(const VDetail &detail, const int &i) const
 {
-    qreal length = 0;
-    QVector<QPointF> points;
-    points << contour << newPoints;
-    for (qint32 i = 0; i < points.size()-1; ++i)
+    QPointF begin;
+    if (detail.CountNode() > 1)
     {
-        QLineF line(points.at(i), points.at(i+1));
-        length += line.length();
+        if (i == 0)
+        {
+            if (detail.at(detail.CountNode()-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(detail.at(detail.CountNode()-1).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (detail.at(i-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(detail.at(i-1).getId())->toQPointF();
+            }
+        }
     }
-    return qFloor(length);
+    return begin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VEquidistant::EndSegment(const VDetail &detail, const int &i) const
+{
+    QPointF end;
+    if (detail.CountNode() > 2)
+    {
+        if (i == detail.CountNode() - 1)
+        {
+            if (detail.at(0).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(detail.at(0).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (detail.at(i+1).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(detail.at(i+1).getId())->toQPointF();
+            }
+        }
+    }
+    return end;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,18 +359,6 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VEquidistant::GetReversePoint(const QVector<QPointF> &points)
-{
-    SCASSERT(points.size() > 0);
-    QVector<QPointF> reversePoints;
-    for (qint32 i = points.size() - 1; i >= 0; --i)
-    {
-        reversePoints.append(points.at(i));
-    }
-    return reversePoints;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width)
 {
     SCASSERT(width > 0);
@@ -354,15 +380,22 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
         case (QLineF::UnboundedIntersection):
         {
                 QLineF line( line1.p2(), CrosPoint );
-                if (line.length() > width + qApp->toPixel(8))
-                {
-                    QLineF lineL = QLineF(bigLine1.p2(), CrosPoint);
-                    lineL.setLength(width);
-                    points.append(lineL.p2());
+                const qreal length = line.length();
+                if (length > width*2.4)
+                { // Cutting too long an acute angle
+                    line.setLength(width); // Not sure about width value here
+                    QLineF cutLine(line.p2(), CrosPoint); // Cut line is a perpendicular
+                    cutLine.setLength(length); // Decided take this length
 
-                    lineL = QLineF(bigLine2.p1(), CrosPoint);
-                    lineL.setLength(width);
-                    points.append(lineL.p2());
+                    // We do not check intersection type because intersection must alwayse exist
+                    QPointF px;
+                    cutLine.setAngle(cutLine.angle()+90);
+                    bigLine1.intersect( cutLine, &px );
+                    points.append(px);
+
+                    cutLine.setAngle(cutLine.angle()-180);
+                    bigLine2.intersect( cutLine, &px );
+                    points.append(px);
                 }
                 else
                 {
@@ -399,29 +432,4 @@ QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );
     return pLine.p2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VEquidistant::AddContour(const QVector<QPointF> &nodePoints, QVector<QPointF> &points, QVector<QPointF> &pointsEkv,
-                              const VDetail &detail, int i)
-{
-    int len1 = GetLengthContour(points, nodePoints);
-    QVector<QPointF> reversedPoints = GetReversePoint(nodePoints);
-    int lenReverse = GetLengthContour(points, reversedPoints);
-    if (len1 <= lenReverse)
-    {
-        points << nodePoints;
-        if (detail.getSeamAllowance() == true)
-        {
-            pointsEkv << biasPoints(nodePoints, detail.at(i).getMx(), detail.at(i).getMy());
-        }
-    }
-    else
-    {
-        points << reversedPoints;
-        if (detail.getSeamAllowance() == true)
-        {
-            pointsEkv << biasPoints(reversedPoints, detail.at(i).getMx(), detail.at(i).getMy());
-        }
-    }
 }

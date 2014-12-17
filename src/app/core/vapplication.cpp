@@ -516,6 +516,7 @@ void VApplication::ClearOldLogs() const
                 qCDebug(vApp) << "Failed to lock"<<info.absoluteFilePath();
             }
             delete lock;
+            lock = nullptr;
         }
     }
     else

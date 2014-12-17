@@ -74,6 +74,7 @@ public:
     static const QString AttrWidth;
     static const QString AttrIdObject;
     static const QString AttrNodeType;
+    static const QString AttrReverse;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
     static const QString NodeArc;

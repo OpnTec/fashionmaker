@@ -52,6 +52,7 @@ const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
 const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
+const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
 
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
@@ -181,7 +182,8 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        VNodeDetail node(id, detail.at(i).getTypeTool(), NodeDetail::Contour);
+        VNodeDetail node(id, detail.at(i).getTypeTool(), NodeDetail::Contour, detail.at(i).getMx(),
+                         detail.at(i).getMy(), detail.at(i).getReverse());
         det.append(node);
     }
     det.setName(detail.getName());
@@ -455,6 +457,12 @@ void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDet
     doc->SetAttribute(nod, AttrIdObject, node.getId());
     doc->SetAttribute(nod, AttrMx, qApp->fromPixel(node.getMx()));
     doc->SetAttribute(nod, AttrMy, qApp->fromPixel(node.getMy()));
+
+    if (node.getTypeTool() != Tool::NodePoint)
+    {
+        doc->SetAttribute(nod, AttrReverse, static_cast<quint8>(node.getReverse()));
+    }
+
     if (node.getTypeNode() == NodeDetail::Contour)
     {
         doc->SetAttribute(nod, AttrNodeType, NodeTypeContour);
@@ -503,7 +511,7 @@ void VToolDetail::ShowVisualization(bool show)
 void VToolDetail::RefreshGeometry()
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    QPainterPath path = VEquidistant().ContourPath(id, this->getData());
+    QPainterPath path = VEquidistant(this->getData()).ContourPath(id);
     this->setPath(path);
 
     VDetail detail = VAbstractTool::data.GetDetail(id);
@@ -511,6 +519,7 @@ void VToolDetail::RefreshGeometry()
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::DeleteTool(bool ask)
 {
     DeleteDetail *delDet = new DeleteDetail(doc, id);

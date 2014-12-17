@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>565</width>
-    <height>324</height>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -121,6 +121,17 @@
           <widget class="QLabel" name="labelUnitY">
            <property name="text">
             <string>cm</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QCheckBox" name="checkBoxReverse">
+           <property name="text">
+            <string>Reverse</string>
            </property>
           </widget>
          </item>
@@ -243,6 +254,9 @@
               </property>
               <property name="singleStep">
                <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
               </property>
              </widget>
             </item>

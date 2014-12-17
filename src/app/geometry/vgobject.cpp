@@ -350,3 +350,70 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
     *b = p1.x() - line.p2().x();
     *c = - *a * p1.x() - *b * p1.y();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VGObject::PointInSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
+{
+    const qreal eps = 1e-8;
+
+    qreal a = p2.y() - p1.y();
+    qreal b = p1.x() - p2.x();
+    qreal c = - a * p1.x() - b * p1.y();
+    if (qAbs(a * t.x() + b * t.y() + c) > eps)
+    {
+        return false;
+    }
+
+    return PointInBox (t, p1, p2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VGObject::PointInBox(const QPointF &t, const QPointF &p1, const QPointF &p2)
+{
+    const qreal eps = 1e-8;
+
+    return  (qAbs (t.x() - qMin(p1.x(), p2.x())) <= eps || qMin(p1.x(), p2.x()) <= t.x()) &&
+            (qAbs (qMax(p1.x(), p2.x()) - t.x()) <= eps || qMax(p1.x(), p2.x()) >= t.x()) &&
+            (qAbs (t.y() - qMin(p1.y(), p2.y())) <= eps || qMin(p1.y(), p2.y()) <= t.y()) &&
+            (qAbs (qMax(p1.y(), p2.y()) - t.y()) <= eps || qMax(p1.y(), p2.y()) >= t.y());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetReversePoint return revers container of points.
+ * @param points container with points.
+ * @return reverced points.
+ */
+QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
+{
+    if (points.isEmpty())
+    {
+        return points;
+    }
+    QVector<QPointF> reversePoints;
+    for (qint32 i = points.size() - 1; i >= 0; --i)
+    {
+        reversePoints.append(points.at(i));
+    }
+    return reversePoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetLengthContour return length of contour.
+ * @param contour container with points of contour.
+ * @param newPoints point whos we try to add to contour.
+ * @return length length of contour.
+ */
+int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
+{
+    qreal length = 0;
+    QVector<QPointF> points;
+    points << contour << newPoints;
+    for (qint32 i = 0; i < points.size()-1; ++i)
+    {
+        QLineF line(points.at(i), points.at(i+1));
+        length += line.length();
+    }
+    return qFloor(length);
+}

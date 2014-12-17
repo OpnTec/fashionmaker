@@ -516,16 +516,6 @@ void VPattern::DecrementReferens(quint32 id) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief TestUniqueId test exist unique id in pattern file. Each id must be unique.
- */
-void VPattern::TestUniqueId() const
-{
-    QVector<quint32> vector;
-    CollectId(documentElement(), vector);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SPointActiveDraw return id base point current pattern peace.
  * @return id base point.
  */
@@ -717,7 +707,7 @@ MeasurementsType VPattern::MType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::SaveDocument(const QString &fileName, QString &error)
+bool VPattern::SaveDocument(const QString &fileName, QString &error) const
 {
     try
     {
@@ -990,6 +980,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     const quint32 id = GetParametrUInt(element, VToolDetail::AttrIdObject, NULL_ID_STR);
                     const qreal mx = qApp->toPixel(GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                     const qreal my = qApp->toPixel(GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
+                    const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
                     const NodeDetail nodeType = NodeDetail::Contour;
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
@@ -1014,7 +1005,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                             continue;
                             break;
                     }
-                    detail.append(VNodeDetail(id, tool, nodeType, mx, my));
+                    detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
                 }
             }
         }
@@ -2076,36 +2067,6 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetParametrId return value id attribute.
- * @param domElement tag in xml tree.
- * @return id value.
- */
-quint32 VPattern::GetParametrId(const QDomElement &domElement) const
-{
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-
-    quint32 id = 0;
-
-    QString message = tr("Got wrong parameter id. Need only id > 0.");
-    try
-    {
-        id = GetParametrUInt(domElement, VDomDocument::AttrId, NULL_ID_STR);
-        if (id <= 0)
-        {
-            throw VExceptionWrongId(message, domElement);
-        }
-    }
-    catch (const VExceptionConversionError &e)
-    {
-        VExceptionWrongId excep(message, domElement);
-        excep.AddMoreInformation(e.ErrorMessage());
-        throw excep;
-    }
-    return id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QMap<GHeights, bool> VPattern::GetGradationHeights() const
 {
     QMap<GHeights, bool> map;
@@ -2505,34 +2466,6 @@ QString VPattern::GenerateLabel(const LabelType &type) const
     }
     qCDebug(vXML)<<"Got unknow type"<<static_cast<char>(type);
     return QString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CollectId recursive function, try find id attribute in file. Throw exclusion if find not unique.
- * @param node tag in xml tree.
- * @param vector list with ids.
- */
-void VPattern::CollectId(const QDomElement &node, QVector<quint32> &vector) const
-{
-    if (node.hasAttribute(VDomDocument::AttrId))
-    {
-        const quint32 id = GetParametrId(node);
-        if (vector.contains(id))
-        {
-            throw VExceptionWrongId(tr("This id is not unique."), node);
-        }
-        vector.append(id);
-    }
-
-    for (qint32 i=0; i<node.childNodes().length(); ++i)
-    {
-        const QDomNode n = node.childNodes().at(i);
-        if (n.isElement())
-        {
-            CollectId(n.toElement(), vector);
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

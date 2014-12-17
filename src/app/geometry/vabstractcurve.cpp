@@ -52,6 +52,76 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
+{
+    QVector<QPointF> points = GetPoints();
+    if (reverse)
+    {
+        points = GetReversePoints(points);
+    }
+    points = FromBegin(points, begin);
+    points = ToEnd(points, end);
+    return points;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin) const
+{
+    if (points.count() >= 2)
+    {
+        QVector<QPointF> segment;
+        bool theBegin = false;
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            if (theBegin == false)
+            {
+                if (PointInSegment(begin, points.at(i), points.at(i+1)))
+                {
+                    theBegin = true;
+                    segment.append(begin);
+                    if (i == points.count()-2)
+                    {
+                         segment.append(points.at(i+1));
+                    }
+                    continue;
+                }
+            }
+            else
+            {
+                segment.append(points.at(i));
+                if (i == points.count()-2)
+                {
+                     segment.append(points.at(i+1));
+                }
+            }
+        }
+
+        if (segment.isEmpty())
+        {
+            return points;
+        }
+        else
+        {
+            return segment;
+        }
+    }
+    else
+    {
+        return points;
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end) const
+{
+    QVector<QPointF> reversed = GetReversePoints(points);
+    reversed = FromBegin(reversed, end);
+    return GetReversePoints(reversed);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
 {
     QPainterPath path;

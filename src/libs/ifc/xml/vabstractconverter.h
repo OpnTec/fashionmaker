@@ -38,7 +38,8 @@ public:
     VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter();
 
-    void Convert() const;
+    void         Convert();
+    virtual bool SaveDocument(const QString &fileName, QString &error) const;
 
 protected:
     int     ver;
@@ -46,6 +47,8 @@ protected:
 
     int  GetVersion(const QString &version) const;
     void CheckVersion(int ver) const;
+    void Save() const;
+    void SetVersion(const QString &version);
 
     virtual int     MinVer() const =0;
     virtual int     MaxVer() const =0;
@@ -54,7 +57,7 @@ protected:
     virtual QString MaxVerStr() const =0;
 
     virtual QString XSDSchema(int ver) const =0;
-    virtual void    ApplyPatches() const =0;
+    virtual void    ApplyPatches() =0;
 
 private:
     Q_DISABLE_COPY(VAbstractConverter)

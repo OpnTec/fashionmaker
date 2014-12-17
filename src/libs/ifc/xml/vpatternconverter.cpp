@@ -40,8 +40,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.1");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.1");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.1.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.2");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.2.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -87,6 +87,8 @@ QString VPatternConverter::XSDSchema(int ver) const
     switch(ver)
     {
         case (0x000101):
+            return QStringLiteral("://schema/pattern/v0.1.1.xsd");
+        case (0x000102):
             return CurrentSchema;
         default:
         {
@@ -98,13 +100,20 @@ QString VPatternConverter::XSDSchema(int ver) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ApplyPatches() const
+void VPatternConverter::ApplyPatches()
 {
     try
     {
         switch(ver)
         {
             case (0x000101):
+            {
+                ToV0_1_2();
+                const QString schema = XSDSchema(0x000102);
+                ValidateXML(schema, fileName);
+                break;
+            }
+            case (0x000102):
                 break;
             default:
                 break;
@@ -127,4 +136,11 @@ void VPatternConverter::ApplyPatches() const
 
         throw e;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_1_2()
+{
+    SetVersion("0.1.2");
+    Save();
 }
