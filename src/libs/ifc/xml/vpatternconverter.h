@@ -54,7 +54,7 @@ private:
     Q_DISABLE_COPY(VPatternConverter)
     static const QString    PatternMinVerStr;
 
-//    void ToV0_1_2();
+    void ToV0_1_2();
 };
 
 #endif // VPATTERNCONVERTER_H

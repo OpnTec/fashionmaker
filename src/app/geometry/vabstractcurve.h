@@ -45,8 +45,7 @@ public:
     VAbstractCurve& operator= (const VAbstractCurve &curve);
 
     virtual QVector<QPointF> GetPoints() const =0;
-    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end,
-                                              const QVector<QPointF> &contourPoints = QVector<QPointF>()) const;
+    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
 
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual qreal            GetLength() const =0;
@@ -56,8 +55,6 @@ protected:
 private:
     QVector<QPointF>         FromBegin(const QVector<QPointF> &points, const QPointF &begin) const;
     QVector<QPointF>         ToEnd(const QVector<QPointF> &points, const QPointF &end) const;
-    QVector<QPointF>         CorrectAnticlockwise(const QVector<QPointF> &points,
-                                                  const QVector<QPointF> &contourPoints) const;
 };
 
 #endif // VABSTRACTCURVE_H

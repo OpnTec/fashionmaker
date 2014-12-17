@@ -52,13 +52,12 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end,
-                                                  const QVector<QPointF> &contourPoints) const
+QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
 {
     QVector<QPointF> points = GetPoints();
-    if (contourPoints.isEmpty() == false)
+    if (reverse)
     {
-        points = CorrectAnticlockwise(points, contourPoints);
+        points = GetReversePoints(points);
     }
     points = FromBegin(points, begin);
     points = ToEnd(points, end);
@@ -120,23 +119,6 @@ QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPo
     QVector<QPointF> reversed = GetReversePoints(points);
     reversed = FromBegin(reversed, end);
     return GetReversePoints(reversed);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::CorrectAnticlockwise(const QVector<QPointF> &points,
-                                                      const QVector<QPointF> &contourPoints) const
-{
-    const int len1 = GetLengthContour(contourPoints, points);
-    const QVector<QPointF> reversedPoints = GetReversePoints(points);
-    const int lenReverse = GetLengthContour(contourPoints, reversedPoints);
-    if (len1 <= lenReverse)
-    {
-        return points;
-    }
-    else
-    {
-        return reversedPoints;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

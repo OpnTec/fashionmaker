@@ -106,9 +106,6 @@ private:
      */
     static QPointF   SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 
-    static void      AddContourPoints(const QVector<QPointF> &nodePoints, QVector<QPointF> &points,
-                                QVector<QPointF> &pointsEkv, const VDetail &detail, int i);
-
     QPointF StartSegment(const VDetail &detail, const int &i) const;
     QPointF EndSegment(const VDetail &detail, const int &i) const;
 };

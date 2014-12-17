@@ -53,7 +53,7 @@ public:
      * @param mx object bias x axis
      * @param my object bias y axis
      */
-    VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx = 0, qreal my = 0);
+    VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx = 0, qreal my = 0, bool reverse = false);
     /**
      * @brief VNodeDetail copy constructor
      * @param node node
@@ -116,6 +116,9 @@ public:
      * @param value bias y axis.
      */
     void        setMy(const qreal &value);
+
+    bool        getReverse() const;
+    void        setReverse(bool reverse);
 private:
     QSharedDataPointer<VNodeDetailData> d;
 };

@@ -257,7 +257,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
             qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
             break;
     }
-    newDetail.append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour));
+    newDetail.append(VNodeDetail(id, det.at(i).getTypeTool(), NodeDetail::Contour, 0, 0, det.at(i).getReverse()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -694,6 +694,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
                             quint32 id = doc->GetParametrUInt(element, VToolDetail::AttrIdObject, NULL_ID_STR);
                             qreal mx = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                             qreal my = qApp->toPixel(doc->GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
+                            const bool reversed = doc->GetParametrUInt(element, VToolDetail::AttrReverse, "0");
                             Tool tool = Tool::NodePoint;
                             NodeDetail nodeType = NodeDetail::Contour;
                             QString t = doc->GetParametrString(element, "type", "NodePoint");
@@ -713,7 +714,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VPattern *doc, const QDomE
                             {
                                 tool = Tool::NodeSplinePath;
                             }
-                            d.append(VNodeDetail(id, tool, nodeType, mx, my));
+                            d.append(VNodeDetail(id, tool, nodeType, mx, my, reversed));
                         }
                     }
                 }

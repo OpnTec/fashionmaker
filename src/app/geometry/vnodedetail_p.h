@@ -41,15 +41,16 @@ class VNodeDetailData : public QSharedData
 {
 public:
   VNodeDetailData()
-    :id(NULL_ID), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0)
+    :id(NULL_ID), typeTool(Tool::NodePoint), typeNode(NodeDetail::Contour), mx(0), my(0), reverse(false)
   {}
 
-  VNodeDetailData(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my)
-      :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my)
+  VNodeDetailData(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my, bool reverse)
+      :id(id), typeTool(typeTool), typeNode(typeNode), mx(mx), my(my), reverse(reverse)
   {}
 
   VNodeDetailData (const VNodeDetailData& node)
-      :QSharedData(node), id(node.id), typeTool(node.typeTool), typeNode(node.typeNode), mx(node.mx), my(node.my)
+      :QSharedData(node), id(node.id), typeTool(node.typeTool), typeNode(node.typeNode), mx(node.mx), my(node.my),
+        reverse(node.reverse)
   {}
 
   ~VNodeDetailData() {}
@@ -74,6 +75,10 @@ public:
    * @brief my bias y axis.
    */
   qreal       my;
+  /**
+   * @brief reverse true if need reverse points list for node.
+   */
+  bool        reverse;
 };
 
 #ifdef Q_CC_GNU

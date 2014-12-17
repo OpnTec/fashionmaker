@@ -980,6 +980,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     const quint32 id = GetParametrUInt(element, VToolDetail::AttrIdObject, NULL_ID_STR);
                     const qreal mx = qApp->toPixel(GetParametrDouble(element, VAbstractTool::AttrMx, "0.0"));
                     const qreal my = qApp->toPixel(GetParametrDouble(element, VAbstractTool::AttrMy, "0.0"));
+                    const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
                     const NodeDetail nodeType = NodeDetail::Contour;
 
                     const QString t = GetParametrString(element, AttrType, "NodePoint");
@@ -1004,7 +1005,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                             continue;
                             break;
                     }
-                    detail.append(VNodeDetail(id, tool, nodeType, mx, my));
+                    detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
                 }
             }
         }

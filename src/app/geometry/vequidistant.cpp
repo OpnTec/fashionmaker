@@ -77,7 +77,12 @@ QPainterPath VEquidistant::ContourPath(const quint32 &idDetail) const
                 const QPointF begin = StartSegment(detail, i);
                 const QPointF end = EndSegment(detail, i);
 
-                AddContourPoints(curve->GetSegmentPoints(begin, end, points), points, pointsEkv, detail, i);
+                QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, detail.at(i).getReverse());
+                points << nodePoints;
+                if (detail.getSeamAllowance() == true)
+                {
+                    pointsEkv << biasPoints(nodePoints, detail.at(i).getMx(), detail.at(i).getMy());
+                }
             }
             break;
             default:
@@ -427,33 +432,4 @@ QPointF VEquidistant::SingleParallelPoint(const QLineF &line, const qreal &angle
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );
     return pLine.p2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VEquidistant::AddContourPoints(const QVector<QPointF> &nodePoints, QVector<QPointF> &points,
-                                    QVector<QPointF> &pointsEkv, const VDetail &detail, int i)
-{
-    /*
-     * Even if we made correction anticlockwise in method VAbstractCurve::GetSegmentPoints i decided left this check
-     * also here. I think it will make code more bullet proof. If it will slowdown creation contour delete correction.
-     */
-    int len1 = VGObject::GetLengthContour(points, nodePoints);
-    QVector<QPointF> reversedPoints = VGObject::GetReversePoints(nodePoints);
-    int lenReverse = VGObject::GetLengthContour(points, reversedPoints);
-    if (len1 <= lenReverse)
-    {
-        points << nodePoints;
-        if (detail.getSeamAllowance() == true)
-        {
-            pointsEkv << biasPoints(nodePoints, detail.at(i).getMx(), detail.at(i).getMy());
-        }
-    }
-    else
-    {
-        points << reversedPoints;
-        if (detail.getSeamAllowance() == true)
-        {
-            pointsEkv << biasPoints(reversedPoints, detail.at(i).getMx(), detail.at(i).getMy());
-        }
-    }
 }

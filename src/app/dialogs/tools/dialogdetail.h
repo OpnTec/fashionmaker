@@ -50,6 +50,7 @@ public slots:
     void             BiasYChanged(qreal d);
     void             ClickedSeams(bool checked);
     void             ClickedClosed(bool checked);
+    void             ClickedReverse(bool checked);
     void             ObjectChanged(int row);
     void             DeleteItem();
     virtual void     UpdateList();
@@ -73,7 +74,7 @@ private:
     bool             closed;
 
     void             NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
-                             qreal mx = 0, qreal my = 0);
+                             qreal mx = 0, qreal my = 0, bool reverse = false);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
