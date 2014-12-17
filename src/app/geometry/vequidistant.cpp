@@ -375,15 +375,22 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
         case (QLineF::UnboundedIntersection):
         {
                 QLineF line( line1.p2(), CrosPoint );
-                if (line.length() > width + qApp->toPixel(8))
-                {
-                    QLineF lineL = QLineF(bigLine1.p2(), CrosPoint);
-                    lineL.setLength(width);
-                    points.append(lineL.p2());
+                const qreal length = line.length();
+                if (length > width*2.4)
+                { // Cutting too long an acute angle
+                    line.setLength(width); // Not sure about width value here
+                    QLineF cutLine(line.p2(), CrosPoint); // Cut line is a perpendicular
+                    cutLine.setLength(length); // Decided take this length
 
-                    lineL = QLineF(bigLine2.p1(), CrosPoint);
-                    lineL.setLength(width);
-                    points.append(lineL.p2());
+                    // We do not check intersection type because intersection must alwayse exist
+                    QPointF px;
+                    cutLine.setAngle(cutLine.angle()+90);
+                    bigLine1.intersect( cutLine, &px );
+                    points.append(px);
+
+                    cutLine.setAngle(cutLine.angle()-180);
+                    bigLine2.intersect( cutLine, &px );
+                    points.append(px);
                 }
                 else
                 {
