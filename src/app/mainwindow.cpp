@@ -1454,6 +1454,8 @@ void MainWindow::Clear()
     qCDebug(vMainWindow)<<"Reseting main window";
 
     delete lock; // Unlock pattern file
+    lock = nullptr;
+
     ui->actionDetails->setChecked(false);
     ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
@@ -2453,6 +2455,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
                 restoreFiles.append(files.at(i));
             }
             delete lock;
+            lock = nullptr;
         }
 
         // Clearing list after filtering
