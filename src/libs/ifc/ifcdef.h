@@ -30,6 +30,11 @@
 #define IFCDEF_H
 
 #include <csignal>
+#include <QtGlobal>
+
+#ifdef Q_OS_WIN32
+    extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+#endif /*Q_OS_WIN32*/
 
 enum class Unit : char { Mm, Cm, Inch };
 enum class MeasurementsType : char { Standard, Individual };

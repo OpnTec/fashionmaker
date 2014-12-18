@@ -29,7 +29,6 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include <QtGlobal>
 #include "../libs/ifc/ifcdef.h"
 
 #ifdef Q_OS_WIN32
@@ -40,7 +39,6 @@
 #   endif /*Q_CC_MSVC*/
 #   include <windows.h>
 
-extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 #endif /*Q_OS_WIN32*/
 
 class QString;
