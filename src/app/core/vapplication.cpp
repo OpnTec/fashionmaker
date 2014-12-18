@@ -478,6 +478,7 @@ void VApplication::BeginLogging()
     else
     {
         delete log;
+        log = nullptr;
         qCDebug(vApp) << "Error opening log file '" << LogPath() << "'. All debug output redirected to console.";
     }
 }
