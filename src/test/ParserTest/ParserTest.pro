@@ -53,6 +53,11 @@ CONFIG(debug, debug|release){
         *-g++{
         QMAKE_CXXFLAGS += \
             $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+
+        #gcc’s 4.8.0 Address Sanitizer
+        #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
+        QMAKE_CFLAGS+=-fsanitize=address -fno-omit-frame-pointer
+        QMAKE_LFLAGS+=-fsanitize=address
         }
         clang*{
         QMAKE_CXXFLAGS += \

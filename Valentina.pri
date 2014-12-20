@@ -145,12 +145,13 @@ GCC_DEBUG_CXXFLAGS += \
     -Wstrict-overflow=5 \
     -Wundef \
     -Wno-unused \
-    -ftrapv
+    -ftrapv \
+    -fsanitize=address #gcc’s 4.8.0 Address Sanitizer
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
     -O0 \ # Turn off oprimization.
-    $$ISYSTEM \ # Ignore warnings Qt headers.
+    $$ISYSTEM \ # Ignore warnings in Qt headers.
     # Last gdb doesn't show debug symbols with Qt Creator (issue with Python 3 and debug scripts that use Python 2.7).
     # Solution to use older version gdb, that's why we use old standard of debug information.
     -gdwarf-3 \
