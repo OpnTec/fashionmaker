@@ -1001,6 +1001,8 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
     unsigned int	i;
     unsigned int*	faces	= NULL;
 
+    del.num_faces	= 0; //Warning using uninitialized value
+
 #if PREDICATE == EXACT_PREDICATE
     exactinit();
 #endif

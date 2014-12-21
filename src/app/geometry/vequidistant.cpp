@@ -365,7 +365,8 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
     QVector<QPointF> points;
     if (line1.p2() != line2.p2())
     {
-        qDebug()<<"Last point of two lines must be equal.";
+        qDebug()<<"Last points of two lines must be equal.";
+        return QVector<QPointF>();
     }
     QPointF CrosPoint;
     QLineF bigLine1 = ParallelLine(line1, width );
@@ -390,11 +391,19 @@ QVector<QPointF> VEquidistant::EkvPoint(const QLineF &line1, const QLineF &line2
                     // We do not check intersection type because intersection must alwayse exist
                     QPointF px;
                     cutLine.setAngle(cutLine.angle()+90);
-                    bigLine1.intersect( cutLine, &px );
+                    QLineF::IntersectType type = bigLine1.intersect( cutLine, &px );
+                    if (type == QLineF::NoIntersection)
+                    {
+                        qDebug()<<"Couldn't find intersection with cut line.";
+                    }
                     points.append(px);
 
                     cutLine.setAngle(cutLine.angle()-180);
-                    bigLine2.intersect( cutLine, &px );
+                    type = bigLine2.intersect( cutLine, &px );
+                    if (type == QLineF::NoIntersection)
+                    {
+                        qDebug()<<"Couldn't find intersection with cut line.";
+                    }
                     points.append(px);
                 }
                 else

@@ -33,6 +33,7 @@
 #include <QString>
 #include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QVector>
 
 class VGObjectData;
 class QLineF;

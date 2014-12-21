@@ -31,6 +31,7 @@
 
 #include <QException>
 #include <QString>
+#include <QCoreApplication>
 #include "ifcdef.h"
 
 class QWidget;

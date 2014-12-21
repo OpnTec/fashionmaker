@@ -47,7 +47,13 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 VObjEngine::VObjEngine()
     :QPaintEngine(svgEngineFeatures()), stream(nullptr), globalPointsCount(0), outputDevice(nullptr), planeCount(0),
       size(), resolution(96), matrix()
-{}
+{
+    for(int i=0; i < MAX_POINTS; i++)
+    {
+        points[i].x = 0;
+        points[i].y = 0;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjEngine::~VObjEngine()

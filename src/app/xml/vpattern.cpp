@@ -444,7 +444,16 @@ void VPattern::setCurrentData()
             }
             if (tools.size() > 0)
             {
-                ToolExists(id);
+                try
+                {
+                    ToolExists(id);
+                }
+                catch (VExceptionBadId &e)
+                {
+                    qCDebug(vXML)<<"List of tools doesn't containe id="<<id;
+                    return;
+                }
+
                 const VDataTool *vTool = tools.value(id);
                 *data = vTool->getData();
                 qCDebug(vXML)<<"Data successfully updated.";
