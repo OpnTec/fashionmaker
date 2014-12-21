@@ -48,8 +48,10 @@ public:
     virtual void drawPath(const QPainterPath &path);
     virtual Type type() const;
     virtual void drawPoints(const QPointF *points, int pointCount);
+    virtual void drawPoints(const QPoint *points, int pointCount);
     virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr);
     virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode);
+    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode);
 
     QSize getSize() const;
     void setSize(const QSize &value);

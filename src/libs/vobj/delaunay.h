@@ -48,21 +48,21 @@ typedef float	real;
 #endif
 
 typedef struct {
-	real	x, y;
+    real	x, y;
 } del_point2d_t;
 
 typedef struct {
-	/** input points count */
-	unsigned int	num_points;
+    /** input points count */
+    unsigned int	num_points;
 
-	/** the input points */
-	del_point2d_t*	points;
+    /** the input points */
+    del_point2d_t*	points;
 
-	/** number of returned faces */
-	unsigned int	num_faces;
+    /** number of returned faces */
+    unsigned int	num_faces;
 
-	/** the triangles given as a sequence: num verts, verts indices, num verts, verts indices first face is the external face */
-	unsigned int*	faces;
+    /** the triangles given as a sequence: num verts, verts indices, num verts, verts indices first face is the external face */
+    unsigned int*	faces;
 } delaunay2d_t;
 
 typedef int		(*incircle_predicate_t)(del_point2d_t* p0, del_point2d_t* p1, del_point2d_t* p2, del_point2d_t* p3);
@@ -78,7 +78,7 @@ typedef int		(*incircle_predicate_t)(del_point2d_t* p0, del_point2d_t* p1, del_p
  * @pred: incircle predicate
  * @return: the number of created faces
  */
-delaunay2d_t*			delaunay2d_from(del_point2d_t *points, unsigned int num_points, incircle_predicate_t pred);
+delaunay2d_t*			delaunay2d_from(del_point2d_t *points, unsigned int num_points);
 
 /*
  * release a delaunay2d object

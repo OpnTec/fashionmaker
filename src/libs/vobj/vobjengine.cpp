@@ -142,12 +142,12 @@ void VObjEngine::drawPath(const QPainterPath &path)
     }
 
     int offset = 0;
-    delaunay2d_t *res = delaunay2d_from(points, num_points, NULL);//Calculate faces
+    delaunay2d_t *res = delaunay2d_from(points, num_points);//Calculate faces
 
     QPointF	pf[MAX_POINTS];
     bool skipFace=false;//Need skip first face
 
-    for(int i = 0; i < res->num_faces; i++ )
+    for(unsigned int i = 0; i < res->num_faces; i++ )
     {
         if (offset == 0)
         {
@@ -200,6 +200,11 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
     *stream << endl;
 }
 
+void VObjEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine::PolygonDrawMode mode)
+{
+    QPaintEngine::drawPolygon(points, pointCount, mode);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 QPaintEngine::Type VObjEngine::type() const
 {
@@ -218,6 +223,12 @@ void VObjEngine::drawPoints(const QPointF *points, int pointCount)
              << "0.000000" << endl;
         ++globalPointsCount;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VObjEngine::drawPoints(const QPoint *points, int pointCount)
+{
+    QPaintEngine::drawPoints(points, pointCount);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
