@@ -53,7 +53,7 @@ public:
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 private:
-    QVector<QPointF>         FromBegin(const QVector<QPointF> &points, const QPointF &begin) const;
+    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin);
     QVector<QPointF>         ToEnd(const QVector<QPointF> &points, const QPointF &end) const;
 };
 

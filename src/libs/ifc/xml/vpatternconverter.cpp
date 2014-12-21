@@ -94,7 +94,6 @@ QString VPatternConverter::XSDSchema(int ver) const
         {
             const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
             throw VException(errorMsg);
-            break;
         }
     }
 }
@@ -134,7 +133,7 @@ void VPatternConverter::ApplyPatches()
         QFile file(backupFileName);
         file.remove();
 
-        throw e;
+        throw;
     }
 }
 

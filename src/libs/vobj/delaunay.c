@@ -763,7 +763,6 @@ static halfedge_t* del_valid_link( halfedge_t *b )
 {
     point2d_t	*g, *g_p, *d, *d_p;
     halfedge_t	*gd, *dd, *new_gd, *new_dd;
-    int		a;
 
     g	= b->vertex;
     gd	= del_valid_left(b);
@@ -777,7 +776,7 @@ static halfedge_t* del_valid_link( halfedge_t *b )
 
     if( g != g_p && d != d_p )
     {
-        a	= in_circle(g, d, g_p, d_p);
+        int a	= in_circle(g, d, g_p, d_p);
 
         if( a != ON_CIRCLE )
         {
@@ -822,7 +821,6 @@ static halfedge_t* del_valid_link( halfedge_t *b )
 */
 static halfedge_t* del_get_lower_tangent( delaunay_t *left, delaunay_t *right )
 {
-    point2d_t	*pl, *pr;
     halfedge_t	*right_d, *left_d, *new_ld, *new_rd;
     int		sl, sr;
 
@@ -830,8 +828,8 @@ static halfedge_t* del_get_lower_tangent( delaunay_t *left, delaunay_t *right )
     right_d	= right->leftmost_he;
 
     do {
-        pl		= left_d->prev->pair->vertex;
-        pr		= right_d->pair->vertex;
+        point2d_t *pl = left_d->prev->pair->vertex;
+        point2d_t *pr = right_d->pair->vertex;
 
         if( (sl = classify_point_seg(left_d->vertex, right_d->vertex, pl)) == ON_RIGHT ) {
             left_d	= left_d->prev->pair;
@@ -915,13 +913,12 @@ static void del_link( delaunay_t *result, delaunay_t *left, delaunay_t *right )
 void del_divide_and_conquer( delaunay_t *del, int start, int end )
 {
     delaunay_t	left, right;
-    int			i, n;
 
-    n		= (end - start + 1);
+    int n		= (end - start + 1);
 
     if( n > 3 )
     {
-        i		= (n / 2) + (n & 1);
+        int i		= (n / 2) + (n & 1);
         left.points		= del->points;
         right.points	= del->points;
         del_divide_and_conquer( &left, start, start + i - 1 );
@@ -1001,7 +998,7 @@ void del_build_faces( delaunay_t *del )
 delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
     delaunay2d_t*	res	= NULL;
     delaunay_t	del;
-    unsigned int	i, j, fbuff_size = 0;
+    unsigned int	i;
     unsigned int*	faces	= NULL;
 
 #if PREDICATE == EXACT_PREDICATE
@@ -1029,13 +1026,13 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
 
         del_build_faces( &del );
 
-        fbuff_size	= 0;
+        unsigned int fbuff_size	= 0;
         for( i = 0; i < del.num_faces; i++ )
             fbuff_size	+= del.faces[i].num_verts + 1;
 
         faces = (unsigned int*)malloc(sizeof(unsigned int) * fbuff_size);
 
-        j = 0;
+        unsigned int j = 0;
         for( i = 0; i < del.num_faces; i++ )
         {
             halfedge_t	*curr;
