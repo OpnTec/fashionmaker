@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(theme);
     Q_INIT_RESOURCE(flags);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.1");
+    QT_REQUIRE_VERSION(argc, argv, "5.2.0");
 
     VApplication app(argc, argv);
 
