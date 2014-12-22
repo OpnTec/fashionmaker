@@ -40,10 +40,15 @@ VERSION = 2.2.5
 # Set "make install" command for Unix-like systems.
 unix:!macx{
     isEmpty(PREFIX_LIB){
-        contains(QMAKE_HOST.arch, x86_64) {
-            PREFIX_LIB = $$DEFAULT_PREFIX/lib64
+        isEmpty(PREFIX){
+            PR_LIB = $$DEFAULT_PREFIX
         } else {
-            PREFIX_LIB = $$DEFAULT_PREFIX/lib
+            PR_LIB = $$PREFIX
+        }
+        contains(QMAKE_HOST.arch, x86_64) {
+            PREFIX_LIB = $$PR_LIB/lib64
+        } else {
+            PREFIX_LIB = $$PR_LIB/lib
         }
     }
     target.path = $$PREFIX_LIB
