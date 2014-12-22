@@ -1,18 +1,14 @@
 <services>                   
   <service name="tar_scm">
   	<param name="url">https://github.com/dismine/Valentina.git</param>
-  	<param name="versionprefix">0.2.8-alpha</param>
+  	<param name="versionprefix">0.2.8</param>
     <param name="filename">valentina</param>
-    <param name="branch">master</param>
   	<param name="scm">git</param>
+    <param name="versionformat">%at</param>
   </service>
-  <service name="extract_file">
+  <service name="extract_file" mode="disabled">
     <param name="archive">*.tar</param>
     <param name="files">*/dist/rpm/valentina.spec</param>
-  </service>
-  <service name="recompress">
-    <param name="file">*.tar</param>
-    <param name="compression">gz</param>
   </service>
   <service name="set_version"/>
 </services>

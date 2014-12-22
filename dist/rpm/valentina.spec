@@ -2,7 +2,7 @@ Name:valentina
 
 # Fedora specifics
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
-BuildRequires:  pkgconfig(Qt5Core) libqt5-qttools >= 5.2.0 libQtSvg-devel >= 5.2.0 ccache
+BuildRequires:  pkgconfig(Qt5Core) pkgconfig(Qt5Gui) pkgconfig(Qt5Network) pkgconfig(Qt5PrintSupport) pkgconfig(Qt5Widgets) pkgconfig(Qt5Xml) ccache
 %endif
 
 # SUSE Specifics
@@ -11,10 +11,11 @@ BuildRequires:  libqt5-qtbase-devel >= 5.2.0 libqt5-qttools >= 5.2.0 libQt5Svg-d
 %endif
 
 Version:	0.2.8
-Release:	1
+Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
 Source0:	%{name}-%{version}.tar
+Requires:   poppler-utils
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
@@ -68,4 +69,5 @@ ldconfig
 %changelog
 * Mon Dec 22 2014 Roman Telezhinskyi
  - Initial build
+
 
