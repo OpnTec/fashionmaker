@@ -2,68 +2,70 @@ Name:valentina
 
 # Fedora specifics
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
-BuildRequires:  pkgconfig(Qt5Core) libqt5-qttools >= 5.0.0 libQtSvg-devel >= 5.0.0 ccache
+BuildRequires:  pkgconfig(Qt5Core) libqt5-qttools >= 5.2.0 libQtSvg-devel >= 5.2.0 ccache
 %endif
 
 # SUSE Specifics
 %if 0%{?suse_version} > 0
-BuildRequires:  libqt5-qtbase-devel >= 5.0.0 libqt5-qttools >= 5.0.0 libQt5Svg-devel >= 5.0.0 ccache update-desktop-files
+BuildRequires:  libqt5-qtbase-devel >= 5.2.0 libqt5-qttools >= 5.2.0 libQt5Svg-devel >= 5.2.0 ccache update-desktop-files
 %endif
 
-Version:	0.2.2
+Version:	0.2.8
 Release:	1
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
-Source0:	%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar
 Group:		Graphics
 Summary:	Pattern Making Application
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build 
-Packager:       Roman Telezhinsky <dismine@gmail.com>   
+BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
+Packager:   Roman Telezhinskyi <dismine@gmail.com>   
 
 %description
-Open source project of creating a pattern making program, whose allow 
-create and modeling patterns of clothing.
+Valentina is a cross-platform patternmaking program which allows designers 
+to create and model patterns of clothing. This software allows pattern 
+creation, using either standard sizing tables or an individual’s set of 
+measurements. It blends new technologies with traditional methods to create 
+a unique pattern making tool. 
 
 %prep
 %setup -q -n %{name}-%{version}
 
 %build
-qmake-qt5
+qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r
 %{__make} %{?jobs:-j %jobs}
 
 %install
-mkdir -p $RPM_BUILD_ROOT/usr/{bin,share}
-mkdir -p $RPM_BUILD_ROOT/usr/share/%{name}/translations
-%{__install} -Dm 755 -s bin/%{name} %{buildroot}%{_bindir}/%{name}
-%{__install} -Dm 644 dist/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
-%{__install} -Dm 644 dist/%{name}.png %{buildroot}%{_datadir}/pixmaps/%{name}.png
-%{__install} -Dm 644 dist/%{name}.1.gz %{buildroot}%{_mandir}/man1/%{name}.1.gz
-%{__install} -Dm 644 share/translations/valentina_uk.qm %{buildroot}%{_datadir}/%{name}/translations/valentina_uk.qm
-%{__install} -Dm 644 share/translations/valentina_ru.qm %{buildroot}%{_datadir}/%{name}/translations/valentina_ru.qm
+%{__make} install
+gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
+%{__install} -Dm 644 dist/debian/%{name}.1.gz %{buildroot}%{_mandir}/man1/%{name}.1.gz
+
 %if 0%{?suse_version} > 0
 %suse_update_desktop_file -r %{name} VectorGraphics
 %endif
 
-%clean
-[ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
-
 
 %files
 %defattr(-,root,root,-)
-%doc README LICENSE 
+%doc README.txt LICENSE_GPL.txt 
 %doc %{_mandir}/man1/%{name}.1.gz
 %{_bindir}/*
+%{_libdir}/*
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/%{name}.png
-%{_datadir}/%{name}/translations/valentina_uk.qm
-%{_datadir}/%{name}/translations/valentina_ru.qm
+%{_datadir}/pixmaps/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
+%{_datadir}/%{name}/translations/*.qm
+%dir %{_datadir}/%{name}/tables/standard
+%{_datadir}/%{name}/tables/standard/*.vst
+
+%clean
+[ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
+
+%post
+ldconfig
 
 
 %changelog
-* Mon Dec 9 2013 Roman Telezhinsky
+* Mon Dec 22 2014 Roman Telezhinskyi
  - Initial build
-
-
 

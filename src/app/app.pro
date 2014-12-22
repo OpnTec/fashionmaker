@@ -178,13 +178,14 @@ unix{
         # Path to bin file after installation
         target.path = $$PREFIX/bin
 
-        # .desctop file
+        # .desktop file
         desktop.path = $$DATADIR/applications/
         desktop.files += ../../dist/$${TARGET}.desktop
 
         # logo
         pixmaps.path = $$DATADIR/pixmaps/
-        pixmaps.files += ../../dist/$${TARGET}.png
+        pixmaps.files += ../../dist/$${TARGET}.png \
+                         ../../dist/application-x-valentina-pattern.png
 
         # Path to translation files after installation
         translations.path = $$DATADIR/$${TARGET}/translations/
