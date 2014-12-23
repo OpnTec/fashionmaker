@@ -2,12 +2,27 @@ Name:valentina
 
 # Fedora specifics
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
-BuildRequires:  pkgconfig(Qt5Core) pkgconfig(Qt5Gui) pkgconfig(Qt5Network) pkgconfig(Qt5PrintSupport) pkgconfig(Qt5Widgets) pkgconfig(Qt5Xml) ccache
+BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(Qt5Gui)
+BuildRequires: pkgconfig(Qt5Network)
+BuildRequires: pkgconfig(Qt5PrintSupport)
+BuildRequires: pkgconfig(Qt5Widgets)
+BuildRequires: pkgconfig(Qt5Xml)
+BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
+BuildRequires: qt5-qtsvg-devel >= 5.2.0
+BuildRequires: qt5-qttools-devel >= 5.2.0
+BuildRequires: ccache
 %endif
 
 # SUSE Specifics
 %if 0%{?suse_version} > 0
-BuildRequires:  libqt5-qtbase-devel >= 5.2.0 libqt5-qttools >= 5.2.0 libQt5Svg-devel >= 5.2.0 ccache update-desktop-files
+BuildRequires: libqt5-qtbase-devel
+BuildRequires: libqt5-qttools
+BuildRequires: libQt5Svg-devel
+BuildRequires: libqt5-qtxmlpatterns-devel
+BuildRequires: libqt5-linguist-devel
+BuildRequires: ccache
+BuildRequires: update-desktop-files
 %endif
 
 Version:	0.2.8
@@ -32,7 +47,11 @@ a unique pattern making tool.
 %setup -q -n %{name}-%{version}
 
 %build
-qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r
+%if 0%{?suse_version} >= 1320
+qmake-qt5 PREFIX=%{buildroot}%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r
+%else
+qmake-qt5 PREFIX=%{buildroot}%{_prefix} Valentina.pro -r
+%endif
 %{__make} %{?jobs:-j %jobs}
 
 %install
@@ -56,6 +75,7 @@ gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/*.qm
+%dir %{_datadir}/%{name}/tables
 %dir %{_datadir}/%{name}/tables/standard
 %{_datadir}/%{name}/tables/standard/*.vst
 
@@ -69,5 +89,6 @@ ldconfig
 %changelog
 * Mon Dec 22 2014 Roman Telezhinskyi
  - Initial build
+
 
 
