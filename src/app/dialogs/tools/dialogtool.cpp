@@ -410,11 +410,14 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
     QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object);
     if (plainTextEdit != nullptr)
     {
-        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-        if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
+        if (event->type() == QEvent::KeyPress)
         {
-            // Ignore Enter key
-            return true;
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if ((keyEvent->key() == Qt::Key_Enter) || (keyEvent->key() == Qt::Key_Return))
+            {
+                // Ignore Enter key
+                return true;
+            }
         }
     }
     else
