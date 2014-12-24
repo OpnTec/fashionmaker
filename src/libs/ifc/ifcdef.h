@@ -59,7 +59,7 @@ static const quint32 null_id = 0;
  * 4. Continue to debug after failed assertion on Linux? [C/C++] -
  * https://stackoverflow.com/questions/1721543/continue-to-debug-after-failed-assertion-on-linux-c-c
  */
-#ifndef QT_NO_DEBUG
+#ifndef V_NO_ASSERT
 #ifdef Q_OS_WIN32
 #ifdef Q_CC_MSVC
 #define SCASSERT(cond)                                      \
