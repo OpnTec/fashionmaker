@@ -1340,6 +1340,7 @@ bool MainWindow::SaveAs()
     {
         fileName += ".val";
     }
+    const QString oldFileName = curFile;
     QString error;
     bool result = SavePattern(fileName, error);
     if (result == false)
@@ -1351,6 +1352,13 @@ bool MainWindow::SaveAs()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+    }
+    if (oldFileName != curFile)
+    {// Now we have new file name after save as.
+     // But still have previous name in restore list. We should delete them.
+        QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
+        restoreFiles.removeAll(oldFileName);
+        qApp->getSettings()->SetRestoreFileList(restoreFiles);
     }
     return result;
 }
