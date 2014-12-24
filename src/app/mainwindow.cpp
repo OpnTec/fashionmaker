@@ -2577,7 +2577,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
     if (index != -1)
     {
         doc->ChangeActivPP(comboBoxDraws->itemText(index));
-        doc->setCurrentData();
+        doc->LiteParseTree(Document::LiteParse);
         emit RefreshHistory();
         if (drawMode)
         {
