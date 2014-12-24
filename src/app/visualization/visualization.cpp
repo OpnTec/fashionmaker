@@ -178,6 +178,7 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
 
     lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
     lineItem->setLine(line);
+    lineItem->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,4 +189,5 @@ void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &pa
 
     pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style, cap));
     pathItem->setPath(path);
+    pathItem->setVisible(true);
 }

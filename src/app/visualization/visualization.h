@@ -101,6 +101,7 @@ protected:
         item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
         item->setZValue(1);
         item->setFlags(QGraphicsItem::ItemStacksBehindParent);
+        item->setVisible(false);
         return item;
     }
 private:
