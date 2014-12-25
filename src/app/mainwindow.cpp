@@ -1034,12 +1034,14 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CanselTool cansel tool.
+ * @brief CancelTool cancel tool.
  */
 void MainWindow::CancelTool()
 {
+    qCDebug(vMainWindow)<<"Canceling tool.";
     delete dialogTool;
     dialogTool = nullptr;
+    qCDebug(vMainWindow)<<"Dialog closed.";
     switch ( tool )
     {
         case Tool::Arrow:
@@ -1171,6 +1173,7 @@ void MainWindow::CancelTool()
  */
 void  MainWindow::ArrowTool()
 {
+    qCDebug(vMainWindow)<<"Arrow tool.";
     CancelTool();
     ui->actionArrowTool->setChecked(true);
     ui->actionStopTool->setEnabled(false);
@@ -1459,18 +1462,22 @@ void MainWindow::OnlineHelp()
  */
 void MainWindow::Clear()
 {
-    qCDebug(vMainWindow)<<"Reseting main window";
+    qCDebug(vMainWindow)<<"Reseting main window.";
 
     delete lock; // Unlock pattern file
     lock = nullptr;
+    qCDebug(vMainWindow)<<"Unlocked pattern file.";
 
     ui->actionDetails->setChecked(false);
     ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
     ui->actionDraw->setEnabled(false);
-    setCurrentFile("");
+    qCDebug(vMainWindow)<<"Returned to Draw mode.";
+    setCurrentFile(QString());
     pattern->Clear();
+    qCDebug(vMainWindow)<<"Clearing pattern.";
     doc->clear();
+    qCDebug(vMainWindow)<<"Clearing scenes.";
     sceneDraw->clear();
     sceneDetails->clear();
     ArrowTool();
@@ -2038,6 +2045,7 @@ void MainWindow::AutoSavePattern()
  */
 void MainWindow::setCurrentFile(const QString &fileName)
 {
+    qCDebug(vMainWindow)<<"Set current name to \""<<fileName<<"\"";
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
@@ -2048,6 +2056,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     }
     else
     {
+        qCDebug(vMainWindow)<<"Updating recent file list.";
         QStringList files = qApp->getSettings()->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -2059,6 +2068,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
         qApp->getSettings()->SetRecentFileList(files);
         UpdateRecentFileActions();
 
+        qCDebug(vMainWindow)<<"Updating restore file list.";
         QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
@@ -2135,6 +2145,7 @@ bool MainWindow::MaybeSave()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateRecentFileActions()
 {
+    qCDebug(vMainWindow)<<"Updating recent file actions.";
     const QStringList files = qApp->getSettings()->GetRecentFileList();
     const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
