@@ -2140,6 +2140,10 @@ void VApplication::GatherLogs() const
                         *out << "Log file error:" + logFile.errorString() << endl;
                     }
                 }
+                else
+                {
+                    *out << "Could not lock" << info.absoluteFilePath() << ".";
+                }
                 delete logLock;
             }
         }
