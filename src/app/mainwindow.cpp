@@ -2095,6 +2095,7 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
+    qCDebug(vMainWindow)<<"Reading settings.";
     restoreGeometry(qApp->getSettings()->GetGeometry());
     restoreState(qApp->getSettings()->GetWindowState());
 
@@ -2215,6 +2216,7 @@ void MainWindow::AddDocks()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PropertyBrowser()
 {
+    qCDebug(vMainWindow)<<"Initialization property browser.";
     toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
 
     connect(ui->view, &VMainGraphicsView::itemClicked, toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
