@@ -30,6 +30,7 @@
 #include <QKeyEvent>
 #include "../../geometry/vpointf.h"
 #include "../../visualization/vgraphicssimpletextitem.h"
+#include "../../undocommands/movelabel.h"
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 
@@ -121,13 +122,9 @@ void VToolPoint::NameChangePosition(const QPointF &pos)
  */
 void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(mx));
-        doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(my));
-        emit toolhaveChange();
-    }
+    MoveLabel *moveLabel = new MoveLabel(doc, mx, my, id, this->scene());
+    connect(moveLabel, &MoveLabel::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

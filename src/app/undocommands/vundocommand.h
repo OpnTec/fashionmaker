@@ -46,7 +46,8 @@ enum class UndoCommand: char { AddPatternPiece,
                                MoveDetail,
                                DeleteTool,
                                DeletePatternPiece,
-                               RenamePP
+                               RenamePP,
+                               MoveLabel
                              };
 
 class VPattern;
