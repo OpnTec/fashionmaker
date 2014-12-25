@@ -161,6 +161,7 @@ void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line,
         axis.setLength(axis.length()+arrow_step);
     }
     item->setPath(path);
+    item->setVisible(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
