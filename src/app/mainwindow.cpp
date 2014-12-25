@@ -2039,7 +2039,7 @@ void MainWindow::AutoSavePattern()
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     curFile = fileName;
-    setWindowModified(false);
+    qApp->getUndoStack()->setClean();
 
     QString shownName = strippedName(curFile);
     if (curFile.isEmpty())
