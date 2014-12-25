@@ -45,7 +45,7 @@ class QString;
 class QStringList;
 
 #define SceneSize 50000
-#define DefPointRadius 2.0//mm
+#define DefPointRadius 1.5//mm
 
 extern const QString nameRegExp;
 extern const QString degreeSymbol;
