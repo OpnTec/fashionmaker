@@ -117,7 +117,7 @@ QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsIte
 //---------------------------------------------------------------------------------------------------------------------
 QRectF Visualization::PointRect(const qreal &radius) const
 {
-    QRectF rec = QRectF(0, 0, radius*2/factor, radius*2/factor);
+    QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     return rec;
 }
