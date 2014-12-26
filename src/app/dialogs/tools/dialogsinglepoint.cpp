@@ -36,7 +36,7 @@
  * @param parent parent widget
  */
 DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSinglePoint), name(QString()), point(QPointF())
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSinglePoint), point(QPointF())
 {
     ui->setupUi(this);
     ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));
@@ -44,10 +44,10 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &tool
     labelEditNamePoint = ui->labelEditName;
     InitOkCancel(ui);
 
-    flagName = false;
+    flagName = true;
     CheckState();
 
-    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogSinglePoint::NamePointChanged);
+    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogTool::NamePointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ void DialogSinglePoint::mousePress(const QPointF &scenePos)
 void DialogSinglePoint::SaveData()
 {
     point = QPointF(qApp->toPixel(ui->doubleSpinBoxX->value()), qApp->toPixel(ui->doubleSpinBoxY->value()));
-    name = ui->lineEditName->text();
+    pointName = ui->lineEditName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ void DialogSinglePoint::UpdateList()
  */
 void DialogSinglePoint::setData(const QString &name, const QPointF &point)
 {
-    this->name = name;
+    pointName = name;
     this->point = point;
     isInitialized = true;
     ui->lineEditName->setText(name);

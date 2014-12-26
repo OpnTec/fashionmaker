@@ -62,9 +62,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogSinglePoint *ui;
 
-    /** @brief name name of point */
-    QString        name;
-
     /** @brief point data of point */
     QPointF        point;
 };
@@ -76,7 +73,7 @@ private:
  */
 inline QString DialogSinglePoint::getName() const
 {
-    return name;
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

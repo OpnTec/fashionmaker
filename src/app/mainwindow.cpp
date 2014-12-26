@@ -1407,6 +1407,7 @@ bool MainWindow::Save()
  */
 void MainWindow::Open()
 {
+    qCDebug(vMainWindow)<<"Openning new file.";
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
     const QStringList files = qApp->getSettings()->GetRecentFileList();
