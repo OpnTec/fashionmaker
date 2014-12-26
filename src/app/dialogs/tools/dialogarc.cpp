@@ -117,7 +117,10 @@ void DialogArc::DeployF2TextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogArc::~DialogArc()
 {
-    delete path;
+    if (qApp->getCurrentScene()->items().contains(path))
+    { // In some cases scene delete object yourself. If not make check program will crash.
+        delete path;
+    }
     delete ui;
 }
 

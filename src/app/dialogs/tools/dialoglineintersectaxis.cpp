@@ -81,7 +81,10 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersectAxis::~DialogLineIntersectAxis()
 {
-    delete line;
+    if (qApp->getCurrentScene()->items().contains(line))
+    { // In some cases scene delete object yourself. If not make check program will crash.
+        delete line;
+    }
     delete ui;
 }
 

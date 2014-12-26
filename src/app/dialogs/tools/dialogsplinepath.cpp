@@ -65,7 +65,10 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
 //---------------------------------------------------------------------------------------------------------------------
 DialogSplinePath::~DialogSplinePath()
 {
-    delete visPath;
+    if (qApp->getCurrentScene()->items().contains(visPath))
+    { // In some cases scene delete object yourself. If not make check program will crash.
+        delete visPath;
+    }
     delete ui;
 }
 

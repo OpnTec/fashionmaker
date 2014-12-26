@@ -96,7 +96,10 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfContact::~DialogPointOfContact()
 {
-    delete line;
+    if (qApp->getCurrentScene()->items().contains(line))
+    { // In some cases scene delete object yourself. If not make check program will crash.
+        delete line;
+    }
     delete ui;
 }
 

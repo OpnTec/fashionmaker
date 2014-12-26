@@ -72,7 +72,10 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
 //---------------------------------------------------------------------------------------------------------------------
 DialogTriangle::~DialogTriangle()
 {
-    delete line;
+    if (qApp->getCurrentScene()->items().contains(line))
+    { // In some cases scene delete object yourself. If not make check program will crash.
+        delete line;
+    }
     delete ui;
 }
 
