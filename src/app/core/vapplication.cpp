@@ -2280,7 +2280,15 @@ void VApplication::SendReport(const QString &reportName) const
     QFile logFile(QString("%1/valentina.log").arg(LogDirPath()));
     if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        content.append(ReadFileForSending(logFile));
+        const QString logContent = ReadFileForSending(logFile);
+        if (logContent.isEmpty())
+        {
+            content.append("Log file is empty.");
+        }
+        else
+        {
+            content.append(logContent);
+        }
         logFile.close();
     }
     else
