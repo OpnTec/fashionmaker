@@ -293,7 +293,7 @@ void VNodePoint::RefreshLine()
     VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4))
+    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
     {
         lineName->setVisible(false);
     }
