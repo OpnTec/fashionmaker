@@ -26,6 +26,9 @@
  **
  *************************************************************************/
 
+#include <QSysInfo>
+#include <QCoreApplication>
+
 #ifndef VERSION_H
 #define VERSION_H
 
@@ -55,5 +58,8 @@ extern const QString APP_VERSION;
 #define VER_PRODUCTNAME_STR         "Valentina"
 
 #define VER_COMPANYDOMAIN_STR       "www.valentina-project.org"
+
+QString compilerString();
+QString buildCompatibilityString();
 
 #endif // VERSION_H

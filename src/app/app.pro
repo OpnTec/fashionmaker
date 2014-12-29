@@ -102,9 +102,10 @@ CONFIG(debug, debug|release){
         }
     }
 
-    #Calculate revision number only in release mode. Change revision number each time requare recompilation
-    #precompiled headers file.
-    DEFINES += "LOC_REV=0"
+    #Calculate latest tag distance and build revision only in release mode. Change number each time requare
+    #recompilation precompiled headers file.
+    DEFINES += "LATEST_TAG_DISTANCE=0"
+    DEFINES += "BUILD_REVISION=\\\"uknown\\\""
 }else{
     # Release mode
     DEFINES += V_NO_ASSERT
@@ -120,12 +121,19 @@ CONFIG(debug, debug|release){
         QMAKE_LFLAGS_RELEASE =
     }
 
-    #local revision number for using in version
-    HG_REV=$$system(hg parents --template '{rev}')
-    isEmpty(HG_REV){
-        HG_REV = 0 # if we can't find local revision left 0.
+    #latest tag distance number for using in version
+    HG_DISTANCE=$$system(hg log -r tip --template '{latesttagdistance}')
+    isEmpty(HG_DISTANCE){
+        HG_DISTANCE = 0 # if we can't find local revision left 0.
     }
-    DEFINES += "LOC_REV=$${HG_REV}" # Make available local revision number in sources.
+    DEFINES += "LATEST_TAG_DISTANCE=$${HG_DISTANCE}" # Make available latest tag distance number in sources.
+
+    #build revision number for using in version
+    HG_HESH=$$system("hg log -r tip --template '{node|short}'")
+    isEmpty(HG_HESH){
+        HG_HESH = "unknown" # if we can't find build revision left unknown.
+    }
+    DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
 
 # Some extra information about Qt. Can be usefull.

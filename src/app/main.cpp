@@ -71,7 +71,8 @@ int main(int argc, char *argv[])
     app.StartLogging();
 
     qDebug()<<"Version:"<<APP_VERSION;
-    qDebug()<<"Based on Qt "<<QT_VERSION_STR<<"(32 bit)";
+    qDebug()<<"Build revision:"<<BUILD_REVISION;
+    qDebug()<<buildCompatibilityString();
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
     qDebug()<<"Command-line arguments:"<<app.arguments();
     qDebug()<<"Process ID:"<<app.applicationPid();
