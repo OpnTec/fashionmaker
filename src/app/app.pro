@@ -126,13 +126,20 @@ CONFIG(debug, debug|release){
     isEmpty(HG_DISTANCE){
         HG_DISTANCE = 0 # if we can't find local revision left 0.
     }
+    message("Latest tag distance:" $${HG_DISTANCE})
     DEFINES += "LATEST_TAG_DISTANCE=$${HG_DISTANCE}" # Make available latest tag distance number in sources.
 
     #build revision number for using in version
-    HG_HESH=$$system("hg log -r tip --template '{node|short}'")
+    unix {
+        HG_HESH=$$system("hg log -r tip --template '{node|short}'")
+    } else {
+        # Use escape character before "|" on Windows
+        HG_HESH=$$system(hg log -r tip --template "{node^|short}")
+    }
     isEmpty(HG_HESH){
         HG_HESH = "unknown" # if we can't find build revision left unknown.
     }
+    message("Build revision:" $${HG_HESH})
     DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
 
