@@ -48,6 +48,8 @@ private:
     Ui::DialogAboutApp *ui;
     Q_DISABLE_COPY(DialogAboutApp)
 
+    void FontPointSize(QWidget *w, int pointSize);
+
 private slots:
     void webButtonClicked();
 };

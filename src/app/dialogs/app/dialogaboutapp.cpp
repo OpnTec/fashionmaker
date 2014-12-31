@@ -32,6 +32,7 @@
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
+#include "../../options.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
@@ -52,15 +53,31 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
                                                            "KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY "
                                                            "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
+
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, &DialogAboutApp::webButtonClicked );
 
+    // By default on Windows font point size 8 points we need 11 like on Linux.
+    FontPointSize(ui->label_Legal_Stuff, 11);
+    FontPointSize(ui->label_contrib_label, 11);
+    FontPointSize(ui->label_Valentina_Built, 11);
+    FontPointSize(ui->label_QT_Version, 11);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::~DialogAboutApp()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAboutApp::FontPointSize(QWidget *w, int pointSize)
+{
+    SCASSERT(w != nullptr);
+
+    QFont font = w->font();
+    font.setPointSize(pointSize);
+    w->setFont(font);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
