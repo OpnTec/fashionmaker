@@ -37,10 +37,10 @@ extern const int DEBUG_VERSION;
 
 extern const QString APP_VERSION;
 
-// Change version number in version.cpp also.
+// Change version number in version.cpp too.
 
-#define VER_FILEVERSION             0,2,8,0
-#define VER_FILEVERSION_STR         "0.2.8.0\0"
+#define VER_FILEVERSION             0,2,9,0
+#define VER_FILEVERSION_STR         "0.2.9.0\0"
 
 #define VER_PRODUCTVERSION          VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
@@ -48,7 +48,7 @@ extern const QString APP_VERSION;
 #define VER_COMPANYNAME_STR         "ValentinaTeam"
 #define VER_FILEDESCRIPTION_STR     "Patternmaking program."
 #define VER_INTERNALNAME_STR        "Valentina"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014 Valentina Team"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014-2015 Valentina Team"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
 #define VER_ORIGINALFILENAME_STR    "valentina.exe"
