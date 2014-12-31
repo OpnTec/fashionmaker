@@ -26,9 +26,6 @@
  **
  *************************************************************************/
 
-#include <QSysInfo>
-#include <QCoreApplication>
-
 #ifndef VERSION_H
 #define VERSION_H
 

@@ -29,6 +29,7 @@
 #include "version.h"
 #include <QString>
 #include <QApplication>
+#include <QSysInfo>
 
 extern const int MAJOR_VERSION = 0;
 extern const int MINOR_VERSION = 2;
