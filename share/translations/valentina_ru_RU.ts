@@ -239,7 +239,7 @@
     </message>
     <message>
         <source>Based on Qt %2 (32 bit)</source>
-        <translation>Базируется на Qt %2 (32 bit)</translation>
+        <translation type="vanished">Базируется на Qt %2 (32 bit)</translation>
     </message>
     <message>
         <source>Built on %3 at %4</source>
@@ -256,6 +256,10 @@
     <message>
         <source>Cannot open your default browser</source>
         <translation>Не могу открыть браузер по умолчанию</translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation>Резвизия:</translation>
     </message>
 </context>
 <context>
@@ -1084,6 +1088,10 @@
     <message>
         <source>Got wrong tools. Ignore.</source>
         <translation type="vanished">Получен не правильный инструмент. Игнорируем.</translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation>Изменить направление</translation>
     </message>
 </context>
 <context>
@@ -6759,6 +6767,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>MoveLabel</name>
+    <message>
+        <source>Move point label</source>
+        <translation>Переместить метку точки</translation>
+    </message>
+</context>
+<context>
     <name>MoveSPoint</name>
     <message>
         <source>Move single point</source>
@@ -6908,6 +6923,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Arguments:</source>
         <translation type="vanished">Аргументы:</translation>
+    </message>
+</context>
+<context>
+    <name>QCoreApplication</name>
+    <message>
+        <source>Based on Qt %1 (%2, %3 bit)</source>
+        <translation>Базируется на Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -7298,6 +7320,49 @@ Do you want to save your changes?</source>
         <source>An SVG drawing created by the SVG Generator Example provided with Qt.</source>
         <translation type="vanished">An SVG drawing created by the SVG Generator Example provided with Qt.</translation>
     </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation>Wavefront OBJ (*.obj)</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractConverter</name>
+    <message>
+        <source>Error creation backup file: %1.</source>
+        <translation>Ошибка создания резервного файла: %1.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t get version information.</source>
+        <translation>Не удалось получить информацию о версии.</translation>
+    </message>
+    <message>
+        <source>Too many tags &lt;%1&gt; in file.</source>
+        <translation>Слишком много тегов &lt;%1&gt; в файле.</translation>
+    </message>
+    <message>
+        <source>Version &quot;%1&quot; invalid.</source>
+        <translation>Версия &quot;%1&quot; недействительная</translation>
+    </message>
+    <message>
+        <source>Version &quot;0.0.0&quot; invalid.</source>
+        <translation>Версия &quot;0.0.0&quot; недействительная.</translation>
+    </message>
+    <message>
+        <source>Invalid version. Minimum supported version is %1</source>
+        <translation>Недействительная версия. Минимально поддерживаемая %1</translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported version is %1</source>
+        <translation>Недействительная версия. Максимально поддерживаемая %1</translation>
+    </message>
+    <message>
+        <source>Error no unique id.</source>
+        <translation>Ошибка не уникальный id.</translation>
+    </message>
+    <message>
+        <source>Could not change version.</source>
+        <translation>Не удалось изменить версию.</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractNode</name>
@@ -7349,11 +7414,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation>Не удалось скопировать временный файл в выходной файл</translation>
+        <translation type="vanished">Не удалось скопировать временный файл в выходной файл</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
-        <translation>Не удалось удалить файл документа.</translation>
+        <translation type="vanished">Не удалось удалить файл документа.</translation>
     </message>
     <message>
         <source>Something wrong!!</source>
@@ -7394,7 +7459,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
+        <translation>Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toLongLong parameter</source>
@@ -7449,7 +7514,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="vanished">Этот id не уникальный.</translation>
+        <translation>Этот id не уникальный.</translation>
     </message>
     <message>
         <source>Error creating or updating detail</source>
@@ -7558,6 +7623,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not load schema file.</source>
         <translation>Неудалось открыть файл схемы.</translation>
+    </message>
+    <message>
+        <source>Could not copy temp file to document file</source>
+        <translation>Не удалось скопировать временный файл в выходной файл</translation>
+    </message>
+    <message>
+        <source>Could not remove document file</source>
+        <translation>Не удалось удалить файл документа</translation>
     </message>
 </context>
 <context>
@@ -7807,15 +7880,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
+        <translation type="vanished">Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Этот id не уникальный.</translation>
+        <translation type="vanished">Этот id не уникальный.</translation>
     </message>
     <message>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
+    </message>
+</context>
+<context>
+    <name>VPatternConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation>Неожиданная версия &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation>Ошибка востановления с резервного файла: %1.</translation>
     </message>
 </context>
 <context>

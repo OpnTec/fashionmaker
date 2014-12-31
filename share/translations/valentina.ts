@@ -230,10 +230,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Based on Qt %2 (32 bit)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Built on %3 at %4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -247,6 +243,10 @@
     </message>
     <message>
         <source>Cannot open your default browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -947,6 +947,10 @@
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5167,6 +5171,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>MoveLabel</name>
+    <message>
+        <source>Move point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MoveSPoint</name>
     <message>
         <source>Move single point</source>
@@ -5264,6 +5275,13 @@ Do you want to save your changes?</source>
     <message>
         <source>in</source>
         <comment>inch</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QCoreApplication</name>
+    <message>
+        <source>Based on Qt %1 (%2, %3 bit)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5634,6 +5652,49 @@ Do you want to save your changes?</source>
         <source>Critical error!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractConverter</name>
+    <message>
+        <source>Error creation backup file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t get version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Too many tags &lt;%1&gt; in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version &quot;%1&quot; invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version &quot;0.0.0&quot; invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Minimum supported version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported version is %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error no unique id.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not change version.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractTool</name>
@@ -5670,14 +5731,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not copy temp file to document file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not remove document file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5738,6 +5791,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This id is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not copy temp file to document file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not remove document file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5942,15 +6011,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPatternConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

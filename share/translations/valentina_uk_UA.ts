@@ -235,7 +235,7 @@
     </message>
     <message>
         <source>Based on Qt %2 (32 bit)</source>
-        <translation>Базується на Qt %2 (32 bit)</translation>
+        <translation type="vanished">Базується на Qt %2 (32 bit)</translation>
     </message>
     <message>
         <source>Built on %3 at %4</source>
@@ -252,6 +252,10 @@
     <message>
         <source>Cannot open your default browser</source>
         <translation>Не можу відкрити браузер по замовчуванню</translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation>Ревізія:</translation>
     </message>
 </context>
 <context>
@@ -1060,6 +1064,10 @@
     <message>
         <source>Got wrong tools. Ignore.</source>
         <translation type="vanished">Отримано не правильний інструмент. Інгнорується.</translation>
+    </message>
+    <message>
+        <source>Reverse</source>
+        <translation>Протилежний напрямок</translation>
     </message>
 </context>
 <context>
@@ -5724,6 +5732,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>MoveLabel</name>
+    <message>
+        <source>Move point label</source>
+        <translation>Перемістити мітку точки</translation>
+    </message>
+</context>
+<context>
     <name>MoveSPoint</name>
     <message>
         <source>Move single point</source>
@@ -5873,6 +5888,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Arguments:</source>
         <translation type="vanished">Аргументи:</translation>
+    </message>
+</context>
+<context>
+    <name>QCoreApplication</name>
+    <message>
+        <source>Based on Qt %1 (%2, %3 bit)</source>
+        <translation>Базується на Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -6255,6 +6277,49 @@ Do you want to save your changes?</source>
         <source>toolBar</source>
         <translation>Панель інструментів</translation>
     </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation>Wavefront OBJ (*.obj)</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractConverter</name>
+    <message>
+        <source>Error creation backup file: %1.</source>
+        <translation>Помилка створення резервного файлу: %1.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t get version information.</source>
+        <translation>Не вдалося отримати інформацію про версію.</translation>
+    </message>
+    <message>
+        <source>Too many tags &lt;%1&gt; in file.</source>
+        <translation>За надто багато тегів &lt;%1&gt; у файлі.</translation>
+    </message>
+    <message>
+        <source>Version &quot;%1&quot; invalid.</source>
+        <translation>Версія &quot;%1&quot; має неправильне значення.</translation>
+    </message>
+    <message>
+        <source>Version &quot;0.0.0&quot; invalid.</source>
+        <translation>Версія &quot;0.0.0&quot; не дійсне.</translation>
+    </message>
+    <message>
+        <source>Invalid version. Minimum supported version is %1</source>
+        <translation>Не правильна весрія. Мінімально підтримувана %1</translation>
+    </message>
+    <message>
+        <source>Invalid version. Maximum supported version is %1</source>
+        <translation>Неправильна версія. Максимально підтримувана %1</translation>
+    </message>
+    <message>
+        <source>Error no unique id.</source>
+        <translation>Помилка не унікальний id.</translation>
+    </message>
+    <message>
+        <source>Could not change version.</source>
+        <translation>Не давлося змінити версію.</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractNode</name>
@@ -6306,11 +6371,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation>Не вдалося зкопіювати тимчасовий файл до файлу документа</translation>
+        <translation type="vanished">Не вдалося зкопіювати тимчасовий файл до файлу документа</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
-        <translation>Не вдалося видалити файл документа</translation>
+        <translation type="vanished">Не вдалося видалити файл документа</translation>
     </message>
     <message>
         <source>Something wrong!!</source>
@@ -6351,7 +6416,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
+        <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toLongLong parameter</source>
@@ -6398,7 +6463,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="vanished">Цей id не унікальний.</translation>
+        <translation>Цей id не унікальний.</translation>
     </message>
     <message>
         <source>Error creating or updating detail</source>
@@ -6507,6 +6572,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not load schema file.</source>
         <translation>Не вдалося відкрити файл схеми.</translation>
+    </message>
+    <message>
+        <source>Could not copy temp file to document file</source>
+        <translation>Не вдалося зкопіювати тимчасовий файл до файлу документа</translation>
+    </message>
+    <message>
+        <source>Could not remove document file</source>
+        <translation>Не вдалося видалити файл документа</translation>
     </message>
 </context>
 <context>
@@ -6756,15 +6829,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
+        <translation type="vanished">Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation>Цей id не унікальний.</translation>
+        <translation type="vanished">Цей id не унікальний.</translation>
     </message>
     <message>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
+    </message>
+</context>
+<context>
+    <name>VPatternConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation>Неочікувана версія &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation>Помилка відновлення резервного файлу: %1.</translation>
     </message>
 </context>
 <context>

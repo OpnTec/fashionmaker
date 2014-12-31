@@ -206,8 +206,11 @@
          <property name="horizontalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
          <property name="plainText">
-          <string>Roman Telezhinskyi  
+          <string notr="true">Roman Telezhinskyi  
 Susan Spencer 
 luzpazB 
 Christine Neupert
