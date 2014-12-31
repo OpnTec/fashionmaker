@@ -1454,7 +1454,7 @@ void MainWindow::RepotBug()
 void MainWindow::OnlineHelp()
 {
     qCDebug(vMainWindow)<<"Showing online help";
-    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/Content"));
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/v0.2.9/Content"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
