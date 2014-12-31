@@ -25,6 +25,10 @@ CONFIG -= debug_and_release debug_and_release_target
 # We use C++11 standard
 CONFIG += c++11
 
+# Since Qt 5.4.0 the source code location is recorded only in debug builds.
+# We need this information also in release builds. For this need define QT_MESSAGELOGCONTEXT.
+DEFINES += QT_MESSAGELOGCONTEXT
+
 # Directory for executable file
 DESTDIR = bin
 

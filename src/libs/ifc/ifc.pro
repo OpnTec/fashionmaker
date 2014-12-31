@@ -26,6 +26,10 @@ CONFIG += \
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
+# Since Qt 5.4.0 the source code location is recorded only in debug builds.
+# We need this information also in release builds. For this need define QT_MESSAGELOGCONTEXT.
+DEFINES += QT_MESSAGELOGCONTEXT
+
 include(ifc.pri)
 
 # This is static library so no need in "make install"
