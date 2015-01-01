@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+	<version>0.2.0</version>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1900-01-01</birth-date>
+        <sex>male</sex>
+        <email>username@example.com</email>
+    </personal>
+    <body-measurements>
+        <unit>cm</unit>
+        <head_and_neck>
+            <head_girth value="0.0"/>
+            <mid_neck_girth value="0.0"/>
+            <neck_base_girth value="0.0"/>
+            <head_and_neck_length value="0.0"/>
+        </head_and_neck>
+        <torso>
+            <center_front_waist_length value="0.0"/>
+            <center_back_waist_length value="0.0"/>
+            <shoulder_length value="0.0"/>
+            <side_waist_length value="0.0"/>
+            <trunk_length value="0.0"/>
+            <shoulder_girth value="0.0"/>
+            <upper_chest_girth value="0.0"/>
+            <bust_girth value="0.0"/>
+            <under_bust_girth value="0.0"/>
+            <waist_girth value="0.0"/>
+            <high_hip_girth value="0.0"/>
+            <hip_girth value="0.0"/>
+            <upper_front_chest_width value="0.0"/>
+            <front_chest_width value="0.0"/>
+            <across_front_shoulder_width value="0.0"/>
+            <across_back_shoulder_width value="0.0"/>
+            <upper_back_width value="0.0"/>
+            <back_width value="0.0"/>
+            <bustpoint_to_bustpoint value="0.0"/>
+            <halter_bustpoint_to_bustpoint value="0.0"/>
+            <neck_to_bustpoint value="0.0"/>
+            <crotch_length value="0.0"/>
+            <rise_height value="0.0"/>
+            <shoulder_drop value="0.0"/>
+            <shoulder_slope_degrees value="0.0"/>
+            <front_shoulder_slope_length value="0.0"/>
+            <back_shoulder_slope_length value="0.0"/>
+            <front_shoulder_to_waist_length value="0.0"/>
+            <back_shoulder_to_waist_length value="0.0"/>
+            <front_neck_arc value="0.0"/>
+            <back_neck_arc value="0.0"/>
+            <front_upper_chest_arc value="0.0"/>
+            <back_upper_chest_arc value="0.0"/>
+            <front_waist_arc value="0.0"/>
+            <back_waist_arc value="0.0"/>
+            <front_upper_hip_arc value="0.0"/>
+            <back_upper_hip_arc value="0.0"/>
+            <front_hip_arc value="0.0"/>
+            <back_hip_arc value="0.0"/>
+            <chest_slope value="0.0"/>
+            <back_slope value="0.0"/>
+            <front_waist_slope value="0.0"/>
+            <back_waist_slope value="0.0"/>
+            <front_neck_to_upper_chest_height value="0.0"/>
+            <front_neck_to_bust_height value="0.0"/>
+            <front_waist_to_upper_chest value="0.0"/>
+            <front_waist_to_lower_breast value="0.0"/>
+            <back_waist_to_upper_chest value="0.0"/>
+            <strap_length value="0.0"/>
+        </torso>
+        <arm>
+            <armscye_girth value="0.0"/>
+            <elbow_girth value="0.0"/>
+            <upper_arm_girth value="0.0"/>
+            <wrist_girth value="0.0"/>
+            <scye_depth value="0.0"/>
+            <shoulder_and_arm_length value="0.0"/>
+            <underarm_length value="0.0"/>
+            <cervicale_to_wrist_length value="0.0"/>
+            <shoulder_to_elbow_length value="0.0"/>
+            <arm_length value="0.0"/>
+        </arm>
+        <hand>
+            <hand_width value="0.0"/>
+            <hand_length value="0.0"/>
+            <hand_girth value="0.0"/>
+        </hand>
+        <leg>
+            <thigh_girth value="0.0"/>
+            <mid_thigh_girth value="0.0"/>
+            <knee_girth value="0.0"/>
+            <calf_girth value="0.0"/>
+            <ankle_girth value="0.0"/>
+            <knee_height value="0.0"/>
+            <ankle_height value="0.0"/>
+        </leg>
+        <foot>
+            <foot_width value="0.0"/>
+            <foot_length value="0.0"/>
+        </foot>
+        <heights>
+            <height value="0.0"/>
+            <cervicale_height value="0.0"/>
+            <cervicale_to_knee_height value="0.0"/>
+            <waist_height value="0.0"/>
+            <high_hip_height value="0.0"/>
+            <hip_height value="0.0"/>
+            <waist_to_hip_height value="0.0"/>
+            <waist_to_knee_height value="0.0"/>
+            <crotch_height value="0.0"/>
+        </heights>
+        <extended>
+			<size value="0.0"/>
+			<height_front_neck_base_point value="0.0"/>
+			<height_base_neck_side_point value="0.0"/>
+			<height_shoulder_point value="0.0"/>
+			<height_nipple_point value="0.0"/>
+			<height_back_angle_axilla value="0.0"/>
+			<height_scapular_point value="0.0"/>
+			<height_under_buttock_folds value="0.0"/>
+			<hips_excluding_protruding_abdomen value="0.0"/>
+			<girth_foot_instep value="0.0"/>
+			<side_waist_to_floor value="0.0"/>
+			<front_waist_to_floor value="0.0"/>
+			<arc_through_groin_area value="0.0"/>
+			<waist_to_plane_seat value="0.0"/>
+			<neck_to_radial_point value="0.0"/>
+			<neck_to_third_finger value="0.0"/>
+			<neck_to_first_line_chest_circumference value="0.0"/>
+			<front_waist_length value="0.0"/>
+			<arc_through_shoulder_joint value="0.0"/>
+			<neck_to_back_line_chest_circumference value="0.0"/>
+			<waist_to_neck_side value="0.0"/>
+			<arc_length_upper_body  value="0.0"/>
+			<chest_width value="0.0"/>
+			<anteroposterior_diameter_hands value="0.0"/>
+			<height_clavicular_point value="0.0"/>
+			<height_armhole_slash value="0.0"/>
+			<slash_shoulder_height value="0.0"/>
+			<half_girth_neck value="0.0"/>
+			<half_girth_neck_for_shirts value="0.0"/>
+			<half_girth_chest_first value="0.0"/>
+			<half_girth_chest_second value="0.0"/>
+			<half_girth_chest_third value="0.0"/>
+			<half_girth_waist value="0.0"/>
+			<half_girth_hips_considering_protruding_abdomen value="0.0"/>
+			<half_girth_hips_excluding_protruding_abdomen value="0.0"/>
+			<girth_knee_flexed_feet value="0.0"/>
+			<neck_transverse_diameter value="0.0"/>
+			<front_slash_shoulder_height value="0.0"/>
+			<neck_to_front_waist_line value="0.0"/>
+			<hand_vertical_diameter value="0.0"/>
+			<neck_to_knee_point value="0.0"/>
+			<waist_to_knee value="0.0"/>
+			<shoulder_height value="0.0"/>
+			<head_height value="0.0"/>
+			<body_position value="0.0"/>
+			<arc_behind_shoulder_girdle value="0.0"/>
+			<neck_to_neck_base value="0.0"/>
+			<depth_waist_first value="0.0"/>
+			<depth_waist_second value="0.0"/>
+		</extended>
+    </body-measurements>
+</vit>

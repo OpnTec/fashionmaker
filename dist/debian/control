@@ -1,14 +1,26 @@
 Source: valentina
 Section: graphics
 Priority: optional
-Maintainer: Roman Telezhinsky <dismine@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), qtbase5-dev (>= 5.0.0), libqt5svg5-dev (>= 5.0.0), ccache, g++ (>= 4.6.0), qt5-default (>= 5.0.0), qttools5-dev-tools (>= 5.0.0)
-Standards-Version: 3.9.4
-Homepage: https://bitbucket.org/dismine/valentina
+Maintainer: Roman Telezhynskyi <dismine@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), 
+               qtbase5-dev (>= 5.2.1), 
+               libqt5svg5-dev (>= 5.2.1), 
+               ccache, 
+               g++ (>= 4.6.0), 
+               qt5-default (>= 5.2.1), 
+               qttools5-dev-tools (>= 5.2.1), 
+               libqt5xmlpatterns5-dev (>= 5.2.1)
+Standards-Version: 3.9.5
+Homepage: http://www.valentina-project.org/
+Vcs-Browser: https://bitbucket.org/dismine/valentina
 
 Package: valentina
 Architecture: i386 amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt5core5a (>= 5.2.0), libqt5gui5 (>= 5.2.0) | libqt5gui5-gles (>= 5.2.0), libqt5printsupport5 (>= 5.2.0), libqt5svg5 (>= 5.2.0), libqt5widgets5 (>= 5.2.0), libqt5xml5 (>= 5.2.0), libqt5xmlpatterns5 (>= 5.2.0), libstdc++6 (>= 4.6), xpdf
 Description: Pattern making program.
- Open source project of creating a pattern making program, whose allow 
- create and modeling patterns of clothing.
+ Valentina is a cross-platform patternmaking program which allows designers 
+ to create and model patterns of clothing. This software allows pattern 
+ creation, using either standard sizing tables or an individual’s set of 
+ measurements. It blends new technologies with traditional methods to create 
+ a unique pattern making tool.
+ Supported langugages: En, Ru, Uk, Cz, It, Fr, De, Nl

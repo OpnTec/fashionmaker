@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogMeasurements</class>
+ <widget class="QDialog" name="DialogMeasurements">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>448</width>
+    <height>244</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>448</width>
+    <height>244</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>529</width>
+    <height>244</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Measurements</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../share/resources/icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QToolButton" name="toolButtonStandard">
+           <property name="minimumSize">
+            <size>
+             <width>166</width>
+             <height>123</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>166</width>
+             <height>123</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Graduation</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../share/resources/icon.qrc">
+             <normaloff>:/icon/Graduation.png</normaloff>:/icon/Graduation.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>160</width>
+             <height>120</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Use for creation pattern standard measurement table</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QToolButton" name="toolButtonIndividual">
+           <property name="minimumSize">
+            <size>
+             <width>166</width>
+             <height>123</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>166</width>
+             <height>123</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Individual</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../share/resources/icon.qrc">
+             <normaloff>:/icon/individual.png</normaloff>:/icon/individual.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>160</width>
+             <height>120</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Use for creation pattern individual measurements</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>toolButtonStandard</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../share/resources/icon.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>cursor/endline_cursor.png</file>
+        <file>cursor/line_cursor.png</file>
+        <file>cursor/alongline_cursor.png</file>
+        <file>cursor/shoulder_cursor.png</file>
+        <file>cursor/normal_cursor.png</file>
+        <file>cursor/bisector_cursor.png</file>
+        <file>cursor/intersect_cursor.png</file>
+        <file>cursor/spline_cursor.png</file>
+        <file>cursor/arc_cursor.png</file>
+        <file>cursor/splinepath_cursor.png</file>
+        <file>cursor/pointcontact_cursor.png</file>
+        <file>cursor/new_detail_cursor.png</file>
+        <file>cursor/height_cursor.png</file>
+        <file>cursor/triangle_cursor.png</file>
+        <file>cursor/pointofintersect_cursor.png</file>
+        <file>cursor/spline_cut_point_cursor.png</file>
+        <file>cursor/splinepath_cut_point_cursor.png</file>
+        <file>cursor/union_cursor.png</file>
+        <file>cursor/arc_cut_cursor.png</file>
+        <file>cursor/cursor-arrow-closehand.png</file>
+        <file>cursor/cursor-arrow-openhand.png</file>
+        <file>cursor/line_intersect_axis_cursor.png</file>
+        <file>cursor/arc_intersect_axis_cursor.png</file>
+        <file>cursor/curve_intersect_axis_cursor.png</file>
+    </qresource>
+</RCC>

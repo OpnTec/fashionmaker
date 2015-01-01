@@ -19,9 +19,68 @@ syntax: glob
 # Ignore this directory.
 html/
 latex/
+bin/
+moc/
+obj/
+uic/
+rcc/
+man/
 
-# Ignore file used QtCreator for user profile.
+# Ignore Coverity Scan Build Tool
+cov-int/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Qt-es
+/.qmake.cache
+/.qmake.stash
 *.pro.user
+*.pro.user.*
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+Makefile*
+*-build-*
 
-# Ignore file Qt translation.
+# Ignore Qt translation file .
 *.qm
+
+# QtCreator
+*.autosave
+
+# Ignore Mercurial .orig files
+*.orig
+
+*.rej
+
+# QtCtreator Qml
+*.qmlproject.user
+*.qmlproject.user.*

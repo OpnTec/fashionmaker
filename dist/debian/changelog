@@ -1,5 +1,5 @@
-valentina (0.2.2) saucy; urgency=low
+valentina (0.2.8-alpha) trusty; urgency=low
 
-  * Add new dependions qttools5-dev-tools 
+  * Auto build.
 
- -- Roman Telezhinsky <dismine@gmail.com> Tue, 26 Nov 2013 21:28:15 +0200
+ -- dismine <dismine@dismine-To-be-filled-by-O-E-M>  Fri, 27 Jun 2014 09:51:38 +0300

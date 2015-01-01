@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>schema/individual_measurements.xsd</file>
+        <file>schema/standard_measurements.xsd</file>
+        <file>schema/pattern/v0.1.0.xsd</file>
+        <file>schema/pattern/v0.1.1.xsd</file>
+        <file>schema/pattern/v0.1.2.xsd</file>
+    </qresource>
+</RCC>

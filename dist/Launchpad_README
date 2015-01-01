@@ -1,0 +1,97 @@
+README (English)
+##################################################
+Launchpad Package tools
+##################################################
+
+This file contains explanation how to publish
+a package onto LaunchPad.
+Some string useful for local testing creation recipe.
+Here used technique when you have separate debian directory 
+and merge it with source using recipe file.
+
+
+# This is standard command to work on DEB packaging:
+#
+# To install all packagers tools:
+# sudo apt-get install bzr-builder bzr dpatch pbuilder debootstrap devscripts debhelper build-essential
+
+# Init local working env
+- Create account on launchpad.org
+- Create Project
+- Import branch from git mirror
+- Create new recipe
+- Upload SSH public key onto account
+- Upload you GPG sign key
+- Run from command line: 
+    bzr launchpad-login yourlogin
+    bzr whoami "Your Name <email@email.com>"
+- Create a file /.pbuilderrc with content (need for local testing creation recipe)
+	## Overrides /etc/pbuilderrc
+
+	# Default distribution
+    # Uncomment if you want different distribution system than you use now.
+	#DISTRIBUTION=saucy
+	COMPONENTS="main restricted universe multiverse"
+
+	# Repositories
+	MIRRORSITE=http://archive.ubuntu.com/ubuntu
+	OTHERMIRROR="deb ${MIRRORSITE} ${DISTRIBUTION} ${COMPONENTS} | deb ${MIRRORSITE} ${DISTRIBUTION}-backports ${COMPONENTS} | deb ${MIRRORSITE} ${DISTRIBUTION}-security ${COMPONENTS} | deb ${MIRRORSITE} ${DISTRIBUTION}-updates ${COMPONENTS} | deb http://ppa.launchpad.net/ubuntu-sdk-team/ppa/ubuntu ${DISTRIBUTION} main"
+	# Last PPA is example how to add additional PPA to your local build system. Useful when you want use packages that don't exist in standard repository.
+
+	# For build results (in this directory you will find deb packages. Don't forget this path!)
+	BUILDRESULT=${HOME}/pbuilder/result
+
+	# Mount directories inside chroot environment
+	BINDMOUNTS=${BUILDRESULT}
+- Make our pbuilder trust packages from our PPA
+For example you added PPA ubuntu-sdk-team, now you need add public key for using this PPA.
+First, we'll login to our pbuilder environment:
+	sudo pbuilder --login --save-after-login
+Then, we'll give it the public key to our PPA, just like if we were adding it to our own keyring:
+	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys [YOUR PUBLIC KEY HERE]
+If all goes well, you can leave your pbuilder environment by typing:
+	exit
+- Tell the pbuilder environment that it is going to act just like the Launchpad build farm
+Still in our terminal:
+    sudo pbuilder create --debootstrapopts --variant=buildd
+-  Update our environment with these new packages
+Still in our terminal, type:
+	sudo pbuilder --update --override-config
+- Edit file ~/.bashrc ti add
+DEBFULLNAME="<Your name>" 
+DEBEMAIL="<Your email address>" 
+
+# Init package tools for launchpad
+- Create a Bazaar directory
+    mkdir bzr
+- Create debian directory and upload it onto bzr branch ~dismine/valentina/debian
+    cd bzr
+    mkdir debian
+    cd debian
+    bzr init
+    cp -pr valentina/debian bzr/debian
+    bzr add debian
+    bzr commit -m "Init"
+    bzr push lp:~dismine/valentina/debian
+  or download it from launchpad bazaar:
+    cd bzr
+    bzr branch lp:~dismine/valentina/debian
+- To update this debian directory, edit files into the bzr dir and run
+    bzr commit -m "Description of change"
+    bzr push lp:~dismine/valentina/debian
+- Create a file valentina.recipe with content
+    cd bzr
+    vi valentina.recipe
+        # bzr-builder format 0.3 deb-version {debupstream}+{revno}+{revno:packaging}
+        lp:valentina
+        merge packaging lp:~dismine/valentina/debian
+
+	Next command usefull for local testing creation recipe.
+- Run command
+    cd bzr
+    bzr dailydeb --allow-fallback-to-native valentina.recipe working-dir
+  This will create a directory "working-dir" with valentina sources and will add sources from ~dismine/valentina/debian
+- Test package sources
+    sudo pbuilder build <working-dir>/<project>_<version>.dsc
+    Example: sudo pbuilder build working-dir/valentina_0.2.2.dsc
+

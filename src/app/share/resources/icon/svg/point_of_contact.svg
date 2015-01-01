@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="32"
+   height="32"
+   id="svg2985"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="point_of_contact.svg"
+   inkscape:export-filename="/home/dismine/CAD/Valentina/src/app/share/resources/icon/32x32/point_of_contact.png"
+   inkscape:export-xdpi="92"
+   inkscape:export-ydpi="92">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1301"
+     inkscape:window-height="852"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="0.98901497"
+     inkscape:cx="-271.46872"
+     inkscape:cy="-114.65974"
+     inkscape:window-x="75"
+     inkscape:window-y="34"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2985" />
+  <defs
+     id="defs2987" />
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#000000;fill-opacity:1;stroke:#370000;stroke-width:1.56700003;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-opacity:0.93950177;stroke-dasharray:none;stroke-dashoffset:0"
+     id="path2985-2"
+     d="m 31.028791,26.922787 a 1.7373301,1.7294948 0 0 1 -3.47466,0 1.7373301,1.7294948 0 1 1 3.47466,0 z" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:none;stroke:#000000;stroke-width:2.01399994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="path3009"
+     d="M 2.9435976,20.300548 28.398653,26.566127" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#000000;fill-opacity:1;stroke:#370000;stroke-width:1.56700003;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-opacity:0.93950177;stroke-dasharray:none;stroke-dashoffset:0"
+     id="path2985-2-9"
+     d="m 4.4164272,20.301891 a 1.7373301,1.7294948 0 0 1 -3.47466002,0 1.7373301,1.7294948 0 1 1 3.47466002,0 z" />
+  <path
+     sodipodi:type="arc"
+     style="fill:none;stroke:#0700ff;stroke-width:2.01399994;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:5.03499999"
+     id="path2995"
+     sodipodi:cx="41.694916"
+     sodipodi:cy="9.0847454"
+     sodipodi:rx="15.839976"
+     sodipodi:ry="16.511644"
+     d="M 27.984434,17.353807 A 15.839976,16.511644 0 0 1 51.053641,-4.2367903 L 41.694916,9.0847454 z"
+     sodipodi:start="2.6170678"
+     sodipodi:end="5.3444756"
+     transform="matrix(-0.25880394,-0.96592988,0.96592988,-0.25880394,21.443611,50.610156)" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#ff0034;fill-opacity:1;stroke:#ff0034;stroke-width:1.56700003;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="path2985-2-9-3"
+     d="m 15.058467,22.645282 a 1.7373301,1.7294948 0 0 1 -3.47466,0 1.7373301,1.7294948 0 1 1 3.47466,0 z" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#000000;fill-opacity:1;stroke:#370000;stroke-width:1.56700003;stroke-linejoin:round;stroke-miterlimit:4.9000001;stroke-opacity:0.93950177;stroke-dasharray:none;stroke-dashoffset:0"
+     id="path2985-2-2"
+     d="m 20.964155,8.0421479 a 1.7373301,1.7294948 0 0 1 -3.47466,0 1.7373301,1.7294948 0 1 1 3.47466,0 z" />
+</svg>

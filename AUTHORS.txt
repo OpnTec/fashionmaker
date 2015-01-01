@@ -1,0 +1,14 @@
+Our Team:
+
+	(*) Roman Telezhynskyi <dismine@gmail.com>
+	    Maintainer and founder of the project.
+
+	(*) Christine Neupert <enaisoc@googlemail.com>
+	    Testing, translation.
+
+    (*) Patrick Proy <patrick@proy.org>
+	    Developing.
+    
+    (*) Lindsay Williams <linzkitt@gmail.com>
+        Design logo.
+
