@@ -55,7 +55,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
       namePoint(nullptr), lineName(nullptr)
 {
-    radius = (1.5/*mm*/ / 25.4) * VApplication::PrintDPI;
+    radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
