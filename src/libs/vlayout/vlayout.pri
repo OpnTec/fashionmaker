@@ -3,8 +3,10 @@
 
 HEADERS += \
     $$PWD/stable.h \
-    $$PWD/vlayoutgenerator.h
+    $$PWD/vlayoutgenerator.h \
+    $$PWD/vlayoutdetail.h
 
 SOURCES += \
     $$PWD/stable.cpp \
-    $$PWD/vlayoutgenerator.cpp
+    $$PWD/vlayoutgenerator.cpp \
+    $$PWD/vlayoutdetail.cpp
