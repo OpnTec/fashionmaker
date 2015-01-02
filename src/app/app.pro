@@ -393,6 +393,15 @@ DEPENDPATH += $$PWD/../libs/vobj
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vobj/$${DESTDIR}/vobj.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vobj/$${DESTDIR}/libvobj.a
 
+# VLayout static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vlayout/$${DESTDIR}/ -lvlayout
+
+INCLUDEPATH += $$PWD/../libs/vlayout
+DEPENDPATH += $$PWD/../libs/vlayout
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/libvlayout.a
+
 
 # Strip after you link all libaries.
 CONFIG(release, debug|release){

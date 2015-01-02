@@ -44,7 +44,7 @@ public:
     VAbstractDetail(const QString &name);
     VAbstractDetail(const VAbstractDetail &detail);
     VAbstractDetail &operator=(const VAbstractDetail &detail);
-    ~VAbstractDetail();
+    virtual ~VAbstractDetail();
 
     void    Clear();
 
