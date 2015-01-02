@@ -234,12 +234,12 @@ QPainterPath VEquidistant::Equidistant(QVector<QPointF> points, const Equidistan
     QVector<QPointF> ekvPoints;
     if ( points.size() < 3 )
     {
-        qDebug()<<"Not enough points for building the equidistant.\n";
+        qDebug()<<"Not enough points for building the equidistant.";
         return ekv;
     }
     if (width <= 0)
     {
-        qDebug()<<"Width <= 0.\n";
+        qDebug()<<"Width <= 0.";
         return ekv;
     }
     for (qint32 i = 0; i < points.size(); ++i )
@@ -306,7 +306,8 @@ QVector<QPointF> VEquidistant::CheckLoops(const QVector<QPointF> &points)
     /*If we got less than 4 points no need seek loops.*/
     if (points.size() < 4)
     {
-       return ekvPoints;
+        qDebug()<<"Less then 4 points. Doesn't need check for loops.";
+        return points;
     }
     bool closed = false;
     if (points.at(0) == points.at(points.size()-1))
