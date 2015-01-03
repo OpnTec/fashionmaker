@@ -35,6 +35,7 @@
 #include "../libs/vlayout/vabstractdetail.h"
 
 class VDetailData;
+class VContainer;
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).
@@ -75,11 +76,19 @@ public:
     VDetail RemoveEdge(const quint32 &index) const;
 
     QList<quint32> Missing(const VDetail &det) const;
+
+    QVector<QPointF> ContourPoints(const VContainer *data) const;
+    QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 private:
     QSharedDataPointer<VDetailData> d;
 
     QVector<VNodeDetail> listNodePoint()const;
     static int indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
+
+    QPointF StartSegment(const VContainer *data, const int &i) const;
+    QPointF EndSegment(const VContainer *data, const int &i) const;
+
+    static QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my);
 };
 
 #endif // VDETAIL_H

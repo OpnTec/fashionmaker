@@ -28,6 +28,9 @@
 
 #include "vdetail.h"
 #include "vdetail_p.h"
+#include "../container/vcontainer.h"
+#include "vpointf.h"
+
 #include <QDebug>
 #include <QString>
 
@@ -354,6 +357,84 @@ QList<quint32> VDetail::Missing(const VDetail &det) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VDetail::ContourPoints(const VContainer *data) const
+{
+    QVector<QPointF> points;
+    for (int i = 0; i< CountNode(); ++i)
+    {
+        switch (at(i).getTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
+                points.append(point->toQPointF());
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).getId());
+
+                const QPointF begin = StartSegment(data, i);
+                const QPointF end = EndSegment(data, i);
+
+                points << curve->GetSegmentPoints(begin, end, at(i).getReverse());
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).getTypeTool());
+                break;
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
+{
+    QVector<QPointF> pointsEkv;
+    for (int i = 0; i< CountNode(); ++i)
+    {
+        switch (at(i).getTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
+                if (getSeamAllowance() == true)
+                {
+                    QPointF pEkv = point->toQPointF();
+                    pEkv.setX(pEkv.x()+at(i).getMx());
+                    pEkv.setY(pEkv.y()+at(i).getMy());
+                    pointsEkv.append(pEkv);
+                }
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).getId());
+
+                const QPointF begin = StartSegment(data, i);
+                const QPointF end = EndSegment(data, i);
+
+                QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, at(i).getReverse());
+                if (getSeamAllowance() == true)
+                {
+                    pointsEkv << biasPoints(nodePoints, at(i).getMx(), at(i).getMy());
+                }
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).getTypeTool());
+                break;
+        }
+    }
+    return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief listNodePoint return list nodes only with points.
  * @return list points node.
@@ -389,6 +470,75 @@ int VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
     }
     qDebug()<<"Can't find node.";
     return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VDetail::StartSegment(const VContainer *data, const int &i) const
+{
+    QPointF begin;
+    if (CountNode() > 1)
+    {
+        if (i == 0)
+        {
+            if (at(CountNode()-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(at(CountNode()-1).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (at(i-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(at(i-1).getId())->toQPointF();
+            }
+        }
+    }
+    return begin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VDetail::EndSegment(const VContainer *data, const int &i) const
+{
+    QPointF end;
+    if (CountNode() > 2)
+    {
+        if (i == CountNode() - 1)
+        {
+            if (at(0).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(at(0).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (at(i+1).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(at(i+1).getId())->toQPointF();
+            }
+        }
+    }
+    return end;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief biasPoints bias point.
+ * @param points vector of points.
+ * @param mx offset respect to x.
+ * @param my offset respect to y.
+ * @return new vector biased points.
+ */
+QVector<QPointF> VDetail::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my)
+{
+    QVector<QPointF> p;
+    for (qint32 i = 0; i < points.size(); ++i)
+    {
+        QPointF point = points.at(i);
+        point.setX(point.x() + mx);
+        point.setY(point.y() + my);
+        p.append(point);
+    }
+    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
