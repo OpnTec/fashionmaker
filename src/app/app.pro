@@ -109,7 +109,7 @@ CONFIG(debug, debug|release){
     #Calculate latest tag distance and build revision only in release mode. Change number each time requare
     #recompilation precompiled headers file.
     DEFINES += "LATEST_TAG_DISTANCE=0"
-    DEFINES += "BUILD_REVISION=\\\"uknown\\\""
+    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
 }else{
     # Release mode
     DEFINES += V_NO_ASSERT
@@ -126,7 +126,7 @@ CONFIG(debug, debug|release){
     }
 
     #latest tag distance number for using in version
-    HG_DISTANCE=$$system(hg log -r tip --template '{latesttagdistance}')
+    HG_DISTANCE=$$system(hg log -r. --template '{latesttagdistance}')
     isEmpty(HG_DISTANCE){
         HG_DISTANCE = 0 # if we can't find local revision left 0.
     }
@@ -135,10 +135,10 @@ CONFIG(debug, debug|release){
 
     #build revision number for using in version
     unix {
-        HG_HESH=$$system("hg log -r tip --template '{node|short}'")
+        HG_HESH=$$system("hg log -r. --template '{node|short}'")
     } else {
         # Use escape character before "|" on Windows
-        HG_HESH=$$system(hg log -r tip --template "{node^|short}")
+        HG_HESH=$$system(hg log -r. --template "{node^|short}")
     }
     isEmpty(HG_HESH){
         HG_HESH = "unknown" # if we can't find build revision left unknown.
