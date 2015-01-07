@@ -6,7 +6,9 @@ HEADERS += \
     $$PWD/vlayoutgenerator.h \
     $$PWD/vlayoutdetail.h \
     $$PWD/vabstractdetail.h \
-    $$PWD/vabstractdetail_p.h
+    $$PWD/vabstractdetail_p.h \
+    $$PWD/vlayoutdetail_p.h \
+    $$PWD/vlayoutdef.h
 
 SOURCES += \
     $$PWD/stable.cpp \

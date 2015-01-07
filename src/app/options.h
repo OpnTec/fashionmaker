@@ -118,7 +118,6 @@ enum class Source : char { FromGui, FromFile, FromTool };
 enum class Draw : char { Calculation, Modeling };
 enum class NodeDetail : char { Contour, Modeling };
 enum class Contour : char { OpenContour, CloseContour };
-enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
 enum class SplinePointPosition : char { FirstPoint, LastPoint };
 enum class VarType : char { Measurement, Increment, LineLength, SplineLength, ArcLength, LineAngle, Unknown };

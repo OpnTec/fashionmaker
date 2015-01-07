@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlayoutdetail.h
+ **  @file   vlayoutdef.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   2 1, 2015
+ **  @date   7 1, 2015
  **
  **  @brief
  **  @copyright
@@ -26,49 +26,9 @@
  **
  *************************************************************************/
 
-#ifndef VLAYOUTDETAIL_H
-#define VLAYOUTDETAIL_H
+#ifndef VLAYOUTDEF_H
+#define VLAYOUTDEF_H
 
-#include "vabstractdetail.h"
+enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 
-#include <QMatrix>
-#include <QPointF>
-
-class VLayoutDetailData;
-
-class VLayoutDetail :public VAbstractDetail
-{
-public:
-    VLayoutDetail();
-    VLayoutDetail(const VLayoutDetail &detail);
-    VLayoutDetail &operator=(const VLayoutDetail &detail);
-    virtual ~VLayoutDetail();
-
-    QVector<QPointF> GetContour() const;
-    void SetCountour(const QVector<QPointF> &points);
-
-    QVector<QPointF> GetSeamAllowencePoints() const;
-    void SetSeamAllowencePoints(const QVector<QPointF> &points);
-
-    QVector<QPointF> GetLayoutAllowence() const;
-    void SetLayoutAllowence();
-
-    QMatrix GetMatrix() const;
-    void    SetMatrix(const QMatrix &matrix);
-
-    qreal GetLayoutWidth() const;
-    void  SetLayoutWidth(const qreal &value);
-
-    void translate(qreal dx, qreal dy);
-    void rotate(qreal degrees);
-
-    int    EdgesCount() const;
-    QLineF Edge(int i) const;
-
-private:
-    QSharedDataPointer<VLayoutDetailData> d;
-
-    QVector<QPointF> Map(const QVector<QPointF> &points) const;
-};
-
-#endif // VLAYOUTDETAIL_H
+#endif // VLAYOUTDEF_H

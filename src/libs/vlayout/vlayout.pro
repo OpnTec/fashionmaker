@@ -7,9 +7,6 @@
 # File with common stuff for whole project
 include(../../../Valentina.pri)
 
-# We don't need gui library.
-QT       -= gui
-
 # Name of library
 TARGET = vlayout
 

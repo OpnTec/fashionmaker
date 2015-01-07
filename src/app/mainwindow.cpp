@@ -29,7 +29,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "geometry/vspline.h"
-#include "geometry/vequidistant.h"
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
@@ -1908,7 +1907,7 @@ void MainWindow::ActionLayout(bool checked)
 {
     Q_UNUSED(checked);
     ActionDetails(true);//Get all list of details.
-    QVector<VItem*> listDetails;
+    QVector<VLayoutDetail> listDetails;
     const QHash<quint32, VDetail> *details = pattern->DataDetails();
     if (details->count() == 0)
     {
@@ -1919,8 +1918,14 @@ void MainWindow::ActionLayout(bool checked)
     while (idetail.hasNext())
     {
         idetail.next();
-        QPainterPath path = VEquidistant(pattern).ContourPath(idetail.key());
-        listDetails.append(new VItem(path, listDetails.size()));
+        VLayoutDetail det = VLayoutDetail();
+        det.SetCountour(idetail.value().ContourPoints(pattern));
+        det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern));
+        det.setSeamAllowance(idetail.value().getSeamAllowance());
+        det.setName(idetail.value().getName());
+        det.SetLayoutAllowence();
+
+        listDetails.append(det);
     }
     QString description = doc->GetDescription();
 

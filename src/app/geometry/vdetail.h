@@ -36,6 +36,7 @@
 
 class VDetailData;
 class VContainer;
+class QPainterPath;
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).
@@ -79,6 +80,8 @@ public:
 
     QVector<QPointF> ContourPoints(const VContainer *data) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
+
+    QPainterPath ContourPath(const VContainer *data) const;
 private:
     QSharedDataPointer<VDetailData> d;
 

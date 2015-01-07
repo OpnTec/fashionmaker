@@ -31,8 +31,12 @@
 
 #include <QSharedDataPointer>
 
+#include "vlayoutdef.h"
+
 class QString;
 class VAbstractDetailData;
+class QPointF;
+class QLineF;
 
 /**
  * @brief The VAbstractDetail class abstract class for all details.
@@ -59,8 +63,17 @@ public:
 
     qreal   getWidth() const;
     void    setWidth(const qreal &value);
+
+    static QVector<QPointF> Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width);
 private:
     QSharedDataPointer<VAbstractDetailData> d;
+
+    static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
+    static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
+    static QLineF           ParallelLine(const QLineF &line, qreal width );
+    static QPointF          SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 };
 
 #endif // VABSTRACTDETAIL_H

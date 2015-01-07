@@ -10,7 +10,6 @@ HEADERS += \
     $$PWD/varc.h \
     $$PWD/vgobject.h \
     $$PWD/vpointf.h \
-    $$PWD/vequidistant.h \
     $$PWD/vabstractcurve.h \
     $$PWD/vnodedetail_p.h \
     $$PWD/vdetail_p.h \
@@ -30,5 +29,4 @@ SOURCES += \
     $$PWD/varc.cpp \
     $$PWD/vgobject.cpp \
     $$PWD/vpointf.cpp \
-    $$PWD/vequidistant.cpp \
     $$PWD/vabstractcurve.cpp

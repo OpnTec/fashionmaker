@@ -30,6 +30,7 @@
 #include "vdetail_p.h"
 #include "../container/vcontainer.h"
 #include "vpointf.h"
+#include "../core/vapplication.h"
 
 #include <QDebug>
 #include <QString>
@@ -432,6 +433,49 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
         }
     }
     return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VDetail::ContourPath(const VContainer *data) const
+{
+    QVector<QPointF> points = ContourPoints(data);
+    QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
+
+    QPainterPath path;
+
+    // contour
+    path.moveTo(points[0]);
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
+        path.lineTo(points.at(i));
+    }
+    path.lineTo(points.at(0));
+
+    // seam allowence
+    if (getSeamAllowance() == true)
+    {
+        QPainterPath ekv;
+        QVector<QPointF> p;
+        if (getClosed() == true)
+        {
+            p = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
+        }
+        else
+        {
+            p = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
+        }
+
+        ekv.moveTo(p.at(0));
+        for (qint32 i = 1; i < p.count(); ++i)
+        {
+            ekv.lineTo(p.at(i));
+        }
+
+        path.addPath(ekv);
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

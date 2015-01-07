@@ -31,7 +31,8 @@
 
 #include <QLabel>
 #include <QMainWindow>
-#include "widgets/vitem.h"
+
+#include "../../libs/vlayout/vlayoutdetail.h"
 
 namespace Ui
 {
@@ -55,7 +56,8 @@ public:
     ~TableWindow();
 public slots:
 
-    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description);
+    void                  ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName,
+                                      const QString &description);
 
     void                  StopTable();
 
@@ -96,7 +98,7 @@ private:
     Ui::TableWindow*      ui;
 
     /** @brief listDetails list of details. */
-    QVector<VItem*>       listDetails;
+    QVector<VLayoutDetail>       listDetails;
 
     /** @brief outItems true if we have details out paper sheet. */
     bool                  outItems;

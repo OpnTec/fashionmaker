@@ -30,7 +30,6 @@
 #include "nodeDetails/nodedetails.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
-#include "../geometry/vequidistant.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"
@@ -511,10 +510,8 @@ void VToolDetail::ShowVisualization(bool show)
 void VToolDetail::RefreshGeometry()
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    QPainterPath path = VEquidistant(this->getData()).ContourPath(id);
-    this->setPath(path);
-
     VDetail detail = VAbstractTool::data.GetDetail(id);
+    this->setPath(detail.ContourPath(this->getData()));
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }

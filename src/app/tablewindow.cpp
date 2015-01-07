@@ -48,7 +48,7 @@
  */
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), numberDetal(nullptr), colission(nullptr), ui(new Ui::TableWindow),
-    listDetails(QVector<VItem*>()), outItems(false), collidingItems(false), tableScene(nullptr),
+    listDetails(QVector<VLayoutDetail>()), outItems(false), collidingItems(false), tableScene(nullptr),
     paper(nullptr), shadowPaper(nullptr), listOutItems(nullptr), listCollidingItems(QList<QGraphicsItem*>()),
     indexDetail(0), sceneRect(QRectF()), fileName(QString()), description(QString())
 {
@@ -112,30 +112,30 @@ void TableWindow::AddPaper()
  */
 void TableWindow::AddDetail()
 {
-    if (indexDetail<listDetails.count())
-    {
-        tableScene->clearSelection();
-        VItem* Detail = listDetails[indexDetail];
-        SCASSERT(Detail != nullptr);
-        connect(Detail, &VItem::itemOut, this, &TableWindow::itemOut);
-        connect(Detail, &VItem::itemColliding, this, &TableWindow::itemColliding);
-        connect(this, &TableWindow::LengthChanged, Detail, &VItem::LengthChanged);
-        Detail->setPen(QPen(Qt::black, 1));
-        Detail->setBrush(QBrush(Qt::white));
-        Detail->setPos(paper->boundingRect().center());
-        Detail->setFlag(QGraphicsItem::ItemIsMovable, true);
-        Detail->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        Detail->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-        Detail->setPaper(paper);
-        tableScene->addItem(Detail);
-        Detail->setSelected(true);
-        indexDetail++;
-        if (indexDetail==listDetails.count())
-        {
-            ui->actionSave->setEnabled(true);
-        }
-    }
-    numberDetal->setText(QString(tr("%1 details left.")).arg(listDetails.count()-indexDetail));
+//    if (indexDetail<listDetails.count())
+//    {
+//        tableScene->clearSelection();
+//        VItem* Detail = listDetails[indexDetail];
+//        SCASSERT(Detail != nullptr);
+//        connect(Detail, &VItem::itemOut, this, &TableWindow::itemOut);
+//        connect(Detail, &VItem::itemColliding, this, &TableWindow::itemColliding);
+//        connect(this, &TableWindow::LengthChanged, Detail, &VItem::LengthChanged);
+//        Detail->setPen(QPen(Qt::black, 1));
+//        Detail->setBrush(QBrush(Qt::white));
+//        Detail->setPos(paper->boundingRect().center());
+//        Detail->setFlag(QGraphicsItem::ItemIsMovable, true);
+//        Detail->setFlag(QGraphicsItem::ItemIsSelectable, true);
+//        Detail->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+//        Detail->setPaper(paper);
+//        tableScene->addItem(Detail);
+//        Detail->setSelected(true);
+//        indexDetail++;
+//        if (indexDetail==listDetails.count())
+//        {
+//            ui->actionSave->setEnabled(true);
+//        }
+//    }
+//    numberDetal->setText(QString(tr("%1 details left.")).arg(listDetails.count()-indexDetail));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ void TableWindow::AddDetail()
 /*
  * Get details for creation layout.
  */
-void TableWindow::ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description)
+void TableWindow::ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName, const QString &description)
 {
     this->description = description;
 
@@ -390,67 +390,67 @@ void TableWindow::itemOut(int number, bool flag)
 void TableWindow::itemColliding(QList<QGraphicsItem *> list, int number)
 {
     //qDebug()<<"number="<<number;
-    if (number==0)
-    {
-        if (listCollidingItems.isEmpty()==false)
-        {
-            if (listCollidingItems.contains(list.at(0))==true)
-            {
-                listCollidingItems.removeAt(listCollidingItems.indexOf(list.at(0)));
-                if (listCollidingItems.size()>1)
-                {
-                    for ( int i = 0; i < listCollidingItems.count(); ++i )
-                    {
-                        QList<QGraphicsItem *> lis = listCollidingItems.at(i)->collidingItems();
-                        if (lis.size()-2 <= 0)
-                        {
-                            VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
-                            SCASSERT(bitem != nullptr);
-                            bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
-                            listCollidingItems.removeAt(i);
-                        }
-                    }
-                }
-                else if (listCollidingItems.size()==1)
-                {
-                    VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
-                    SCASSERT(bitem != nullptr);
-                    bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
-                    listCollidingItems.clear();
-                    collidingItems = true;
-                }
-            }
-            else
-            {
-                collidingItems = true;
-            }
-        }
-        else
-        {
-            collidingItems = true;
-        }
-    }
-    else if (number==1)
-    {
-        if (list.contains(paper)==true)
-        {
-            list.removeAt(list.indexOf(paper));
-        }
-        if (list.contains(shadowPaper)==true)
-        {
-            list.removeAt(list.indexOf(shadowPaper));
-        }
-        for ( int i = 0; i < list.count(); ++i )
-        {
-            if (listCollidingItems.contains(list.at(i))==false)
-            {
-                listCollidingItems.append(list.at(i));
-            }
-        }
-        collidingItems = false;
-    }
-    qDebug()<<"itemColliding::outItems="<<outItems<<"&& collidingItems"<<collidingItems;
-    checkNext();
+//    if (number==0)
+//    {
+//        if (listCollidingItems.isEmpty()==false)
+//        {
+//            if (listCollidingItems.contains(list.at(0))==true)
+//            {
+//                listCollidingItems.removeAt(listCollidingItems.indexOf(list.at(0)));
+//                if (listCollidingItems.size()>1)
+//                {
+//                    for ( int i = 0; i < listCollidingItems.count(); ++i )
+//                    {
+//                        QList<QGraphicsItem *> lis = listCollidingItems.at(i)->collidingItems();
+//                        if (lis.size()-2 <= 0)
+//                        {
+//                            VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(i) );
+//                            SCASSERT(bitem != nullptr);
+//                            bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+//                            listCollidingItems.removeAt(i);
+//                        }
+//                    }
+//                }
+//                else if (listCollidingItems.size()==1)
+//                {
+//                    VItem * bitem = qgraphicsitem_cast<VItem *> ( listCollidingItems.at(0) );
+//                    SCASSERT(bitem != nullptr);
+//                    bitem->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+//                    listCollidingItems.clear();
+//                    collidingItems = true;
+//                }
+//            }
+//            else
+//            {
+//                collidingItems = true;
+//            }
+//        }
+//        else
+//        {
+//            collidingItems = true;
+//        }
+//    }
+//    else if (number==1)
+//    {
+//        if (list.contains(paper)==true)
+//        {
+//            list.removeAt(list.indexOf(paper));
+//        }
+//        if (list.contains(shadowPaper)==true)
+//        {
+//            list.removeAt(list.indexOf(shadowPaper));
+//        }
+//        for ( int i = 0; i < list.count(); ++i )
+//        {
+//            if (listCollidingItems.contains(list.at(i))==false)
+//            {
+//                listCollidingItems.append(list.at(i));
+//            }
+//        }
+//        collidingItems = false;
+//    }
+//    qDebug()<<"itemColliding::outItems="<<outItems<<"&& collidingItems"<<collidingItems;
+//    checkNext();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -32,12 +32,12 @@
 #include <QMainWindow>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
-#include "widgets/vitem.h"
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 #include "xml/vdomdocument.h"
+#include "../libs/vlayout/vlayoutdetail.h"
 
 namespace Ui
 {
@@ -136,7 +136,8 @@ signals:
      * @param listDetails list of details.
      * @param description pattern description.
      */
-    void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile, const QString &description);
+    void               ModelChosen(QVector<VLayoutDetail> listDetails, const QString &curFile,
+                                   const QString &description);
     void               RefreshHistory();
 protected:
     virtual void       keyPressEvent(QKeyEvent *event);
