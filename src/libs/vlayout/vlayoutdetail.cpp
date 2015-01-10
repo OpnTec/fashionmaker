@@ -65,6 +65,11 @@ QVector<QPointF> VLayoutDetail::GetContour() const
 void VLayoutDetail::SetCountour(const QVector<QPointF> &points)
 {
     d->contour = points;
+    // Contour can't be closed
+    if (d->contour.first() == d->contour.last())
+    {
+        d->contour.removeLast();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,6 +82,11 @@ QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
 void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points)
 {
     d->seamAllowence = points;
+    // Seam allowence can't be closed
+    if (d->seamAllowence.first() == d->seamAllowence.last())
+    {
+        d->seamAllowence.removeLast();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,23 +120,39 @@ void VLayoutDetail::SetLayoutWidth(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::translate(qreal dx, qreal dy)
+void VLayoutDetail::Translate(qreal dx, qreal dy)
 {
-    const QMatrix m = d->matrix.translate(dx, dy);
-    d->matrix = m;
+    d->matrix = d->matrix.translate(dx, dy);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::rotate(qreal degrees)
+void VLayoutDetail::Rotate(const QPointF &originPoint, qreal degrees)
 {
-    const QMatrix m = d->matrix.rotate(degrees);
-    d->matrix = m;
+    Translate(-originPoint.x(), -originPoint.y());
+    d->matrix = d->matrix.rotate(degrees);
+    Translate(originPoint.x(), originPoint.y());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::Mirror(const QLineF &edge)
+{
+    if (edge.isNull())
+    {
+        return;
+    }
+
+    QLineF axis = QLineF(edge.x1(), edge.y1(), 100, edge.y2()); // Ox axis
+
+    qreal angle = edge.angleTo(axis);
+    Rotate(edge.p1(), angle);
+    d->matrix = d->matrix.scale(d->matrix.m11()*-1, d->matrix.m22());
+    Rotate(edge.p1(), 360 - angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutDetail::EdgesCount() const
 {
-    return d->layoutAllowence.count()-1;
+    return d->layoutAllowence.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,8 +162,49 @@ QLineF VLayoutDetail::Edge(int i) const
     { // Doesn't exist such edge
         return QLineF();
     }
-    const QLineF line(d->layoutAllowence.at(i-1), d->layoutAllowence.at(i));
-    return line;
+    const QVector<QPointF> points = GetLayoutAllowence();
+    QLineF edge;
+    if (i < EdgesCount())
+    {
+        edge = QLineF(points.at(i-1), points.at(i));
+    }
+    else
+    {
+        edge = QLineF(points.at(EdgesCount()-1), points.at(0));
+    }
+    return edge;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutDetail::EdgeByPoint(const QPointF &p1) const
+{
+    if (p1.isNull())
+    {
+        return 0;
+    }
+
+    if (EdgesCount() < 3)
+    {
+        return 0;
+    }
+
+    const QVector<QPointF> points = GetLayoutAllowence();
+    for (int i=0; i< points.size(); i++)
+    {
+        if (points.at(i) == p1)
+        {
+            return i+1;
+        }
+    }
+    return 0; // Did not find edge
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VLayoutDetail::BoundingRect() const
+{
+    QVector<QPointF> points = GetLayoutAllowence();
+    points.append(points.first());
+    return QPolygonF(points).boundingRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,6 +234,16 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
     for (int i = 0; i < points.size(); ++i)
     {
         p.append(d->matrix.map(points.at(i)));
+    }
+
+    if (d->matrix.m11() < 0)
+    {
+        QList<QPointF> list = p.toList();
+        for(int k=0, s=list.size(), max=(s/2); k<max; k++)
+        {
+            list.swap(k, s-(1+k));
+        }
+        p = list.toVector();
     }
     return p;
 }

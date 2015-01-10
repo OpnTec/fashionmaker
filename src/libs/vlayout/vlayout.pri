@@ -8,10 +8,13 @@ HEADERS += \
     $$PWD/vabstractdetail.h \
     $$PWD/vabstractdetail_p.h \
     $$PWD/vlayoutdetail_p.h \
-    $$PWD/vlayoutdef.h
+    $$PWD/vlayoutdef.h \
+    $$PWD/vlayoutpaper.h \
+    vlayoutpaper_p.h
 
 SOURCES += \
     $$PWD/stable.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutdetail.cpp \
-    $$PWD/vabstractdetail.cpp
+    $$PWD/vabstractdetail.cpp \
+    $$PWD/vlayoutpaper.cpp

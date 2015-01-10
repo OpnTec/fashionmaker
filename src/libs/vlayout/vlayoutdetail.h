@@ -59,11 +59,15 @@ public:
     qreal GetLayoutWidth() const;
     void  SetLayoutWidth(const qreal &value);
 
-    void translate(qreal dx, qreal dy);
-    void rotate(qreal degrees);
+    void Translate(qreal dx, qreal dy);
+    void Rotate(const QPointF &originPoint, qreal degrees);
+    void Mirror(const QLineF &edge);
 
     int    EdgesCount() const;
     QLineF Edge(int i) const;
+    int    EdgeByPoint(const QPointF &p1) const;
+
+    QRectF BoundingRect() const;
 
 private:
     QSharedDataPointer<VLayoutDetailData> d;
