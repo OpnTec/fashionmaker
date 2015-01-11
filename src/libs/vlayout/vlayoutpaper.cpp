@@ -219,7 +219,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
         d->details.append(workDetail);
         // First detail, just simple take all points
-        d->globalContour = workDetail.GetLayoutAllowence();
+        d->globalContour = workDetail.GetLayoutAllowencePoints();
     }
 
     return bestResult.ValideResult(); // Do we have the best result?
@@ -407,7 +407,7 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
         return InsideType::EdgeError;
     }
 
-    const QVector<QPointF> lPoints = detail.GetLayoutAllowence();
+    const QVector<QPointF> lPoints = detail.GetLayoutAllowencePoints();
 
     const QLineF detailEdge = detail.Edge(detailI);
     if (detailEdge.isNull()) // Got null edge
@@ -485,7 +485,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
 {
     if (d->globalContour.isEmpty())
     {
-        return detail.GetLayoutAllowence();
+        return detail.GetLayoutAllowencePoints();
     }
 
     if (globalI <= 0 || globalI > EdgesCount())
@@ -505,7 +505,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
         ++i;
         if (i==globalI)
         {
-            const QVector<QPointF> dPoints = detail.GetLayoutAllowence();
+            const QVector<QPointF> dPoints = detail.GetLayoutAllowencePoints();
             const int nD = dPoints.count();
             int processedPoints = 0;
             int j = detJ;

@@ -44,14 +44,14 @@ public:
     VLayoutDetail &operator=(const VLayoutDetail &detail);
     virtual ~VLayoutDetail();
 
-    QVector<QPointF> GetContour() const;
-    void SetCountour(const QVector<QPointF> &points);
+    QVector<QPointF> GetContourPoints() const;
+    void SetCountourPoints(const QVector<QPointF> &points);
 
     QVector<QPointF> GetSeamAllowencePoints() const;
     void SetSeamAllowencePoints(const QVector<QPointF> &points);
 
-    QVector<QPointF> GetLayoutAllowence() const;
-    void SetLayoutAllowence();
+    QVector<QPointF> GetLayoutAllowencePoints() const;
+    void SetLayoutAllowencePoints();
 
     QMatrix GetMatrix() const;
     void    SetMatrix(const QMatrix &matrix);
@@ -68,6 +68,9 @@ public:
     int    EdgeByPoint(const QPointF &p1) const;
 
     QRectF BoundingRect() const;
+
+    bool isNull() const;
+    qint64 Square() const;
 
 private:
     QSharedDataPointer<VLayoutDetailData> d;

@@ -1919,11 +1919,11 @@ void MainWindow::ActionLayout(bool checked)
     {
         idetail.next();
         VLayoutDetail det = VLayoutDetail();
-        det.SetCountour(idetail.value().ContourPoints(pattern));
+        det.SetCountourPoints(idetail.value().ContourPoints(pattern));
         det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern));
         det.setSeamAllowance(idetail.value().getSeamAllowance());
         det.setName(idetail.value().getName());
-        det.SetLayoutAllowence();
+        det.SetLayoutAllowencePoints();
 
         listDetails.append(det);
     }

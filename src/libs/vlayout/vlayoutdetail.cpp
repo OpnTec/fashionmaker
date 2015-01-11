@@ -29,6 +29,8 @@
 #include "vlayoutdetail.h"
 #include "vlayoutdetail_p.h"
 
+#include <QtMath>
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()
     :VAbstractDetail(), d(new VLayoutDetailData)
@@ -56,13 +58,13 @@ VLayoutDetail::~VLayoutDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::GetContour() const
+QVector<QPointF> VLayoutDetail::GetContourPoints() const
 {
     return d->contour;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetCountour(const QVector<QPointF> &points)
+void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
 {
     d->contour = points;
     // Contour can't be closed
@@ -90,7 +92,7 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::GetLayoutAllowence() const
+QVector<QPointF> VLayoutDetail::GetLayoutAllowencePoints() const
 {
     return Map(d->layoutAllowence);
 }
@@ -162,7 +164,7 @@ QLineF VLayoutDetail::Edge(int i) const
     { // Doesn't exist such edge
         return QLineF();
     }
-    const QVector<QPointF> points = GetLayoutAllowence();
+    const QVector<QPointF> points = GetLayoutAllowencePoints();
     QLineF edge;
     if (i < EdgesCount())
     {
@@ -188,7 +190,7 @@ int VLayoutDetail::EdgeByPoint(const QPointF &p1) const
         return 0;
     }
 
-    const QVector<QPointF> points = GetLayoutAllowence();
+    const QVector<QPointF> points = GetLayoutAllowencePoints();
     for (int i=0; i< points.size(); i++)
     {
         if (points.at(i) == p1)
@@ -202,13 +204,80 @@ int VLayoutDetail::EdgeByPoint(const QPointF &p1) const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutDetail::BoundingRect() const
 {
-    QVector<QPointF> points = GetLayoutAllowence();
+    QVector<QPointF> points = GetLayoutAllowencePoints();
     points.append(points.first());
     return QPolygonF(points).boundingRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetLayoutAllowence()
+bool VLayoutDetail::isNull() const
+{
+    if (d->contour.isEmpty() == false && d->layoutWidth > 0)
+    {
+        if (getSeamAllowance() && d->seamAllowence.isEmpty() == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        return true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint64 VLayoutDetail::Square() const
+{
+    if (d->layoutAllowence.isEmpty())
+    {
+        return 0;
+    }
+
+    const int n = d->layoutAllowence.count();
+    qreal s, res = 0;
+    qint64 sq = 0;
+
+    QVector<qreal> x;
+    QVector<qreal> y;
+
+    for(int i=0; i < n; ++i)
+    {
+        x.append(d->layoutAllowence.at(i).x());
+        y.append(d->layoutAllowence.at(i).y());
+    }
+
+    // Calculation a polygon area through the sum of the areas of trapezoids
+    for (int i = 0; i < n; ++i)
+    {
+        if (i == 0)
+        {
+            s = x.at(i)*(y.at(n-1) - y.at(i+1)); //if i == 0, then y[i-1] replace on y[n-1]
+            res += s;
+        }
+        else
+        {
+            if (i == n-1)
+            {
+                s = x.at(i)*(y.at(i-1) - y.at(0)); // if i == n-1, then y[i+1] replace on y[0]
+                res += s;
+            }
+            else
+            {
+                s = x.at(i)*(y.at(i-1) - y.at(i+1));
+                res += s;
+            }
+        }
+    }
+    sq = qFloor(qAbs(res/2.0));
+    return sq;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetLayoutAllowencePoints()
 {
     if (d->layoutWidth > 0)
     {

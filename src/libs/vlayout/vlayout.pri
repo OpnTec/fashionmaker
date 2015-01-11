@@ -10,11 +10,13 @@ HEADERS += \
     $$PWD/vlayoutdetail_p.h \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
-    vlayoutpaper_p.h
+    $$PWD/vlayoutpaper_p.h \
+    $$PWD/vbank.h
 
 SOURCES += \
     $$PWD/stable.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutdetail.cpp \
     $$PWD/vabstractdetail.cpp \
-    $$PWD/vlayoutpaper.cpp
+    $$PWD/vlayoutpaper.cpp \
+    $$PWD/vbank.cpp
