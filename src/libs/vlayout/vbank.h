@@ -34,6 +34,7 @@
 
 class QPointF;
 class VLayoutDetail;
+class QRectF;
 
 enum class Cases : char { CaseThreeGroup, CaseTwoGroup, CaseDesc};
 
@@ -59,6 +60,8 @@ public:
     int AllDetailsCount() const;
     int LeftArrange() const;
 
+    QRectF GetBiggestBoundingRect() const;
+
 private:
     Q_DISABLE_COPY(VBank)
     QVector<VLayoutDetail> details;
@@ -72,6 +75,7 @@ private:
 
     Cases caseType;
     bool prepare;
+    QRectF boundingRect;
 
     void PrepareGroup();
 
@@ -84,6 +88,7 @@ private:
     int GetNextDescGroup() const;
 
     void SqMaxMin(qint64 &sMax, qint64 &sMin) const;
+    void BiggestBoundingRect();
 };
 
 #endif // VBANK_H

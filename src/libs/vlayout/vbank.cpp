@@ -31,12 +31,13 @@
 
 #include <QPointF>
 #include <climits>
+#include <QRectF>
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
     :details(QVector<VLayoutDetail>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
       middle(QHash<int, qint64>()), small(QHash<int, qint64>()), layoutWidth(0), caseType(Cases::CaseDesc),
-      prepare(false)
+      prepare(false), boundingRect(QRectF())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,6 +181,7 @@ bool VBank::Prepare()
         unsorted.insert(i, square);
     }
 
+    BiggestBoundingRect();
     PrepareGroup();
 
     prepare = true;
@@ -194,6 +196,7 @@ void VBank::Reset()
     big.clear();
     middle.clear();
     small.clear();
+    boundingRect = QRectF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,6 +215,40 @@ int VBank::AllDetailsCount() const
 int VBank::LeftArrange() const
 {
     return big.count() + middle.count() + small.count();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBank::BiggestBoundingRect()
+{
+    int index = -1;
+    qint64 sMax = LLONG_MIN;
+
+    QHash<int, qint64>::const_iterator i = unsorted.constBegin();
+    while (i != unsorted.constEnd())
+    {
+        if (i.value() > sMax)
+        {
+            sMax = i.value();
+            index = i.key();
+        }
+
+        ++i;
+    }
+
+    if (index >= 0 && index < details.size())
+    {
+        boundingRect = QPolygonF(details.at(index).GetLayoutAllowencePoints()).boundingRect();
+    }
+    else
+    {
+        boundingRect = QRectF();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VBank::GetBiggestBoundingRect() const
+{
+    return boundingRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,7 +288,7 @@ void VBank::PrepareThreeGroups()
         {
             big.insert(i.key(), i.value());
         }
-        else if (s1 > i.value() && i.value() > s2)
+        else if (s1 >= i.value() && i.value() > s2)
         {
             middle.insert(i.key(), i.value());
         }

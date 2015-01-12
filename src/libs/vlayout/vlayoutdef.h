@@ -31,4 +31,13 @@
 
 enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 
+enum class LayoutErrors : char
+{
+    NoError,
+    PrepareLayoutError,
+    PaperSizeError,
+    ProcessStoped,
+    EmptyPaperError
+};
+
 #endif // VLAYOUTDEF_H

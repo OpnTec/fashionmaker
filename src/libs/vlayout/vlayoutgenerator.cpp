@@ -27,8 +27,148 @@
  *************************************************************************/
 
 #include "vlayoutgenerator.h"
+#include "vlayoutpaper.h"
+#include "vlayoutdetail.h"
 
+#include <QRectF>
 
-VLayoutGenerator::VLayoutGenerator()
+//---------------------------------------------------------------------------------------------------------------------
+VLayoutGenerator::VLayoutGenerator(QObject *parent)
+    :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
+      stopGeneration(false), state(LayoutErrors::NoError)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VLayoutGenerator::~VLayoutGenerator()
 {
+    delete bank;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetDetails(const QVector<VLayoutDetail> &details)
+{
+    bank->SetDetails(details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetLayoutWidth(qreal width)
+{
+    bank->SetLayoutWidth(width);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetCaseType(Cases caseType)
+{
+    bank->SetCaseType(caseType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::DetailsCount()
+{
+    return bank->AllDetailsCount();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::Generate()
+{
+    stopGeneration = false;
+    papers.clear();
+    state = LayoutErrors::NoError;
+    emit Start();
+
+    if (bank->Prepare())
+    {
+        CheckDetailsSize();
+        do
+        {
+            if (stopGeneration)
+            {
+                state = LayoutErrors::ProcessStoped;
+                break;
+            }
+
+            VLayoutPaper paper(paperHeight, paperWidth);
+            if (bank->LeftArrange() > 0)
+            {
+                const int index = bank->GetTiket();
+                if (paper.ArrangeDetail(bank->GetDetail(index)))
+                {
+                    bank->Arranged(index);
+                }
+                else
+                {
+                    bank->NotArranged(index);
+                }
+            }
+            else
+            {
+                if (paper.Count() > 0)
+                {
+                    papers.append(paper);
+                }
+                else
+                {
+                    state = LayoutErrors::EmptyPaperError;
+                    emit Error(state);
+                    return;
+                }
+            }
+
+        } while (bank->AllDetailsCount() > 0);
+    }
+    else
+    {
+        state = LayoutErrors::PrepareLayoutError;
+        emit Error(state);
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+LayoutErrors VLayoutGenerator::State() const
+{
+    return state;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::Abort()
+{
+    stopGeneration = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::CheckDetailsSize()
+{
+    const QRectF rec = bank->GetBiggestBoundingRect();
+    if (rec.width() > paperWidth || rec.height() > paperHeight)
+    {
+        state = LayoutErrors::PaperSizeError;
+        emit Error(state);
+        stopGeneration = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::GetPaperWidth() const
+{
+    return paperWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetPaperWidth(int value)
+{
+    paperWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::GetPaperHeight() const
+{
+    return paperHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetPaperHeight(int value)
+{
+    paperHeight = value;
+}
+

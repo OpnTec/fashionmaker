@@ -29,12 +29,55 @@
 #ifndef VLAYOUTGENERATOR_H
 #define VLAYOUTGENERATOR_H
 
+#include <QObject>
 
-class VLayoutGenerator
+#include "vlayoutdef.h"
+#include "vbank.h"
+
+class VLayoutPaper;
+class VLayoutDetail;
+
+class VLayoutGenerator :public QObject
 {
-
+    Q_OBJECT
 public:
-    VLayoutGenerator();
+    VLayoutGenerator(QObject *parent = 0);
+    virtual ~VLayoutGenerator();
+
+    void SetDetails(const QVector<VLayoutDetail> &details);
+    void SetLayoutWidth(qreal width);
+    void SetCaseType(Cases caseType);
+    int DetailsCount();
+
+    int GetPaperHeight() const;
+    void SetPaperHeight(int value);
+
+    int GetPaperWidth() const;
+    void SetPaperWidth(int value);
+
+    void Generate();
+
+    LayoutErrors State() const;
+
+signals:
+    void Start();
+    void Arranged(int count);
+    void Error(const LayoutErrors &state);
+    void Finished();
+
+public slots:
+    void Abort();
+
+private:
+    Q_DISABLE_COPY(VLayoutGenerator)
+    QVector<VLayoutPaper> papers;
+    VBank *bank;
+    int paperHeight;
+    int paperWidth;
+    bool stopGeneration;
+    LayoutErrors state;
+
+    void CheckDetailsSize();
 };
 
 #endif // VLAYOUTGENERATOR_H
