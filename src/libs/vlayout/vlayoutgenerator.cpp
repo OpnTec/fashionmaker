@@ -31,6 +31,8 @@
 #include "vlayoutdetail.h"
 
 #include <QRectF>
+#include <QImage>
+#include <QDir>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
@@ -74,6 +76,14 @@ void VLayoutGenerator::Generate()
     stopGeneration = false;
     papers.clear();
     state = LayoutErrors::NoError;
+
+#ifdef LAYOUT_DEBUG
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
+    QDir debugDir(path);
+    debugDir.removeRecursively();
+    debugDir.mkpath(path);
+#endif
+
     emit Start();
 
     if (bank->Prepare())
@@ -89,6 +99,7 @@ void VLayoutGenerator::Generate()
 
             VLayoutPaper paper(paperHeight, paperWidth);
             paper.SetShift(shift);
+            paper.SetPaperIndex(papers.count());
             if (bank->LeftArrange() > 0)
             {
                 const int index = bank->GetTiket();

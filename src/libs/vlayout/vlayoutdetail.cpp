@@ -29,6 +29,7 @@
 #include "vlayoutdetail.h"
 #include "vlayoutdetail_p.h"
 
+#include <QPainterPath>
 #include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,4 +316,44 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
         p = list.toVector();
     }
     return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutDetail::ContourPath() const
+{
+    QPainterPath path;
+
+    // contour
+    path.moveTo(d->contour[0]);
+    for (qint32 i = 1; i < d->contour.count(); ++i)
+    {
+        path.lineTo(d->contour.at(i));
+    }
+    path.lineTo(d->contour.at(0));
+
+    // seam allowence
+    if (getSeamAllowance() == true)
+    {
+        QPainterPath ekv;
+        QVector<QPointF> p;
+        if (getClosed() == true)
+        {
+            p = Equidistant(d->seamAllowence, EquidistantType::CloseEquidistant, getWidth());
+        }
+        else
+        {
+            p = Equidistant(d->seamAllowence, EquidistantType::OpenEquidistant, getWidth());
+        }
+
+        ekv.moveTo(p.at(0));
+        for (qint32 i = 1; i < p.count(); ++i)
+        {
+            ekv.lineTo(p.at(i));
+        }
+
+        path.addPath(ekv);
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
 }

@@ -1923,7 +1923,7 @@ void MainWindow::ActionLayout(bool checked)
         det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern));
         det.setSeamAllowance(idetail.value().getSeamAllowance());
         det.setName(idetail.value().getName());
-        det.SetLayoutAllowencePoints();
+        det.setWidth(qApp->toPixel(idetail.value().getWidth()));
 
         listDetails.append(det);
     }

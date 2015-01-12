@@ -32,6 +32,9 @@
 #include <climits>
 #include <QPointF>
 #include <QtMath>
+#include <QImage>
+#include <QDir>
+#include <QPainter>
 
 class BestResult
 {
@@ -172,6 +175,12 @@ void VLayoutPaper::SetShift(unsigned int shift)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetPaperIndex(quint32 index)
+{
+    d->paperIndex = index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail)
 {
     // First need set size of paper
@@ -184,6 +193,8 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail)
     {
         return false;//Not enough edges
     }
+
+    d->frame = 0;
 
     if (Count() == 0)
     {
@@ -223,6 +234,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
                                          workDetail.GetMatrix());
                 }
             }
+            ++d->frame;
 
             for (int angle = 0; angle < 360; ++angle)
             {
@@ -238,6 +250,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
                                              workDetail.GetMatrix());
                     }
                 }
+                ++d->frame;
             }
         }
     }
@@ -273,6 +286,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
                     continue; // Outside of sheet.
                 }
             }
+            ++d->frame;
         }
     }
 
@@ -287,6 +301,10 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
     bool flagSquare = false;
 
     CombineEdges(detail, globalEdge, dEdge);
+
+#ifdef LAYOUT_DEBUG
+    DrawDebug(detail);
+#endif
 
     switch (Crossing(detail, j, dEdge))
     {
@@ -362,6 +380,10 @@ bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, i
     bool flagSquare = false;
 
     RotateEdges(detail, globalEdge, dEdge, angle);
+
+#ifdef LAYOUT_DEBUG
+    DrawDebug(detail);
+#endif
 
     switch (Crossing(detail, j, dEdge))
     {
@@ -734,4 +756,104 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
     }
 
     return bestResult.ValideResult(); // Do we have the best result?
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::DrawDebug(const VLayoutDetail &detail) const
+{
+    QImage frameImage ( d->paperWidth, d->paperHeight, QImage::Format_RGB32 );
+    frameImage.fill(Qt::white);
+    QPainter paint;
+    paint.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.begin(&frameImage);
+
+    if (d->globalContour.isEmpty())
+    {
+        paint.drawPath(DrawContour(CutEdge(QLineF(0, 0, d->paperWidth, 0))));
+    }
+    else
+    {
+        paint.drawPath(DrawContour(d->globalContour));
+    }
+
+    paint.setPen(QPen(Qt::darkGreen, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.drawPath(DrawContour(detail.GetLayoutAllowencePoints()));
+
+#ifdef ARRANGED_DETAILS
+    paint.setPen(QPen(Qt::blue, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.drawPath(DrawDetails());
+#endif
+
+    paint.end();
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2.png").arg(d->paperIndex)
+            .arg(d->frame);
+    frameImage.save (path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutPaper::ShowDirection(const QLineF &edge) const
+{
+    QLineF arrow = edge;
+    arrow.setLength(edge.length()/2.0);
+
+    //Reverse line because we want start arrow from this point
+    arrow = QLineF(arrow.p2(), arrow.p1());
+    const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
+    arrow.setLength(14);//arrow length in pixels
+
+    QPainterPath path;
+    arrow.setAngle(angle-35);
+    path.moveTo(arrow.p1());
+    path.lineTo(arrow.p2());
+
+    arrow.setAngle(angle+35);
+    path.moveTo(arrow.p1());
+    path.lineTo(arrow.p2());
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutPaper::DrawContour(const QVector<QPointF> &points) const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+    if (points.count() >= 2)
+    {
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.moveTo(points.at(i));
+            path.lineTo(points.at(i+1));
+        }
+        path.lineTo(points.at(0));
+
+#ifdef SHOW_DIRECTION
+        for (qint32 i = 0; i < points.count()-1; ++i)
+        {
+            path.addPath(ShowDirection(QLineF(points.at(i), points.at(i+1))));
+        }
+#endif
+
+#ifdef SHOW_VERTICES
+        for (qint32 i = 0; i < points.count(); ++i)
+        {
+            path.addRect(points.at(i).x()-3, points.at(i).y()-3, 6, 6);
+        }
+#endif
+    }
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutPaper::DrawDetails() const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+    if (Count() > 0)
+    {
+        for (int i = 0; i < d->details.size(); ++i)
+        {
+            path.addPath(d->details.at(i).ContourPath());
+        }
+    }
+    return path;
 }

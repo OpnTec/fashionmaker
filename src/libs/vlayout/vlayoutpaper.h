@@ -37,6 +37,7 @@ class QPointF;
 class QLineF;
 class QPolygonF;
 class BestResult;
+class QPainterPath;
 
 class VLayoutPaper
 {
@@ -55,6 +56,8 @@ public:
 
     unsigned int GetShift() const;
     void         SetShift(unsigned int shift);
+
+    void SetPaperIndex(quint32 index);
 
     bool ArrangeDetail(const VLayoutDetail &detail);
     int  Count() const;
@@ -98,6 +101,11 @@ private:
     QVector<QPointF> CutEdge(const QLineF &edge) const;
 
     bool SaveResult(const BestResult &bestResult, const VLayoutDetail &detail);
+
+    void DrawDebug(const VLayoutDetail &detail) const;
+    QPainterPath ShowDirection(const QLineF &edge) const;
+    QPainterPath DrawContour(const QVector<QPointF> &points) const;
+    QPainterPath DrawDetails() const;
 };
 
 #endif // VLAYOUTPAPER_H
