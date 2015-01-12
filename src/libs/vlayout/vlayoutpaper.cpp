@@ -31,6 +31,7 @@
 
 #include <climits>
 #include <QPointF>
+#include <QtMath>
 
 class BestResult
 {
@@ -159,6 +160,18 @@ void VLayoutPaper::SetWidth(int width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+unsigned int VLayoutPaper::GetShift() const
+{
+    return d->shift;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetShift(unsigned int shift)
+{
+    d->shift = shift;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail)
 {
     // First need set size of paper
@@ -193,36 +206,31 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
 {
     BestResult bestResult;
 
-    // We should use copy of the detail.
-    VLayoutDetail workDetail = detail;
-
-    for (int i=1; i<= detail.EdgesCount(); i++)
+    for (int j=1; j <= EdgesCount(); ++j)
     {
-        int dEdge = i;// For mirror detail edge will be different
-        if (CheckPosition(workDetail, 1, dEdge))
+        // We should use copy of the detail.
+        VLayoutDetail workDetail = detail;
+
+        for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            const QRectF rec = workDetail.BoundingRect();
-            if (SheetContains(rec))
+            int dEdge = i;// For mirror detail edge will be different
+            if (CheckPosition(workDetail, j, dEdge))
             {
-                bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), 1, dEdge, workDetail.GetMatrix());
-            }
-            else
-            {
-                continue; // Outside of sheet.
+                const QRectF rec = workDetail.BoundingRect();
+                if (SheetContains(rec))
+                {
+                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
+                                         workDetail.GetMatrix());
+                }
+                else
+                {
+                    continue; // Outside of sheet.
+                }
             }
         }
     }
 
-    if (bestResult.ValideResult())
-    {
-        VLayoutDetail workDetail = detail;
-        workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
-        d->details.append(workDetail);
-        // First detail, just simple take all points
-        d->globalContour = workDetail.GetLayoutAllowencePoints();
-    }
-
-    return bestResult.ValideResult(); // Do we have the best result?
+    return SaveResult(bestResult, detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,22 +264,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
         }
     }
 
-    if (bestResult.ValideResult())
-    {
-        VLayoutDetail workDetail = detail;
-        workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
-        const QVector<QPointF> newGContour = UniteWithContour(workDetail, bestResult.GContourEdge(),
-                                                              bestResult.DetailEdge());
-        if (newGContour.isEmpty())
-        {
-            return false;
-        }
-        d->details.append(workDetail);
-        // First detail, just simple take all points
-        d->globalContour = newGContour;
-    }
-
-    return bestResult.ValideResult(); // Do we have the best result?
+    return SaveResult(bestResult, detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -483,42 +476,63 @@ void VLayoutPaper::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge,
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ) const
 {
+    QVector<QPointF> newContour;
     if (d->globalContour.isEmpty())
     {
-        return detail.GetLayoutAllowencePoints();
-    }
-
-    if (globalI <= 0 || globalI > EdgesCount())
-    {
-        return QVector<QPointF>();
-    }
-
-    if (detJ <= 0 || detJ > detail.EdgesCount())
-    {
-        return QVector<QPointF>();
-    }
-
-    QVector<QPointF> newContour;
-    for(int i=0; i < d->globalContour.count(); ++i)
-    {
-        newContour.append(d->globalContour.at(i));
-        ++i;
-        if (i==globalI)
+        int processedEdges = 0;
+        const int nD = detail.EdgesCount();
+        int j = detJ+1;
+        do
         {
-            const QVector<QPointF> dPoints = detail.GetLayoutAllowencePoints();
-            const int nD = dPoints.count();
-            int processedPoints = 0;
-            int j = detJ;
-            do
+            if (j > nD)
             {
-                if (j > nD-1)
+                j=0;
+            }
+            const QVector<QPointF> points = CutEdge(detail.Edge(j));
+            for (int i = 0; i < points.size()-1; ++i)
+            {
+                newContour.append(points.at(i));
+            }
+            ++processedEdges;
+            ++j;
+        }while (processedEdges < nD);
+    }
+    else
+    {
+        if (globalI <= 0 || globalI > EdgesCount())
+        {
+            return QVector<QPointF>();
+        }
+
+        if (detJ <= 0 || detJ > detail.EdgesCount())
+        {
+            return QVector<QPointF>();
+        }
+
+        for(int i=0; i < d->globalContour.count(); ++i)
+        {
+            newContour.append(d->globalContour.at(i));
+            ++i;
+            if (i==globalI)
+            {
+                int processedEdges = 0;
+                const int nD = detail.EdgesCount();
+                int j = detJ+1;
+                do
                 {
-                    j=0;
-                }
-                newContour.append(dPoints.at(j));
-                ++processedPoints;
-                ++j;
-            }while (processedPoints<nD);
+                    if (j > nD)
+                    {
+                        j=0;
+                    }
+                    const QVector<QPointF> points = CutEdge(detail.Edge(j));
+                    for (int i = 0; i < points.size()-1; ++i)
+                    {
+                        newContour.append(points.at(i));
+                    }
+                    ++processedEdges;
+                    ++j;
+                }while (processedEdges < nD);
+            }
         }
     }
     return newContour;
@@ -530,29 +544,73 @@ QLineF VLayoutPaper::GlobalEdge(int i) const
     if (d->details.isEmpty())
     {
         // Because sheet is blank we have one global edge for all cases - Ox axis.
-        return QLineF(0, 0, d->paperWidth, 0);
-    }
+        const QLineF axis = QLineF(0, 0, d->paperWidth, 0);
+        if (d->shift == 0)
+        {
+            return axis;
+        }
 
-    if (i < 1 || i > EdgesCount())
-    { // Doesn't exist such edge
-        return QLineF();
-    }
-    QLineF edge;
-    if (i < EdgesCount())
-    {
-        edge = QLineF(d->globalContour.at(i-1), d->globalContour.at(i));
+        const int n = qFloor(axis.length()/d->shift);
+
+        if (i < 1 || i > n)
+        { // Doesn't exist such edge
+            return QLineF();
+        }
+
+        if (n <= 0)
+        {
+            return axis;
+        }
+        else
+        {
+            const qreal nShift = axis.length()/n;
+            return QLineF(nShift*(i-1), 0, nShift*i, 0);
+        }
     }
     else
-    { // Closed countour
-        edge = QLineF(d->globalContour.at(EdgesCount()-1), d->globalContour.at(0));
+    {
+        if (i < 1 || i > EdgesCount())
+        { // Doesn't exist such edge
+            return QLineF();
+        }
+        QLineF edge;
+        if (i < EdgesCount())
+        {
+            edge = QLineF(d->globalContour.at(i-1), d->globalContour.at(i));
+        }
+        else
+        { // Closed countour
+            edge = QLineF(d->globalContour.at(EdgesCount()-1), d->globalContour.at(0));
+        }
+        return edge;
     }
-    return edge;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::EdgesCount() const
 {
-    return d->globalContour.count();
+    if (d->details.isEmpty())
+    {
+        if (d->shift == 0)
+        {
+            return 1;
+        }
+
+        const QLineF axis = QLineF(0, 0, d->paperWidth, 0);
+        const int n = qFloor(axis.length()/d->shift);
+        if (n <= 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return n;
+        }
+    }
+    else
+    {
+        return d->globalContour.count();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -561,4 +619,54 @@ QPolygonF VLayoutPaper::GlobalPolygon() const
     QVector<QPointF> points = d->globalContour;
     points.append(points.first());
     return QPolygonF(points);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPaper::CutEdge(const QLineF &edge) const
+{
+    QVector<QPointF> points;
+    if (d->shift == 0)
+    {
+        points.append(edge.p1());
+        points.append(edge.p2());
+    }
+
+    const int n = qFloor(edge.length()/d->shift);
+
+    if (n <= 0)
+    {
+        points.append(edge.p1());
+        points.append(edge.p2());
+    }
+    else
+    {
+        const qreal nShift = edge.length()/n;
+        for (int i = 1; i <= n+1; ++i)
+        {
+            QLineF l1 = edge;
+            l1.setLength(nShift*(i-1));
+            points.append(l1.p2());
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail &detail)
+{
+    if (bestResult.ValideResult())
+    {
+        VLayoutDetail workDetail = detail;
+        workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
+        const QVector<QPointF> newGContour = UniteWithContour(workDetail, bestResult.GContourEdge(),
+                                                              bestResult.DetailEdge());
+        if (newGContour.isEmpty())
+        {
+            return false;
+        }
+        d->details.append(workDetail);
+        d->globalContour = newGContour;
+    }
+
+    return bestResult.ValideResult(); // Do we have the best result?
 }

@@ -35,7 +35,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
-      stopGeneration(false), state(LayoutErrors::NoError)
+      stopGeneration(false), state(LayoutErrors::NoError), shift(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,6 +88,7 @@ void VLayoutGenerator::Generate()
             }
 
             VLayoutPaper paper(paperHeight, paperWidth);
+            paper.SetShift(shift);
             if (bank->LeftArrange() > 0)
             {
                 const int index = bank->GetTiket();
@@ -161,6 +162,18 @@ void VLayoutGenerator::SetPaperWidth(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+unsigned int VLayoutGenerator::GetShift() const
+{
+    return shift;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetShift(unsigned int shift)
+{
+    this->shift = shift;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VLayoutGenerator::GetPaperHeight() const
 {
     return paperHeight;
@@ -171,4 +184,3 @@ void VLayoutGenerator::SetPaperHeight(int value)
 {
     paperHeight = value;
 }
-

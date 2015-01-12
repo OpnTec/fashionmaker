@@ -55,6 +55,9 @@ public:
     int GetPaperWidth() const;
     void SetPaperWidth(int value);
 
+    unsigned int GetShift() const;
+    void         SetShift(unsigned int shift);
+
     void Generate();
 
     LayoutErrors State() const;
@@ -76,6 +79,7 @@ private:
     int paperWidth;
     bool stopGeneration;
     LayoutErrors state;
+    unsigned int shift;
 
     void CheckDetailsSize();
 };

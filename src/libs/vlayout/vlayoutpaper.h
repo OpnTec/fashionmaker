@@ -36,6 +36,7 @@ class VLayoutDetail;
 class QPointF;
 class QLineF;
 class QPolygonF;
+class BestResult;
 
 class VLayoutPaper
 {
@@ -51,6 +52,9 @@ public:
 
     int  GetWidth() const;
     void SetWidth(int width);
+
+    unsigned int GetShift() const;
+    void         SetShift(unsigned int shift);
 
     bool ArrangeDetail(const VLayoutDetail &detail);
     int  Count() const;
@@ -86,6 +90,9 @@ private:
     int    EdgesCount() const;
 
     QPolygonF GlobalPolygon() const;
+    QVector<QPointF> CutEdge(const QLineF &edge) const;
+
+    bool SaveResult(const BestResult &bestResult, const VLayoutDetail &detail);
 };
 
 #endif // VLAYOUTPAPER_H
