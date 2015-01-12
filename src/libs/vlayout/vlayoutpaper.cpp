@@ -208,13 +208,13 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
 
     for (int j=1; j <= EdgesCount(); ++j)
     {
-        // We should use copy of the detail.
-        VLayoutDetail workDetail = detail;
-
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            int dEdge = i;// For mirror detail edge will be different
-            if (CheckPosition(workDetail, j, dEdge))
+            // We should use copy of the detail.
+            VLayoutDetail workDetail = detail;
+
+            int dEdge = i;// For mirrored detail edge will be different
+            if (CheckCombineEdges(workDetail, j, dEdge))
             {
                 const QRectF rec = workDetail.BoundingRect();
                 if (SheetContains(rec))
@@ -222,9 +222,21 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
                     bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
                                          workDetail.GetMatrix());
                 }
-                else
+            }
+
+            for (int angle = 0; angle < 360; ++angle)
+            {
+                // We should use copy of the detail.
+                VLayoutDetail workDetail = detail;
+
+                if (CheckRotationEdges(workDetail, j, i, angle))
                 {
-                    continue; // Outside of sheet.
+                    const QRectF rec = workDetail.BoundingRect();
+                    if (SheetContains(rec))
+                    {
+                        bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
+                                             workDetail.GetMatrix());
+                    }
                 }
             }
         }
@@ -246,7 +258,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
         for (int i=1; i<= workDetail.EdgesCount(); i++)
         {
             int dEdge = i;// For mirror detail edge will be different
-            if (CheckPosition(workDetail, j, dEdge))
+            if (CheckCombineEdges(workDetail, j, dEdge))
             {
                 if (SheetContains(workDetail.BoundingRect()))
                 {
@@ -268,7 +280,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::CheckPosition(VLayoutDetail &detail, int j, int &dEdge) const
+bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const
 {
     const QLineF globalEdge = GlobalEdge(j);
     bool flagMirror = false;
@@ -339,6 +351,43 @@ bool VLayoutPaper::CheckPosition(VLayoutDetail &detail, int j, int &dEdge) const
             default:
                 break;
         }
+    }
+    return flagSquare;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const
+{
+    const QLineF globalEdge = GlobalEdge(j);
+    bool flagSquare = false;
+
+    RotateEdges(detail, globalEdge, dEdge, angle);
+
+    switch (Crossing(detail, j, dEdge))
+    {
+        case CrossingType::EdgeError:
+            return false;
+        case CrossingType::Intersection:
+            flagSquare = false;
+            break;
+        case CrossingType::NoIntersection:
+        {
+            switch (InsideContour(detail, dEdge))
+            {
+                case InsideType::EdgeError:
+                    return false;
+                case InsideType::Inside:
+                    flagSquare = false;
+                    break;
+                case InsideType::Outside:
+                    flagSquare = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        default:
+            break;
     }
     return flagSquare;
 }
@@ -471,6 +520,22 @@ void VLayoutPaper::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge,
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
     detail.Rotate(globalEdge.p2(), angle_between);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const
+{
+    QLineF detailEdge = detail.Edge(dEdge);
+
+    // Find distance between two edges for two begin vertex.
+    const qreal dx = globalEdge.x2() - detailEdge.x2();
+    const qreal dy = globalEdge.y2() - detailEdge.y2();
+
+    detailEdge.translate(dx, dy); // Use values for translate detail edge.
+
+    // Now we move detail to position near to global contour edge.
+    detail.Translate(dx, dy);
+    detail.Rotate(globalEdge.p2(), angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
