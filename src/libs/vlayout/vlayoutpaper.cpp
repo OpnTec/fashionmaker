@@ -35,6 +35,7 @@
 #include <QImage>
 #include <QDir>
 #include <QPainter>
+#include <QGraphicsItem>
 
 class BestResult
 {
@@ -856,4 +857,18 @@ QPainterPath VLayoutPaper::DrawDetails() const
         }
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsItem *VLayoutPaper::GetItem() const
+{
+    QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->paperWidth, d->paperHeight));
+    paper->setPen(QPen(Qt::black, 1));
+    paper->setBrush(QBrush(Qt::white));
+    for (int i=0; i < d->details.count(); ++i)
+    {
+        QGraphicsItem *item = d->details.at(i).GetItem();
+        item->setParentItem(paper);
+    }
+    return paper;
 }

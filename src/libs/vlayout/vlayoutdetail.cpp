@@ -29,6 +29,7 @@
 #include "vlayoutdetail.h"
 #include "vlayoutdetail_p.h"
 
+#include <QGraphicsItem>
 #include <QPainterPath>
 #include <QtMath>
 
@@ -324,25 +325,27 @@ QPainterPath VLayoutDetail::ContourPath() const
     QPainterPath path;
 
     // contour
-    path.moveTo(d->contour[0]);
-    for (qint32 i = 1; i < d->contour.count(); ++i)
+    QVector<QPointF> points = Map(d->contour);
+    path.moveTo(points.at(0));
+    for (qint32 i = 1; i < points.count(); ++i)
     {
-        path.lineTo(d->contour.at(i));
+        path.lineTo(points.at(i));
     }
-    path.lineTo(d->contour.at(0));
+    path.lineTo(points.at(0));
 
     // seam allowence
     if (getSeamAllowance() == true)
     {
         QPainterPath ekv;
         QVector<QPointF> p;
+        points = Map(d->seamAllowence);
         if (getClosed() == true)
         {
-            p = Equidistant(d->seamAllowence, EquidistantType::CloseEquidistant, getWidth());
+            p = Equidistant(points, EquidistantType::CloseEquidistant, getWidth());
         }
         else
         {
-            p = Equidistant(d->seamAllowence, EquidistantType::OpenEquidistant, getWidth());
+            p = Equidistant(points, EquidistantType::OpenEquidistant, getWidth());
         }
 
         ekv.moveTo(p.at(0));
@@ -356,4 +359,12 @@ QPainterPath VLayoutDetail::ContourPath() const
     }
 
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsItem *VLayoutDetail::GetItem() const
+{
+    QGraphicsPathItem *item = new QGraphicsPathItem();
+    item->setPath(ContourPath());
+    return item;
 }

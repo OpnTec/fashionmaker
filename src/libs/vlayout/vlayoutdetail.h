@@ -35,6 +35,7 @@
 #include <QPointF>
 
 class VLayoutDetailData;
+class QGraphicsItem;
 
 class VLayoutDetail :public VAbstractDetail
 {
@@ -72,6 +73,7 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
+    QGraphicsItem *GetItem() const;
 
 private:
     QSharedDataPointer<VLayoutDetailData> d;

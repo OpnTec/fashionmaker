@@ -33,6 +33,7 @@
 #include <QRectF>
 #include <QImage>
 #include <QDir>
+#include <QGraphicsItem>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
@@ -140,6 +141,17 @@ void VLayoutGenerator::Generate()
 LayoutErrors VLayoutGenerator::State() const
 {
     return state;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<QGraphicsItem *> VLayoutGenerator::GetItems() const
+{
+    QList<QGraphicsItem *> list;
+    for (int i=0; i < papers.count(); ++i)
+    {
+        list.append(papers.at(i).GetItem());
+    }
+    return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

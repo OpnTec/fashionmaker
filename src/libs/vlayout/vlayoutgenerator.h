@@ -30,12 +30,14 @@
 #define VLAYOUTGENERATOR_H
 
 #include <QObject>
+#include <QList>
 
 #include "vlayoutdef.h"
 #include "vbank.h"
 
 class VLayoutPaper;
 class VLayoutDetail;
+class QGraphicsItem;
 
 class VLayoutGenerator :public QObject
 {
@@ -61,6 +63,8 @@ public:
     void Generate();
 
     LayoutErrors State() const;
+
+    QList<QGraphicsItem *> GetItems() const;
 
 signals:
     void Start();

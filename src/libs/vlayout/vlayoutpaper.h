@@ -38,6 +38,7 @@ class QLineF;
 class QPolygonF;
 class BestResult;
 class QPainterPath;
+class QGraphicsItem;
 
 class VLayoutPaper
 {
@@ -61,6 +62,8 @@ public:
 
     bool ArrangeDetail(const VLayoutDetail &detail);
     int  Count() const;
+    QGraphicsItem *GetItem() const;
+
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 

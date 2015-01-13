@@ -7,6 +7,8 @@
 # File with common stuff for whole project
 include(../../../Valentina.pri)
 
+QT += core gui widgets
+
 # Name of library
 TARGET = vlayout
 
