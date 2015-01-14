@@ -52,5 +52,8 @@
         <file>icon/32x32/line_intersect_axis.png</file>
         <file>icon/32x32/arc_intersect_axis.png</file>
         <file>icon/32x32/curve_intersect_axis.png</file>
+        <file>icon/16x16/landscape.png</file>
+        <file>icon/16x16/portrait.png</file>
+        <file>icon/16x16/template.png</file>
     </qresource>
 </RCC>

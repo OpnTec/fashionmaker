@@ -73,6 +73,7 @@ public:
     static const QString    UnitMM;
     static const QString    UnitCM;
     static const QString    UnitINCH;
+    static const QString    UnitPX;
     static const QString    TagVersion;
     /**
      * @param data container with variables

@@ -292,22 +292,20 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 double VApplication::toPixel(double val, const Unit &unit) const
 {
-    double result = 0;
     switch (unit)
     {
-    case Unit::Mm:
-        result = (val / 25.4) * PrintDPI;
-        break;
-    case Unit::Cm:
-        result = ((val * 10.0) / 25.4) * PrintDPI;
-        break;
-    case Unit::Inch:
-        result = val * PrintDPI;
-        break;
-    default:
-        break;
+        case Unit::Mm:
+            return (val / 25.4) * PrintDPI;
+        case Unit::Cm:
+            return ((val * 10.0) / 25.4) * PrintDPI;
+        case Unit::Inch:
+            return val * PrintDPI;
+        case Unit::Px:
+            return val;
+        default:
+            break;
     }
-    return result;
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -319,22 +317,20 @@ double VApplication::toPixel(double val) const
 //---------------------------------------------------------------------------------------------------------------------
 double VApplication::fromPixel(double pix, const Unit &unit) const
 {
-    double result = 0;
     switch (unit)
     {
-    case Unit::Mm:
-        result = (pix / PrintDPI) * 25.4;
-        break;
-    case Unit::Cm:
-        result = ((pix / PrintDPI) * 25.4) / 10.0;
-        break;
-    case Unit::Inch:
-        result = pix / PrintDPI;
-        break;
-    default:
-        break;
+        case Unit::Mm:
+            return (pix / PrintDPI) * 25.4;
+        case Unit::Cm:
+            return ((pix / PrintDPI) * 25.4) / 10.0;
+        case Unit::Inch:
+            return pix / PrintDPI;
+        case Unit::Px:
+            return pix;
+        default:
+            break;
     }
-    return result;
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

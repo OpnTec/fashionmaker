@@ -235,7 +235,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
                                          workDetail.GetMatrix());
                 }
             }
-            ++d->frame;
+            d->frame = d->frame + 2;
 
             for (int angle = 0; angle < 360; ++angle)
             {

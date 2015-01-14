@@ -34,6 +34,7 @@
 #include "core/vapplication.h"
 #include <QtCore/qmath.h>
 #include "../../libs/vobj/vobjpaintdevice.h"
+#include "../dialogs/app/dialoglayoutsettings.h"
 
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"
@@ -79,6 +80,7 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionAdd, &QAction::triggered, this, &TableWindow::AddLength);
     connect(ui->actionRemove, &QAction::triggered, this, &TableWindow::RemoveLength);
     connect(ui->view, &VTableGraphicsView::itemChect, this, &TableWindow::itemChect);
+    connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -508,6 +510,13 @@ void TableWindow::RemoveLength()
     {
         ui->actionRemove->setDisabled(true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::Layout()
+{
+    DialogLayoutSettings layout(this);
+    layout.exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

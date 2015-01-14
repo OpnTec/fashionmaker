@@ -70,6 +70,7 @@
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
    <addaction name="actionStop"/>
+   <addaction name="actionLayout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSave">
@@ -198,6 +199,11 @@
    </property>
    <property name="toolTip">
     <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionLayout">
+   <property name="text">
+    <string>Layout</string>
    </property>
   </action>
  </widget>

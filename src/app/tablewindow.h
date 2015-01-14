@@ -74,6 +74,7 @@ public slots:
     void                  AddLength();
 
     void                  RemoveLength();
+    void                  Layout();
 signals:
     /**
      * @brief closed emit if window is closing.

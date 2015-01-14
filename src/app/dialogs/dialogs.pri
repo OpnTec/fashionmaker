@@ -41,7 +41,8 @@ HEADERS += \
     $$PWD/app/configpages/communitypage.h \
     $$PWD/app/configpages/pathpage.h \
     $$PWD/app/dialogundo.h \
-    $$PWD/tools/dialogcurveintersectaxis.h
+    $$PWD/tools/dialogcurveintersectaxis.h \
+    $$PWD/app/dialoglayoutsettings.h
 
 SOURCES += \
     $$PWD/tools/dialogtriangle.cpp \
@@ -81,7 +82,8 @@ SOURCES += \
     $$PWD/app/configpages/communitypage.cpp \
     $$PWD/app/configpages/pathpage.cpp \
     $$PWD/app/dialogundo.cpp \
-    $$PWD/tools/dialogcurveintersectaxis.cpp
+    $$PWD/tools/dialogcurveintersectaxis.cpp \
+    $$PWD/app/dialoglayoutsettings.cpp
 
 FORMS += \
     $$PWD/tools/dialogtriangle.ui \
@@ -115,4 +117,5 @@ FORMS += \
     $$PWD/app/dialogaboutapp.ui \
     $$PWD/app/dialogpatternxmledit.ui \
     $$PWD/app/dialogundo.ui \
-    $$PWD/tools/dialogcurveintersectaxis.ui
+    $$PWD/tools/dialogcurveintersectaxis.ui \
+    $$PWD/app/dialoglayoutsettings.ui
