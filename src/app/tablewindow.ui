@@ -22,21 +22,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMinAndMaxSize</enum>
-    </property>
-    <property name="leftMargin">
-     <number>9</number>
-    </property>
-    <property name="topMargin">
-     <number>9</number>
-    </property>
-    <property name="rightMargin">
-     <number>9</number>
-    </property>
-    <property name="bottomMargin">
-     <number>9</number>
-    </property>
     <item>
      <widget class="VTableGraphicsView" name="view"/>
     </item>
@@ -73,6 +58,46 @@
    <addaction name="actionLayout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Pages</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <property name="iconSize">
+        <size>
+         <width>200</width>
+         <height>200</height>
+        </size>
+       </property>
+       <property name="movement">
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="flow">
+        <enum>QListView::TopToBottom</enum>
+       </property>
+       <property name="isWrapping" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::IconMode</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionSave">
    <property name="enabled">
     <bool>false</bool>

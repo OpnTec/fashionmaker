@@ -33,11 +33,14 @@
 #include <QMainWindow>
 
 #include "../../libs/vlayout/vlayoutdetail.h"
+#include "../../libs/vlayout/vbank.h"
 
 namespace Ui
 {
     class TableWindow;
 }
+
+class QGraphicsScene;
 
 /**
  * @brief TableWindow class layout window.
@@ -46,87 +49,37 @@ class TableWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    /** @brief numberDetal show count details, what need placed. */
-    QLabel*               numberDetal;
-
-    /** @brief colission show if exist colissions. */
-    QLabel*               colission;
-
     explicit TableWindow(QWidget *parent = nullptr);
     ~TableWindow();
-public slots:
 
+public slots:
     void                  ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName,
                                       const QString &description);
-
-    void                  StopTable();
-
-    void                  saveScene();
-
-    void                  GetNextDetail();
-
-    void                  itemChect(bool flag);
-
-    void                  itemOut(int number, bool flag);
-
-    void                  itemColliding(QList<QGraphicsItem *> list, int number);
-
-    void                  AddLength();
-
-    void                  RemoveLength();
     void                  Layout();
+    void                  StopTable();
+    void                  saveScene();
+    void                  ShowPaper(int index);
+
 signals:
-    /**
-     * @brief closed emit if window is closing.
-     */
+    /** @brief closed emit if window is closing. */
     void                  closed();
-    /**
-     * @brief LengthChanged emit if changing length of paper sheet.
-     */
-    void                  LengthChanged();
+
 protected:
-
     void                  closeEvent(QCloseEvent *event);
-
     void                  moveToCenter();
-
     void                  showEvent ( QShowEvent * event );
 
-    void                  keyPressEvent ( QKeyEvent * event );
 private:
     Q_DISABLE_COPY(TableWindow)
     /** @brief ui keeps information about user interface */
     Ui::TableWindow*      ui;
 
     /** @brief listDetails list of details. */
-    QVector<VLayoutDetail>       listDetails;
+    QVector<VLayoutDetail> listDetails;
 
-    /** @brief outItems true if we have details out paper sheet. */
-    bool                  outItems;
-
-    /** @brief collidingItems true if we have colission details. */
-    bool                  collidingItems;
-
-    /** @brief currentScene pointer to scene. */
-    QGraphicsScene*       tableScene;
-
-    /** @brief paper paper sheet. */
-    QGraphicsRectItem*    paper;
-
-    /** @brief shadowPaper paper sheet shadow. */
-    QGraphicsRectItem*    shadowPaper;
-
-    /** @brief listOutItems list state out each detail. */
-    QBitArray*            listOutItems;
-
-    /** @brief listCollidingItems list colissed details. */
-    QList<QGraphicsItem*> listCollidingItems;
-
-    /** @brief indexDetail index next detail in list what will be shown. */
-    qint32                indexDetail;
-
-    /** @brief sceneRect minimal size of a paper. */
-    QRectF                sceneRect;
+    QList<QGraphicsItem *> papers;
+    QList<QGraphicsItem *> shadows;
+    QList<QGraphicsScene *> scenes;
 
     /** @brief fileName keep name of pattern file. */
     QString               fileName;
@@ -134,9 +87,14 @@ private:
     /** @brief description pattern description */
     QString               description;
 
-    void                  checkNext();
-    void                  AddPaper();
-    void                  AddDetail();
+    int paperHeight;
+    int paperWidth;
+    unsigned int shift;
+    qreal layoutWidth;
+    Cases group;
+
+    QGraphicsScene* tempScene;
+
     void                  SvgFile(const QString &name)const;
     void                  PngFile(const QString &name)const;
     void                  PdfFile(const QString &name)const;
@@ -144,6 +102,11 @@ private:
     void                  PsFile(const QString &name)const;
     void                  PdfToPs(const QStringList &params)const;
     void                  ObjFile(const QString &name)const;
+
+    void ClearLayout();
+    void CreateShadows();
+    void CreateScenes();
+    void PrepareSceneList();
 };
 
 #endif // TABLEWINDOW_H
