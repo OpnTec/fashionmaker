@@ -191,34 +191,32 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
 
     if (eqv == EquidistantType::CloseEquidistant)
     {
-        p.append(points.at(0));
+        p.append(p.at(0));
     }
-    for (qint32 i = 0; i < points.size(); ++i )
+    for (qint32 i = 0; i < p.size(); ++i )
     {
         if ( i == 0 && eqv == EquidistantType::CloseEquidistant)
         {//first point, polyline closed
-            ekvPoints<<EkvPoint(QLineF(points.at(points.size()-2), points.at(points.size()-1)),
-                                QLineF(points.at(1), points.at(0)), width);
+            ekvPoints<<EkvPoint(QLineF(p.at(p.size()-2), p.at(p.size()-1)), QLineF(p.at(1), p.at(0)), width);
             continue;
         }
         else if (i == 0 && eqv == EquidistantType::OpenEquidistant)
         {//first point, polyline doesn't closed
-            ekvPoints.append(SingleParallelPoint(QLineF(points.at(0), points.at(1)), 90, width));
+            ekvPoints.append(SingleParallelPoint(QLineF(p.at(0), p.at(1)), 90, width));
             continue;
         }
-        if (i == points.size()-1 && eqv == EquidistantType::CloseEquidistant)
+        if (i == p.size()-1 && eqv == EquidistantType::CloseEquidistant)
         {//last point, polyline closed
             ekvPoints.append(ekvPoints.at(0));
             continue;
         }
-        else if (i == points.size()-1 && eqv == EquidistantType::OpenEquidistant)
+        else if (i == p.size()-1 && eqv == EquidistantType::OpenEquidistant)
         {//last point, polyline doesn't closed
-                ekvPoints.append(SingleParallelPoint(QLineF(points.at(points.size()-1), points.at(points.size()-2)),
-                                                     -90, width));
+                ekvPoints.append(SingleParallelPoint(QLineF(p.at(p.size()-1), p.at(p.size()-2)), -90, width));
                 continue;
         }
         //points in the middle of polyline
-        ekvPoints<<EkvPoint(QLineF(points.at(i-1), points.at(i)), QLineF(points.at(i+1), points.at(i)), width);
+        ekvPoints<<EkvPoint(QLineF(p.at(i-1), p.at(i)), QLineF(p.at(i+1), p.at(i)), width);
     }
     return ekvPoints;
 }
