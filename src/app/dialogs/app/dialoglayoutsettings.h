@@ -62,11 +62,11 @@ public:
     void SetGroup(const Cases &value);
 
 public slots:
-    void TemplateSelected();
     void ConvertPaperSize();
     void ConvertLayoutSize();
+
+    void TemplateSelected();
     void PaperSizeChanged();
-    void LayoutWidthChanged();
     void Swap(bool checked);
 
 private:
@@ -83,8 +83,12 @@ private:
     Unit PaperUnit() const;
     Unit LayoutUnit() const;
 
-    void CorrectDecimals();
+    void CorrectPaperDecimals();
+    void CorrectLayoutDecimals();
     void Label();
+
+    void MinimumPaperSize();
+    void MinimumLayoutSize();
 };
 
 #endif // DIALOGLAYOUTSETTINGS_H

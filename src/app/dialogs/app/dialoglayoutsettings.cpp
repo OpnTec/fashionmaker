@@ -45,6 +45,8 @@ DialogLayoutSettings::DialogLayoutSettings(QWidget *parent)
     InitPaperUnits();
     InitLayoutUnits();
     InitTemplates();
+    MinimumPaperSize();
+    MinimumLayoutSize();
 
     connect(ui->comboBoxTemplates,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
@@ -58,8 +60,6 @@ DialogLayoutSettings::DialogLayoutSettings(QWidget *parent)
     connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
     connect(ui->comboBoxLayoutUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertLayoutSize);
-    connect(ui->doubleSpinBoxLayoutWidth,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &DialogLayoutSettings::LayoutWidthChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ void DialogLayoutSettings::TemplateSelected()
     ui->doubleSpinBoxPaperWidth->setValue(size.width());
     ui->doubleSpinBoxPaperHeight->setValue(size.height());
     oldPaperUnit = PaperUnit();
-    CorrectDecimals();
+    CorrectPaperDecimals();
     PaperSizeChanged();
 }
 
@@ -173,7 +173,8 @@ void DialogLayoutSettings::ConvertPaperSize()
     ui->doubleSpinBoxPaperWidth->setValue(VAbstractMeasurements::UnitConvertor(width, oldPaperUnit, paperUnit));
     ui->doubleSpinBoxPaperHeight->setValue(VAbstractMeasurements::UnitConvertor(height, oldPaperUnit, paperUnit));
     oldPaperUnit = paperUnit;
-    CorrectDecimals();
+    CorrectPaperDecimals();
+    MinimumPaperSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,22 +186,13 @@ void DialogLayoutSettings::ConvertLayoutSize()
     ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(layoutWidth, oldLayoutUnit, unit));
     ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(shift, oldLayoutUnit, unit));
     oldLayoutUnit = unit;
+    CorrectLayoutDecimals();
+    MinimumLayoutSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::PaperSizeChanged()
 {
-    QDoubleSpinBox *box = qobject_cast<QDoubleSpinBox*>(sender());
-    if (box != nullptr)
-    {
-        if (box->value() <= 0)
-        {
-            box->blockSignals(true);
-            box->setValue(1);
-            box->blockSignals(false);
-        }
-    }
-
     if (ui->doubleSpinBoxPaperHeight->value() > ui->doubleSpinBoxPaperWidth->value())
     {
         ui->toolButtonPortrate->blockSignals(true);
@@ -215,21 +207,6 @@ void DialogLayoutSettings::PaperSizeChanged()
     }
 
     Label();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::LayoutWidthChanged()
-{
-    QDoubleSpinBox *box = qobject_cast<QDoubleSpinBox*>(sender());
-    if (box != nullptr)
-    {
-        if (box->value() <= 0)
-        {
-            box->blockSignals(true);
-            box->setValue(1);
-            box->blockSignals(false);
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -283,6 +260,9 @@ void DialogLayoutSettings::InitLayoutUnits()
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
     }
+
+    ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(1, Unit::Mm, oldLayoutUnit));
+    ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(10, Unit::Mm, oldLayoutUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,17 +330,48 @@ Unit DialogLayoutSettings::LayoutUnit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::CorrectDecimals()
+void DialogLayoutSettings::CorrectPaperDecimals()
 {
-    if (oldPaperUnit == Unit::Px)
+    switch(oldPaperUnit)
     {
-        ui->doubleSpinBoxPaperWidth->setDecimals(0);
-        ui->doubleSpinBoxPaperHeight->setDecimals(0);
+        case Unit::Cm:
+        case Unit::Mm:
+            ui->doubleSpinBoxPaperWidth->setDecimals(2);
+            ui->doubleSpinBoxPaperHeight->setDecimals(2);
+            break;
+        case Unit::Inch:
+            ui->doubleSpinBoxPaperWidth->setDecimals(5);
+            ui->doubleSpinBoxPaperHeight->setDecimals(5);
+            break;
+        case Unit::Px:
+            ui->doubleSpinBoxPaperWidth->setDecimals(0);
+            ui->doubleSpinBoxPaperHeight->setDecimals(0);
+            break;
+        default:
+            break;
     }
-    else
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::CorrectLayoutDecimals()
+{
+    switch(oldLayoutUnit)
     {
-        ui->doubleSpinBoxPaperWidth->setDecimals(2);
-        ui->doubleSpinBoxPaperHeight->setDecimals(2);
+        case Unit::Cm:
+        case Unit::Mm:
+            ui->doubleSpinBoxLayoutWidth->setDecimals(2);
+            ui->doubleSpinBoxShift->setDecimals(2);
+            break;
+        case Unit::Inch:
+            ui->doubleSpinBoxLayoutWidth->setDecimals(5);
+            ui->doubleSpinBoxShift->setDecimals(5);
+            break;
+        case Unit::Px:
+            ui->doubleSpinBoxLayoutWidth->setDecimals(0);
+            ui->doubleSpinBoxShift->setDecimals(0);
+            break;
+        default:
+            break;
     }
 }
 
@@ -373,4 +384,19 @@ void DialogLayoutSettings::Label()
                                                                    PaperUnit(), Unit::Px));
     QString text = QString("%1 x %2 px, \n%3 ppi").arg(width).arg(height).arg(VApplication::PrintDPI);
     ui->labelSizeDescription->setText(text);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::MinimumPaperSize()
+{
+    const qreal value = VAbstractMeasurements::UnitConvertor(1, Unit::Px, oldPaperUnit);
+    ui->doubleSpinBoxPaperWidth->setMinimum(value);
+    ui->doubleSpinBoxPaperHeight->setMinimum(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::MinimumLayoutSize()
+{
+    const qreal value = VAbstractMeasurements::UnitConvertor(1, Unit::Px, oldLayoutUnit);
+    ui->doubleSpinBoxLayoutWidth->setMinimum(value);
 }

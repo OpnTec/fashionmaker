@@ -193,6 +193,12 @@
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="1">
            <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutWidth">
+            <property name="minimumSize">
+             <size>
+              <width>94</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="minimum">
              <double>0.000000000000000</double>
             </property>
@@ -220,6 +226,12 @@
           </item>
           <item row="1" column="1">
            <widget class="QDoubleSpinBox" name="doubleSpinBoxShift">
+            <property name="minimumSize">
+             <size>
+              <width>94</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximum">
              <double>99999.990000000005239</double>
             </property>
@@ -337,7 +349,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>
