@@ -90,7 +90,7 @@ void VLayoutGenerator::Generate()
     if (bank->Prepare())
     {
         CheckDetailsSize();
-        do
+        while (bank->AllDetailsCount() > 0)
         {
             if (stopGeneration)
             {
@@ -100,7 +100,7 @@ void VLayoutGenerator::Generate()
             VLayoutPaper paper(paperHeight, paperWidth);
             paper.SetShift(shift);
             paper.SetPaperIndex(papers.count());
-            if (bank->LeftArrange() > 0)
+            do
             {
                 const int index = bank->GetTiket();
                 if (paper.ArrangeDetail(bank->GetDetail(index), stopGeneration))
@@ -117,22 +117,19 @@ void VLayoutGenerator::Generate()
                 {
                     break;
                 }
+            } while(bank->LeftArrange() > 0);
+
+            if (paper.Count() > 0)
+            {
+                papers.append(paper);
             }
             else
             {
-                if (paper.Count() > 0)
-                {
-                    papers.append(paper);
-                }
-                else
-                {
-                    state = LayoutErrors::EmptyPaperError;
-                    emit Error(state);
-                    return;
-                }
+                state = LayoutErrors::EmptyPaperError;
+                emit Error(state);
+                return;
             }
-
-        } while (bank->AllDetailsCount() > 0);
+        }
     }
     else
     {
