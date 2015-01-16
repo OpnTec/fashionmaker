@@ -183,7 +183,7 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail)
+bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, bool &stop)
 {
     // First need set size of paper
     if (d->paperHeight <= 0 || d->paperWidth <= 0)
@@ -200,11 +200,11 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail)
 
     if (Count() == 0)
     {
-        return AddToBlankSheet(detail);
+        return AddToBlankSheet(detail, stop);
     }
     else
     {
-        return AddToSheet(detail);
+        return AddToSheet(detail, stop);
     }
 }
 
@@ -215,7 +215,7 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
+bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
 {
     BestResult bestResult;
 
@@ -224,6 +224,11 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
             QCoreApplication::processEvents();
+
+            if (stop)
+            {
+                return false;
+            }
 
             // We should use copy of the detail.
             VLayoutDetail workDetail = detail;
@@ -243,6 +248,11 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
             for (int angle = 0; angle <= 360; ++angle)
             {
                 QCoreApplication::processEvents();
+
+                if (stop)
+                {
+                    return false;
+                }
 
                 // We should use copy of the detail.
                 VLayoutDetail workDetail = detail;
@@ -265,7 +275,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
+bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 {
     BestResult bestResult;
 
@@ -277,6 +287,11 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
         for (int i=1; i<= workDetail.EdgesCount(); i++)
         {
             QCoreApplication::processEvents();
+
+            if (stop)
+            {
+                return false;
+            }
 
             int dEdge = i;// For mirror detail edge will be different
             if (CheckCombineEdges(workDetail, j, dEdge))

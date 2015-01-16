@@ -60,7 +60,7 @@ public:
 
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutDetail &detail);
+    bool ArrangeDetail(const VLayoutDetail &detail, bool &stop);
     int  Count() const;
     QGraphicsItem *GetItem() const;
 
@@ -81,8 +81,8 @@ private:
         EdgeError = 2
     };
 
-    bool AddToBlankSheet(const VLayoutDetail &detail);
-    bool AddToSheet(const VLayoutDetail &detail);
+    bool AddToBlankSheet(const VLayoutDetail &detail, bool &stop);
+    bool AddToSheet(const VLayoutDetail &detail, bool &stop);
 
     bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const;
     bool CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const;

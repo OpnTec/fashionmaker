@@ -94,7 +94,6 @@ void VLayoutGenerator::Generate()
         {
             if (stopGeneration)
             {
-                state = LayoutErrors::ProcessStoped;
                 break;
             }
 
@@ -104,7 +103,7 @@ void VLayoutGenerator::Generate()
             if (bank->LeftArrange() > 0)
             {
                 const int index = bank->GetTiket();
-                if (paper.ArrangeDetail(bank->GetDetail(index)))
+                if (paper.ArrangeDetail(bank->GetDetail(index), stopGeneration))
                 {
                     bank->Arranged(index);
                     emit Arranged(bank->ArrangedCount());
@@ -112,6 +111,11 @@ void VLayoutGenerator::Generate()
                 else
                 {
                     bank->NotArranged(index);
+                }
+
+                if (stopGeneration)
+                {
+                    break;
                 }
             }
             else
@@ -160,6 +164,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetItems() const
 void VLayoutGenerator::Abort()
 {
     stopGeneration = true;
+    state = LayoutErrors::ProcessStoped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
