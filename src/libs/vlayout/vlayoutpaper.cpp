@@ -467,7 +467,10 @@ VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, i
 
             if (type == QLineF::BoundedIntersection)
             {
-                return CrossingType::Intersection;
+                if (TrueIntersection(globalEdge, detailEdge, xPoint))
+                {
+                    return CrossingType::Intersection;
+                }
             }
         }
     }
@@ -893,6 +896,23 @@ QPainterPath VLayoutPaper::DrawDetails() const
         }
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const
+{
+    const QPointF pX = RoundedPoint(p);
+    const QPointF gP1 = RoundedPoint(gEdge.p1());
+    const QPointF gP2 = RoundedPoint(gEdge.p2());
+    const QPointF dP1 = RoundedPoint(dEdge.p1());
+    const QPointF dP2 = RoundedPoint(dEdge.p2());
+    return pX != gP1 && pX != gP2 && pX != dP1 && pX != dP2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VLayoutPaper::RoundedPoint(const QPointF &p) const
+{
+    return QPointF(qRound(p.x()), qRound(p.y()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

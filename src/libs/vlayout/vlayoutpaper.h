@@ -110,6 +110,9 @@ private:
     QPainterPath DrawContour(const QVector<QPointF> &points) const;
     QVector<QPointF> TranslateContour(const QVector<QPointF> &points, qreal dx, qreal dy) const;
     QPainterPath DrawDetails() const;
+
+    bool TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const;
+    QPointF RoundedPoint(const QPointF &p) const;
 };
 
 #endif // VLAYOUTPAPER_H
