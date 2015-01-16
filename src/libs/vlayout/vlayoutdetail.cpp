@@ -74,6 +74,8 @@ void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
     {
         d->contour.removeLast();
     }
+
+    d->contour = RoundPoints(d->contour);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -91,6 +93,8 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points)
     {
         d->seamAllowence.removeLast();
     }
+
+    d->seamAllowence = RoundPoints(d->seamAllowence);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -126,15 +130,19 @@ void VLayoutDetail::SetLayoutWidth(const qreal &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutDetail::Translate(qreal dx, qreal dy)
 {
-    d->matrix = d->matrix.translate(dx, dy);
+    QMatrix m;
+    m.translate(dx, dy);
+    d->matrix *= m;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutDetail::Rotate(const QPointF &originPoint, qreal degrees)
 {
-    Translate(-originPoint.x(), -originPoint.y());
-    d->matrix = d->matrix.rotate(degrees);
-    Translate(originPoint.x(), originPoint.y());
+    QMatrix m;
+    m.translate(originPoint.x(), originPoint.y());
+    m.rotate(-degrees);
+    m.translate(-originPoint.x(), -originPoint.y());
+    d->matrix *= m;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,9 +156,9 @@ void VLayoutDetail::Mirror(const QLineF &edge)
     QLineF axis = QLineF(edge.x1(), edge.y1(), 100, edge.y2()); // Ox axis
 
     qreal angle = edge.angleTo(axis);
-    Rotate(edge.p1(), angle);
-    d->matrix = d->matrix.scale(d->matrix.m11()*-1, d->matrix.m22());
-    Rotate(edge.p1(), 360 - angle);
+    Rotate(edge.p1(), -angle);
+    d->matrix *= d->matrix.scale(d->matrix.m11()*-1, d->matrix.m22());
+    Rotate(edge.p1(), 360 + angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -286,10 +294,18 @@ void VLayoutDetail::SetLayoutAllowencePoints()
         if (getSeamAllowance())
         {
             d->layoutAllowence = Equidistant(d->seamAllowence, EquidistantType::CloseEquidistant, d->layoutWidth);
+            if (d->layoutAllowence.isEmpty() == false)
+            {
+                d->layoutAllowence.removeLast();
+            }
         }
         else
         {
             d->layoutAllowence = Equidistant(d->contour, EquidistantType::CloseEquidistant, d->layoutWidth);
+            if (d->layoutAllowence.isEmpty() == false)
+            {
+                d->layoutAllowence.removeLast();
+            }
         }
     }
     else
@@ -315,6 +331,17 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
             list.swap(k, s-(1+k));
         }
         p = list.toVector();
+    }
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutDetail::RoundPoints(const QVector<QPointF> &points) const
+{
+    QVector<QPointF> p;
+    for (int i=0; i < points.size(); ++i)
+    {
+        p.append(QPointF(qRound(points.at(i).x()), qRound(points.at(i).y())));
     }
     return p;
 }

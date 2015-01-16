@@ -36,6 +36,7 @@
 #include <QDir>
 #include <QPainter>
 #include <QGraphicsItem>
+#include <QCoreApplication>
 
 class BestResult
 {
@@ -222,6 +223,8 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
+            QCoreApplication::processEvents();
+
             // We should use copy of the detail.
             VLayoutDetail workDetail = detail;
 
@@ -237,8 +240,10 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail)
             }
             d->frame = d->frame + 2;
 
-            for (int angle = 0; angle < 360; ++angle)
+            for (int angle = 0; angle <= 360; ++angle)
             {
+                QCoreApplication::processEvents();
+
                 // We should use copy of the detail.
                 VLayoutDetail workDetail = detail;
 
@@ -271,6 +276,8 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail)
 
         for (int i=1; i<= workDetail.EdgesCount(); i++)
         {
+            QCoreApplication::processEvents();
+
             int dEdge = i;// For mirror detail edge will be different
             if (CheckCombineEdges(workDetail, j, dEdge))
             {
@@ -304,7 +311,7 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
     CombineEdges(detail, globalEdge, dEdge);
 
 #ifdef LAYOUT_DEBUG
-    DrawDebug(detail);
+    DrawDebug(detail, d->frame);
 #endif
 
     switch (Crossing(detail, j, dEdge))
@@ -338,6 +345,10 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
 
     if (flagMirror)
     {
+        #ifdef LAYOUT_DEBUG
+            DrawDebug(detail, d->frame+1);
+        #endif
+
         dEdge = detail.EdgeByPoint(globalEdge.p2());
         if (dEdge <= 0)
         {
@@ -383,7 +394,7 @@ bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, i
     RotateEdges(detail, globalEdge, dEdge, angle);
 
 #ifdef LAYOUT_DEBUG
-    DrawDebug(detail);
+    DrawDebug(detail, d->frame);
 #endif
 
     switch (Crossing(detail, j, dEdge))
@@ -536,13 +547,15 @@ void VLayoutPaper::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge,
     const qreal dx = globalEdge.x2() - detailEdge.x2();
     const qreal dy = globalEdge.y2() - detailEdge.y2();
 
+//    detailEdge = QLineF(detailEdge.x1()+dx, detailEdge.y1()+dy, detailEdge.x2()+dx, detailEdge.y2()+dy);
+//    angle = detailEdge.angle();
     detailEdge.translate(dx, dy); // Use values for translate detail edge.
 
     const qreal angle_between = globalEdge.angleTo(detailEdge); // Seek angle between two edges.
 
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
-    detail.Rotate(globalEdge.p2(), angle_between);
+    detail.Rotate(detailEdge.p2(), -angle_between);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -760,34 +773,46 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::DrawDebug(const VLayoutDetail &detail) const
+void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
 {
-    QImage frameImage ( d->paperWidth, d->paperHeight, QImage::Format_RGB32 );
+    QImage frameImage(d->paperWidth*3, d->paperHeight*3, QImage::Format_RGB32);
     frameImage.fill(Qt::white);
     QPainter paint;
-    paint.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     paint.begin(&frameImage);
 
+    paint.setPen(QPen(Qt::darkRed, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.drawRect(QRectF(d->paperWidth, d->paperHeight, d->paperWidth, d->paperHeight));
+
+    paint.setPen(QPen(Qt::black, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    QPainterPath p;
     if (d->globalContour.isEmpty())
     {
-        paint.drawPath(DrawContour(CutEdge(QLineF(0, 0, d->paperWidth, 0))));
+        p = DrawContour(CutEdge(QLineF(0, 0, d->paperWidth, 0)));
+        p.translate(d->paperWidth, d->paperHeight);
+        paint.drawPath(p);
     }
     else
     {
-        paint.drawPath(DrawContour(d->globalContour));
+        p = DrawContour(d->globalContour);
+        p.translate(d->paperWidth, d->paperHeight);
+        paint.drawPath(p);
     }
 
-    paint.setPen(QPen(Qt::darkGreen, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawPath(DrawContour(detail.GetLayoutAllowencePoints()));
+    paint.setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    p = DrawContour(detail.GetLayoutAllowencePoints());
+    p.translate(d->paperWidth, d->paperHeight);
+    paint.drawPath(p);
 
 #ifdef ARRANGED_DETAILS
     paint.setPen(QPen(Qt::blue, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawPath(DrawDetails());
+    p = DrawDetails();
+    p.translate(d->paperWidth, d->paperHeight);
+    paint.drawPath(p);
 #endif
 
     paint.end();
     const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2.png").arg(d->paperIndex)
-            .arg(d->frame);
+            .arg(frame);
     frameImage.save (path);
 }
 
@@ -842,6 +867,17 @@ QPainterPath VLayoutPaper::DrawContour(const QVector<QPointF> &points) const
 #endif
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPaper::TranslateContour(const QVector<QPointF> &points, qreal dx, qreal dy) const
+{
+    QVector<QPointF> p;
+    for (qint32 i = 0; i < points.count(); ++i)
+    {
+        p.append(QPointF(points.at(i).x()+dx, points.at(i).y()+dy));
+    }
+    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -105,9 +105,10 @@ private:
 
     bool SaveResult(const BestResult &bestResult, const VLayoutDetail &detail);
 
-    void DrawDebug(const VLayoutDetail &detail) const;
+    void DrawDebug(const VLayoutDetail &detail, int frame) const;
     QPainterPath ShowDirection(const QLineF &edge) const;
     QPainterPath DrawContour(const QVector<QPointF> &points) const;
+    QVector<QPointF> TranslateContour(const QVector<QPointF> &points, qreal dx, qreal dy) const;
     QPainterPath DrawDetails() const;
 };
 
