@@ -153,12 +153,16 @@ void VLayoutDetail::Mirror(const QLineF &edge)
         return;
     }
 
-    QLineF axis = QLineF(edge.x1(), edge.y1(), 100, edge.y2()); // Ox axis
+    const QLineF axis = QLineF(edge.x1(), edge.y1(), 100, edge.y2()); // Ox axis
 
-    qreal angle = edge.angleTo(axis);
-    Rotate(edge.p1(), -angle);
-    d->matrix *= d->matrix.scale(d->matrix.m11()*-1, d->matrix.m22());
-    Rotate(edge.p1(), 360 + angle);
+    const qreal angle = edge.angleTo(axis);
+    QMatrix m;
+    m.translate(edge.p2().x(), edge.p2().y());
+    m.rotate(-angle);
+    m.scale(m.m11(), m.m22()*-1);
+    m.rotate(360 - (-angle));
+    m.translate(-edge.p2().x(), -edge.p2().y());
+    d->matrix *= m;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,7 +327,7 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
         p.append(d->matrix.map(points.at(i)));
     }
 
-    if (d->matrix.m11() < 0)
+    if (d->matrix.m22() < 0)
     {
         QList<QPointF> list = p.toList();
         for(int k=0, s=list.size(), max=(s/2); k<max; k++)
