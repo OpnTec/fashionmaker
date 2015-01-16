@@ -252,6 +252,12 @@ QRectF VBank::GetBiggestBoundingRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VBank::ArrangedCount() const
+{
+    return details.size() - AllDetailsCount();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VBank::PrepareGroup()
 {
     switch(caseType)

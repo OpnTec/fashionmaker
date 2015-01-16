@@ -59,6 +59,7 @@ public:
 
     int AllDetailsCount() const;
     int LeftArrange() const;
+    int ArrangedCount() const;
 
     QRectF GetBiggestBoundingRect() const;
 

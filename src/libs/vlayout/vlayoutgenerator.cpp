@@ -107,6 +107,7 @@ void VLayoutGenerator::Generate()
                 if (paper.ArrangeDetail(bank->GetDetail(index)))
                 {
                     bank->Arranged(index);
+                    emit Arranged(bank->ArrangedCount());
                 }
                 else
                 {
