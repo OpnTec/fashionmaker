@@ -432,6 +432,18 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
                 break;
         }
     }
+
+    if (getSeamAllowance() == true)
+    {
+        if (getClosed() == true)
+        {
+            pointsEkv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
+        }
+        else
+        {
+            pointsEkv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
+        }
+    }
     return pointsEkv;
 }
 
@@ -455,20 +467,10 @@ QPainterPath VDetail::ContourPath(const VContainer *data) const
     if (getSeamAllowance() == true)
     {
         QPainterPath ekv;
-        QVector<QPointF> p;
-        if (getClosed() == true)
+        ekv.moveTo(pointsEkv.at(0));
+        for (qint32 i = 1; i < pointsEkv.count(); ++i)
         {
-            p = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
-        }
-        else
-        {
-            p = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
-        }
-
-        ekv.moveTo(p.at(0));
-        for (qint32 i = 1; i < p.count(); ++i)
-        {
-            ekv.lineTo(p.at(i));
+            ekv.lineTo(pointsEkv.at(i));
         }
 
         path.addPath(ekv);

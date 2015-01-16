@@ -367,22 +367,18 @@ QPainterPath VLayoutDetail::ContourPath() const
     // seam allowence
     if (getSeamAllowance() == true)
     {
-        QPainterPath ekv;
-        QVector<QPointF> p;
         points = Map(d->seamAllowence);
+
         if (getClosed() == true)
         {
-            p = Equidistant(points, EquidistantType::CloseEquidistant, getWidth());
-        }
-        else
-        {
-            p = Equidistant(points, EquidistantType::OpenEquidistant, getWidth());
+            points.append(points.at(0));
         }
 
-        ekv.moveTo(p.at(0));
-        for (qint32 i = 1; i < p.count(); ++i)
+        QPainterPath ekv;
+        ekv.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
         {
-            ekv.lineTo(p.at(i));
+            ekv.lineTo(points.at(i));
         }
 
         path.addPath(ekv);
