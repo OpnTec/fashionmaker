@@ -69,7 +69,7 @@ BestResult::BestResult()
 //---------------------------------------------------------------------------------------------------------------------
 void BestResult::NewResult(qint64 square, int i, int j, const QMatrix &matrix)
 {
-    if (square <= resSquare && square > 0)
+    if (square < resSquare && square > 0)
     {
         resI = i;
         resJ = j;
