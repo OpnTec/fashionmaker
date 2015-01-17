@@ -260,7 +260,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
             }
             d->frame = d->frame + 2;
 
-            for (int angle = 0; angle <= 360; ++angle)
+            for (int angle = 0; angle <= 360; angle = angle+5)
             {
                 QCoreApplication::processEvents();
 
@@ -319,12 +319,8 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
                     bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
                                          workDetail.GetMatrix());
                 }
-                else
-                {
-                    continue; // Outside of sheet.
-                }
             }
-            ++d->frame;
+            d->frame = d->frame + 2;
         }
     }
 
@@ -582,8 +578,6 @@ void VLayoutPaper::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge,
     const qreal dx = globalEdge.x2() - detailEdge.x2();
     const qreal dy = globalEdge.y2() - detailEdge.y2();
 
-//    detailEdge = QLineF(detailEdge.x1()+dx, detailEdge.y1()+dy, detailEdge.x2()+dx, detailEdge.y2()+dy);
-//    angle = detailEdge.angle();
     detailEdge.translate(dx, dy); // Use values for translate detail edge.
 
     const qreal angle_between = globalEdge.angleTo(detailEdge); // Seek angle between two edges.
@@ -810,38 +804,38 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
 {
-    QImage frameImage(d->paperWidth*3, d->paperHeight*3, QImage::Format_RGB32);
+    QImage frameImage(d->paperWidth*2, d->paperHeight*2, QImage::Format_RGB32);
     frameImage.fill(Qt::white);
     QPainter paint;
     paint.begin(&frameImage);
 
     paint.setPen(QPen(Qt::darkRed, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawRect(QRectF(d->paperWidth, d->paperHeight, d->paperWidth, d->paperHeight));
+    paint.drawRect(QRectF(d->paperWidth/2, d->paperHeight/2, d->paperWidth, d->paperHeight));
 
     paint.setPen(QPen(Qt::black, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     QPainterPath p;
     if (d->globalContour.isEmpty())
     {
         p = DrawContour(CutEdge(QLineF(0, 0, d->paperWidth, 0)));
-        p.translate(d->paperWidth, d->paperHeight);
+        p.translate(d->paperWidth/2, d->paperHeight/2);
         paint.drawPath(p);
     }
     else
     {
         p = DrawContour(d->globalContour);
-        p.translate(d->paperWidth, d->paperHeight);
+        p.translate(d->paperWidth/2, d->paperHeight/2);
         paint.drawPath(p);
     }
 
     paint.setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawContour(detail.GetLayoutAllowencePoints());
-    p.translate(d->paperWidth, d->paperHeight);
+    p.translate(d->paperWidth/2, d->paperHeight/2);
     paint.drawPath(p);
 
 #ifdef ARRANGED_DETAILS
     paint.setPen(QPen(Qt::blue, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawDetails();
-    p.translate(d->paperWidth, d->paperHeight);
+    p.translate(d->paperWidth/2, d->paperHeight/2);
     paint.drawPath(p);
 #endif
 

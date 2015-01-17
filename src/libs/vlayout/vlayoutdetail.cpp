@@ -153,14 +153,24 @@ void VLayoutDetail::Mirror(const QLineF &edge)
         return;
     }
 
-    const QLineF axis = QLineF(edge.x1(), edge.y1(), 100, edge.y2()); // Ox axis
+    const QLineF axis = QLineF(edge.x2(), edge.y2(), edge.x2() + 100, edge.y2()); // Ox axis
 
     const qreal angle = edge.angleTo(axis);
     QMatrix m;
     m.translate(edge.p2().x(), edge.p2().y());
     m.rotate(-angle);
+    m.translate(-edge.p2().x(), -edge.p2().y());
+    d->matrix *= m;
+
+    m.reset();
+    m.translate(edge.p2().x(), edge.p2().y());
     m.scale(m.m11(), m.m22()*-1);
-    m.rotate(360 - (-angle));
+    m.translate(-edge.p2().x(), -edge.p2().y());
+    d->matrix *= m;
+
+    m.reset();
+    m.translate(edge.p2().x(), edge.p2().y());
+    m.rotate(-(360-angle));
     m.translate(-edge.p2().x(), -edge.p2().y());
     d->matrix *= m;
 }
