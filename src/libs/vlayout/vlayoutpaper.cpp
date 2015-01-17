@@ -639,11 +639,20 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
             return QVector<QPointF>();
         }
 
-        for(int i=0; i < d->globalContour.count(); ++i)
+        int i2 = 0;
+        if (globalI == d->globalContour.count())
         {
-            newContour.append(d->globalContour.at(i));
-            ++i;
-            if (i==globalI)
+            i2 = 0;
+        }
+        else
+        {
+            i2 = globalI;
+        }
+
+        int i=0;
+        while(i < d->globalContour.count())
+        {
+            if (i == i2)
             {
                 int processedEdges = 0;
                 const int nD = detail.EdgesCount();
@@ -654,15 +663,31 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
                     {
                         j=1;
                     }
-                    const QVector<QPointF> points = CutEdge(detail.Edge(j));
-                    for (int i = 0; i < points.size()-1; ++i)
+                    if (j != detJ)
                     {
-                        newContour.append(points.at(i));
+                        const QVector<QPointF> points = CutEdge(detail.Edge(j));
+                        for (int i = 0; i < points.size()-1; ++i)
+                        {
+                            newContour.append(points.at(i));
+                        }
                     }
                     ++processedEdges;
                     ++j;
-                }while (processedEdges <= nD);
+                }while (processedEdges < nD);
             }
+
+            if (newContour.isEmpty() == false)
+            {
+                if (newContour.last() != d->globalContour.at(i))
+                {
+                    newContour.append(d->globalContour.at(i));
+                }
+            }
+            else
+            {
+                newContour.append(d->globalContour.at(i));
+            }
+            ++i;
         }
     }
     return newContour;
