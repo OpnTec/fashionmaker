@@ -165,6 +165,21 @@ void VLayoutPaper::SetWidth(int width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutPaper::GetLayoutWidth() const
+{
+    return d->layoutWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetLayoutWidth(qreal width)
+{
+    if (width >= 0)
+    {
+        d->layoutWidth = width;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 unsigned int VLayoutPaper::GetShift() const
 {
     return d->shift;
@@ -607,7 +622,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
         {
             if (j > nD)
             {
-                j=0;
+                j=1;
             }
             const QVector<QPointF> points = CutEdge(detail.Edge(j));
             for (int i = 0; i < points.size()-1; ++i)
@@ -616,7 +631,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
             }
             ++processedEdges;
             ++j;
-        }while (processedEdges < nD);
+        }while (processedEdges <= nD);
     }
     else
     {
@@ -643,7 +658,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
                 {
                     if (j > nD)
                     {
-                        j=0;
+                        j=1;
                     }
                     const QVector<QPointF> points = CutEdge(detail.Edge(j));
                     for (int i = 0; i < points.size()-1; ++i)
@@ -652,7 +667,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
                     }
                     ++processedEdges;
                     ++j;
-                }while (processedEdges < nD);
+                }while (processedEdges <= nD);
             }
         }
     }
@@ -665,7 +680,7 @@ QLineF VLayoutPaper::GlobalEdge(int i) const
     if (d->details.isEmpty())
     {
         // Because sheet is blank we have one global edge for all cases - Ox axis.
-        const QLineF axis = QLineF(0, 0, d->paperWidth, 0);
+        const QLineF axis = QLineF(0, 0, d->paperWidth - d->layoutWidth/2, 0);
         if (d->shift == 0)
         {
             return axis;
@@ -831,8 +846,8 @@ void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
 #endif
 
     paint.end();
-    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2.png").arg(d->paperIndex)
-            .arg(frame);
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(d->paperIndex)
+            .arg(d->details.count()).arg(frame);
     frameImage.save (path);
 }
 

@@ -99,6 +99,7 @@ void VLayoutGenerator::Generate()
 
             VLayoutPaper paper(paperHeight, paperWidth);
             paper.SetShift(shift);
+            paper.SetLayoutWidth(bank->GetLayoutWidth());
             paper.SetPaperIndex(papers.count());
             do
             {

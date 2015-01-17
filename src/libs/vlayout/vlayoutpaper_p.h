@@ -45,17 +45,18 @@ class VLayoutPaperData : public QSharedData
 public:
     VLayoutPaperData()
         :details(QVector<VLayoutDetail>()), globalContour(QVector<QPointF>()), paperHeight(0), paperWidth(0), shift(0),
-          paperIndex(0), frame(0)
+          paperIndex(0), frame(0), layoutWidth(0)
     {}
 
     VLayoutPaperData(int height, int width)
         :details(QVector<VLayoutDetail>()), globalContour(QVector<QPointF>()), paperHeight(height), paperWidth(width),
-          shift(0), paperIndex(0), frame(0)
+          shift(0), paperIndex(0), frame(0), layoutWidth(0)
     {}
 
     VLayoutPaperData(const VLayoutPaperData &paper)
         :QSharedData(paper), details(paper.details), globalContour(paper.globalContour), paperHeight(paper.paperHeight),
-          paperWidth(paper.paperWidth), shift(paper.shift), paperIndex(paper.paperIndex), frame(paper.frame)
+          paperWidth(paper.paperWidth), shift(paper.shift), paperIndex(paper.paperIndex), frame(paper.frame),
+          layoutWidth(paper.layoutWidth)
     {}
 
     ~VLayoutPaperData() {}
@@ -75,6 +76,7 @@ public:
     unsigned int shift;
     quint32 paperIndex;
     quint32 frame;
+    qreal layoutWidth;
 };
 
 #ifdef Q_CC_GNU

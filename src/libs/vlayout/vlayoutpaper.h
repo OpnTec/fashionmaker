@@ -55,6 +55,9 @@ public:
     int  GetWidth() const;
     void SetWidth(int width);
 
+    qreal GetLayoutWidth() const;
+    void  SetLayoutWidth(qreal width);
+
     unsigned int GetShift() const;
     void         SetShift(unsigned int shift);
 
