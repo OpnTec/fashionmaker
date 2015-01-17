@@ -87,12 +87,6 @@ private:
     /** @brief description pattern description */
     QString               description;
 
-    int paperHeight;
-    int paperWidth;
-    unsigned int shift;
-    qreal layoutWidth;
-    Cases group;
-
     QGraphicsScene* tempScene;
 
     void                  SvgFile(const QString &name)const;

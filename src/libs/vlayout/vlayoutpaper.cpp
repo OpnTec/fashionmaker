@@ -69,7 +69,7 @@ BestResult::BestResult()
 //---------------------------------------------------------------------------------------------------------------------
 void BestResult::NewResult(qint64 square, int i, int j, const QMatrix &matrix)
 {
-    if (square < resSquare && square > 0)
+    if (square <= resSquare && square > 0)
     {
         resI = i;
         resJ = j;
@@ -409,7 +409,9 @@ bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, i
     RotateEdges(detail, globalEdge, dEdge, angle);
 
 #ifdef LAYOUT_DEBUG
-    DrawDebug(detail, d->frame);
+    #ifdef SHOW_ROTATION
+        DrawDebug(detail, d->frame);
+    #endif
 #endif
 
     switch (Crossing(detail, j, dEdge))

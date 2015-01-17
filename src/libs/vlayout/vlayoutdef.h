@@ -40,12 +40,13 @@ enum class LayoutErrors : char
     EmptyPaperError
 };
 
-#define LAYOUT_DEBUG // Enable debug mode
+//#define LAYOUT_DEBUG // Enable debug mode
 
 #ifdef LAYOUT_DEBUG
 #   define SHOW_VERTICES // Show contour vertices
 #   define SHOW_DIRECTION   // Show contour direction
 #   define ARRANGED_DETAILS // Show already arranged details
+//#   define SHOW_ROTATION
 #endif//LAYOUT_DEBUG
 
 #endif // VLAYOUTDEF_H

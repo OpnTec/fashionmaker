@@ -119,6 +119,11 @@ void VLayoutGenerator::Generate()
                 }
             } while(bank->LeftArrange() > 0);
 
+            if (stopGeneration)
+            {
+                break;
+            }
+
             if (paper.Count() > 0)
             {
                 papers.append(paper);

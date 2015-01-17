@@ -54,8 +54,7 @@
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::TableWindow),
     listDetails(QVector<VLayoutDetail>()), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
-    scenes(QList<QGraphicsScene *>()), fileName(QString()), description(QString()), paperHeight(0), paperWidth(0),
-    shift(0), layoutWidth(0), group(Cases::CaseDesc), tempScene(nullptr)
+    scenes(QList<QGraphicsScene *>()), fileName(QString()), description(QString()), tempScene(nullptr)
 {
     ui->setupUi(this);
     tempScene = new QGraphicsScene(QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm)));
@@ -67,8 +66,8 @@ TableWindow::TableWindow(QWidget *parent)
     ui->view->setScene(tempScene);
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
     ui->horizontalLayout->addWidget(ui->view);
-    //connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomIn);
-    //connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomOut);
+    connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomIn);
+    connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomOut);
     connect(ui->actionStop, &QAction::triggered, this, &TableWindow::StopTable);
     //connect(ui->actionSave, &QAction::triggered, this, &TableWindow::saveScene);
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
@@ -255,49 +254,39 @@ void TableWindow::saveScene()
 //    delete brush;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::ShowPaper(int index)
 {
     if (index < 0 || index > scenes.size())
     {
         ui->view->setScene(tempScene);
     }
+    else
+    {
+        ui->view->setScene(scenes.at(index));
+    }
 
-    ui->view->setScene(scenes.at(index));
+    ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TableWindow::Layout()
 {
     DialogLayoutSettings layout(this);
-    if (paperHeight != 0)
-    {
-        layout.SetPaperHeight(paperHeight);
-        layout.SetPaperWidth(paperWidth);
-        layout.SetLayoutWidth(layoutWidth);
-        layout.SetShift(shift);
-        layout.SetGroup(group);
-    }
-
     if (layout.exec() == QDialog::Rejected)
     {
         return;
     }
 
-    paperHeight = layout.GetPaperHeight();
-    paperWidth = layout.GetPaperWidth();
-    shift = layout.GetShift();
-    layoutWidth = layout.GetLayoutWidth();
-    group = layout.GetGroup();
-
     VLayoutGenerator lGenerator(this);
     lGenerator.SetDetails(listDetails);
-    lGenerator.SetLayoutWidth(layoutWidth);
-    lGenerator.SetCaseType(group);
-    lGenerator.SetPaperHeight(paperHeight);
-    lGenerator.SetPaperWidth(paperWidth);
-    lGenerator.SetShift(shift);
+    lGenerator.SetLayoutWidth(layout.GetLayoutWidth());
+    lGenerator.SetCaseType(layout.GetGroup());
+    lGenerator.SetPaperHeight(layout.GetPaperHeight());
+    lGenerator.SetPaperWidth(layout.GetPaperWidth());
+    lGenerator.SetShift(layout.GetShift());
 
-    DialogLayoutProgress progress(lGenerator.DetailsCount(), this);
+    DialogLayoutProgress progress(listDetails.count(), this);
 
     connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
     connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
@@ -307,14 +296,25 @@ void TableWindow::Layout()
 
     lGenerator.Generate();
 
-    if (lGenerator.State() == LayoutErrors::NoError)
+    switch (lGenerator.State())
     {
-        ClearLayout();
-        papers = lGenerator.GetItems();
-        CreateShadows();
-        CreateScenes();
-        // Create previews
-        PrepareSceneList();
+        case LayoutErrors::NoError:
+            ClearLayout();
+            papers = lGenerator.GetItems();
+            CreateShadows();
+            CreateScenes();
+            // Create previews
+            PrepareSceneList();
+            break;
+        case LayoutErrors::ProcessStoped:
+            break;
+        case LayoutErrors::PrepareLayoutError:
+        case LayoutErrors::PaperSizeError:
+        case LayoutErrors::EmptyPaperError:
+            ClearLayout();
+            break;
+        default:
+            break;
     }
 }
 
@@ -470,9 +470,9 @@ void TableWindow::ClearLayout()
 {
     qDeleteAll (scenes);
     scenes.clear();
-    listDetails.clear();
     shadows.clear();
     papers.clear();
+    ui->listWidget->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -517,9 +517,14 @@ void TableWindow::CreateScenes()
 void TableWindow::PrepareSceneList()
 {
     const QIcon ico("://icon/64x64/icon64x64.png");
-    for (int i=0; i<scenes.size(); ++i)
+    for (int i=1; i<=scenes.size(); ++i)
     {
         QListWidgetItem *item = new QListWidgetItem(ico, QString::number(i));
         ui->listWidget->addItem(item);
+    }
+
+    if (scenes.isEmpty() == false)
+    {
+        ui->listWidget->setCurrentRow(0);
     }
 }

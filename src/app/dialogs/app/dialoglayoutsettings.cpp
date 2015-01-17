@@ -262,7 +262,7 @@ void DialogLayoutSettings::InitLayoutUnits()
     }
 
     ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(1, Unit::Mm, oldLayoutUnit));
-    ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(10, Unit::Mm, oldLayoutUnit));
+    ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(50, Unit::Mm, oldLayoutUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
