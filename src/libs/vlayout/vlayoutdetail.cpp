@@ -104,13 +104,13 @@ QVector<QPointF> VLayoutDetail::GetLayoutAllowencePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMatrix VLayoutDetail::GetMatrix() const
+QTransform VLayoutDetail::GetMatrix() const
 {
     return d->matrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetMatrix(const QMatrix &matrix)
+void VLayoutDetail::SetMatrix(const QTransform &matrix)
 {
     d->matrix = matrix;
 }
@@ -130,7 +130,7 @@ void VLayoutDetail::SetLayoutWidth(const qreal &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutDetail::Translate(qreal dx, qreal dy)
 {
-    QMatrix m;
+    QTransform m;
     m.translate(dx, dy);
     d->matrix *= m;
 }
@@ -138,7 +138,7 @@ void VLayoutDetail::Translate(qreal dx, qreal dy)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutDetail::Rotate(const QPointF &originPoint, qreal degrees)
 {
-    QMatrix m;
+    QTransform m;
     m.translate(originPoint.x(), originPoint.y());
     m.rotate(-degrees);
     m.translate(-originPoint.x(), -originPoint.y());
@@ -156,7 +156,7 @@ void VLayoutDetail::Mirror(const QLineF &edge)
     const QLineF axis = QLineF(edge.x2(), edge.y2(), edge.x2() + 100, edge.y2()); // Ox axis
 
     const qreal angle = edge.angleTo(axis);
-    QMatrix m;
+    QTransform m;
     m.translate(edge.p2().x(), edge.p2().y());
     m.rotate(-angle);
     m.translate(-edge.p2().x(), -edge.p2().y());
@@ -173,6 +173,8 @@ void VLayoutDetail::Mirror(const QLineF &edge)
     m.rotate(-(360-angle));
     m.translate(-edge.p2().x(), -edge.p2().y());
     d->matrix *= m;
+
+    d->mirror = !d->mirror;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,7 +339,7 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
         p.append(d->matrix.map(points.at(i)));
     }
 
-    if (d->matrix.m22() < 0)
+    if (d->mirror)
     {
         QList<QPointF> list = p.toList();
         for(int k=0, s=list.size(), max=(s/2); k<max; k++)
@@ -404,4 +406,16 @@ QGraphicsItem *VLayoutDetail::GetItem() const
     QGraphicsPathItem *item = new QGraphicsPathItem();
     item->setPath(ContourPath());
     return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutDetail::IsMirror() const
+{
+    return d->mirror;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutDetail::SetMirror(bool value)
+{
+    d->mirror = value;
 }

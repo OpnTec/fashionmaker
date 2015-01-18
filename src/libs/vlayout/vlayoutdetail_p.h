@@ -32,7 +32,7 @@
 #include <QSharedData>
 #include <QPointF>
 #include <QVector>
-#include <QMatrix>
+#include <QTransform>
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -44,12 +44,12 @@ class VLayoutDetailData : public QSharedData
 public:
     VLayoutDetailData()
         :contour(QVector<QPointF>()), seamAllowence(QVector<QPointF>()), layoutAllowence(QVector<QPointF>()),
-          matrix(QMatrix()), layoutWidth(0)
+          matrix(QMatrix()), layoutWidth(0), mirror(false)
     {}
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
-          layoutAllowence(detail.layoutAllowence), matrix(detail.matrix), layoutWidth(detail.layoutWidth)
+          layoutAllowence(detail.layoutAllowence), matrix(detail.matrix), layoutWidth(detail.layoutWidth), mirror(false)
     {}
 
     ~VLayoutDetailData() {}
@@ -64,10 +64,12 @@ public:
     QVector<QPointF> layoutAllowence;
 
     /** @brief matrix transformation matrix*/
-    QMatrix matrix;
+    QTransform matrix;
 
     /** @brief layoutWidth value layout allowence width in pixels. */
     qreal layoutWidth;
+
+    bool mirror;
 };
 
 #ifdef Q_CC_GNU

@@ -43,31 +43,33 @@ class BestResult
 public:
     BestResult();
 
-    void NewResult(qint64 square, int i, int j, const QMatrix &matrix);
+    void NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror);
 
     qint64  BestSquare() const;
     int     GContourEdge() const;
     int     DetailEdge() const;
-    QMatrix Matrix() const;
+    QTransform Matrix() const;
     bool    ValideResult() const;
+    bool    Mirror() const;
 
 private:
     // All nedded information about best result
     int resI; // Edge of global contour
     int resJ; // Edge of detail
-    QMatrix resMatrix; // Matrix for rotation and translation detail
+    QTransform resMatrix; // Matrix for rotation and translation detail
     qint64 resSquare; // Best square size (least). For begin set max value.
     bool valideResult;
+    bool resMirror;
 };
 
 //===================================================BestResult========================================================
 //---------------------------------------------------------------------------------------------------------------------
 BestResult::BestResult()
-    :resI(0), resJ(0), resMatrix(QMatrix()), resSquare(LLONG_MAX),valideResult(false)
+    :resI(0), resJ(0), resMatrix(QMatrix()), resSquare(LLONG_MAX), valideResult(false), resMirror(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void BestResult::NewResult(qint64 square, int i, int j, const QMatrix &matrix)
+void BestResult::NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror)
 {
     if (square <= resSquare && square > 0)
     {
@@ -76,6 +78,7 @@ void BestResult::NewResult(qint64 square, int i, int j, const QMatrix &matrix)
         resMatrix = matrix;
         resSquare = square;
         valideResult = true;
+        resMirror = mirror;
     }
 }
 
@@ -98,7 +101,7 @@ int BestResult::DetailEdge() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMatrix BestResult::Matrix() const
+QTransform BestResult::Matrix() const
 {
     return resMatrix;
 }
@@ -107,6 +110,12 @@ QMatrix BestResult::Matrix() const
 bool BestResult::ValideResult() const
 {
     return valideResult;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool BestResult::Mirror() const
+{
+    return resMirror;
 }
 
 //===================================================VLayoutPaper======================================================
@@ -255,12 +264,12 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
                 if (SheetContains(rec))
                 {
                     bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                         workDetail.GetMatrix());
+                                         workDetail.GetMatrix(), workDetail.IsMirror());
                 }
             }
             d->frame = d->frame + 2;
 
-            for (int angle = 0; angle <= 360; angle = angle+5)
+            for (int angle = 0; angle <= 360; angle = angle+20)
             {
                 QCoreApplication::processEvents();
 
@@ -278,7 +287,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
                     if (SheetContains(rec))
                     {
                         bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
-                                             workDetail.GetMatrix());
+                                             workDetail.GetMatrix(), workDetail.IsMirror());
                     }
                 }
                 ++d->frame;
@@ -317,7 +326,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
                     newGContour.append(newGContour.first());
                     const QRectF rec = QPolygonF(newGContour).boundingRect();
                     bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                         workDetail.GetMatrix());
+                                         workDetail.GetMatrix(), workDetail.IsMirror());
                 }
             }
             d->frame = d->frame + 2;
@@ -337,7 +346,9 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
     CombineEdges(detail, globalEdge, dEdge);
 
 #ifdef LAYOUT_DEBUG
-    DrawDebug(detail, d->frame);
+#   ifdef SHOW_COMBINE
+        DrawDebug(detail, d->frame);
+#   endif
 #endif
 
     switch (Crossing(detail, j, dEdge))
@@ -372,7 +383,9 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
     if (flagMirror)
     {
         #ifdef LAYOUT_DEBUG
-            DrawDebug(detail, d->frame+1);
+            #ifdef SHOW_MIRROR
+                DrawDebug(detail, d->frame+1);
+            #endif
         #endif
 
         dEdge = detail.EdgeByPoint(globalEdge.p2());
@@ -455,7 +468,8 @@ bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, int globalI, int detailI) const
+VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, const int &globalI,
+                                                  const int &detailI) const
 {
     int globalEdgesCount = EdgesCount();
     if (globalEdgesCount == 0)
@@ -507,7 +521,7 @@ VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail, int detailI) const
+VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail, const int &detailI) const
 {
     if (detail.EdgesCount() < 3)
     {
@@ -535,10 +549,35 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
     }
     else
     {
-        const QPolygonF gPoly = GlobalPolygon();
-        for(int i = 0; i < lPoints.count(); i++)
+        const int polyCorners = EdgesCount();
+        int j = polyCorners-1;
+
+        QVector<qreal> constant;
+        QVector<qreal> multiple;
+
+        for(int i=0; i<polyCorners; i++)
         {
-            const QPointF p = lPoints.at(i);
+            const qreal xi = d->globalContour.at(i).x();
+            const qreal xj = d->globalContour.at(j).x();
+            const qreal yi = d->globalContour.at(i).y();
+            const qreal yj = d->globalContour.at(j).y();
+            if(qFuzzyCompare(yj, yi))
+            {
+                constant.insert(i, xi);
+                multiple.insert(i, 0);
+            }
+            else
+            {
+                constant.insert(i, xi - (yi*xj)/(yj-yi) + (yi*xi)/(yj-yi));
+                multiple.insert(i, (xj-xi)/(yj-yi));
+            }
+
+            j=i;
+        }
+
+        for(int k = 0; k < lPoints.count(); k++)
+        {
+            const QPointF p = lPoints.at(k);
             if (p.isNull())
             {
                 return InsideType::EdgeError;
@@ -546,7 +585,23 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
 
             if (p != detailEdge.p1() && p != detailEdge.p2())
             {
-                if (gPoly.containsPoint(p, Qt::OddEvenFill))
+                int j = polyCorners-1;
+                bool oddNodes = false;
+
+                for (int i=0; i<polyCorners; i++)
+                {
+                    const qreal yi = d->globalContour.at(i).y();
+                    const qreal yj = d->globalContour.at(j).y();
+
+                    if (((yi < p.y() && yj >= p.y()) || (yj < p.y() && yi >= p.y())))
+                    {
+                        oddNodes ^= (p.y() * multiple.at(i) + constant.at(i) < p.x());
+                    }
+
+                    j=i;
+                }
+
+                if (oddNodes)
                 {
                     return InsideType::Inside;
                 }
@@ -570,7 +625,7 @@ bool VLayoutPaper::SheetContains(const QRectF &rect) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge) const
+void VLayoutPaper::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const
 {
     QLineF detailEdge = detail.Edge(dEdge);
 
@@ -813,6 +868,7 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
     {
         VLayoutDetail workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
+        workDetail.SetMirror(bestResult.Mirror());
         const QVector<QPointF> newGContour = UniteWithContour(workDetail, bestResult.GContourEdge(),
                                                               bestResult.DetailEdge());
         if (newGContour.isEmpty())
@@ -821,6 +877,12 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
         }
         d->details.append(workDetail);
         d->globalContour = newGContour;
+
+#ifdef LAYOUT_DEBUG
+#   ifdef SHOW_BEST
+        DrawDebug(workDetail, UINT_MAX);
+#   endif
+#endif
     }
 
     return bestResult.ValideResult(); // Do we have the best result?
@@ -852,10 +914,12 @@ void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
         paint.drawPath(p);
     }
 
+#ifdef SHOW_CANDIDATE
     paint.setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawContour(detail.GetLayoutAllowencePoints());
     p.translate(d->paperWidth/2, d->paperHeight/2);
     paint.drawPath(p);
+#endif
 
 #ifdef ARRANGED_DETAILS
     paint.setPen(QPen(Qt::blue, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));

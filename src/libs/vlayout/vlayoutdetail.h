@@ -54,11 +54,14 @@ public:
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();
 
-    QMatrix GetMatrix() const;
-    void    SetMatrix(const QMatrix &matrix);
+    QTransform GetMatrix() const;
+    void    SetMatrix(const QTransform &matrix);
 
     qreal GetLayoutWidth() const;
     void  SetLayoutWidth(const qreal &value);
+
+    bool IsMirror() const;
+    void SetMirror(bool value);
 
     void Translate(qreal dx, qreal dy);
     void Rotate(const QPointF &originPoint, qreal degrees);
