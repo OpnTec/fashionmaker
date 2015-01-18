@@ -1021,7 +1021,7 @@ bool VLayoutPaper::TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, co
     const QPointF gP2 = RoundedPoint(gEdge.p2());
     const QPointF dP1 = RoundedPoint(dEdge.p1());
     const QPointF dP2 = RoundedPoint(dEdge.p2());
-    return pX != gP1 && pX != gP2 && pX != dP1 && pX != dP2;
+    return !(pX == gP1 || pX == gP2 || pX == dP1 || pX == dP2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
