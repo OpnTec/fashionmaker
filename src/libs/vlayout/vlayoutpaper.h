@@ -116,6 +116,7 @@ private:
 
     bool TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const;
     QPointF RoundedPoint(const QPointF &p) const;
+    QVector<QPointF> Triplet(const QLineF &edge) const;
 };
 
 #endif // VLAYOUTPAPER_H

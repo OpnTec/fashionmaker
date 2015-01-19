@@ -575,35 +575,44 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
             j=i;
         }
 
-        for(int k = 0; k < lPoints.count(); k++)
+        for(int m = 1; m <= detail.EdgesCount(); ++m)
         {
-            const QPointF p = lPoints.at(k);
-            if (p.isNull())
+            if (m == detailI)
+            {
+                continue;
+            }
+
+            const QLineF detailEdge = detail.Edge(m);
+            if (detailEdge.isNull()) // Got null edge
             {
                 return InsideType::EdgeError;
             }
 
-            if (p != detailEdge.p1() && p != detailEdge.p2())
+            const QVector<QPointF> p = Triplet(detailEdge);
+            for (int n=0; n<p.size(); ++n )
             {
-                int j = polyCorners-1;
-                bool oddNodes = false;
-
-                for (int i=0; i<polyCorners; i++)
+                if (p.at(n) != detailEdge.p1() && p.at(n) != detailEdge.p2())
                 {
-                    const qreal yi = d->globalContour.at(i).y();
-                    const qreal yj = d->globalContour.at(j).y();
+                    int j = polyCorners-1;
+                    bool oddNodes = false;
 
-                    if (((yi < p.y() && yj >= p.y()) || (yj < p.y() && yi >= p.y())))
+                    for (int i=0; i<polyCorners; i++)
                     {
-                        oddNodes ^= (p.y() * multiple.at(i) + constant.at(i) < p.x());
+                        const qreal yi = d->globalContour.at(i).y();
+                        const qreal yj = d->globalContour.at(j).y();
+
+                        if (((yi < p.at(n).y() && yj >= p.at(n).y()) || (yj < p.at(n).y() && yi >= p.at(n).y())))
+                        {
+                            oddNodes ^= (p.at(n).y() * multiple.at(i) + constant.at(i) < p.at(n).x());
+                        }
+
+                        j=i;
                     }
 
-                    j=i;
-                }
-
-                if (oddNodes)
-                {
-                    return InsideType::Inside;
+                    if (oddNodes)
+                    {
+                        return InsideType::Inside;
+                    }
                 }
             }
         }
@@ -1028,6 +1037,19 @@ bool VLayoutPaper::TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, co
 QPointF VLayoutPaper::RoundedPoint(const QPointF &p) const
 {
     return QPointF(qRound(p.x()), qRound(p.y()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPaper::Triplet(const QLineF &edge) const
+{
+    QVector<QPointF> p;
+    QLineF line = edge;
+    line.setLength(edge.length()/2);
+
+    p.append(edge.p1());
+    p.append(line.p2());
+    p.append(edge.p2());
+    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
