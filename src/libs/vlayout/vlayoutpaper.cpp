@@ -518,7 +518,7 @@ VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, c
 
             if (type == QLineF::BoundedIntersection)
             {
-                if (TrueIntersection(globalEdge, detailEdge, xPoint))
+                if (TrueIntersection(GlobalEdge(globalI), detail.Edge(detailI), xPoint))
                 {
                     return CrossingType::Intersection;
                 }
