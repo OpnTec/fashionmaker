@@ -261,11 +261,8 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
             if (CheckCombineEdges(workDetail, j, dEdge))
             {
                 const QRectF rec = workDetail.BoundingRect();
-                if (SheetContains(rec))
-                {
-                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                         workDetail.GetMatrix(), workDetail.IsMirror());
-                }
+                bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
+                                     workDetail.GetMatrix(), workDetail.IsMirror());
             }
             d->frame = d->frame + 2;
 
@@ -284,11 +281,8 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
                 if (CheckRotationEdges(workDetail, j, i, angle))
                 {
                     const QRectF rec = workDetail.BoundingRect();
-                    if (SheetContains(rec))
-                    {
-                        bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
-                                             workDetail.GetMatrix(), workDetail.IsMirror());
-                    }
+                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
+                                         workDetail.GetMatrix(), workDetail.IsMirror());
                 }
                 ++d->frame;
             }
@@ -320,14 +314,11 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             int dEdge = i;// For mirror detail edge will be different
             if (CheckCombineEdges(workDetail, j, dEdge))
             {
-                if (SheetContains(workDetail.BoundingRect()))
-                {
-                    QVector<QPointF> newGContour = UniteWithContour(workDetail, j, dEdge);
-                    newGContour.append(newGContour.first());
-                    const QRectF rec = QPolygonF(newGContour).boundingRect();
-                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                         workDetail.GetMatrix(), workDetail.IsMirror());
-                }
+                QVector<QPointF> newGContour = UniteWithContour(workDetail, j, dEdge);
+                newGContour.append(newGContour.first());
+                const QRectF rec = QPolygonF(newGContour).boundingRect();
+                bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
+                                     workDetail.GetMatrix(), workDetail.IsMirror());
             }
             d->frame = d->frame + 2;
         }
@@ -351,7 +342,13 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
 #   endif
 #endif
 
-    switch (Crossing(detail, j, dEdge))
+    CrossingType type = CrossingType::Intersection;
+    if (SheetContains(detail.BoundingRect()))
+    {
+        type = Crossing(detail, j, dEdge);
+    }
+
+    switch (type)
     {
         case CrossingType::EdgeError:
             return false;
@@ -394,7 +391,13 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
             return false;
         }
 
-        switch (Crossing(detail, j, dEdge))
+        CrossingType type = CrossingType::Intersection;
+        if (SheetContains(detail.BoundingRect()))
+        {
+            type = Crossing(detail, j, dEdge);
+        }
+
+        switch (type)
         {
             case CrossingType::EdgeError:
                 return false;
@@ -438,7 +441,13 @@ bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, i
     #endif
 #endif
 
-    switch (Crossing(detail, j, dEdge))
+    CrossingType type = CrossingType::Intersection;
+    if (SheetContains(detail.BoundingRect()))
+    {
+        type = Crossing(detail, j, dEdge);
+    }
+
+    switch (type)
     {
         case CrossingType::EdgeError:
             return false;
@@ -935,6 +944,8 @@ void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
     p = DrawDetails();
     p.translate(d->paperWidth/2, d->paperHeight/2);
     paint.drawPath(p);
+#else
+    Q_UNUSED(detail)
 #endif
 
     paint.end();

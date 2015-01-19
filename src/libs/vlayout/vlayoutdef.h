@@ -40,7 +40,7 @@ enum class LayoutErrors : char
     EmptyPaperError
 };
 
-#define LAYOUT_DEBUG // Enable debug mode
+//#define LAYOUT_DEBUG // Enable debug mode
 
 #ifdef LAYOUT_DEBUG
 #   define SHOW_VERTICES // Show contour vertices
