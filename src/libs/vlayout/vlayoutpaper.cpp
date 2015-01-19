@@ -600,28 +600,25 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
             const QVector<QPointF> p = Triplet(detailEdge);
             for (int n=0; n<p.size(); ++n )
             {
-                if (p.at(n) != detailEdge.p1() && p.at(n) != detailEdge.p2())
+                int j = polyCorners-1;
+                bool oddNodes = false;
+
+                for (int i=0; i<polyCorners; i++)
                 {
-                    int j = polyCorners-1;
-                    bool oddNodes = false;
+                    const qreal yi = d->globalContour.at(i).y();
+                    const qreal yj = d->globalContour.at(j).y();
 
-                    for (int i=0; i<polyCorners; i++)
+                    if (((yi < p.at(n).y() && yj >= p.at(n).y()) || (yj < p.at(n).y() && yi >= p.at(n).y())))
                     {
-                        const qreal yi = d->globalContour.at(i).y();
-                        const qreal yj = d->globalContour.at(j).y();
-
-                        if (((yi < p.at(n).y() && yj >= p.at(n).y()) || (yj < p.at(n).y() && yi >= p.at(n).y())))
-                        {
-                            oddNodes ^= (p.at(n).y() * multiple.at(i) + constant.at(i) < p.at(n).x());
-                        }
-
-                        j=i;
+                        oddNodes ^= (p.at(n).y() * multiple.at(i) + constant.at(i) < p.at(n).x());
                     }
 
-                    if (oddNodes)
-                    {
-                        return InsideType::Inside;
-                    }
+                    j=i;
+                }
+
+                if (oddNodes)
+                {
+                    return InsideType::Inside;
                 }
             }
         }
