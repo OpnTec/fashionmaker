@@ -190,17 +190,30 @@ QLineF VLayoutDetail::Edge(int i) const
     { // Doesn't exist such edge
         return QLineF();
     }
-    const QVector<QPointF> points = GetLayoutAllowencePoints();
-    QLineF edge;
+
+    int i1, i2;
     if (i < EdgesCount())
     {
-        edge = QLineF(points.at(i-1), points.at(i));
+        i1 = i-1;
+        i2 = i;
     }
     else
     {
-        edge = QLineF(points.at(EdgesCount()-1), points.at(0));
+        i1 = EdgesCount()-1;
+        i2 = 0;
     }
-    return edge;
+
+    if (d->mirror)
+    {
+        const int oldI1 = i1;
+        i1 = (d->layoutAllowence.size()-1) - i2;
+        i2 = (d->layoutAllowence.size()-1) - oldI1;
+        return QLineF(d->matrix.map(d->layoutAllowence.at(i2)), d->matrix.map(d->layoutAllowence.at(i1)));
+    }
+    else
+    {
+        return QLineF(d->matrix.map(d->layoutAllowence.at(i1)), d->matrix.map(d->layoutAllowence.at(i2)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

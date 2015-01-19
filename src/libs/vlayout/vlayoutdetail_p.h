@@ -49,7 +49,8 @@ public:
 
     VLayoutDetailData(const VLayoutDetailData &detail)
         :QSharedData(detail), contour(detail.contour), seamAllowence(detail.seamAllowence),
-          layoutAllowence(detail.layoutAllowence), matrix(detail.matrix), layoutWidth(detail.layoutWidth), mirror(false)
+          layoutAllowence(detail.layoutAllowence), matrix(detail.matrix), layoutWidth(detail.layoutWidth),
+          mirror(detail.mirror)
     {}
 
     ~VLayoutDetailData() {}
