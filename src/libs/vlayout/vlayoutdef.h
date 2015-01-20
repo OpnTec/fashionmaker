@@ -40,6 +40,12 @@ enum class LayoutErrors : char
     EmptyPaperError
 };
 
+enum class BestFrom : char
+{
+    Rotation = 0,
+    Combine = 1
+};
+
 //#define LAYOUT_DEBUG // Enable debug mode
 
 #ifdef LAYOUT_DEBUG

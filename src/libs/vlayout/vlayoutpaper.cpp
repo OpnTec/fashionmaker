@@ -43,7 +43,7 @@ class BestResult
 public:
     BestResult();
 
-    void NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror);
+    void NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
 
     qint64  BestSquare() const;
     int     GContourEdge() const;
@@ -51,6 +51,7 @@ public:
     QTransform Matrix() const;
     bool    ValideResult() const;
     bool    Mirror() const;
+    BestFrom Type() const;
 
 private:
     // All nedded information about best result
@@ -60,18 +61,20 @@ private:
     qint64 resSquare; // Best square size (least). For begin set max value.
     bool valideResult;
     bool resMirror;
+    BestFrom type;
 };
 
 //===================================================BestResult========================================================
 //---------------------------------------------------------------------------------------------------------------------
 BestResult::BestResult()
-    :resI(0), resJ(0), resMatrix(QMatrix()), resSquare(LLONG_MAX), valideResult(false), resMirror(false)
+    :resI(0), resJ(0), resMatrix(QMatrix()), resSquare(LLONG_MAX), valideResult(false), resMirror(false),
+      type (BestFrom::Rotation)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void BestResult::NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror)
+void BestResult::NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror, BestFrom type)
 {
-    if (square <= resSquare && square > 0)
+    if (square <= resSquare && square > 0 && type >= this->type)
     {
         resI = i;
         resJ = j;
@@ -79,6 +82,7 @@ void BestResult::NewResult(qint64 square, int i, int j, const QTransform &matrix
         resSquare = square;
         valideResult = true;
         resMirror = mirror;
+        this->type = type;
     }
 }
 
@@ -116,6 +120,12 @@ bool BestResult::ValideResult() const
 bool BestResult::Mirror() const
 {
     return resMirror;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+BestFrom BestResult::Type() const
+{
+    return type;
 }
 
 //===================================================VLayoutPaper======================================================
@@ -269,7 +279,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
 
                 const QRectF rec = workDetail.BoundingRect();
                 bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                     workDetail.GetMatrix(), workDetail.IsMirror());
+                                     workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Combine);
             }
             d->frame = d->frame + 3;
 
@@ -296,7 +306,7 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
 
                     const QRectF rec = workDetail.BoundingRect();
                     bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
-                                         workDetail.GetMatrix(), workDetail.IsMirror());
+                                         workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Rotation);
                 }
                 ++d->frame;
             }
@@ -313,10 +323,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 
     for (int j=1; j <= EdgesCount(); ++j)
     {
-        // We should use copy of the detail.
-        VLayoutDetail workDetail = detail;
-
-        for (int i=1; i<= workDetail.EdgesCount(); i++)
+        for (int i=1; i<= detail.EdgesCount(); i++)
         {
             QCoreApplication::processEvents();
 
@@ -324,6 +331,9 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             {
                 return false;
             }
+
+            // We should use copy of the detail.
+            VLayoutDetail workDetail = detail;
 
             int dEdge = i;// For mirror detail edge will be different
             if (CheckCombineEdges(workDetail, j, dEdge))
@@ -334,13 +344,43 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
                 #   endif
                 #endif
 
-                QVector<QPointF> newGContour = UniteWithContour(workDetail, j, dEdge);
+                QVector<QPointF> newGContour = UniteWithContour(workDetail, j, dEdge, BestFrom::Combine);
                 newGContour.append(newGContour.first());
                 const QRectF rec = QPolygonF(newGContour).boundingRect();
                 bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                     workDetail.GetMatrix(), workDetail.IsMirror());
+                                     workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Combine);
             }
             d->frame = d->frame + 3;
+
+            for (int angle = 0; angle <= 360; angle = angle+20)
+            {
+                QCoreApplication::processEvents();
+
+                if (stop)
+                {
+                    return false;
+                }
+
+                // We should use copy of the detail.
+                VLayoutDetail workDetail = detail;
+
+                if (CheckRotationEdges(workDetail, j, i, angle))
+                {
+                    #ifdef LAYOUT_DEBUG
+                    #   ifdef SHOW_CANDIDATE_BEST
+                            ++d->frame;
+                            DrawDebug(workDetail, d->frame);
+                    #   endif
+                    #endif
+
+                    QVector<QPointF> newGContour = UniteWithContour(workDetail, j, i, BestFrom::Rotation);
+                    newGContour.append(newGContour.first());
+                    const QRectF rec = QPolygonF(newGContour).boundingRect();
+                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
+                                         workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Rotation);
+                }
+                ++d->frame;
+            }
         }
     }
 
@@ -694,28 +734,12 @@ void VLayoutPaper::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ) const
+QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const
 {
     QVector<QPointF> newContour;
     if (d->globalContour.isEmpty())
     {
-        int processedEdges = 0;
-        const int nD = detail.EdgesCount();
-        int j = detJ+1;
-        do
-        {
-            if (j > nD)
-            {
-                j=1;
-            }
-            const QVector<QPointF> points = CutEdge(detail.Edge(j));
-            for (int i = 0; i < points.size()-1; ++i)
-            {
-                newContour.append(points.at(i));
-            }
-            ++processedEdges;
-            ++j;
-        }while (processedEdges < nD);
+        AppendWhole(newContour, detail, detJ);
     }
     else
     {
@@ -744,26 +768,33 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
         {
             if (i == i2)
             {
-                int processedEdges = 0;
-                const int nD = detail.EdgesCount();
-                int j = detJ+1;
-                do
+                if (type == BestFrom::Rotation)
                 {
-                    if (j > nD)
+                    AppendWhole(newContour, detail, detJ);
+                }
+                else
+                {
+                    int processedEdges = 0;
+                    const int nD = detail.EdgesCount();
+                    int j = detJ+1;
+                    do
                     {
-                        j=1;
-                    }
-                    if (j != detJ)
-                    {
-                        const QVector<QPointF> points = CutEdge(detail.Edge(j));
-                        for (int i = 0; i < points.size()-1; ++i)
+                        if (j > nD)
                         {
-                            newContour.append(points.at(i));
+                            j=1;
                         }
-                    }
-                    ++processedEdges;
-                    ++j;
-                }while (processedEdges < nD);
+                        if (j != detJ)
+                        {
+                            const QVector<QPointF> points = CutEdge(detail.Edge(j));
+                            for (int i = 0; i < points.size()-1; ++i)
+                            {
+                                newContour.append(points.at(i));
+                            }
+                        }
+                        ++processedEdges;
+                        ++j;
+                    }while (processedEdges < nD);
+                }
             }
 
             if (newContour.isEmpty() == false)
@@ -781,6 +812,28 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
         }
     }
     return newContour;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const
+{
+    int processedEdges = 0;
+    const int nD = detail.EdgesCount();
+    int j = detJ+1;
+    do
+    {
+        if (j > nD)
+        {
+            j=1;
+        }
+        const QVector<QPointF> points = CutEdge(detail.Edge(j));
+        for (int i = 0; i < points.size()-1; ++i)
+        {
+            contour.append(points.at(i));
+        }
+        ++processedEdges;
+        ++j;
+    }while (processedEdges < nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -905,7 +958,7 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
         workDetail.SetMirror(bestResult.Mirror());
         const QVector<QPointF> newGContour = UniteWithContour(workDetail, bestResult.GContourEdge(),
-                                                              bestResult.DetailEdge());
+                                                              bestResult.DetailEdge(), bestResult.Type());
         if (newGContour.isEmpty())
         {
             return false;

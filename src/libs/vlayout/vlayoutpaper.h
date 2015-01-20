@@ -30,6 +30,7 @@
 #define VLAYOUTPAPER_H
 
 #include <QSharedDataPointer>
+#include "vlayoutdef.h"
 
 class VLayoutPaperData;
 class VLayoutDetail;
@@ -98,7 +99,8 @@ private:
     void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const;
     void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
-    QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ) const;
+    QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
+    void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
 
     QLineF GlobalEdge(int i) const;
     int    EdgesCount() const;
