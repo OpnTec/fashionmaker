@@ -260,11 +260,18 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
             int dEdge = i;// For mirrored detail edge will be different
             if (CheckCombineEdges(workDetail, j, dEdge))
             {
+                #ifdef LAYOUT_DEBUG
+                #   ifdef SHOW_CANDIDATE_BEST
+                        DrawDebug(workDetail, d->frame+2);
+
+                #   endif
+                #endif
+
                 const QRectF rec = workDetail.BoundingRect();
                 bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
                                      workDetail.GetMatrix(), workDetail.IsMirror());
             }
-            d->frame = d->frame + 2;
+            d->frame = d->frame + 3;
 
             for (int angle = 0; angle <= 360; angle = angle+20)
             {
@@ -280,6 +287,13 @@ bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
 
                 if (CheckRotationEdges(workDetail, j, i, angle))
                 {
+                    #ifdef LAYOUT_DEBUG
+                    #   ifdef SHOW_CANDIDATE_BEST
+                            ++d->frame;
+                            DrawDebug(workDetail, d->frame);
+                    #   endif
+                    #endif
+
                     const QRectF rec = workDetail.BoundingRect();
                     bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
                                          workDetail.GetMatrix(), workDetail.IsMirror());
@@ -314,13 +328,19 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             int dEdge = i;// For mirror detail edge will be different
             if (CheckCombineEdges(workDetail, j, dEdge))
             {
+                #ifdef LAYOUT_DEBUG
+                #   ifdef SHOW_CANDIDATE_BEST
+                        DrawDebug(workDetail, d->frame+2);
+                #   endif
+                #endif
+
                 QVector<QPointF> newGContour = UniteWithContour(workDetail, j, dEdge);
                 newGContour.append(newGContour.first());
                 const QRectF rec = QPolygonF(newGContour).boundingRect();
                 bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
                                      workDetail.GetMatrix(), workDetail.IsMirror());
             }
-            d->frame = d->frame + 2;
+            d->frame = d->frame + 3;
         }
     }
 
@@ -695,7 +715,7 @@ QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int
             }
             ++processedEdges;
             ++j;
-        }while (processedEdges <= nD);
+        }while (processedEdges < nD);
     }
     else
     {
@@ -911,7 +931,7 @@ void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
     QPainter paint;
     paint.begin(&frameImage);
 
-    paint.setPen(QPen(Qt::darkRed, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.setPen(QPen(Qt::darkRed, 10, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     paint.drawRect(QRectF(d->paperWidth/2, d->paperHeight/2, d->paperWidth, d->paperHeight));
 
     paint.setPen(QPen(Qt::black, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));

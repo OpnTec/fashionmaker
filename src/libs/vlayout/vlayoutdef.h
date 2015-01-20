@@ -50,6 +50,7 @@ enum class LayoutErrors : char
 //#   define SHOW_ROTATION
 //#   define SHOW_COMBINE
 //#   define SHOW_MIRROR
+//#   define SHOW_CANDIDATE_BEST
 #   define SHOW_BEST
 #endif//LAYOUT_DEBUG
 

@@ -75,7 +75,7 @@ void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
         d->contour.removeLast();
     }
 
-    d->contour = RoundPoints(d->contour);
+    d->contour = RemoveDublicates(RoundPoints(d->contour));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points)
         d->seamAllowence.removeLast();
     }
 
-    d->seamAllowence = RoundPoints(d->seamAllowence);
+    d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,7 +245,8 @@ QRectF VLayoutDetail::BoundingRect() const
 {
     QVector<QPointF> points = GetLayoutAllowencePoints();
     points.append(points.first());
-    return QPolygonF(points).boundingRect();
+    QRectF rec =  QPolygonF(points).boundingRect();
+    return rec;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

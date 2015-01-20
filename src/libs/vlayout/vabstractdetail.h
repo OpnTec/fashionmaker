@@ -65,10 +65,13 @@ public:
     void    setWidth(const qreal &value);
 
     static QVector<QPointF> Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width);
+
+protected:
+    static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
+
 private:
     QSharedDataPointer<VAbstractDetailData> d;
 
-    static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
     static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
