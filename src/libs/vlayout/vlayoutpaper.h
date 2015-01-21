@@ -73,45 +73,11 @@ public:
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    enum class CrossingType : char
-    {
-        NoIntersection = 0,
-        Intersection = 1,
-        EdgeError = 2
-    };
-
-    enum class InsideType : char
-    {
-        Outside = 0,
-        Inside = 1,
-        EdgeError = 2
-    };
-
     bool AddToSheet(const VLayoutDetail &detail, bool &stop);
-
-    bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const;
-    bool CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const;
-
-    CrossingType Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const;
-    InsideType   InsideContour(const VLayoutDetail &detail, const int &detailI) const;
-    qreal        CheckSide(const QLineF &edge, const QPointF &p) const;
-    bool         SheetContains(const QRectF &rect) const;
-
-    void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const;
-    void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
     bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
     void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 
-    static void DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
-                          int detailsCount, const QVector<VLayoutDetail> &details = QVector<VLayoutDetail>());
-    static QPainterPath ShowDirection(const QLineF &edge);
-    static QPainterPath DrawContour(const QVector<QPointF> &points);
-    static QPainterPath DrawDetails(const QVector<VLayoutDetail> &details);
-
-    bool TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const;
-    QPointF RoundedPoint(const QPointF &p) const;
-    QVector<QPointF> Triplet(const QLineF &edge) const;
 };
 
 #endif // VLAYOUTPAPER_H

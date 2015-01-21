@@ -46,7 +46,7 @@ enum class BestFrom : char
     Combine = 1
 };
 
-#define LAYOUT_DEBUG // Enable debug mode
+//#define LAYOUT_DEBUG // Enable debug mode
 
 #ifdef LAYOUT_DEBUG
 #   define SHOW_VERTICES // Show contour vertices
@@ -57,7 +57,7 @@ enum class BestFrom : char
 //#   define SHOW_COMBINE
 //#   define SHOW_MIRROR
 //#   define SHOW_CANDIDATE_BEST
-#   define SHOW_BEST
+//#   define SHOW_BEST
 #endif//LAYOUT_DEBUG
 
 #endif // VLAYOUTDEF_H
