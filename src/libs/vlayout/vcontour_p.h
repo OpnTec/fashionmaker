@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlayoutpaper_p.h
+ **  @file   vcontour_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   8 1, 2015
+ **  @date   21 1, 2015
  **
  **  @brief
  **  @copyright
@@ -26,53 +26,49 @@
  **
  *************************************************************************/
 
-#ifndef VLAYOUTPAPER_P_H
-#define VLAYOUTPAPER_P_H
+#ifndef VCONTOUR_P_H
+#define VCONTOUR_P_H
 
 #include <QSharedData>
-#include <QVector>
 #include <QPointF>
-
-#include "vlayoutdetail.h"
-#include "vcontour.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
 #endif
 
-class VLayoutPaperData : public QSharedData
+class VContourData : public QSharedData
 {
 public:
-    VLayoutPaperData()
-        :details(QVector<VLayoutDetail>()), globalContour(VContour()), paperIndex(0), frame(0), layoutWidth(0)
+    VContourData()
+        :globalContour(QVector<QPointF>()), paperHeight(0), paperWidth(0), shift(0)
     {}
 
-    VLayoutPaperData(int height, int width)
-        :details(QVector<VLayoutDetail>()), globalContour(VContour(height, width)), paperIndex(0), frame(0),
-          layoutWidth(0)
+    VContourData(int height, int width)
+        :globalContour(QVector<QPointF>()), paperHeight(height), paperWidth(width), shift(0)
     {}
 
-    VLayoutPaperData(const VLayoutPaperData &paper)
-        :QSharedData(paper), details(paper.details), globalContour(paper.globalContour), paperIndex(paper.paperIndex),
-          frame(paper.frame), layoutWidth(paper.layoutWidth)
+    VContourData(const VContourData &contour)
+        :QSharedData(contour), globalContour(contour.globalContour), paperHeight(contour.paperHeight),
+          paperWidth(contour.paperWidth), shift(contour.shift)
     {}
 
-    ~VLayoutPaperData() {}
-
-    /** @brief details list of arranged details. */
-    QVector<VLayoutDetail> details;
+    ~VContourData() {}
 
     /** @brief globalContour list of global points contour. */
-    VContour globalContour;
+    QVector<QPointF> globalContour;
 
-    quint32 paperIndex;
-    quint32 frame;
-    qreal layoutWidth;
+    /** @brief paperHeight height of paper in pixels*/
+    int paperHeight;
+
+    /** @brief paperWidth width of paper in pixels*/
+    int paperWidth;
+
+    unsigned int shift;
 };
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic pop
 #endif
 
-#endif // VLAYOUTPAPER_P_H
+#endif // VCONTOUR_P_H

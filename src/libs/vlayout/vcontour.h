@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlayoutdef.h
+ **  @file   vcontour.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 1, 2015
+ **  @date   21 1, 2015
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,52 @@
  **
  *************************************************************************/
 
-#ifndef VLAYOUTDEF_H
-#define VLAYOUTDEF_H
+#ifndef VCONTOUR_H
+#define VCONTOUR_H
 
-enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
+#include "vlayoutdef.h"
 
-enum class LayoutErrors : char
+#include <QVector>
+#include <QSharedDataPointer>
+
+class VContourData;
+class QPointF;
+class VLayoutDetail;
+class QLineF;
+
+class VContour
 {
-    NoError,
-    PrepareLayoutError,
-    PaperSizeError,
-    ProcessStoped,
-    EmptyPaperError
+public:
+    VContour();
+    VContour(int height, int width);
+    VContour(const VContour &contour);
+    VContour &operator=(const VContour &contour);
+    virtual ~VContour();
+
+    void SetContour(const QVector<QPointF> &contour);
+    QVector<QPointF> GetContour() const;
+
+    unsigned int GetShift() const;
+    void         SetShift(unsigned int shift);
+
+    int  GetHeight() const;
+    void SetHeight(int height);
+
+    int  GetWidth() const;
+    void SetWidth(int width);
+
+    QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
+
+    int    EdgesCount() const;
+    QLineF GlobalEdge(int i) const;
+    QVector<QPointF> CutEdge(const QLineF &edge) const;
+
+    const QPointF &	at(int i) const;
+
+private:
+    QSharedDataPointer<VContourData> d;
+
+    void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
 };
 
-enum class BestFrom : char
-{
-    Rotation = 0,
-    Combine = 1
-};
-
-#define LAYOUT_DEBUG // Enable debug mode
-
-#ifdef LAYOUT_DEBUG
-#   define SHOW_VERTICES // Show contour vertices
-#   define SHOW_DIRECTION   // Show contour direction
-#   define ARRANGED_DETAILS // Show already arranged details
-//#   define SHOW_CANDIDATE
-//#   define SHOW_ROTATION
-//#   define SHOW_COMBINE
-//#   define SHOW_MIRROR
-//#   define SHOW_CANDIDATE_BEST
-#   define SHOW_BEST
-#endif//LAYOUT_DEBUG
-
-#endif // VLAYOUTDEF_H
+#endif // VCONTOUR_H

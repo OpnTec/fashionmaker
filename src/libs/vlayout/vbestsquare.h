@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlayoutdef.h
+ **  @file   vbestsquare.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 1, 2015
+ **  @date   21 1, 2015
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,38 @@
  **
  *************************************************************************/
 
-#ifndef VLAYOUTDEF_H
-#define VLAYOUTDEF_H
+#ifndef VBESTSQUARE_H
+#define VBESTSQUARE_H
 
-enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
+#include "vlayoutdef.h"
 
-enum class LayoutErrors : char
+#include <QTransform>
+
+class VBestSquare
 {
-    NoError,
-    PrepareLayoutError,
-    PaperSizeError,
-    ProcessStoped,
-    EmptyPaperError
+public:
+    VBestSquare();
+
+    void NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
+    void NewResult(const VBestSquare &best);
+
+    qint64     BestSquare() const;
+    int        GContourEdge() const;
+    int        DetailEdge() const;
+    QTransform Matrix() const;
+    bool       ValideResult() const;
+    bool       Mirror() const;
+    BestFrom   Type() const;
+
+private:
+    // All nedded information about best result
+    int resI; // Edge of global contour
+    int resJ; // Edge of detail
+    QTransform resMatrix; // Matrix for rotation and translation detail
+    qint64 resSquare; // Best square size (least). For begin set max value.
+    bool valideResult;
+    bool resMirror;
+    BestFrom type;
 };
 
-enum class BestFrom : char
-{
-    Rotation = 0,
-    Combine = 1
-};
-
-#define LAYOUT_DEBUG // Enable debug mode
-
-#ifdef LAYOUT_DEBUG
-#   define SHOW_VERTICES // Show contour vertices
-#   define SHOW_DIRECTION   // Show contour direction
-#   define ARRANGED_DETAILS // Show already arranged details
-//#   define SHOW_CANDIDATE
-//#   define SHOW_ROTATION
-//#   define SHOW_COMBINE
-//#   define SHOW_MIRROR
-//#   define SHOW_CANDIDATE_BEST
-#   define SHOW_BEST
-#endif//LAYOUT_DEBUG
-
-#endif // VLAYOUTDEF_H
+#endif // VBESTSQUARE_H

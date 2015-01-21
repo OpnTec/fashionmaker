@@ -11,7 +11,10 @@ HEADERS += \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
     $$PWD/vlayoutpaper_p.h \
-    $$PWD/vbank.h
+    $$PWD/vbank.h \
+    $$PWD/vcontour.h \
+    $$PWD/vcontour_p.h \
+    $$PWD/vbestsquare.h
 
 SOURCES += \
     $$PWD/stable.cpp \
@@ -19,4 +22,6 @@ SOURCES += \
     $$PWD/vlayoutdetail.cpp \
     $$PWD/vabstractdetail.cpp \
     $$PWD/vlayoutpaper.cpp \
-    $$PWD/vbank.cpp
+    $$PWD/vbank.cpp \
+    $$PWD/vcontour.cpp \
+    $$PWD/vbestsquare.cpp

@@ -28,6 +28,7 @@
 
 #include "vlayoutpaper.h"
 #include "vlayoutpaper_p.h"
+#include "vbestsquare.h"
 
 #include <climits>
 #include <QPointF>
@@ -38,97 +39,6 @@
 #include <QGraphicsItem>
 #include <QCoreApplication>
 
-class BestResult
-{
-public:
-    BestResult();
-
-    void NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
-
-    qint64  BestSquare() const;
-    int     GContourEdge() const;
-    int     DetailEdge() const;
-    QTransform Matrix() const;
-    bool    ValideResult() const;
-    bool    Mirror() const;
-    BestFrom Type() const;
-
-private:
-    // All nedded information about best result
-    int resI; // Edge of global contour
-    int resJ; // Edge of detail
-    QTransform resMatrix; // Matrix for rotation and translation detail
-    qint64 resSquare; // Best square size (least). For begin set max value.
-    bool valideResult;
-    bool resMirror;
-    BestFrom type;
-};
-
-//===================================================BestResult========================================================
-//---------------------------------------------------------------------------------------------------------------------
-BestResult::BestResult()
-    :resI(0), resJ(0), resMatrix(QMatrix()), resSquare(LLONG_MAX), valideResult(false), resMirror(false),
-      type (BestFrom::Rotation)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void BestResult::NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror, BestFrom type)
-{
-    if (square <= resSquare && square > 0 && type >= this->type)
-    {
-        resI = i;
-        resJ = j;
-        resMatrix = matrix;
-        resSquare = square;
-        valideResult = true;
-        resMirror = mirror;
-        this->type = type;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qint64 BestResult::BestSquare() const
-{
-    return resSquare;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int BestResult::GContourEdge() const
-{
-    return resI;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int BestResult::DetailEdge() const
-{
-    return resJ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QTransform BestResult::Matrix() const
-{
-    return resMatrix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool BestResult::ValideResult() const
-{
-    return valideResult;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool BestResult::Mirror() const
-{
-    return resMirror;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-BestFrom BestResult::Type() const
-{
-    return type;
-}
-
-//===================================================VLayoutPaper======================================================
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
     :d(new VLayoutPaperData)
@@ -162,25 +72,25 @@ VLayoutPaper::~VLayoutPaper()
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::GetHeight() const
 {
-    return d->paperHeight;
+    return d->globalContour.GetHeight();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetHeight(int height)
 {
-    d->paperHeight = height;
+    d->globalContour.SetHeight(height);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::GetWidth() const
 {
-    return d->paperWidth;
+    return d->globalContour.GetWidth();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetWidth(int width)
 {
-    d->paperWidth = width;
+    d->globalContour.SetWidth(width);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -201,13 +111,13 @@ void VLayoutPaper::SetLayoutWidth(qreal width)
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int VLayoutPaper::GetShift() const
 {
-    return d->shift;
+    return d->globalContour.GetShift();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetShift(unsigned int shift)
 {
-    d->shift = shift;
+    d->globalContour.SetShift(shift);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,7 +130,7 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, bool &stop)
 {
     // First need set size of paper
-    if (d->paperHeight <= 0 || d->paperWidth <= 0)
+    if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
     {
         return false;
     }
@@ -244,9 +154,9 @@ int VLayoutPaper::Count() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 {
-    BestResult bestResult;
+    VBestSquare bestResult;
 
-    for (int j=1; j <= EdgesCount(); ++j)
+    for (int j=1; j <= d->globalContour.EdgesCount(); ++j)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
@@ -265,15 +175,12 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             {
                 #ifdef LAYOUT_DEBUG
                 #   ifdef SHOW_CANDIDATE_BEST
-                        DrawDebug(workDetail, d->frame+2);
+                        DrawDebug(d->globalContour, workDetail, d->frame+2, d->paperIndex, d->details.count(),
+                                  d->details);
                 #   endif
                 #endif
 
-                QVector<QPointF> newGContour = UniteWithContour(workDetail, j, dEdge, BestFrom::Combine);
-                newGContour.append(newGContour.first());
-                const QRectF rec = QPolygonF(newGContour).boundingRect();
-                bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                     workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Combine);
+                SaveCandidate(bestResult, workDetail, j, dEdge, BestFrom::Combine);
             }
             d->frame = d->frame + 3;
 
@@ -294,15 +201,12 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
                     #ifdef LAYOUT_DEBUG
                     #   ifdef SHOW_CANDIDATE_BEST
                             ++d->frame;
-                            DrawDebug(workDetail, d->frame);
+                            DrawDebug(d->globalContour, workDetail, d->frame, d->paperIndex, d->details.count(),
+                                      d->details);
                     #   endif
                     #endif
 
-                    QVector<QPointF> newGContour = UniteWithContour(workDetail, j, i, BestFrom::Rotation);
-                    newGContour.append(newGContour.first());
-                    const QRectF rec = QPolygonF(newGContour).boundingRect();
-                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
-                                         workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Rotation);
+                    SaveCandidate(bestResult, workDetail, j, i, BestFrom::Rotation);
                 }
                 ++d->frame;
             }
@@ -315,7 +219,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const
 {
-    const QLineF globalEdge = GlobalEdge(j);
+    const QLineF globalEdge = d->globalContour.GlobalEdge(j);
     bool flagMirror = false;
     bool flagSquare = false;
 
@@ -323,7 +227,7 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
 
 #ifdef LAYOUT_DEBUG
 #   ifdef SHOW_COMBINE
-        DrawDebug(detail, d->frame);
+        DrawDebug(d->globalContour, detail, d->frame, d->paperIndex, d->details.count(), d->details);
 #   endif
 #endif
 
@@ -366,7 +270,7 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
     {
         #ifdef LAYOUT_DEBUG
             #ifdef SHOW_MIRROR
-                DrawDebug(detail, d->frame+1);
+                DrawDebug(d->globalContour, detail, d->frame+1, d->paperIndex, d->details.count(), d->details);
             #endif
         #endif
 
@@ -415,14 +319,14 @@ bool VLayoutPaper::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) c
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const
 {
-    const QLineF globalEdge = GlobalEdge(j);
+    const QLineF globalEdge = d->globalContour.GlobalEdge(j);
     bool flagSquare = false;
 
     RotateEdges(detail, globalEdge, dEdge, angle);
 
 #ifdef LAYOUT_DEBUG
     #ifdef SHOW_ROTATION
-        DrawDebug(detail, d->frame);
+        DrawDebug(d->globalContour, detail, d->frame, d->paperIndex, d->details.count(), d->details);
     #endif
 #endif
 
@@ -465,7 +369,7 @@ bool VLayoutPaper::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, i
 VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, const int &globalI,
                                                   const int &detailI) const
 {
-    int globalEdgesCount = EdgesCount();
+    int globalEdgesCount = d->globalContour.EdgesCount();
     if (globalEdgesCount == 0)
     {
         globalEdgesCount = 1;// For blank sheet
@@ -479,7 +383,7 @@ VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, c
 
     for(int i = 1; i <= globalEdgesCount; i++)
     {
-        const QLineF globalEdge = GlobalEdge(i);
+        const QLineF globalEdge = d->globalContour.GlobalEdge(i);
         if (globalEdge.isNull()) // Got null edge
         {
             return CrossingType::EdgeError;
@@ -503,7 +407,7 @@ VLayoutPaper::CrossingType VLayoutPaper::Crossing(const VLayoutDetail &detail, c
 
             if (type == QLineF::BoundedIntersection)
             {
-                if (TrueIntersection(GlobalEdge(globalI), detail.Edge(detailI), xPoint))
+                if (TrueIntersection(d->globalContour.GlobalEdge(globalI), detail.Edge(detailI), xPoint))
                 {
                     return CrossingType::Intersection;
                 }
@@ -532,7 +436,7 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
 
     if (d->details.isEmpty())
     {
-        const QLineF globalEdge = GlobalEdge(1);
+        const QLineF globalEdge = d->globalContour.GlobalEdge(1);
         for(int i = 0; i < lPoints.count(); i++)
         {
             if (CheckSide(globalEdge, lPoints.at(i)) < 0)
@@ -543,7 +447,7 @@ VLayoutPaper::InsideType VLayoutPaper::InsideContour(const VLayoutDetail &detail
     }
     else
     {
-        const int polyCorners = EdgesCount();
+        const int polyCorners = d->globalContour.EdgesCount();
         int j = polyCorners-1;
 
         QVector<qreal> constant;
@@ -620,7 +524,7 @@ qreal VLayoutPaper::CheckSide(const QLineF &edge, const QPointF &p) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::SheetContains(const QRectF &rect) const
 {
-    const QRectF bRect(0, 0, d->paperWidth, d->paperHeight);
+    const QRectF bRect(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight());
     return bRect.contains(rect);
 }
 
@@ -659,241 +563,26 @@ void VLayoutPaper::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPaper::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const
-{
-    QVector<QPointF> newContour;
-    if (d->globalContour.isEmpty())
-    {
-        AppendWhole(newContour, detail, detJ);
-    }
-    else
-    {
-        if (globalI <= 0 || globalI > EdgesCount())
-        {
-            return QVector<QPointF>();
-        }
-
-        if (detJ <= 0 || detJ > detail.EdgesCount())
-        {
-            return QVector<QPointF>();
-        }
-
-        int i2 = 0;
-        if (globalI == d->globalContour.count())
-        {
-            i2 = 0;
-        }
-        else
-        {
-            i2 = globalI;
-        }
-
-        int i=0;
-        while(i < d->globalContour.count())
-        {
-            if (i == i2)
-            {
-                if (type == BestFrom::Rotation)
-                {
-                    AppendWhole(newContour, detail, detJ);
-                }
-                else
-                {
-                    int processedEdges = 0;
-                    const int nD = detail.EdgesCount();
-                    int j = detJ+1;
-                    do
-                    {
-                        if (j > nD)
-                        {
-                            j=1;
-                        }
-                        if (j != detJ)
-                        {
-                            const QVector<QPointF> points = CutEdge(detail.Edge(j));
-                            for (int i = 0; i < points.size()-1; ++i)
-                            {
-                                newContour.append(points.at(i));
-                            }
-                        }
-                        ++processedEdges;
-                        ++j;
-                    }while (processedEdges < nD);
-                }
-            }
-
-            if (newContour.isEmpty() == false)
-            {
-                if (newContour.last() != d->globalContour.at(i))
-                {
-                    newContour.append(d->globalContour.at(i));
-                }
-            }
-            else
-            {
-                newContour.append(d->globalContour.at(i));
-            }
-            ++i;
-        }
-    }
-    return newContour;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const
-{
-    int processedEdges = 0;
-    const int nD = detail.EdgesCount();
-    int j = detJ+1;
-    do
-    {
-        if (j > nD)
-        {
-            j=1;
-        }
-        const QVector<QPointF> points = CutEdge(detail.Edge(j));
-        for (int i = 0; i < points.size()-1; ++i)
-        {
-            contour.append(points.at(i));
-        }
-        ++processedEdges;
-        ++j;
-    }while (processedEdges < nD);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutPaper::GlobalEdge(int i) const
-{
-    if (d->details.isEmpty())
-    {
-        // Because sheet is blank we have one global edge for all cases - Ox axis.
-        const QLineF axis = QLineF(0, 0, d->paperWidth - d->layoutWidth/2, 0);
-        if (d->shift == 0)
-        {
-            return axis;
-        }
-
-        const int n = qFloor(axis.length()/d->shift);
-
-        if (i < 1 || i > n)
-        { // Doesn't exist such edge
-            return QLineF();
-        }
-
-        if (n <= 0)
-        {
-            return axis;
-        }
-        else
-        {
-            const qreal nShift = axis.length()/n;
-            return QLineF(nShift*(i-1), 0, nShift*i, 0);
-        }
-    }
-    else
-    {
-        if (i < 1 || i > EdgesCount())
-        { // Doesn't exist such edge
-            return QLineF();
-        }
-        QLineF edge;
-        if (i < EdgesCount())
-        {
-            edge = QLineF(d->globalContour.at(i-1), d->globalContour.at(i));
-        }
-        else
-        { // Closed countour
-            edge = QLineF(d->globalContour.at(EdgesCount()-1), d->globalContour.at(0));
-        }
-        return edge;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VLayoutPaper::EdgesCount() const
-{
-    if (d->details.isEmpty())
-    {
-        if (d->shift == 0)
-        {
-            return 1;
-        }
-
-        const QLineF axis = QLineF(0, 0, d->paperWidth, 0);
-        const int n = qFloor(axis.length()/d->shift);
-        if (n <= 0)
-        {
-            return 1;
-        }
-        else
-        {
-            return n;
-        }
-    }
-    else
-    {
-        return d->globalContour.count();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPolygonF VLayoutPaper::GlobalPolygon() const
-{
-    QVector<QPointF> points = d->globalContour;
-    points.append(points.first());
-    return QPolygonF(points);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPaper::CutEdge(const QLineF &edge) const
-{
-    QVector<QPointF> points;
-    if (d->shift == 0)
-    {
-        points.append(edge.p1());
-        points.append(edge.p2());
-    }
-
-    const int n = qFloor(edge.length()/d->shift);
-
-    if (n <= 0)
-    {
-        points.append(edge.p1());
-        points.append(edge.p2());
-    }
-    else
-    {
-        const qreal nShift = edge.length()/n;
-        for (int i = 1; i <= n+1; ++i)
-        {
-            QLineF l1 = edge;
-            l1.setLength(nShift*(i-1));
-            points.append(l1.p2());
-        }
-    }
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail &detail)
+bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail)
 {
     if (bestResult.ValideResult())
     {
         VLayoutDetail workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
         workDetail.SetMirror(bestResult.Mirror());
-        const QVector<QPointF> newGContour = UniteWithContour(workDetail, bestResult.GContourEdge(),
-                                                              bestResult.DetailEdge(), bestResult.Type());
+        const QVector<QPointF> newGContour = d->globalContour.UniteWithContour(workDetail, bestResult.GContourEdge(),
+                                                                               bestResult.DetailEdge(),
+                                                                               bestResult.Type());
         if (newGContour.isEmpty())
         {
             return false;
         }
         d->details.append(workDetail);
-        d->globalContour = newGContour;
+        d->globalContour.SetContour(newGContour);
 
 #ifdef LAYOUT_DEBUG
 #   ifdef SHOW_BEST
-        DrawDebug(workDetail, UINT_MAX);
+        DrawDebug(d->globalContour, workDetail, UINT_MAX, d->paperIndex, d->details.count(), d->details);
 #   endif
 #endif
     }
@@ -902,55 +591,67 @@ bool VLayoutPaper::SaveResult(const BestResult &bestResult, const VLayoutDetail 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::DrawDebug(const VLayoutDetail &detail, int frame) const
+void VLayoutPaper::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ,
+                                 BestFrom type)
 {
-    QImage frameImage(d->paperWidth*2, d->paperHeight*2, QImage::Format_RGB32);
+    QVector<QPointF> newGContour = d->globalContour.UniteWithContour(detail, globalI, detJ, type);
+    newGContour.append(newGContour.first());
+    const QRectF rec = QPolygonF(newGContour).boundingRect();
+    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), globalI, detJ,
+                         detail.GetMatrix(), detail.IsMirror(), type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
+                             int detailsCount, const QVector<VLayoutDetail> &details)
+{
+    QImage frameImage(contour.GetWidth()*2, contour.GetHeight()*2, QImage::Format_RGB32);
     frameImage.fill(Qt::white);
     QPainter paint;
     paint.begin(&frameImage);
 
     paint.setPen(QPen(Qt::darkRed, 10, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawRect(QRectF(d->paperWidth/2, d->paperHeight/2, d->paperWidth, d->paperHeight));
+    paint.drawRect(QRectF(contour.GetWidth()/2, contour.GetHeight()/2, contour.GetWidth(), contour.GetHeight()));
 
     paint.setPen(QPen(Qt::black, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     QPainterPath p;
-    if (d->globalContour.isEmpty())
+    if (contour.GetContour().isEmpty())
     {
-        p = DrawContour(CutEdge(QLineF(0, 0, d->paperWidth, 0)));
-        p.translate(d->paperWidth/2, d->paperHeight/2);
+        p = DrawContour(contour.CutEdge(QLineF(0, 0, contour.GetWidth(), 0)));
+        p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
         paint.drawPath(p);
     }
     else
     {
-        p = DrawContour(d->globalContour);
-        p.translate(d->paperWidth/2, d->paperHeight/2);
+        p = DrawContour(contour.GetContour());
+        p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
         paint.drawPath(p);
     }
 
 #ifdef SHOW_CANDIDATE
     paint.setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawContour(detail.GetLayoutAllowencePoints());
-    p.translate(d->paperWidth/2, d->paperHeight/2);
+    p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
     paint.drawPath(p);
 #endif
 
 #ifdef ARRANGED_DETAILS
     paint.setPen(QPen(Qt::blue, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    p = DrawDetails();
-    p.translate(d->paperWidth/2, d->paperHeight/2);
+    p = DrawDetails(details);
+    p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
     paint.drawPath(p);
 #else
     Q_UNUSED(detail)
 #endif
 
     paint.end();
-    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(d->paperIndex)
-            .arg(d->details.count()).arg(frame);
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(paperIndex)
+            .arg(detailsCount).arg(frame);
     frameImage.save (path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPaper::ShowDirection(const QLineF &edge) const
+QPainterPath VLayoutPaper::ShowDirection(const QLineF &edge)
 {
     QLineF arrow = edge;
     arrow.setLength(edge.length()/2.0);
@@ -972,7 +673,7 @@ QPainterPath VLayoutPaper::ShowDirection(const QLineF &edge) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPaper::DrawContour(const QVector<QPointF> &points) const
+QPainterPath VLayoutPaper::DrawContour(const QVector<QPointF> &points)
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
@@ -1003,26 +704,15 @@ QPainterPath VLayoutPaper::DrawContour(const QVector<QPointF> &points) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPaper::TranslateContour(const QVector<QPointF> &points, qreal dx, qreal dy) const
-{
-    QVector<QPointF> p;
-    for (qint32 i = 0; i < points.count(); ++i)
-    {
-        p.append(QPointF(points.at(i).x()+dx, points.at(i).y()+dy));
-    }
-    return p;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPaper::DrawDetails() const
+QPainterPath VLayoutPaper::DrawDetails(const QVector<VLayoutDetail> &details)
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
-    if (Count() > 0)
+    if (details.count() > 0)
     {
-        for (int i = 0; i < d->details.size(); ++i)
+        for (int i = 0; i < details.size(); ++i)
         {
-            path.addPath(d->details.at(i).ContourPath());
+            path.addPath(details.at(i).ContourPath());
         }
     }
     return path;
@@ -1061,7 +751,8 @@ QVector<QPointF> VLayoutPaper::Triplet(const QLineF &edge) const
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsItem *VLayoutPaper::GetItem() const
 {
-    QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->paperWidth, d->paperHeight));
+    QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(),
+                                                            d->globalContour.GetHeight()));
     paper->setPen(QPen(Qt::black, 1));
     paper->setBrush(QBrush(Qt::white));
     for (int i=0; i < d->details.count(); ++i)

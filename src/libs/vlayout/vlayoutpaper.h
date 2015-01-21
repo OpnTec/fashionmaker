@@ -37,9 +37,11 @@ class VLayoutDetail;
 class QPointF;
 class QLineF;
 class QPolygonF;
-class BestResult;
 class QPainterPath;
 class QGraphicsItem;
+class VBestSquare;
+class VContour;
+class QRectF;
 
 class VLayoutPaper
 {
@@ -98,22 +100,14 @@ private:
     void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const;
     void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
-    QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
-    void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
+    bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
+    void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 
-    QLineF GlobalEdge(int i) const;
-    int    EdgesCount() const;
-
-    QPolygonF GlobalPolygon() const;
-    QVector<QPointF> CutEdge(const QLineF &edge) const;
-
-    bool SaveResult(const BestResult &bestResult, const VLayoutDetail &detail);
-
-    void DrawDebug(const VLayoutDetail &detail, int frame) const;
-    QPainterPath ShowDirection(const QLineF &edge) const;
-    QPainterPath DrawContour(const QVector<QPointF> &points) const;
-    QVector<QPointF> TranslateContour(const QVector<QPointF> &points, qreal dx, qreal dy) const;
-    QPainterPath DrawDetails() const;
+    static void DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
+                          int detailsCount, const QVector<VLayoutDetail> &details = QVector<VLayoutDetail>());
+    static QPainterPath ShowDirection(const QLineF &edge);
+    static QPainterPath DrawContour(const QVector<QPointF> &points);
+    static QPainterPath DrawDetails(const QVector<VLayoutDetail> &details);
 
     bool TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const;
     QPointF RoundedPoint(const QPointF &p) const;
