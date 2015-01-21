@@ -232,88 +232,13 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, bool &stop)
 
     d->frame = 0;
 
-    if (Count() == 0)
-    {
-        return AddToBlankSheet(detail, stop);
-    }
-    else
-    {
-        return AddToSheet(detail, stop);
-    }
+    return AddToSheet(detail, stop);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::Count() const
 {
     return d->details.count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToBlankSheet(const VLayoutDetail &detail, bool &stop)
-{
-    BestResult bestResult;
-
-    for (int j=1; j <= EdgesCount(); ++j)
-    {
-        for (int i=1; i<= detail.EdgesCount(); i++)
-        {
-            QCoreApplication::processEvents();
-
-            if (stop)
-            {
-                return false;
-            }
-
-            // We should use copy of the detail.
-            VLayoutDetail workDetail = detail;
-
-            int dEdge = i;// For mirrored detail edge will be different
-            if (CheckCombineEdges(workDetail, j, dEdge))
-            {
-                #ifdef LAYOUT_DEBUG
-                #   ifdef SHOW_CANDIDATE_BEST
-                        DrawDebug(workDetail, d->frame+2);
-
-                #   endif
-                #endif
-
-                const QRectF rec = workDetail.BoundingRect();
-                bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, dEdge,
-                                     workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Combine);
-            }
-            d->frame = d->frame + 3;
-
-            for (int angle = 0; angle <= 360; angle = angle+20)
-            {
-                QCoreApplication::processEvents();
-
-                if (stop)
-                {
-                    return false;
-                }
-
-                // We should use copy of the detail.
-                VLayoutDetail workDetail = detail;
-
-                if (CheckRotationEdges(workDetail, j, i, angle))
-                {
-                    #ifdef LAYOUT_DEBUG
-                    #   ifdef SHOW_CANDIDATE_BEST
-                            ++d->frame;
-                            DrawDebug(workDetail, d->frame);
-                    #   endif
-                    #endif
-
-                    const QRectF rec = workDetail.BoundingRect();
-                    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), j, i,
-                                         workDetail.GetMatrix(), workDetail.IsMirror(), BestFrom::Rotation);
-                }
-                ++d->frame;
-            }
-        }
-    }
-
-    return SaveResult(bestResult, detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

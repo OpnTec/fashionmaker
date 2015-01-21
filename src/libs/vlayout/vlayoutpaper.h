@@ -85,7 +85,6 @@ private:
         EdgeError = 2
     };
 
-    bool AddToBlankSheet(const VLayoutDetail &detail, bool &stop);
     bool AddToSheet(const VLayoutDetail &detail, bool &stop);
 
     bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const;
