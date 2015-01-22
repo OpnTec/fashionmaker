@@ -119,6 +119,8 @@ private:
 
     static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, unsigned int shift);
     static QVector<QPointF> CutEdge(const QLineF &edge, unsigned int shift);
+
+    void Rotate(int increase);
 };
 
 #endif // VPOSITION_H

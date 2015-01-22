@@ -69,31 +69,7 @@ void VPosition::run()
     }
     frame = frame + 3;
 
-    for (int angle = 0; angle <= 360; angle = angle+180)
-    {
-        if (*stop)
-        {
-            return;
-        }
-
-        QCoreApplication::processEvents();
-
-        // We should use copy of the detail.
-        VLayoutDetail workDetail = detail;
-
-        if (CheckRotationEdges(workDetail, j, i, angle))
-        {
-            #ifdef LAYOUT_DEBUG
-            #   ifdef SHOW_CANDIDATE_BEST
-                    ++frame;
-                    DrawDebug(gContour, workDetail, frame, paperIndex, detailsCount, details);
-            #   endif
-            #endif
-
-            SaveCandidate(bestResult, workDetail, j, i, BestFrom::Rotation);
-        }
-        ++frame;
-    }
+    Rotate(180);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,6 +581,36 @@ QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
         }
     }
     return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPosition::Rotate(int increase)
+{
+    for (int angle = 0; angle <= 360; angle = angle+increase)
+    {
+        if (*stop)
+        {
+            return;
+        }
+
+        QCoreApplication::processEvents();
+
+        // We should use copy of the detail.
+        VLayoutDetail workDetail = detail;
+
+        if (CheckRotationEdges(workDetail, j, i, angle))
+        {
+            #ifdef LAYOUT_DEBUG
+            #   ifdef SHOW_CANDIDATE_BEST
+                    ++frame;
+                    DrawDebug(gContour, workDetail, frame, paperIndex, detailsCount, details);
+            #   endif
+            #endif
+
+            SaveCandidate(bestResult, workDetail, j, i, BestFrom::Rotation);
+        }
+        ++frame;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
