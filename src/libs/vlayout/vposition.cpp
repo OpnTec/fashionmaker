@@ -35,6 +35,7 @@
 #include <QPainterPath>
 #include <QImage>
 #include <QPainter>
+#include <QCoreApplication>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i)
@@ -45,6 +46,8 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detai
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
+    QCoreApplication::processEvents();
+
     // We should use copy of the detail.
     VLayoutDetail workDetail = detail;
 
@@ -63,6 +66,8 @@ void VPosition::run()
 
     for (int angle = 0; angle <= 360; angle = angle+180)
     {
+        QCoreApplication::processEvents();
+
         // We should use copy of the detail.
         VLayoutDetail workDetail = detail;
 
