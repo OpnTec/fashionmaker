@@ -61,6 +61,12 @@ public:
     Cases GetGroup() const;
     void SetGroup(const Cases &value);
 
+    bool GetRotate() const;
+    void SetRotate(bool state);
+
+    int GetIncrease() const;
+    void SetIncrease(int increase);
+
 public slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();

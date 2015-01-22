@@ -123,6 +123,35 @@ void VLayoutPaper::SetShift(unsigned int shift)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::GetRotate() const
+{
+    return d->rotate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetRotate(bool value)
+{
+    d->rotate = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutPaper::GetRotationIncrease() const
+{
+    return d->rotationIncrease;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetRotationIncrease(int value)
+{
+    d->rotationIncrease = value;
+
+    if ((d->rotationIncrease >= 1 && d->rotationIncrease <= 180 && 360 % d->rotationIncrease == 0) == false)
+    {
+        d->rotationIncrease = 180;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetPaperIndex(quint32 index)
 {
     d->paperIndex = index;
@@ -164,7 +193,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop);
+            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);
@@ -177,7 +206,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             threads.append(thread);
             thread_pool->start(thread);
 
-            d->frame = d->frame + 3 + 360/180*2;
+            d->frame = d->frame + 3 + 360/d->rotationIncrease*2;
         }
     }
 

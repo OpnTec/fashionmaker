@@ -6,182 +6,344 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>273</height>
+    <width>661</width>
+    <height>289</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Creation a layout</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_5">
+  <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QGroupBox" name="groupBoxPaperSize">
-       <property name="title">
-        <string>Paper size</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="spacing">
-           <number>6</number>
-          </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="groupBoxPaperSize">
+         <property name="title">
+          <string>Paper size</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLabel" name="label">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>6</number>
             </property>
-            <property name="text">
-             <string>Templates:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBoxTemplates"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="1" column="2">
-           <widget class="QComboBox" name="comboBoxPaperSizeUnit">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>124</width>
-              <height>0</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="labelWidth">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Width:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="labelHeight">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Height:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxPaperHeight">
-            <property name="minimumSize">
-             <size>
-              <width>94</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="decimals">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <double>99999.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxPaperWidth">
-            <property name="minimumSize">
-             <size>
-              <width>94</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="decimals">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <double>99999.990000000005239</double>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="labelSizeDescription">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <widget class="QToolButton" name="toolButtonPortrate">
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>...</string>
+               <string>Templates:</string>
               </property>
-              <property name="icon">
-               <iconset resource="../../share/resources/icon.qrc">
-                <normaloff>:/icon/16x16/portrait.png</normaloff>:/icon/16x16/portrait.png</iconset>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="toolButtonLandscape">
-              <property name="text">
-               <string>...</string>
+             <widget class="QComboBox" name="comboBoxTemplates"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="1" column="2">
+             <widget class="QComboBox" name="comboBoxPaperSizeUnit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="icon">
-               <iconset resource="../../share/resources/icon.qrc">
-                <normaloff>:/icon/16x16/landscape.png</normaloff>:/icon/16x16/landscape.png</iconset>
+              <property name="minimumSize">
+               <size>
+                <width>124</width>
+                <height>0</height>
+               </size>
               </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
              </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelWidth">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Width:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelHeight">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Height:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxPaperHeight">
+              <property name="minimumSize">
+               <size>
+                <width>94</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="decimals">
+               <number>2</number>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxPaperWidth">
+              <property name="minimumSize">
+               <size>
+                <width>94</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="decimals">
+               <number>2</number>
+              </property>
+              <property name="maximum">
+               <double>99999.990000000005239</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLabel" name="labelSizeDescription">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QToolButton" name="toolButtonPortrate">
+                <property name="text">
+                 <string>...</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../share/resources/icon.qrc">
+                  <normaloff>:/icon/16x16/portrait.png</normaloff>:/icon/16x16/portrait.png</iconset>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+                <property name="autoRaise">
+                 <bool>true</bool>
+                </property>
+                <attribute name="buttonGroup">
+                 <string notr="true">buttonGroup</string>
+                </attribute>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="toolButtonLandscape">
+                <property name="text">
+                 <string>...</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../share/resources/icon.qrc">
+                  <normaloff>:/icon/16x16/landscape.png</normaloff>:/icon/16x16/landscape.png</iconset>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
+                </property>
+                <property name="autoRaise">
+                 <bool>true</bool>
+                </property>
+                <attribute name="buttonGroup">
+                 <string notr="true">buttonGroup</string>
+                </attribute>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
          </layout>
-        </item>
-       </layout>
-      </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxRotate">
+         <property name="title">
+          <string>Rotate workpiece</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Rotate by</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxIncrease">
+            <property name="currentIndex">
+             <number>21</number>
+            </property>
+            <item>
+             <property name="text">
+              <string notr="true">1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">12</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">15</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">18</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">20</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">24</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">30</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">36</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">40</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">45</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">60</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">72</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">90</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">180</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>degree</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBoxCreationOptions">
@@ -349,7 +511,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

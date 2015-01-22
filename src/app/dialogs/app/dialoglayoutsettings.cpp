@@ -154,6 +154,37 @@ void DialogLayoutSettings::SetGroup(const Cases &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::GetRotate() const
+{
+    return ui->groupBoxRotate->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetRotate(bool state)
+{
+    ui->groupBoxRotate->setChecked(state);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int DialogLayoutSettings::GetIncrease() const
+{
+    return ui->comboBoxIncrease->currentText().toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetIncrease(int increase)
+{
+    int index = ui->comboBoxIncrease->findText(QString::number(increase));
+
+    if (index == -1)
+    {
+        index = 21;
+    }
+
+    ui->comboBoxIncrease->setCurrentIndex(index);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
     const QSizeF size = Template();

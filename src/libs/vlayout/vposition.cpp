@@ -38,10 +38,16 @@
 #include <QCoreApplication>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop)
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,
+                     int rotationIncrease)
     :QRunnable(), bestResult(VBestSquare()), gContour(gContour), detail(detail), i(i), j(j), paperIndex(0), frame(0),
-      detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop)
-{}
+      detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate), rotationIncrease(rotationIncrease)
+{
+    if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
+    {
+        rotationIncrease = 180;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
@@ -69,7 +75,17 @@ void VPosition::run()
     }
     frame = frame + 3;
 
-    Rotate(180);
+    if (rotate)
+    {
+        Rotate(rotationIncrease);
+    }
+    else
+    {
+        if (gContour.GetContour().isEmpty())
+        {
+            Rotate(rotationIncrease);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

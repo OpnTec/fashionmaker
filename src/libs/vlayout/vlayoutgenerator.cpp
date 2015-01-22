@@ -38,7 +38,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
-      stopGeneration(false), state(LayoutErrors::NoError), shift(0)
+      stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,6 +101,8 @@ void VLayoutGenerator::Generate()
             paper.SetShift(shift);
             paper.SetLayoutWidth(bank->GetLayoutWidth());
             paper.SetPaperIndex(papers.count());
+            paper.SetRotate(rotate);
+            paper.SetRotationIncrease(rotationIncrease);
             do
             {
                 const int index = bank->GetTiket();
@@ -168,6 +170,35 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration = true;
     state = LayoutErrors::ProcessStoped;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::GetRotationIncrease() const
+{
+    return rotationIncrease;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetRotationIncrease(int value)
+{
+    rotationIncrease = value;
+
+    if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
+    {
+        rotationIncrease = 180;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::GetRotate() const
+{
+    return rotate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetRotate(bool value)
+{
+    rotate = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

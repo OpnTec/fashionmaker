@@ -285,6 +285,8 @@ void TableWindow::Layout()
     lGenerator.SetPaperHeight(layout.GetPaperHeight());
     lGenerator.SetPaperWidth(layout.GetPaperWidth());
     lGenerator.SetShift(layout.GetShift());
+    lGenerator.SetRotate(layout.GetRotate());
+    lGenerator.SetRotationIncrease(layout.GetIncrease());
 
     DialogLayoutProgress progress(listDetails.count(), this);
 

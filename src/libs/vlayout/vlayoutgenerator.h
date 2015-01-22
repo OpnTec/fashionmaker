@@ -66,6 +66,12 @@ public:
 
     QList<QGraphicsItem *> GetItems() const;
 
+    bool GetRotate() const;
+    void SetRotate(bool value);
+
+    int GetRotationIncrease() const;
+    void SetRotationIncrease(int value);
+
 signals:
     void Start();
     void Arranged(int count);
@@ -84,6 +90,8 @@ private:
     bool stopGeneration;
     LayoutErrors state;
     unsigned int shift;
+    bool rotate;
+    int rotationIncrease;
 
     void CheckDetailsSize();
 };

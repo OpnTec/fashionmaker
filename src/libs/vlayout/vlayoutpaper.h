@@ -64,6 +64,12 @@ public:
     unsigned int GetShift() const;
     void         SetShift(unsigned int shift);
 
+    bool GetRotate() const;
+    void SetRotate(bool value);
+
+    int GetRotationIncrease() const;
+    void SetRotationIncrease(int value);
+
     void SetPaperIndex(quint32 index);
 
     bool ArrangeDetail(const VLayoutDetail &detail, bool &stop);
