@@ -38,15 +38,20 @@
 #include <QCoreApplication>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i)
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop)
     :QRunnable(), bestResult(VBestSquare()), gContour(gContour), detail(detail), i(i), j(j), paperIndex(0), frame(0),
-      detailsCount(0), details(QVector<VLayoutDetail>())
+      detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
     QCoreApplication::processEvents();
+
+    if (*stop)
+    {
+        return;
+    }
 
     // We should use copy of the detail.
     VLayoutDetail workDetail = detail;
@@ -66,6 +71,11 @@ void VPosition::run()
 
     for (int angle = 0; angle <= 360; angle = angle+180)
     {
+        if (*stop)
+        {
+            return;
+        }
+
         QCoreApplication::processEvents();
 
         // We should use copy of the detail.

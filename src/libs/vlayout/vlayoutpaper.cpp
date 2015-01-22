@@ -164,7 +164,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            VPosition *thread = new VPosition(d->globalContour, j, detail, i);
+            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);

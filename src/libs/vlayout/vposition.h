@@ -46,7 +46,7 @@ class QPainterPath;
 class VPosition : public QRunnable
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i);
+    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop);
     virtual ~VPosition(){}
 
     virtual void run();
@@ -78,6 +78,7 @@ private:
     quint32 frame;
     quint32 detailsCount;
     QVector<VLayoutDetail> details;
+    bool *stop;
 
     enum class CrossingType : char
     {
