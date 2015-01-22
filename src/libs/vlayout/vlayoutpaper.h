@@ -34,14 +34,8 @@
 
 class VLayoutPaperData;
 class VLayoutDetail;
-class QPointF;
-class QLineF;
-class QPolygonF;
-class QPainterPath;
 class QGraphicsItem;
 class VBestSquare;
-class VContour;
-class QRectF;
 
 class VLayoutPaper
 {

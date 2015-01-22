@@ -31,15 +31,10 @@
 #include "vbestsquare.h"
 #include "vposition.h"
 
-#include <climits>
-#include <QPointF>
-#include <QtMath>
-#include <QImage>
-#include <QDir>
-#include <QPainter>
 #include <QGraphicsItem>
 #include <QCoreApplication>
 #include <QThreadPool>
+#include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
