@@ -158,7 +158,6 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 {
     VBestSquare bestResult;
     QThreadPool *thread_pool = QThreadPool::globalInstance();
-    thread_pool->setMaxThreadCount(4);
     QVector<VPosition *> threads;
 
     for (int j=1; j <= d->globalContour.EdgesCount(); ++j)
@@ -176,7 +175,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             threads.append(thread);
             thread_pool->start(thread);
 
-            d->frame = d->frame + 3 + 360/20*2;
+            d->frame = d->frame + 3 + 360/180*2;
         }
     }
 

@@ -61,7 +61,7 @@ void VPosition::run()
     }
     frame = frame + 3;
 
-    for (int angle = 0; angle <= 360; angle = angle+20)
+    for (int angle = 0; angle <= 360; angle = angle+180)
     {
         // We should use copy of the detail.
         VLayoutDetail workDetail = detail;
@@ -404,7 +404,7 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
         return InsideType::EdgeError;
     }
 
-    if (details.isEmpty())
+    if (gContour.GetContour().isEmpty())
     {
         const QLineF globalEdge = gContour.GlobalEdge(1);
         for(int i = 0; i < lPoints.count(); i++)
