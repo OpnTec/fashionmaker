@@ -260,6 +260,7 @@ void TableWindow::ShowPaper(int index)
     if (index < 0 || index > scenes.size())
     {
         ui->view->setScene(tempScene);
+        ui->actionSave->setEnabled(false);
     }
     else
     {
@@ -518,15 +519,43 @@ void TableWindow::CreateScenes()
 //---------------------------------------------------------------------------------------------------------------------
 void TableWindow::PrepareSceneList()
 {
-    const QIcon ico("://icon/64x64/icon64x64.png");
     for (int i=1; i<=scenes.size(); ++i)
     {
-        QListWidgetItem *item = new QListWidgetItem(ico, QString::number(i));
+        QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1), QString::number(i));
         ui->listWidget->addItem(item);
     }
 
     if (scenes.isEmpty() == false)
     {
         ui->listWidget->setCurrentRow(0);
+        ui->actionSave->setEnabled(true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QIcon TableWindow::ScenePreview(int i) const
+{
+    QImage image;
+    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+    if (paper)
+    {
+        const QRectF r = paper->rect();
+        // Create the image with the exact size of the shrunk scene
+        image = QImage(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_RGB32);
+        image.fill(Qt::white);
+        QPainter painter(&image);
+        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+        scenes.at(i)->render(&painter);
+        image.scaled(101, 146, Qt::KeepAspectRatio);
+    }
+    else
+    {
+        image = QImage(QSize(101, 146), QImage::Format_RGB32);
+        image.fill(Qt::white);
+    }
+    return QIcon(QBitmap::fromImage(image));
 }

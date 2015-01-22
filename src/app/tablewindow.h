@@ -101,6 +101,7 @@ private:
     void CreateShadows();
     void CreateScenes();
     void PrepareSceneList();
+    QIcon ScenePreview(int i) const;
 };
 
 #endif // TABLEWINDOW_H

@@ -44,6 +44,8 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     SCASSERT(bCancel != nullptr);
     connect(bCancel, &QPushButton::clicked, this, &DialogLayoutProgress::StopWorking);
     setModal(true);
+
+    this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
