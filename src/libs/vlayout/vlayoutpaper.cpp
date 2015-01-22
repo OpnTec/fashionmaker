@@ -166,10 +166,12 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
         {
             VPosition *thread = new VPosition(d->globalContour, j, detail, i);
             //Info for debug
-            thread->setPaperIndex(d->paperIndex);
-            thread->setFrame(d->frame);
-            thread->setDetailsCount(d->details.count());
-            thread->setDetails(d->details);
+            #ifdef LAYOUT_DEBUG
+                thread->setPaperIndex(d->paperIndex);
+                thread->setFrame(d->frame);
+                thread->setDetailsCount(d->details.count());
+                thread->setDetails(d->details);
+            #endif
 
             thread->setAutoDelete(false);
             threads.append(thread);
