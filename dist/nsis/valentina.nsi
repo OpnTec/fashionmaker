@@ -14,7 +14,7 @@ SetCompressor /FINAL /SOLID lzma
 !define MUI_FILE "valentina"
 
 !insertmacro GetPEVersionLocal "c:\pack\valentina\valentina.exe" ver
-!define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}-alpha"
+!define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}"
 
 !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
 !define WEBSITE_LINK "http://www.valentina-project.org/"
