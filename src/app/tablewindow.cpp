@@ -164,7 +164,7 @@ void TableWindow::StopTable()
 void TableWindow::saveScene()
 {
     QMap<QString, QString> extByMessage = InitFormates();
-    DialogSaveLayout dialog(extByMessage, scenes.size(), this);
+    DialogSaveLayout dialog(extByMessage, scenes.size(), fileName, this);
 
     if (dialog.exec() == QDialog::Rejected)
     {

@@ -35,7 +35,8 @@
 #include <QMessageBox>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int count, QWidget *parent)
+DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int count, const QString &mask,
+                                   QWidget *parent)
     :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count)
 {
     ui->setupUi(this);
@@ -46,6 +47,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
 
     QRegExpValidator *validator = new QRegExpValidator(QRegExp("^[\\w\\-. ]+$"), this);
     ui->lineEditMask->setValidator(validator);
+    ui->lineEditMask->setText(mask);
 
     QMap<QString, QString>::const_iterator i = formates.constBegin();
     while (i != formates.constEnd())

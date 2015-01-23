@@ -41,7 +41,8 @@ class DialogSaveLayout : public QDialog
     Q_OBJECT
 
 public:
-    DialogSaveLayout(const QMap<QString, QString> &formates, int count, QWidget *parent = 0);
+    DialogSaveLayout(const QMap<QString, QString> &formates, int count, const QString &mask = QString(),
+                     QWidget *parent = 0);
     ~DialogSaveLayout();
 
     QString Path() const;
