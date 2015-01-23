@@ -662,15 +662,21 @@ QVector<QPointF> VPosition::Triplet(const QLineF &edge) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPosition::ShowDirection(const QLineF &edge)
 {
+    const int arrowLength = 14;
+    QPainterPath path;
+    if (edge.length()/arrowLength < 5)
+    {
+        return  path;
+    }
+
     QLineF arrow = edge;
     arrow.setLength(edge.length()/2.0);
 
     //Reverse line because we want start arrow from this point
     arrow = QLineF(arrow.p2(), arrow.p1());
     const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
-    arrow.setLength(14);//arrow length in pixels
+    arrow.setLength(arrowLength);//arrow length in pixels
 
-    QPainterPath path;
     arrow.setAngle(angle-35);
     path.moveTo(arrow.p1());
     path.lineTo(arrow.p2());
