@@ -155,12 +155,23 @@ LayoutErrors VLayoutGenerator::State() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> VLayoutGenerator::GetItems() const
+QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 {
     QList<QGraphicsItem *> list;
     for (int i=0; i < papers.count(); ++i)
     {
-        list.append(papers.at(i).GetItem());
+        list.append(papers.at(i).GetPaperItem());
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetails() const
+{
+    QList<QList<QGraphicsItem *> > list;
+    for (int i=0; i < papers.count(); ++i)
+    {
+        list.append(papers.at(i).GetDetails());
     }
     return list;
 }

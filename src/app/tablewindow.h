@@ -41,6 +41,7 @@ namespace Ui
 }
 
 class QGraphicsScene;
+class QGraphicsRectItem;
 
 /**
  * @brief TableWindow class layout window.
@@ -80,6 +81,7 @@ private:
     QList<QGraphicsItem *> papers;
     QList<QGraphicsItem *> shadows;
     QList<QGraphicsScene *> scenes;
+    QList<QList<QGraphicsItem *> > details;
 
     /** @brief fileName keep name of pattern file. */
     QString               fileName;
@@ -89,19 +91,20 @@ private:
 
     QGraphicsScene* tempScene;
 
-    void                  SvgFile(const QString &name)const;
-    void                  PngFile(const QString &name)const;
-    void                  PdfFile(const QString &name)const;
-    void                  EpsFile(const QString &name)const;
-    void                  PsFile(const QString &name)const;
+    void                  SvgFile(const QString &name, int i)const;
+    void                  PngFile(const QString &name, int i)const;
+    void                  PdfFile(const QString &name, int i)const;
+    void                  EpsFile(const QString &name, int i)const;
+    void                  PsFile(const QString &name, int i)const;
     void                  PdfToPs(const QStringList &params)const;
-    void                  ObjFile(const QString &name)const;
+    void                  ObjFile(const QString &name, int i)const;
 
     void ClearLayout();
     void CreateShadows();
     void CreateScenes();
     void PrepareSceneList();
     QIcon ScenePreview(int i) const;
+    QMap<QString, QString> InitFormates() const;
 };
 
 #endif // TABLEWINDOW_H

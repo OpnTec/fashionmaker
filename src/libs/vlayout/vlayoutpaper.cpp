@@ -270,16 +270,22 @@ void VLayoutPaper::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsItem *VLayoutPaper::GetItem() const
+QGraphicsRectItem *VLayoutPaper::GetPaperItem() const
 {
     QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(),
                                                             d->globalContour.GetHeight()));
     paper->setPen(QPen(Qt::black, 1));
     paper->setBrush(QBrush(Qt::white));
+    return paper;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<QGraphicsItem *> VLayoutPaper::GetDetails() const
+{
+    QList<QGraphicsItem *> list;
     for (int i=0; i < d->details.count(); ++i)
     {
-        QGraphicsItem *item = d->details.at(i).GetItem();
-        item->setParentItem(paper);
+        list.append(d->details.at(i).GetItem());
     }
-    return paper;
+    return list;
 }

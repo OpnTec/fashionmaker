@@ -34,6 +34,7 @@
 #include "../dialogs/app/dialoglayoutsettings.h"
 #include "../../libs/vlayout/vlayoutgenerator.h"
 #include "../dialogs/app/dialoglayoutprogress.h"
+#include "../dialogs/app/dialogsavelayout.h"
 
 #include <QtSvg>
 #include <QPrinter>
@@ -54,7 +55,8 @@
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::TableWindow),
     listDetails(QVector<VLayoutDetail>()), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
-    scenes(QList<QGraphicsScene *>()), fileName(QString()), description(QString()), tempScene(nullptr)
+    scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),fileName(QString()),
+    description(QString()), tempScene(nullptr)
 {
     ui->setupUi(this);
     tempScene = new QGraphicsScene(QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm)));
@@ -69,7 +71,7 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomIn);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomOut);
     connect(ui->actionStop, &QAction::triggered, this, &TableWindow::StopTable);
-    //connect(ui->actionSave, &QAction::triggered, this, &TableWindow::saveScene);
+    connect(ui->actionSave, &QAction::triggered, this, &TableWindow::saveScene);
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
 }
@@ -161,97 +163,68 @@ void TableWindow::StopTable()
  */
 void TableWindow::saveScene()
 {
-//    QMap<QString, QString> extByMessage;
-//    extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
-//    extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
-//    extByMessage[ tr("Images (*.png)") ] = ".png";
-//    extByMessage[ tr("Wavefront OBJ (*.obj)") ] = ".obj";
+    QMap<QString, QString> extByMessage = InitFormates();
+    DialogSaveLayout dialog(extByMessage, scenes.size(), this);
 
-//    QProcess proc;
-//    proc.start(PDFTOPS);
-//    if (proc.waitForFinished(15000))
-//    {
-//        extByMessage[ tr("PS files (*.ps)") ] = ".ps";
-//        extByMessage[ tr("EPS files (*.eps)") ] = ".eps";
-//    }
-//    else
-//    {
-//        qWarning()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
-//    }
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
 
-//    QString saveMessage;
-//    QMapIterator<QString, QString> i(extByMessage);
-//    while (i.hasNext())
-//    {
-//        i.next();
-//        saveMessage += i.key();
-//        if (i.hasNext())
-//        {
-//            saveMessage += ";;";
-//        }
-//    }
+    QString suf = dialog.Formate();
+    suf.replace(".", "");
 
-//    QString sf;
-//    // the save function
-//    QString dir = QDir::homePath()+"/"+fileName;
-//    QString name = QFileDialog::getSaveFileName(this, tr("Save layout"), dir, saveMessage, &sf);
+    QString path = dialog.Path();
+    QString mask = dialog.Mask();
 
-//    if (name.isEmpty())
-//    {
-//        return;
-//    }
-
-//    // what if the user did not specify a suffix...?
-//    QString suf = extByMessage.value(sf);
-//    suf.replace(".", "");
-//    QFileInfo f( name );
-//    if (f.suffix().isEmpty() || f.suffix() != suf)
-//    {
-//        name += extByMessage.value(sf);
-//    }
-
-//    QBrush *brush = new QBrush();
-//    brush->setColor( QColor( Qt::white ) );
-//    tableScene->setBackgroundBrush( *brush );
-//    tableScene->clearSelection(); // Selections would also render to the file, so need delete them
-//    shadowPaper->setVisible(false);
-//    paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
-//    QFileInfo fi( name );
-//    QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj";
-//    switch (suffix.indexOf(fi.suffix()))
-//    {
-//        case 0: //svg
-//            paper->setVisible(false);
-//            SvgFile(name);
-//            paper->setVisible(true);
-//            break;
-//        case 1: //png
-//            PngFile(name);
-//            break;
-//        case 2: //pdf
-//            PdfFile(name);
-//            break;
-//        case 3: //eps
-//            EpsFile(name);
-//            break;
-//        case 4: //ps
-//            PsFile(name);
-//            break;
-//        case 5: //obj
-//            paper->setVisible(false);
-//            ObjFile(name);
-//            paper->setVisible(true);
-//            break;
-//        default:
-//            qDebug() << "Can't recognize file suffix. File file "<<name<<Q_FUNC_INFO;
-//            break;
-//    }
-//    paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
-//    brush->setColor( QColor( Qt::gray ) );
-//    brush->setStyle( Qt::SolidPattern );
-//    tableScene->setBackgroundBrush( *brush );
-//    shadowPaper->setVisible(true);
-//    delete brush;
+    for (int i=0; i < scenes.size(); ++i)
+    {
+        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+        if (paper)
+        {
+            const QString name = path + "/" + mask+QString::number(i+1) + dialog.Formate();
+            QBrush *brush = new QBrush();
+            brush->setColor( QColor( Qt::white ) );
+            scenes[i]->setBackgroundBrush( *brush );
+            shadows[i]->setVisible(false);
+            paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+            QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj";
+            switch (suffix.indexOf(suf))
+            {
+                case 0: //svg
+                    paper->setVisible(false);
+                    SvgFile(name, i);
+                    paper->setVisible(true);
+                    break;
+                case 1: //png
+                    PngFile(name, i);
+                    break;
+                case 2: //pdf
+                    PdfFile(name, i);
+                    break;
+                case 3: //eps
+                    EpsFile(name, i);
+                    break;
+                case 4: //ps
+                    PsFile(name, i);
+                    break;
+                case 5: //obj
+                    paper->setVisible(false);
+                    ObjFile(name, i);
+                    paper->setVisible(true);
+                    break;
+                default:
+                    qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
+                    break;
+            }
+            paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+            brush->setColor( QColor( Qt::gray ) );
+            brush->setStyle( Qt::SolidPattern );
+            scenes[i]->setBackgroundBrush( *brush );
+            shadows[i]->setVisible(true);
+            delete brush;
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -303,10 +276,10 @@ void TableWindow::Layout()
     {
         case LayoutErrors::NoError:
             ClearLayout();
-            papers = lGenerator.GetItems();
+            papers = lGenerator.GetPapersItems();
+            details = lGenerator.GetAllDetails();
             CreateShadows();
             CreateScenes();
-            // Create previews
             PrepareSceneList();
             break;
         case LayoutErrors::ProcessStoped:
@@ -326,23 +299,28 @@ void TableWindow::Layout()
  * @brief SvgFile save layout to svg file.
  * @param name name layout file.
  */
-void TableWindow::SvgFile(const QString &name) const
+void TableWindow::SvgFile(const QString &name, int i) const
 {
-//    QSvgGenerator generator;
-//    generator.setFileName(name);
-//    generator.setSize(paper->rect().size().toSize());
-//    generator.setViewBox(paper->rect());
-//    generator.setTitle("Valentina pattern");
-//    generator.setDescription(description);
-//    generator.setResolution(static_cast<int>(qApp->PrintDPI));
-//    QPainter painter;
-//    painter.begin(&generator);
-//    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-//    painter.setRenderHint(QPainter::Antialiasing, true);
-//    painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine()), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-//    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-//    tableScene->render(&painter);
-//    painter.end();
+    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+    if (paper)
+    {
+        QSvgGenerator generator;
+        generator.setFileName(name);
+        generator.setSize(paper->rect().size().toSize());
+        generator.setViewBox(paper->rect());
+        generator.setTitle("Valentina. Pattern layout");
+        generator.setDescription(description);
+        generator.setResolution(static_cast<int>(qApp->PrintDPI));
+        QPainter painter;
+        painter.begin(&generator);
+        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine()), Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+        scenes.at(i)->render(&painter);
+        painter.end();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,21 +328,24 @@ void TableWindow::SvgFile(const QString &name) const
  * @brief PngFile save layout to png file.
  * @param name name layout file.
  */
-void TableWindow::PngFile(const QString &name) const
+void TableWindow::PngFile(const QString &name, int i) const
 {
-//    QRectF r = paper->rect();
-//    qreal x=0, y=0, w=0, h=0;
-//    r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
-//    // Create the image with the exact size of the shrunk scene
-//    QImage image(QSize(static_cast<qint32>(w), static_cast<qint32>(h)), QImage::Format_ARGB32);
-//    image.fill(Qt::transparent);                                              // Start all pixels transparent
-//    QPainter painter(&image);
-//    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-//    painter.setRenderHint(QPainter::Antialiasing, true);
-//    painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-//    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-//    tableScene->render(&painter);
-//    image.save(name);
+    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+    if (paper)
+    {
+        const QRectF r = paper->rect();
+        // Create the image with the exact size of the shrunk scene
+        QImage image(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_ARGB32);
+        image.fill(Qt::transparent);                                              // Start all pixels transparent
+        QPainter painter(&image);
+        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+        scenes.at(i)->render(&painter);
+        image.save(name);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,28 +353,32 @@ void TableWindow::PngFile(const QString &name) const
  * @brief PdfFile save layout to pdf file.
  * @param name name layout file.
  */
-void TableWindow::PdfFile(const QString &name) const
+void TableWindow::PdfFile(const QString &name, int i) const
 {
-//    QPrinter printer;
-//    printer.setOutputFormat(QPrinter::PdfFormat);
-//    printer.setOutputFileName(name);
-//    QRectF r = paper->rect();
-//    qreal x=0, y=0, w=0, h=0;
-//    r.getRect(&x, &y, &w, &h);// Re-shrink the scene to it's bounding contents
-//    printer.setResolution(static_cast<int>(qApp->PrintDPI));
-//    printer.setPaperSize ( QSizeF(qApp->fromPixel(w, Unit::Mm), qApp->fromPixel(h, Unit::Mm)), QPrinter::Millimeter );
-//    QPainter painter;
-//    if (painter.begin( &printer ) == false)
-//    { // failed to open file
-//        qCritical("Can't open printer %s", qPrintable(name));
-//        return;
-//    }
-//    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-//    painter.setRenderHint(QPainter::Antialiasing, true);
-//    painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-//    painter.setBrush ( QBrush ( Qt::NoBrush ) );
-//    tableScene->render(&painter);
-//    painter.end();
+    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+    if (paper)
+    {
+        QPrinter printer;
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(name);
+        const QRectF r = paper->rect();
+        printer.setResolution(static_cast<int>(qApp->PrintDPI));
+        printer.setPaperSize ( QSizeF(qApp->fromPixel(r.width(), Unit::Mm), qApp->fromPixel(r.height(), Unit::Mm)),
+                               QPrinter::Millimeter );
+        QPainter painter;
+        if (painter.begin( &printer ) == false)
+        { // failed to open file
+            qCritical("Can't open printer %s", qPrintable(name));
+            return;
+        }
+        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
+        painter.setBrush ( QBrush ( Qt::NoBrush ) );
+        scenes.at(i)->render(&painter);
+        painter.end();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -401,15 +386,15 @@ void TableWindow::PdfFile(const QString &name) const
  * @brief EpsFile save layout to eps file.
  * @param name name layout file.
  */
-void TableWindow::EpsFile(const QString &name) const
+void TableWindow::EpsFile(const QString &name, int i) const
 {
-//    QTemporaryFile tmp;
-//    if (tmp.open())
-//    {
-//        PdfFile(tmp.fileName());
-//        QStringList params = QStringList() << "-eps" << tmp.fileName() << name;
-//        PdfToPs(params);
-//    }
+    QTemporaryFile tmp;
+    if (tmp.open())
+    {
+        PdfFile(tmp.fileName(), i);
+        QStringList params = QStringList() << "-eps" << tmp.fileName() << name;
+        PdfToPs(params);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -417,15 +402,15 @@ void TableWindow::EpsFile(const QString &name) const
  * @brief PsFile save layout to ps file.
  * @param name name layout file.
  */
-void TableWindow::PsFile(const QString &name) const
+void TableWindow::PsFile(const QString &name, int i) const
 {
-//    QTemporaryFile tmp;
-//    if (tmp.open())
-//    {
-//        PdfFile(tmp.fileName());
-//        QStringList params = QStringList() << tmp.fileName() << name;
-//        PdfToPs(params);
-//    }
+    QTemporaryFile tmp;
+    if (tmp.open())
+    {
+        PdfFile(tmp.fileName(), i);
+        QStringList params = QStringList() << tmp.fileName() << name;
+        PdfToPs(params);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,36 +421,40 @@ void TableWindow::PsFile(const QString &name) const
  */
 void TableWindow::PdfToPs(const QStringList &params) const
 {
-//#ifndef QT_NO_CURSOR
-//    QApplication::setOverrideCursor(Qt::WaitCursor);
-//#endif
-//    QProcess proc;
-//    proc.start(PDFTOPS, params);
-//    proc.waitForFinished(15000);
-//#ifndef QT_NO_CURSOR
-//    QApplication::restoreOverrideCursor();
-//#endif
+#ifndef QT_NO_CURSOR
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
+    QProcess proc;
+    proc.start(PDFTOPS, params);
+    proc.waitForFinished(15000);
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
 
-//    QFile f(params.last());
-//    if (f.exists() == false)
-//    {
-//        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(params.last()).arg(proc.errorString());
-//        QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
-//        msgBox.exec();
-//    }
+    QFile f(params.last());
+    if (f.exists() == false)
+    {
+        QString msg = QString(tr("Creating file '%1' failed! %2")).arg(params.last()).arg(proc.errorString());
+        QMessageBox msgBox(QMessageBox::Critical, tr("Critical error!"), msg, QMessageBox::Ok | QMessageBox::Default);
+        msgBox.exec();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TableWindow::ObjFile(const QString &name) const
+void TableWindow::ObjFile(const QString &name, int i) const
 {
-//    VObjPaintDevice generator;
-//    generator.setFileName(name);
-//    generator.setSize(paper->rect().size().toSize());
-//    generator.setResolution(static_cast<int>(qApp->PrintDPI));
-//    QPainter painter;
-//    painter.begin(&generator);
-//    tableScene->render(&painter);
-//    painter.end();
+    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+    if (paper)
+    {
+        VObjPaintDevice generator;
+        generator.setFileName(name);
+        generator.setSize(paper->rect().size().toSize());
+        generator.setResolution(static_cast<int>(qApp->PrintDPI));
+        QPainter painter;
+        painter.begin(&generator);
+        scenes.at(i)->render(&painter);
+        painter.end();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -512,6 +501,13 @@ void TableWindow::CreateScenes()
         scene->setBackgroundBrush(brush);
         scene->addItem(shadows.at(i));
         scene->addItem(papers.at(i));
+
+        QList<QGraphicsItem *> paperDetails = details.at(i);
+        for (int i=0; i < paperDetails.size(); ++i)
+        {
+            scene->addItem(paperDetails.at(i));
+        }
+
         scenes.append(scene);
     }
 }
@@ -558,4 +554,27 @@ QIcon TableWindow::ScenePreview(int i) const
         image.fill(Qt::white);
     }
     return QIcon(QBitmap::fromImage(image));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> TableWindow::InitFormates() const
+{
+    QMap<QString, QString> extByMessage;
+    extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
+    extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
+    extByMessage[ tr("Images (*.png)") ] = ".png";
+    extByMessage[ tr("Wavefront OBJ (*.obj)") ] = ".obj";
+
+    QProcess proc;
+    proc.start(PDFTOPS);
+    if (proc.waitForFinished(15000))
+    {
+        extByMessage[ tr("PS files (*.ps)") ] = ".ps";
+        extByMessage[ tr("EPS files (*.eps)") ] = ".eps";
+    }
+    else
+    {
+        qWarning()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
+    }
+    return extByMessage;
 }

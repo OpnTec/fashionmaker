@@ -36,6 +36,7 @@ class VLayoutPaperData;
 class VLayoutDetail;
 class QGraphicsItem;
 class VBestSquare;
+class QGraphicsRectItem;
 
 class VLayoutPaper
 {
@@ -68,7 +69,8 @@ public:
 
     bool ArrangeDetail(const VLayoutDetail &detail, bool &stop);
     int  Count() const;
-    QGraphicsItem *GetItem() const;
+    QGraphicsRectItem *GetPaperItem() const;
+    QList<QGraphicsItem *> GetDetails() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;
