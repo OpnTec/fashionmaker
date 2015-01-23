@@ -292,7 +292,7 @@ void DialogLayoutSettings::InitLayoutUnits()
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
     }
 
-    ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(1, Unit::Mm, oldLayoutUnit));
+    ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(2.5, Unit::Mm, oldLayoutUnit));
     ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(50, Unit::Mm, oldLayoutUnit));
 }
 
