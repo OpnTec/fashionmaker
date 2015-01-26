@@ -229,7 +229,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool to make point from x &amp; y of two other points.</string>
+           <string>'Point from X and Y of two other points.</string>
           </property>
           <property name="text">
            <string notr="true">...</string>

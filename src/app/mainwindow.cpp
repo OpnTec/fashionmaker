@@ -658,7 +658,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 {
     SetToolButtonWithApply<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
                                                       ":/cursor/pointofintersect_cursor.png",
-                                                      tr("Select point vertically"),
+                                                      tr("Select point for X value (vertical)"),
                                                       &MainWindow::ClosedDialogWithApply<VToolPointOfIntersection>,
                                                       &MainWindow::ApplyDialog<VToolPointOfIntersection>);
 }

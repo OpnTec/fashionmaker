@@ -100,7 +100,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
             switch (number)
             {
                 case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point horizontally")))
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
                     {
                         number++;
                         line->VisualMode(id);
