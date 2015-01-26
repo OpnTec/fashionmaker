@@ -942,7 +942,6 @@ void MainWindow::ToolBarDraws()
     ui->actionHistory->setEnabled(false);
     connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
 
-    ui->toolBarDraws->addAction(ui->actionLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
     ui->actionLayout->setEnabled(false);
 }
