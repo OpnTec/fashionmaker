@@ -65,6 +65,9 @@ public:
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
 
+    QString GetPathLayout() const;
+    void SetPathLayout(const QString &value);
+
     QString GetUser() const;
     void SetUser(const QString &value);
 
@@ -128,6 +131,7 @@ private:
 
     static const QString SettingPathsIndividualMeasurements;
     static const QString SettingPathsPattern;
+    static const QString SettingPathsLayout;
 
     static const QString SettingPatternUser;
     static const QString SettingPatternGraphicalOutput;

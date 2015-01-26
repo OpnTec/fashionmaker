@@ -64,6 +64,7 @@ void PathPage::Apply()
 {
     qApp->getSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
     qApp->getSettings()->SetPathPattern(pathTable->item(1, 1)->text());
+    qApp->getSettings()->SetPathLayout(pathTable->item(2, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,10 +126,11 @@ QGroupBox *PathPage::PathGroup()
     return pathGroup;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void PathPage::InitTable()
 {
     pathTable = new QTableWidget();
-    pathTable->setRowCount(2);
+    pathTable->setRowCount(3);
     pathTable->setColumnCount(2);
     pathTable->verticalHeader()->setVisible(false);
     pathTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -144,6 +146,9 @@ void PathPage::InitTable()
 
     pathTable->setItem(1, 0, new QTableWidgetItem(tr("Patterns")));
     pathTable->setItem(1, 1, new QTableWidgetItem(qApp->getSettings()->GetPathPattern()));
+
+    pathTable->setItem(2, 0, new QTableWidgetItem(tr("Layout")));
+    pathTable->setItem(2, 1, new QTableWidgetItem(qApp->getSettings()->GetPathLayout()));
 
     pathTable->verticalHeader()->setDefaultSectionSize(20);
     pathTable->resizeColumnsToContents();

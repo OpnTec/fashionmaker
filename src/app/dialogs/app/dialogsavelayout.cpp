@@ -29,6 +29,8 @@
 #include "dialogsavelayout.h"
 #include "ui_dialogsavelayout.h"
 #include "../options.h"
+#include "../../core/vapplication.h"
+#include "../../core/vsettings.h"
 
 #include <QDir>
 #include <QFileDialog>
@@ -48,6 +50,8 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     QRegExpValidator *validator = new QRegExpValidator(QRegExp("^[\\w\\-. ]+$"), this);
     ui->lineEditFileName->setValidator(validator);
     ui->lineEditFileName->setText(fileName);
+
+    ui->lineEditPath->setText(qApp->getSettings()->GetPathLayout());
 
     QMap<QString, QString>::const_iterator i = formates.constBegin();
     while (i != formates.constEnd())

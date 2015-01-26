@@ -30,6 +30,7 @@
 #include "ui_tablewindow.h"
 #include "widgets/vtablegraphicsview.h"
 #include "core/vapplication.h"
+#include "core/vsettings.h"
 #include "../../libs/vobj/vobjpaintdevice.h"
 #include "../dialogs/app/dialoglayoutsettings.h"
 #include "../../libs/vlayout/vlayoutgenerator.h"
@@ -174,8 +175,9 @@ void TableWindow::SaveLayout()
     QString suf = dialog.Formate();
     suf.replace(".", "");
 
-    QString path = dialog.Path();
-    QString mask = dialog.FileName();
+    const QString path = dialog.Path();
+    qApp->getSettings()->SetPathLayout(path);
+    const QString mask = dialog.FileName();
 
     for (int i=0; i < scenes.size(); ++i)
     {

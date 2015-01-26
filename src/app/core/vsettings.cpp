@@ -42,6 +42,7 @@ const QString VSettings::SettingConfigurationLabelLanguage    = QStringLiteral("
 
 const QString VSettings::SettingPathsIndividualMeasurements   = QStringLiteral("paths/individual_measurements");
 const QString VSettings::SettingPathsPattern                  = QStringLiteral("paths/pattern");
+const QString VSettings::SettingPathsLayout                   = QStringLiteral("paths/layout");
 
 const QString VSettings::SettingPatternUser                   = QStringLiteral("pattern/user");
 const QString VSettings::SettingPatternGraphicalOutput        = QStringLiteral("pattern/graphicalOutput");
@@ -183,6 +184,18 @@ QString VSettings::GetPathPattern() const
 void VSettings::SetPathPattern(const QString &value)
 {
     setValue(SettingPathsPattern, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetPathLayout() const
+{
+    return value(SettingPathsLayout, QDir::homePath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetPathLayout(const QString &value)
+{
+    setValue(SettingPathsLayout, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
