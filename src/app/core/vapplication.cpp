@@ -340,6 +340,43 @@ double VApplication::fromPixel(double pix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VApplication::TryLock(QLockFile *lock)
+{
+    if (lock == nullptr)
+    {
+        return false;
+    }
+
+    if (lock->tryLock())
+    {
+        return true;
+    }
+    else
+    {
+        if (lock->error() == QLockFile::LockFailedError)
+        {
+            // This happens if a stale lock file exists and another process uses that PID.
+            // Try removing the stale file, which will fail if a real process is holding a
+            // file-level lock. A false error is more problematic than not locking properly
+            // on corner-case systems.
+            if (lock->removeStaleLockFile() == false || lock->tryLock() == false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::pathToTables() const
 {
     if (_patternType == MeasurementsType::Individual)
@@ -461,7 +498,7 @@ void VApplication::BeginLogging()
         qInstallMessageHandler(noisyFailureMsgHandler);
         logLock = new QLockFile(LogPath()+".lock");
         logLock->setStaleLockTime(0);
-        if (logLock->tryLock())
+        if (TryLock(logLock))
         {
             qCDebug(vApp) << "Log file"<<LogPath()<<"was locked.";
         }
@@ -495,7 +532,7 @@ void VApplication::ClearOldLogs() const
         {
             QFileInfo info(allFiles.at(i));
             QLockFile *lock = new QLockFile(info.absoluteFilePath() + ".lock");
-            if (lock->tryLock())
+            if (TryLock(lock))
             {
                 qCDebug(vApp) << "Locked file"<<info.absoluteFilePath();
                 QFile oldLog(allFiles.at(i));
@@ -2118,7 +2155,7 @@ void VApplication::GatherLogs() const
                 }
                 QLockFile *logLock = new QLockFile(info.absoluteFilePath()+".lock");
                 logLock->setStaleLockTime(0);
-                if (logLock->tryLock())
+                if (TryLock(logLock))
                 {
                     *out <<"--------------------------" << endl;
                     QFile logFile(info.absoluteFilePath());

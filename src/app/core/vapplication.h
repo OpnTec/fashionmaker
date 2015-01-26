@@ -70,6 +70,8 @@ public:
     double             fromPixel(double pix, const Unit &unit) const;
     double             fromPixel(double pix) const;
 
+    static bool        TryLock(QLockFile *lock);
+
     static const qreal PrintDPI;
     QString            translationsPath() const;
     QString            pathToTables() const;

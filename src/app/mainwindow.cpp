@@ -2365,7 +2365,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     qCDebug(vMainWindow)<<"Loking file";
     lock = new QLockFile(fileName+".lock");
     lock->setStaleLockTime(0);
-    if (lock->tryLock())
+    if (VApplication::TryLock(lock))
     {
         qCDebug(vMainWindow) << "Pattern file"<<fileName<<"was locked.";
     }
@@ -2477,7 +2477,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
             // Seeking file that realy need reopen
             QLockFile *lock = new QLockFile(files.at(i)+".lock");
             lock->setStaleLockTime(0);
-            if (lock->tryLock())
+            if (VApplication::TryLock(lock))
             {
                 restoreFiles.append(files.at(i));
             }
