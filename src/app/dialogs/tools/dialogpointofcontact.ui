@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point of contact</string>
+   <string>Point from intersection of line and arc</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
