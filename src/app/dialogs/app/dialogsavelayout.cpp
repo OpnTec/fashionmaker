@@ -35,7 +35,7 @@
 #include <QMessageBox>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int count, const QString &mask,
+DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int count, const QString &fileName,
                                    QWidget *parent)
     :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count)
 {
@@ -46,8 +46,8 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     bOk->setEnabled(false);
 
     QRegExpValidator *validator = new QRegExpValidator(QRegExp("^[\\w\\-. ]+$"), this);
-    ui->lineEditMask->setValidator(validator);
-    ui->lineEditMask->setText(mask);
+    ui->lineEditFileName->setValidator(validator);
+    ui->lineEditFileName->setText(fileName);
 
     QMap<QString, QString>::const_iterator i = formates.constBegin();
     while (i != formates.constEnd())
@@ -57,7 +57,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     }
 
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
-    connect(ui->lineEditMask, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
+    connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogSaveLayout::ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, &DialogSaveLayout::Browse);
@@ -79,9 +79,9 @@ QString DialogSaveLayout::Path() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::Mask() const
+QString DialogSaveLayout::FileName() const
 {
-    return ui->lineEditMask->text();
+    return ui->lineEditFileName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+"/"+Mask()+QString::number(i+1)+Formate();
+        const QString name = Path()+"/"+FileName()+QString::number(i+1)+Formate();
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
@@ -117,7 +117,7 @@ void DialogSaveLayout::Save()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::ShowExample()
 {
-    ui->labelExample->setText(tr("Example:") + Mask() + "1" + Formate());
+    ui->labelExample->setText(tr("Example:") + FileName() + "1" + Formate());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

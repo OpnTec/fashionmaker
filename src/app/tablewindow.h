@@ -58,7 +58,7 @@ public slots:
                                       const QString &description);
     void                  Layout();
     void                  StopTable();
-    void                  saveScene();
+    void                  SaveLayout();
     void                  ShowPaper(int index);
 
 signals:

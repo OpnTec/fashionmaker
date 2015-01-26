@@ -71,7 +71,7 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomIn);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VTableGraphicsView::ZoomOut);
     connect(ui->actionStop, &QAction::triggered, this, &TableWindow::StopTable);
-    connect(ui->actionSave, &QAction::triggered, this, &TableWindow::saveScene);
+    connect(ui->actionSave, &QAction::triggered, this, &TableWindow::SaveLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
 }
@@ -161,7 +161,7 @@ void TableWindow::StopTable()
 /**
  * @brief saveScene save created layout.
  */
-void TableWindow::saveScene()
+void TableWindow::SaveLayout()
 {
     QMap<QString, QString> extByMessage = InitFormates();
     DialogSaveLayout dialog(extByMessage, scenes.size(), fileName, this);
@@ -175,7 +175,7 @@ void TableWindow::saveScene()
     suf.replace(".", "");
 
     QString path = dialog.Path();
-    QString mask = dialog.Mask();
+    QString mask = dialog.FileName();
 
     for (int i=0; i < scenes.size(); ++i)
     {
