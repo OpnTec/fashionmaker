@@ -1468,7 +1468,6 @@ void MainWindow::Clear()
     qCDebug(vMainWindow)<<"Unlocked pattern file.";
 
     ui->actionDetails->setChecked(false);
-    ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
     ui->actionDraw->setEnabled(false);
     qCDebug(vMainWindow)<<"Returned to Draw mode.";
@@ -1678,11 +1677,20 @@ void MainWindow::SetEnabledGUI(bool enabled)
         ui->actionHistory->setEnabled(enabled);
         ui->actionNewDraw->setEnabled(enabled);
         ui->actionDraw->setEnabled(enabled);
-        ui->actionDetails->setEnabled(enabled);
         ui->actionTable->setEnabled(enabled);
-        ui->actionLayout->setEnabled(enabled);
         ui->actionZoomFitBest->setEnabled(enabled);
         ui->actionZoomOriginal->setEnabled(enabled);
+
+        if (enabled)
+        {
+            Layout();
+        }
+        else
+        {
+            ui->actionDetails->setEnabled(enabled);
+            ui->actionLayout->setEnabled(enabled);
+        }
+
         guiEnabled = enabled;
 
         sceneDraw->SetDisable(!enabled);
@@ -1708,10 +1716,12 @@ void MainWindow::Layout()
     const QHash<quint32, VDetail> *details = pattern->DataDetails();
     if (details->size() > 0)
     {
+        ui->actionDetails->setEnabled(true);
         ui->actionLayout->setEnabled(true);
     }
     else
     {
+        ui->actionDetails->setEnabled(false);
         ui->actionLayout->setEnabled(false);
     }
 }
@@ -1826,12 +1836,12 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     ui->actionSaveAs->setEnabled(enable);
     ui->actionDraw->setEnabled(enable);
-    ui->actionDetails->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
     if (enable == true && curFile.isEmpty() == false)
     {
         ui->actionSave->setEnabled(enable);
     }
+    Layout();
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
     ui->actionPattern_properties->setEnabled(enable);
