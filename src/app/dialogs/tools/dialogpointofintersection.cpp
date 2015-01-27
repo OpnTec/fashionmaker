@@ -62,6 +62,7 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
             this, &DialogPointOfIntersection::PointNameChanged);
 
     line = new VisToolPointOfIntersection(data);
+    line->VisualMode(NULL_ID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,7 +104,8 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
                     if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
                     {
                         number++;
-                        line->VisualMode(id);
+                        line->setPoint1Id(id);
+                        line->RefreshGeometry();
                     }
                     break;
                 case 1:
@@ -173,7 +175,6 @@ void DialogPointOfIntersection::ShowVisualization()
     {
         VMainGraphicsScene *scene = qApp->getCurrentScene();
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
-        scene->addItem(line);
         line->RefreshGeometry();
     }
 }
