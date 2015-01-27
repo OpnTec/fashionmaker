@@ -125,7 +125,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool triangle.</string>
+           <string>Triangle tool.</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
