@@ -129,7 +129,7 @@ void VToolDetail::setDialog()
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
     SCASSERT(dialogTool != nullptr);
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    dialogTool->setDetails(detail);
+    dialogTool->setDetail(detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     SCASSERT(dialog != nullptr);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    VDetail detail = dialogTool->getDetails();
+    VDetail detail = dialogTool->getDetail();
     VDetail det;
     qApp->getUndoStack()->beginMacro("add detail");
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -260,7 +260,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         SCASSERT(dialog != nullptr);
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
         SCASSERT(dialogTool != nullptr);
-        VDetail newDet = dialogTool->getDetails();
+        VDetail newDet = dialogTool->getDetail();
         VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());

@@ -42,8 +42,8 @@ class DialogDetail : public DialogTool
 public:
     DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
 
-    VDetail          getDetails() const;
-    void             setDetails(const VDetail &value);
+    VDetail          getDetail() const;
+    void             setDetail(const VDetail &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     void             BiasXChanged(qreal d);
@@ -64,8 +64,8 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogDetail ui;
 
-    /** @brief details detail */
-    VDetail          details;
+    /** @brief detail detail */
+    VDetail          detail;
 
     /** @brief supplement keep option supplement of seams */
     bool             supplement;
@@ -75,6 +75,9 @@ private:
 
     void             NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                              qreal mx = 0, qreal my = 0, bool reverse = false);
+    VDetail          CreateDetail() const;
+    void             ValidObjects(bool value);
+    void             EnableObjectGUI(bool value);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,9 +85,9 @@ private:
  * @brief getDetails return detail
  * @return detail
  */
-inline VDetail DialogDetail::getDetails() const
+inline VDetail DialogDetail::getDetail() const
 {
-    return details;
+    return detail;
 }
 
 #endif // DIALOGDETAIL_H

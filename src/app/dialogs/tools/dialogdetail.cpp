@@ -44,7 +44,7 @@
  * @param parent parent widget
  */
 DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(), details(VDetail()), supplement(true), closed(true)
+    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
@@ -110,7 +110,22 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
                 qDebug()<<tr("Got wrong scene object. Ignore.");
                 break;
         }
-        ui.toolButtonDelete->setEnabled(true);
+
+        if (ui.listWidget->count() > 0)
+        {
+            EnableObjectGUI(true);
+        }
+
+        if (CreateDetail().ContourPoints(data).size() < 3)
+        {
+            ValidObjects(false);
+        }
+        else
+        {
+            ValidObjects(true);
+
+        }
+
         this->show();
     }
 }
@@ -118,16 +133,8 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDetail::SaveData()
 {
-    details.Clear();
-    for (qint32 i = 0; i < ui.listWidget->count(); ++i)
-    {
-        QListWidgetItem *item = ui.listWidget->item(i);
-        details.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
-    }
-    details.setWidth(ui.doubleSpinBoxSeams->value());
-    details.setName(ui.lineEditNameDetail->text());
-    details.setSeamAllowance(supplement);
-    details.setClosed(closed);
+    detail.Clear();
+    detail = CreateDetail();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -203,25 +210,61 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VDetail DialogDetail::CreateDetail() const
+{
+    VDetail detail;
+    for (qint32 i = 0; i < ui.listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui.listWidget->item(i);
+        detail.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
+    }
+    detail.setWidth(ui.doubleSpinBoxSeams->value());
+    detail.setName(ui.lineEditNameDetail->text());
+    detail.setSeamAllowance(supplement);
+    detail.setClosed(closed);
+    return detail;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ValidObjects(bool value)
+{
+    flagError = value;
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::EnableObjectGUI(bool value)
+{
+    ui.toolButtonDelete->setEnabled(value);
+    ui.doubleSpinBoxBiasX->setEnabled(value);
+    ui.doubleSpinBoxBiasY->setEnabled(value);
+
+    if (value == false)
+    {
+        ui.checkBoxReverse->setEnabled(value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDetails set detail
  * @param value detail
  */
-void DialogDetail::setDetails(const VDetail &value)
+void DialogDetail::setDetail(const VDetail &value)
 {
-    details = value;
+    detail = value;
     ui.listWidget->clear();
-    for (int i = 0; i < details.CountNode(); ++i)
+    for (int i = 0; i < detail.CountNode(); ++i)
     {
-        NewItem(details.at(i).getId(), details.at(i).getTypeTool(), details.at(i).getTypeNode(), details.at(i).getMx(),
-                details.at(i).getMy(), details.at(i).getReverse());
+        NewItem(detail.at(i).getId(), detail.at(i).getTypeTool(), detail.at(i).getTypeNode(), detail.at(i).getMx(),
+                detail.at(i).getMy(), detail.at(i).getReverse());
     }
-    ui.lineEditNameDetail->setText(details.getName());
-    ui.checkBoxSeams->setChecked(details.getSeamAllowance());
-    ui.checkBoxClosed->setChecked(details.getClosed());
-    ClickedClosed(details.getClosed());
-    ClickedSeams(details.getSeamAllowance());
-    ui.doubleSpinBoxSeams->setValue(details.getWidth());
+    ui.lineEditNameDetail->setText(detail.getName());
+    ui.checkBoxSeams->setChecked(detail.getSeamAllowance());
+    ui.checkBoxClosed->setChecked(detail.getClosed());
+    ClickedClosed(detail.getClosed());
+    ClickedSeams(detail.getSeamAllowance());
+    ui.doubleSpinBoxSeams->setValue(detail.getWidth());
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
@@ -297,7 +340,7 @@ void DialogDetail::ClickedReverse(bool checked)
  */
 void DialogDetail::ObjectChanged(int row)
 {
-    if (ui.listWidget->count() == 0)
+    if (ui.listWidget->count() == 0 || row == -1)
     {
         return;
     }
@@ -323,8 +366,16 @@ void DialogDetail::ObjectChanged(int row)
  */
 void DialogDetail::DeleteItem()
 {
-    qint32 row = ui.listWidget->currentRow();
-    delete ui.listWidget->item( row );
+    if (ui.listWidget->count() == 1)
+    {
+        EnableObjectGUI(false);
+    }
+
+    delete ui.listWidget->item( ui.listWidget->currentRow() );
+    if (CreateDetail().ContourPoints(data).size() < 3 )
+    {
+        ValidObjects(false);
+    }
 }
 
 
