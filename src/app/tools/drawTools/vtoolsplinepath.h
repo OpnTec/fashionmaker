@@ -80,7 +80,7 @@ protected:
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     void          RefreshGeometry();
-    void          AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);
+    static void   AddPathPoint(VPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
     void          RefreshSplinePath(VSplinePath &splPath);
 };

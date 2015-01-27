@@ -251,20 +251,18 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
  */
 void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path)
 {
-    SCASSERT(doc != nullptr)
-    QDomNodeList nodeList = node.childNodes();
-    qint32 num = nodeList.size();
-    for (qint32 i = 0; i < num; ++i)
+    SCASSERT(doc != nullptr);
+    QDomElement element = node.toElement();
+    if (element.isElement() == false)
     {
-        QDomElement domElement = nodeList.at(i).toElement();
-        if (domElement.isNull() == false)
-        {
-            VSplinePoint p = path.at(i);
-            doc->SetAttribute(domElement, AttrPSpline, p.P().id());
-            doc->SetAttribute(domElement, AttrKAsm1, p.KAsm1());
-            doc->SetAttribute(domElement, AttrKAsm2, p.KAsm2());
-            doc->SetAttribute(domElement, AttrAngle, p.Angle2());
-        }
+        qDebug()<<"Couldn't convert parent to element.";
+        return;
+    }
+
+    doc->removeAllChilds(element);
+    for (qint32 i = 0; i < path.CountPoint(); ++i)
+    {
+        AddPathPoint(doc, element, path.at(i));
     }
 }
 
@@ -352,8 +350,9 @@ void VToolSplinePath::RefreshDataInFile()
  * @param domElement dom element.
  * @param splPoint spline path point.
  */
-void VToolSplinePath::AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint)
+void VToolSplinePath::AddPathPoint(VPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint)
 {
+    SCASSERT(doc != nullptr);
     QDomElement pathPoint = doc->createElement(AttrPathPoint);
 
     doc->SetAttribute(pathPoint, AttrPSpline, splPoint.P().id());
@@ -406,7 +405,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->RemoveAllChild(tag);
     for (qint32 i = 0; i < splPath->CountPoint(); ++i)
     {
-        AddPathPoint(tag, splPath->at(i));
+        AddPathPoint(doc, tag, splPath->at(i));
     }
 }
 

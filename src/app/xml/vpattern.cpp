@@ -301,6 +301,21 @@ bool VPattern::ChangeNamePP(const QString& oldName, const QString &newName)
 void VPattern::Parse(const Document &parse)
 {
     qCDebug(vXML)<<"Parsing pattern.";
+    switch (parse)
+    {
+        case Document::FullParse:
+            qCDebug(vXML)<<"Full parse.";
+            break;
+        case Document::LiteParse:
+            qCDebug(vXML)<<"Lite parse.";
+            break;
+        case Document::LitePPParse:
+            qCDebug(vXML)<<"Lite pattern piece parse.";
+            break;
+        default:
+            break;
+    }
+
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
@@ -317,6 +332,7 @@ void VPattern::Parse(const Document &parse)
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagDraw
+                        qCDebug(vXML)<<"Tag draw.";
                         if (parse == Document::FullParse)
                         {
                             if (nameActivPP.isEmpty())
@@ -336,22 +352,29 @@ void VPattern::Parse(const Document &parse)
                         ParseDrawElement(domElement, parse);
                         break;
                     case 1: // TagIncrements
+                        qCDebug(vXML)<<"Tag increments.";
                         ParseIncrementsElement(domElement);
                         break;
                     case 2: // TagAuthor
+                        qCDebug(vXML)<<"Tag author.";
                         break;
                     case 3: // TagDescription
+                        qCDebug(vXML)<<"Tag description.";
                         break;
                     case 4: // TagNotes
+                        qCDebug(vXML)<<"Tag notes.";
                         break;
                     case 5: // TagMeasurements
+                        qCDebug(vXML)<<"Tag measurements.";
                         break;
                     case 6: // TagVersion
+                        qCDebug(vXML)<<"Tag version.";
                         break;
                     case 7: // TagGradation
+                        qCDebug(vXML)<<"Tag gradation.";
                         break;
                     default:
-                        qDebug()<<"Wrong tag name"<<domElement.tagName()<<Q_FUNC_INFO;
+                        qCDebug(vXML)<<"Wrong tag name"<<domElement.tagName();
                         break;
                 }
             }
@@ -883,17 +906,20 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
                 switch (tags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagCalculation
+                        qCDebug(vXML)<<"Tag calculation.";
                         data->ClearCalculationGObjects();
                         ParseDrawMode(domElement, parse, Draw::Calculation);
                         break;
                     case 1: // TagModeling
+                        qCDebug(vXML)<<"Tag modeling.";
                         ParseDrawMode(domElement, parse, Draw::Modeling);
                         break;
                     case 2: // TagDetails
+                        qCDebug(vXML)<<"Tag details.";
                         ParseDetails(domElement, parse);
                         break;
                     default:
-                        qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
+                        qCDebug(vXML)<<"Wrong tag name";
                         break;
                 }
             }
@@ -933,22 +959,27 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
             switch (tags.indexOf(domElement.tagName()))
             {
                 case 0: // TagPoint
+                    qCDebug(vXML)<<"Tag point.";
                     ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 case 1: // TagLine
+                    qCDebug(vXML)<<"Tag line.";
                     ParseLineElement(scene, domElement, parse);
                     break;
                 case 2: // TagSpline
+                    qCDebug(vXML)<<"Tag spline.";
                     ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 case 3: // TagArc
+                    qCDebug(vXML)<<"Tag arc.";
                     ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 case 4: // TagTools
+                    qCDebug(vXML)<<"Tag tools.";
                     ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 default:
-                    qDebug()<<"Wrong tag name"<<Q_FUNC_INFO;
+                    qCDebug(vXML)<<"Wrong tag name";
                     break;
             }
         }
@@ -1813,6 +1844,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::ToolType
+            qCDebug(vXML)<<"VToolSpline.";
             try
             {
                 ToolsCommonAttributes(domElement, id);
@@ -1835,6 +1867,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             }
             break;
         case 1: //VToolSplinePath::ToolType
+            qCDebug(vXML)<<"VToolSplinePath.";
             try
             {
                 ToolsCommonAttributes(domElement, id);
@@ -1879,6 +1912,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             }
             break;
         case 2: //VNodeSpline::ToolType
+            qCDebug(vXML)<<"VNodeSpline.";
             try
             {
                 SplinesCommonAttributes(domElement, id, idObject, idTool);
@@ -1896,6 +1930,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             }
             break;
         case 3: //VNodeSplinePath::ToolType
+            qCDebug(vXML)<<"VNodeSplinePath.";
             try
             {
                 SplinesCommonAttributes(domElement, id, idObject, idTool);
@@ -1913,7 +1948,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             }
             break;
         default:
-            qDebug() << "Illegal spline type in VDomDocument::ParseSplineElement().";
+            qCDebug(vXML) << "Illegal spline type in VDomDocument::ParseSplineElement().";
             break;
     }
 }

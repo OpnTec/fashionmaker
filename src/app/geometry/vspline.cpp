@@ -294,6 +294,17 @@ void VSpline::PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2,
                               qreal x3, qreal y3, qreal x4, qreal y4,
                               qint16 level, QVector<qreal> &px, QVector<qreal> &py)
 {
+    if (px.size() >= 2)
+    {
+        for (int i=1; i < px.size(); ++i)
+        {
+            if (QPointF(px.at(i-1), py.at(i-1)) == QPointF(px.at(i), py.at(i)))
+            {
+                qCritical("All neighbors points in path must be unique.");
+            }
+        }
+    }
+
     const double curve_collinearity_epsilon                 = 1e-30;
     const double curve_angle_tolerance_epsilon              = 0.01;
     const double m_angle_tolerance = 0.0;

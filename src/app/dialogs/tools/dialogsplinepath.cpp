@@ -103,6 +103,11 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {
+        if (path.CountPoint() >= 2 && path.at(path.CountPoint()-1).P().id() == id)
+        {
+            return;
+        }
+
         NewItem(id, 1, 0, 1, 180);
         emit ToolTip(tr("Select point of curve path"));
 
