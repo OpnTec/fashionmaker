@@ -306,11 +306,11 @@ unix{
             QMAKE_BUNDLE_DATA += TRANSLATION_id_ID
         }
 
-    qmuparser.path = $$FRAMEWORKS_DIR
-    qmuparser.files = $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/
-    qmuparser.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
-    vpropertyexplorer.path = $$FRAMEWORKS_DIR
-    vpropertyexplorer.files = $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/
+    # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
+    # For bundle this names more then enough. We don't need care much about libraries versions.
+    libraries.path = $$FRAMEWORKS_DIR
+    libraries.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
+    libraries.files = $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
 
     # logo on macx.
@@ -322,9 +322,7 @@ unix{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        qmuparser \
-        vpropertyexplorer
-
+        libraries
     }
 }
 
