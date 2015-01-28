@@ -38,6 +38,8 @@ public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
+    static QString StandardTablesPath();
+
     bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
 
@@ -61,6 +63,9 @@ public:
 
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
+
+    QString GetPathStandardMeasurements() const;
+    void SetPathStandardMeasurements(const QString &value);
 
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
@@ -130,6 +135,7 @@ private:
     static const QString SettingConfigurationLabelLanguage;
 
     static const QString SettingPathsIndividualMeasurements;
+    static const QString SettingPathsStandardMeasurements;
     static const QString SettingPathsPattern;
     static const QString SettingPathsLayout;
 

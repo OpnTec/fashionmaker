@@ -31,6 +31,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QLocale>
+#include <QApplication>
 
 const QString VSettings::SettingConfigurationOsSeparator      = QStringLiteral("configuration/osSeparator");
 const QString VSettings::SettingConfigurationAutosaveState    = QStringLiteral("configuration/autosave/state");
@@ -41,6 +42,7 @@ const QString VSettings::SettingConfigurationUnit             = QStringLiteral("
 const QString VSettings::SettingConfigurationLabelLanguage    = QStringLiteral("configuration/label_language");
 
 const QString VSettings::SettingPathsIndividualMeasurements   = QStringLiteral("paths/individual_measurements");
+const QString VSettings::SettingPathsStandardMeasurements     = QStringLiteral("paths/standard_measurements");
 const QString VSettings::SettingPathsPattern                  = QStringLiteral("paths/pattern");
 const QString VSettings::SettingPathsLayout                   = QStringLiteral("paths/layout");
 
@@ -172,6 +174,18 @@ QString VSettings::GetPathIndividualMeasurements() const
 void VSettings::SetPathIndividualMeasurements(const QString &value)
 {
     setValue(SettingPathsIndividualMeasurements, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetPathStandardMeasurements() const
+{
+    return value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetPathStandardMeasurements(const QString &value)
+{
+    setValue(SettingPathsStandardMeasurements, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -414,4 +428,45 @@ QString VSettings::GetUserPassword() const
 void VSettings::SetUserPassword(const QString &value)
 {
     setValue(SettingCommunityUserPassword, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::StandardTablesPath()
+{
+    const QString stPath = QStringLiteral("/tables/standard");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + stPath;
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    }
+#else // Unix
+    #ifdef QT_DEBUG
+        return QApplication::applicationDirPath() + stPath;
+    #else
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    #endif
+#endif
 }

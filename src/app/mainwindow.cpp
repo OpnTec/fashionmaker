@@ -2574,15 +2574,21 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
         else
         {
             QString filter;
+            QString mPath;
             if (patternType == MeasurementsType::Standard)
             {
                 filter = tr("Standard measurements (*.vst)");
+                //Use standard path to standard measurements
+                const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
             else
             {
                 filter = tr("Individual measurements (*.vit)");
+                //Use standard path to individual measurements
+                const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
+                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
-            QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), qApp->pathToTables(), filter);
 
             if (mPath.isEmpty())
             {

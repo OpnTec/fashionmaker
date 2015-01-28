@@ -506,7 +506,7 @@ void DialogIncrements::SaveBirthDate(const QDate & date)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::OpenTable()
 {
-    QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
+    const QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
             .arg(doc->UnitsToStr(qApp->patternUnit()));
     if (qApp->patternType() == MeasurementsType::Individual)
     {
@@ -555,7 +555,9 @@ void DialogIncrements::OpenTable()
     else
     {
         const QString filter(tr("Standard measurements (*.vst)"));
-        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), qApp->pathToTables(), filter);
+        //Use standard path to standard measurements
+        const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
         {
             return;

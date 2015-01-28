@@ -33,6 +33,7 @@
 #include <QDesktopWidget>
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
+#include "../../core/vsettings.h"
 #include "../../container/vcontainer.h"
 #include <QLoggingCategory>
 
@@ -149,14 +150,16 @@ void DialogStandardMeasurements::LoadStandardTables()
 {
     qCDebug(vStMeasur)<<"Loading standard table.";
     QStringList filters{"*.vst"};
-    QDir tablesDir(qApp->pathToTables());
+    //Use standard path to standard measurements
+    const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+    QDir tablesDir(path);
     tablesDir.setNameFilters(filters);
-    tablesDir.setCurrent(qApp->pathToTables());
+    tablesDir.setCurrent(path);
 
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
     {
-        qCDebug(vStMeasur)<<"Can't find standard measurements in path"<<qApp->pathToTables();
+        qCDebug(vStMeasur)<<"Can't find standard measurements in path"<<path;
         ui->comboBoxTables->clear();
         CheckState();
         return;

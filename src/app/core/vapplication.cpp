@@ -377,36 +377,6 @@ bool VApplication::TryLock(QLockFile *lock)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::pathToTables() const
-{
-    if (_patternType == MeasurementsType::Individual)
-    {
-        return QStringLiteral("://tables/individual/individual.vit");
-    }
-    else
-    {
-        const QString stPath = QStringLiteral("/tables/standard");
-        #ifdef Q_OS_WIN
-            return QApplication::applicationDirPath() + stPath;
-        #else
-            #ifdef QT_DEBUG
-                return QApplication::applicationDirPath() + stPath;
-            #else
-                QDir dir(QApplication::applicationDirPath() + stPath);
-                if (dir.exists())
-                {
-                    return dir.absolutePath();
-                }
-                else
-                {
-                    return QStringLiteral("/usr/share/valentina/tables/standard");
-                }
-            #endif
-        #endif
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::translationsPath() const
 {
     const QString trPath = QStringLiteral("/translations");

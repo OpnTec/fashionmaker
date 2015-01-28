@@ -74,7 +74,6 @@ public:
 
     static const qreal PrintDPI;
     QString            translationsPath() const;
-    QString            pathToTables() const;
     qreal              widthMainLine() const;
     qreal              widthHairLine() const;
     QString            VarToUser(const QString &var) const;
