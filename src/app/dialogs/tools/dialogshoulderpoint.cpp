@@ -58,7 +58,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
     flagFormula = false;
     CheckState();
 
-    FillComboBoxTypeLine(ui->comboBoxLineType);
+    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
     FillComboBoxPoints(ui->comboBoxP3);
@@ -212,7 +212,7 @@ void DialogShoulderPoint::SaveData()
     line->setLineP1Id(p1Line);
     line->setLineP2Id(p2Line);
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
 
@@ -283,7 +283,7 @@ void DialogShoulderPoint::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

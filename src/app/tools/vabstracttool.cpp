@@ -161,9 +161,9 @@ void VAbstractTool::DeleteTool(bool ask)
  * @brief LineStyle return pen style for current line style.
  * @return pen style.
  */
-Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
+Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
 {
-    QStringList styles = Styles();
+    const QStringList styles = StylesList();
     switch (styles.indexOf(typeLine))
     {
         case 0: // TypeLineNone
@@ -188,6 +188,30 @@ Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
             return Qt::SolidLine;
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QIcon> VAbstractTool::LineStylesPics()
+{
+    QMap<QString, QIcon> map;
+    const QStringList styles = StylesList();
+
+    for (int i=0; i < styles.size(); ++i)
+    {
+        const Qt::PenStyle style = LineStyleToPenStyle(styles.at(i));
+        QPixmap pix(80, 14);
+        pix.fill(Qt::white);
+
+        QBrush brush(Qt::black);
+        QPen pen(brush, 2.5, style);
+
+        QPainter painter(&pix);
+        painter.setPen(pen);
+        painter.drawLine(2, 7, 78, 7);
+
+        map.insert(styles.at(i), QIcon(pix));
+    }
+    return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -264,7 +288,7 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
  * @brief Styles return list of all line styles.
  * @return list of all line styles.
  */
-const QStringList VAbstractTool::Styles()
+const QStringList VAbstractTool::StylesList()
 {
     QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine <<
                                           TypeLineDashDotLine << TypeLineDashDotDotLine;

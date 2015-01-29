@@ -1,42 +1,52 @@
 /************************************************************************
  **
- **  @file   venumproperty.h
- **  @author hedgeware <internal(at)hedgeware.net>
- **  @date
+ **  @file   vlinetypeproperty.h
+ **  @author Roman Telezhynskyi <dismine(at)gmail.com>
+ **  @date   29 1, 2015
  **
  **  @brief
  **  @copyright
- **  All rights reserved. This program and the accompanying materials
- **  are made available under the terms of the GNU Lesser General Public License
- **  (LGPL) version 2.1 which accompanies this distribution, and is available at
- **  http://www.gnu.org/licenses/lgpl-2.1.html
+ **  This source code is part of the Valentine project, a pattern making
+ **  program, whose allow create and modeling patterns of clothing.
+ **  Copyright (C) 2015 Valentina project
+ **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
- **  This library is distributed in the hope that it will be useful,
+ **  Valentina is free software: you can redistribute it and/or modify
+ **  it under the terms of the GNU General Public License as published by
+ **  the Free Software Foundation, either version 3 of the License, or
+ **  (at your option) any later version.
+ **
+ **  Valentina is distributed in the hope that it will be useful,
  **  but WITHOUT ANY WARRANTY; without even the implied warranty of
- **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- **  Lesser General Public License for more details.
+ **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ **  GNU General Public License for more details.
+ **
+ **  You should have received a copy of the GNU General Public License
+ **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
 
-#ifndef VENUMPROPERTY_H
-#define VENUMPROPERTY_H
+#ifndef VLINETYPEPROPERTY_H
+#define VLINETYPEPROPERTY_H
 
 #include "../vproperty.h"
 
-#include <QStringList>
+#include <QMap>
+#include <QString>
+#include <QIcon>
 
 namespace VPE
 {
 
-class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
+class VPROPERTYEXPLORERSHARED_EXPORT VLineTypeProperty : public VProperty
 {
     Q_OBJECT
 public:
     //! Constructor
-    VEnumProperty(const QString& name);
+    VLineTypeProperty(const QString& name);
 
     //! Destructor
-    ~VEnumProperty() {}
+    ~VLineTypeProperty() {}
 
     //! Get the data how it should be displayed
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const;
@@ -52,11 +62,11 @@ public:
     //! Gets the data from the widget
     virtual QVariant getEditorData(const QWidget* editor) const;
 
-    //! Sets the enumeration literals
-    virtual void setLiterals(const QStringList &literals);
+    //! Sets the line styles
+    virtual void setStyles(const QMap<QString, QIcon> &styles);
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QStringList getLiterals() const;
+    virtual QMap<QString, QIcon> getStyles() const;
 
     //! Sets the value of the property
     virtual void setValue(const QVariant& value);
@@ -71,29 +81,21 @@ public:
     //! \return Returns the newly created property (or container, if it was not NULL)
     virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
-    //! Sets the settings. Available settings:
-    //!
-    //! key: "literals" - value: "item1;;item2;;item3"
-    virtual void setSetting(const QString& key, const QVariant& value);
-
-    //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const;
-
-    //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const;
+    static int IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style);
 
 public slots:
     void currentIndexChanged(int index);
 
 protected:
     //! The list of possible options to choose from
-    QStringList EnumerationLiterals;
+    QMap<QString, QIcon> styles;
+    QVector<QString> indexList;
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
     //members by reimplementing the VPropertyPrivate class without touching this header file.
 private:
-    Q_DISABLE_COPY(VEnumProperty)
+    Q_DISABLE_COPY(VLineTypeProperty)
 };
 
 }
 
-#endif // VENUMPROPERTY_H
+#endif // VLINETYPEPROPERTY_H

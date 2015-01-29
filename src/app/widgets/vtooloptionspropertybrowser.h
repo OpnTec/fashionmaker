@@ -71,7 +71,7 @@ private:
     void AddPropertyPointName(Tool *i, const QString &propertyName);
 
     template<class Tool>
-    void AddPropertyLineType(Tool *i, const QString &propertyName);
+    void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
 

@@ -66,7 +66,7 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), checkBoxHideEmpty(nullptr),
-      lineStyles(VAbstractTool::Styles()), okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
+      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
       toolId(toolId), prepare(false), pointName(QString())
 {
     SCASSERT(data != nullptr);
@@ -288,10 +288,16 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
  * @brief FillComboBoxTypeLine fill comboBox list of type lines
  * @param box comboBox
  */
-void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
+void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const
 {
     SCASSERT(box != nullptr);
-    box->addItems(lineStyles);
+    QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
+    while (i != stylesPics.constEnd())
+    {
+        box->addItem(i.value(), "", QVariant(i.key()));
+        ++i;
+    }
+
     box->setCurrentIndex(1);
 }
 
@@ -303,30 +309,13 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
  */
 QString DialogTool::GetTypeLine(const QComboBox *box) const
 {
-    switch (lineStyles.indexOf(box->currentText()))
+    SCASSERT(box != nullptr)
+    QString value = box->currentData().toString();
+    if (value.isEmpty())
     {
-        case 0: //No line
-            return VAbstractTool::TypeLineNone;
-            break;
-        case 1: //Line
-            return VAbstractTool::TypeLineLine;
-            break;
-        case 2: //Dash Line
-            return VAbstractTool::TypeLineDashLine;
-            break;
-        case 3: //Dot Line
-            return VAbstractTool::TypeLineDotLine;
-            break;
-        case 4: //Dash Dot Line
-            return VAbstractTool::TypeLineDashDotLine;
-            break;
-        case 5: //Dash Dot Dot Line
-            return VAbstractTool::TypeLineDashDotDotLine;
-            break;
-        default:
-            return VAbstractTool::TypeLineLine;
-            break;
+        value = VAbstractTool::TypeLineLine;
     }
+    return value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,8 +326,8 @@ QString DialogTool::GetTypeLine(const QComboBox *box) const
  */
 void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
 {
-    QStringList styles = VAbstractTool::Styles();
-    qint32 index = box->findText(lineStyles.at(styles.indexOf(value)));
+    SCASSERT(box != nullptr)
+    const qint32 index = box->findData(value);
     if (index != -1)
     {
         box->setCurrentIndex(index);
@@ -353,7 +342,8 @@ void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
  */
 void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
 {
-    qint32 index = box->findData(value);
+    SCASSERT(box != nullptr)
+    const qint32 index = box->findData(value);
     if (index != -1)
     {
         box->setCurrentIndex(index);

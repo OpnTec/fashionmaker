@@ -87,7 +87,7 @@ void VToolAlongLine::FullUpdateFromFile()
         visual->setPoint1Id(basePointId);
         visual->setPoint2Id(secondPointId);
         visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -201,7 +201,7 @@ void VToolAlongLine::ShowVisualization(bool show)
             visual->setPoint1Id(basePointId);
             visual->setPoint2Id(secondPointId);
             visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }

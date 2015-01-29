@@ -27,7 +27,8 @@ SOURCES += \
     $$PWD/plugins/vstringproperty.cpp \
     $$PWD/plugins/vpointfproperty.cpp \
     $$PWD/plugins/vobjectproperty.cpp \
-    $$PWD/stable.cpp
+    $$PWD/stable.cpp \
+    $$PWD/plugins/vlinetypeproperty.cpp
 
 HEADERS +=\
     $$PWD/vpropertyexplorer_global.h \
@@ -67,4 +68,5 @@ HEADERS +=\
     $$PWD/plugins/vpointfproperty.h \
     $$PWD/plugins/vobjectproperty.h \
     $$PWD/vproperties.h \
-    $$PWD/stable.h
+    $$PWD/stable.h \
+    $$PWD/plugins/vlinetypeproperty.h

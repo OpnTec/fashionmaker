@@ -61,7 +61,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 
     if (typeCreation == Source::FromGui)
     {
@@ -196,7 +196,7 @@ void VToolLine::FullUpdateFromFile()
         VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
         visual->setPoint1Id(firstPoint);
         visual->setPoint2Id(secondPoint);
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -239,7 +239,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
     this->setEnabled(nameActivDraw == newName);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ void VToolLine::RefreshDataInFile()
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyle(typeLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,7 +301,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -414,7 +414,7 @@ void VToolLine::ShowVisualization(bool show)
 
             visual->setPoint1Id(firstPoint);
             visual->setPoint2Id(secondPoint);
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -477,5 +477,5 @@ void VToolLine::RefreshGeometry()
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyle(typeLine)));
+    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 }

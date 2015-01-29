@@ -51,7 +51,10 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType);
+
+    QMap<QString, QIcon> stylesPics = VAbstractTool::LineStylesPics();
+    stylesPics.remove(VAbstractTool::TypeLineNone);// Prevent hiding line
+    FillComboBoxTypeLine(ui->comboBoxLineType, stylesPics);
 
     number = 0;
 
@@ -93,7 +96,7 @@ void DialogLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,7 +161,7 @@ void DialogLine::SaveData()
 
     line->setPoint1Id(firstPoint);
     line->setPoint2Id(secondPoint);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
 

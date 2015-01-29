@@ -193,8 +193,6 @@ protected:
 
     QCheckBox        *checkBoxHideEmpty;
 
-    /** @brief lineStyles list supported line styles. */
-    QStringList      lineStyles;
     const QColor     okColor;
     const QColor     errorColor;
     /**
@@ -217,7 +215,7 @@ protected:
     void             FillComboBoxSplinesPath(QComboBox *box,
                                              ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxCurves(QComboBox *box)const;
-    void             FillComboBoxTypeLine(QComboBox *box) const;
+    void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
     template <class key, class val>

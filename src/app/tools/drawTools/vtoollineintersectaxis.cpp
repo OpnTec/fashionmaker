@@ -243,7 +243,7 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
             visual->setPoint2Id(secondPointId);
             visual->setAxisPointId(basePointId);
             visual->setAngle(qApp->FormulaToUser(formulaAngle));
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -284,7 +284,7 @@ void VToolLineIntersectAxis::FullUpdateFromFile()
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
         visual->setAngle(qApp->FormulaToUser(formulaAngle));
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }

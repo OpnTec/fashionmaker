@@ -26,6 +26,7 @@
 #include "plugins/vcolorproperty.h"
 #include "plugins/Vector3d/vvector3dproperty.h"
 #include "plugins/vemptyproperty.h"
+#include "plugins/vlinetypeproperty.h"
 #include "plugins/venumproperty.h"
 #include "plugins/vfileproperty.h"
 #include "plugins/vnumberproperty.h"

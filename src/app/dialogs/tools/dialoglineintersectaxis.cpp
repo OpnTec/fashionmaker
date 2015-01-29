@@ -57,7 +57,7 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType);
+    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
 
     connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogLineIntersectAxis::PutAngle);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogLineIntersectAxis::PutVal);
@@ -112,7 +112,7 @@ void DialogLineIntersectAxis::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ void DialogLineIntersectAxis::SaveData()
     line->setPoint2Id(secondPointId);
     line->setAxisPointId(basePointId);
     line->setAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
 

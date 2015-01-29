@@ -60,7 +60,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType);
+    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     ui->comboBoxLineType->setCurrentIndex(0);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
@@ -189,7 +189,7 @@ void DialogAlongLine::SaveData()
     line->setPoint1Id(firstPointId);
     line->setPoint2Id(secondPointId);
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
 
@@ -249,7 +249,7 @@ void DialogAlongLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -218,7 +218,7 @@ void VToolNormal::FullUpdateFromFile()
         visual->setPoint2Id(secondPointId);
         visual->setLength(qApp->FormulaToUser(formulaLength));
         visual->setAngle(angle);
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -334,7 +334,7 @@ void VToolNormal::ShowVisualization(bool show)
             visual->setPoint2Id(secondPointId);
             visual->setLength(qApp->FormulaToUser(formulaLength));
             visual->setAngle(angle);
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }

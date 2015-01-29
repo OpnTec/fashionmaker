@@ -209,7 +209,7 @@ void VToolHeight::FullUpdateFromFile()
         visual->setPoint1Id(basePointId);
         visual->setLineP1Id(p1LineId);
         visual->setLineP2Id(p2LineId);
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -301,7 +301,7 @@ void VToolHeight::ShowVisualization(bool show)
             visual->setPoint1Id(basePointId);
             visual->setLineP1Id(p1LineId);
             visual->setLineP2Id(p2LineId);
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }

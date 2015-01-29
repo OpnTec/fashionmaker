@@ -92,9 +92,13 @@ public:
     static const QString    TypeLineDotLine;
     static const QString    TypeLineDashDotLine;
     static const QString    TypeLineDashDotDotLine;
-    static const QStringList Styles();
+
+    static const QStringList    StylesList();
+    static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
+    static QMap<QString, QIcon> LineStylesPics();
+
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
-    static Qt::PenStyle     LineStyle(const QString &typeLine);
+
     const VContainer        *getData() const;
 
     QString                 getLineType() const;

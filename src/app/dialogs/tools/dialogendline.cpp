@@ -63,7 +63,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType);
+    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
 
     connect(ui->toolButtonPutHereLength, &QPushButton::clicked, this, &DialogEndLine::PutHere);
     connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogEndLine::PutAngle);
@@ -173,7 +173,7 @@ void DialogEndLine::setTypeLine(const QString &value)
 {
     typeLine = value;
     SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -287,7 +287,7 @@ void DialogEndLine::SaveData()
     line->setPoint1Id(basePointId);
     line->setLength(formulaLength);
     line->setAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
 

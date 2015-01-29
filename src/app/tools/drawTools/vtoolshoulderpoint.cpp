@@ -243,7 +243,7 @@ void VToolShoulderPoint::FullUpdateFromFile()
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
         visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -360,7 +360,7 @@ void VToolShoulderPoint::ShowVisualization(bool show)
             visual->setLineP1Id(basePointId);
             visual->setLineP2Id(p2Line);
             visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }
