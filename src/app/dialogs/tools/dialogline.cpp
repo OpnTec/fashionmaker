@@ -51,6 +51,7 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     QMap<QString, QIcon> stylesPics = VAbstractTool::LineStylesPics();
     stylesPics.remove(VAbstractTool::TypeLineNone);// Prevent hiding line

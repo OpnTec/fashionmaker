@@ -57,6 +57,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     InitArrow(ui);
 

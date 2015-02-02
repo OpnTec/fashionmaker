@@ -49,6 +49,8 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
 
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);
+    FillComboBoxLineColors(ui->comboBoxColor);
+
     connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogSpline::PointNameChanged);
     connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),

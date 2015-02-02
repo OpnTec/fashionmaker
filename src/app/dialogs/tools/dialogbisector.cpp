@@ -62,6 +62,7 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     FillComboBoxPoints(ui->comboBoxThirdPoint);
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);

@@ -46,6 +46,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
     bOk->setEnabled(false);
 
     FillComboBoxPoints(ui->comboBoxPoint);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),

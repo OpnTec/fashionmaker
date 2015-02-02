@@ -74,6 +74,7 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     CheckState();
 
