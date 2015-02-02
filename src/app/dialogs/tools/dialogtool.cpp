@@ -298,7 +298,7 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
         ++i;
     }
 
-    box->setCurrentIndex(1);
+    box->setCurrentIndex(4);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
