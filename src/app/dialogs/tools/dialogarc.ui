@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>423</width>
-    <height>544</height>
+    <width>425</width>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -584,31 +584,41 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Center point</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBoxBasePoint">
-           <property name="toolTip">
-            <string>Select point of center of arc</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Center point</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBoxBasePoint">
+             <property name="toolTip">
+              <string>Select point of center of arc</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="comboBoxColor"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Color</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
          <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
@@ -782,7 +792,6 @@
   <tabstop>pushButtonGrowLengthF1</tabstop>
   <tabstop>toolButtonPutHereF2</tabstop>
   <tabstop>toolButtonEqualF2</tabstop>
-  <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>

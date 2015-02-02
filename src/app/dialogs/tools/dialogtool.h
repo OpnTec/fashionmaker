@@ -209,6 +209,7 @@ protected:
 
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
+
     void             FillComboBoxPoints(QComboBox *box)const;
     void             FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc)const;
     void             FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
@@ -217,8 +218,10 @@ protected:
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
+
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
+    QString          GetLineColor(const QComboBox *box)const;
     template <class key, class val>
     void             ShowVariable(const QMap<key, val> var);
     void             SetupTypeLine(QComboBox *box, const QString &value);
