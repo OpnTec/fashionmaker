@@ -204,3 +204,33 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPoint return id first point
+ * @return id
+ */
+quint32 DialogLine::getFirstPoint() const
+{
+    return firstPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPoint return id second point
+ * @return id
+ */
+quint32 DialogLine::getSecondPoint() const
+{
+    return secondPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogLine::getTypeLine() const
+{
+    return typeLine;
+}

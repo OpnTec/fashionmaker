@@ -107,3 +107,23 @@ DialogSinglePoint::~DialogSinglePoint()
 {
     delete ui;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getName return name
+ * @return name
+ */
+QString DialogSinglePoint::getName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPoint return point
+ * @return point
+ */
+QPointF DialogSinglePoint::getPoint() const
+{
+    return point;
+}

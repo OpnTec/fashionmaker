@@ -263,3 +263,53 @@ void DialogHeight::ShowVisualization()
         line->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogHeight::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogHeight::getTypeLine() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getBasePointId return id base point of height
+ * @return id
+ */
+quint32 DialogHeight::getBasePointId() const
+{
+    return basePointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP1LineId return id first point of line
+ * @return id id
+ */
+quint32 DialogHeight::getP1LineId() const
+{
+    return p1LineId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP2LineId return id second point of line
+ * @return id
+ */
+quint32 DialogHeight::getP2LineId() const
+{
+    return p2LineId;
+}

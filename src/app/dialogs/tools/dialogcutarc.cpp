@@ -196,3 +196,23 @@ QString DialogCutArc::getFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name point on arc
+ * @return name
+ */
+QString DialogCutArc::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getArcId return id of arc
+ * @return id
+ */
+quint32 DialogCutArc::getArcId() const
+{
+    return arcId;
+}

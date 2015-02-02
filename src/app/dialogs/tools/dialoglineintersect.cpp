@@ -390,3 +390,53 @@ void DialogLineIntersect::setPointName(const QString &value)
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP1Line1 return id first point of first line
+ * @return id
+ */
+quint32 DialogLineIntersect::getP1Line1() const
+{
+    return p1Line1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP2Line1 return id second point of first line
+ * @return id
+ */
+quint32 DialogLineIntersect::getP2Line1() const
+{
+    return p2Line1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP1Line2 return id first point of second line
+ * @return id
+ */
+quint32 DialogLineIntersect::getP1Line2() const
+{
+    return p1Line2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP2Line2 return id second point of second line
+ * @return id
+ */
+quint32 DialogLineIntersect::getP2Line2() const
+{
+    return p2Line2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name of point
+ */
+QString DialogLineIntersect::getPointName() const
+{
+    return pointName;
+}

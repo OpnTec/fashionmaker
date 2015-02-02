@@ -179,3 +179,33 @@ void DialogCutSpline::ShowVisualization()
         path->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogCutSpline::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
+QString DialogCutSpline::getFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSplineId return id base point of line
+ * @return id
+ */
+quint32 DialogCutSpline::getSplineId() const
+{
+    return splineId;
+}

@@ -298,3 +298,63 @@ void DialogBisector::closeEvent(QCloseEvent *event)
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogBisector::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogBisector::getTypeLine() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
+QString DialogBisector::getFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id of first point
+ * @return id
+ */
+quint32 DialogBisector::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id of second point
+ * @return id
+ */
+quint32 DialogBisector::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getThirdPointId return id of third point
+ * @return id
+ */
+quint32 DialogBisector::getThirdPointId() const
+{
+    return thirdPointId;
+}

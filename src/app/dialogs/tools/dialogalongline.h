@@ -47,6 +47,7 @@ class DialogAlongLine : public DialogTool
 public:
     DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogAlongLine();
+
     QString             getPointName() const;
     void                setPointName(const QString &value);
 
@@ -109,55 +110,5 @@ private:
 
     QString             lineColor;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogAlongLine::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogAlongLine::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogAlongLine::getFormula() const
-{
-    return qApp->FormulaFromUser(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPointId return id first point of line
- * @return id
- */
-inline quint32 DialogAlongLine::getFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPointId return id second point of line
- * @return id
- */
-inline quint32 DialogAlongLine::getSecondPointId() const
-{
-    return secondPointId;
-}
 
 #endif // DIALOGALONGLINE_H

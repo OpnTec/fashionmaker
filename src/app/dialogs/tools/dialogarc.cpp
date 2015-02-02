@@ -437,3 +437,43 @@ void DialogArc::CheckAngles()
 
     DialogArc::CheckState();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetCenter return id of center point
+ * @return id id
+ */
+quint32 DialogArc::GetCenter() const
+{
+    return center;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetRadius return formula of radius
+ * @return formula
+ */
+QString DialogArc::GetRadius() const
+{
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF1 return formula first angle of arc
+ * @return formula
+ */
+QString DialogArc::GetF1() const
+{
+    return f1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF2 return formula second angle of arc
+ * @return formula
+ */
+QString DialogArc::GetF2() const
+{
+    return f2;
+}

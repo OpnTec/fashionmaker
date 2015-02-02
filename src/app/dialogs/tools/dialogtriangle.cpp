@@ -275,3 +275,53 @@ void DialogTriangle::setAxisP1Id(const quint32 &value)
     setPointId(ui->comboBoxAxisP1, axisP1Id, value);
     line->setPoint1Id(axisP1Id);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAxisP1Id return id first point of axis
+ * @return id
+ */
+quint32 DialogTriangle::getAxisP1Id() const
+{
+    return axisP1Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAxisP2Id return id second point of axis
+ * @return id
+ */
+quint32 DialogTriangle::getAxisP2Id() const
+{
+    return axisP2Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id of first point
+ * @return id
+ */
+quint32 DialogTriangle::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id of second point
+ * @return id
+ */
+quint32 DialogTriangle::getSecondPointId() const
+{
+    return secondPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogTriangle::getPointName() const
+{
+    return pointName;
+}

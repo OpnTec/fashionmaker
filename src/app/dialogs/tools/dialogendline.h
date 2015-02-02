@@ -107,58 +107,6 @@ private:
     int               formulaBaseHeightAngle;
 
     VisToolEndLine    *line;
-
-
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogEndLine::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogEndLine::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogEndLine::getFormula() const
-{
-    return qApp->FormulaFromUser(formulaLength);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getAngle return formula angle of line
- * @return angle formula
- */
-inline QString DialogEndLine::getAngle() const
-{
-    return qApp->FormulaFromUser(formulaAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getBasePointId return id base point of line
- * @return id
- */
-inline quint32 DialogEndLine::getBasePointId() const
-{
-    return basePointId;
-}
 
 #endif // DIALOGENDLINE_H

@@ -309,3 +309,53 @@ DialogEndLine::~DialogEndLine()
     }
     delete ui;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogEndLine::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogEndLine::getTypeLine() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
+QString DialogEndLine::getFormula() const
+{
+    return qApp->FormulaFromUser(formulaLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAngle return formula angle of line
+ * @return angle formula
+ */
+QString DialogEndLine::getAngle() const
+{
+    return qApp->FormulaFromUser(formulaAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getBasePointId return id base point of line
+ * @return id
+ */
+quint32 DialogEndLine::getBasePointId() const
+{
+    return basePointId;
+}

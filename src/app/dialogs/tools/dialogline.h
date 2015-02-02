@@ -87,34 +87,4 @@ private:
 
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPoint return id first point
- * @return id
- */
-inline quint32 DialogLine::getFirstPoint() const
-{
-    return firstPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPoint return id second point
- * @return id
- */
-inline quint32 DialogLine::getSecondPoint() const
-{
-    return secondPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogLine::getTypeLine() const
-{
-    return typeLine;
-}
-
 #endif // DIALOGLINE_H

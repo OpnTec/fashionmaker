@@ -276,3 +276,53 @@ void DialogAlongLine::setPointName(const QString &value)
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogAlongLine::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogAlongLine::getTypeLine() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
+QString DialogAlongLine::getFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id first point of line
+ * @return id
+ */
+quint32 DialogAlongLine::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id second point of line
+ * @return id
+ */
+quint32 DialogAlongLine::getSecondPointId() const
+{
+    return secondPointId;
+}

@@ -83,34 +83,4 @@ private:
     VisToolPointOfIntersection *line;
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogPointOfIntersection::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPointId return id of first point
- * @return id
- */
-inline quint32 DialogPointOfIntersection::getFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPointId return id of second point
- * @return id
- */
-inline quint32 DialogPointOfIntersection::getSecondPointId() const
-{
-    return secondPointId;
-}
-
 #endif // DIALOGPOINTOFINTERSECTION_H

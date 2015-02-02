@@ -66,24 +66,4 @@ private:
     QPointF        point;
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getName return name
- * @return name
- */
-inline QString DialogSinglePoint::getName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPoint return point
- * @return point
- */
-inline QPointF DialogSinglePoint::getPoint() const
-{
-    return point;
-}
-
 #endif // DIALOGSINGLEPOINT_H

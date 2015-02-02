@@ -91,24 +91,4 @@ private:
     VisToolCutArc     *path;
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name point on arc
- * @return name
- */
-inline QString DialogCutArc::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getArcId return id of arc
- * @return id
- */
-inline quint32 DialogCutArc::getArcId() const
-{
-    return arcId;
-}
-
 #endif // DIALOGCUTARC_H

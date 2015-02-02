@@ -294,3 +294,53 @@ quint32 DialogSpline::getP4() const
 {
     return p4;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAngle1 return first angle of spline
+ * @return angle in degree
+ */
+qreal DialogSpline::getAngle1() const
+{
+    return angle1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAngle2 return second angle of spline
+ * @return angle in degree
+ */
+qreal DialogSpline::getAngle2() const
+{
+    return angle2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getKAsm1 return first coefficient asymmetry
+ * @return value. Can be >= 0.
+ */
+qreal DialogSpline::getKAsm1() const
+{
+    return kAsm1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getKAsm2 return second coefficient asymmetry
+ * @return value. Can be >= 0.
+ */
+qreal DialogSpline::getKAsm2() const
+{
+    return kAsm2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getKCurve return coefficient curve
+ * @return value. Can be >= 0.
+ */
+qreal DialogSpline::getKCurve() const
+{
+    return kCurve;
+}

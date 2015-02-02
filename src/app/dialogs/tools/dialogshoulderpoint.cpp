@@ -297,3 +297,63 @@ void DialogShoulderPoint::setPointName(const QString &value)
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogShoulderPoint::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogShoulderPoint::getTypeLine() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
+QString DialogShoulderPoint::getFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP1Line return id first point of line
+ * @return id
+ */
+quint32 DialogShoulderPoint::getP1Line() const
+{
+    return p1Line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getP2Line return id second point of line
+ * @return id
+ */
+quint32 DialogShoulderPoint::getP2Line() const
+{
+    return p2Line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPShoulder return id shoulder point
+ * @return id
+ */
+quint32 DialogShoulderPoint::getP3() const
+{
+    return pShoulder;
+}

@@ -296,3 +296,53 @@ void DialogPointOfContact::setPointName(const QString &value)
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogPointOfContact::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getRadius return formula radius of arc
+ * @return formula
+ */
+QString DialogPointOfContact::getRadius() const
+{
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetCenter return id of center point
+ * @return id
+ */
+quint32 DialogPointOfContact::getCenter() const
+{
+    return center;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPoint return id first point
+ * @return id
+ */
+quint32 DialogPointOfContact::getFirstPoint() const
+{
+    return firstPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPoint return id second point
+ * @return id
+ */
+quint32 DialogPointOfContact::getSecondPoint() const
+{
+    return secondPoint;
+}

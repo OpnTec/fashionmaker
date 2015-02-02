@@ -87,34 +87,4 @@ private:
     VisToolCutSpline     *path;
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogCutSpline::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogCutSpline::getFormula() const
-{
-    return qApp->FormulaFromUser(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSplineId return id base point of line
- * @return id
- */
-inline quint32 DialogCutSpline::getSplineId() const
-{
-    return splineId;
-}
-
 #endif // DIALOGCUTSPLINE_H

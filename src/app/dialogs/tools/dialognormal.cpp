@@ -269,3 +269,63 @@ void DialogNormal::setPointName(const QString &value)
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPointName return name of point
+ * @return name
+ */
+QString DialogNormal::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getTypeLine return type of line
+ * @return type
+ */
+QString DialogNormal::getTypeLine() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFormula return string of formula
+ * @return formula
+ */
+QString DialogNormal::getFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getAngle return aditional angle of normal
+ * @return angle in degree
+ */
+qreal DialogNormal::getAngle() const
+{
+    return angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getFirstPointId return id of first point
+ * @return id
+ */
+quint32 DialogNormal::getFirstPointId() const
+{
+    return firstPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSecondPointId return id of second point
+ * @return id
+ */
+quint32 DialogNormal::getSecondPointId() const
+{
+    return secondPointId;
+}
