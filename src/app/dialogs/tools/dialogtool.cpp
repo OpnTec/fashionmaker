@@ -376,27 +376,11 @@ QString DialogTool::GetLineColor(const QComboBox *box) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SetupTypeLine setupe type of line
- * @param box combobox
- * @param value string from pattern file
- */
-void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
-{
-    SCASSERT(box != nullptr)
-    const qint32 index = box->findData(value);
-    if (index != -1)
-    {
-        box->setCurrentIndex(index);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief ChangeCurrentData select item in combobox by id
  * @param box combobox
  * @param value id of item
  */
-void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
+void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
 {
     SCASSERT(box != nullptr)
     const qint32 index = box->findData(value);

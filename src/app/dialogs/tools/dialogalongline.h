@@ -53,6 +53,9 @@ public:
     QString             getTypeLine() const;
     void                setTypeLine(const QString &value);
 
+    QString             getLineColor() const;
+    void                setLineColor(const QString &value);
+
     QString             getFormula() const;
     void                setFormula(const QString &value);
 
@@ -103,6 +106,8 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
     VisToolAlongLine    *line;
+
+    QString             lineColor;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

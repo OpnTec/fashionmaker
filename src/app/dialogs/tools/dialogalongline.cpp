@@ -43,7 +43,7 @@
 DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine), number(0),
       typeLine(QString()), formula(QString()), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0),
-      line(nullptr)
+      line(nullptr), lineColor(VAbstractTool::ColorBlack)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -249,8 +249,21 @@ void DialogAlongLine::setFormula(const QString &value)
 void DialogAlongLine::setTypeLine(const QString &value)
 {
     typeLine = value;
-    SetupTypeLine(ui->comboBoxLineType, value);
+    ChangeCurrentData(ui->comboBoxLineType, value);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogAlongLine::getLineColor() const
+{
+    return lineColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::setLineColor(const QString &value)
+{
+    lineColor = value;
+    ChangeCurrentData(ui->comboBoxLineColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -97,7 +97,7 @@ void DialogHeight::setPointName(const QString &value)
 void DialogHeight::setTypeLine(const QString &value)
 {
     typeLine = value;
-    SetupTypeLine(ui->comboBoxLineType, value);
+    ChangeCurrentData(ui->comboBoxLineType, value);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
 }
 

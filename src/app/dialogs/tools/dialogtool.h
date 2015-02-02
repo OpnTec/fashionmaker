@@ -224,8 +224,7 @@ protected:
     QString          GetLineColor(const QComboBox *box)const;
     template <class key, class val>
     void             ShowVariable(const QMap<key, val> var);
-    void             SetupTypeLine(QComboBox *box, const QString &value);
-    void             ChangeCurrentData(QComboBox *box, const quint32 &value) const;
+    void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
     void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
     void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
