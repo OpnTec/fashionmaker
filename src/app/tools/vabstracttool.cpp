@@ -70,6 +70,8 @@ const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
 const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
 const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::AttrCurve       = QStringLiteral("curve");
+const QString VAbstractTool::AttrLineColor   = QStringLiteral("lineColor");
+const QString VAbstractTool::AttrColor       = QStringLiteral("color");
 
 const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");
@@ -77,6 +79,14 @@ const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine")
 const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
+
+const QString VAbstractTool::ColorBlack     = QStringLiteral("black");
+const QString VAbstractTool::ColorGreen     = QStringLiteral("green");
+const QString VAbstractTool::ColorBlue      = QStringLiteral("blue");
+const QString VAbstractTool::ColorDarkRed   = QStringLiteral("darkRed");
+const QString VAbstractTool::ColorDarkGreen = QStringLiteral("darkGreen");
+const QString VAbstractTool::ColorDarkBlue  = QStringLiteral("DarkBlue");
+const QString VAbstractTool::ColorYellow    = QStringLiteral("Yellow");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -215,6 +225,14 @@ QMap<QString, QIcon> VAbstractTool::LineStylesPics()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+const QStringList VAbstractTool::Colors()
+{
+    const QStringList colors = QStringList() << ColorBlack << ColorGreen << ColorBlue << ColorDarkRed << ColorDarkGreen
+                                             << ColorDarkBlue << ColorYellow;
+    return colors;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractTool::getLineType() const
 {
     return typeLine;
@@ -290,8 +308,8 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
  */
 const QStringList VAbstractTool::StylesList()
 {
-    QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine <<
-                                          TypeLineDashDotLine << TypeLineDashDotDotLine;
+    const QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine
+                                             << TypeLineDashDotLine << TypeLineDashDotDotLine;
     return styles;
 }
 
