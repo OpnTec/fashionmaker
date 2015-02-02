@@ -302,6 +302,50 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxLineColors(QComboBox *box) const
+{
+    SCASSERT(box != nullptr);
+
+    const QStringList colorNames = VAbstractTool::Colors();
+
+    for (int i = 0; i < colorNames.size(); ++i)
+    {
+        QString name;
+        switch (i)
+        {
+            case 0: // ColorBlack
+                name = tr("black");
+                break;
+            case 1: // ColorGreen
+                name = tr("green");
+                break;
+            case 2: // ColorBlue
+                name = tr("blue");
+                break;
+            case 3: // ColorDarkRed
+                name = tr("dark red");
+                break;
+            case 4: // ColorDarkGreen
+                name = tr("dark green");
+                break;
+            case 5: // ColorDarkBlue
+                name = tr("dark blue");
+                break;
+            case 6: // ColorYellow
+                name = tr("yellow");
+                break;
+            default:
+                name = tr("black");
+                break;
+        }
+
+        QPixmap pix(16, 16);
+        pix.fill(QColor(colorNames.at(i)));
+        box->insertItem(i, QIcon(pix), name, QVariant(colorNames.at(i)));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief getTypeLine return type of line
  * @param box combobox
@@ -314,6 +358,18 @@ QString DialogTool::GetTypeLine(const QComboBox *box) const
     if (value.isEmpty())
     {
         value = VAbstractTool::TypeLineLine;
+    }
+    return value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::GetLineColor(const QComboBox *box) const
+{
+    SCASSERT(box != nullptr)
+    QString value = box->currentData().toString();
+    if (value.isEmpty())
+    {
+        value = VAbstractTool::ColorBlack;
     }
     return value;
 }

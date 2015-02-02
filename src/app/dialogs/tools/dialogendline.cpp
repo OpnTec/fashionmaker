@@ -64,6 +64,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonPutHereLength, &QPushButton::clicked, this, &DialogEndLine::PutHere);
     connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogEndLine::PutAngle);

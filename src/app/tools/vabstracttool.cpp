@@ -85,8 +85,8 @@ const QString VAbstractTool::ColorGreen     = QStringLiteral("green");
 const QString VAbstractTool::ColorBlue      = QStringLiteral("blue");
 const QString VAbstractTool::ColorDarkRed   = QStringLiteral("darkRed");
 const QString VAbstractTool::ColorDarkGreen = QStringLiteral("darkGreen");
-const QString VAbstractTool::ColorDarkBlue  = QStringLiteral("DarkBlue");
-const QString VAbstractTool::ColorYellow    = QStringLiteral("Yellow");
+const QString VAbstractTool::ColorDarkBlue  = QStringLiteral("darkBlue");
+const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

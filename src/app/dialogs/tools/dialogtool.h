@@ -216,6 +216,7 @@ protected:
                                              ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
+    void             FillComboBoxLineColors(QComboBox *box)const;
     virtual void     CheckState();
     QString          GetTypeLine(const QComboBox *box)const;
     template <class key, class val>
