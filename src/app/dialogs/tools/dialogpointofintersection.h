@@ -48,7 +48,6 @@ public:
     DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogPointOfIntersection();
 
-    QString        getPointName() const;
     void           setPointName(const QString &value);
 
     quint32        getFirstPointId() const;

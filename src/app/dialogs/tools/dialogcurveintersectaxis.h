@@ -45,7 +45,6 @@ public:
     DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogCurveIntersectAxis();
 
-    QString      getPointName() const;
     void         setPointName(const QString &value);
 
     QString      getTypeLine() const;

@@ -46,7 +46,6 @@ public:
     DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSinglePoint();
     void           setData(const QString &name, const QPointF &point);
-    QString        getName()const;
     QPointF        getPoint()const;
 public slots:
     void           mousePress(const QPointF &scenePos);

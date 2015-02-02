@@ -49,7 +49,6 @@ public:
     DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfContact();
 
-    QString        getPointName() const;
     void           setPointName(const QString &value);
 
     QString        getRadius() const;

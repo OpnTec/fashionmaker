@@ -60,7 +60,6 @@ public:
     quint32                 getP2Line2() const;
     void                    setP2Line2(const quint32 &value);
 
-    QString                 getPointName() const;
     void                    setPointName(const QString &value);
 public slots:
     virtual void            ChosenObject(quint32 id, const SceneObject &type);

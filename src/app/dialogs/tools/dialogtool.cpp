@@ -1188,6 +1188,12 @@ void DialogTool::SetToolId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowVariable show variables in list
  * @param var container with variables

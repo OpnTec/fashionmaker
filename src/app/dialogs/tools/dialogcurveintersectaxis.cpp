@@ -81,12 +81,6 @@ DialogCurveIntersectAxis::~DialogCurveIntersectAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::setPointName(const QString &value)
 {
     pointName = value;

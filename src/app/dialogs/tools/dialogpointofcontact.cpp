@@ -299,16 +299,6 @@ void DialogPointOfContact::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getPointName return name of point
- * @return name
- */
-QString DialogPointOfContact::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getRadius return formula radius of arc
  * @return formula
  */

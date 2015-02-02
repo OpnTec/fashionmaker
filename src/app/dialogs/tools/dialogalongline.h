@@ -48,7 +48,6 @@ public:
     DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogAlongLine();
 
-    QString             getPointName() const;
     void                setPointName(const QString &value);
 
     QString             getTypeLine() const;

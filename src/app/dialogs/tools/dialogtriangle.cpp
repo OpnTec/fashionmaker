@@ -315,13 +315,3 @@ quint32 DialogTriangle::getSecondPointId() const
 {
     return secondPointId;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-QString DialogTriangle::getPointName() const
-{
-    return pointName;
-}

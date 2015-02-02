@@ -48,7 +48,6 @@ public:
     DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogNormal();
 
-    QString          getPointName() const;
     void             setPointName(const QString &value);
 
     QString          getTypeLine() const;

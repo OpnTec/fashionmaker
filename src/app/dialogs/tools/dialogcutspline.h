@@ -48,7 +48,6 @@ public:
     DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogCutSpline();
 
-    QString             getPointName() const;
     void                setPointName(const QString &value);
 
     QString             getFormula() const;

@@ -49,7 +49,6 @@ public:
     DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogBisector();
 
-    QString            getPointName() const;
     void               setPointName(const QString &value);
 
     QString            getTypeLine() const;

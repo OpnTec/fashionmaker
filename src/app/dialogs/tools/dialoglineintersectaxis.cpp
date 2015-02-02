@@ -90,12 +90,6 @@ DialogLineIntersectAxis::~DialogLineIntersectAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersectAxis::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::setPointName(const QString &value)
 {
     pointName = value;

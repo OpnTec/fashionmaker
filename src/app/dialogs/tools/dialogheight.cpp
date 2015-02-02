@@ -266,16 +266,6 @@ void DialogHeight::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getPointName return name of point
- * @return name
- */
-QString DialogHeight::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getTypeLine return type of line
  * @return type
  */

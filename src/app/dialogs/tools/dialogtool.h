@@ -69,6 +69,8 @@ public:
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
+
+    QString          getPointName() const;
 signals:
     /**
      * @brief DialogClosed signal dialog closed

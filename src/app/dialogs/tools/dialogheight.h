@@ -48,7 +48,6 @@ public:
     DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogHeight();
 
-    QString          getPointName() const;
     void             setPointName(const QString &value);
 
     QString          getTypeLine() const;

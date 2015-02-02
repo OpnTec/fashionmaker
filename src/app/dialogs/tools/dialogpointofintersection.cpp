@@ -203,16 +203,6 @@ void DialogPointOfIntersection::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getPointName return name of point
- * @return name
- */
-QString DialogPointOfIntersection::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getFirstPointId return id of first point
  * @return id
  */

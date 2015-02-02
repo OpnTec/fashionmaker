@@ -182,16 +182,6 @@ void DialogCutSplinePath::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getPointName return name of point
- * @return name
- */
-QString DialogCutSplinePath::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getFormula return string of formula
  * @return formula
  */

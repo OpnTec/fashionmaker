@@ -301,16 +301,6 @@ void DialogBisector::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getPointName return name of point
- * @return name
- */
-QString DialogBisector::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getTypeLine return type of line
  * @return type
  */

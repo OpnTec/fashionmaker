@@ -430,13 +430,3 @@ quint32 DialogLineIntersect::getP2Line2() const
 {
     return p2Line2;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name of point
- */
-QString DialogLineIntersect::getPointName() const
-{
-    return pointName;
-}

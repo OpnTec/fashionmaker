@@ -48,7 +48,6 @@ public:
     DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogEndLine();
 
-    QString           getPointName() const;
     void              setPointName(const QString &value);
 
     QString           getTypeLine() const;

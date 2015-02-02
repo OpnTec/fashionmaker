@@ -195,7 +195,7 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     QPointF p = dialogTool->getPoint();
-    QString name = dialogTool->getName();
+    QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));

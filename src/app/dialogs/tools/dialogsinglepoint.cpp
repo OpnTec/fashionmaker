@@ -110,16 +110,6 @@ DialogSinglePoint::~DialogSinglePoint()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getName return name
- * @return name
- */
-QString DialogSinglePoint::getName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getPoint return point
  * @return point
  */
