@@ -88,9 +88,6 @@ private:
     QString typeLine;
 
     QString formulaAngle;
-    quint32 basePointId;
-    quint32 firstPointId;
-    quint32 secondPointId;
     int     formulaBaseHeightAngle;
 
     VisToolLineIntersectAxis *line;

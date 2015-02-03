@@ -42,8 +42,7 @@
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine), number(0),
-      typeLine(QString()), formula(QString()), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0),
-      line(nullptr), lineColor(VAbstractTool::ColorBlack)
+      typeLine(QString()), formula(QString()), formulaBaseHeight(0), line(nullptr), lineColor(VAbstractTool::ColorBlack)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -184,11 +183,9 @@ void DialogAlongLine::SaveData()
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
+    line->setPoint1Id(getFirstPointId());
+    line->setPoint2Id(getSecondPointId());
     line->setLength(formula);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
@@ -208,7 +205,7 @@ void DialogAlongLine::closeEvent(QCloseEvent *event)
  */
 void DialogAlongLine::setSecondPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
 }
 
@@ -219,7 +216,7 @@ void DialogAlongLine::setSecondPointId(const quint32 &value)
  */
 void DialogAlongLine::setFirstPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
 }
 
@@ -304,7 +301,7 @@ QString DialogAlongLine::getFormula() const
  */
 quint32 DialogAlongLine::getFirstPointId() const
 {
-    return firstPointId;
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,5 +311,5 @@ quint32 DialogAlongLine::getFirstPointId() const
  */
 quint32 DialogAlongLine::getSecondPointId() const
 {
-    return secondPointId;
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

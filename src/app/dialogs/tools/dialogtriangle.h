@@ -80,18 +80,6 @@ private:
     /** @brief number number of handled objects */
     qint32         number;
 
-    /** @brief axisP1Id id first point of axis */
-    quint32         axisP1Id;
-
-    /** @brief axisP2Id id second point of axis */
-    quint32         axisP2Id;
-
-    /** @brief firstPointId id first point of line */
-    quint32         firstPointId;
-
-    /** @brief secondPointId id second point of line */
-    quint32         secondPointId;
-
     VisToolTriangle *line;
 };
 

@@ -77,9 +77,6 @@ private:
     /** @brief formula string with formula */
     QString             formula;
 
-    /**  @brief splineId keep id of spline */
-    quint32             splineId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                 formulaBaseHeight;
 

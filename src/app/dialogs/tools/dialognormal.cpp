@@ -40,7 +40,7 @@
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), number(0), typeLine(QString()),
-      formula(QString()), angle(0), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0), line(nullptr)
+      formula(QString()), angle(0), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -177,11 +177,9 @@ void DialogNormal::SaveData()
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
+    line->setPoint1Id(getFirstPointId());
+    line->setPoint2Id(getSecondPointId());
     line->setLength(formula);
     line->setAngle(angle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
@@ -202,7 +200,7 @@ void DialogNormal::closeEvent(QCloseEvent *event)
  */
 void DialogNormal::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
 }
 
@@ -213,7 +211,7 @@ void DialogNormal::setSecondPointId(const quint32 &value)
  */
 void DialogNormal::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
 }
 
@@ -307,7 +305,7 @@ qreal DialogNormal::getAngle() const
  */
 quint32 DialogNormal::getFirstPointId() const
 {
-    return firstPointId;
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -317,5 +315,5 @@ quint32 DialogNormal::getFirstPointId() const
  */
 quint32 DialogNormal::getSecondPointId() const
 {
-    return secondPointId;
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

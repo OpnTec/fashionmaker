@@ -108,9 +108,6 @@ private:
     /** @brief timerF2 timer of check formula of second angle */
     QTimer        *timerF2;
 
-    /** @brief center id of center point */
-    quint32       center;
-
     /** @brief radius formula of radius */
     QString       radius;
 

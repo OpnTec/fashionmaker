@@ -92,15 +92,6 @@ private:
     /** @brief radius radius of arc */
     QString        radius;
 
-    /** @brief center id center point of arc */
-    quint32         center;
-
-    /** @brief firstPoint id first point of line */
-    quint32         firstPoint;
-
-    /** @brief secondPoint id second point of line */
-    quint32         secondPoint;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
 

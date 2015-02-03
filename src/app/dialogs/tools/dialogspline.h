@@ -87,12 +87,6 @@ private:
     /** @brief number number of handled objects */
     qint32        number;
 
-    /** @brief p1 id first point of spline */
-    quint32        p1;
-
-    /** @brief p4 id fourth point of spline */
-    quint32        p4;
-
     /** @brief angle1 first angle of spline in degree */
     qreal         angle1;
 

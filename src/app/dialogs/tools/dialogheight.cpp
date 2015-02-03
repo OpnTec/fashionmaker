@@ -42,8 +42,7 @@
  * @param parent parent widget
  */
 DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), number(0),
-    typeLine(QString()), basePointId(NULL_ID), p1LineId(NULL_ID), p2LineId(NULL_ID), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), number(0), typeLine(QString()), line(nullptr)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -108,8 +107,8 @@ void DialogHeight::setTypeLine(const QString &value)
  */
 void DialogHeight::setBasePointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxBasePoint, basePointId, value);
-    line->setPoint1Id(basePointId);
+    setCurrentPointId(ui->comboBoxBasePoint, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,8 +118,8 @@ void DialogHeight::setBasePointId(const quint32 &value)
  */
 void DialogHeight::setP1LineId(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line, p1LineId, value);
-    line->setLineP1Id(p1LineId);
+    setCurrentPointId(ui->comboBoxP1Line, value);
+    line->setLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,8 +129,8 @@ void DialogHeight::setP1LineId(const quint32 &value)
  */
 void DialogHeight::setP2LineId(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line, p2LineId, value);
-    line->setLineP2Id(p2LineId);
+    setCurrentPointId(ui->comboBoxP2Line, value);
+    line->setLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,13 +197,10 @@ void DialogHeight::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
     typeLine = GetTypeLine(ui->comboBoxLineType);
-    basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
-    p1LineId = getCurrentObjectId(ui->comboBoxP1Line);
-    p2LineId = getCurrentObjectId(ui->comboBoxP2Line);
 
-    line->setPoint1Id(basePointId);
-    line->setLineP1Id(p1LineId);
-    line->setLineP2Id(p2LineId);
+    line->setPoint1Id(getBasePointId());
+    line->setLineP1Id(getP1LineId());
+    line->setLineP2Id(getP2LineId());
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
@@ -281,7 +277,7 @@ QString DialogHeight::getTypeLine() const
  */
 quint32 DialogHeight::getBasePointId() const
 {
-    return basePointId;
+    return getCurrentObjectId(ui->comboBoxBasePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -291,7 +287,7 @@ quint32 DialogHeight::getBasePointId() const
  */
 quint32 DialogHeight::getP1LineId() const
 {
-    return p1LineId;
+    return getCurrentObjectId(ui->comboBoxP1Line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,5 +297,5 @@ quint32 DialogHeight::getP1LineId() const
  */
 quint32 DialogHeight::getP2LineId() const
 {
-    return p2LineId;
+    return getCurrentObjectId(ui->comboBoxP2Line);
 }

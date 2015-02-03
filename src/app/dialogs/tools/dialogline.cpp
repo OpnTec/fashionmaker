@@ -43,8 +43,7 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), number(0), firstPoint(NULL_ID), secondPoint(NULL_ID),
-      typeLine(QString()), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), number(0), typeLine(QString()), line(nullptr)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -84,7 +83,7 @@ DialogLine::~DialogLine()
  */
 void DialogLine::setSecondPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPoint, value);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
 }
 
@@ -107,7 +106,7 @@ void DialogLine::setTypeLine(const QString &value)
  */
 void DialogLine::setFirstPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPoint, value);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
 }
 
@@ -154,14 +153,10 @@ void DialogLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SaveData()
 {
-    qint32 index = ui->comboBoxFirstPoint->currentIndex();
-    firstPoint = qvariant_cast<quint32>(ui->comboBoxFirstPoint->itemData(index));
-    index = ui->comboBoxSecondPoint->currentIndex();
-    secondPoint = qvariant_cast<quint32>(ui->comboBoxSecondPoint->itemData(index));
     typeLine = GetTypeLine(ui->comboBoxLineType);
 
-    line->setPoint1Id(firstPoint);
-    line->setPoint2Id(secondPoint);
+    line->setPoint1Id(getFirstPoint());
+    line->setPoint2Id(getSecondPoint());
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
 }
@@ -212,7 +207,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
  */
 quint32 DialogLine::getFirstPoint() const
 {
-    return firstPoint;
+    return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,7 +217,7 @@ quint32 DialogLine::getFirstPoint() const
  */
 quint32 DialogLine::getSecondPoint() const
 {
-    return secondPoint;
+    return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

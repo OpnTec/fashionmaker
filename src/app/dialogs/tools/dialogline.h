@@ -75,12 +75,6 @@ private:
     /** @brief number number of handled objects */
     qint32         number;
 
-    /** @brief firstPoint id first point */
-    quint32        firstPoint;
-
-    /** @brief secondPoint id second point */
-    quint32        secondPoint;
-
     /** @brief typeLine type of line */
     QString        typeLine;
     VisToolLine    *line;

@@ -74,11 +74,6 @@ private:
     /** @brief number number of handled objects */
     qint32         number;
 
-    /** @brief firstPointId id first point of line */
-    quint32        firstPointId;
-
-    /** @brief secondPointId id second point of line */
-    quint32        secondPointId;
     VisToolPointOfIntersection *line;
 };
 

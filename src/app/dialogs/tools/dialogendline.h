@@ -61,6 +61,7 @@ public:
 
     quint32           getBasePointId() const;
     void              setBasePointId(const quint32 &value);
+
     virtual void      ShowDialog(bool click);
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type);
@@ -97,9 +98,6 @@ private:
 
     /** @brief angle angle of line */
     QString           formulaAngle;
-
-    /** @brief basePointId id base point of line */
-    quint32           basePointId;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;

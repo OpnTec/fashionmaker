@@ -41,8 +41,8 @@
  * @param parent parent widget
  */
 DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()),
-      splineId(NULL_ID), formulaBaseHeight(0), path(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()), formulaBaseHeight(0),
+      path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -115,8 +115,8 @@ void DialogCutSpline::setFormula(const QString &value)
  */
 void DialogCutSpline::setSplineId(const quint32 &value)
 {
-    setCurrentSplineId(ui->comboBoxSpline, splineId, value, ComboBoxCutSpline::CutSpline);
-    path->setPoint1Id(splineId);
+    setCurrentSplineId(ui->comboBoxSpline, value, ComboBoxCutSpline::CutSpline);
+    path->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,9 +148,8 @@ void DialogCutSpline::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    splineId = getCurrentObjectId(ui->comboBoxSpline);
 
-    path->setPoint1Id(splineId);
+    path->setPoint1Id(getSplineId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -197,5 +196,5 @@ QString DialogCutSpline::getFormula() const
  */
 quint32 DialogCutSpline::getSplineId() const
 {
-    return splineId;
+    return getCurrentObjectId(ui->comboBoxSpline);
 }

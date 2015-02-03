@@ -83,14 +83,6 @@ private:
     /** @brief typeLine type of line */
     QString          typeLine;
 
-    /** @brief basePointId id base point of height */
-    quint32          basePointId;
-
-    /** @brief p1LineId id first point of line */
-    quint32          p1LineId;
-
-    /** @brief p2LineId id second point of line */
-    quint32          p2LineId;
     VisToolHeight    *line;
 };
 

@@ -39,8 +39,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersectAxis), number(0), typeLine(QString()),
-      formulaAngle(QString()), basePointId(NULL_ID), firstPointId(NULL_ID), secondPointId(NULL_ID),
-      formulaBaseHeightAngle(0), line(nullptr)
+      formulaAngle(QString()), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -134,39 +133,39 @@ void DialogLineIntersectAxis::setAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogLineIntersectAxis::getBasePointId() const
 {
-    return basePointId;
+    return getCurrentObjectId(ui->comboBoxAxisPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::setBasePointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxAxisPoint, basePointId, value);
+    setCurrentPointId(ui->comboBoxAxisPoint, value);
     line->setAxisPointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogLineIntersectAxis::getFirstPointId() const
 {
-    return firstPointId;
+    return getCurrentObjectId(ui->comboBoxFirstLinePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::setFirstPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxFirstLinePoint, firstPointId, value);
+    setCurrentPointId(ui->comboBoxFirstLinePoint, value);
     line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogLineIntersectAxis::getSecondPointId() const
 {
-    return secondPointId;
+    return getCurrentObjectId(ui->comboBoxSecondLinePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::setSecondPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxSecondLinePoint, secondPointId, value);
+    setCurrentPointId(ui->comboBoxSecondLinePoint, value);
     line->setPoint2Id(value);
 }
 
@@ -180,7 +179,7 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
             /*We will ignore click if poinet is in point circle*/
             VMainGraphicsScene *scene = qApp->getCurrentScene();
             SCASSERT(scene != nullptr);
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(basePointId);
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(getBasePointId());
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
@@ -237,7 +236,6 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxAxisPoint, ""))
                         {
-                            basePointId = id;
                             line->setAxisPointId(id);
                             line->RefreshGeometry();
                             prepare = true;
@@ -323,13 +321,9 @@ void DialogLineIntersectAxis::SaveData()
     formulaAngle = ui->plainTextEditFormula->toPlainText();
     formulaAngle.replace("\n", " ");
 
-    basePointId = getCurrentObjectId(ui->comboBoxAxisPoint);
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstLinePoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondLinePoint);
-
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
-    line->setAxisPointId(basePointId);
+    line->setPoint1Id(getFirstPointId());
+    line->setPoint2Id(getSecondPointId());
+    line->setAxisPointId(getBasePointId());
     line->setAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();

@@ -43,8 +43,7 @@
  */
 DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogBisector), number(0), typeLine(QString()),
-      formula(QString()), firstPointId(NULL_ID), secondPointId(NULL_ID), thirdPointId(NULL_ID), formulaBaseHeight(0),
-      line(nullptr)
+      formula(QString()), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -247,8 +246,8 @@ void DialogBisector::setFormula(const QString &value)
  */
 void DialogBisector::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
-    line->setPoint1Id(firstPointId);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -258,8 +257,8 @@ void DialogBisector::setFirstPointId(const quint32 &value)
  */
 void DialogBisector::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
-    line->setPoint2Id(secondPointId);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,8 +268,8 @@ void DialogBisector::setSecondPointId(const quint32 &value)
  */
 void DialogBisector::setThirdPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxThirdPoint, thirdPointId, value);
-    line->setPoint3Id(thirdPointId);
+    setCurrentPointId(ui->comboBoxThirdPoint, value);
+    line->setPoint3Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,13 +279,10 @@ void DialogBisector::SaveData()
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
-    thirdPointId = getCurrentObjectId(ui->comboBoxThirdPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
-    line->setPoint3Id(thirdPointId);
+    line->setPoint1Id(getFirstPointId());
+    line->setPoint2Id(getSecondPointId());
+    line->setPoint3Id(getThirdPointId());
     line->setLength(formula);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
@@ -326,7 +322,7 @@ QString DialogBisector::getFormula() const
  */
 quint32 DialogBisector::getFirstPointId() const
 {
-    return firstPointId;
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,7 +332,7 @@ quint32 DialogBisector::getFirstPointId() const
  */
 quint32 DialogBisector::getSecondPointId() const
 {
-    return secondPointId;
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -346,5 +342,5 @@ quint32 DialogBisector::getSecondPointId() const
  */
 quint32 DialogBisector::getThirdPointId() const
 {
-    return thirdPointId;
+    return getCurrentObjectId(ui->comboBoxThirdPoint);
 }

@@ -43,8 +43,7 @@
  */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), number(0),
-    typeLine(QString()), formula(QString()), p1Line(NULL_ID), p2Line(NULL_ID), pShoulder(NULL_ID), formulaBaseHeight(0),
-    line (nullptr)
+    typeLine(QString()), formula(QString()), formulaBaseHeight(0), line (nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -205,13 +204,10 @@ void DialogShoulderPoint::SaveData()
     typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    p1Line = getCurrentObjectId(ui->comboBoxP1Line);
-    p2Line = getCurrentObjectId(ui->comboBoxP2Line);
-    pShoulder = getCurrentObjectId(ui->comboBoxP3);
 
-    line->setPoint1Id(pShoulder);
-    line->setLineP1Id(p1Line);
-    line->setLineP2Id(p2Line);
+    line->setPoint1Id(getP3());
+    line->setLineP1Id(getP1Line());
+    line->setLineP2Id(getP2Line());
     line->setLength(formula);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();
@@ -231,8 +227,8 @@ void DialogShoulderPoint::closeEvent(QCloseEvent *event)
  */
 void DialogShoulderPoint::setP3(const quint32 &value)
 {
-    setPointId(ui->comboBoxP3, pShoulder, value);
-    line->setPoint1Id(pShoulder);
+    setCurrentPointId(ui->comboBoxP3, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,8 +238,8 @@ void DialogShoulderPoint::setP3(const quint32 &value)
  */
 void DialogShoulderPoint::setP2Line(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line, p2Line, value);
-    line->setLineP2Id(p2Line);
+    setCurrentPointId(ui->comboBoxP2Line, value);
+    line->setLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,8 +249,8 @@ void DialogShoulderPoint::setP2Line(const quint32 &value)
  */
 void DialogShoulderPoint::setP1Line(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line, p1Line, value);
-    line->setLineP1Id(p1Line);
+    setCurrentPointId(ui->comboBoxP1Line, value);
+    line->setLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,7 +321,7 @@ QString DialogShoulderPoint::getFormula() const
  */
 quint32 DialogShoulderPoint::getP1Line() const
 {
-    return p1Line;
+    return getCurrentObjectId(ui->comboBoxP1Line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,7 +331,7 @@ quint32 DialogShoulderPoint::getP1Line() const
  */
 quint32 DialogShoulderPoint::getP2Line() const
 {
-    return p2Line;
+    return getCurrentObjectId(ui->comboBoxP2Line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -345,5 +341,5 @@ quint32 DialogShoulderPoint::getP2Line() const
  */
 quint32 DialogShoulderPoint::getP3() const
 {
-    return pShoulder;
+    return getCurrentObjectId(ui->comboBoxP3);
 }

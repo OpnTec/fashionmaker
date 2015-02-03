@@ -39,7 +39,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogCurveIntersectAxis), number(0), typeLine(QString()),
-      formulaAngle(QString()), basePointId(NULL_ID), curveId(NULL_ID), formulaBaseHeightAngle(0), line(nullptr)
+      formulaAngle(QString()), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
 
@@ -125,26 +125,26 @@ void DialogCurveIntersectAxis::setAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogCurveIntersectAxis::getBasePointId() const
 {
-    return basePointId;
+    return getCurrentObjectId(ui->comboBoxAxisPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::setBasePointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxAxisPoint, basePointId, value);
+    setCurrentPointId(ui->comboBoxAxisPoint, value);
     line->setAxisPointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 DialogCurveIntersectAxis::getCurveId() const
 {
-    return curveId;
+    return getCurrentObjectId(ui->comboBoxCurve);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::setCurveId(const quint32 &value)
 {
-    setCurrentCurveId(ui->comboBoxCurve, curveId, value);
+    setCurrentCurveId(ui->comboBoxCurve, value);
     line->setPoint1Id(value);
 }
 
@@ -158,7 +158,7 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
             /*We will ignore click if poinet is in point circle*/
             VMainGraphicsScene *scene = qApp->getCurrentScene();
             SCASSERT(scene != nullptr);
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(basePointId);
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(getBasePointId());
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
@@ -199,7 +199,6 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (SetObject(id, ui->comboBoxAxisPoint, ""))
                     {
-                        basePointId = id;
                         line->setAxisPointId(id);
                         line->RefreshGeometry();
                         prepare = true;
@@ -258,11 +257,8 @@ void DialogCurveIntersectAxis::SaveData()
     formulaAngle = ui->plainTextEditFormula->toPlainText();
     formulaAngle.replace("\n", " ");
 
-    basePointId = getCurrentObjectId(ui->comboBoxAxisPoint);
-    curveId = getCurrentObjectId(ui->comboBoxCurve);
-
-    line->setPoint1Id(curveId);
-    line->setAxisPointId(basePointId);
+    line->setPoint1Id(getCurveId());
+    line->setAxisPointId(getBasePointId());
     line->setAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
     line->RefreshGeometry();

@@ -42,8 +42,7 @@
  * @param parent parent widget
  */
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), number(0),
-    firstPointId(NULL_ID), secondPointId(NULL_ID), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), number(0), line(nullptr)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -82,8 +81,8 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
  */
 void DialogPointOfIntersection::setSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
-    line->setPoint2Id(secondPointId);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,11 +131,9 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
 void DialogPointOfIntersection::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
+    line->setPoint1Id(getFirstPointId());
+    line->setPoint2Id(getSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -186,8 +183,8 @@ void DialogPointOfIntersection::ShowVisualization()
  */
 void DialogPointOfIntersection::setFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
-    line->setPoint1Id(firstPointId);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,7 +205,7 @@ void DialogPointOfIntersection::setPointName(const QString &value)
  */
 quint32 DialogPointOfIntersection::getFirstPointId() const
 {
-    return firstPointId;
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,5 +215,5 @@ quint32 DialogPointOfIntersection::getFirstPointId() const
  */
 quint32 DialogPointOfIntersection::getSecondPointId() const
 {
-    return secondPointId;
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

@@ -100,12 +100,6 @@ private:
     /** @brief angle aditional angle of normal */
     qreal            angle;
 
-    /** @brief firstPointId id first point of line */
-    quint32          firstPointId;
-
-    /** @brief secondPointId id second point of line */
-    quint32          secondPointId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int              formulaBaseHeight;
 

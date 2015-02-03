@@ -81,9 +81,6 @@ private:
     /** @brief formula string with formula */
     QString           formula;
 
-    /** @brief arcId keep id of arc */
-    quint32           arcId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
 

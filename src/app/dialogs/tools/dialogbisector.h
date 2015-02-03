@@ -98,15 +98,6 @@ private:
     /** @brief formula formula */
     QString            formula;
 
-    /** @brief firstPointId id of first point */
-    quint32            firstPointId;
-
-    /** @brief secondPointId id of second point */
-    quint32            secondPointId;
-
-    /** @brief thirdPointId id of third point */
-    quint32            thirdPointId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                formulaBaseHeight;
     VisToolBisector    *line;

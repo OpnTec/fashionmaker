@@ -63,10 +63,7 @@ public:
     void                    setPointName(const QString &value);
 public slots:
     virtual void            ChosenObject(quint32 id, const SceneObject &type);
-    void                    P1Line1Changed( int index);
-    void                    P2Line1Changed( int index);
-    void                    P1Line2Changed( int index);
-    void                    P2Line2Changed( int index);
+    void                    PointChanged();
     virtual void            PointNameChanged();
     virtual void            UpdateList();
 protected:
@@ -83,18 +80,6 @@ private:
 
     /** @brief number number of handled objects */
     qint32                  number;
-
-    /** @brief p1Line1 id first point of first line */
-    quint32                 p1Line1;
-
-    /** @brief p2Line1 id second point of first line */
-    quint32                 p2Line1;
-
-    /** @brief p1Line2 id first point of second line */
-    quint32                 p1Line2;
-
-    /** @brief p2Line2 id second point of second line */
-    quint32                 p2Line2;
 
     /** @brief flagPoint keep state of point */
     bool                    flagPoint;

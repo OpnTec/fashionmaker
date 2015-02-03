@@ -42,8 +42,8 @@
  * @param parent parent widget
  */
 DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()),
-      arcId(NULL_ID), formulaBaseHeight(0), path(nullptr)
+    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0),
+      path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -133,9 +133,8 @@ void DialogCutArc::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    arcId = getCurrentObjectId(ui->comboBoxArc);
 
-    path->setPoint1Id(arcId);
+    path->setPoint1Id(getArcId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -154,8 +153,8 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
  */
 void DialogCutArc::setArcId(const quint32 &value)
 {
-    setCurrentArcId(ui->comboBoxArc, arcId, value, ComboBoxCutArc::CutArc);
-    path->setPoint1Id(arcId);
+    setCurrentArcId(ui->comboBoxArc, value, ComboBoxCutArc::CutArc);
+    path->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,5 +203,5 @@ QString DialogCutArc::getFormula() const
  */
 quint32 DialogCutArc::getArcId() const
 {
-    return arcId;
+    return getCurrentObjectId(ui->comboBoxArc);
 }

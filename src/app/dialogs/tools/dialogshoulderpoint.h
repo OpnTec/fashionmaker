@@ -97,15 +97,6 @@ private:
     /** @brief formula formula */
     QString        formula;
 
-    /** @brief p1Line id first point of line */
-    quint32         p1Line;
-
-    /** @brief p2Line id second point of line */
-    quint32         p2Line;
-
-    /** @brief pShoulder id shoulder point */
-    quint32         pShoulder;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
     VisToolShoulderPoint *line;

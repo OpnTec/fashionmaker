@@ -41,8 +41,8 @@
  * @param parent parent widget
  */
 DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), number(0), p1(NULL_ID), p4(NULL_ID), angle1(0),
-      angle2(0), kAsm1(1), kAsm2(1), kCurve(1), path(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), number(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+      kCurve(1), path(nullptr)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -76,7 +76,7 @@ DialogSpline::~DialogSpline()
  */
 quint32 DialogSpline::getP1() const
 {
-    return p1;
+    return getCurrentObjectId(ui->comboBoxP1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,16 +141,14 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::SaveData()
 {
-    p1 = getCurrentObjectId(ui->comboBoxP1);
-    p4 = getCurrentObjectId(ui->comboBoxP4);
     angle1 = ui->spinBoxAngle1->value();
     angle2 = ui->spinBoxAngle2->value();
     kAsm1 = ui->doubleSpinBoxKasm1->value();
     kAsm2 = ui->doubleSpinBoxKasm2->value();
     kCurve = ui->doubleSpinBoxKcurve->value();
 
-    path->setPoint1Id(p1);
-    path->setPoint4Id(p4);
+    path->setPoint1Id(getP1());
+    path->setPoint4Id(getP4());
     path->setAngle1(angle1);
     path->setAngle2(angle2);
     path->setKAsm1(kAsm1);
@@ -270,8 +268,8 @@ void DialogSpline::setAngle1(const qreal &value)
  */
 void DialogSpline::setP4(const quint32 &value)
 {
-    setPointId(ui->comboBoxP4, p4, value);
-    path->setPoint4Id(p4);
+    setCurrentPointId(ui->comboBoxP4, value);
+    path->setPoint4Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,8 +279,8 @@ void DialogSpline::setP4(const quint32 &value)
  */
 void DialogSpline::setP1(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1, p1, value);
-    path->setPoint1Id(p1);
+    setCurrentPointId(ui->comboBoxP1, value);
+    path->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -292,7 +290,7 @@ void DialogSpline::setP1(const quint32 &value)
  */
 quint32 DialogSpline::getP4() const
 {
-    return p4;
+    return getCurrentObjectId(ui->comboBoxP4);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
