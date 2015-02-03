@@ -42,7 +42,7 @@
  * @param parent parent widget
  */
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), number(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), line(nullptr)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));

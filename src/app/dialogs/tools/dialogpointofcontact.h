@@ -86,9 +86,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfContact *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
     /** @brief radius radius of arc */
     QString        radius;
 

@@ -42,7 +42,7 @@
  * @param parent parent widget
  */
 DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogBisector), number(0), typeLine(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogBisector), typeLine(QString()),
       formula(QString()), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);

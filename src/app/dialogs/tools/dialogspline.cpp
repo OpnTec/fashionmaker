@@ -41,7 +41,7 @@
  * @param parent parent widget
  */
 DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), number(0), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
       kCurve(1), path(nullptr)
 {
     ui->setupUi(this);

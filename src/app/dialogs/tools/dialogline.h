@@ -72,9 +72,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogLine *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
     /** @brief typeLine type of line */
     QString        typeLine;
     VisToolLine    *line;

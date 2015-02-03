@@ -84,9 +84,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogSpline *ui;
 
-    /** @brief number number of handled objects */
-    qint32        number;
-
     /** @brief angle1 first angle of spline in degree */
     qreal         angle1;
 

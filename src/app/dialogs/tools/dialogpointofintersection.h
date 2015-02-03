@@ -71,9 +71,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfIntersection *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
     VisToolPointOfIntersection *line;
 };
 

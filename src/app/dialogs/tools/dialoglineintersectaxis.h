@@ -81,9 +81,6 @@ private:
     Q_DISABLE_COPY(DialogLineIntersectAxis)
     Ui::DialogLineIntersectAxis *ui;
 
-    /** @brief number number of handled objects */
-    qint32  number;
-
     /** @brief typeLine type of line */
     QString typeLine;
 

@@ -78,9 +78,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogLineIntersect *ui;
 
-    /** @brief number number of handled objects */
-    qint32                  number;
-
     /** @brief flagPoint keep state of point */
     bool                    flagPoint;
 

@@ -43,7 +43,7 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), number(0), typeLine(QString()), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), typeLine(QString()), line(nullptr)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);

@@ -67,7 +67,7 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), checkBoxHideEmpty(nullptr),
       okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
-      toolId(toolId), prepare(false), pointName(QString())
+      toolId(toolId), prepare(false), pointName(QString()), number(0)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);

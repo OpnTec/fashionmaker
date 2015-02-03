@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersectAxis), number(0), typeLine(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersectAxis), typeLine(QString()),
       formulaAngle(QString()), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);

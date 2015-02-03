@@ -77,9 +77,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
     VisToolTriangle *line;
 };
 

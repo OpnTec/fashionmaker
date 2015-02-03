@@ -209,6 +209,9 @@ protected:
     /** @brief pointName name of point */
     QString          pointName;
 
+    /** @brief number number of handled objects */
+    qint32           number;
+
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
 
