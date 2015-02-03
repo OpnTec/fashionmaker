@@ -94,8 +94,6 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
     VisToolAlongLine    *line;
-
-    QString             lineColor;
 };
 
 #endif // DIALOGALONGLINE_H
