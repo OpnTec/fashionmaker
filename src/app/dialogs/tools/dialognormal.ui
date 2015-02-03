@@ -245,7 +245,11 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBoxFirstPoint"/>
+          <widget class="QComboBox" name="comboBoxFirstPoint">
+           <property name="toolTip">
+            <string>First point of line</string>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="labelSecondPoint">
@@ -261,7 +265,11 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QComboBox" name="comboBoxSecondPoint"/>
+          <widget class="QComboBox" name="comboBoxSecondPoint">
+           <property name="toolTip">
+            <string>Second point of line</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

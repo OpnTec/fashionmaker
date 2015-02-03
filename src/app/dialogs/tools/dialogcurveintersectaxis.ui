@@ -229,7 +229,7 @@
            <item row="0" column="1">
             <widget class="QComboBox" name="comboBoxAxisPoint">
              <property name="toolTip">
-              <string>First point of line</string>
+              <string>Axis Point</string>
              </property>
             </widget>
            </item>
@@ -249,7 +249,7 @@
            <item row="1" column="1">
             <widget class="QComboBox" name="comboBoxCurve">
              <property name="toolTip">
-              <string>First point of line</string>
+              <string>Curve</string>
              </property>
             </widget>
            </item>

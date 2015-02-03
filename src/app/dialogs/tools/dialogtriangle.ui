@@ -55,7 +55,7 @@
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxAxisP1">
        <property name="toolTip">
-        <string>First point of line</string>
+        <string>First point of the axis</string>
        </property>
       </widget>
      </item>
@@ -75,7 +75,7 @@
      <item row="2" column="1">
       <widget class="QComboBox" name="comboBoxAxisP2">
        <property name="toolTip">
-        <string>First point of line</string>
+        <string>Second point of the axis</string>
        </property>
       </widget>
      </item>
@@ -115,7 +115,7 @@
      <item row="4" column="1">
       <widget class="QComboBox" name="comboBoxSecondPoint">
        <property name="toolTip">
-        <string>First point of line</string>
+        <string>Second point of line</string>
        </property>
       </widget>
      </item>
