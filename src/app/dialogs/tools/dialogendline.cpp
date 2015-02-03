@@ -43,7 +43,7 @@
  * @param parent parent widget
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), typeLine(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine),
       formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
@@ -170,9 +170,8 @@ void DialogEndLine::setPointName(const QString &value)
  */
 void DialogEndLine::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -273,7 +272,6 @@ void DialogEndLine::ShowVisualization()
 void DialogEndLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
 
     formulaLength = ui->plainTextEditFormula->toPlainText();
     formulaLength.replace("\n", " ");
@@ -284,7 +282,7 @@ void DialogEndLine::SaveData()
     line->setPoint1Id(getBasePointId());
     line->setLength(formulaLength);
     line->setAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -313,7 +311,7 @@ DialogEndLine::~DialogEndLine()
  */
 QString DialogEndLine::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

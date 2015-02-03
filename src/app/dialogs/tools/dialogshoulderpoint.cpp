@@ -42,8 +42,8 @@
  * @param parent parent widget
  */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), typeLine(QString()),
-      formula(QString()), formulaBaseHeight(0), line (nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), formula(QString()),
+      formulaBaseHeight(0), line (nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -201,7 +201,6 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
 void DialogShoulderPoint::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
 
@@ -209,7 +208,7 @@ void DialogShoulderPoint::SaveData()
     line->setLineP1Id(getP1Line());
     line->setLineP2Id(getP2Line());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -278,9 +277,8 @@ void DialogShoulderPoint::setFormula(const QString &value)
  */
 void DialogShoulderPoint::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,7 +299,7 @@ void DialogShoulderPoint::setPointName(const QString &value)
  */
 QString DialogShoulderPoint::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

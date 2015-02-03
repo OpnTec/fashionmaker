@@ -42,7 +42,7 @@
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine),
-      typeLine(QString()), formula(QString()), formulaBaseHeight(0), line(nullptr), lineColor(VAbstractTool::ColorBlack)
+      formula(QString()), formulaBaseHeight(0), line(nullptr), lineColor(VAbstractTool::ColorBlack)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -180,14 +180,14 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
 void DialogAlongLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
+
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
 
     line->setPoint1Id(getFirstPointId());
     line->setPoint2Id(getSecondPointId());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -245,9 +245,8 @@ void DialogAlongLine::setFormula(const QString &value)
  */
 void DialogAlongLine::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,7 +280,7 @@ void DialogAlongLine::setPointName(const QString &value)
  */
 QString DialogAlongLine::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

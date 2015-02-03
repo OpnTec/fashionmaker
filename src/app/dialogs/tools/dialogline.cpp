@@ -43,7 +43,7 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), typeLine(QString()), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), line(nullptr)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -94,9 +94,8 @@ void DialogLine::setSecondPoint(const quint32 &value)
  */
 void DialogLine::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,11 +152,9 @@ void DialogLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SaveData()
 {
-    typeLine = GetTypeLine(ui->comboBoxLineType);
-
     line->setPoint1Id(getFirstPoint());
     line->setPoint2Id(getSecondPoint());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -227,5 +224,5 @@ quint32 DialogLine::getSecondPoint() const
  */
 QString DialogLine::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }

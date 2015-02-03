@@ -72,8 +72,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogLine *ui;
 
-    /** @brief typeLine type of line */
-    QString        typeLine;
     VisToolLine    *line;
 
 };

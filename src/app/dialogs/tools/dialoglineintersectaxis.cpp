@@ -38,8 +38,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersectAxis), typeLine(QString()),
-      formulaAngle(QString()), formulaBaseHeightAngle(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersectAxis), formulaAngle(QString()),
+      formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -98,15 +98,14 @@ void DialogLineIntersectAxis::setPointName(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogLineIntersectAxis::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,7 +315,6 @@ void DialogLineIntersectAxis::ShowVisualization()
 void DialogLineIntersectAxis::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
 
     formulaAngle = ui->plainTextEditFormula->toPlainText();
     formulaAngle.replace("\n", " ");
@@ -325,7 +323,7 @@ void DialogLineIntersectAxis::SaveData()
     line->setPoint2Id(getSecondPointId());
     line->setAxisPointId(getBasePointId());
     line->setAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 

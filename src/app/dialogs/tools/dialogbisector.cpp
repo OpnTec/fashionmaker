@@ -42,8 +42,8 @@
  * @param parent parent widget
  */
 DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogBisector), typeLine(QString()),
-      formula(QString()), formulaBaseHeight(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogBisector), formula(QString()), formulaBaseHeight(0),
+      line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -216,9 +216,8 @@ void DialogBisector::setPointName(const QString &value)
  */
 void DialogBisector::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -276,7 +275,7 @@ void DialogBisector::setThirdPointId(const quint32 &value)
 void DialogBisector::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
+
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
 
@@ -284,7 +283,7 @@ void DialogBisector::SaveData()
     line->setPoint2Id(getSecondPointId());
     line->setPoint3Id(getThirdPointId());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -302,7 +301,7 @@ void DialogBisector::closeEvent(QCloseEvent *event)
  */
 QString DialogBisector::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,8 +39,8 @@
  * @param parent parent widget
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), typeLine(QString()),
-      formula(QString()), angle(0), formulaBaseHeight(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), formula(QString()), angle(0), formulaBaseHeight(0),
+      line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -173,7 +173,6 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
 void DialogNormal::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
@@ -182,7 +181,7 @@ void DialogNormal::SaveData()
     line->setPoint2Id(getSecondPointId());
     line->setLength(formula);
     line->setAngle(angle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -252,9 +251,8 @@ void DialogNormal::setFormula(const QString &value)
  */
 void DialogNormal::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,7 +273,7 @@ void DialogNormal::setPointName(const QString &value)
  */
 QString DialogNormal::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

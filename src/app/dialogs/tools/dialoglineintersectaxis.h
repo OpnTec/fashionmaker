@@ -81,9 +81,6 @@ private:
     Q_DISABLE_COPY(DialogLineIntersectAxis)
     Ui::DialogLineIntersectAxis *ui;
 
-    /** @brief typeLine type of line */
-    QString typeLine;
-
     QString formulaAngle;
     int     formulaBaseHeightAngle;
 

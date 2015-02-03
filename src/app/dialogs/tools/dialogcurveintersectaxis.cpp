@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCurveIntersectAxis), typeLine(QString()),
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCurveIntersectAxis),
       formulaAngle(QString()), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
@@ -90,15 +90,14 @@ void DialogCurveIntersectAxis::setPointName(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogCurveIntersectAxis::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -252,7 +251,6 @@ void DialogCurveIntersectAxis::ShowVisualization()
 void DialogCurveIntersectAxis::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
 
     formulaAngle = ui->plainTextEditFormula->toPlainText();
     formulaAngle.replace("\n", " ");
@@ -260,7 +258,7 @@ void DialogCurveIntersectAxis::SaveData()
     line->setPoint1Id(getCurveId());
     line->setAxisPointId(getBasePointId());
     line->setAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 

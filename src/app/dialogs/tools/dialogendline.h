@@ -90,9 +90,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogEndLine *ui;
 
-    /** @brief typeLine type of line */
-    QString           typeLine;
-
     /** @brief formula formula */
     QString           formulaLength;
 

@@ -77,9 +77,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogHeight *ui;
 
-    /** @brief typeLine type of line */
-    QString          typeLine;
-
     VisToolHeight    *line;
 };
 

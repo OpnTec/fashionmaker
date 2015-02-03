@@ -42,7 +42,7 @@
  * @param parent parent widget
  */
 DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), typeLine(QString()), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), line(nullptr)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -95,9 +95,8 @@ void DialogHeight::setPointName(const QString &value)
  */
 void DialogHeight::setTypeLine(const QString &value)
 {
-    typeLine = value;
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,12 +195,11 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 void DialogHeight::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
 
     line->setPoint1Id(getBasePointId());
     line->setLineP1Id(getP1LineId());
     line->setLineP2Id(getP2LineId());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -267,7 +265,7 @@ void DialogHeight::ShowVisualization()
  */
 QString DialogHeight::getTypeLine() const
 {
-    return typeLine;
+    return GetTypeLine(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
