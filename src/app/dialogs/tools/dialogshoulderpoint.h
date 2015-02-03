@@ -64,6 +64,9 @@ public:
 
     quint32        getP3() const;
     void           setP3(const quint32 &value);
+
+    QString        getLineColor() const;
+    void           setLineColor(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     /**

@@ -99,6 +99,18 @@ void DialogLine::setTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogLine::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPoint set id first point
  * @param value id

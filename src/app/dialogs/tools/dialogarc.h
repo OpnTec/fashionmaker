@@ -59,6 +59,9 @@ public:
 
     QString       GetF2() const;
     void          SetF2(const QString &value);
+
+    QString       GetColor() const;
+    void          SetColor(const QString &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type);
     /**

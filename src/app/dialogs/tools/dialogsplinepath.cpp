@@ -95,6 +95,18 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogSplinePath::getColor() const
+{
+    return GetLineColor(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::setColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail

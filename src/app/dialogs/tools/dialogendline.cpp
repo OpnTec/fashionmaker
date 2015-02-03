@@ -224,6 +224,18 @@ void DialogEndLine::setBasePointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogEndLine::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogEndLine::ShowDialog show dialog after finish working with visual part
  * @param click true if need show dialog after click mouse

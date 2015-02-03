@@ -62,6 +62,9 @@ public:
     quint32      getSecondPointId() const;
     void         setSecondPointId(const quint32 &value);
 
+    QString      getLineColor() const;
+    void         setLineColor(const QString &value);
+
     virtual void ShowDialog(bool click);
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type);

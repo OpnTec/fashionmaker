@@ -231,6 +231,18 @@ void DialogShoulderPoint::setP3(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogShoulderPoint::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setP2Line set id second point of line
  * @param value id

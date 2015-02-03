@@ -204,6 +204,18 @@ void DialogNormal::setSecondPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogNormal::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setFirstPointId set id of first point
  * @param value id

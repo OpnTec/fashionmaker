@@ -272,6 +272,18 @@ void DialogBisector::setThirdPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogBisector::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();

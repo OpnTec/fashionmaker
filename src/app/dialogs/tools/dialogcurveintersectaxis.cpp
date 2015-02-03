@@ -148,6 +148,18 @@ void DialogCurveIntersectAxis::setCurveId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogCurveIntersectAxis::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::ShowDialog(bool click)
 {
     if (prepare)

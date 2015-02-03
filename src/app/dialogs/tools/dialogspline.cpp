@@ -214,6 +214,18 @@ void DialogSpline::setKCurve(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogSpline::getColor() const
+{
+    return GetLineColor(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::setColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setKAsm2 set second coefficient asymmetry
  * @param value value. Can be >= 0.

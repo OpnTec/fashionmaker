@@ -51,6 +51,9 @@ public:
 
     VSplinePath        GetPath() const;
     void               SetPath(const VSplinePath &value);
+
+    QString            getColor() const;
+    void               setColor(const QString &value);
 public slots:
     virtual void       ChosenObject(quint32 id, const SceneObject &type);
     void               PointChanged(int row);

@@ -155,6 +155,18 @@ void DialogArc::SetF2(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetColor() const
+{
+    return GetLineColor(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetF1 set formula first angle of arc
  * @param value formula

@@ -133,6 +133,18 @@ void DialogHeight::setP2LineId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogHeight::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHeight::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail

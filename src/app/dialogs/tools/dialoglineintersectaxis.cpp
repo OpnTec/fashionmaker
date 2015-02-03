@@ -169,6 +169,18 @@ void DialogLineIntersectAxis::setSecondPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogLineIntersectAxis::getLineColor() const
+{
+    return GetLineColor(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLineIntersectAxis::setLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::ShowDialog(bool click)
 {
     if (prepare)
