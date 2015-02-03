@@ -1165,7 +1165,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
 {
     VToolCurveIntersectAxis *i = qgraphicsitem_cast<VToolCurveIntersectAxis *>(item);
     i->ShowVisualization(true);
-    formView->setTitle(tr("Point intersection line and axis"));
+    formView->setTitle(tr("Point intersection curve and axis"));
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
