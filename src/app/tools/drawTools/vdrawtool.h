@@ -55,6 +55,9 @@ public:
     virtual void setDialog() {}
     virtual void DialogLinkDestroy();
     static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
+
+    QString      getLineType() const;
+    virtual void SetTypeLine(const QString &value);
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
@@ -71,7 +74,10 @@ protected:
     QString      nameActivDraw;
 
     /** @brief dialog dialog options.*/
-    DialogTool *dialog;
+    DialogTool  *dialog;
+
+    /** @brief typeLine line type. */
+    QString      typeLine;
 
     void         AddToCalculation(const QDomElement &domElement);
 

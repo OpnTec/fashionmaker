@@ -114,8 +114,6 @@ public:
 
     const VContainer        *getData() const;
 
-    QString                 getLineType() const;
-    virtual void            SetTypeLine(const QString &value);
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
@@ -151,9 +149,6 @@ protected:
 
     /** @brief currentColor current tool color. */
     Qt::GlobalColor         currentColor;
-
-    /** @brief typeLine line type. */
-    QString                 typeLine;
 
     Visualization           *vis;
 

@@ -97,8 +97,7 @@ const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine),
-      vis(nullptr)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), vis(nullptr)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
@@ -230,21 +229,6 @@ const QStringList VAbstractTool::Colors()
     const QStringList colors = QStringList() << ColorBlack << ColorGreen << ColorBlue << ColorDarkRed << ColorDarkGreen
                                              << ColorDarkBlue << ColorYellow;
     return colors;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VAbstractTool::getLineType() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::SetTypeLine(const QString &value)
-{
-    typeLine = value;
-
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -46,8 +46,8 @@ qreal VDrawTool::factor = 1;
  * @param id object id in container.
  */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), ignoreFullUpdate(false),
-      nameActivDraw(doc->GetNameActivPP()), dialog(nullptr)
+    :VAbstractTool(doc, data, id, parent), ignoreFullUpdate(false), nameActivDraw(doc->GetNameActivPP()),
+      dialog(nullptr), typeLine(TypeLineLine)
 {
     connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -284,4 +284,19 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
     AddToCalc *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addToCal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDrawTool::getLineType() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SetTypeLine(const QString &value)
+{
+    typeLine = value;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
 }
