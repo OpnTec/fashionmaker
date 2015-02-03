@@ -161,10 +161,10 @@ void DialogTriangle::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    line->setPoint1Id(getAxisP1Id());
-    line->setPoint2Id(getAxisP2Id());
-    line->setHypotenuseP1Id(getFirstPointId());
-    line->setHypotenuseP2Id(getSecondPointId());
+    line->setPoint1Id(GetAxisP1Id());
+    line->setPoint2Id(GetAxisP2Id());
+    line->setHypotenuseP1Id(GetFirstPointId());
+    line->setHypotenuseP2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -218,10 +218,10 @@ void DialogTriangle::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogTriangle::setPointName(const QString &value)
+void DialogTriangle::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -229,10 +229,10 @@ void DialogTriangle::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPointId set id of second point
+ * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogTriangle::setSecondPointId(const quint32 &value)
+void DialogTriangle::SetSecondPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setHypotenuseP2Id(value);
@@ -240,10 +240,10 @@ void DialogTriangle::setSecondPointId(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPointId set id of first point
+ * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogTriangle::setFirstPointId(const quint32 &value)
+void DialogTriangle::SetFirstPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setHypotenuseP1Id(value);
@@ -251,10 +251,10 @@ void DialogTriangle::setFirstPointId(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAxisP2Id set id second point of axis
+ * @brief SetAxisP2Id set id second point of axis
  * @param value id
  */
-void DialogTriangle::setAxisP2Id(const quint32 &value)
+void DialogTriangle::SetAxisP2Id(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxAxisP2, value);
     line->setPoint2Id(value);
@@ -262,10 +262,10 @@ void DialogTriangle::setAxisP2Id(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAxisP1Id set id first point of axis
+ * @brief SetAxisP1Id set id first point of axis
  * @param value id
  */
-void DialogTriangle::setAxisP1Id(const quint32 &value)
+void DialogTriangle::SetAxisP1Id(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxAxisP1, value);
     line->setPoint1Id(value);
@@ -273,40 +273,40 @@ void DialogTriangle::setAxisP1Id(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getAxisP1Id return id first point of axis
+ * @brief GetAxisP1Id return id first point of axis
  * @return id
  */
-quint32 DialogTriangle::getAxisP1Id() const
+quint32 DialogTriangle::GetAxisP1Id() const
 {
     return getCurrentObjectId(ui->comboBoxAxisP1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getAxisP2Id return id second point of axis
+ * @brief GetAxisP2Id return id second point of axis
  * @return id
  */
-quint32 DialogTriangle::getAxisP2Id() const
+quint32 DialogTriangle::GetAxisP2Id() const
 {
     return getCurrentObjectId(ui->comboBoxAxisP2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFirstPointId return id of first point
+ * @brief GetFirstPointId return id of first point
  * @return id
  */
-quint32 DialogTriangle::getFirstPointId() const
+quint32 DialogTriangle::GetFirstPointId() const
 {
     return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getSecondPointId return id of second point
+ * @brief GetSecondPointId return id of second point
  * @return id
  */
-quint32 DialogTriangle::getSecondPointId() const
+quint32 DialogTriangle::GetSecondPointId() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

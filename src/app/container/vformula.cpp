@@ -56,7 +56,7 @@ VFormula &VFormula::operator=(const VFormula &formula)
     {
         return *this;
     }
-    this->formula = formula.getFormula();
+    this->formula = formula.GetFormula();
     this->value = formula.getStringValue();
     this->checkZero = formula.getCheckZero();
     this->data = formula.getData();
@@ -69,7 +69,7 @@ VFormula &VFormula::operator=(const VFormula &formula)
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const VFormula &formula)
-    :formula(formula.getFormula()), value(formula.getStringValue()), checkZero(formula.getCheckZero()),
+    :formula(formula.GetFormula()), value(formula.getStringValue()), checkZero(formula.getCheckZero()),
       data(formula.getData()), toolId(formula.getToolId()), postfix(formula.getPostfix()), _error(formula.error()),
       dValue(formula.getDoubleValue())
 {}
@@ -78,7 +78,7 @@ VFormula::VFormula(const VFormula &formula)
 bool VFormula::operator==(const VFormula &formula) const
 {
     bool isEqual = false;
-    if (this->formula == formula.getFormula() && this->value == formula.getStringValue() &&
+    if (this->formula == formula.GetFormula() && this->value == formula.getStringValue() &&
         this->checkZero == formula.getCheckZero() && this->data == formula.getData() &&
         this->toolId == formula.getToolId() && this->postfix == formula.getPostfix() &&
         this->_error == formula.error() && qFuzzyCompare(this->dValue, formula.getDoubleValue()))
@@ -94,7 +94,7 @@ bool VFormula::operator!=(const VFormula &formula) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::getFormula(FormulaType type) const
+QString VFormula::GetFormula(FormulaType type) const
 {
     if (type == FormulaType::ToUser)
     {
@@ -107,7 +107,7 @@ QString VFormula::getFormula(FormulaType type) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormula::setFormula(const QString &value, FormulaType type)
+void VFormula::SetFormula(const QString &value, FormulaType type)
 {
     if (formula != value)
     {

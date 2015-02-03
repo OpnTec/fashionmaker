@@ -67,12 +67,12 @@ void VToolLineIntersectAxis::setDialog()
     DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setAngle(formulaAngle);
-    dialogTool->setBasePointId(basePointId);
-    dialogTool->setFirstPointId(firstPointId);
-    dialogTool->setSecondPointId(secondPointId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetAngle(formulaAngle);
+    dialogTool->SetBasePointId(basePointId);
+    dialogTool->SetFirstPointId(firstPointId);
+    dialogTool->SetSecondPointId(secondPointId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,11 +83,11 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(DialogTool *dialog, VMain
     DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
     SCASSERT(dialogTool);
     const QString pointName = dialogTool->getPointName();
-    const QString typeLine = dialogTool->getTypeLine();
-    QString formulaAngle = dialogTool->getAngle();
-    const quint32 basePointId = dialogTool->getBasePointId();
-    const quint32 firstPointId = dialogTool->getFirstPointId();
-    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const QString typeLine = dialogTool->GetTypeLine();
+    QString formulaAngle = dialogTool->GetAngle();
+    const quint32 basePointId = dialogTool->GetBasePointId();
+    const quint32 firstPointId = dialogTool->GetFirstPointId();
+    const quint32 secondPointId = dialogTool->GetSecondPointId();
 
     VToolLineIntersectAxis *point = nullptr;
     point=Create(0, pointName, typeLine, formulaAngle, basePointId, firstPointId, secondPointId, 5, 10, scene, doc,
@@ -170,7 +170,7 @@ QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolLineIntersectAxis::getFormulaAngle() const
+VFormula VToolLineIntersectAxis::GetFormulaAngle() const
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
@@ -180,11 +180,11 @@ VFormula VToolLineIntersectAxis::getFormulaAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::setFormulaAngle(const VFormula &value)
+void VToolLineIntersectAxis::SetFormulaAngle(const VFormula &value)
 {
     if (value.error() == false)
     {
-        formulaAngle = value.getFormula(FormulaType::FromUser);
+        formulaAngle = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
@@ -192,13 +192,13 @@ void VToolLineIntersectAxis::setFormulaAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersectAxis::getFirstPointId() const
+quint32 VToolLineIntersectAxis::GetFirstPointId() const
 {
     return firstPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::setFirstPointId(const quint32 &value)
+void VToolLineIntersectAxis::SetFirstPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -210,13 +210,13 @@ void VToolLineIntersectAxis::setFirstPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLineIntersectAxis::getSecondPointId() const
+quint32 VToolLineIntersectAxis::GetSecondPointId() const
 {
     return secondPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::setSecondPointId(const quint32 &value)
+void VToolLineIntersectAxis::SetSecondPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -242,7 +242,7 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
             visual->setPoint1Id(firstPointId);
             visual->setPoint2Id(secondPointId);
             visual->setAxisPointId(basePointId);
-            visual->setAngle(qApp->FormulaToUser(formulaAngle));
+            visual->SetAngle(qApp->FormulaToUser(formulaAngle));
             visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
@@ -283,7 +283,7 @@ void VToolLineIntersectAxis::FullUpdateFromFile()
         visual->setPoint1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
-        visual->setAngle(qApp->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
@@ -308,11 +308,11 @@ void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement)
     DialogLineIntersectAxis *dialogTool = qobject_cast<DialogLineIntersectAxis*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrAngle, dialogTool->getAngle());
-    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
-    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getFirstPointId()));
-    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getSecondPointId()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
+    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstPointId()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondPointId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -58,7 +58,7 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
-    setColorLabel(Qt::black);
+    SetColorLabel(Qt::black);
     if (typeCreation == Source::FromGui)
     {
         AddToFile();
@@ -79,7 +79,7 @@ void VToolSinglePoint::setDialog()
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setData(p->name(), p->toQPointF());
+    dialogTool->SetData(p->name(), p->toQPointF());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,7 +194,7 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
     SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    QPointF p = dialogTool->getPoint();
+    QPointF p = dialogTool->GetPoint();
     QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
@@ -241,10 +241,10 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setColorLabel change color for label and label line.
+ * @brief SetColorLabel change color for label and label line.
  * @param color new color.
  */
-void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
+void VToolSinglePoint::SetColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
     lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -310,12 +310,12 @@ void VToolSinglePoint::ChangedActivDraw(const QString &newName)
     if (nameActivDraw == newName)
     {
         this->setEnabled(true);
-        setColorLabel(Qt::black);
+        SetColorLabel(Qt::black);
     }
     else
     {
         this->setEnabled(false);
-        setColorLabel(Qt::gray);
+        SetColorLabel(Qt::gray);
     }
 }
 

@@ -55,14 +55,14 @@ public:
     quint32          getCenter() const;
     void             setCenter(const quint32 &value);
 
-    VFormula         getFormulaRadius() const;
-    void             setFormulaRadius(const VFormula &value);
+    VFormula         GetFormulaRadius() const;
+    void             SetFormulaRadius(const VFormula &value);
 
-    VFormula         getFormulaF1() const;
-    void             setFormulaF1(const VFormula &value);
+    VFormula         GetFormulaF1() const;
+    void             SetFormulaF1(const VFormula &value);
 
-    VFormula         getFormulaF2() const;
-    void             setFormulaF2(const VFormula &value);
+    VFormula         GetFormulaF2() const;
+    void             SetFormulaF2(const VFormula &value);
 
     virtual void     ShowVisualization(bool show);
 protected:

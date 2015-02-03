@@ -66,11 +66,11 @@ void VToolCurveIntersectAxis::setDialog()
     DialogCurveIntersectAxis *dialogTool = qobject_cast<DialogCurveIntersectAxis*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setAngle(formulaAngle);
-    dialogTool->setBasePointId(basePointId);
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetAngle(formulaAngle);
+    dialogTool->SetBasePointId(basePointId);
     dialogTool->setCurveId(curveId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,9 +81,9 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(DialogTool *dialog, VMa
     DialogCurveIntersectAxis *dialogTool = qobject_cast<DialogCurveIntersectAxis*>(dialog);
     SCASSERT(dialogTool);
     const QString pointName = dialogTool->getPointName();
-    const QString typeLine = dialogTool->getTypeLine();
-    QString formulaAngle = dialogTool->getAngle();
-    const quint32 basePointId = dialogTool->getBasePointId();
+    const QString typeLine = dialogTool->GetTypeLine();
+    QString formulaAngle = dialogTool->GetAngle();
+    const quint32 basePointId = dialogTool->GetBasePointId();
     const quint32 curveId = dialogTool->getCurveId();
 
     VToolCurveIntersectAxis *point = nullptr;
@@ -173,7 +173,7 @@ QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCurveIntersectAxis::getFormulaAngle() const
+VFormula VToolCurveIntersectAxis::GetFormulaAngle() const
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
@@ -183,11 +183,11 @@ VFormula VToolCurveIntersectAxis::getFormulaAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::setFormulaAngle(const VFormula &value)
+void VToolCurveIntersectAxis::SetFormulaAngle(const VFormula &value)
 {
     if (value.error() == false)
     {
-        formulaAngle = value.getFormula(FormulaType::FromUser);
+        formulaAngle = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
@@ -226,7 +226,7 @@ void VToolCurveIntersectAxis::ShowVisualization(bool show)
 
             visual->setPoint1Id(curveId);
             visual->setAxisPointId(basePointId);
-            visual->setAngle(qApp->FormulaToUser(formulaAngle));
+            visual->SetAngle(qApp->FormulaToUser(formulaAngle));
             visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
@@ -265,7 +265,7 @@ void VToolCurveIntersectAxis::FullUpdateFromFile()
         VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         visual->setPoint1Id(curveId);
         visual->setAxisPointId(basePointId);
-        visual->setAngle(qApp->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
@@ -290,9 +290,9 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement)
     DialogCurveIntersectAxis *dialogTool = qobject_cast<DialogCurveIntersectAxis*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrAngle, dialogTool->getAngle());
-    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
+    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrCurve, QString().setNum(dialogTool->getCurveId()));
 }
 

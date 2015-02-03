@@ -79,10 +79,10 @@ DialogHeight::~DialogHeight()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogHeight::setPointName(const QString &value)
+void DialogHeight::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -90,10 +90,10 @@ void DialogHeight::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setTypeLine set type of line
+ * @brief SetTypeLine set type of line
  * @param value type
  */
-void DialogHeight::setTypeLine(const QString &value)
+void DialogHeight::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
@@ -101,10 +101,10 @@ void DialogHeight::setTypeLine(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setBasePointId set id base point of height
+ * @brief SetBasePointId set id base point of height
  * @param value id
  */
-void DialogHeight::setBasePointId(const quint32 &value)
+void DialogHeight::SetBasePointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxBasePoint, value);
     line->setPoint1Id(value);
@@ -112,10 +112,10 @@ void DialogHeight::setBasePointId(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setP1LineId set id first point of line
+ * @brief SetP1LineId set id first point of line
  * @param value id
  */
-void DialogHeight::setP1LineId(const quint32 &value)
+void DialogHeight::SetP1LineId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxP1Line, value);
     line->setLineP1Id(value);
@@ -123,23 +123,23 @@ void DialogHeight::setP1LineId(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setP2LineId set id second point of line
+ * @brief SetP2LineId set id second point of line
  * @param value id
  */
-void DialogHeight::setP2LineId(const quint32 &value)
+void DialogHeight::SetP2LineId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxP2Line, value);
     line->setLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogHeight::getLineColor() const
+QString DialogHeight::GetLineColor() const
 {
-    return GetLineColor(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogHeight::setLineColor(const QString &value)
+void DialogHeight::SetLineColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineColor, value);
 }
@@ -208,10 +208,10 @@ void DialogHeight::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    line->setPoint1Id(getBasePointId());
-    line->setLineP1Id(getP1LineId());
-    line->setLineP2Id(getP2LineId());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
+    line->setPoint1Id(GetBasePointId());
+    line->setLineP1Id(GetP1LineId());
+    line->setLineP2Id(GetP2LineId());
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -272,40 +272,40 @@ void DialogHeight::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getTypeLine return type of line
+ * @brief GetTypeLine return type of line
  * @return type
  */
-QString DialogHeight::getTypeLine() const
+QString DialogHeight::GetTypeLine() const
 {
-    return GetTypeLine(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getBasePointId return id base point of height
+ * @brief GetBasePointId return id base point of height
  * @return id
  */
-quint32 DialogHeight::getBasePointId() const
+quint32 DialogHeight::GetBasePointId() const
 {
     return getCurrentObjectId(ui->comboBoxBasePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getP1LineId return id first point of line
+ * @brief GetP1LineId return id first point of line
  * @return id id
  */
-quint32 DialogHeight::getP1LineId() const
+quint32 DialogHeight::GetP1LineId() const
 {
     return getCurrentObjectId(ui->comboBoxP1Line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getP2LineId return id second point of line
+ * @brief GetP2LineId return id second point of line
  * @return id
  */
-quint32 DialogHeight::getP2LineId() const
+quint32 DialogHeight::GetP2LineId() const
 {
     return getCurrentObjectId(ui->comboBoxP2Line);
 }

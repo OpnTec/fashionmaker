@@ -56,11 +56,11 @@ public:
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
 
-    quint32 getFirstPointId() const;
-    void    setFirstPointId(const quint32 &value);
+    quint32 GetFirstPointId() const;
+    void    SetFirstPointId(const quint32 &value);
 
-    quint32 getThirdPointId() const;
-    void    setThirdPointId(const quint32 &value);
+    quint32 GetThirdPointId() const;
+    void    SetThirdPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:

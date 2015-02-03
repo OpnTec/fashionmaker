@@ -54,8 +54,8 @@ public:
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
-    VFormula     getFormulaAngle() const;
-    void         setFormulaAngle(const VFormula &value);
+    VFormula     GetFormulaAngle() const;
+    void         SetFormulaAngle(const VFormula &value);
 
     quint32      getCurveId() const;
     void         setCurveId(const quint32 &value);

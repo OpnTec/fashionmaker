@@ -225,8 +225,7 @@ protected:
     void             FillComboBoxLineColors(QComboBox *box)const;
 
     virtual void     CheckState();
-    QString          GetTypeLine(const QComboBox *box)const;
-    QString          GetLineColor(const QComboBox *box)const;
+    QString          GetComboBoxCurrentData(const QComboBox *box)const;
     template <class key, class val>
     void             ShowVariable(const QMap<key, val> var);
     void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;

@@ -206,7 +206,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
                             splinePath->at(i-1).Angle2(), splinePath->at(i).Angle1(), splinePath->at(i-1).KAsm2(),
-                            splinePath->at(i).KAsm1(), splinePath->getKCurve());
+                            splinePath->at(i).KAsm1(), splinePath->GetKCurve());
 
                     VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
@@ -366,7 +366,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
                             splinePath->at(i-1).Angle2(), splinePath->at(i).Angle1(), splinePath->at(i-1).KAsm2(),
-                            splinePath->at(i).KAsm1(), splinePath->getKCurve());
+                            splinePath->at(i).KAsm1(), splinePath->GetKCurve());
 
                     VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),

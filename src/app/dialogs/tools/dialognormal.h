@@ -48,25 +48,25 @@ public:
     DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogNormal();
 
-    void             setPointName(const QString &value);
+    void             SetPointName(const QString &value);
 
-    QString          getTypeLine() const;
-    void             setTypeLine(const QString &value);
+    QString          GetTypeLine() const;
+    void             SetTypeLine(const QString &value);
 
-    QString          getFormula() const;
-    void             setFormula(const QString &value);
+    QString          GetFormula() const;
+    void             SetFormula(const QString &value);
 
-    qreal            getAngle() const;
-    void             setAngle(const qreal &value);
+    qreal            GetAngle() const;
+    void             SetAngle(const qreal &value);
 
-    quint32          getFirstPointId() const;
-    void             setFirstPointId(const quint32 &value);
+    quint32          GetFirstPointId() const;
+    void             SetFirstPointId(const quint32 &value);
 
-    quint32          getSecondPointId() const;
-    void             setSecondPointId(const quint32 &value);
+    quint32          GetSecondPointId() const;
+    void             SetSecondPointId(const quint32 &value);
 
-    QString          getLineColor() const;
-    void             setLineColor(const QString &value);
+    QString          GetLineColor() const;
+    void             SetLineColor(const QString &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     /**

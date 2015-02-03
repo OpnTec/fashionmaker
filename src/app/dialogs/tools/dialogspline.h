@@ -48,29 +48,29 @@ public:
     DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSpline();
 
-    quint32       getP1() const;
-    void          setP1(const quint32 &value);
+    quint32       GetP1() const;
+    void          SetP1(const quint32 &value);
 
-    quint32       getP4() const;
-    void          setP4(const quint32 &value);
+    quint32       GetP4() const;
+    void          SetP4(const quint32 &value);
 
-    qreal         getAngle1() const;
-    void          setAngle1(const qreal &value);
+    qreal         GetAngle1() const;
+    void          SetAngle1(const qreal &value);
 
-    qreal         getAngle2() const;
-    void          setAngle2(const qreal &value);
+    qreal         GetAngle2() const;
+    void          SetAngle2(const qreal &value);
 
-    qreal         getKAsm1() const;
-    void          setKAsm1(const qreal &value);
+    qreal         GetKAsm1() const;
+    void          SetKAsm1(const qreal &value);
 
-    qreal         getKAsm2() const;
-    void          setKAsm2(const qreal &value);
+    qreal         GetKAsm2() const;
+    void          SetKAsm2(const qreal &value);
 
-    qreal         getKCurve() const;
-    void          setKCurve(const qreal &value);
+    qreal         GetKCurve() const;
+    void          SetKCurve(const qreal &value);
 
-    QString       getColor() const;
-    void          setColor(const QString &value);
+    QString       GetColor() const;
+    void          SetColor(const QString &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type);
     virtual void  PointNameChanged();

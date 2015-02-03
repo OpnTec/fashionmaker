@@ -49,7 +49,7 @@ public:
     DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfContact();
 
-    void           setPointName(const QString &value);
+    void           SetPointName(const QString &value);
 
     QString        getRadius() const;
     void           setRadius(const QString &value);
@@ -57,11 +57,11 @@ public:
     quint32        getCenter() const;
     void           setCenter(const quint32 &value);
 
-    quint32        getFirstPoint() const;
-    void           setFirstPoint(const quint32 &value);
+    quint32        GetFirstPoint() const;
+    void           SetFirstPoint(const quint32 &value);
 
-    quint32        getSecondPoint() const;
-    void           setSecondPoint(const quint32 &value);
+    quint32        GetSecondPoint() const;
+    void           SetSecondPoint(const quint32 &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     /**

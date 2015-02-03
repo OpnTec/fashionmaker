@@ -239,7 +239,7 @@ QString VAbstractTool::getLineType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::setTypeLine(const QString &value)
+void VAbstractTool::SetTypeLine(const QString &value)
 {
     typeLine = value;
 

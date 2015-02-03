@@ -53,8 +53,8 @@ public:
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
 
-    VFormula     getFormulaAngle() const;
-    void         setFormulaAngle(const VFormula &value);
+    VFormula     GetFormulaAngle() const;
+    void         SetFormulaAngle(const VFormula &value);
     virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();

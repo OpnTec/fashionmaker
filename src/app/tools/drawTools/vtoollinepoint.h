@@ -44,14 +44,14 @@ public:
     virtual ~VToolLinePoint();
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
-    VFormula          getFormulaLength() const;
-    void              setFormulaLength(const VFormula &value);
+    VFormula          GetFormulaLength() const;
+    void              SetFormulaLength(const VFormula &value);
 
-    quint32           getBasePointId() const;
-    void              setBasePointId(const quint32 &value);
+    quint32           GetBasePointId() const;
+    void              SetBasePointId(const quint32 &value);
 
-    qreal             getAngle() const;
-    void              setAngle(const qreal &value);
+    qreal             GetAngle() const;
+    void              SetAngle(const qreal &value);
 
 public slots:
     virtual void      ChangedActivDraw(const QString &newName);

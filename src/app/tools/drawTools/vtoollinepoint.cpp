@@ -108,13 +108,13 @@ void VToolLinePoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolLinePoint::getAngle() const
+qreal VToolLinePoint::GetAngle() const
 {
     return angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::setAngle(const qreal &value)
+void VToolLinePoint::SetAngle(const qreal &value)
 {
     angle = value;
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
@@ -122,13 +122,13 @@ void VToolLinePoint::setAngle(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLinePoint::getBasePointId() const
+quint32 VToolLinePoint::GetBasePointId() const
 {
     return basePointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::setBasePointId(const quint32 &value)
+void VToolLinePoint::SetBasePointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -140,7 +140,7 @@ void VToolLinePoint::setBasePointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolLinePoint::getFormulaLength() const
+VFormula VToolLinePoint::GetFormulaLength() const
 {
     VFormula fLength(formulaLength, this->getData());
     fLength.setCheckZero(true);
@@ -151,11 +151,11 @@ VFormula VToolLinePoint::getFormulaLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::setFormulaLength(const VFormula &value)
+void VToolLinePoint::SetFormulaLength(const VFormula &value)
 {
     if (value.error() == false)
     {
-        formulaLength = value.getFormula(FormulaType::FromUser);
+        formulaLength = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);

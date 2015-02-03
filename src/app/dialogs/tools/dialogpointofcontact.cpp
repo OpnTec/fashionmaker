@@ -218,8 +218,8 @@ void DialogPointOfContact::SaveData()
     radius = ui->plainTextEditFormula->toPlainText();
     radius.replace("\n", " ");
 
-    line->setPoint1Id(getFirstPoint());
-    line->setLineP2Id(getSecondPoint());
+    line->setPoint1Id(GetFirstPoint());
+    line->setLineP2Id(GetSecondPoint());
     line->setRadiusId(getCenter());
     line->setRadius(radius);
     line->RefreshGeometry();
@@ -234,10 +234,10 @@ void DialogPointOfContact::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPoint set id second point
+ * @brief SetSecondPoint set id second point
  * @param value id
  */
-void DialogPointOfContact::setSecondPoint(const quint32 &value)
+void DialogPointOfContact::SetSecondPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setLineP2Id(value);
@@ -245,10 +245,10 @@ void DialogPointOfContact::setSecondPoint(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPoint set id first point
+ * @brief SetFirstPoint set id first point
  * @param value id
  */
-void DialogPointOfContact::setFirstPoint(const quint32 &value)
+void DialogPointOfContact::SetFirstPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
@@ -285,10 +285,10 @@ void DialogPointOfContact::setRadius(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogPointOfContact::setPointName(const QString &value)
+void DialogPointOfContact::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -316,20 +316,20 @@ quint32 DialogPointOfContact::getCenter() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFirstPoint return id first point
+ * @brief GetFirstPoint return id first point
  * @return id
  */
-quint32 DialogPointOfContact::getFirstPoint() const
+quint32 DialogPointOfContact::GetFirstPoint() const
 {
     return getCurrentObjectId(ui->comboBoxFirstPoint);;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getSecondPoint return id second point
+ * @brief GetSecondPoint return id second point
  * @return id
  */
-quint32 DialogPointOfContact::getSecondPoint() const
+quint32 DialogPointOfContact::GetSecondPoint() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

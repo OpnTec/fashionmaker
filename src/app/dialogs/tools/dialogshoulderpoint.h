@@ -48,25 +48,25 @@ public:
     DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogShoulderPoint();
 
-    void           setPointName(const QString &value);
+    void           SetPointName(const QString &value);
 
-    QString        getTypeLine() const;
-    void           setTypeLine(const QString &value);
+    QString        GetTypeLine() const;
+    void           SetTypeLine(const QString &value);
 
-    QString        getFormula() const;
-    void           setFormula(const QString &value);
+    QString        GetFormula() const;
+    void           SetFormula(const QString &value);
 
-    quint32        getP1Line() const;
-    void           setP1Line(const quint32 &value);
+    quint32        GetP1Line() const;
+    void           SetP1Line(const quint32 &value);
 
-    quint32        getP2Line() const;
-    void           setP2Line(const quint32 &value);
+    quint32        GetP2Line() const;
+    void           SetP2Line(const quint32 &value);
 
-    quint32        getP3() const;
-    void           setP3(const quint32 &value);
+    quint32        GetP3() const;
+    void           SetP3(const quint32 &value);
 
-    QString        getLineColor() const;
-    void           setLineColor(const QString &value);
+    QString        GetLineColor() const;
+    void           SetLineColor(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     /**

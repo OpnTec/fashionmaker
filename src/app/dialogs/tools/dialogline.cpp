@@ -78,10 +78,10 @@ DialogLine::~DialogLine()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPoint set id second point
+ * @brief SetSecondPoint set id second point
  * @param value id
  */
-void DialogLine::setSecondPoint(const quint32 &value)
+void DialogLine::SetSecondPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
@@ -89,33 +89,33 @@ void DialogLine::setSecondPoint(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setTypeLine set type of line
+ * @brief SetTypeLine set type of line
  * @param value type
  */
-void DialogLine::setTypeLine(const QString &value)
+void DialogLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLine::getLineColor() const
+QString DialogLine::GetLineColor() const
 {
-    return GetLineColor(ui->comboBoxLineColor);
+    return GetComboBoxCurrentData(ui->comboBoxLineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLine::setLineColor(const QString &value)
+void DialogLine::SetLineColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPoint set id first point
+ * @brief SetFirstPoint set id first point
  * @param value id
  */
-void DialogLine::setFirstPoint(const quint32 &value)
+void DialogLine::SetFirstPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
@@ -164,9 +164,9 @@ void DialogLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SaveData()
 {
-    line->setPoint1Id(getFirstPoint());
-    line->setPoint2Id(getSecondPoint());
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(getTypeLine()));
+    line->setPoint1Id(GetFirstPoint());
+    line->setPoint2Id(GetSecondPoint());
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -211,30 +211,30 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFirstPoint return id first point
+ * @brief GetFirstPoint return id first point
  * @return id
  */
-quint32 DialogLine::getFirstPoint() const
+quint32 DialogLine::GetFirstPoint() const
 {
     return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getSecondPoint return id second point
+ * @brief GetSecondPoint return id second point
  * @return id
  */
-quint32 DialogLine::getSecondPoint() const
+quint32 DialogLine::GetSecondPoint() const
 {
     return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getTypeLine return type of line
+ * @brief GetTypeLine return type of line
  * @return type
  */
-QString DialogLine::getTypeLine() const
+QString DialogLine::GetTypeLine() const
 {
-    return GetTypeLine(ui->comboBoxLineType);
+    return GetComboBoxCurrentData(ui->comboBoxLineType);
 }

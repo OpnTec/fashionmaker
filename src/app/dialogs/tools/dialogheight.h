@@ -48,22 +48,22 @@ public:
     DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogHeight();
 
-    void             setPointName(const QString &value);
+    void             SetPointName(const QString &value);
 
-    QString          getTypeLine() const;
-    void             setTypeLine(const QString &value);
+    QString          GetTypeLine() const;
+    void             SetTypeLine(const QString &value);
 
-    quint32          getBasePointId() const;
-    void             setBasePointId(const quint32 &value);
+    quint32          GetBasePointId() const;
+    void             SetBasePointId(const quint32 &value);
 
-    quint32          getP1LineId() const;
-    void             setP1LineId(const quint32 &value);
+    quint32          GetP1LineId() const;
+    void             SetP1LineId(const quint32 &value);
 
-    quint32          getP2LineId() const;
-    void             setP2LineId(const quint32 &value);
+    quint32          GetP2LineId() const;
+    void             SetP2LineId(const quint32 &value);
 
-    QString          getLineColor() const;
-    void             setLineColor(const QString &value);
+    QString          GetLineColor() const;
+    void             SetLineColor(const QString &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     virtual void     PointNameChanged();

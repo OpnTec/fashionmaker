@@ -43,7 +43,7 @@ public:
     virtual void RefreshGeometry();
 
     QString      Angle() const;
-    void         setAngle(const QString &expression);
+    void         SetAngle(const QString &expression);
     void         setPoint2Id(const quint32 &value);
     void         setAxisPointId(const quint32 &value);
 

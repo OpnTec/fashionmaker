@@ -51,17 +51,17 @@ public:
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
-    quint32 getP1Line1() const;
-    void    setP1Line1(const quint32 &value);
+    quint32 GetP1Line1() const;
+    void    SetP1Line1(const quint32 &value);
 
-    quint32 getP2Line1() const;
-    void    setP2Line1(const quint32 &value);
+    quint32 GetP2Line1() const;
+    void    SetP2Line1(const quint32 &value);
 
-    quint32 getP1Line2() const;
-    void    setP1Line2(const quint32 &value);
+    quint32 GetP1Line2() const;
+    void    SetP1Line2(const quint32 &value);
 
-    quint32 getP2Line2() const;
-    void    setP2Line2(const quint32 &value);
+    quint32 GetP2Line2() const;
+    void    SetP2Line2(const quint32 &value);
 
     virtual void ShowVisualization(bool show);
 public slots:

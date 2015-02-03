@@ -48,19 +48,19 @@ public:
     DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogTriangle();
 
-    quint32        getAxisP1Id() const;
-    void           setAxisP1Id(const quint32 &value);
+    quint32        GetAxisP1Id() const;
+    void           SetAxisP1Id(const quint32 &value);
 
-    quint32        getAxisP2Id() const;
-    void           setAxisP2Id(const quint32 &value);
+    quint32        GetAxisP2Id() const;
+    void           SetAxisP2Id(const quint32 &value);
 
-    quint32        getFirstPointId() const;
-    void           setFirstPointId(const quint32 &value);
+    quint32        GetFirstPointId() const;
+    void           SetFirstPointId(const quint32 &value);
 
-    quint32        getSecondPointId() const;
-    void           setSecondPointId(const quint32 &value);
+    quint32        GetSecondPointId() const;
+    void           SetSecondPointId(const quint32 &value);
 
-    void           setPointName(const QString &value);
+    void           SetPointName(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   PointNameChanged();

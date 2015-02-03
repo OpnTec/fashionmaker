@@ -82,9 +82,9 @@ void VToolLine::setDialog()
     SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    dialogTool->setFirstPoint(firstPoint);
-    dialogTool->setSecondPoint(secondPoint);
-    dialogTool->setTypeLine(typeLine);
+    dialogTool->SetFirstPoint(firstPoint);
+    dialogTool->SetSecondPoint(secondPoint);
+    dialogTool->SetTypeLine(typeLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,9 +100,9 @@ VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
     SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const quint32 firstPoint = dialogTool->getFirstPoint();
-    const quint32 secondPoint = dialogTool->getSecondPoint();
-    const QString typeLine = dialogTool->getTypeLine();
+    const quint32 firstPoint = dialogTool->GetFirstPoint();
+    const quint32 secondPoint = dialogTool->GetSecondPoint();
+    const QString typeLine = dialogTool->GetTypeLine();
 
     VToolLine *line = nullptr;
     line = Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Source::FromGui);
@@ -366,9 +366,9 @@ void VToolLine::SaveDialog(QDomElement &domElement)
     SCASSERT(dialog != nullptr);
     DialogLine *dialogTool = qobject_cast<DialogLine*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
-    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -383,13 +383,13 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLine::getSecondPoint() const
+quint32 VToolLine::GetSecondPoint() const
 {
     return secondPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::setSecondPoint(const quint32 &value)
+void VToolLine::SetSecondPoint(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -435,7 +435,7 @@ void VToolLine::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::setTypeLine(const QString &value)
+void VToolLine::SetTypeLine(const QString &value)
 {
     typeLine = value;
 
@@ -444,13 +444,13 @@ void VToolLine::setTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLine::getFirstPoint() const
+quint32 VToolLine::GetFirstPoint() const
 {
     return firstPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::setFirstPoint(const quint32 &value)
+void VToolLine::SetFirstPoint(const quint32 &value)
 {
     if (value != NULL_ID)
     {

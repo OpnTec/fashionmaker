@@ -76,9 +76,9 @@ void VToolCutSpline::setDialog()
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setFormula(formula);
+    dialogTool->SetFormula(formula);
     dialogTool->setSplineId(curveCutId);
-    dialogTool->setPointName(point->name());
+    dialogTool->SetPointName(point->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *s
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->getFormula();
+    QString formula = dialogTool->GetFormula();
     const quint32 splineId = dialogTool->getSplineId();
     VToolCutSpline* point = nullptr;
     point = Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
@@ -282,7 +282,7 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
 }
 

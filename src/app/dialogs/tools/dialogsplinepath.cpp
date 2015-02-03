@@ -88,20 +88,20 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
         NewItem(path.at(i).P().id(), path.at(i).KAsm1(), path.at(i).Angle1(), path.at(i).KAsm2(), path.at(i).Angle2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->doubleSpinBoxKcurve->setValue(path.getKCurve());
+    ui->doubleSpinBoxKcurve->setValue(path.GetKCurve());
 
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSplinePath::getColor() const
+QString DialogSplinePath::GetColor() const
 {
-    return GetLineColor(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSplinePath::setColor(const QString &value)
+void DialogSplinePath::SetColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxColor, value);
 }
@@ -375,5 +375,5 @@ void DialogSplinePath::SavePath()
         QListWidgetItem *item = ui->listWidget->item(i);
         path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
     }
-    path.setKCurve(ui->doubleSpinBoxKcurve->value());
+    path.SetKCurve(ui->doubleSpinBoxKcurve->value());
 }

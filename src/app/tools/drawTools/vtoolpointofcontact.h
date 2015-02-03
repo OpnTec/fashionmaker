@@ -62,11 +62,11 @@ public:
     quint32 getCenter() const;
     void    setCenter(const quint32 &value);
 
-    quint32 getFirstPointId() const;
-    void    setFirstPointId(const quint32 &value);
+    quint32 GetFirstPointId() const;
+    void    SetFirstPointId(const quint32 &value);
 
-    quint32 getSecondPointId() const;
-    void    setSecondPointId(const quint32 &value);
+    quint32 GetSecondPointId() const;
+    void    SetSecondPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:

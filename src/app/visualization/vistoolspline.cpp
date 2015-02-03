@@ -84,31 +84,31 @@ void VisToolSpline::setPoint4Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setAngle1(const qreal &value)
+void VisToolSpline::SetAngle1(const qreal &value)
 {
     angle1 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setAngle2(const qreal &value)
+void VisToolSpline::SetAngle2(const qreal &value)
 {
     angle2 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setKAsm1(const qreal &value)
+void VisToolSpline::SetKAsm1(const qreal &value)
 {
     kAsm1 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setKAsm2(const qreal &value)
+void VisToolSpline::SetKAsm2(const qreal &value)
 {
     kAsm2 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setKCurve(const qreal &value)
+void VisToolSpline::SetKCurve(const qreal &value)
 {
     kCurve = value;
 }

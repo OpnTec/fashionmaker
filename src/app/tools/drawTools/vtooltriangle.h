@@ -54,17 +54,17 @@ public:
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};
 
-    quint32 getAxisP1Id() const;
-    void    setAxisP1Id(const quint32 &value);
+    quint32 GetAxisP1Id() const;
+    void    SetAxisP1Id(const quint32 &value);
 
-    quint32 getAxisP2Id() const;
-    void    setAxisP2Id(const quint32 &value);
+    quint32 GetAxisP2Id() const;
+    void    SetAxisP2Id(const quint32 &value);
 
-    quint32 getFirstPointId() const;
-    void    setFirstPointId(const quint32 &value);
+    quint32 GetFirstPointId() const;
+    void    SetFirstPointId(const quint32 &value);
 
-    quint32 getSecondPointId() const;
-    void    setSecondPointId(const quint32 &value);
+    quint32 GetSecondPointId() const;
+    void    SetSecondPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:

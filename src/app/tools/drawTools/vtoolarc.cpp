@@ -197,7 +197,7 @@ void VToolArc::setCenter(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArc::getFormulaRadius() const
+VFormula VToolArc::GetFormulaRadius() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     SCASSERT(arc.isNull() == false);
@@ -210,7 +210,7 @@ VFormula VToolArc::getFormulaRadius() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setFormulaRadius(const VFormula &value)
+void VToolArc::SetFormulaRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
@@ -225,7 +225,7 @@ void VToolArc::setFormulaRadius(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArc::getFormulaF1() const
+VFormula VToolArc::GetFormulaF1() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     SCASSERT(arc.isNull() == false);
@@ -238,7 +238,7 @@ VFormula VToolArc::getFormulaF1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setFormulaF1(const VFormula &value)
+void VToolArc::SetFormulaF1(const VFormula &value)
 {
     if (value.error() == false)
     {
@@ -254,7 +254,7 @@ void VToolArc::setFormulaF1(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArc::getFormulaF2() const
+VFormula VToolArc::GetFormulaF2() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     SCASSERT(arc.isNull() == false);
@@ -267,7 +267,7 @@ VFormula VToolArc::getFormulaF2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setFormulaF2(const VFormula &value)
+void VToolArc::SetFormulaF2(const VFormula &value)
 {
     if (value.error() == false)
     {

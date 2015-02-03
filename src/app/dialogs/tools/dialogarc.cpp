@@ -157,7 +157,7 @@ void DialogArc::SetF2(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArc::GetColor() const
 {
-    return GetLineColor(ui->comboBoxColor);
+    return GetComboBoxCurrentData(ui->comboBoxColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

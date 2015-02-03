@@ -237,7 +237,7 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
         controlPoints[j-1]->blockSignals(false);
 
         spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4(),
-                splPath.getKCurve());
+                splPath.GetKCurve());
         UpdateControlPoints(spl, splPath, i);
     }
 }
@@ -340,7 +340,7 @@ void VToolSplinePath::RefreshDataInFile()
     }
     VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
     RefreshSplinePath(splPath);
-    doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
+    doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.GetKCurve()));
     UpdatePathPoint(doc, domElement, splPath);
 }
 
@@ -388,7 +388,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
 
     VSplinePath splPath = dialogTool->GetPath();
     RefreshSplinePath(splPath);
-    doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.getKCurve()));
+    doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.GetKCurve()));
     UpdatePathPoint(doc, domElement, splPath);
 }
 
@@ -400,7 +400,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 
     doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrKCurve, splPath->getKCurve());
+    doc->SetAttribute(tag, AttrKCurve, splPath->GetKCurve());
 
     doc->RemoveAllChild(tag);
     for (qint32 i = 0; i < splPath->CountPoint(); ++i)

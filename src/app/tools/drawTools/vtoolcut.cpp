@@ -94,7 +94,7 @@ void VToolCut::setCurveCutId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCut::getFormula() const
+VFormula VToolCut::GetFormula() const
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
@@ -104,11 +104,11 @@ VFormula VToolCut::getFormula() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::setFormula(const VFormula &value)
+void VToolCut::SetFormula(const VFormula &value)
 {
     if (value.error() == false)
     {
-        formula = value.getFormula(FormulaType::FromUser);
+        formula = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);

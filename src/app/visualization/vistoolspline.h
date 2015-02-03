@@ -41,11 +41,11 @@ public:
     virtual void RefreshGeometry();
 
     void         setPoint4Id(const quint32 &value);
-    void         setAngle1(const qreal &value);
-    void         setAngle2(const qreal &value);
-    void         setKAsm1(const qreal &value);
-    void         setKAsm2(const qreal &value);
-    void         setKCurve(const qreal &value);
+    void         SetAngle1(const qreal &value);
+    void         SetAngle2(const qreal &value);
+    void         SetKAsm1(const qreal &value);
+    void         SetKAsm2(const qreal &value);
+    void         SetKCurve(const qreal &value);
 
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};

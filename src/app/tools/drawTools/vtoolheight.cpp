@@ -72,11 +72,11 @@ void VToolHeight::setDialog()
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setBasePointId(basePointId);
-    dialogTool->setP1LineId(p1LineId);
-    dialogTool->setP2LineId(p2LineId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetBasePointId(basePointId);
+    dialogTool->SetP1LineId(p1LineId);
+    dialogTool->SetP2LineId(p2LineId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,10 +95,10 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     SCASSERT(dialogTool != nullptr);
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
     const QString pointName = dialogTool->getPointName();
-    const QString typeLine = dialogTool->getTypeLine();
-    const quint32 basePointId = dialogTool->getBasePointId();
-    const quint32 p1LineId = dialogTool->getP1LineId();
-    const quint32 p2LineId = dialogTool->getP2LineId();
+    const QString typeLine = dialogTool->GetTypeLine();
+    const quint32 basePointId = dialogTool->GetBasePointId();
+    const quint32 p1LineId = dialogTool->GetP1LineId();
+    const quint32 p2LineId = dialogTool->GetP2LineId();
 
     VToolHeight *point = nullptr;
     point = Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
@@ -244,10 +244,10 @@ void VToolHeight::SaveDialog(QDomElement &domElement)
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
-    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1LineId()));
-    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2LineId()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1LineId()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2LineId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,13 +269,13 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolHeight::getP2LineId() const
+quint32 VToolHeight::GetP2LineId() const
 {
     return p2LineId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolHeight::setP2LineId(const quint32 &value)
+void VToolHeight::SetP2LineId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -322,13 +322,13 @@ void VToolHeight::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolHeight::getP1LineId() const
+quint32 VToolHeight::GetP1LineId() const
 {
     return p1LineId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolHeight::setP1LineId(const quint32 &value)
+void VToolHeight::SetP1LineId(const quint32 &value)
 {
     if (value != NULL_ID)
     {

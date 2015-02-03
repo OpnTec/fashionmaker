@@ -74,12 +74,12 @@ void VToolShoulderPoint::setDialog()
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formulaLength);
-    dialogTool->setP1Line(basePointId);
-    dialogTool->setP2Line(p2Line);
-    dialogTool->setP3(pShoulder);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetFormula(formulaLength);
+    dialogTool->SetP1Line(basePointId);
+    dialogTool->SetP2Line(p2Line);
+    dialogTool->SetP3(pShoulder);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,11 +134,11 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
     SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool);
-    QString formula = dialogTool->getFormula();
-    const quint32 p1Line = dialogTool->getP1Line();
-    const quint32 p2Line = dialogTool->getP2Line();
-    const quint32 pShoulder = dialogTool->getP3();
-    const QString typeLine = dialogTool->getTypeLine();
+    QString formula = dialogTool->GetFormula();
+    const quint32 p1Line = dialogTool->GetP1Line();
+    const quint32 p2Line = dialogTool->GetP2Line();
+    const quint32 pShoulder = dialogTool->GetP3();
+    const QString typeLine = dialogTool->GetTypeLine();
     const QString pointName = dialogTool->getPointName();
     VToolShoulderPoint * point = nullptr;
     point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
@@ -300,11 +300,11 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1Line()));
-    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2Line()));
-    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getP3()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1Line()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2Line()));
+    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->GetP3()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -381,13 +381,13 @@ void VToolShoulderPoint::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolShoulderPoint::getP2Line() const
+quint32 VToolShoulderPoint::GetP2Line() const
 {
     return p2Line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolShoulderPoint::setP2Line(const quint32 &value)
+void VToolShoulderPoint::SetP2Line(const quint32 &value)
 {
     if (value != NULL_ID)
     {

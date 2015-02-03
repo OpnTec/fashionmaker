@@ -48,17 +48,17 @@ public:
     DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLine();
 
-    quint32        getFirstPoint() const;
-    void           setFirstPoint(const quint32 &value);
+    quint32        GetFirstPoint() const;
+    void           SetFirstPoint(const quint32 &value);
 
-    quint32        getSecondPoint() const;
-    void           setSecondPoint(const quint32 &value);
+    quint32        GetSecondPoint() const;
+    void           SetSecondPoint(const quint32 &value);
 
-    QString        getTypeLine() const;
-    void           setTypeLine(const QString &value);
+    QString        GetTypeLine() const;
+    void           SetTypeLine(const QString &value);
 
-    QString        getLineColor() const;
-    void           setLineColor(const QString &value);
+    QString        GetLineColor() const;
+    void           SetLineColor(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   PointNameChanged();

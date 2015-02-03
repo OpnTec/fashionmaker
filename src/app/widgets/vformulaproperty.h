@@ -76,10 +76,10 @@ public:
     virtual QVariant getValue() const;
 
     //! Returns the formula
-    virtual VFormula getFormula() const;
+    virtual VFormula GetFormula() const;
 
     //! Sets the formula
-    virtual void setFormula(const VFormula &formula);
+    virtual void SetFormula(const VFormula &formula);
 
 public slots:
     virtual void ValueChildChanged(const QVariant &value, int typeForParent);

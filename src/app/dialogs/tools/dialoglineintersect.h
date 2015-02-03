@@ -48,19 +48,19 @@ public:
     DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLineIntersect();
 
-    quint32                 getP1Line1() const;
-    void                    setP1Line1(const quint32 &value);
+    quint32                 GetP1Line1() const;
+    void                    SetP1Line1(const quint32 &value);
 
-    quint32                 getP2Line1() const;
-    void                    setP2Line1(const quint32 &value);
+    quint32                 GetP2Line1() const;
+    void                    SetP2Line1(const quint32 &value);
 
-    quint32                 getP1Line2() const;
-    void                    setP1Line2(const quint32 &value);
+    quint32                 GetP1Line2() const;
+    void                    SetP1Line2(const quint32 &value);
 
-    quint32                 getP2Line2() const;
-    void                    setP2Line2(const quint32 &value);
+    quint32                 GetP2Line2() const;
+    void                    SetP2Line2(const quint32 &value);
 
-    void                    setPointName(const QString &value);
+    void                    SetPointName(const QString &value);
 public slots:
     virtual void            ChosenObject(quint32 id, const SceneObject &type);
     void                    PointChanged();

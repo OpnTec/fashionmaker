@@ -241,10 +241,10 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
             {
                 DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
                 dialog->setWindowTitle(tr("Edit wrong formula"));
-                dialog->setFormula(formula);
+                dialog->SetFormula(formula);
                 if (dialog->exec() == QDialog::Accepted)
                 {
-                    formula = dialog->getFormula();
+                    formula = dialog->GetFormula();
                     /* Need delete dialog here because parser in dialog don't allow use correct separator for parsing
                      * here. */
                     delete dialog;

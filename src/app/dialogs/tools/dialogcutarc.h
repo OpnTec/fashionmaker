@@ -49,10 +49,10 @@ public:
     DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogCutArc();
 
-    void              setPointName(const QString &value);
+    void              SetPointName(const QString &value);
 
-    QString           getFormula() const;
-    void              setFormula(const QString &value);
+    QString           GetFormula() const;
+    void              SetFormula(const QString &value);
 
     quint32           getArcId() const;
     void              setArcId(const quint32 &value);

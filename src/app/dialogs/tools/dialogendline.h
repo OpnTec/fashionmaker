@@ -48,22 +48,22 @@ public:
     DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogEndLine();
 
-    void              setPointName(const QString &value);
+    void              SetPointName(const QString &value);
 
-    QString           getTypeLine() const;
-    void              setTypeLine(const QString &value);
+    QString           GetTypeLine() const;
+    void              SetTypeLine(const QString &value);
 
-    QString           getFormula() const;
-    void              setFormula(const QString &value);
+    QString           GetFormula() const;
+    void              SetFormula(const QString &value);
 
-    QString           getAngle() const;
-    void              setAngle(const QString &value);
+    QString           GetAngle() const;
+    void              SetAngle(const QString &value);
 
-    quint32           getBasePointId() const;
-    void              setBasePointId(const quint32 &value);
+    quint32           GetBasePointId() const;
+    void              SetBasePointId(const quint32 &value);
 
-    QString           getLineColor() const;
-    void              setLineColor(const QString &value);
+    QString           GetLineColor() const;
+    void              SetLineColor(const QString &value);
 
     virtual void      ShowDialog(bool click);
 public slots:

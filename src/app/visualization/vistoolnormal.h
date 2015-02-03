@@ -42,8 +42,8 @@ public:
 
     void         setPoint2Id(const quint32 &value);
     void         setLength(const QString &expression);
-    qreal        getAngle() const;
-    void         setAngle(const qreal &value);
+    qreal        GetAngle() const;
+    void         SetAngle(const qreal &value);
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
 private:

@@ -159,10 +159,10 @@ void DialogCutArc::setArcId(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string with formula length
+ * @brief SetFormula set string with formula length
  * @param value string with formula
  */
-void DialogCutArc::setFormula(const QString &value)
+void DialogCutArc::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed.
@@ -177,10 +177,10 @@ void DialogCutArc::setFormula(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name point on arc
+ * @brief SetPointName set name point on arc
  * @param value name
  */
-void DialogCutArc::setPointName(const QString &value)
+void DialogCutArc::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -188,10 +188,10 @@ void DialogCutArc::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFormula return string with formula length
+ * @brief GetFormula return string with formula length
  * @return formula
  */
-QString DialogCutArc::getFormula() const
+QString DialogCutArc::GetFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }

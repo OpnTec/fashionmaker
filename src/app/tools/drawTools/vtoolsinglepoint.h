@@ -71,7 +71,7 @@ protected:
 private:
     QString namePP;
     QString mPath;
-    void         setColorLabel(const Qt::GlobalColor & color);
+    void         SetColorLabel(const Qt::GlobalColor & color);
 
 };
 

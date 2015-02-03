@@ -45,8 +45,10 @@ class DialogSinglePoint : public DialogTool
 public:
     DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSinglePoint();
-    void           setData(const QString &name, const QPointF &point);
-    QPointF        getPoint()const;
+
+    void           SetData(const QString &name, const QPointF &point);
+    QPointF        GetPoint()const;
+
 public slots:
     void           mousePress(const QPointF &scenePos);
     virtual void   UpdateList();

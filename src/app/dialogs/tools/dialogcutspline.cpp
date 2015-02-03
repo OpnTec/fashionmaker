@@ -80,10 +80,10 @@ DialogCutSpline::~DialogCutSpline()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogCutSpline::setPointName(const QString &value)
+void DialogCutSpline::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -91,10 +91,10 @@ void DialogCutSpline::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogCutSpline::setFormula(const QString &value)
+void DialogCutSpline::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -181,10 +181,10 @@ void DialogCutSpline::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFormula return string of formula
+ * @brief GetFormula return string of formula
  * @return formula
  */
-QString DialogCutSpline::getFormula() const
+QString DialogCutSpline::GetFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }

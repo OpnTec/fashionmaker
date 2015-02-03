@@ -53,11 +53,11 @@ public:
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Height)};
 
-    quint32 getP1LineId() const;
-    void    setP1LineId(const quint32 &value);
+    quint32 GetP1LineId() const;
+    void    SetP1LineId(const quint32 &value);
 
-    quint32 getP2LineId() const;
-    void    setP2LineId(const quint32 &value);
+    quint32 GetP2LineId() const;
+    void    SetP2LineId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:

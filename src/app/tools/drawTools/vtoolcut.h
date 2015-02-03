@@ -43,8 +43,8 @@ public:
     virtual int   type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
-    VFormula getFormula() const;
-    void     setFormula(const VFormula &value);
+    VFormula GetFormula() const;
+    void     SetFormula(const VFormula &value);
 
     quint32 getCurveCutId() const;
     void    setCurveCutId(const quint32 &value);

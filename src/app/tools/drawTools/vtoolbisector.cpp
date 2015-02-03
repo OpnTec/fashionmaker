@@ -112,12 +112,12 @@ void VToolBisector::setDialog()
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formulaLength);
-    dialogTool->setFirstPointId(firstPointId);
-    dialogTool->setSecondPointId(basePointId);
-    dialogTool->setThirdPointId(thirdPointId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetFormula(formulaLength);
+    dialogTool->SetFirstPointId(firstPointId);
+    dialogTool->SetSecondPointId(basePointId);
+    dialogTool->SetThirdPointId(thirdPointId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,11 +134,11 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
     SCASSERT(dialog != nullptr);
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    QString formula = dialogTool->getFormula();
-    const quint32 firstPointId = dialogTool->getFirstPointId();
-    const quint32 secondPointId = dialogTool->getSecondPointId();
-    const quint32 thirdPointId = dialogTool->getThirdPointId();
-    const QString typeLine = dialogTool->getTypeLine();
+    QString formula = dialogTool->GetFormula();
+    const quint32 firstPointId = dialogTool->GetFirstPointId();
+    const quint32 secondPointId = dialogTool->GetSecondPointId();
+    const quint32 thirdPointId = dialogTool->GetThirdPointId();
+    const QString typeLine = dialogTool->GetTypeLine();
     const QString pointName = dialogTool->getPointName();
     VToolBisector *point = nullptr;
     point=Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
@@ -296,11 +296,11 @@ void VToolBisector::SaveDialog(QDomElement &domElement)
     DialogBisector *dialogTool = qobject_cast<DialogBisector*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
-    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
-    doc->SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogTool->getThirdPointId()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
+    doc->SetAttribute(domElement, AttrThirdPoint, QString().setNum(dialogTool->GetThirdPointId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,13 +323,13 @@ void VToolBisector::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolBisector::getThirdPointId() const
+quint32 VToolBisector::GetThirdPointId() const
 {
     return thirdPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::setThirdPointId(const quint32 &value)
+void VToolBisector::SetThirdPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -377,13 +377,13 @@ void VToolBisector::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolBisector::getFirstPointId() const
+quint32 VToolBisector::GetFirstPointId() const
 {
     return firstPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolBisector::setFirstPointId(const quint32 &value)
+void VToolBisector::SetFirstPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {

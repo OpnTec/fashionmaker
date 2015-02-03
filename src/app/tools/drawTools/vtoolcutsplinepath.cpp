@@ -80,9 +80,9 @@ void VToolCutSplinePath::setDialog()
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setFormula(formula);
+    dialogTool->SetFormula(formula);
     dialogTool->setSplinePathId(curveCutId);
-    dialogTool->setPointName(point->name());
+    dialogTool->SetPointName(point->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphics
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->getFormula();
+    QString formula = dialogTool->GetFormula();
     const quint32 splinePathId = dialogTool->getSplinePathId();
     VToolCutSplinePath* point = nullptr;
     point = Create(0, pointName, formula, splinePathId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
@@ -156,8 +156,8 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
 
     VSplinePoint splP1 = splPath->at(p1);
     VSplinePoint splP2 = splPath->at(p2);
-    const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
-    const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
+    const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
+    const VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
 
     VSplinePath *splPath1 = new VSplinePath();
     VSplinePath *splPath2 = new VSplinePath();
@@ -191,8 +191,8 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
             splPath2->append(splPath->at(i));
         }
     }
-    splPath1->setKCurve(splPath->getKCurve());
-    splPath2->setKCurve(splPath->getKCurve());
+    splPath1->SetKCurve(splPath->GetKCurve());
+    splPath2->SetKCurve(splPath->GetKCurve());
 
     splPath1->setMaxCountPoints(splPath->CountPoint());
     splPath2->setMaxCountPoints(splPath->CountPoint());
@@ -331,7 +331,7 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
 }
 

@@ -346,30 +346,13 @@ void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @param box combobox
- * @return type
- */
-QString DialogTool::GetTypeLine(const QComboBox *box) const
+QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
 {
     SCASSERT(box != nullptr)
     QString value = box->currentData().toString();
     if (value.isEmpty())
     {
         value = VAbstractTool::TypeLineLine;
-    }
-    return value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetLineColor(const QComboBox *box) const
-{
-    SCASSERT(box != nullptr)
-    QString value = box->currentData().toString();
-    if (value.isEmpty())
-    {
-        value = VAbstractTool::ColorBlack;
     }
     return value;
 }

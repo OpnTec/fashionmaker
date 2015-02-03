@@ -108,7 +108,7 @@ QString VisToolLineIntersectAxis::Angle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolLineIntersectAxis::setAngle(const QString &expression)
+void VisToolLineIntersectAxis::SetAngle(const QString &expression)
 {
     angle = FindVal(expression);
 }

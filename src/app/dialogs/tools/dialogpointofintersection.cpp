@@ -76,10 +76,10 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPointId set id of second point
+ * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogPointOfIntersection::setSecondPointId(const quint32 &value)
+void DialogPointOfIntersection::SetSecondPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
@@ -132,8 +132,8 @@ void DialogPointOfIntersection::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    line->setPoint1Id(getFirstPointId());
-    line->setPoint2Id(getSecondPointId());
+    line->setPoint1Id(GetFirstPointId());
+    line->setPoint2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -178,10 +178,10 @@ void DialogPointOfIntersection::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPointId set id of first point
+ * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogPointOfIntersection::setFirstPointId(const quint32 &value)
+void DialogPointOfIntersection::SetFirstPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
@@ -189,10 +189,10 @@ void DialogPointOfIntersection::setFirstPointId(const quint32 &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogPointOfIntersection::setPointName(const QString &value)
+void DialogPointOfIntersection::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -200,20 +200,20 @@ void DialogPointOfIntersection::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFirstPointId return id of first point
+ * @brief GetFirstPointId return id of first point
  * @return id
  */
-quint32 DialogPointOfIntersection::getFirstPointId() const
+quint32 DialogPointOfIntersection::GetFirstPointId() const
 {
     return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getSecondPointId return id of second point
+ * @brief GetSecondPointId return id of second point
  * @return id
  */
-quint32 DialogPointOfIntersection::getSecondPointId() const
+quint32 DialogPointOfIntersection::GetSecondPointId() const
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
 }
