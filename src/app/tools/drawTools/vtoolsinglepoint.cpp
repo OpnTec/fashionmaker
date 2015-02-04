@@ -301,26 +301,6 @@ void  VToolSinglePoint::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolSinglePoint::ChangedActivDraw(const QString &newName)
-{
-    VToolPoint::ChangedActivDraw(newName);
-    if (nameActivDraw == newName)
-    {
-        this->setEnabled(true);
-        SetColorLabel(Qt::black);
-    }
-    else
-    {
-        this->setEnabled(false);
-        SetColorLabel(Qt::gray);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

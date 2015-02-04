@@ -239,7 +239,6 @@ void VToolLine::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
     this->setEnabled(nameActivDraw == newName);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

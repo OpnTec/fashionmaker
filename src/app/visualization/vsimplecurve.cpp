@@ -60,8 +60,7 @@ VSimpleCurve::VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurv
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::ChangedActivDraw(const bool &flag)
 {
-    setFlag(QGraphicsItem::ItemIsSelectable, flag);
-    setAcceptHoverEvents(flag);
+    setEnabled(flag);
     setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
 }
 

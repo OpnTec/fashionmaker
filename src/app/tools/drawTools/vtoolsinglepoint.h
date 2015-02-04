@@ -48,7 +48,6 @@ public:
     virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
-    virtual void ChangedActivDraw(const QString &newName);
     virtual void SetFactor(qreal factor);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 signals:
