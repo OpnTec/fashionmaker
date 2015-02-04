@@ -58,6 +58,10 @@ public:
 
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
+
+    QString      GetLineColor() const;
+    void         SetLineColor(const QString &value);
+
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
@@ -78,6 +82,9 @@ protected:
 
     /** @brief typeLine line type. */
     QString      typeLine;
+
+    /** @brief lineColor color line or curve, but not a point. */
+    QString      lineColor;
 
     void         AddToCalculation(const QDomElement &domElement);
 
