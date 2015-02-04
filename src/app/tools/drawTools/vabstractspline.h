@@ -45,6 +45,9 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
     virtual QString  getTagName() const;
     void             ShowFoot(bool show);
+
+    void setEnabled(bool enabled);
+
 public slots:
     virtual void     FullUpdateFromFile ();
     void             Disable(bool disable);

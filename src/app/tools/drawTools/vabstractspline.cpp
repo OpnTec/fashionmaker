@@ -87,7 +87,6 @@ void VAbstractSpline::ChangedActivDraw(const QString &newName)
     VDrawTool::ChangedActivDraw(newName);
     const bool selectable = (nameActivDraw == newName);
     this->setEnabled(selectable);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     emit setEnabledPoint(selectable);
 }
 
@@ -217,5 +216,19 @@ void VAbstractSpline::ShowFoot(bool show)
     for (int i = 0; i < controlPoints.size(); ++i)
     {
         controlPoints.at(i)->setVisible(show);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::setEnabled(bool enabled)
+{
+    QGraphicsPathItem::setEnabled(enabled);
+    if (enabled)
+    {
+        setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    }
+    else
+    {
+        setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())/factor));
     }
 }
