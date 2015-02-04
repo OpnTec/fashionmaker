@@ -84,6 +84,21 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::setEnabled(bool enabled)
+{
+    QGraphicsSimpleTextItem::setEnabled(enabled);
+    const QPalette palet = this->scene()->palette();
+    if (enabled)
+    {
+        setBrush(palet.brush(QPalette::Active, QPalette::Text));
+    }
+    else
+    {
+        setBrush(palet.brush(QPalette::Disabled, QPalette::Text));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief itemChange handle item change.
  * @param change change.

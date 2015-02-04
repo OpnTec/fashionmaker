@@ -47,6 +47,8 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
+
+    void setEnabled(bool enabled);
 signals:
     /**
      * @brief NameChangePosition emit when label change position.

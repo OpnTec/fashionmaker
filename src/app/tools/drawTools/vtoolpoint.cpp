@@ -50,9 +50,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
-    namePoint->setBrush(Qt::black);
     lineName = new QGraphicsLineItem(this);
-    lineName->setPen(QPen(Qt::black));
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -136,9 +134,7 @@ void VToolPoint::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
     this->setEnabled(nameActivDraw == newName);
-    namePoint->setBrush(QBrush(currentColor));
-    lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    namePoint->setEnabled(nameActivDraw == newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
