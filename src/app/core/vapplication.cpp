@@ -1771,27 +1771,25 @@ QString VApplication::FormulaFromUser(const QString &formula)
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
+            loc = QLocale::system();
             bool ok = false;
-            qreal d = loc.toDouble(nValues.at(i), &ok);
+            const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
             {
                 qDebug()<<"Can't convert to double token"<<nValues.at(i);
                 continue;
             }
-            if (qFloor (d) < d)
-            {
-                QLocale loc = QLocale(QLocale::C);
-                QString dStr = loc.toString(d);
-                newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
-                int bias = nValues.at(i).length() - dStr.length();
-                if (bias != 0)
-                {
-                    CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
-                    nKeys = numbers.keys();
-                    nValues = numbers.values();
-                }
-            }
 
+            loc = QLocale(QLocale::C);
+            const QString dStr = loc.toString(d);
+            newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
+            const int bias = nValues.at(i).length() - dStr.length();
+            if (bias != 0)
+            {
+                CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
+                nKeys = numbers.keys();
+                nValues = numbers.values();
+            }
         }
     }
 
@@ -1885,27 +1883,24 @@ QString VApplication::FormulaToUser(const QString &formula)
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            QLocale loc = QLocale(QLocale::C);
+            loc = QLocale(QLocale::C);
             bool ok = false;
-            qreal d = loc.toDouble(nValues.at(i), &ok);
+            const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
             {
                 qDebug()<<"Can't convert to double token"<<nValues.at(i);
                 continue;
             }
-            if (qFloor (d) < d)
-            {
-                QLocale loc = QLocale::system();
-                QString dStr = loc.toString(d);
-                newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
-                int bias = nValues.at(i).length() - dStr.length();
 
-                if (bias != 0)
-                {
-                    CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
-                    nKeys = numbers.keys();
-                    nValues = numbers.values();
-                }
+            loc = QLocale::system();
+            const QString dStr = loc.toString(d);
+            newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
+            const int bias = nValues.at(i).length() - dStr.length();
+            if (bias != 0)
+            {
+                CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
+                nKeys = numbers.keys();
+                nValues = numbers.values();
             }
         }
     }
