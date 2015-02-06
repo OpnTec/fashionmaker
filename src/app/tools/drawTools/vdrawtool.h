@@ -64,7 +64,7 @@ public:
 
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
-    virtual void ChangedActivDraw(const QString &newName);
+    virtual void ChangedActivDraw(const QString &newName) = 0;
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGuiOk(int result);
     virtual void FullUpdateFromGuiApply();
