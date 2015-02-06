@@ -143,8 +143,8 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
                                                                    typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersectAxis::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersectAxis::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(basePointId);
         doc->IncrementReferens(firstPointId);

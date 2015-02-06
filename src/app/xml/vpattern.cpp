@@ -1161,7 +1161,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                     scene->addItem(spoint);
                     connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
                     connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
-                    connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolPoint::Disable);
+                    connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolSinglePoint::Disable);
                     tools[id] = spoint;
                 }
             }

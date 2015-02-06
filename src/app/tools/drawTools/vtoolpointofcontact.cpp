@@ -209,7 +209,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
         scene->addItem(point);
         connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfContact::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(center);
         doc->IncrementReferens(firstPointId);

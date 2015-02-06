@@ -131,8 +131,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
                                                                      curveId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCurveIntersectAxis::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCurveIntersectAxis::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(basePointId);
         doc->IncrementReferens(curveId);
