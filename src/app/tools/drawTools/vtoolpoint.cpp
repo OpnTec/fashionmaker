@@ -133,8 +133,8 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
 void VToolPoint::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
-    this->setEnabled(nameActivDraw == newName);
-    namePoint->setEnabled(nameActivDraw == newName);
+    this->setEnabled(enabled);
+    namePoint->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

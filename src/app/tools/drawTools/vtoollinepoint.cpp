@@ -70,8 +70,8 @@ VToolLinePoint::~VToolLinePoint()
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
     VToolPoint::ChangedActivDraw(newName);
-    this->setEnabled(nameActivDraw == newName);
-    mainLine->setEnabled(nameActivDraw == newName);
+    this->setEnabled(enabled);
+    mainLine->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

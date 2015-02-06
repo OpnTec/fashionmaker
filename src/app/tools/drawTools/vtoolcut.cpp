@@ -60,10 +60,8 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
 void VToolCut::ChangedActivDraw(const QString &newName)
 {
     VToolPoint::ChangedActivDraw(newName);
-    const bool flag = (nameActivDraw == newName);
-    this->setEnabled(flag);
-    firstCurve->ChangedActivDraw(flag);
-    secondCurve->ChangedActivDraw(flag);
+    firstCurve->ChangedActivDraw(enabled);
+    secondCurve->ChangedActivDraw(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

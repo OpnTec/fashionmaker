@@ -85,9 +85,8 @@ void VAbstractSpline::Disable(bool disable)
 void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
-    const bool selectable = (nameActivDraw == newName);
-    this->setEnabled(selectable);
-    emit setEnabledPoint(selectable);
+    this->setEnabled(enabled);
+    emit setEnabledPoint(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

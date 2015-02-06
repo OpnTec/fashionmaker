@@ -238,7 +238,7 @@ void VToolLine::Disable(bool disable)
 void VToolLine::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
-    this->setEnabled(nameActivDraw == newName);
+    this->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
