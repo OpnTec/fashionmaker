@@ -258,6 +258,7 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrP1Line, p1LineId);
     doc->SetAttribute(tag, AttrP2Line, p2LineId);

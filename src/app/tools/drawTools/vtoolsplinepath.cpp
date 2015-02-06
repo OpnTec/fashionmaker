@@ -403,6 +403,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrKCurve, splPath->GetKCurve());
+    doc->SetAttribute(tag, AttrColor, lineColor);
 
     doc->RemoveAllChild(tag);
     for (qint32 i = 0; i < splPath->CountPoint(); ++i)

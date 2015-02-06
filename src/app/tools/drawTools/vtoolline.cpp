@@ -385,6 +385,7 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrFirstPoint, firstPoint);
     doc->SetAttribute(tag, AttrSecondPoint, secondPoint);
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

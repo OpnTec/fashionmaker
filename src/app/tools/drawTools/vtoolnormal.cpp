@@ -287,6 +287,7 @@ void VToolNormal::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrAngle, angle);
     doc->SetAttribute(tag, AttrFirstPoint, basePointId);

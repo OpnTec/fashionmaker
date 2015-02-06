@@ -314,6 +314,7 @@ void VToolShoulderPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrP1Line, basePointId);
     doc->SetAttribute(tag, AttrP2Line, p2Line);

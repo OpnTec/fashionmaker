@@ -367,6 +367,7 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrRadius, arc->GetFormulaRadius());
     doc->SetAttribute(tag, AttrAngle1, arc->GetFormulaF1());
     doc->SetAttribute(tag, AttrAngle2, arc->GetFormulaF2());
+    doc->SetAttribute(tag, AttrColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

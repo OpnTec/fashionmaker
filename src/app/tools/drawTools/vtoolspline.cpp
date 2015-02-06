@@ -350,6 +350,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
+    doc->SetAttribute(tag, AttrColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
