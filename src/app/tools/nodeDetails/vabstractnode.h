@@ -53,6 +53,9 @@ protected:
     /** @brief idTool id tool. */
     quint32       idTool;
 
+    /** @brief currentColor current tool color. */
+    QColor        currentColor;
+
     void         AddToModeling(const QDomElement &domElement);
     virtual void decrementReferens();
     virtual void RemoveReferens();

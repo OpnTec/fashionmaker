@@ -296,6 +296,7 @@ void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurve
     {
         path.translate(-arc->GetP2().x(), -arc->GetP2().y());
     }
+    curve->SetCurrentColor(QColor(lineColor));
     curve->setPath(path);
 }
 

@@ -97,7 +97,7 @@ const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), vis(nullptr)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(nullptr)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);

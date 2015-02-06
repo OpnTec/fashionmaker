@@ -204,7 +204,7 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthMainLine())/factor));
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -216,7 +216,7 @@ void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,7 +227,7 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);

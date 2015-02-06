@@ -239,6 +239,7 @@ void VToolLine::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
     this->setEnabled(enabled);
+    this->setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -289,7 +290,8 @@ void VToolLine::RefreshDataInFile()
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, LineStyleToPenStyle(typeLine)));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor,
+                      LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,7 +302,8 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+                      LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -476,6 +479,6 @@ void VToolLine::RefreshGeometry()
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/factor,
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor,
                       LineStyleToPenStyle(typeLine)));
 }

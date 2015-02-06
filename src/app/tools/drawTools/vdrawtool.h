@@ -164,32 +164,32 @@ protected:
     void ShowItem(Item *item, quint32 id, Qt::GlobalColor color, bool enable)
     {
         SCASSERT(item != nullptr);
-        if (id == item->id)
-        {
-            if (enable == false)
-            {
-                currentColor = baseColor;
-            }
-            else
-            {
-                currentColor = color;
-            }
-            item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-        }
+//        if (id == item->id)
+//        {
+//            if (enable == false)
+//            {
+//                currentColor = baseColor;
+//            }
+//            else
+//            {
+//                currentColor = color;
+//            }
+//            item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+//        }
     }
     template <typename Item>
     void DisableItem(Item *item, bool disable)
     {
         SCASSERT(item != nullptr);
-        if (disable)
-        {
-            currentColor = Qt::gray;
-        }
-        else
-        {
-            currentColor = baseColor;
-        }
-        item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+//        if (disable)
+//        {
+//            currentColor = Qt::gray;
+//        }
+//        else
+//        {
+//            currentColor = baseColor;
+//        }
+//        item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     }
 private:
     Q_DISABLE_COPY(VDrawTool)

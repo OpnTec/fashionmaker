@@ -86,6 +86,8 @@ void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
     VDrawTool::ChangedActivDraw(newName);
     this->setEnabled(enabled);
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+                      Qt::RoundCap));
     emit setEnabledPoint(enabled);
 }
 
@@ -121,7 +123,8 @@ void VAbstractSpline::SetFactor(qreal factor)
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine, Qt::RoundCap));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+                      Qt::RoundCap));
     this->setPath(ToolPath(PathDirection::Show));
     isHovered = true;
     QGraphicsPathItem::hoverEnterEvent(event);
@@ -136,7 +139,7 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
     isHovered = false;
     QGraphicsPathItem::hoverLeaveEvent(event);

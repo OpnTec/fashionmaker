@@ -307,6 +307,7 @@ void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCu
     {
         path.translate(-spl->GetP4().toQPointF().x(), -spl->GetP4().toQPointF().y());
     }
+    curve->SetCurrentColor(QColor(lineColor));
     curve->setPath(path);
 }
 

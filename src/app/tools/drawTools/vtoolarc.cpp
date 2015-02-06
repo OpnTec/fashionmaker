@@ -373,7 +373,7 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
  */
 void VToolArc::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
 
     if (vis != nullptr)

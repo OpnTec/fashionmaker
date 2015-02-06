@@ -41,12 +41,12 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
     Q_ASSERT_X(curve1id > 0, Q_FUNC_INFO, "curve1id <= 0");
     Q_ASSERT_X(curve2id > 0, Q_FUNC_INFO, "curve2id <= 0");
 
-    firstCurve = new VSimpleCurve(curve1id, &currentColor, SimpleCurvePoint::ForthPoint, &factor);
+    firstCurve = new VSimpleCurve(curve1id, QColor(lineColor), SimpleCurvePoint::ForthPoint, &factor);
     firstCurve->setParentItem(this);
     connect(firstCurve, &VSimpleCurve::Choosed, this, &VToolCut::CurveChoosed);
     connect(firstCurve, &VSimpleCurve::HoverPath, this, &VToolCut::HoverPath);
 
-    secondCurve = new VSimpleCurve(curve2id, &currentColor, SimpleCurvePoint::FirstPoint, &factor);
+    secondCurve = new VSimpleCurve(curve2id, QColor(lineColor), SimpleCurvePoint::FirstPoint, &factor);
     secondCurve->setParentItem(this);
     connect(secondCurve, &VSimpleCurve::Choosed, this, &VToolCut::CurveChoosed);
     connect(secondCurve, &VSimpleCurve::HoverPath, this, &VToolCut::HoverPath);

@@ -358,6 +358,7 @@ void VToolCutSplinePath::RefreshCurve(VSimpleCurve *curve, quint32 curveId, Simp
         VSpline spl = splPath->GetSpline(splPath->Count());
         path.translate(-spl.GetP4().toQPointF().x(), -spl.GetP4().toQPointF().y());
     }
+    curve->SetCurrentColor(QColor(lineColor));
     curve->setPath(path);
 }
 

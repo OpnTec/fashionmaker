@@ -147,9 +147,6 @@ protected:
     /** @brief baseColor base color for tool. */
     Qt::GlobalColor         baseColor;
 
-    /** @brief currentColor current tool color. */
-    Qt::GlobalColor         currentColor;
-
     Visualization           *vis;
 
     /**
