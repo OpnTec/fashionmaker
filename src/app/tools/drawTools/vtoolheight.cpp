@@ -239,6 +239,7 @@ void VToolHeight::SaveDialog(QDomElement &domElement)
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1LineId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2LineId()));

@@ -332,6 +332,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
     doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
     doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

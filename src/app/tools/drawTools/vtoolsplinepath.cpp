@@ -390,6 +390,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement)
     VSplinePath splPath = dialogTool->GetPath();
     RefreshSplinePath(splPath);
     doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.GetKCurve()));
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     UpdatePathPoint(doc, domElement, splPath);
 }
 

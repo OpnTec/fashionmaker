@@ -138,6 +138,7 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement)
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrFirstPoint, dialogTool->GetFirstPointId());
     doc->SetAttribute(domElement, AttrSecondPoint, dialogTool->GetSecondPointId());

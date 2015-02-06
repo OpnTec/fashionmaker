@@ -352,6 +352,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
     doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
