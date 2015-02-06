@@ -227,7 +227,7 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/factor));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -259,14 +259,7 @@ void VToolPoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - scenePos()));
-        if (currentColor == Qt::gray)
-        {
-            lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-        }
-        else
-        {
-            lineName->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
-        }
+        lineName->setPen(QPen(CorrectColor(Qt::black), qApp->toPixel(qApp->widthHairLine())/factor));
 
         if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
         {
@@ -324,4 +317,18 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsEllipseItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::setEnabled(bool enabled)
+{
+    QGraphicsEllipseItem::setEnabled(enabled);
+    if (enabled)
+    {
+        setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    }
+    else
+    {
+        setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())/factor));
+    }
 }

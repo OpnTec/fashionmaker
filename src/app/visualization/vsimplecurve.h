@@ -71,6 +71,10 @@ private:
     Qt::GlobalColor   *currentColor;
 
     SimpleCurvePoint  curvePosition;
+
+    bool              enabled;
+
+    QColor CorrectColor(const QColor &color) const;
 };
 
 #endif // VSIMPLECURVE_H

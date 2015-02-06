@@ -80,7 +80,8 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    mainLine->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/factor,
+                          LineStyleToPenStyle(typeLine)));
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF point = VDrawTool::data.GeometricObject<VPointF>(id)->toQPointF();
     QPointF basePoint = VDrawTool::data.GeometricObject<VPointF>(basePointId)->toQPointF();

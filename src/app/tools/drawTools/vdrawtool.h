@@ -86,6 +86,8 @@ protected:
     /** @brief lineColor color line or curve, but not a point. */
     QString      lineColor;
 
+    bool         enabled;
+
     void         AddToCalculation(const QDomElement &domElement);
 
     /** @brief SaveDialog save options into file after change in dialog. */
@@ -93,6 +95,7 @@ protected:
     void         SaveDialogChange();
     virtual void AddToFile();
     virtual void RefreshDataInFile();
+    QColor       CorrectColor(const QColor &color) const;
 
     template <typename Dialog, typename Tool>
     /**

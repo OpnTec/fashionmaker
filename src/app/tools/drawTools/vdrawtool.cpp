@@ -47,7 +47,7 @@ qreal VDrawTool::factor = 1;
  */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VAbstractTool(doc, data, id, parent), ignoreFullUpdate(false), nameActivDraw(doc->GetNameActivPP()),
-      dialog(nullptr), typeLine(TypeLineLine), lineColor(ColorBlack)
+      dialog(nullptr), typeLine(TypeLineLine), lineColor(ColorBlack), enabled(true)
 {
     connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -81,14 +81,7 @@ void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
  */
 void VDrawTool::ChangedActivDraw(const QString &newName)
 {
-    if (nameActivDraw == newName)
-    {
-        currentColor = baseColor;
-    }
-    else
-    {
-        currentColor = Qt::gray;
-    }
+    enabled = nameActivDraw == newName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,6 +169,19 @@ void VDrawTool::RefreshDataInFile()
     else
     {
         qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QColor VDrawTool::CorrectColor(const QColor &color) const
+{
+    if (enabled)
+    {
+        return color;
+    }
+    else
+    {
+        return Qt::gray;
     }
 }
 

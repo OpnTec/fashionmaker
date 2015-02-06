@@ -49,6 +49,8 @@ public:
     void                    setName(const QString &name);
     virtual QString         getTagName() const;
     static const QString    TagName;
+
+    void                    setEnabled(bool enabled);
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ChangedActivDraw(const QString &newName);
