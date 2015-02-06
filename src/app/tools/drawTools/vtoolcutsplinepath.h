@@ -64,6 +64,7 @@ protected:
     virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                PathDirection direction = PathDirection::Hide);
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void  ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 };

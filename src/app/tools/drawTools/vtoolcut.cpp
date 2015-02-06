@@ -150,5 +150,4 @@ void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
         formula = domElement.attribute(AttrLength, "");
         curveCutId = domElement.attribute(attrCurve, "").toUInt();
     }
-    RefreshGeometry();
 }

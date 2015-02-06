@@ -68,6 +68,7 @@ QString VAbstractSpline::getTagName() const
  */
 void VAbstractSpline::FullUpdateFromFile()
 {
+    ReadAttributes();
     RefreshGeometry();
 }
 
@@ -210,6 +211,12 @@ QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
     path.addPath(curve->GetPath(direction));
     path.setFillRule( Qt::WindingFill );
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
+{
+    lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -75,6 +75,7 @@ protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void   SaveDialog(QDomElement &domElement);
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void   ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */

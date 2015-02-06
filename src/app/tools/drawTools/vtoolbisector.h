@@ -72,6 +72,7 @@ protected:
     virtual void   RemoveReferens();
     virtual void   SaveDialog(QDomElement &domElement);
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void   ReadToolAttributes(const QDomElement &domElement);
 private:
     /** @brief firstPointId id first point of angle. */
     quint32         firstPointId;

@@ -82,6 +82,7 @@ void VToolArc::setDialog()
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetF2(arc->GetFormulaF2());
     dialogTool->SetRadius(arc->GetFormulaRadius());
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

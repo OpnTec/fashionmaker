@@ -86,6 +86,7 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event);
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
+    virtual void     ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VAbstractSpline)
 };

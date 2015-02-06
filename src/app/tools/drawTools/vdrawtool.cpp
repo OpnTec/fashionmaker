@@ -158,7 +158,7 @@ void VDrawTool::RefreshDataInFile()
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 
@@ -172,6 +172,20 @@ QColor VDrawTool::CorrectColor(const QColor &color) const
     else
     {
         return Qt::gray;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::ReadAttributes()
+{
+    const QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        ReadToolAttributes(domElement);
+    }
+    else
+    {
+        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 

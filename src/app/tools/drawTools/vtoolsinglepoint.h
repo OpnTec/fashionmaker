@@ -67,6 +67,7 @@ protected:
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     QString namePP;
     QString mPath;

@@ -85,6 +85,7 @@ void VToolLine::setDialog()
     dialogTool->SetFirstPoint(firstPoint);
     dialogTool->SetSecondPoint(secondPoint);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,6 +190,7 @@ QString VToolLine::getTagName() const
  */
 void VToolLine::FullUpdateFromFile()
 {
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -385,6 +387,15 @@ void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::ReadToolAttributes(const QDomElement &domElement)
+{
+    firstPoint = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPoint = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLine::GetSecondPoint() const
 {
     return secondPoint;
@@ -469,13 +480,6 @@ void VToolLine::SetFirstPoint(const quint32 &value)
  */
 void VToolLine::RefreshGeometry()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        firstPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-        secondPoint = doc->GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-        typeLine = doc->GetParametrString(domElement, VAbstractTool::AttrTypeLine, VAbstractTool::TypeLineLine);
-    }
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));

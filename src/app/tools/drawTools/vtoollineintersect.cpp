@@ -193,14 +193,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
  */
 void VToolLineIntersect::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        p1Line1 = domElement.attribute(AttrP1Line1, "").toUInt();
-        p2Line1 = domElement.attribute(AttrP2Line1, "").toUInt();
-        p1Line2 = domElement.attribute(AttrP1Line2, "").toUInt();
-        p2Line2 = domElement.attribute(AttrP2Line2, "").toUInt();
-    }
+    ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 
     if (vis != nullptr)
@@ -289,6 +282,15 @@ void VToolLineIntersect::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
     doc->SetAttribute(tag, AttrP2Line1, p2Line1);
     doc->SetAttribute(tag, AttrP1Line2, p1Line2);
     doc->SetAttribute(tag, AttrP2Line2, p2Line2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::ReadToolAttributes(const QDomElement &domElement)
+{
+    p1Line1 = doc->GetParametrUInt(domElement, AttrP1Line1, NULL_ID_STR);
+    p2Line1 = doc->GetParametrUInt(domElement, AttrP2Line1, NULL_ID_STR);
+    p1Line2 = doc->GetParametrUInt(domElement, AttrP1Line2, NULL_ID_STR);
+    p2Line2 = doc->GetParametrUInt(domElement, AttrP2Line2, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

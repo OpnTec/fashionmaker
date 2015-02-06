@@ -105,6 +105,7 @@ void VToolSpline::setDialog()
     dialogTool->SetKAsm1(spl->GetKasm1());
     dialogTool->SetKAsm2(spl->GetKasm2());
     dialogTool->SetKCurve(spl->GetKcurve());
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

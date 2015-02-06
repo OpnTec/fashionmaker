@@ -220,7 +220,8 @@ void VToolCutArc::ShowVisualization(bool show)
  */
 void VToolCutArc::FullUpdateFromFile()
 {
-    FullUpdateCurveFromFile(AttrArc);
+    ReadAttributes();
+    RefreshGeometry();
 
     if (vis != nullptr)
     {
@@ -314,4 +315,11 @@ void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 
     doc->SetAttribute(tag, AttrLength, formula);
     doc->SetAttribute(tag, AttrArc, curveCutId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
+{
+    formula = doc->GetParametrString(domElement, AttrLength, "");
+    curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
 }

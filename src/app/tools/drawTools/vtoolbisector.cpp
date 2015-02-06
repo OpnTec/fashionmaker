@@ -113,6 +113,7 @@ void VToolBisector::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetFirstPointId(firstPointId);
     dialogTool->SetSecondPointId(basePointId);
@@ -221,15 +222,7 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
  */
 void VToolBisector::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        formulaLength = domElement.attribute(AttrLength, "");
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        basePointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-        thirdPointId = domElement.attribute(AttrThirdPoint, "").toUInt();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -320,6 +313,17 @@ void VToolBisector::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, basePointId);
     doc->SetAttribute(tag, AttrThirdPoint, thirdPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    basePointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    thirdPointId = doc->GetParametrUInt(domElement, AttrThirdPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

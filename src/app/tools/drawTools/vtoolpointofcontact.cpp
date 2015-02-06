@@ -225,14 +225,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
  */
 void VToolPointOfContact::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        arcRadius = domElement.attribute(AttrRadius, "");
-        center = domElement.attribute(AttrCenter, "").toUInt();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-    }
+    ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 
     if (vis != nullptr)
@@ -320,6 +313,15 @@ void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
     doc->SetAttribute(tag, AttrCenter, center);
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
+{
+    arcRadius = doc->GetParametrString(domElement, AttrRadius, "");
+    center = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -80,6 +80,7 @@ void VToolEndLine::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetBasePointId(basePointId);
@@ -181,14 +182,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
  */
 void VToolEndLine::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        formulaLength = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
-        formulaAngle = domElement.attribute(AttrAngle, "");
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -233,6 +227,7 @@ void VToolEndLine::SaveDialog(QDomElement &domElement)
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
@@ -251,9 +246,20 @@ void VToolEndLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrAngle, formulaAngle);
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

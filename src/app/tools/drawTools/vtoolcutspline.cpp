@@ -231,7 +231,8 @@ void VToolCutSpline::ShowVisualization(bool show)
  */
 void VToolCutSpline::FullUpdateFromFile()
 {
-    FullUpdateCurveFromFile(AttrSpline);
+    ReadAttributes();
+    RefreshGeometry();
 
     if (vis != nullptr)
     {
@@ -325,4 +326,11 @@ void VToolCutSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 
     doc->SetAttribute(tag, AttrLength, formula);
     doc->SetAttribute(tag, AttrSpline, curveCutId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
+{
+    formula = doc->GetParametrString(domElement, AttrLength, "");
+    curveCutId = doc->GetParametrUInt(domElement, AttrSpline, NULL_ID_STR);
 }

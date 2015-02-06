@@ -73,6 +73,7 @@ void VToolHeight::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetBasePointId(basePointId);
     dialogTool->SetP1LineId(p1LineId);
     dialogTool->SetP2LineId(p2LineId);
@@ -193,14 +194,7 @@ QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
  */
 void VToolHeight::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
-        p1LineId = domElement.attribute(AttrP1Line, "").toUInt();
-        p2LineId = domElement.attribute(AttrP2Line, "").toUInt();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -266,6 +260,16 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrP1Line, p1LineId);
     doc->SetAttribute(tag, AttrP2Line, p2LineId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    p1LineId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2LineId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

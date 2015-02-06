@@ -75,6 +75,7 @@ void VToolShoulderPoint::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetP1Line(basePointId);
     dialogTool->SetP2Line(p2Line);
@@ -225,15 +226,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
  */
 void VToolShoulderPoint::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        formulaLength = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrP1Line, "").toUInt();
-        p2Line = domElement.attribute(AttrP2Line, "").toUInt();
-        pShoulder = domElement.attribute(AttrPShoulder, "").toUInt();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -324,6 +317,17 @@ void VToolShoulderPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
     doc->SetAttribute(tag, AttrP1Line, basePointId);
     doc->SetAttribute(tag, AttrP2Line, p2Line);
     doc->SetAttribute(tag, AttrPShoulder, pShoulder);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    basePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2Line = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    pShoulder = doc->GetParametrUInt(domElement, AttrPShoulder, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

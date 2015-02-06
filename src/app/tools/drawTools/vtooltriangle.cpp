@@ -220,14 +220,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
  */
 void VToolTriangle::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        axisP1Id = domElement.attribute(AttrAxisP1, "").toUInt();
-        axisP2Id = domElement.attribute(AttrAxisP2, "").toUInt();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-    }
+    ReadAttributes();
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
 
     if (vis != nullptr)
@@ -305,6 +298,15 @@ void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrAxisP2, axisP2Id);
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
+{
+    axisP1Id = doc->GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
+    axisP2Id = doc->GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
+    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

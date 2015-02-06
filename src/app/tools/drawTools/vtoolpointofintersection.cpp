@@ -165,12 +165,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const quint32 _id, co
  */
 void VToolPointOfIntersection::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-    }
+    ReadAttributes();
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
 
     if (vis != nullptr)
@@ -240,6 +235,13 @@ void VToolPointOfIntersection::SaveOptions(QDomElement &tag, QSharedPointer<VGOb
 
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);
     doc->SetAttribute(tag, AttrSecondPoint, secondPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::ReadToolAttributes(const QDomElement &domElement)
+{
+    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

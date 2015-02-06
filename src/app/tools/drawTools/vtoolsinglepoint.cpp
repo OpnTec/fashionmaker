@@ -265,6 +265,13 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ReadToolAttributes(const QDomElement &domElement)
+{
+    Q_UNUSED(domElement);
+    // This tool doesn't need read attributes from file.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.

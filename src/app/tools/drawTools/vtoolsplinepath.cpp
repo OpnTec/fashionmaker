@@ -98,6 +98,7 @@ void VToolSplinePath::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     dialogTool->SetPath(*splPath);
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

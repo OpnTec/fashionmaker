@@ -280,7 +280,8 @@ void VToolCutSplinePath::ShowVisualization(bool show)
  */
 void VToolCutSplinePath::FullUpdateFromFile()
 {
-    FullUpdateCurveFromFile(AttrSplinePath);
+    ReadAttributes();
+    RefreshGeometry();
 
     if (vis != nullptr)
     {
@@ -376,4 +377,11 @@ void VToolCutSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 
     doc->SetAttribute(tag, AttrLength, formula);
     doc->SetAttribute(tag, AttrSplinePath, curveCutId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
+{
+    formula = doc->GetParametrString(domElement, AttrLength, "");
+    curveCutId = doc->GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
 }

@@ -68,6 +68,7 @@ void VToolLineIntersectAxis::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetBasePointId(basePointId);
     dialogTool->SetFirstPointId(firstPointId);
@@ -266,15 +267,7 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
-        firstPointId = domElement.attribute(AttrP1Line, "").toUInt();
-        secondPointId = domElement.attribute(AttrP2Line, "").toUInt();
-        formulaAngle = domElement.attribute(AttrAngle, "");
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -332,4 +325,15 @@ void VToolLineIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObje
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrP1Line, firstPointId);
     doc->SetAttribute(tag, AttrP2Line, secondPointId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    firstPointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
 }

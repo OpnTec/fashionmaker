@@ -71,14 +71,7 @@ VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, cons
  */
 void VToolAlongLine::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        formulaLength = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -169,6 +162,16 @@ void VToolAlongLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    basePointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolAlongLine::GetSecondPointId() const
 {
     return secondPointId;
@@ -232,6 +235,7 @@ void VToolAlongLine::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetFirstPointId(basePointId);
     dialogTool->SetSecondPointId(secondPointId);

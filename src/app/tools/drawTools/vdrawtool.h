@@ -97,6 +97,9 @@ protected:
     virtual void RefreshDataInFile();
     QColor       CorrectColor(const QColor &color) const;
 
+    void         ReadAttributes();
+    virtual void ReadToolAttributes(const QDomElement &domElement)=0;
+
     template <typename Dialog, typename Tool>
     /**
      * @brief ContextMenu show context menu for tool.

@@ -67,6 +67,7 @@ void VToolCurveIntersectAxis::setDialog()
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetBasePointId(basePointId);
     dialogTool->setCurveId(curveId);
@@ -250,14 +251,7 @@ void VToolCurveIntersectAxis::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
-        curveId = domElement.attribute(AttrCurve, "").toUInt();
-        formulaAngle = domElement.attribute(AttrAngle, "");
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -312,4 +306,14 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
     doc->SetAttribute(tag, AttrAngle, formulaAngle);
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrCurve, curveId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    curveId = doc->GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
 }
