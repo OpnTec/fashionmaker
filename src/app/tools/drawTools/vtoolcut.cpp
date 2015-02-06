@@ -59,9 +59,7 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
  */
 void VToolCut::ChangedActivDraw(const QString &newName)
 {
-    VToolPoint::ChangedActivDraw(newName);
-    firstCurve->ChangedActivDraw(enabled);
-    secondCurve->ChangedActivDraw(enabled);
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,6 +70,14 @@ void VToolCut::HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirecti
     {
         RefreshCurve(simpleCurve, id, curvePosition, direction);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::Disable(bool disable)
+{
+    VToolPoint::Disable(disable);
+    firstCurve->ChangedActivDraw(enabled);
+    secondCurve->ChangedActivDraw(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

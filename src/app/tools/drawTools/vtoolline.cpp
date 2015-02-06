@@ -227,7 +227,9 @@ void VToolLine::SetFactor(qreal factor)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::Disable(bool disable)
 {
-    DisableItem(this, disable);
+    enabled = !disable;
+    this->setEnabled(enabled);
+    this->setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,9 +239,7 @@ void VToolLine::Disable(bool disable)
  */
 void VToolLine::ChangedActivDraw(const QString &newName)
 {
-    VDrawTool::ChangedActivDraw(newName);
-    this->setEnabled(enabled);
-    this->setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

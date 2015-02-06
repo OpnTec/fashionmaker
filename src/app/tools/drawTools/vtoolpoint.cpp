@@ -132,9 +132,7 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
  */
 void VToolPoint::ChangedActivDraw(const QString &newName)
 {
-    VDrawTool::ChangedActivDraw(newName);
-    this->setEnabled(enabled);
-    namePoint->setEnabled(enabled);
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,7 +171,9 @@ void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::Disable(bool disable)
 {
-    DisableItem(this, disable);
+    enabled = !disable;
+    this->setEnabled(enabled);
+    namePoint->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

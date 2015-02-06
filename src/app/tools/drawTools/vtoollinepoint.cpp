@@ -69,11 +69,7 @@ VToolLinePoint::~VToolLinePoint()
  */
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
-    VToolPoint::ChangedActivDraw(newName);
-    this->setEnabled(enabled);
-    mainLine->setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
-                          LineStyleToPenStyle(typeLine)));
-    mainLine->setEnabled(enabled);
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,6 +104,15 @@ void VToolLinePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::Disable(bool disable)
+{
+    VToolPoint::Disable(disable);
+    mainLine->setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+                          LineStyleToPenStyle(typeLine)));
+    mainLine->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

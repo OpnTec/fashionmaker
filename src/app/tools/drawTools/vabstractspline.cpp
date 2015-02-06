@@ -74,7 +74,11 @@ void VAbstractSpline::FullUpdateFromFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::Disable(bool disable)
 {
-    DisableItem(this, disable);
+    enabled = !disable;
+    this->setEnabled(enabled);
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+                      Qt::RoundCap));
+    emit setEnabledPoint(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,11 +88,7 @@ void VAbstractSpline::Disable(bool disable)
  */
 void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
-    VDrawTool::ChangedActivDraw(newName);
-    this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
-                      Qt::RoundCap));
-    emit setEnabledPoint(enabled);
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

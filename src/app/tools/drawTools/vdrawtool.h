@@ -177,20 +177,6 @@ protected:
 //            item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
 //        }
     }
-    template <typename Item>
-    void DisableItem(Item *item, bool disable)
-    {
-        SCASSERT(item != nullptr);
-//        if (disable)
-//        {
-//            currentColor = Qt::gray;
-//        }
-//        else
-//        {
-//            currentColor = baseColor;
-//        }
-//        item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    }
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
