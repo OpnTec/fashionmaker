@@ -50,9 +50,10 @@ const QString VToolEndLine::ToolType = QStringLiteral("endLine");
  * @param parent parent object.
  */
 VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  const QString &typeLine,
-                           const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
-                           const Source &typeCreation, QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, formulaLength, basePointId, 0, parent), formulaAngle(formulaAngle)
+                           const QString &lineColor, const QString &formulaLength, const QString &formulaAngle,
+                           const quint32 &basePointId, const Source &typeCreation, QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formulaLength, basePointId, 0, parent),
+      formulaAngle(formulaAngle)
 {
     if (typeCreation == Source::FromGui)
     {
@@ -103,12 +104,13 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
     SCASSERT(dialogTool);
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     QString formulaLength = dialogTool->GetFormula();
     QString formulaAngle = dialogTool->GetAngle();
     const quint32 basePointId = dialogTool->GetBasePointId();
 
     VToolEndLine *point = nullptr;
-    point=Create(0, pointName, typeLine, formulaLength, formulaAngle, basePointId, 5, 10, scene, doc, data,
+    point=Create(0, pointName, typeLine, lineColor, formulaLength, formulaAngle, basePointId, 5, 10, scene, doc, data,
                  Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -123,6 +125,7 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
  * @param _id tool id, 0 if tool doesn't exist yet.
  * @param pointName point name.
  * @param typeLine line type.
+ * @param lineColor line color.
  * @param formulaLength string with formula length of line.
  * @param formulaAngle formula angle of line.
  * @param basePointId id first point of line.
@@ -136,9 +139,10 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
  * @return the created tool
  */
 VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                   QString &formulaLength, QString &formulaAngle, const quint32 &basePointId,
-                                   const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                   VContainer *data, const Document &parse, const Source &typeCreation)
+                                   const QString &lineColor, QString &formulaLength, QString &formulaAngle,
+                                   const quint32 &basePointId, const qreal &mx, const qreal &my,
+                                   VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                   const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
     QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
@@ -163,8 +167,8 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
     VDrawTool::AddRecord(id, Tool::EndLine, doc);
     if (parse == Document::FullParse)
     {
-        VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, formulaLength, formulaAngle, basePointId,
-                                               typeCreation);
+        VToolEndLine *point = new VToolEndLine(doc, data, id, typeLine, lineColor, formulaLength, formulaAngle,
+                                               basePointId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolEndLine::SetFactor);

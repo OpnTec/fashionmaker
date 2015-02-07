@@ -49,9 +49,10 @@ const QString VToolBisector::ToolType = QStringLiteral("bisector");
  * @param parent parent object.
  */
 VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                             const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                             const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, secondPointId, 0, parent), firstPointId(NULL_ID),
+                             const QString &lineColor, const QString &formula, const quint32 &firstPointId,
+                             const quint32 &secondPointId, const quint32 &thirdPointId, const Source &typeCreation,
+                             QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, secondPointId, 0, parent), firstPointId(NULL_ID),
       thirdPointId(NULL_ID)
 {
     this->firstPointId = firstPointId;
@@ -140,10 +141,11 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const quint32 thirdPointId = dialogTool->GetThirdPointId();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolBisector *point = nullptr;
-    point=Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    point=Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, lineColor, pointName, 5, 10, scene,
+                 doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -170,10 +172,10 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
  * @param typeCreation way we create this tool.
  */
 VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                           const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
-                           const QString &pointName, const qreal &mx, const qreal &my,
-                           VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                           const Document &parse, const Source &typeCreation)
+                                     const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
+                                     const QString &lineColor, const QString &pointName, const qreal &mx,
+                                     const qreal &my, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                     const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
@@ -201,8 +203,8 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
     VDrawTool::AddRecord(id, Tool::Bisector, doc);
     if (parse == Document::FullParse)
     {
-        VToolBisector *point = new VToolBisector(doc, data, id, typeLine, formula, firstPointId, secondPointId,
-                                                 thirdPointId, typeCreation);
+        VToolBisector *point = new VToolBisector(doc, data, id, typeLine, lineColor, formula, firstPointId,
+                                                 secondPointId, thirdPointId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);

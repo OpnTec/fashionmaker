@@ -40,14 +40,15 @@ class VToolAlongLine : public VToolLinePoint
 public:
 
     VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula, const quint32 &firstPointId,
-                   const quint32 &secondPointId, const QString &typeLine, const Source &typeCreation,
-                   QGraphicsItem * parent = nullptr);
+                   const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
+                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog();
     static VToolAlongLine* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolAlongLine* Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                  QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                                  const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                                  VContainer *data, const Document &parse, const Source &typeCreation);
+                                  const QString &lineColor, QString &formula, const quint32 &firstPointId,
+                                  const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                                  VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                  const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AlongLine)};

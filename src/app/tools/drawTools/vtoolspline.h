@@ -38,14 +38,14 @@ class VToolSpline:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
                  QGraphicsItem * parent = nullptr );
     virtual ~VToolSpline();
     virtual void setDialog();
     static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                                const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                               VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                               const QString &color, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const {return Type;}

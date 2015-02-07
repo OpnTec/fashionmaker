@@ -40,16 +40,17 @@ class VToolShoulderPoint : public VToolLinePoint
     Q_OBJECT
 public:
     VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                       const QString &formula, const quint32 &p1Line, const quint32 &p2Line, const quint32 &pShoulder,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
+                       const QString &lineColor, const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
+                       const quint32 &pShoulder, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);
     static VToolShoulderPoint* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolShoulderPoint* Create(const quint32 _id, QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                      const quint32 &pShoulder, const QString &typeLine, const QString &pointName,
-                                      const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                      VContainer *data, const Document &parse, const Source &typeCreation);
+                                      const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
+                                      const QString &pointName, const qreal &mx, const qreal &my,
+                                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                      const Source &typeCreation);
     static const QString ToolType;
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::ShoulderPoint) };

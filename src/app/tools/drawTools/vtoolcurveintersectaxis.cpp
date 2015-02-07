@@ -38,10 +38,11 @@ const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersect
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCurveIntersectAxis::VToolCurveIntersectAxis(VPattern *doc, VContainer *data, const quint32 &id,
-                                                 const QString &typeLine, const QString &formulaAngle,
-                                                 const quint32 &basePointId, const quint32 &curveId,
-                                                 const Source &typeCreation, QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent), formulaAngle(formulaAngle),
+                                                 const QString &typeLine, const QString &lineColor,
+                                                 const QString &formulaAngle, const quint32 &basePointId,
+                                                 const quint32 &curveId, const Source &typeCreation,
+                                                 QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), formulaAngle(formulaAngle),
       curveId(curveId)
 {
     if (typeCreation == Source::FromGui)
@@ -83,12 +84,13 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(DialogTool *dialog, VMa
     SCASSERT(dialogTool);
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     QString formulaAngle = dialogTool->GetAngle();
     const quint32 basePointId = dialogTool->GetBasePointId();
     const quint32 curveId = dialogTool->getCurveId();
 
     VToolCurveIntersectAxis *point = nullptr;
-    point=Create(0, pointName, typeLine, formulaAngle, basePointId, curveId, 5, 10, scene, doc, data,
+    point=Create(0, pointName, typeLine, lineColor, formulaAngle, basePointId, curveId, 5, 10, scene, doc, data,
                  Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -99,9 +101,9 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(DialogTool *dialog, VMa
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, const QString &pointName,
-                                                         const QString &typeLine, QString &formulaAngle,
-                                                         const quint32 &basePointId, const quint32 &curveId,
-                                                         const qreal &mx, const qreal &my,
+                                                         const QString &typeLine, const QString &lineColor,
+                                                         QString &formulaAngle, const quint32 &basePointId,
+                                                         const quint32 &curveId, const qreal &mx, const qreal &my,
                                                          VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                                          const Document &parse, const Source &typeCreation)
 {
@@ -128,8 +130,8 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
     VDrawTool::AddRecord(id, Tool::CurveIntersectAxis, doc);
     if (parse == Document::FullParse)
     {
-        VToolCurveIntersectAxis *point = new VToolCurveIntersectAxis(doc, data, id, typeLine, formulaAngle, basePointId,
-                                                                     curveId, typeCreation);
+        VToolCurveIntersectAxis *point = new VToolCurveIntersectAxis(doc, data, id, typeLine, lineColor, formulaAngle,
+                                                                     basePointId, curveId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCurveIntersectAxis::SetFactor);

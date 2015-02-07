@@ -49,10 +49,11 @@ const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
  * @param parent parent object.
  */
 VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                                       const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                       const quint32 &pShoulder, const Source &typeCreation,
+                                       const QString &lineColor, const QString &formula, const quint32 &p1Line,
+                                       const quint32 &p2Line, const quint32 &pShoulder, const Source &typeCreation,
                                        QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, p1Line, 0, parent), p2Line(p2Line),
+      pShoulder(pShoulder)
 {
     if (typeCreation == Source::FromGui)
     {
@@ -140,10 +141,11 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
     const quint32 p2Line = dialogTool->GetP2Line();
     const quint32 pShoulder = dialogTool->GetP3();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolShoulderPoint * point = nullptr;
-    point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, lineColor, pointName, 5, 10, scene, doc, data,
+                 Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -171,7 +173,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
  * @return the created tool
  */
 VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
-                                const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
+                                const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                 const Document &parse, const Source &typeCreation)
@@ -204,7 +206,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
     VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
     if (parse == Document::FullParse)
     {
-        VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,
+        VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, lineColor, formula,
                                                            p1Line, p2Line, pShoulder,
                                                            typeCreation);
         scene->addItem(point);

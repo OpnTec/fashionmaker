@@ -47,10 +47,12 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object
  */
-VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem *parent)
+VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
+                   QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::Arc;
+    lineColor = color;
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -102,8 +104,9 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
+    const QString color = dialogTool->GetColor();
     VToolArc* point = nullptr;
-    point=Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Source::FromGui);
+    point=Create(0, center, radius, f1, f2, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -126,8 +129,8 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
  * @param typeCreation way we create this tool.
  */
 VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
-                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
-                      const Source &typeCreation)
+                           const QString &color, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                           const Document &parse, const Source &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
@@ -156,7 +159,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     VDrawTool::AddRecord(id, Tool::Arc, doc);
     if (parse == Document::FullParse)
     {
-        VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
+        VToolArc *toolArc = new VToolArc(doc, data, id, color, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, toolArc, &VToolArc::SetFactor);

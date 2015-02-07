@@ -40,12 +40,13 @@ class VToolLine: public VDrawTool, public QGraphicsLineItem
     Q_OBJECT
 public:
     VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-              const QString &typeLine, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
+              QGraphicsItem * parent = nullptr);
     virtual void     setDialog();
     static VToolLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
-                        const QString &typeLine, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
-                        const Document &parse, const Source &typeCreation);
+                             const QString &typeLine, const QString &lineColor, VMainGraphicsScene  *scene,
+                             VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString TagName;
     virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     virtual int      type() const {return Type;}

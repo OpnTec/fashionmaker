@@ -36,18 +36,20 @@
  * @param data container with variables.
  * @param id object id in container.
  * @param typeLine line type.
+ * @param lineColor line color.
  * @param formula string with length formula.
  * @param basePointId id base line point.
  * @param angle line angle.
  * @param parent parent object.
  */
-VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,
-                               const QString &typeLine, const QString &formula, const quint32 &basePointId,
+VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                               const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent),  formulaLength(formula), angle(angle), basePointId(basePointId),
+    :VToolPoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
       mainLine(nullptr)
 {
     this->typeLine = typeLine;
+    this->lineColor = lineColor;
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
     QPointF point1 = data->GeometricObject<VPointF>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<VPointF>(id)->toQPointF();

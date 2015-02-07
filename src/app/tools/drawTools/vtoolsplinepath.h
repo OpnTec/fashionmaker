@@ -38,12 +38,13 @@ class VToolSplinePath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+    VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                     QGraphicsItem * parent = nullptr);
      virtual void setDialog();
      static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene, VPattern *doc,
-                                    VContainer *data, const Document &parse, const Source &typeCreation);
+     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
+                                    VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                    const Source &typeCreation);
      static const QString ToolType;
      static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
      virtual int  type() const {return Type;}

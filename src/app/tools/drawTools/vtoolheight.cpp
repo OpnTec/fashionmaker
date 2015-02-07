@@ -47,9 +47,10 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
  * @param parent parent object.
  */
 VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                         const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                         const Source &typeCreation, QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent), p1LineId(p1LineId), p2LineId(p2LineId)
+                         const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
+                         const quint32 &p2LineId, const Source &typeCreation, QGraphicsItem * parent)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), p1LineId(p1LineId),
+      p2LineId(p2LineId)
 {
     ignoreFullUpdate = true;
     if (typeCreation == Source::FromGui)
@@ -97,12 +98,13 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     const quint32 basePointId = dialogTool->GetBasePointId();
     const quint32 p1LineId = dialogTool->GetP1LineId();
     const quint32 p2LineId = dialogTool->GetP2LineId();
 
     VToolHeight *point = nullptr;
-    point = Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
+    point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
                    Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -130,9 +132,9 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @return the created tool
  */
 VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                 const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+                                 const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
+                                 const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                 VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
@@ -161,7 +163,7 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
     VDrawTool::AddRecord(id, Tool::Height, doc);
     if (parse == Document::FullParse)
     {
-        VToolHeight *point = new VToolHeight(doc, data, id, typeLine, basePointId, p1LineId, p2LineId,
+        VToolHeight *point = new VToolHeight(doc, data, id, typeLine, lineColor, basePointId, p1LineId, p2LineId,
                                              typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);

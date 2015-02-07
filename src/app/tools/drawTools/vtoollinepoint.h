@@ -39,7 +39,7 @@ class VToolLinePoint : public VToolPoint
 {
     Q_OBJECT
 public:
-    VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
+    VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor, const QString &formula,
                    const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
     virtual ~VToolLinePoint();
     virtual int       type() const {return Type;}

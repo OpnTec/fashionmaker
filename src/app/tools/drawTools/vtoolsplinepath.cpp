@@ -42,8 +42,8 @@ const QString VToolSplinePath::ToolType = QStringLiteral("path");
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                 QGraphicsItem *parent)
+VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const QString &color,
+                                 const Source &typeCreation, QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::SplinePath;
@@ -115,12 +115,13 @@ VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene 
     DialogSplinePath *dialogTool = qobject_cast<DialogSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
     VSplinePath *path = new VSplinePath(dialogTool->GetPath());
+    const QString color = dialogTool->GetColor();
     for (qint32 i = 0; i < path->CountPoint(); ++i)
     {
         doc->IncrementReferens((*path)[i].P().id());
     }
     VToolSplinePath* spl = nullptr;
-    spl = Create(0, path, scene, doc, data, Document::FullParse, Source::FromGui);
+    spl = Create(0, path, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (spl != nullptr)
     {
         spl->dialog=dialogTool;
@@ -139,8 +140,9 @@ VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene 
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene *scene, VPattern *doc,
-                             VContainer *data, const Document &parse, const Source &typeCreation)
+VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, const QString &color,
+                                         VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                         const Document &parse, const Source &typeCreation)
 {
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
@@ -160,7 +162,7 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, V
     VDrawTool::AddRecord(id, Tool::SplinePath, doc);
     if (parse == Document::FullParse)
     {
-        VToolSplinePath *spl = new VToolSplinePath(doc, data, id, typeCreation);
+        VToolSplinePath *spl = new VToolSplinePath(doc, data, id, color, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
@@ -426,7 +428,7 @@ void VToolSplinePath::RefreshGeometry()
     {
         this->setPath(ToolPath());
     }
-
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     for (qint32 i = 1; i<=splPath->Count(); ++i)
     {

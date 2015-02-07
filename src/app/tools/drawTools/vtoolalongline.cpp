@@ -50,9 +50,9 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
  */
 VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, const QString &formula,
                                const quint32 &firstPointId, const quint32 &secondPointId,
-                               const QString &typeLine, const Source &typeCreation,
+                               const QString &typeLine, const QString &lineColor, const Source &typeCreation,
                                QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, 0, parent), secondPointId(secondPointId)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, firstPointId, 0, parent), secondPointId(secondPointId)
 {
 
     if (typeCreation == Source::FromGui)
@@ -261,10 +261,11 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolAlongLine *point=nullptr;
-    point = Create(0, pointName, typeLine, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
+                   Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -290,9 +291,10 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
  * @param typeCreation way we create this tool.
  */
 VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                       QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                                       const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                       VContainer *data, const Document &parse, const Source &typeCreation)
+                                       const QString &lineColor, QString &formula, const quint32 &firstPointId,
+                                       const quint32 &secondPointId, const qreal &mx, const qreal &my,
+                                       VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                       const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
@@ -320,8 +322,8 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     VDrawTool::AddRecord(id, Tool::AlongLine, doc);
     if (parse == Document::FullParse)
     {
-        VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId,
-                                                   secondPointId, typeLine, typeCreation);
+        VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine,
+                                                   lineColor, typeCreation);
         scene->addItem(point);
         connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolAlongLine::SetFactor);

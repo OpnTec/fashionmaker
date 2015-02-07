@@ -48,10 +48,12 @@ const QString VToolLine::TagName = QStringLiteral("line");
  * @param parent parent object.
  */
 VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-                     const QString &typeLine, const Source &typeCreation, QGraphicsItem *parent)
+                     const QString &typeLine, const QString &lineColor, const Source &typeCreation,
+                     QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
 {
     this->typeLine = typeLine;
+    this->lineColor = lineColor;
     ignoreFullUpdate = true;
     //Line
     const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
@@ -104,9 +106,11 @@ VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
     const quint32 firstPoint = dialogTool->GetFirstPoint();
     const quint32 secondPoint = dialogTool->GetSecondPoint();
     const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
 
     VToolLine *line = nullptr;
-    line = Create(0, firstPoint, secondPoint, typeLine, scene, doc, data, Document::FullParse, Source::FromGui);
+    line = Create(0, firstPoint, secondPoint, typeLine, lineColor,  scene, doc, data, Document::FullParse,
+                  Source::FromGui);
     if (line != nullptr)
     {
         line->dialog=dialogTool;
@@ -128,8 +132,8 @@ VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPat
  * @param typeCreation way we create this tool.
  */
 VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
-                       const QString &typeLine, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                       const Document &parse, const Source &typeCreation)
+                              const QString &typeLine, const QString &lineColor, VMainGraphicsScene *scene,
+                              VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation)
 {
     SCASSERT(scene != nullptr);
     SCASSERT(doc != nullptr);
@@ -152,7 +156,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
     VDrawTool::AddRecord(id, Tool::Line, doc);
     if (parse == Document::FullParse)
     {
-        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, typeCreation);
+        VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, lineColor, typeCreation);
         scene->addItem(line);
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
@@ -485,6 +489,6 @@ void VToolLine::RefreshGeometry()
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor,
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
                       LineStyleToPenStyle(typeLine)));
 }

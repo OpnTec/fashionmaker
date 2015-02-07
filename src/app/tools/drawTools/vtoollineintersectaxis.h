@@ -36,15 +36,16 @@ class VToolLineIntersectAxis : public VToolLinePoint
     Q_OBJECT
 public:
     VToolLineIntersectAxis(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                           const QString &formulaAngle, const quint32 &basePointId, const quint32 &firstPointId,
-                           const quint32 &secondPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
+                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                           QGraphicsItem * parent = nullptr);
     virtual ~VToolLineIntersectAxis();
     virtual void setDialog();
 
     static VToolLineIntersectAxis *Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                                           VContainer *data);
     static VToolLineIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                          QString &formulaAngle, const quint32 &basePointId,
+                                          const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
                                           const quint32 &firstPointId, const quint32 &secondPointId,
                                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
                                           VContainer *data, const Document &parse, const Source &typeCreation);

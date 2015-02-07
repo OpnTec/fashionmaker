@@ -40,12 +40,13 @@ class VToolArc :public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolArc(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
+             QGraphicsItem * parent = nullptr);
     virtual void     setDialog();
     static VToolArc* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolArc* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
-                            VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
-                            const Source &typeCreation);
+                            const QString &color, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                            const Document &parse, const Source &typeCreation);
     static const QString TagName;
     static const QString ToolType;
     virtual int      type() const {return Type;}

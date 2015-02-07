@@ -39,9 +39,9 @@ class VToolBisector : public VToolLinePoint
     Q_OBJECT
 public:
 
-    VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
-                  const quint32 &firstPointId, const quint32 &secondPointId, const quint32 &thirdPointId,
-                  const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor,
+                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
@@ -49,8 +49,8 @@ public:
     static VToolBisector* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolBisector* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                                  const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
-                                 const QString &pointName, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                                 VPattern *doc, VContainer *data, const Document &parse,
+                                 const QString &lineColor, const QString &pointName, const qreal &mx, const qreal &my,
+                                 VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
                                  const Source &typeCreation);
     static const QString ToolType;
     virtual int    type() const {return Type;}

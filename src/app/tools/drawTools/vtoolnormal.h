@@ -38,15 +38,16 @@ class VToolNormal : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
-                const qreal &angle, const quint32 &firstPointId, const quint32 &secondPointId,
+    VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor,
+                const QString &formula, const qreal &angle, const quint32 &firstPointId, const quint32 &secondPointId,
                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
     static VToolNormal* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolNormal* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                               const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
-                               const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                               VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation);
+                               const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
+                               const QString &pointName, const qreal angle, const qreal &mx, const qreal &my,
+                               VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
+                               const Source &typeCreation);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;

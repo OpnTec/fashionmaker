@@ -43,11 +43,12 @@ const QString VToolSpline::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
                          QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::Spline;
+    lineColor = color;
 
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -129,8 +130,9 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const qreal angle1 = dialogTool->GetAngle1();
     const qreal angle2 = dialogTool->GetAngle2();
     const qreal kCurve = dialogTool->GetKCurve();
+    const QString color = dialogTool->GetColor();
     VToolSpline *spl = nullptr;
-    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
+    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, doc, data, Document::FullParse,
                  Source::FromGui);
     if (spl != nullptr)
     {
@@ -159,7 +161,7 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  */
 VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                                  const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                 const QString &color, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<VPointF>(p1);
@@ -183,7 +185,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
     VDrawTool::AddRecord(id, Tool::Spline, doc);
     if (parse == Document::FullParse)
     {
-        VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
+        VToolSpline *spl = new VToolSpline(doc, data, id, color, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
@@ -359,7 +361,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
  */
 void VToolSpline::RefreshGeometry()
 {
-    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     if (isHovered)
     {
         this->setPath(ToolPath(PathDirection::Show));
