@@ -73,6 +73,10 @@ private:
     template<class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
+    template<class Tool>
+    void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
+                              const QString &id);
+
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
 
     QStringList PropertiesList() const;

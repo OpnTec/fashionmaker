@@ -60,7 +60,7 @@ public:
     virtual void SetTypeLine(const QString &value);
 
     QString      GetLineColor() const;
-    void         SetLineColor(const QString &value);
+    virtual void SetLineColor(const QString &value);
 
 public slots:
     virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);

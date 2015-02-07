@@ -398,6 +398,22 @@ void VToolOptionsPropertyBrowser::AddPropertyLineType(Tool *i, const QString &pr
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyLineColor(Tool *i, const QString &propertyName,
+                                                       const QMap<QString, QString> &colors, const QString &id)
+{
+    VLineColorProperty *lineColorProperty = new VLineColorProperty(propertyName);
+    lineColorProperty->setColors(colors);
+    const qint32 index = VLineColorProperty::IndexOfColor(colors, i->GetLineColor());
+    if (index == -1)
+    {
+        qWarning()<<"Can't find line style" << i->GetLineColor()<<"in list";
+    }
+    lineColorProperty->setValue(index);
+    AddProperty(lineColorProperty, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
 void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
 {
     if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
@@ -471,6 +487,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEndLine(VProperty *property)
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
             break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
+            break;
         case 4: // VAbstractTool::AttrLength
             i->SetFormulaLength(value.value<VFormula>());
             break;
@@ -500,6 +519,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolAlongLine(VProperty *property)
             break;
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
+            break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
             break;
         case 4: // VAbstractTool::AttrLength
             i->SetFormulaLength(value.value<VFormula>());
@@ -531,6 +553,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VProperty *property)
         case 10: // VAbstractTool::AttrAngle2
             i->SetFormulaF2(value.value<VFormula>());
             break;
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -557,6 +582,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolBisector(VProperty *property)
             break;
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
+            break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -654,6 +682,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolHeight(VProperty *property)
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
             break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -674,6 +705,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLine(VProperty *property)
     {
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
+            break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -723,6 +757,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolNormal(VProperty *property)
             break;
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
+            break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -794,6 +831,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolShoulderPoint(VProperty *propert
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
             break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -819,6 +859,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
             i->setSpline(spl);
             break;
         }
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -844,6 +887,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
             i->setSplinePath(splPath);
             break;
         }
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -887,6 +933,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolLineIntersectAxis(VProperty *pro
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
             break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
+            break;
         case 5: // VAbstractTool::AttrAngle
             i->SetFormulaAngle(value.value<VFormula>());
             break;
@@ -913,6 +962,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VProperty *pr
             break;
         case 3: // VAbstractTool::AttrTypeLine
             i->SetTypeLine(value.toString());
+            break;
+        case 26: // VAbstractTool::AttrTypeLineColor
+            i->SetLineColor(value.toString());
             break;
         case 5: // VAbstractTool::AttrAngle
             i->SetFormulaAngle(value.value<VFormula>());
@@ -946,6 +998,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), VAbstractTool::AttrLength);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), VAbstractTool::AttrAngle);
 }
@@ -959,6 +1012,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), VAbstractTool::AttrLength);
 }
 
@@ -972,6 +1026,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     AddPropertyFormula(tr("Radius"), i->GetFormulaRadius(), VAbstractTool::AttrRadius);
     AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), VAbstractTool::AttrAngle1);
     AddPropertyFormula(tr("Second angle"), i->GetFormulaF2(), VAbstractTool::AttrAngle2);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -983,6 +1038,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), VAbstractTool::AttrLength);
 }
 
@@ -1028,6 +1084,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1040,6 +1097,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
     QMap<QString, QIcon> styles = VAbstractTool::LineStylesPics();
     styles.remove(VAbstractTool::TypeLineNone);
     AddPropertyLineType(i, tr("Line type"), styles);
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1062,6 +1120,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), VAbstractTool::AttrLength);
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
 
     VDoubleProperty* itemAngle = new VDoubleProperty(tr("Additional angle degrees"));
     itemAngle->setValue(i->GetAngle());
@@ -1101,6 +1160,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), VAbstractTool::AttrLength);
 }
 
@@ -1119,6 +1179,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     itemFactor->setSetting("Precision", 3);
     itemFactor->setValue(spl.GetKcurve());
     AddProperty(itemFactor, VAbstractTool::AttrKCurve);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1136,6 +1197,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     itemFactor->setSetting("Precision", 3);
     itemFactor->setValue(splPath.GetKCurve());
     AddProperty(itemFactor, VAbstractTool::AttrKCurve);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1157,6 +1219,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), VAbstractTool::AttrAngle);
 }
 
@@ -1169,6 +1232,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
+    AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), VAbstractTool::AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), VAbstractTool::AttrAngle);
 }
 
@@ -1186,8 +1250,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
     VToolEndLine *i = qgraphicsitem_cast<VToolEndLine *>(currentItem);
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormulaLength());
@@ -1204,8 +1275,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
     VToolAlongLine *i = qgraphicsitem_cast<VToolAlongLine *>(currentItem);
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormulaLength());
@@ -1229,6 +1307,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     QVariant valueSecondAngle;
     valueSecondAngle.setValue(i->GetFormulaF2());
     idToProperty[VAbstractTool::AttrAngle2]->setValue(valueSecondAngle);
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1242,8 +1323,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
     valueFormula.setValue(i->GetFormulaLength());
     idToProperty[VAbstractTool::AttrLength]->setValue(valueFormula);
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1289,8 +1377,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
 
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1298,8 +1393,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
 {
     VToolLine *i = qgraphicsitem_cast<VToolLine *>(currentItem);
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1323,8 +1425,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
 
     idToProperty[VAbstractTool::AttrAngle]->setValue( i->GetAngle());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1358,8 +1467,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
 
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1369,6 +1485,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
 
     VSpline spl = i->getSpline();
     idToProperty[VAbstractTool::AttrKCurve]->setValue(spl.GetKcurve());
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1378,6 +1497,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
 
     VSplinePath splPath = i->getSplinePath();
     idToProperty[VAbstractTool::AttrKCurve]->setValue(splPath.GetKCurve());
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1394,8 +1516,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
     VToolLineIntersectAxis *i = qgraphicsitem_cast<VToolLineIntersectAxis *>(currentItem);
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -1408,8 +1537,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     VToolCurveIntersectAxis *i = qgraphicsitem_cast<VToolCurveIntersectAxis *>(currentItem);
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
 
+    {
     const qint32 index = VLineTypeProperty::IndexOfStyle(VAbstractTool::LineStylesPics(), i->getLineType());
     idToProperty[VAbstractTool::AttrTypeLine]->setValue(index);
+    }
+
+    {
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrLineColor]->setValue(index);
+    }
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -1444,6 +1580,8 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << VAbstractTool::AttrPShoulder       /* 22 */
                                      << VAbstractTool::AttrAxisP1          /* 23 */
                                      << VAbstractTool::AttrAxisP2          /* 24 */
-                                     << VAbstractTool::AttrKCurve;         /* 25 */
+                                     << VAbstractTool::AttrKCurve          /* 25 */
+                                     << VAbstractTool::AttrLineColor       /* 26 */
+                                     << VAbstractTool::AttrColor;          /* 27 */
     return attr;
 }

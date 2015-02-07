@@ -59,7 +59,9 @@ public:
     void    SetSecondPoint(const quint32 &value);
 
     virtual void     ShowVisualization(bool show);
+
     virtual void     SetTypeLine(const QString &value);
+    virtual void     SetLineColor(const QString &value);
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);

@@ -35,5 +35,6 @@
 #include "plugins/vshortcutproperty.h"
 #include "plugins/vstringproperty.h"
 #include "plugins/vwidgetproperty.h"
+#include "plugins/vlinecolorproperty.h"
 
 #endif // VPROPERTIES_H

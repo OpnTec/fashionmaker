@@ -463,6 +463,15 @@ void VToolLine::SetTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::SetLineColor(const QString &value)
+{
+    lineColor = value;
+
+    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLine::GetFirstPoint() const
 {
     return firstPoint;
