@@ -414,7 +414,7 @@ void VToolLine::SetSecondPoint(const quint32 &value)
     {
         secondPoint = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
         SaveOption(obj);
     }
 }
@@ -484,7 +484,7 @@ void VToolLine::SetFirstPoint(const quint32 &value)
     {
         firstPoint = value;
 
-        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+        QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
         SaveOption(obj);
     }
 }
