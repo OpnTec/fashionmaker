@@ -857,12 +857,11 @@ void VPattern::haveLiteChange()
 /**
  * @brief ShowHistoryTool hightlight tool.
  * @param id tool id.
- * @param color hightlight color.
  * @param enable enable or diasable hightlight.
  */
-void VPattern::ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable)
+void VPattern::ShowHistoryTool(quint32 id, bool enable)
 {
-    emit ShowTool(id, color, enable);
+    emit ShowTool(id, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

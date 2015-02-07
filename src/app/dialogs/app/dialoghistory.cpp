@@ -74,7 +74,7 @@ void DialogHistory::DialogAccepted()
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
     quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    emit ShowHistoryTool(id, Qt::green, false);
+    emit ShowHistoryTool(id, false);
     emit DialogClosed(QDialog::Accepted);
 }
 
@@ -103,12 +103,12 @@ void DialogHistory::cellClicked(int row, int column)
     {
         QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
         quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, Qt::green, false);
+        emit ShowHistoryTool(id, false);
 
         cursorToolRecordRow = row;
         item = ui->tableWidget->item(cursorToolRecordRow, 0);
         id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, Qt::green, true);
+        emit ShowHistoryTool(id, true);
     }
 }
 
@@ -434,7 +434,7 @@ void DialogHistory::ShowPoint()
         cursorToolRecordRow = 0;
         item = ui->tableWidget->item(0, 0);
         quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, Qt::green, true);
+        emit ShowHistoryTool(id, true);
     }
 }
 
@@ -466,6 +466,6 @@ void DialogHistory::closeEvent(QCloseEvent *event)
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
     quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    emit ShowHistoryTool(id, Qt::green, false);
+    emit ShowHistoryTool(id, false);
     DialogTool::closeEvent(event);
 }

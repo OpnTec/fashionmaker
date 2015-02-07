@@ -64,13 +64,11 @@ VDrawTool::~VDrawTool()
 /**
  * @brief ShowTool  highlight tool.
  * @param id object id in container.
- * @param color highlight color.
  * @param enable enable or disable highlight.
  */
-void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
+void VDrawTool::ShowTool(quint32 id, bool enable)
 {
     Q_UNUSED(id);
-    Q_UNUSED(color);
     Q_UNUSED(enable);
 }
 

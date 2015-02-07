@@ -65,7 +65,7 @@ public:
 public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ChangedActivDraw(const QString &newName);
-    virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
+    virtual void     ShowTool(quint32 id, bool enable);
     virtual void     SetFactor(qreal factor);
     void             Disable(bool disable);
 protected:

@@ -63,7 +63,7 @@ public:
     virtual void SetLineColor(const QString &value);
 
 public slots:
-    virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
+    virtual void ShowTool(quint32 id, bool enable);
     virtual void ChangedActivDraw(const QString &newName) = 0;
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGuiOk(int result);
@@ -161,24 +161,15 @@ protected:
      * @brief ShowItem highlight tool.
      * @param item tool.
      * @param id object id in container.
-     * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    void ShowItem(Item *item, quint32 id, Qt::GlobalColor color, bool enable)
+    void ShowItem(Item *item, quint32 id, bool enable)
     {
         SCASSERT(item != nullptr);
-//        if (id == item->id)
-//        {
-//            if (enable == false)
-//            {
-//                currentColor = baseColor;
-//            }
-//            else
-//            {
-//                currentColor = color;
-//            }
-//            item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-//        }
+        if (id == item->id)
+        {
+            ShowVisualization(enable);
+        }
     }
 private:
     Q_DISABLE_COPY(VDrawTool)

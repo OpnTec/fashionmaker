@@ -96,12 +96,11 @@ void VAbstractSpline::ChangedActivDraw(const QString &newName)
 /**
  * @brief ShowTool highlight tool.
  * @param id object id in container
- * @param color highlight color.
  * @param enable enable or disable highlight.
  */
-void VAbstractSpline::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
+void VAbstractSpline::ShowTool(quint32 id, bool enable)
 {
-    ShowItem(this, id, color, enable);
+    ShowItem(this, id, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
