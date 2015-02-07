@@ -108,7 +108,8 @@ public:
     static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
     static QMap<QString, QIcon> LineStylesPics();
 
-    static const QStringList    Colors();
+    static const QStringList      Colors();
+    static QMap<QString, QString> ColorsList();
 
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
 

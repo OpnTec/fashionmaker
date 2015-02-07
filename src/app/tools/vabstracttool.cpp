@@ -232,6 +232,48 @@ const QStringList VAbstractTool::Colors()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> VAbstractTool::ColorsList()
+{
+    QMap<QString, QString> map;
+
+    const QStringList colorNames = Colors();
+    for (int i = 0; i < colorNames.size(); ++i)
+    {
+        QString name;
+        switch (i)
+        {
+            case 0: // ColorBlack
+                name = tr("black");
+                break;
+            case 1: // ColorGreen
+                name = tr("green");
+                break;
+            case 2: // ColorBlue
+                name = tr("blue");
+                break;
+            case 3: // ColorDarkRed
+                name = tr("dark red");
+                break;
+            case 4: // ColorDarkGreen
+                name = tr("dark green");
+                break;
+            case 5: // ColorDarkBlue
+                name = tr("dark blue");
+                break;
+            case 6: // ColorYellow
+                name = tr("yellow");
+                break;
+            default:
+                name = tr("black");
+                break;
+        }
+
+        map.insert(colorNames.at(i), name);
+    }
+    return map;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QMap<QString, quint32> VAbstractTool::PointsList() const
 {
     const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();
