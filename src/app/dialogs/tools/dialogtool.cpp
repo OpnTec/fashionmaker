@@ -1020,6 +1020,7 @@ void DialogTool::ValChenged(int row)
     SCASSERT(radioButtonLengthCurve != nullptr);
     if (listWidget->count() == 0)
     {
+        labelDescription->setText("");
         return;
     }
     QListWidgetItem *item = listWidget->item( row );
@@ -1078,7 +1079,6 @@ void DialogTool::ValChenged(int row)
         labelDescription->setText(desc);
         return;
     }
-
     if (radioButtonAngleLine->isChecked())
     {
         QString desc = QString("%1(%2) - %3").arg(item->text())
@@ -1158,6 +1158,7 @@ void DialogTool::ShowVariable(const QMap<key, val> var)
     SCASSERT(checkBoxHideEmpty != nullptr);
     listWidget->blockSignals(true);
     listWidget->clear();
+    labelDescription->setText("");
 
     QMapIterator<key, val> iMap(var);
     while (iMap.hasNext())

@@ -265,28 +265,6 @@ void DialogArc::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ValChenged show description angles of lines
- * @param row number of row
- */
-void DialogArc::ValChenged(int row)
-{
-    if (ui->listWidget->count() == 0)
-    {
-        return;
-    }
-    QListWidgetItem *item = ui->listWidget->item( row );
-    if (ui->radioButtonAngleLine->isChecked())
-    {
-        qreal angle = *data->GetVariable<VLineAngle>(item->text())->GetValue();
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(angle).arg(tr("Value of angle of line."));
-        ui->labelDescription->setText(desc);
-        return;
-    }
-    DialogTool::ValChenged(row);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief PutRadius put variable into formula of radius
  */
 void DialogArc::PutRadius()

@@ -70,7 +70,6 @@ public slots:
     void DeployFormulaTextEdit();
     void DeployF1TextEdit();
     void DeployF2TextEdit();
-    virtual void  ValChenged(int row);
     void          PutRadius();
     void          PutF1();
     void          PutF2();

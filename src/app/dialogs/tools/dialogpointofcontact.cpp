@@ -62,7 +62,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
 
     if (qApp->patternType() == MeasurementsType::Standard)
     {
