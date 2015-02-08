@@ -1078,6 +1078,15 @@ void DialogTool::ValChenged(int row)
         labelDescription->setText(desc);
         return;
     }
+
+    if (radioButtonAngleLine->isChecked())
+    {
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(*data->GetVariable<VLineAngle>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(tr("Line Angle"));
+        labelDescription->setText(desc);
+        return;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
