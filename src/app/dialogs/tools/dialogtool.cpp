@@ -460,8 +460,8 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Eval evaluate formula and show result
- * @param text formula
- * @param flag flag state of formula
+ * @param text expresion that we parse
+ * @param flag flag state of eval formula
  * @param label label for signal error
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
@@ -484,10 +484,10 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
     {
         try
         {
-            // Replace line return with spaces for calc if exist
+            // Replace line return character with spaces for calc if exist
             QString formula = text;
             formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);
+            formula = qApp->FormulaFromUser(formula);// Translate to internal look.
             Calculator *cal = new Calculator(data);
             result = cal->EvalFormula(formula);
             delete cal;
@@ -511,7 +511,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                 {
                     loc = QLocale(QLocale::C);
                 }
-                label->setText(loc.toString(result) + postfix);
+                label->setText(loc.toString(result) + " " +postfix);
                 flag = true;
                 ChangeColor(labelEditFormula, okColor);
                 label->setToolTip(tr("Value"));
@@ -532,7 +532,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                      << "--------------------------------------";
         }
     }
-    CheckState();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
     return result;
 }
 
@@ -886,7 +886,7 @@ void DialogTool::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
     Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, false);
 }
 
