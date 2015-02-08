@@ -45,9 +45,9 @@
  */
 DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
-      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(NULL_ID), radius(QString()),
-      f1(QString()), f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr),
-      angleF1(INT_MIN), angleF2(INT_MIN)
+      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), radius(QString()), f1(QString()), f2(QString()),
+      formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr), angleF1(INT_MIN),
+      angleF2(INT_MIN)
 {
     ui->setupUi(this);
 
@@ -74,6 +74,7 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     CheckState();
 
@@ -131,9 +132,8 @@ DialogArc::~DialogArc()
  */
 void DialogArc::SetCenter(const quint32 &value)
 {
-    center = value;
-    ChangeCurrentData(ui->comboBoxBasePoint, center);
-    path->setPoint1Id(center);
+    ChangeCurrentData(ui->comboBoxBasePoint, value);
+    path->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,6 +152,18 @@ void DialogArc::SetF2(const QString &value)
     ui->plainTextEditF2->setPlainText(f2);
     path->setF2(f2);
     MoveCursorToEnd(ui->plainTextEditF2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -234,9 +246,8 @@ void DialogArc::SaveData()
     f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
     f2.replace("\n", " ");
-    center = getCurrentObjectId(ui->comboBoxBasePoint);
 
-    path->setPoint1Id(center);
+    path->setPoint1Id(GetCenter());
     path->setRadius(radius);
     path->setF1(f1);
     path->setF2(f2);
@@ -435,4 +446,44 @@ void DialogArc::CheckAngles()
     }
 
     DialogArc::CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetCenter return id of center point
+ * @return id id
+ */
+quint32 DialogArc::GetCenter() const
+{
+    return getCurrentObjectId(ui->comboBoxBasePoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetRadius return formula of radius
+ * @return formula
+ */
+QString DialogArc::GetRadius() const
+{
+    return radius;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF1 return formula first angle of arc
+ * @return formula
+ */
+QString DialogArc::GetF1() const
+{
+    return f1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF2 return formula second angle of arc
+ * @return formula
+ */
+QString DialogArc::GetF2() const
+{
+    return f2;
 }

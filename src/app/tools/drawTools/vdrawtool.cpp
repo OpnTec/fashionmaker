@@ -46,8 +46,8 @@ qreal VDrawTool::factor = 1;
  * @param id object id in container.
  */
 VDrawTool::VDrawTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), ignoreFullUpdate(false),
-      nameActivDraw(doc->GetNameActivPP()), dialog(nullptr)
+    :VAbstractTool(doc, data, id, parent), ignoreFullUpdate(false), nameActivDraw(doc->GetNameActivPP()),
+      dialog(nullptr), typeLine(TypeLineLine), lineColor(ColorBlack), enabled(true)
 {
     connect(this->doc, &VPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -64,31 +64,12 @@ VDrawTool::~VDrawTool()
 /**
  * @brief ShowTool  highlight tool.
  * @param id object id in container.
- * @param color highlight color.
  * @param enable enable or disable highlight.
  */
-void VDrawTool::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
+void VDrawTool::ShowTool(quint32 id, bool enable)
 {
     Q_UNUSED(id);
-    Q_UNUSED(color);
     Q_UNUSED(enable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace. name new active pattern peace.
- */
-void VDrawTool::ChangedActivDraw(const QString &newName)
-{
-    if (nameActivDraw == newName)
-    {
-        currentColor = baseColor;
-    }
-    else
-    {
-        currentColor = Qt::gray;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +156,34 @@ void VDrawTool::RefreshDataInFile()
     }
     else
     {
-        qDebug()<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QColor VDrawTool::CorrectColor(const QColor &color) const
+{
+    if (enabled)
+    {
+        return color;
+    }
+    else
+    {
+        return Qt::gray;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::ReadAttributes()
+{
+    const QDomElement domElement = doc->elementById(QString().setNum(id));
+    if (domElement.isElement())
+    {
+        ReadToolAttributes(domElement);
+    }
+    else
+    {
+        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
     }
 }
 
@@ -241,10 +249,10 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
             {
                 DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
                 dialog->setWindowTitle(tr("Edit wrong formula"));
-                dialog->setFormula(formula);
+                dialog->SetFormula(formula);
                 if (dialog->exec() == QDialog::Accepted)
                 {
-                    formula = dialog->getFormula();
+                    formula = dialog->GetFormula();
                     /* Need delete dialog here because parser in dialog don't allow use correct separator for parsing
                      * here. */
                     delete dialog;
@@ -284,4 +292,35 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
     AddToCalc *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addToCal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDrawTool::getLineType() const
+{
+    return typeLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SetTypeLine(const QString &value)
+{
+    typeLine = value;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VDrawTool::GetLineColor() const
+{
+    return lineColor;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SetLineColor(const QString &value)
+{
+    lineColor = value;
+
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
 }

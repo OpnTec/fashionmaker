@@ -41,13 +41,17 @@ class VSimpleCurve : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurvePoint curvePosition,
+    VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint curvePosition,
                  qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
     virtual int     type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleSplinePath)};
+
+    QColor GetCurrentColor() const;
+    void SetCurrentColor(const QColor &value);
+
 signals:
     /**
      * @brief Choosed send id when clicked.
@@ -68,9 +72,13 @@ private:
     qreal             *factor;
 
     /** @brief currentColor current color. */
-    Qt::GlobalColor   *currentColor;
+    QColor            currentColor;
 
     SimpleCurvePoint  curvePosition;
+
+    bool              enabled;
+
+    QColor CorrectColor(const QColor &color) const;
 };
 
 #endif // VSIMPLECURVE_H

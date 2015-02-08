@@ -68,13 +68,18 @@ QString VAbstractSpline::getTagName() const
  */
 void VAbstractSpline::FullUpdateFromFile()
 {
+    ReadAttributes();
     RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::Disable(bool disable)
 {
-    DisableItem(this, disable);
+    enabled = !disable;
+    this->setEnabled(enabled);
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+                      Qt::RoundCap));
+    emit setEnabledPoint(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,23 +89,18 @@ void VAbstractSpline::Disable(bool disable)
  */
 void VAbstractSpline::ChangedActivDraw(const QString &newName)
 {
-    VDrawTool::ChangedActivDraw(newName);
-    const bool selectable = (nameActivDraw == newName);
-    this->setEnabled(selectable);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    emit setEnabledPoint(selectable);
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowTool highlight tool.
  * @param id object id in container
- * @param color highlight color.
  * @param enable enable or disable highlight.
  */
-void VAbstractSpline::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
+void VAbstractSpline::ShowTool(quint32 id, bool enable)
 {
-    ShowItem(this, id, color, enable);
+    ShowItem(this, id, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,8 @@ void VAbstractSpline::SetFactor(qreal factor)
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine, Qt::RoundCap));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+                      Qt::RoundCap));
     this->setPath(ToolPath(PathDirection::Show));
     isHovered = true;
     QGraphicsPathItem::hoverEnterEvent(event);
@@ -138,7 +139,7 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
     isHovered = false;
     QGraphicsPathItem::hoverLeaveEvent(event);
@@ -212,10 +213,30 @@ QPainterPath VAbstractSpline::ToolPath(PathDirection direction) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
+{
+    lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ShowFoot(bool show)
 {
     for (int i = 0; i < controlPoints.size(); ++i)
     {
         controlPoints.at(i)->setVisible(show);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::setEnabled(bool enabled)
+{
+    QGraphicsPathItem::setEnabled(enabled);
+    if (enabled)
+    {
+        setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    }
+    else
+    {
+        setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())/factor));
     }
 }

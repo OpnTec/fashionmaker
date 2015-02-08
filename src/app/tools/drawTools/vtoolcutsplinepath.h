@@ -42,12 +42,12 @@ public:
 
     VToolCutSplinePath(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                        const quint32 &splinePathId, const quint32 &splPath1id, const quint32 &splPath2id,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
+                       const QString &color, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog();
     static VToolCutSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolCutSplinePath *Create(const quint32 _id, const QString &pointName, QString &formula,
                                       const quint32 &splinePathId, const qreal &mx, const qreal &my,
-                                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                      const QString &color, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                       const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrSplinePath;
@@ -64,6 +64,7 @@ protected:
     virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                PathDirection direction = PathDirection::Hide);
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void  ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolCutSplinePath)
 };

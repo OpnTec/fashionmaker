@@ -48,26 +48,22 @@ public:
     DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLineIntersect();
 
-    quint32                 getP1Line1() const;
-    void                    setP1Line1(const quint32 &value);
+    quint32                 GetP1Line1() const;
+    void                    SetP1Line1(const quint32 &value);
 
-    quint32                 getP2Line1() const;
-    void                    setP2Line1(const quint32 &value);
+    quint32                 GetP2Line1() const;
+    void                    SetP2Line1(const quint32 &value);
 
-    quint32                 getP1Line2() const;
-    void                    setP1Line2(const quint32 &value);
+    quint32                 GetP1Line2() const;
+    void                    SetP1Line2(const quint32 &value);
 
-    quint32                 getP2Line2() const;
-    void                    setP2Line2(const quint32 &value);
+    quint32                 GetP2Line2() const;
+    void                    SetP2Line2(const quint32 &value);
 
-    QString                 getPointName() const;
-    void                    setPointName(const QString &value);
+    void                    SetPointName(const QString &value);
 public slots:
     virtual void            ChosenObject(quint32 id, const SceneObject &type);
-    void                    P1Line1Changed( int index);
-    void                    P2Line1Changed( int index);
-    void                    P1Line2Changed( int index);
-    void                    P2Line2Changed( int index);
+    void                    PointChanged();
     virtual void            PointNameChanged();
     virtual void            UpdateList();
 protected:
@@ -82,21 +78,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogLineIntersect *ui;
 
-    /** @brief number number of handled objects */
-    qint32                  number;
-
-    /** @brief p1Line1 id first point of first line */
-    quint32                 p1Line1;
-
-    /** @brief p2Line1 id second point of first line */
-    quint32                 p2Line1;
-
-    /** @brief p1Line2 id first point of second line */
-    quint32                 p1Line2;
-
-    /** @brief p2Line2 id second point of second line */
-    quint32                 p2Line2;
-
     /** @brief flagPoint keep state of point */
     bool                    flagPoint;
 
@@ -105,55 +86,5 @@ private:
     virtual void            CheckState();
     bool                    CheckIntersecion();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getP1Line1 return id first point of first line
- * @return id
- */
-inline quint32 DialogLineIntersect::getP1Line1() const
-{
-    return p1Line1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getP2Line1 return id second point of first line
- * @return id
- */
-inline quint32 DialogLineIntersect::getP2Line1() const
-{
-    return p2Line1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getP1Line2 return id first point of second line
- * @return id
- */
-inline quint32 DialogLineIntersect::getP1Line2() const
-{
-    return p1Line2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getP2Line2 return id second point of second line
- * @return id
- */
-inline quint32 DialogLineIntersect::getP2Line2() const
-{
-    return p2Line2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name of point
- */
-inline QString DialogLineIntersect::getPointName() const
-{
-    return pointName;
-}
 
 #endif // DIALOGLINEINTERSECT_H

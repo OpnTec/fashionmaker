@@ -255,13 +255,13 @@ void VSplinePath::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::getKCurve() const
+qreal VSplinePath::GetKCurve() const
 {
     return d->kCurve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSplinePath::setKCurve(const qreal &value)
+void VSplinePath::SetKCurve(const qreal &value)
 {
     if (value > 0)
     {

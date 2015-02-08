@@ -86,6 +86,9 @@ public:
     static const QString    AttrAxisP1;
     static const QString    AttrAxisP2;
     static const QString    AttrCurve;
+    static const QString    AttrLineColor;
+    static const QString    AttrColor;
+
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;
     static const QString    TypeLineDashLine;
@@ -93,16 +96,25 @@ public:
     static const QString    TypeLineDashDotLine;
     static const QString    TypeLineDashDotDotLine;
 
+    static const QString    ColorBlack;
+    static const QString    ColorGreen;
+    static const QString    ColorBlue;
+    static const QString    ColorDarkRed;
+    static const QString    ColorDarkGreen;
+    static const QString    ColorDarkBlue;
+    static const QString    ColorYellow;
+
     static const QStringList    StylesList();
     static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
     static QMap<QString, QIcon> LineStylesPics();
+
+    static const QStringList      Colors();
+    static QMap<QString, QString> ColorsList();
 
     static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
 
     const VContainer        *getData() const;
 
-    QString                 getLineType() const;
-    virtual void            setTypeLine(const QString &value);
     QMap<QString, quint32>  PointsList() const;
     virtual QString         getTagName() const =0;
     virtual void            ShowVisualization(bool show) =0;
@@ -135,12 +147,6 @@ protected:
 
     /** @brief baseColor base color for tool. */
     Qt::GlobalColor         baseColor;
-
-    /** @brief currentColor current tool color. */
-    Qt::GlobalColor         currentColor;
-
-    /** @brief typeLine line type. */
-    QString                 typeLine;
 
     Visualization           *vis;
 

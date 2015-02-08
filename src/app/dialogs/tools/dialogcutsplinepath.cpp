@@ -41,8 +41,8 @@
  * @param parent parent widget
  */
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSplinePath), formula(QString()),
-      splinePathId(NULL_ID), formulaBaseHeight(0), path(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSplinePath), formula(QString()), formulaBaseHeight(0),
+      path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -57,6 +57,7 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
     CheckState();
 
     FillComboBoxSplinesPath(ui->comboBoxSplinePath);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSplinePath::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSplinePath::PutVal);
@@ -80,10 +81,10 @@ DialogCutSplinePath::~DialogCutSplinePath()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogCutSplinePath::setPointName(const QString &value)
+void DialogCutSplinePath::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -91,10 +92,10 @@ void DialogCutSplinePath::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogCutSplinePath::setFormula(const QString &value)
+void DialogCutSplinePath::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -115,8 +116,20 @@ void DialogCutSplinePath::setFormula(const QString &value)
  */
 void DialogCutSplinePath::setSplinePathId(const quint32 &value)
 {
-    setCurrentSplinePathId(ui->comboBoxSplinePath, splinePathId, value, ComboBoxCutSpline::CutSpline);
-    path->setPoint1Id(splinePathId);
+    setCurrentSplinePathId(ui->comboBoxSplinePath, value, ComboBoxCutSpline::CutSpline);
+    path->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutSplinePath::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,9 +161,8 @@ void DialogCutSplinePath::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    splinePathId = getCurrentObjectId(ui->comboBoxSplinePath);
 
-    path->setPoint1Id(splinePathId);
+    path->setPoint1Id(getSplinePathId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -178,4 +190,24 @@ void DialogCutSplinePath::ShowVisualization()
         scene->addItem(path);
         path->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFormula return string of formula
+ * @return formula
+ */
+QString DialogCutSplinePath::GetFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSplineId return id base point of line
+ * @return id
+ */
+quint32 DialogCutSplinePath::getSplinePathId() const
+{
+    return getCurrentObjectId(ui->comboBoxSplinePath);
 }

@@ -41,8 +41,8 @@
  * @param parent parent widget
  */
 DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()),
-      splineId(NULL_ID), formulaBaseHeight(0), path(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()), formulaBaseHeight(0),
+      path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -57,6 +57,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     CheckState();
 
     FillComboBoxSplines(ui->comboBoxSpline);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSpline::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSpline::PutVal);
@@ -80,10 +81,10 @@ DialogCutSpline::~DialogCutSpline()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogCutSpline::setPointName(const QString &value)
+void DialogCutSpline::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -91,10 +92,10 @@ void DialogCutSpline::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogCutSpline::setFormula(const QString &value)
+void DialogCutSpline::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -115,8 +116,20 @@ void DialogCutSpline::setFormula(const QString &value)
  */
 void DialogCutSpline::setSplineId(const quint32 &value)
 {
-    setCurrentSplineId(ui->comboBoxSpline, splineId, value, ComboBoxCutSpline::CutSpline);
-    path->setPoint1Id(splineId);
+    setCurrentSplineId(ui->comboBoxSpline, value, ComboBoxCutSpline::CutSpline);
+    path->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutSpline::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,9 +161,8 @@ void DialogCutSpline::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    splineId = getCurrentObjectId(ui->comboBoxSpline);
 
-    path->setPoint1Id(splineId);
+    path->setPoint1Id(getSplineId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -178,4 +190,24 @@ void DialogCutSpline::ShowVisualization()
         scene->addItem(path);
         path->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFormula return string of formula
+ * @return formula
+ */
+QString DialogCutSpline::GetFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getSplineId return id base point of line
+ * @return id
+ */
+quint32 DialogCutSpline::getSplineId() const
+{
+    return getCurrentObjectId(ui->comboBoxSpline);
 }

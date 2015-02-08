@@ -197,10 +197,9 @@ signals:
     /**
      * @brief ShowTool highlight tool.
      * @param id tool id.
-     * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    void           ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
+    void           ShowTool(quint32 id, bool enable);
     /**
      * @brief ChangedCursor change cursor position.
      * @param id tool id.
@@ -214,7 +213,7 @@ signals:
 public slots:
     void           LiteParseTree(const Document &parse);
     void           haveLiteChange();
-    void           ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
+    void           ShowHistoryTool(quint32 id, bool enable);
     void           NeedFullParsing();
     void           ClearScene();
 protected:
@@ -267,7 +266,7 @@ private:
     void           UpdateMeasurements();
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
-                                          qreal &my, QString &typeLine);
+                                          qreal &my, QString &typeLine, QString &lineColor);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
                                           qreal &my);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);

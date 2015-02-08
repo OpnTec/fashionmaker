@@ -70,6 +70,8 @@ const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
 const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
 const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::AttrCurve       = QStringLiteral("curve");
+const QString VAbstractTool::AttrLineColor   = QStringLiteral("lineColor");
+const QString VAbstractTool::AttrColor       = QStringLiteral("color");
 
 const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");
@@ -77,6 +79,14 @@ const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine")
 const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
+
+const QString VAbstractTool::ColorBlack     = QStringLiteral("black");
+const QString VAbstractTool::ColorGreen     = QStringLiteral("green");
+const QString VAbstractTool::ColorBlue      = QStringLiteral("blue");
+const QString VAbstractTool::ColorDarkRed   = QStringLiteral("darkRed");
+const QString VAbstractTool::ColorDarkGreen = QStringLiteral("darkGreen");
+const QString VAbstractTool::ColorDarkBlue  = QStringLiteral("darkBlue");
+const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -87,8 +97,7 @@ const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDot
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine),
-      vis(nullptr)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(nullptr)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
@@ -215,18 +224,53 @@ QMap<QString, QIcon> VAbstractTool::LineStylesPics()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractTool::getLineType() const
+const QStringList VAbstractTool::Colors()
 {
-    return typeLine;
+    const QStringList colors = QStringList() << ColorBlack << ColorGreen << ColorBlue << ColorDarkRed << ColorDarkGreen
+                                             << ColorDarkBlue << ColorYellow;
+    return colors;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::setTypeLine(const QString &value)
+QMap<QString, QString> VAbstractTool::ColorsList()
 {
-    typeLine = value;
+    QMap<QString, QString> map;
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
+    const QStringList colorNames = Colors();
+    for (int i = 0; i < colorNames.size(); ++i)
+    {
+        QString name;
+        switch (i)
+        {
+            case 0: // ColorBlack
+                name = tr("black");
+                break;
+            case 1: // ColorGreen
+                name = tr("green");
+                break;
+            case 2: // ColorBlue
+                name = tr("blue");
+                break;
+            case 3: // ColorDarkRed
+                name = tr("dark red");
+                break;
+            case 4: // ColorDarkGreen
+                name = tr("dark green");
+                break;
+            case 5: // ColorDarkBlue
+                name = tr("dark blue");
+                break;
+            case 6: // ColorYellow
+                name = tr("yellow");
+                break;
+            default:
+                name = tr("black");
+                break;
+        }
+
+        map.insert(colorNames.at(i), name);
+    }
+    return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,8 +334,8 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
  */
 const QStringList VAbstractTool::StylesList()
 {
-    QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine <<
-                                          TypeLineDashDotLine << TypeLineDashDotDotLine;
+    const QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine
+                                             << TypeLineDashDotLine << TypeLineDashDotDotLine;
     return styles;
 }
 

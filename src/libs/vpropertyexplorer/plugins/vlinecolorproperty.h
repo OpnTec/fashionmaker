@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vformulaproperty.h
+ **  @file   vlinecolorproperty.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 8, 2014
+ **  @date   7 2, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,38 +26,49 @@
  **
  *************************************************************************/
 
-#ifndef VFORMULAPROPERTY_H
-#define VFORMULAPROPERTY_H
+#ifndef VLINECOLORPROPERTY_H
+#define VLINECOLORPROPERTY_H
 
-#include "../../libs/vpropertyexplorer/vproperty.h"
+#include "../vproperty.h"
 
-class VFormula;
+#include <QMap>
+#include <QString>
 
-class VFormulaProperty : public VPE::VProperty
+namespace VPE
+{
+
+class VPROPERTYEXPLORERSHARED_EXPORT VLineColorProperty : public VProperty
 {
     Q_OBJECT
 public:
-    VFormulaProperty(const QString &name);
+    //! Constructor
+    VLineColorProperty(const QString& name);
+
+    //! Destructor
+    ~VLineColorProperty() {}
 
     //! Get the data how it should be displayed
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const;
-
-    //! Returns item flags
-    Qt::ItemFlags flags(int column = DPC_Name) const;
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
+    virtual QWidget *createEditor(QWidget* parent, const QStyleOptionViewItem& options,
                                   const QAbstractItemDelegate* delegate);
-
-    //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-    virtual bool setEditorData(QWidget* editor);
 
     //! Gets the data from the widget
     virtual QVariant getEditorData(const QWidget* editor) const;
+
+    //! Sets the colors
+    virtual void setColors(const QMap<QString, QString> &colors);
+
+    //! Get the settings. This function has to be implemented in a subclass in order to have an effect
+    virtual QMap<QString, QString> getColors() const;
+
+    //! Sets the value of the property
+    virtual void setValue(const QVariant& value);
 
     //! Returns a string containing the type of the property
     virtual QString type() const;
@@ -67,23 +78,23 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const;
+    virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
 
-    //! Sets the value of the property
-    virtual void setValue(const QVariant& value);
-
-    //! Returns the value of the property as a QVariant
-    virtual QVariant getValue() const;
-
-    //! Returns the formula
-    virtual VFormula GetFormula() const;
-
-    //! Sets the formula
-    virtual void SetFormula(const VFormula &formula);
+    static int IndexOfColor(const QMap<QString, QString> &colors, const QString &color);
 
 public slots:
-    virtual void ValueChildChanged(const QVariant &value, int typeForParent);
+    void currentIndexChanged(int index);
 
+protected:
+    //! The list of possible options to choose from
+    QMap<QString, QString> colors;
+    QVector<QString> indexList;
+    // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
+    //members by reimplementing the VPropertyPrivate class without touching this header file.
+private:
+    Q_DISABLE_COPY(VLineColorProperty)
 };
 
-#endif // VFORMULAPROPERTY_H
+}
+
+#endif // VLINECOLORPROPERTY_H

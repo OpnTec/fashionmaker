@@ -39,25 +39,25 @@ class VToolHeight: public VToolLinePoint
     Q_OBJECT
 public:
 
-    VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const quint32 &basePointId,
-                const quint32 &p1LineId, const quint32 &p2LineId, const Source &typeCreation,
-                QGraphicsItem * parent = nullptr);
+    VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor,
+                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog();
     static VToolHeight *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                               const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                               const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                               VContainer *data, const Document &parse, const Source &typeCreation);
+                               const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
+                               const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
+                               VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Height)};
 
-    quint32 getP1LineId() const;
-    void    setP1LineId(const quint32 &value);
+    quint32 GetP1LineId() const;
+    void    SetP1LineId(const quint32 &value);
 
-    quint32 getP2LineId() const;
-    void    setP2LineId(const quint32 &value);
+    quint32 GetP2LineId() const;
+    void    SetP2LineId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:
@@ -67,6 +67,7 @@ protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void   SaveDialog(QDomElement &domElement);
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void   ReadToolAttributes(const QDomElement &domElement);
 private:
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;

@@ -72,7 +72,7 @@ QString VisToolEndLine::Angle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setAngle(const QString &expression)
+void VisToolEndLine::SetAngle(const QString &expression)
 {
     angle = FindVal(expression);
 }

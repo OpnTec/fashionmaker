@@ -36,17 +36,18 @@ class VToolCurveIntersectAxis : public VToolLinePoint
     Q_OBJECT
 public:
     VToolCurveIntersectAxis(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                            const QString &formulaAngle, const quint32 &basePointId, const quint32 &curveId,
-                            const Source &typeCreation, QGraphicsItem * parent = nullptr);
+                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
+                            const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual ~VToolCurveIntersectAxis();
     virtual void setDialog();
 
     static VToolCurveIntersectAxis *Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                                            VContainer *data);
     static VToolCurveIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                           QString &formulaAngle, const quint32 &basePointId, const quint32 &curveId,
-                                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                                           VContainer *data, const Document &parse, const Source &typeCreation);
+                                           const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
+                                           const quint32 &curveId, const qreal &mx, const qreal &my,
+                                           VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                                           const Document &parse, const Source &typeCreation);
 
     static QPointF FindPoint(const QPointF &point, qreal angle, const QSharedPointer<VAbstractCurve> &curve);
 
@@ -54,8 +55,8 @@ public:
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
-    VFormula     getFormulaAngle() const;
-    void         setFormulaAngle(const VFormula &value);
+    VFormula     GetFormulaAngle() const;
+    void         SetFormulaAngle(const VFormula &value);
 
     quint32      getCurveId() const;
     void         setCurveId(const quint32 &value);
@@ -68,6 +69,7 @@ protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolCurveIntersectAxis)
     QString formulaAngle;

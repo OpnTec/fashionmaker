@@ -63,10 +63,9 @@ signals:
     /**
      * @brief ShowHistoryTool signal change color of selected in records tool
      * @param id id of tool
-     * @param color new color of tool
      * @param enable true enable selection, false disable selection
      */
-    void              ShowHistoryTool(quint32 id, Qt::GlobalColor color, bool enable);
+    void              ShowHistoryTool(quint32 id, bool enable);
 protected:
     virtual void      closeEvent ( QCloseEvent * event );
 private:

@@ -69,6 +69,8 @@ public:
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
+
+    QString          getPointName() const;
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -207,8 +209,12 @@ protected:
     /** @brief pointName name of point */
     QString          pointName;
 
+    /** @brief number number of handled objects */
+    qint32           number;
+
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
+
     void             FillComboBoxPoints(QComboBox *box)const;
     void             FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc)const;
     void             FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
@@ -216,26 +222,27 @@ protected:
                                              ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
+    void             FillComboBoxLineColors(QComboBox *box)const;
+
     virtual void     CheckState();
-    QString          GetTypeLine(const QComboBox *box)const;
+    QString          GetComboBoxCurrentData(const QComboBox *box)const;
     template <class key, class val>
     void             ShowVariable(const QMap<key, val> var);
-    void             SetupTypeLine(QComboBox *box, const QString &value);
-    void             ChangeCurrentData(QComboBox *box, const quint32 &value) const;
+    void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
     void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
     void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
                           bool checkZero = true);
-    void             setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value) const;
-    void             setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value,
+    void             setCurrentPointId(QComboBox *box, const quint32 &value) const;
+    void             setCurrentSplineId(QComboBox *box, const quint32 &value,
                                         ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
-    void             setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value,
+    void             setCurrentArcId(QComboBox *box, const quint32 &value,
                                      ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc) const;
-    void             setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
+    void             setCurrentSplinePathId(QComboBox *box, const quint32 &value,
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
-    void             setCurrentCurveId(QComboBox *box, quint32 &curveId, const quint32 &value) const;
+    void             setCurrentCurveId(QComboBox *box, const quint32 &value) const;
     quint32          getCurrentObjectId(QComboBox *box) const;
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
@@ -328,7 +335,6 @@ protected:
     }
 
     void             ChangeColor(QWidget *widget, const QColor &color);
-    void             setPointId(QComboBox *box, quint32 &pointId, const quint32 &value);
     virtual void     ShowVisualization(){}
     /**
      * @brief SaveData Put dialog data in local variables

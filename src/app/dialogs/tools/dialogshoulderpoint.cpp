@@ -42,9 +42,8 @@
  * @param parent parent widget
  */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), number(0),
-    typeLine(QString()), formula(QString()), p1Line(NULL_ID), p2Line(NULL_ID), pShoulder(NULL_ID), formulaBaseHeight(0),
-    line (nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), formula(QString()),
+      formulaBaseHeight(0), line (nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -62,6 +61,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
     FillComboBoxPoints(ui->comboBoxP3);
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogShoulderPoint::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
@@ -201,18 +201,14 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
 void DialogShoulderPoint::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    p1Line = getCurrentObjectId(ui->comboBoxP1Line);
-    p2Line = getCurrentObjectId(ui->comboBoxP2Line);
-    pShoulder = getCurrentObjectId(ui->comboBoxP3);
 
-    line->setPoint1Id(pShoulder);
-    line->setLineP1Id(p1Line);
-    line->setLineP2Id(p2Line);
+    line->setPoint1Id(GetP3());
+    line->setLineP1Id(GetP1Line());
+    line->setLineP2Id(GetP2Line());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -228,40 +224,52 @@ void DialogShoulderPoint::closeEvent(QCloseEvent *event)
  * @brief setPShoulder set id shoulder point
  * @param value id
  */
-void DialogShoulderPoint::setP3(const quint32 &value)
+void DialogShoulderPoint::SetP3(const quint32 &value)
 {
-    setPointId(ui->comboBoxP3, pShoulder, value);
-    line->setPoint1Id(pShoulder);
+    setCurrentPointId(ui->comboBoxP3, value);
+    line->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogShoulderPoint::GetLineColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::SetLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setP2Line set id second point of line
+ * @brief SetP2Line set id second point of line
  * @param value id
  */
-void DialogShoulderPoint::setP2Line(const quint32 &value)
+void DialogShoulderPoint::SetP2Line(const quint32 &value)
 {
-    setPointId(ui->comboBoxP2Line, p2Line, value);
-    line->setLineP2Id(p2Line);
+    setCurrentPointId(ui->comboBoxP2Line, value);
+    line->setLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setP1Line set id first point of line
+ * @brief SetP1Line set id first point of line
  * @param value id
  */
-void DialogShoulderPoint::setP1Line(const quint32 &value)
+void DialogShoulderPoint::SetP1Line(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1Line, p1Line, value);
-    line->setLineP1Id(p1Line);
+    setCurrentPointId(ui->comboBoxP1Line, value);
+    line->setLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogShoulderPoint::setFormula(const QString &value)
+void DialogShoulderPoint::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed.
@@ -276,23 +284,72 @@ void DialogShoulderPoint::setFormula(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setTypeLine set type of line
+ * @brief SetTypeLine set type of line
  * @param value type
  */
-void DialogShoulderPoint::setTypeLine(const QString &value)
+void DialogShoulderPoint::SetTypeLine(const QString &value)
 {
-    typeLine = value;
-    SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    ChangeCurrentData(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogShoulderPoint::setPointName(const QString &value)
+void DialogShoulderPoint::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetTypeLine return type of line
+ * @return type
+ */
+QString DialogShoulderPoint::GetTypeLine() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFormula return string of formula
+ * @return formula
+ */
+QString DialogShoulderPoint::GetFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP1Line return id first point of line
+ * @return id
+ */
+quint32 DialogShoulderPoint::GetP1Line() const
+{
+    return getCurrentObjectId(ui->comboBoxP1Line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetP2Line return id second point of line
+ * @return id
+ */
+quint32 DialogShoulderPoint::GetP2Line() const
+{
+    return getCurrentObjectId(ui->comboBoxP2Line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPShoulder return id shoulder point
+ * @return id
+ */
+quint32 DialogShoulderPoint::GetP3() const
+{
+    return getCurrentObjectId(ui->comboBoxP3);
 }

@@ -36,18 +36,20 @@
  * @param data container with variables.
  * @param id object id in container.
  * @param typeLine line type.
+ * @param lineColor line color.
  * @param formula string with length formula.
  * @param basePointId id base line point.
  * @param angle line angle.
  * @param parent parent object.
  */
-VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id,
-                               const QString &typeLine, const QString &formula, const quint32 &basePointId,
+VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                               const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent),  formulaLength(formula), angle(angle), basePointId(basePointId),
+    :VToolPoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
       mainLine(nullptr)
 {
     this->typeLine = typeLine;
+    this->lineColor = lineColor;
     Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
     QPointF point1 = data->GeometricObject<VPointF>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<VPointF>(id)->toQPointF();
@@ -69,9 +71,7 @@ VToolLinePoint::~VToolLinePoint()
  */
 void VToolLinePoint::ChangedActivDraw(const QString &newName)
 {
-    VToolPoint::ChangedActivDraw(newName);
-    this->setEnabled(nameActivDraw == newName);
-    mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,8 @@ void VToolLinePoint::ChangedActivDraw(const QString &newName)
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    mainLine->setPen(QPen(CorrectColor(QColor(lineColor)), qApp->toPixel(qApp->widthHairLine())/factor,
+                          LineStyleToPenStyle(typeLine)));
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF point = VDrawTool::data.GeometricObject<VPointF>(id)->toQPointF();
     QPointF basePoint = VDrawTool::data.GeometricObject<VPointF>(basePointId)->toQPointF();
@@ -108,13 +109,22 @@ void VToolLinePoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolLinePoint::getAngle() const
+void VToolLinePoint::Disable(bool disable)
+{
+    VToolPoint::Disable(disable);
+    mainLine->setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+                          LineStyleToPenStyle(typeLine)));
+    mainLine->setEnabled(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VToolLinePoint::GetAngle() const
 {
     return angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::setAngle(const qreal &value)
+void VToolLinePoint::SetAngle(const qreal &value)
 {
     angle = value;
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
@@ -122,13 +132,13 @@ void VToolLinePoint::setAngle(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolLinePoint::getBasePointId() const
+quint32 VToolLinePoint::GetBasePointId() const
 {
     return basePointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::setBasePointId(const quint32 &value)
+void VToolLinePoint::SetBasePointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -140,7 +150,7 @@ void VToolLinePoint::setBasePointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolLinePoint::getFormulaLength() const
+VFormula VToolLinePoint::GetFormulaLength() const
 {
     VFormula fLength(formulaLength, this->getData());
     fLength.setCheckZero(true);
@@ -151,11 +161,11 @@ VFormula VToolLinePoint::getFormulaLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::setFormulaLength(const VFormula &value)
+void VToolLinePoint::SetFormulaLength(const VFormula &value)
 {
     if (value.error() == false)
     {
-        formulaLength = value.getFormula(FormulaType::FromUser);
+        formulaLength = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);

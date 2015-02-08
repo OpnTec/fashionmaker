@@ -42,7 +42,7 @@ public:
 
     virtual void RefreshGeometry();
     QString      Angle() const;
-    void         setAngle(const QString &expression);
+    void         SetAngle(const QString &expression);
     void         setLength(const QString &expression);
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};

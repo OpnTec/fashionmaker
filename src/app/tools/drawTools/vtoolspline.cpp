@@ -43,11 +43,12 @@ const QString VToolSpline::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
                          QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::Spline;
+    lineColor = color;
 
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -98,13 +99,14 @@ void VToolSpline::setDialog()
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    dialogTool->setP1(spl->GetP1().id());
-    dialogTool->setP4(spl->GetP4().id());
-    dialogTool->setAngle1(spl->GetAngle1());
-    dialogTool->setAngle2(spl->GetAngle2());
-    dialogTool->setKAsm1(spl->GetKasm1());
-    dialogTool->setKAsm2(spl->GetKasm2());
-    dialogTool->setKCurve(spl->GetKcurve());
+    dialogTool->SetP1(spl->GetP1().id());
+    dialogTool->SetP4(spl->GetP4().id());
+    dialogTool->SetAngle1(spl->GetAngle1());
+    dialogTool->SetAngle2(spl->GetAngle2());
+    dialogTool->SetKAsm1(spl->GetKasm1());
+    dialogTool->SetKAsm2(spl->GetKasm2());
+    dialogTool->SetKCurve(spl->GetKcurve());
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,15 +123,16 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     SCASSERT(dialog != nullptr);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const quint32 p1 = dialogTool->getP1();
-    const quint32 p4 = dialogTool->getP4();
-    const qreal kAsm1 = dialogTool->getKAsm1();
-    const qreal kAsm2 = dialogTool->getKAsm2();
-    const qreal angle1 = dialogTool->getAngle1();
-    const qreal angle2 = dialogTool->getAngle2();
-    const qreal kCurve = dialogTool->getKCurve();
+    const quint32 p1 = dialogTool->GetP1();
+    const quint32 p4 = dialogTool->GetP4();
+    const qreal kAsm1 = dialogTool->GetKAsm1();
+    const qreal kAsm2 = dialogTool->GetKAsm2();
+    const qreal angle1 = dialogTool->GetAngle1();
+    const qreal angle2 = dialogTool->GetAngle2();
+    const qreal kCurve = dialogTool->GetKCurve();
+    const QString color = dialogTool->GetColor();
     VToolSpline *spl = nullptr;
-    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
+    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, doc, data, Document::FullParse,
                  Source::FromGui);
     if (spl != nullptr)
     {
@@ -158,7 +161,7 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  */
 VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                                  const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                 const QString &color, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<VPointF>(p1);
@@ -182,7 +185,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
     VDrawTool::AddRecord(id, Tool::Spline, doc);
     if (parse == Document::FullParse)
     {
-        VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
+        VToolSpline *spl = new VToolSpline(doc, data, id, color, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
@@ -225,11 +228,11 @@ void VToolSpline::ShowVisualization(bool show)
             const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
             visual->setPoint1Id(spl->GetP1().id());
             visual->setPoint4Id(spl->GetP4().id());
-            visual->setAngle1(spl->GetAngle1());
-            visual->setAngle2(spl->GetAngle2());
-            visual->setKAsm1(spl->GetKasm1());
-            visual->setKAsm2(spl->GetKasm2());
-            visual->setKCurve(spl->GetKcurve());
+            visual->SetAngle1(spl->GetAngle1());
+            visual->SetAngle2(spl->GetAngle2());
+            visual->SetKAsm1(spl->GetKasm1());
+            visual->SetKAsm2(spl->GetKasm2());
+            visual->SetKCurve(spl->GetKcurve());
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -308,10 +311,10 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
 
-    VPointF point1 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->getP1());
-    VPointF point4 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->getP4());
-    VSpline spl = VSpline (point1, point4, dialogTool->getAngle1(), dialogTool->getAngle2(),
-                           dialogTool->getKAsm1(), dialogTool->getKAsm2(), dialogTool->getKCurve());
+    VPointF point1 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->GetP1());
+    VPointF point4 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->GetP4());
+    VSpline spl = VSpline (point1, point4, dialogTool->GetAngle1(), dialogTool->GetAngle2(),
+                           dialogTool->GetKAsm1(), dialogTool->GetKAsm2(), dialogTool->GetKCurve());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);
@@ -322,7 +325,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->getKCurve());
+    spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->GetKCurve());
 
     doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
     doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
@@ -331,6 +334,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
     doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
     doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,6 +352,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
+    doc->SetAttribute(tag, AttrColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,7 +361,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
  */
 void VToolSpline::RefreshGeometry()
 {
-    //this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     if (isHovered)
     {
         this->setPath(ToolPath(PathDirection::Show));
@@ -388,11 +393,11 @@ void VToolSpline::RefreshGeometry()
         VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
         visual->setPoint1Id(spl->GetP1().id());
         visual->setPoint4Id(spl->GetP4().id());
-        visual->setAngle1(spl->GetAngle1());
-        visual->setAngle2(spl->GetAngle2());
-        visual->setKAsm1(spl->GetKasm1());
-        visual->setKAsm2(spl->GetKasm2());
-        visual->setKCurve(spl->GetKcurve());
+        visual->SetAngle1(spl->GetAngle1());
+        visual->SetAngle2(spl->GetAngle2());
+        visual->SetKAsm1(spl->GetKasm1());
+        visual->SetKAsm2(spl->GetKasm2());
+        visual->SetKCurve(spl->GetKcurve());
         visual->RefreshGeometry();
     }
 }

@@ -67,8 +67,8 @@ void VisToolCutSplinePath::RefreshGeometry()
 
             VSplinePoint splP1 = splPath->at(p1);
             VSplinePoint splP2 = splPath->at(p2);
-            const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, p, splPath->getKCurve());
-            const VSpline spl2 = VSpline(p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
+            const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, p, splPath->GetKCurve());
+            const VSpline spl2 = VSpline(p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
 
             VSplinePath spPath1 = VSplinePath();
             VSplinePath spPath2 = VSplinePath();
@@ -104,8 +104,8 @@ void VisToolCutSplinePath::RefreshGeometry()
                 }
             }
 
-            spPath1.setKCurve(splPath->getKCurve());
-            spPath2.setKCurve(splPath->getKCurve());
+            spPath1.SetKCurve(splPath->GetKCurve());
+            spPath2.SetKCurve(splPath->GetKCurve());
 
             DrawPoint(point, cutPoint, mainColor);
 

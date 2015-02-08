@@ -52,13 +52,12 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
 {
     baseColor = Qt::red;
-    currentColor = baseColor;
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())/factor));
     ignoreFullUpdate = true;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
-    setColorLabel(Qt::black);
+    SetColorLabel(Qt::black);
     if (typeCreation == Source::FromGui)
     {
         AddToFile();
@@ -79,7 +78,7 @@ void VToolSinglePoint::setDialog()
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setData(p->name(), p->toQPointF());
+    dialogTool->SetData(p->name(), p->toQPointF());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,8 +193,8 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
     SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    QPointF p = dialogTool->getPoint();
-    QString name = dialogTool->getName();
+    QPointF p = dialogTool->GetPoint();
+    QString name = dialogTool->getPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));
@@ -241,10 +240,10 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setColorLabel change color for label and label line.
+ * @brief SetColorLabel change color for label and label line.
  * @param color new color.
  */
-void VToolSinglePoint::setColorLabel(const Qt::GlobalColor &color)
+void VToolSinglePoint::SetColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
     lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -263,6 +262,13 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     doc->SetAttribute(tag, AttrY, qApp->fromPixel(point->y()));
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ReadToolAttributes(const QDomElement &domElement)
+{
+    Q_UNUSED(domElement);
+    // This tool doesn't need read attributes from file.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,26 +303,6 @@ void  VToolSinglePoint::FullUpdateFromFile()
 {
     VPointF point = *VAbstractTool::data.GeometricObject<VPointF>(id);
     RefreshPointGeometry(point);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolSinglePoint::ChangedActivDraw(const QString &newName)
-{
-    VToolPoint::ChangedActivDraw(newName);
-    if (nameActivDraw == newName)
-    {
-        this->setEnabled(true);
-        setColorLabel(Qt::black);
-    }
-    else
-    {
-        this->setEnabled(false);
-        setColorLabel(Qt::gray);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

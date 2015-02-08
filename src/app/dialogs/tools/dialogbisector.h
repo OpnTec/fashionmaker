@@ -49,23 +49,25 @@ public:
     DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogBisector();
 
-    QString            getPointName() const;
-    void               setPointName(const QString &value);
+    void               SetPointName(const QString &value);
 
-    QString            getTypeLine() const;
-    void               setTypeLine(const QString &value);
+    QString            GetTypeLine() const;
+    void               SetTypeLine(const QString &value);
 
-    QString            getFormula() const;
-    void               setFormula(const QString &value);
+    QString            GetFormula() const;
+    void               SetFormula(const QString &value);
 
-    quint32            getFirstPointId() const;
-    void               setFirstPointId(const quint32 &value);
+    quint32            GetFirstPointId() const;
+    void               SetFirstPointId(const quint32 &value);
 
-    quint32            getSecondPointId() const;
-    void               setSecondPointId(const quint32 &value);
+    quint32            GetSecondPointId() const;
+    void               SetSecondPointId(const quint32 &value);
 
-    quint32            getThirdPointId() const;
-    void               setThirdPointId(const quint32 &value);
+    quint32            GetThirdPointId() const;
+    void               SetThirdPointId(const quint32 &value);
+
+    QString            GetLineColor() const;
+    void               SetLineColor(const QString &value);
 public slots:
     virtual void       ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -90,88 +92,13 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogBisector *ui;
 
-    /** @brief number number of handled objects */
-    qint32             number;
-
-    /** @brief typeLine type of line */
-    QString            typeLine;
-
     /** @brief formula formula */
     QString            formula;
-
-    /** @brief firstPointId id of first point */
-    quint32            firstPointId;
-
-    /** @brief secondPointId id of second point */
-    quint32            secondPointId;
-
-    /** @brief thirdPointId id of third point */
-    quint32            thirdPointId;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                formulaBaseHeight;
     VisToolBisector    *line;
 
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogBisector::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogBisector::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogBisector::getFormula() const
-{
-    return qApp->FormulaFromUser(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPointId return id of first point
- * @return id
- */
-inline quint32 DialogBisector::getFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPointId return id of second point
- * @return id
- */
-inline quint32 DialogBisector::getSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getThirdPointId return id of third point
- * @return id
- */
-inline quint32 DialogBisector::getThirdPointId() const
-{
-    return thirdPointId;
-}
 
 #endif // DIALOGBISECTOR_H

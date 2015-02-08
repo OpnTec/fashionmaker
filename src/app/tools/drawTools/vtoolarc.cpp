@@ -47,10 +47,12 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object
  */
-VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation, QGraphicsItem *parent)
+VToolArc::VToolArc(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
+                   QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::Arc;
+    lineColor = color;
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
@@ -82,6 +84,7 @@ void VToolArc::setDialog()
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetF2(arc->GetFormulaF2());
     dialogTool->SetRadius(arc->GetFormulaRadius());
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,8 +104,9 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
     QString radius = dialogTool->GetRadius();
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
+    const QString color = dialogTool->GetColor();
     VToolArc* point = nullptr;
-    point=Create(0, center, radius, f1, f2, scene, doc, data, Document::FullParse, Source::FromGui);
+    point=Create(0, center, radius, f1, f2, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -125,8 +129,8 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPatte
  * @param typeCreation way we create this tool.
  */
 VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
-                      VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
-                      const Source &typeCreation)
+                           const QString &color, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                           const Document &parse, const Source &typeCreation)
 {
     qreal calcRadius = 0, calcF1 = 0, calcF2 = 0;
 
@@ -155,7 +159,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     VDrawTool::AddRecord(id, Tool::Arc, doc);
     if (parse == Document::FullParse)
     {
-        VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
+        VToolArc *toolArc = new VToolArc(doc, data, id, color, typeCreation);
         scene->addItem(toolArc);
         connect(toolArc, &VToolArc::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, toolArc, &VToolArc::SetFactor);
@@ -197,7 +201,7 @@ void VToolArc::setCenter(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArc::getFormulaRadius() const
+VFormula VToolArc::GetFormulaRadius() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     SCASSERT(arc.isNull() == false);
@@ -210,7 +214,7 @@ VFormula VToolArc::getFormulaRadius() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setFormulaRadius(const VFormula &value)
+void VToolArc::SetFormulaRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
@@ -225,7 +229,7 @@ void VToolArc::setFormulaRadius(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArc::getFormulaF1() const
+VFormula VToolArc::GetFormulaF1() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     SCASSERT(arc.isNull() == false);
@@ -238,7 +242,7 @@ VFormula VToolArc::getFormulaF1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setFormulaF1(const VFormula &value)
+void VToolArc::SetFormulaF1(const VFormula &value)
 {
     if (value.error() == false)
     {
@@ -254,7 +258,7 @@ void VToolArc::setFormulaF1(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArc::getFormulaF2() const
+VFormula VToolArc::GetFormulaF2() const
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
     SCASSERT(arc.isNull() == false);
@@ -267,7 +271,7 @@ VFormula VToolArc::getFormulaF2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArc::setFormulaF2(const VFormula &value)
+void VToolArc::SetFormulaF2(const VFormula &value)
 {
     if (value.error() == false)
     {
@@ -351,6 +355,7 @@ void VToolArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
     doc->SetAttribute(domElement, AttrAngle1, dialogTool->GetF1());
     doc->SetAttribute(domElement, AttrAngle2, dialogTool->GetF2());
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -365,6 +370,7 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrRadius, arc->GetFormulaRadius());
     doc->SetAttribute(tag, AttrAngle1, arc->GetFormulaF1());
     doc->SetAttribute(tag, AttrAngle2, arc->GetFormulaF2());
+    doc->SetAttribute(tag, AttrColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,7 +379,7 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
  */
 void VToolArc::RefreshGeometry()
 {
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
 
     if (vis != nullptr)

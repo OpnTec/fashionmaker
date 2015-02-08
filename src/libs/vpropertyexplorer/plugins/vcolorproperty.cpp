@@ -36,7 +36,7 @@ QVariant VColorProperty::data (int column, int role) const
 {
     if (column == DPC_Data && (Qt::DisplayRole == role))
     {
-        return VColorPropertyEditor::getColorString(d_ptr->VariantValue.value<QColor>());
+        return VColorPropertyEditor::GetColorString(d_ptr->VariantValue.value<QColor>());
     }
     else if (Qt::EditRole == role)
     {
@@ -44,7 +44,7 @@ QVariant VColorProperty::data (int column, int role) const
     }
     else if (column == DPC_Data && (Qt::DecorationRole == role))
     {
-        return VColorPropertyEditor::getColorPixmap(d_ptr->VariantValue.value<QColor>());
+        return VColorPropertyEditor::GetColorPixmap(d_ptr->VariantValue.value<QColor>());
     }
     else
         return VProperty::data(column, role);
@@ -58,7 +58,7 @@ QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewIte
     Q_UNUSED(delegate);
 
     VColorPropertyEditor* tmpWidget = new VColorPropertyEditor(parent);
-    tmpWidget->setColor(d_ptr->VariantValue.value<QColor>());
+    tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
     return tmpWidget;
 }
 
@@ -68,7 +68,7 @@ bool VColorProperty::setEditorData(QWidget* editor)
     VColorPropertyEditor* tmpWidget = qobject_cast<VColorPropertyEditor*>(editor);
     if (tmpWidget)
     {
-        tmpWidget->setColor(d_ptr->VariantValue.value<QColor>());
+        tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
     }
     else
         return false;
@@ -82,7 +82,7 @@ QVariant VColorProperty::getEditorData(const QWidget *editor) const
     const VColorPropertyEditor* tmpWidget = qobject_cast<const VColorPropertyEditor*>(editor);
     if (tmpWidget)
     {
-        return tmpWidget->getColor();
+        return tmpWidget->GetColor();
     }
 
     return QVariant();

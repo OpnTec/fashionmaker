@@ -39,8 +39,8 @@
  * @param parent parent widget
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), number(0), typeLine(QString()),
-      formula(QString()), angle(0), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), formula(QString()), angle(0), formulaBaseHeight(0),
+      line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -57,6 +57,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     InitArrow(ui);
 
@@ -172,18 +173,15 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
 void DialogNormal::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
+    line->setPoint1Id(GetFirstPointId());
+    line->setPoint2Id(GetSecondPointId());
     line->setLength(formula);
-    line->setAngle(angle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->SetAngle(angle);
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -196,44 +194,56 @@ void DialogNormal::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPointId set id of second point
+ * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogNormal::setSecondPointId(const quint32 &value)
+void DialogNormal::SetSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogNormal::GetLineColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::SetLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPointId set id of first point
+ * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogNormal::setFirstPointId(const quint32 &value)
+void DialogNormal::SetFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAngle set aditional angle of normal
+ * @brief SetAngle set aditional angle of normal
  * @param value angle in degree
  */
-void DialogNormal::setAngle(const qreal &value)
+void DialogNormal::SetAngle(const qreal &value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
-    line->setAngle(angle);
+    line->SetAngle(angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogNormal::setFormula(const QString &value)
+void DialogNormal::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed.
@@ -248,23 +258,72 @@ void DialogNormal::setFormula(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setTypeLine set type of line
+ * @brief SetTypeLine set type of line
  * @param value type
  */
-void DialogNormal::setTypeLine(const QString &value)
+void DialogNormal::SetTypeLine(const QString &value)
 {
-    typeLine = value;
-    SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    ChangeCurrentData(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogNormal::setPointName(const QString &value)
+void DialogNormal::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetTypeLine return type of line
+ * @return type
+ */
+QString DialogNormal::GetTypeLine() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFormula return string of formula
+ * @return formula
+ */
+QString DialogNormal::GetFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle return aditional angle of normal
+ * @return angle in degree
+ */
+qreal DialogNormal::GetAngle() const
+{
+    return angle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFirstPointId return id of first point
+ * @return id
+ */
+quint32 DialogNormal::GetFirstPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetSecondPointId return id of second point
+ * @return id
+ */
+quint32 DialogNormal::GetSecondPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

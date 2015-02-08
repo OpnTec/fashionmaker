@@ -50,9 +50,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
-    namePoint->setBrush(Qt::black);
     lineName = new QGraphicsLineItem(this);
-    lineName->setPen(QPen(Qt::black));
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -134,23 +132,18 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
  */
 void VToolPoint::ChangedActivDraw(const QString &newName)
 {
-    VDrawTool::ChangedActivDraw(newName);
-    this->setEnabled(nameActivDraw == newName);
-    namePoint->setBrush(QBrush(currentColor));
-    lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowTool  highlight tool.
  * @param id object id in container.
- * @param color highlight color.
  * @param enable enable or disable highlight.
  */
-void VToolPoint::ShowTool(quint32 id, Qt::GlobalColor color, bool enable)
+void VToolPoint::ShowTool(quint32 id, bool enable)
 {
-    ShowItem(this, id, color, enable);
+    ShowItem(this, id, enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -177,7 +170,9 @@ void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::Disable(bool disable)
 {
-    DisableItem(this, disable);
+    enabled = !disable;
+    this->setEnabled(enabled);
+    namePoint->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,7 +203,7 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthMainLine())/factor));
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -220,7 +215,7 @@ void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,7 +226,7 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -263,14 +258,7 @@ void VToolPoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - scenePos()));
-        if (currentColor == Qt::gray)
-        {
-            lineName->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
-        }
-        else
-        {
-            lineName->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
-        }
+        lineName->setPen(QPen(CorrectColor(Qt::black), qApp->toPixel(qApp->widthHairLine())/factor));
 
         if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
         {
@@ -328,4 +316,18 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsEllipseItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::setEnabled(bool enabled)
+{
+    QGraphicsEllipseItem::setEnabled(enabled);
+    if (enabled)
+    {
+        setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    }
+    else
+    {
+        setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())/factor));
+    }
 }

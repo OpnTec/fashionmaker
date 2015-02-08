@@ -121,7 +121,7 @@ void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::setFormula(const QString &value)
+void DialogEditWrongFormula::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -147,7 +147,7 @@ void DialogEditWrongFormula::setPostfix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEditWrongFormula::getFormula() const
+QString DialogEditWrongFormula::GetFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }

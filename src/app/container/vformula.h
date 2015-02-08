@@ -46,8 +46,8 @@ public:
     bool operator==(const VFormula &formula) const;
     bool operator!=(const VFormula &formula) const;
 
-    QString getFormula(FormulaType type = FormulaType::ToUser) const;
-    void setFormula(const QString &value, FormulaType type = FormulaType::ToUser);
+    QString GetFormula(FormulaType type = FormulaType::ToUser) const;
+    void SetFormula(const QString &value, FormulaType type = FormulaType::ToUser);
 
     QString getStringValue() const;
     qreal   getDoubleValue() const;

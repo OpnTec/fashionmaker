@@ -104,13 +104,13 @@ void VisToolNormal::setLength(const QString &expression)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VisToolNormal::getAngle() const
+qreal VisToolNormal::GetAngle() const
 {
     return angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolNormal::setAngle(const qreal &value)
+void VisToolNormal::SetAngle(const qreal &value)
 {
     angle = value;
 }

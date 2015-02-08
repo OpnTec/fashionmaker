@@ -43,9 +43,8 @@
  * @param parent parent widget
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine), typeLine(QString()),
-      formulaLength(QString()), formulaAngle(QString()), basePointId(NULL_ID), formulaBaseHeight(0),
-      formulaBaseHeightAngle(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine),
+      formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -64,6 +63,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonPutHereLength, &QPushButton::clicked, this, &DialogEndLine::PutHere);
     connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogEndLine::PutAngle);
@@ -144,7 +144,6 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxBasePoint, ""))
             {
-                basePointId = id;
                 line->VisualMode(id);
                 connect(line, &VisToolEndLine::ToolTip, this, &DialogTool::ShowVisToolTip);
                 prepare = true;
@@ -155,10 +154,10 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogEndLine::setPointName(const QString &value)
+void DialogEndLine::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -166,22 +165,21 @@ void DialogEndLine::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setTypeLine set type of line
+ * @brief SetTypeLine set type of line
  * @param value type
  */
-void DialogEndLine::setTypeLine(const QString &value)
+void DialogEndLine::SetTypeLine(const QString &value)
 {
-    typeLine = value;
-    SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    ChangeCurrentData(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogEndLine::setFormula(const QString &value)
+void DialogEndLine::SetFormula(const QString &value)
 {
     formulaLength = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -197,10 +195,10 @@ void DialogEndLine::setFormula(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAngle set angle of line
+ * @brief SetAngle set angle of line
  * @param value angle in degree
  */
-void DialogEndLine::setAngle(const QString &value)
+void DialogEndLine::SetAngle(const QString &value)
 {
     formulaAngle = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -210,19 +208,31 @@ void DialogEndLine::setAngle(const QString &value)
         this->DeployAngleTextEdit();
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
-    line->setAngle(formulaAngle);
+    line->SetAngle(formulaAngle);
     MoveCursorToEnd(ui->plainTextEditAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setBasePointId set id base point of line
+ * @brief SetBasePointId set id base point of line
  * @param value id
  */
-void DialogEndLine::setBasePointId(const quint32 &value)
+void DialogEndLine::SetBasePointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxBasePoint, basePointId, value);
+    setCurrentPointId(ui->comboBoxBasePoint, value);
     line->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEndLine::GetLineColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::SetLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,7 +249,7 @@ void DialogEndLine::ShowDialog(bool click)
             /*We will ignore click if poinet is in point circle*/
             VMainGraphicsScene *scene = qApp->getCurrentScene();
             SCASSERT(scene != nullptr);
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(basePointId);
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
@@ -250,7 +260,7 @@ void DialogEndLine::ShowDialog(bool click)
             }
         }
         this->setModal(true);
-        this->setAngle(line->Angle());//Show in dialog angle what user choose
+        this->SetAngle(line->Angle());//Show in dialog angle what user choose
         emit ToolTip("");
         timerFormula->start();
         this->show();
@@ -274,7 +284,6 @@ void DialogEndLine::ShowVisualization()
 void DialogEndLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
 
     formulaLength = ui->plainTextEditFormula->toPlainText();
     formulaLength.replace("\n", " ");
@@ -282,12 +291,10 @@ void DialogEndLine::SaveData()
     formulaAngle = ui->plainTextEditAngle->toPlainText();
     formulaAngle.replace("\n", " ");
 
-    basePointId = getCurrentObjectId(ui->comboBoxBasePoint);
-
-    line->setPoint1Id(basePointId);
+    line->setPoint1Id(GetBasePointId());
     line->setLength(formulaLength);
-    line->setAngle(formulaAngle);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+    line->SetAngle(formulaAngle);
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -307,4 +314,44 @@ DialogEndLine::~DialogEndLine()
         delete line;
     }
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetTypeLine return type of line
+ * @return type
+ */
+QString DialogEndLine::GetTypeLine() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFormula return string of formula
+ * @return formula
+ */
+QString DialogEndLine::GetFormula() const
+{
+    return qApp->FormulaFromUser(formulaLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle return formula angle of line
+ * @return angle formula
+ */
+QString DialogEndLine::GetAngle() const
+{
+    return qApp->FormulaFromUser(formulaAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetBasePointId return id base point of line
+ * @return id
+ */
+quint32 DialogEndLine::GetBasePointId() const
+{
+    return getCurrentObjectId(ui->comboBoxBasePoint);
 }

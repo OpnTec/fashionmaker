@@ -45,9 +45,10 @@ class DialogSinglePoint : public DialogTool
 public:
     DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogSinglePoint();
-    void           setData(const QString &name, const QPointF &point);
-    QString        getName()const;
-    QPointF        getPoint()const;
+
+    void           SetData(const QString &name, const QPointF &point);
+    QPointF        GetPoint()const;
+
 public slots:
     void           mousePress(const QPointF &scenePos);
     virtual void   UpdateList();
@@ -65,25 +66,5 @@ private:
     /** @brief point data of point */
     QPointF        point;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getName return name
- * @return name
- */
-inline QString DialogSinglePoint::getName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPoint return point
- * @return point
- */
-inline QPointF DialogSinglePoint::getPoint() const
-{
-    return point;
-}
 
 #endif // DIALOGSINGLEPOINT_H

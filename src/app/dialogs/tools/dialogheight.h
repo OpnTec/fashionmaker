@@ -48,20 +48,22 @@ public:
     DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogHeight();
 
-    QString          getPointName() const;
-    void             setPointName(const QString &value);
+    void             SetPointName(const QString &value);
 
-    QString          getTypeLine() const;
-    void             setTypeLine(const QString &value);
+    QString          GetTypeLine() const;
+    void             SetTypeLine(const QString &value);
 
-    quint32          getBasePointId() const;
-    void             setBasePointId(const quint32 &value);
+    quint32          GetBasePointId() const;
+    void             SetBasePointId(const quint32 &value);
 
-    quint32          getP1LineId() const;
-    void             setP1LineId(const quint32 &value);
+    quint32          GetP1LineId() const;
+    void             SetP1LineId(const quint32 &value);
 
-    quint32          getP2LineId() const;
-    void             setP2LineId(const quint32 &value);
+    quint32          GetP2LineId() const;
+    void             SetP2LineId(const quint32 &value);
+
+    QString          GetLineColor() const;
+    void             SetLineColor(const QString &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     virtual void     PointNameChanged();
@@ -78,71 +80,7 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogHeight *ui;
 
-    /** @brief number number of handled objects */
-    qint32           number;
-
-    /** @brief typeLine type of line */
-    QString          typeLine;
-
-    /** @brief basePointId id base point of height */
-    quint32          basePointId;
-
-    /** @brief p1LineId id first point of line */
-    quint32          p1LineId;
-
-    /** @brief p2LineId id second point of line */
-    quint32          p2LineId;
     VisToolHeight    *line;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogHeight::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogHeight::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getBasePointId return id base point of height
- * @return id
- */
-inline quint32 DialogHeight::getBasePointId() const
-{
-    return basePointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getP1LineId return id first point of line
- * @return id id
- */
-inline quint32 DialogHeight::getP1LineId() const
-{
-    return p1LineId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getP2LineId return id second point of line
- * @return id
- */
-inline quint32 DialogHeight::getP2LineId() const
-{
-    return p2LineId;
-}
 
 #endif // DIALOGHEIGHT_H

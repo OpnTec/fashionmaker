@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id,
+                   const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id, const QString &color,
                    QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), firstCurve(nullptr), secondCurve(nullptr),
       curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id)
@@ -41,12 +41,14 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
     Q_ASSERT_X(curve1id > 0, Q_FUNC_INFO, "curve1id <= 0");
     Q_ASSERT_X(curve2id > 0, Q_FUNC_INFO, "curve2id <= 0");
 
-    firstCurve = new VSimpleCurve(curve1id, &currentColor, SimpleCurvePoint::ForthPoint, &factor);
+    lineColor = color;
+
+    firstCurve = new VSimpleCurve(curve1id, QColor(lineColor), SimpleCurvePoint::ForthPoint, &factor);
     firstCurve->setParentItem(this);
     connect(firstCurve, &VSimpleCurve::Choosed, this, &VToolCut::CurveChoosed);
     connect(firstCurve, &VSimpleCurve::HoverPath, this, &VToolCut::HoverPath);
 
-    secondCurve = new VSimpleCurve(curve2id, &currentColor, SimpleCurvePoint::FirstPoint, &factor);
+    secondCurve = new VSimpleCurve(curve2id, QColor(lineColor), SimpleCurvePoint::FirstPoint, &factor);
     secondCurve->setParentItem(this);
     connect(secondCurve, &VSimpleCurve::Choosed, this, &VToolCut::CurveChoosed);
     connect(secondCurve, &VSimpleCurve::HoverPath, this, &VToolCut::HoverPath);
@@ -59,11 +61,7 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
  */
 void VToolCut::ChangedActivDraw(const QString &newName)
 {
-    VToolPoint::ChangedActivDraw(newName);
-    const bool flag = (nameActivDraw == newName);
-    this->setEnabled(flag);
-    firstCurve->ChangedActivDraw(flag);
-    secondCurve->ChangedActivDraw(flag);
+    Disable(!(nameActivDraw == newName));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,6 +72,14 @@ void VToolCut::HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirecti
     {
         RefreshCurve(simpleCurve, id, curvePosition, direction);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::Disable(bool disable)
+{
+    VToolPoint::Disable(disable);
+    firstCurve->ChangedActivDraw(enabled);
+    secondCurve->ChangedActivDraw(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,7 +100,7 @@ void VToolCut::setCurveCutId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCut::getFormula() const
+VFormula VToolCut::GetFormula() const
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
@@ -104,11 +110,11 @@ VFormula VToolCut::getFormula() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::setFormula(const VFormula &value)
+void VToolCut::SetFormula(const VFormula &value)
 {
     if (value.error() == false)
     {
-        formula = value.getFormula(FormulaType::FromUser);
+        formula = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);
@@ -146,5 +152,4 @@ void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
         formula = domElement.attribute(AttrLength, "");
         curveCutId = domElement.attribute(attrCurve, "").toUInt();
     }
-    RefreshGeometry();
 }

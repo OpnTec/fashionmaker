@@ -42,8 +42,8 @@
  * @param parent parent widget
  */
 DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()),
-      arcId(NULL_ID), formulaBaseHeight(0), path(nullptr)
+    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0),
+      path(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -58,6 +58,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutArc::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutArc::PutVal);
@@ -133,9 +134,8 @@ void DialogCutArc::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    arcId = getCurrentObjectId(ui->comboBoxArc);
 
-    path->setPoint1Id(arcId);
+    path->setPoint1Id(getArcId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -154,16 +154,28 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
  */
 void DialogCutArc::setArcId(const quint32 &value)
 {
-    setCurrentArcId(ui->comboBoxArc, arcId, value, ComboBoxCutArc::CutArc);
-    path->setPoint1Id(arcId);
+    setCurrentArcId(ui->comboBoxArc, value, ComboBoxCutArc::CutArc);
+    path->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutArc::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string with formula length
+ * @brief SetFormula set string with formula length
  * @param value string with formula
  */
-void DialogCutArc::setFormula(const QString &value)
+void DialogCutArc::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed.
@@ -178,10 +190,10 @@ void DialogCutArc::setFormula(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name point on arc
+ * @brief SetPointName set name point on arc
  * @param value name
  */
-void DialogCutArc::setPointName(const QString &value)
+void DialogCutArc::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -189,10 +201,20 @@ void DialogCutArc::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getFormula return string with formula length
+ * @brief GetFormula return string with formula length
  * @return formula
  */
-QString DialogCutArc::getFormula() const
+QString DialogCutArc::GetFormula() const
 {
     return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getArcId return id of arc
+ * @return id
+ */
+quint32 DialogCutArc::getArcId() const
+{
+    return getCurrentObjectId(ui->comboBoxArc);
 }

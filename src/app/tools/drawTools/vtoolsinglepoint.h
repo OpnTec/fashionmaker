@@ -48,7 +48,6 @@ public:
     virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
-    virtual void ChangedActivDraw(const QString &newName);
     virtual void SetFactor(qreal factor);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 signals:
@@ -68,10 +67,11 @@ protected:
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     QString namePP;
     QString mPath;
-    void         setColorLabel(const Qt::GlobalColor & color);
+    void         SetColorLabel(const Qt::GlobalColor & color);
 
 };
 

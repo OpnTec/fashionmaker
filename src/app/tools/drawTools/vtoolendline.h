@@ -39,22 +39,23 @@ class VToolEndLine : public VToolLinePoint
     Q_OBJECT
 public:
 
-    VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+    VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor,
                  const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
                  const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual ~VToolEndLine();
     virtual void setDialog();
     static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                QString &formulaLength, QString &formulaAngle, const quint32 &basePointId,
-                                const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
-                                VContainer *data, const Document &parse, const Source &typeCreation);
+                                const QString &lineColor, QString &formulaLength, QString &formulaAngle,
+                                const quint32 &basePointId, const qreal &mx, const qreal &my,
+                                VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
 
-    VFormula     getFormulaAngle() const;
-    void         setFormulaAngle(const VFormula &value);
+    VFormula     GetFormulaAngle() const;
+    void         SetFormulaAngle(const VFormula &value);
     virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
@@ -63,6 +64,7 @@ protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     QString formulaAngle;
 };

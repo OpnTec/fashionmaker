@@ -49,10 +49,12 @@ public:
     void                    setName(const QString &name);
     virtual QString         getTagName() const;
     static const QString    TagName;
+
+    void                    setEnabled(bool enabled);
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ChangedActivDraw(const QString &newName);
-    virtual void            ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
+    virtual void            ShowTool(quint32 id, bool enable);
     virtual void            SetFactor(qreal factor);
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void                    Disable(bool disable);

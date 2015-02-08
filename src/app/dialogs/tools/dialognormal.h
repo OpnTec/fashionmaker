@@ -48,23 +48,25 @@ public:
     DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogNormal();
 
-    QString          getPointName() const;
-    void             setPointName(const QString &value);
+    void             SetPointName(const QString &value);
 
-    QString          getTypeLine() const;
-    void             setTypeLine(const QString &value);
+    QString          GetTypeLine() const;
+    void             SetTypeLine(const QString &value);
 
-    QString          getFormula() const;
-    void             setFormula(const QString &value);
+    QString          GetFormula() const;
+    void             SetFormula(const QString &value);
 
-    qreal            getAngle() const;
-    void             setAngle(const qreal &value);
+    qreal            GetAngle() const;
+    void             SetAngle(const qreal &value);
 
-    quint32          getFirstPointId() const;
-    void             setFirstPointId(const quint32 &value);
+    quint32          GetFirstPointId() const;
+    void             SetFirstPointId(const quint32 &value);
 
-    quint32          getSecondPointId() const;
-    void             setSecondPointId(const quint32 &value);
+    quint32          GetSecondPointId() const;
+    void             SetSecondPointId(const quint32 &value);
+
+    QString          GetLineColor() const;
+    void             SetLineColor(const QString &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -89,88 +91,16 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogNormal *ui;
 
-    /** @brief number number of handled objects */
-    qint32           number;
-
-    /** @brief typeLine type of line */
-    QString          typeLine;
-
     /** @brief formula formula */
     QString          formula;
 
     /** @brief angle aditional angle of normal */
     qreal            angle;
 
-    /** @brief firstPointId id first point of line */
-    quint32          firstPointId;
-
-    /** @brief secondPointId id second point of line */
-    quint32          secondPointId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int              formulaBaseHeight;
 
     VisToolNormal    *line;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogNormal::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogNormal::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogNormal::getFormula() const
-{
-    return qApp->FormulaFromUser(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getAngle return aditional angle of normal
- * @return angle in degree
- */
-inline qreal DialogNormal::getAngle() const
-{
-    return angle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPointId return id of first point
- * @return id
- */
-inline quint32 DialogNormal::getFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPointId return id of second point
- * @return id
- */
-inline quint32 DialogNormal::getSecondPointId() const
-{
-    return secondPointId;
-}
 
 #endif // DIALOGNORMAL_H

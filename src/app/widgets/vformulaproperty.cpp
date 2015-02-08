@@ -95,7 +95,7 @@ QWidget* VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewI
     VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
     VFormulaPropertyEditor* tmpEditor = new VFormulaPropertyEditor(parent);
 
-    tmpEditor->setFormula(formula);
+    tmpEditor->SetFormula(formula);
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;
 }
@@ -108,7 +108,7 @@ bool VFormulaProperty::setEditorData(QWidget* editor)
     if (tmpWidget)
     {
         VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
-        tmpWidget->setFormula(formula);
+        tmpWidget->SetFormula(formula);
     }
     else
         return false;
@@ -124,7 +124,7 @@ QVariant VFormulaProperty::getEditorData(const QWidget *editor) const
     if (tmpWidget)
     {
         QVariant value;
-        value.setValue(tmpWidget->getFormula());
+        value.setValue(tmpWidget->GetFormula());
         return value;
     }
 
@@ -163,26 +163,26 @@ VProperty *VFormulaProperty::clone(bool include_children, VProperty *container) 
 void VFormulaProperty::setValue(const QVariant &value)
 {
     VFormula tmpFormula = value.value<VFormula>();
-    setFormula(tmpFormula);
+    SetFormula(tmpFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVariant VFormulaProperty::getValue() const
 {
-    VFormula tmpFormula = getFormula();
+    VFormula tmpFormula = GetFormula();
     QVariant value;
     value.setValue(tmpFormula);
     return value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VFormulaProperty::getFormula() const
+VFormula VFormulaProperty::GetFormula() const
 {
     return VProperty::d_ptr->VariantValue.value<VFormula>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormulaProperty::setFormula(const VFormula &formula)
+void VFormulaProperty::SetFormula(const VFormula &formula)
 {
     if (d_ptr->Children.count() < 2)
     {
@@ -197,7 +197,7 @@ void VFormulaProperty::setFormula(const VFormula &formula)
     QVariant tmpValue(formula.getStringValue());
     tmpValue.convert(QVariant::String);
 
-    QVariant tmpFormula(formula.getFormula());
+    QVariant tmpFormula(formula.GetFormula());
     tmpFormula.convert(QVariant::String);
 
     VProperty::d_ptr->Children.at(0)->setValue(tmpValue);
@@ -213,8 +213,8 @@ void VFormulaProperty::ValueChildChanged(const QVariant &value, int typeForParen
 {
     if (typeForParent == static_cast<int>(ChildType::Formula))
     {
-        VFormula newFormula = getFormula();
-        newFormula.setFormula(value.toString());
-        setFormula(newFormula);
+        VFormula newFormula = GetFormula();
+        newFormula.SetFormula(value.toString());
+        SetFormula(newFormula);
     }
 }

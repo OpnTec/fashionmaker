@@ -39,23 +39,24 @@ class VToolLinePoint : public VToolPoint
 {
     Q_OBJECT
 public:
-    VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
+    VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor, const QString &formula,
                    const quint32 &basePointId, const qreal &angle, QGraphicsItem * parent = nullptr);
     virtual ~VToolLinePoint();
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
-    VFormula          getFormulaLength() const;
-    void              setFormulaLength(const VFormula &value);
+    VFormula          GetFormulaLength() const;
+    void              SetFormulaLength(const VFormula &value);
 
-    quint32           getBasePointId() const;
-    void              setBasePointId(const quint32 &value);
+    quint32           GetBasePointId() const;
+    void              SetBasePointId(const quint32 &value);
 
-    qreal             getAngle() const;
-    void              setAngle(const qreal &value);
+    qreal             GetAngle() const;
+    void              SetAngle(const qreal &value);
 
 public slots:
     virtual void      ChangedActivDraw(const QString &newName);
     virtual void      SetFactor(qreal factor);
+    void              Disable(bool disable);
 protected:
     /** @brief formula string with length formula. */
     QString           formulaLength;

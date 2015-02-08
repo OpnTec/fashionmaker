@@ -41,14 +41,16 @@
  * @param parent parent widget
  */
 DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), number(0), p1(NULL_ID), p4(NULL_ID), angle1(0),
-      angle2(0), kAsm1(1), kAsm2(1), kCurve(1), path(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
+      kCurve(1), path(nullptr)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);
+    FillComboBoxLineColors(ui->comboBoxColor);
+
     connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogSpline::PointNameChanged);
     connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -69,12 +71,12 @@ DialogSpline::~DialogSpline()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getP1 return id first point of spline
+ * @brief GetP1 return id first point of spline
  * @return id
  */
-quint32 DialogSpline::getP1() const
+quint32 DialogSpline::GetP1() const
 {
-    return p1;
+    return getCurrentObjectId(ui->comboBoxP1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -139,21 +141,19 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::SaveData()
 {
-    p1 = getCurrentObjectId(ui->comboBoxP1);
-    p4 = getCurrentObjectId(ui->comboBoxP4);
     angle1 = ui->spinBoxAngle1->value();
     angle2 = ui->spinBoxAngle2->value();
     kAsm1 = ui->doubleSpinBoxKasm1->value();
     kAsm2 = ui->doubleSpinBoxKasm2->value();
     kCurve = ui->doubleSpinBoxKcurve->value();
 
-    path->setPoint1Id(p1);
-    path->setPoint4Id(p4);
-    path->setAngle1(angle1);
-    path->setAngle2(angle2);
-    path->setKAsm1(kAsm1);
-    path->setKAsm2(kAsm2);
-    path->setKCurve(kCurve);
+    path->setPoint1Id(GetP1());
+    path->setPoint4Id(GetP4());
+    path->SetAngle1(angle1);
+    path->SetAngle2(angle2);
+    path->SetKAsm1(kAsm1);
+    path->SetKAsm2(kAsm2);
+    path->SetKCurve(kCurve);
     path->RefreshGeometry();
 }
 
@@ -203,92 +203,154 @@ void DialogSpline::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setKCurve set coefficient curve
+ * @brief SetKCurve set coefficient curve
  * @param value value. Can be >= 0.
  */
-void DialogSpline::setKCurve(const qreal &value)
+void DialogSpline::SetKCurve(const qreal &value)
 {
     kCurve = value;
     ui->doubleSpinBoxKcurve->setValue(value);
-    path->setKCurve(kCurve);
+    path->SetKCurve(kCurve);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSpline::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setKAsm2 set second coefficient asymmetry
+ * @brief SetKAsm2 set second coefficient asymmetry
  * @param value value. Can be >= 0.
  */
-void DialogSpline::setKAsm2(const qreal &value)
+void DialogSpline::SetKAsm2(const qreal &value)
 {
     kAsm2 = value;
     ui->doubleSpinBoxKasm2->setValue(value);
-    path->setKAsm2(kAsm2);
+    path->SetKAsm2(kAsm2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setKAsm1 set first coefficient asymmetry
+ * @brief SetKAsm1 set first coefficient asymmetry
  * @param value value. Can be >= 0.
  */
-void DialogSpline::setKAsm1(const qreal &value)
+void DialogSpline::SetKAsm1(const qreal &value)
 {
     kAsm1 = value;
     ui->doubleSpinBoxKasm1->setValue(value);
-    path->setKAsm1(kAsm1);
+    path->SetKAsm1(kAsm1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAngle2 set second angle of spline
+ * @brief SetAngle2 set second angle of spline
  * @param value angle in degree
  */
-void DialogSpline::setAngle2(const qreal &value)
+void DialogSpline::SetAngle2(const qreal &value)
 {
     angle2 = value;
     ui->spinBoxAngle2->setValue(static_cast<qint32>(value));
-    path->setAngle2(angle2);
+    path->SetAngle2(angle2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAngle1 set first angle of spline
+ * @brief SetAngle1 set first angle of spline
  * @param value angle in degree
  */
-void DialogSpline::setAngle1(const qreal &value)
+void DialogSpline::SetAngle1(const qreal &value)
 {
     angle1 = value;
     ui->spinBoxAngle1->setValue(static_cast<qint32>(value));
-    path->setAngle1(angle1);
+    path->SetAngle1(angle1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setP4 set id fourth point of spline
+ * @brief SetP4 set id fourth point of spline
  * @param value id
  */
-void DialogSpline::setP4(const quint32 &value)
+void DialogSpline::SetP4(const quint32 &value)
 {
-    setPointId(ui->comboBoxP4, p4, value);
-    path->setPoint4Id(p4);
+    setCurrentPointId(ui->comboBoxP4, value);
+    path->setPoint4Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setP1 set id first point of spline
+ * @brief SetP1 set id first point of spline
  * @param value id
  */
-void DialogSpline::setP1(const quint32 &value)
+void DialogSpline::SetP1(const quint32 &value)
 {
-    setPointId(ui->comboBoxP1, p1, value);
-    path->setPoint1Id(p1);
+    setCurrentPointId(ui->comboBoxP1, value);
+    path->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getP4 return id fourth point of spline
+ * @brief GetP4 return id fourth point of spline
  * @return id
  */
-quint32 DialogSpline::getP4() const
+quint32 DialogSpline::GetP4() const
 {
-    return p4;
+    return getCurrentObjectId(ui->comboBoxP4);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle1 return first angle of spline
+ * @return angle in degree
+ */
+qreal DialogSpline::GetAngle1() const
+{
+    return angle1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAngle2 return second angle of spline
+ * @return angle in degree
+ */
+qreal DialogSpline::GetAngle2() const
+{
+    return angle2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKAsm1 return first coefficient asymmetry
+ * @return value. Can be >= 0.
+ */
+qreal DialogSpline::GetKAsm1() const
+{
+    return kAsm1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKAsm2 return second coefficient asymmetry
+ * @return value. Can be >= 0.
+ */
+qreal DialogSpline::GetKAsm2() const
+{
+    return kAsm2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetKCurve return coefficient curve
+ * @return value. Can be >= 0.
+ */
+qreal DialogSpline::GetKCurve() const
+{
+    return kCurve;
 }
