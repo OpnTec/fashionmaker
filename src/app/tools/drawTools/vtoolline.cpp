@@ -307,8 +307,11 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
-                      LineStyleToPenStyle(typeLine)));
+    if (vis == nullptr)
+    {
+        this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+                          LineStyleToPenStyle(typeLine)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -449,6 +452,7 @@ void VToolLine::ShowVisualization(bool show)
     {
         delete vis;
         vis = nullptr;
+        hoverLeaveEvent(nullptr);
     }
 }
 
@@ -497,6 +501,5 @@ void VToolLine::RefreshGeometry()
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(first->toQPointF(), second->toQPointF()));
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
-                      LineStyleToPenStyle(typeLine)));
+    this->setPen(QPen(CorrectColor(lineColor), pen().widthF(), LineStyleToPenStyle(typeLine)));
 }
