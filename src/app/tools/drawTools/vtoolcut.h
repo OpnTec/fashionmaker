@@ -39,7 +39,7 @@ class VToolCut : public VToolPoint
     Q_OBJECT
 public:
     VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula, const quint32 &curveCutId,
-             const quint32 &curve1id, const quint32 &curve2id, QGraphicsItem * parent = nullptr);
+             const quint32 &curve1id, const quint32 &curve2id, const QString &color, QGraphicsItem * parent = nullptr);
     virtual int   type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 

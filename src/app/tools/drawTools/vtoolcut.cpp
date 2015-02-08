@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id,
+                   const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id, const QString &color,
                    QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), firstCurve(nullptr), secondCurve(nullptr),
       curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id)
@@ -40,6 +40,8 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
     Q_ASSERT_X(curveCutId > 0, Q_FUNC_INFO, "curveCutId <= 0");
     Q_ASSERT_X(curve1id > 0, Q_FUNC_INFO, "curve1id <= 0");
     Q_ASSERT_X(curve2id > 0, Q_FUNC_INFO, "curve2id <= 0");
+
+    lineColor = color;
 
     firstCurve = new VSimpleCurve(curve1id, QColor(lineColor), SimpleCurvePoint::ForthPoint, &factor);
     firstCurve->setParentItem(this);

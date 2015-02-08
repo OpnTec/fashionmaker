@@ -610,6 +610,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VProperty *property)
         case 4: // VAbstractTool::AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -634,6 +637,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VProperty *property)
         case 4: // VAbstractTool::AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -657,6 +663,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VProperty *propert
             break;
         case 4: // VAbstractTool::AttrLength
             i->SetFormula(value.value<VFormula>());
+            break;
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1051,6 +1060,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), VAbstractTool::AttrLength);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1062,6 +1072,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), VAbstractTool::AttrLength);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1073,6 +1084,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
 
     AddPropertyPointName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), VAbstractTool::AttrLength);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1344,6 +1356,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[VAbstractTool::AttrLength]->setValue(valueFormula);
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1356,6 +1371,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSpline()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[VAbstractTool::AttrLength]->setValue(valueFormula);
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1368,6 +1386,9 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[VAbstractTool::AttrLength]->setValue(valueFormula);
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
