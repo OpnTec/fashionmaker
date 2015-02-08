@@ -896,6 +896,9 @@ void DialogTool::EvalFormula()
  */
 void DialogTool::SizeHeight()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
+
     SCASSERT(listWidget != nullptr);
     listWidget->blockSignals(true);
     listWidget->clear();
