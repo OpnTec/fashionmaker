@@ -354,6 +354,9 @@
          <height>24</height>
         </size>
        </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -538,6 +541,9 @@
          <width>16777215</width>
          <height>24</height>
         </size>
+       </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -790,8 +796,10 @@
   <tabstop>toolButtonPutHereF1</tabstop>
   <tabstop>toolButtonEqualF1</tabstop>
   <tabstop>pushButtonGrowLengthF1</tabstop>
+  <tabstop>plainTextEditF2</tabstop>
   <tabstop>toolButtonPutHereF2</tabstop>
   <tabstop>toolButtonEqualF2</tabstop>
+  <tabstop>pushButtonGrowLengthF2</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
@@ -801,7 +809,8 @@
   <tabstop>radioButtonAngleLine</tabstop>
   <tabstop>checkBoxHideEmpty</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>comboBoxBasePoint</tabstop>
+  <tabstop>comboBoxColor</tabstop>
  </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
@@ -814,8 +823,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>567</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -830,8 +839,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>567</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
