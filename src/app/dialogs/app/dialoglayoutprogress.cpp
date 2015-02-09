@@ -31,6 +31,7 @@
 #include "../options.h"
 
 #include <QMessageBox>
+#include <QPushButton>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
