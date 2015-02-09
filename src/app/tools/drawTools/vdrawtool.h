@@ -69,6 +69,7 @@ public slots:
     virtual void FullUpdateFromGuiOk(int result);
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
+    virtual void EnableToolMove(bool move);
 protected:
 
     /** @brief ignoreFullUpdate ignore or not full updates. */

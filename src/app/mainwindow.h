@@ -139,6 +139,7 @@ signals:
     void               ModelChosen(QVector<VLayoutDetail> listDetails, const QString &curFile,
                                    const QString &description);
     void               RefreshHistory();
+    void               EnableItemMove(bool move);
 protected:
     virtual void       keyPressEvent(QKeyEvent *event);
     virtual void       showEvent(QShowEvent *event);

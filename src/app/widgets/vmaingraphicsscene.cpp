@@ -126,3 +126,9 @@ void VMainGraphicsScene::SetFactor(qreal factor)
     scaleFactor=scaleFactor*factor;
     emit NewFactor(scaleFactor);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::EnableItemMove(bool move)
+{
+    emit EnableToolMove(move);
+}

@@ -50,6 +50,7 @@ public slots:
     virtual void FullUpdateFromFile();
     virtual void SetFactor(qreal factor);
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    virtual void EnableToolMove(bool move);
 signals:
     /**
      * @brief FullUpdateTree handle if need update pattern file.

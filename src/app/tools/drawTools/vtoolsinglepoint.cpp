@@ -205,7 +205,10 @@ void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     VToolPoint::hoverEnterEvent(event);
 
-    VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,16 +216,22 @@ void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     VToolPoint::hoverLeaveEvent(event);
 
-    //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        //Disable cursor-arrow-openhand
+        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+        }
     }
     VToolPoint::mousePressEvent(event);
 }
@@ -230,10 +239,13 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        //Disable cursor-arrow-closehand
-        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            //Disable cursor-arrow-closehand
+            VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
+        }
     }
     VToolPoint::mouseReleaseEvent(event);
 }
@@ -331,4 +343,10 @@ void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
     {
         ContextMenu<DialogSinglePoint>(this, event, false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
 }

@@ -92,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
     qApp->setCurrentScene(currentScene);
+    connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     sceneDetails = new VMainGraphicsScene();
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
@@ -244,7 +245,9 @@ void MainWindow::ActionNewPP()
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
+    connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolSinglePoint::Disable);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
+    connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolSinglePoint::EnableToolMove);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     SCASSERT(tools != nullptr);
     tools->insert(id, spoint);
@@ -1046,114 +1049,75 @@ void MainWindow::CancelTool()
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
             ui->actionStopTool->setEnabled(true);
-            break;
+            emit EnableItemMove(false);
+            return;
         case Tool::SinglePoint:
             Q_UNREACHABLE();
             //Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
             ui->toolButtonEndLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Line:
             ui->toolButtonLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearFocus();
             break;
         case Tool::AlongLine:
             ui->toolButtonAlongLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::ShoulderPoint:
             ui->toolButtonShoulderPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Normal:
             ui->toolButtonNormal->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Bisector:
             ui->toolButtonBisector->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::LineIntersect:
             ui->toolButtonLineIntersect->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Spline:
             ui->toolButtonSpline->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Arc:
             ui->toolButtonArc->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::SplinePath:
             ui->toolButtonSplinePath->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::PointOfContact:
             ui->toolButtonPointOfContact->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Detail:
             ui->toolButtonNewDetail->setChecked(false);
             break;
         case Tool::Height:
             ui->toolButtonHeight->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Triangle:
             ui->toolButtonTriangle->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::PointOfIntersection:
             ui->toolButtonPointOfIntersection->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CutSpline:
             ui->toolButtonSplineCutPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CutSplinePath:
             ui->toolButtonSplinePathCutPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::UnionDetails:
             ui->toolButtonUnionDetails->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CutArc:
             ui->toolButtonArcCutPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::LineIntersectAxis:
             ui->toolButtonLineIntersectAxis->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(false);
             ui->toolButtonArcIntersectAxis->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:
@@ -1163,6 +1127,9 @@ void MainWindow::CancelTool()
             qDebug()<<"Got wrong tool type. Ignored.";
             break;
     }
+    currentScene->setFocus(Qt::OtherFocusReason);
+    currentScene->clearSelection();
+    emit EnableItemMove(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
