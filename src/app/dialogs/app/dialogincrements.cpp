@@ -55,6 +55,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
 
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     qCDebug(vDialog)<<"Showing variables.";
     if (qApp->patternType() == MeasurementsType::Individual)
     {

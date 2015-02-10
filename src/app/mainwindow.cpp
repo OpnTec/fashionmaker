@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
         recentFileActs[i] = nullptr;
     }
 
+    WindowsLocale();
     CreateActions();
     CreateMenus();
     ToolBarDraws();
@@ -1403,6 +1404,7 @@ void MainWindow::Preferences()
 {
     ConfigDialog dlg(this);
     connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale);
     if (dlg.exec() == QDialog::Accepted)
     {
         InitAutoSave();
@@ -2472,6 +2474,12 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 
     }
     return restoreFiles;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::WindowsLocale()
+{
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,6 +29,7 @@
 #include "dialoglayoutprogress.h"
 #include "ui_dialoglayoutprogress.h"
 #include "../options.h"
+#include "../core/vapplication.h"
 
 #include <QMessageBox>
 #include <QPushButton>
@@ -38,6 +39,9 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     :QDialog(parent), ui(new Ui::DialogLayoutProgress)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     ui->progressBar->setMaximum(count);
     ui->progressBar->setValue(0);
 

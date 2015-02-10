@@ -47,6 +47,8 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
 {
     ui->setupUi(this);
 
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
     move(position.topLeft());

@@ -35,7 +35,6 @@
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"
-#include "vsettings.h"
 
 #include <QDebug>
 #include <QDir>

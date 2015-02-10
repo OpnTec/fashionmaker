@@ -33,6 +33,7 @@
 #include "../options.h"
 #include "../widgets/vmaingraphicsview.h"
 #include "../../libs/qmuparser/qmutranslation.h"
+#include "vsettings.h"
 
 class VApplication;// used in define
 class QUndoStack;
@@ -40,7 +41,6 @@ class VMainGraphicsView;
 class VMainGraphicsScene;
 class VPattern;
 class QFile;
-class VSettings;
 class QLockFile;
 
 #if defined(qApp)

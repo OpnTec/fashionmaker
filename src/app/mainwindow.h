@@ -130,6 +130,7 @@ public slots:
     void               Layout();
     void               UpdateGradation();
     void               GlobalChangePP(const QString &patternPiece);
+    void               WindowsLocale();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
