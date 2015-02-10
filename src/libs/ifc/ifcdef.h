@@ -72,7 +72,7 @@ static const quint32 null_id = 0;
     }                                                       \
 }                                                           \
 
-#else
+#else // GCC (Windows)
 
 #define SCASSERT(cond)                                      \
 {                                                           \
@@ -80,12 +80,12 @@ static const quint32 null_id = 0;
     {                                                       \
         qDebug("ASSERT: %s in %s (%s:%u)",                  \
             #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        DebugBreak();                                       \
+        std::raise(SIGTRAP);                                \
     }                                                       \
 }                                                           \
 
 #endif /*Q_CC_MSVC*/
-#else
+#else // UNIX
 #define SCASSERT(cond)                                      \
 {                                                           \
     if (!(cond))                                            \
@@ -99,7 +99,7 @@ static const quint32 null_id = 0;
 #endif /* Q_OS_WIN32 */
 #else // define but disable this function if debugging is not set
 #define SCASSERT(cond) qt_noop();
-#endif /* QT_NO_DEBUG */
+#endif /* V_NO_ASSERT */
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)
