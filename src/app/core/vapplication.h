@@ -81,8 +81,18 @@ public:
     QString            GuiText(const QString &measurement) const;
     QString            Description(const QString &measurement) const;
     QString            PostfixOperator(const QString &name) const;
+
     QString            FormulaFromUser(const QString &formula);
     QString            FormulaToUser(const QString &formula);
+
+    template <typename T>
+    QString            LocaleToString(const T &value)
+    {
+        QLocale loc;
+        qApp->getSettings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
+        return loc.toString(value);
+    }
+
     QUndoStack         *getUndoStack() const;
     VMainGraphicsView  *getSceneView() const;
     void               setSceneView(VMainGraphicsView *value);
