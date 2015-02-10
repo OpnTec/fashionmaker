@@ -122,9 +122,12 @@ public:
     }
     void setAllowSubexpressions(bool value);
 
+    std::locale getLocale() const;
+    void setLocale(const std::locale &value);
+
 protected:
     static const QStringList c_DefaultOprt;
-    static std::locale s_locale;  ///< The locale used by the parser
+    std::locale s_locale;  ///< The locale used by the parser
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
     void Init();

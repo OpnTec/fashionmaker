@@ -275,7 +275,7 @@ typedef qreal ( *strfun_type2 ) ( const QString &, qreal );
 typedef qreal ( *strfun_type3 ) ( const QString &, qreal, qreal );
 
 /** @brief Callback used for functions that identify values in a string. */
-typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal );
+typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const std::locale &s_locale );
 
 /** @brief Callback used for variable creation factory functions. */
 typedef qreal* ( *facfun_type ) ( const QString &, void* );
