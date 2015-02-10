@@ -156,6 +156,7 @@ void ConfigDialog::Apply()
         default:
             break;
     }
+    emit UpdateProperties();
     setResult(QDialog::Accepted);
 }
 

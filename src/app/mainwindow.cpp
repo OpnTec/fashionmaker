@@ -1402,6 +1402,7 @@ void MainWindow::Open()
 void MainWindow::Preferences()
 {
     ConfigDialog dlg(this);
+    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
     if (dlg.exec() == QDialog::Accepted)
     {
         InitAutoSave();
