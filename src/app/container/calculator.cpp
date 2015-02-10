@@ -245,7 +245,8 @@ qreal* Calculator::AddVariable(const QString &a_szName, void *a_pUserData)
  */
 void Calculator::SetSepForEval()
 {
-    SetArgSep(',');
+    SetArgSep(';');
+    SetThousandsSep(',');
     SetDecSep('.');
 }
 
