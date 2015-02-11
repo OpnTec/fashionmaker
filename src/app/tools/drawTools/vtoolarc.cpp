@@ -389,8 +389,8 @@ void VToolArc::RefreshGeometry()
 
         visual->setPoint1Id(arc->GetCenter().id());
         visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(arc->GetFormulaF1());
-        visual->setF2(arc->GetFormulaF2());
+        visual->setF1(qApp->FormulaToUser(arc->GetFormulaF1()));
+        visual->setF2(qApp->FormulaToUser(arc->GetFormulaF2()));
         visual->RefreshGeometry();
     }
 }
