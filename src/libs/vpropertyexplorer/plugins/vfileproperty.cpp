@@ -87,6 +87,7 @@ QWidget* VFileProperty::createEditor(QWidget * parent, const QStyleOptionViewIte
         VFileEditWidget::connect(tmpWidget, SIGNAL(commitData(QWidget*)), delegate, SIGNAL(commitData(QWidget*)));
 
     }
+    tmpWidget->setLocale(parent->locale());
     tmpWidget->setFilter(static_cast<VFilePropertyPrivate*>(d_ptr)->FileFilters);   // todo: parse this string
     tmpWidget->setFile(d_ptr->VariantValue.toString());
     tmpWidget->setDirectory(static_cast<VFilePropertyPrivate*>(d_ptr)->Directory);

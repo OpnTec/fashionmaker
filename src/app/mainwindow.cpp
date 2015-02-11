@@ -84,7 +84,6 @@ MainWindow::MainWindow(QWidget *parent)
         recentFileActs[i] = nullptr;
     }
 
-    WindowsLocale();
     CreateActions();
     CreateMenus();
     ToolBarDraws();
@@ -135,6 +134,7 @@ MainWindow::MainWindow(QWidget *parent)
     PropertyBrowser();
 
     setCurrentFile("");
+    WindowsLocale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1144,6 +1144,7 @@ void  MainWindow::ArrowTool()
     ui->actionArrowTool->setChecked(true);
     ui->actionStopTool->setEnabled(false);
     tool = Tool::Arrow;
+    emit EnableItemMove(true);
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
@@ -1403,8 +1404,8 @@ void MainWindow::Open()
 void MainWindow::Preferences()
 {
     ConfigDialog dlg(this);
-    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
-    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     if (dlg.exec() == QDialog::Accepted)
     {
         InitAutoSave();

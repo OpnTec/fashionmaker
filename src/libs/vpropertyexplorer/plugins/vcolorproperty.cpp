@@ -58,6 +58,7 @@ QWidget* VColorProperty::createEditor(QWidget* parent, const QStyleOptionViewIte
     Q_UNUSED(delegate);
 
     VColorPropertyEditor* tmpWidget = new VColorPropertyEditor(parent);
+    tmpWidget->setLocale(parent->locale());
     tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
     return tmpWidget;
 }

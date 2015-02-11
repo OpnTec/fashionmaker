@@ -58,6 +58,7 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     Q_UNUSED(option);
     Q_UNUSED(index);
     QLineEdit *editor = new QLineEdit(parent);
+    editor->setLocale(parent->locale());
     //Same regex pattern in xsd file
     editor->setValidator( new QRegExpValidator(QRegExp(regex)) );
     connect(editor, &QLineEdit::editingFinished, this, &TextDelegate::commitAndCloseEditor);

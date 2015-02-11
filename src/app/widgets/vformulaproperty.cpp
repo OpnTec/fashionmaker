@@ -94,7 +94,7 @@ QWidget* VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewI
 
     VFormula formula = VProperty::d_ptr->VariantValue.value<VFormula>();
     VFormulaPropertyEditor* tmpEditor = new VFormulaPropertyEditor(parent);
-
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->SetFormula(formula);
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;
