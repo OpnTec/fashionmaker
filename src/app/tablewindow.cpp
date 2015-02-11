@@ -60,6 +60,9 @@ TableWindow::TableWindow(QWidget *parent)
     description(QString()), tempScene(nullptr)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     tempScene = new QGraphicsScene(QRectF(0, 0, qApp->toPixel(823, Unit::Mm), qApp->toPixel(1171, Unit::Mm)));
     QBrush brush;
     brush.setStyle( Qt::SolidPattern );

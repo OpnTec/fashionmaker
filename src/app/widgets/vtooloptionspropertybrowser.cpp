@@ -233,6 +233,14 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::RefreshOptions()
+{
+    QGraphicsItem *item = currentItem;
+    itemClicked(nullptr);//close options
+    itemClicked(item);//reopen options
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
 {
     VProperty *prop = property;

@@ -33,6 +33,7 @@
 #include <QVBoxLayout>
 #include <QStackedWidget>
 #include <QCloseEvent>
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
@@ -93,6 +94,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     this->setFixedSize(QSize(750, 550));
     this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,6 +158,8 @@ void ConfigDialog::Apply()
         default:
             break;
     }
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    emit UpdateProperties();
     setResult(QDialog::Accepted);
 }
 

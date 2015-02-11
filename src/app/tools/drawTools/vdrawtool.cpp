@@ -114,7 +114,7 @@ void VDrawTool::FullUpdateFromGuiApply()
 void VDrawTool::SaveDialogChange()
 {
     qCDebug(vTool)<<"Saving tool options after using dialog";
-    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    QDomElement oldDomElement = doc->elementById(id);
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -148,7 +148,7 @@ void VDrawTool::AddToFile()
  */
 void VDrawTool::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
@@ -176,7 +176,7 @@ QColor VDrawTool::CorrectColor(const QColor &color) const
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ReadAttributes()
 {
-    const QDomElement domElement = doc->elementById(QString().setNum(id));
+    const QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         ReadToolAttributes(domElement);

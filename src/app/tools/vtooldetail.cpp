@@ -304,7 +304,7 @@ void VToolDetail::AddToFile()
  */
 void VToolDetail::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         VDetail det = VAbstractTool::data.GetDetail(id);

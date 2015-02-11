@@ -134,6 +134,7 @@ MainWindow::MainWindow(QWidget *parent)
     PropertyBrowser();
 
     setCurrentFile("");
+    WindowsLocale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1143,6 +1144,7 @@ void  MainWindow::ArrowTool()
     ui->actionArrowTool->setChecked(true);
     ui->actionStopTool->setEnabled(false);
     tool = Tool::Arrow;
+    emit EnableItemMove(true);
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
@@ -1402,6 +1404,8 @@ void MainWindow::Open()
 void MainWindow::Preferences()
 {
     ConfigDialog dlg(this);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     if (dlg.exec() == QDialog::Accepted)
     {
         InitAutoSave();
@@ -2471,6 +2475,12 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 
     }
     return restoreFiles;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::WindowsLocale()
+{
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

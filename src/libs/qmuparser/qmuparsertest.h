@@ -276,7 +276,7 @@ private:
     }
 
     // Custom value recognition
-    static int IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal );
+    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal , const std::locale &s_locale);
 
     // cppcheck-suppress functionStatic
     int TestNames();

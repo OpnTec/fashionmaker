@@ -43,6 +43,8 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
 {
     ui->setupUi(this);
 
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
     bOk->setEnabled(false);

@@ -88,7 +88,7 @@ int MoveSpline::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::Do(const VSpline &spl)
 {
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrAngle1, QString().setNum(spl.GetAngle1()));

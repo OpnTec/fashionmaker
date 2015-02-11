@@ -49,6 +49,9 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     cursorToolRecordRow(0)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogHistory::DialogAccepted);
     FillTable();
@@ -197,7 +200,7 @@ void DialogHistory::FillTable()
  */
 QString DialogHistory::Record(const VToolRecord &tool)
 {
-    const QDomElement domElem = doc->elementById(QString().setNum(tool.getId()));
+    const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
     {
         qDebug()<<"Can't find element by id"<<Q_FUNC_INFO;

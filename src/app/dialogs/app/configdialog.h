@@ -43,6 +43,8 @@ public:
     explicit ConfigDialog(QWidget *parent = nullptr);
 public slots:
     void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
+signals:
+    void              UpdateProperties();
 protected:
     virtual void      closeEvent(QCloseEvent *event);
 private:

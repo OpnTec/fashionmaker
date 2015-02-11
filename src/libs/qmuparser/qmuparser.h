@@ -54,7 +54,7 @@ namespace qmu
         virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd);
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
-        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal);
+        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale);
         // Trigonometric functions
         static qreal Tan2(qreal, qreal);
         // hyperbolic functions

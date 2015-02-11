@@ -70,6 +70,7 @@ QWidget* VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewIte
     Q_UNUSED(delegate);
     QComboBox* tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->addItems(EnumerationLiterals);
     tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
     connect(tmpEditor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,

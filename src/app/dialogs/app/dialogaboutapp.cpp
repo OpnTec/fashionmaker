@@ -33,6 +33,7 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include "../../options.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
@@ -40,6 +41,8 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     ui(new Ui::DialogAboutApp)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION));
     ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));

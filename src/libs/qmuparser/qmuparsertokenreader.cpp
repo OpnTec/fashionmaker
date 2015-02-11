@@ -204,7 +204,7 @@ void QmuParserTokenReader::ReInit()
 /**
  * @brief Read the next token from the string.
  */
-QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken()
+QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const std::locale &s_locale)
 {
     assert ( m_pParser );
 
@@ -236,7 +236,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken()
     {
         return SaveBeforeReturn ( tok ); // Check for function argument separators
     }
-    if ( IsValTok ( tok ) )
+    if ( IsValTok ( tok, s_locale ) )
     {
         return SaveBeforeReturn ( tok ); // Check for values / constant tokens
     }
@@ -766,7 +766,7 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
  * @param a_Tok [out] If a value token is found it will be placed here.
  * @return true if a value token has been found.
  */
-bool QmuParserTokenReader::IsValTok ( token_type &a_Tok )
+bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const std::locale &s_locale )
 {
     assert ( m_pConstDef );
     assert ( m_pParser );
@@ -802,7 +802,7 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok )
     for ( item = m_vIdentFun.begin(); item != m_vIdentFun.end(); ++item )
     {
         int iStart = m_iPos;
-        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal ) == 1 )
+        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, s_locale ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
             strTok = m_strFormula.mid ( iStart, m_iPos-iStart );

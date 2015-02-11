@@ -76,6 +76,7 @@ QWidget *VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionView
     Q_UNUSED(delegate);
     QComboBox* tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->setIconSize(QSize(80, 14));
     tmpEditor->setMinimumWidth(80);
     tmpEditor->setMaximumWidth(110);

@@ -86,6 +86,7 @@ QWidget *VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVie
         ++i;
     }
 
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
     connect(tmpEditor, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
                      &VLineColorProperty::currentIndexChanged);

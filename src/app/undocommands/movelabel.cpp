@@ -46,7 +46,7 @@ MoveLabel::MoveLabel(VPattern *doc, const double &x, const double &y, const quin
     qCDebug(vUndo)<<"Label new My"<<newMy;
 
     SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
@@ -114,7 +114,7 @@ void MoveLabel::Do(double mx, double my)
     qCDebug(vUndo)<<"New mx"<<mx;
     qCDebug(vUndo)<<"New my"<<my;
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(mx)));

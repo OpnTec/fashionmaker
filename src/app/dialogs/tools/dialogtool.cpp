@@ -34,8 +34,6 @@
 #include "../../geometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
 #include "../../../libs/qmuparser/qmuparsererror.h"
-#include "../../core/vapplication.h"
-#include "../../core/vsettings.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include <QTimer>
 #include <QCloseEvent>
@@ -502,16 +500,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             }
             else
             {
-                QLocale loc;
-                if (qApp->getSettings()->GetOsSeparator())
-                {
-                    loc = QLocale::system();
-                }
-                else
-                {
-                    loc = QLocale(QLocale::C);
-                }
-                label->setText(loc.toString(result) + " " +postfix);
+                label->setText(qApp->LocaleToString(result) + " " +postfix);
                 flag = true;
                 ChangeColor(labelEditFormula, okColor);
                 label->setToolTip(tr("Value"));

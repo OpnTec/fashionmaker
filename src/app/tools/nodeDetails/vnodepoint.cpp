@@ -180,7 +180,7 @@ void VNodePoint::AddToFile()
 void VNodePoint::RefreshDataInFile()
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, idNode);
@@ -253,7 +253,7 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
  */
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));

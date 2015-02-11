@@ -335,7 +335,7 @@ void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolSplinePath::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement() == false)
     {
         qDebug()<<"Can't find element with id="<<id<<"in pattern file";

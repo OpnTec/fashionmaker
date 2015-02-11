@@ -42,6 +42,9 @@ DialogLayoutSettings::DialogLayoutSettings(QWidget *parent)
     : QDialog(parent), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm), oldLayoutUnit(Unit::Mm)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     InitPaperUnits();
     InitLayoutUnits();
     InitTemplates();

@@ -113,11 +113,11 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::ToUser)
         {
-            formula = value;
+            formula = qApp->FormulaToUser(value);
         }
         else
         {
-            formula = qApp->FormulaToUser(value);
+            formula = value;
         }
         formula.replace("\n", " ");// Replace line return with spaces for calc if exist
         Eval();
@@ -239,17 +239,8 @@ void VFormula::Eval()
             }
             else
             {
-                QLocale loc;
-                if (qApp->getSettings()->GetOsSeparator())
-                {
-                    loc = QLocale::system();
-                }
-                else
-                {
-                    loc = QLocale(QLocale::C);
-                }
                 dValue = result;
-                value = QString(loc.toString(result) + " " + postfix);
+                value = QString(qApp->LocaleToString(result) + " " + postfix);
                 _error = false;
             }
         }

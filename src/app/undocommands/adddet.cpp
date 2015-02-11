@@ -50,7 +50,7 @@ void AddDet::undo()
     QDomElement element;
     if (doc->GetActivNodeElement(VPattern::TagDetails, element))
     {
-        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
         {
             if (element.removeChild(domElement).isNull())

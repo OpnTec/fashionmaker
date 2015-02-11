@@ -48,7 +48,7 @@ void SaveToolOptions::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(oldXml, domElement);
@@ -67,7 +67,7 @@ void SaveToolOptions::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(newXml, domElement);

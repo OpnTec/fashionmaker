@@ -86,7 +86,7 @@ int MoveSplinePath::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::Do(const VSplinePath &splPath)
 {
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(splPath.GetKCurve()));

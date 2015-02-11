@@ -170,7 +170,7 @@ void VNodeSplinePath::AddToFile()
  */
 void VNodeSplinePath::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, QString().setNum(idNode));

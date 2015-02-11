@@ -42,7 +42,7 @@ MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const qu
     nodeId = id;
 
     SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
@@ -64,7 +64,7 @@ void MoveDetail::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, oldX, oldY);
@@ -86,7 +86,7 @@ void MoveDetail::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, newX, newY);

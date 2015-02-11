@@ -37,7 +37,6 @@ using namespace std;
 
 namespace qmu
 {
-std::locale QmuParserBase::s_locale = std::locale(std::locale::classic(), new change_dec_sep<char_type>('.'));
 
 bool QmuParserBase::g_DbgDumpCmdCode = false;
 bool QmuParserBase::g_DbgDumpStack = false;
@@ -57,7 +56,8 @@ const QStringList QmuParserBase::c_DefaultOprt = QStringList()<< "<=" << ">=" <<
  * @brief Constructor.
  */
 QmuParserBase::QmuParserBase()
-    :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
+    :s_locale(std::locale(std::locale::classic(), new change_dec_sep<char_type>('.'))),
+      m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
       m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
       m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
       m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
@@ -72,10 +72,11 @@ QmuParserBase::QmuParserBase()
  * Tha parser can be safely copy constructed but the bytecode is reset during copy construction.
  */
 QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
-    :m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(), m_vStringVarBuf(), m_pTokenReader(),
-      m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(), m_StrVarDef(), m_VarDef(),
-      m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(), m_nIfElseCounter(0), m_vStackBuffer(),
-      m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()), m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
+    :s_locale(a_Parser.getLocale()), m_pParseFormula(&QmuParserBase::ParseString), m_vRPN(), m_vStringBuf(),
+      m_vStringVarBuf(), m_pTokenReader(), m_FunDef(), m_PostOprtDef(), m_InfixOprtDef(), m_OprtDef(), m_ConstDef(),
+      m_StrVarDef(), m_VarDef(), m_bBuiltInOp(true), m_sNameChars(), m_sOprtChars(), m_sInfixOprtChars(),
+      m_nIfElseCounter(0), m_vStackBuffer(), m_nFinalResultIdx(0), m_Tokens(QMap<int, QString>()),
+      m_Numbers(QMap<int, QString>()), allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
     Assign(a_Parser);
@@ -218,6 +219,18 @@ void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
 void QmuParserBase::setAllowSubexpressions(bool value)
 {
     allowSubexpressions = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+std::locale QmuParserBase::getLocale() const
+{
+    return s_locale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setLocale(const std::locale &value)
+{
+    s_locale = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1300,7 +1313,7 @@ void QmuParserBase::CreateRPN() const
 
     for (;;)
     {
-        opt = m_pTokenReader->ReadNextToken();
+        opt = m_pTokenReader->ReadNextToken(s_locale);
 
         switch (opt.GetCode())
         {

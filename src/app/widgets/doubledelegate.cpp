@@ -53,6 +53,7 @@ QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOption
     Q_UNUSED(index);
     emit NewLastValue(-10001.0);//Here need reset value to default because we begin work with new item
     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
+    editor->setLocale(parent->locale());
     editor->setMinimum(-10000.0);
     editor->setMaximum(10000.0);
     connect(editor, &QDoubleSpinBox::editingFinished, this, &DoubleSpinBoxDelegate::commitAndCloseEditor);

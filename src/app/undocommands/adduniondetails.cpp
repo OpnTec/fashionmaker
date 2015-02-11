@@ -49,7 +49,7 @@ void AddUnionDetails::undo()
     QDomElement modelingElement;
     if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
     {
-        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
         {
             if (modelingElement.removeChild(domElement).isNull())
