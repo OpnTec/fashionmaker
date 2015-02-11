@@ -179,14 +179,14 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString()
-                                                          .setNum(data->GetTableValue(qApp->VarFromUser(iMap.key()))));
+            QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(
+                                                              data->GetTableValue(qApp->VarFromUser(iMap.key()))));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
         }
 
-        item = new QTableWidgetItem(QString().setNum(m->GetBase()));
+        item = new QTableWidgetItem(qApp->LocaleToString(m->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -196,12 +196,12 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m->GetKsize()));
+            QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(m->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 3, item);// in sizes
 
-            item = new QTableWidgetItem(QString().setNum(m->GetKheight()));
+            item = new QTableWidgetItem(qApp->LocaleToString(m->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 4, item);// in heights
@@ -252,23 +252,23 @@ void DialogIncrements::FillIncrements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(data->GetTableValue(iMap.value())));
+            item = new QTableWidgetItem(qApp->LocaleToString(data->GetTableValue(iMap.value())));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetIncrement->setItem(currentRow, 1, item);
         }
 
-        item = new QTableWidgetItem(QString().setNum(incr->GetBase()));
+        item = new QTableWidgetItem(qApp->LocaleToString(incr->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(incr->GetKsize()));
+            item = new QTableWidgetItem(qApp->LocaleToString(incr->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 3, item);
 
-            item = new QTableWidgetItem(QString().setNum(incr->GetKheight()));
+            item = new QTableWidgetItem(qApp->LocaleToString(incr->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 4, item);
         }
@@ -307,7 +307,7 @@ void DialogIncrements::FillTable(const QMap<QString, T> varTable, QTableWidget *
         item->setFont(QFont("Times", 12, QFont::Bold));
         table->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(QString().setNum(length));
+        item = new QTableWidgetItem(qApp->LocaleToString(length));
         item->setTextAlignment(Qt::AlignHCenter);
         table->setItem(currentRow, 1, item);
     }
