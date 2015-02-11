@@ -2004,6 +2004,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     {
         qCDebug(vMainWindow)<<"Could not save file"<<fileName<<"."<<error<<".";
     }
+    PatternWasModified(result);
     return result;
 }
 
