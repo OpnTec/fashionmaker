@@ -678,7 +678,7 @@ void DialogIncrements::clickedToolButtonRemove()
     data->RemoveIncrement(itemName->text());
 
     quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         QDomNodeList list = doc->elementsByTagName(VPattern::TagIncrements);
@@ -750,7 +750,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
     const QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
     const QTableWidgetItem *item = ui->tableWidgetIncrement->item(row, column);
     const quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement() == false)
     {
         qCDebug(vDialog)<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;

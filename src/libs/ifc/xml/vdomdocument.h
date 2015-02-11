@@ -81,6 +81,7 @@ public:
     VDomDocument();
     virtual ~VDomDocument();
     QDomElement    elementById(const QString& id);
+    QDomElement    elementById(quint32 id);
     void           removeAllChilds(QDomElement &element);
     template <typename T>
     /**

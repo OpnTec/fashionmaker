@@ -275,7 +275,7 @@ void VToolLine::AddToFile()
  */
 void VToolLine::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();

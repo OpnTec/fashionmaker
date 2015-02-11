@@ -99,7 +99,7 @@ void VAbstractNode::decrementReferens()
     if (_referens <= 0)
     {
         doc->DecrementReferens(idNode);
-        QDomElement domElement = doc->elementById(QString().setNum(id));
+        QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
         {
             QDomNode element = domElement.parentNode();

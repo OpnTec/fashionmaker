@@ -48,7 +48,7 @@ void SaveDetailOptions::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         SaveDet(domElement, oldDet);
@@ -85,7 +85,7 @@ void SaveDetailOptions::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         SaveDet(domElement, newDet);

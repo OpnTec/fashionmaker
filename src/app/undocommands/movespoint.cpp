@@ -46,7 +46,7 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
     qCDebug(vUndo)<<"SPoint newY"<<newY;
 
     SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrX, "0.0"));
@@ -114,7 +114,7 @@ void MoveSPoint::Do(double x, double y)
     qCDebug(vUndo)<<"Move to x"<<x;
     qCDebug(vUndo)<<"Move to y"<<y;
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(x)));

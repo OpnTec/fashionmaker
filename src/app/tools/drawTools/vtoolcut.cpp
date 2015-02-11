@@ -146,7 +146,7 @@ void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
 {
     Q_ASSERT_X(attrCurve.isEmpty() == false, Q_FUNC_INFO, "attribute name is empty");
 
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         formula = domElement.attribute(AttrLength, "");

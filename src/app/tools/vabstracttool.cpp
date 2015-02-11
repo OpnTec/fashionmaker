@@ -310,7 +310,7 @@ int VAbstractTool::ConfirmDeletion()
 void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool)<<"Saving tool options";
-    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    QDomElement oldDomElement = doc->elementById(id);
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();

@@ -750,7 +750,7 @@ void VToolUnionDetails::AddToFile()
  */
 void VToolUnionDetails::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIndexD1, indexD1);

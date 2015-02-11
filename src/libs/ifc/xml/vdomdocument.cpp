@@ -135,6 +135,12 @@ QDomElement VDomDocument::elementById(const QString& id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QDomElement VDomDocument::elementById(quint32 id)
+{
+    return elementById(QString().setNum(id));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Removes all children of a given element tag. RENAME: removeAllChildren
  * @param element tag
