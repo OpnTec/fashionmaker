@@ -37,6 +37,9 @@ const QString nameRegExp = QStringLiteral("^([^0-9-*/^+=\\s\\(\\)%:;!.,`'\"]){1,
 // furthermore blows up the binary sizes.
 const QString degreeSymbol = QStringLiteral("°");
 
+const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
+const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
+
 // Keep synchronize all names with initialization in VApllication class!!!!!
 //measurements
 //head and neck

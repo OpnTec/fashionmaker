@@ -50,6 +50,9 @@ class QStringList;
 extern const QString nameRegExp;
 extern const QString degreeSymbol;
 
+extern const QString cursorArrowOpenHand;
+extern const QString cursorArrowCloseHand;
+
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
 enum class Tool : unsigned char
 {

@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogspline.h"
 #include "../../undocommands/movespline.h"
 #include "../../visualization/vistoolspline.h"
+#include "../../options.h"
 #include <QtMath>
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
@@ -371,7 +372,7 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+            VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
             oldPosition = event->scenePos();
             event->accept();
         }
@@ -387,7 +388,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             //Disable cursor-arrow-closehand
-            VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
+            VApplication::restoreOverrideCursor(cursorArrowCloseHand);
         }
     }
     VAbstractSpline::mouseReleaseEvent(event);
@@ -451,7 +452,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+        VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
     }
 
     VAbstractSpline::hoverEnterEvent(event);
@@ -463,7 +464,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         //Disable cursor-arrow-openhand
-        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
+        VApplication::restoreOverrideCursor(cursorArrowOpenHand);
     }
 
     VAbstractSpline::hoverLeaveEvent(event);
