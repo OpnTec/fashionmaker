@@ -1998,13 +1998,13 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
             qCDebug(vMainWindow)<<"File"<<fileName<<"saved.";
+            PatternWasModified(result);
         }
     }
     else
     {
         qCDebug(vMainWindow)<<"Could not save file"<<fileName<<"."<<error<<".";
     }
-    PatternWasModified(result);
     return result;
 }
 
