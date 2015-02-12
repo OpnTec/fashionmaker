@@ -44,7 +44,7 @@ const QString VToolSplinePath::ToolType = QStringLiteral("path");
  */
 VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const QString &color,
                                  const Source &typeCreation, QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent)
+    :VAbstractSpline(doc, data, id, parent), oldPosition()
 {
     sceneType = SceneObject::SplinePath;
 
@@ -52,6 +52,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+    this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setAcceptHoverEvents(true);
 
     const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(id);
@@ -167,6 +168,7 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
         connect(spl, &VToolSplinePath::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSplinePath::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSplinePath::EnableToolMove);
         doc->AddTool(id, spl);
         return spl;
     }
@@ -412,6 +414,121 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     {
         AddPathPoint(doc, tag, splPath->at(i));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
+            oldPosition = event->scenePos();
+            event->accept();
+        }
+    }
+    VAbstractSpline::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            //Disable cursor-arrow-closehand
+            VApplication::restoreOverrideCursor(cursorArrowCloseHand);
+        }
+    }
+    VAbstractSpline::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
+    // event, you can be certain that this item also received a mouse press event, and that this item is the current
+    // mouse grabber.".
+
+    VSplinePath oldSplPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
+    VSplinePath newSplPath = oldSplPath;
+    int indexSpline = oldSplPath.Segment(oldPosition);
+    if (indexSpline == -1)
+    {
+        return;
+    }
+
+    VSpline spline = newSplPath.GetSpline(indexSpline);
+    const qreal t = spline.ParamT(oldPosition);
+
+    if (qFloor(t) == -1)
+    {
+        return;
+    }
+
+    // Magic Bezier Drag Equations follow!
+    // "weight" describes how the influence of the drag should be distributed
+    // among the handles; 0 = front handle only, 1 = back handle only.
+
+    double weight;
+    if (t <= 1.0 / 6.0)
+    {
+        weight = 0;
+    }
+    else if (t <= 0.5)
+    {
+        weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
+    }
+    else if (t <= 5.0 / 6.0)
+    {
+        weight = (1 - pow((6 * (1-t) - 1) / 2.0, 3)) / 2 + 0.5;
+    }
+    else
+    {
+        weight = 1;
+    }
+
+    const QPointF delta = event->scenePos() - oldPosition;
+    const QPointF offset0 = ((1-weight)/(3*t*(1-t)*(1-t))) * delta;
+    const QPointF offset1 = (weight/(3*t*t*(1-t))) * delta;
+
+    const QPointF p2 = spline.GetP2() + offset0;
+    const QPointF p3 = spline.GetP3() + offset1;
+
+    oldPosition = event->scenePos(); // Now mouse here
+
+    const VSpline spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4(), spline.GetKcurve());
+
+    UpdateControlPoints(spl, newSplPath, indexSpline);
+
+    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
+    connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSplPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
+
+    VAbstractSpline::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        //Disable cursor-arrow-openhand
+        VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+    }
+
+    VAbstractSpline::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

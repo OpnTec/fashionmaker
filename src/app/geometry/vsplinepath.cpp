@@ -237,6 +237,30 @@ void VSplinePath::setMaxCountPoints(const qint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VSplinePath::Segment(const QPointF &p) const
+{
+    int index = -1;
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
+        VSpline spl = VSpline(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
+                              d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+
+        const qreal t = spl.ParamT(p);
+
+        if (qFloor(t) == -1)
+        {
+            continue;
+        }
+        else
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::CountPoint() const
 {
     return d->path.size();

@@ -79,7 +79,14 @@ protected:
     virtual void  RemoveReferens();
     virtual void  SaveDialog(QDomElement &domElement);
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void  mousePressEvent(QGraphicsSceneMouseEvent * event);
+    virtual void  mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    virtual void  hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
+    QPointF oldPosition;
+
     void          RefreshGeometry();
     static void   AddPathPoint(VPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
