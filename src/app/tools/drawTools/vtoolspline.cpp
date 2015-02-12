@@ -55,7 +55,6 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    //this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
@@ -193,6 +192,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSpline::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSpline::EnableToolMove);
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);
         doc->IncrementReferens(p4);
@@ -284,6 +284,12 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
@@ -361,12 +367,30 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        oldPosition = event->scenePos();
-        event->accept();
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+            oldPosition = event->scenePos();
+            event->accept();
+        }
     }
     VAbstractSpline::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            //Disable cursor-arrow-closehand
+            VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
+        }
+    }
+    VAbstractSpline::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,7 +444,29 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
     connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSpl);
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+    }
+
+    VAbstractSpline::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        //Disable cursor-arrow-openhand
+        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
+    }
+
+    VAbstractSpline::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
