@@ -744,3 +744,134 @@ void VSpline::SetKcurve(qreal factor)
         d->kCurve = factor;
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+int VSpline::Sign(long double ld) const
+{
+    if(qAbs(ld)<0.00000000001)
+    {
+        return 0;
+    }
+    return (ld>0) ? 1 : -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Cubic Cubic equation solution. Real coefficients case.
+ *
+ * This method use method Vieta-Cardano for eval cubic equations.
+ * Cubic equation write in form x3+a*x2+b*x+c=0.
+ *
+ * Output:
+ * 3 real roots -> then x is filled with them;
+ * 1 real + 2 complex -> x[0] is real, x[1] is real part of complex roots, x[2] - non-negative imaginary part.
+ *
+ * @param x solution array (size 3).
+ * @param a coefficient
+ * @param b coefficient
+ * @param c coefficient
+ * @return 3 - 3 real roots;
+ *         1 - 1 real root + 2 complex;
+ *         2 - 1 real root + complex roots imaginary part is zero (i.e. 2 real roots).
+ */
+qint32 VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) const
+{
+    //To find cubic equation roots in the case of real coefficients, calculated at the beginning
+    const qreal q = (pow(a, 2) - 3*b)/9.;
+    const qreal r = (2*pow(a, 3) - 9*a*b + 27.*c)/54.;
+    if (pow(r, 2) < pow(q, 3))
+    { // equation has three real roots, use formula Vieta
+        const qreal t = acos(r/sqrt(pow(q, 3)))/3.;
+        x.insert(0, -2.*sqrt(q)*cos(t)-a/3);
+        x.insert(1, -2.*sqrt(q)*cos(t + (2*M_2PI/3.)) - a/3.);
+        x.insert(2, -2.*sqrt(q)*cos(t - (2*M_2PI/3.)) - a/3.);
+        return(3);
+    }
+    else
+    { // 1 real root + 2 complex
+        //Formula Cardano
+        const qreal aa = -Sign(r)*pow(fabs(r)+sqrt(pow(r, 2)-pow(q, 3)), 1./3.);
+        const qreal bb = Sign(aa) == 0 ? 0 : q/aa;
+
+        x.insert(0, aa+bb-a/3.); // Real root
+        x.insert(1, (-0.5)*(aa+bb)-a/3.); //Complex root
+        x.insert(2, (sqrt(3.)*0.5)*fabs(aa-bb)); // Complex root
+        if (qFuzzyCompare(x.at(2) + 1, 0. + 1))
+        {
+            return(2);
+        }
+        return(1);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<qreal> VSpline::CalcT (qreal curveCoord1, qreal curveCoord2, qreal curveCoord3,
+                               qreal curveCoord4, qreal pointCoord) const
+{
+    const qreal a = -curveCoord1 + 3*curveCoord2 - 3*curveCoord3 + curveCoord4;
+    const qreal b = 3*curveCoord1 - 6*curveCoord2 + 3*curveCoord3;
+    const qreal c = -3*curveCoord1 + 3*curveCoord2;
+    const qreal d = -pointCoord + curveCoord1;
+
+    QVector<qreal> t = QVector<qreal>(3, -1);
+    Cubic(t, b/a, c/a, d/a);
+
+    QVector<qreal> retT;
+    for (int i=0; i < t.size(); ++i)
+    {
+        if ( t.at(i) >= 0 && t.at(i) <= 1 )
+        {
+            retT.append(t.at(i));
+        }
+    }
+
+    return retT;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VSpline::ParamT calculate t coeffient that reprezent point on curve.
+ *
+ * Each point that belongs to Cubic Bézier curve can be shown by coefficient in interval [0; 1].
+ *
+ * @param pBt point on curve
+ * @return t coeffient that reprezent this point on curve. Return -1 if point doesn't belongs to curve.
+ */
+qreal VSpline::ParamT (const QPointF &pBt) const
+{
+    QVector<qreal> ts;
+    // Calculate t coefficient for each axis
+    ts += CalcT (GetP1().toQPointF().x(), d->p2.x(), d->p3.x(), GetP4().toQPointF().x(), pBt.x());
+    ts += CalcT (GetP1().toQPointF().y(), d->p2.y(), d->p3.y(), GetP4().toQPointF().y(), pBt.y());
+
+    if(ts.isEmpty())
+    {
+        return -1; // We don't have candidates
+    }
+
+    qreal tx = -1;
+    qreal eps = 3; // Error calculation
+
+    // In morst case we will have 6 result in interval [0; 1].
+    // Here we try find closest to our point.
+    for (int i=0; i< ts.size(); ++i)
+    {
+        const qreal t = ts.at(i);
+        const QPointF p0 = GetP1().toQPointF();
+        const QPointF p1 = d->p2;
+        const QPointF p2 = d->p3;
+        const QPointF p3 = GetP4().toQPointF();
+        //The explicit form of the Cubic Bézier curve
+        const qreal pointX = pow(1-t, 3)*p0.x() + 3*pow(1-t, 2)*t*p1.x() + 3*(1-t)*pow(t, 2)*p2.x() + pow(t, 3)*p3.x();
+        const qreal pointY = pow(1-t, 3)*p0.y() + 3*pow(1-t, 2)*t*p1.y() + 3*(1-t)*pow(t, 2)*p2.y() + pow(t, 3)*p3.y();
+
+        const QLineF line(pBt, QPointF(pointX, pointY));
+        if (line.length() <= eps)
+        {
+            tx = t;
+            eps = line.length(); //Next point should be even closest
+        }
+    }
+
+    return tx;
+}

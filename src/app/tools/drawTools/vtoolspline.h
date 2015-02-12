@@ -63,9 +63,12 @@ protected:
     virtual void RemoveReferens();
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
 private:
     Q_DISABLE_COPY(VToolSpline)
     void         RefreshGeometry ();
+    QPointF oldPosition;
 };
 
 #endif // VTOOLSPLINE_H

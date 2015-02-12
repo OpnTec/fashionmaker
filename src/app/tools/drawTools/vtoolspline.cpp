@@ -31,6 +31,7 @@
 #include "../../dialogs/tools/dialogspline.h"
 #include "../../undocommands/movespline.h"
 #include "../../visualization/vistoolspline.h"
+#include <QtMath>
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
@@ -45,7 +46,7 @@ const QString VToolSpline::ToolType = QStringLiteral("simple");
  */
 VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
                          QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent)
+    :VAbstractSpline(doc, data, id, parent), oldPosition()
 {
     sceneType = SceneObject::Spline;
     lineColor = color;
@@ -53,6 +54,8 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+    this->setFlag(QGraphicsItem::ItemIsMovable, true);
+    //this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
@@ -353,6 +356,71 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
     doc->SetAttribute(tag, AttrColor, lineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        oldPosition = event->scenePos();
+        event->accept();
+    }
+    VAbstractSpline::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
+    // event, you can be certain that this item also received a mouse press event, and that this item is the current
+    // mouse grabber.".
+
+    // Magic Bezier Drag Equations follow!
+    // "weight" describes how the influence of the drag should be distributed
+    // among the handles; 0 = front handle only, 1 = back handle only.
+
+    const QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+    const qreal t = spline->ParamT(oldPosition);
+
+    if (qFloor(t) == -1)
+    {
+        return;
+    }
+
+    double weight;
+    if (t <= 1.0 / 6.0)
+    {
+        weight = 0;
+    }
+    else if (t <= 0.5)
+    {
+        weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
+    }
+    else if (t <= 5.0 / 6.0)
+    {
+        weight = (1 - pow((6 * (1-t) - 1) / 2.0, 3)) / 2 + 0.5;
+    }
+    else
+    {
+        weight = 1;
+    }
+
+    const QPointF delta = event->scenePos() - oldPosition;
+    const QPointF offset0 = ((1-weight)/(3*t*(1-t)*(1-t))) * delta;
+    const QPointF offset1 = (weight/(3*t*t*(1-t))) * delta;
+
+    const QPointF p2 = spline->GetP2() + offset0;
+    const QPointF p3 = spline->GetP3() + offset1;
+
+    oldPosition = event->scenePos(); // Now mouse here
+
+    VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4(), spline->GetKcurve());
+
+    MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
+    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSpl);
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
