@@ -205,6 +205,12 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdateControlPoints update position points control points in file.
  * @param spl spline what was changed.

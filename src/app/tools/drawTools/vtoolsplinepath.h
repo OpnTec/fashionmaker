@@ -73,6 +73,7 @@ public slots:
 
     void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
+    virtual void  EnableToolMove(bool move);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void  RefreshDataInFile();
