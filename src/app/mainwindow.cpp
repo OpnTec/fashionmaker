@@ -300,6 +300,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     if (checked)
     {
         CancelTool();
+        emit EnableItemMove(true);
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
@@ -340,6 +341,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     if (checked)
     {
         CancelTool();
+        emit EnableItemMove(false);
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
@@ -1050,7 +1052,6 @@ void MainWindow::CancelTool()
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
             ui->actionStopTool->setEnabled(true);
-            emit EnableItemMove(false);
             return;
         case Tool::SinglePoint:
             Q_UNREACHABLE();
@@ -1130,7 +1131,6 @@ void MainWindow::CancelTool()
     }
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
-    emit EnableItemMove(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1998,13 +1998,13 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
             qCDebug(vMainWindow)<<"File"<<fileName<<"saved.";
+            PatternWasModified(result);
         }
     }
     else
     {
         qCDebug(vMainWindow)<<"Could not save file"<<fileName<<"."<<error<<".";
     }
-    PatternWasModified(result);
     return result;
 }
 

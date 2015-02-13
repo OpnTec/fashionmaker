@@ -145,6 +145,12 @@ void VSimpleCurve::SetCurrentColor(const QColor &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->ignore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QColor VSimpleCurve::CorrectColor(const QColor &color) const
 {
     if (enabled)

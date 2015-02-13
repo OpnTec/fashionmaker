@@ -122,6 +122,7 @@
 																			     <xs:attribute name="arc" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="curve" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="lineColor" type="colors"></xs:attribute>
+																			     <xs:attribute name="color" type="colors"></xs:attribute>
 																	       </xs:complexType>
                                                                      </xs:element>                                                              
 																     <xs:element name="line" minOccurs="0" maxOccurs="unbounded">

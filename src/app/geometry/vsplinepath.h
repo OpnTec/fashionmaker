@@ -185,6 +185,8 @@ public:
      * @param value max count.
      */
     void setMaxCountPoints(const qint32 &value);
+
+    int Segment(const QPointF &p) const;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

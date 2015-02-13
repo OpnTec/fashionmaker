@@ -47,11 +47,14 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
     firstCurve->setParentItem(this);
     connect(firstCurve, &VSimpleCurve::Choosed, this, &VToolCut::CurveChoosed);
     connect(firstCurve, &VSimpleCurve::HoverPath, this, &VToolCut::HoverPath);
+    // TODO: Now we only hide simple curves, but in future need totally delete them all.
+    firstCurve->setVisible(false);
 
     secondCurve = new VSimpleCurve(curve2id, QColor(lineColor), SimpleCurvePoint::FirstPoint, &factor);
     secondCurve->setParentItem(this);
     connect(secondCurve, &VSimpleCurve::Choosed, this, &VToolCut::CurveChoosed);
     connect(secondCurve, &VSimpleCurve::HoverPath, this, &VToolCut::HoverPath);
+    secondCurve->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
