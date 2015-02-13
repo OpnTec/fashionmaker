@@ -300,7 +300,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     if (checked)
     {
         CancelTool();
-        emit EnableItemMove(true);
+        emit EnableItemMove(false);
         tool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
