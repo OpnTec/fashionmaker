@@ -53,8 +53,6 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     ui->lineEditFileName->setValidator(validator);
     ui->lineEditFileName->setText(fileName);
 
-    ui->lineEditPath->setText(qApp->getSettings()->GetPathLayout());
-
     QMap<QString, QString>::const_iterator i = formates.constBegin();
     while (i != formates.constEnd())
     {
@@ -70,6 +68,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
     ui->comboBoxFormat->setCurrentIndex(4);//svg
+    ui->lineEditPath->setText(qApp->getSettings()->GetPathLayout());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
