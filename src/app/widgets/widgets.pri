@@ -5,7 +5,6 @@ HEADERS += \
     $$PWD/vtablegraphicsview.h \
     $$PWD/vmaingraphicsview.h \
     $$PWD/vmaingraphicsscene.h \
-    $$PWD/vitem.h \
     $$PWD/doubledelegate.h \
     $$PWD/textdelegate.h \
     $$PWD/vtooloptionspropertybrowser.h \
@@ -16,7 +15,6 @@ SOURCES += \
     $$PWD/vtablegraphicsview.cpp \
     $$PWD/vmaingraphicsview.cpp \
     $$PWD/vmaingraphicsscene.cpp \
-    $$PWD/vitem.cpp \
     $$PWD/doubledelegate.cpp \
     $$PWD/textdelegate.cpp \
     $$PWD/vtooloptionspropertybrowser.cpp \
