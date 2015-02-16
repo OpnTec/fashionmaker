@@ -66,7 +66,6 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);
 
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogBisector::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogBisector::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogBisector::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);

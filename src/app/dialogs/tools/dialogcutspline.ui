@@ -101,22 +101,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqual">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -427,7 +417,6 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHere</tabstop>
-  <tabstop>toolButtonEqual</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>comboBoxSpline</tabstop>
   <tabstop>lineEditNamePoint</tabstop>

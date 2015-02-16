@@ -61,7 +61,6 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 
     connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::PutAngle);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogCurveIntersectAxis::PutVal);
-    connect(ui->toolButtonEqualAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::EvalAngle);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCurveIntersectAxis::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCurveIntersectAxis::AngleTextChanged);
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::DeployAngleTextEdit);

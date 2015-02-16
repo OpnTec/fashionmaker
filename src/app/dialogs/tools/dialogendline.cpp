@@ -68,9 +68,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     connect(ui->toolButtonPutHereLength, &QPushButton::clicked, this, &DialogEndLine::PutHere);
     connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogEndLine::PutAngle);
 
-    connect(ui->toolButtonEqualLength, &QPushButton::clicked, this, &DialogEndLine::EvalFormula);
-    connect(ui->toolButtonEqualAngle, &QPushButton::clicked, this, &DialogEndLine::EvalAngle);
-
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEndLine::FormulaTextChanged);

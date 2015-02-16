@@ -47,7 +47,6 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEditWrongFormula::EvalFormula);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEditWrongFormula::DeployFormulaTextEdit);
 

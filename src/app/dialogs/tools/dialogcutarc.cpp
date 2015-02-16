@@ -63,7 +63,6 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutArc::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutArc::PutVal);
 
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogCutArc::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutArc::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);

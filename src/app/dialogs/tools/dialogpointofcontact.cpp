@@ -78,7 +78,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
     connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogPointOfContact::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);

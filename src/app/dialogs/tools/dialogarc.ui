@@ -107,22 +107,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualRadius">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -295,22 +285,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualF1">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -483,22 +463,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualF2">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_5">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -790,15 +760,12 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHereRadius</tabstop>
-  <tabstop>toolButtonEqualRadius</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>plainTextEditF1</tabstop>
   <tabstop>toolButtonPutHereF1</tabstop>
-  <tabstop>toolButtonEqualF1</tabstop>
   <tabstop>pushButtonGrowLengthF1</tabstop>
   <tabstop>plainTextEditF2</tabstop>
   <tabstop>toolButtonPutHereF2</tabstop>
-  <tabstop>toolButtonEqualF2</tabstop>
   <tabstop>pushButtonGrowLengthF2</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>

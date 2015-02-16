@@ -63,7 +63,6 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogNormal::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogNormal::PutVal);
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogNormal::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);

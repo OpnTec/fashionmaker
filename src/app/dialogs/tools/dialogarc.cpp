@@ -82,10 +82,6 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
     connect(ui->toolButtonPutHereF2, &QPushButton::clicked, this, &DialogArc::PutF2);
 
-    connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
-    connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF);
-    connect(ui->toolButtonEqualF2, &QPushButton::clicked, this, &DialogArc::EvalF);
-
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
     connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArc::F1Changed);
     connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this, &DialogArc::F2Changed);

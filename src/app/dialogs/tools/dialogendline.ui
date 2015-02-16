@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>417</width>
-    <height>538</height>
+    <height>571</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -110,22 +110,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualLength">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -298,22 +288,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualAngle">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_5">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -665,11 +645,9 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHereLength</tabstop>
-  <tabstop>toolButtonEqualLength</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>plainTextEditAngle</tabstop>
   <tabstop>toolButtonPutHereAngle</tabstop>
-  <tabstop>toolButtonEqualAngle</tabstop>
   <tabstop>pushButtonGrowLengthAngle</tabstop>
   <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>lineEditNamePoint</tabstop>
