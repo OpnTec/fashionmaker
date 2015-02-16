@@ -40,7 +40,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -307,7 +307,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Point of intersection line and axis</string>
+           <string>Intersect Line and Axis</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -334,7 +334,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -410,7 +410,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>156</height>
         </rect>
        </property>
@@ -660,7 +660,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
