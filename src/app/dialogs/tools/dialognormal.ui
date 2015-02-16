@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Normal</string>
+   <string>Point along perpendicular</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">

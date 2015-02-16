@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point of intersection</string>
+   <string>Point from X and Y of two other points</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">

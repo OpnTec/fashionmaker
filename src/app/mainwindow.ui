@@ -40,7 +40,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -99,7 +99,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Special point on shoulder.</string>
+           <string>Special point on shoulder</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -125,7 +125,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Triangle tool.</string>
+           <string>Triangle tool</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -203,7 +203,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Point at intersection of arc and line.</string>
+           <string>Point at intersection of arc and line</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -229,7 +229,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>'Point from X and Y of two other points.</string>
+           <string>Point from X and Y of two other points</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -307,7 +307,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Intersect Line and Axis</string>
+           <string>Point intersect line and axis</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -334,7 +334,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>58</height>
         </rect>
        </property>
@@ -410,7 +410,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>156</height>
         </rect>
        </property>
@@ -433,7 +433,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Curve tool.</string>
+           <string>Simple curve</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -459,7 +459,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool for path curve.</string>
+           <string>Curved path</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -485,7 +485,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool for segmenting a curve.</string>
+           <string>Segmenting a simple curve</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -511,7 +511,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool segment a pathed curve.</string>
+           <string>Segment a curved path</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -535,6 +535,9 @@
          <widget class="QToolButton" name="toolButtonCurveIntersectAxis">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point intersect curve and axis</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -584,7 +587,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Arc tool.</string>
+           <string>Arc</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -610,7 +613,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Cut arc tool.</string>
+           <string>Segment an arc</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -634,6 +637,9 @@
          <widget class="QToolButton" name="toolButtonArcIntersectAxis">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point intersect arc and axis</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -660,7 +666,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>58</height>
         </rect>
        </property>
@@ -680,7 +686,7 @@
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonNewDetail">
           <property name="toolTip">
-           <string>Tool new detail.</string>
+           <string>Seam allowance tool</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -706,7 +712,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Tool for union two details.</string>
+           <string>Union tool</string>
           </property>
           <property name="text">
            <string notr="true">...</string>

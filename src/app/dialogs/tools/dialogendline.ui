@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Point in the end of a line</string>
+   <string>Point at distance and angle</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">

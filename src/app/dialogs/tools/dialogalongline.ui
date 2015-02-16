@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point along line</string>
+   <string>Point at distance along line</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">

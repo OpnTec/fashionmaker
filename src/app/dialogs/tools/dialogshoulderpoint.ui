@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point of shoulder</string>
+   <string>Special point on shoulder</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
