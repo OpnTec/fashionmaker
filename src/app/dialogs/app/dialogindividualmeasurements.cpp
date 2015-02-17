@@ -229,7 +229,7 @@ void DialogIndividualMeasurements::OpenTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::NewTable()
 {
-    QString dir = QDir::homePath()+"/measurements.vit";
+    const QString dir = qApp->getSettings()->GetPathIndividualMeasurements()+"/measurements.vit";
     QString name = QFileDialog::getSaveFileName(this, tr("Where save measurements?"), dir,
                                                 tr("Individual measurements (*.vit)"));
 
@@ -239,7 +239,7 @@ void DialogIndividualMeasurements::NewTable()
     }
 
     // what if the users did not specify a suffix...?
-    QFileInfo f( name );
+    const QFileInfo f( name );
     if (f.suffix().isEmpty() && f.suffix() != "vit")
     {
         name += ".vit";
