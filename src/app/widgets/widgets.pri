@@ -9,7 +9,8 @@ HEADERS += \
     $$PWD/textdelegate.h \
     $$PWD/vtooloptionspropertybrowser.h \
     $$PWD/vformulapropertyeditor.h \
-    $$PWD/vformulaproperty.h
+    $$PWD/vformulaproperty.h \
+    $$PWD/vwidgetpopup.h
 
 SOURCES += \
     $$PWD/vtablegraphicsview.cpp \
@@ -19,4 +20,5 @@ SOURCES += \
     $$PWD/textdelegate.cpp \
     $$PWD/vtooloptionspropertybrowser.cpp \
     $$PWD/vformulapropertyeditor.cpp \
-    $$PWD/vformulaproperty.cpp
+    $$PWD/vformulaproperty.cpp \
+    $$PWD/vwidgetpopup.cpp

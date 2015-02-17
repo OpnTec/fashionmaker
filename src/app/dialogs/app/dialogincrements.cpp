@@ -30,6 +30,7 @@
 #include "ui_dialogincrements.h"
 #include "../../widgets/doubledelegate.h"
 #include "../../widgets/textdelegate.h"
+#include "../../widgets/vwidgetpopup.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
 #include "../../core/vsettings.h"
@@ -380,6 +381,20 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ShowSuccess() const
+{
+    VWidgetPopup *popup = new VWidgetPopup();
+    QLabel *label = new QLabel(tr("Data successfully saved."));
+    QFont f = label->font();
+    f.setBold(true);
+    f.setPixelSize(16);
+    label->setFont(f);
+    popup->SetWidget(label);
+    popup->SetLifeTime(2000);
+    popup->Show(frameGeometry().center());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowMeasurements()
 {
     if (qApp->patternType() == MeasurementsType::Individual)
@@ -434,6 +449,10 @@ void DialogIncrements::SaveGivenName()
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -452,6 +471,10 @@ void DialogIncrements::SaveFamilyName()
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -468,6 +491,10 @@ void DialogIncrements::SaveEmail()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+    }
+    else
+    {
+        ShowSuccess();
     }
 }
 
@@ -486,6 +513,10 @@ void DialogIncrements::SaveSex(int index)
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -502,6 +533,10 @@ void DialogIncrements::SaveBirthDate(const QDate & date)
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+    }
+    else
+    {
+        ShowSuccess();
     }
 }
 
@@ -660,6 +695,7 @@ void DialogIncrements::clickedToolButtonAdd()
     ui->toolButtonRemove->setEnabled(true);
     ui->tableWidgetIncrement->blockSignals(false);
     emit haveLiteChange();
+    ShowSuccess();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -687,6 +723,7 @@ void DialogIncrements::clickedToolButtonRemove()
     else
     {
         qCDebug(vDialog)<<"Could not find object with id"<<id;
+        return;
     }
 
     ui->tableWidgetIncrement->removeRow(row);
@@ -697,6 +734,7 @@ void DialogIncrements::clickedToolButtonRemove()
 
     ui->tableWidgetIncrement->blockSignals(false);
     emit haveLiteChange();
+    ShowSuccess();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -801,6 +839,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
             break;
     }
     emit haveLiteChange();
+    ShowSuccess();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -853,7 +892,10 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 messageBox.exec();
             }
-
+            else
+            {
+                ShowSuccess();
+            }
             data->ClearVariables();
             m->Measurements();
 

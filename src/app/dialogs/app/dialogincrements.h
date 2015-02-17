@@ -107,6 +107,7 @@ private:
     void                 SetItemViewOnly(QTableWidgetItem *item);
     void                 ShowUnits();
     void                 ShowHeaderUnits(QTableWidget *table, int column);
+    void                 ShowSuccess() const;
 };
 
 #endif // DIALOGINCREMENTS_H
