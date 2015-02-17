@@ -214,7 +214,7 @@ void VFormulaProperty::ValueChildChanged(const QVariant &value, int typeForParen
     if (typeForParent == static_cast<int>(ChildType::Formula))
     {
         VFormula newFormula = GetFormula();
-        newFormula.SetFormula(value.toString());
+        newFormula.SetFormula(value.toString(), FormulaType::FromUser);
         SetFormula(newFormula);
     }
 }
