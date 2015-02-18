@@ -47,6 +47,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
     :VAbstractSpline(doc, data, id, parent), oldPosition()
 {
     sceneType = SceneObject::SplinePath;
+    lineColor = color;
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
