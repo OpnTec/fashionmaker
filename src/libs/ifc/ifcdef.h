@@ -34,6 +34,7 @@
 
 #ifdef Q_OS_WIN32
     extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+    #include <windows.h>
 #endif /*Q_OS_WIN32*/
 
 enum class Unit : char { Mm, Cm, Inch, Px };
@@ -80,7 +81,7 @@ static const quint32 null_id = 0;
     {                                                       \
         qDebug("ASSERT: %s in %s (%s:%u)",                  \
             #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        std::raise(SIGTRAP);                                \
+        DebugBreak();                                       \
     }                                                       \
 }                                                           \
 
