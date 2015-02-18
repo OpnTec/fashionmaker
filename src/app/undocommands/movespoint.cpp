@@ -89,8 +89,10 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getSPointId();
 
+    qCDebug(vUndo)<<"Mergin.";
     if (id != nodeId)
     {
+        qCDebug(vUndo)<<"Merging canceled.";
         return false;
     }
 
