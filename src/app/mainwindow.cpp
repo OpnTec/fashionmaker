@@ -71,7 +71,7 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Tool::Arrow),
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), currentTool(Tool::Arrow), lastUsedTool(Tool::Arrow),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       isInitialized(false), dialogTable(nullptr), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
@@ -301,7 +301,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     {
         CancelTool();
         emit EnableItemMove(false);
-        tool = t;
+        currentTool = lastUsedTool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
@@ -342,7 +342,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     {
         CancelTool();
         emit EnableItemMove(false);
-        tool = t;
+        currentTool = lastUsedTool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
@@ -1046,7 +1046,7 @@ void MainWindow::CancelTool()
     delete dialogTool;
     dialogTool = nullptr;
     qCDebug(vMainWindow)<<"Dialog closed.";
-    switch ( tool )
+    switch ( currentTool )
     {
         case Tool::Arrow:
             ui->actionArrowTool->setChecked(false);
@@ -1143,7 +1143,7 @@ void  MainWindow::ArrowTool()
     CancelTool();
     ui->actionArrowTool->setChecked(true);
     ui->actionStopTool->setEnabled(false);
-    tool = Tool::Arrow;
+    currentTool = Tool::Arrow;
     emit EnableItemMove(true);
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
@@ -1236,6 +1236,7 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionHistory->setEnabled(true);
         ui->actionOptionDraw->setEnabled(true);
         ui->actionNewDraw->setEnabled(true);
+
     }
     else
     {
@@ -1275,6 +1276,7 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+
     }
     else
     {
@@ -1462,6 +1464,7 @@ void MainWindow::Clear()
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
     ui->actionEdit_pattern_code->setEnabled(false);
+    ui->actionLast_tool->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -1965,6 +1968,8 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
     ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
 
+    ui->actionLast_tool->setEnabled(drawTools);
+
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
 }
@@ -2169,13 +2174,13 @@ void MainWindow::CreateMenus()
     QAction *undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, undoAction);
+    ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
     QAction *redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, redoAction);
+    ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);
 
     separatorAct = new QAction(this);
@@ -2189,6 +2194,115 @@ void MainWindow::CreateMenus()
     separatorAct->setSeparator(true);
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
     AddDocks();
+}
+
+void MainWindow::LastUsedTool()
+{
+    if (currentTool == lastUsedTool)
+        return;
+
+    switch ( lastUsedTool )
+    {
+        case Tool::Arrow:
+            ui->actionArrowTool->setChecked(true);
+            ArrowTool();
+            break;
+        case Tool::SinglePoint:
+            Q_UNREACHABLE();
+            //Nothing to do here because we can't create this tool from main window.
+            break;
+        case Tool::EndLine:
+            ui->toolButtonEndLine->setChecked(true);
+            ToolEndLine(true);
+            break;
+        case Tool::Line:
+            ui->toolButtonLine->setChecked(true);
+            ToolLine(true);
+            break;
+        case Tool::AlongLine:
+            ui->toolButtonAlongLine->setChecked(true);
+            ToolAlongLine(true);
+            break;
+        case Tool::ShoulderPoint:
+            ui->toolButtonShoulderPoint->setChecked(true);
+            ToolShoulderPoint(true);
+            break;
+        case Tool::Normal:
+            ui->toolButtonNormal->setChecked(true);
+            ToolNormal(true);
+            break;
+        case Tool::Bisector:
+            ui->toolButtonBisector->setChecked(true);
+            ToolBisector(true);
+            break;
+        case Tool::LineIntersect:
+            ui->toolButtonLineIntersect->setChecked(true);
+            ToolLineIntersect(true);
+            break;
+        case Tool::Spline:
+            ui->toolButtonSpline->setChecked(true);
+            ToolSpline(true);
+            break;
+        case Tool::Arc:
+            ui->toolButtonArc->setChecked(true);
+            ToolArc(true);
+            break;
+        case Tool::SplinePath:
+            ui->toolButtonSplinePath->setChecked(true);
+            ToolSplinePath(true);
+            break;
+        case Tool::PointOfContact:
+            ui->toolButtonPointOfContact->setChecked(true);
+            ToolPointOfContact(true);
+            break;
+        case Tool::Detail:
+            ui->toolButtonNewDetail->setChecked(true);
+            ToolDetail(true);
+            break;
+        case Tool::Height:
+            ui->toolButtonHeight->setChecked(true);
+            ToolHeight(true);
+            break;
+        case Tool::Triangle:
+            ui->toolButtonTriangle->setChecked(true);
+            ToolTriangle(true);
+            break;
+        case Tool::PointOfIntersection:
+            ui->toolButtonPointOfIntersection->setChecked(true);
+            ToolPointOfIntersection(true);
+            break;
+        case Tool::CutSpline:
+            ui->toolButtonSplineCutPoint->setChecked(true);
+            ToolCutSpline(true);
+            break;
+        case Tool::CutSplinePath:
+            ui->toolButtonSplinePathCutPoint->setChecked(true);
+            ToolCutSplinePath(true);
+            break;
+        case Tool::UnionDetails:
+            ui->toolButtonUnionDetails->setChecked(true);
+            ToolUnionDetails(true);
+            break;
+        case Tool::CutArc:
+            ui->toolButtonArcCutPoint->setChecked(true);
+            ToolCutArc(true);
+            break;
+        case Tool::LineIntersectAxis:
+            ui->toolButtonLineIntersectAxis->setChecked(true);
+            ToolLineIntersectAxis(true);
+            break;
+        case Tool::CurveIntersectAxis:
+            ui->toolButtonCurveIntersectAxis->setChecked(true);
+            ToolCurveIntersectAxis(true);
+            break;
+        case Tool::NodePoint:
+        case Tool::NodeArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
+        default:
+            qDebug()<<"Got wrong tool type. Ignored.";
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2244,6 +2358,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionRepotBug, &QAction::triggered, this, &MainWindow::RepotBug);
     connect(ui->actionOnlineHelp, &QAction::triggered, this, &MainWindow::OnlineHelp);
+    connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);

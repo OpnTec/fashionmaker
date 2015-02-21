@@ -48,7 +48,7 @@
          <x>0</x>
          <y>0</y>
          <width>105</width>
-         <height>272</height>
+         <height>262</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -335,7 +335,7 @@
          <x>0</x>
          <y>0</y>
          <width>105</width>
-         <height>58</height>
+         <height>56</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -411,7 +411,7 @@
          <x>0</x>
          <y>0</y>
          <width>105</width>
-         <height>156</height>
+         <height>150</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -565,7 +565,7 @@
          <x>0</x>
          <y>0</y>
          <width>105</width>
-         <height>104</height>
+         <height>100</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -667,7 +667,7 @@
          <x>0</x>
          <y>0</y>
          <width>105</width>
-         <height>58</height>
+         <height>56</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -763,7 +763,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -802,6 +802,7 @@
     <addaction name="actionZoomFitBest"/>
     <addaction name="actionZoomOriginal"/>
     <addaction name="separator"/>
+    <addaction name="actionLast_tool"/>
     <addaction name="actionPattern_properties"/>
     <addaction name="actionEdit_pattern_code"/>
    </widget>
@@ -1294,6 +1295,17 @@
    </property>
    <property name="toolTip">
     <string>Show online help</string>
+   </property>
+  </action>
+  <action name="actionLast_tool">
+   <property name="text">
+    <string>Last Tool</string>
+   </property>
+   <property name="toolTip">
+    <string>Activate last used tool again</string>
+   </property>
+   <property name="shortcut">
+    <string>L</string>
    </property>
   </action>
  </widget>

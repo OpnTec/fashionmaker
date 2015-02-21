@@ -120,6 +120,9 @@ public slots:
     void               AboutQt();
     void               PatternProperties();
 
+//tmp
+    void                LastUsedTool();
+
     /**
      * @brief Edit XML code of pattern
      */
@@ -158,7 +161,10 @@ private:
     VPattern           *doc;
 
     /** @brief tool current tool */
-    Tool               tool;
+    Tool               currentTool;
+
+    /** @brief tool last used tool */
+    Tool               lastUsedTool;
 
     /** @brief currentScene pointer to current scene. */
     VMainGraphicsScene *currentScene;
