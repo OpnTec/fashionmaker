@@ -34,8 +34,10 @@ const QString VStandardMeasurements::TagDescription      = QStringLiteral("descr
 const QString VStandardMeasurements::TagId               = QStringLiteral("id");
 const QString VStandardMeasurements::TagSize             = QStringLiteral("size");
 const QString VStandardMeasurements::TagHeight           = QStringLiteral("height");
+
 const QString VStandardMeasurements::AttrSize_increase   = QStringLiteral("size_increase");
 const QString VStandardMeasurements::AttrHeight_increase = QStringLiteral("height_increase");
+const QString VStandardMeasurements::AttrBase            = QStringLiteral("base");
 
 //---------------------------------------------------------------------------------------------------------------------
 VStandardMeasurements::VStandardMeasurements(VContainer *data)
@@ -93,7 +95,7 @@ void VStandardMeasurements::ReadMeasurement(const QDomElement &domElement, const
 
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) const
+qreal VStandardMeasurements::TakeParametr(const QString &tag, const QString &attr, qreal defValue) const
 {
     const qreal defVal = UnitConvertor(defValue, Unit::Cm, qApp->patternUnit());
 
@@ -110,7 +112,7 @@ qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) co
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                qreal value = GetParametrDouble(domElement, AttrValue, QString("%1").arg(defVal));
+                qreal value = GetParametrDouble(domElement, attr, QString("%1").arg(defVal));
                 value = UnitConvertor(value, MUnit(), qApp->patternUnit());
                 return value;
             }
@@ -122,7 +124,7 @@ qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) co
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetSize()
 {
-    const qreal value = TakeParametr(TagSize, 50);
+    const qreal value = TakeParametr(TagSize, AttrBase, 50);
     data->SetSize(value);
     data->SetSizeName(size_M);
 }
@@ -130,7 +132,7 @@ void VStandardMeasurements::SetSize()
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetHeight()
 {
-    const qreal value = TakeParametr(TagHeight, 176);
+    const qreal value = TakeParametr(TagHeight, AttrBase, 176);
     data->SetHeight(value);
     data->SetHeightName(height_M);
 }

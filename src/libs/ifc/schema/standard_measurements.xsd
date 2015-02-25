@@ -15,7 +15,6 @@
 				<xs:element name="height">
 					<xs:complexType>
 						<xs:attribute name="base" type="xs:double"></xs:attribute>
-						<xs:attribute name="name" type="xs:string"></xs:attribute>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="body-measurements">

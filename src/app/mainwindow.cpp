@@ -861,12 +861,12 @@ void MainWindow::ToolBarOption()
         const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes());
 
         gradationHeights = SetGradationList(tr("Height: "), listHeights);
-        SetDefaultHeight(static_cast<int>(GHeights::H176));
+        SetDefaultHeight(static_cast<int>(pattern->height()));
         connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
         gradationSizes = SetGradationList(tr("Size: "), listSizes);
-        SetDefaultSize(static_cast<int>(GSizes::S50));
+        SetDefaultSize(static_cast<int>(pattern->size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedSize);
 
@@ -890,12 +890,13 @@ QComboBox *MainWindow::SetGradationList(const QString &label, const QStringList 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetDefaultHeight set base height in combobox.
+ * @param value [in] height value in pattern units.
+ */
 void MainWindow::SetDefaultHeight(int value)
 {
-    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
-    QString strVal = QString("%1").arg(val);
-
-    qint32 index = gradationHeights->findText(strVal);
+    const qint32 index = gradationHeights->findText(QString("%1").arg(value));
     if (index != -1)
     {
         gradationHeights->setCurrentIndex(index);
@@ -907,12 +908,13 @@ void MainWindow::SetDefaultHeight(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetDefaultSize set base size in combobox.
+ * @param value [in] size value in pattern units.
+ */
 void MainWindow::SetDefaultSize(int value)
 {
-    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
-    QString strVal = QString("%1").arg(val);
-
-    qint32 index = gradationSizes->findText(strVal);
+    const qint32 index = gradationSizes->findText(QString("%1").arg(value));
     if (index != -1)
     {
         gradationSizes->setCurrentIndex(index);
