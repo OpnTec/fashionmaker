@@ -61,6 +61,9 @@ public:
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
 
+    bool GetConfirmItemDelete() const;
+    void SetConfirmItemDelete(const bool &value);
+
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
@@ -133,6 +136,7 @@ private:
     static const QString SettingConfigurationLocale;
     static const QString SettingConfigurationUnit;
     static const QString SettingConfigurationLabelLanguage;
+    static const QString SettingConfigurationConfirmItemDeletion;
 
     static const QString SettingPathsIndividualMeasurements;
     static const QString SettingPathsStandardMeasurements;

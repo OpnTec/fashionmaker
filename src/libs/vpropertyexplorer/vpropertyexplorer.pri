@@ -29,7 +29,8 @@ SOURCES += \
     $$PWD/plugins/vobjectproperty.cpp \
     $$PWD/stable.cpp \
     $$PWD/plugins/vlinetypeproperty.cpp \
-    $$PWD/plugins/vlinecolorproperty.cpp
+    $$PWD/plugins/vlinecolorproperty.cpp \
+    $$PWD/checkablemessagebox.cpp
 
 HEADERS +=\
     $$PWD/vpropertyexplorer_global.h \
@@ -71,4 +72,5 @@ HEADERS +=\
     $$PWD/vproperties.h \
     $$PWD/stable.h \
     $$PWD/plugins/vlinetypeproperty.h \
-    $$PWD/plugins/vlinecolorproperty.h
+    $$PWD/plugins/vlinecolorproperty.h \
+    $$PWD/checkablemessagebox.h

@@ -28,13 +28,15 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsView>
-#include <QMessageBox>
+#include <QStyle>
+#include <QtCore/qmath.h>
+#include "checkablemessagebox.h"
 #include "../undocommands/deltool.h"
 #include "../core/vapplication.h"
 #include "../geometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
 #include "../widgets/vmaingraphicsview.h"
-#include <QtCore/qmath.h>
+#include "../core/vsettings.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -154,7 +156,7 @@ void VAbstractTool::DeleteTool(bool ask)
         qApp->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
-            if (ConfirmDeletion() == QMessageBox::Cancel)
+            if (ConfirmDeletion() == QMessageBox::No)
             {
                 return;
             }
@@ -163,6 +165,27 @@ void VAbstractTool::DeleteTool(bool ask)
         connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VAbstractTool::ConfirmDeletion()
+{
+    if (false == qApp->getSettings()->GetConfirmItemDelete())
+        return QMessageBox::Yes;
+
+    Utils::CheckableMessageBox msgBox(qApp->getMainWindow());
+    msgBox.setWindowTitle(tr("Confirm deletion"));
+    msgBox.setText(tr("Do you really want to delete?"));
+    msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
+    msgBox.setDefaultButton(QDialogButtonBox::No);
+    msgBox.setIconPixmap(qApp->style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32,32) );
+
+    int dialogResult = msgBox.exec();
+
+    if (dialogResult == QDialog::Accepted)
+        qApp->getSettings()->SetConfirmItemDelete(not msgBox.isChecked());
+
+    return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -292,18 +315,6 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
         }
     }
     return list;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VAbstractTool::ConfirmDeletion()
-{
-    QMessageBox msgBox;
-    msgBox.setText(tr("Confirm the deletion."));
-    msgBox.setInformativeText(tr("Do you really want delete?"));
-    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.setIcon(QMessageBox::Question);
-    return msgBox.exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

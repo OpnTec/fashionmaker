@@ -522,7 +522,7 @@ void VToolDetail::DeleteTool(bool ask)
     DeleteDetail *delDet = new DeleteDetail(doc, id);
     if (ask)
     {
-        if (ConfirmDeletion() == QMessageBox::Cancel)
+        if (ConfirmDeletion() == QMessageBox::No)
         {
             return;
         }

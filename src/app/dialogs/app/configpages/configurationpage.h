@@ -59,10 +59,12 @@ private:
     bool      unitChanged;
     bool      labelLangChanged;
     QCheckBox *sendReportCheck;
+    QCheckBox *askPointDeletionCheck;
 
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
     QGroupBox *SendGroup();
+    QGroupBox *DrawGroup();
     void      SetLabelComboBox(const QStringList &list);
 };
 

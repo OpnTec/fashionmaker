@@ -40,6 +40,7 @@ const QString VSettings::SettingConfigurationSendReportState  = QStringLiteral("
 const QString VSettings::SettingConfigurationLocale           = QStringLiteral("configuration/locale");
 const QString VSettings::SettingConfigurationUnit             = QStringLiteral("configuration/unit");
 const QString VSettings::SettingConfigurationLabelLanguage    = QStringLiteral("configuration/label_language");
+const QString VSettings::SettingConfigurationConfirmItemDeletion= QStringLiteral("configuration/confirm_item_deletion");
 
 const QString VSettings::SettingPathsIndividualMeasurements   = QStringLiteral("paths/individual_measurements");
 const QString VSettings::SettingPathsStandardMeasurements     = QStringLiteral("paths/standard_measurements");
@@ -162,6 +163,18 @@ QString VSettings::GetLabelLanguage() const
 void VSettings::SetLabelLanguage(const QString &value)
 {
     setValue(SettingConfigurationLabelLanguage, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetConfirmItemDelete() const
+{
+    return value(SettingConfigurationConfirmItemDeletion, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetConfirmItemDelete(const bool &value)
+{
+    setValue(SettingConfigurationConfirmItemDeletion, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

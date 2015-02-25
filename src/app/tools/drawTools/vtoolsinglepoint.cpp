@@ -173,7 +173,7 @@ void VToolSinglePoint::DeleteTool(bool ask)
         qApp->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
-            if (ConfirmDeletion() == QMessageBox::Cancel)
+            if (ConfirmDeletion() == QMessageBox::No)
             {
                 return;
             }
