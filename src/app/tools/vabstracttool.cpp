@@ -30,7 +30,7 @@
 #include <QGraphicsView>
 #include <QStyle>
 #include <QtCore/qmath.h>
-#include "checkablemessagebox.h"
+#include "../../libs/vpropertyexplorer/checkablemessagebox.h"
 #include "../undocommands/deltool.h"
 #include "../core/vapplication.h"
 #include "../geometry/vpointf.h"
@@ -174,7 +174,9 @@ void VAbstractTool::DeleteTool(bool ask)
 int VAbstractTool::ConfirmDeletion()
 {
     if (false == qApp->getSettings()->GetConfirmItemDelete())
+    {
         return QMessageBox::Yes;
+    }
 
     Utils::CheckableMessageBox msgBox(qApp->getMainWindow());
     msgBox.setWindowTitle(tr("Confirm deletion"));
@@ -186,7 +188,9 @@ int VAbstractTool::ConfirmDeletion()
     int dialogResult = msgBox.exec();
 
     if (dialogResult == QDialog::Accepted)
+    {
         qApp->getSettings()->SetConfirmItemDelete(not msgBox.isChecked());
+    }
 
     return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
 }
