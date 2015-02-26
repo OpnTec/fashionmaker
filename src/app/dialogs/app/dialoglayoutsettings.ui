@@ -135,7 +135,7 @@
             <item row="2" column="2">
              <widget class="QLabel" name="labelSizeDescription">
               <property name="text">
-               <string>TextLabel</string>
+               <string notr="true">TextLabel</string>
               </property>
              </widget>
             </item>
@@ -144,7 +144,7 @@
               <item>
                <widget class="QToolButton" name="toolButtonPortrate">
                 <property name="text">
-                 <string>...</string>
+                 <string notr="true">...</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../../share/resources/icon.qrc">
@@ -167,7 +167,7 @@
               <item>
                <widget class="QToolButton" name="toolButtonLandscape">
                 <property name="text">
-                 <string>...</string>
+                 <string notr="true">...</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../../share/resources/icon.qrc">
@@ -511,7 +511,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>

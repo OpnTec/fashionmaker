@@ -10,5 +10,6 @@
         <file>flags/Russia.png</file>
         <file>flags/Ukraine.png</file>
         <file>flags/UnitedStates.png</file>
+        <file>flags/Spain.png</file>
     </qresource>
 </RCC>
