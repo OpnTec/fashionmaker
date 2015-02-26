@@ -102,7 +102,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         ui->toolBoxMeasurements->setItemEnabled(0, false);
 
         const QString filePath = doc->MPath();
-        VStandardMeasurements *mSt;
+        VStandardMeasurements *mSt = nullptr;
         try
         {
             VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
@@ -117,7 +117,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         catch (VException &e)
         {
             e.CriticalMessageBox(tr("File error."), this);
-            delete mSt;
+            if (mSt != nullptr)
+            {
+                delete mSt;
+            }
             emit DialogClosed(QDialog::Rejected);
             return;
         }
