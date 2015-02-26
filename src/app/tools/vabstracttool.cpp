@@ -119,6 +119,9 @@ VAbstractTool::~VAbstractTool()
  */
 void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 {
+    SCASSERT(sc != nullptr);
+    SCASSERT(view != nullptr);
+
     QRectF rect = sc->itemsBoundingRect();
 
     QRect  rec0 = view->rect();

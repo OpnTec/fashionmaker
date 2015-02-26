@@ -44,8 +44,13 @@ class VStandardMeasurements:public VAbstractMeasurements
 public:
     VStandardMeasurements(VContainer *data);
     virtual ~VStandardMeasurements();
-    QString      Description();
+    QString      OrigDescription ();
+    QString      TrDescription ();
     QString      Id();
+
+    qreal        Size() const;
+    qreal        Height() const;
+
     void         SetSize();
     void         SetHeight();
     static const QString TagMeasurement;
@@ -53,13 +58,15 @@ public:
     static const QString TagId;
     static const QString TagSize;
     static const QString TagHeight;
+
     static const QString AttrSize_increase;
     static const QString AttrHeight_increase;
+    static const QString AttrBase;
 protected:
     virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag);
 private:
     Q_DISABLE_COPY(VStandardMeasurements)
-    qreal        TakeParametr(const QString &tag, qreal defValue) const;
+    qreal        TakeParametr(const QString &tag, const QString &attr, qreal defValue) const;
 };
 
 #endif // VSTANDARDMEASUREMENTS_H

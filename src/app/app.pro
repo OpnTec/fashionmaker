@@ -181,7 +181,8 @@ INSTALL_TRANSLATIONS += \
     $${TRANSLATIONS_PATH}/valentina_fr_FR.qm \
     $${TRANSLATIONS_PATH}/valentina_it_IT.qm \
     $${TRANSLATIONS_PATH}/valentina_nl_NL.qm \
-    $${TRANSLATIONS_PATH}/valentina_id_ID.qm
+    $${TRANSLATIONS_PATH}/valentina_id_ID.qm \
+    $${TRANSLATIONS_PATH}/valentina_es_ES.qm
 
 # Set "make install" command for Unix-like systems.
 unix{
@@ -304,6 +305,14 @@ unix{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_id_ID.path = "$$RESOURCES_DIR/translations/id_ID.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_id_ID
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_es_ES.qm){
+            TRANSLATION_es_ES.files += \
+                $${TRANSLATIONS_PATH}/valentina_es_ES.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_es_ES.path = "$$RESOURCES_DIR/translations/es_ES.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_es_ES
         }
 
     # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.

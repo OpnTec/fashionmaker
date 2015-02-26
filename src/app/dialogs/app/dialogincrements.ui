@@ -118,8 +118,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>559</width>
-            <height>82</height>
+            <width>939</width>
+            <height>411</height>
            </rect>
           </property>
           <attribute name="icon">
@@ -290,6 +290,23 @@
            <string>Measurements</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QLabel" name="labelBaseValues">
+             <property name="text">
+              <string notr="true">Base size: ; base height: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelDescription">
+             <property name="text">
+              <string notr="true">Description:</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QCheckBox" name="checkBoxHideEmpty">
              <property name="text">

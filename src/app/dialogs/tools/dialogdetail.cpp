@@ -340,11 +340,12 @@ void DialogDetail::ClickedReverse(bool checked)
  */
 void DialogDetail::ObjectChanged(int row)
 {
-    if (ui.listWidget->count() == 0 || row == -1)
+    if (ui.listWidget->count() == 0 || row == -1 || row >= ui.listWidget->count())
     {
         return;
     }
     const QListWidgetItem *item = ui.listWidget->item( row );
+    SCASSERT(item != nullptr);
     const VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
     ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));

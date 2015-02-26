@@ -183,16 +183,11 @@ void DialogStandardMeasurements::LoadStandardTables()
             }
             else
             {
-                const QString trDesc = qApp->STDescription(m.Id());
-                if (trDesc.isEmpty() == false)
+                const QString desc = m.TrDescription();
+                if (desc.isEmpty() == false)
                 {
-                    qCDebug(vStMeasur)<<"Adding user table from"<<fi.absoluteFilePath();
-                    ui->comboBoxTables->addItem(trDesc, QVariant(fi.absoluteFilePath()));
-                }
-                else if (m.Description().isEmpty() == false)
-                {
-                    qCDebug(vStMeasur)<<"Adding table with id"<<m.Id()<<"from"<<fi.absoluteFilePath();
-                    ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
+                    qCDebug(vStMeasur)<<"Adding table from"<<fi.absoluteFilePath();
+                    ui->comboBoxTables->addItem(desc, QVariant(fi.absoluteFilePath()));
                 }
             }
         }

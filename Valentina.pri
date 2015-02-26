@@ -529,7 +529,6 @@ GCC_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
     -Wextra \
-    -pedantic \
     -fno-omit-frame-pointer # Need for exchndl.dll
 
 CLANG_DEBUG_CXXFLAGS += \
