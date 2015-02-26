@@ -319,7 +319,7 @@ unix{
     # For bundle this names more then enough. We don't need care much about libraries versions.
     libraries.path = $$FRAMEWORKS_DIR
     libraries.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
-    libraries.files = $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
+    libraries.files += $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
 
     # logo on macx.

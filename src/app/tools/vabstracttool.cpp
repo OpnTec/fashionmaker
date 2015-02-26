@@ -28,7 +28,8 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsView>
-#include <QStyle>
+#include <QIcon>
+#include <QMessageBox>
 #include <QtCore/qmath.h>
 #include "../../libs/vpropertyexplorer/checkablemessagebox.h"
 #include "../undocommands/deltool.h"

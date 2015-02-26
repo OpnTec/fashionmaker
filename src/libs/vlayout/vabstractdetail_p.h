@@ -30,6 +30,7 @@
 #define VABSTRACTDETAIL_P_H
 
 #include <QSharedData>
+#include <QString>
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push

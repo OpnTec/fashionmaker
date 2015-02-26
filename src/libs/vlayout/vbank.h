@@ -31,10 +31,10 @@
 
 #include <QVector>
 #include <QHash>
+#include <QRectF>
 
 class QPointF;
 class VLayoutDetail;
-class QRectF;
 
 enum class Cases : char { CaseThreeGroup, CaseTwoGroup, CaseDesc};
 
