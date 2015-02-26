@@ -28,13 +28,15 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsView>
+#include <QIcon>
 #include <QMessageBox>
+#include <QtCore/qmath.h>
+
 #include "../undocommands/deltool.h"
 #include "../core/vapplication.h"
 #include "../geometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
 #include "../widgets/vmaingraphicsview.h"
-#include <QtCore/qmath.h>
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");

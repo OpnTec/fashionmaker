@@ -31,6 +31,8 @@
 
 #include "../vabstracttool.h"
 
+#include <QColor>
+
 /**
  * @brief The VAbstractNode class parent class for all detail node.
  */

@@ -25,6 +25,7 @@
 
 #include <QMap>
 #include <QString>
+#include <locale>
 
 #include "qmuparserfixes.h"
 

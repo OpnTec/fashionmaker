@@ -36,6 +36,8 @@
 #include <QImage>
 #include <QPainter>
 #include <QCoreApplication>
+#include <QDir>
+#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,

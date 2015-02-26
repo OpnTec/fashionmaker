@@ -31,6 +31,8 @@
 #include "../../undocommands/movesplinepath.h"
 #include "../../visualization/vistoolsplinepath.h"
 
+#include <QtMath>
+
 const QString VToolSplinePath::ToolType = QStringLiteral("path");
 
 //---------------------------------------------------------------------------------------------------------------------

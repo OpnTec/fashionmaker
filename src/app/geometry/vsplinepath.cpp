@@ -30,6 +30,8 @@
 #include "vsplinepath_p.h"
 #include "../libs/ifc/exception/vexception.h"
 
+#include <QtMath>
+
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw mode)
     : VAbstractCurve(GOType::SplinePath, idObject, mode), d(new VSplinePathData(kCurve))
