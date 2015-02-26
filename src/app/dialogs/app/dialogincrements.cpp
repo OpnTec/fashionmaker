@@ -100,6 +100,27 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     if (qApp->patternType() == MeasurementsType::Standard)
     {
         ui->toolBoxMeasurements->setItemEnabled(0, false);
+
+        const QString filePath = doc->MPath();
+        VStandardMeasurements *mSt;
+        try
+        {
+            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
+            mSt = new VStandardMeasurements(data);
+            mSt->setXMLContent(filePath);
+
+            ui->labelBaseValues->setText(tr("Base size: %1 %3; Base height: %2 %3").arg(mSt->Size())
+                                         .arg(mSt->Height()).arg(VDomDocument::UnitsToStr(qApp->patternUnit())));
+            ui->labelDescription->setText(tr("Description: \"%1\"").arg(mSt->TrDescription()));
+            delete mSt;
+        }
+        catch (VException &e)
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+            delete mSt;
+            emit DialogClosed(QDialog::Rejected);
+            return;
+        }
     }
     else
     {
@@ -133,6 +154,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
                 &DialogIncrements::SaveSex);
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &DialogIncrements::SaveBirthDate);
+
+        // hide fileds that don't exist in individual measurements
+        ui->labelBaseValues->setVisible(false);
+        ui->labelDescription->setVisible(false);
     }
 
     ui->toolBoxMeasurements->setCurrentIndex(1);

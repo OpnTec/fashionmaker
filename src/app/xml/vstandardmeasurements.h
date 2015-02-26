@@ -44,8 +44,13 @@ class VStandardMeasurements:public VAbstractMeasurements
 public:
     VStandardMeasurements(VContainer *data);
     virtual ~VStandardMeasurements();
-    QString      Description();
+    QString      OrigDescription ();
+    QString      TrDescription ();
     QString      Id();
+
+    qreal        Size() const;
+    qreal        Height() const;
+
     void         SetSize();
     void         SetHeight();
     static const QString TagMeasurement;

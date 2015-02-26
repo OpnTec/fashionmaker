@@ -51,7 +51,7 @@ VStandardMeasurements::~VStandardMeasurements()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VStandardMeasurements::Description()
+QString VStandardMeasurements::OrigDescription ()
 {
     const QString desc = UniqueTagText(TagDescription, "");
     if (desc.isEmpty())
@@ -59,6 +59,20 @@ QString VStandardMeasurements::Description()
         qWarning()<<"Empty description in standard table."<<Q_FUNC_INFO;
     }
     return desc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VStandardMeasurements::TrDescription()
+{
+    const QString trDesc = qApp->STDescription(Id());
+    if (trDesc.isEmpty() == false)
+    {
+        return trDesc;
+    }
+    else
+    {
+        return OrigDescription ();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,6 +84,18 @@ QString VStandardMeasurements::Id()
         qWarning()<<"Empty id value in standard table."<<Q_FUNC_INFO;
     }
     return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VStandardMeasurements::Size() const
+{
+    return TakeParametr(TagSize, AttrBase, 50);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VStandardMeasurements::Height() const
+{
+    return TakeParametr(TagHeight, AttrBase, 176);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -124,15 +150,13 @@ qreal VStandardMeasurements::TakeParametr(const QString &tag, const QString &att
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetSize()
 {
-    const qreal value = TakeParametr(TagSize, AttrBase, 50);
-    data->SetSize(value);
+    data->SetSize(Size());
     data->SetSizeName(size_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetHeight()
 {
-    const qreal value = TakeParametr(TagHeight, AttrBase, 176);
-    data->SetHeight(value);
+    data->SetHeight(Height());
     data->SetHeightName(height_M);
 }
