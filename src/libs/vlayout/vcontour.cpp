@@ -239,15 +239,8 @@ QLineF VContour::GlobalEdge(int i) const
             return QLineF();
         }
 
-        if (n <= 0)
-        {
-            return axis;
-        }
-        else
-        {
-            const qreal nShift = axis.length()/n;
-            return QLineF(nShift*(i-1), 0, nShift*i, 0);
-        }
+        const qreal nShift = axis.length()/n;
+        return QLineF(nShift*(i-1), 0, nShift*i, 0);
     }
     else
     {

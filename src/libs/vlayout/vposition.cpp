@@ -580,22 +580,24 @@ QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
         points.append(edge.p1());
         points.append(edge.p2());
     }
-
-    const int n = qFloor(edge.length()/shift);
-
-    if (n <= 0)
-    {
-        points.append(edge.p1());
-        points.append(edge.p2());
-    }
     else
     {
-        const qreal nShift = edge.length()/n;
-        for (int i = 1; i <= n+1; ++i)
+        const int n = qFloor(edge.length()/shift);
+
+        if (n <= 0)
         {
-            QLineF l1 = edge;
-            l1.setLength(nShift*(i-1));
-            points.append(l1.p2());
+            points.append(edge.p1());
+            points.append(edge.p2());
+        }
+        else
+        {
+            const qreal nShift = edge.length()/n;
+            for (int i = 1; i <= n+1; ++i)
+            {
+                QLineF l1 = edge;
+                l1.setLength(nShift*(i-1));
+                points.append(l1.p2());
+            }
         }
     }
     return points;

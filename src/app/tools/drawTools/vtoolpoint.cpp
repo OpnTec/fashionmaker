@@ -28,9 +28,12 @@
 
 #include "vtoolpoint.h"
 #include <QKeyEvent>
+#include <QLoggingCategory>
 #include "../../geometry/vpointf.h"
 #include "../../visualization/vgraphicssimpletextitem.h"
 #include "../../undocommands/movelabel.h"
+
+Q_LOGGING_CATEGORY(vToolPoint, "v.toolPoint")
 
 const QString VToolPoint::TagName = QStringLiteral("point");
 
@@ -79,12 +82,21 @@ void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolPoint::name() const
 {
-    return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
+    try
+    {
+        return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
+    }
+    catch (const VExceptionBadId &e)
+    {
+        qCDebug(vToolPoint)<<"Error!"<<"Couldn't get point name."<<e.ErrorMessage()<<e.DetailedInformation();
+        return QString("");// Return empty string for property browser
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::setName(const QString &name)
 {
+    // Don't know if need check name here.
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     obj->setName(name);
     SaveOption(obj);
