@@ -71,10 +71,10 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), currentTool(Tool::Arrow), lastUsedTool(Tool::Arrow),
-      currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
-      isInitialized(false), dialogTable(nullptr), dialogTool(nullptr), dialogHistory(nullptr),
-      comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), currentTool(Tool::Arrow),
+      lastUsedTool(Tool::Arrow), currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr),
+      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), dialogTable(nullptr), dialogTool(nullptr),
+      dialogHistory(nullptr), comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
       gradationSizes(nullptr), toolOptions(nullptr), lock(nullptr)
@@ -2201,7 +2201,9 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     if (currentTool == lastUsedTool)
+    {
         return;
+    }
 
     switch ( lastUsedTool )
     {

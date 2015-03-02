@@ -80,7 +80,7 @@ int VBank::GetTiket()
         }
     }
 
-    switch(caseType)
+    switch (caseType)
     {
         case Cases::CaseThreeGroup:
             return GetNextThreeGroups();
@@ -260,7 +260,7 @@ int VBank::ArrangedCount() const
 //---------------------------------------------------------------------------------------------------------------------
 void VBank::PrepareGroup()
 {
-    switch(caseType)
+    switch (caseType)
     {
         case Cases::CaseThreeGroup:
             PrepareThreeGroups();

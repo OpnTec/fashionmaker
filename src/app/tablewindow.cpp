@@ -56,7 +56,7 @@
 TableWindow::TableWindow(QWidget *parent)
     :QMainWindow(parent), ui(new Ui::TableWindow),
     listDetails(QVector<VLayoutDetail>()), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
-    scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),fileName(QString()),
+    scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()), fileName(QString()),
     description(QString()), tempScene(nullptr)
 {
     ui->setupUi(this);

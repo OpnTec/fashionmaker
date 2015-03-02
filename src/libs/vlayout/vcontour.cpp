@@ -143,7 +143,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int glo
         }
 
         int i=0;
-        while(i < d->globalContour.count())
+        while (i < d->globalContour.count())
         {
             if (i == i2)
             {

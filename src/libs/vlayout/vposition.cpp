@@ -360,7 +360,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const i
         return CrossingType::EdgeError;
     }
 
-    for(int i = 1; i <= globalEdgesCount; i++)
+    for (int i = 1; i <= globalEdgesCount; i++)
     {
         const QLineF globalEdge = gContour.GlobalEdge(i);
         if (globalEdge.isNull()) // Got null edge
@@ -368,7 +368,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const i
             return CrossingType::EdgeError;
         }
 
-        for(int j = 1; j <= detailEdgesCount; j++)
+        for (int j = 1; j <= detailEdgesCount; j++)
         {
             if (i == globalI && j == detailI)
             {
@@ -416,7 +416,7 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
     if (gContour.GetContour().isEmpty())
     {
         const QLineF globalEdge = gContour.GlobalEdge(1);
-        for(int i = 0; i < lPoints.count(); i++)
+        for (int i = 0; i < lPoints.count(); i++)
         {
             if (CheckSide(globalEdge, lPoints.at(i)) < 0)
             {
@@ -432,13 +432,13 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
         QVector<qreal> constant;
         QVector<qreal> multiple;
 
-        for(int i=0; i<polyCorners; i++)
+        for (int i=0; i<polyCorners; i++)
         {
             const qreal xi = gContour.at(i).x();
             const qreal xj = gContour.at(j).x();
             const qreal yi = gContour.at(i).y();
             const qreal yj = gContour.at(j).y();
-            if(qFuzzyCompare(yj, yi))
+            if (qFuzzyCompare(yj, yi))
             {
                 constant.insert(i, xi);
                 multiple.insert(i, 0);
@@ -452,7 +452,7 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
             j=i;
         }
 
-        for(int m = 1; m <= detail.EdgesCount(); ++m)
+        for (int m = 1; m <= detail.EdgesCount(); ++m)
         {
             if (m == detailI)
             {

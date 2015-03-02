@@ -48,7 +48,7 @@ VObjEngine::VObjEngine()
     :QPaintEngine(svgEngineFeatures()), stream(nullptr), globalPointsCount(0), outputDevice(nullptr), planeCount(0),
       size(), resolution(96), matrix()
 {
-    for(int i=0; i < MAX_POINTS; i++)
+    for (int i=0; i < MAX_POINTS; i++)
     {
         points[i].x = 0;
         points[i].y = 0;
@@ -137,9 +137,9 @@ void VObjEngine::drawPath(const QPainterPath &path)
 
     unsigned int num_points = 0;
 
-    for(int i=0; i < polygon.count(); i++)
+    for (int i=0; i < polygon.count(); i++)
     {
-        if( num_points < MAX_POINTS )
+        if ( num_points < MAX_POINTS )
         {
             points[num_points].x = polygon.at(i).x();
             points[num_points].y = polygon.at(i).y();
@@ -150,10 +150,10 @@ void VObjEngine::drawPath(const QPainterPath &path)
     int offset = 0;
     delaunay2d_t *res = delaunay2d_from(points, num_points);//Calculate faces
 
-    QPointF	pf[MAX_POINTS];
+    QPointF pf[MAX_POINTS];
     bool skipFace=false;//Need skip first face
 
-    for(unsigned int i = 0; i < res->num_faces; i++ )
+    for (unsigned int i = 0; i < res->num_faces; i++ )
     {
         if (offset == 0)
         {
@@ -165,7 +165,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
         }
         int num_verts = res->faces[offset];
         offset++;
-        for( int j = 0; j < num_verts; j++ )
+        for ( int j = 0; j < num_verts; j++ )
         {
             int p0 = res->faces[offset + j];
             pf[j] = QPointF(points[p0].x, points[p0].y);
@@ -173,13 +173,13 @@ void VObjEngine::drawPath(const QPainterPath &path)
         if (skipFace == false )
         {
             QPolygonF face;
-            for( int i = 0; i < num_verts; i++ )
+            for ( int i = 0; i < num_verts; i++ )
             {
                 face << QPointF(pf[i]);
             }
             QPolygonF united = polygon.united(face);
             qint64 sqUnited = Square(united);
-            if(sqUnited <= sq)
+            if (sqUnited <= sq)
             {// This face incide our base polygon.
                 drawPolygon(pf, num_verts, QPaintEngine::OddEvenMode);
             }
@@ -289,7 +289,7 @@ QPolygonF VObjEngine::MakePointsUnique(const QPolygonF &polygon) const
 {
     QVector<QPointF> set;
     QPolygonF uniquePolygon;
-    for(int i=0; i < polygon.count(); i++)
+    for (int i=0; i < polygon.count(); i++)
     {
         if (set.contains(polygon.at(i)) == false)
         {
@@ -310,7 +310,7 @@ qint64 VObjEngine::Square(const QPolygonF &poly) const
     qreal s, res = 0;
     qint64 sq = 0;
 
-    for(int i=0; i < n; i++)
+    for (int i=0; i < n; i++)
     {
         x.append(poly.at(i).x());
         y.append(poly.at(i).y());

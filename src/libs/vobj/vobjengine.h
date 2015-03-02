@@ -34,13 +34,13 @@
 
 class QTextStream;
 
-#define MAX_POINTS		512
+#define MAX_POINTS      512
 
 class VObjEngine : public QPaintEngine
 {
 public:
     VObjEngine();
-    virtual	~VObjEngine();
+    virtual ~VObjEngine();
 
     virtual bool begin(QPaintDevice *pdev);
     virtual bool end();
@@ -67,7 +67,7 @@ private:
     QTextStream     *stream;
     unsigned int     globalPointsCount;
     QIODevice       *outputDevice;
-    del_point2d_t	 points[MAX_POINTS];
+    del_point2d_t    points[MAX_POINTS];
     unsigned int     planeCount;
     QSize            size;
     int              resolution;

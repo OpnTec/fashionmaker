@@ -84,7 +84,7 @@ QString VPatternConverter::XSDSchema(int ver) const
 {
     CheckVersion(ver);
 
-    switch(ver)
+    switch (ver)
     {
         case (0x000100):
             return QStringLiteral("://schema/pattern/v0.1.0.xsd");
@@ -107,7 +107,7 @@ void VPatternConverter::ApplyPatches()
 {
     try
     {
-        switch(ver)
+        switch (ver)
         {
             case (0x000100):
             {

@@ -31,8 +31,9 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogLineIntersectAxis;
+namespace Ui
+{
+    class DialogLineIntersectAxis;
 }
 
 class VisToolLineIntersectAxis;

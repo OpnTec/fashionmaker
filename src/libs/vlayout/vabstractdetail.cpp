@@ -226,20 +226,20 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
 QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &points)
 {
     QVector<QPointF> p = points;
-    for(int i = 0; i < p.size(); i++)
+    for (int i = 0; i < p.size(); i++)
     {
         QPointF current = p.at(i);
 
-        for(int j = i; j < p.size(); j++)
+        for (int j = i; j < p.size(); j++)
         {
-            if(j == i)
+            if (j == i)
             {
                 continue;
             }
             else
             {
                 QPointF temp = p.at(j);
-                if(current == temp)
+                if (current == temp)
                 {
                     QVector<QPointF>::iterator iter = p.begin() + j;
                     p.erase(iter);

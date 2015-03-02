@@ -55,7 +55,7 @@ public:
     void setResolution(int dpi);
 
 protected:
-    virtual int	metric(PaintDeviceMetric metric) const;
+    virtual int metric(PaintDeviceMetric metric) const;
 private:
     Q_DISABLE_COPY(VObjPaintDevice)
     VObjEngine *engine;

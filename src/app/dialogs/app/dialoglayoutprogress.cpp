@@ -75,7 +75,7 @@ void DialogLayoutProgress::Arranged(int count)
 void DialogLayoutProgress::Error(const LayoutErrors &state)
 {
     QString text;
-    switch(state)
+    switch (state)
     {
         case LayoutErrors::NoError:
             return;

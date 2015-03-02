@@ -173,10 +173,10 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
  * @return the created tool
  */
 VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
-                                const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
-                                const QString &pointName, const qreal &mx, const qreal &my,
-                                VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
-                                const Document &parse, const Source &typeCreation)
+                                               const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
+                                               const QString &lineColor, const QString &pointName, const qreal &mx,
+                                               const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
+                                               VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(p1Line);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(p2Line);

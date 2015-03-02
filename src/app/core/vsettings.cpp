@@ -33,39 +33,40 @@
 #include <QLocale>
 #include <QApplication>
 
-const QString VSettings::SettingConfigurationOsSeparator            = QStringLiteral("configuration/osSeparator");
-const QString VSettings::SettingConfigurationAutosaveState          = QStringLiteral("configuration/autosave/state");
-const QString VSettings::SettingConfigurationAutosaveTime           = QStringLiteral("configuration/autosave/time");
-const QString VSettings::SettingConfigurationSendReportState        = QStringLiteral("configuration/send_report/state");
-const QString VSettings::SettingConfigurationLocale                 = QStringLiteral("configuration/locale");
-const QString VSettings::SettingConfigurationUnit                   = QStringLiteral("configuration/unit");
-const QString VSettings::SettingConfigurationLabelLanguage          = QStringLiteral("configuration/label_language");
-const QString VSettings::SettingConfigurationConfirmItemDeletion    = QStringLiteral("configuration/confirm_item_deletion");
+const QString VSettings::SettingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
+const QString VSettings::SettingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
+const QString VSettings::SettingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
+const QString VSettings::SettingConfigurationSendReportState     = QStringLiteral("configuration/send_report/state");
+const QString VSettings::SettingConfigurationLocale              = QStringLiteral("configuration/locale");
+const QString VSettings::SettingConfigurationUnit                = QStringLiteral("configuration/unit");
+const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");
+const QString VSettings::SettingConfigurationConfirmItemDeletion
+                                                                = QStringLiteral("configuration/confirm_item_deletion");
 
-const QString VSettings::SettingPathsIndividualMeasurements         = QStringLiteral("paths/individual_measurements");
-const QString VSettings::SettingPathsStandardMeasurements           = QStringLiteral("paths/standard_measurements");
-const QString VSettings::SettingPathsPattern                        = QStringLiteral("paths/pattern");
-const QString VSettings::SettingPathsLayout                         = QStringLiteral("paths/layout");
+const QString VSettings::SettingPathsIndividualMeasurements      = QStringLiteral("paths/individual_measurements");
+const QString VSettings::SettingPathsStandardMeasurements        = QStringLiteral("paths/standard_measurements");
+const QString VSettings::SettingPathsPattern                     = QStringLiteral("paths/pattern");
+const QString VSettings::SettingPathsLayout                      = QStringLiteral("paths/layout");
 
-const QString VSettings::SettingPatternUser                         = QStringLiteral("pattern/user");
-const QString VSettings::SettingPatternGraphicalOutput              = QStringLiteral("pattern/graphicalOutput");
-const QString VSettings::SettingPatternUndo                         = QStringLiteral("pattern/undo");
+const QString VSettings::SettingPatternUser                      = QStringLiteral("pattern/user");
+const QString VSettings::SettingPatternGraphicalOutput           = QStringLiteral("pattern/graphicalOutput");
+const QString VSettings::SettingPatternUndo                      = QStringLiteral("pattern/undo");
 
-const QString VSettings::SettingGeneralRecentFileList               = QStringLiteral("recentFileList");
-const QString VSettings::SettingGeneralRestoreFileList              = QStringLiteral("restoreFileList");
-const QString VSettings::SettingGeneralGeometry                     = QStringLiteral("geometry");
-const QString VSettings::SettingGeneralWindowState                  = QStringLiteral("windowState");
+const QString VSettings::SettingGeneralRecentFileList            = QStringLiteral("recentFileList");
+const QString VSettings::SettingGeneralRestoreFileList           = QStringLiteral("restoreFileList");
+const QString VSettings::SettingGeneralGeometry                  = QStringLiteral("geometry");
+const QString VSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
 
-const QString VSettings::SettingCommunityServer                     = QStringLiteral("community/server");
-const QString VSettings::SettingCommunityServerSecure               = QStringLiteral("community/serverSecure");
-const QString VSettings::SettingCommunityUseProxy                   = QStringLiteral("community/useProxy");
-const QString VSettings::SettingCommunityProxyAddress               = QStringLiteral("community/proxyAddress");
-const QString VSettings::SettingCommunityProxyPort                  = QStringLiteral("community/proxyPort");
-const QString VSettings::SettingCommunityProxyUser                  = QStringLiteral("community/proxyUser");
-const QString VSettings::SettingCommunityProxyPass                  = QStringLiteral("community/proxyPass");
-const QString VSettings::SettingCommunityUsername                   = QStringLiteral("community/username");
-const QString VSettings::SettingCommunitySavePassword               = QStringLiteral("community/savePassword");
-const QString VSettings::SettingCommunityUserPassword               = QStringLiteral("community/userpassword");
+const QString VSettings::SettingCommunityServer                  = QStringLiteral("community/server");
+const QString VSettings::SettingCommunityServerSecure            = QStringLiteral("community/serverSecure");
+const QString VSettings::SettingCommunityUseProxy                = QStringLiteral("community/useProxy");
+const QString VSettings::SettingCommunityProxyAddress            = QStringLiteral("community/proxyAddress");
+const QString VSettings::SettingCommunityProxyPort               = QStringLiteral("community/proxyPort");
+const QString VSettings::SettingCommunityProxyUser               = QStringLiteral("community/proxyUser");
+const QString VSettings::SettingCommunityProxyPass               = QStringLiteral("community/proxyPass");
+const QString VSettings::SettingCommunityUsername                = QStringLiteral("community/username");
+const QString VSettings::SettingCommunitySavePassword            = QStringLiteral("community/savePassword");
+const QString VSettings::SettingCommunityUserPassword            = QStringLiteral("community/userpassword");
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,

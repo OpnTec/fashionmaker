@@ -748,7 +748,7 @@ void VSpline::SetKcurve(qreal factor)
 //---------------------------------------------------------------------------------------------------------------------
 int VSpline::Sign(long double ld) const
 {
-    if(qAbs(ld)<0.00000000001)
+    if (qAbs(ld)<0.00000000001)
     {
         return 0;
     }
@@ -844,7 +844,7 @@ qreal VSpline::ParamT (const QPointF &pBt) const
     ts += CalcT (GetP1().toQPointF().x(), d->p2.x(), d->p3.x(), GetP4().toQPointF().x(), pBt.x());
     ts += CalcT (GetP1().toQPointF().y(), d->p2.y(), d->p3.y(), GetP4().toQPointF().y(), pBt.y());
 
-    if(ts.isEmpty())
+    if (ts.isEmpty())
     {
         return -1; // We don't have candidates
     }

@@ -85,7 +85,7 @@ void PathPage::DefaultPath()
     QTableWidgetItem *item = pathTable->item(row, 1);
     SCASSERT(item != nullptr);
 
-    switch(row)
+    switch (row)
     {
         case 1: // standard measurements
             item->setText(VSettings::StandardTablesPath());
@@ -110,7 +110,7 @@ void PathPage::EditPath()
     SCASSERT(item != nullptr);
 
     QString path;
-    switch(row)
+    switch (row)
     {
         case 0: // individual measurements
             path = qApp->getSettings()->GetPathIndividualMeasurements();

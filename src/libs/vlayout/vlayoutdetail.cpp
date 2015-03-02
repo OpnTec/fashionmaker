@@ -284,7 +284,7 @@ qint64 VLayoutDetail::Square() const
     QVector<qreal> x;
     QVector<qreal> y;
 
-    for(int i=0; i < n; ++i)
+    for (int i=0; i < n; ++i)
     {
         x.append(d->layoutAllowence.at(i).x());
         y.append(d->layoutAllowence.at(i).y());
@@ -356,7 +356,7 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
     if (d->mirror)
     {
         QList<QPointF> list = p.toList();
-        for(int k=0, s=list.size(), max=(s/2); k<max; k++)
+        for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
             list.swap(k, s-(1+k));
         }

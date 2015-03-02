@@ -323,7 +323,7 @@ QSizeF DialogLayoutSettings::Template()
     qreal width = 0;
     qreal height = 0;
 
-    switch(temp)
+    switch (temp)
     {
         case PaperSizeTemplate::A0:
             width = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
@@ -366,7 +366,7 @@ Unit DialogLayoutSettings::LayoutUnit() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::CorrectPaperDecimals()
 {
-    switch(oldPaperUnit)
+    switch (oldPaperUnit)
     {
         case Unit::Cm:
         case Unit::Mm:
@@ -389,7 +389,7 @@ void DialogLayoutSettings::CorrectPaperDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::CorrectLayoutDecimals()
 {
-    switch(oldLayoutUnit)
+    switch (oldLayoutUnit)
     {
         case Unit::Cm:
         case Unit::Mm:

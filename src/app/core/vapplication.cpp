@@ -217,7 +217,7 @@ void VApplication::NewValentina(const QString &fileName)
     {
         const QString run = QString("\"%1\" \"%2\"").arg(qApp->applicationFilePath()).arg(fileName);
         qCDebug(vApp)<<"New process with arguments. program ="<<run;
-        if(QProcess::startDetached(run))
+        if (QProcess::startDetached(run))
         {
             qCDebug(vApp)<<"The process was started successfully.";
         }
@@ -2231,7 +2231,7 @@ void VApplication::GatherLogs() const
 void VApplication::DrMingw()
 {
     QFile drmingw("exchndl.dll");
-    if(drmingw.exists())
+    if (drmingw.exists())
     {// If don't want create reports just delete exchndl.dll from installer
         LoadLibrary(L"exchndl.dll");
     }

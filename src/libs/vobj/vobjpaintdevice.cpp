@@ -160,5 +160,3 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
     }
     return 0;
 }
-
-

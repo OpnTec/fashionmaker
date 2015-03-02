@@ -37,7 +37,8 @@
 
 static const char kDoNotAskAgainKey[] = "DoNotAskAgain";
 
-namespace Utils {
+namespace Utils
+{
 
 class CheckableMessageBoxPrivate
 {
@@ -131,7 +132,9 @@ QAbstractButton *CheckableMessageBox::clickedButton() const
 QDialogButtonBox::StandardButton CheckableMessageBox::clickedStandardButton() const
 {
     if (d->clickedButton)
+    {
         return d->buttonBox->standardButton(d->clickedButton);
+    }
     return QDialogButtonBox::NoButton;
 }
 
@@ -148,7 +151,9 @@ void CheckableMessageBox::setText(const QString &t)
 QPixmap CheckableMessageBox::iconPixmap() const
 {
     if (const QPixmap *p = d->pixmapLabel->pixmap())
+    {
         return QPixmap(*p);
+    }
     return QPixmap();
 }
 
@@ -212,14 +217,19 @@ QDialogButtonBox::StandardButton CheckableMessageBox::defaultButton() const
 {
     foreach (QAbstractButton *b, d->buttonBox->buttons())
         if (QPushButton *pb = qobject_cast<QPushButton *>(b))
+        {
             if (pb->isDefault())
+            {
                return d->buttonBox->standardButton(pb);
+            }
+        }
     return QDialogButtonBox::NoButton;
 }
 
 void CheckableMessageBox::setDefaultButton(QDialogButtonBox::StandardButton s)
 {
-    if (QPushButton *b = d->buttonBox->button(s)) {
+    if (QPushButton *b = d->buttonBox->button(s))
+    {
         b->setDefault(true);
         b->setFocus();
     }
@@ -277,12 +287,15 @@ QMessageBox::StandardButton CheckableMessageBox::dialogButtonBoxToMessageBoxButt
 bool askAgain(QSettings *settings, const QString &settingsSubKey)
 {
     //QTC_CHECK(settings);
-    if (settings) {
+    if (settings)
+    {
         settings->beginGroup(QLatin1String(kDoNotAskAgainKey));
         bool shouldNotAsk = settings->value(settingsSubKey, false).toBool();
         settings->endGroup();
         if (shouldNotAsk)
+        {
             return false;
+        }
     }
     return true;
 }
@@ -310,7 +323,9 @@ void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString 
 void doNotAskAgain(QSettings *settings, const QString &settingsSubKey)
 {
     if (!settings)
+    {
         return;
+    }
 
     settings->beginGroup(QLatin1String(kDoNotAskAgainKey));
     settings->setValue(settingsSubKey, true);
@@ -336,13 +351,17 @@ CheckableMessageBox::doNotAskAgainQuestion(QWidget *parent, const QString &title
 
 {
     if (!askAgain(settings, settingsSubKey))
+    {
         return acceptButton;
+    }
 
     CheckableMessageBox messageBox(parent);
     initDoNotAskAgainMessageBox(messageBox, title, text, buttons, defaultButton, Question);
     messageBox.exec();
     if (messageBox.isChecked() && (messageBox.clickedStandardButton() == acceptButton))
+    {
         doNotAskAgain(settings, settingsSubKey);
+    }
 
     return messageBox.clickedStandardButton();
 }
@@ -364,13 +383,17 @@ CheckableMessageBox::doNotShowAgainInformation(QWidget *parent, const QString &t
 
 {
     if (!askAgain(settings, settingsSubKey))
+    {
             return defaultButton;
+    }
 
     CheckableMessageBox messageBox(parent);
     initDoNotAskAgainMessageBox(messageBox, title, text, buttons, defaultButton, Information);
     messageBox.exec();
     if (messageBox.isChecked())
+    {
         doNotAskAgain(settings, settingsSubKey);
+    }
 
     return messageBox.clickedStandardButton();
 }
@@ -396,8 +419,10 @@ bool CheckableMessageBox::hasSuppressedQuestions(QSettings *settings)
     //Q_ASSERT(settings, return false);
     bool hasSuppressed = false;
     settings->beginGroup(QLatin1String(kDoNotAskAgainKey));
-    foreach (const QString &subKey, settings->childKeys()) {
-        if (settings->value(subKey, false).toBool()) {
+    foreach (const QString &subKey, settings->childKeys())
+    {
+        if (settings->value(subKey, false).toBool())
+        {
             hasSuppressed = true;
             break;
         }

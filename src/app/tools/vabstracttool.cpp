@@ -185,7 +185,7 @@ int VAbstractTool::ConfirmDeletion()
     msgBox.setText(tr("Do you really want to delete?"));
     msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
     msgBox.setDefaultButton(QDialogButtonBox::No);
-    msgBox.setIconPixmap(qApp->style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32,32) );
+    msgBox.setIconPixmap(qApp->style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
 
     int dialogResult = msgBox.exec();
 
