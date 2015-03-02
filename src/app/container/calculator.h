@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -40,10 +40,10 @@ class VContainer;
  * Note. If created to many parser for different purpes in the same time parser can work wrong.
  * Example:
  * DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data);
- * dialog->setFormula(formula);
+ * dialog->SetFormula(formula);
  * if (dialog->exec() == QDialog::Accepted)
  * {
- *     formula = dialog->getFormula();
+ *     formula = dialog->GetFormula();
  *     //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
  *     //Don't know why.
  *     delete dialog;

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -51,6 +51,7 @@ public slots:
     void itemClicked(QGraphicsItem *item);
     void userChangedData(VPE::VProperty* property);
     void UpdateOptions();
+    void RefreshOptions();
 private:
     Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
 
@@ -71,7 +72,11 @@ private:
     void AddPropertyPointName(Tool *i, const QString &propertyName);
 
     template<class Tool>
-    void AddPropertyLineType(Tool *i, const QString &propertyName);
+    void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
+
+    template<class Tool>
+    void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
+                              const QString &id);
 
     void AddPropertyFormula(const QString &propertyName, const VFormula &formula, const QString &attrName);
 

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,9 +49,10 @@ const QString VToolNormal::ToolType = QStringLiteral("normal");
  * @param parent parent object.
  */
 VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                         const QString &formula, const qreal &angle, const quint32 &firstPointId,
-                         const quint32 &secondPointId, const Source &typeCreation, QGraphicsItem *parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, firstPointId, angle, parent),
+                         const QString &lineColor, const QString &formula, const qreal &angle,
+                         const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                         QGraphicsItem *parent)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, firstPointId, angle, parent),
     secondPointId(secondPointId)
 {
 
@@ -75,12 +76,12 @@ void VToolNormal::setDialog()
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formulaLength);
-    dialogTool->setAngle(angle);
-    dialogTool->setFirstPointId(basePointId);
-    dialogTool->setSecondPointId(secondPointId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetFormula(formulaLength);
+    dialogTool->SetAngle(angle);
+    dialogTool->SetFirstPointId(basePointId);
+    dialogTool->SetSecondPointId(secondPointId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,15 +97,16 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     SCASSERT(dialog != nullptr);
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    QString formula = dialogTool->getFormula();
-    const quint32 firstPointId = dialogTool->getFirstPointId();
-    const quint32 secondPointId = dialogTool->getSecondPointId();
-    const QString typeLine = dialogTool->getTypeLine();
+    QString formula = dialogTool->GetFormula();
+    const quint32 firstPointId = dialogTool->GetFirstPointId();
+    const quint32 secondPointId = dialogTool->GetSecondPointId();
+    const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
-    const qreal angle = dialogTool->getAngle();
+    const qreal angle = dialogTool->GetAngle();
     VToolNormal *point = nullptr;
-    point=Create(0, formula, firstPointId, secondPointId, typeLine, pointName, angle, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    point=Create(0, formula, firstPointId, secondPointId, typeLine, lineColor, pointName, angle, 5, 10, scene, doc,
+                 data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -131,10 +133,10 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @param typeCreation way we create this tool.
  */
 VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
-                         const quint32 &secondPointId, const QString &typeLine, const QString &pointName,
-                         const qreal angle, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
-                         VPattern *doc, VContainer *data, const Document &parse,
-                         const Source &typeCreation)
+                                 const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
+                                 const QString &pointName, const qreal angle, const qreal &mx, const qreal &my,
+                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                 const Source &typeCreation)
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
@@ -161,12 +163,12 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
     VDrawTool::AddRecord(id, Tool::Normal, doc);
     if (parse == Document::FullParse)
     {
-        VToolNormal *point = new VToolNormal(doc, data, id, typeLine, formula, angle,
-                                             firstPointId, secondPointId, typeCreation);
+        VToolNormal *point = new VToolNormal(doc, data, id, typeLine, lineColor, formula, angle, firstPointId,
+                                             secondPointId, typeCreation);
         scene->addItem(point);
         connect(point, &VToolNormal::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolNormal::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolNormal::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
@@ -200,15 +202,7 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
  */
 void VToolNormal::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        formulaLength = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-        angle = domElement.attribute(AttrAngle, "").toDouble();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -217,8 +211,8 @@ void VToolNormal::FullUpdateFromFile()
         visual->setPoint1Id(basePointId);
         visual->setPoint2Id(secondPointId);
         visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setAngle(angle);
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->SetAngle(angle);
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -274,11 +268,12 @@ void VToolNormal::SaveDialog(QDomElement &domElement)
     DialogNormal *dialogTool = qobject_cast<DialogNormal*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    doc->SetAttribute(domElement, AttrAngle, QString().setNum(dialogTool->getAngle()));
-    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
-    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
+    doc->SetAttribute(domElement, AttrAngle, QString().setNum(dialogTool->GetAngle()));
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,6 +289,7 @@ void VToolNormal::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrAngle, angle);
     doc->SetAttribute(tag, AttrFirstPoint, basePointId);
@@ -301,13 +297,24 @@ void VToolNormal::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolNormal::getSecondPointId() const
+void VToolNormal::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    basePointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    angle = doc->GetParametrDouble(domElement, AttrAngle, "0");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolNormal::GetSecondPointId() const
 {
     return secondPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolNormal::setSecondPointId(const quint32 &value)
+void VToolNormal::SetSecondPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -333,8 +340,8 @@ void VToolNormal::ShowVisualization(bool show)
             visual->setPoint1Id(basePointId);
             visual->setPoint2Id(secondPointId);
             visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setAngle(angle);
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->SetAngle(angle);
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }

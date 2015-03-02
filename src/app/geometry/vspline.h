@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -71,6 +71,7 @@ public:
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
+    qreal   ParamT(const QPointF &pBt) const;
 protected:
     static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
 private:
@@ -80,6 +81,10 @@ private:
                                   qint16 level, QVector<qreal> &px, QVector<qreal> &py);
     static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
     void           CreateName();
+    QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
+                         qreal pointCoord) const;
+    qint32         Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) const;
+    int            Sign(long double ld) const;
 };
 
 #endif // VSPLINE_H

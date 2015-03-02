@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -48,7 +48,7 @@ void SaveToolOptions::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(oldXml, domElement);
@@ -67,7 +67,7 @@ void SaveToolOptions::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         domElement.parentNode().replaceChild(newXml, domElement);

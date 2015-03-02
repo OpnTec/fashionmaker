@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -92,7 +92,7 @@ void DialogSinglePoint::UpdateList()
  * @param name name of point
  * @param point data for point
  */
-void DialogSinglePoint::setData(const QString &name, const QPointF &point)
+void DialogSinglePoint::SetData(const QString &name, const QPointF &point)
 {
     pointName = name;
     this->point = point;
@@ -106,4 +106,14 @@ void DialogSinglePoint::setData(const QString &name, const QPointF &point)
 DialogSinglePoint::~DialogSinglePoint()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getPoint return point
+ * @return point
+ */
+QPointF DialogSinglePoint::GetPoint() const
+{
+    return point;
 }

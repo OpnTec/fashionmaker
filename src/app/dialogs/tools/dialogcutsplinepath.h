@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -48,14 +48,16 @@ public:
     DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogCutSplinePath();
 
-    QString      getPointName() const;
-    void         setPointName(const QString &value);
+    void         SetPointName(const QString &value);
 
-    QString      getFormula() const;
-    void         setFormula(const QString &value);
+    QString      GetFormula() const;
+    void         SetFormula(const QString &value);
 
     quint32      getSplinePathId() const;
     void         setSplinePathId(const quint32 &value);
+
+    QString      GetColor() const;
+    void         SetColor(const QString &value);
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -78,43 +80,10 @@ private:
     /** @brief formula string with formula */
     QString      formula;
 
-    /** @brief splinePathId keep id of splinePath */
-    quint32      splinePathId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
 
     VisToolCutSplinePath *path;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogCutSplinePath::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogCutSplinePath::getFormula() const
-{
-    return qApp->FormulaFromUser(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSplineId return id base point of line
- * @return id
- */
-inline quint32 DialogCutSplinePath::getSplinePathId() const
-{
-    return splinePathId;
-}
 
 #endif // DIALOGCUTSPLINEPATH_H

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -33,6 +33,7 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include "../../options.h"
+#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
@@ -40,6 +41,8 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     ui(new Ui::DialogAboutApp)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION));
     ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));

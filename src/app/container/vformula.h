@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -46,8 +46,8 @@ public:
     bool operator==(const VFormula &formula) const;
     bool operator!=(const VFormula &formula) const;
 
-    QString getFormula(FormulaType type = FormulaType::ToUser) const;
-    void setFormula(const QString &value, FormulaType type = FormulaType::ToUser);
+    QString GetFormula(FormulaType type = FormulaType::ToUser) const;
+    void SetFormula(const QString &value, FormulaType type = FormulaType::ToUser);
 
     QString getStringValue() const;
     qreal   getDoubleValue() const;

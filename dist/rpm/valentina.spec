@@ -25,7 +25,7 @@ BuildRequires: ccache
 BuildRequires: update-desktop-files
 %endif
 
-Version:	0.2.8
+Version:	0.2.9
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+

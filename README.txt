@@ -1,5 +1,6 @@
 Pattern making program
-Copyright (C) 2013-2014  Roman Telezhynskyi <dismine@gmail.com>    
+Author Roman Telezhynskyi <dismine(at)gmail.com>
+Copyright (C) 2013-2015 Valentina project  
 Valentina Web page: http://www.valentina-project.org/    
 Valentina user manual https://bitbucket.org/dismine/valentina/wiki/manual/Content    
 Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
@@ -19,16 +20,19 @@ Supported Platforms
 ===================
 The standalone binary packages support the following platforms:
 
-Windows XP SP2 or later
-Ubuntu Linux 14.04 (32-bit) or later
+Windows XP SP2 (32-bit) or later
+Ubuntu Linux 14.04 (32-bit/64-bit) or later
+OpenSUSE 13.02 (32-bit/64-bit) or later
+Fedora 20 (32-bit/64-bit) or later
+Mac OS X 10.7 (64-bit) or later
 
-Building the sources requires Qt 5.2.1 or later.
+Building the sources requires Qt 5.2.0 or later.
 
 Compiling Valentina
 ====================
 Prerequisites:   
-   * Qt 5.2.1 or later (On Unix development packages needed)   
-   * mercurial   
+   * Qt 5.2.0 or later (On Unix development packages needed)   
+   * mercurial (only for working with repository)   
    * On Unix:   
      - ccache   
      - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
@@ -65,9 +69,13 @@ Unix systems:
 Default prefix for command "make install" is /usr. For using another 
 prefix build with qmake command:
 
-qmake PREFIX=/usr/local Valentina.pro -r
+qmake PREFIX=/usr/local PREFIX_LIB=/usr/lib/i386-linux-gnu Valentina.pro -r
 
-where /usr/local is a new prefix for installation.
+where /usr/local is a new prefix for installation binary files and /usr/lib/i386-linux-gnu is new prefix for install libraries.
+
+More about creation installers read in articles:
+* How create Windows installer - https://bitbucket.org/dismine/valentina/wiki/developers/Creation_Windows_installer
+* How create debian package - https://bitbucket.org/dismine/valentina/wiki/developers/Creation_deb_package
 
 LICENSING
 ==========
@@ -81,4 +89,8 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-See LICENSE file for further information
+See LICENSE_GPL.txt file for further information
+
+Other components released under:
+* QMuParser - BSD license
+* VPropertyExplorer - LGPLv2.1 license

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -39,12 +39,12 @@ class VToolCut : public VToolPoint
     Q_OBJECT
 public:
     VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula, const quint32 &curveCutId,
-             const quint32 &curve1id, const quint32 &curve2id, QGraphicsItem * parent = nullptr);
+             const quint32 &curve1id, const quint32 &curve2id, const QString &color, QGraphicsItem * parent = nullptr);
     virtual int   type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
-    VFormula getFormula() const;
-    void     setFormula(const VFormula &value);
+    VFormula GetFormula() const;
+    void     SetFormula(const VFormula &value);
 
     quint32 getCurveCutId() const;
     void    setCurveCutId(const quint32 &value);
@@ -53,6 +53,7 @@ public slots:
     virtual void  ChangedActivDraw(const QString &newName);
     virtual void  CurveChoosed(quint32 id)=0;
     void          HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
+    void          Disable(bool disable);
 protected:
     /** @brief formula keep formula of length */
     QString       formula;

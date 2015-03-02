@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -34,8 +34,10 @@ const QString VStandardMeasurements::TagDescription      = QStringLiteral("descr
 const QString VStandardMeasurements::TagId               = QStringLiteral("id");
 const QString VStandardMeasurements::TagSize             = QStringLiteral("size");
 const QString VStandardMeasurements::TagHeight           = QStringLiteral("height");
+
 const QString VStandardMeasurements::AttrSize_increase   = QStringLiteral("size_increase");
 const QString VStandardMeasurements::AttrHeight_increase = QStringLiteral("height_increase");
+const QString VStandardMeasurements::AttrBase            = QStringLiteral("base");
 
 //---------------------------------------------------------------------------------------------------------------------
 VStandardMeasurements::VStandardMeasurements(VContainer *data)
@@ -49,7 +51,7 @@ VStandardMeasurements::~VStandardMeasurements()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VStandardMeasurements::Description()
+QString VStandardMeasurements::OrigDescription ()
 {
     const QString desc = UniqueTagText(TagDescription, "");
     if (desc.isEmpty())
@@ -57,6 +59,20 @@ QString VStandardMeasurements::Description()
         qWarning()<<"Empty description in standard table."<<Q_FUNC_INFO;
     }
     return desc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VStandardMeasurements::TrDescription()
+{
+    const QString trDesc = qApp->STDescription(Id());
+    if (trDesc.isEmpty() == false)
+    {
+        return trDesc;
+    }
+    else
+    {
+        return OrigDescription ();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,6 +84,18 @@ QString VStandardMeasurements::Id()
         qWarning()<<"Empty id value in standard table."<<Q_FUNC_INFO;
     }
     return id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VStandardMeasurements::Size() const
+{
+    return TakeParametr(TagSize, AttrBase, 50);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VStandardMeasurements::Height() const
+{
+    return TakeParametr(TagHeight, AttrBase, 176);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,7 +121,7 @@ void VStandardMeasurements::ReadMeasurement(const QDomElement &domElement, const
 
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) const
+qreal VStandardMeasurements::TakeParametr(const QString &tag, const QString &attr, qreal defValue) const
 {
     const qreal defVal = UnitConvertor(defValue, Unit::Cm, qApp->patternUnit());
 
@@ -110,7 +138,7 @@ qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) co
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                qreal value = GetParametrDouble(domElement, AttrValue, QString("%1").arg(defVal));
+                qreal value = GetParametrDouble(domElement, attr, QString("%1").arg(defVal));
                 value = UnitConvertor(value, MUnit(), qApp->patternUnit());
                 return value;
             }
@@ -122,15 +150,13 @@ qreal VStandardMeasurements::TakeParametr(const QString &tag, qreal defValue) co
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetSize()
 {
-    const qreal value = TakeParametr(TagSize, 50);
-    data->SetSize(value);
+    data->SetSize(Size());
     data->SetSizeName(size_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VStandardMeasurements::SetHeight()
 {
-    const qreal value = TakeParametr(TagHeight, 176);
-    data->SetHeight(value);
+    data->SetHeight(Height());
     data->SetHeightName(height_M);
 }

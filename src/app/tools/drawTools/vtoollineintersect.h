@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -51,17 +51,17 @@ public:
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
-    quint32 getP1Line1() const;
-    void    setP1Line1(const quint32 &value);
+    quint32 GetP1Line1() const;
+    void    SetP1Line1(const quint32 &value);
 
-    quint32 getP2Line1() const;
-    void    setP2Line1(const quint32 &value);
+    quint32 GetP2Line1() const;
+    void    SetP2Line1(const quint32 &value);
 
-    quint32 getP1Line2() const;
-    void    setP1Line2(const quint32 &value);
+    quint32 GetP1Line2() const;
+    void    SetP1Line2(const quint32 &value);
 
-    quint32 getP2Line2() const;
-    void    setP2Line2(const quint32 &value);
+    quint32 GetP2Line2() const;
+    void    SetP2Line2(const quint32 &value);
 
     virtual void ShowVisualization(bool show);
 public slots:
@@ -73,6 +73,7 @@ protected:
     virtual void RemoveReferens();
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;

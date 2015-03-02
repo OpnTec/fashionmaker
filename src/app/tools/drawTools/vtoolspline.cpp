@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -31,6 +31,8 @@
 #include "../../dialogs/tools/dialogspline.h"
 #include "../../undocommands/movespline.h"
 #include "../../visualization/vistoolspline.h"
+#include "../../options.h"
+#include <QtMath>
 
 const QString VToolSpline::ToolType = QStringLiteral("simple");
 
@@ -43,15 +45,17 @@ const QString VToolSpline::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
                          QGraphicsItem *parent)
-    :VAbstractSpline(doc, data, id, parent)
+    :VAbstractSpline(doc, data, id, parent), oldPosition()
 {
     sceneType = SceneObject::Spline;
+    lineColor = color;
 
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+    this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
@@ -98,13 +102,14 @@ void VToolSpline::setDialog()
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    dialogTool->setP1(spl->GetP1().id());
-    dialogTool->setP4(spl->GetP4().id());
-    dialogTool->setAngle1(spl->GetAngle1());
-    dialogTool->setAngle2(spl->GetAngle2());
-    dialogTool->setKAsm1(spl->GetKasm1());
-    dialogTool->setKAsm2(spl->GetKasm2());
-    dialogTool->setKCurve(spl->GetKcurve());
+    dialogTool->SetP1(spl->GetP1().id());
+    dialogTool->SetP4(spl->GetP4().id());
+    dialogTool->SetAngle1(spl->GetAngle1());
+    dialogTool->SetAngle2(spl->GetAngle2());
+    dialogTool->SetKAsm1(spl->GetKasm1());
+    dialogTool->SetKAsm2(spl->GetKasm2());
+    dialogTool->SetKCurve(spl->GetKcurve());
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,15 +126,16 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     SCASSERT(dialog != nullptr);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const quint32 p1 = dialogTool->getP1();
-    const quint32 p4 = dialogTool->getP4();
-    const qreal kAsm1 = dialogTool->getKAsm1();
-    const qreal kAsm2 = dialogTool->getKAsm2();
-    const qreal angle1 = dialogTool->getAngle1();
-    const qreal angle2 = dialogTool->getAngle2();
-    const qreal kCurve = dialogTool->getKCurve();
+    const quint32 p1 = dialogTool->GetP1();
+    const quint32 p4 = dialogTool->GetP4();
+    const qreal kAsm1 = dialogTool->GetKAsm1();
+    const qreal kAsm2 = dialogTool->GetKAsm2();
+    const qreal angle1 = dialogTool->GetAngle1();
+    const qreal angle2 = dialogTool->GetAngle2();
+    const qreal kCurve = dialogTool->GetKCurve();
+    const QString color = dialogTool->GetColor();
     VToolSpline *spl = nullptr;
-    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, scene, doc, data, Document::FullParse,
+    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, doc, data, Document::FullParse,
                  Source::FromGui);
     if (spl != nullptr)
     {
@@ -158,7 +164,7 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  */
 VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                                  const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
+                                 const QString &color, VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation)
 {
     VPointF point1 = *data->GeometricObject<VPointF>(p1);
@@ -182,11 +188,12 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
     VDrawTool::AddRecord(id, Tool::Spline, doc);
     if (parse == Document::FullParse)
     {
-        VToolSpline *spl = new VToolSpline(doc, data, id, typeCreation);
+        VToolSpline *spl = new VToolSpline(doc, data, id, color, typeCreation);
         scene->addItem(spl);
         connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSpline::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSpline::EnableToolMove);
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);
         doc->IncrementReferens(p4);
@@ -225,11 +232,11 @@ void VToolSpline::ShowVisualization(bool show)
             const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
             visual->setPoint1Id(spl->GetP1().id());
             visual->setPoint4Id(spl->GetP4().id());
-            visual->setAngle1(spl->GetAngle1());
-            visual->setAngle2(spl->GetAngle2());
-            visual->setKAsm1(spl->GetKasm1());
-            visual->setKAsm2(spl->GetKasm2());
-            visual->setKCurve(spl->GetKcurve());
+            visual->SetAngle1(spl->GetAngle1());
+            visual->SetAngle2(spl->GetAngle2());
+            visual->SetKAsm1(spl->GetKasm1());
+            visual->SetKAsm2(spl->GetKasm2());
+            visual->SetKCurve(spl->GetKcurve());
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -278,6 +285,12 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
@@ -308,10 +321,10 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
 
-    VPointF point1 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->getP1());
-    VPointF point4 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->getP4());
-    VSpline spl = VSpline (point1, point4, dialogTool->getAngle1(), dialogTool->getAngle2(),
-                           dialogTool->getKAsm1(), dialogTool->getKAsm2(), dialogTool->getKCurve());
+    VPointF point1 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->GetP1());
+    VPointF point4 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->GetP4());
+    VSpline spl = VSpline (point1, point4, dialogTool->GetAngle1(), dialogTool->GetAngle2(),
+                           dialogTool->GetKAsm1(), dialogTool->GetKAsm2(), dialogTool->GetKCurve());
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);
@@ -322,7 +335,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->getKCurve());
+    spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->GetKCurve());
 
     doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
     doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
@@ -331,6 +344,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
     doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
     doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,6 +362,112 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
+    doc->SetAttribute(tag, AttrColor, lineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
+            oldPosition = event->scenePos();
+            event->accept();
+        }
+    }
+    VAbstractSpline::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            //Disable cursor-arrow-closehand
+            VApplication::restoreOverrideCursor(cursorArrowCloseHand);
+        }
+    }
+    VAbstractSpline::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
+    // event, you can be certain that this item also received a mouse press event, and that this item is the current
+    // mouse grabber.".
+
+    // Magic Bezier Drag Equations follow!
+    // "weight" describes how the influence of the drag should be distributed
+    // among the handles; 0 = front handle only, 1 = back handle only.
+
+    const QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+    const qreal t = spline->ParamT(oldPosition);
+
+    if (qFloor(t) == -1)
+    {
+        return;
+    }
+
+    double weight;
+    if (t <= 1.0 / 6.0)
+    {
+        weight = 0;
+    }
+    else if (t <= 0.5)
+    {
+        weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
+    }
+    else if (t <= 5.0 / 6.0)
+    {
+        weight = (1 - pow((6 * (1-t) - 1) / 2.0, 3)) / 2 + 0.5;
+    }
+    else
+    {
+        weight = 1;
+    }
+
+    const QPointF delta = event->scenePos() - oldPosition;
+    const QPointF offset0 = ((1-weight)/(3*t*(1-t)*(1-t))) * delta;
+    const QPointF offset1 = (weight/(3*t*t*(1-t))) * delta;
+
+    const QPointF p2 = spline->GetP2() + offset0;
+    const QPointF p3 = spline->GetP3() + offset1;
+
+    oldPosition = event->scenePos(); // Now mouse here
+
+    VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4(), spline->GetKcurve());
+
+    MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
+    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveSpl);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
+
+    VAbstractSpline::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        //Disable cursor-arrow-openhand
+        VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+    }
+
+    VAbstractSpline::hoverLeaveEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,7 +476,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
  */
 void VToolSpline::RefreshGeometry()
 {
-    //this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     if (isHovered)
     {
         this->setPath(ToolPath(PathDirection::Show));
@@ -388,11 +508,11 @@ void VToolSpline::RefreshGeometry()
         VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
         visual->setPoint1Id(spl->GetP1().id());
         visual->setPoint4Id(spl->GetP4().id());
-        visual->setAngle1(spl->GetAngle1());
-        visual->setAngle2(spl->GetAngle2());
-        visual->setKAsm1(spl->GetKasm1());
-        visual->setKAsm2(spl->GetKasm2());
-        visual->setKCurve(spl->GetKcurve());
+        visual->SetAngle1(spl->GetAngle1());
+        visual->SetAngle2(spl->GetAngle2());
+        visual->SetKAsm1(spl->GetKasm1());
+        visual->SetKAsm2(spl->GetKasm2());
+        visual->SetKCurve(spl->GetKcurve());
         visual->RefreshGeometry();
     }
 }

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,10 +49,11 @@ const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
  * @param parent parent object.
  */
 VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                                       const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                                       const quint32 &pShoulder, const Source &typeCreation,
+                                       const QString &lineColor, const QString &formula, const quint32 &p1Line,
+                                       const quint32 &p2Line, const quint32 &pShoulder, const Source &typeCreation,
                                        QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, formula, p1Line, 0, parent), p2Line(p2Line), pShoulder(pShoulder)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, p1Line, 0, parent), p2Line(p2Line),
+      pShoulder(pShoulder)
 {
     if (typeCreation == Source::FromGui)
     {
@@ -74,12 +75,13 @@ void VToolShoulderPoint::setDialog()
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setFormula(formulaLength);
-    dialogTool->setP1Line(basePointId);
-    dialogTool->setP2Line(p2Line);
-    dialogTool->setP3(pShoulder);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
+    dialogTool->SetFormula(formulaLength);
+    dialogTool->SetP1Line(basePointId);
+    dialogTool->SetP2Line(p2Line);
+    dialogTool->SetP3(pShoulder);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,15 +136,16 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
     SCASSERT(dialog != nullptr);
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool);
-    QString formula = dialogTool->getFormula();
-    const quint32 p1Line = dialogTool->getP1Line();
-    const quint32 p2Line = dialogTool->getP2Line();
-    const quint32 pShoulder = dialogTool->getP3();
-    const QString typeLine = dialogTool->getTypeLine();
+    QString formula = dialogTool->GetFormula();
+    const quint32 p1Line = dialogTool->GetP1Line();
+    const quint32 p2Line = dialogTool->GetP2Line();
+    const quint32 pShoulder = dialogTool->GetP3();
+    const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     VToolShoulderPoint * point = nullptr;
-    point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    point=Create(0, formula, p1Line, p2Line, pShoulder, typeLine, lineColor, pointName, 5, 10, scene, doc, data,
+                 Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -170,7 +173,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
  * @return the created tool
  */
 VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formula, const quint32 &p1Line,
-                                const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine,
+                                const quint32 &p2Line, const quint32 &pShoulder, const QString &typeLine, const QString &lineColor,
                                 const QString &pointName, const qreal &mx, const qreal &my,
                                 VMainGraphicsScene *scene, VPattern *doc, VContainer *data,
                                 const Document &parse, const Source &typeCreation)
@@ -203,13 +206,13 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
     VDrawTool::AddRecord(id, Tool::ShoulderPoint, doc);
     if (parse == Document::FullParse)
     {
-        VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, formula,
+        VToolShoulderPoint *point = new VToolShoulderPoint(doc, data, id, typeLine, lineColor, formula,
                                                            p1Line, p2Line, pShoulder,
                                                            typeCreation);
         scene->addItem(point);
         connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolShoulderPoint::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(p1Line);
         doc->IncrementReferens(p2Line);
@@ -225,15 +228,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
  */
 void VToolShoulderPoint::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        formulaLength = domElement.attribute(AttrLength, "");
-        basePointId = domElement.attribute(AttrP1Line, "").toUInt();
-        p2Line = domElement.attribute(AttrP2Line, "").toUInt();
-        pShoulder = domElement.attribute(AttrPShoulder, "").toUInt();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -243,7 +238,7 @@ void VToolShoulderPoint::FullUpdateFromFile()
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
         visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -300,11 +295,12 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement)
     DialogShoulderPoint *dialogTool = qobject_cast<DialogShoulderPoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
-    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1Line()));
-    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2Line()));
-    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->getP3()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1Line()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2Line()));
+    doc->SetAttribute(domElement, AttrPShoulder, QString().setNum(dialogTool->GetP3()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -320,10 +316,22 @@ void VToolShoulderPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrLength, formulaLength);
     doc->SetAttribute(tag, AttrP1Line, basePointId);
     doc->SetAttribute(tag, AttrP2Line, p2Line);
     doc->SetAttribute(tag, AttrPShoulder, pShoulder);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = doc->GetParametrString(domElement, AttrLength, "");
+    basePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2Line = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    pShoulder = doc->GetParametrUInt(domElement, AttrPShoulder, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,7 +368,7 @@ void VToolShoulderPoint::ShowVisualization(bool show)
             visual->setLineP1Id(basePointId);
             visual->setLineP2Id(p2Line);
             visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -381,13 +389,13 @@ void VToolShoulderPoint::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolShoulderPoint::getP2Line() const
+quint32 VToolShoulderPoint::GetP2Line() const
 {
     return p2Line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolShoulderPoint::setP2Line(const quint32 &value)
+void VToolShoulderPoint::SetP2Line(const quint32 &value)
 {
     if (value != NULL_ID)
     {

@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -276,7 +275,7 @@ private:
     }
 
     // Custom value recognition
-    static int IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal );
+    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal , const std::locale &s_locale);
 
     // cppcheck-suppress functionStatic
     int TestNames();

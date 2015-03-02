@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -199,14 +198,14 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 * @param [out] a_fVal Pointer where the value should be stored in case one is found.
 * @return 1 if a value was found 0 otherwise.
 */
-int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal)
+int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale)
 {
     qreal fVal(0);
 
     std::wstring a_szExprStd = a_szExpr.toStdWString();
     stringstream_type stream(a_szExprStd);
     stream.seekg(0);        // todo:  check if this really is necessary
-    stream.imbue(QmuParser::s_locale);
+    stream.imbue(s_locale);
     stream >> fVal;
     stringstream_type::pos_type iEnd = stream.tellg(); // Position after reading
 

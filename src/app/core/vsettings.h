@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -38,6 +38,8 @@ public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
+    static QString StandardTablesPath();
+
     bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
 
@@ -59,11 +61,20 @@ public:
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
 
+    bool GetConfirmItemDelete() const;
+    void SetConfirmItemDelete(const bool &value);
+
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
+    QString GetPathStandardMeasurements() const;
+    void SetPathStandardMeasurements(const QString &value);
+
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
+
+    QString GetPathLayout() const;
+    void SetPathLayout(const QString &value);
 
     QString GetUser() const;
     void SetUser(const QString &value);
@@ -125,9 +136,12 @@ private:
     static const QString SettingConfigurationLocale;
     static const QString SettingConfigurationUnit;
     static const QString SettingConfigurationLabelLanguage;
+    static const QString SettingConfigurationConfirmItemDeletion;
 
     static const QString SettingPathsIndividualMeasurements;
+    static const QString SettingPathsStandardMeasurements;
     static const QString SettingPathsPattern;
+    static const QString SettingPathsLayout;
 
     static const QString SettingPatternUser;
     static const QString SettingPatternGraphicalOutput;

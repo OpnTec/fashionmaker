@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -33,6 +33,7 @@
 #include <QDesktopWidget>
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
+#include "../../core/vsettings.h"
 #include "../../container/vcontainer.h"
 #include <QLoggingCategory>
 
@@ -44,6 +45,8 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
     QDialog(parent), ui(new Ui::DialogStandardMeasurements), data(data), _name(patternPieceName), _tablePath(QString())
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
@@ -149,14 +152,16 @@ void DialogStandardMeasurements::LoadStandardTables()
 {
     qCDebug(vStMeasur)<<"Loading standard table.";
     QStringList filters{"*.vst"};
-    QDir tablesDir(qApp->pathToTables());
+    //Use standard path to standard measurements
+    const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+    QDir tablesDir(path);
     tablesDir.setNameFilters(filters);
-    tablesDir.setCurrent(qApp->pathToTables());
+    tablesDir.setCurrent(path);
 
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
     {
-        qCDebug(vStMeasur)<<"Can't find standard measurements in path"<<qApp->pathToTables();
+        qCDebug(vStMeasur)<<"Can't find standard measurements in path"<<path;
         ui->comboBoxTables->clear();
         CheckState();
         return;
@@ -178,16 +183,11 @@ void DialogStandardMeasurements::LoadStandardTables()
             }
             else
             {
-                const QString trDesc = qApp->STDescription(m.Id());
-                if (trDesc.isEmpty() == false)
+                const QString desc = m.TrDescription();
+                if (desc.isEmpty() == false)
                 {
-                    qCDebug(vStMeasur)<<"Adding user table from"<<fi.absoluteFilePath();
-                    ui->comboBoxTables->addItem(trDesc, QVariant(fi.absoluteFilePath()));
-                }
-                else if (m.Description().isEmpty() == false)
-                {
-                    qCDebug(vStMeasur)<<"Adding table with id"<<m.Id()<<"from"<<fi.absoluteFilePath();
-                    ui->comboBoxTables->addItem(m.Description(), QVariant(fi.absoluteFilePath()));
+                    qCDebug(vStMeasur)<<"Adding table from"<<fi.absoluteFilePath();
+                    ui->comboBoxTables->addItem(desc, QVariant(fi.absoluteFilePath()));
                 }
             }
         }

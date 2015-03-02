@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -29,7 +29,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "geometry/vspline.h"
-#include "geometry/vequidistant.h"
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
@@ -72,7 +71,7 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), tool(Tool::Arrow),
+    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), currentTool(Tool::Arrow), lastUsedTool(Tool::Arrow),
       currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr), mouseCoordinate(nullptr), helpLabel(nullptr),
       isInitialized(false), dialogTable(nullptr), dialogTool(nullptr), dialogHistory(nullptr),
       comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
@@ -93,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     sceneDraw = new VMainGraphicsScene();
     currentScene = sceneDraw;
     qApp->setCurrentScene(currentScene);
+    connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     sceneDetails = new VMainGraphicsScene();
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
@@ -134,6 +134,7 @@ MainWindow::MainWindow(QWidget *parent)
     PropertyBrowser();
 
     setCurrentFile("");
+    WindowsLocale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,7 +246,9 @@ void MainWindow::ActionNewPP()
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
+    connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolSinglePoint::Disable);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
+    connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolSinglePoint::EnableToolMove);
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     SCASSERT(tools != nullptr);
     tools->insert(id, spoint);
@@ -297,7 +300,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     if (checked)
     {
         CancelTool();
-        tool = t;
+        emit EnableItemMove(false);
+        currentTool = lastUsedTool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
@@ -337,7 +341,8 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     if (checked)
     {
         CancelTool();
-        tool = t;
+        emit EnableItemMove(false);
+        currentTool = lastUsedTool = t;
         QPixmap pixmap(cursor);
         QCursor cur(pixmap, 2, 3);
         ui->view->setCursor(cur);
@@ -659,7 +664,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 {
     SetToolButtonWithApply<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
                                                       ":/cursor/pointofintersect_cursor.png",
-                                                      tr("Select point vertically"),
+                                                      tr("Select point for X value (vertical)"),
                                                       &MainWindow::ClosedDialogWithApply<VToolPointOfIntersection>,
                                                       &MainWindow::ApplyDialog<VToolPointOfIntersection>);
 }
@@ -856,12 +861,12 @@ void MainWindow::ToolBarOption()
         const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes());
 
         gradationHeights = SetGradationList(tr("Height: "), listHeights);
-        SetDefaultHeight(static_cast<int>(GHeights::H176));
+        SetDefaultHeight(static_cast<int>(pattern->height()));
         connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
         gradationSizes = SetGradationList(tr("Size: "), listSizes);
-        SetDefaultSize(static_cast<int>(GSizes::S50));
+        SetDefaultSize(static_cast<int>(pattern->size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedSize);
 
@@ -885,12 +890,13 @@ QComboBox *MainWindow::SetGradationList(const QString &label, const QStringList 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetDefaultHeight set base height in combobox.
+ * @param value [in] height value in pattern units.
+ */
 void MainWindow::SetDefaultHeight(int value)
 {
-    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
-    QString strVal = QString("%1").arg(val);
-
-    qint32 index = gradationHeights->findText(strVal);
+    const qint32 index = gradationHeights->findText(QString("%1").arg(value));
     if (index != -1)
     {
         gradationHeights->setCurrentIndex(index);
@@ -902,12 +908,13 @@ void MainWindow::SetDefaultHeight(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetDefaultSize set base size in combobox.
+ * @param value [in] size value in pattern units.
+ */
 void MainWindow::SetDefaultSize(int value)
 {
-    qreal val = VAbstractMeasurements::UnitConvertor(value, Unit::Cm, qApp->patternUnit());
-    QString strVal = QString("%1").arg(val);
-
-    qint32 index = gradationSizes->findText(strVal);
+    const qint32 index = gradationSizes->findText(QString("%1").arg(value));
     if (index != -1)
     {
         gradationSizes->setCurrentIndex(index);
@@ -943,7 +950,6 @@ void MainWindow::ToolBarDraws()
     ui->actionHistory->setEnabled(false);
     connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
 
-    ui->toolBarDraws->addAction(ui->actionLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
     ui->actionLayout->setEnabled(false);
 }
@@ -1042,120 +1048,80 @@ void MainWindow::CancelTool()
     delete dialogTool;
     dialogTool = nullptr;
     qCDebug(vMainWindow)<<"Dialog closed.";
-    switch ( tool )
+    switch ( currentTool )
     {
         case Tool::Arrow:
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
             ui->actionStopTool->setEnabled(true);
-            break;
+            return;
         case Tool::SinglePoint:
             Q_UNREACHABLE();
             //Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
             ui->toolButtonEndLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Line:
             ui->toolButtonLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearFocus();
             break;
         case Tool::AlongLine:
             ui->toolButtonAlongLine->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::ShoulderPoint:
             ui->toolButtonShoulderPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Normal:
             ui->toolButtonNormal->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Bisector:
             ui->toolButtonBisector->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::LineIntersect:
             ui->toolButtonLineIntersect->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Spline:
             ui->toolButtonSpline->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Arc:
             ui->toolButtonArc->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::SplinePath:
             ui->toolButtonSplinePath->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::PointOfContact:
             ui->toolButtonPointOfContact->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Detail:
             ui->toolButtonNewDetail->setChecked(false);
             break;
         case Tool::Height:
             ui->toolButtonHeight->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::Triangle:
             ui->toolButtonTriangle->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::PointOfIntersection:
             ui->toolButtonPointOfIntersection->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CutSpline:
             ui->toolButtonSplineCutPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CutSplinePath:
             ui->toolButtonSplinePathCutPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::UnionDetails:
             ui->toolButtonUnionDetails->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CutArc:
             ui->toolButtonArcCutPoint->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::LineIntersectAxis:
             ui->toolButtonLineIntersectAxis->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(false);
             ui->toolButtonArcIntersectAxis->setChecked(false);
-            currentScene->setFocus(Qt::OtherFocusReason);
-            currentScene->clearSelection();
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:
@@ -1165,6 +1131,8 @@ void MainWindow::CancelTool()
             qDebug()<<"Got wrong tool type. Ignored.";
             break;
     }
+    currentScene->setFocus(Qt::OtherFocusReason);
+    currentScene->clearSelection();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1177,7 +1145,8 @@ void  MainWindow::ArrowTool()
     CancelTool();
     ui->actionArrowTool->setChecked(true);
     ui->actionStopTool->setEnabled(false);
-    tool = Tool::Arrow;
+    currentTool = Tool::Arrow;
+    emit EnableItemMove(true);
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
@@ -1269,6 +1238,7 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionHistory->setEnabled(true);
         ui->actionOptionDraw->setEnabled(true);
         ui->actionNewDraw->setEnabled(true);
+
     }
     else
     {
@@ -1308,6 +1278,7 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+
     }
     else
     {
@@ -1437,6 +1408,8 @@ void MainWindow::Open()
 void MainWindow::Preferences()
 {
     ConfigDialog dlg(this);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
+    connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     if (dlg.exec() == QDialog::Accepted)
     {
         InitAutoSave();
@@ -1454,7 +1427,7 @@ void MainWindow::RepotBug()
 void MainWindow::OnlineHelp()
 {
     qCDebug(vMainWindow)<<"Showing online help";
-    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/v0.2.9/Content"));
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/Content"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1470,7 +1443,6 @@ void MainWindow::Clear()
     qCDebug(vMainWindow)<<"Unlocked pattern file.";
 
     ui->actionDetails->setChecked(false);
-    ui->actionDetails->setEnabled(false);
     ui->actionDraw->setChecked(true);
     ui->actionDraw->setEnabled(false);
     qCDebug(vMainWindow)<<"Returned to Draw mode.";
@@ -1494,6 +1466,7 @@ void MainWindow::Clear()
     ui->actionHistory->setEnabled(false);
     ui->actionTable->setEnabled(false);
     ui->actionEdit_pattern_code->setEnabled(false);
+    ui->actionLast_tool->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -1507,6 +1480,7 @@ void MainWindow::Clear()
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
     qApp->getUndoStack()->clear();
+    toolOptions->itemClicked(nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1680,11 +1654,20 @@ void MainWindow::SetEnabledGUI(bool enabled)
         ui->actionHistory->setEnabled(enabled);
         ui->actionNewDraw->setEnabled(enabled);
         ui->actionDraw->setEnabled(enabled);
-        ui->actionDetails->setEnabled(enabled);
         ui->actionTable->setEnabled(enabled);
-        ui->actionLayout->setEnabled(enabled);
         ui->actionZoomFitBest->setEnabled(enabled);
         ui->actionZoomOriginal->setEnabled(enabled);
+
+        if (enabled)
+        {
+            Layout();
+        }
+        else
+        {
+            ui->actionDetails->setEnabled(enabled);
+            ui->actionLayout->setEnabled(enabled);
+        }
+
         guiEnabled = enabled;
 
         sceneDraw->SetDisable(!enabled);
@@ -1710,10 +1693,12 @@ void MainWindow::Layout()
     const QHash<quint32, VDetail> *details = pattern->DataDetails();
     if (details->size() > 0)
     {
+        ui->actionDetails->setEnabled(true);
         ui->actionLayout->setEnabled(true);
     }
     else
     {
+        ui->actionDetails->setEnabled(false);
         ui->actionLayout->setEnabled(false);
     }
 }
@@ -1828,12 +1813,12 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     ui->actionSaveAs->setEnabled(enable);
     ui->actionDraw->setEnabled(enable);
-    ui->actionDetails->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
     if (enable == true && curFile.isEmpty() == false)
     {
         ui->actionSave->setEnabled(enable);
     }
+    Layout();
     ui->actionTable->setEnabled(enable);
     ui->actionHistory->setEnabled(enable);
     ui->actionPattern_properties->setEnabled(enable);
@@ -1908,7 +1893,7 @@ void MainWindow::ActionLayout(bool checked)
 {
     Q_UNUSED(checked);
     ActionDetails(true);//Get all list of details.
-    QVector<VItem*> listDetails;
+    QVector<VLayoutDetail> listDetails;
     const QHash<quint32, VDetail> *details = pattern->DataDetails();
     if (details->count() == 0)
     {
@@ -1919,8 +1904,14 @@ void MainWindow::ActionLayout(bool checked)
     while (idetail.hasNext())
     {
         idetail.next();
-        QPainterPath path = VEquidistant(pattern).ContourPath(idetail.key());
-        listDetails.append(new VItem(path, listDetails.size()));
+        VLayoutDetail det = VLayoutDetail();
+        det.SetCountourPoints(idetail.value().ContourPoints(pattern));
+        det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern));
+        det.setSeamAllowance(idetail.value().getSeamAllowance());
+        det.setName(idetail.value().getName());
+        det.setWidth(qApp->toPixel(idetail.value().getWidth()));
+
+        listDetails.append(det);
     }
     QString description = doc->GetDescription();
 
@@ -1979,6 +1970,8 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
     ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
 
+    ui->actionLast_tool->setEnabled(drawTools);
+
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
 }
@@ -2013,6 +2006,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
             qCDebug(vMainWindow)<<"File"<<fileName<<"saved.";
+            PatternWasModified(result);
         }
     }
     else
@@ -2182,13 +2176,13 @@ void MainWindow::CreateMenus()
     QAction *undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, undoAction);
+    ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
     QAction *redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, redoAction);
+    ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);
 
     separatorAct = new QAction(this);
@@ -2202,6 +2196,115 @@ void MainWindow::CreateMenus()
     separatorAct->setSeparator(true);
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
     AddDocks();
+}
+
+void MainWindow::LastUsedTool()
+{
+    if (currentTool == lastUsedTool)
+        return;
+
+    switch ( lastUsedTool )
+    {
+        case Tool::Arrow:
+            ui->actionArrowTool->setChecked(true);
+            ArrowTool();
+            break;
+        case Tool::SinglePoint:
+            Q_UNREACHABLE();
+            //Nothing to do here because we can't create this tool from main window.
+            break;
+        case Tool::EndLine:
+            ui->toolButtonEndLine->setChecked(true);
+            ToolEndLine(true);
+            break;
+        case Tool::Line:
+            ui->toolButtonLine->setChecked(true);
+            ToolLine(true);
+            break;
+        case Tool::AlongLine:
+            ui->toolButtonAlongLine->setChecked(true);
+            ToolAlongLine(true);
+            break;
+        case Tool::ShoulderPoint:
+            ui->toolButtonShoulderPoint->setChecked(true);
+            ToolShoulderPoint(true);
+            break;
+        case Tool::Normal:
+            ui->toolButtonNormal->setChecked(true);
+            ToolNormal(true);
+            break;
+        case Tool::Bisector:
+            ui->toolButtonBisector->setChecked(true);
+            ToolBisector(true);
+            break;
+        case Tool::LineIntersect:
+            ui->toolButtonLineIntersect->setChecked(true);
+            ToolLineIntersect(true);
+            break;
+        case Tool::Spline:
+            ui->toolButtonSpline->setChecked(true);
+            ToolSpline(true);
+            break;
+        case Tool::Arc:
+            ui->toolButtonArc->setChecked(true);
+            ToolArc(true);
+            break;
+        case Tool::SplinePath:
+            ui->toolButtonSplinePath->setChecked(true);
+            ToolSplinePath(true);
+            break;
+        case Tool::PointOfContact:
+            ui->toolButtonPointOfContact->setChecked(true);
+            ToolPointOfContact(true);
+            break;
+        case Tool::Detail:
+            ui->toolButtonNewDetail->setChecked(true);
+            ToolDetail(true);
+            break;
+        case Tool::Height:
+            ui->toolButtonHeight->setChecked(true);
+            ToolHeight(true);
+            break;
+        case Tool::Triangle:
+            ui->toolButtonTriangle->setChecked(true);
+            ToolTriangle(true);
+            break;
+        case Tool::PointOfIntersection:
+            ui->toolButtonPointOfIntersection->setChecked(true);
+            ToolPointOfIntersection(true);
+            break;
+        case Tool::CutSpline:
+            ui->toolButtonSplineCutPoint->setChecked(true);
+            ToolCutSpline(true);
+            break;
+        case Tool::CutSplinePath:
+            ui->toolButtonSplinePathCutPoint->setChecked(true);
+            ToolCutSplinePath(true);
+            break;
+        case Tool::UnionDetails:
+            ui->toolButtonUnionDetails->setChecked(true);
+            ToolUnionDetails(true);
+            break;
+        case Tool::CutArc:
+            ui->toolButtonArcCutPoint->setChecked(true);
+            ToolCutArc(true);
+            break;
+        case Tool::LineIntersectAxis:
+            ui->toolButtonLineIntersectAxis->setChecked(true);
+            ToolLineIntersectAxis(true);
+            break;
+        case Tool::CurveIntersectAxis:
+            ui->toolButtonCurveIntersectAxis->setChecked(true);
+            ToolCurveIntersectAxis(true);
+            break;
+        case Tool::NodePoint:
+        case Tool::NodeArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
+        default:
+            qDebug()<<"Got wrong tool type. Ignored.";
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2257,6 +2360,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
     connect(ui->actionRepotBug, &QAction::triggered, this, &MainWindow::RepotBug);
     connect(ui->actionOnlineHelp, &QAction::triggered, this, &MainWindow::OnlineHelp);
+    connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
@@ -2360,7 +2464,7 @@ void MainWindow::LoadPattern(const QString &fileName)
     qCDebug(vMainWindow)<<"Loking file";
     lock = new QLockFile(fileName+".lock");
     lock->setStaleLockTime(0);
-    if (lock->tryLock())
+    if (VApplication::TryLock(lock))
     {
         qCDebug(vMainWindow) << "Pattern file"<<fileName<<"was locked.";
     }
@@ -2472,7 +2576,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
             // Seeking file that realy need reopen
             QLockFile *lock = new QLockFile(files.at(i)+".lock");
             lock->setStaleLockTime(0);
-            if (lock->tryLock())
+            if (VApplication::TryLock(lock))
             {
                 restoreFiles.append(files.at(i));
             }
@@ -2490,6 +2594,12 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 
     }
     return restoreFiles;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::WindowsLocale()
+{
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2560,15 +2670,21 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
         else
         {
             QString filter;
+            QString mPath;
             if (patternType == MeasurementsType::Standard)
             {
                 filter = tr("Standard measurements (*.vst)");
+                //Use standard path to standard measurements
+                const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
             else
             {
                 filter = tr("Individual measurements (*.vit)");
+                //Use standard path to individual measurements
+                const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
+                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
-            QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), qApp->pathToTables(), filter);
 
             if (mPath.isEmpty())
             {

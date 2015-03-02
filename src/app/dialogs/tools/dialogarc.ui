@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>423</width>
-    <height>544</height>
+    <width>425</width>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -107,22 +107,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualRadius">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -295,22 +285,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualF1">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -353,6 +333,9 @@
          <width>16777215</width>
          <height>24</height>
         </size>
+       </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -480,22 +463,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualF2">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_5">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -538,6 +511,9 @@
          <width>16777215</width>
          <height>24</height>
         </size>
+       </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -584,31 +560,41 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Center point</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBoxBasePoint">
-           <property name="toolTip">
-            <string>Select point of center of arc</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Center point</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBoxBasePoint">
+             <property name="toolTip">
+              <string>Select point of center of arc</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="comboBoxColor"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Color</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
          <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
@@ -774,15 +760,13 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHereRadius</tabstop>
-  <tabstop>toolButtonEqualRadius</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>plainTextEditF1</tabstop>
   <tabstop>toolButtonPutHereF1</tabstop>
-  <tabstop>toolButtonEqualF1</tabstop>
   <tabstop>pushButtonGrowLengthF1</tabstop>
+  <tabstop>plainTextEditF2</tabstop>
   <tabstop>toolButtonPutHereF2</tabstop>
-  <tabstop>toolButtonEqualF2</tabstop>
-  <tabstop>comboBoxBasePoint</tabstop>
+  <tabstop>pushButtonGrowLengthF2</tabstop>
   <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
@@ -792,7 +776,8 @@
   <tabstop>radioButtonAngleLine</tabstop>
   <tabstop>checkBoxHideEmpty</tabstop>
   <tabstop>listWidget</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>comboBoxBasePoint</tabstop>
+  <tabstop>comboBoxColor</tabstop>
  </tabstops>
  <resources>
   <include location="../../share/resources/icon.qrc"/>
@@ -805,8 +790,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>567</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -821,8 +806,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>567</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

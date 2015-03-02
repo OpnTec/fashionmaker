@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -54,17 +54,17 @@ public:
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};
 
-    quint32 getAxisP1Id() const;
-    void    setAxisP1Id(const quint32 &value);
+    quint32 GetAxisP1Id() const;
+    void    SetAxisP1Id(const quint32 &value);
 
-    quint32 getAxisP2Id() const;
-    void    setAxisP2Id(const quint32 &value);
+    quint32 GetAxisP2Id() const;
+    void    SetAxisP2Id(const quint32 &value);
 
-    quint32 getFirstPointId() const;
-    void    setFirstPointId(const quint32 &value);
+    quint32 GetFirstPointId() const;
+    void    SetFirstPointId(const quint32 &value);
 
-    quint32 getSecondPointId() const;
-    void    setSecondPointId(const quint32 &value);
+    quint32 GetSecondPointId() const;
+    void    SetSecondPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:
@@ -75,6 +75,7 @@ protected:
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void   SaveDialog(QDomElement &domElement);
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void   ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */

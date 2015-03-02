@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -73,7 +73,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormulaPropertyEditor::setFormula(const VFormula& formula)
+void VFormulaPropertyEditor::SetFormula(const VFormula& formula)
 {
     if (this->formula != formula)
     {
@@ -89,11 +89,11 @@ void VFormulaPropertyEditor::onToolButtonClicked()
                                                                    qApp->getMainWindow());
     tmpWidget->setCheckZero(formula.getCheckZero());
     tmpWidget->setPostfix(formula.getPostfix());
-    tmpWidget->setFormula(formula.getFormula(FormulaType::FromUser));
+    tmpWidget->SetFormula(formula.GetFormula(FormulaType::FromUser));
 
     if (tmpWidget->exec() == QDialog::Accepted)
     {
-        formula.setFormula(tmpWidget->getFormula(), FormulaType::ToUser);
+        formula.SetFormula(tmpWidget->GetFormula(), FormulaType::ToUser);
         TextLabel->setText(formula.getStringValue());
         delete tmpWidget;
         emit dataChangedByUser(formula, this);
@@ -122,7 +122,7 @@ VFormulaPropertyEditor::~VFormulaPropertyEditor()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VFormulaPropertyEditor::getFormula() const
+VFormula VFormulaPropertyEditor::GetFormula() const
 {
     return formula;
 }

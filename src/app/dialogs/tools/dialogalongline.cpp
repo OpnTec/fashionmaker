@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -41,9 +41,8 @@
  * @param parent parent widget
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine), number(0),
-      typeLine(QString()), formula(QString()), firstPointId(NULL_ID), secondPointId(NULL_ID), formulaBaseHeight(0),
-      line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine),
+      formula(QString()), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -60,12 +59,11 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType);
-    ui->comboBoxLineType->setCurrentIndex(0);
+    FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
+    FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogAlongLine::EvalFormula);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
     connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogTool::PutVal);
@@ -180,16 +178,14 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
 void DialogAlongLine::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    typeLine = GetTypeLine(ui->comboBoxLineType);
+
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
+    line->setPoint1Id(GetFirstPointId());
+    line->setPoint2Id(GetSecondPointId());
     line->setLength(formula);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -202,32 +198,32 @@ void DialogAlongLine::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPointId set id second point of line
+ * @brief SetSecondPointId set id second point of line
  * @param value id
  */
-void DialogAlongLine::setSecondPointId(const quint32 &value)
+void DialogAlongLine::SetSecondPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxSecondPoint, secondPointId, value);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
     line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPointId set id first point of line
+ * @brief SetFirstPointId set id first point of line
  * @param value id
  */
-void DialogAlongLine::setFirstPointId(const quint32 &value)
+void DialogAlongLine::SetFirstPointId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxFirstPoint, firstPointId, value);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
     line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFormula set string of formula
+ * @brief SetFormula set string of formula
  * @param value formula
  */
-void DialogAlongLine::setFormula(const QString &value)
+void DialogAlongLine::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed.
@@ -242,23 +238,74 @@ void DialogAlongLine::setFormula(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setTypeLine set type of line
+ * @brief SetTypeLine set type of line
  * @param value type
  */
-void DialogAlongLine::setTypeLine(const QString &value)
+void DialogAlongLine::SetTypeLine(const QString &value)
 {
-    typeLine = value;
-    SetupTypeLine(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyle(typeLine));
+    ChangeCurrentData(ui->comboBoxLineType, value);
+    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogAlongLine::GetLineColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::SetLineColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxLineColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogAlongLine::setPointName(const QString &value)
+void DialogAlongLine::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetTypeLine return type of line
+ * @return type
+ */
+QString DialogAlongLine::GetTypeLine() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxLineType);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFormula return string of formula
+ * @return formula
+ */
+QString DialogAlongLine::GetFormula() const
+{
+    return qApp->FormulaFromUser(formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFirstPointId return id first point of line
+ * @return id
+ */
+quint32 DialogAlongLine::GetFirstPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetSecondPointId return id second point of line
+ * @return id
+ */
+quint32 DialogAlongLine::GetSecondPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -255,7 +255,7 @@ QString VArc::GetFormulaF1() const
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::SetFormulaF1(const VFormula &value)
 {
-    d->formulaF1 = value.getFormula(FormulaType::FromUser);
+    d->formulaF1 = value.GetFormula(FormulaType::FromUser);
     d->f1 = value.getDoubleValue();
 }
 
@@ -282,7 +282,7 @@ QString VArc::GetFormulaF2() const
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::SetFormulaF2(const VFormula &value)
 {
-    d->formulaF2 = value.getFormula(FormulaType::FromUser);
+    d->formulaF2 = value.GetFormula(FormulaType::FromUser);
     d->f2 = value.getDoubleValue();
 }
 
@@ -309,7 +309,7 @@ QString VArc::GetFormulaRadius() const
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::SetFormulaRadius(const VFormula &value)
 {
-    d->formulaRadius = value.getFormula(FormulaType::FromUser);
+    d->formulaRadius = value.GetFormula(FormulaType::FromUser);
     d->radius = value.getDoubleValue();
 }
 

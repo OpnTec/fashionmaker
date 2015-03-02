@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,10 +49,12 @@ public:
     void                    setName(const QString &name);
     virtual QString         getTagName() const;
     static const QString    TagName;
+
+    void                    setEnabled(bool enabled);
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ChangedActivDraw(const QString &newName);
-    virtual void            ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
+    virtual void            ShowTool(quint32 id, bool enable);
     virtual void            SetFactor(qreal factor);
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void                    Disable(bool disable);

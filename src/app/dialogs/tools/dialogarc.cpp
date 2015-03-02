@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -45,9 +45,9 @@
  */
 DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
-      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), center(NULL_ID), radius(QString()),
-      f1(QString()), f2(QString()), formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr),
-      angleF1(INT_MIN), angleF2(INT_MIN)
+      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), radius(QString()), f1(QString()), f2(QString()),
+      formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr), angleF1(INT_MIN),
+      angleF2(INT_MIN)
 {
     ui->setupUi(this);
 
@@ -74,16 +74,13 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     CheckState();
 
     connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
     connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
     connect(ui->toolButtonPutHereF2, &QPushButton::clicked, this, &DialogArc::PutF2);
-
-    connect(ui->toolButtonEqualRadius, &QPushButton::clicked, this, &DialogArc::EvalRadius);
-    connect(ui->toolButtonEqualF1, &QPushButton::clicked, this, &DialogArc::EvalF);
-    connect(ui->toolButtonEqualF2, &QPushButton::clicked, this, &DialogArc::EvalF);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
     connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArc::F1Changed);
@@ -131,9 +128,8 @@ DialogArc::~DialogArc()
  */
 void DialogArc::SetCenter(const quint32 &value)
 {
-    center = value;
-    ChangeCurrentData(ui->comboBoxBasePoint, center);
-    path->setPoint1Id(center);
+    ChangeCurrentData(ui->comboBoxBasePoint, value);
+    path->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,6 +148,18 @@ void DialogArc::SetF2(const QString &value)
     ui->plainTextEditF2->setPlainText(f2);
     path->setF2(f2);
     MoveCursorToEnd(ui->plainTextEditF2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogArc::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,7 +187,7 @@ void DialogArc::SetF1(const QString &value)
  */
 void DialogArc::SetRadius(const QString &value)
 {
-    radius = value;
+    radius = qApp->FormulaToUser(value);
     // increase height if needed.
     if (radius.length() > 80)
     {
@@ -234,9 +242,8 @@ void DialogArc::SaveData()
     f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
     f2.replace("\n", " ");
-    center = getCurrentObjectId(ui->comboBoxBasePoint);
 
-    path->setPoint1Id(center);
+    path->setPoint1Id(GetCenter());
     path->setRadius(radius);
     path->setF1(f1);
     path->setF2(f2);
@@ -250,28 +257,6 @@ void DialogArc::closeEvent(QCloseEvent *event)
     ui->plainTextEditF1->blockSignals(true);
     ui->plainTextEditF2->blockSignals(true);
     DialogTool::closeEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ValChenged show description angles of lines
- * @param row number of row
- */
-void DialogArc::ValChenged(int row)
-{
-    if (ui->listWidget->count() == 0)
-    {
-        return;
-    }
-    QListWidgetItem *item = ui->listWidget->item( row );
-    if (ui->radioButtonAngleLine->isChecked())
-    {
-        qreal angle = *data->GetVariable<VLineAngle>(item->text())->GetValue();
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(angle).arg(tr("Value of angle of line."));
-        ui->labelDescription->setText(desc);
-        return;
-    }
-    DialogTool::ValChenged(row);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -435,4 +420,44 @@ void DialogArc::CheckAngles()
     }
 
     DialogArc::CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetCenter return id of center point
+ * @return id id
+ */
+quint32 DialogArc::GetCenter() const
+{
+    return getCurrentObjectId(ui->comboBoxBasePoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetRadius return formula of radius
+ * @return formula
+ */
+QString DialogArc::GetRadius() const
+{
+    return qApp->FormulaFromUser(radius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF1 return formula first angle of arc
+ * @return formula
+ */
+QString DialogArc::GetF1() const
+{
+    return qApp->FormulaFromUser(f1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetF2 return formula second angle of arc
+ * @return formula
+ */
+QString DialogArc::GetF2() const
+{
+    return qApp->FormulaFromUser(f2);
 }

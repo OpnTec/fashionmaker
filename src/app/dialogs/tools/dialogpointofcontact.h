@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,8 +49,7 @@ public:
     DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfContact();
 
-    QString        getPointName() const;
-    void           setPointName(const QString &value);
+    void           SetPointName(const QString &value);
 
     QString        getRadius() const;
     void           setRadius(const QString &value);
@@ -58,11 +57,11 @@ public:
     quint32        getCenter() const;
     void           setCenter(const quint32 &value);
 
-    quint32        getFirstPoint() const;
-    void           setFirstPoint(const quint32 &value);
+    quint32        GetFirstPoint() const;
+    void           SetFirstPoint(const quint32 &value);
 
-    quint32        getSecondPoint() const;
-    void           setSecondPoint(const quint32 &value);
+    quint32        GetSecondPoint() const;
+    void           SetSecondPoint(const quint32 &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -87,75 +86,13 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfContact *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
     /** @brief radius radius of arc */
     QString        radius;
-
-    /** @brief center id center point of arc */
-    quint32         center;
-
-    /** @brief firstPoint id first point of line */
-    quint32         firstPoint;
-
-    /** @brief secondPoint id second point of line */
-    quint32         secondPoint;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
 
     VisToolPointOfContact *line;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogPointOfContact::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getRadius return formula radius of arc
- * @return formula
- */
-inline QString DialogPointOfContact::getRadius() const
-{
-    return radius;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetCenter return id of center point
- * @return id
- */
-inline quint32 DialogPointOfContact::getCenter() const
-{
-    return center;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPoint return id first point
- * @return id
- */
-inline  quint32 DialogPointOfContact::getFirstPoint() const
-{
-    return firstPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPoint return id second point
- * @return id
- */
-inline quint32 DialogPointOfContact::getSecondPoint() const
-{
-    return secondPoint;
-}
 
 #endif // DIALOGPOINTOFCONTACT_H

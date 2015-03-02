@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -34,9 +34,10 @@
 
 #ifdef Q_OS_WIN32
     extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+    #include <windows.h>
 #endif /*Q_OS_WIN32*/
 
-enum class Unit : char { Mm, Cm, Inch };
+enum class Unit : char { Mm, Cm, Inch, Px };
 enum class MeasurementsType : char { Standard, Individual };
 
 static const quint32 null_id = 0;
@@ -72,7 +73,7 @@ static const quint32 null_id = 0;
     }                                                       \
 }                                                           \
 
-#else
+#else // GCC (Windows)
 
 #define SCASSERT(cond)                                      \
 {                                                           \
@@ -85,7 +86,7 @@ static const quint32 null_id = 0;
 }                                                           \
 
 #endif /*Q_CC_MSVC*/
-#else
+#else // UNIX
 #define SCASSERT(cond)                                      \
 {                                                           \
     if (!(cond))                                            \
@@ -99,7 +100,7 @@ static const quint32 null_id = 0;
 #endif /* Q_OS_WIN32 */
 #else // define but disable this function if debugging is not set
 #define SCASSERT(cond) qt_noop();
-#endif /* QT_NO_DEBUG */
+#endif /* V_NO_ASSERT */
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)

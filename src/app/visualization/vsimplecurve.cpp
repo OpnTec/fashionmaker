@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -40,18 +40,18 @@
  * @param currentColor current color.
  * @param parent parent object.
  */
-VSimpleCurve::VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurvePoint pointPosition, qreal *factor,
+VSimpleCurve::VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint pointPosition, qreal *factor,
                            QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor),
-      curvePosition(pointPosition)
+      curvePosition(pointPosition), enabled(true)
 {
     if (factor == nullptr)
     {
-        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
+        setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
     }
     else
     {
-        setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/ *factor));
+        setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -60,9 +60,9 @@ VSimpleCurve::VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurv
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::ChangedActivDraw(const bool &flag)
 {
-    setFlag(QGraphicsItem::ItemIsSelectable, flag);
-    setAcceptHoverEvents(flag);
-    setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
+    enabled = flag;
+    setEnabled(enabled);
+    setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/ *factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,11 +102,11 @@ void VSimpleCurve::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())));
+        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthMainLine())));
     }
     else
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthMainLine())/ *factor));
+        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthMainLine())/ *factor));
     }
     emit HoverPath(id, curvePosition, PathDirection::Show);
 }
@@ -121,12 +121,44 @@ void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())));
+        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())));
     }
     else
     {
-        this->setPen(QPen(*currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
+        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/ *factor));
     }
 
     emit HoverPath(id, curvePosition, PathDirection::Hide);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QColor VSimpleCurve::GetCurrentColor() const
+{
+    return currentColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::SetCurrentColor(const QColor &value)
+{
+    currentColor = value;
+    setPen(QPen(CorrectColor(currentColor), pen().widthF()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->ignore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QColor VSimpleCurve::CorrectColor(const QColor &color) const
+{
+    if (enabled)
+    {
+        return color;
+    }
+    else
+    {
+        return Qt::gray;
+    }
 }

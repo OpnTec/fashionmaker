@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -28,31 +28,53 @@
 
 #include "vdetail.h"
 #include "vdetail_p.h"
+#include "../container/vcontainer.h"
+#include "vpointf.h"
+#include "../core/vapplication.h"
+
 #include <QDebug>
 #include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDetail default contructor. Create empty detail.
+ */
 VDetail::VDetail()
-    :d(new VDetailData)
+    :VAbstractDetail(), d(new VDetailData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDetail constructor.
+ * @param name detail name.
+ * @param nodes list of nodes.
+ */
 VDetail::VDetail(const QString &name, const QVector<VNodeDetail> &nodes)
-    :d(new VDetailData(name, nodes))
+    :VAbstractDetail(name), d(new VDetailData(nodes))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VDetail copy constructor.
+ * @param detail detail.
+ */
 VDetail::VDetail(const VDetail &detail)
-    :d (detail.d)
+    :VAbstractDetail(detail), d (detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief operator = assignment operator.
+ * @param detail detail.
+ * @return new detail.
+ */
 VDetail &VDetail::operator =(const VDetail &detail)
 {
     if ( &detail == this )
     {
         return *this;
     }
+    VAbstractDetail::operator=(detail);
     d = detail.d;
     return *this;
 }
@@ -62,24 +84,31 @@ VDetail::~VDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Clear detail full clear.
+ */
 void VDetail::Clear()
 {
     d->nodes.clear();
-    d->name.clear();
     d->mx = 0;
     d->my = 0;
-    d->seamAllowance = true;
-    d->closed = true;
-    d->width = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClearNodes clear list of nodes.
+ */
 void VDetail::ClearNodes()
 {
     d->nodes.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Containes check if detail containe this id.
+ * @param id object id.
+ * @return true if containe.
+ */
 bool VDetail::Containes(const quint32 &id) const
 {
     for (int i = 0; i < d->nodes.size(); ++i)
@@ -94,36 +123,66 @@ bool VDetail::Containes(const quint32 &id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief operator [] find node by index in list.
+ * @param indx index node in list.
+ * @return node
+ */
 VNodeDetail &VDetail::operator [](int indx)
 {
     return d->nodes[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief at find node by index in list.
+ * @param indx index node in list.
+ * @return const node.
+ */
 const VNodeDetail &VDetail::at(int indx) const
 {
     return d->nodes.at(indx);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief indexOfNode return index in list node using id object.
+ * @param id object (arc, point, spline, splinePath) id.
+ * @return index in list or -1 id can't find.
+ */
 int VDetail::indexOfNode(const quint32 &id) const
 {
     return indexOfNode(d->nodes, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief id return id detail in list data.
+ * @return id.
+ */
 quint32 VDetail::id() const
 {
     return d->_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setId set id detail in list data.
+ * @param id detail id.
+ */
 void VDetail::setId(const quint32 &id)
 {
     d->_id = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief OnEdge checks if two poins located on the edge. Edge is line between two points. If between two points
+ * located arcs or splines ignore this.
+ * @param p1 id first point.
+ * @param p2 id second point.
+ * @return true - on edge, false - no.
+ */
 bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
@@ -162,6 +221,13 @@ bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Edge return edge index in detail. Edge is line between two points. If between two points
+ * located arcs or splines ignore this.
+ * @param p1 id first point.
+ * @param p2 id second point.
+ * @return edge index or -1 if points don't located on edge
+ */
 int VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 {
     if (OnEdge(p1, p2) == false)
@@ -187,6 +253,12 @@ int VDetail::Edge(const quint32 &p1, const quint32 &p2) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NodeOnEdge return nodes located on edge with index.
+ * @param index index of edge.
+ * @param p1 first node.
+ * @param p2 second node.
+ */
 void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
@@ -207,6 +279,11 @@ void VDetail::NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveEdge return detail without edge with index.
+ * @param index idex of edge.
+ * @return detail without edge with index.
+ */
 VDetail VDetail::RemoveEdge(const quint32 &index) const
 {
     VDetail det(*this);
@@ -250,6 +327,12 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Missing find missing ids in detail. When we deleted object in detail and return this detail need
+ * understand, what nodes need make invisible.
+ * @param det changed detail.
+ * @return  list with missing detail.
+ */
 QList<quint32> VDetail::Missing(const VDetail &det) const
 {
     if (d->nodes.size() == det.CountNode())
@@ -275,6 +358,133 @@ QList<quint32> VDetail::Missing(const VDetail &det) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VDetail::ContourPoints(const VContainer *data) const
+{
+    QVector<QPointF> points;
+    for (int i = 0; i< CountNode(); ++i)
+    {
+        switch (at(i).getTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
+                points.append(point->toQPointF());
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).getId());
+
+                const QPointF begin = StartSegment(data, i);
+                const QPointF end = EndSegment(data, i);
+
+                points << curve->GetSegmentPoints(begin, end, at(i).getReverse());
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).getTypeTool());
+                break;
+        }
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
+{
+    QVector<QPointF> pointsEkv;
+    for (int i = 0; i< CountNode(); ++i)
+    {
+        switch (at(i).getTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
+                if (getSeamAllowance() == true)
+                {
+                    QPointF pEkv = point->toQPointF();
+                    pEkv.setX(pEkv.x()+at(i).getMx());
+                    pEkv.setY(pEkv.y()+at(i).getMy());
+                    pointsEkv.append(pEkv);
+                }
+            }
+            break;
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+            {
+                const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).getId());
+
+                const QPointF begin = StartSegment(data, i);
+                const QPointF end = EndSegment(data, i);
+
+                QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, at(i).getReverse());
+                if (getSeamAllowance() == true)
+                {
+                    pointsEkv << biasPoints(nodePoints, at(i).getMx(), at(i).getMy());
+                }
+            }
+            break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(at(i).getTypeTool());
+                break;
+        }
+    }
+
+    if (getSeamAllowance() == true)
+    {
+        if (getClosed() == true)
+        {
+            pointsEkv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
+        }
+        else
+        {
+            pointsEkv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
+        }
+    }
+    return pointsEkv;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VDetail::ContourPath(const VContainer *data) const
+{
+    QVector<QPointF> points = ContourPoints(data);
+    QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
+
+    QPainterPath path;
+
+    // contour
+    path.moveTo(points[0]);
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
+        path.lineTo(points.at(i));
+    }
+    path.lineTo(points.at(0));
+
+    // seam allowence
+    if (getSeamAllowance() == true)
+    {
+        QPainterPath ekv;
+        ekv.moveTo(pointsEkv.at(0));
+        for (qint32 i = 1; i < pointsEkv.count(); ++i)
+        {
+            ekv.lineTo(pointsEkv.at(i));
+        }
+
+        path.addPath(ekv);
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief listNodePoint return list nodes only with points.
+ * @return list points node.
+ */
 QVector<VNodeDetail> VDetail::listNodePoint() const
 {
     QVector<VNodeDetail> list;
@@ -289,6 +499,12 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief indexOfNode return index in list node using id object.
+ * @param list list nodes detail.
+ * @param id object (arc, point, spline, splinePath) id.
+ * @return index in list or -1 id can't find.
+ */
 int VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 {
     for (int i = 0; i < list.size(); ++i)
@@ -303,96 +519,149 @@ int VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VDetail::StartSegment(const VContainer *data, const int &i) const
+{
+    QPointF begin;
+    if (CountNode() > 1)
+    {
+        if (i == 0)
+        {
+            if (at(CountNode()-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(at(CountNode()-1).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (at(i-1).getTypeTool() == Tool::NodePoint)
+            {
+                begin = data->GeometricObject<VPointF>(at(i-1).getId())->toQPointF();
+            }
+        }
+    }
+    return begin;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VDetail::EndSegment(const VContainer *data, const int &i) const
+{
+    QPointF end;
+    if (CountNode() > 2)
+    {
+        if (i == CountNode() - 1)
+        {
+            if (at(0).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(at(0).getId())->toQPointF();
+            }
+        }
+        else
+        {
+            if (at(i+1).getTypeTool() == Tool::NodePoint)
+            {
+                end = data->GeometricObject<VPointF>(at(i+1).getId())->toQPointF();
+            }
+        }
+    }
+    return end;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief biasPoints bias point.
+ * @param points vector of points.
+ * @param mx offset respect to x.
+ * @param my offset respect to y.
+ * @return new vector biased points.
+ */
+QVector<QPointF> VDetail::biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my)
+{
+    QVector<QPointF> p;
+    for (qint32 i = 0; i < points.size(); ++i)
+    {
+        QPointF point = points.at(i);
+        point.setX(point.x() + mx);
+        point.setY(point.y() + my);
+        p.append(point);
+    }
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief append append in the end of list node.
+ * @param node new node.
+ */
 void VDetail::append(const VNodeDetail &node)
 {
     d->nodes.append(node);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CountNode return count nodes.
+ * @return count.
+ */
 qint32 VDetail::CountNode() const
 {
     return d->nodes.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDetail::getName() const
-{
-    return d->name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDetail::setName(const QString &value)
-{
-    d->name = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getMx return bias for X axis.
+ * @return x bias.
+ */
 qreal VDetail::getMx() const
 {
     return d->mx;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setMx set bias for X axis.
+ * @param value new x bias.
+ */
 void VDetail::setMx(const qreal &value)
 {
     d->mx = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getMy get bias for y axis.
+ * @return y axis.
+ */
 qreal VDetail::getMy() const
 {
     return d->my;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setMy set bias for y axis.
+ * @param value new y bias.
+ */
 void VDetail::setMy(const qreal &value)
 {
     d->my = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDetail::getSeamAllowance() const
-{
-    return d->seamAllowance;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDetail::setSeamAllowance(bool value)
-{
-    d->seamAllowance = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VDetail::getClosed() const
-{
-    return d->closed;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDetail::setClosed(bool value)
-{
-    d->closed = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VDetail::getWidth() const
-{
-    return d->width;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDetail::setWidth(const qreal &value)
-{
-    d->width = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getNodes return list of nodes.
+ * @return list of nodes.
+ */
 QVector<VNodeDetail> VDetail::getNodes() const
 {
     return d->nodes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief setNodes set list of nodes
+ * @param value list of nodes
+ */
 void VDetail::setNodes(const QVector<VNodeDetail> &value)
 {
     d->nodes = value;

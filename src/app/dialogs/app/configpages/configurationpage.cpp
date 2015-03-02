@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -51,11 +51,13 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
     QGroupBox *saveGroup = SaveGroup();
     QGroupBox *langGroup = LangGroup();
     QGroupBox *sendGroup = SendGroup();
+    QGroupBox *drawGroup = DrawGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(saveGroup);
     mainLayout->addWidget(langGroup);
     mainLayout->addWidget(sendGroup);
+    mainLayout->addWidget(drawGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -73,6 +75,7 @@ void ConfigurationPage::Apply()
 
     qApp->getSettings()->SetOsSeparator(osOptionCheck->isChecked());
     qApp->getSettings()->SetSendReportState(sendReportCheck->isChecked());
+    qApp->getSettings()->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
 
     if (langChanged)
     {
@@ -269,6 +272,21 @@ QGroupBox *ConfigurationPage::SendGroup()
 
     sendGroup->setLayout(sendLayout);
     return sendGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGroupBox *ConfigurationPage::DrawGroup()
+{
+    QGroupBox *drawGroup = new QGroupBox(tr("Pattern Editing"));
+
+    askPointDeletionCheck = new QCheckBox(tr("Confirm item deletion"));
+    askPointDeletionCheck->setChecked(qApp->getSettings()->GetConfirmItemDelete());
+
+    QVBoxLayout *editLayout = new QVBoxLayout;
+    editLayout->addWidget(askPointDeletionCheck);
+
+    drawGroup->setLayout(editLayout);
+    return drawGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

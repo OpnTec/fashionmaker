@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -84,6 +84,21 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::setEnabled(bool enabled)
+{
+    QGraphicsSimpleTextItem::setEnabled(enabled);
+    const QPalette palet = this->scene()->palette();
+    if (enabled)
+    {
+        setBrush(palet.brush(QPalette::Active, QPalette::Text));
+    }
+    else
+    {
+        setBrush(palet.brush(QPalette::Disabled, QPalette::Text));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief itemChange handle item change.
  * @param change change.
@@ -109,7 +124,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     this->setBrush(Qt::green);
 
-    VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+    VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
@@ -124,7 +139,7 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     this->setBrush(Qt::black);
 
     //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -143,7 +158,7 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+        VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
     }
     QGraphicsSimpleTextItem::mousePressEvent(event);
 }
@@ -154,7 +169,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
-        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
+        VApplication::restoreOverrideCursor(cursorArrowCloseHand);
     }
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }

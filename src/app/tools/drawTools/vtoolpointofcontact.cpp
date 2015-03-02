@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -78,9 +78,9 @@ void VToolPointOfContact::setDialog()
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->setRadius(arcRadius);
     dialogTool->setCenter(center);
-    dialogTool->setFirstPoint(firstPointId);
-    dialogTool->setSecondPoint(secondPointId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetFirstPoint(firstPointId);
+    dialogTool->SetSecondPoint(secondPointId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,8 +138,8 @@ VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphi
     SCASSERT(dialogTool != nullptr);
     QString radius = dialogTool->getRadius();
     const quint32 center = dialogTool->getCenter();
-    const quint32 firstPointId = dialogTool->getFirstPoint();
-    const quint32 secondPointId = dialogTool->getSecondPoint();
+    const quint32 firstPointId = dialogTool->GetFirstPoint();
+    const quint32 secondPointId = dialogTool->GetSecondPoint();
     const QString pointName = dialogTool->getPointName();
     VToolPointOfContact *point = nullptr;
     point=Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
@@ -209,7 +209,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
         scene->addItem(point);
         connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfContact::Disable);
         doc->AddTool(id, point);
         doc->IncrementReferens(center);
         doc->IncrementReferens(firstPointId);
@@ -225,14 +225,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
  */
 void VToolPointOfContact::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        arcRadius = domElement.attribute(AttrRadius, "");
-        center = domElement.attribute(AttrCenter, "").toUInt();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-    }
+    ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 
     if (vis != nullptr)
@@ -300,8 +293,8 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
-    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPoint()));
-    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPoint()));
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,13 +316,22 @@ void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfContact::getSecondPointId() const
+void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
+{
+    arcRadius = doc->GetParametrString(domElement, AttrRadius, "");
+    center = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolPointOfContact::GetSecondPointId() const
 {
     return secondPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::setSecondPointId(const quint32 &value)
+void VToolPointOfContact::SetSecondPointId(const quint32 &value)
 {
     secondPointId = value;
 }
@@ -370,13 +372,13 @@ void VToolPointOfContact::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolPointOfContact::getFirstPointId() const
+quint32 VToolPointOfContact::GetFirstPointId() const
 {
     return firstPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfContact::setFirstPointId(const quint32 &value)
+void VToolPointOfContact::SetFirstPointId(const quint32 &value)
 {
     firstPointId = value;
 }
@@ -415,7 +417,7 @@ void VToolPointOfContact::setArcRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
-        arcRadius = value.getFormula(FormulaType::FromUser);
+        arcRadius = value.GetFormula(FormulaType::FromUser);
 
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         SaveOption(obj);

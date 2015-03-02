@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -40,8 +40,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.2");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.2.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.1.3");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.1.3.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -91,6 +91,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000101):
             return QStringLiteral("://schema/pattern/v0.1.1.xsd");
         case (0x000102):
+            return QStringLiteral("://schema/pattern/v0.1.2.xsd");
+        case (0x000103):
             return CurrentSchema;
         default:
         {
@@ -119,9 +121,16 @@ void VPatternConverter::ApplyPatches()
                 ToV0_1_2();
                 const QString schema = XSDSchema(0x000102);
                 ValidateXML(schema, fileName);
-                break;
+                // continue conversion
             }
             case (0x000102):
+            {
+                ToV0_1_3();
+                const QString schema = XSDSchema(0x000103);
+                ValidateXML(schema, fileName);
+                // continue conversion
+            }
+            case (0x000103):
                 break;
             default:
                 break;
@@ -157,5 +166,12 @@ void VPatternConverter::ToV0_1_1()
 void VPatternConverter::ToV0_1_2()
 {
     SetVersion(QStringLiteral("0.1.2"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_1_3()
+{
+    SetVersion(QStringLiteral("0.1.3"));
     Save();
 }

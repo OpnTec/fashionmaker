@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -39,13 +39,13 @@ class VToolCutArc : public VToolCut
     Q_OBJECT
 public:
     VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula, const quint32 &arcId,
-                const quint32 &arc1id, const quint32 &arc2id, const Source &typeCreation,
+                const quint32 &arc1id, const quint32 &arc2id, const QString &color, const Source &typeCreation,
                 QGraphicsItem * parent = nullptr);
     virtual void setDialog();
     static VToolCutArc*  Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc, VContainer *data);
     static VToolCutArc*  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                VContainer *data, const Document &parse, const Source &typeCreation);
+                                const qreal &mx, const qreal &my, const QString &color, VMainGraphicsScene *scene,
+                                VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     static const QString AttrArc;
     virtual int  type() const {return Type;}
@@ -61,6 +61,7 @@ protected:
     virtual void RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                               PathDirection direction = PathDirection::Hide);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolCutArc)
 };

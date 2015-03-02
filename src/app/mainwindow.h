@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -32,12 +32,12 @@
 #include <QMainWindow>
 #include "widgets/vmaingraphicsscene.h"
 #include "widgets/vmaingraphicsview.h"
-#include "widgets/vitem.h"
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 #include "xml/vdomdocument.h"
+#include "../libs/vlayout/vlayoutdetail.h"
 
 namespace Ui
 {
@@ -120,6 +120,9 @@ public slots:
     void               AboutQt();
     void               PatternProperties();
 
+//tmp
+    void                LastUsedTool();
+
     /**
      * @brief Edit XML code of pattern
      */
@@ -130,14 +133,17 @@ public slots:
     void               Layout();
     void               UpdateGradation();
     void               GlobalChangePP(const QString &patternPiece);
+    void               WindowsLocale();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
      * @param listDetails list of details.
      * @param description pattern description.
      */
-    void               ModelChosen(QVector<VItem*> listDetails, const QString &curFile, const QString &description);
+    void               ModelChosen(QVector<VLayoutDetail> listDetails, const QString &curFile,
+                                   const QString &description);
     void               RefreshHistory();
+    void               EnableItemMove(bool move);
 protected:
     virtual void       keyPressEvent(QKeyEvent *event);
     virtual void       showEvent(QShowEvent *event);
@@ -155,7 +161,10 @@ private:
     VPattern           *doc;
 
     /** @brief tool current tool */
-    Tool               tool;
+    Tool               currentTool;
+
+    /** @brief tool last used tool */
+    Tool               lastUsedTool;
 
     /** @brief currentScene pointer to current scene. */
     VMainGraphicsScene *currentScene;

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -36,15 +36,16 @@ class VToolLineIntersectAxis : public VToolLinePoint
     Q_OBJECT
 public:
     VToolLineIntersectAxis(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                           const QString &formulaAngle, const quint32 &basePointId, const quint32 &firstPointId,
-                           const quint32 &secondPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
+                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
+                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                           QGraphicsItem * parent = nullptr);
     virtual ~VToolLineIntersectAxis();
     virtual void setDialog();
 
     static VToolLineIntersectAxis *Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern *doc,
                                           VContainer *data);
     static VToolLineIntersectAxis *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                          QString &formulaAngle, const quint32 &basePointId,
+                                          const QString &lineColor, QString &formulaAngle, const quint32 &basePointId,
                                           const quint32 &firstPointId, const quint32 &secondPointId,
                                           const qreal &mx, const qreal &my, VMainGraphicsScene  *scene, VPattern *doc,
                                           VContainer *data, const Document &parse, const Source &typeCreation);
@@ -55,14 +56,14 @@ public:
     virtual int       type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersectAxis)};
 
-    VFormula     getFormulaAngle() const;
-    void         setFormulaAngle(const VFormula &value);
+    VFormula     GetFormulaAngle() const;
+    void         SetFormulaAngle(const VFormula &value);
 
-    quint32      getFirstPointId() const;
-    void         setFirstPointId(const quint32 &value);
+    quint32      GetFirstPointId() const;
+    void         SetFirstPointId(const quint32 &value);
 
-    quint32      getSecondPointId() const;
-    void         setSecondPointId(const quint32 &value);
+    quint32      GetSecondPointId() const;
+    void         SetSecondPointId(const quint32 &value);
 
     virtual void ShowVisualization(bool show);
 public slots:
@@ -72,6 +73,7 @@ protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VToolLineIntersectAxis)
     QString formulaAngle;

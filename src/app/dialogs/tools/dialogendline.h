@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -48,20 +48,23 @@ public:
     DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogEndLine();
 
-    QString           getPointName() const;
-    void              setPointName(const QString &value);
+    void              SetPointName(const QString &value);
 
-    QString           getTypeLine() const;
-    void              setTypeLine(const QString &value);
+    QString           GetTypeLine() const;
+    void              SetTypeLine(const QString &value);
 
-    QString           getFormula() const;
-    void              setFormula(const QString &value);
+    QString           GetFormula() const;
+    void              SetFormula(const QString &value);
 
-    QString           getAngle() const;
-    void              setAngle(const QString &value);
+    QString           GetAngle() const;
+    void              SetAngle(const QString &value);
 
-    quint32           getBasePointId() const;
-    void              setBasePointId(const quint32 &value);
+    quint32           GetBasePointId() const;
+    void              SetBasePointId(const quint32 &value);
+
+    QString           GetLineColor() const;
+    void              SetLineColor(const QString &value);
+
     virtual void      ShowDialog(bool click);
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type);
@@ -90,75 +93,17 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogEndLine *ui;
 
-    /** @brief typeLine type of line */
-    QString           typeLine;
-
     /** @brief formula formula */
     QString           formulaLength;
 
     /** @brief angle angle of line */
     QString           formulaAngle;
 
-    /** @brief basePointId id base point of line */
-    quint32           basePointId;
-
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
     int               formulaBaseHeightAngle;
 
     VisToolEndLine    *line;
-
-
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogEndLine::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogEndLine::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogEndLine::getFormula() const
-{
-    return qApp->FormulaFromUser(formulaLength);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getAngle return formula angle of line
- * @return angle formula
- */
-inline QString DialogEndLine::getAngle() const
-{
-    return qApp->FormulaFromUser(formulaAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getBasePointId return id base point of line
- * @return id
- */
-inline quint32 DialogEndLine::getBasePointId() const
-{
-    return basePointId;
-}
 
 #endif // DIALOGENDLINE_H

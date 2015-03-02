@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -42,7 +42,7 @@ MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const qu
     nodeId = id;
 
     SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
@@ -64,7 +64,7 @@ void MoveDetail::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, oldX, oldY);
@@ -86,7 +86,7 @@ void MoveDetail::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         SaveCoordinates(domElement, newX, newY);

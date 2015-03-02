@@ -56,6 +56,7 @@ QWidget* VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionView
     Q_UNUSED(delegate);
 
     QSpinBox* tmpEditor = new QSpinBox(parent);
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->setMinimum(static_cast<int>(minValue));
     tmpEditor->setMaximum(static_cast<int>(maxValue));
     tmpEditor->setSingleStep(static_cast<int>(singleStep));
@@ -162,6 +163,7 @@ QWidget* VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewI
     Q_UNUSED(options);
     Q_UNUSED(delegate);
     QDoubleSpinBox* tmpEditor = new QDoubleSpinBox(parent);
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->setMinimum(minValue);
     tmpEditor->setMaximum(maxValue);
     tmpEditor->setDecimals(Precision);

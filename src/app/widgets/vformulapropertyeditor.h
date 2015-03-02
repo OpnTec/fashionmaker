@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,20 +49,20 @@ public:
     virtual ~VFormulaPropertyEditor();
 
     //! Returns the formula currently set
-    VFormula getFormula() const;
+    VFormula GetFormula() const;
 
     //! Needed for proper event handling
     bool eventFilter(QObject *obj, QEvent *ev);
 
 signals:
     //! This is emitted, when the user changes the color
-    void dataChangedByUser(const VFormula &getFormula, VFormulaPropertyEditor* editor);
+    void dataChangedByUser(const VFormula &GetFormula, VFormulaPropertyEditor* editor);
 
     void dataChanged();
 
 public slots:
     //! Sets the color of the widget
-    void setFormula(const VFormula &formula);
+    void SetFormula(const VFormula &formula);
 
 private slots:
     void onToolButtonClicked();

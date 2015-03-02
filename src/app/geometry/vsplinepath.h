@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -118,15 +118,15 @@ public:
      */
     void          Clear();
     /**
-     * @brief getKCurve return coefficient of curvature spline path.
+     * @brief GetKCurve return coefficient of curvature spline path.
      * @return coefficient of curvature spline.
      */
-    qreal         getKCurve() const;
+    qreal         GetKCurve() const;
     /**
-     * @brief setKCurve set coefficient of curvature spline path.
+     * @brief SetKCurve set coefficient of curvature spline path.
      * @param value coefficient of curvature spline path.
      */
-    void          setKCurve(const qreal &value);
+    void          SetKCurve(const qreal &value);
     /**
      * @brief GetPoint pointer to list spline point.
      * @return list.
@@ -160,8 +160,8 @@ public:
      *
      * VSplinePoint splP1 = splPath->at(p1);
      * VSplinePoint splP2 = splPath->at(p2);
-     * VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->getKCurve());
-     * VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->getKCurve());
+     * VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
+     * VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
      * @param length length first spline path.
      * @param p1 index first spline point in list.
      * @param p2 index second spline point in list.
@@ -185,6 +185,8 @@ public:
      * @param value max count.
      */
     void setMaxCountPoints(const qint32 &value);
+
+    int Segment(const QPointF &p) const;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

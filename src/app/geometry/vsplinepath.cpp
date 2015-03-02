@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -30,6 +30,8 @@
 #include "vsplinepath_p.h"
 #include "../libs/ifc/exception/vexception.h"
 
+#include <QtMath>
+
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(qreal kCurve, quint32 idObject, Draw mode)
     : VAbstractCurve(GOType::SplinePath, idObject, mode), d(new VSplinePathData(kCurve))
@@ -47,6 +49,11 @@ VSplinePath::~VSplinePath()
 //---------------------------------------------------------------------------------------------------------------------
 void VSplinePath::append(const VSplinePoint &point)
 {
+    if (d->path.size() > 0 && d->path.last().P().toQPointF() == point.P().toQPointF())
+    {
+        return;
+    }
+
     d->path.append(point);
     QString name = splPath;
     name.append(QString("_%1").arg(d->path.first().P().name()));
@@ -232,6 +239,30 @@ void VSplinePath::setMaxCountPoints(const qint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VSplinePath::Segment(const QPointF &p) const
+{
+    int index = -1;
+    for (qint32 i = 1; i <= Count(); ++i)
+    {
+        VSpline spl = VSpline(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
+                              d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+
+        const qreal t = spl.ParamT(p);
+
+        if (qFloor(t) == -1)
+        {
+            continue;
+        }
+        else
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::CountPoint() const
 {
     return d->path.size();
@@ -250,13 +281,13 @@ void VSplinePath::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::getKCurve() const
+qreal VSplinePath::GetKCurve() const
 {
     return d->kCurve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSplinePath::setKCurve(const qreal &value)
+void VSplinePath::SetKCurve(const qreal &value)
 {
     if (value > 0)
     {

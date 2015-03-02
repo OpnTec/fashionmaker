@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,6 +49,9 @@ class QStringList;
 
 extern const QString nameRegExp;
 extern const QString degreeSymbol;
+
+extern const QString cursorArrowOpenHand;
+extern const QString cursorArrowCloseHand;
 
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
 enum class Tool : unsigned char
@@ -118,7 +121,6 @@ enum class Source : char { FromGui, FromFile, FromTool };
 enum class Draw : char { Calculation, Modeling };
 enum class NodeDetail : char { Contour, Modeling };
 enum class Contour : char { OpenContour, CloseContour };
-enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
 enum class SplinePointPosition : char { FirstPoint, LastPoint };
 enum class VarType : char { Measurement, Increment, LineLength, SplineLength, ArcLength, LineAngle, Unknown };

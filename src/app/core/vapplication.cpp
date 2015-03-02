@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -35,7 +35,6 @@
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"
-#include "vsettings.h"
 
 #include <QDebug>
 #include <QDir>
@@ -292,22 +291,20 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 double VApplication::toPixel(double val, const Unit &unit) const
 {
-    double result = 0;
     switch (unit)
     {
-    case Unit::Mm:
-        result = (val / 25.4) * PrintDPI;
-        break;
-    case Unit::Cm:
-        result = ((val * 10.0) / 25.4) * PrintDPI;
-        break;
-    case Unit::Inch:
-        result = val * PrintDPI;
-        break;
-    default:
-        break;
+        case Unit::Mm:
+            return (val / 25.4) * PrintDPI;
+        case Unit::Cm:
+            return ((val * 10.0) / 25.4) * PrintDPI;
+        case Unit::Inch:
+            return val * PrintDPI;
+        case Unit::Px:
+            return val;
+        default:
+            break;
     }
-    return result;
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -319,22 +316,20 @@ double VApplication::toPixel(double val) const
 //---------------------------------------------------------------------------------------------------------------------
 double VApplication::fromPixel(double pix, const Unit &unit) const
 {
-    double result = 0;
     switch (unit)
     {
-    case Unit::Mm:
-        result = (pix / PrintDPI) * 25.4;
-        break;
-    case Unit::Cm:
-        result = ((pix / PrintDPI) * 25.4) / 10.0;
-        break;
-    case Unit::Inch:
-        result = pix / PrintDPI;
-        break;
-    default:
-        break;
+        case Unit::Mm:
+            return (pix / PrintDPI) * 25.4;
+        case Unit::Cm:
+            return ((pix / PrintDPI) * 25.4) / 10.0;
+        case Unit::Inch:
+            return pix / PrintDPI;
+        case Unit::Px:
+            return pix;
+        default:
+            break;
     }
-    return result;
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,32 +339,39 @@ double VApplication::fromPixel(double pix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::pathToTables() const
+bool VApplication::TryLock(QLockFile *lock)
 {
-    if (_patternType == MeasurementsType::Individual)
+    if (lock == nullptr)
     {
-        return QStringLiteral("://tables/individual/individual.vit");
+        return false;
+    }
+
+    if (lock->tryLock())
+    {
+        return true;
     }
     else
     {
-        const QString stPath = QStringLiteral("/tables/standard");
-        #ifdef Q_OS_WIN
-            return QApplication::applicationDirPath() + stPath;
-        #else
-            #ifdef QT_DEBUG
-                return QApplication::applicationDirPath() + stPath;
-            #else
-                QDir dir(QApplication::applicationDirPath() + stPath);
-                if (dir.exists())
-                {
-                    return dir.absolutePath();
-                }
-                else
-                {
-                    return QStringLiteral("/usr/share/valentina/tables/standard");
-                }
-            #endif
-        #endif
+        if (lock->error() == QLockFile::LockFailedError)
+        {
+            // This happens if a stale lock file exists and another process uses that PID.
+            // Try removing the stale file, which will fail if a real process is holding a
+            // file-level lock. A false error is more problematic than not locking properly
+            // on corner-case systems.
+            if (lock->removeStaleLockFile() == false || lock->tryLock() == false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return false;
     }
 }
 
@@ -465,7 +467,7 @@ void VApplication::BeginLogging()
         qInstallMessageHandler(noisyFailureMsgHandler);
         logLock = new QLockFile(LogPath()+".lock");
         logLock->setStaleLockTime(0);
-        if (logLock->tryLock())
+        if (TryLock(logLock))
         {
             qCDebug(vApp) << "Log file"<<LogPath()<<"was locked.";
         }
@@ -499,7 +501,7 @@ void VApplication::ClearOldLogs() const
         {
             QFileInfo info(allFiles.at(i));
             QLockFile *lock = new QLockFile(info.absoluteFilePath() + ".lock");
-            if (lock->tryLock())
+            if (TryLock(lock))
             {
                 qCDebug(vApp) << "Locked file"<<info.absoluteFilePath();
                 QFile oldLog(allFiles.at(i));
@@ -1502,6 +1504,14 @@ void VApplication::InitSTDescriptions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::MeasurementsFromUser translate measurement to internal look.
+ * @param newFormula [in|out] expression to translate
+ * @param position token position
+ * @param token token to translate
+ * @param bias hold change of length between translated and origin token string
+ * @return true if was found measurement with same name.
+ */
 bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, QmuTranslation>::const_iterator i = measurements.constBegin();
@@ -1519,6 +1529,14 @@ bool VApplication::MeasurementsFromUser(QString &newFormula, int position, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::VariablesFromUser translate variable to internal look.
+ * @param newFormula [in|out] expression to translate
+ * @param position token position
+ * @param token token to translate
+ * @param bias hold change of length between translated and origin token string
+ * @return true if was found variable with same name.
+ */
 bool VApplication::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, QmuTranslation>::const_iterator i = variables.constBegin();
@@ -1538,6 +1556,14 @@ bool VApplication::VariablesFromUser(QString &newFormula, int position, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::PostfixOperatorsFromUser translate postfix operator to internal look.
+ * @param newFormula [in|out] expression to translate
+ * @param position token position
+ * @param token token to translate
+ * @param bias hold change of length between translated and origin token string
+ * @return true if was found postfix operator with same name.
+ */
 bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, QmuTranslation>::const_iterator i = postfixOperators.constBegin();
@@ -1555,6 +1581,14 @@ bool VApplication::PostfixOperatorsFromUser(QString &newFormula, int position, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::FunctionsFromUser translate function name to internal look.
+ * @param newFormula [in|out] expression to translate
+ * @param position token position
+ * @param token token to translate
+ * @param bias hold change of length between translated and origin token string
+ * @return true if was found function with same name.
+ */
 bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, QmuTranslation>::const_iterator i = functions.constBegin();
@@ -1572,6 +1606,14 @@ bool VApplication::FunctionsFromUser(QString &newFormula, int position, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::VariablesToUser translate variable name to user.
+ * @param newFormula [in|out] expression to translate
+ * @param position token position
+ * @param token token to translate
+ * @param bias hold change of length between translated and origin token string
+ * @return true if was found variable with same name.
+ */
 bool VApplication::VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const
 {
     QMap<QString, QmuTranslation>::const_iterator i = variables.constBegin();
@@ -1591,18 +1633,37 @@ bool VApplication::VariablesToUser(QString &newFormula, int position, const QStr
     return false;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::CorrectionsPositions correct position tokens in expression after token translation.
+ *
+ * Because translated string can have different length compare to original need make correction after each translation.
+ * If bias = 0 correction will not happens.
+ *
+ * @param position position currecnt token in expression
+ * @param bias difference between original token length and translated
+ * @param tokens all tokens
+ * @param numbers all numbers
+ */
 void VApplication::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
                                         QMap<int, QString> &numbers)
 {
     if (bias == 0)
     {
-        return;
+        return;// Nothing to correct;
     }
 
     BiasTokens(position, bias, tokens);
     BiasTokens(position, bias, numbers);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::BiasTokens change position for each token that have position more then "position".
+ * @param position token position
+ * @param bias difference between original token length and translated
+ * @param tokens all tokens
+ */
 void VApplication::BiasTokens(int position, int bias, QMap<int, QString> &tokens) const
 {
     QMap<int, QString> newTokens;
@@ -1610,7 +1671,7 @@ void VApplication::BiasTokens(int position, int bias, QMap<int, QString> &tokens
     while (i != tokens.constEnd())
     {
         if (i.key()<= position)
-        {
+        { // Tokens before position "position" did not change his positions.
             newTokens.insert(i.key(), i.value());
         }
         else
@@ -1702,16 +1763,22 @@ QString VApplication::PostfixOperator(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::FormulaFromUser replace all known tokens in formula to internal look. Also change decimal
+ * separator in numbers.
+ * @param formula expression that need translate
+ * @return translated expression
+ */
 QString VApplication::FormulaFromUser(const QString &formula)
 {
-    QString newFormula = formula;
+    QString newFormula = formula;// Local copy for making changes
 
-    Calculator *cal = new Calculator(formula);
-    QMap<int, QString> tokens = cal->GetTokens();
-    QMap<int, QString> numbers = cal->GetNumbers();
+    Calculator *cal = new Calculator(formula);// Eval formula
+    QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
+    QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
     delete cal;
 
-    QList<int> tKeys = tokens.keys();
+    QList<int> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
     for (int i = 0; i < tKeys.size(); ++i)
     {
@@ -1719,7 +1786,7 @@ QString VApplication::FormulaFromUser(const QString &formula)
         if (MeasurementsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1730,7 +1797,7 @@ QString VApplication::FormulaFromUser(const QString &formula)
         if (VariablesFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1741,7 +1808,7 @@ QString VApplication::FormulaFromUser(const QString &formula)
         if (PostfixOperatorsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1752,7 +1819,7 @@ QString VApplication::FormulaFromUser(const QString &formula)
         if (FunctionsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1761,34 +1828,32 @@ QString VApplication::FormulaFromUser(const QString &formula)
         }
     }
 
-    QLocale loc = QLocale::system();
+    QLocale loc = QLocale::system(); // User locale
     if (loc != QLocale(QLocale::C) && getSettings()->GetOsSeparator())
-    {
-        QList<int> nKeys = numbers.keys();
+    {// User want use Os separator
+        QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
+            loc = QLocale::system();// From system locale
             bool ok = false;
-            qreal d = loc.toDouble(nValues.at(i), &ok);
+            const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
             {
                 qDebug()<<"Can't convert to double token"<<nValues.at(i);
-                continue;
-            }
-            if (qFloor (d) < d)
-            {
-                QLocale loc = QLocale(QLocale::C);
-                QString dStr = loc.toString(d);
-                newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
-                int bias = nValues.at(i).length() - dStr.length();
-                if (bias != 0)
-                {
-                    CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
-                    nKeys = numbers.keys();
-                    nValues = numbers.values();
-                }
+                continue;//Leave with out translation
             }
 
+            loc = QLocale(QLocale::C);// To internal locale
+            const QString dStr = loc.toString(d);// Internal look for number
+            newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
+            const int bias = nValues.at(i).length() - dStr.length();
+            if (bias != 0)
+            {// Translated number has different length than original. Position next tokens need to be corrected.
+                CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
+                nKeys = numbers.keys();
+                nValues = numbers.values();
+            }
         }
     }
 
@@ -1796,17 +1861,23 @@ QString VApplication::FormulaFromUser(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VApplication::FormulaToUser replace all known tokens in formula to user look. Also change decimal
+ * separator in numbers.
+ * @param formula expression that need translate
+ * @return translated expression
+ */
 QString VApplication::FormulaToUser(const QString &formula)
 {
-    QString newFormula = formula;
+    QString newFormula = formula;// Local copy for making changes
 
     QMap<int, QString> tokens;
     QMap<int, QString> numbers;
     try
     {
-        Calculator *cal = new Calculator(formula, false);
-        tokens = cal->GetTokens();
-        numbers = cal->GetNumbers();
+        Calculator *cal = new Calculator(formula, false);// Eval formula
+        tokens = cal->GetTokens();// Tokens (variables, measurements)
+        numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
         delete cal;
     }
     catch (qmu::QmuParserError &e)
@@ -1828,7 +1899,7 @@ QString VApplication::FormulaToUser(const QString &formula)
             newFormula.replace(tKeys.at(i), tValues.at(i).length(), measurements.value(tValues.at(i)).translate());
             int bias = tValues.at(i).length() - measurements.value(tValues.at(i)).translate().length();
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1841,7 +1912,7 @@ QString VApplication::FormulaToUser(const QString &formula)
             newFormula.replace(tKeys.at(i), tValues.at(i).length(), functions.value(tValues.at(i)).translate());
             int bias = tValues.at(i).length() - functions.value(tValues.at(i)).translate().length();
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1854,7 +1925,7 @@ QString VApplication::FormulaToUser(const QString &formula)
             newFormula.replace(tKeys.at(i), tValues.at(i).length(), postfixOperators.value(tValues.at(i)).translate());
             int bias = tValues.at(i).length() - postfixOperators.value(tValues.at(i)).translate().length();
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1866,7 +1937,7 @@ QString VApplication::FormulaToUser(const QString &formula)
         if (VariablesToUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {
+            {// Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -1875,34 +1946,31 @@ QString VApplication::FormulaToUser(const QString &formula)
         }
     }
 
-    QLocale loc = QLocale::system();
+    QLocale loc = QLocale::system();// User locale
     if (loc != QLocale::C && getSettings()->GetOsSeparator())
-    {
-        QList<int> nKeys = numbers.keys();
+    {// User want use Os separator
+        QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            QLocale loc = QLocale(QLocale::C);
+            loc = QLocale(QLocale::C);// From pattern locale
             bool ok = false;
-            qreal d = loc.toDouble(nValues.at(i), &ok);
+            const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (ok == false)
             {
                 qDebug()<<"Can't convert to double token"<<nValues.at(i);
-                continue;
+                continue;//Leave with out translation
             }
-            if (qFloor (d) < d)
-            {
-                QLocale loc = QLocale::system();
-                QString dStr = loc.toString(d);
-                newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
-                int bias = nValues.at(i).length() - dStr.length();
 
-                if (bias != 0)
-                {
-                    CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
-                    nKeys = numbers.keys();
-                    nValues = numbers.values();
-                }
+            loc = QLocale::system();// To user locale
+            const QString dStr = loc.toString(d);// Number string in user locale
+            newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
+            const int bias = nValues.at(i).length() - dStr.length();
+            if (bias != 0)
+            {// Translated number has different length than original. Position next tokens need to be corrected.
+                CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
+                nKeys = numbers.keys();
+                nValues = numbers.values();
             }
         }
     }
@@ -2122,7 +2190,7 @@ void VApplication::GatherLogs() const
                 }
                 QLockFile *logLock = new QLockFile(info.absoluteFilePath()+".lock");
                 logLock->setStaleLockTime(0);
-                if (logLock->tryLock())
+                if (TryLock(logLock))
                 {
                     *out <<"--------------------------" << endl;
                     QFile logFile(info.absoluteFilePath());
@@ -2248,8 +2316,10 @@ void VApplication::SendReport(const QString &reportName) const
     // Additional information
     content.append(QString("-------------------------------")+"\r\n");
     content.append(QString("Version:%1").arg(APP_VERSION)+"\r\n");
+    content.append(QString("Build revision:%1").arg(BUILD_REVISION)+"\r\n");
     content.append(QString("Based on Qt %2 (32 bit)").arg(QT_VERSION_STR)+"\r\n");
     content.append(QString("Built on %3 at %4").arg(__DATE__).arg(__TIME__)+"\r\n");
+    content.append(QString("Web site:http://www.valentina-project.org/ ")+"\r\n");
     content.append("\r\n");
 
     // Creating json with report
@@ -2317,13 +2387,17 @@ void VApplication::SendReport(const QString &reportName) const
     gistFile.write(saveRep.toJson());
     gistFile.close();
 
-    QFile curlFile("curl.exe");
+    const QString curl = QString("%1/curl.exe").arg(qApp->applicationDirPath());
+    QFile curlFile(curl);
     if (curlFile.exists())
     {// Trying send report
-        // Change token 28df778e0ef75e3724f7b9622fb70b9c69187779 if need
-        QString arg = QString("curl.exe -k -H \"Authorization: bearer 28df778e0ef75e3724f7b9622fb70b9c69187779\" "
-                              "-H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "
-                              "--data @gist.json https://api.github.com/gists");
+        // Change token if need
+        const QStringList token = QStringList()<<"3c"<<"6e"<<"91"<<"19"<<"96"<<"92"<<"dc"<<"50"<<"67"<<"8a"<<"2a"<<"89"
+                                               <<"a3"<<"55"<<"9e"<<"c7"<<"9d"<<"f8"<<"66"<<"a5";
+
+        const QString arg = QString("curl.exe -k -H \"Authorization: bearer ")+token.join("")+
+                            QString("\" -H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "
+                                    "--data @gist.json https://api.github.com/gists");
         QProcess::startDetached(arg);
         reportFile.remove();// Clear after yourself
     }
@@ -2331,6 +2405,7 @@ void VApplication::SendReport(const QString &reportName) const
     {// We can not send than just collect
         CollectReport(reportName);
     }
+    curlFile.close();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

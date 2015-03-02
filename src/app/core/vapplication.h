@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -33,6 +33,7 @@
 #include "../options.h"
 #include "../widgets/vmaingraphicsview.h"
 #include "../../libs/qmuparser/qmutranslation.h"
+#include "vsettings.h"
 
 class VApplication;// used in define
 class QUndoStack;
@@ -40,7 +41,6 @@ class VMainGraphicsView;
 class VMainGraphicsScene;
 class VPattern;
 class QFile;
-class VSettings;
 class QLockFile;
 
 #if defined(qApp)
@@ -70,9 +70,10 @@ public:
     double             fromPixel(double pix, const Unit &unit) const;
     double             fromPixel(double pix) const;
 
+    static bool        TryLock(QLockFile *lock);
+
     static const qreal PrintDPI;
     QString            translationsPath() const;
-    QString            pathToTables() const;
     qreal              widthMainLine() const;
     qreal              widthHairLine() const;
     QString            VarToUser(const QString &var) const;
@@ -80,8 +81,18 @@ public:
     QString            GuiText(const QString &measurement) const;
     QString            Description(const QString &measurement) const;
     QString            PostfixOperator(const QString &name) const;
+
     QString            FormulaFromUser(const QString &formula);
     QString            FormulaToUser(const QString &formula);
+
+    template <typename T>
+    QString            LocaleToString(const T &value)
+    {
+        QLocale loc;
+        qApp->getSettings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
+        return loc.toString(value);
+    }
+
     QUndoStack         *getUndoStack() const;
     VMainGraphicsView  *getSceneView() const;
     void               setSceneView(VMainGraphicsView *value);

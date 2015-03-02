@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -51,6 +51,9 @@ public:
 
     VSplinePath        GetPath() const;
     void               SetPath(const VSplinePath &value);
+
+    QString            GetColor() const;
+    void               SetColor(const QString &value);
 public slots:
     virtual void       ChosenObject(quint32 id, const SceneObject &type);
     void               PointChanged(int row);

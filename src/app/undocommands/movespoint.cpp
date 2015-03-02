@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -46,7 +46,7 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
     qCDebug(vUndo)<<"SPoint newY"<<newY;
 
     SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrX, "0.0"));
@@ -89,8 +89,10 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getSPointId();
 
+    qCDebug(vUndo)<<"Mergin.";
     if (id != nodeId)
     {
+        qCDebug(vUndo)<<"Merging canceled.";
         return false;
     }
 
@@ -114,7 +116,7 @@ void MoveSPoint::Do(double x, double y)
     qCDebug(vUndo)<<"Move to x"<<x;
     qCDebug(vUndo)<<"Move to y"<<y;
 
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, VAbstractTool::AttrX, QString().setNum(qApp->fromPixel(x)));

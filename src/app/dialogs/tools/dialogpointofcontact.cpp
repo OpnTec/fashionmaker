@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -41,8 +41,8 @@
  * @param parent parent widget
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), number(0),
-      radius(QString()), center(NULL_ID), firstPoint(NULL_ID), secondPoint(NULL_ID), formulaBaseHeight(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact),
+      radius(QString()), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
     InitVariables(ui);
@@ -62,7 +62,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogPointOfContact::ValChenged);
 
     if (qApp->patternType() == MeasurementsType::Standard)
     {
@@ -79,7 +78,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
     connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
     connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogPointOfContact::EvalFormula);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
@@ -217,13 +215,10 @@ void DialogPointOfContact::SaveData()
     pointName = ui->lineEditNamePoint->text();
     radius = ui->plainTextEditFormula->toPlainText();
     radius.replace("\n", " ");
-    center = getCurrentObjectId(ui->comboBoxCenter);
-    firstPoint = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPoint = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPoint);
-    line->setLineP2Id(secondPoint);
-    line->setRadiusId(center);
+    line->setPoint1Id(GetFirstPoint());
+    line->setLineP2Id(GetSecondPoint());
+    line->setRadiusId(getCenter());
     line->setRadius(radius);
     line->RefreshGeometry();
 }
@@ -237,24 +232,24 @@ void DialogPointOfContact::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPoint set id second point
+ * @brief SetSecondPoint set id second point
  * @param value id
  */
-void DialogPointOfContact::setSecondPoint(const quint32 &value)
+void DialogPointOfContact::SetSecondPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPoint, value);
-    line->setLineP2Id(secondPoint);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
+    line->setLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPoint set id first point
+ * @brief SetFirstPoint set id first point
  * @param value id
  */
-void DialogPointOfContact::setFirstPoint(const quint32 &value)
+void DialogPointOfContact::SetFirstPoint(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPoint, value);
-    line->setPoint1Id(firstPoint);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -264,8 +259,8 @@ void DialogPointOfContact::setFirstPoint(const quint32 &value)
  */
 void DialogPointOfContact::setCenter(const quint32 &value)
 {
-    setPointId(ui->comboBoxCenter, center, value);
-    line->setRadiusId(center);
+    setCurrentPointId(ui->comboBoxCenter, value);
+    line->setRadiusId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,7 +270,7 @@ void DialogPointOfContact::setCenter(const quint32 &value)
  */
 void DialogPointOfContact::setRadius(const QString &value)
 {
-    radius = value;
+    radius = qApp->FormulaToUser(value);
     // increase height if needed.
     if (radius.length() > 80)
     {
@@ -288,11 +283,51 @@ void DialogPointOfContact::setRadius(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogPointOfContact::setPointName(const QString &value)
+void DialogPointOfContact::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief getRadius return formula radius of arc
+ * @return formula
+ */
+QString DialogPointOfContact::getRadius() const
+{
+    return qApp->FormulaFromUser(radius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetCenter return id of center point
+ * @return id
+ */
+quint32 DialogPointOfContact::getCenter() const
+{
+    return getCurrentObjectId(ui->comboBoxCenter);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFirstPoint return id first point
+ * @return id
+ */
+quint32 DialogPointOfContact::GetFirstPoint() const
+{
+    return getCurrentObjectId(ui->comboBoxFirstPoint);;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetSecondPoint return id second point
+ * @return id
+ */
+quint32 DialogPointOfContact::GetSecondPoint() const
+{
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

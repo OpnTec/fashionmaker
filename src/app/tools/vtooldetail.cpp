@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -30,7 +30,6 @@
 #include "nodeDetails/nodedetails.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
-#include "../geometry/vequidistant.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"
@@ -130,7 +129,7 @@ void VToolDetail::setDialog()
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
     SCASSERT(dialogTool != nullptr);
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    dialogTool->setDetails(detail);
+    dialogTool->setDetail(detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -146,7 +145,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VPattern
     SCASSERT(dialog != nullptr);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    VDetail detail = dialogTool->getDetails();
+    VDetail detail = dialogTool->getDetail();
     VDetail det;
     qApp->getUndoStack()->beginMacro("add detail");
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -261,7 +260,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         SCASSERT(dialog != nullptr);
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
         SCASSERT(dialogTool != nullptr);
-        VDetail newDet = dialogTool->getDetails();
+        VDetail newDet = dialogTool->getDetail();
         VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
@@ -305,7 +304,7 @@ void VToolDetail::AddToFile()
  */
 void VToolDetail::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         VDetail det = VAbstractTool::data.GetDetail(id);
@@ -511,10 +510,8 @@ void VToolDetail::ShowVisualization(bool show)
 void VToolDetail::RefreshGeometry()
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    QPainterPath path = VEquidistant(this->getData()).ContourPath(id);
-    this->setPath(path);
-
     VDetail detail = VAbstractTool::data.GetDetail(id);
+    this->setPath(detail.ContourPath(this->getData()));
     this->setPos(detail.getMx(), detail.getMy());
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
@@ -525,7 +522,7 @@ void VToolDetail::DeleteTool(bool ask)
     DeleteDetail *delDet = new DeleteDetail(doc, id);
     if (ask)
     {
-        if (ConfirmDeletion() == QMessageBox::Cancel)
+        if (ConfirmDeletion() == QMessageBox::No)
         {
             return;
         }

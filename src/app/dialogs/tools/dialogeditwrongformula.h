@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -51,8 +51,8 @@ public:
     explicit DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogEditWrongFormula();
 
-    QString      getFormula() const;
-    void         setFormula(const QString &value);
+    QString      GetFormula() const;
+    void         SetFormula(const QString &value);
     void         setCheckZero(bool value);
     void         setPostfix(const QString &value);
 public slots:

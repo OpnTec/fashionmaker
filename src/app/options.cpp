@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -36,6 +36,9 @@ const QString nameRegExp = QStringLiteral("^([^0-9-*/^+=\\s\\(\\)%:;!.,`'\"]){1,
 // From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
 // furthermore blows up the binary sizes.
 const QString degreeSymbol = QStringLiteral("°");
+
+const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
+const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
 
 // Keep synchronize all names with initialization in VApllication class!!!!!
 //measurements

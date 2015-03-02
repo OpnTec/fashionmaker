@@ -45,31 +45,31 @@ public:
 
 
     //! Returns the color currently set
-    QColor getColor() const;
+    QColor GetColor() const;
 
     //! A little helper function generating an image to represent a color
     //! \param color The color to fill the image with
     //! \size The size of the generated pixmap
     //! \return Returns a QPixmap
-    static QPixmap getColorPixmap(const QColor& color, unsigned int size = 16);
+    static QPixmap GetColorPixmap(const QColor& color, unsigned int size = 16);
 
     //! A helper function to convert a color into a string.
     //! \param color The color to fill the image with
     //! \return The color as string, usually in the format [RRR, GGG, BBB] (AAA)
-    static QString getColorString(const QColor& color);
+    static QString GetColorString(const QColor& color);
 
     //! Needed for proper event handling
     bool eventFilter(QObject *obj, QEvent *ev);
 
 signals:
     //! This is emitted, when the user changes the color
-    void dataChangedByUser(const QColor &getColor, VColorPropertyEditor* editor);
+    void dataChangedByUser(const QColor &GetColor, VColorPropertyEditor* editor);
 
     void dataChanged();
 
 public slots:
     //! Sets the color of the widget
-    void setColor(const QColor &color_);
+    void SetColor(const QColor &color_);
 
 private slots:
     void onToolButtonClicked();

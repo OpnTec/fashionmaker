@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -31,12 +31,17 @@
 
 #include <QLabel>
 #include <QMainWindow>
-#include "widgets/vitem.h"
+
+#include "../../libs/vlayout/vlayoutdetail.h"
+#include "../../libs/vlayout/vbank.h"
 
 namespace Ui
 {
     class TableWindow;
 }
+
+class QGraphicsScene;
+class QGraphicsRectItem;
 
 /**
  * @brief TableWindow class layout window.
@@ -45,85 +50,38 @@ class TableWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    /** @brief numberDetal show count details, what need placed. */
-    QLabel*               numberDetal;
-
-    /** @brief colission show if exist colissions. */
-    QLabel*               colission;
-
     explicit TableWindow(QWidget *parent = nullptr);
     ~TableWindow();
+
 public slots:
-
-    void                  ModelChosen(QVector<VItem*> listDetails, const QString &fileName, const QString &description);
-
+    void                  ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName,
+                                      const QString &description);
+    void                  Layout();
     void                  StopTable();
+    void                  SaveLayout();
+    void                  ShowPaper(int index);
 
-    void                  saveScene();
-
-    void                  GetNextDetail();
-
-    void                  itemChect(bool flag);
-
-    void                  itemOut(int number, bool flag);
-
-    void                  itemColliding(QList<QGraphicsItem *> list, int number);
-
-    void                  AddLength();
-
-    void                  RemoveLength();
 signals:
-    /**
-     * @brief closed emit if window is closing.
-     */
+    /** @brief closed emit if window is closing. */
     void                  closed();
-    /**
-     * @brief LengthChanged emit if changing length of paper sheet.
-     */
-    void                  LengthChanged();
+
 protected:
-
     void                  closeEvent(QCloseEvent *event);
-
     void                  moveToCenter();
-
     void                  showEvent ( QShowEvent * event );
 
-    void                  keyPressEvent ( QKeyEvent * event );
 private:
     Q_DISABLE_COPY(TableWindow)
     /** @brief ui keeps information about user interface */
     Ui::TableWindow*      ui;
 
     /** @brief listDetails list of details. */
-    QVector<VItem*>       listDetails;
+    QVector<VLayoutDetail> listDetails;
 
-    /** @brief outItems true if we have details out paper sheet. */
-    bool                  outItems;
-
-    /** @brief collidingItems true if we have colission details. */
-    bool                  collidingItems;
-
-    /** @brief currentScene pointer to scene. */
-    QGraphicsScene*       tableScene;
-
-    /** @brief paper paper sheet. */
-    QGraphicsRectItem*    paper;
-
-    /** @brief shadowPaper paper sheet shadow. */
-    QGraphicsRectItem*    shadowPaper;
-
-    /** @brief listOutItems list state out each detail. */
-    QBitArray*            listOutItems;
-
-    /** @brief listCollidingItems list colissed details. */
-    QList<QGraphicsItem*> listCollidingItems;
-
-    /** @brief indexDetail index next detail in list what will be shown. */
-    qint32                indexDetail;
-
-    /** @brief sceneRect minimal size of a paper. */
-    QRectF                sceneRect;
+    QList<QGraphicsItem *> papers;
+    QList<QGraphicsItem *> shadows;
+    QList<QGraphicsScene *> scenes;
+    QList<QList<QGraphicsItem *> > details;
 
     /** @brief fileName keep name of pattern file. */
     QString               fileName;
@@ -131,16 +89,22 @@ private:
     /** @brief description pattern description */
     QString               description;
 
-    void                  checkNext();
-    void                  AddPaper();
-    void                  AddDetail();
-    void                  SvgFile(const QString &name)const;
-    void                  PngFile(const QString &name)const;
-    void                  PdfFile(const QString &name)const;
-    void                  EpsFile(const QString &name)const;
-    void                  PsFile(const QString &name)const;
+    QGraphicsScene* tempScene;
+
+    void                  SvgFile(const QString &name, int i)const;
+    void                  PngFile(const QString &name, int i)const;
+    void                  PdfFile(const QString &name, int i)const;
+    void                  EpsFile(const QString &name, int i)const;
+    void                  PsFile(const QString &name, int i)const;
     void                  PdfToPs(const QStringList &params)const;
-    void                  ObjFile(const QString &name)const;
+    void                  ObjFile(const QString &name, int i)const;
+
+    void ClearLayout();
+    void CreateShadows();
+    void CreateScenes();
+    void PrepareSceneList();
+    QIcon ScenePreview(int i) const;
+    QMap<QString, QString> InitFormates() const;
 };
 
 #endif // TABLEWINDOW_H

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -47,20 +47,23 @@ class DialogAlongLine : public DialogTool
 public:
     DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogAlongLine();
-    QString             getPointName() const;
-    void                setPointName(const QString &value);
 
-    QString             getTypeLine() const;
-    void                setTypeLine(const QString &value);
+    void                SetPointName(const QString &value);
 
-    QString             getFormula() const;
-    void                setFormula(const QString &value);
+    QString             GetTypeLine() const;
+    void                SetTypeLine(const QString &value);
 
-    quint32             getFirstPointId() const;
-    void                setFirstPointId(const quint32 &value);
+    QString             GetLineColor() const;
+    void                SetLineColor(const QString &value);
 
-    quint32             getSecondPointId() const;
-    void                setSecondPointId(const quint32 &value);
+    QString             GetFormula() const;
+    void                SetFormula(const QString &value);
+
+    quint32             GetFirstPointId() const;
+    void                SetFirstPointId(const quint32 &value);
+
+    quint32             GetSecondPointId() const;
+    void                SetSecondPointId(const quint32 &value);
 public slots:
     virtual void        ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -85,74 +88,12 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogAlongLine *ui;
 
-    /** @brief number number of handled objects */
-    qint32              number;
-
-    /** @brief typeLine type of line */
-    QString             typeLine;
-
     /** @brief formula formula */
     QString             formula;
-
-    /** @brief firstPointId id first point of line */
-    quint32             firstPointId;
-
-    /** @brief secondPointId id second point of line */
-    quint32             secondPointId;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
     VisToolAlongLine    *line;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogAlongLine::getPointName() const
-{
-    return pointName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogAlongLine::getTypeLine() const
-{
-    return typeLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFormula return string of formula
- * @return formula
- */
-inline QString DialogAlongLine::getFormula() const
-{
-    return qApp->FormulaFromUser(formula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPointId return id first point of line
- * @return id
- */
-inline quint32 DialogAlongLine::getFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPointId return id second point of line
- * @return id
- */
-inline quint32 DialogAlongLine::getSecondPointId() const
-{
-    return secondPointId;
-}
 
 #endif // DIALOGALONGLINE_H

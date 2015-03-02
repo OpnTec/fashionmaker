@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -38,12 +38,13 @@ class VToolSplinePath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+    VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                     QGraphicsItem * parent = nullptr);
      virtual void setDialog();
      static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, VMainGraphicsScene  *scene, VPattern *doc,
-                                    VContainer *data, const Document &parse, const Source &typeCreation);
+     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
+                                    VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                    const Source &typeCreation);
      static const QString ToolType;
      static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
      virtual int  type() const {return Type;}
@@ -72,15 +73,23 @@ public slots:
 
     void          ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
+    virtual void  EnableToolMove(bool move);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void  RefreshDataInFile();
     virtual void  RemoveReferens();
     virtual void  SaveDialog(QDomElement &domElement);
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void  mousePressEvent(QGraphicsSceneMouseEvent * event);
+    virtual void  mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    virtual void  hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
+    QPointF oldPosition;
+
     void          RefreshGeometry();
-    void          AddPathPoint(QDomElement &domElement, const VSplinePoint &splPoint);
+    static void   AddPathPoint(VPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
     void          RefreshSplinePath(VSplinePath &splPath);
 };

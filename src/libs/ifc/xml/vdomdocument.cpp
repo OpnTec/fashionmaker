@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -96,6 +96,7 @@ const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
 const QString VDomDocument::UnitMM     = QStringLiteral("mm");
 const QString VDomDocument::UnitCM     = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
+const QString VDomDocument::UnitPX     = QStringLiteral("px");
 const QString VDomDocument::TagVersion = QStringLiteral("version");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,6 +132,12 @@ QDomElement VDomDocument::elementById(const QString& id)
     }
 
     return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VDomDocument::elementById(quint32 id)
+{
+    return elementById(QString().setNum(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -499,7 +506,7 @@ void VDomDocument::setXMLContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VDomDocument::StrToUnits(const QString &unit)
 {
-    QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH;
+    QStringList units = QStringList() << UnitMM << UnitCM << UnitINCH << UnitPX;
     Unit result = Unit::Cm;
     switch (units.indexOf(unit))
     {
@@ -511,6 +518,9 @@ Unit VDomDocument::StrToUnits(const QString &unit)
             break;
         case 2:// inch
             result = Unit::Inch;
+            break;
+        case 3:// px
+            result = Unit::Px;
             break;
         default:
             result = Unit::Cm;
@@ -561,6 +571,16 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
             else
             {
                 result = UnitINCH;
+            }
+            break;
+        case Unit::Px:
+            if (translate)
+            {
+                result = QObject::tr("px");
+            }
+            else
+            {
+                result = UnitPX;
             }
             break;
         default:

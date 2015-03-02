@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>457</width>
-    <height>532</height>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Line intersect axis</string>
+   <string>Point intersect line and axis</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
@@ -97,22 +97,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqualAngle">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -226,7 +216,7 @@
            <item row="0" column="1">
             <widget class="QComboBox" name="comboBoxAxisPoint">
              <property name="toolTip">
-              <string>First point of line</string>
+              <string>Axis Point</string>
              </property>
             </widget>
            </item>
@@ -266,7 +256,7 @@
            <item row="2" column="1">
             <widget class="QComboBox" name="comboBoxSecondLinePoint">
              <property name="toolTip">
-              <string>First point of line</string>
+              <string>Second point of line</string>
              </property>
             </widget>
            </item>
@@ -302,10 +292,38 @@
            </item>
            <item row="4" column="1">
             <widget class="QComboBox" name="comboBoxLineType">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>110</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="toolTip">
               <string>Show line from first point to this point</string>
              </property>
+             <property name="iconSize">
+              <size>
+               <width>80</width>
+               <height>14</height>
+              </size>
+             </property>
             </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Line color</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QComboBox" name="comboBoxLineColor"/>
            </item>
           </layout>
          </item>
@@ -480,7 +498,6 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHereAngle</tabstop>
-  <tabstop>toolButtonEqualAngle</tabstop>
   <tabstop>pushButtonGrowLengthAngle</tabstop>
   <tabstop>comboBoxAxisPoint</tabstop>
   <tabstop>comboBoxFirstLinePoint</tabstop>
