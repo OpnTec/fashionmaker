@@ -78,7 +78,6 @@ private:
     bool AddToSheet(const VLayoutDetail &detail, bool &stop);
 
     bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
-    void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 
 };
 

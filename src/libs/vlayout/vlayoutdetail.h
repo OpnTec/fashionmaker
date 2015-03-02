@@ -82,7 +82,7 @@ private:
     QSharedDataPointer<VLayoutDetailData> d;
 
     QVector<QPointF> Map(const QVector<QPointF> &points) const;
-    QVector<QPointF> RoundPoints(const QVector<QPointF> &points) const;
+    static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 };
 
 #endif // VLAYOUTDETAIL_H

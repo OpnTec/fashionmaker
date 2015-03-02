@@ -746,7 +746,7 @@ void VSpline::SetKcurve(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSpline::Sign(long double ld) const
+int VSpline::Sign(long double ld)
 {
     if (qAbs(ld)<0.00000000001)
     {
@@ -774,7 +774,7 @@ int VSpline::Sign(long double ld) const
  *         1 - 1 real root + 2 complex;
  *         2 - 1 real root + complex roots imaginary part is zero (i.e. 2 real roots).
  */
-qint32 VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) const
+qint32 VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c)
 {
     //To find cubic equation roots in the case of real coefficients, calculated at the beginning
     const qreal q = (pow(a, 2) - 3*b)/9.;

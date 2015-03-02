@@ -259,17 +259,6 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ,
-                                 BestFrom type)
-{
-    QVector<QPointF> newGContour = d->globalContour.UniteWithContour(detail, globalI, detJ, type);
-    newGContour.append(newGContour.first());
-    const QRectF rec = QPolygonF(newGContour).boundingRect();
-    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), globalI, detJ,
-                         detail.GetMatrix(), detail.IsMirror(), type);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QGraphicsRectItem *VLayoutPaper::GetPaperItem() const
 {
     QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(),

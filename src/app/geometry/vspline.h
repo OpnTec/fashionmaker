@@ -83,8 +83,8 @@ private:
     void           CreateName();
     QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
                          qreal pointCoord) const;
-    qint32         Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) const;
-    int            Sign(long double ld) const;
+    static qint32  Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c);
+    static int     Sign(long double ld);
 };
 
 #endif // VSPLINE_H

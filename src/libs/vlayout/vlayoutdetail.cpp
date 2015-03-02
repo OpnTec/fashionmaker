@@ -366,7 +366,7 @@ QVector<QPointF> VLayoutDetail::Map(const QVector<QPointF> &points) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutDetail::RoundPoints(const QVector<QPointF> &points) const
+QVector<QPointF> VLayoutDetail::RoundPoints(const QVector<QPointF> &points)
 {
     QVector<QPointF> p;
     for (int i=0; i < points.size(); ++i)

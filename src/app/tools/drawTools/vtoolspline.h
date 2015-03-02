@@ -38,7 +38,7 @@ class VToolSpline:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
+    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                  QGraphicsItem * parent = nullptr );
     virtual ~VToolSpline();
     virtual void setDialog();

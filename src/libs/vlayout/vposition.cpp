@@ -47,7 +47,7 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detai
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
-        rotationIncrease = 180;
+        this->rotationIncrease = 180;
     }
 }
 

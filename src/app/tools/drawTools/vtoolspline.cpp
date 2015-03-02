@@ -45,7 +45,7 @@ const QString VToolSpline::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QString color, const Source &typeCreation,
+VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                          QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent), oldPosition()
 {

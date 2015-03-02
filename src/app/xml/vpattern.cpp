@@ -1647,9 +1647,9 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    quint32 id = 0;
     try
     {
+        quint32 id = 0;
         ToolsCommonAttributes(domElement, id);
         const quint32 firstPoint = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
         const quint32 secondPoint = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
@@ -2065,7 +2065,6 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    quint32 id = 0;
     QStringList tools{VToolUnionDetails::ToolType};
 
     switch (tools.indexOf(type))
@@ -2073,6 +2072,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
         case 0: //VToolUnionDetails::ToolType
             try
             {
+                quint32 id = 0;
                 ToolsCommonAttributes(domElement, id);
                 const quint32 indexD1 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD1, "-1");
                 const quint32 indexD2 = GetParametrUInt(domElement, VToolUnionDetails::AttrIndexD2, "-1");
