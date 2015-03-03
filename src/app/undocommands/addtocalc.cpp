@@ -50,7 +50,7 @@ void AddToCalc::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    doc->ChangeActivPP(nameActivDraw);//User will not see this change
+    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -90,7 +90,7 @@ void AddToCalc::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    doc->ChangeActivPP(nameActivDraw);//User will not see this change
+    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;

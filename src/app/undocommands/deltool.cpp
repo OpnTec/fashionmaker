@@ -54,7 +54,8 @@ void DelTool::undo()
 
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
-    doc->SetCurrentPP(nameActivDraw);
+    //Keep last!
+    doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -62,8 +63,9 @@ void DelTool::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
+    //Keep first!
+    doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);
     emit NeedFullParsing();
-    doc->SetCurrentPP(nameActivDraw);
 }
