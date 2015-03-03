@@ -248,43 +248,45 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
         delete cal;
 
         DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
-        if (dialogUndo->exec() == QDialog::Accepted)
+        forever
         {
-            UndoButton resultUndo = dialogUndo->Result();
-            delete dialogUndo;
-            if (resultUndo == UndoButton::Fix)
+            if (dialogUndo->exec() == QDialog::Accepted)
             {
-                DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
-                dialog->setWindowTitle(tr("Edit wrong formula"));
-                dialog->SetFormula(formula);
-                if (dialog->exec() == QDialog::Accepted)
+                const UndoButton resultUndo = dialogUndo->Result();
+                if (resultUndo == UndoButton::Fix)
                 {
-                    formula = dialog->GetFormula();
-                    /* Need delete dialog here because parser in dialog don't allow use correct separator for parsing
-                     * here. */
-                    delete dialog;
-                    Calculator *cal1 = new Calculator(data);
-                    result = cal1->EvalFormula(formula);
-                    delete cal1; /* Here can be memory leak, but dialog already check this formula and probability
-                                  * very low. */
+                    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
+                    dialog->setWindowTitle(tr("Edit wrong formula"));
+                    dialog->SetFormula(formula);
+                    if (dialog->exec() == QDialog::Accepted)
+                    {
+                        formula = dialog->GetFormula();
+                        /* Need delete dialog here because parser in dialog don't allow use correct separator for
+                         * parsing here. */
+                        delete dialog;
+                        Calculator *cal1 = new Calculator(data);
+                        result = cal1->EvalFormula(formula);
+                        delete cal1; /* Here can be memory leak, but dialog already check this formula and probability
+                                      * very low. */
+                        break;
+                    }
+                    else
+                    {
+                        delete dialog;
+                    }
                 }
                 else
                 {
-                    delete dialog;
-                    throw;
+                    throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
                 }
             }
             else
             {
-                QString what = QString("Undo wrong formula %1").arg(formula);
-                throw VExceptionUndo(what);
+                delete dialogUndo;
+                throw;
             }
         }
-        else
-        {
-            delete dialogUndo;
-            throw;
-        }
+        delete dialogUndo;
     }
     return result;
 }
