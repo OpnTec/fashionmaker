@@ -120,6 +120,7 @@ private slots:
     void slotClicked(QAbstractButton *b);
 
 private:
+    Q_DISABLE_COPY(CheckableMessageBox)
     CheckableMessageBoxPrivate *d;
 };
 

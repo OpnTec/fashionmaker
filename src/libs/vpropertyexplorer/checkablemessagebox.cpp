@@ -44,7 +44,7 @@ class CheckableMessageBoxPrivate
 {
 public:
     CheckableMessageBoxPrivate(QDialog *q)
-        : clickedButton(0)
+        : pixmapLabel(nullptr), messageLabel(nullptr), checkBox(nullptr), buttonBox(nullptr), clickedButton(nullptr)
     {
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
 
@@ -100,6 +100,8 @@ public:
     QCheckBox *checkBox;
     QDialogButtonBox *buttonBox;
     QAbstractButton *clickedButton;
+private:
+    Q_DISABLE_COPY(CheckableMessageBoxPrivate)
 };
 
 CheckableMessageBox::CheckableMessageBox(QWidget *parent) :
