@@ -51,7 +51,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
 
     QRegExpValidator *validator = new QRegExpValidator(QRegExp("^[\\w\\-. ]+$"), this);
     ui->lineEditFileName->setValidator(validator);
-    ui->lineEditFileName->setText(fileName);
+    ui->lineEditFileName->setText(fileName+"_");
 
     QMap<QString, QString>::const_iterator i = formates.constBegin();
     while (i != formates.constEnd())
