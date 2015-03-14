@@ -1906,8 +1906,7 @@ void MainWindow::ActionLayout(bool checked)
         idetail.next();
         VLayoutDetail det = VLayoutDetail();
         det.SetCountourPoints(idetail.value().ContourPoints(pattern));
-        det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern));
-        det.setSeamAllowance(idetail.value().getSeamAllowance());
+        det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern), idetail.value().getSeamAllowance());
         det.setName(idetail.value().getName());
         det.setWidth(qApp->toPixel(idetail.value().getWidth()));
 

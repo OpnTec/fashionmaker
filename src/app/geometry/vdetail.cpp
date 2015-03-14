@@ -395,6 +395,11 @@ QVector<QPointF> VDetail::ContourPoints(const VContainer *data) const
 QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
 {
     QVector<QPointF> pointsEkv;
+    if (getSeamAllowance() == false)
+    {
+        return pointsEkv;
+    }
+
     for (int i = 0; i< CountNode(); ++i)
     {
         switch (at(i).getTypeTool())
@@ -402,13 +407,10 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
             case (Tool::NodePoint):
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
-                if (getSeamAllowance() == true)
-                {
-                    QPointF pEkv = point->toQPointF();
-                    pEkv.setX(pEkv.x()+at(i).getMx());
-                    pEkv.setY(pEkv.y()+at(i).getMy());
-                    pointsEkv.append(pEkv);
-                }
+                QPointF pEkv = point->toQPointF();
+                pEkv.setX(pEkv.x()+at(i).getMx());
+                pEkv.setY(pEkv.y()+at(i).getMy());
+                pointsEkv.append(pEkv);
             }
             break;
             case (Tool::NodeArc):
@@ -421,10 +423,7 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
                 const QPointF end = EndSegment(data, i);
 
                 QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, at(i).getReverse());
-                if (getSeamAllowance() == true)
-                {
-                    pointsEkv << biasPoints(nodePoints, at(i).getMx(), at(i).getMy());
-                }
+                pointsEkv << biasPoints(nodePoints, at(i).getMx(), at(i).getMy());
             }
             break;
             default:
@@ -433,16 +432,13 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
         }
     }
 
-    if (getSeamAllowance() == true)
+    if (getClosed() == true)
     {
-        if (getClosed() == true)
-        {
-            pointsEkv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
-        }
-        else
-        {
-            pointsEkv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
-        }
+        pointsEkv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
+    }
+    else
+    {
+        pointsEkv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
     }
     return pointsEkv;
 }

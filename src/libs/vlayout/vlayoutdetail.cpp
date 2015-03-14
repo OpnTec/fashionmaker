@@ -32,6 +32,7 @@
 #include <QGraphicsItem>
 #include <QPainterPath>
 #include <QtMath>
+#include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutDetail::VLayoutDetail()
@@ -85,16 +86,28 @@ QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points)
+void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence)
 {
-    d->seamAllowence = points;
-    // Seam allowence can't be closed
-    if (d->seamAllowence.first() == d->seamAllowence.last())
+    if (seamAllowence)
     {
-        d->seamAllowence.removeLast();
-    }
+        setSeamAllowance(seamAllowence);
+        d->seamAllowence = points;
+        if (not d->seamAllowence.isEmpty())
+        {
+            // Seam allowence can't be closed
+            if (d->seamAllowence.first() == d->seamAllowence.last())
+            {
+                d->seamAllowence.removeLast();
+            }
 
-    d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence));
+            d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence));
+        }
+        else
+        {
+            qWarning()<<"Seam allowence is empty.";
+            setSeamAllowance(false);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
