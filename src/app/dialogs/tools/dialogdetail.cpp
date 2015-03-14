@@ -44,7 +44,7 @@
  * @param parent parent widget
  */
 DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true)
+    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true)
 {
     ui.setupUi(this);
     labelEditNamePoint = ui.labelEditNameDetail;
@@ -71,6 +71,8 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogDetail::BiasXChanged);
     connect(ui.doubleSpinBoxBiasY,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
             this, &DialogDetail::BiasYChanged);
+    connect(ui.doubleSpinBoxSeams,  static_cast<void (QDoubleSpinBox::*)(qreal)>(&QDoubleSpinBox::valueChanged),
+            this, &DialogDetail::AlowenceChanged);
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
     connect(ui.checkBoxReverse, &QCheckBox::clicked, this, &DialogDetail::ClickedReverse);
@@ -135,6 +137,18 @@ void DialogDetail::SaveData()
 {
     detail.Clear();
     detail = CreateDetail();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::CheckState()
+{
+    SCASSERT(bOk != nullptr);
+    bOk->setEnabled(flagFormula && flagName && flagError && flagWidth);
+    // In case dialog hasn't apply button
+    if ( bApply != nullptr)
+    {
+        bApply->setEnabled(bOk->isEnabled());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,6 +315,25 @@ void DialogDetail::BiasYChanged(qreal d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::AlowenceChanged(qreal d)
+{
+    if (ui.doubleSpinBoxSeams->isEnabled())
+    {
+        if (d <= 0)
+        {
+            flagWidth = false;
+            ChangeColor(ui.labelEditWidth, errorColor);
+        }
+        else
+        {
+            flagWidth = true;
+            ChangeColor(ui.labelEditWidth, okColor);
+        }
+        CheckState();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ClickedSeams save supplement of seams for detail
  * @param checked 1 - need supplement, 0 - don't need supplement
@@ -310,6 +343,18 @@ void DialogDetail::ClickedSeams(bool checked)
     supplement = checked;
     ui.checkBoxClosed->setEnabled(checked);
     ui.doubleSpinBoxSeams->setEnabled(checked);
+
+    if (checked && ui.doubleSpinBoxSeams->value() <= 0)
+    {
+        flagWidth = false;
+        ChangeColor(ui.labelEditWidth, errorColor);
+    }
+    else
+    {
+        flagWidth = true;
+        ChangeColor(ui.labelEditWidth, okColor);
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

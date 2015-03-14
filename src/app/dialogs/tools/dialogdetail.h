@@ -48,6 +48,7 @@ public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     void             BiasXChanged(qreal d);
     void             BiasYChanged(qreal d);
+    void             AlowenceChanged(qreal d);
     void             ClickedSeams(bool checked);
     void             ClickedClosed(bool checked);
     void             ClickedReverse(bool checked);
@@ -59,6 +60,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData();
+    virtual void     CheckState();
 private:
 
     /** @brief ui keeps information about user interface */
@@ -72,6 +74,7 @@ private:
 
     /** @brief closed keep option about equdistant (closed or not) */
     bool             closed;
+    bool             flagWidth;
 
     void             NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                              qreal mx = 0, qreal my = 0, bool reverse = false);
