@@ -67,7 +67,6 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, &DialogSaveLayout::Browse);
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
-    ui->comboBoxFormat->setCurrentIndex(4);//svg
     ui->lineEditPath->setText(qApp->getSettings()->GetPathLayout());
 }
 
