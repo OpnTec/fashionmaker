@@ -122,6 +122,14 @@ private slots:
 private:
     Q_DISABLE_COPY(CheckableMessageBox)
     CheckableMessageBoxPrivate *d;
+    enum DoNotAskAgainType{Question, Information};
+
+    static bool askAgain(QSettings *settings, const QString &settingsSubKey);
+    static void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString &title,
+                                            const QString &text, QDialogButtonBox::StandardButtons buttons,
+                                            QDialogButtonBox::StandardButton defaultButton,
+                                            DoNotAskAgainType type);
+    static void doNotAskAgain(QSettings *settings, const QString &settingsSubKey);
 };
 
 } // namespace Utils

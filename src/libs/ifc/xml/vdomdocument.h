@@ -75,9 +75,7 @@ public:
     static const QString    UnitINCH;
     static const QString    UnitPX;
     static const QString    TagVersion;
-    /**
-     * @param data container with variables
-     */
+
     VDomDocument();
     virtual ~VDomDocument();
     QDomElement    elementById(const QString& id);

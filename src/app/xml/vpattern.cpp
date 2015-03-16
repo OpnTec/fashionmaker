@@ -473,6 +473,7 @@ void VPattern::setCurrentData()
                 }
                 catch (VExceptionBadId &e)
                 {
+                    Q_UNUSED(e)
                     qCDebug(vXML)<<"List of tools doesn't containe id="<<id;
                     return;
                 }

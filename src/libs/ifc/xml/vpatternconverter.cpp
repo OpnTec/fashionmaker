@@ -115,6 +115,9 @@ void VPatternConverter::ApplyPatches()
                 const QString schema = XSDSchema(0x000101);
                 ValidateXML(schema, fileName);
                 // continue conversion
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
             }
             case (0x000101):
             {
@@ -122,6 +125,9 @@ void VPatternConverter::ApplyPatches()
                 const QString schema = XSDSchema(0x000102);
                 ValidateXML(schema, fileName);
                 // continue conversion
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
             }
             case (0x000102):
             {
@@ -129,6 +135,9 @@ void VPatternConverter::ApplyPatches()
                 const QString schema = XSDSchema(0x000103);
                 ValidateXML(schema, fileName);
                 // continue conversion
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
             }
             case (0x000103):
                 break;

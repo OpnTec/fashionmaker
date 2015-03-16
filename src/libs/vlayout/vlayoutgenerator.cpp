@@ -100,7 +100,7 @@ void VLayoutGenerator::Generate()
             VLayoutPaper paper(paperHeight, paperWidth);
             paper.SetShift(shift);
             paper.SetLayoutWidth(bank->GetLayoutWidth());
-            paper.SetPaperIndex(papers.count());
+            paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
             paper.SetRotationIncrease(rotationIncrease);
             do

@@ -51,7 +51,6 @@ public:
 signals:
     /**
      * @brief NewLastValue help reset last value in const method (hack).
-     * @param text text.
      */
     void    NewLastValue(const qreal &newLastValue) const;
 public slots:

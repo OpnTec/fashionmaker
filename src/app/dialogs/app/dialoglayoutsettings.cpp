@@ -98,7 +98,8 @@ void DialogLayoutSettings::SetPaperWidth(int value)
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int DialogLayoutSettings::GetShift() const
 {
-    return qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxShift->value(), oldLayoutUnit, Unit::Px));
+    return static_cast<quint32>(qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxShift->value(),
+                                                                            oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,7 +111,8 @@ void DialogLayoutSettings::SetShift(unsigned int value)
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int DialogLayoutSettings::GetLayoutWidth() const
 {
-    return qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(), oldLayoutUnit, Unit::Px));
+    return static_cast<quint32>(qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(),
+                                                                            oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

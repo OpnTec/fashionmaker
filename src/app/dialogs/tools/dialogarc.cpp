@@ -401,7 +401,7 @@ void DialogArc::ShowLineAngles()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::CheckAngles()
 {
-    if (angleF1 == INT_MIN || angleF2 == INT_MIN)
+    if (static_cast<int>(angleF1) == INT_MIN || static_cast<int>(angleF2) == INT_MIN)
     {
         return;
     }

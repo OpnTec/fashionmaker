@@ -35,12 +35,21 @@
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
+#ifdef Q_CC_CLANG
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsign-conversion"
+#endif
+
     return QPaintEngine::PaintEngineFeatures(
         QPaintEngine::AllFeatures
         & ~QPaintEngine::PatternBrush
         & ~QPaintEngine::PerspectiveTransform
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
+
+#ifdef Q_CC_CLANG
+#pragma clang diagnostic pop
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,11 +172,11 @@ void VObjEngine::drawPath(const QPainterPath &path)
         {
             skipFace=false;
         }
-        int num_verts = res->faces[offset];
+        int num_verts = static_cast<int>(res->faces[offset]);
         offset++;
         for ( int j = 0; j < num_verts; j++ )
         {
-            int p0 = res->faces[offset + j];
+            int p0 = static_cast<int>(res->faces[offset + j]);
             pf[j] = QPointF(points[p0].x, points[p0].y);
         }
         if (skipFace == false )
@@ -201,7 +210,7 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 
     for (int i = 0; i < pointCount; ++i)
     {
-        *stream << QString(" %1").arg(globalPointsCount - pointCount + i + 1);
+        *stream << QString(" %1").arg(globalPointsCount - static_cast<unsigned int>(pointCount + i + 1));
     }
     *stream << endl;
 }

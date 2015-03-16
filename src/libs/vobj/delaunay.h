@@ -70,12 +70,8 @@ typedef int		(*incircle_predicate_t)(del_point2d_t* p0, del_point2d_t* p1, del_p
 /*
  * build the 2D Delaunay triangulation given a set of points of at least 3 points
  *
- * @points: point set given as a sequence of tuple x0, y0, x1, y1, ....
- * @num_points: number of given point
- * @preds: the incircle predicate
- * @faces: the triangles given as a sequence: num verts, verts indices, num verts, verts indices
- *		first face is the external face
- * @pred: incircle predicate
+ * @param points point set given as a sequence of tuple x0, y0, x1, y1, ....
+ * @param num_points number of given point
  * @return: the number of created faces
  */
 delaunay2d_t*			delaunay2d_from(del_point2d_t *points, unsigned int num_points);

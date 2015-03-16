@@ -203,7 +203,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             threads.append(thread);
             thread_pool->start(thread);
 
-            d->frame = d->frame + 3 + 360/d->rotationIncrease*2;
+            d->frame = d->frame + 3 + static_cast<unsigned int>(360/d->rotationIncrease*2);
         }
     }
 

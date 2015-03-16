@@ -175,7 +175,6 @@ void DialogLineIntersect::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief P1Line1Changed changed first point of first line
- * @param index index in list
  */
 void DialogLineIntersect::PointChanged()
 {

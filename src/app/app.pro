@@ -99,6 +99,12 @@ CONFIG(debug, debug|release){
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+
+        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+        # want them in global list. Compromise decision delete them from local list.
+        QMAKE_CXXFLAGS -= \
+            -Wmissing-prototypes \
+            -Wundefined-reinterpret-cast
         }
     } else {
         *-g++{

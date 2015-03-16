@@ -24,8 +24,13 @@
 #include <QPushButton>
 #include <QSettings>
 
+static const char kDoNotAskAgainKey[] = "DoNotAskAgain";
+
+namespace Utils
+{
+
 /*!
-    \class Utils::CheckableMessageBox
+    \class CheckableMessageBox
 
     \brief The CheckableMessageBox class implements a message box suitable for
     questions with a
@@ -34,12 +39,6 @@
     Emulates the QMessageBox API with
     static conveniences. The message label can open external URLs.
 */
-
-static const char kDoNotAskAgainKey[] = "DoNotAskAgain";
-
-namespace Utils
-{
-
 class CheckableMessageBoxPrivate
 {
 public:
@@ -55,8 +54,7 @@ public:
         pixmapLabel->setSizePolicy(sizePolicy);
         pixmapLabel->setVisible(false);
 
-        QSpacerItem *pixmapSpacer =
-            new QSpacerItem(0, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+        QSpacerItem *pixmapSpacer = new QSpacerItem(0, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 
         messageLabel = new QLabel(q);
         messageLabel->setMinimumSize(QSize(300, 0));
@@ -64,10 +62,8 @@ public:
         messageLabel->setOpenExternalLinks(true);
         messageLabel->setTextInteractionFlags(Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse);
 
-        QSpacerItem *checkBoxRightSpacer =
-            new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
-        QSpacerItem *buttonSpacer =
-            new QSpacerItem(0, 1, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        QSpacerItem *checkBoxRightSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        QSpacerItem *buttonSpacer = new QSpacerItem(0, 1, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         checkBox = new QCheckBox(q);
         checkBox->setText(CheckableMessageBox::tr("Do not ask again"));
@@ -112,8 +108,7 @@ CheckableMessageBox::CheckableMessageBox(QWidget *parent) :
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     connect(d->buttonBox, SIGNAL(accepted()), SLOT(accept()));
     connect(d->buttonBox, SIGNAL(rejected()), SLOT(reject()));
-    connect(d->buttonBox, SIGNAL(clicked(QAbstractButton*)),
-        SLOT(slotClicked(QAbstractButton*)));
+    connect(d->buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(slotClicked(QAbstractButton*)));
 }
 
 CheckableMessageBox::~CheckableMessageBox()
@@ -286,7 +281,7 @@ QMessageBox::StandardButton CheckableMessageBox::dialogButtonBoxToMessageBoxButt
     return static_cast<QMessageBox::StandardButton>(int(db));
 }
 
-bool askAgain(QSettings *settings, const QString &settingsSubKey)
+bool CheckableMessageBox::askAgain(QSettings *settings, const QString &settingsSubKey)
 {
     //QTC_CHECK(settings);
     if (settings)
@@ -302,12 +297,10 @@ bool askAgain(QSettings *settings, const QString &settingsSubKey)
     return true;
 }
 
-enum DoNotAskAgainType{Question, Information};
-
-void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString &title,
-                                 const QString &text, QDialogButtonBox::StandardButtons buttons,
-                                 QDialogButtonBox::StandardButton defaultButton,
-                                 DoNotAskAgainType type)
+void CheckableMessageBox::initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString &title,
+                                                      const QString &text, QDialogButtonBox::StandardButtons buttons,
+                                                      QDialogButtonBox::StandardButton defaultButton,
+                                                      DoNotAskAgainType type)
 {
     messageBox.setWindowTitle(title);
     messageBox.setIconPixmap(QMessageBox::standardIcon(type == Information
@@ -322,7 +315,7 @@ void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString 
     messageBox.setDefaultButton(defaultButton);
 }
 
-void doNotAskAgain(QSettings *settings, const QString &settingsSubKey)
+void CheckableMessageBox::doNotAskAgain(QSettings *settings, const QString &settingsSubKey)
 {
     if (!settings)
     {

@@ -149,7 +149,7 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmWidthMM:
             return qRound(engine->getSize().width() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmNumColors:
-            return 0xffffffff;
+            return static_cast<int>(0xffffffff);
         case QPaintDevice::PdmPhysicalDpiX:
             return engine->getResolution();
         case QPaintDevice::PdmPhysicalDpiY:

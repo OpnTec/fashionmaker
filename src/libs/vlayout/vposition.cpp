@@ -170,6 +170,9 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     p = DrawContour(detail.GetLayoutAllowencePoints());
     p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
     paint.drawPath(p);
+#else
+    Q_UNUSED(detail)
+    Q_UNUSED(details)
 #endif
 
 #ifdef ARRANGED_DETAILS
@@ -177,6 +180,8 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     p = DrawDetails(details);
     p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
     paint.drawPath(p);
+#else
+    Q_UNUSED(details)
 #endif
 
     paint.end();
@@ -241,6 +246,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) cons
                 default:
                     break;
             }
+            break;
         }
         default:
             break;
@@ -288,6 +294,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) cons
                     default:
                         break;
                 }
+                break;
             }
             default:
                 break;
@@ -338,6 +345,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
                 default:
                     break;
             }
+            break;
         }
         default:
             break;

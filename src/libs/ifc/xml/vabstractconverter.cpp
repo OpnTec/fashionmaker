@@ -169,6 +169,7 @@ bool VAbstractConverter::SaveDocument(const QString &fileName, QString &error) c
     }
     catch (const VExceptionWrongId &e)
     {
+        Q_UNUSED(e)
         error = tr("Error no unique id.");
         return false;
     }
