@@ -571,7 +571,11 @@ QMap<QString, QString> TableWindow::InitFormates() const
     extByMessage[ tr("Wavefront OBJ (*.obj)") ] = ".obj";
 
     QProcess proc;
-    proc.start(PDFTOPS);
+#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
+    proc.start(qApp->applicationDirPath()+"/"+PDFTOPS); // Seek pdftops in app bundle or near valentin.exe
+#else
+    proc.start(PDFTOPS); // Seek pdftops in standard path
+#endif
     if (proc.waitForFinished(15000))
     {
         extByMessage[ tr("PS files (*.ps)") ] = ".ps";
@@ -579,7 +583,7 @@ QMap<QString, QString> TableWindow::InitFormates() const
     }
     else
     {
-        qWarning()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
+        qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
     }
     return extByMessage;
 }
