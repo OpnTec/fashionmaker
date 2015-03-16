@@ -46,7 +46,7 @@
 ConfigurationPage::ConfigurationPage(QWidget *parent)
     : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), labelCombo(nullptr),
       unitCombo(nullptr), osOptionCheck(nullptr), langChanged(false), unitChanged(false), labelLangChanged(false),
-      sendReportCheck(nullptr)
+      sendReportCheck(nullptr), askPointDeletionCheck(nullptr)
 {
     QGroupBox *saveGroup = SaveGroup();
     QGroupBox *langGroup = LangGroup();

@@ -69,9 +69,14 @@ CONFIG(debug, debug|release){
         #Turn on compilers warnings.
         *-g++{
         QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            # Key -isystem disable checking errors in system headers.
+            $$GCC_DEBUG_CXXFLAGS \ # See Valentina.pri for more details.
+
+        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+        # want them in global list. Compromise decision delete them from local list.
+        QMAKE_CXXFLAGS -= \
+            -Wswitch-default
 
         #gcc’s 4.8.0 Address Sanitizer
         #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
