@@ -92,6 +92,7 @@ DEFAULT_PREFIX = /usr
 # Also trying make all possible for speed up build time.
 unix {
 
+!macx{
 # Key -isystem disable checking errors in system headers. Mark ignore warnings Qt headers.
 ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]" \
@@ -100,6 +101,19 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtCore"
+} else {
+ISYSTEM += \
+    -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtXml.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtXml.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtGui.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtGui.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/"
+}
 
 # Usefull GCC warnings keys.
 GCC_DEBUG_CXXFLAGS += \
