@@ -761,6 +761,7 @@ void MainWindow::ShowToolTip(const QString &toolTip)
  */
 void MainWindow::tableClosed()
 {
+    ui->actionDetails->setChecked(true);
     show();
 }
 
