@@ -194,6 +194,12 @@ void VToolPoint::DeleteFromLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::EnableToolMove(bool move)
+{
+    namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.

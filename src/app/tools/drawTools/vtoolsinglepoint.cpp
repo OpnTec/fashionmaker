@@ -350,4 +350,5 @@ void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
 void VToolSinglePoint::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
+    VToolPoint::EnableToolMove(move);
 }

@@ -328,6 +328,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
         connect(point, &VToolAlongLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolAlongLine::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolAlongLine::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolAlongLine::EnableToolMove);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);

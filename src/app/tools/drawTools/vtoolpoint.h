@@ -59,6 +59,7 @@ public slots:
     virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void                    Disable(bool disable);
     void                    DeleteFromLabel();
+    virtual void            EnableToolMove(bool move);
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;

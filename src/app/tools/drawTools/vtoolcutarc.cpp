@@ -174,6 +174,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutArc::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutArc::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutArc::EnableToolMove);
         doc->AddTool(id, point);
         doc->AddTool(arc1id, point);
         doc->AddTool(arc2id, point);

@@ -213,6 +213,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
         connect(point, &VToolShoulderPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolShoulderPoint::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolShoulderPoint::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolShoulderPoint::EnableToolMove);
         doc->AddTool(id, point);
         doc->IncrementReferens(p1Line);
         doc->IncrementReferens(p2Line);

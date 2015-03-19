@@ -122,9 +122,12 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
  */
 void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setBrush(Qt::green);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        this->setBrush(Qt::green);
 
-    VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
+        VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
@@ -136,10 +139,13 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setBrush(Qt::black);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        this->setBrush(Qt::black);
 
-    //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+        //Disable cursor-arrow-openhand
+        VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+    }
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -156,9 +162,12 @@ void VGraphicsSimpleTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *e
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
+        }
     }
     QGraphicsSimpleTextItem::mousePressEvent(event);
 }
@@ -166,10 +175,13 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        //Disable cursor-arrow-closehand
-        VApplication::restoreOverrideCursor(cursorArrowCloseHand);
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            //Disable cursor-arrow-closehand
+            VApplication::restoreOverrideCursor(cursorArrowCloseHand);
+        }
     }
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }

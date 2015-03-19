@@ -151,6 +151,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const quint32 _id, co
         connect(point, &VToolPointOfIntersection::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfIntersection::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfIntersection::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfIntersection::EnableToolMove);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPointId);
         doc->IncrementReferens(secondPointId);
