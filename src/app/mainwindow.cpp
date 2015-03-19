@@ -1260,6 +1260,7 @@ void MainWindow::ActionDetails(bool checked)
         SaveCurrentScene();
 
         currentScene = sceneDetails;
+        ui->view->itemClicked(nullptr);
         ui->view->setScene(sceneDetails);
         disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
