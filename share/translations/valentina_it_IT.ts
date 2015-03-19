@@ -193,6 +193,14 @@
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -5900,6 +5908,21 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
@@ -5941,14 +5964,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <source>Confirm the deletion.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5974,6 +5989,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

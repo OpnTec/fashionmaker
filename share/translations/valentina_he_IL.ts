@@ -193,6 +193,14 @@
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -259,10 +267,6 @@
     <message>
         <source>Insert variable into the formula</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -366,10 +370,6 @@
     <message>
         <source>Insert variable into the formula</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -477,10 +477,6 @@
     <message>
         <source>Insert marked variable into the formula</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -681,10 +677,6 @@
         <translation>אורך</translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
     </message>
@@ -764,10 +756,6 @@
         <translation>אורך</translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
     </message>
@@ -845,10 +833,6 @@
     <message>
         <source>Length</source>
         <translation>אורך</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1050,10 +1034,6 @@
     <message>
         <source>Length</source>
         <translation>אורך</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1629,10 +1609,6 @@
 <context>
     <name>DialogLine</name>
     <message>
-        <source>Line</source>
-        <translation type="vanished">קו</translation>
-    </message>
-    <message>
         <source>First point</source>
         <translation>נקודה ראשונה</translation>
     </message>
@@ -1663,10 +1639,6 @@
 </context>
 <context>
     <name>DialogLineIntersect</name>
-    <message>
-        <source>Intersection of lines</source>
-        <translation type="vanished">הצטלבות של קווים</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>תווית הנקודה</translation>
@@ -1847,10 +1819,6 @@
     <message>
         <source>Insert variable into formula</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2126,10 +2094,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>ערך הרדיוס</translation>
     </message>
@@ -2246,10 +2210,6 @@
     <message>
         <source>Insert variable into formula</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">לחשב ערך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2369,10 +2329,6 @@
 </context>
 <context>
     <name>DialogSpline</name>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">עקומה</translation>
-    </message>
     <message>
         <source>First point</source>
         <translation>נקודה ראשונה</translation>
@@ -5864,6 +5820,21 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
@@ -5905,14 +5876,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <source>Confirm the deletion.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5938,6 +5901,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

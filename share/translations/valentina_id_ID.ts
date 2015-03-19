@@ -193,6 +193,14 @@
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>Setelah setiap kerusakan Valentina mengumpulkan informasi yang dapat membantu kami memperbaiki suatu masalah. Kami tidak mengumpulkan informasi pribadi apapun. Temukan lebih lanjut tentang apa &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; jenis informasi &lt;/a&gt; kami kumpulkan.</translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -253,20 +261,12 @@
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <source>Point along line</source>
-        <translation type="vanished">Titik di sepanjang garis</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>panjang</translation>
     </message>
     <message>
         <source>Insert variable into the formula</source>
         <translation>Masukkan variabel ke dalam rumus</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Hitung nilai</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -373,10 +373,6 @@
         <translation>sisipkan variabel ke dalam formula</translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">hitung nilai</translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>nilai radius</translation>
     </message>
@@ -457,10 +453,6 @@
         <translation>variabel</translation>
     </message>
     <message>
-        <source>Value of angle of line.</source>
-        <translation type="vanished">nilai sudut garis</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -486,10 +478,6 @@
     <message>
         <source>Insert marked variable into the formula</source>
         <translation>sisipkan variabel yang ditandai ke dalam rumus</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">hitung nilai</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -595,16 +583,8 @@
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
-        <source>Curve intersect axis</source>
-        <translation type="vanished">sumbu perpotongan kurva</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>sudut</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Hitung nilai</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -617,10 +597,6 @@
     <message>
         <source>Axis point</source>
         <translation>titik sumbu</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Titik pertama dari baris</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -698,16 +674,8 @@
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Cut arc</source>
-        <translation type="vanished">potong busur</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>panjang</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Hitung nilai</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -724,10 +692,6 @@
     <message>
         <source>Arc</source>
         <translation>busur</translation>
-    </message>
-    <message>
-        <source>Selected curve</source>
-        <translation type="vanished">kurva yang telah dipilih</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -789,16 +753,8 @@
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Cut curve</source>
-        <translation type="vanished">potong kurva</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>panjang</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Hitung nilai</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -876,16 +832,8 @@
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Cut curve path</source>
-        <translation type="vanished">potong jalur curva</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>panjang</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Hitung nilai</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1028,10 +976,6 @@
     <message>
         <source>Insert variable into formula</source>
         <translation>sisipkan variabel ke dalam rumus</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Hitung nilai</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -5879,6 +5823,21 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
@@ -5920,14 +5879,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <source>Confirm the deletion.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5953,6 +5904,14 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

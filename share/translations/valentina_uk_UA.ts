@@ -197,6 +197,14 @@
         <source>With OS options (.)</source>
         <translation type="vanished">З параметрів ОС (.)</translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation>Редагування лекала</translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation>Підтвердіть видалення об&apos;єкту</translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -6697,6 +6705,21 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation>Не питати знову</translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation>Не &amp;питати знову</translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
+        <translation>Не по&amp;казувати знову</translation>
+    </message>
+</context>
+<context>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
@@ -6746,11 +6769,11 @@ Do you want to save your changes?</source>
     <name>VAbstractTool</name>
     <message>
         <source>Confirm the deletion.</source>
-        <translation>Підтвердіть видалення.</translation>
+        <translation type="vanished">Підтвердіть видалення.</translation>
     </message>
     <message>
         <source>Do you really want delete?</source>
-        <translation>Ви дійсно хочете видалити?</translation>
+        <translation type="vanished">Ви дійсно хочете видалити?</translation>
     </message>
     <message>
         <source>black</source>
@@ -6779,6 +6802,14 @@ Do you want to save your changes?</source>
     <message>
         <source>yellow</source>
         <translation>жовтий</translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation>Підтвердіть видалення</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
+        <translation>Ви дійсно хочете видалити?</translation>
     </message>
 </context>
 <context>

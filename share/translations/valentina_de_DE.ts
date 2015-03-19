@@ -193,6 +193,14 @@
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -253,20 +261,12 @@
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <source>Point along line</source>
-        <translation type="vanished">Punkt auf einer Linie</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
     </message>
     <message>
         <source>Insert variable into the formula</source>
         <translation>Variable in die Formel einfügen</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -372,10 +372,6 @@
         <translation>Variable in die Formel einfügen</translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>Wert des Radius</translation>
     </message>
@@ -456,10 +452,6 @@
         <translation>Variablen</translation>
     </message>
     <message>
-        <source>Value of angle of line.</source>
-        <translation type="vanished">Wert des Linenwinkels.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -479,20 +471,12 @@
 <context>
     <name>DialogBisector</name>
     <message>
-        <source>Bisector</source>
-        <translation type="vanished">Winkelhalbierende</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
         <translation>Markierte Variable in die Formel einfügen</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -598,16 +582,8 @@
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
-        <source>Curve intersect axis</source>
-        <translation type="vanished">Laufender Schnittpunkt auf Kurve</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>Winkel</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -697,16 +673,8 @@
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Cut arc</source>
-        <translation type="vanished">Kreisbogen</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -723,10 +691,6 @@
     <message>
         <source>Arc</source>
         <translation>Bogen</translation>
-    </message>
-    <message>
-        <source>Selected curve</source>
-        <translation type="vanished">Ausgewählte Kurve</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -788,16 +752,8 @@
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Cut curve</source>
-        <translation type="vanished">Kurvensegment</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -875,16 +831,8 @@
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Cut curve path</source>
-        <translation type="vanished">Pfadsegment</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1029,10 +977,6 @@
         <translation>Variable in die Formel einfügen</translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
-    </message>
-    <message>
         <source>Value of first angle</source>
         <translation>Wert des ersten Winkels</translation>
     </message>
@@ -1088,16 +1032,8 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <source>Point in the end of a line</source>
-        <translation type="vanished">Punkt mit Abstand und Winkel</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1614,10 +1550,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Rotate workpiece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1677,10 +1609,6 @@
 <context>
     <name>DialogLine</name>
     <message>
-        <source>Line</source>
-        <translation type="vanished">Linie</translation>
-    </message>
-    <message>
         <source>First point</source>
         <translation>Erster Punkt</translation>
     </message>
@@ -1711,10 +1639,6 @@
 </context>
 <context>
     <name>DialogLineIntersect</name>
-    <message>
-        <source>Intersection of lines</source>
-        <translation type="vanished">Schnittpunkt von Linien</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Bezeichnung des Punktes</translation>
@@ -1755,16 +1679,8 @@
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
-        <source>Line intersect axis</source>
-        <translation type="vanished">Laufender Schnittpunkt auf Linie</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>Winkel</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -1897,20 +1813,12 @@
 <context>
     <name>DialogNormal</name>
     <message>
-        <source>Normal</source>
-        <translation type="vanished">Normale</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
         <translation>Variable in die Formel einfügen</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2178,20 +2086,12 @@
 <context>
     <name>DialogPointOfContact</name>
     <message>
-        <source>Point of contact</source>
-        <translation type="vanished">Kontaktpunkt</translation>
-    </message>
-    <message>
         <source>Radius</source>
         <translation>Radius</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
         <translation>Variable in die Formel einfügen</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2273,32 +2173,16 @@
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
-        <source>Point of intersection</source>
-        <translation type="vanished">Punkt aus Koordinaten</translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation>Bezeichnung des Punktes</translation>
-    </message>
-    <message>
-        <source>vertical point</source>
-        <translation type="vanished">vertikaler Punkt</translation>
     </message>
     <message>
         <source>First point of angle</source>
         <translation>Punkt der ersten Schenkelgeraden</translation>
     </message>
     <message>
-        <source>horizontal point</source>
-        <translation type="vanished">horizontaler Punkt</translation>
-    </message>
-    <message>
         <source>Second point of angle</source>
         <translation>Scheitel des Winkels</translation>
-    </message>
-    <message>
-        <source>Select point horizontally</source>
-        <translation type="vanished">Wähle Punkt horizontal</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -2320,20 +2204,12 @@
 <context>
     <name>DialogShoulderPoint</name>
     <message>
-        <source>Point of shoulder</source>
-        <translation type="vanished">Spezieller Punkt an der Schulter</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Länge</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
         <translation>Variable in die Formel einfügen</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Wert berechnen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2453,10 +2329,6 @@
 </context>
 <context>
     <name>DialogSpline</name>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">Kurve</translation>
-    </message>
     <message>
         <source>First point</source>
         <translation>Erster Punkt</translation>
@@ -2610,10 +2482,6 @@
 <context>
     <name>DialogTriangle</name>
     <message>
-        <source>Triangle</source>
-        <translation type="vanished">Dreieck</translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation>Bezeichnung des Punktes</translation>
     </message>
@@ -2691,10 +2559,6 @@
 </context>
 <context>
     <name>DialogUnionDetails</name>
-    <message>
-        <source>Union details</source>
-        <translation type="vanished">Details vereinigen</translation>
-    </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Soll die Details wirklich vereinigt werden?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -2874,14 +2738,6 @@
         <translation>Punkt auf einer Normalen</translation>
     </message>
     <message>
-        <source>Special point on shoulder.</source>
-        <translation type="vanished">Spezieller Punkt an der Schulter.</translation>
-    </message>
-    <message>
-        <source>Tool triangle.</source>
-        <translation type="vanished">Werkzeug Dreieck.</translation>
-    </message>
-    <message>
         <source>Perpendicular point along line</source>
         <translation>Lotfußpunkt auf einer Linie</translation>
     </message>
@@ -2890,24 +2746,12 @@
         <translation>Punkt entlang einer Winkelhalbierenden</translation>
     </message>
     <message>
-        <source>Point at intersection of arc and line.</source>
-        <translation type="vanished">Schnittpunkt eines Bogens und einer Linie.</translation>
-    </message>
-    <message>
-        <source>Tool to make point from x &amp; y of two other points.</source>
-        <translation type="vanished">Werkzeug zum Erstellen eines Punktes aus den x- und y-Koordinaten zweier anderer Punkte.</translation>
-    </message>
-    <message>
         <source>Point at distance and angle</source>
         <translation>Punkt mit Abstand und Winkel</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
         <translation>Punkt in einer Distanz auf einer Linie</translation>
-    </message>
-    <message>
-        <source>Point of intersection line and axis</source>
-        <translation type="vanished">Laufender Schnittpunkt auf Linie</translation>
     </message>
     <message>
         <source>...</source>
@@ -2938,22 +2782,6 @@
         <translation>Kurve</translation>
     </message>
     <message>
-        <source>Curve tool.</source>
-        <translation type="vanished">Kurvenverkzeug.</translation>
-    </message>
-    <message>
-        <source>Tool for path curve.</source>
-        <translation type="vanished">Pfad-Werkzeug.</translation>
-    </message>
-    <message>
-        <source>Tool for segmenting a curve.</source>
-        <translation type="vanished">Werkzeug zur Kurvensegmentierung.</translation>
-    </message>
-    <message>
-        <source>Tool segment a pathed curve.</source>
-        <translation type="vanished">Werkzeug zur Pfadsegmentierung.</translation>
-    </message>
-    <message>
         <source>Tools for creating arcs.</source>
         <translation>Werkzeuge zur Bogenerzeugung.</translation>
     </message>
@@ -2962,28 +2790,12 @@
         <translation>Bogen</translation>
     </message>
     <message>
-        <source>Arc tool.</source>
-        <translation type="vanished">Bogenwerkzeug.</translation>
-    </message>
-    <message>
-        <source>Cut arc tool.</source>
-        <translation type="vanished">Kreisbogenwerkzeug.</translation>
-    </message>
-    <message>
         <source>Tools for creating details.</source>
         <translation>Werkzeuge zur Detailerzeugung.</translation>
     </message>
     <message>
         <source>Detail</source>
         <translation>Detail</translation>
-    </message>
-    <message>
-        <source>Tool new detail.</source>
-        <translation type="vanished">Werkzeug neues Detail.</translation>
-    </message>
-    <message>
-        <source>Tool for union two details.</source>
-        <translation type="vanished">Werkzeug zum zusammenfügen zweier Details.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -5948,22 +5760,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Layout speichern</translation>
     </message>
     <message>
-        <source>Next</source>
-        <translation type="vanished">Weiter</translation>
-    </message>
-    <message>
-        <source>Next detail</source>
-        <translation type="vanished">Nächstes Detail</translation>
-    </message>
-    <message>
-        <source>Turn</source>
-        <translation type="vanished">Drehen</translation>
-    </message>
-    <message>
-        <source>Turn the detail 90 degrees</source>
-        <translation type="vanished">Detail um 90° drehen</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
@@ -5972,44 +5768,12 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Legen stoppen</translation>
     </message>
     <message>
-        <source>Enlarge letter</source>
-        <translation type="vanished">Buchstaben vergrößern</translation>
-    </message>
-    <message>
-        <source>Enlarge the length of the sheet</source>
-        <translation type="vanished">Länge des Blattes verlängern</translation>
-    </message>
-    <message>
-        <source>Reduce sheet</source>
-        <translation type="vanished">Seite verkleinern</translation>
-    </message>
-    <message>
-        <source>Reduce the length of the sheet</source>
-        <translation type="vanished">Die Länge der Seite verkleinern</translation>
-    </message>
-    <message>
-        <source>Mirroring</source>
-        <translation type="vanished">Spiegeln</translation>
-    </message>
-    <message>
         <source>Zoom In</source>
         <translation>Vergrößern</translation>
     </message>
     <message>
         <source>Zoom Out</source>
         <translation>Verkleinern</translation>
-    </message>
-    <message>
-        <source>0 details left.</source>
-        <translation type="vanished">0 Details übrig.</translation>
-    </message>
-    <message>
-        <source>Collisions not found.</source>
-        <translation type="vanished">Kollisionen nicht gefunden.</translation>
-    </message>
-    <message>
-        <source>%1 details left.</source>
-        <translation type="vanished">%1 Details übrig.</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -6036,10 +5800,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>EPS Dateien (*.eps)</translation>
     </message>
     <message>
-        <source>Collisions found.</source>
-        <translation type="vanished">Kollisionen gefunden.</translation>
-    </message>
-    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Fehler beim anlegen von Datei &apos;%1&apos;! &quot;%2&apos;</translation>
     </message>
@@ -6057,6 +5817,21 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6103,11 +5878,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>VAbstractTool</name>
     <message>
         <source>Confirm the deletion.</source>
-        <translation>Löschen bestätigen.</translation>
+        <translation type="vanished">Löschen bestätigen.</translation>
     </message>
     <message>
         <source>Do you really want delete?</source>
-        <translation>Wirklich löschen?</translation>
+        <translation type="vanished">Wirklich löschen?</translation>
     </message>
     <message>
         <source>black</source>
@@ -6135,6 +5910,14 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
