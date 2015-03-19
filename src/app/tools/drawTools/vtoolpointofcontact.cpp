@@ -106,15 +106,35 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
             return p1;
             break;
         case 2:
-            if (QLineF(firstPoint, p1).length() <= QLineF(firstPoint, p2).length())
+        {
+            const bool flagP1 = VGObject::PointInSegment (p1, firstPoint, secondPoint);
+            const bool flagP2 = VGObject::PointInSegment (p2, firstPoint, secondPoint);
+            if ((flagP1 == true && flagP2 == true) ||
+                (flagP1 == false && flagP2 == false)/*In case we have something wrong*/)
             {
-                return p1;
+                // We don't have options for choosing correct point. Use closest to segment first point.
+                if (QLineF(firstPoint, p1).length() <= QLineF(firstPoint, p2).length())
+                {
+                    return p1;
+                }
+                else
+                {
+                    return p2;
+                }
             }
             else
-            {
-                return p2;
+            { // In this case we have one real and one theoretical intersection.
+                if (flagP1)
+                {
+                    return p1;
+                }
+                else
+                {
+                    return p2;
+                }
             }
             break;
+        }
         default:
             qDebug() << "Unxpected value" << res;
             return QPointF();
