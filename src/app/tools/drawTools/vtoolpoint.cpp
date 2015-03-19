@@ -53,6 +53,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolPoint::PointChoosed);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
@@ -200,6 +201,12 @@ void VToolPoint::EnableToolMove(bool move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::PointChoosed()
+{
+    emit ChoosedTool(id, SceneObject::Point);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.
@@ -208,7 +215,7 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, SceneObject::Point);
+        PointChoosed();
     }
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
