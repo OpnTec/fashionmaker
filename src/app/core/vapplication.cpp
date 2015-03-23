@@ -2392,8 +2392,8 @@ void VApplication::SendReport(const QString &reportName) const
     if (curlFile.exists())
     {// Trying send report
         // Change token if need
-        const QStringList token = QStringList()<<"3c"<<"6e"<<"91"<<"19"<<"96"<<"92"<<"dc"<<"50"<<"67"<<"8a"<<"2a"<<"89"
-                                               <<"a3"<<"55"<<"9e"<<"c7"<<"9d"<<"f8"<<"66"<<"a5";
+        const QStringList token = QStringList()<<"78"<<"5e"<<"02"<<"bd"<<"41"<<"e9"<<"6a"<<"63"<<"ab"<<"18"<<"09"<<"2f"
+                                               <<"13"<<"cf"<<"48"<<"b4"<<"75"<<"6a"<<"42"<<"39";
 
         const QString arg = QString("curl.exe -k -H \"Authorization: bearer ")+token.join("")+
                             QString("\" -H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "
