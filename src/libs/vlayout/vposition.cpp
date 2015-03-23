@@ -147,10 +147,10 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     QPainter paint;
     paint.begin(&frameImage);
 
-    paint.setPen(QPen(Qt::darkRed, 10, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     paint.drawRect(QRectF(contour.GetWidth()/2, contour.GetHeight()/2, contour.GetWidth(), contour.GetHeight()));
 
-    paint.setPen(QPen(Qt::black, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.setPen(QPen(Qt::black, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     QPainterPath p;
     if (contour.GetContour().isEmpty())
     {
@@ -166,7 +166,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     }
 
 #ifdef SHOW_CANDIDATE
-    paint.setPen(QPen(Qt::darkGreen, 3, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.setPen(QPen(Qt::darkGreen, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawContour(detail.GetLayoutAllowencePoints());
     p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
     paint.drawPath(p);
@@ -176,7 +176,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
 #endif
 
 #ifdef ARRANGED_DETAILS
-    paint.setPen(QPen(Qt::blue, 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.setPen(QPen(Qt::blue, 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawDetails(details);
     p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
     paint.drawPath(p);

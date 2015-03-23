@@ -48,16 +48,20 @@ enum class BestFrom : char
 
 //#define LAYOUT_DEBUG // Enable debug mode
 
+// This block help rule debug mode. Don't turn all options at the same time!
 #ifdef LAYOUT_DEBUG
-#   define SHOW_VERTICES // Show contour vertices
-#   define SHOW_DIRECTION   // Show contour direction
-#   define ARRANGED_DETAILS // Show already arranged details
-//#   define SHOW_CANDIDATE
-//#   define SHOW_ROTATION
-//#   define SHOW_COMBINE
-//#   define SHOW_MIRROR
-//#   define SHOW_CANDIDATE_BEST
-//#   define SHOW_BEST
+// Nice looking
+#   define SHOW_VERTICES         // Show contour vertices
+#   define SHOW_DIRECTION        // Show contour direction
+#   define ARRANGED_DETAILS      // Show already arranged details
+
+// Debugging
+#   define SHOW_CANDIDATE        // Show each position
+#   define SHOW_ROTATION         // For each position show rotation part
+#   define SHOW_COMBINE          // For each position show edge combine part
+#   define SHOW_MIRROR           // For each position show mirror part
+//#   define SHOW_CANDIDATE_BEST   // For only correct positions that pass checks
+//#   define SHOW_BEST             // Show only best position for workpiece
 #endif//LAYOUT_DEBUG
 
 #endif // VLAYOUTDEF_H
