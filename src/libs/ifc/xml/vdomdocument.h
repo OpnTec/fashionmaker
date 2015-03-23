@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program that allows creating and modelling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -73,13 +73,13 @@ public:
     static const QString    UnitMM;
     static const QString    UnitCM;
     static const QString    UnitINCH;
+    static const QString    UnitPX;
     static const QString    TagVersion;
-    /**
-     * @param data container with variables
-     */
+
     VDomDocument();
     virtual ~VDomDocument();
     QDomElement    elementById(const QString& id);
+    QDomElement    elementById(quint32 id);
     void           removeAllChilds(QDomElement &element);
     template <typename T>
     /**

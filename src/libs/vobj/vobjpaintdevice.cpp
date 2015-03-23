@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -149,7 +149,7 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmWidthMM:
             return qRound(engine->getSize().width() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmNumColors:
-            return 0xffffffff;
+            return static_cast<int>(0xffffffff);
         case QPaintDevice::PdmPhysicalDpiX:
             return engine->getResolution();
         case QPaintDevice::PdmPhysicalDpiY:
@@ -160,5 +160,3 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
     }
     return 0;
 }
-
-

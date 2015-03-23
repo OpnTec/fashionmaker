@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -62,8 +61,9 @@ QmuParserTester::QmuParserTester()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal )
+int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale )
 {
+    Q_UNUSED(s_locale)
     if ( a_szExpr.data()[1] == 0 || ( a_szExpr.data()[0] != '0' || a_szExpr.data()[1] != 'x' ) )
     {
         return 0;

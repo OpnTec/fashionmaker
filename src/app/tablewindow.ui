@@ -22,23 +22,18 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMinAndMaxSize</enum>
-    </property>
-    <property name="leftMargin">
-     <number>9</number>
-    </property>
-    <property name="topMargin">
-     <number>9</number>
-    </property>
-    <property name="rightMargin">
-     <number>9</number>
-    </property>
-    <property name="bottomMargin">
-     <number>9</number>
-    </property>
     <item>
-     <widget class="VTableGraphicsView" name="view"/>
+     <widget class="VTableGraphicsView" name="view">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>20</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="resizeAnchor">
+       <enum>QGraphicsView::AnchorUnderMouse</enum>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -48,8 +43,8 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>16</width>
-     <height>16</height>
+     <width>24</width>
+     <height>24</height>
     </size>
    </property>
    <property name="toolButtonStyle">
@@ -62,16 +57,82 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionSave"/>
-   <addaction name="actionNext"/>
-   <addaction name="actionTurn"/>
-   <addaction name="actionAdd"/>
-   <addaction name="actionRemove"/>
-   <addaction name="actionMirror"/>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
    <addaction name="actionStop"/>
+   <addaction name="actionLayout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>187</width>
+     <height>121</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>187</width>
+     <height>524287</height>
+    </size>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Layout pages</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>200</width>
+         <height>200</height>
+        </size>
+       </property>
+       <property name="movement">
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="flow">
+        <enum>QListView::TopToBottom</enum>
+       </property>
+       <property name="isWrapping" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::IconMode</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionSave">
    <property name="enabled">
     <bool>false</bool>
@@ -88,35 +149,6 @@
     <string>Save layout</string>
    </property>
   </action>
-  <action name="actionNext">
-   <property name="icon">
-    <iconset theme="go-next">
-     <normaloff/>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Next</string>
-   </property>
-   <property name="toolTip">
-    <string>Next detail</string>
-   </property>
-  </action>
-  <action name="actionTurn">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset theme="object-rotate-left">
-     <normaloff/>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Turn</string>
-   </property>
-   <property name="toolTip">
-    <string>Turn the detail 90 degrees</string>
-   </property>
-  </action>
   <action name="actionStop">
    <property name="icon">
     <iconset theme="process-stop">
@@ -128,50 +160,6 @@
    </property>
    <property name="toolTip">
     <string>Stop laying</string>
-   </property>
-  </action>
-  <action name="actionAdd">
-   <property name="icon">
-    <iconset theme="list-add">
-     <normaloff/>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Enlarge letter</string>
-   </property>
-   <property name="toolTip">
-    <string>Enlarge the length of the sheet</string>
-   </property>
-  </action>
-  <action name="actionRemove">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset theme="list-remove">
-     <normaloff/>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Reduce sheet</string>
-   </property>
-   <property name="toolTip">
-    <string>Reduce the length of the sheet</string>
-   </property>
-  </action>
-  <action name="actionMirror">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
-     <normaloff>:/icon/16x16/mirror.png</normaloff>:/icon/16x16/mirror.png</iconset>
-   </property>
-   <property name="text">
-    <string>Mirroring</string>
-   </property>
-   <property name="toolTip">
-    <string>Mirroring</string>
    </property>
   </action>
   <action name="actionZoomIn">
@@ -198,6 +186,15 @@
    </property>
    <property name="toolTip">
     <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionLayout">
+   <property name="icon">
+    <iconset resource="share/resources/icon.qrc">
+     <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
+   </property>
+   <property name="text">
+    <string>Layout</string>
    </property>
   </action>
  </widget>

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -32,8 +32,8 @@
 #include <QSysInfo>
 
 extern const int MAJOR_VERSION = 0;
-extern const int MINOR_VERSION = 2;
-extern const int DEBUG_VERSION = 9;
+extern const int MINOR_VERSION = 3;
+extern const int DEBUG_VERSION = 0;
 
 extern const QString APP_VERSION(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
                                  .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
@@ -52,11 +52,16 @@ QString compilerString()
     return QLatin1String("GCC " ) + QLatin1String(__VERSION__);
 #elif defined(Q_CC_MSVC)
     if (_MSC_VER >= 1800) // 1800: MSVC 2013 (yearly release cycle)
-        return QLatin1String("MSVC ") + QString::number(2008 + ((_MSC_VER / 100) - 13));
+    {
+        compiler = QLatin1String("MSVC ") + QString::number(2008 + ((_MSC_VER / 100) - 13));
+    }
     if (_MSC_VER >= 1500) // 1500: MSVC 2008, 1600: MSVC 2010, ... (2-year release cycle)
+    {
         return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
-#endif
+    }
+#else
     return QLatin1String("<unknown compiler>");
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

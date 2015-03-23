@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -43,6 +43,8 @@ public:
     explicit ConfigDialog(QWidget *parent = nullptr);
 public slots:
     void              changePage(QListWidgetItem *current, QListWidgetItem *previous);
+signals:
+    void              UpdateProperties();
 protected:
     virtual void      closeEvent(QCloseEvent *event);
 private:

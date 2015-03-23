@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point of intersection</string>
+   <string>Point from X and Y of two other points</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
@@ -58,7 +58,7 @@
         </size>
        </property>
        <property name="text">
-        <string>vertical point</string>
+        <string>X: vertical point</string>
        </property>
       </widget>
      </item>
@@ -78,7 +78,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>horizontal point</string>
+        <string>Y: horizontal point</string>
        </property>
       </widget>
      </item>

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Intersection of lines</string>
+   <string>Point at line intersection</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">

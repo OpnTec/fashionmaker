@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -58,7 +57,7 @@ public:
     QChar          GetArgSep() const;
     void           IgnoreUndefVar(bool bIgnore);
     void           ReInit();
-    token_type     ReadNextToken();
+    token_type     ReadNextToken(const std::locale &s_locale);
 private:
 
     /**
@@ -103,7 +102,7 @@ private:
     bool            IsFunTok(token_type &a_Tok);
     bool            IsPostOpTok(token_type &a_Tok);
     bool            IsOprt(token_type &a_Tok);
-    bool            IsValTok(token_type &a_Tok);
+    bool            IsValTok(token_type &a_Tok, const std::locale &s_locale);
     bool            IsVarTok(token_type &a_Tok);
     bool            IsStrVarTok(token_type &a_Tok);
     bool            IsUndefVarTok(token_type &a_Tok);

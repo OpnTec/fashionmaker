@@ -86,7 +86,7 @@ public slots:
     void currentIndexChanged(int index);
 
 protected:
-    //! The list of possible options to choose frome
+    //! The list of possible options to choose from
     QStringList EnumerationLiterals;
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
     //members by reimplementing the VPropertyPrivate class without touching this header file.

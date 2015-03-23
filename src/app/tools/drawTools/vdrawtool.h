@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -55,13 +55,21 @@ public:
     virtual void setDialog() {}
     virtual void DialogLinkDestroy();
     static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
+
+    QString      getLineType() const;
+    virtual void SetTypeLine(const QString &value);
+
+    QString      GetLineColor() const;
+    virtual void SetLineColor(const QString &value);
+
 public slots:
-    virtual void ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
-    virtual void ChangedActivDraw(const QString &newName);
+    virtual void ShowTool(quint32 id, bool enable);
+    virtual void ChangedActivDraw(const QString &newName) = 0;
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGuiOk(int result);
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
+    virtual void EnableToolMove(bool move);
 protected:
 
     /** @brief ignoreFullUpdate ignore or not full updates. */
@@ -71,7 +79,15 @@ protected:
     QString      nameActivDraw;
 
     /** @brief dialog dialog options.*/
-    DialogTool *dialog;
+    DialogTool  *dialog;
+
+    /** @brief typeLine line type. */
+    QString      typeLine;
+
+    /** @brief lineColor color line or curve, but not a point. */
+    QString      lineColor;
+
+    bool         enabled;
 
     void         AddToCalculation(const QDomElement &domElement);
 
@@ -80,6 +96,10 @@ protected:
     void         SaveDialogChange();
     virtual void AddToFile();
     virtual void RefreshDataInFile();
+    QColor       CorrectColor(const QColor &color) const;
+
+    void         ReadAttributes();
+    virtual void ReadToolAttributes(const QDomElement &domElement)=0;
 
     template <typename Dialog, typename Tool>
     /**
@@ -142,38 +162,15 @@ protected:
      * @brief ShowItem highlight tool.
      * @param item tool.
      * @param id object id in container.
-     * @param color highlight color.
      * @param enable enable or disable highlight.
      */
-    void ShowItem(Item *item, quint32 id, Qt::GlobalColor color, bool enable)
+    void ShowItem(Item *item, quint32 id, bool enable)
     {
         SCASSERT(item != nullptr);
         if (id == item->id)
         {
-            if (enable == false)
-            {
-                currentColor = baseColor;
-            }
-            else
-            {
-                currentColor = color;
-            }
-            item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
+            ShowVisualization(enable);
         }
-    }
-    template <typename Item>
-    void DisableItem(Item *item, bool disable)
-    {
-        SCASSERT(item != nullptr);
-        if (disable)
-        {
-            currentColor = Qt::gray;
-        }
-        else
-        {
-            currentColor = baseColor;
-        }
-        item->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/factor));
     }
 private:
     Q_DISABLE_COPY(VDrawTool)

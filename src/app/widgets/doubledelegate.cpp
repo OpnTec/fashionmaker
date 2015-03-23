@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -53,6 +53,7 @@ QWidget *DoubleSpinBoxDelegate::createEditor(QWidget *parent, const QStyleOption
     Q_UNUSED(index);
     emit NewLastValue(-10001.0);//Here need reset value to default because we begin work with new item
     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
+    editor->setLocale(parent->locale());
     editor->setMinimum(-10000.0);
     editor->setMaximum(10000.0);
     connect(editor, &QDoubleSpinBox::editingFinished, this, &DoubleSpinBoxDelegate::commitAndCloseEditor);

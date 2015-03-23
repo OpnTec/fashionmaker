@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -31,37 +31,42 @@
 #include <QDir>
 #include <QDebug>
 #include <QLocale>
+#include <QApplication>
 
-const QString VSettings::SettingConfigurationOsSeparator      = QStringLiteral("configuration/osSeparator");
-const QString VSettings::SettingConfigurationAutosaveState    = QStringLiteral("configuration/autosave/state");
-const QString VSettings::SettingConfigurationAutosaveTime     = QStringLiteral("configuration/autosave/time");
-const QString VSettings::SettingConfigurationSendReportState  = QStringLiteral("configuration/send_report/state");
-const QString VSettings::SettingConfigurationLocale           = QStringLiteral("configuration/locale");
-const QString VSettings::SettingConfigurationUnit             = QStringLiteral("configuration/unit");
-const QString VSettings::SettingConfigurationLabelLanguage    = QStringLiteral("configuration/label_language");
+const QString VSettings::SettingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
+const QString VSettings::SettingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
+const QString VSettings::SettingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
+const QString VSettings::SettingConfigurationSendReportState     = QStringLiteral("configuration/send_report/state");
+const QString VSettings::SettingConfigurationLocale              = QStringLiteral("configuration/locale");
+const QString VSettings::SettingConfigurationUnit                = QStringLiteral("configuration/unit");
+const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");
+const QString VSettings::SettingConfigurationConfirmItemDeletion
+                                                                = QStringLiteral("configuration/confirm_item_deletion");
 
-const QString VSettings::SettingPathsIndividualMeasurements   = QStringLiteral("paths/individual_measurements");
-const QString VSettings::SettingPathsPattern                  = QStringLiteral("paths/pattern");
+const QString VSettings::SettingPathsIndividualMeasurements      = QStringLiteral("paths/individual_measurements");
+const QString VSettings::SettingPathsStandardMeasurements        = QStringLiteral("paths/standard_measurements");
+const QString VSettings::SettingPathsPattern                     = QStringLiteral("paths/pattern");
+const QString VSettings::SettingPathsLayout                      = QStringLiteral("paths/layout");
 
-const QString VSettings::SettingPatternUser                   = QStringLiteral("pattern/user");
-const QString VSettings::SettingPatternGraphicalOutput        = QStringLiteral("pattern/graphicalOutput");
-const QString VSettings::SettingPatternUndo                   = QStringLiteral("pattern/undo");
+const QString VSettings::SettingPatternUser                      = QStringLiteral("pattern/user");
+const QString VSettings::SettingPatternGraphicalOutput           = QStringLiteral("pattern/graphicalOutput");
+const QString VSettings::SettingPatternUndo                      = QStringLiteral("pattern/undo");
 
-const QString VSettings::SettingGeneralRecentFileList         = QStringLiteral("recentFileList");
-const QString VSettings::SettingGeneralRestoreFileList        = QStringLiteral("restoreFileList");
-const QString VSettings::SettingGeneralGeometry               = QStringLiteral("geometry");
-const QString VSettings::SettingGeneralWindowState            = QStringLiteral("windowState");
+const QString VSettings::SettingGeneralRecentFileList            = QStringLiteral("recentFileList");
+const QString VSettings::SettingGeneralRestoreFileList           = QStringLiteral("restoreFileList");
+const QString VSettings::SettingGeneralGeometry                  = QStringLiteral("geometry");
+const QString VSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
 
-const QString VSettings::SettingCommunityServer               = QStringLiteral("community/server");
-const QString VSettings::SettingCommunityServerSecure         = QStringLiteral("community/serverSecure");
-const QString VSettings::SettingCommunityUseProxy             = QStringLiteral("community/useProxy");
-const QString VSettings::SettingCommunityProxyAddress         = QStringLiteral("community/proxyAddress");
-const QString VSettings::SettingCommunityProxyPort            = QStringLiteral("community/proxyPort");
-const QString VSettings::SettingCommunityProxyUser            = QStringLiteral("community/proxyUser");
-const QString VSettings::SettingCommunityProxyPass            = QStringLiteral("community/proxyPass");
-const QString VSettings::SettingCommunityUsername             = QStringLiteral("community/username");
-const QString VSettings::SettingCommunitySavePassword         = QStringLiteral("community/savePassword");
-const QString VSettings::SettingCommunityUserPassword         = QStringLiteral("community/userpassword");
+const QString VSettings::SettingCommunityServer                  = QStringLiteral("community/server");
+const QString VSettings::SettingCommunityServerSecure            = QStringLiteral("community/serverSecure");
+const QString VSettings::SettingCommunityUseProxy                = QStringLiteral("community/useProxy");
+const QString VSettings::SettingCommunityProxyAddress            = QStringLiteral("community/proxyAddress");
+const QString VSettings::SettingCommunityProxyPort               = QStringLiteral("community/proxyPort");
+const QString VSettings::SettingCommunityProxyUser               = QStringLiteral("community/proxyUser");
+const QString VSettings::SettingCommunityProxyPass               = QStringLiteral("community/proxyPass");
+const QString VSettings::SettingCommunityUsername                = QStringLiteral("community/username");
+const QString VSettings::SettingCommunitySavePassword            = QStringLiteral("community/savePassword");
+const QString VSettings::SettingCommunityUserPassword            = QStringLiteral("community/userpassword");
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -162,6 +167,18 @@ void VSettings::SetLabelLanguage(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetConfirmItemDelete() const
+{
+    return value(SettingConfigurationConfirmItemDeletion, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetConfirmItemDelete(const bool &value)
+{
+    setValue(SettingConfigurationConfirmItemDeletion, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathIndividualMeasurements() const
 {
     return value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
@@ -174,6 +191,18 @@ void VSettings::SetPathIndividualMeasurements(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetPathStandardMeasurements() const
+{
+    return value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetPathStandardMeasurements(const QString &value)
+{
+    setValue(SettingPathsStandardMeasurements, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathPattern() const
 {
     return value(SettingPathsPattern, QDir::homePath()).toString();
@@ -183,6 +212,18 @@ QString VSettings::GetPathPattern() const
 void VSettings::SetPathPattern(const QString &value)
 {
     setValue(SettingPathsPattern, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::GetPathLayout() const
+{
+    return value(SettingPathsLayout, QDir::homePath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetPathLayout(const QString &value)
+{
+    setValue(SettingPathsLayout, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -401,4 +442,45 @@ QString VSettings::GetUserPassword() const
 void VSettings::SetUserPassword(const QString &value)
 {
     setValue(SettingCommunityUserPassword, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VSettings::StandardTablesPath()
+{
+    const QString stPath = QStringLiteral("/tables/standard");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + stPath;
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    }
+#else // Unix
+    #ifdef QT_DEBUG
+        return QApplication::applicationDirPath() + stPath;
+    #else
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    #endif
+#endif
 }

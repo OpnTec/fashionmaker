@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -54,7 +53,7 @@ namespace qmu
         virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd);
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
-        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal);
+        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale);
         // Trigonometric functions
         static qreal Tan2(qreal, qreal);
         // hyperbolic functions

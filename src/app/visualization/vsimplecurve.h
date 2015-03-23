@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -41,13 +41,17 @@ class VSimpleCurve : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, Qt::GlobalColor *currentColor, SimpleCurvePoint curvePosition,
+    VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint curvePosition,
                  qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
     virtual int     type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleSplinePath)};
+
+    QColor GetCurrentColor() const;
+    void SetCurrentColor(const QColor &value);
+
 signals:
     /**
      * @brief Choosed send id when clicked.
@@ -56,6 +60,7 @@ signals:
     void            Choosed(quint32 id);
     void            HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
 protected:
+    virtual void    mousePressEvent(QGraphicsSceneMouseEvent * event);
     virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
@@ -68,9 +73,13 @@ private:
     qreal             *factor;
 
     /** @brief currentColor current color. */
-    Qt::GlobalColor   *currentColor;
+    QColor            currentColor;
 
     SimpleCurvePoint  curvePosition;
+
+    bool              enabled;
+
+    QColor CorrectColor(const QColor &color) const;
 };
 
 #endif // VSIMPLECURVE_H

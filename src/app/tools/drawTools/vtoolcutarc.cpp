@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -50,9 +50,9 @@ const QString VToolCutArc::AttrArc  = QStringLiteral("arc");
  * @param parent parent object.
  */
 VToolCutArc::VToolCutArc(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                         const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id,
+                         const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id, const QString &color,
                          const Source &typeCreation, QGraphicsItem * parent)
-    :VToolCut(doc, data, id, formula, arcId, arc1id, arc2id, parent)
+    :VToolCut(doc, data, id, formula, arcId, arc1id, arc2id, color, parent)
 {
     RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
     RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
@@ -77,9 +77,10 @@ void VToolCutArc::setDialog()
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setFormula(formula);
+    dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
-    dialogTool->setPointName(point->name());
+    dialogTool->SetPointName(point->name());
+    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,10 +97,11 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
-    QString formula = dialogTool->getFormula();
+    QString formula = dialogTool->GetFormula();
     const quint32 arcId = dialogTool->getArcId();
+    const QString color = dialogTool->GetColor();
     VToolCutArc* point = nullptr;
-    point=Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+    point=Create(0, pointName, formula, arcId, 5, 10, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -123,8 +125,8 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @param typeCreation way we create this tool.
  */
 VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+                                 const qreal &mx, const qreal &my, const QString &color, VMainGraphicsScene *scene,
+                                 VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
 
@@ -167,11 +169,12 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
-        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, typeCreation);
+        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, color, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutArc::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutArc::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutArc::EnableToolMove);
         doc->AddTool(id, point);
         doc->AddTool(arc1id, point);
         doc->AddTool(arc2id, point);
@@ -220,7 +223,8 @@ void VToolCutArc::ShowVisualization(bool show)
  */
 void VToolCutArc::FullUpdateFromFile()
 {
-    FullUpdateCurveFromFile(AttrArc);
+    ReadAttributes();
+    RefreshGeometry();
 
     if (vis != nullptr)
     {
@@ -271,8 +275,9 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrLength, dialogTool->getFormula());
+    doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
+    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -296,6 +301,7 @@ void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurve
     {
         path.translate(-arc->GetP2().x(), -arc->GetP2().y());
     }
+    curve->SetCurrentColor(QColor(lineColor));
     curve->setPath(path);
 }
 
@@ -310,7 +316,16 @@ void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+    doc->SetAttribute(tag, AttrColor, lineColor);
 
     doc->SetAttribute(tag, AttrLength, formula);
     doc->SetAttribute(tag, AttrArc, curveCutId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
+{
+    formula = doc->GetParametrString(domElement, AttrLength, "");
+    curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+    lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
 }

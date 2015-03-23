@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -46,6 +46,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
     bOk->setEnabled(false);
 
     FillComboBoxPoints(ui->comboBoxPoint);
+    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
     connect(ui->comboBoxPoint,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -87,10 +88,22 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
         NewItem(path.at(i).P().id(), path.at(i).KAsm1(), path.at(i).Angle1(), path.at(i).KAsm2(), path.at(i).Angle2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
-    ui->doubleSpinBoxKcurve->setValue(path.getKCurve());
+    ui->doubleSpinBoxKcurve->setValue(path.GetKCurve());
 
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSplinePath::GetColor() const
+{
+    return GetComboBoxCurrentData(ui->comboBoxColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::SetColor(const QString &value)
+{
+    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -103,6 +116,11 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {
+        if (path.CountPoint() >= 2 && path.at(path.CountPoint()-1).P().id() == id)
+        {
+            return;
+        }
+
         NewItem(id, 1, 0, 1, 180);
         emit ToolTip(tr("Select point of curve path"));
 
@@ -357,5 +375,5 @@ void DialogSplinePath::SavePath()
         QListWidgetItem *item = ui->listWidget->item(i);
         path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
     }
-    path.setKCurve(ui->doubleSpinBoxKcurve->value());
+    path.SetKCurve(ui->doubleSpinBoxKcurve->value());
 }

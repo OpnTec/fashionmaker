@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -25,6 +24,7 @@
 
 #include <QMap>
 #include <QString>
+#include <locale>
 
 #include "qmuparserfixes.h"
 
@@ -275,7 +275,7 @@ typedef qreal ( *strfun_type2 ) ( const QString &, qreal );
 typedef qreal ( *strfun_type3 ) ( const QString &, qreal, qreal );
 
 /** @brief Callback used for functions that identify values in a string. */
-typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal );
+typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const std::locale &s_locale );
 
 /** @brief Callback used for variable creation factory functions. */
 typedef qreal* ( *facfun_type ) ( const QString &, void* );

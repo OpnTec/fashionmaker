@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -42,8 +42,7 @@
  * @param parent parent widget
  */
 DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), number(0),
-    firstPointId(NULL_ID), secondPointId(NULL_ID), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection), line(nullptr)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -62,6 +61,7 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
             this, &DialogPointOfIntersection::PointNameChanged);
 
     line = new VisToolPointOfIntersection(data);
+    line->VisualMode(NULL_ID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,13 +76,13 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPointId set id of second point
+ * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogPointOfIntersection::setSecondPointId(const quint32 &value)
+void DialogPointOfIntersection::SetSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
-    line->setPoint2Id(secondPointId);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,10 +100,11 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
             switch (number)
             {
                 case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point horizontally")))
+                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
                     {
                         number++;
-                        line->VisualMode(id);
+                        line->setPoint1Id(id);
+                        line->RefreshGeometry();
                     }
                     break;
                 case 1:
@@ -130,11 +131,9 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
 void DialogPointOfIntersection::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
 
-    line->setPoint1Id(firstPointId);
-    line->setPoint2Id(secondPointId);
+    line->setPoint1Id(GetFirstPointId());
+    line->setPoint2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -173,29 +172,48 @@ void DialogPointOfIntersection::ShowVisualization()
     {
         VMainGraphicsScene *scene = qApp->getCurrentScene();
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
-        scene->addItem(line);
         line->RefreshGeometry();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPointId set id of first point
+ * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogPointOfIntersection::setFirstPointId(const quint32 &value)
+void DialogPointOfIntersection::SetFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
-    line->setPoint1Id(firstPointId);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
+    line->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogPointOfIntersection::setPointName(const QString &value)
+void DialogPointOfIntersection::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFirstPointId return id of first point
+ * @return id
+ */
+quint32 DialogPointOfIntersection::GetFirstPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetSecondPointId return id of second point
+ * @return id
+ */
+quint32 DialogPointOfIntersection::GetSecondPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

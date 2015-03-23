@@ -197,6 +197,14 @@
         <source>With OS options (.)</source>
         <translation type="vanished">З параметрів ОС (.)</translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation>Редагування лекала</translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation>Підтвердіть видалення об&apos;єкту</translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -262,7 +270,7 @@
     <name>DialogAlongLine</name>
     <message>
         <source>Point along line</source>
-        <translation>Точка вздовж лінії</translation>
+        <translation type="vanished">Точка вздовж лінії</translation>
     </message>
     <message>
         <source>Length</source>
@@ -278,7 +286,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахунок довжини</translation>
+        <translation type="vanished">Розрахунок довжини</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -368,6 +376,14 @@
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
+    <message>
+        <source>Point at distance along line</source>
+        <translation>Точка вздовж лінії</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -389,7 +405,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -497,7 +513,7 @@
     </message>
     <message>
         <source>Value of angle of line.</source>
-        <translation>Значення кута лінії.</translation>
+        <translation type="vanished">Значення кута лінії.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -511,12 +527,16 @@
         <source>Angles equal</source>
         <translation>Кути однакові</translation>
     </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
     <message>
         <source>Bisector</source>
-        <translation>Бісектриса</translation>
+        <translation type="vanished">Бісектриса</translation>
     </message>
     <message>
         <source>Length</source>
@@ -536,7 +556,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -638,12 +658,20 @@
         <source>_</source>
         <translation type="obsolete">_</translation>
     </message>
+    <message>
+        <source>Point along bisector</source>
+        <translation>Точка бісектриси кута</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Curve intersect axis</source>
-        <translation>Перетин кривої і осі</translation>
+        <translation type="vanished">Перетин кривої і осі</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -651,7 +679,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -667,7 +695,7 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Перша точка лінії</translation>
+        <translation type="vanished">Перша точка лінії</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -729,6 +757,18 @@
         <source>Select axis point</source>
         <translation>Виберіть точку осі</translation>
     </message>
+    <message>
+        <source>Point intersect curve and axis</source>
+        <translation>Точка перениту кривої і вісі</translation>
+    </message>
+    <message>
+        <source>Axis Point</source>
+        <translation>Точка осі</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
@@ -746,7 +786,7 @@
     </message>
     <message>
         <source>Cut arc</source>
-        <translation>Розрізати дугу</translation>
+        <translation type="vanished">Розрізати дугу</translation>
     </message>
     <message>
         <source>...</source>
@@ -754,7 +794,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -774,7 +814,7 @@
     </message>
     <message>
         <source>Selected curve</source>
-        <translation>Вибрана крива</translation>
+        <translation type="vanished">Вибрана крива</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -824,6 +864,18 @@
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
+    <message>
+        <source>Segment an arc</source>
+        <translation>Сегмент дуги</translation>
+    </message>
+    <message>
+        <source>Selected arc</source>
+        <translation>Виберіть дугу</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSpline</name>
@@ -841,7 +893,7 @@
     </message>
     <message>
         <source>Cut curve</source>
-        <translation>Розрізат криву</translation>
+        <translation type="vanished">Розрізат криву</translation>
     </message>
     <message>
         <source>...</source>
@@ -849,7 +901,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -919,6 +971,14 @@
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
+    <message>
+        <source>Segmenting a simple curve</source>
+        <translation>Сегментація простої кривої</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
@@ -936,7 +996,7 @@
     </message>
     <message>
         <source>Cut curve path</source>
-        <translation>Розрізати складну криву</translation>
+        <translation type="vanished">Розрізати складну криву</translation>
     </message>
     <message>
         <source>...</source>
@@ -944,7 +1004,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1014,6 +1074,14 @@
         <source>Variables - Click twice to insert into formula</source>
         <translation>Змінні - клікніть двічі для вставки в формулу</translation>
     </message>
+    <message>
+        <source>Segment a curved path</source>
+        <translation>Сегментація складної кривої</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
+    </message>
 </context>
 <context>
     <name>DialogDetail</name>
@@ -1069,6 +1137,10 @@
         <source>Reverse</source>
         <translation>Протилежний напрямок</translation>
     </message>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation>Деталь</translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1090,7 +1162,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -1157,7 +1229,7 @@
     </message>
     <message>
         <source>Point in the end of a line</source>
-        <translation>Точка на кінці відрізку</translation>
+        <translation type="vanished">Точка на кінці відрізку</translation>
     </message>
     <message>
         <source>Formula for calculation of length of line</source>
@@ -1165,7 +1237,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1263,6 +1335,14 @@
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
+    <message>
+        <source>Point at distance and angle</source>
+        <translation>Точка на кінці лінії</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogHeight</name>
@@ -1272,7 +1352,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Зріст</translation>
+        <translation type="vanished">Зріст</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1305,6 +1385,18 @@
     <message>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
+    </message>
+    <message>
+        <source>Perpendicular point along line</source>
+        <translation>Перпендикулярна точка вздовж лінії</translation>
+    </message>
+    <message>
+        <source>Base Point</source>
+        <translation>Базова точка</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
     </message>
 </context>
 <context>
@@ -1600,6 +1692,22 @@
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
+    <message>
+        <source>Tables of Variables</source>
+        <translation>Таблиці змінних</translation>
+    </message>
+    <message>
+        <source>Base size: %1 %3; Base height: %2 %3</source>
+        <translation>Базовий розмір: %1 %3; Базовий зріст: %2 %3</translation>
+    </message>
+    <message>
+        <source>Description: &quot;%1&quot;</source>
+        <translation>Опис: &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>Data successfully saved.</source>
+        <translation>Данні успішно збережені.</translation>
+    </message>
 </context>
 <context>
     <name>DialogIndividualMeasurements</name>
@@ -1681,10 +1789,120 @@
     </message>
 </context>
 <context>
+    <name>DialogLayoutProgress</name>
+    <message>
+        <source>Creation a layout</source>
+        <translation>Створення розкладки</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Зачекайте, відбувається пошук найкращої позиції для деталі.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t prepare data for creation layout</source>
+        <translation>Не вдалося підготувати данні для створення розкладки</translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation>Критична помилка</translation>
+    </message>
+    <message>
+        <source>Wrong paper size</source>
+        <translation>Не правильний розмір паперу</translation>
+    </message>
+    <message>
+        <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation>Декілька деталей залишилися укладеними, але жодна з них не підійшла для листа</translation>
+    </message>
+</context>
+<context>
+    <name>DialogLayoutSettings</name>
+    <message>
+        <source>Creation a layout</source>
+        <translation>Створення розкладки</translation>
+    </message>
+    <message>
+        <source>Paper size</source>
+        <translation>Розмір паперу</translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation>Шаблони:</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation>Ширина:</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation>Висота:</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
+        <source>Rotate workpiece</source>
+        <translation>Повертати деталі</translation>
+    </message>
+    <message>
+        <source>Rotate by</source>
+        <translation>Повертати на</translation>
+    </message>
+    <message>
+        <source>degree</source>
+        <translation>градуси</translation>
+    </message>
+    <message>
+        <source>Creation options</source>
+        <translation>Опції створення</translation>
+    </message>
+    <message>
+        <source>Layout width:</source>
+        <translation>Ширина розкладки:</translation>
+    </message>
+    <message>
+        <source>Shift length:</source>
+        <translation>Довжина зміщення:</translation>
+    </message>
+    <message>
+        <source>Principle of choosing the next workpiece</source>
+        <translation>Принцип вибору настпної деталі</translation>
+    </message>
+    <message>
+        <source>Three groups: big, middle, small</source>
+        <translation>Три групи: великі, середні, малі</translation>
+    </message>
+    <message>
+        <source>Two groups: big, small</source>
+        <translation>Дві групи: великі, малі</translation>
+    </message>
+    <message>
+        <source>Descending area</source>
+        <translation>За спаданням площі</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation>Міліметри</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation>Сантиметри</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation>Дюйми</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation>Пікселі</translation>
+    </message>
+</context>
+<context>
     <name>DialogLine</name>
     <message>
         <source>Line</source>
-        <translation>Лінія</translation>
+        <translation type="vanished">Лінія</translation>
     </message>
     <message>
         <source>First point</source>
@@ -1706,6 +1924,14 @@
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
     </message>
+    <message>
+        <source>Line between points</source>
+        <translation>Лінія між двома точками</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
@@ -1715,7 +1941,7 @@
     </message>
     <message>
         <source>Intersection of lines</source>
-        <translation>Перетин ліній</translation>
+        <translation type="vanished">Перетин ліній</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1749,12 +1975,16 @@
         <source>Select second point of second line</source>
         <translation>Виберіть другу точку другої лінії</translation>
     </message>
+    <message>
+        <source>Point at line intersection</source>
+        <translation>Точка перетину ліній</translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
         <source>Line intersect axis</source>
-        <translation>Перетин лінії і осі</translation>
+        <translation type="vanished">Перетин лінії і осі</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -1762,7 +1992,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -1848,6 +2078,22 @@
         <source>Select axis point</source>
         <translation>Виберіть точку осі</translation>
     </message>
+    <message>
+        <source>Point intersect line and axis</source>
+        <translation>Точка на перетині лінії і осі</translation>
+    </message>
+    <message>
+        <source>Axis Point</source>
+        <translation>Точка осі</translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation>Друга точка лінії</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogMeasurements</name>
@@ -1880,7 +2126,7 @@
     <name>DialogNormal</name>
     <message>
         <source>Normal</source>
-        <translation>Перпендикуляр</translation>
+        <translation type="vanished">Перпендикуляр</translation>
     </message>
     <message>
         <source>Length</source>
@@ -1920,7 +2166,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1981,6 +2227,22 @@
     <message>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
+    </message>
+    <message>
+        <source>Point along perpendicular</source>
+        <translation>Інструмент точка перпендикуляра</translation>
+    </message>
+    <message>
+        <source>First point of line</source>
+        <translation>Перша точка лінії</translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation>Друга точка лінії</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
     </message>
 </context>
 <context>
@@ -2157,7 +2419,7 @@
     <name>DialogPointOfContact</name>
     <message>
         <source>Point of contact</source>
-        <translation>Точка дотику</translation>
+        <translation type="vanished">Точка дотику</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -2181,7 +2443,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2255,6 +2517,10 @@
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
+    <message>
+        <source>Point at intersection of arc and line</source>
+        <translation>Точка на перетині дуги та лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
@@ -2268,11 +2534,11 @@
     </message>
     <message>
         <source>vertical point</source>
-        <translation>Точка по вертикалі</translation>
+        <translation type="vanished">Точка по вертикалі</translation>
     </message>
     <message>
         <source>horizontal point</source>
-        <translation>Точка по горизонталі</translation>
+        <translation type="vanished">Точка по горизонталі</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -2280,7 +2546,7 @@
     </message>
     <message>
         <source>Point of intersection</source>
-        <translation>Точка перетину</translation>
+        <translation type="vanished">Точка перетину</translation>
     </message>
     <message>
         <source>Second point of angle</source>
@@ -2288,14 +2554,30 @@
     </message>
     <message>
         <source>Select point horizontally</source>
-        <translation>Виберіть точку горизонталі</translation>
+        <translation type="vanished">Виберіть точку горизонталі</translation>
+    </message>
+    <message>
+        <source>Point from X and Y of two other points</source>
+        <translation>Точка на перетині Х і Y коодринат двох інших точок</translation>
+    </message>
+    <message>
+        <source>X: vertical point</source>
+        <translation>Х: вертикальна точка</translation>
+    </message>
+    <message>
+        <source>Y: horizontal point</source>
+        <translation>Y: горизонтальна точка</translation>
+    </message>
+    <message>
+        <source>Select point for Y value (horizontal)</source>
+        <translation>Виберіть точку на горизонталі</translation>
     </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Point of shoulder</source>
-        <translation>Точка плеча</translation>
+        <translation type="vanished">Точка плеча</translation>
     </message>
     <message>
         <source>Length</source>
@@ -2311,7 +2593,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation>Розрахувати значення</translation>
+        <translation type="vanished">Розрахувати значення</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2405,6 +2687,14 @@
         <source>Select point of shoulder</source>
         <translation type="vanished">Виберіть точку плеча</translation>
     </message>
+    <message>
+        <source>Special point on shoulder</source>
+        <translation>Спеціальна точка на плече</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -2437,7 +2727,7 @@
     <name>DialogSpline</name>
     <message>
         <source>Curve</source>
-        <translation>Крива</translation>
+        <translation type="vanished">Крива</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2470,6 +2760,14 @@
     <message>
         <source>Select last point of curve</source>
         <translation>Виберість останню точку кривої</translation>
+    </message>
+    <message>
+        <source>Simple curve</source>
+        <translation>Проста крива</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
     </message>
 </context>
 <context>
@@ -2513,6 +2811,10 @@
     <message>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
     </message>
 </context>
 <context>
@@ -2616,6 +2918,10 @@
         <source>Parser error: %1</source>
         <translation>Помилка синтаксичного аналізу: %1</translation>
     </message>
+    <message>
+        <source>Line Angle</source>
+        <translation>Кут лінії</translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
@@ -2625,7 +2931,7 @@
     </message>
     <message>
         <source>Triangle</source>
-        <translation>Трикутник</translation>
+        <translation type="vanished">Трикутник</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2662,6 +2968,22 @@
     <message>
         <source>Select second point</source>
         <translation>Виберіть другу точку</translation>
+    </message>
+    <message>
+        <source>Triangle tool</source>
+        <translation>Інструмент трикутник</translation>
+    </message>
+    <message>
+        <source>First point of the axis</source>
+        <translation>Перша точка вісі</translation>
+    </message>
+    <message>
+        <source>Second point of the axis</source>
+        <translation>Друга точка вісі</translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation>Друга точка лінії</translation>
     </message>
 </context>
 <context>
@@ -2715,11 +3037,15 @@
     </message>
     <message>
         <source>Union details</source>
-        <translation>Обєднання деталей</translation>
+        <translation type="vanished">Обєднання деталей</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Union tool</source>
+        <translation>Інструмент об&apos;єднання</translation>
     </message>
 </context>
 <context>
@@ -2877,7 +3203,7 @@
     </message>
     <message>
         <source>Special point on shoulder.</source>
-        <translation>Інструмент точка плеча.</translation>
+        <translation type="vanished">Інструмент точка плеча.</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -2893,7 +3219,7 @@
     </message>
     <message>
         <source>Point at intersection of arc and line.</source>
-        <translation>Інструмент точка дотику.</translation>
+        <translation type="vanished">Інструмент точка дотику.</translation>
     </message>
     <message>
         <source>Tool point of height.</source>
@@ -2901,7 +3227,7 @@
     </message>
     <message>
         <source>Tool triangle.</source>
-        <translation>Інструмент трикутник.</translation>
+        <translation type="vanished">Інструмент трикутник.</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -2957,7 +3283,7 @@
     </message>
     <message>
         <source>Tool new detail.</source>
-        <translation>Інструмент нова деталь.</translation>
+        <translation type="vanished">Інструмент нова деталь.</translation>
     </message>
     <message>
         <source>File</source>
@@ -2993,7 +3319,7 @@
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points.</source>
-        <translation>Інструменд для створення точки з двух х и у координат двух інших точок.</translation>
+        <translation type="vanished">Інструменд для створення точки з двух х и у координат двух інших точок.</translation>
     </message>
     <message>
         <source>Line between points</source>
@@ -3005,23 +3331,23 @@
     </message>
     <message>
         <source>Curve tool.</source>
-        <translation>Інструмент крива.</translation>
+        <translation type="vanished">Інструмент крива.</translation>
     </message>
     <message>
         <source>Tool for path curve.</source>
-        <translation>Інструмент складна крива.</translation>
+        <translation type="vanished">Інструмент складна крива.</translation>
     </message>
     <message>
         <source>Tool segment a pathed curve.</source>
-        <translation>Інструмент розрізання складної кривої.</translation>
+        <translation type="vanished">Інструмент розрізання складної кривої.</translation>
     </message>
     <message>
         <source>Tool for segmenting a curve.</source>
-        <translation>Інструмент розрізання кривої.</translation>
+        <translation type="vanished">Інструмент розрізання кривої.</translation>
     </message>
     <message>
         <source>Point of intersection line and axis</source>
-        <translation>Точка на перетині лінії і осі</translation>
+        <translation type="vanished">Точка на перетині лінії і осі</translation>
     </message>
     <message>
         <source>...</source>
@@ -3029,15 +3355,15 @@
     </message>
     <message>
         <source>Arc tool.</source>
-        <translation>Інструмент дуга.</translation>
+        <translation type="vanished">Інструмент дуга.</translation>
     </message>
     <message>
         <source>Cut arc tool.</source>
-        <translation>Інструмент розрізання дуги.</translation>
+        <translation type="vanished">Інструмент розрізання дуги.</translation>
     </message>
     <message>
         <source>Tool for union two details.</source>
-        <translation>Інструмент обєднання двух деталей.</translation>
+        <translation type="vanished">Інструмент обєднання двух деталей.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -3583,7 +3909,7 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>Select point vertically</source>
-        <translation>Виберіть точку по вертикалі</translation>
+        <translation type="vanished">Виберіть точку по вертикалі</translation>
     </message>
     <message>
         <source>Select detail</source>
@@ -3710,6 +4036,82 @@ Do you want to save your changes?</source>
     <message>
         <source>This file already opened in another window.</source>
         <translation>Цей файл вже відкрито в іншому вікні.</translation>
+    </message>
+    <message>
+        <source>Special point on shoulder</source>
+        <translation>Спеціальна точка на плечі</translation>
+    </message>
+    <message>
+        <source>Triangle tool</source>
+        <translation>Інструмент трикутник</translation>
+    </message>
+    <message>
+        <source>Point at intersection of arc and line</source>
+        <translation>Точка на перетині дуги та лінії</translation>
+    </message>
+    <message>
+        <source>Point from X and Y of two other points</source>
+        <translation>Точка на перетині Х і Y коодринат двох інших точок</translation>
+    </message>
+    <message>
+        <source>Point intersect line and axis</source>
+        <translation>Точка на перетині лінії і осі</translation>
+    </message>
+    <message>
+        <source>Simple curve</source>
+        <translation>Проста крива</translation>
+    </message>
+    <message>
+        <source>Curved path</source>
+        <translation>Складна крива</translation>
+    </message>
+    <message>
+        <source>Segmenting a simple curve</source>
+        <translation>Сегментація простої кривої</translation>
+    </message>
+    <message>
+        <source>Segment a curved path</source>
+        <translation>Сегментація складної кривої</translation>
+    </message>
+    <message>
+        <source>Point intersect curve and axis</source>
+        <translation>Точка перениту кривої і вісі</translation>
+    </message>
+    <message>
+        <source>Segment an arc</source>
+        <translation>Сегмент дуги</translation>
+    </message>
+    <message>
+        <source>Point intersect arc and axis</source>
+        <translation>Точка перетину дуги і вісі</translation>
+    </message>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation>Деталь</translation>
+    </message>
+    <message>
+        <source>Union tool</source>
+        <translation>Інструмент об&apos;єднання</translation>
+    </message>
+    <message>
+        <source>toolBar</source>
+        <translation>Панель інструментів</translation>
+    </message>
+    <message>
+        <source>Last Tool</source>
+        <translation>Останній інструмент</translation>
+    </message>
+    <message>
+        <source>Activate last used tool again</source>
+        <translation>Активувати останній використаний інструмент знову</translation>
+    </message>
+    <message>
+        <source>L</source>
+        <translation>L</translation>
+    </message>
+    <message>
+        <source>Select point for X value (vertical)</source>
+        <translation>Виберіть точку по вертикалі</translation>
     </message>
 </context>
 <context>
@@ -5793,6 +6195,14 @@ Do you want to save your changes?</source>
         <source>Patterns</source>
         <translation>Лекала</translation>
     </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation>Стандартна таблиця мірок</translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation>Розкладка</translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>
@@ -5932,6 +6342,10 @@ Do you want to save your changes?</source>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
         <translation>Значення</translation>
+    </message>
+    <message>
+        <source>px</source>
+        <translation>піксел</translation>
     </message>
 </context>
 <context>
@@ -6167,19 +6581,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Next</source>
-        <translation>Наступний</translation>
+        <translation type="vanished">Наступний</translation>
     </message>
     <message>
         <source>Next detail</source>
-        <translation>Наступна деталь</translation>
+        <translation type="vanished">Наступна деталь</translation>
     </message>
     <message>
         <source>Turn</source>
-        <translation>Повернути</translation>
+        <translation type="vanished">Повернути</translation>
     </message>
     <message>
         <source>Turn the detail 90 degrees</source>
-        <translation>Повернути деталь на 90 градусів </translation>
+        <translation type="vanished">Повернути деталь на 90 градусів </translation>
     </message>
     <message>
         <source>Turn the detail 180 degrees</source>
@@ -6191,11 +6605,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Enlarge letter</source>
-        <translation>Збільшити аркуш</translation>
+        <translation type="vanished">Збільшити аркуш</translation>
     </message>
     <message>
         <source>Enlarge the length of the sheet</source>
-        <translation>Збільшити довжину аркушу</translation>
+        <translation type="vanished">Збільшити довжину аркушу</translation>
     </message>
     <message>
         <source>Enlarge the length of sheet</source>
@@ -6203,15 +6617,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Reduce sheet</source>
-        <translation>Зменшити аркуш</translation>
+        <translation type="vanished">Зменшити аркуш</translation>
     </message>
     <message>
         <source>Reduce the length of the sheet</source>
-        <translation>Зменшити довжину аркушу</translation>
+        <translation type="vanished">Зменшити довжину аркушу</translation>
     </message>
     <message>
         <source>Mirroring</source>
-        <translation>Дзеркальне відображення</translation>
+        <translation type="vanished">Дзеркальне відображення</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -6227,15 +6641,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>0 details left.</source>
-        <translation>0 деталей залишилось.</translation>
+        <translation type="vanished">0 деталей залишилось.</translation>
     </message>
     <message>
         <source>Collisions not found.</source>
-        <translation>Колізії не знайдено.</translation>
+        <translation type="vanished">Колізії не знайдено.</translation>
     </message>
     <message>
         <source>%1 details left.</source>
-        <translation>%1 деталей залишилось.</translation>
+        <translation type="vanished">%1 деталей залишилось.</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -6263,7 +6677,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Collisions found.</source>
-        <translation>Знайдено колізії.</translation>
+        <translation type="vanished">Знайдено колізії.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -6280,6 +6694,29 @@ Do you want to save your changes?</source>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
         <translation>Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>Layout pages</source>
+        <translation>Сторінки розкладки</translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation>Розкладка</translation>
+    </message>
+</context>
+<context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation>Не питати знову</translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation>Не &amp;питати знову</translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
+        <translation>Не по&amp;казувати знову</translation>
     </message>
 </context>
 <context>
@@ -6332,10 +6769,46 @@ Do you want to save your changes?</source>
     <name>VAbstractTool</name>
     <message>
         <source>Confirm the deletion.</source>
-        <translation>Підтвердіть видалення.</translation>
+        <translation type="vanished">Підтвердіть видалення.</translation>
     </message>
     <message>
         <source>Do you really want delete?</source>
+        <translation type="vanished">Ви дійсно хочете видалити?</translation>
+    </message>
+    <message>
+        <source>black</source>
+        <translation>чорний</translation>
+    </message>
+    <message>
+        <source>green</source>
+        <translation>зелений</translation>
+    </message>
+    <message>
+        <source>blue</source>
+        <translation>синій</translation>
+    </message>
+    <message>
+        <source>dark red</source>
+        <translation>темно червоний</translation>
+    </message>
+    <message>
+        <source>dark green</source>
+        <translation>темно зелений</translation>
+    </message>
+    <message>
+        <source>dark blue</source>
+        <translation>темно синій</translation>
+    </message>
+    <message>
+        <source>yellow</source>
+        <translation>жовтий</translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation>Підтвердіть видалення</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
         <translation>Ви дійсно хочете видалити?</translation>
     </message>
 </context>
@@ -7005,6 +7478,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Point intersection line and axis</source>
         <translation>Точка на перетині лінії і осі</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation>Колір лінії</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
+    </message>
+    <message>
+        <source>Point intersection curve and axis</source>
+        <translation>Точка перениту кривої і вісі</translation>
     </message>
 </context>
 <context>

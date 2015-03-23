@@ -61,7 +61,7 @@ QWidget* VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionVie
     {
         VShortcutEditWidget::connect(tmpWidget, SIGNAL(commitData(QWidget*)), delegate, SIGNAL(commitData(QWidget*)));
     }
-
+    tmpWidget->setLocale(parent->locale());
     return tmpWidget;
 }
 

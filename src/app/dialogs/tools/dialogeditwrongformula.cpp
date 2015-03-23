@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -47,7 +47,6 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
-    connect(ui->toolButtonEqual, &QPushButton::clicked, this, &DialogEditWrongFormula::EvalFormula);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEditWrongFormula::DeployFormulaTextEdit);
 
@@ -121,7 +120,7 @@ void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::setFormula(const QString &value)
+void DialogEditWrongFormula::SetFormula(const QString &value)
 {
     formula = qApp->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
@@ -147,7 +146,7 @@ void DialogEditWrongFormula::setPostfix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEditWrongFormula::getFormula() const
+QString DialogEditWrongFormula::GetFormula() const
 {
     return qApp->FormulaFromUser(formula);
 }

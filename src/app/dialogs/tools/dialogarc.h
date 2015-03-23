@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -59,6 +59,9 @@ public:
 
     QString       GetF2() const;
     void          SetF2(const QString &value);
+
+    QString       GetColor() const;
+    void          SetColor(const QString &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type);
     /**
@@ -67,7 +70,6 @@ public slots:
     void DeployFormulaTextEdit();
     void DeployF1TextEdit();
     void DeployF2TextEdit();
-    virtual void  ValChenged(int row);
     void          PutRadius();
     void          PutF1();
     void          PutF2();
@@ -108,9 +110,6 @@ private:
     /** @brief timerF2 timer of check formula of second angle */
     QTimer        *timerF2;
 
-    /** @brief center id of center point */
-    quint32       center;
-
     /** @brief radius formula of radius */
     QString       radius;
 
@@ -135,45 +134,5 @@ private:
     void          ShowLineAngles();
     void          CheckAngles();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetCenter return id of center point
- * @return id id
- */
-inline quint32 DialogArc::GetCenter() const
-{
-    return center;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetRadius return formula of radius
- * @return formula
- */
-inline QString DialogArc::GetRadius() const
-{
-    return radius;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF1 return formula first angle of arc
- * @return formula
- */
-inline QString DialogArc::GetF1() const
-{
-    return f1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF2 return formula second angle of arc
- * @return formula
- */
-inline QString DialogArc::GetF2() const
-{
-    return f2;
-}
 
 #endif // DIALOGARC_H

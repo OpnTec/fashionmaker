@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -45,6 +45,9 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
     virtual QString  getTagName() const;
     void             ShowFoot(bool show);
+
+    void setEnabled(bool enabled);
+
 public slots:
     virtual void     FullUpdateFromFile ();
     void             Disable(bool disable);
@@ -75,7 +78,7 @@ protected:
      */
     virtual void     RefreshGeometry ()=0;
     virtual void     ChangedActivDraw ( const QString &newName );
-    virtual void     ShowTool(quint32 id, Qt::GlobalColor color, bool enable);
+    virtual void     ShowTool(quint32 id, bool enable);
     virtual void     SetFactor(qreal factor);
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
@@ -83,6 +86,7 @@ protected:
     virtual void     keyReleaseEvent(QKeyEvent * event);
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
+    virtual void     ReadToolAttributes(const QDomElement &domElement);
 private:
     Q_DISABLE_COPY(VAbstractSpline)
 };

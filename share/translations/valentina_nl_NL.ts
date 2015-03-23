@@ -193,6 +193,14 @@
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>Na elke crash zal Valentina informatie verzamelen dat ons kan helpen het probleem op te lossen. Wij verzamelen geen persoonlijke informatie. Hier vind u wat wij aan informatie verzamelen :&lt;ahref=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;&quot;.</translation>
     </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -230,10 +238,6 @@
         <translation>Bijdragers</translation>
     </message>
     <message>
-        <source>Based on Qt %2 (32 bit)</source>
-        <translation type="vanished">Gebaseerd op Qt %2 (32 bit)</translation>
-    </message>
-    <message>
         <source>Built on %3 at %4</source>
         <translation>Gebouwd op %3 op %4</translation>
     </message>
@@ -251,15 +255,11 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished"></translation>
+        <translation>Herziene uitgave gebouwd</translation>
     </message>
 </context>
 <context>
     <name>DialogAlongLine</name>
-    <message>
-        <source>Point along line</source>
-        <translation>Punt langs de lijn</translation>
-    </message>
     <message>
         <source>Length</source>
         <translation>Lengte</translation>
@@ -267,10 +267,6 @@
     <message>
         <source>Insert variable into the formula</source>
         <translation>Voeg variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -352,6 +348,14 @@
         <source>Select second point of line</source>
         <translation>Selecteer tweede punt van lijn</translation>
     </message>
+    <message>
+        <source>Point at distance along line</source>
+        <translation type="unfinished">Punt op afstand langs lijn</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArc</name>
@@ -366,10 +370,6 @@
     <message>
         <source>Insert variable into the formula</source>
         <translation>Voeg variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -452,10 +452,6 @@
         <translation>Variabelen</translation>
     </message>
     <message>
-        <source>Value of angle of line.</source>
-        <translation>Waarde van hoek van de lijn</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -467,13 +463,13 @@
         <source>Angles equal</source>
         <translation>Gelijke zijden</translation>
     </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
-    <message>
-        <source>Bisector</source>
-        <translation>Bisector</translation>
-    </message>
     <message>
         <source>Length</source>
         <translation>Lengte</translation>
@@ -481,10 +477,6 @@
     <message>
         <source>Insert marked variable into the formula</source>
         <translation>Voeg gemarkeerde variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -578,20 +570,20 @@
         <source>Select third point of angle</source>
         <translation>Selecteer derde punt van lijn</translation>
     </message>
+    <message>
+        <source>Point along bisector</source>
+        <translation type="unfinished">Punt langs bisector</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
-        <source>Curve intersect axis</source>
-        <translation>Kromming doorkruist as</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>Hoek</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -604,10 +596,6 @@
     <message>
         <source>Axis point</source>
         <translation>As punt</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation>Eerste punt van de lijn</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -669,20 +657,24 @@
         <source>Select axis point</source>
         <translation>Selecteer as punt</translation>
     </message>
+    <message>
+        <source>Point intersect curve and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Cut arc</source>
-        <translation>Knip boog</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Lengte</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -699,10 +691,6 @@
     <message>
         <source>Arc</source>
         <translation>Boog</translation>
-    </message>
-    <message>
-        <source>Selected curve</source>
-        <translation>Geselecteerde kromming</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -748,20 +736,24 @@
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
+    <message>
+        <source>Segment an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Cut curve</source>
-        <translation>Knip kromming</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Lengte</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -827,20 +819,20 @@
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
+    <message>
+        <source>Segmenting a simple curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Cut curve path</source>
-        <translation>Knip kromming</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Lengte</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -906,6 +898,14 @@
         <source>Variables - Click twice to insert into formula</source>
         <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
+    <message>
+        <source>Segment a curved path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogDetail</name>
@@ -955,6 +955,10 @@
     </message>
     <message>
         <source>Reverse</source>
+        <translation>Omgekeerde</translation>
+    </message>
+    <message>
+        <source>Seam allowance tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -971,10 +975,6 @@
     <message>
         <source>Insert variable into formula</source>
         <translation>Voeg variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -1032,16 +1032,8 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <source>Point in the end of a line</source>
-        <translation>Punt aan het einde van een lijn</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Lengte</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1119,13 +1111,17 @@
         <source>Variables</source>
         <translation>Variabelen</translation>
     </message>
+    <message>
+        <source>Point at distance and angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogHeight</name>
-    <message>
-        <source>Height</source>
-        <translation>Hoogte</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Punt label</translation>
@@ -1157,6 +1153,18 @@
     <message>
         <source>Select second point of line</source>
         <translation>Selecteer tweede punt van lijn</translation>
+    </message>
+    <message>
+        <source>Perpendicular point along line</source>
+        <translation type="unfinished">Haakse hoek punt langs lijn</translation>
+    </message>
+    <message>
+        <source>Base Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1195,7 +1203,7 @@
     </message>
     <message>
         <source>%4 - bisector of angle %1_%2_%3</source>
-        <translation type="unfinished"></translation>
+        <translation>%4 - bisector of angle %1_%2_%3</translation>
     </message>
     <message>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
@@ -1404,6 +1412,22 @@
         <source>Can&apos;t save measurement</source>
         <translation>Kan maten niet opslaan </translation>
     </message>
+    <message>
+        <source>Tables of Variables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size: %1 %3; Base height: %2 %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description: &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data successfully saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIndividualMeasurements</name>
@@ -1477,11 +1501,113 @@
     </message>
 </context>
 <context>
-    <name>DialogLine</name>
+    <name>DialogLayoutProgress</name>
     <message>
-        <source>Line</source>
-        <translation>Lijn</translation>
+        <source>Creation a layout</source>
+        <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t prepare data for creation layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogLayoutSettings</name>
+    <message>
+        <source>Creation a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paper size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Templates:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate workpiece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>degree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creation options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Principle of choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Three groups: big, middle, small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two groups: big, small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Descending area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimiters</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimeters</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Inches</translation>
+    </message>
+    <message>
+        <source>Pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogLine</name>
     <message>
         <source>First point</source>
         <translation>Eerste punt</translation>
@@ -1502,13 +1628,17 @@
         <source>Select second point</source>
         <translation>Selecteer tweede punt</translation>
     </message>
+    <message>
+        <source>Line between points</source>
+        <translation type="unfinished">Lijn tussen punten</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
-    <message>
-        <source>Intersection of lines</source>
-        <translation>Kruispunt van lijnen</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Punt label</translation>
@@ -1541,20 +1671,16 @@
         <source>Select second point of second line</source>
         <translation>Selecteer tweede punt van tweede lijn</translation>
     </message>
+    <message>
+        <source>Point at line intersection</source>
+        <translation type="unfinished">Punt op lijnkruising</translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
-        <source>Line intersect axis</source>
-        <translation>Lijn kruist de as</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>Hoek</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -1640,6 +1766,22 @@
         <source>Select axis point</source>
         <translation>Selecteer as punt</translation>
     </message>
+    <message>
+        <source>Point intersect line and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation type="unfinished">Tweede punt van de lijn</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogMeasurements</name>
@@ -1671,20 +1813,12 @@
 <context>
     <name>DialogNormal</name>
     <message>
-        <source>Normal</source>
-        <translation>Normaal</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Lengte</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
         <translation>Voeg variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1761,6 +1895,22 @@
     <message>
         <source>Select second point of line</source>
         <translation>Selecteer tweede punt van lijn</translation>
+    </message>
+    <message>
+        <source>Point along perpendicular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of line</source>
+        <translation type="unfinished">Eerste punt van de lijn</translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation type="unfinished">Tweede punt van de lijn</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1936,20 +2086,12 @@
 <context>
     <name>DialogPointOfContact</name>
     <message>
-        <source>Point of contact</source>
-        <translation>Contactpunt</translation>
-    </message>
-    <message>
         <source>Radius</source>
         <translation>Straal</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
         <translation>Voeg variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2023,44 +2165,44 @@
         <source>Select second point of line</source>
         <translation>Selecteer tweede punt van lijn</translation>
     </message>
+    <message>
+        <source>Point at intersection of arc and line</source>
+        <translation type="unfinished">Kruispunt van boog en lijn</translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
-        <source>Point of intersection</source>
-        <translation>Kruispunt</translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation>Punt label</translation>
-    </message>
-    <message>
-        <source>vertical point</source>
-        <translation>Verticaal punt</translation>
     </message>
     <message>
         <source>First point of angle</source>
         <translation>Eerste punt van hoek</translation>
     </message>
     <message>
-        <source>horizontal point</source>
-        <translation>Horizontaal punt</translation>
-    </message>
-    <message>
         <source>Second point of angle</source>
         <translation>Tweede punt van hoek</translation>
     </message>
     <message>
-        <source>Select point horizontally</source>
-        <translation>Selecteer punt horzontaal</translation>
+        <source>Point from X and Y of two other points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X: vertical point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y: horizontal point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point for Y value (horizontal)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
-    <message>
-        <source>Point of shoulder</source>
-        <translation>Schouderpunt</translation>
-    </message>
     <message>
         <source>Length</source>
         <translation>Lengte</translation>
@@ -2068,10 +2210,6 @@
     <message>
         <source>Insert variable into formula</source>
         <translation>Voeg variabele info in de formule</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation>Bereken waarde</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2153,6 +2291,14 @@
         <source>Select second point of line</source>
         <translation>Selecteer tweede punt van lijn</translation>
     </message>
+    <message>
+        <source>Special point on shoulder</source>
+        <translation type="unfinished">Speciaal punt op schouder</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSinglePoint</name>
@@ -2184,10 +2330,6 @@
 <context>
     <name>DialogSpline</name>
     <message>
-        <source>Curve</source>
-        <translation>Kromming</translation>
-    </message>
-    <message>
         <source>First point</source>
         <translation>Eerste punt</translation>
     </message>
@@ -2218,6 +2360,14 @@
     <message>
         <source>Select last point of curve</source>
         <translation>Selecteer laatste punt van de krommming</translation>
+    </message>
+    <message>
+        <source>Simple curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2257,6 +2407,10 @@
     <message>
         <source>Select point of curve path</source>
         <translation>Selecteer punt van krommingspad</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2320,13 +2474,13 @@
         <source>Parser error: %1</source>
         <translation>Fout bij uitpakken: %1</translation>
     </message>
+    <message>
+        <source>Line Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
-    <message>
-        <source>Triangle</source>
-        <translation>Driehoek</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Punt label</translation>
@@ -2363,6 +2517,22 @@
         <source>Select second point</source>
         <translation>Selecteer tweede punt</translation>
     </message>
+    <message>
+        <source>Triangle tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of the axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of the axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation type="unfinished">Tweede punt van de lijn</translation>
+    </message>
 </context>
 <context>
     <name>DialogUndo</name>
@@ -2390,10 +2560,6 @@
 <context>
     <name>DialogUnionDetails</name>
     <message>
-        <source>Union details</source>
-        <translation>Gezamenlijke details</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je echt gezamenlijke details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -2412,6 +2578,10 @@
     <message>
         <source>Select detail</source>
         <translation>Selecteer een detail</translation>
+    </message>
+    <message>
+        <source>Union tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2546,7 +2716,7 @@
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation type="unfinished"></translation>
+        <translation>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</translation>
     </message>
 </context>
 <context>
@@ -2568,14 +2738,6 @@
         <translation>Punt voor haakse hoek</translation>
     </message>
     <message>
-        <source>Special point on shoulder.</source>
-        <translation>Speciaal punt op schouder</translation>
-    </message>
-    <message>
-        <source>Tool triangle.</source>
-        <translation>Driehoek gereedschap</translation>
-    </message>
-    <message>
         <source>Perpendicular point along line</source>
         <translation>Haakse hoek punt langs lijn</translation>
     </message>
@@ -2584,24 +2746,12 @@
         <translation>Punt langs bisector</translation>
     </message>
     <message>
-        <source>Point at intersection of arc and line.</source>
-        <translation>Kruispunt van boog en lijn</translation>
-    </message>
-    <message>
-        <source>Tool to make point from x &amp; y of two other points.</source>
-        <translation>Gereedschap om een punt te maken van X &amp; Y van twee andere punten</translation>
-    </message>
-    <message>
         <source>Point at distance and angle</source>
         <translation>Punt op afstand en hoek</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
         <translation>Punt op afstand langs lijn</translation>
-    </message>
-    <message>
-        <source>Point of intersection line and axis</source>
-        <translation>Kruispunt tussen lijn en as</translation>
     </message>
     <message>
         <source>...</source>
@@ -2632,22 +2782,6 @@
         <translation>Kromming</translation>
     </message>
     <message>
-        <source>Curve tool.</source>
-        <translation>Krommingsgereedschap</translation>
-    </message>
-    <message>
-        <source>Tool for path curve.</source>
-        <translation>Gereedschap voorkrommingspad</translation>
-    </message>
-    <message>
-        <source>Tool for segmenting a curve.</source>
-        <translation>Gereedschap om een kromming in segmenten te delen</translation>
-    </message>
-    <message>
-        <source>Tool segment a pathed curve.</source>
-        <translation>Gereedschap segmenteerd een krommingspad</translation>
-    </message>
-    <message>
         <source>Tools for creating arcs.</source>
         <translation>Gereedschap voor het maken van bogen</translation>
     </message>
@@ -2656,28 +2790,12 @@
         <translation>Boog</translation>
     </message>
     <message>
-        <source>Arc tool.</source>
-        <translation>Boog gereedschap </translation>
-    </message>
-    <message>
-        <source>Cut arc tool.</source>
-        <translation>Knip een boog gereedschap</translation>
-    </message>
-    <message>
         <source>Tools for creating details.</source>
         <translation>Gereedschap om details te maken</translation>
     </message>
     <message>
         <source>Detail</source>
         <translation>Detail</translation>
-    </message>
-    <message>
-        <source>Tool new detail.</source>
-        <translation>Gereedschap nieuw detail</translation>
-    </message>
-    <message>
-        <source>Tool for union two details.</source>
-        <translation>Gereedschap om twee details te verenigen.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -3009,10 +3127,6 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
         <translation>Selecteer eerste punt van de as</translation>
     </message>
     <message>
-        <source>Select point vertically</source>
-        <translation>Selecteer punt verticaal</translation>
-    </message>
-    <message>
         <source>Select detail</source>
         <translation>Selecteer een detail</translation>
     </message>
@@ -3168,6 +3282,82 @@ Do you want to save your changes?</source>
     <message>
         <source>Individual measurements (*.vit)</source>
         <translation>Individuele maten(*.vit)</translation>
+    </message>
+    <message>
+        <source>Special point on shoulder</source>
+        <translation type="unfinished">Speciaal punt op schouder</translation>
+    </message>
+    <message>
+        <source>Triangle tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point at intersection of arc and line</source>
+        <translation type="unfinished">Kruispunt van boog en lijn</translation>
+    </message>
+    <message>
+        <source>Point from X and Y of two other points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point intersect line and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simple curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curved path</source>
+        <translation type="unfinished">Krommingspad</translation>
+    </message>
+    <message>
+        <source>Segmenting a simple curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment a curved path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point intersect curve and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segment an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point intersect arc and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Union tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toolBar</source>
+        <translation type="unfinished">Werkbalk</translation>
+    </message>
+    <message>
+        <source>Last Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate last used tool again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>L</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point for X value (vertical)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5178,7 +5368,7 @@ Do you want to save your changes?</source>
     <name>MoveLabel</name>
     <message>
         <source>Move point label</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats punt merk</translation>
     </message>
 </context>
 <context>
@@ -5236,6 +5426,14 @@ Do you want to save your changes?</source>
         <source>Patterns</source>
         <translation>Patronen</translation>
     </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>
@@ -5286,7 +5484,7 @@ Do you want to save your changes?</source>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebaseerd op Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -5324,6 +5522,10 @@ Do you want to save your changes?</source>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
         <translation>Waarde</translation>
+    </message>
+    <message>
+        <source>px</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5557,22 +5759,6 @@ Do you want to save your changes?</source>
         <translation>Sla opmaak op</translation>
     </message>
     <message>
-        <source>Next</source>
-        <translation>Volgende</translation>
-    </message>
-    <message>
-        <source>Next detail</source>
-        <translation>Volgend detail</translation>
-    </message>
-    <message>
-        <source>Turn</source>
-        <translation>Omdraaien</translation>
-    </message>
-    <message>
-        <source>Turn the detail 90 degrees</source>
-        <translation>Draai het detail 90 graden</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
@@ -5581,44 +5767,12 @@ Do you want to save your changes?</source>
         <translation>Stop plaatsen</translation>
     </message>
     <message>
-        <source>Enlarge letter</source>
-        <translation>Vergroot letter</translation>
-    </message>
-    <message>
-        <source>Enlarge the length of the sheet</source>
-        <translation>Vergroot de lengte van het werkblad</translation>
-    </message>
-    <message>
-        <source>Reduce sheet</source>
-        <translation>Verklein werkblad</translation>
-    </message>
-    <message>
-        <source>Reduce the length of the sheet</source>
-        <translation>Verklein de lengte van het werkblad</translation>
-    </message>
-    <message>
-        <source>Mirroring</source>
-        <translation>Spiegelen</translation>
-    </message>
-    <message>
         <source>Zoom In</source>
         <translation>Inzoomen</translation>
     </message>
     <message>
         <source>Zoom Out</source>
         <translation>Uitzoomen</translation>
-    </message>
-    <message>
-        <source>0 details left.</source>
-        <translation>0 details over.</translation>
-    </message>
-    <message>
-        <source>Collisions not found.</source>
-        <translation>Conflicten niet gevonden</translation>
-    </message>
-    <message>
-        <source>%1 details left.</source>
-        <translation>%1 details over</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -5645,10 +5799,6 @@ Do you want to save your changes?</source>
         <translation>EPS bestanden (*.eps)</translation>
     </message>
     <message>
-        <source>Collisions found.</source>
-        <translation>Conflicten gevonden</translation>
-    </message>
-    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Bestand &apos;%1&apos; gefaald te maken! %2</translation>
     </message>
@@ -5658,6 +5808,29 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
+        <translation>Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>Layout pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Utils::CheckableMessageBox</name>
+    <message>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not &amp;show again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5665,50 +5838,86 @@ Do you want to save your changes?</source>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het maken van reserve bestand: %1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon geen versie informatie krijgen.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Te veel etiketten &lt;%1&gt; in bestand.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versie &quot;%1&quot; ongeldig.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versie &quot;0.0.0&quot; ongeldig.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige versie. Minimale ondersteunde versie is %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige versie. Maximale ondersteunde versie is %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished">Fout geen unieke ID.</translation>
+        <translation>Fout geen unieke ID.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished"></translation>
+        <translation>kon de versie niet veranderen.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
         <source>Confirm the deletion.</source>
-        <translation>Bevestig de verwijdering.</translation>
+        <translation type="vanished">Bevestig de verwijdering.</translation>
     </message>
     <message>
         <source>Do you really want delete?</source>
-        <translation>Wil je echt verwijderen?</translation>
+        <translation type="vanished">Wil je echt verwijderen?</translation>
+    </message>
+    <message>
+        <source>black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dark blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5736,14 +5945,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Something&apos;s wrong!!</source>
         <translation>Er gaat iets verkeerd!</translation>
-    </message>
-    <message>
-        <source>Could not copy temp file to document file</source>
-        <translation type="vanished">Kon temp bestand niet kopiren naar document bestand</translation>
-    </message>
-    <message>
-        <source>Could not remove document file</source>
-        <translation type="vanished">Kon document bestand niet verwijderen</translation>
     </message>
 </context>
 <context>
@@ -5809,19 +6010,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished">Heeft verkeerde parameter ID. Heeft alleen nodig ID &gt; 0</translation>
+        <translation>Krijg de verkeerde parameter ID. Gebruik alleen ID &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="unfinished">Deze ID is niet uniek.</translation>
+        <translation>Deze ID is niet uniek.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation type="unfinished">Kon temp bestand niet kopiren naar document bestand</translation>
+        <translation>Kon temp bestand niet kopieëren naar document bestand</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
-        <translation type="unfinished">Kon document bestand niet verwijderen</translation>
+        <translation>Kon document bestand niet verwijderen</translation>
     </message>
 </context>
 <context>
@@ -6025,14 +6226,6 @@ Do you want to save your changes?</source>
         <translation>Fout bij het maken of bijwerken van gezamelijke details</translation>
     </message>
     <message>
-        <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Heeft verkeerde parameter ID. Heeft alleen nodig ID &gt; 0</translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
-        <translation type="vanished">Deze ID is niet uniek.</translation>
-    </message>
-    <message>
         <source>File error.</source>
         <translation>Bestandsfout</translation>
     </message>
@@ -6041,11 +6234,11 @@ Do you want to save your changes?</source>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte versie &quot;%1&quot;. </translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout met het heropslaan van reserve bestand: %1.</translation>
     </message>
 </context>
 <context>
@@ -6203,6 +6396,18 @@ Do you want to save your changes?</source>
         <source>Point intersection line and axis</source>
         <translation>Kruispunt tussen lijn en as</translation>
     </message>
+    <message>
+        <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point intersection curve and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Variables</name>
@@ -6236,32 +6441,32 @@ Do you want to save your changes?</source>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Kruising tussen kromming en as&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punt op afstand en hoek&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Kruising tussen lijn en as&lt;/b&gt;: hoek = %1°; &lt;b&gt;Shift&lt;/b&gt; - klevende hoek, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Krommings pad&lt;/b&gt;: selecteer drie of meer punten</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Krommings pad&lt;/b&gt;: selecteer drie of meer punten, &lt;b&gt;Enter&lt;/b&gt; - voltooi creatie</translation>
     </message>
 </context>
 <context>

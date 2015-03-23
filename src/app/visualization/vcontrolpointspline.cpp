@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -90,7 +90,7 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
-    VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"), 1, 1);
+    VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -99,7 +99,7 @@ void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
     //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-openhand.png"));
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
     QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
@@ -126,7 +126,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        VApplication::setOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"), 1, 1);
+        VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
     }
     QGraphicsEllipseItem::mousePressEvent(event);
 }
@@ -137,7 +137,7 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
-        VApplication::restoreOverrideCursor(QStringLiteral("://cursor/cursor-arrow-closehand.png"));
+        VApplication::restoreOverrideCursor(cursorArrowCloseHand);
     }
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }

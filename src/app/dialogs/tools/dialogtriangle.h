@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -48,20 +48,19 @@ public:
     DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogTriangle();
 
-    quint32        getAxisP1Id() const;
-    void           setAxisP1Id(const quint32 &value);
+    quint32        GetAxisP1Id() const;
+    void           SetAxisP1Id(const quint32 &value);
 
-    quint32        getAxisP2Id() const;
-    void           setAxisP2Id(const quint32 &value);
+    quint32        GetAxisP2Id() const;
+    void           SetAxisP2Id(const quint32 &value);
 
-    quint32        getFirstPointId() const;
-    void           setFirstPointId(const quint32 &value);
+    quint32        GetFirstPointId() const;
+    void           SetFirstPointId(const quint32 &value);
 
-    quint32        getSecondPointId() const;
-    void           setSecondPointId(const quint32 &value);
+    quint32        GetSecondPointId() const;
+    void           SetSecondPointId(const quint32 &value);
 
-    QString        getPointName() const;
-    void           setPointName(const QString &value);
+    void           SetPointName(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   PointNameChanged();
@@ -78,72 +77,7 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
-    /** @brief axisP1Id id first point of axis */
-    quint32         axisP1Id;
-
-    /** @brief axisP2Id id second point of axis */
-    quint32         axisP2Id;
-
-    /** @brief firstPointId id first point of line */
-    quint32         firstPointId;
-
-    /** @brief secondPointId id second point of line */
-    quint32         secondPointId;
-
     VisToolTriangle *line;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getAxisP1Id return id first point of axis
- * @return id
- */
-inline quint32 DialogTriangle::getAxisP1Id() const
-{
-    return axisP1Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getAxisP2Id return id second point of axis
- * @return id
- */
-inline quint32 DialogTriangle::getAxisP2Id() const
-{
-    return axisP2Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPointId return id of first point
- * @return id
- */
-inline quint32 DialogTriangle::getFirstPointId() const
-{
-    return firstPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPointId return id of second point
- * @return id
- */
-inline quint32 DialogTriangle::getSecondPointId() const
-{
-    return secondPointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getPointName return name of point
- * @return name
- */
-inline QString DialogTriangle::getPointName() const
-{
-    return pointName;
-}
 
 #endif // DIALOGTRIANGLE_H

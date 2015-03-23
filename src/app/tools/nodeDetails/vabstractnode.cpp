@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  */
 VAbstractNode::VAbstractNode(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const quint32 &idTool, QObject *parent)
-    : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool)
+    : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool), currentColor(Qt::black)
 {
     _referens = 0;
 }
@@ -99,7 +99,7 @@ void VAbstractNode::decrementReferens()
     if (_referens <= 0)
     {
         doc->DecrementReferens(idNode);
-        QDomElement domElement = doc->elementById(QString().setNum(id));
+        QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
         {
             QDomNode element = domElement.parentNode();

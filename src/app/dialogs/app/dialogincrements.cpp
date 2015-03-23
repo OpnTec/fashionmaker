@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -30,6 +30,7 @@
 #include "ui_dialogincrements.h"
 #include "../../widgets/doubledelegate.h"
 #include "../../widgets/textdelegate.h"
+#include "../../widgets/vwidgetpopup.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
 #include "../../core/vsettings.h"
@@ -54,6 +55,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       m(nullptr)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     qCDebug(vDialog)<<"Showing variables.";
     if (qApp->patternType() == MeasurementsType::Individual)
@@ -97,6 +100,30 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     if (qApp->patternType() == MeasurementsType::Standard)
     {
         ui->toolBoxMeasurements->setItemEnabled(0, false);
+
+        const QString filePath = doc->MPath();
+        VStandardMeasurements *mSt = nullptr;
+        try
+        {
+            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
+            mSt = new VStandardMeasurements(data);
+            mSt->setXMLContent(filePath);
+
+            ui->labelBaseValues->setText(tr("Base size: %1 %3; Base height: %2 %3").arg(mSt->Size())
+                                         .arg(mSt->Height()).arg(VDomDocument::UnitsToStr(qApp->patternUnit())));
+            ui->labelDescription->setText(tr("Description: \"%1\"").arg(mSt->TrDescription()));
+            delete mSt;
+        }
+        catch (VException &e)
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+            if (mSt != nullptr)
+            {
+                delete mSt;
+            }
+            emit DialogClosed(QDialog::Rejected);
+            return;
+        }
     }
     else
     {
@@ -130,6 +157,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
                 &DialogIncrements::SaveSex);
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &DialogIncrements::SaveBirthDate);
+
+        // hide fileds that don't exist in individual measurements
+        ui->labelBaseValues->setVisible(false);
+        ui->labelDescription->setVisible(false);
     }
 
     ui->toolBoxMeasurements->setCurrentIndex(1);
@@ -177,14 +208,14 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString()
-                                                          .setNum(data->GetTableValue(qApp->VarFromUser(iMap.key()))));
+            QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(
+                                                              data->GetTableValue(qApp->VarFromUser(iMap.key()))));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
         }
 
-        item = new QTableWidgetItem(QString().setNum(m->GetBase()));
+        item = new QTableWidgetItem(qApp->LocaleToString(m->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -194,12 +225,12 @@ void DialogIncrements::FillMeasurements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(QString().setNum(m->GetKsize()));
+            QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(m->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 3, item);// in sizes
 
-            item = new QTableWidgetItem(QString().setNum(m->GetKheight()));
+            item = new QTableWidgetItem(qApp->LocaleToString(m->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 4, item);// in heights
@@ -250,23 +281,23 @@ void DialogIncrements::FillIncrements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(data->GetTableValue(iMap.value())));
+            item = new QTableWidgetItem(qApp->LocaleToString(data->GetTableValue(iMap.value())));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetIncrement->setItem(currentRow, 1, item);
         }
 
-        item = new QTableWidgetItem(QString().setNum(incr->GetBase()));
+        item = new QTableWidgetItem(qApp->LocaleToString(incr->GetBase()));
         item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidgetIncrement->setItem(currentRow, 2, item);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(QString().setNum(incr->GetKsize()));
+            item = new QTableWidgetItem(qApp->LocaleToString(incr->GetKsize()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 3, item);
 
-            item = new QTableWidgetItem(QString().setNum(incr->GetKheight()));
+            item = new QTableWidgetItem(qApp->LocaleToString(incr->GetKheight()));
             item->setTextAlignment(Qt::AlignHCenter);
             ui->tableWidgetIncrement->setItem(currentRow, 4, item);
         }
@@ -305,7 +336,7 @@ void DialogIncrements::FillTable(const QMap<QString, T> varTable, QTableWidget *
         item->setFont(QFont("Times", 12, QFont::Bold));
         table->setItem(currentRow, 0, item);
 
-        item = new QTableWidgetItem(QString().setNum(length));
+        item = new QTableWidgetItem(qApp->LocaleToString(length));
         item->setTextAlignment(Qt::AlignHCenter);
         table->setItem(currentRow, 1, item);
     }
@@ -378,6 +409,20 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::ShowSuccess() const
+{
+    VWidgetPopup *popup = new VWidgetPopup();
+    QLabel *label = new QLabel(tr("Data successfully saved."));
+    QFont f = label->font();
+    f.setBold(true);
+    f.setPixelSize(16);
+    label->setFont(f);
+    popup->SetWidget(label);
+    popup->SetLifeTime(2000);
+    popup->Show(frameGeometry().center());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowMeasurements()
 {
     if (qApp->patternType() == MeasurementsType::Individual)
@@ -432,6 +477,10 @@ void DialogIncrements::SaveGivenName()
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -450,6 +499,10 @@ void DialogIncrements::SaveFamilyName()
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -466,6 +519,10 @@ void DialogIncrements::SaveEmail()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+    }
+    else
+    {
+        ShowSuccess();
     }
 }
 
@@ -484,6 +541,10 @@ void DialogIncrements::SaveSex(int index)
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -501,12 +562,16 @@ void DialogIncrements::SaveBirthDate(const QDate & date)
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
     }
+    else
+    {
+        ShowSuccess();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::OpenTable()
 {
-    QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
+    const QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
             .arg(doc->UnitsToStr(qApp->patternUnit()));
     if (qApp->patternType() == MeasurementsType::Individual)
     {
@@ -555,7 +620,9 @@ void DialogIncrements::OpenTable()
     else
     {
         const QString filter(tr("Standard measurements (*.vst)"));
-        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), qApp->pathToTables(), filter);
+        //Use standard path to standard measurements
+        const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
         {
             return;
@@ -656,6 +723,7 @@ void DialogIncrements::clickedToolButtonAdd()
     ui->toolButtonRemove->setEnabled(true);
     ui->tableWidgetIncrement->blockSignals(false);
     emit haveLiteChange();
+    ShowSuccess();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -674,7 +742,7 @@ void DialogIncrements::clickedToolButtonRemove()
     data->RemoveIncrement(itemName->text());
 
     quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         QDomNodeList list = doc->elementsByTagName(VPattern::TagIncrements);
@@ -683,6 +751,7 @@ void DialogIncrements::clickedToolButtonRemove()
     else
     {
         qCDebug(vDialog)<<"Could not find object with id"<<id;
+        return;
     }
 
     ui->tableWidgetIncrement->removeRow(row);
@@ -693,6 +762,7 @@ void DialogIncrements::clickedToolButtonRemove()
 
     ui->tableWidgetIncrement->blockSignals(false);
     emit haveLiteChange();
+    ShowSuccess();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -746,7 +816,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
     const QTableWidgetItem *itemName = ui->tableWidgetIncrement->item(row, 0);
     const QTableWidgetItem *item = ui->tableWidgetIncrement->item(row, column);
     const quint32 id = qvariant_cast<quint32>(itemName->data(Qt::UserRole));
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement() == false)
     {
         qCDebug(vDialog)<<"Cant't find increment with id = "<<id<<Q_FUNC_INFO;
@@ -797,6 +867,7 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
             break;
     }
     emit haveLiteChange();
+    ShowSuccess();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -849,7 +920,10 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
                 messageBox.setStandardButtons(QMessageBox::Ok);
                 messageBox.exec();
             }
-
+            else
+            {
+                ShowSuccess();
+            }
             data->ClearVariables();
             m->Measurements();
 

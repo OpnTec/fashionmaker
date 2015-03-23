@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -38,14 +38,14 @@ class VToolSpline:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+    VToolSpline (VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                  QGraphicsItem * parent = nullptr );
     virtual ~VToolSpline();
     virtual void setDialog();
     static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                                const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                               VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
+                               const QString &color, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const {return Type;}
@@ -58,14 +58,21 @@ public:
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
+    virtual void EnableToolMove(bool move);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void RemoveReferens();
     virtual void SaveDialog(QDomElement &domElement);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     Q_DISABLE_COPY(VToolSpline)
     void         RefreshGeometry ();
+    QPointF oldPosition;
 };
 
 #endif // VTOOLSPLINE_H

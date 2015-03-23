@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -28,6 +28,7 @@
 
 #include "dialogpatternxmledit.h"
 #include "ui_dialogpatternxmledit.h"
+#include "../core/vapplication.h"
 
 #include <QInputDialog>
 #include <QMessageBox>
@@ -35,7 +36,6 @@
 const short int DialogPatternXmlEdit::ChangeTypeDelete=1;
 const short int DialogPatternXmlEdit::ChangeTypeAdd=2;
 const short int DialogPatternXmlEdit::ChangeTypeModify=3;
-
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
@@ -45,6 +45,8 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
       changeStackLast(nullptr)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     this->xmlmodel = new VXMLTreeView();
     this->doc=xmldoc;

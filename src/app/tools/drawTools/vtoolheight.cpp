@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -47,9 +47,10 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
  * @param parent parent object.
  */
 VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                         const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                         const Source &typeCreation, QGraphicsItem * parent)
-    :VToolLinePoint(doc, data, id, typeLine, QString(), basePointId, 0, parent), p1LineId(p1LineId), p2LineId(p2LineId)
+                         const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
+                         const quint32 &p2LineId, const Source &typeCreation, QGraphicsItem * parent)
+    :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), p1LineId(p1LineId),
+      p2LineId(p2LineId)
 {
     ignoreFullUpdate = true;
     if (typeCreation == Source::FromGui)
@@ -72,11 +73,12 @@ void VToolHeight::setDialog()
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setTypeLine(typeLine);
-    dialogTool->setBasePointId(basePointId);
-    dialogTool->setP1LineId(p1LineId);
-    dialogTool->setP2LineId(p2LineId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetTypeLine(typeLine);
+    dialogTool->SetLineColor(lineColor);
+    dialogTool->SetBasePointId(basePointId);
+    dialogTool->SetP1LineId(p1LineId);
+    dialogTool->SetP2LineId(p2LineId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,13 +97,14 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     SCASSERT(dialogTool != nullptr);
     disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
     const QString pointName = dialogTool->getPointName();
-    const QString typeLine = dialogTool->getTypeLine();
-    const quint32 basePointId = dialogTool->getBasePointId();
-    const quint32 p1LineId = dialogTool->getP1LineId();
-    const quint32 p2LineId = dialogTool->getP2LineId();
+    const QString typeLine = dialogTool->GetTypeLine();
+    const QString lineColor = dialogTool->GetLineColor();
+    const quint32 basePointId = dialogTool->GetBasePointId();
+    const quint32 p1LineId = dialogTool->GetP1LineId();
+    const quint32 p2LineId = dialogTool->GetP2LineId();
 
     VToolHeight *point = nullptr;
-    point = Create(0, pointName, typeLine, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
+    point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, data,
                    Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
@@ -129,9 +132,9 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @return the created tool
  */
 VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, const QString &typeLine,
-                                 const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VPattern *doc,
-                                 VContainer *data, const Document &parse, const Source &typeCreation)
+                                 const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
+                                 const quint32 &p2LineId, const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
+                                 VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> p1Line = data->GeometricObject<VPointF>(p1LineId);
@@ -160,12 +163,13 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
     VDrawTool::AddRecord(id, Tool::Height, doc);
     if (parse == Document::FullParse)
     {
-        VToolHeight *point = new VToolHeight(doc, data, id, typeLine, basePointId, p1LineId, p2LineId,
+        VToolHeight *point = new VToolHeight(doc, data, id, typeLine, lineColor, basePointId, p1LineId, p2LineId,
                                              typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPoint::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolHeight::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolHeight::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolHeight::EnableToolMove);
         doc->AddTool(id, point);
         doc->IncrementReferens(basePointId);
         doc->IncrementReferens(p1LineId);
@@ -193,14 +197,7 @@ QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
  */
 void VToolHeight::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        typeLine = domElement.attribute(AttrTypeLine, "");
-        basePointId = domElement.attribute(AttrBasePoint, "").toUInt();
-        p1LineId = domElement.attribute(AttrP1Line, "").toUInt();
-        p2LineId = domElement.attribute(AttrP2Line, "").toUInt();
-    }
+    ReadAttributes();
     RefreshGeometry();
 
     if (vis != nullptr)
@@ -209,7 +206,7 @@ void VToolHeight::FullUpdateFromFile()
         visual->setPoint1Id(basePointId);
         visual->setLineP1Id(p1LineId);
         visual->setLineP2Id(p2LineId);
-        visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
 }
@@ -244,10 +241,11 @@ void VToolHeight::SaveDialog(QDomElement &domElement)
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->getTypeLine());
-    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->getBasePointId()));
-    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->getP1LineId()));
-    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->getP2LineId()));
+    doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
+    doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
+    doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
+    doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetP1LineId()));
+    doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetP2LineId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,19 +261,30 @@ void VToolHeight::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrP1Line, p1LineId);
     doc->SetAttribute(tag, AttrP2Line, p2LineId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolHeight::getP2LineId() const
+void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
+{
+    typeLine = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    p1LineId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2LineId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolHeight::GetP2LineId() const
 {
     return p2LineId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolHeight::setP2LineId(const quint32 &value)
+void VToolHeight::SetP2LineId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -301,7 +310,7 @@ void VToolHeight::ShowVisualization(bool show)
             visual->setPoint1Id(basePointId);
             visual->setLineP1Id(p1LineId);
             visual->setLineP2Id(p2LineId);
-            visual->setLineStyle(VAbstractTool::LineStyle(typeLine));
+            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
             visual->RefreshGeometry();
             vis = visual;
         }
@@ -322,13 +331,13 @@ void VToolHeight::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolHeight::getP1LineId() const
+quint32 VToolHeight::GetP1LineId() const
 {
     return p1LineId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolHeight::setP1LineId(const quint32 &value)
+void VToolHeight::SetP1LineId(const quint32 &value)
 {
     if (value != NULL_ID)
     {

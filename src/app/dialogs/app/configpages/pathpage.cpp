@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -63,7 +63,9 @@ PathPage::PathPage(QWidget *parent)
 void PathPage::Apply()
 {
     qApp->getSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
-    qApp->getSettings()->SetPathPattern(pathTable->item(1, 1)->text());
+    qApp->getSettings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
+    qApp->getSettings()->SetPathPattern(pathTable->item(2, 1)->text());
+    qApp->getSettings()->SetPathLayout(pathTable->item(3, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,24 +81,62 @@ void PathPage::TableActivated()
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::DefaultPath()
 {
-    QTableWidgetItem *item = pathTable->item(pathTable->currentRow(), 1);
+    const int row = pathTable->currentRow();
+    QTableWidgetItem *item = pathTable->item(row, 1);
     SCASSERT(item != nullptr);
-    item->setText(QDir::homePath());
+
+    switch (row)
+    {
+        case 1: // standard measurements
+            item->setText(VSettings::StandardTablesPath());
+            item->setToolTip(VSettings::StandardTablesPath());
+            break;
+        case 0: // individual measurements
+        case 2: // pattern path
+        case 3: // layout path
+            item->setText(QDir::homePath());
+            item->setToolTip(QDir::homePath());
+            break;
+        default:
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::EditPath()
 {
-    QTableWidgetItem *item = pathTable->item(pathTable->currentRow(), 1);
+    const int row = pathTable->currentRow();
+    QTableWidgetItem *item = pathTable->item(row, 1);
     SCASSERT(item != nullptr);
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), QDir::homePath(),
+
+    QString path;
+    switch (row)
+    {
+        case 0: // individual measurements
+            path = qApp->getSettings()->GetPathIndividualMeasurements();
+            break;
+        case 1: // standard measurements
+            path = qApp->getSettings()->GetPathStandardMeasurements();
+            break;
+        case 2: // pattern path
+            path = qApp->getSettings()->GetPathPattern();
+            break;
+        case 3: // layout path
+            path = qApp->getSettings()->GetPathLayout();
+            break;
+        default:
+            break;
+    }
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), path,
                                                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (dir.isEmpty())
     {
-        dir = QDir::homePath();
+        DefaultPath();
+        return;
     }
 
     item->setText(dir);
+    item->setToolTip(dir);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,10 +165,11 @@ QGroupBox *PathPage::PathGroup()
     return pathGroup;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void PathPage::InitTable()
 {
     pathTable = new QTableWidget();
-    pathTable->setRowCount(2);
+    pathTable->setRowCount(4);
     pathTable->setColumnCount(2);
     pathTable->verticalHeader()->setVisible(false);
     pathTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -139,11 +180,33 @@ void PathPage::InitTable()
     QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
     pathTable->setHorizontalHeaderLabels(tableHeader);
 
-    pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-    pathTable->setItem(0, 1, new QTableWidgetItem(qApp->getSettings()->GetPathIndividualMeasurements()));
+    {
+        pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathIndividualMeasurements());
+        item->setToolTip(qApp->getSettings()->GetPathIndividualMeasurements());
+        pathTable->setItem(0, 1, item);
+    }
 
-    pathTable->setItem(1, 0, new QTableWidgetItem(tr("Patterns")));
-    pathTable->setItem(1, 1, new QTableWidgetItem(qApp->getSettings()->GetPathPattern()));
+    {
+        pathTable->setItem(1, 0, new QTableWidgetItem(tr("Standard measurements")));
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathStandardMeasurements());
+        item->setToolTip(qApp->getSettings()->GetPathStandardMeasurements());
+        pathTable->setItem(1, 1, item);
+    }
+
+    {
+        pathTable->setItem(2, 0, new QTableWidgetItem(tr("Patterns")));
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathPattern());
+        item->setToolTip(qApp->getSettings()->GetPathPattern());
+        pathTable->setItem(2, 1, item);
+    }
+
+    {
+        pathTable->setItem(3, 0, new QTableWidgetItem(tr("Layout")));
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathLayout());
+        item->setToolTip(qApp->getSettings()->GetPathLayout());
+        pathTable->setItem(3, 1, item);
+    }
 
     pathTable->verticalHeader()->setDefaultSectionSize(20);
     pathTable->resizeColumnsToContents();

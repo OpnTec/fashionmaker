@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -39,9 +39,9 @@ class VToolBisector : public VToolLinePoint
     Q_OBJECT
 public:
 
-    VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &formula,
-                  const quint32 &firstPointId, const quint32 &secondPointId, const quint32 &thirdPointId,
-                  const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolBisector(VPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const QString &lineColor,
+                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
@@ -49,18 +49,18 @@ public:
     static VToolBisector* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
     static VToolBisector* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                                  const quint32 &secondPointId, const quint32 &thirdPointId, const QString &typeLine,
-                                 const QString &pointName, const qreal &mx, const qreal &my, VMainGraphicsScene  *scene,
-                                 VPattern *doc, VContainer *data, const Document &parse,
+                                 const QString &lineColor, const QString &pointName, const qreal &mx, const qreal &my,
+                                 VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
                                  const Source &typeCreation);
     static const QString ToolType;
     virtual int    type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
 
-    quint32 getFirstPointId() const;
-    void    setFirstPointId(const quint32 &value);
+    quint32 GetFirstPointId() const;
+    void    SetFirstPointId(const quint32 &value);
 
-    quint32 getThirdPointId() const;
-    void    setThirdPointId(const quint32 &value);
+    quint32 GetThirdPointId() const;
+    void    SetThirdPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
 public slots:
@@ -72,6 +72,7 @@ protected:
     virtual void   RemoveReferens();
     virtual void   SaveDialog(QDomElement &domElement);
     virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void   ReadToolAttributes(const QDomElement &domElement);
 private:
     /** @brief firstPointId id first point of angle. */
     quint32         firstPointId;

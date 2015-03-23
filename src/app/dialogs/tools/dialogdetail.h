@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -42,12 +42,13 @@ class DialogDetail : public DialogTool
 public:
     DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
 
-    VDetail          getDetails() const;
-    void             setDetails(const VDetail &value);
+    VDetail          getDetail() const;
+    void             setDetail(const VDetail &value);
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     void             BiasXChanged(qreal d);
     void             BiasYChanged(qreal d);
+    void             AlowenceChanged(qreal d);
     void             ClickedSeams(bool checked);
     void             ClickedClosed(bool checked);
     void             ClickedReverse(bool checked);
@@ -59,22 +60,27 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData();
+    virtual void     CheckState();
 private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogDetail ui;
 
-    /** @brief details detail */
-    VDetail          details;
+    /** @brief detail detail */
+    VDetail          detail;
 
     /** @brief supplement keep option supplement of seams */
     bool             supplement;
 
     /** @brief closed keep option about equdistant (closed or not) */
     bool             closed;
+    bool             flagWidth;
 
     void             NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                              qreal mx = 0, qreal my = 0, bool reverse = false);
+    VDetail          CreateDetail() const;
+    void             ValidObjects(bool value);
+    void             EnableObjectGUI(bool value);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,9 +88,9 @@ private:
  * @brief getDetails return detail
  * @return detail
  */
-inline VDetail DialogDetail::getDetails() const
+inline VDetail DialogDetail::getDetail() const
 {
-    return details;
+    return detail;
 }
 
 #endif // DIALOGDETAIL_H

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -28,13 +28,17 @@
 
 #include "vabstracttool.h"
 #include <QGraphicsView>
+#include <QIcon>
+#include <QStyle>
 #include <QMessageBox>
+#include <QtCore/qmath.h>
+#include "../../libs/vpropertyexplorer/checkablemessagebox.h"
 #include "../undocommands/deltool.h"
 #include "../core/vapplication.h"
 #include "../geometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
 #include "../widgets/vmaingraphicsview.h"
-#include <QtCore/qmath.h>
+#include "../core/vsettings.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");
 const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
@@ -70,6 +74,8 @@ const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
 const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
 const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::AttrCurve       = QStringLiteral("curve");
+const QString VAbstractTool::AttrLineColor   = QStringLiteral("lineColor");
+const QString VAbstractTool::AttrColor       = QStringLiteral("color");
 
 const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");
@@ -77,6 +83,14 @@ const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine")
 const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
 const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
 const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
+
+const QString VAbstractTool::ColorBlack     = QStringLiteral("black");
+const QString VAbstractTool::ColorGreen     = QStringLiteral("green");
+const QString VAbstractTool::ColorBlue      = QStringLiteral("blue");
+const QString VAbstractTool::ColorDarkRed   = QStringLiteral("darkRed");
+const QString VAbstractTool::ColorDarkGreen = QStringLiteral("darkGreen");
+const QString VAbstractTool::ColorDarkBlue  = QStringLiteral("darkBlue");
+const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -87,8 +101,7 @@ const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDot
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), currentColor(Qt::black), typeLine(TypeLineLine),
-      vis(nullptr)
+    :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(nullptr)
 {
     SCASSERT(doc != nullptr);
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
@@ -108,6 +121,9 @@ VAbstractTool::~VAbstractTool()
  */
 void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 {
+    SCASSERT(sc != nullptr);
+    SCASSERT(view != nullptr);
+
     QRectF rect = sc->itemsBoundingRect();
 
     QRect  rec0 = view->rect();
@@ -145,7 +161,7 @@ void VAbstractTool::DeleteTool(bool ask)
         qApp->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
-            if (ConfirmDeletion() == QMessageBox::Cancel)
+            if (ConfirmDeletion() == QMessageBox::No)
             {
                 return;
             }
@@ -157,13 +173,38 @@ void VAbstractTool::DeleteTool(bool ask)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VAbstractTool::ConfirmDeletion()
+{
+    if (false == qApp->getSettings()->GetConfirmItemDelete())
+    {
+        return QMessageBox::Yes;
+    }
+
+    Utils::CheckableMessageBox msgBox(qApp->getMainWindow());
+    msgBox.setWindowTitle(tr("Confirm deletion"));
+    msgBox.setText(tr("Do you really want to delete?"));
+    msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
+    msgBox.setDefaultButton(QDialogButtonBox::No);
+    msgBox.setIconPixmap(qApp->style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
+
+    int dialogResult = msgBox.exec();
+
+    if (dialogResult == QDialog::Accepted)
+    {
+        qApp->getSettings()->SetConfirmItemDelete(not msgBox.isChecked());
+    }
+
+    return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief LineStyle return pen style for current line style.
  * @return pen style.
  */
-Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
+Qt::PenStyle VAbstractTool::LineStyleToPenStyle(const QString &typeLine)
 {
-    QStringList styles = Styles();
+    const QStringList styles = StylesList();
     switch (styles.indexOf(typeLine))
     {
         case 0: // TypeLineNone
@@ -191,18 +232,77 @@ Qt::PenStyle VAbstractTool::LineStyle(const QString &typeLine)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractTool::getLineType() const
+QMap<QString, QIcon> VAbstractTool::LineStylesPics()
 {
-    return typeLine;
+    QMap<QString, QIcon> map;
+    const QStringList styles = StylesList();
+
+    for (int i=0; i < styles.size(); ++i)
+    {
+        const Qt::PenStyle style = LineStyleToPenStyle(styles.at(i));
+        QPixmap pix(80, 14);
+        pix.fill(Qt::white);
+
+        QBrush brush(Qt::black);
+        QPen pen(brush, 2.5, style);
+
+        QPainter painter(&pix);
+        painter.setPen(pen);
+        painter.drawLine(2, 7, 78, 7);
+
+        map.insert(styles.at(i), QIcon(pix));
+    }
+    return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::setTypeLine(const QString &value)
+const QStringList VAbstractTool::Colors()
 {
-    typeLine = value;
+    const QStringList colors = QStringList() << ColorBlack << ColorGreen << ColorBlue << ColorDarkRed << ColorDarkGreen
+                                             << ColorDarkBlue << ColorYellow;
+    return colors;
+}
 
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> VAbstractTool::ColorsList()
+{
+    QMap<QString, QString> map;
+
+    const QStringList colorNames = Colors();
+    for (int i = 0; i < colorNames.size(); ++i)
+    {
+        QString name;
+        switch (i)
+        {
+            case 0: // ColorBlack
+                name = tr("black");
+                break;
+            case 1: // ColorGreen
+                name = tr("green");
+                break;
+            case 2: // ColorBlue
+                name = tr("blue");
+                break;
+            case 3: // ColorDarkRed
+                name = tr("dark red");
+                break;
+            case 4: // ColorDarkGreen
+                name = tr("dark green");
+                break;
+            case 5: // ColorDarkBlue
+                name = tr("dark blue");
+                break;
+            case 6: // ColorYellow
+                name = tr("yellow");
+                break;
+            default:
+                name = tr("black");
+                break;
+        }
+
+        map.insert(colorNames.at(i), name);
+    }
+    return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,22 +327,10 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VAbstractTool::ConfirmDeletion()
-{
-    QMessageBox msgBox;
-    msgBox.setText(tr("Confirm the deletion."));
-    msgBox.setInformativeText(tr("Do you really want delete?"));
-    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.setIcon(QMessageBox::Question);
-    return msgBox.exec();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool)<<"Saving tool options";
-    QDomElement oldDomElement = doc->elementById(QString().setNum(id));
+    QDomElement oldDomElement = doc->elementById(id);
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -264,10 +352,10 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
  * @brief Styles return list of all line styles.
  * @return list of all line styles.
  */
-const QStringList VAbstractTool::Styles()
+const QStringList VAbstractTool::StylesList()
 {
-    QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine <<
-                                          TypeLineDashDotLine << TypeLineDashDotDotLine;
+    const QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine
+                                             << TypeLineDashDotLine << TypeLineDashDotDotLine;
     return styles;
 }
 

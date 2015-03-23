@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -48,12 +48,18 @@ VisToolPointOfIntersection::~VisToolPointOfIntersection()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersection::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    QLineF axisL1;
+    if (point1Id <= NULL_ID)
+    {
+        axisL1 = Axis(Visualization::scenePos, 90);
+        DrawLine(this, axisL1, supportColor, Qt::DashLine);
+    }
+    else
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
-        QLineF axisL1 = Axis(first->toQPointF(), 90);
+        axisL1 = Axis(first->toQPointF(), 90);
         DrawLine(this, axisL1, supportColor, Qt::DashLine);
 
         QLineF axisL2;

@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -76,10 +76,10 @@ public:
     virtual QVariant getValue() const;
 
     //! Returns the formula
-    virtual VFormula getFormula() const;
+    virtual VFormula GetFormula() const;
 
     //! Sets the formula
-    virtual void setFormula(const VFormula &formula);
+    virtual void SetFormula(const VFormula &formula);
 
 public slots:
     virtual void ValueChildChanged(const QVariant &value, int typeForParent);

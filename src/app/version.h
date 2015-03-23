@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -39,8 +39,8 @@ extern const QString APP_VERSION;
 
 // Change version number in version.cpp too.
 
-#define VER_FILEVERSION             0,2,9,0
-#define VER_FILEVERSION_STR         "0.2.9.0\0"
+#define VER_FILEVERSION             0,3,0,0
+#define VER_FILEVERSION_STR         "0.3.0.0\0"
 
 #define VER_PRODUCTVERSION          VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR

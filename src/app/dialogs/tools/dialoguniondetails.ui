@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Union details</string>
+   <string>Union tool</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">

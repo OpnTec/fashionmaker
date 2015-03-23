@@ -3,4 +3,5 @@ CONFIG   += ordered
 SUBDIRS = qmuparser \
     vpropertyexplorer \
     ifc \
-    vobj
+    vobj \
+    vlayout

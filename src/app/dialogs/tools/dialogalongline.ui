@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>428</width>
-    <height>499</height>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Point along line</string>
+   <string>Point at distance along line</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
@@ -107,22 +107,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqual">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="labelEqual">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -223,15 +213,15 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
            <item row="0" column="0">
             <widget class="QLabel" name="labelEditNamePoint">
              <property name="text">
               <string>Point label</string>
              </property>
             </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEditNamePoint"/>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="labelFirstPoint">
@@ -276,10 +266,41 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>110</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="toolTip">
               <string>Show line from first point to this point</string>
              </property>
+             <property name="iconSize">
+              <size>
+               <width>80</width>
+               <height>14</height>
+              </size>
+             </property>
             </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Line color</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="comboBoxLineColor"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEditNamePoint"/>
            </item>
           </layout>
          </item>
@@ -445,7 +466,6 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHere</tabstop>
-  <tabstop>toolButtonEqual</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>lineEditNamePoint</tabstop>
   <tabstop>comboBoxFirstPoint</tabstop>

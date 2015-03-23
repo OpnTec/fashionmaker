@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vabstractmeasurements.h"
+#include "../core/vapplication.h"
 
 const QString VAbstractMeasurements::TagUnit   = QStringLiteral("unit");
 const QString VAbstractMeasurements::AttrValue = QStringLiteral("value");
@@ -214,6 +215,8 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
                     return value / 10.0;
                 case Unit::Inch:
                     return value / 25.4;
+                case Unit::Px:
+                    return (value / 25.4) * VApplication::PrintDPI;
                 default:
                     break;
             }
@@ -227,6 +230,8 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
                     return value;
                 case Unit::Inch:
                     return value / 2.54;
+                case Unit::Px:
+                    return ((value * 10.0) / 25.4) * VApplication::PrintDPI;
                 default:
                     break;
             }
@@ -239,6 +244,23 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
                 case Unit::Cm:
                     return value * 2.54;
                 case Unit::Inch:
+                    return value;
+                case Unit::Px:
+                    return value * VApplication::PrintDPI;
+                default:
+                    break;
+            }
+            break;
+        case Unit::Px:
+            switch (to)
+            {
+                case Unit::Mm:
+                    return (value / VApplication::PrintDPI) * 25.4;
+                case Unit::Cm:
+                    return ((value / VApplication::PrintDPI) * 25.4) / 10.0;
+                case Unit::Inch:
+                    return value / VApplication::PrintDPI;
+                case Unit::Px:
                     return value;
                 default:
                     break;

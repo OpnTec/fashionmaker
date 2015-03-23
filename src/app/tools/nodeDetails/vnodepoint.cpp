@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -55,7 +55,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
       namePoint(nullptr), lineName(nullptr)
 {
-    radius = (1.5/*mm*/ / 25.4) * VApplication::PrintDPI;
+    radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
@@ -180,7 +180,7 @@ void VNodePoint::AddToFile()
 void VNodePoint::RefreshDataInFile()
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrIdObject, idNode);
@@ -253,7 +253,7 @@ void VNodePoint::NameChangePosition(const QPointF &pos)
  */
 void VNodePoint::UpdateNamePosition(qreal mx, qreal my)
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
+    QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));

@@ -13,8 +13,9 @@ syntax: glob
 # Temporary files used by the vim editor.
 .*.swp
 
-# A hidden file created by the Mac OS X Finder.
+# A hidden files created by the Mac OS X Finder.
 .DS_Store
+._.DS_Store
 
 # Ignore this directory.
 html/
@@ -84,3 +85,6 @@ Makefile*
 # QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+
+# Xcode project
+*.xcodeproj

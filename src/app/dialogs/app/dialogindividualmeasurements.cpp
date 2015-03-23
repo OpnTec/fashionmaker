@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -46,6 +46,8 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
     data(data)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
@@ -98,8 +100,9 @@ void DialogIndividualMeasurements::DialogAccepted()
         }
 
         //just in case
-        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", qApp->pathToTables());
-        QFile iMeasur(qApp->pathToTables());
+        const QString path = QStringLiteral("://tables/individual/individual.vit");
+        VDomDocument::ValidateXML("://schema/individual_measurements.xsd", path);
+        QFile iMeasur(path);
         //TODO maybe make copy save?
         if ( iMeasur.copy(_tablePath) == false )
         {
@@ -226,7 +229,7 @@ void DialogIndividualMeasurements::OpenTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::NewTable()
 {
-    QString dir = QDir::homePath()+"/measurements.vit";
+    const QString dir = qApp->getSettings()->GetPathIndividualMeasurements()+"/measurements.vit";
     QString name = QFileDialog::getSaveFileName(this, tr("Where save measurements?"), dir,
                                                 tr("Individual measurements (*.vit)"));
 
@@ -236,7 +239,7 @@ void DialogIndividualMeasurements::NewTable()
     }
 
     // what if the users did not specify a suffix...?
-    QFileInfo f( name );
+    const QFileInfo f( name );
     if (f.suffix().isEmpty() && f.suffix() != "vit")
     {
         name += ".vit";

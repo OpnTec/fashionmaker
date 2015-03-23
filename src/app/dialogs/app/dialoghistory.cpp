@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -49,6 +49,9 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     cursorToolRecordRow(0)
 {
     ui->setupUi(this);
+
+    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
     bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogHistory::DialogAccepted);
     FillTable();
@@ -74,7 +77,7 @@ void DialogHistory::DialogAccepted()
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
     quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    emit ShowHistoryTool(id, Qt::green, false);
+    emit ShowHistoryTool(id, false);
     emit DialogClosed(QDialog::Accepted);
 }
 
@@ -103,12 +106,12 @@ void DialogHistory::cellClicked(int row, int column)
     {
         QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
         quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, Qt::green, false);
+        emit ShowHistoryTool(id, false);
 
         cursorToolRecordRow = row;
         item = ui->tableWidget->item(cursorToolRecordRow, 0);
         id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, Qt::green, true);
+        emit ShowHistoryTool(id, true);
     }
 }
 
@@ -197,7 +200,7 @@ void DialogHistory::FillTable()
  */
 QString DialogHistory::Record(const VToolRecord &tool)
 {
-    const QDomElement domElem = doc->elementById(QString().setNum(tool.getId()));
+    const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
     {
         qDebug()<<"Can't find element by id"<<Q_FUNC_INFO;
@@ -434,7 +437,7 @@ void DialogHistory::ShowPoint()
         cursorToolRecordRow = 0;
         item = ui->tableWidget->item(0, 0);
         quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, Qt::green, true);
+        emit ShowHistoryTool(id, true);
     }
 }
 
@@ -466,6 +469,6 @@ void DialogHistory::closeEvent(QCloseEvent *event)
 {
     QTableWidgetItem *item = ui->tableWidget->item(cursorToolRecordRow, 0);
     quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    emit ShowHistoryTool(id, Qt::green, false);
+    emit ShowHistoryTool(id, false);
     DialogTool::closeEvent(event);
 }

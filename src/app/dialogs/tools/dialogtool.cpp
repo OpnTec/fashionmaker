@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -34,8 +34,6 @@
 #include "../../geometry/vsplinepath.h"
 #include "../../tools/vabstracttool.h"
 #include "../../../libs/qmuparser/qmuparsererror.h"
-#include "../../core/vapplication.h"
-#include "../../core/vsettings.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include <QTimer>
 #include <QCloseEvent>
@@ -66,8 +64,8 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       labelEditFormula(nullptr), radioButtonSizeGrowth(nullptr), radioButtonStandardTable(nullptr),
       radioButtonIncrements(nullptr), radioButtonLengthLine(nullptr), radioButtonLengthArc(nullptr),
       radioButtonLengthCurve(nullptr), radioButtonAngleLine(nullptr), checkBoxHideEmpty(nullptr),
-      lineStyles(VAbstractTool::Styles()), okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
-      toolId(toolId), prepare(false), pointName(QString())
+      okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
+      toolId(toolId), prepare(false), pointName(QString()), number(0)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
@@ -288,61 +286,45 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
  * @brief FillComboBoxTypeLine fill comboBox list of type lines
  * @param box comboBox
  */
-void DialogTool::FillComboBoxTypeLine(QComboBox *box) const
+void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const
 {
     SCASSERT(box != nullptr);
-    box->addItems(lineStyles);
-    box->setCurrentIndex(1);
+    QMap<QString, QIcon>::const_iterator i = stylesPics.constBegin();
+    while (i != stylesPics.constEnd())
+    {
+        box->addItem(i.value(), "", QVariant(i.key()));
+        ++i;
+    }
+
+    box->setCurrentIndex(4);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @param box combobox
- * @return type
- */
-QString DialogTool::GetTypeLine(const QComboBox *box) const
+void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 {
-    switch (lineStyles.indexOf(box->currentText()))
+    SCASSERT(box != nullptr);
+
+    const QMap<QString, QString> map = VAbstractTool::ColorsList();
+    QMap<QString, QString>::const_iterator i = map.constBegin();
+    while (i != map.constEnd())
     {
-        case 0: //No line
-            return VAbstractTool::TypeLineNone;
-            break;
-        case 1: //Line
-            return VAbstractTool::TypeLineLine;
-            break;
-        case 2: //Dash Line
-            return VAbstractTool::TypeLineDashLine;
-            break;
-        case 3: //Dot Line
-            return VAbstractTool::TypeLineDotLine;
-            break;
-        case 4: //Dash Dot Line
-            return VAbstractTool::TypeLineDashDotLine;
-            break;
-        case 5: //Dash Dot Dot Line
-            return VAbstractTool::TypeLineDashDotDotLine;
-            break;
-        default:
-            return VAbstractTool::TypeLineLine;
-            break;
+        QPixmap pix(16, 16);
+        pix.fill(QColor(i.key()));
+        box->addItem(QIcon(pix), i.value(), QVariant(i.key()));
+        ++i;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetupTypeLine setupe type of line
- * @param box combobox
- * @param value string from pattern file
- */
-void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
+QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
 {
-    QStringList styles = VAbstractTool::Styles();
-    qint32 index = box->findText(lineStyles.at(styles.indexOf(value)));
-    if (index != -1)
+    SCASSERT(box != nullptr)
+    QString value = box->currentData().toString();
+    if (value.isEmpty())
     {
-        box->setCurrentIndex(index);
+        value = VAbstractTool::TypeLineLine;
     }
+    return value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -351,9 +333,10 @@ void DialogTool::SetupTypeLine(QComboBox *box, const QString &value)
  * @param box combobox
  * @param value id of item
  */
-void DialogTool::ChangeCurrentData(QComboBox *box, const quint32 &value) const
+void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
 {
-    qint32 index = box->findData(value);
+    SCASSERT(box != nullptr)
+    const qint32 index = box->findData(value);
     if (index != -1)
     {
         box->setCurrentIndex(index);
@@ -475,8 +458,8 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Eval evaluate formula and show result
- * @param text formula
- * @param flag flag state of formula
+ * @param text expresion that we parse
+ * @param flag flag state of eval formula
  * @param label label for signal error
  * @param postfix unit name
  * @param checkZero true - if formula can't be equal zero
@@ -499,10 +482,10 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
     {
         try
         {
-            // Replace line return with spaces for calc if exist
+            // Replace line return character with spaces for calc if exist
             QString formula = text;
             formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);
+            formula = qApp->FormulaFromUser(formula);// Translate to internal look.
             Calculator *cal = new Calculator(data);
             result = cal->EvalFormula(formula);
             delete cal;
@@ -517,16 +500,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             }
             else
             {
-                QLocale loc;
-                if (qApp->getSettings()->GetOsSeparator())
-                {
-                    loc = QLocale::system();
-                }
-                else
-                {
-                    loc = QLocale(QLocale::C);
-                }
-                label->setText(loc.toString(result) + postfix);
+                label->setText(qApp->LocaleToString(result) + " " +postfix);
                 flag = true;
                 ChangeColor(labelEditFormula, okColor);
                 label->setToolTip(tr("Value"));
@@ -547,33 +521,34 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
                      << "--------------------------------------";
         }
     }
-    CheckState();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
     return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setCurrentPointId(QComboBox *box, quint32 &pointId, const quint32 &value) const
+void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value) const
 {
     SCASSERT(box != nullptr);
+
+    box->blockSignals(true);
+
     FillComboBoxPoints(box);
-    pointId = value;
     ChangeCurrentData(box, value);
+
+    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setCurrentSplineId set current spline id in combobox
  * @param box combobox
- * @param splineId save current spline id
  * @param value spline id
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const quint32 &value,
-                                    ComboBoxCutSpline cut) const
+void DialogTool::setCurrentSplineId(QComboBox *box, const quint32 &value, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxSplines(box, cut);
-    splineId = value;
     ChangeCurrentData(box, value);
 }
 
@@ -581,15 +556,13 @@ void DialogTool::setCurrentSplineId(QComboBox *box, quint32 &splineId, const qui
 /**
  * @brief setCurrentArcId
  * @param box combobox
- * @param arcId save current arc id
  * @param value arc id
  * @param cut if set to ComboMode::CutArc don't show id+1 and id+2
  */
-void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &value, ComboBoxCutArc cut) const
+void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, ComboBoxCutArc cut) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxArcs(box, cut);
-    arcId = value;
     ChangeCurrentData(box, value);
 }
 
@@ -597,25 +570,21 @@ void DialogTool::setCurrentArcId(QComboBox *box, quint32 &arcId, const quint32 &
 /**
  * @brief setCurrentSplinePathId set current splinePath id in combobox
  * @param box combobox
- * @param splinePathId save current splinePath id
  * @param value splinePath id
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::setCurrentSplinePathId(QComboBox *box, quint32 &splinePathId, const quint32 &value,
-                                        ComboBoxCutSpline cut) const
+void DialogTool::setCurrentSplinePathId(QComboBox *box, const quint32 &value, ComboBoxCutSpline cut) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxSplinesPath(box, cut);
-    splinePathId = value;
     ChangeCurrentData(box, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setCurrentCurveId(QComboBox *box, quint32 &curveId, const quint32 &value) const
+void DialogTool::setCurrentCurveId(QComboBox *box, const quint32 &value) const
 {
     SCASSERT(box != nullptr);
     FillComboBoxCurves(box);
-    curveId = value;
     ChangeCurrentData(box, value);
 }
 
@@ -771,15 +740,6 @@ void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setPointId(QComboBox *box, quint32 &pointId, const quint32 &value)
-{
-    SCASSERT(box != nullptr);
-    box->blockSignals(true);
-    setCurrentPointId(box, pointId, value);
-    box->blockSignals(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogAccepted save data and emit signal about closed dialog.
  */
@@ -915,7 +875,7 @@ void DialogTool::EvalFormula()
 {
     SCASSERT(plainTextEditFormula != nullptr);
     SCASSERT(labelResultCalculation != nullptr);
-    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
     Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, false);
 }
 
@@ -925,6 +885,9 @@ void DialogTool::EvalFormula()
  */
 void DialogTool::SizeHeight()
 {
+    SCASSERT(checkBoxHideEmpty != nullptr);
+    checkBoxHideEmpty->setEnabled(false);
+
     SCASSERT(listWidget != nullptr);
     listWidget->blockSignals(true);
     listWidget->clear();
@@ -1046,6 +1009,7 @@ void DialogTool::ValChenged(int row)
     SCASSERT(radioButtonLengthCurve != nullptr);
     if (listWidget->count() == 0)
     {
+        labelDescription->setText("");
         return;
     }
     QListWidgetItem *item = listWidget->item( row );
@@ -1104,6 +1068,14 @@ void DialogTool::ValChenged(int row)
         labelDescription->setText(desc);
         return;
     }
+    if (radioButtonAngleLine->isChecked())
+    {
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(*data->GetVariable<VLineAngle>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(tr("Line Angle"));
+        labelDescription->setText(desc);
+        return;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1158,6 +1130,12 @@ void DialogTool::SetToolId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogTool::getPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowVariable show variables in list
  * @param var container with variables
@@ -1169,6 +1147,7 @@ void DialogTool::ShowVariable(const QMap<key, val> var)
     SCASSERT(checkBoxHideEmpty != nullptr);
     listWidget->blockSignals(true);
     listWidget->clear();
+    labelDescription->setText("");
 
     QMapIterator<key, val> iMap(var);
     while (iMap.hasNext())

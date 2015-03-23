@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>583</width>
-    <height>480</height>
+    <height>524</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>573</width>
-    <height>480</height>
+    <height>524</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>583</width>
-    <height>480</height>
+    <height>524</height>
    </size>
   </property>
   <property name="cursor">
@@ -201,7 +201,7 @@
           </font>
          </property>
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -217,7 +217,16 @@ Christine Neupert
 Sabine Schmaltz
 grumpi
 Steve Conklin
-Patrick Proy </string>
+Lindsay Williams
+Patrick Proy
+Mischa Krempel
+Matt Daw
+Peter Gsellmann
+Robert Martin
+Michaela Orth
+Rina Rivera
+Fritz Rometsch
+Felix Ulber </string>
          </property>
         </widget>
        </item>

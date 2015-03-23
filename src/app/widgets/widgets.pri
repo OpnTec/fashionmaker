@@ -5,20 +5,20 @@ HEADERS += \
     $$PWD/vtablegraphicsview.h \
     $$PWD/vmaingraphicsview.h \
     $$PWD/vmaingraphicsscene.h \
-    $$PWD/vitem.h \
     $$PWD/doubledelegate.h \
     $$PWD/textdelegate.h \
     $$PWD/vtooloptionspropertybrowser.h \
     $$PWD/vformulapropertyeditor.h \
-    $$PWD/vformulaproperty.h
+    $$PWD/vformulaproperty.h \
+    $$PWD/vwidgetpopup.h
 
 SOURCES += \
     $$PWD/vtablegraphicsview.cpp \
     $$PWD/vmaingraphicsview.cpp \
     $$PWD/vmaingraphicsscene.cpp \
-    $$PWD/vitem.cpp \
     $$PWD/doubledelegate.cpp \
     $$PWD/textdelegate.cpp \
     $$PWD/vtooloptionspropertybrowser.cpp \
     $$PWD/vformulapropertyeditor.cpp \
-    $$PWD/vformulaproperty.cpp
+    $$PWD/vformulaproperty.cpp \
+    $$PWD/vwidgetpopup.cpp

@@ -10,23 +10,23 @@
     <x>0</x>
     <y>0</y>
     <width>286</width>
-    <height>151</height>
+    <height>179</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>286</width>
-    <height>151</height>
+    <height>179</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>286</width>
-    <height>151</height>
+    <height>179</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Line</string>
+   <string>Line between points</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
@@ -122,14 +122,36 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>80</width>
          <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>110</width>
+         <height>16777215</height>
         </size>
        </property>
        <property name="toolTip">
         <string>Show line from first point to this point</string>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>80</width>
+         <height>14</height>
+        </size>
+       </property>
       </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Line color</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="comboBoxLineColor"/>
      </item>
     </layout>
    </item>

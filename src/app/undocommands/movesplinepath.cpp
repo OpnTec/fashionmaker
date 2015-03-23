@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -86,10 +86,10 @@ int MoveSplinePath::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::Do(const VSplinePath &splPath)
 {
-    QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(splPath.getKCurve()));
+        doc->SetAttribute(domElement, VToolSplinePath::AttrKCurve, QString().setNum(splPath.GetKCurve()));
         VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
 
         emit NeedLiteParsing(Document::LiteParse);

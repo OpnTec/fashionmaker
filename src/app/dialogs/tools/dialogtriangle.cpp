@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -41,8 +41,7 @@
  * @param parent parent widget
  */
 DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), number(0), axisP1Id(NULL_ID),
-    axisP2Id(NULL_ID), firstPointId(NULL_ID), secondPointId(NULL_ID), line (nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle), line (nullptr)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -161,15 +160,11 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 void DialogTriangle::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
-    firstPointId = getCurrentObjectId(ui->comboBoxFirstPoint);
-    secondPointId = getCurrentObjectId(ui->comboBoxSecondPoint);
-    axisP1Id = getCurrentObjectId(ui->comboBoxAxisP1);
-    axisP2Id = getCurrentObjectId(ui->comboBoxAxisP2);
 
-    line->setPoint1Id(axisP1Id);
-    line->setPoint2Id(axisP2Id);
-    line->setHypotenuseP1Id(firstPointId);
-    line->setHypotenuseP2Id(secondPointId);
+    line->setPoint1Id(GetAxisP1Id());
+    line->setPoint2Id(GetAxisP2Id());
+    line->setHypotenuseP1Id(GetFirstPointId());
+    line->setHypotenuseP2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -223,10 +218,10 @@ void DialogTriangle::ShowVisualization()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setPointName set name of point
+ * @brief SetPointName set name of point
  * @param value name
  */
-void DialogTriangle::setPointName(const QString &value)
+void DialogTriangle::SetPointName(const QString &value)
 {
     pointName = value;
     ui->lineEditNamePoint->setText(pointName);
@@ -234,44 +229,84 @@ void DialogTriangle::setPointName(const QString &value)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setSecondPointId set id of second point
+ * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogTriangle::setSecondPointId(const quint32 &value)
+void DialogTriangle::SetSecondPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxSecondPoint, secondPointId, value);
-    line->setHypotenuseP2Id(secondPointId);
+    setCurrentPointId(ui->comboBoxSecondPoint, value);
+    line->setHypotenuseP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setFirstPointId set id of first point
+ * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogTriangle::setFirstPointId(const quint32 &value)
+void DialogTriangle::SetFirstPointId(const quint32 &value)
 {
-    setPointId(ui->comboBoxFirstPoint, firstPointId, value);
-    line->setHypotenuseP1Id(firstPointId);
+    setCurrentPointId(ui->comboBoxFirstPoint, value);
+    line->setHypotenuseP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAxisP2Id set id second point of axis
+ * @brief SetAxisP2Id set id second point of axis
  * @param value id
  */
-void DialogTriangle::setAxisP2Id(const quint32 &value)
+void DialogTriangle::SetAxisP2Id(const quint32 &value)
 {
-    setPointId(ui->comboBoxAxisP2, axisP2Id, value);
-    line->setPoint2Id(axisP2Id);
+    setCurrentPointId(ui->comboBoxAxisP2, value);
+    line->setPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief setAxisP1Id set id first point of axis
+ * @brief SetAxisP1Id set id first point of axis
  * @param value id
  */
-void DialogTriangle::setAxisP1Id(const quint32 &value)
+void DialogTriangle::SetAxisP1Id(const quint32 &value)
 {
-    setPointId(ui->comboBoxAxisP1, axisP1Id, value);
-    line->setPoint1Id(axisP1Id);
+    setCurrentPointId(ui->comboBoxAxisP1, value);
+    line->setPoint1Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAxisP1Id return id first point of axis
+ * @return id
+ */
+quint32 DialogTriangle::GetAxisP1Id() const
+{
+    return getCurrentObjectId(ui->comboBoxAxisP1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetAxisP2Id return id second point of axis
+ * @return id
+ */
+quint32 DialogTriangle::GetAxisP2Id() const
+{
+    return getCurrentObjectId(ui->comboBoxAxisP2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetFirstPointId return id of first point
+ * @return id
+ */
+quint32 DialogTriangle::GetFirstPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxFirstPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetSecondPointId return id of second point
+ * @return id
+ */
+quint32 DialogTriangle::GetSecondPointId() const
+{
+    return getCurrentObjectId(ui->comboBoxSecondPoint);
 }

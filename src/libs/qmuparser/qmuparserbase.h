@@ -1,7 +1,6 @@
 /***************************************************************************************************
  **
- **  Original work Copyright (C) 2013 Ingo Berg
- **  Modified work Copyright 2014 Roman Telezhynskyi <dismine(at)gmail.com>
+ **  Copyright (C) 2013 Ingo Berg
  **
  **  Permission is hereby granted, free of charge, to any person obtaining a copy of this
  **  software and associated documentation files (the "Software"), to deal in the Software
@@ -122,9 +121,12 @@ public:
     }
     void setAllowSubexpressions(bool value);
 
+    std::locale getLocale() const;
+    void setLocale(const std::locale &value);
+
 protected:
     static const QStringList c_DefaultOprt;
-    static std::locale s_locale;  ///< The locale used by the parser
+    std::locale s_locale;  ///< The locale used by the parser
     static bool g_DbgDumpCmdCode;
     static bool g_DbgDumpStack;
     void Init();

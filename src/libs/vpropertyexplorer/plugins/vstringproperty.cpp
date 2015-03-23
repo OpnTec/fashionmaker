@@ -50,6 +50,7 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     Q_UNUSED(delegate);
 
     QLineEdit* tmpEditor = new QLineEdit(parent);
+    tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setText(d_ptr->VariantValue.toString());

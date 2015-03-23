@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -31,8 +31,9 @@
 
 #include "dialogtool.h"
 
-namespace Ui {
-class DialogLineIntersectAxis;
+namespace Ui
+{
+    class DialogLineIntersectAxis;
 }
 
 class VisToolLineIntersectAxis;
@@ -45,23 +46,25 @@ public:
     DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLineIntersectAxis();
 
-    QString      getPointName() const;
-    void         setPointName(const QString &value);
+    void         SetPointName(const QString &value);
 
-    QString      getTypeLine() const;
-    void         setTypeLine(const QString &value);
+    QString      GetTypeLine() const;
+    void         SetTypeLine(const QString &value);
 
-    QString      getAngle() const;
-    void         setAngle(const QString &value);
+    QString      GetAngle() const;
+    void         SetAngle(const QString &value);
 
-    quint32      getBasePointId() const;
-    void         setBasePointId(const quint32 &value);
+    quint32      GetBasePointId() const;
+    void         SetBasePointId(const quint32 &value);
 
-    quint32      getFirstPointId() const;
-    void         setFirstPointId(const quint32 &value);
+    quint32      GetFirstPointId() const;
+    void         SetFirstPointId(const quint32 &value);
 
-    quint32      getSecondPointId() const;
-    void         setSecondPointId(const quint32 &value);
+    quint32      GetSecondPointId() const;
+    void         SetSecondPointId(const quint32 &value);
+
+    QString      GetLineColor() const;
+    void         SetLineColor(const QString &value);
 
     virtual void ShowDialog(bool click);
 public slots:
@@ -82,16 +85,7 @@ private:
     Q_DISABLE_COPY(DialogLineIntersectAxis)
     Ui::DialogLineIntersectAxis *ui;
 
-    /** @brief number number of handled objects */
-    qint32  number;
-
-    /** @brief typeLine type of line */
-    QString typeLine;
-
     QString formulaAngle;
-    quint32 basePointId;
-    quint32 firstPointId;
-    quint32 secondPointId;
     int     formulaBaseHeightAngle;
 
     VisToolLineIntersectAxis *line;

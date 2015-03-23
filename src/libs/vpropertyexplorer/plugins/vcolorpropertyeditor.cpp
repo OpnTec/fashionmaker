@@ -47,11 +47,11 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
 
     // Create the text label
     TextLabel = new QLabel(this);
-    TextLabel->setText(getColorString(Color));
+    TextLabel->setText(GetColorString(Color));
 
     // Create the label for the pixmap
     ColorLabel = new QLabel(this);
-    ColorLabel->setPixmap(getColorPixmap(Color));
+    ColorLabel->setPixmap(GetColorPixmap(Color));
 
     // Spacer (this is needed for proper display of the label and button)
     Spacer = new QSpacerItem(1, 0, QSizePolicy::Expanding, QSizePolicy::Ignored);
@@ -68,17 +68,17 @@ VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     //ColorLabel->hide();   // for now, we just use the standard display and only add the button
 }
 
-void VColorPropertyEditor::setColor(const QColor& color_)
+void VColorPropertyEditor::SetColor(const QColor& color_)
 {
     if (Color != color_)
     {
         Color = color_;
-        ColorLabel->setPixmap(getColorPixmap(Color));
-        TextLabel->setText(getColorString(Color));
+        ColorLabel->setPixmap(GetColorPixmap(Color));
+        TextLabel->setText(GetColorString(Color));
     }
 }
 
-QPixmap VColorPropertyEditor::getColorPixmap(const QColor& color, unsigned int size)
+QPixmap VColorPropertyEditor::GetColorPixmap(const QColor& color, unsigned int size)
 {
     QImage tmpImgage(static_cast<int>(size), static_cast<int>(size), QImage::Format_ARGB32_Premultiplied);
     tmpImgage.fill(static_cast<unsigned int>(color.rgb()));
@@ -86,7 +86,7 @@ QPixmap VColorPropertyEditor::getColorPixmap(const QColor& color, unsigned int s
     // todo: support alpha channel
 }
 
-QString VColorPropertyEditor::getColorString(const QColor& color)
+QString VColorPropertyEditor::GetColorString(const QColor& color)
 {
     return QString("[%1, %2, %3] (%4)").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha());
 }
@@ -98,7 +98,7 @@ void VColorPropertyEditor::onToolButtonClicked()
     QRgb newRgba = QColorDialog::getRgba(oldRgba, &ok, this);
     if (ok && newRgba != oldRgba)
     {
-        setColor(QColor::fromRgba(newRgba));
+        SetColor(QColor::fromRgba(newRgba));
         emit dataChangedByUser(Color, this);
         UserChangeEvent *event = new UserChangeEvent();
         QCoreApplication::postEvent ( this, event );
@@ -123,7 +123,7 @@ VColorPropertyEditor::~VColorPropertyEditor()
     //
 }
 
-QColor VColorPropertyEditor::getColor() const
+QColor VColorPropertyEditor::GetColor() const
 {
     return Color;
 }

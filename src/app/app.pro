@@ -99,6 +99,12 @@ CONFIG(debug, debug|release){
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+
+        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+        # want them in global list. Compromise decision delete them from local list.
+        QMAKE_CXXFLAGS -= \
+            -Wmissing-prototypes \
+            -Wundefined-reinterpret-cast
         }
     } else {
         *-g++{
@@ -109,7 +115,7 @@ CONFIG(debug, debug|release){
     #Calculate latest tag distance and build revision only in release mode. Change number each time requare
     #recompilation precompiled headers file.
     DEFINES += "LATEST_TAG_DISTANCE=0"
-    DEFINES += "BUILD_REVISION=\\\"uknown\\\""
+    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
 }else{
     # Release mode
     DEFINES += V_NO_ASSERT
@@ -125,8 +131,13 @@ CONFIG(debug, debug|release){
         QMAKE_LFLAGS_RELEASE =
     }
 
+    macx{
+        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
+    }else {
+        HG = hg # All other platforms all OK.
+    }
     #latest tag distance number for using in version
-    HG_DISTANCE=$$system(hg log -r tip --template '{latesttagdistance}')
+    HG_DISTANCE=$$system($${HG} log -r. --template '{latesttagdistance}')
     isEmpty(HG_DISTANCE){
         HG_DISTANCE = 0 # if we can't find local revision left 0.
     }
@@ -135,10 +146,10 @@ CONFIG(debug, debug|release){
 
     #build revision number for using in version
     unix {
-        HG_HESH=$$system("hg log -r tip --template '{node|short}'")
+        HG_HESH=$$system("$${HG} log -r. --template '{node|short}'")
     } else {
         # Use escape character before "|" on Windows
-        HG_HESH=$$system(hg log -r tip --template "{node^|short}")
+        HG_HESH=$$system($${HG} log -r. --template "{node^|short}")
     }
     isEmpty(HG_HESH){
         HG_HESH = "unknown" # if we can't find build revision left unknown.
@@ -181,7 +192,9 @@ INSTALL_TRANSLATIONS += \
     $${TRANSLATIONS_PATH}/valentina_fr_FR.qm \
     $${TRANSLATIONS_PATH}/valentina_it_IT.qm \
     $${TRANSLATIONS_PATH}/valentina_nl_NL.qm \
-    $${TRANSLATIONS_PATH}/valentina_id_ID.qm
+    $${TRANSLATIONS_PATH}/valentina_id_ID.qm \
+    $${TRANSLATIONS_PATH}/valentina_es_ES.qm \
+    $${TRANSLATIONS_PATH}/valentina_fi_FI.qm
 
 # Set "make install" command for Unix-like systems.
 unix{
@@ -306,11 +319,27 @@ unix{
             QMAKE_BUNDLE_DATA += TRANSLATION_id_ID
         }
 
-    qmuparser.path = $$FRAMEWORKS_DIR
-    qmuparser.files = $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/
-    qmuparser.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
-    vpropertyexplorer.path = $$FRAMEWORKS_DIR
-    vpropertyexplorer.files = $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/
+        exists($${TRANSLATIONS_PATH}/valentina_es_ES.qm){
+            TRANSLATION_es_ES.files += \
+                $${TRANSLATIONS_PATH}/valentina_es_ES.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_es_ES.path = "$$RESOURCES_DIR/translations/es_ES.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_es_ES
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_fi_FI.qm){
+            TRANSLATION_fi_FI.files += \
+                $${TRANSLATIONS_PATH}/valentina_fi_FI.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_fi_FI.path = "$$RESOURCES_DIR/translations/fi_FI.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_fi_FI
+        }
+
+    # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
+    # For bundle this names more then enough. We don't need care much about libraries versions.
+    libraries.path = $$FRAMEWORKS_DIR
+    libraries.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
+    libraries.files += $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
 
     # logo on macx.
@@ -322,9 +351,7 @@ unix{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        qmuparser \
-        vpropertyexplorer
-
+        libraries
     }
 }
 
@@ -392,6 +419,15 @@ DEPENDPATH += $$PWD/../libs/vobj
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vobj/$${DESTDIR}/vobj.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vobj/$${DESTDIR}/libvobj.a
+
+# VLayout static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vlayout/$${DESTDIR}/ -lvlayout
+
+INCLUDEPATH += $$PWD/../libs/vlayout
+DEPENDPATH += $$PWD/../libs/vlayout
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/libvlayout.a
 
 
 # Strip after you link all libaries.

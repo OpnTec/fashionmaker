@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -48,14 +48,17 @@ public:
     DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     ~DialogLine();
 
-    quint32        getFirstPoint() const;
-    void           setFirstPoint(const quint32 &value);
+    quint32        GetFirstPoint() const;
+    void           SetFirstPoint(const quint32 &value);
 
-    quint32        getSecondPoint() const;
-    void           setSecondPoint(const quint32 &value);
+    quint32        GetSecondPoint() const;
+    void           SetSecondPoint(const quint32 &value);
 
-    QString        getTypeLine() const;
-    void           setTypeLine(const QString &value);
+    QString        GetTypeLine() const;
+    void           SetTypeLine(const QString &value);
+
+    QString        GetLineColor() const;
+    void           SetLineColor(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   PointNameChanged();
@@ -72,49 +75,8 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogLine *ui;
 
-    /** @brief number number of handled objects */
-    qint32         number;
-
-    /** @brief firstPoint id first point */
-    quint32        firstPoint;
-
-    /** @brief secondPoint id second point */
-    quint32        secondPoint;
-
-    /** @brief typeLine type of line */
-    QString        typeLine;
     VisToolLine    *line;
 
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getFirstPoint return id first point
- * @return id
- */
-inline quint32 DialogLine::getFirstPoint() const
-{
-    return firstPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getSecondPoint return id second point
- * @return id
- */
-inline quint32 DialogLine::getSecondPoint() const
-{
-    return secondPoint;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief getTypeLine return type of line
- * @return type
- */
-inline QString DialogLine::getTypeLine() const
-{
-    return typeLine;
-}
 
 #endif // DIALOGLINE_H

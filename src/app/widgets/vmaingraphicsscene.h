@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -52,6 +52,7 @@ public:
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
+    void          EnableItemMove(bool move);
 protected:
     virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -78,6 +79,7 @@ signals:
      */
     void          NewFactor(qreal factor);
     void          DisableItem(bool disable);
+    void          EnableToolMove(bool move);
 private:
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;

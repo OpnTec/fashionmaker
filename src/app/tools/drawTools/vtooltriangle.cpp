@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -74,11 +74,11 @@ void VToolTriangle::setDialog()
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->setAxisP1Id(axisP1Id);
-    dialogTool->setAxisP2Id(axisP2Id);
-    dialogTool->setFirstPointId(firstPointId);
-    dialogTool->setSecondPointId(secondPointId);
-    dialogTool->setPointName(p->name());
+    dialogTool->SetAxisP1Id(axisP1Id);
+    dialogTool->SetAxisP2Id(axisP2Id);
+    dialogTool->SetFirstPointId(firstPointId);
+    dialogTool->SetSecondPointId(secondPointId);
+    dialogTool->SetPointName(p->name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,10 +95,10 @@ VToolTriangle* VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *sce
     SCASSERT(dialog != nullptr);
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const quint32 axisP1Id = dialogTool->getAxisP1Id();
-    const quint32 axisP2Id = dialogTool->getAxisP2Id();
-    const quint32 firstPointId = dialogTool->getFirstPointId();
-    const quint32 secondPointId = dialogTool->getSecondPointId();
+    const quint32 axisP1Id = dialogTool->GetAxisP1Id();
+    const quint32 axisP2Id = dialogTool->GetAxisP2Id();
+    const quint32 firstPointId = dialogTool->GetFirstPointId();
+    const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString pointName = dialogTool->getPointName();
     VToolTriangle* point = nullptr;
     point = Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, scene, doc, data,
@@ -161,7 +161,8 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
         scene->addItem(point);
         connect(point, &VToolTriangle::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolTriangle::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPoint::Disable);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolTriangle::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolTriangle::EnableToolMove);
         doc->AddTool(id, point);
         doc->IncrementReferens(axisP1Id);
         doc->IncrementReferens(axisP2Id);
@@ -220,14 +221,7 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
  */
 void VToolTriangle::FullUpdateFromFile()
 {
-    QDomElement domElement = doc->elementById(QString().setNum(id));
-    if (domElement.isElement())
-    {
-        axisP1Id = domElement.attribute(AttrAxisP1, "").toUInt();
-        axisP2Id = domElement.attribute(AttrAxisP2, "").toUInt();
-        firstPointId = domElement.attribute(AttrFirstPoint, "").toUInt();
-        secondPointId = domElement.attribute(AttrSecondPoint, "").toUInt();
-    }
+    ReadAttributes();
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
 
     if (vis != nullptr)
@@ -283,10 +277,10 @@ void VToolTriangle::SaveDialog(QDomElement &domElement)
     DialogTriangle *dialogTool = qobject_cast<DialogTriangle*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
-    doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->getAxisP1Id()));
-    doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->getAxisP2Id()));
-    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->getFirstPointId()));
-    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->getSecondPointId()));
+    doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->GetAxisP1Id()));
+    doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->GetAxisP2Id()));
+    doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
+    doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,13 +302,22 @@ void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::getSecondPointId() const
+void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
+{
+    axisP1Id = doc->GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
+    axisP2Id = doc->GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
+    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolTriangle::GetSecondPointId() const
 {
     return secondPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::setSecondPointId(const quint32 &value)
+void VToolTriangle::SetSecondPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -361,13 +364,13 @@ void VToolTriangle::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::getFirstPointId() const
+quint32 VToolTriangle::GetFirstPointId() const
 {
     return firstPointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::setFirstPointId(const quint32 &value)
+void VToolTriangle::SetFirstPointId(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -379,13 +382,13 @@ void VToolTriangle::setFirstPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::getAxisP2Id() const
+quint32 VToolTriangle::GetAxisP2Id() const
 {
     return axisP2Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::setAxisP2Id(const quint32 &value)
+void VToolTriangle::SetAxisP2Id(const quint32 &value)
 {
     if (value != NULL_ID)
     {
@@ -397,13 +400,13 @@ void VToolTriangle::setAxisP2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VToolTriangle::getAxisP1Id() const
+quint32 VToolTriangle::GetAxisP1Id() const
 {
     return axisP1Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTriangle::setAxisP1Id(const quint32 &value)
+void VToolTriangle::SetAxisP1Id(const quint32 &value)
 {
     if (value != NULL_ID)
     {

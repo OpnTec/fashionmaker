@@ -8,7 +8,7 @@
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2014 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -50,13 +50,13 @@ void AddToCalc::undo()
 {
     qCDebug(vUndo)<<"Undo.";
 
-    doc->ChangeActivPP(nameActivDraw);//User will not see this change
+    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VPattern::TagCalculation, calcElement))
     {
-        QDomElement domElement = doc->elementById(QString().setNum(nodeId));
+        QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
         {
             if (calcElement.removeChild(domElement).isNull())
@@ -90,7 +90,7 @@ void AddToCalc::redo()
 {
     qCDebug(vUndo)<<"Redo.";
 
-    doc->ChangeActivPP(nameActivDraw);//User will not see this change
+    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -102,7 +102,7 @@ void AddToCalc::redo()
         }
         else
         {
-            QDomElement refElement = doc->elementById(QString().setNum(cursor));
+            QDomElement refElement = doc->elementById(cursor);
             if (refElement.isElement())
             {
                 calcElement.insertAfter(xml, refElement);

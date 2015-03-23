@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>412</width>
-    <height>433</height>
+    <height>466</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Cut arc</string>
+   <string>Segment an arc</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../share/resources/icon.qrc">
@@ -101,22 +101,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonEqual">
-       <property name="toolTip">
-        <string>Calculate value</string>
-       </property>
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string notr="true">...</string>
+        <string/>
        </property>
-       <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/equal.png</normaloff>:/icon/24x24/equal.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
+       <property name="pixmap">
+        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -230,7 +220,7 @@
            <item row="0" column="1">
             <widget class="QComboBox" name="comboBoxArc">
              <property name="toolTip">
-              <string>Selected curve</string>
+              <string>Selected arc</string>
              </property>
             </widget>
            </item>
@@ -249,6 +239,16 @@
            </item>
            <item row="1" column="1">
             <widget class="QLineEdit" name="lineEditNamePoint"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Color</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="comboBoxColor"/>
            </item>
           </layout>
          </item>
@@ -417,7 +417,6 @@
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHere</tabstop>
-  <tabstop>toolButtonEqual</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>comboBoxArc</tabstop>
   <tabstop>lineEditNamePoint</tabstop>
