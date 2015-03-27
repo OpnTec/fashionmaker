@@ -15,6 +15,10 @@ BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
 BuildRequires: qt5-qtsvg-devel >= 5.2.0
 BuildRequires: qt5-qttools-devel >= 5.2.0
+
+Requires:      qt5-qtsvg >= 5.2.0
+Requires:      qt5-qtbase-gui >= 5.2.0
+Requires:      qt5-qtxmlpatterns >= 5.2.0
 %endif
 
 # SUSE Specifics
@@ -27,12 +31,13 @@ BuildRequires: libqt5-linguist-devel
 BuildRequires: update-desktop-files
 %endif
 
+Requires:   poppler-utils
+
 Version:	0.3.0
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
 Source0:	%{name}-%{version}.tar
-Requires:   poppler-utils
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
@@ -105,3 +110,4 @@ gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %changelog
 * Mon Dec 22 2014 Roman Telezhinskyi
  - Initial build
+
