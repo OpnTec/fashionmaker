@@ -462,15 +462,18 @@ QPainterPath VDetail::ContourPath(const VContainer *data) const
     // seam allowence
     if (getSeamAllowance() == true)
     {
-        QPainterPath ekv;
-        ekv.moveTo(pointsEkv.at(0));
-        for (qint32 i = 1; i < pointsEkv.count(); ++i)
+        if (not pointsEkv.isEmpty())
         {
-            ekv.lineTo(pointsEkv.at(i));
-        }
+            QPainterPath ekv;
+            ekv.moveTo(pointsEkv.at(0));
+            for (qint32 i = 1; i < pointsEkv.count(); ++i)
+            {
+                ekv.lineTo(pointsEkv.at(i));
+            }
 
-        path.addPath(ekv);
-        path.setFillRule(Qt::WindingFill);
+            path.addPath(ekv);
+            path.setFillRule(Qt::WindingFill);
+        }
     }
 
     return path;
