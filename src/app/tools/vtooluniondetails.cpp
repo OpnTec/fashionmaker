@@ -511,6 +511,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             doc->UpdateToolData(id, data);
         }
     }
+    //First add tool to file
     VAbstractTool::AddRecord(id, Tool::UnionDetails, doc);
     if (parse == Document::FullParse)
     {
@@ -528,6 +529,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         }
 
     }
+    //Then create new details
     VNodeDetail det1p1;
     VNodeDetail det1p2;
     d1.NodeOnEdge(indexD1, det1p1, det1p2);
@@ -550,28 +552,42 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     point4.setX(point4.x()+dx);
     point4.setY(point4.y()+dy);
 
-    const qreal angle = QLineF(point4.toQPointF(), point3.toQPointF()).angleTo(QLineF(point1.toQPointF(),
-                                                                                      point2.toQPointF()));
-    qint32 pointsD2 = 0; //Keeps count points second detail, what we already add.
+    const QLineF p4p3 = QLineF(point4.toQPointF(), point3.toQPointF());
+    const QLineF p1p2 = QLineF(point1.toQPointF(), point2.toQPointF());
+
+    // How many points do we need to skip?
+    // If lengths of edges not equal we should left the second point of the second detail.
+    qint32 skip;
+    if (qFuzzyCompare(p1p2.length(), p4p3.length()))
+    {
+        skip = 2;
+    }
+    else
+    {
+        skip = 1;
+    }
+
+    const qreal angle = p4p3.angleTo(p1p2);
+    qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.
+
+    const qint32 countNodeD1 = d1.RemoveEdge(indexD1).CountNode();
+    const qint32 countNodeD2 = d2.RemoveEdge(indexD2).CountNode();
 
     if (typeCreation == Source::FromGui)
     {
-        qint32 j = 0, i = 0;
+        qint32 i = 0;
         VDetail newDetail;
         do
         {
             AddToNewDetail(unionDetails, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id);
             ++i;
-            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < d2.RemoveEdge(indexD2).CountNode()-2)
+            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
             {
+                qint32 j = 0;
+                FindIndexJ(pointsD2, d2, indexD2, j);
                 do
                 {
-                    FindJ(pointsD2, d2, indexD2, j);
-                    if (pointsD2 == d2.RemoveEdge(indexD2).CountNode() -2)
-                    {
-                        break;
-                    }
-                    if (j >= d2.RemoveEdge(indexD2).CountNode())
+                    if (j >= countNodeD2)
                     {
                         j=0;
                     }
@@ -579,9 +595,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                                    det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
+                } while (pointsD2 <= countNodeD2-skip);
             }
-        } while (i < d1.RemoveEdge(indexD1).CountNode());
+        } while (i < countNodeD1);
 
         newDetail.setName("Detail");
         newDetail.setWidth(d1.getWidth());
@@ -604,20 +620,17 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     else
     {
         quint32 idCount = 0;
-        qint32 j = 0, i = 0;
+        qint32 i = 0;
         do
         {
             UpdatePoints(id, data, d1.RemoveEdge(indexD1), i, idCount);
             ++i;
-            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < d2.RemoveEdge(indexD2).CountNode()-2)
+            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
             {
+                qint32 j = 0;
+                FindIndexJ(pointsD2, d2, indexD2, j);
                 do
                 {
-                    FindJ(pointsD2, d2, indexD2, j);
-                    if (pointsD2 == d2.RemoveEdge(indexD2).CountNode()-2)
-                    {
-                        break;
-                    }
                     if (j >= d2.RemoveEdge(indexD2).CountNode())
                     {
                         j=0;
@@ -625,9 +638,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     UpdatePoints(id, data, d2.RemoveEdge(indexD2), j, idCount, dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
+                } while (pointsD2 <= countNodeD2-skip);
             }
-        } while (i<d1.RemoveEdge(indexD1).CountNode());
+        } while (i<countNodeD1);
     }
     return nullptr;
 }
@@ -643,20 +656,20 @@ void VToolUnionDetails::PointsOnEdge(const VDetail &d, const quint32 &index, VPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j)
+void VToolUnionDetails::FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j)
 {
     if (pointsD2 == 0)
     {
         VNodeDetail node1;
         VNodeDetail node2;
         d2.NodeOnEdge(indexD2, node1, node2);
-        int k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
+        const int k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
         if (k == d2.RemoveEdge(indexD2).CountNode()-1)
-        {
+        {//We have last node in detail, we wil begin from 0
             j = 0;
         }
         else
-        {
+        {// Continue from next node
             j = d2.RemoveEdge(indexD2).indexOfNode(node2.getId())+1;
         }
     }

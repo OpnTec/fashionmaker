@@ -289,10 +289,10 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
     VDetail det(*this);
     det.ClearNodes();
 
-    QVector<VNodeDetail> list = this->listNodePoint();
-    quint32 edge = static_cast<quint32>(list.size());
+    // Edge can be only segment. We ignore all curves inside segments.
+    const quint32 edges = static_cast<quint32>(listNodePoint().size());
     quint32 k = 0;
-    for (quint32 i=0; i<edge; ++i)
+    for (quint32 i=0; i<edges; ++i)
     {
         if (i == index)
         {
@@ -304,20 +304,14 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
             VNodeDetail p1;
             VNodeDetail p2;
             this->NodeOnEdge(i, p1, p2);
-            int j1 = this->indexOfNode(p1.getId());
+            const int j1 = this->indexOfNode(p1.getId());
             int j2 = this->indexOfNode(p2.getId());
             if (j2 == 0)
             {
                 j2 = this->CountNode()-1;
-                if (j1 == j2)
-                {
-                    det.append(this->at(j1));
-                    ++k;
-                    continue;
-                }
             }
             for (int j=j1; j<j2; ++j)
-            {
+            {// Add "segment" except last point. Inside can be curves too.
                 det.append(this->at(j));
                 ++k;
             }
