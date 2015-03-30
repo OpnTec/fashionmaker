@@ -202,6 +202,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 path->setMode(Draw::Modeling);
                 const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
                 qint32 k = splinePath->getMaxCountPoints();
+                SCASSERT (k >= 3)
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
@@ -209,22 +210,18 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                             splinePath->at(i).KAsm1(), splinePath->GetKCurve());
 
                     VPointF *p1 = new VPointF(spline.GetP1());
-                    BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
+                    BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
                     //quint32 idP1 = data->AddGObject(p1);
                     --k;
 
                     VPointF p2 = VPointF(spline.GetP2());
-                    BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
+                    BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
 
                     VPointF p3 = VPointF(spline.GetP3());
-                    BiasRotatePoint(&p3, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
+                    BiasRotatePoint(&p3, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
 
                     VPointF *p4 = new VPointF(spline.GetP4());
-                    BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
+                    BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
                     //quint32 idP4 = data->AddGObject(p4);
                     --k;
 
@@ -595,7 +592,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                                    det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 <= countNodeD2-skip);
+                } while (pointsD2 < countNodeD2-skip);
             }
         } while (i < countNodeD1);
 
@@ -638,7 +635,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     UpdatePoints(id, data, d2.RemoveEdge(indexD2), j, idCount, dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 <= countNodeD2-skip);
+                } while (pointsD2 < countNodeD2-skip);
             }
         } while (i<countNodeD1);
     }
@@ -664,6 +661,7 @@ void VToolUnionDetails::FindIndexJ(const qint32 &pointsD2, const VDetail &d2, co
         VNodeDetail node2;
         d2.NodeOnEdge(indexD2, node1, node2);
         const int k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
+        SCASSERT(k != -1)
         if (k == d2.RemoveEdge(indexD2).CountNode()-1)
         {//We have last node in detail, we wil begin from 0
             j = 0;

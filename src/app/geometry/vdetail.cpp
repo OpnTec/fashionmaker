@@ -308,7 +308,7 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
             int j2 = this->indexOfNode(p2.getId());
             if (j2 == 0)
             {
-                j2 = this->CountNode()-1;
+                j2 = this->CountNode();
             }
             for (int j=j1; j<j2; ++j)
             {// Add "segment" except last point. Inside can be curves too.
