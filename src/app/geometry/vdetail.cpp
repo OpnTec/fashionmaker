@@ -186,7 +186,7 @@ void VDetail::setId(const quint32 &id)
 bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
-    if (list.size() < 3)
+    if (list.size() < 2)
     {
         qDebug()<<"Not enough points.";
         return false;
