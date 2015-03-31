@@ -2565,22 +2565,46 @@
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Ersten Punkt auswählen</translation>
+        <translation type="vanished">Ersten Punkt auswählen</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Zweiten Punkt auswählen</translation>
+        <translation type="vanished">Zweiten Punkt auswählen</translation>
     </message>
     <message>
         <source>Select another second point</source>
-        <translation>Einen anderen zweiten Punkt auswählen</translation>
+        <translation type="vanished">Einen anderen zweiten Punkt auswählen</translation>
     </message>
     <message>
         <source>Select detail</source>
-        <translation>Detail auswählen</translation>
+        <translation type="vanished">Detail auswählen</translation>
     </message>
     <message>
         <source>Union tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a first point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece should have at least two points and three objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a second point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a unique point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a point on edge</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

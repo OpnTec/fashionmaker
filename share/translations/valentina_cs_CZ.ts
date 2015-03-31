@@ -2565,22 +2565,46 @@
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Vybrat první bod</translation>
+        <translation type="vanished">Vybrat první bod</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Vybrat druhý bod</translation>
+        <translation type="vanished">Vybrat druhý bod</translation>
     </message>
     <message>
         <source>Select another second point</source>
-        <translation>Vybrat jiný druhý bod</translation>
+        <translation type="vanished">Vybrat jiný druhý bod</translation>
     </message>
     <message>
         <source>Select detail</source>
-        <translation>Vybrat detail</translation>
+        <translation type="vanished">Vybrat detail</translation>
     </message>
     <message>
         <source>Union tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a first point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece should have at least two points and three objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a second point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a unique point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a point on edge</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

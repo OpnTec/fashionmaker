@@ -3021,19 +3021,19 @@
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Виберість першу точку</translation>
+        <translation type="vanished">Виберість першу точку</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Виберіть другу точку</translation>
+        <translation type="vanished">Виберіть другу точку</translation>
     </message>
     <message>
         <source>Select another second point</source>
-        <translation>Виберіть іншу точку</translation>
+        <translation type="vanished">Виберіть іншу точку</translation>
     </message>
     <message>
         <source>Select detail</source>
-        <translation>Виберіть деталь</translation>
+        <translation type="vanished">Виберіть деталь</translation>
     </message>
     <message>
         <source>Union details</source>
@@ -3046,6 +3046,30 @@
     <message>
         <source>Union tool</source>
         <translation>Інструмент об&apos;єднання</translation>
+    </message>
+    <message>
+        <source>Select a first point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece should have at least two points and three objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a second point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a unique point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a point on edge</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
