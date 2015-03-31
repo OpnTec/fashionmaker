@@ -629,15 +629,16 @@ void VToolUnionDetails::FindIndexJ(const qint32 &pointsD2, const VDetail &d2, co
         VNodeDetail node1;
         VNodeDetail node2;
         d2.NodeOnEdge(indexD2, node1, node2);
-        const int k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
+        const VDetail removedD2 = d2.RemoveEdge(indexD2);
+        const int k = removedD2.indexOfNode(node2.getId());
         SCASSERT(k != -1)
-        if (k == d2.RemoveEdge(indexD2).CountNode()-1)
+        if (k == removedD2.CountNode()-1)
         {//We have last node in detail, we wil begin from 0
             j = 0;
         }
         else
         {// Continue from next node
-            j = d2.RemoveEdge(indexD2).indexOfNode(node2.getId())+1;
+            j = k+1;
         }
     }
 }
