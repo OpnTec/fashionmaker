@@ -3049,27 +3049,27 @@
     </message>
     <message>
         <source>Select a first point</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберість першу точку</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь повинна мати принаймні дві точки і три об&apos;єкти</translation>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть другу точку</translation>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть унікальну точку</translation>
     </message>
     <message>
         <source>Select a detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть деталь</translation>
     </message>
     <message>
         <source>Select a point on edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть точку на ребрі</translation>
     </message>
 </context>
 <context>
