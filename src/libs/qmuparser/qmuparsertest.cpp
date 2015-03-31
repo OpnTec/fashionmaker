@@ -56,6 +56,7 @@ QmuParserTester::QmuParserTester()
     AddTest ( &QmuParserTester::TestBinOprt );
     AddTest ( &QmuParserTester::TestException );
     AddTest ( &QmuParserTester::TestStrArg );
+    AddTest ( &QmuParserTester::TestBulkMode );
 
     QmuParserTester::c_iCount = 0;
 }
@@ -165,6 +166,44 @@ int QmuParserTester::TestStrArg()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int QmuParserTester::TestBulkMode()
+{
+    int iStat = 0;
+    qWarning() << "testing bulkmode...";
+
+#define EQN_TEST_BULK(EXPR, R1, R2, R3, R4, PASS) \
+    { \
+        double res[] = { R1, R2, R3, R4 }; \
+        iStat += EqnTestBulk(EXPR, res, (PASS)); \
+    }
+
+    // Bulk Variables for the test:
+    // a: 1,2,3,4
+    // b: 2,2,2,2
+    // c: 3,3,3,3
+    // d: 5,4,3,2
+    EQN_TEST_BULK("a",   1, 1, 1, 1, false)
+    EQN_TEST_BULK("a",   1, 2, 3, 4, true)
+    EQN_TEST_BULK("b=a", 1, 2, 3, 4, true)
+    EQN_TEST_BULK("b=a, b*10", 10, 20, 30, 40, true)
+    EQN_TEST_BULK("b=a, b*10, a", 1, 2, 3, 4, true)
+    EQN_TEST_BULK("a+b", 3, 4, 5, 6, true)
+    EQN_TEST_BULK("c*(a+b)", 9, 12, 15, 18, true)
+#undef EQN_TEST_BULK
+
+    if (iStat == 0)
+    {
+        qWarning() << "passed";
+    }
+    else
+    {
+        qWarning() << "\n  failed with " << iStat << " errors";
+    }
+
+    return iStat;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int QmuParserTester::TestBinOprt()
 {
     int iStat = 0;
@@ -172,16 +211,7 @@ int QmuParserTester::TestBinOprt()
 
     // built in operators
     // xor operator
-    //iStat += EqnTest("1 xor 2", 3, true);
-    //iStat += EqnTest("a xor b", 3, true);            // with a=1 and b=2
-    //iStat += EqnTest("1 xor 2 xor 3", 0, true);
-    //iStat += EqnTest("a xor b xor 3", 0, true);      // with a=1 and b=2
-    //iStat += EqnTest("a xor b xor c", 0, true);      // with a=1 and b=2
-    //iStat += EqnTest("(1 xor 2) xor 3", 0, true);
-    //iStat += EqnTest("(a xor b) xor c", 0, true);    // with a=1 and b=2
-    //iStat += EqnTest("(a) xor (b) xor c", 0, true);  // with a=1 and b=2
-    //iStat += EqnTest("1 or 2"), 3, true;
-    //iStat += EqnTest("a or b"), 3, true;             // with a=1 and b=2
+
     iStat += EqnTest ( "a++b", 3, true );
     iStat += EqnTest ( "a ++ b", 3, true );
     iStat += EqnTest ( "1++2", 3, true );
@@ -220,6 +250,7 @@ int QmuParserTester::TestBinOprt()
     iStat += EqnTest ( "2*(a=b)", 4, true );
     iStat += EqnTest ( "2*(a=b+1)", 6, true );
     iStat += EqnTest ( "(a=b+1)*2", 6, true );
+    iStat += EqnTest ( "a=c, a*10", 30, true);
 
     iStat += EqnTest ( "2^2^3", 256, true );
     iStat += EqnTest ( "1/2/3", 1.0 / 6.0, true );
@@ -1401,6 +1432,63 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
     {
         qWarning() << "\n  fail: " << a_str <<  " (unexpected exception)";
         return 1;  // exceptions other than ParserException are not allowed
+    }
+
+    return iRet;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/** \brief Test an expression in Bulk Mode. */
+int QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass)
+{
+    QmuParserTester::c_iCount++;
+
+    // Define Bulk Variables
+    int nBulkSize = 4;
+    double vVariableA[] = { 1, 2, 3, 4 };   // variable values
+    double vVariableB[] = { 2, 2, 2, 2 };   // variable values
+    double vVariableC[] = { 3, 3, 3, 3 };   // variable values
+    double vResults[] = { 0, 0, 0, 0 };   // variable values
+    int iRet(0);
+
+    try
+    {
+        QmuParser p;
+        p.DefineConst("const1", 1);
+        p.DefineConst("const2", 2);
+        p.DefineVar("a", vVariableA);
+        p.DefineVar("b", vVariableB);
+        p.DefineVar("c", vVariableC);
+
+        p.SetExpr(a_str);
+        p.Eval(vResults, nBulkSize);
+
+        bool bCloseEnough(true);
+        for (int i = 0; i < nBulkSize; ++i)
+        {
+            bCloseEnough &= (fabs(a_fRes[i] - vResults[i]) <= fabs(a_fRes[i] * 0.00001));
+        }
+
+        iRet = ((bCloseEnough && a_fPass) || (!bCloseEnough && !a_fPass)) ? 0 : 1;
+        if (iRet == 1)
+        {
+            qWarning() << "\n  fail: " << a_str << " (incorrect result; expected: {" << a_fRes[0] << ","
+                       << a_fRes[1] << "," << a_fRes[2] << "," << a_fRes[3] << "}" << " ;calculated: " << vResults[0]
+                       << "," << vResults[1] << "," << vResults[2] << "," << vResults[3] << "}";
+        }
+    }
+    catch (QmuParserError &e)
+    {
+        if (a_fPass)
+        {
+            qWarning() << "\n  fail: " << e.GetExpr() << " : " << e.GetMsg();
+            iRet = 1;
+        }
+    }
+    catch (...)
+    {
+        qWarning() << "\n  fail: " << a_str << " (unexpected exception)";
+        iRet = 1;  // exceptions other than ParserException are not allowed
     }
 
     return iRet;

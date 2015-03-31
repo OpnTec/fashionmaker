@@ -1044,9 +1044,18 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
 #endif
                 continue;
             case cmASSIGN:
+                // Bugfix for Bulkmode:
+                // for details see:
+                // https://groups.google.com/forum/embed/?place=forum/muparser-dev&showsearch=true&showpopout=true&
+                // showtabs=false&parenturl=http://muparser.beltoforion.de/mup_forum.html&afterlogin&pli=1#!topic/
+                // muparser-dev/szgatgoHTws
                 --sidx;
-                Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
+                Stack[sidx] = *(pTok->Oprt.ptr + nOffset) = Stack[sidx + 1];
                 continue;
+                // original code:
+                //--sidx;
+                //Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
+                //continue;
             case cmIF:
                 if (qFuzzyCompare(Stack[sidx--]+1, 1+0))
                 {
