@@ -68,6 +68,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
     ui->lineEditPath->setText(qApp->getSettings()->GetPathLayout());
+    ShowExample();//Show example for current format.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
