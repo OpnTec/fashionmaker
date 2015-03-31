@@ -210,11 +210,12 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 
     for (int i = 0; i < pointCount; ++i)
     {
-        *stream << QString(" %1").arg(globalPointsCount - static_cast<unsigned int>(pointCount + i + 1));
+        *stream << QString(" %1").arg(globalPointsCount - static_cast<unsigned int>(pointCount) + i + 1);
     }
     *stream << endl;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VObjEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine::PolygonDrawMode mode)
 {
     QPaintEngine::drawPolygon(points, pointCount, mode);
