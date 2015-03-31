@@ -236,7 +236,7 @@ void VContainer::ClearGObjects()
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearCalculationGObjects()
 {
-    if (d->gObjects.size()>0)
+    if (not d->gObjects.isEmpty())
     {
         QVector<quint32> keys;
         QHash<quint32, QSharedPointer<VGObject> >::iterator i;
@@ -248,7 +248,8 @@ void VContainer::ClearCalculationGObjects()
                 keys.append(i.key());
             }
         }
-        if (keys.size()>0)
+        // We can't delete objects in previous loop it will destroy the iterator.
+        if (not keys.isEmpty())
         {
             for (int i = 0; i < keys.size(); ++i)
             {
@@ -324,7 +325,7 @@ template <typename key, typename val>
 quint32 VContainer::AddObject(QHash<key, val> &obj, val value)
 {
     SCASSERT(value != nullptr);
-    quint32 id = getNextId();
+    const quint32 id = getNextId();
     value->setId(id);
     obj[id] = value;
     return id;
