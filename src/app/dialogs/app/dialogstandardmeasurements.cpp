@@ -28,14 +28,15 @@
 
 #include "dialogstandardmeasurements.h"
 #include "ui_dialogstandardmeasurements.h"
-#include <QDir>
-#include <QPushButton>
-#include <QDesktopWidget>
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
 #include "../../core/vsettings.h"
 #include "../../container/vcontainer.h"
-#include <QLoggingCategory>
+#include "../../utils/logging.h"
+
+#include <QDir>
+#include <QPushButton>
+#include <QDesktopWidget>
 
 Q_LOGGING_CATEGORY(vStMeasur, "v.st.measurements")
 

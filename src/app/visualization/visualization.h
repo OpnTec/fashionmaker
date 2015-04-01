@@ -31,9 +31,10 @@
 
 #include <QObject>
 #include <QGraphicsItem>
+
 #include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
-#include <QLoggingCategory>
+#include "../../utils/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 

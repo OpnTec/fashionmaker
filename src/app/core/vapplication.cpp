@@ -35,6 +35,7 @@
 #include "vmaingraphicsview.h"
 #include "../container/calculator.h"
 #include "../version.h"
+#include "../../utils/logging.h"
 
 #include <QDebug>
 #include <QDir>
@@ -46,7 +47,6 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QMessageBox>
-#include <QLoggingCategory>
 #include <QThread>
 #include <QDateTime>
 #include <QLockFile>

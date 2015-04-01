@@ -46,6 +46,7 @@ UI_DIR = uic
 
 # Suport subdirectories. Just better project code tree.
 include(app.pri)
+include(../utils/utils.pri)
 
 # This include path help promoute VMainGraphicsView on main window. Without it compiler can't find path to custom view
 INCLUDEPATH += "$${PWD}/widgets"

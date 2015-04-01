@@ -44,6 +44,7 @@
 #include "vtooloptionspropertybrowser.h"
 #include "options.h"
 #include "../libs/ifc/xml/vpatternconverter.h"
+#include "../../utils/logging.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -60,7 +61,6 @@
 #include <QtGlobal>
 #include <QDesktopWidget>
 #include <QDesktopServices>
-#include <QLoggingCategory>
 #include <QLockFile>
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")

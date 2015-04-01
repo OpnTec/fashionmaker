@@ -27,13 +27,14 @@
  *************************************************************************/
 
 #include "vcontainer.h"
-#include <QDebug>
 #include "../core/vapplication.h"
 #include "../geometry/varc.h"
 #include "../geometry/vsplinepath.h"
+#include "../../utils/logging.h"
+
 #include <QLineF>
 #include <QtAlgorithms>
-#include <QLoggingCategory>
+#include <QDebug>
 
 Q_LOGGING_CATEGORY(vCon, "v.container")
 

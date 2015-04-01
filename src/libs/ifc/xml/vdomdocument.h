@@ -31,10 +31,10 @@
 
 #include <QDomDocument>
 #include <QDebug>
-#include <QLoggingCategory>
 #include <QCoreApplication>
 
 #include "ifcdef.h"
+#include "../../../utils/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 

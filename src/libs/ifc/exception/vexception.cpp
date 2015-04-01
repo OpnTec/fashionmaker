@@ -27,11 +27,12 @@
  *************************************************************************/
 
 #include "vexception.h"
+#include "../../../utils/logging.h"
+
 #include <QGridLayout>
 #include <QMessageBox>
 #include <QSpacerItem>
 #include <QApplication>
-#include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(vExcep, "v.excep")
 

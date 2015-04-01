@@ -31,6 +31,7 @@ CONFIG -= debug_and_release debug_and_release_target
 DEFINES += QT_MESSAGELOGCONTEXT
 
 include(ifc.pri)
+include(../../utils/utils.pri)
 
 # This is static library so no need in "make install"
 
@@ -74,7 +75,7 @@ CONFIG(debug, debug|release){
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
 
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+        # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
         # want them in global list. Compromise decision delete them from local list.
         QMAKE_CXXFLAGS -= \
             -Wmissing-prototypes

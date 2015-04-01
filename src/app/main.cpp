@@ -35,7 +35,11 @@
 #include <QTextCodec>
 #include <QMessageBox>
 #include <QThread>
-#include <QCommandLineParser>
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+#   include "../core/qcommandlineparser.h"
+#else
+#   include <QCommandLineParser>
+#endif
 #include <QtXml>
 #include <QLibraryInfo>
 
@@ -48,7 +52,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(theme);
     Q_INIT_RESOURCE(flags);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.0");
+    QT_REQUIRE_VERSION(argc, argv, "5.0.0");
 
     VApplication app(argc, argv);
 

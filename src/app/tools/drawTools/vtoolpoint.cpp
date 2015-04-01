@@ -27,11 +27,12 @@
  *************************************************************************/
 
 #include "vtoolpoint.h"
-#include <QKeyEvent>
-#include <QLoggingCategory>
+#include "../../utils/logging.h"
 #include "../../geometry/vpointf.h"
 #include "../../visualization/vgraphicssimpletextitem.h"
 #include "../../undocommands/movelabel.h"
+
+#include <QKeyEvent>
 
 Q_LOGGING_CATEGORY(vToolPoint, "v.toolPoint")
 

@@ -29,15 +29,16 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
+#include "../../core/vapplication.h"
+#include "../../utils/logging.h"
+
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QLineEdit>
 #include <QListWidget>
 #include <QRadioButton>
-#include "../../core/vapplication.h"
 #include <QPushButton>
 #include <QCheckBox>
-#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
