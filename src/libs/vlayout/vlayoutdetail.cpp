@@ -74,10 +74,17 @@ QVector<QPointF> VLayoutDetail::GetContourPoints() const
 void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
 {
     d->contour = points;
-    // Contour can't be closed
-    if (d->contour.first() == d->contour.last())
+    if (not d->contour.isEmpty())
     {
-        d->contour.removeLast();
+        // Contour can't be closed
+        if (d->contour.first() == d->contour.last())
+        {
+        #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+            d->contour.remove(d->layoutAllowence.size() - 1);
+        #else
+            d->contour.removeLast();
+        #endif
+        }
     }
 
     d->contour = RemoveDublicates(RoundPoints(d->contour));
@@ -101,7 +108,11 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool 
             // Seam allowence can't be closed
             if (d->seamAllowence.first() == d->seamAllowence.last())
             {
-                d->seamAllowence.removeLast();
+                #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+                    d->seamAllowence.remove(d->layoutAllowence.size() - 1);
+                #else
+                    d->seamAllowence.removeLast();
+                #endif
             }
 
             d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence));
@@ -343,7 +354,11 @@ void VLayoutDetail::SetLayoutAllowencePoints()
             d->layoutAllowence = Equidistant(d->seamAllowence, EquidistantType::CloseEquidistant, d->layoutWidth);
             if (d->layoutAllowence.isEmpty() == false)
             {
-                d->layoutAllowence.removeLast();
+                #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+                    d->layoutAllowence.remove(d->layoutAllowence.size() - 1);
+                #else
+                    d->layoutAllowence.removeLast();
+                #endif
             }
         }
         else
@@ -351,7 +366,11 @@ void VLayoutDetail::SetLayoutAllowencePoints()
             d->layoutAllowence = Equidistant(d->contour, EquidistantType::CloseEquidistant, d->layoutWidth);
             if (d->layoutAllowence.isEmpty() == false)
             {
+            #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+                d->layoutAllowence.remove(d->layoutAllowence.size() - 1);
+            #else
                 d->layoutAllowence.removeLast();
+            #endif
             }
         }
     }
