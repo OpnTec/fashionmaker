@@ -33,7 +33,12 @@
 #include "../../core/vsettings.h"
 #include "../../xml/vabstractmeasurements.h"
 
-#include <QtMath>
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../../../utils/vmath.h"
+#else
+#   include <QtMath>
+#endif
+
 
 enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4 };
 

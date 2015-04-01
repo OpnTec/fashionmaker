@@ -1,2 +1,3 @@
 HEADERS += \
-    $$PWD/logging.h
+    $$PWD/logging.h \
+    $$PWD/vmath.h

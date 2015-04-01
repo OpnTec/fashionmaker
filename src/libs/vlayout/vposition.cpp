@@ -37,7 +37,11 @@
 #include <QPainter>
 #include <QCoreApplication>
 #include <QDir>
-#include <QtMath>
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../../utils/vmath.h"
+#else
+#   include <QtMath>
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,

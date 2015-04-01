@@ -30,7 +30,11 @@
 
 #include <QTextStream>
 #include <QDebug>
-#include <QtMath>
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../../utils/vmath.h"
+#else
+#   include <QtMath>
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
