@@ -180,7 +180,7 @@ VApplication::VApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VApplication::~VApplication()
 {
-    qCDebug(vApp)<<"Application closing.";
+    qCDebug(vApp, "Application closing.");
     qInstallMessageHandler(0); // Resore the message handler
     delete out;
 
@@ -199,31 +199,31 @@ VApplication::~VApplication()
  */
 void VApplication::NewValentina(const QString &fileName)
 {
-    qCDebug(vApp)<<"Open new detached process.";
+    qCDebug(vApp, "Open new detached process.");
     if (fileName.isEmpty())
     {
-        qCDebug(vApp)<<"New process without arguments. program ="<<qApp->applicationFilePath();
+        qCDebug(vApp, "New process without arguments. program = %s", qApp->applicationFilePath().toUtf8().constData());
         // Path can contain spaces.
         if (QProcess::startDetached("\""+qApp->applicationFilePath()+"\""))
         {
-            qCDebug(vApp)<<"The process was started successfully.";
+            qCDebug(vApp, "The process was started successfully.");
         }
         else
         {
-            qCWarning(vApp)<<"Could not run process. The operation timed out or an error occurred.";
+            qCWarning(vApp, "Could not run process. The operation timed out or an error occurred.");
         }
     }
     else
     {
         const QString run = QString("\"%1\" \"%2\"").arg(qApp->applicationFilePath()).arg(fileName);
-        qCDebug(vApp)<<"New process with arguments. program ="<<run;
+        qCDebug(vApp, "New process with arguments. program = %s", run.toUtf8().constData());
         if (QProcess::startDetached(run))
         {
-            qCDebug(vApp)<<"The process was started successfully.";
+            qCDebug(vApp, "The process was started successfully.");
         }
         else
         {
-            qCWarning(vApp)<<"Could not run process. The operation timed out or an error occurred.";
+            qCWarning(vApp, "Could not run process. The operation timed out or an error occurred.");
         }
     }
 }
@@ -469,19 +469,20 @@ void VApplication::BeginLogging()
         logLock->setStaleLockTime(0);
         if (TryLock(logLock))
         {
-            qCDebug(vApp) << "Log file"<<LogPath()<<"was locked.";
+            qCDebug(vApp, "Log file %s was locked.", LogPath().toUtf8().constData());
         }
         else
         {
-            qCDebug(vApp) << "Failed to lock" << LogPath();
-            qCDebug(vApp) << "Error type:"<<logLock->error();
+            qCDebug(vApp, "Failed to lock %s", LogPath().toUtf8().constData());
+            qCDebug(vApp, "Error type: %d", logLock->error());
         }
     }
     else
     {
         delete log;
         log = nullptr;
-        qCDebug(vApp) << "Error opening log file '" << LogPath() << "'. All debug output redirected to console.";
+        qCDebug(vApp, "Error opening log file \'%s\'. All debug output redirected to console.",
+                LogPath().toUtf8().constData());
     }
 }
 
@@ -496,27 +497,27 @@ void VApplication::ClearOldLogs() const
     const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == false)
     {
-        qCDebug(vApp) << "Clearing old logs";
+        qCDebug(vApp, "Clearing old logs");
         for (int i = 0; i < allFiles.size(); ++i)
         {
             QFileInfo info(allFiles.at(i));
             QLockFile *lock = new QLockFile(info.absoluteFilePath() + ".lock");
             if (TryLock(lock))
             {
-                qCDebug(vApp) << "Locked file"<<info.absoluteFilePath();
+                qCDebug(vApp, "Locked file %s", info.absoluteFilePath().toUtf8().constData());
                 QFile oldLog(allFiles.at(i));
                 if (oldLog.remove())
                 {
-                    qCDebug(vApp) << "Deleted"<<info.absoluteFilePath();
+                    qCDebug(vApp, "Deleted %s", info.absoluteFilePath().toUtf8().constData());
                 }
                 else
                 {
-                    qCDebug(vApp) << "Could not delete"<<info.absoluteFilePath();
+                    qCDebug(vApp, "Could not delete %s", info.absoluteFilePath().toUtf8().constData());
                 }
             }
             else
             {
-                qCDebug(vApp) << "Failed to lock"<<info.absoluteFilePath();
+                qCDebug(vApp, "Failed to lock %s", info.absoluteFilePath().toUtf8().constData());
             }
             delete lock;
             lock = nullptr;
@@ -524,7 +525,7 @@ void VApplication::ClearOldLogs() const
     }
     else
     {
-        qCDebug(vApp) << "There are no old logs.";
+        qCDebug(vApp, "There are no old logs.");
     }
 }
 

@@ -21,9 +21,14 @@
 
 #include "qcommandlineoption.h"
 
-#include "qset.h"
+#include <QSet>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
 
 class QCommandLineOptionPrivate : public QSharedData
 {
@@ -50,6 +55,10 @@ public:
     //! Show or hide in --help
     bool hidden;
 };
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 /*!
     \since 5.2

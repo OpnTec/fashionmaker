@@ -113,7 +113,7 @@ void VDrawTool::FullUpdateFromGuiApply()
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::SaveDialogChange()
 {
-    qCDebug(vTool)<<"Saving tool options after using dialog";
+    qCDebug(vTool, "Saving tool options after using dialog");
     QDomElement oldDomElement = doc->elementById(id);
     if (oldDomElement.isElement())
     {
@@ -126,7 +126,7 @@ void VDrawTool::SaveDialogChange()
     }
     else
     {
-        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool, "Can't find tool with id = %u", id);
     }
 }
 
@@ -156,7 +156,7 @@ void VDrawTool::RefreshDataInFile()
     }
     else
     {
-        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool, "Can't find tool with id = %u", id);
     }
 }
 
@@ -183,7 +183,7 @@ void VDrawTool::ReadAttributes()
     }
     else
     {
-        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool, "Can't find tool with id = %u", id);
     }
 }
 

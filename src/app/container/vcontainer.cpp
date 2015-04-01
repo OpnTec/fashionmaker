@@ -211,7 +211,7 @@ void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val p
  */
 void VContainer::Clear()
 {
-    qCDebug(vCon)<<"Clearing container data.";
+    qCDebug(vCon, "Clearing container data.");
     _id = NULL_ID;
 
     d->details.clear();

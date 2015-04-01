@@ -48,7 +48,7 @@ RenamePP::~RenamePP()
 //---------------------------------------------------------------------------------------------------------------------
 void RenamePP::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     ChangeName(newPPname, oldPPname);
 }
@@ -56,7 +56,7 @@ void RenamePP::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void RenamePP::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     ChangeName(oldPPname, newPPname);
 }
@@ -92,6 +92,6 @@ void RenamePP::ChangeName(const QString &oldName, const QString &newName)
     }
     else
     {
-        qCWarning(vUndo)<<"Can't change pattern piece name";
+        qCWarning(vUndo, "Can't change pattern piece name");
     }
 }

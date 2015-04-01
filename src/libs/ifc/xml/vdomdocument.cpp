@@ -425,7 +425,7 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
  */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
-    qCDebug(vXML)<<"Validation xml file"<<fileName<<".";
+    qCDebug(vXML, "Validation xml file %s.", fileName.toUtf8().constData());
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
@@ -451,7 +451,7 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
         const QString errorMsg(tr("Could not load schema file.").arg(fileSchema.fileName()));
         throw VException(errorMsg);
     }
-    qCDebug(vXML)<<"Schema loaded.";
+    qCDebug(vXML, "Schema loaded.");
 
     bool errorOccurred = false;
     if (sch.isValid() == false)

@@ -48,7 +48,7 @@ MoveSplinePath::~MoveSplinePath()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     Do(oldSplinePath);
 }
@@ -56,7 +56,7 @@ void MoveSplinePath::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     Do(newSplinePath);
 }
@@ -99,7 +99,7 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find spline path with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find spline path with id = %u.", nodeId);
         return;
     }
 }

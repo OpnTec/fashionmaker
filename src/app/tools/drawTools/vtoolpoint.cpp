@@ -90,7 +90,8 @@ QString VToolPoint::name() const
     }
     catch (const VExceptionBadId &e)
     {
-        qCDebug(vToolPoint)<<"Error!"<<"Couldn't get point name."<<e.ErrorMessage()<<e.DetailedInformation();
+        qCDebug(vToolPoint, "Error! Couldn't get point name. %s %s", e.ErrorMessage().toUtf8().constData(),
+                e.DetailedInformation().toUtf8().constData());
         return QString("");// Return empty string for property browser
     }
 }

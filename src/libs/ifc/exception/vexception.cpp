@@ -103,7 +103,8 @@ void VException::CriticalMessageBox(const QString &situation, QWidget * parent) 
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
-    qCDebug(vExcep)<<"Critical error!"<<situation<<ErrorMessage()<<DetailedInformation();
+    qCDebug(vExcep, "Critical error! %s %s %s", situation.toUtf8().constData(), ErrorMessage().toUtf8().constData(),
+            DetailedInformation().toUtf8().constData());
     msgBox.exec();
 }
 

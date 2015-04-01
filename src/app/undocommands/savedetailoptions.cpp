@@ -46,7 +46,7 @@ SaveDetailOptions::~SaveDetailOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
@@ -75,7 +75,7 @@ void SaveDetailOptions::undo()
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find detail with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
         return;
     }
 }
@@ -83,7 +83,7 @@ void SaveDetailOptions::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
@@ -112,7 +112,7 @@ void SaveDetailOptions::redo()
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find detail with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
         return;
     }
 }

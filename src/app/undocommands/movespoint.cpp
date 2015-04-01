@@ -40,10 +40,10 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
 {
     setText(tr("Move single point"));
     nodeId = id;
-    qCDebug(vUndo)<<"SPoint id"<<nodeId;
+    qCDebug(vUndo, "SPoint id %u", nodeId);
 
-    qCDebug(vUndo)<<"SPoint newX"<<newX;
-    qCDebug(vUndo)<<"SPoint newY"<<newY;
+    qCDebug(vUndo, "SPoint newX %f", newX);
+    qCDebug(vUndo, "SPoint newY %f", newY);
 
     SCASSERT(scene != nullptr);
     QDomElement domElement = doc->elementById(id);
@@ -52,12 +52,12 @@ MoveSPoint::MoveSPoint(VPattern *doc, const double &x, const double &y, const qu
         oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrX, "0.0"));
         oldY = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrY, "0.0"));
 
-        qCDebug(vUndo)<<"SPoint oldX"<<oldX;
-        qCDebug(vUndo)<<"SPoint oldY"<<oldY;
+        qCDebug(vUndo, "SPoint oldX %f", oldX);
+        qCDebug(vUndo, "SPoint oldY %f", oldY);
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find spoint with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
         return;
     }
 }
@@ -69,7 +69,7 @@ MoveSPoint::~MoveSPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     Do(oldX, oldY);
 }
@@ -77,7 +77,7 @@ void MoveSPoint::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     Do(newX, newY);
 }
@@ -89,18 +89,18 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
     SCASSERT(moveCommand != nullptr);
     const quint32 id = moveCommand->getSPointId();
 
-    qCDebug(vUndo)<<"Mergin.";
+    qCDebug(vUndo, "Mergin.");
     if (id != nodeId)
     {
-        qCDebug(vUndo)<<"Merging canceled.";
+        qCDebug(vUndo, "Merging canceled.");
         return false;
     }
 
-    qCDebug(vUndo)<<"Mergin undo.";
+    qCDebug(vUndo, "Mergin undo.");
     newX = moveCommand->getNewX();
     newY = moveCommand->getNewY();
-    qCDebug(vUndo)<<"SPoint newX"<<newX;
-    qCDebug(vUndo)<<"SPoint newY"<<newY;
+    qCDebug(vUndo, "SPoint newX %f", newX);
+    qCDebug(vUndo, "SPoint newY %f", newY);
     return true;
 }
 
@@ -113,8 +113,8 @@ int MoveSPoint::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSPoint::Do(double x, double y)
 {
-    qCDebug(vUndo)<<"Move to x"<<x;
-    qCDebug(vUndo)<<"Move to y"<<y;
+    qCDebug(vUndo, "Move to x %f", x);
+    qCDebug(vUndo, "Move to y %f", y);
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
@@ -129,7 +129,7 @@ void MoveSPoint::Do(double x, double y)
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find spoint with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find spoint with id = %u.", nodeId);
         return;
     }
 }

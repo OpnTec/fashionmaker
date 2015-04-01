@@ -45,7 +45,7 @@ AddDet::~AddDet()
 // cppcheck-suppress unusedFunction
 void AddDet::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     QDomElement element;
     if (doc->GetActivNodeElement(VPattern::TagDetails, element))
@@ -55,19 +55,19 @@ void AddDet::undo()
         {
             if (element.removeChild(domElement).isNull())
             {
-                qCDebug(vUndo)<<"Can't delete node";
+                qCDebug(vUndo, "Can't delete node");
                 return;
             }
         }
         else
         {
-            qCDebug(vUndo)<<"Can't get node by id = "<<nodeId<<".";
+            qCDebug(vUndo, "Can't get node by id = %u.", nodeId);
             return;
         }
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagDetails<<".";
+        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagDetails.toUtf8().constData());
         return;
     }
     emit NeedFullParsing();
@@ -77,7 +77,7 @@ void AddDet::undo()
 // cppcheck-suppress unusedFunction
 void AddDet::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     QDomElement element;
     if (doc->GetActivNodeElement(VPattern::TagDetails, element))
@@ -86,7 +86,7 @@ void AddDet::redo()
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find tag"<<VPattern::TagDetails<<".";
+        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagDetails.toUtf8().constData());
         return;
     }
     RedoFullParsing();

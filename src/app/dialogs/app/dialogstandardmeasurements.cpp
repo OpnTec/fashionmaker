@@ -64,7 +64,7 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
         connect(bCansel, &QPushButton::clicked, this, &DialogStandardMeasurements::DialogRejected);
     }
 
-    qCDebug(vStMeasur)<<"Pattern piece name"<<_name;
+    qCDebug(vStMeasur, "Pattern piece name %s", _name.toUtf8().constData());
     ui->lineEditName->setText(_name);
 
     LoadStandardTables();
@@ -151,7 +151,7 @@ void DialogStandardMeasurements::CheckState()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogStandardMeasurements::LoadStandardTables()
 {
-    qCDebug(vStMeasur)<<"Loading standard table.";
+    qCDebug(vStMeasur, "Loading standard table.");
     QStringList filters{"*.vst"};
     //Use standard path to standard measurements
     const QString path = qApp->getSettings()->GetPathStandardMeasurements();
@@ -162,13 +162,13 @@ void DialogStandardMeasurements::LoadStandardTables()
     const QStringList allFiles = tablesDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     if (allFiles.isEmpty() == true)
     {
-        qCDebug(vStMeasur)<<"Can't find standard measurements in path"<<path;
+        qCDebug(vStMeasur, "Can't find standard measurements in path %s", path.toUtf8().constData());
         ui->comboBoxTables->clear();
         CheckState();
         return;
     }
 
-    qCDebug(vStMeasur)<<"Was found"<<allFiles.size()<<"tables.";
+    qCDebug(vStMeasur, "Was found %d tables.", allFiles.size());
     for (int i = 0; i < allFiles.size(); ++i)
     {
         QFileInfo fi(allFiles.at(i));
@@ -179,22 +179,23 @@ void DialogStandardMeasurements::LoadStandardTables()
             m.setXMLContent(fi.absoluteFilePath());
             if (m.MUnit() == Unit::Inch)
             {
-                qCWarning(vStMeasur)<<"We do not support inches for standard table. Ignore table"
-                                    <<fi.absoluteFilePath()<<".";
+                qCWarning(vStMeasur, "We do not support inches for standard table. Ignore table %s .",
+                          fi.absoluteFilePath().toUtf8().constData());
             }
             else
             {
                 const QString desc = m.TrDescription();
                 if (desc.isEmpty() == false)
                 {
-                    qCDebug(vStMeasur)<<"Adding table from"<<fi.absoluteFilePath();
+                    qCDebug(vStMeasur, "Adding table from %s", fi.absoluteFilePath().toUtf8().constData());
                     ui->comboBoxTables->addItem(desc, QVariant(fi.absoluteFilePath()));
                 }
             }
         }
         catch (VException &e)
         {
-            qCDebug(vStMeasur)<<"File error."<<e.ErrorMessage()<<e.DetailedInformation()<<Q_FUNC_INFO;
+            qCDebug(vStMeasur, "File error. %s %s", e.ErrorMessage().toUtf8().constData(),
+                    e.DetailedInformation().toUtf8().constData());
             continue;
         }
     }

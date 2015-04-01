@@ -50,7 +50,7 @@ DelTool::~DelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     UndoDeleteAfterSibling(parentNode, siblingId);
     emit NeedFullParsing();
@@ -61,7 +61,7 @@ void DelTool::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void DelTool::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     //Keep first!
     doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change

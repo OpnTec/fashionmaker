@@ -150,7 +150,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wmissing-format-attribute \
     -Wswitch-default \
     -Wuninitialized \
-    -Wno-variadic-macros \
+    -Wvariadic-macros \
     -Wlogical-op \
     -Wnoexcept \
     -Wmissing-noreturn \

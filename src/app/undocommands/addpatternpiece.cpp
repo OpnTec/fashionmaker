@@ -46,7 +46,7 @@ AddPatternPiece::~AddPatternPiece()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     if (doc->CountPP() <= 1)
     {
@@ -64,7 +64,7 @@ void AddPatternPiece::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     if (doc->CountPP() == 0 && mPath.isEmpty() == false)
     {

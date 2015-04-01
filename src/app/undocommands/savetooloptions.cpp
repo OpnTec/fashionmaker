@@ -46,7 +46,7 @@ SaveToolOptions::~SaveToolOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
@@ -57,7 +57,7 @@ void SaveToolOptions::undo()
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find tool with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
         return;
     }
 }
@@ -65,7 +65,7 @@ void SaveToolOptions::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void SaveToolOptions::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
@@ -76,7 +76,7 @@ void SaveToolOptions::redo()
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find tool with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find tool with id = %u.", nodeId);
         return;
     }
 }

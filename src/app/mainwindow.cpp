@@ -143,30 +143,30 @@ MainWindow::MainWindow(QWidget *parent)
  */
 void MainWindow::ActionNewPP()
 {
-    qCDebug(vMainWindow)<<"New PP.";
+    qCDebug(vMainWindow, "New PP.");
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
-    qCDebug(vMainWindow)<<"Generated PP name:"<<patternPieceName;
+    qCDebug(vMainWindow, "Generated PP name: %s", patternPieceName.toUtf8().constData());
     QString path;
     if (comboBoxDraws->count() == 0)
     {
-        qCDebug(vMainWindow)<<"First PP";
+        qCDebug(vMainWindow, "First PP");
         DialogMeasurements measurements(this);
         if (measurements.exec() == QDialog::Rejected)
         {
-            qCDebug(vMainWindow)<<"Creation PP was canceled";
+            qCDebug(vMainWindow, "Creation PP was canceled");
             return;
         }
         if (measurements.type() == MeasurementsType::Standard)
         {
-            qCDebug(vMainWindow)<<"PP with standard measurements";
+            qCDebug(vMainWindow, "PP with standard measurements");
             qApp->setPatternType(MeasurementsType::Standard);
             DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
             if (stMeasurements.exec() == QDialog::Accepted)
             {
                 patternPieceName = stMeasurements.name();
-                qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
+                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
                 path = stMeasurements.tablePath();
-                qCDebug(vMainWindow)<<"Table path:"<<path;
+                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
                 VStandardMeasurements m(pattern);
                 m.setXMLContent(path);
                 m.SetSize();
@@ -175,13 +175,13 @@ void MainWindow::ActionNewPP()
             }
             else
             {
-                qCDebug(vMainWindow)<<"Selection standard measurements canceled.";
+                qCDebug(vMainWindow, "Selection standard measurements canceled.");
                 return;
             }
         }
         else
         {
-            qCDebug(vMainWindow)<<"PP with individual measurements.";
+            qCDebug(vMainWindow, "PP with individual measurements.");
             QMessageBox::StandardButton ret;
             ret = QMessageBox::question(this, tr("Individual measurements is under development"),
                                         tr("There is no way create individual measurements file independent on the "
@@ -198,16 +198,16 @@ void MainWindow::ActionNewPP()
             if (indMeasurements.exec() == QDialog::Accepted)
             {
                 patternPieceName = indMeasurements.name();
-                qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
+                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
                 path = indMeasurements.tablePath();
-                qCDebug(vMainWindow)<<"Table path:"<<path;
+                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
                 VIndividualMeasurements m(pattern);
                 m.setXMLContent(path);
                 m.Measurements();
             }
             else
             {
-                qCDebug(vMainWindow)<<"Selection individual measurements canceled.";
+                qCDebug(vMainWindow, "Selection individual measurements canceled.");
                 return;
             }
         }
@@ -219,19 +219,19 @@ void MainWindow::ActionNewPP()
     }
     else
     {
-        qCDebug(vMainWindow)<<"PP count"<<comboBoxDraws->count();
+        qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
         patternPieceName = PatternPieceName(patternPieceName);
-        qCDebug(vMainWindow)<<"PP name:"<<patternPieceName;
+        qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
         if (patternPieceName.isEmpty())
         {
-            qCDebug(vMainWindow)<<"Name empty.";
+            qCDebug(vMainWindow, "Name empty.");
             return;
         }
         path = doc->MPath();
     }
     if (doc->appendPP(patternPieceName) == false)
     {
-        qCDebug(vMainWindow)<<"Error creating pattern piece with the name "<<patternPieceName<<".";
+        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", patternPieceName.toUtf8().constData());
         return;
     }
     comboBoxDraws->blockSignals(true);
@@ -826,7 +826,7 @@ void MainWindow::showEvent( QShowEvent *event )
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    qCDebug(vMainWindow)<<"Closing main window";
+    qCDebug(vMainWindow, "Closing main window");
     if (MaybeSave())
     {
         FileClosedCorrect();
@@ -836,7 +836,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     else
     {
-        qCDebug(vMainWindow)<<"Closing canceled.";
+        qCDebug(vMainWindow, "Closing canceled.");
         event->ignore();
     }
 }
@@ -1045,10 +1045,10 @@ void MainWindow::mouseMove(const QPointF &scenePos)
  */
 void MainWindow::CancelTool()
 {
-    qCDebug(vMainWindow)<<"Canceling tool.";
+    qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
     dialogTool = nullptr;
-    qCDebug(vMainWindow)<<"Dialog closed.";
+    qCDebug(vMainWindow, "Dialog closed.");
     switch ( currentTool )
     {
         case Tool::Arrow:
@@ -1142,7 +1142,7 @@ void MainWindow::CancelTool()
  */
 void  MainWindow::ArrowTool()
 {
-    qCDebug(vMainWindow)<<"Arrow tool.";
+    qCDebug(vMainWindow, "Arrow tool.");
     CancelTool();
     ui->actionArrowTool->setChecked(true);
     ui->actionStopTool->setEnabled(false);
@@ -1152,7 +1152,7 @@ void  MainWindow::ArrowTool()
     ui->view->setCursor(cur);
     helpLabel->setText("");
     ui->view->setShowToolOptions(true);
-    qCDebug(vMainWindow)<<"Enabled arrow tool.";
+    qCDebug(vMainWindow, "Enabled arrow tool.");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1218,7 +1218,7 @@ void MainWindow::ActionDraw(bool checked)
 {
     if (checked)
     {
-        qCDebug(vMainWindow)<<"Show draw scene";
+        qCDebug(vMainWindow, "Show draw scene");
         ui->actionDetails->setChecked(false);
         SaveCurrentScene();
 
@@ -1256,7 +1256,7 @@ void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
     {
-        qCDebug(vMainWindow)<<"Show details scene";
+        qCDebug(vMainWindow, "Show details scene");
         ui->actionDraw->setChecked(false);
         SaveCurrentScene();
 
@@ -1380,7 +1380,7 @@ bool MainWindow::Save()
  */
 void MainWindow::Open()
 {
-    qCDebug(vMainWindow)<<"Openning new file.";
+    qCDebug(vMainWindow, "Openning new file.");
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
     const QStringList files = qApp->getSettings()->GetRecentFileList();
@@ -1394,7 +1394,7 @@ void MainWindow::Open()
         //Absolute path to last open file
         dir = QFileInfo(files.first()).absolutePath();
     }
-    qCDebug(vMainWindow)<<"Run QFileDialog::getOpenFileName: dir ="<<dir<<".";
+    qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", dir.toUtf8().constData());
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
     if (filePath.isEmpty())
     {
@@ -1421,14 +1421,14 @@ void MainWindow::Preferences()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::RepotBug()
 {
-    qCDebug(vMainWindow)<<"Reporting bug";
+    qCDebug(vMainWindow, "Reporting bug");
     QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/issues/new"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OnlineHelp()
 {
-    qCDebug(vMainWindow)<<"Showing online help";
+    qCDebug(vMainWindow, "Showing online help");
     QDesktopServices::openUrl(QUrl("https://bitbucket.org/dismine/valentina/wiki/manual/Content"));
 }
 
@@ -1438,21 +1438,21 @@ void MainWindow::OnlineHelp()
  */
 void MainWindow::Clear()
 {
-    qCDebug(vMainWindow)<<"Reseting main window.";
+    qCDebug(vMainWindow, "Reseting main window.");
 
     delete lock; // Unlock pattern file
     lock = nullptr;
-    qCDebug(vMainWindow)<<"Unlocked pattern file.";
+    qCDebug(vMainWindow, "Unlocked pattern file.");
 
     ui->actionDetails->setChecked(false);
     ui->actionDraw->setChecked(true);
     ui->actionDraw->setEnabled(false);
-    qCDebug(vMainWindow)<<"Returned to Draw mode.";
+    qCDebug(vMainWindow, "Returned to Draw mode.");
     setCurrentFile(QString());
     pattern->Clear();
-    qCDebug(vMainWindow)<<"Clearing pattern.";
+    qCDebug(vMainWindow, "Clearing pattern.");
     doc->clear();
-    qCDebug(vMainWindow)<<"Clearing scenes.";
+    qCDebug(vMainWindow, "Clearing scenes.");
     sceneDraw->clear();
     sceneDetails->clear();
     ArrowTool();
@@ -1501,7 +1501,7 @@ void MainWindow::FileClosedCorrect()
     {
         autofile.remove();
     }
-    qCDebug(vMainWindow)<<"File"<<curFile<<"closed correct.";
+    qCDebug(vMainWindow, "File %s closed correct.", curFile.toUtf8().constData());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1521,7 +1521,7 @@ void MainWindow::ResetWindow()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
-    qCDebug(vMainWindow)<<"Full parsing file";
+    qCDebug(vMainWindow, "Full parsing file");
 
     toolOptions->ClearPropertyBrowser();
     try
@@ -1997,7 +1997,7 @@ void MainWindow::MinimumScrollBar()
  */
 bool MainWindow::SavePattern(const QString &fileName, QString &error)
 {
-    qCDebug(vMainWindow)<<"Saving pattern file"<<fileName<<".";
+    qCDebug(vMainWindow, "Saving pattern file %s.", fileName.toUtf8().constData());
     QFileInfo tempInfo(fileName);
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
@@ -2006,13 +2006,13 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
-            qCDebug(vMainWindow)<<"File"<<fileName<<"saved.";
+            qCDebug(vMainWindow, "File %s saved.", fileName.toUtf8().constData());
             PatternWasModified(result);
         }
     }
     else
     {
-        qCDebug(vMainWindow)<<"Could not save file"<<fileName<<"."<<error<<".";
+        qCDebug(vMainWindow, "Could not save file %s. %s.", fileName.toUtf8().constData(), error.toUtf8().constData());
     }
     return result;
 }
@@ -2023,7 +2023,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
  */
 void MainWindow::AutoSavePattern()
 {
-    qCDebug(vMainWindow)<<"Autosaving pattern.";
+    qCDebug(vMainWindow, "Autosaving pattern.");
 
     if (curFile.isEmpty() == false && this->isWindowModified() == true)
     {
@@ -2041,7 +2041,7 @@ void MainWindow::AutoSavePattern()
  */
 void MainWindow::setCurrentFile(const QString &fileName)
 {
-    qCDebug(vMainWindow)<<"Set current name to \""<<fileName<<"\"";
+    qCDebug(vMainWindow, "Set current name to \"%s\"", fileName.toUtf8().constData());
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
@@ -2052,7 +2052,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     }
     else
     {
-        qCDebug(vMainWindow)<<"Updating recent file list.";
+        qCDebug(vMainWindow, "Updating recent file list.");
         QStringList files = qApp->getSettings()->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -2064,7 +2064,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
         qApp->getSettings()->SetRecentFileList(files);
         UpdateRecentFileActions();
 
-        qCDebug(vMainWindow)<<"Updating restore file list.";
+        qCDebug(vMainWindow, "Updating restore file list.");
         QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
@@ -2091,7 +2091,7 @@ QString MainWindow::strippedName(const QString &fullFileName)
  */
 void MainWindow::ReadSettings()
 {
-    qCDebug(vMainWindow)<<"Reading settings.";
+    qCDebug(vMainWindow, "Reading settings.");
     restoreGeometry(qApp->getSettings()->GetGeometry());
     restoreState(qApp->getSettings()->GetWindowState());
 
@@ -2142,7 +2142,7 @@ bool MainWindow::MaybeSave()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateRecentFileActions()
 {
-    qCDebug(vMainWindow)<<"Updating recent file actions.";
+    qCDebug(vMainWindow, "Updating recent file actions.");
     const QStringList files = qApp->getSettings()->GetRecentFileList();
     const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
@@ -2323,7 +2323,7 @@ void MainWindow::AddDocks()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PropertyBrowser()
 {
-    qCDebug(vMainWindow)<<"Initialization property browser.";
+    qCDebug(vMainWindow, "Initialization property browser.");
     toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
 
     connect(ui->view, &VMainGraphicsView::itemClicked, toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
@@ -2395,7 +2395,7 @@ void MainWindow::InitAutoSave()
     {
         const qint32 autoTime = qApp->getSettings()->GetAutosaveTime();
         autoSaveTimer->start(autoTime*60000);
-        qCDebug(vMainWindow)<<"Autosaving each"<<autoTime<<"minutes.";
+        qCDebug(vMainWindow, "Autosaving each %d minutes.", autoTime);
     }
     qApp->setAutoSaveTimer(autoSaveTimer);
 }
@@ -2449,7 +2449,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::LoadPattern(const QString &fileName)
 {
-    qCDebug(vMainWindow)<<"Loading new file"<<fileName<<".";
+    qCDebug(vMainWindow, "Loading new file %s.", fileName.toUtf8().constData());
 
     //We have unsaved changes or load more then one file per time
     if (OpenNewValentina(fileName))
@@ -2459,25 +2459,25 @@ void MainWindow::LoadPattern(const QString &fileName)
 
     if (fileName.isEmpty())
     {
-        qCDebug(vMainWindow) << "Got empty file.";
+        qCDebug(vMainWindow, "Got empty file.");
         Clear();
         return;
     }
 
-    qCDebug(vMainWindow)<<"Loking file";
+    qCDebug(vMainWindow, "Loking file");
     lock = new QLockFile(fileName+".lock");
     lock->setStaleLockTime(0);
     if (VApplication::TryLock(lock))
     {
-        qCDebug(vMainWindow) << "Pattern file"<<fileName<<"was locked.";
+        qCDebug(vMainWindow, "Pattern file %s was locked.", fileName.toUtf8().constData());
     }
     else
     {
-        qCDebug(vMainWindow) << "Failed to lock" << fileName;
-        qCDebug(vMainWindow) << "Error type:"<<lock->error();
+        qCDebug(vMainWindow, "Failed to lock %s", fileName.toUtf8().constData());
+        qCDebug(vMainWindow, "Error type: %d", lock->error());
         if (lock->error() == QLockFile::LockFailedError)
         {
-            qCCritical(vMainWindow) << tr("This file already opened in another window.");
+            qCCritical(vMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
             Clear();
             return;
         }
@@ -2520,7 +2520,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             {
                 QMessageBox::critical(this, tr("Wrong units."),
                                       tr("Application doesn't support standard table with inches."));
-                qCDebug(vMainWindow)<<"Application doesn't support standard table with inches.";
+                qCDebug(vMainWindow, "Application doesn't support standard table with inches.");
                 Clear();
                 return;
             }
@@ -2556,7 +2556,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             PatternWasModified(!patternModified);
         }
         helpLabel->setText(tr("File loaded"));
-        qCDebug(vMainWindow)<<"File loaded.";
+        qCDebug(vMainWindow, "File loaded.");
 
         qApp->setOpeningPattern();// End opening file
 
@@ -2611,7 +2611,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
     const QStringList files = GetUnlokedRestoreFileList();
     if (files.size() > 0)
     {
-        qCDebug(vMainWindow)<<"Reopen files after crash.";
+        qCDebug(vMainWindow, "Reopen files after crash.");
 
         QStringList restoreFiles;
         for (int i = 0; i < files.size(); ++i)
@@ -2632,7 +2632,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                                           QMessageBox::Yes);
             if (reply == QMessageBox::Yes)
             {
-                qCDebug(vMainWindow)<<"User said Yes.";
+                qCDebug(vMainWindow, "User said Yes.");
 
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
@@ -2646,8 +2646,9 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                     }
                     else
                     {
-                        qCDebug(vMainWindow) << "Could not copy "<<restoreFiles.at(i) +".autosave"<<"to"
-                                             <<restoreFiles.at(i)<<error;
+                        qCDebug(vMainWindow, "Could not copy %s.autosave to %s %s",
+                                restoreFiles.at(i).toUtf8().constData(), restoreFiles.at(i).toUtf8().constData(),
+                                error.toUtf8().constData());
                     }
                 }
             }

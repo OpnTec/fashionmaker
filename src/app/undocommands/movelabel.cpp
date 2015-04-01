@@ -40,10 +40,10 @@ MoveLabel::MoveLabel(VPattern *doc, const double &x, const double &y, const quin
 {
     setText(tr("Move point label"));
     nodeId = id;
-    qCDebug(vUndo)<<"Point id"<<nodeId;
+    qCDebug(vUndo, "Point id %u", nodeId);
 
-    qCDebug(vUndo)<<"Label new Mx"<<newMx;
-    qCDebug(vUndo)<<"Label new My"<<newMy;
+    qCDebug(vUndo, "Label new Mx %f", newMx);
+    qCDebug(vUndo, "Label new My %f", newMy);
 
     SCASSERT(scene != nullptr);
     QDomElement domElement = doc->elementById(id);
@@ -52,12 +52,12 @@ MoveLabel::MoveLabel(VPattern *doc, const double &x, const double &y, const quin
         oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
         oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0"));
 
-        qCDebug(vUndo)<<"Label old Mx"<<oldMx;
-        qCDebug(vUndo)<<"Label old My"<<oldMy;
+        qCDebug(vUndo, "Label old Mx %f", oldMx);
+        qCDebug(vUndo, "Label old My %f", oldMy);
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find point with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
         return;
     }
 }
@@ -69,7 +69,7 @@ MoveLabel::~MoveLabel()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveLabel::undo()
 {
-    qCDebug(vUndo)<<"Undo.";
+    qCDebug(vUndo, "Undo.");
 
     Do(oldMx, oldMy);
 }
@@ -77,7 +77,7 @@ void MoveLabel::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void MoveLabel::redo()
 {
-    qCDebug(vUndo)<<"Redo.";
+    qCDebug(vUndo, "Redo.");
 
     Do(newMx, newMy);
 }
@@ -94,11 +94,11 @@ bool MoveLabel::mergeWith(const QUndoCommand *command)
         return false;
     }
 
-    qCDebug(vUndo)<<"Mergin undo.";
+    qCDebug(vUndo, "Mergin undo.");
     newMx = moveCommand->getNewMx();
     newMy = moveCommand->getNewMy();
-    qCDebug(vUndo)<<"Label new Mx"<<newMx;
-    qCDebug(vUndo)<<"Label new My"<<newMy;
+    qCDebug(vUndo, "Label new Mx %f", newMx);
+    qCDebug(vUndo, "Label new My %f", newMy);
     return true;
 }
 
@@ -111,8 +111,8 @@ int MoveLabel::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveLabel::Do(double mx, double my)
 {
-    qCDebug(vUndo)<<"New mx"<<mx;
-    qCDebug(vUndo)<<"New my"<<my;
+    qCDebug(vUndo, "New mx %f", mx);
+    qCDebug(vUndo, "New my %f", my);
 
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
@@ -127,7 +127,7 @@ void MoveLabel::Do(double mx, double my)
     }
     else
     {
-        qCDebug(vUndo)<<"Can't find point with id ="<<nodeId<<".";
+        qCDebug(vUndo, "Can't find point with id = %u.", nodeId);
         return;
     }
 }

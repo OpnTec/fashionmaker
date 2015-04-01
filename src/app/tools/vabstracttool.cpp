@@ -329,7 +329,7 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
-    qCDebug(vTool)<<"Saving tool options";
+    qCDebug(vTool, "Saving tool options");
     QDomElement oldDomElement = doc->elementById(id);
     if (oldDomElement.isElement())
     {
@@ -343,7 +343,7 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
     }
     else
     {
-        qCDebug(vTool)<<"Can't find tool with id ="<< id << Q_FUNC_INFO;
+        qCDebug(vTool, "Can't find tool with id = %u", id);
     }
 }
 
