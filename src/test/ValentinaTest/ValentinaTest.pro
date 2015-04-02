@@ -20,6 +20,8 @@ CONFIG -= debug_and_release debug_and_release_target
 # We use C++11 standard
 CONFIG += c++11
 
+CONFIG += testcase
+
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 SOURCES += \
