@@ -15,7 +15,7 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-#include <qglobal.h>
+#include <QtGlobal>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 
@@ -67,8 +67,7 @@ private:
         QMessageLogger(__FILE__, __LINE__, Q_FUNC_INFO, category().categoryName()).warning(__VA_ARGS__)
 #define qCCritical(category, ...) \
     for (bool q_category_enabled = category().isCriticalEnabled(); q_category_enabled; q_category_enabled = false)  \
-        QMessageLogger(__FILE__, __LINE__, Q_FUNC_QT_VERSION < 0x053000INFO, \
-                       category().categoryName()).critical(__VA_ARGS__)
+        QMessageLogger(__FILE__, __LINE__, Q_FUNC_INFO, category().categoryName()).critical(__VA_ARGS__)
 # endif // QT_VERSION > QT_VERSION_CHECK(5, 0, 0)
 
 #else // QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
