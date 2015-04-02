@@ -28,7 +28,7 @@ class QLoggingCategory
     Q_DISABLE_COPY(QLoggingCategory)
 public:
     explicit QLoggingCategory(const char *category) : name(category) {}
-    ~QLoggingCategory();
+    ~QLoggingCategory() {}
 
     bool isDebugEnabled() const { return false; }
     bool isWarningEnabled() const { return true; }
