@@ -9,18 +9,26 @@ QT       += testlib
 QT       -= gui
 
 TARGET = tst_test
-CONFIG   += console
-CONFIG   -= app_bundle
+
+# CONFIG += testcase adds a  'make check' which is great. But by default it also
+# adds a 'make install' that installs the test cases, which we do not want.
+# Can configure it not to do that with 'no_testcase_installs'
+# We use C++11 standard
+CONFIG += c++11 testcase no_testcase_installs
+
+# Use out-of-source builds (shadow builds)
+CONFIG -= app_bundle debug_and_release debug_and_release_target
 
 TEMPLATE = app
 
-# Use out-of-source builds (shadow builds)
-CONFIG -= debug_and_release debug_and_release_target
+# directory for executable file
+DESTDIR = bin
 
-# We use C++11 standard
-CONFIG += c++11
+# Directory for files created moc
+MOC_DIR = moc
 
-CONFIG += testcase
+# objecs files
+OBJECTS_DIR = obj
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
