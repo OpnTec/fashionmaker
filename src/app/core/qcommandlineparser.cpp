@@ -24,16 +24,10 @@
 #include <QCoreApplication>
 #include <QHash>
 #include <QVector>
-#include <QDebug>
-#if defined(Q_OS_WIN) && !defined(QT_BOOTSTRAPPED) && !defined(Q_OS_WINCE) && !defined(Q_OS_WINRT)
-#  include <qt_windows.h>
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-
-typedef QHash<QString, int> NameHash_t;
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -41,6 +35,8 @@ typedef QHash<QString, int> NameHash_t;
     #pragma GCC diagnostic ignored "-Wswitch-default"
     #pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
 #endif
+
+typedef QHash<QString, int> NameHash_t;
 
 class QCommandLineParserPrivate
 {
@@ -169,10 +165,6 @@ QStringList QCommandLineParserPrivate::aliases(const QString &optionName) const
     Example:
     \snippet code/src_corelib_tools_qcommandlineparser_main.cpp 0
 
-    If your compiler supports the C++11 standard, the three addOption() calls in
-    the above example can be simplified:
-    \snippet code/src_corelib_tools_qcommandlineparser_main.cpp cxx11
-
     Known limitation: the parsing of Qt options inside QCoreApplication and subclasses
     happens before QCommandLineParser exists, so it can't take it into account. This
     means any option value that looks like a builtin Qt option, will be treated by
@@ -180,78 +172,6 @@ QStringList QCommandLineParserPrivate::aliases(const QString &optionName) const
     lead to QGuiApplication seeing the -reverse option set, and removing it from
     QCoreApplication::arguments() before QCommandLineParser defines the \c{profile}
     option and parses the command line.
-
-    \section2 How to Use QCommandLineParser in Complex Applications
-
-    In practice, additional error checking needs to be performed on the positional
-    arguments and option values. For example, ranges of numbers should be checked.
-
-    It is then advisable to introduce a function to do the command line parsing
-    which takes a struct or class receiving the option values returning an
-    enumeration representing the result. The dnslookup example of the QtNetwork
-    module illustrates this:
-
-    \snippet dnslookup.h 0
-
-    \snippet dnslookup.cpp 0
-
-    In the main function, help should be printed to the standard output if the help option
-    was passed and the application should return the exit code 0.
-
-    If an error was detected, the error message should be printed to the standard
-    error output and the application should return an exit code other than 0.
-
-    \snippet dnslookup.cpp 1
-
-    A special case to consider here are GUI applications on Windows and mobile
-    platforms. These applications may not use the standard output or error channels
-    since the output is either discarded or not accessible.
-
-    For such GUI applications, it is recommended to display help texts and error messages
-    using a QMessageBox. To preserve the formatting of the help text, rich text
-    with \c <pre> elements should be used:
-
-    \code
-
-    switch (parseCommandLine(parser, &query, &errorMessage)) {
-    case CommandLineOk:
-        break;
-    case CommandLineError:
-#ifdef Q_OS_WIN
-        QMessageBox::warning(0, QGuiApplication::applicationDisplayName(),
-                             "<html><head/><body><h2>" + errorMessage + "</h2><pre>"
-                             + parser.helpText() + "</pre></body></html>");
-#else
-        fputs(qPrintable(errorMessage), stderr);
-        fputs("\n\n", stderr);
-        fputs(qPrintable(parser.helpText()), stderr);
-#endif
-        return 1;
-    case CommandLineVersionRequested:
-#ifdef Q_OS_WIN
-        QMessageBox::information(0, QGuiApplication::applicationDisplayName(),
-                                 QGuiApplication::applicationDisplayName() + ' '
-                                 + QCoreApplication::applicationVersion());
-#else
-        printf("%s %s\n", QGuiApplication::applicationDisplayName(),
-               qPrintable(QCoreApplication::applicationVersion()));
-#endif
-        return 0;
-    case CommandLineHelpRequested:
-#ifdef Q_OS_WIN
-        QMessageBox::warning(0, QGuiApplication::applicationDisplayName(),
-                             "<html><head/><body><pre>"
-                             + parser.helpText() + "</pre></body></html>");
-        return 0;
-#else
-        parser.showHelp();
-        Q_UNREACHABLE();
-#endif
-    }
-    \endcode
-
-    However, this does not apply to the dnslookup example, because it is a
-    console application.
 
     \sa QCommandLineOption, QCoreApplication
 */
@@ -336,26 +256,6 @@ bool QCommandLineParser::addOption(const QCommandLineOption &option)
 }
 
 /*!
-    \since 5.4
-
-    Adds the options to look for while parsing. The options are specified by
-    the parameter \a options.
-
-    Returns \c true if adding all of the options was successful; otherwise
-    returns \c false.
-
-    See the documentation for addOption() for when this function may fail.
-*/
-bool QCommandLineParser::addOptions(const QList<QCommandLineOption> &options)
-{
-    // should be optimized (but it's no worse than what was possible before)
-    bool result = true;
-    for (QList<QCommandLineOption>::const_iterator it = options.begin(), end = options.end(); it != end; ++it)
-        result &= addOption(*it);
-    return result;
-}
-
-/*!
     Adds the \c{-v} / \c{--version} option, which displays the version string of the application.
 
     This option is handled automatically by QCommandLineParser.
@@ -366,9 +266,9 @@ bool QCommandLineParser::addOptions(const QList<QCommandLineOption> &options)
 */
 QCommandLineOption QCommandLineParser::addVersionOption()
 {
+    d->builtinVersionOption = true;
     QCommandLineOption opt(QStringList() << QStringLiteral("v") << QStringLiteral("version"), tr("Displays version information."));
     addOption(opt);
-    d->builtinVersionOption = true;
     return opt;
 }
 
@@ -386,6 +286,7 @@ QCommandLineOption QCommandLineParser::addVersionOption()
 */
 QCommandLineOption QCommandLineParser::addHelpOption()
 {
+    d->builtinHelpOption = true;
     QCommandLineOption opt(QStringList()
 #ifdef Q_OS_WIN
                 << QStringLiteral("?")
@@ -393,7 +294,6 @@ QCommandLineOption QCommandLineParser::addHelpOption()
                 << QStringLiteral("h")
                 << QStringLiteral("help"), tr("Displays this help."));
     addOption(opt);
-    d->builtinHelpOption = true;
     return opt;
 }
 
@@ -509,8 +409,10 @@ void QCommandLineParser::process(const QStringList &arguments)
         ::exit(EXIT_FAILURE);
     }
 
-    if (d->builtinVersionOption && isSet(QStringLiteral("version")))
-        showVersion();
+    if (d->builtinVersionOption && isSet(QStringLiteral("version"))) {
+        printf("%s %s\n", qPrintable(QCoreApplication::applicationName()), qPrintable(QCoreApplication::applicationVersion()));
+        ::exit(EXIT_SUCCESS);
+    }
 
     if (d->builtinHelpOption && isSet(QStringLiteral("help")))
         showHelp(EXIT_SUCCESS);
@@ -804,8 +706,7 @@ QStringList QCommandLineParser::values(const QString &optionName) const
 */
 bool QCommandLineParser::isSet(const QCommandLineOption &option) const
 {
-    // option.names() might be empty if the constructor failed
-    return !option.names().isEmpty() && isSet(option.names().first());
+    return isSet(option.names().first());
 }
 
 /*!
@@ -900,22 +801,6 @@ QStringList QCommandLineParser::unknownOptionNames() const
 }
 
 /*!
-    Displays the version information from QCoreApplication::applicationVersion(),
-    and exits the application.
-    This is automatically triggered by the --version option, but can also
-    be used to display the version when not using process().
-    The exit code is set to EXIT_SUCCESS (0).
-
-    \sa addVersionOption()
-    \since 5.4
-*/
-Q_NORETURN void QCommandLineParser::showVersion()
-{
-    fprintf(stdout, "%s %s\n", qPrintable(QCoreApplication::applicationName()), qPrintable(QCoreApplication::applicationVersion()));
-    ::exit(EXIT_SUCCESS);
-}
-
-/*!
     Displays the help information, and exits the application.
     This is automatically triggered by the --help option, but can also
     be used to display the help when the user is not invoking the
@@ -946,50 +831,11 @@ static QString wrapText(const QString &names, int longestOptionNameString, const
 {
     const QLatin1Char nl('\n');
     QString text = QStringLiteral("  ") + names.leftJustified(longestOptionNameString) + QLatin1Char(' ');
-    const int indent = text.length();
-    int lineStart = 0;
-    int lastBreakable = -1;
-    const int max = 79 - indent;
-    int x = 0;
-    const int len = description.length();
-
-    for (int i = 0; i < len; ++i) {
-        ++x;
-        const QChar c = description.at(i);
-        if (c.isSpace())
-            lastBreakable = i;
-
-        int breakAt = -1;
-        int nextLineStart = -1;
-        if (x > max && lastBreakable != -1) {
-            // time to break and we know where
-            breakAt = lastBreakable;
-            nextLineStart = lastBreakable + 1;
-        } else if ((x > max - 1 && lastBreakable == -1) || i == len - 1) {
-            // time to break but found nowhere [-> break here], or end of last line
-            breakAt = i + 1;
-            nextLineStart = breakAt;
-        } else if (c == nl) {
-            // forced break
-            breakAt = i;
-            nextLineStart = i + 1;
-        }
-
-        if (breakAt != -1) {
-            const int numChars = breakAt - lineStart;
-            //qDebug() << "breakAt=" << description.at(breakAt) << "breakAtSpace=" << breakAtSpace << lineStart << "to" << breakAt << description.mid(lineStart, numChars);
-            if (lineStart > 0)
-                text += QString(indent, QLatin1Char(' '));
-            text += description.midRef(lineStart, numChars) + nl;
-            x = 0;
-            lastBreakable = -1;
-            lineStart = nextLineStart;
-            if (lineStart < len && description.at(lineStart).isSpace())
-                ++lineStart; // don't start a line with a space
-            i = lineStart;
-        }
-    }
-
+    const int leftColumnWidth = text.length();
+    const int rightColumnWidth = 79 - leftColumnWidth;
+    text += description.left(rightColumnWidth) + nl;
+    for (int n = rightColumnWidth; n < description.length(); n += rightColumnWidth)
+        text += QStringLiteral(" ").repeated(leftColumnWidth) + description.mid(n, rightColumnWidth) + nl;
     return text;
 }
 
@@ -1044,6 +890,7 @@ QString QCommandLineParserPrivate::helpText() const
     }
     return text;
 }
+
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic pop
