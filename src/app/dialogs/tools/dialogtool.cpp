@@ -319,7 +319,12 @@ void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
 {
     SCASSERT(box != nullptr)
-    QString value = box->currentData().toString();
+    QString value;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    value = box->itemData(box->currentIndex()).toString();
+#else
+    value = box->currentData().toString();
+#endif
     if (value.isEmpty())
     {
         value = VAbstractTool::TypeLineLine;

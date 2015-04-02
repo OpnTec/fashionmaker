@@ -92,7 +92,11 @@ QString DialogSaveLayout::FileName() const
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogSaveLayout::Formate() const
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    return ui->comboBoxFormat->currentData(ui->comboBoxFormat->currentIndex()).toString();
+#else
     return ui->comboBoxFormat->currentData().toString();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

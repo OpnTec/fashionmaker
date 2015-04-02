@@ -324,7 +324,13 @@ void DialogLayoutSettings::InitTemplates()
 //---------------------------------------------------------------------------------------------------------------------
 QSizeF DialogLayoutSettings::Template()
 {
-    const PaperSizeTemplate temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    PaperSizeTemplate temp;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->itemData(ui->comboBoxTemplates->currentIndex())
+                                          .toInt());
+#else
+    temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+#endif
     const Unit paperUnit = PaperUnit();
 
     qreal width = 0;
@@ -361,13 +367,23 @@ QSizeF DialogLayoutSettings::Template()
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::PaperUnit() const
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->itemData(ui->comboBoxPaperSizeUnit->currentIndex())
+                                    .toString());
+#else
     return VDomDocument::StrToUnits(ui->comboBoxPaperSizeUnit->currentData().toString());
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 Unit DialogLayoutSettings::LayoutUnit() const
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->itemData(ui->comboBoxLayoutUnit->currentIndex())
+                                    .toString());
+#else
     return VDomDocument::StrToUnits(ui->comboBoxLayoutUnit->currentData().toString());
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
