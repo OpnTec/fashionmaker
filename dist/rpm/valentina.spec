@@ -26,9 +26,17 @@ Requires:      qt5-qtxmlpatterns >= 5.0.0
 BuildRequires: libqt5-qtbase-devel
 BuildRequires: libqt5-qttools
 BuildRequires: libQt5Svg-devel
-BuildRequires: libqt5-qtxmlpatterns-devel
-BuildRequires: libqt5-linguist-devel
 BuildRequires: update-desktop-files
+
+%if 0%{?suse_version} >= 1310
+BuildRequires: libQt5XmlPatterns-devel
+%endif
+
+%if 0%{?suse_version} >= 1320
+BuildRequires: libqt5-linguist-devel
+BuildRequires: libqt5-qtxmlpatterns-devel
+%endif
+
 %endif
 
 Requires:   poppler-utils
