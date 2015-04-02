@@ -11,7 +11,7 @@ before_install:
   - sudo add-apt-repository ppa:ubuntu-sdk-team/ppa -y
   - sudo apt-get update -qq
   - sudo apt-get install -y qtbase5-dev libqt5svg5-dev ccache qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev
-  - sudo apt-get install -y libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 libstdc++6 xpdf
+  - sudo apt-get install -y libqt5core5 libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 libstdc++6 xpdf
 
 before_script:
   - mkdir build
