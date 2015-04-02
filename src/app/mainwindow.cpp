@@ -62,7 +62,7 @@
 #include <QDesktopWidget>
 #include <QDesktopServices>
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "qlockfile.h"
+#   include "core/qlockfile.h"
 #else
 #   include <QLockFile>
 #endif
