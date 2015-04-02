@@ -61,7 +61,11 @@
 #include <QtGlobal>
 #include <QDesktopWidget>
 #include <QDesktopServices>
-#include <QLockFile>
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "qlockfile.h"
+#else
+#   include <QLockFile>
+#endif
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 

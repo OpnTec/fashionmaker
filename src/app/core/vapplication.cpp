@@ -49,7 +49,11 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QDateTime>
-#include <QLockFile>
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "qlockfile.h"
+#else
+#   include <QLockFile>
+#endif
 #include <QtXmlPatterns>
 
 using namespace qmu;
