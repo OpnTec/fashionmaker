@@ -210,7 +210,7 @@ bool QLockFile::tryLock(int timeout)
             if (!d->isLocked && d->isApparentlyStale()) {
                 // Stale lock from another thread/process
                 // Ensure two processes don't remove it at the same time
-                QLockFile rmlock(d->fileName + QLatin1String(".rmlock"));
+                QLockFile rmlock(d->fileName + QStringLiteral(".rmlock"));
                 if (rmlock.tryLock()) {
                     if (d->isApparentlyStale() && d->removeStaleLock())
                         continue;
@@ -220,7 +220,7 @@ bool QLockFile::tryLock(int timeout)
         }
         if (timeout == 0 || (timeout > 0 && timer.hasExpired(timeout)))
             return false;
-        QLockFileThread::msleep(sleepTime);
+        QThread::msleep(sleepTime);
         if (sleepTime < 5 * 1000)
             sleepTime *= 2;
     }

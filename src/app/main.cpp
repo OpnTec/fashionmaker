@@ -36,7 +36,7 @@
 #include <QMessageBox>
 #include <QThread>
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../core/qcommandlineparser.h"
+#   include "../core/backport/qcommandlineparser.h"
 #else
 #   include <QCommandLineParser>
 #endif

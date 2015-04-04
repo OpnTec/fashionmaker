@@ -430,6 +430,9 @@ DEPENDPATH += $$PWD/../libs/vlayout
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/vlayout.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/libvlayout.a
 
+# For build qt backport code
+win32: LIBS+= libole32 libuuid
+
 
 # Strip after you link all libaries.
 CONFIG(release, debug|release){
