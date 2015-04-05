@@ -29,5 +29,6 @@ notifications:
    email:
      recipients:
         - dismine@gmail.com
+        - susan.spencer@gmail.com
      on_success: change
      on_failure: always
