@@ -61,9 +61,7 @@
 #include <QtGlobal>
 #include <QDesktopWidget>
 #include <QDesktopServices>
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "core/backport/qlockfile.h"
-#else
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #   include <QLockFile>
 #endif
 
@@ -81,7 +79,12 @@ MainWindow::MainWindow(QWidget *parent)
       dialogHistory(nullptr), comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
-      gradationSizes(nullptr), toolOptions(nullptr), lock(nullptr)
+      gradationSizes(nullptr),
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+      toolOptions(nullptr), lock(nullptr)
+#else
+      toolOptions(nullptr)
+#endif
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -1444,9 +1447,11 @@ void MainWindow::Clear()
 {
     qCDebug(vMainWindow, "Reseting main window.");
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     delete lock; // Unlock pattern file
     lock = nullptr;
     qCDebug(vMainWindow, "Unlocked pattern file.");
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     ui->actionDetails->setChecked(false);
     ui->actionDraw->setChecked(true);
@@ -2438,7 +2443,9 @@ MainWindow::~MainWindow()
 {
     CancelTool();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     delete lock; // Unlock pattern file
+#endif
     delete pattern;
     delete doc;
     delete sceneDetails;
@@ -2468,6 +2475,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         return;
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     qCDebug(vMainWindow, "Loking file");
     lock = new QLockFile(fileName+".lock");
     lock->setStaleLockTime(0);
@@ -2486,6 +2494,7 @@ void MainWindow::LoadPattern(const QString &fileName)
             return;
         }
     }
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     // On this stage scene empty. Fit scene size to view size
     VAbstractTool::NewSceneRect(sceneDraw, ui->view);
@@ -2574,7 +2583,9 @@ void MainWindow::LoadPattern(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 QStringList MainWindow::GetUnlokedRestoreFileList() const
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QStringList restoreFiles;
+    //Take all files that need to be restored
     QStringList files = qApp->getSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
@@ -2601,6 +2612,9 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 
     }
     return restoreFiles;
+#else
+    return qApp->getSettings()->GetRestoreFileList();
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

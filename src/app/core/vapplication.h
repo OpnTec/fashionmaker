@@ -41,7 +41,9 @@ class VMainGraphicsView;
 class VMainGraphicsScene;
 class VPattern;
 class QFile;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 class QLockFile;
+#endif
 
 #if defined(qApp)
 #undef qApp
@@ -70,7 +72,9 @@ public:
     double             fromPixel(double pix, const Unit &unit) const;
     double             fromPixel(double pix) const;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     static bool        TryLock(QLockFile *lock);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     static const qreal PrintDPI;
     QString            translationsPath() const;
@@ -167,7 +171,9 @@ private:
     VPattern           *doc;
     QFile              *log;
     QTextStream        *out;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QLockFile          *logLock;
+#endif
     void               InitLineWidth();
     void               InitMeasurements();
     void               InitVariables();

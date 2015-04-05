@@ -49,9 +49,7 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QDateTime>
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "backport/qlockfile.h"
-#else
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #   include <QLockFile>
 #endif
 #include <QtXmlPatterns>
@@ -169,7 +167,12 @@ VApplication::VApplication(int &argc, char **argv)
       variables(QMap<QString, QmuTranslation>()), functions(QMap<QString, QmuTranslation>()),
       postfixOperators(QMap<QString, QmuTranslation>()), stDescriptions(QMap<QString, QmuTranslation>()),
       undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr), mainWindow(nullptr),
-      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr), out(nullptr), logLock(nullptr)
+      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr),
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+      out(nullptr), logLock(nullptr)
+#else
+      out(nullptr)
+#endif
 {
     undoStack = new QUndoStack(this);
 
@@ -192,7 +195,9 @@ VApplication::~VApplication()
     {
         log->close();
         delete log;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         delete logLock;
+#endif
     }
 }
 
@@ -342,6 +347,7 @@ double VApplication::fromPixel(double pix) const
     return fromPixel(pix, _patternUnit);
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 //---------------------------------------------------------------------------------------------------------------------
 bool VApplication::TryLock(QLockFile *lock)
 {
@@ -378,6 +384,8 @@ bool VApplication::TryLock(QLockFile *lock)
         return false;
     }
 }
+
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::translationsPath() const
@@ -469,6 +477,7 @@ void VApplication::BeginLogging()
     {
         out = new QTextStream(log);
         qInstallMessageHandler(noisyFailureMsgHandler);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         logLock = new QLockFile(LogPath()+".lock");
         logLock->setStaleLockTime(0);
         if (TryLock(logLock))
@@ -480,6 +489,7 @@ void VApplication::BeginLogging()
             qCDebug(vApp, "Failed to lock %s", LogPath().toUtf8().constData());
             qCDebug(vApp, "Error type: %d", logLock->error());
         }
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     }
     else
     {
@@ -505,6 +515,7 @@ void VApplication::ClearOldLogs() const
         for (int i = 0; i < allFiles.size(); ++i)
         {
             QFileInfo info(allFiles.at(i));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
             QLockFile *lock = new QLockFile(info.absoluteFilePath() + ".lock");
             if (TryLock(lock))
             {
@@ -523,8 +534,23 @@ void VApplication::ClearOldLogs() const
             {
                 qCDebug(vApp, "Failed to lock %s", info.absoluteFilePath().toUtf8().constData());
             }
+
             delete lock;
             lock = nullptr;
+#else
+            if (info.created().daysTo(QDateTime::currentDateTime()) >= 3)
+            {
+                QFile oldLog(allFiles.at(i));
+                if (oldLog.remove())
+                {
+                    qCDebug(vApp, "Deleted %s", info.absoluteFilePath().toUtf8().constData());
+                }
+                else
+                {
+                    qCDebug(vApp, "Could not delete %s", info.absoluteFilePath().toUtf8().constData());
+                }
+            }
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         }
     }
     else

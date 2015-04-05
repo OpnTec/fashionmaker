@@ -41,9 +41,9 @@
 #include <csignal>
 
 /*In all cases we need include core header for getting defined values*/
-#ifdef QT_CORE_LIB
-#   include <QtCore>
-#endif
+//#ifdef QT_CORE_LIB
+//#   include <QtCore>
+//#endif
 
 #ifdef QT_GUI_LIB
 #   include <QtGui>

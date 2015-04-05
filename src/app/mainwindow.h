@@ -214,7 +214,9 @@ private:
     QComboBox          *gradationHeights;
     QComboBox          *gradationSizes;
     VToolOptionsPropertyBrowser *toolOptions;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QLockFile          *lock;
+#endif
 
     void               ToolBarOption();
     void               ToolBarDraws();
