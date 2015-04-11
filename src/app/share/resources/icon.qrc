@@ -55,5 +55,6 @@
         <file>icon/16x16/landscape.png</file>
         <file>icon/16x16/portrait.png</file>
         <file>icon/16x16/template.png</file>
+        <file>icon/32x32/pdf.png</file>
     </qresource>
 </RCC>

@@ -61,5 +61,11 @@
         <file alias="16x16/actions/help-contents.png">icons/win.icon.theme/16x16/actions/help-contents.png</file>
         <file alias="24x24/actions/help-contents.png">icons/win.icon.theme/24x24/actions/help-contents.png</file>
         <file alias="32x32/actions/help-contents.png">icons/win.icon.theme/32x32/actions/help-contents.png</file>
+        <file alias="16x16/actions/document-print.png">icons/win.icon.theme/16x16/actions/document-print.png</file>
+        <file alias="24x24/actions/document-print.png">icons/win.icon.theme/24x24/actions/document-print.png</file>
+        <file alias="32x32/actions/document-print.png">icons/win.icon.theme/32x32/actions/document-print.png</file>
+        <file alias="16x16/actions/document-print-preview.png">icons/win.icon.theme/16x16/actions/document-print-preview.png</file>
+        <file alias="24x24/actions/document-print-preview.png">icons/win.icon.theme/24x24/actions/document-print-preview.png</file>
+        <file alias="32x32/actions/document-print-preview.png">icons/win.icon.theme/32x32/actions/document-print-preview.png</file>
     </qresource>
 </RCC>

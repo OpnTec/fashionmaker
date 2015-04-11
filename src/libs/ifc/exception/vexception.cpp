@@ -28,6 +28,7 @@
 
 #include "vexception.h"
 #include "../../../utils/logging.h"
+#include "../../../utils/def.h"
 
 #include <QGridLayout>
 #include <QMessageBox>
