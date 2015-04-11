@@ -133,6 +133,42 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint_pre_view"/>
+    <addaction name="action_Print"/>
+    <addaction name="actionSave_to_p_df"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionZoomIn"/>
+    <addaction name="actionZoomOut"/>
+   </widget>
+   <widget class="QMenu" name="menuLayout">
+    <property name="title">
+     <string>Layout</string>
+    </property>
+    <addaction name="actionLayout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuLayout"/>
+  </widget>
   <action name="actionSave">
    <property name="enabled">
     <bool>false</bool>
@@ -195,6 +231,27 @@
    </property>
    <property name="text">
     <string>Layout</string>
+   </property>
+  </action>
+  <action name="actionPrint_pre_view">
+   <property name="icon">
+    <iconset theme="document-print-preview"/>
+   </property>
+   <property name="text">
+    <string>Print pre&amp;view...</string>
+   </property>
+  </action>
+  <action name="action_Print">
+   <property name="icon">
+    <iconset theme="document-print"/>
+   </property>
+   <property name="text">
+    <string>&amp;Print...</string>
+   </property>
+  </action>
+  <action name="actionSave_to_p_df">
+   <property name="text">
+    <string>Print to p&amp;df</string>
    </property>
   </action>
  </widget>
