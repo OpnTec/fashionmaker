@@ -30,6 +30,7 @@
 #define OPTIONS_H
 
 #include "../libs/ifc/ifcdef.h"
+#include "../../utils/def.h"
 
 #ifdef Q_OS_WIN32
 #   if defined( Q_CC_MSVC )        // MSVC USED

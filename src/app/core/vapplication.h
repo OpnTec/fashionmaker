@@ -279,7 +279,7 @@ inline void VApplication::setCurrentDocument(VPattern *doc)
 inline VPattern *VApplication::getCurrentDocument() const
 {
     SCASSERT(doc != nullptr)
-            return doc;
+    return doc;
 }
 
 #endif // VAPPLICATION_H

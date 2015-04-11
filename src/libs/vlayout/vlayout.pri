@@ -15,7 +15,8 @@ HEADERS += \
     $$PWD/vcontour.h \
     $$PWD/vcontour_p.h \
     $$PWD/vbestsquare.h \
-    $$PWD/vposition.h
+    $$PWD/vposition.h \
+    vposter.h
 
 SOURCES += \
     $$PWD/stable.cpp \
@@ -26,4 +27,5 @@ SOURCES += \
     $$PWD/vbank.cpp \
     $$PWD/vcontour.cpp \
     $$PWD/vbestsquare.cpp \
-    $$PWD/vposition.cpp
+    $$PWD/vposition.cpp \
+    vposter.cpp

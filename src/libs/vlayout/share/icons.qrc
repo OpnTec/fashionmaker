@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>scissors_horizontal.png</file>
+        <file>scissors_vertical.png</file>
+    </qresource>
+</RCC>

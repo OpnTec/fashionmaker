@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../Valentina.pri)
 
-QT += core gui widgets
+QT += core gui widgets printsupport
 
 # Name of library
 TARGET = vlayout
@@ -93,3 +93,6 @@ CONFIG(debug, debug|release){
         QMAKE_LFLAGS_RELEASE =
     }
 }
+
+RESOURCES += \
+    share/icons.qrc
