@@ -42,6 +42,7 @@
 #include <QPrinter>
 #include <QGraphicsScene>
 #include <QPrintPreviewDialog>
+#include <QPrintDialog>
 #include <QtCore/qmath.h>
 
 #ifdef Q_OS_WIN
@@ -81,6 +82,7 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
     connect(ui->actionPrint_pre_view, &QAction::triggered, this, &TableWindow::PrintPreview);
+    connect(ui->action_Print, &QAction::triggered, this, &TableWindow::LayoutPrint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,7 +276,10 @@ void TableWindow::PrintPreview()
 
     QPrinter printer(def, QPrinter::ScreenResolution);
     printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+    printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+    printer.setDocName(fileName);
 
+    // display print preview dialog
     QPrintPreviewDialog  preview(&printer);
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &TableWindow::Print);
     preview.exec();
@@ -319,6 +324,21 @@ void TableWindow::Print(QPrinter *printer)
     }
 
     painter.end();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::LayoutPrint()
+{
+    // display print dialog and if accepted print
+    QPrinter printer;
+    printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+    printer.setDocName(fileName);
+    QPrintDialog dialog( &printer, this );
+    if ( dialog.exec() == QDialog::Accepted )
+    {
+        printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+        Print( &printer );
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -193,10 +193,13 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save As...</string>
    </property>
    <property name="toolTip">
     <string>Save layout</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionStop">
@@ -267,6 +270,9 @@
    </property>
    <property name="text">
     <string>&amp;Print...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
   <action name="actionSave_to_p_df">

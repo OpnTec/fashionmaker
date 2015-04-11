@@ -42,6 +42,7 @@ namespace Ui
 
 class QGraphicsScene;
 class QGraphicsRectItem;
+class QPrinter;
 
 /**
  * @brief TableWindow class layout window.
@@ -61,6 +62,7 @@ public slots:
     void ShowPaper(int index);
     void PrintPreview();
     void Print (QPrinter *printer);
+    void LayoutPrint();
 
 signals:
     /** @brief closed emit if window is closing. */
