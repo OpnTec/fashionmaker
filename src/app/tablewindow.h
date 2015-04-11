@@ -113,6 +113,9 @@ private:
     QMap<QString, QString> InitFormates() const;
 
     void EnableActions(bool enable);
+    void ToolBarStyle(QToolBar *bar);
+    void ReadSettings();
+    void ToolBarStyles();
 };
 
 #endif // TABLEWINDOW_H

@@ -825,8 +825,16 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>Toolbar files</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -843,8 +851,16 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>ToolBar modes</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -857,8 +873,16 @@
    <addaction name="actionLayout"/>
   </widget>
   <widget class="QToolBar" name="toolBarDraws">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>Toolbar pattern</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -869,8 +893,16 @@
    <addaction name="actionNewDraw"/>
   </widget>
   <widget class="QToolBar" name="toolBarOption">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>Toolbar options</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>BottomToolBarArea</enum>
@@ -883,8 +915,16 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>Toolbar tools</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -914,8 +954,16 @@
    <widget class="QWidget" name="dockWidgetContents_10"/>
   </widget>
   <widget class="QToolBar" name="toolBarArrows">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -1058,7 +1106,7 @@
      <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
    </property>
    <property name="text">
-    <string>Pointer tools</string>
+    <string>Pointer</string>
    </property>
    <property name="toolTip">
     <string>Pointer tools</string>
@@ -1085,7 +1133,7 @@
      <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
    </property>
    <property name="text">
-    <string>Change the label of pattern piece</string>
+    <string>Config pattern piece</string>
    </property>
    <property name="toolTip">
     <string>Change the label of pattern piece</string>
@@ -1133,7 +1181,7 @@
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
-    <string>Export pattern (layout)</string>
+    <string>Export pattern</string>
    </property>
    <property name="toolTip">
     <string>Create layout</string>

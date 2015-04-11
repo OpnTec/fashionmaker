@@ -1419,6 +1419,7 @@ void MainWindow::Preferences()
     ConfigDialog dlg(this);
     connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
     connect(&dlg, &ConfigDialog::UpdateProperties, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
+    connect(&dlg, &ConfigDialog::UpdateProperties, this, &MainWindow::ToolBarStyles);
     if (dlg.exec() == QDialog::Accepted)
     {
         InitAutoSave();
@@ -2111,6 +2112,9 @@ void MainWindow::ReadSettings()
 
     // Stack limit
     qApp->getUndoStack()->setUndoLimit(qApp->getSettings()->GetUndoCount());
+
+    // Text under tool buton icon
+    ToolBarStyles();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2621,6 +2625,30 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 void MainWindow::WindowsLocale()
 {
     qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBarStyles()
+{
+    ToolBarStyle(ui->toolBarArrows);
+    ToolBarStyle(ui->toolBarDraws);
+    ToolBarStyle(ui->toolBarOption);
+    ToolBarStyle(ui->toolBarStages);
+    ToolBarStyle(ui->toolBarTools);
+    ToolBarStyle(ui->mainToolBar);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBarStyle(QToolBar *bar)
+{
+    if (qApp->getSettings()->GetToolBarStyle())
+    {
+        bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    }
+    else
+    {
+        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

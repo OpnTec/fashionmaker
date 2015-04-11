@@ -42,6 +42,7 @@ const QString VSettings::SettingConfigurationUnit                = QStringLitera
 const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");
 const QString VSettings::SettingConfigurationConfirmItemDeletion
                                                                 = QStringLiteral("configuration/confirm_item_deletion");
+const QString VSettings::SettingConfigurationToolBarStyle        = QStringLiteral("configuration/tool_bar_style");
 
 const QString VSettings::SettingPathsIndividualMeasurements      = QStringLiteral("paths/individual_measurements");
 const QString VSettings::SettingPathsStandardMeasurements        = QStringLiteral("paths/standard_measurements");
@@ -176,6 +177,18 @@ bool VSettings::GetConfirmItemDelete() const
 void VSettings::SetConfirmItemDelete(const bool &value)
 {
     setValue(SettingConfigurationConfirmItemDeletion, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetToolBarStyle() const
+{
+    return value(SettingConfigurationToolBarStyle, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetToolBarStyle(const bool &value)
+{
+    setValue(SettingConfigurationToolBarStyle, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

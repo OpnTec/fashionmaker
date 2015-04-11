@@ -64,6 +64,9 @@ public:
     bool GetConfirmItemDelete() const;
     void SetConfirmItemDelete(const bool &value);
 
+    bool GetToolBarStyle() const;
+    void SetToolBarStyle(const bool &value);
+
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
@@ -137,6 +140,7 @@ private:
     static const QString SettingConfigurationUnit;
     static const QString SettingConfigurationLabelLanguage;
     static const QString SettingConfigurationConfirmItemDeletion;
+    static const QString SettingConfigurationToolBarStyle;
 
     static const QString SettingPathsIndividualMeasurements;
     static const QString SettingPathsStandardMeasurements;

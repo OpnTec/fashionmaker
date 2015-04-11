@@ -46,18 +46,20 @@
 ConfigurationPage::ConfigurationPage(QWidget *parent)
     : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), labelCombo(nullptr),
       unitCombo(nullptr), osOptionCheck(nullptr), langChanged(false), unitChanged(false), labelLangChanged(false),
-      sendReportCheck(nullptr), askPointDeletionCheck(nullptr)
+      sendReportCheck(nullptr), askPointDeletionCheck(nullptr), toolBarStyleCheck(nullptr)
 {
     QGroupBox *saveGroup = SaveGroup();
     QGroupBox *langGroup = LangGroup();
     QGroupBox *sendGroup = SendGroup();
     QGroupBox *drawGroup = DrawGroup();
+    QGroupBox *toolBarGroup = ToolBarGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(saveGroup);
     mainLayout->addWidget(langGroup);
     mainLayout->addWidget(sendGroup);
     mainLayout->addWidget(drawGroup);
+    mainLayout->addWidget(toolBarGroup);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 }
@@ -76,6 +78,7 @@ void ConfigurationPage::Apply()
     qApp->getSettings()->SetOsSeparator(osOptionCheck->isChecked());
     qApp->getSettings()->SetSendReportState(sendReportCheck->isChecked());
     qApp->getSettings()->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
+    qApp->getSettings()->SetToolBarStyle(toolBarStyleCheck->isChecked());
 
     if (langChanged)
     {
@@ -287,6 +290,21 @@ QGroupBox *ConfigurationPage::DrawGroup()
 
     drawGroup->setLayout(editLayout);
     return drawGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QGroupBox *ConfigurationPage::ToolBarGroup()
+{
+    QGroupBox *toolBarGroup = new QGroupBox(tr("Toolbar"));
+
+    toolBarStyleCheck = new QCheckBox(tr("The text appears under the icon. (recommended for beginners.)"));
+    toolBarStyleCheck->setChecked(qApp->getSettings()->GetToolBarStyle());
+
+    QVBoxLayout *editLayout = new QVBoxLayout;
+    editLayout->addWidget(toolBarStyleCheck);
+
+    toolBarGroup->setLayout(editLayout);
+    return toolBarGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

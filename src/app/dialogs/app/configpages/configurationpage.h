@@ -60,11 +60,13 @@ private:
     bool      labelLangChanged;
     QCheckBox *sendReportCheck;
     QCheckBox *askPointDeletionCheck;
+    QCheckBox *toolBarStyleCheck;
 
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
     QGroupBox *SendGroup();
     QGroupBox *DrawGroup();
+    QGroupBox *ToolBarGroup();
     void      SetLabelComboBox(const QStringList &list);
 };
 

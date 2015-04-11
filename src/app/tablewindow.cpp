@@ -84,6 +84,8 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionPrint_pre_view, &QAction::triggered, this, &TableWindow::PrintPreview);
     connect(ui->action_Print, &QAction::triggered, this, &TableWindow::LayoutPrint);
     connect(ui->actionSave_to_p_df, &QAction::triggered, this, &TableWindow::PrintToPdf);
+
+    ReadSettings();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -753,4 +755,31 @@ void TableWindow::EnableActions(bool enable)
     ui->actionSave_to_p_df->setEnabled(enable);
     ui->actionPrint_pre_view->setEnabled(enable);
     ui->action_Print->setEnabled(enable);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::ToolBarStyle(QToolBar *bar)
+{
+    if (qApp->getSettings()->GetToolBarStyle())
+    {
+        bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    }
+    else
+    {
+        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::ReadSettings()
+{
+    // Text under tool buton icon
+    ToolBarStyles();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::ToolBarStyles()
+{
+    ToolBarStyle(ui->toolBar);
+    ToolBarStyle(ui->toolBar_2);
 }

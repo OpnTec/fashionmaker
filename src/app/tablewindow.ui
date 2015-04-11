@@ -38,6 +38,11 @@
    </layout>
   </widget>
   <widget class="QToolBar" name="toolBar">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>Main toolbar</string>
    </property>
@@ -48,7 +53,7 @@
     </size>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -170,8 +175,16 @@
    <addaction name="menuLayout"/>
   </widget>
   <widget class="QToolBar" name="toolBar_2">
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>Toolbar print</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -209,10 +222,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Stop</string>
+    <string>Back</string>
    </property>
    <property name="toolTip">
-    <string>Stop laying</string>
+    <string>Back to main window</string>
    </property>
   </action>
   <action name="actionZoomIn">
@@ -247,7 +260,7 @@
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
-    <string>Layout</string>
+    <string>Generate a layout</string>
    </property>
   </action>
   <action name="actionPrint_pre_view">
@@ -255,7 +268,9 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-print-preview"/>
+    <iconset theme="document-print-preview">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Print pre&amp;view...</string>
@@ -266,7 +281,9 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-print"/>
+    <iconset theme="document-print">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>&amp;Print...</string>

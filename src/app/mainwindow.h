@@ -134,6 +134,7 @@ public slots:
     void               UpdateGradation();
     void               GlobalChangePP(const QString &patternPiece);
     void               WindowsLocale();
+    void               ToolBarStyles();
 signals:
     /**
      * @brief ModelChosen emit after calculation all details.
@@ -271,6 +272,7 @@ private:
     bool               OpenNewValentina(const QString &fileName = QString())const;
     void               FileClosedCorrect();
     QStringList        GetUnlokedRestoreFileList()const;
+    void               ToolBarStyle(QToolBar *bar);
 };
 
 #endif // MAINWINDOW_H
