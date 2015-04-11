@@ -36,10 +36,12 @@
 #include "../../libs/vlayout/vlayoutgenerator.h"
 #include "../dialogs/app/dialoglayoutprogress.h"
 #include "../dialogs/app/dialogsavelayout.h"
+#include "../../libs/vlayout/vposter.h"
 
 #include <QtSvg>
 #include <QPrinter>
 #include <QGraphicsScene>
+#include <QPrintPreviewDialog>
 #include <QtCore/qmath.h>
 
 #ifdef Q_OS_WIN
@@ -78,6 +80,7 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionSave, &QAction::triggered, this, &TableWindow::SaveLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
+    connect(ui->actionPrint_pre_view, &QAction::triggered, this, &TableWindow::PrintPreview);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -238,7 +241,7 @@ void TableWindow::ShowPaper(int index)
     if (index < 0 || index > scenes.size())
     {
         ui->view->setScene(tempScene);
-        ui->actionSave->setEnabled(false);
+        EnableActions(false);
     }
     else
     {
@@ -246,6 +249,76 @@ void TableWindow::ShowPaper(int index)
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::PrintPreview()
+{
+    QPrinterInfo def = QPrinterInfo::defaultPrinter();
+
+    //if there is no default printer set the print preview won't show
+    if(def.isNull() || def.printerName().isEmpty())
+    {
+        if(QPrinterInfo::availablePrinters().isEmpty())
+        {
+            QMessageBox::critical(this, tr("Print error"),
+                                  tr("Cannot proceed because there are no available printers in your system."),
+                                  QMessageBox::Ok);
+            return;
+        }
+        else
+        {
+            def = QPrinterInfo::availablePrinters().first();
+        }
+    }
+
+    QPrinter printer(def, QPrinter::ScreenResolution);
+    printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+
+    QPrintPreviewDialog  preview(&printer);
+    connect(&preview, &QPrintPreviewDialog::paintRequested, this, &TableWindow::Print);
+    preview.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::Print(QPrinter *printer)
+{
+    if (printer == nullptr)
+    {
+        return;
+    }
+
+    const QVector<QImage> images = AllSheets();
+
+    VPoster posterazor(printer);
+    QVector<QImage> poster;
+    for (int i=0; i < images.size(); i++)
+    {
+        poster += posterazor.Generate(images.at(i), i+1, images.size());
+    }
+
+    QPainter painter;
+    if (not painter.begin(printer))
+    { // failed to open file
+        qWarning("failed to open file, is it writable?");
+        return;
+    }
+
+    for (int i=0; i < poster.size(); i++)
+    {
+        painter.drawImage(QPointF(), poster.at(i));
+
+        if (i+1 < poster.size())
+        {
+            if (not printer->newPage())
+            {
+                qWarning("failed in flushing page to disk, disk full?");
+                return;
+            }
+        }
+    }
+
+    painter.end();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,8 +354,8 @@ void TableWindow::Layout()
     {
         case LayoutErrors::NoError:
             ClearLayout();
-            papers = lGenerator.GetPapersItems();
-            details = lGenerator.GetAllDetails();
+            papers = lGenerator.GetPapersItems();// Blank sheets
+            details = lGenerator.GetAllDetails();// All details
             CreateShadows();
             CreateScenes();
             PrepareSceneList();
@@ -463,6 +536,49 @@ void TableWindow::ObjFile(const QString &name, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QImage> TableWindow::AllSheets()
+{
+    QVector<QImage> images;
+    for (int i=0; i < scenes.size(); ++i)
+    {
+        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+        if (paper)
+        {
+            // Hide shadow and paper border
+            QBrush *brush = new QBrush();
+            brush->setColor( QColor( Qt::white ) );
+            scenes[i]->setBackgroundBrush( *brush );
+            shadows[i]->setVisible(false);
+            paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));// border
+
+            // Render png
+            const QRectF r = paper->rect();
+            // Create the image with the exact size of the shrunk scene
+            QImage image(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_RGB32);
+            image.fill(Qt::white);
+            QPainter painter(&image);
+            painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+            painter.setRenderHint(QPainter::Antialiasing, true);
+            painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
+            painter.setBrush ( QBrush ( Qt::NoBrush ) );
+            scenes.at(i)->render(&painter);
+            painter.end();
+            images.append(image);
+
+            // Resore
+            paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+            brush->setColor( QColor( Qt::gray ) );
+            brush->setStyle( Qt::SolidPattern );
+            scenes[i]->setBackgroundBrush( *brush );
+            shadows[i]->setVisible(true);
+            delete brush;
+        }
+    }
+    return images;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TableWindow::ClearLayout()
 {
     qDeleteAll (scenes);
@@ -470,6 +586,7 @@ void TableWindow::ClearLayout()
     shadows.clear();
     papers.clear();
     ui->listWidget->clear();
+    EnableActions(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -529,7 +646,7 @@ void TableWindow::PrepareSceneList()
     if (scenes.isEmpty() == false)
     {
         ui->listWidget->setCurrentRow(0);
-        ui->actionSave->setEnabled(true);
+        EnableActions(true);
     }
 }
 
@@ -586,4 +703,13 @@ QMap<QString, QString> TableWindow::InitFormates() const
         qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
     }
     return extByMessage;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::EnableActions(bool enable)
+{
+    ui->actionSave->setEnabled(enable);
+    ui->actionSave_to_p_df->setEnabled(enable);
+    ui->actionPrint_pre_view->setEnabled(enable);
+    ui->action_Print->setEnabled(enable);
 }

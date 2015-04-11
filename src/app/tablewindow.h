@@ -54,12 +54,13 @@ public:
     ~TableWindow();
 
 public slots:
-    void                  ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName,
-                                      const QString &description);
-    void                  Layout();
-    void                  StopTable();
-    void                  SaveLayout();
-    void                  ShowPaper(int index);
+    void ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName, const QString &description);
+    void Layout();
+    void StopTable();
+    void SaveLayout();
+    void ShowPaper(int index);
+    void PrintPreview();
+    void Print (QPrinter *printer);
 
 signals:
     /** @brief closed emit if window is closing. */
@@ -91,13 +92,15 @@ private:
 
     QGraphicsScene* tempScene;
 
-    void                  SvgFile(const QString &name, int i)const;
-    void                  PngFile(const QString &name, int i)const;
-    void                  PdfFile(const QString &name, int i)const;
-    void                  EpsFile(const QString &name, int i)const;
-    void                  PsFile(const QString &name, int i)const;
-    void                  PdfToPs(const QStringList &params)const;
-    void                  ObjFile(const QString &name, int i)const;
+    void SvgFile(const QString &name, int i)const;
+    void PngFile(const QString &name, int i)const;
+    void PdfFile(const QString &name, int i)const;
+    void EpsFile(const QString &name, int i)const;
+    void PsFile(const QString &name, int i)const;
+    void PdfToPs(const QStringList &params)const;
+    void ObjFile(const QString &name, int i)const;
+
+    QVector<QImage> AllSheets();
 
     void ClearLayout();
     void CreateShadows();
@@ -105,6 +108,8 @@ private:
     void PrepareSceneList();
     QIcon ScenePreview(int i) const;
     QMap<QString, QString> InitFormates() const;
+
+    void EnableActions(bool enable);
 };
 
 #endif // TABLEWINDOW_H
