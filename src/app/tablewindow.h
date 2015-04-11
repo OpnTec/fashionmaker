@@ -63,6 +63,7 @@ public slots:
     void PrintPreview();
     void Print (QPrinter *printer);
     void LayoutPrint();
+    void PrintToPdf();
 
 signals:
     /** @brief closed emit if window is closing. */

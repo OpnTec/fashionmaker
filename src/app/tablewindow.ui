@@ -279,6 +279,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="share/resources/icon.qrc">
+     <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
+   </property>
    <property name="text">
     <string>Print to p&amp;df</string>
    </property>

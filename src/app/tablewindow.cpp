@@ -83,6 +83,7 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
     connect(ui->actionPrint_pre_view, &QAction::triggered, this, &TableWindow::PrintPreview);
     connect(ui->action_Print, &QAction::triggered, this, &TableWindow::LayoutPrint);
+    connect(ui->actionSave_to_p_df, &QAction::triggered, this, &TableWindow::PrintToPdf);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,6 +337,26 @@ void TableWindow::LayoutPrint()
     QPrintDialog dialog( &printer, this );
     if ( dialog.exec() == QDialog::Accepted )
     {
+        printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+        Print( &printer );
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TableWindow::PrintToPdf()
+{
+    // display print dialog and if accepted print
+    QPrinter printer;
+    printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+    printer.setDocName(fileName);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+
+    const QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
+                                                          QDir::homePath()+"/"+this->fileName+".pdf",
+                                                          tr("PDF file (*.pdf)"));
+    if (fileName.isEmpty())
+    {
+        printer.setOutputFileName(fileName);
         printer.setResolution(static_cast<int>(VApplication::PrintDPI));
         Print( &printer );
     }
