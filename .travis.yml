@@ -7,6 +7,13 @@ compiler:
   - gcc
   - clang
 
+env:
+  global:
+   # COVERITY_SCAN_TOKEN
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "DO0hLop827D9LXcCxMQ3AmSowl1fC8NPeU/um5Jc0aJqnBvizw4BTWyXyYPlCzci1Lx+4SlRAFBttd0FIMIUEi/9atLR9zSivwLCZ86HaP2gJjzOz/TjM+ZQUcIHsZ2x1kf2dngEoWG5Ur3sa9T+HYd9t32F+aO/PjjN5wFtI6I="
+
 before_install:
   - sudo add-apt-repository ppa:ubuntu-sdk-team/ppa -y
   - sudo apt-get update -qq
@@ -32,3 +39,29 @@ notifications:
         - susan.spencer@gmail.com
      on_success: change
      on_failure: always
+
+addons:
+  coverity_scan:
+
+    # GitHub project metadata
+    # ** specific to your project **
+    project:
+      name: "dismine/Valentina"
+      description: "Build submitted via Travis CI"
+
+    # Where email notification of build analysis results will be sent
+    notification_email: dismine@gmail.com
+
+    # Commands to prepare for build_command
+    # ** likely specific to your build **
+    build_command_prepend: "qmake ../Valentina.pro -r; make clean"
+
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    # ** likely specific to your build **
+    build_command:   "make -j$(nproc)"
+
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    # We push code to github not so frequent so leave master branch.
+    branch_pattern: master
