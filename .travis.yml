@@ -18,7 +18,7 @@ before_install:
   - sudo add-apt-repository ppa:ubuntu-sdk-team/ppa -y
   - sudo apt-get update -qq
   - sudo apt-get install -y qtbase5-dev libqt5svg5-dev ccache qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev
-  - sudo apt-get install -y libqt5core5 libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
+  - sudo apt-get install -y libqt5core5 libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf cppcheck
 
 before_script:
   - mkdir build
@@ -29,6 +29,7 @@ before_script:
   - qmake ../Valentina.pro -r
 
 script:
+  - cppcheck --error-exitcode=1 --quiet --std=posix --enable=performance,portability,warning,style .
   - make -j$(nproc)
   - make check
 
