@@ -177,6 +177,7 @@ QString VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_
     return tmpResult;
 }
 
+// cppcheck-suppress unusedFunction
 const QMap<QString, VProperty *> &VPropertySet::getPropertiesMap() const
 {
     return d_ptr->Properties;

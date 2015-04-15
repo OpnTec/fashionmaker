@@ -306,6 +306,7 @@ QMap<QString, QString> VAbstractTool::ColorsList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QMap<QString, quint32> VAbstractTool::PointsList() const
 {
     const QHash<quint32, QSharedPointer<VGObject> > *objs = data.DataGObjects();

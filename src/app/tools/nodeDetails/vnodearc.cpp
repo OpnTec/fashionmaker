@@ -194,6 +194,7 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  * @brief hoverMoveEvent handle hover move events.
  * @param event hover move event.
  */
+// cppcheck-suppress unusedFunction
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);

@@ -114,7 +114,7 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end) const
+QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end)
 {
     QVector<QPointF> reversed = GetReversePoints(points);
     reversed = FromBegin(reversed, end);

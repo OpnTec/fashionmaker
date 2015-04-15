@@ -86,12 +86,14 @@ void VToolCut::Disable(bool disable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VToolCut::getCurveCutId() const
 {
     return curveCutId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VToolCut::setCurveCutId(const quint32 &value)
 {
     if (value != NULL_ID)
@@ -145,6 +147,7 @@ void VToolCut::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
 {
     Q_ASSERT_X(attrCurve.isEmpty() == false, Q_FUNC_INFO, "attribute name is empty");

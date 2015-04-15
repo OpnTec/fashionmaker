@@ -49,12 +49,14 @@ VObjPaintDevice::~VObjPaintDevice()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QPaintEngine *VObjPaintDevice::paintEngine() const
 {
     return engine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VObjPaintDevice::getFileName() const
 {
     return fileName;

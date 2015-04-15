@@ -83,6 +83,7 @@ bool VCurveLength::Filter(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VCurveLength::GetId() const
 {
     return d->id;
@@ -95,6 +96,7 @@ void VCurveLength::SetId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VCurveLength::GetParentId() const
 {
     return d->parentId;

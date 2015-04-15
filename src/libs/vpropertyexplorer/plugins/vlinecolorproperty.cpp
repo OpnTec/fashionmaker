@@ -118,6 +118,7 @@ void VLineColorProperty::setColors(const QMap<QString, QString> &colors)
     }
 }
 
+// cppcheck-suppress unusedFunction
 QMap<QString, QString> VLineColorProperty::getColors() const
 {
     return colors;

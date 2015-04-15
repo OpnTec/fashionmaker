@@ -154,6 +154,7 @@ GOType VGObject::getType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VGObject::setType(const GOType &type)
 {
     d->type = type;
@@ -405,6 +406,7 @@ QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
  * @param newPoints point whos we try to add to contour.
  * @return length length of contour.
  */
+// cppcheck-suppress unusedFunction
 int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
 {
     qreal length = 0;

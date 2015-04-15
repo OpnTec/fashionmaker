@@ -65,6 +65,7 @@ VLayoutDetail::~VLayoutDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QVector<QPointF> VLayoutDetail::GetContourPoints() const
 {
     return d->contour;
@@ -91,6 +92,7 @@ void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
 {
     return d->seamAllowence;

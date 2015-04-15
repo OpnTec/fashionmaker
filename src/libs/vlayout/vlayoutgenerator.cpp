@@ -66,6 +66,7 @@ void VLayoutGenerator::SetCaseType(Cases caseType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 int VLayoutGenerator::DetailsCount()
 {
     return bank->AllDetailsCount();
@@ -184,6 +185,7 @@ void VLayoutGenerator::Abort()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 int VLayoutGenerator::GetRotationIncrease() const
 {
     return rotationIncrease;

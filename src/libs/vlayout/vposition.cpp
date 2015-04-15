@@ -95,6 +95,7 @@ void VPosition::run()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VPosition::getPaperIndex() const
 {
     return paperIndex;
@@ -107,6 +108,7 @@ void VPosition::setPaperIndex(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VPosition::getFrame() const
 {
     return frame;
@@ -119,6 +121,7 @@ void VPosition::setFrame(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VPosition::getDetailsCount() const
 {
     return detailsCount;
@@ -576,6 +579,7 @@ void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QPolygonF VPosition::GlobalPolygon() const
 {
     QVector<QPointF> points = gContour.GetContour();

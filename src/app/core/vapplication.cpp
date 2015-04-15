@@ -1788,6 +1788,7 @@ QString VApplication::Description(const QString &measurement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VApplication::PostfixOperator(const QString &name) const
 {
     return postfixOperators.value(name).translate();

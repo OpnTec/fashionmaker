@@ -1442,17 +1442,17 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 int QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass)
 {
     QmuParserTester::c_iCount++;
-
-    // Define Bulk Variables
-    int nBulkSize = 4;
-    double vVariableA[] = { 1, 2, 3, 4 };   // variable values
-    double vVariableB[] = { 2, 2, 2, 2 };   // variable values
-    double vVariableC[] = { 3, 3, 3, 3 };   // variable values
-    double vResults[] = { 0, 0, 0, 0 };   // variable values
     int iRet(0);
 
     try
     {
+        // Define Bulk Variables
+        int nBulkSize = 4;
+        double vVariableA[] = { 1, 2, 3, 4 };   // variable values
+        double vVariableB[] = { 2, 2, 2, 2 };   // variable values
+        double vVariableC[] = { 3, 3, 3, 3 };   // variable values
+        double vResults[] = { 0, 0, 0, 0 };   // variable values
+
         QmuParser p;
         p.DefineConst("const1", 1);
         p.DefineConst("const2", 2);

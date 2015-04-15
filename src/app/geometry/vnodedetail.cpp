@@ -78,6 +78,7 @@ Tool VNodeDetail::getTypeTool() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VNodeDetail::setTypeTool(const Tool &value)
 {
     d->typeTool = value;
@@ -90,6 +91,7 @@ NodeDetail VNodeDetail::getTypeNode() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VNodeDetail::setTypeNode(const NodeDetail &value)
 {
     d->typeNode = value;

@@ -527,21 +527,28 @@ qreal incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent)
     int temp8len, temp16alen, temp16blen, temp16clen;
     int temp32alen, temp32blen, temp48len, temp64len;
     qreal axtbb[8], axtcc[8], aytbb[8], aytcc[8];
+    // cppcheck-suppress variableScope
     int axtbblen, axtcclen, aytbblen, aytcclen;
     qreal bxtaa[8], bxtcc[8], bytaa[8], bytcc[8];
+    // cppcheck-suppress variableScope
     int bxtaalen, bxtcclen, bytaalen, bytcclen;
     qreal cxtaa[8], cxtbb[8], cytaa[8], cytbb[8];
+    // cppcheck-suppress variableScope
     int cxtaalen, cxtbblen, cytaalen, cytbblen;
     qreal axtbc[8], aytbc[8], bxtca[8], bytca[8], cxtab[8], cytab[8];
     int axtbclen, aytbclen, bxtcalen, bytcalen, cxtablen, cytablen;
     qreal axtbct[16], aytbct[16], bxtcat[16], bytcat[16], cxtabt[16], cytabt[16];
+    // cppcheck-suppress variableScope
     int axtbctlen, aytbctlen, bxtcatlen, bytcatlen, cxtabtlen, cytabtlen;
     qreal axtbctt[8], aytbctt[8], bxtcatt[8];
     qreal bytcatt[8], cxtabtt[8], cytabtt[8];
+    // cppcheck-suppress variableScope
     int axtbcttlen, aytbcttlen, bxtcattlen, bytcattlen, cxtabttlen, cytabttlen;
     qreal abt[8], bct[8], cat[8];
+    // cppcheck-suppress variableScope
     int abtlen, bctlen, catlen;
     qreal abtt[4], bctt[4], catt[4];
+    // cppcheck-suppress variableScope
     int abttlen, bcttlen, cattlen;
     INEXACT qreal abtt3, bctt3, catt3;
     qreal negate;

@@ -89,12 +89,14 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VLineAngle::GetP1Id() const
 {
     return d->p1Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VLineAngle::GetP2Id() const
 {
     return d->p2Id;

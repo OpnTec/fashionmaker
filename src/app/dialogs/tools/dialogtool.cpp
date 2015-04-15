@@ -1123,6 +1123,7 @@ void DialogTool::UpdateList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 DialogTool::GetToolId() const
 {
     return toolId;

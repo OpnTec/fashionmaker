@@ -655,6 +655,7 @@ QVector<VNodeDetail> VDetail::getNodes() const
  * @brief setNodes set list of nodes
  * @param value list of nodes
  */
+// cppcheck-suppress unusedFunction
 void VDetail::setNodes(const QVector<VNodeDetail> &value)
 {
     d->nodes = value;

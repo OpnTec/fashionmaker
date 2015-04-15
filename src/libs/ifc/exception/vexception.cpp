@@ -161,6 +161,7 @@ VException *VException::clone() const
 /**
  * @brief raise method raise for exception
  */
+// cppcheck-suppress unusedFunction
 Q_NORETURN void VException::raise() const
 {
     throw *this;

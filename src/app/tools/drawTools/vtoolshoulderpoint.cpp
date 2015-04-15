@@ -336,12 +336,14 @@ void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VToolShoulderPoint::getPShoulder() const
 {
     return pShoulder;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VToolShoulderPoint::setPShoulder(const quint32 &value)
 {
     if (value != NULL_ID)

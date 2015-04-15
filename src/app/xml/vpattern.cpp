@@ -553,6 +553,7 @@ void VPattern::DecrementReferens(quint32 id) const
  * @brief SPointActiveDraw return id base point current pattern peace.
  * @return id base point.
  */
+// cppcheck-suppress unusedFunction
 quint32 VPattern::SPointActiveDraw()
 {
     QDomElement calcElement;
@@ -879,6 +880,7 @@ void VPattern::ClearScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VPattern::customEvent(QEvent *event)
 {
     if (event->type() == UNDO_EVENT)

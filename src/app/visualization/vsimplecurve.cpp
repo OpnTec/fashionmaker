@@ -132,6 +132,7 @@ void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QColor VSimpleCurve::GetCurrentColor() const
 {
     return currentColor;

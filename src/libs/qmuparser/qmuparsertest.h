@@ -64,7 +64,7 @@ private:
     static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
 
     // Test Bulkmode
-    int EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass);
+    static int EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass);
 
     // Multiarg callbacks
     static qreal f1of1 ( qreal v )

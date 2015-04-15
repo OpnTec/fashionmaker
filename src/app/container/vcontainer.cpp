@@ -429,6 +429,7 @@ bool VContainer::IsUnique(const QString &name)
  * @param name name of row
  * @return true if contains
  */
+// cppcheck-suppress unusedFunction
 bool VContainer::VariableExist(const QString &name)
 {
     return d->variables.contains(name);
@@ -453,6 +454,7 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VContainer::ClearDetails()
 {
     d->details.clear();

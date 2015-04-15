@@ -65,12 +65,14 @@ void GraphicsViewZoom::gentle_zoom(double factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void GraphicsViewZoom::set_modifiers(Qt::KeyboardModifiers modifiers)
 {
   _modifiers = modifiers;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void GraphicsViewZoom::set_zoom_factor_base(double value)
 {
     _zoom_factor_base = value;

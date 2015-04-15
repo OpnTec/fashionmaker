@@ -127,6 +127,7 @@ protected:
     Q_DISABLE_COPY(DialogTool)
 
     /** @brief data container with data */
+    // cppcheck-suppress duplInheritedMember
     const VContainer *data;
 
     /** @brief isInitialized true if window is initialized */

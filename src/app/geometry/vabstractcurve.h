@@ -54,7 +54,7 @@ protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 private:
     static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin);
-    QVector<QPointF>         ToEnd(const QVector<QPointF> &points, const QPointF &end) const;
+    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end);
 };
 
 #endif // VABSTRACTCURVE_H

@@ -119,6 +119,7 @@ void VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
     }
 }
 
+// cppcheck-suppress unusedFunction
 QMap<QString, QIcon> VLineTypeProperty::getStyles() const
 {
     return styles;

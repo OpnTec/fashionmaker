@@ -58,6 +58,7 @@ void Visualization::setLineStyle(const Qt::PenStyle &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void Visualization::setScenePos(const QPointF &value)
 {
     scenePos = value;
@@ -77,6 +78,7 @@ void Visualization::VisualMode(const quint32 &pointId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void Visualization::setMainColor(const QColor &value)
 {
     mainColor = value;

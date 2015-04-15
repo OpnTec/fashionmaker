@@ -145,6 +145,7 @@ void CheckableMessageBox::setText(const QString &t)
     d->messageLabel->setText(t);
 }
 
+// cppcheck-suppress unusedFunction
 QPixmap CheckableMessageBox::iconPixmap() const
 {
     if (const QPixmap *p = d->pixmapLabel->pixmap())
@@ -180,6 +181,7 @@ void CheckableMessageBox::setCheckBoxText(const QString &t)
     d->checkBox->setText(t);
 }
 
+// cppcheck-suppress unusedFunction
 bool CheckableMessageBox::isCheckBoxVisible() const
 {
     return d->checkBox->isVisible();
@@ -276,6 +278,7 @@ CheckableMessageBox::information(QWidget *parent,
     return mb.clickedStandardButton();
 }
 
+// cppcheck-suppress unusedFunction
 QMessageBox::StandardButton CheckableMessageBox::dialogButtonBoxToMessageBoxButton(QDialogButtonBox::StandardButton db)
 {
     return static_cast<QMessageBox::StandardButton>(int(db));
@@ -337,6 +340,7 @@ void CheckableMessageBox::doNotAskAgain(QSettings *settings, const QString &sett
     with the escape key, or \a acceptButton if the dialog is suppressed.
 */
 QDialogButtonBox::StandardButton
+// cppcheck-suppress unusedFunction
 CheckableMessageBox::doNotAskAgainQuestion(QWidget *parent, const QString &title,
                                            const QString &text, QSettings *settings,
                                            const QString &settingsSubKey,
@@ -370,6 +374,7 @@ CheckableMessageBox::doNotAskAgainQuestion(QWidget *parent, const QString &title
     with the escape key, or \a defaultButton if the dialog is suppressed.
 */
 QDialogButtonBox::StandardButton
+// cppcheck-suppress unusedFunction
 CheckableMessageBox::doNotShowAgainInformation(QWidget *parent, const QString &title,
                                            const QString &text, QSettings *settings,
                                            const QString &settingsSubKey,
@@ -397,6 +402,7 @@ CheckableMessageBox::doNotShowAgainInformation(QWidget *parent, const QString &t
     Resets all suppression settings for doNotAskAgainQuestion() found in \a settings,
     so all these message boxes are shown again.
  */
+// cppcheck-suppress unusedFunction
 void CheckableMessageBox::resetAllDoNotAskAgainQuestions(QSettings *settings)
 {
     //Q_ASSERT(settings, return);
@@ -409,6 +415,7 @@ void CheckableMessageBox::resetAllDoNotAskAgainQuestions(QSettings *settings)
     Returns whether any message boxes from doNotAskAgainQuestion() are suppressed
     in the \a settings.
 */
+// cppcheck-suppress unusedFunction
 bool CheckableMessageBox::hasSuppressedQuestions(QSettings *settings)
 {
     //Q_ASSERT(settings, return false);

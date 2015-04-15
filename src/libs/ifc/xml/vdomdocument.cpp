@@ -625,6 +625,7 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VDomDocument::Major() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
@@ -633,6 +634,7 @@ QString VDomDocument::Major() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VDomDocument::Minor() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
@@ -641,6 +643,7 @@ QString VDomDocument::Minor() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VDomDocument::Patch() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");

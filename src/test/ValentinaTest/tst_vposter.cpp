@@ -40,6 +40,7 @@ TST_VPoster::TST_VPoster(QObject *parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_VPoster::BigPoster()
 {
     QPrinter printer;
@@ -59,6 +60,7 @@ void TST_VPoster::BigPoster()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_VPoster::SmallPoster()
 {
     QPrinter printer;

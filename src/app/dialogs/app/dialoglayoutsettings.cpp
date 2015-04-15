@@ -144,6 +144,7 @@ Cases DialogLayoutSettings::GetGroup() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void DialogLayoutSettings::SetGroup(const Cases &value)
 {
     switch (value)
@@ -182,6 +183,7 @@ int DialogLayoutSettings::GetIncrease() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void DialogLayoutSettings::SetIncrease(int increase)
 {
     int index = ui->comboBoxIncrease->findText(QString::number(increase));

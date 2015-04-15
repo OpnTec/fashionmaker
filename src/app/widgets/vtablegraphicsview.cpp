@@ -46,6 +46,7 @@ VTableGraphicsView::VTableGraphicsView(QWidget *parent)
 /**
  * @brief selectionChanged handle selection change.
  */
+// cppcheck-suppress unusedFunction
 void VTableGraphicsView::selectionChanged()
 {
     QList<QGraphicsItem *> listSelectedItems = scene()->selectedItems();
@@ -65,6 +66,7 @@ void VTableGraphicsView::selectionChanged()
 /**
  * @brief MirrorItem mirror detail.
  */
+// cppcheck-suppress unusedFunction
 void VTableGraphicsView::MirrorItem()
 {
     QList<QGraphicsItem *> list = scene()->selectedItems();
@@ -110,6 +112,7 @@ void VTableGraphicsView::MirrorItem()
  * @brief wheelEvent handle wheel events.
  * @param event wheel event.
  */
+// cppcheck-suppress unusedFunction
 void VTableGraphicsView::wheelEvent(QWheelEvent *event)
 {
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)

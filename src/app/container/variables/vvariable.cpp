@@ -135,6 +135,7 @@ qreal VVariable::GetKsize() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VVariable::SetKsize(const qreal &value)
 {
     d->ksize = value;
@@ -152,6 +153,7 @@ qreal VVariable::GetKheight() const
 
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void VVariable::SetKheight(const qreal &value)
 {
     d->kheight = value;

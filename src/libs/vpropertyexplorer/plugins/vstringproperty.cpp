@@ -123,6 +123,7 @@ void VStringProperty::UpdateParent(const QVariant &value)
     emit childChanged(value, typeForParent);
 }
 
+// cppcheck-suppress unusedFunction
 int VStringProperty::getTypeForParent() const
 {
     return typeForParent;
