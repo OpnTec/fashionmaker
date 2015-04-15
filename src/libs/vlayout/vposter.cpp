@@ -40,7 +40,7 @@ VPoster::VPoster(const QPrinter *printer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QImage> VPoster::Generate(const QImage &image, int page, int pages) const
+QVector<QImage> VPoster::Generate(const QImage &image, int page, int sheets) const
 {
     QVector<QImage> poster;
 
@@ -57,7 +57,7 @@ QVector<QImage> VPoster::Generate(const QImage &image, int page, int pages) cons
         for (int j=0; j< colomns; j++)
         {
             QImage img = Cut(i, j, image);
-            img = Borders(rows, colomns, i, j, img, page, pages);
+            img = Borders(rows, colomns, i, j, img, page, sheets);
             poster.append(img);
         }
     }
@@ -171,7 +171,7 @@ QImage VPoster::Cut(int i, int j, const QImage &image) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int page, int pages) const
+QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int page, int sheets) const
 {
     QPainter painter(&image);
 
@@ -179,7 +179,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
     pen.setColor(Qt::black);
     painter.setPen(pen);
 
-    if (j != 0)
+    if (j != 0 && PageRect().x() > 0)
     {// Left border
         painter.drawLine(QLine(0, 0, 0, image.rect().height()));
         painter.drawImage(QPoint(0, image.rect().height()-allowence), QImage("://scissors_vertical.png"));
@@ -191,7 +191,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
                                image.rect().width()-allowence, image.rect().height()));
     }
 
-    if (i != 0)
+    if (i != 0 && PageRect().y() > 0)
     {// Top border
         painter.drawLine(QLine(0, 0, image.rect().width(), 0));
         painter.drawImage(QPoint(image.rect().width()-allowence, 0), QImage("://scissors_horizontal.png"));
@@ -213,9 +213,9 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
                  image.rect().width()-(allowence+layoutX), allowence-layoutY);
     painter.drawText(labels, Qt::AlignLeft, tr("Grid ( %1 , %2 )").arg(i).arg(j));
     painter.drawText(labels, Qt::AlignHCenter, tr("Page %1 of %2").arg(i*(colomns)+j+1).arg(rows*colomns));
-    if (pages > 1)
+    if (sheets > 1)
     {
-        painter.drawText(labels, Qt::AlignRight, tr("Sheet %1 of %2").arg(page).arg(pages));
+        painter.drawText(labels, Qt::AlignRight, tr("Sheet %1 of %2").arg(page).arg(sheets));
     }
 
     painter.end();

@@ -41,7 +41,7 @@ class VPoster
 public:
     VPoster(const QPrinter *printer);
 
-    QVector<QImage> Generate(const QImage &image, int page, int pages = 1) const;
+    QVector<QImage> Generate(const QImage &image, int page, int sheets = 1) const;
 private:
     const QPrinter *printer;
     unsigned int allowence;
@@ -50,7 +50,7 @@ private:
     int CountColomns(int width) const;
 
     QImage Cut(int i, int j, const QImage &image) const;
-    QImage Borders(int rows, int colomns, int i, int j, QImage &image, int page, int pages) const;
+    QImage Borders(int rows, int colomns, int i, int j, QImage &image, int page, int sheets) const;
 
     QRect PageRect() const;
 
