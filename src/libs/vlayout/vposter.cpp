@@ -153,9 +153,13 @@ QImage VPoster::Cut(int i, int j, const QImage &image) const
 
     if (not image.rect().contains(copyRect))
     {
+        // Create full page with white background
         QImage fullPage(copyRect.size(), image.format());
         fullPage.fill(Qt::white);
 
+        // Real size that we can copy from image.
+        // Because in areas beyond the image, pixels are set to 0 by copy() method.
+        // For 32-bit RGB images, this means black.
         copyRect = image.rect().intersected(copyRect);
 
         QPainter painter(&fullPage);
@@ -197,13 +201,16 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
         painter.drawImage(QPoint(image.rect().width()-allowence, 0), QImage("://scissors_horizontal.png"));
     }
 
-    // Bottom border (mandatory)
-    painter.drawLine(QLine(0, image.rect().height()-allowence,
-                           image.rect().width(), image.rect().height()-allowence));
-    if (i == rows-1)
-    {
-        painter.drawImage(QPoint(image.rect().width()-allowence, image.rect().height()-allowence),
-                          QImage("://scissors_horizontal.png"));
+    if (rows*colomns > 1)
+    { // Don't show bottom border if only one page need
+        // Bottom border (mandatory)
+        painter.drawLine(QLine(0, image.rect().height()-allowence,
+                               image.rect().width(), image.rect().height()-allowence));
+        if (i == rows-1)
+        {
+            painter.drawImage(QPoint(image.rect().width()-allowence, image.rect().height()-allowence),
+                              QImage("://scissors_horizontal.png"));
+        }
     }
 
     // Labels
@@ -225,7 +232,9 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
 //---------------------------------------------------------------------------------------------------------------------
 QRect VPoster::PageRect() const
 {
-
+    // Because the Point unit is defined to be 1/72th of an inch
+    // we can't use method pageRect(QPrinter::Point). Our dpi different can be different.
+    // We convert value yourself to pixels.
     const QRectF rect = printer->pageRect(QPrinter::Millimeter);
     QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())), qFloor(ToPixel(rect.width())),
                    qFloor(ToPixel(rect.height())));
