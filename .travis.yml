@@ -29,7 +29,7 @@ before_script:
   - qmake ../Valentina.pro -r
 
 script:
-  - cppcheck --error-exitcode=1 --quiet --std=posix --enable=performance,portability,warning,style .
+  - cppcheck --error-exitcode=1 --quiet --std=posix --enable=performance,portability,style .
   - make -j$(nproc)
   - make check
 
