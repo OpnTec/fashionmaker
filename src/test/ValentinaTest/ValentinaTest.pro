@@ -35,11 +35,9 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 SOURCES += \
     qttestmainlambda.cpp \
-    tst_test.cpp \
     tst_vposter.cpp
 
 HEADERS += \
-    tst_test.h \
     tst_vposter.h
 
 CONFIG(debug, debug|release){

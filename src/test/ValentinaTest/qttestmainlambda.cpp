@@ -28,7 +28,6 @@
 
 #include <QtTest>
 
-#include "tst_test.h"
 #include "tst_vposter.h"
 
 int main(int argc, char** argv)
@@ -42,7 +41,7 @@ int main(int argc, char** argv)
         delete obj;
     };
 
-    ASSERT_TEST(new Test());
+    //ASSERT_TEST(new Test());
     ASSERT_TEST(new TST_VPoster());
 
     return status;
