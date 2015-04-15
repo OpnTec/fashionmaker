@@ -29,7 +29,11 @@
 #include "vposter.h"
 #include <QPainter>
 #include <QPrinter>
-#include <QtMath>
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../../utils/vmath.h"
+#else
+#   include <QtMath>
+#endif
 
 #include "../../utils/def.h"
 
