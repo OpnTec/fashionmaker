@@ -6,7 +6,7 @@
 
 QT       += testlib gui printsupport
 
-TARGET = tst_test
+TARGET = ValentinaTests
 
 # File with common stuff for whole project
 include(../../../Valentina.pri)
