@@ -100,7 +100,8 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]/QtXml" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
-    -isystem "$$[QT_INSTALL_HEADERS]/QtCore"
+    -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtTest"
 } else {
 ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtWidgets.framework/Headers/" \
@@ -112,7 +113,9 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Versions/5/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Headers/" \
-    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/"
+    -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/"
 }
 
 # Usefull GCC warnings keys.

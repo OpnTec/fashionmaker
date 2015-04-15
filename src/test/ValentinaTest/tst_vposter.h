@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file   tst_vposter.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   15 4, 2015
  **
  **  @brief
  **  @copyright
@@ -26,24 +26,29 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef TST_VPOSTER_H
+#define TST_VPOSTER_H
 
-#include "tst_test.h"
-#include "tst_vposter.h"
+#include <QObject>
 
-int main(int argc, char** argv)
+class QPrinter;
+
+class TST_VPoster : public QObject
 {
-    QApplication app( argc, argv );// For QPrinter
+    Q_OBJECT
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+public:
+    explicit TST_VPoster(QObject *parent = 0);
 
-    ASSERT_TEST(new Test());
-    ASSERT_TEST(new TST_VPoster());
+signals:
 
-    return status;
-}
+private slots:
+    void BigPoster();
+    void SmallPoster();
+
+private:
+    qreal ToPixel(qreal val, const QPrinter &printer) const;
+    QRect PageRect(const QPrinter &printer) const;
+};
+
+#endif // TST_VPOSTER_H
