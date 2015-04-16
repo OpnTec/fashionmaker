@@ -43,6 +43,7 @@
 #include <QGraphicsScene>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
+#include <QtPrintSupport>
 #include <QtCore/qmath.h>
 
 #ifdef Q_OS_WIN
