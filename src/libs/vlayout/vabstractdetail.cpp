@@ -219,6 +219,7 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         //points in the middle of polyline
         ekvPoints<<EkvPoint(QLineF(p.at(i-1), p.at(i)), QLineF(p.at(i+1), p.at(i)), width);
     }
+    ekvPoints = CheckLoops(ekvPoints);//Result path can contain loops
     return ekvPoints;
 }
 
@@ -286,7 +287,6 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
             correctPoints.remove(i);
         }
     }
-    correctPoints = CheckLoops(correctPoints);
     return correctPoints;
 }
 
