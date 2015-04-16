@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file   tst_vabstractdetail.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   16 4, 2015
  **
  **  @brief
  **  @copyright
@@ -26,24 +26,34 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef TST_VABSTRACTDETAIL_H
+#define TST_VABSTRACTDETAIL_H
 
-#include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
+#include <QObject>
 
-int main(int argc, char** argv)
+class TST_VAbstractDetail : public QObject
 {
-    QApplication app( argc, argv );// For QPrinter
+    Q_OBJECT
+public:
+    explicit TST_VAbstractDetail(QObject *parent = 0);
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+signals:
 
-    ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
+private slots:
+    void EquidistantRemoveLoop() const;
 
-    return status;
-}
+private:
+    void Case1() const;
+    void Case2() const;
+
+    QVector<QPointF> InputPointsCase1() const;
+    QVector<QPointF> OutputPointsCase1() const;
+
+    QVector<QPointF> InputPointsCase2() const;
+    QVector<QPointF> OutputPointsCase2() const;
+
+    void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
+
+};
+
+#endif // TST_VABSTRACTDETAIL_H

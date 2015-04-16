@@ -35,10 +35,12 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 SOURCES += \
     qttestmainlambda.cpp \
-    tst_vposter.cpp
+    tst_vposter.cpp \
+    tst_vabstractdetail.cpp
 
 HEADERS += \
-    tst_vposter.h
+    tst_vposter.h \
+    tst_vabstractdetail.h
 
 CONFIG(debug, debug|release){
     # Debug mode
