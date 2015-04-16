@@ -302,6 +302,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 data->UpdateGObject(idDetail+idCount, arc1);
 
                 ++idCount;// For child
+                delete center;
             }
         }
         break;
@@ -330,6 +331,8 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 data->UpdateGObject(idDetail+idCount, spl);
 
                 ++idCount;// For child
+                delete p1;
+                delete p4;
             }
         }
         break;
@@ -371,6 +374,8 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                     }
                     path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
                                               splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    delete p1;
+                    delete p4;
                 }
 
                 ++idCount;//For parent
