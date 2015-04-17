@@ -357,7 +357,7 @@ void TableWindow::PrintToPdf()
     const QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
                                                           QDir::homePath()+"/"+this->fileName+".pdf",
                                                           tr("PDF file (*.pdf)"));
-    if (fileName.isEmpty())
+    if (not fileName.isEmpty())
     {
         printer.setOutputFileName(fileName);
         printer.setResolution(static_cast<int>(VApplication::PrintDPI));
