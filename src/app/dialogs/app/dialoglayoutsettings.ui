@@ -405,6 +405,13 @@
           <item row="1" column="2">
            <widget class="QComboBox" name="comboBoxLayoutUnit"/>
           </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string notr="true">×2</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -511,7 +518,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
