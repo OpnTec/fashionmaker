@@ -40,7 +40,7 @@ before_script:
 
 script:
   - $CXX --version
-  - cppcheck --error-exitcode=1 --quiet --inline-suppr --template '{file}:{line}:{message}:{id}' --std=posix --force --enable=performance,portability ../src
+  - cppcheck --error-exitcode=1 --quiet --inline-suppr --template '{file}:{line}:{message}:{id}' --std=posix --force --report-progress --enable=performance,portability ../src
   - make -j$(nproc)
   - DISPLAY=:99.0 make check
 
