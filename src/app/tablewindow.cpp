@@ -348,7 +348,7 @@ void TableWindow::PngFile(const QString &name, int i) const
         painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
                             Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter);
+        scenes.at(i)->render(&painter, r, r);
         image.save(name);
     }
 }
