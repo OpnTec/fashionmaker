@@ -398,6 +398,11 @@ void TableWindow::PrintToPdf()
                                                               tr("PDF file (*.pdf)"));
         if (not fileName.isEmpty())
         {
+            if(QFileInfo(fileName).suffix().isEmpty())
+            {
+                fileName.append(".pdf");
+            }
+
             printer.setOutputFileName(fileName);
             printer.setResolution(static_cast<int>(VApplication::PrintDPI));
             Print( &printer );
