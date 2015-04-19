@@ -313,17 +313,52 @@ void TableWindow::Print(QPrinter *printer)
         return;
     }
 
-    for (int i=0; i < poster.size(); i++)
+    // Handle the fromPage(), toPage(), supportsMultipleCopies(), and numCopies() values from QPrinter.
+    int firstPage = printer->fromPage() - 1;
+    if (firstPage >= poster.size())
     {
-        painter.drawImage(QPointF(), poster.at(i));
+        return;
+    }
+    if (firstPage == -1)
+    {
+        firstPage = 0;
+    }
 
-        if (i+1 < poster.size())
+    int lastPage = printer->toPage() - 1;
+    if (lastPage == -1 || lastPage >= poster.size())
+    {
+        lastPage = poster.size() - 1;
+    }
+
+    const int numPages = lastPage - firstPage + 1;
+    int copyCount = 1;
+    if (not printer->supportsMultipleCopies())
+    {
+        copyCount = printer->copyCount();
+    }
+
+    for (int i = 0; i < copyCount; ++i)
+    {
+        for (int j = 0; j < numPages; ++j)
         {
-            if (not printer->newPage())
+            if (i != 0 || j != 0)
             {
-                qWarning("failed in flushing page to disk, disk full?");
-                return;
+                if (not printer->newPage())
+                {
+                    qWarning("failed in flushing page to disk, disk full?");
+                    return;
+                }
             }
+            int index;
+            if (printer->pageOrder() == QPrinter::FirstPageFirst)
+            {
+                index = firstPage + j;
+            }
+            else
+            {
+                index = lastPage - j;
+            }
+            painter.drawImage(QPointF(), poster.at(index));
         }
     }
 
@@ -334,7 +369,7 @@ void TableWindow::Print(QPrinter *printer)
 void TableWindow::LayoutPrint()
 {
     // display print dialog and if accepted print
-    QPrinter printer;
+    QPrinter printer(QPrinter::HighResolution);
     printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
     printer.setDocName(fileName);
     QPrintDialog dialog( &printer, this );
