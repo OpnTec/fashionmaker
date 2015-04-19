@@ -373,6 +373,8 @@ void TableWindow::LayoutPrint()
     printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
     printer.setDocName(fileName);
     QPrintDialog dialog( &printer, this );
+    // If only user couldn't change page margins we could use method setMinMax();
+    dialog.setOption(QPrintDialog::PrintCurrentPage, false);
     if ( dialog.exec() == QDialog::Accepted )
     {
         printer.setResolution(static_cast<int>(VApplication::PrintDPI));
