@@ -385,20 +385,23 @@ void TableWindow::LayoutPrint()
 //---------------------------------------------------------------------------------------------------------------------
 void TableWindow::PrintToPdf()
 {
-    // display print dialog and if accepted print
     QPrinter printer;
     printer.setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
     printer.setDocName(fileName);
-    printer.setOutputFormat(QPrinter::PdfFormat);
 
-    const QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
-                                                          QDir::homePath()+"/"+this->fileName+".pdf",
-                                                          tr("PDF file (*.pdf)"));
-    if (not fileName.isEmpty())
+    QPageSetupDialog dialog(&printer, this);
+    if ( dialog.exec() == QDialog::Accepted )
     {
-        printer.setOutputFileName(fileName);
-        printer.setResolution(static_cast<int>(VApplication::PrintDPI));
-        Print( &printer );
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        const QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
+                                                              QDir::homePath()+"/"+this->fileName+".pdf",
+                                                              tr("PDF file (*.pdf)"));
+        if (not fileName.isEmpty())
+        {
+            printer.setOutputFileName(fileName);
+            printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+            Print( &printer );
+        }
     }
 }
 
