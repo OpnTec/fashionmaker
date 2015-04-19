@@ -222,7 +222,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
     const int layoutY = 5;
     QRect labels(layoutX, image.rect().height()-allowence+layoutY,
                  image.rect().width()-(allowence+layoutX), allowence-layoutY);
-    painter.drawText(labels, Qt::AlignLeft, tr("Grid ( %1 , %2 )").arg(i).arg(j));
+    painter.drawText(labels, Qt::AlignLeft, tr("Grid ( %1 , %2 )").arg(i+1).arg(j+1));
     painter.drawText(labels, Qt::AlignHCenter, tr("Page %1 of %2").arg(i*(colomns)+j+1).arg(rows*colomns));
     if (sheets > 1)
     {

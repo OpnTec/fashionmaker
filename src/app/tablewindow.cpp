@@ -393,9 +393,9 @@ void TableWindow::PrintToPdf()
     if ( dialog.exec() == QDialog::Accepted )
     {
         printer.setOutputFormat(QPrinter::PdfFormat);
-        const QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
-                                                              QDir::homePath()+"/"+this->fileName+".pdf",
-                                                              tr("PDF file (*.pdf)"));
+        QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
+                                                        QDir::homePath()+"/"+this->fileName+".pdf",
+                                                        tr("PDF file (*.pdf)"));
         if (not fileName.isEmpty())
         {
             if(QFileInfo(fileName).suffix().isEmpty())
