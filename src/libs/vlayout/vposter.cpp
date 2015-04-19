@@ -39,7 +39,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPoster::VPoster(const QPrinter *printer)
-    :printer(printer), allowence(38)//1 cm
+    :printer(printer), allowence(qRound(10./25.4*printer->resolution()))//1 cm
 {
 }
 
