@@ -54,6 +54,11 @@ signals:
      */
     void              ControlPointChangePosition(const qint32 &indexSpline, SplinePointPosition position,
                                                  const QPointF &pos);
+    /**
+     * @brief ShowContextMenu emit when need show tool's context menu.
+     * @param event context menu event.
+     */
+    void              ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 public slots:
     void              RefreshLine(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                                   const QPointF &splinePoint);
@@ -70,6 +75,7 @@ protected:
     QVariant          itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event );
     virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event );
 private:
     Q_DISABLE_COPY(VControlPointSpline)
     /** @brief indexSpline index spline in list.. */

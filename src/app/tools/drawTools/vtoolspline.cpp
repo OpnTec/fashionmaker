@@ -71,6 +71,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
             &VToolSpline::ControlPointChangePosition);
     connect(this, &VToolSpline::RefreshLine, controlPoint1, &VControlPointSpline::RefreshLine);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint1, &VControlPointSpline::setEnabledPoint);
+    connect(controlPoint1, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
     controlPoints.append(controlPoint1);
 
     VControlPointSpline *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, spl->GetP3(),
@@ -79,6 +80,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
             &VToolSpline::ControlPointChangePosition);
     connect(this, &VToolSpline::RefreshLine, controlPoint2, &VControlPointSpline::RefreshLine);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
+    connect(controlPoint2, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
     controlPoints.append(controlPoint2);
 
     ShowFoot(false);

@@ -143,6 +143,12 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VControlPointSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshLine refresh line control point.
  * @param indexSpline index spline in list.
