@@ -45,7 +45,7 @@ public:
     virtual int      type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
     virtual QString  getTagName() const;
-    void             ShowFoot(bool show);
+    void             ShowHandles(bool show);
 
     void setEnabled(bool enabled);
 

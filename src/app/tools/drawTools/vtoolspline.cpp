@@ -83,7 +83,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
     connect(controlPoint2, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
     controlPoints.append(controlPoint2);
 
-    ShowFoot(false);
+    ShowHandles(false);
 
     if (typeCreation == Source::FromGui)
     {
@@ -261,7 +261,7 @@ void VToolSpline::ShowVisualization(bool show)
         delete vis;
         vis = nullptr;
     }
-    ShowFoot(show);
+    ShowHandles(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

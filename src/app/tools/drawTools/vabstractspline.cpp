@@ -219,7 +219,7 @@ void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::ShowFoot(bool show)
+void VAbstractSpline::ShowHandles(bool show)
 {
     for (int i = 0; i < controlPoints.size(); ++i)
     {

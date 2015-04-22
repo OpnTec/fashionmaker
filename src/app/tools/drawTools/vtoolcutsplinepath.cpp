@@ -271,7 +271,7 @@ void VToolCutSplinePath::ShowVisualization(bool show)
     }
     if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
     {
-        parentCurve->ShowFoot(show);
+        parentCurve->ShowHandles(show);
     }
 }
 

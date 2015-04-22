@@ -85,7 +85,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
         controlPoints.append(controlPoint);
     }
 
-    ShowFoot(false);
+    ShowHandlers(false);
 
     if (typeCreation == Source::FromGui)
     {
@@ -333,7 +333,7 @@ void VToolSplinePath::ShowVisualization(bool show)
         delete vis;
         vis = nullptr;
     }
-    ShowFoot(show);
+    ShowHandlers(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
