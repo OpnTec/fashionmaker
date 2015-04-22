@@ -100,6 +100,9 @@ public:
     QByteArray GetWindowState() const;
     void SetWindowState(const QByteArray &value);
 
+    QByteArray GetToolbarsState() const;
+    void SetToolbarsState(const QByteArray &value);
+
     QString GetServer() const;
     void SetServer(const QString &value);
 
@@ -155,6 +158,7 @@ private:
     static const QString SettingGeneralRestoreFileList;
     static const QString SettingGeneralGeometry;
     static const QString SettingGeneralWindowState;
+    static const QString SettingGeneralToolbarsState;
 
     static const QString SettingCommunityServer;
     static const QString SettingCommunityServerSecure;

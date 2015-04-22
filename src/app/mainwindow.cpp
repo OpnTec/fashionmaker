@@ -2104,6 +2104,7 @@ void MainWindow::ReadSettings()
     qCDebug(vMainWindow, "Reading settings.");
     restoreGeometry(qApp->getSettings()->GetGeometry());
     restoreState(qApp->getSettings()->GetWindowState());
+    restoreState(qApp->getSettings()->GetToolbarsState(), APP_VERSION);
 
     // Scene antialiasing
     const bool graphOutputValue = qApp->getSettings()->GetGraphicalOutput();
@@ -2125,6 +2126,7 @@ void MainWindow::WriteSettings()
 {
     qApp->getSettings()->SetGeometry(saveGeometry());
     qApp->getSettings()->SetWindowState(saveState());
+    qApp->getSettings()->SetToolbarsState(saveState(APP_VERSION));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName(VER_COMPANYNAME_STR);
     app.setOrganizationDomain(VER_COMPANYDOMAIN_STR);
     // Setting the Application version
-    app.setApplicationVersion(APP_VERSION);
+    app.setApplicationVersion(APP_VERSION_STR);
 
     app.OpenSettings();
 
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
     // Run creation log after sending crash report
     app.StartLogging();
 
-    qDebug()<<"Version:"<<APP_VERSION;
+    qDebug()<<"Version:"<<APP_VERSION_STR;
     qDebug()<<"Build revision:"<<BUILD_REVISION;
     qDebug()<<buildCompatibilityString();
     qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;

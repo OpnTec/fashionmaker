@@ -57,6 +57,7 @@ const QString VSettings::SettingGeneralRecentFileList            = QStringLitera
 const QString VSettings::SettingGeneralRestoreFileList           = QStringLiteral("restoreFileList");
 const QString VSettings::SettingGeneralGeometry                  = QStringLiteral("geometry");
 const QString VSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
+const QString VSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 
 const QString VSettings::SettingCommunityServer                  = QStringLiteral("community/server");
 const QString VSettings::SettingCommunityServerSecure            = QStringLiteral("community/serverSecure");
@@ -335,6 +336,18 @@ QByteArray VSettings::GetWindowState() const
 void VSettings::SetWindowState(const QByteArray &value)
 {
     setValue(SettingGeneralWindowState, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QByteArray VSettings::GetToolbarsState() const
+{
+    return value(SettingGeneralToolbarsState).toByteArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetToolbarsState(const QByteArray &value)
+{
+    setValue(SettingGeneralToolbarsState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

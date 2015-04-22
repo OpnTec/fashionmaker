@@ -35,7 +35,12 @@ extern const int MAJOR_VERSION;
 extern const int MINOR_VERSION;
 extern const int DEBUG_VERSION;
 
-extern const QString APP_VERSION;
+extern const QString APP_VERSION_STR;
+
+/*
+   APP_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+#define APP_VERSION 0x000300
 
 // Change version number in version.cpp too.
 
