@@ -247,16 +247,6 @@ void VToolCutArc::CurveChoosed(quint32 id)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogCutArc>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

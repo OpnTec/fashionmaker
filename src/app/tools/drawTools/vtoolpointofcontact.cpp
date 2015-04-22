@@ -273,16 +273,6 @@ void VToolPointOfContact::SetFactor(qreal factor)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogPointOfContact>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

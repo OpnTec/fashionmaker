@@ -56,7 +56,6 @@ public slots:
     virtual void            ChangedActivDraw(const QString &newName);
     virtual void            ShowTool(quint32 id, bool enable);
     virtual void            SetFactor(qreal factor);
-    virtual void            ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void                    Disable(bool disable);
     void                    DeleteFromLabel();
     virtual void            EnableToolMove(bool move);
@@ -79,6 +78,7 @@ protected:
     void                    RefreshLine();
     virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void            keyReleaseEvent(QKeyEvent * event);
+    virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
 private:
     Q_DISABLE_COPY(VToolPoint)
 };

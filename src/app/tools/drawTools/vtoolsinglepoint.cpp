@@ -330,23 +330,6 @@ void VToolSinglePoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolSinglePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    if (doc->CountPP() > 1)
-    {
-        ContextMenu<DialogSinglePoint>(this, event);
-    }
-    else
-    {
-        ContextMenu<DialogSinglePoint>(this, event, false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolSinglePoint::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);

@@ -52,7 +52,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
 {
     radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::ShowContextMenu);
+    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::contextMenuEvent);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
     connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolPoint::PointChoosed);
     lineName = new QGraphicsLineItem(this);
@@ -170,16 +170,6 @@ void VToolPoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    Q_UNUSED(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,6 +334,12 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsEllipseItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    Q_UNUSED(event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

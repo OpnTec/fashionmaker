@@ -286,12 +286,6 @@ void VToolLineIntersectAxis::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogLineIntersectAxis>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLineIntersectAxis>(this, event);

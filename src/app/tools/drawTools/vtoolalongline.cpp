@@ -109,16 +109,6 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu handle context menu event.
- * @param event context menu event.
- */
-void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogAlongLine>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolAlongLine::RemoveReferens()

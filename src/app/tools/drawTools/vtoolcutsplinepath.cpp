@@ -305,16 +305,6 @@ void VToolCutSplinePath::CurveChoosed(quint32 id)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolCutSplinePath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogCutSplinePath>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

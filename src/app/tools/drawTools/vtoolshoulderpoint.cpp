@@ -257,16 +257,6 @@ void VToolShoulderPoint::SetFactor(qreal factor)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogShoulderPoint>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

@@ -221,16 +221,6 @@ void VToolLineIntersect::SetFactor(qreal factor)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogLineIntersect>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

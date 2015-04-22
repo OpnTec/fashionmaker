@@ -67,7 +67,6 @@ public:
 public slots:
     virtual void FullUpdateFromFile();
     virtual void SetFactor(qreal factor);
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void RemoveReferens();

@@ -213,16 +213,6 @@ void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogEndLine>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SaveDialog save options into file after change in dialog.
  */
 void VToolEndLine::SaveDialog(QDomElement &domElement)

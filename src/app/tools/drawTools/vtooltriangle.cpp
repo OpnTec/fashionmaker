@@ -237,16 +237,6 @@ void VToolTriangle::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogTriangle>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolTriangle::RemoveReferens()

@@ -180,16 +180,6 @@ void VToolPointOfIntersection::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ShowContextMenu show context menu.
- * @param event context menu event.
- */
-void VToolPointOfIntersection::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogPointOfIntersection>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RemoveReferens decrement value of reference.
  */
 void VToolPointOfIntersection::RemoveReferens()

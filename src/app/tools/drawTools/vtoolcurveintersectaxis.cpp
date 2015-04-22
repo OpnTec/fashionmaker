@@ -272,12 +272,6 @@ void VToolCurveIntersectAxis::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    ContextMenu<DialogCurveIntersectAxis>(this, event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCurveIntersectAxis>(this, event);

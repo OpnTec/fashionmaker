@@ -54,7 +54,6 @@ public:
 public slots:
     virtual void FullUpdateFromFile();
     virtual void CurveChoosed(quint32 id);
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void SaveDialog(QDomElement &domElement);

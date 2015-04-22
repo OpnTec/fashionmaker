@@ -69,7 +69,6 @@ public:
     virtual void   ShowVisualization(bool show);
 public slots:
     virtual void   FullUpdateFromFile();
-    virtual void   ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 protected:
     virtual void   RemoveReferens();
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
