@@ -53,6 +53,7 @@ public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
+    void          EnableDetailsMode(bool mode);
 protected:
     virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -80,6 +81,7 @@ signals:
     void          NewFactor(qreal factor);
     void          DisableItem(bool disable);
     void          EnableToolMove(bool move);
+    void          CurveDetailsMode(bool mode);
 private:
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;

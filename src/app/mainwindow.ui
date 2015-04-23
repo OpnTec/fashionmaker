@@ -803,6 +803,7 @@
     <addaction name="actionZoomOriginal"/>
     <addaction name="separator"/>
     <addaction name="actionLast_tool"/>
+    <addaction name="actionShowCurveDetails"/>
     <addaction name="actionPattern_properties"/>
     <addaction name="actionEdit_pattern_code"/>
    </widget>
@@ -1354,6 +1355,23 @@
    </property>
    <property name="shortcut">
     <string>L</string>
+   </property>
+  </action>
+  <action name="actionShowCurveDetails">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show Curve Details</string>
+   </property>
+   <property name="toolTip">
+    <string>Show/hide control points and curve direction</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
  </widget>

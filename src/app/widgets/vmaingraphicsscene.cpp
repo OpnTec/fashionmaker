@@ -132,3 +132,9 @@ void VMainGraphicsScene::EnableItemMove(bool move)
 {
     emit EnableToolMove(move);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::EnableDetailsMode(bool mode)
+{
+    emit CurveDetailsMode(mode);
+}

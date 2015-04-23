@@ -52,6 +52,7 @@ public:
 public slots:
     virtual void     FullUpdateFromFile ();
     void             Disable(bool disable);
+    void             DetailsMode(bool mode);
 signals:
     /**
      * @brief RefreshLine refresh control line.
@@ -74,6 +75,7 @@ protected:
     QVector<VControlPointSpline *>   controlPoints;
     SceneObject      sceneType;
     bool             isHovered;
+    bool             detailsMode;
     /**
      * @brief RefreshGeometry  refresh item on scene.
      */

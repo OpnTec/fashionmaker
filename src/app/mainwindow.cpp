@@ -1479,6 +1479,7 @@ void MainWindow::Clear()
     ui->actionTable->setEnabled(false);
     ui->actionEdit_pattern_code->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
+    ui->actionShowCurveDetails->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -1669,6 +1670,7 @@ void MainWindow::SetEnabledGUI(bool enabled)
         ui->actionTable->setEnabled(enabled);
         ui->actionZoomFitBest->setEnabled(enabled);
         ui->actionZoomOriginal->setEnabled(enabled);
+        ui->actionShowCurveDetails->setEnabled(enabled);
 
         if (enabled)
         {
@@ -1839,6 +1841,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomOut->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomOriginal->setEnabled(enable);
+    ui->actionShowCurveDetails->setEnabled(enable);
     //Now we want allow user call context menu
     ui->view->setEnabled(enable);
 }
@@ -1894,6 +1897,13 @@ void MainWindow::ActionHistory(bool checked)
         ui->actionHistory->setChecked(true);
         dialogHistory->activateWindow();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ActionDetailsMode(bool checked)
+{
+    ui->view->itemClicked(nullptr);
+    sceneDraw->EnableDetailsMode(checked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2383,6 +2393,7 @@ void MainWindow::CreateActions()
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
     connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
+    connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionDetailsMode);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.

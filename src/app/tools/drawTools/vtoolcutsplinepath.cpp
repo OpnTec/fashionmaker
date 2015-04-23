@@ -229,6 +229,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutSplinePath::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutSplinePath::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutSplinePath::EnableToolMove);
+        connect(scene, &VMainGraphicsScene::CurveDetailsMode, point, &VToolCutSplinePath::DetailsMode);
         doc->AddTool(id, point);
         doc->AddTool(splPath1id, point);
         doc->AddTool(splPath2id, point);
@@ -271,7 +272,14 @@ void VToolCutSplinePath::ShowVisualization(bool show)
     }
     if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
     {
-        parentCurve->ShowHandles(show);
+        if (detailsMode)
+        {
+            parentCurve->ShowHandles(detailsMode);
+        }
+        else
+        {
+            parentCurve->ShowHandles(show);
+        }
     }
 }
 

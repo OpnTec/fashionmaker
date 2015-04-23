@@ -85,7 +85,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
         controlPoints.append(controlPoint);
     }
 
-    ShowHandlers(false);
+    ShowHandles(false);
 
     if (typeCreation == Source::FromGui)
     {
@@ -178,6 +178,7 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSplinePath::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSplinePath::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSplinePath::EnableToolMove);
+        connect(scene, &VMainGraphicsScene::CurveDetailsMode, spl, &VToolSplinePath::DetailsMode);
         doc->AddTool(id, spl);
         return spl;
     }
@@ -333,7 +334,15 @@ void VToolSplinePath::ShowVisualization(bool show)
         delete vis;
         vis = nullptr;
     }
-    ShowHandlers(show);
+
+    if (detailsMode)
+    {
+        ShowHandles(detailsMode);
+    }
+    else
+    {
+        ShowHandles(show);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -552,7 +561,7 @@ void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolSplinePath::RefreshGeometry()
 {
-    if (isHovered)
+    if (isHovered || detailsMode)
     {
         this->setPath(ToolPath(PathDirection::Show));
     }

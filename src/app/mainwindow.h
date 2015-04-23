@@ -67,6 +67,7 @@ public slots:
     void               ActionLayout(bool checked);
     void               ActionTable(bool checked);
     void               ActionHistory(bool checked);
+    void               ActionDetailsMode(bool checked);
 
     void               tableClosed();
     void               ClosedActionTable();

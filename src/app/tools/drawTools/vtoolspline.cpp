@@ -201,6 +201,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
         connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSpline::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSpline::EnableToolMove);
+        connect(scene, &VMainGraphicsScene::CurveDetailsMode, spl, &VToolSpline::DetailsMode);
         doc->AddTool(id, spl);
         doc->IncrementReferens(p1);
         doc->IncrementReferens(p4);
@@ -261,7 +262,15 @@ void VToolSpline::ShowVisualization(bool show)
         delete vis;
         vis = nullptr;
     }
-    ShowHandles(show);
+
+    if (detailsMode)
+    {
+        ShowHandles(detailsMode);
+    }
+    else
+    {
+        ShowHandles(show);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -484,7 +493,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VToolSpline::RefreshGeometry()
 {
     this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
-    if (isHovered)
+    if (isHovered || detailsMode)
     {
         this->setPath(ToolPath(PathDirection::Show));
     }

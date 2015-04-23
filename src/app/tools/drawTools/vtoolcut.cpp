@@ -35,7 +35,7 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
                    const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id, const QString &color,
                    QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), formula(formula), firstCurve(nullptr), secondCurve(nullptr),
-      curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id)
+      curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id), detailsMode(false)
 {
     Q_ASSERT_X(curveCutId > 0, Q_FUNC_INFO, "curveCutId <= 0");
     Q_ASSERT_X(curve1id > 0, Q_FUNC_INFO, "curve1id <= 0");
@@ -83,6 +83,12 @@ void VToolCut::Disable(bool disable)
     VToolPoint::Disable(disable);
     firstCurve->ChangedActivDraw(enabled);
     secondCurve->ChangedActivDraw(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::DetailsMode(bool mode)
+{
+    detailsMode = mode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

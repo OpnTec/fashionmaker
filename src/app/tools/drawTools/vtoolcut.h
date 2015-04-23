@@ -54,6 +54,7 @@ public slots:
     virtual void  CurveChoosed(quint32 id)=0;
     void          HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
     void          Disable(bool disable);
+    void          DetailsMode(bool mode);
 protected:
     /** @brief formula keep formula of length */
     QString       formula;
@@ -67,6 +68,8 @@ protected:
     quint32       curveCutId;
     quint32       curve1id;
     quint32       curve2id;
+
+    bool          detailsMode;
 
     virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                PathDirection direction = PathDirection::Hide)=0;
