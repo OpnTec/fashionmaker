@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl" version="2.1">
 <context>
     <name>AddDet</name>
     <message>
@@ -195,11 +193,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -350,11 +348,11 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Punt op afstand langs lijn</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -465,7 +463,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -572,11 +570,11 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation type="unfinished">Punt langs bisector</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -659,15 +657,15 @@
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -738,15 +736,15 @@
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -821,11 +819,11 @@
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -900,11 +898,11 @@
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -959,7 +957,7 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1113,11 +1111,11 @@
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1156,15 +1154,15 @@
     </message>
     <message>
         <source>Perpendicular point along line</source>
-        <translation type="unfinished">Haakse hoek punt langs lijn</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Base Point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1414,19 +1412,19 @@
     </message>
     <message>
         <source>Tables of Variables</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Base size: %1 %3; Base height: %2 %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Description: &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Data successfully saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1504,106 +1502,106 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Critical error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Wrong paper size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
     <message>
         <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paper size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>degree</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Creation options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Layout width:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Two groups: big, small</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Descending area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Millimiters</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimeters</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Inches</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1630,11 +1628,11 @@
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished">Lijn tussen punten</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1673,7 +1671,7 @@
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished">Punt op lijnkruising</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1768,19 +1766,19 @@
     </message>
     <message>
         <source>Point intersect line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">Tweede punt van de lijn</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1898,19 +1896,19 @@
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished">Eerste punt van de lijn</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">Tweede punt van de lijn</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2167,7 +2165,7 @@
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation type="unfinished">Kruispunt van boog en lijn</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2186,19 +2184,19 @@
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>X: vertical point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Y: horizontal point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2293,11 +2291,11 @@
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation type="unfinished">Speciaal punt op schouder</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2363,11 +2361,11 @@
     </message>
     <message>
         <source>Simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2410,7 +2408,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2476,7 +2474,7 @@
     </message>
     <message>
         <source>Line Angle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2519,19 +2517,19 @@
     </message>
     <message>
         <source>Triangle tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First point of the axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Second point of the axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">Tweede punt van de lijn</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2564,48 +2562,32 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je echt gezamenlijke details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Select first point</source>
-        <translation type="vanished">Selecteer eerste punt</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Selecteer tweede punt</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Selecteer een ander tweede punt</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Selecteer een detail</translation>
-    </message>
-    <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select a detail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select a point on edge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3309,746 +3291,746 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation type="unfinished">Speciaal punt op schouder</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Triangle tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation type="unfinished">Kruispunt van boog en lijn</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Point intersect line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Curved path</source>
-        <translation type="unfinished">Krommingspad</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished">Werkbalk</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Activate last used tool again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>L</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Measurements</name>
     <message>
         <source>head_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoofd_wijdte</translation>
     </message>
     <message>
         <source>mid_neck_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>midden_hals_wijdte</translation>
     </message>
     <message>
         <source>neck_base_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_basis_wijdte</translation>
     </message>
     <message>
         <source>head_and_neck_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoofd_en_hals_lengte</translation>
     </message>
     <message>
         <source>center_front_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>midden_voorkant_taille_lengte</translation>
     </message>
     <message>
         <source>center_back_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>midden_achterkant_taille_lengte</translation>
     </message>
     <message>
         <source>shoulder_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>schouder_lengte</translation>
     </message>
     <message>
         <source>side_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>zijkant_taille_lengte</translation>
     </message>
     <message>
         <source>trunk_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>romp_lengte</translation>
     </message>
     <message>
         <source>shoulder_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>schouder_wijdte</translation>
     </message>
     <message>
         <source>upper_chest_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boven_borst_wijdte</translation>
     </message>
     <message>
         <source>bust_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>borst_wijdte</translation>
     </message>
     <message>
         <source>under_bust_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>onder_borst_wijdte</translation>
     </message>
     <message>
         <source>waist_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taille_wijdte</translation>
     </message>
     <message>
         <source>high_hip_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoog_heup_wijdte</translation>
     </message>
     <message>
         <source>hip_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>heup_wijdte</translation>
     </message>
     <message>
         <source>upper_front_chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boven_voorkant_borst_wijdte</translation>
     </message>
     <message>
         <source>front_chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_borst_wijdte</translation>
     </message>
     <message>
         <source>across_front_shoulder_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>kruiselings_voorkant_schouder_wijdte</translation>
     </message>
     <message>
         <source>across_back_shoulder_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>kruiselings_rug_schouder_wijdte</translation>
     </message>
     <message>
         <source>upper_back_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boven_rug_breedte</translation>
     </message>
     <message>
         <source>back_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_breedte</translation>
     </message>
     <message>
         <source>bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>bustepunt_naar_bustepunt</translation>
     </message>
     <message>
         <source>halter_bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>halterlijn_bustepunt_naar_bustepunt</translation>
     </message>
     <message>
         <source>neck_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_bustepunt</translation>
     </message>
     <message>
         <source>crotch_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>kruis_lengte</translation>
     </message>
     <message>
         <source>rise_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>omhoogkomen_hoogte</translation>
     </message>
     <message>
         <source>shoulder_drop</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>Schouder_val</translation>
     </message>
     <message>
         <source>shoulder_slope_degrees</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>schouder_kop_graden</translation>
     </message>
     <message>
         <source>front_shoulder_slope_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voor_schouder_kop_lengte</translation>
     </message>
     <message>
         <source>back_shoulder_slope_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_schouder_kop_lengte</translation>
     </message>
     <message>
         <source>front_shoulder_to_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_schouder_naar_taille_lengte</translation>
     </message>
     <message>
         <source>back_shoulder_to_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_schouder_naar_taille_lengte</translation>
     </message>
     <message>
         <source>front_neck_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_hals_boog</translation>
     </message>
     <message>
         <source>back_neck_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_hals_ronding</translation>
     </message>
     <message>
         <source>front_upper_chest_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_boven_borst_ronding</translation>
     </message>
     <message>
         <source>back_upper_chest_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_boven-borst-ronding</translation>
     </message>
     <message>
         <source>front_waist_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_taille_ronding</translation>
     </message>
     <message>
         <source>back_waist_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_taille_ronding</translation>
     </message>
     <message>
         <source>front_upper_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_boven_heup_boog</translation>
     </message>
     <message>
         <source>back_upper_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_boven_heup_ronding</translation>
     </message>
     <message>
         <source>front_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_heup_ronding</translation>
     </message>
     <message>
         <source>back_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_heup_ronding</translation>
     </message>
     <message>
         <source>chest_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>borst_schuinte</translation>
     </message>
     <message>
         <source>back_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_schuinte</translation>
     </message>
     <message>
         <source>front_waist_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_taille_schuinte</translation>
     </message>
     <message>
         <source>back_waist_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_taille_schuinte</translation>
     </message>
     <message>
         <source>front_neck_to_upper_chest_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_hals_naar_boven_borst_hoogte</translation>
     </message>
     <message>
         <source>front_neck_to_bust_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_hals_naar_buste_hoogte</translation>
     </message>
     <message>
         <source>front_waist_to_upper_chest</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_taille_naar_boven_borst</translation>
     </message>
     <message>
         <source>front_waist_to_lower_breast</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_taille_naar_lager_bustelijn</translation>
     </message>
     <message>
         <source>back_waist_to_upper_chest</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>rug_taille_naar_boven_borst</translation>
     </message>
     <message>
         <source>strap_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>riem_lengte</translation>
     </message>
     <message>
         <source>armscye_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>armsgat_wijdte</translation>
     </message>
     <message>
         <source>elbow_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>elleboog_wijdte</translation>
     </message>
     <message>
         <source>upper_arm_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boven_arm_wijdte</translation>
     </message>
     <message>
         <source>wrist_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>pols_wijdte</translation>
     </message>
     <message>
         <source>scye_depth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>armsgat_diepte</translation>
     </message>
     <message>
         <source>shoulder_and_arm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>schouder_en_arm_lengte</translation>
     </message>
     <message>
         <source>underarm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>onderarm_lengte</translation>
     </message>
     <message>
         <source>cervicale_to_wrist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>halswervel_naar_pols_lengte</translation>
     </message>
     <message>
         <source>shoulder_to_elbow_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>schouder_naar_elleboog_wijdte</translation>
     </message>
     <message>
         <source>arm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>arm_lengte</translation>
     </message>
     <message>
         <source>hand_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hand_breedte</translation>
     </message>
     <message>
         <source>hand_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hand_lengte</translation>
     </message>
     <message>
         <source>hand_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hand_wijdte</translation>
     </message>
     <message>
         <source>thigh_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>dij_wijdte</translation>
     </message>
     <message>
         <source>mid_thigh_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>midden_dij_wijdte</translation>
     </message>
     <message>
         <source>knee_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>knie_wijdte</translation>
     </message>
     <message>
         <source>calf_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>kuit_wijdte</translation>
     </message>
     <message>
         <source>ankle_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>enkel_wijdte</translation>
     </message>
     <message>
         <source>knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>knie_hoogte</translation>
     </message>
     <message>
         <source>ankle_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>enkel_hoogte</translation>
     </message>
     <message>
         <source>foot_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voet_breedte</translation>
     </message>
     <message>
         <source>foot_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voet_lengte</translation>
     </message>
     <message>
         <source>height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte</translation>
     </message>
     <message>
         <source>cervicale_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>halswervel_hoogte</translation>
     </message>
     <message>
         <source>cervicale_to_knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>halswervel_naar_knie_hoogte</translation>
     </message>
     <message>
         <source>waist_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taille_hoogte</translation>
     </message>
     <message>
         <source>high_hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoog_heup_hoogte</translation>
     </message>
     <message>
         <source>hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>heup_hoogte</translation>
     </message>
     <message>
         <source>waist_to_hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taille_naar_heup_hoogte</translation>
     </message>
     <message>
         <source>waist_to_knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taille_naar_knie_hoogte</translation>
     </message>
     <message>
         <source>crotch_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>kruis_hoogte</translation>
     </message>
     <message>
         <source>size</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>maat</translation>
     </message>
     <message>
         <source>height_front_neck_base_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_voorkant_hals_basis_punt</translation>
     </message>
     <message>
         <source>height_base_neck_side_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_basis_hals_zijkant_punt</translation>
     </message>
     <message>
         <source>height_shoulder_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_schouder_punt</translation>
     </message>
     <message>
         <source>height_nipple_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_tepel_punt</translation>
     </message>
     <message>
         <source>height_back_angle_axilla</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_rug_hoek_oksel</translation>
     </message>
     <message>
         <source>height_scapular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_schouderblad_punt</translation>
     </message>
     <message>
         <source>height_under_buttock_folds</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_onder_zitvlak_plooien</translation>
     </message>
     <message>
         <source>hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>heupen_uitgezonderd_uitpuilend_onderbuik</translation>
     </message>
     <message>
         <source>girth_foot_instep</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>wijdte_voet_instap</translation>
     </message>
     <message>
         <source>side_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>zijkant_taille_naar_vloer</translation>
     </message>
     <message>
         <source>front_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_taiile_naar_vloer</translation>
     </message>
     <message>
         <source>arc_through_groin_area</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boog_door_lies_gebied</translation>
     </message>
     <message>
         <source>waist_to_plane_seat</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taille_naar_vlakke_stoel</translation>
     </message>
     <message>
         <source>neck_to_radial_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_draai_punt</translation>
     </message>
     <message>
         <source>neck_to_third_finger</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_derde_vinger</translation>
     </message>
     <message>
         <source>neck_to_first_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_eerste_lijn_borst_omtrek</translation>
     </message>
     <message>
         <source>front_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_taille_lengte</translation>
     </message>
     <message>
         <source>arc_through_shoulder_joint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boog_door_schouder_gewricht</translation>
     </message>
     <message>
         <source>neck_to_back_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_rug_lijn_borst_omtrek</translation>
     </message>
     <message>
         <source>waist_to_neck_side</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taiile_naar_hals_zijkant</translation>
     </message>
     <message>
         <source>arc_length_upper_body</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boog_lengte_boven_lichaam</translation>
     </message>
     <message>
         <source>chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>borst_wijdte</translation>
     </message>
     <message>
         <source>anteroposterior_diameter_hands</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>Omtrek_diameter_handen</translation>
     </message>
     <message>
         <source>height_clavicular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_sleutelbeen_punt</translation>
     </message>
     <message>
         <source>height_armhole_slash</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoogte_armholte_verlaagdpunt</translation>
     </message>
     <message>
         <source>slash_shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>verlaagd_schouder_hoogte</translation>
     </message>
     <message>
         <source>half_girth_neck</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_hals</translation>
     </message>
     <message>
         <source>half_girth_neck_for_shirts</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_hals_voor_shirts</translation>
     </message>
     <message>
         <source>half_girth_chest_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_borst_eerste</translation>
     </message>
     <message>
         <source>half_girth_chest_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_borst_tweede</translation>
     </message>
     <message>
         <source>half_girth_chest_third</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_borst_derde</translation>
     </message>
     <message>
         <source>half_girth_waist</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_taille</translation>
     </message>
     <message>
         <source>half_girth_hips_considering_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_heupen_overwegend_uitpullend_onderbuik</translation>
     </message>
     <message>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>helft_wijdte_heupen_uitgezonderd_uitpuilend_onderbuik</translation>
     </message>
     <message>
         <source>girth_knee_flexed_feet</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>wijdte_knie_gebogen_voet</translation>
     </message>
     <message>
         <source>neck_transverse_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_doorsnee_diameter</translation>
     </message>
     <message>
         <source>front_slash_shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>voorkant_verlaagd_schouder_hoogte</translation>
     </message>
     <message>
         <source>neck_to_front_waist_line</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_voorkant_taille_lijn</translation>
     </message>
     <message>
         <source>hand_vertical_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hand_vertivaal_diameter</translation>
     </message>
     <message>
         <source>neck_to_knee_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hals_naar_knie_punt</translation>
     </message>
     <message>
         <source>waist_to_knee</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>taille_naar_knie</translation>
     </message>
     <message>
         <source>shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>schouder_hoogte</translation>
     </message>
     <message>
         <source>head_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hoofd_hoogte</translation>
     </message>
     <message>
         <source>body_position</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>lichaam_positie</translation>
     </message>
     <message>
         <source>arc_behind_shoulder_girdle</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>boog_achter_schouder_gordel</translation>
     </message>
     <message>
         <source>neck_to_neck_base</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>hlas_naar_hals_basis</translation>
     </message>
     <message>
         <source>depth_waist_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>diepte_taille_eerste</translation>
     </message>
     <message>
         <source>depth_waist_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <comment>Short measurement name. Don't use math symbols in name!!!!</comment>
         <translation>diepte_taille_tweede</translation>
     </message>
 </context>
@@ -5452,11 +5434,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5549,7 +5531,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>px</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5836,26 +5818,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5900,48 +5882,40 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Bevestig de verwijdering.</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Wil je echt verwijderen?</translation>
-    </message>
-    <message>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>dark red</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>dark green</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -6005,13 +5979,13 @@ Do you want to save your changes?</source>
         <translation>Kan niet omzetten naar toDouble parameter</translation>
     </message>
     <message>
-        <source>Can&apos;t open file %1:
+        <source>Can't open file %1:
 %2.</source>
         <translation>kan bestand niet openen %1:
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
+        <source>Can't open schema file %1:
 %2.</source>
         <translation>Kan schema bestand niet openen %1:
 %2.</translation>
@@ -6422,15 +6396,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

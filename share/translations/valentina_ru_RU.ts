@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Proxy user</source>
-        <translation>Пользователь Proxy</translation>
+        <translation>Пользователь прокси-сервера</translation>
     </message>
     <message>
         <source>Proxy pass</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Отмена</translation>
+        <translation>О&amp;тмена</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -123,11 +123,11 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>Настройки языка интерфейса пользователя оновлены и будут задействованы при следующем запуске</translation>
+        <translation>Настройки языка интерфейса пользователя обновлены и будут задействованы при следующем запуске</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
+        <translation>Единицы измерения обновлены и будут учтены при следующем создании лекала</translation>
     </message>
     <message>
         <source>Save</source>
@@ -138,12 +138,12 @@
         <translation>Автосохранение измененного лекала</translation>
     </message>
     <message>
-        <source>Interval:</source>
-        <translation>Интервал:</translation>
-    </message>
-    <message>
         <source>min</source>
         <translation>мин</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation>Интервал:</translation>
     </message>
     <message>
         <source>Language</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Разделитель дробовой части</translation>
+        <translation>Разделитель дробной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -174,6 +174,14 @@
         <translation>Миллиметры</translation>
     </message>
     <message>
+        <source>Inches</source>
+        <translation>Дюймы</translation>
+    </message>
+    <message>
+        <source>Label language</source>
+        <translation>Язык имени точки</translation>
+    </message>
+    <message>
         <source>Send crash reports</source>
         <translation>Отсылка отчета об ошибках</translation>
     </message>
@@ -184,22 +192,6 @@
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation>После каждого падения Valentina собирает информацию которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt; которую мы собираем.</translation>
-    </message>
-    <message>
-        <source>Milimiters</source>
-        <translation type="vanished">Milimiters</translation>
-    </message>
-    <message>
-        <source>Inches</source>
-        <translation>Дюймы</translation>
-    </message>
-    <message>
-        <source>Label language</source>
-        <translation>Язык имени точки</translation>
-    </message>
-    <message>
-        <source>With OS options (.)</source>
-        <translation type="vanished">С параметров ОС (.)</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -246,16 +238,12 @@
         <translation>Авторы</translation>
     </message>
     <message>
-        <source>Based on Qt %2 (32 bit)</source>
-        <translation type="vanished">Базируется на Qt %2 (32 bit)</translation>
-    </message>
-    <message>
         <source>Built on %3 at %4</source>
         <translation>Создано %3 в %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Веб сайт : %1</translation>
+        <translation>Веб-сайт : %1</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -267,50 +255,30 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Резвизия:</translation>
+        <translation>Ревизия:</translation>
     </message>
 </context>
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <source>Point along line</source>
-        <translation type="vanished">Точка вдоль линии</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation>Значение длины</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
-        <source>Formula for the calculation of length of line</source>
-        <translation type="vanished">Формула расчета длины линии</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation>Имя точки</translation>
     </message>
     <message>
         <source>Insert variable into the formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
+        <source>Value of length</source>
+        <translation>Значение длины</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation>Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -337,36 +305,16 @@
         <translation>Показать линию с первой точки до этой</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation>Входные данные</translation>
+    </message>
+    <message>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
     </message>
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
-    </message>
-    <message>
-        <source>Input data</source>
-        <translation>Входные данные</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -383,6 +331,18 @@
     <message>
         <source>Length of curves</source>
         <translation>Длина кривых</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -408,40 +368,20 @@
         <translation>Радиус</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Formula for the calculation of radius of arc</source>
-        <translation type="vanished">Формула расчета радиуса дуги</translation>
-    </message>
-    <message>
         <source>Insert variable into the formula</source>
         <translation>Вставить переменную в формулу</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of radius</source>
         <translation>Значение радиуса</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>First angle degree</source>
-        <translation type="vanished">Первый угол градусы</translation>
-    </message>
-    <message>
-        <source>First angle of arc counterclockwise</source>
-        <translation type="vanished">Первый угол дуги против часовой стрелки</translation>
+        <source>First angle</source>
+        <translation>Первый угол</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
@@ -452,12 +392,8 @@
         <translation>Значение первого угла</translation>
     </message>
     <message>
-        <source>Second angle degree</source>
-        <translation type="vanished">Второй угол градусы</translation>
-    </message>
-    <message>
-        <source>Second angle of arc counterclockwise</source>
-        <translation type="vanished">Второй угол дуги против часвой стрелки</translation>
+        <source>Second angle</source>
+        <translation>Второй угол</translation>
     </message>
     <message>
         <source>Insert marked variable into formula</source>
@@ -482,22 +418,6 @@
     <message>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation>Первый угол</translation>
-    </message>
-    <message>
-        <source>Second angle</source>
-        <translation>Второй угол</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -532,10 +452,6 @@
         <translation>Переменные</translation>
     </message>
     <message>
-        <source>Value of angle of line.</source>
-        <translation type="vanished">Значение угла линии.</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -555,36 +471,16 @@
 <context>
     <name>DialogBisector</name>
     <message>
-        <source>Bisector</source>
-        <translation type="vanished">Бисектриса</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation>Значение длины</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
-        <source>Calculation of length of bisector by using the formula</source>
-        <translation type="vanished">Расчет длины бисектрисы используя формулу</translation>
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
         <translation>Вставить выбраную переменную в формулу</translation>
     </message>
     <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <source>Value of length</source>
+        <translation>Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -627,36 +523,16 @@
         <translation>Показать линию с первой точки до этой</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation>Входные данные</translation>
+    </message>
+    <message>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
     </message>
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
-    </message>
-    <message>
-        <source>Input data</source>
-        <translation>Входные данные</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -675,6 +551,18 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
+    </message>
+    <message>
         <source>Select second point of angle</source>
         <translation>Выберить вторую точку угла</translation>
     </message>
@@ -684,7 +572,7 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Точка вдоль бисектрисы</translation>
+        <translation>Точка вдоль биссектрисы</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -694,16 +582,8 @@
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
-        <source>Curve intersect axis</source>
-        <translation type="vanished">Пересичение кривой и оси</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>Угол</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -716,10 +596,6 @@
     <message>
         <source>Axis point</source>
         <translation>Точка оси</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -767,11 +643,11 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
+        <translation>Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
+        <translation>Скрыть пустые мерки</translation>
     </message>
     <message>
         <source>Variables</source>
@@ -797,28 +673,8 @@
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
-    </message>
-    <message>
-        <source>Formula for the calculation of the spline</source>
-        <translation type="vanished">Формула расчета сплайна</translation>
-    </message>
-    <message>
-        <source>Cut arc</source>
-        <translation type="vanished">Разрезать дугу</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -837,10 +693,6 @@
         <translation>Дуга</translation>
     </message>
     <message>
-        <source>Selected curve</source>
-        <translation type="vanished">Выбраная кривая</translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
@@ -855,10 +707,6 @@
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -886,7 +734,7 @@
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -894,7 +742,7 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Выбраная дуга</translation>
+        <translation>Выбранная дуга</translation>
     </message>
     <message>
         <source>Color</source>
@@ -904,28 +752,8 @@
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
-    </message>
-    <message>
-        <source>Formula for the calculation of the spline</source>
-        <translation type="vanished">Формула расчета сплайна</translation>
-    </message>
-    <message>
-        <source>Cut curve</source>
-        <translation type="vanished">Разрезать кривую</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -945,7 +773,7 @@
     </message>
     <message>
         <source>Selected curve</source>
-        <translation>Выбраная кривая</translation>
+        <translation>Выбранная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -962,10 +790,6 @@
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -993,7 +817,7 @@
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -1007,28 +831,8 @@
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
-    </message>
-    <message>
-        <source>Formula for the calculation of the curve length</source>
-        <translation type="vanished">Формула для расчета длины кривои</translation>
-    </message>
-    <message>
-        <source>Cut curve path</source>
-        <translation type="vanished">Разрезать сложную кривую</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1048,7 +852,7 @@
     </message>
     <message>
         <source>Selected curve path</source>
-        <translation>Выбраная сложная кривая</translation>
+        <translation>Выбранная сложная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1065,10 +869,6 @@
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -1096,11 +896,11 @@
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Разделить сложною кривую</translation>
+        <translation>Разделить сложную кривую</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1130,16 +930,12 @@
         <translation>Параметры</translation>
     </message>
     <message>
-        <source>Seam allowance</source>
-        <translation>Прибавка на швы</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
         <source>Name of detail</source>
         <translation>Имя детали</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation>Прибавка на швы</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1150,12 +946,12 @@
         <translation>Замкнутая</translation>
     </message>
     <message>
-        <source>Got wrong scene object. Ignore.</source>
-        <translation>Получен не правильный объект сцены. Ингорируем.</translation>
+        <source>Delete</source>
+        <translation>Удалить</translation>
     </message>
     <message>
-        <source>Got wrong tools. Ignore.</source>
-        <translation type="vanished">Получен не правильный инструмент. Игнорируем.</translation>
+        <source>Got wrong scene object. Ignore.</source>
+        <translation>Получен неправильный объект сцены. Ингорируем.</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -1170,7 +966,7 @@
     <name>DialogEditWrongFormula</name>
     <message>
         <source>Edit formula</source>
-        <translation>Редактировать формулу</translation>
+        <translation>Изменить формулу</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1179,14 +975,6 @@
     <message>
         <source>Insert variable into formula</source>
         <translation>Вставить переменную в формулу</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -1207,10 +995,6 @@
     <message>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -1238,7 +1022,7 @@
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
+        <translation>Скрыть пустые мерки</translation>
     </message>
     <message>
         <source>Variables</source>
@@ -1252,28 +1036,8 @@
         <translation>Длина</translation>
     </message>
     <message>
-        <source>Point in the end of a line</source>
-        <translation type="vanished">Точка на конце отрезка</translation>
-    </message>
-    <message>
-        <source>Formula for calculation of length of line</source>
-        <translation type="vanished">Формула расчета длины линии</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation>Значение длины</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1305,7 +1069,11 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
+    </message>
+    <message>
+        <source>Input data</source>
+        <translation>Входные данные</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -1314,42 +1082,6 @@
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation>Переменные</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Переменные - кликнете дважды для вставки в формулу</translation>
-    </message>
-    <message>
-        <source>Angle of line</source>
-        <translation type="vanished">Угол линии</translation>
-    </message>
-    <message>
-        <source>Degree of angle</source>
-        <translation type="vanished">Угол</translation>
-    </message>
-    <message>
-        <source>Input data</source>
-        <translation>Входные данные</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -1368,6 +1100,18 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation>Скрыть пустые мерки</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation>Переменные</translation>
+    </message>
+    <message>
         <source>Point at distance and angle</source>
         <translation>Точка на конце отрезка</translation>
     </message>
@@ -1378,14 +1122,6 @@
 </context>
 <context>
     <name>DialogHeight</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Рост</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
@@ -1442,6 +1178,10 @@
         <translation>Инструмент</translation>
     </message>
     <message>
+        <source>Can&apos;t create record.</source>
+        <translation>Невозможно создать запись.</translation>
+    </message>
+    <message>
         <source>%1 - Base point</source>
         <translation>%1 - Базовая точка</translation>
     </message>
@@ -1466,12 +1206,32 @@
         <translation>%4 - биссектриса угла %1_%2_%3</translation>
     </message>
     <message>
+        <source>%5 - intersection of lines %1_%2 and %3_%4</source>
+        <translation>%5 - пересечение линий %1_%2 и %3_%4</translation>
+    </message>
+    <message>
+        <source>Curve %1_%2</source>
+        <translation>Кривая %1_%2</translation>
+    </message>
+    <message>
+        <source>Arc with center in point %1</source>
+        <translation>Дуга c центром в точке %1</translation>
+    </message>
+    <message>
+        <source>Curve point %1</source>
+        <translation>Точка кривой %1</translation>
+    </message>
+    <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation>%4 - точка пересечения дуги с центром в точке %1 и линии %2_%3</translation>
     </message>
     <message>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation>Точка перпендикуляра с точки %1 до линии %2_%3</translation>
+    </message>
+    <message>
+        <source>Triangle: axis %1_%2, points %3 and %4</source>
+        <translation>Треугольник: ось %1_%2, точки %3 и %4</translation>
     </message>
     <message>
         <source>%1 - point of intersection %2 and %3</source>
@@ -1497,48 +1257,12 @@
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation>%1 - точка пересечения кривой и оси через точку %2</translation>
     </message>
-    <message>
-        <source>%1 - cut curve point %2</source>
-        <translation type="obsolete">%1 - разрезает сложную кривую %2</translation>
-    </message>
-    <message>
-        <source>Got wrong tool type. Ignore.</source>
-        <translation type="vanished">Получено неправильный тип инструмента. Игнорируем.</translation>
-    </message>
-    <message>
-        <source>Curve %1_%2</source>
-        <translation>Кривая %1_%2</translation>
-    </message>
-    <message>
-        <source>%5 - intersection of lines %1_%2 and %3_%4</source>
-        <translation>%5 - пересечение линий %1_%2 и %3_%4</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create record.</source>
-        <translation>Не могу создать запись.</translation>
-    </message>
-    <message>
-        <source>Arc with center in point %1</source>
-        <translation>Дуга c центром в точке %1</translation>
-    </message>
-    <message>
-        <source>Curve point %1</source>
-        <translation>Точка кривой %1</translation>
-    </message>
-    <message>
-        <source>Triangle: axis %1_%2, points %3 and %4</source>
-        <translation>Треугольник: ось %1_%2, точки %3 и %4</translation>
-    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
     <message>
         <source>Increments</source>
         <translation>Прибавки</translation>
-    </message>
-    <message>
-        <source>Sizes table</source>
-        <translation type="vanished">Стандартная таблица</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -1566,11 +1290,15 @@
     </message>
     <message>
         <source>Sex</source>
-        <translation>Стать</translation>
+        <translation>Пол</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation>Email</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
+        <translation>Скрыть пустые мерки</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1578,7 +1306,7 @@
     </message>
     <message>
         <source>The calculated value</source>
-        <translation>Расчитаное значение</translation>
+        <translation>Рассчитанное значение</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -1589,32 +1317,12 @@
         <translation>В размерах</translation>
     </message>
     <message>
-        <source>In growths</source>
-        <translation type="vanished">В ростах</translation>
+        <source>In heights</source>
+        <translation>В ростах</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Опис</translation>
-    </message>
-    <message>
-        <source>In size</source>
-        <translation type="obsolete">В размерах</translation>
-    </message>
-    <message>
-        <source>In growth</source>
-        <translation type="obsolete">В ростах</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Email</source>
-        <translation>E-mail</translation>
-    </message>
-    <message>
-        <source>In heights</source>
-        <translation>В ростах</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1625,8 +1333,8 @@
         <translation>Линия</translation>
     </message>
     <message>
-        <source>Length of the line</source>
-        <translation type="obsolete">Длина линии</translation>
+        <source>Length</source>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>Curves</source>
@@ -1637,24 +1345,12 @@
         <translation>Кривая</translation>
     </message>
     <message>
-        <source>Length of the curve</source>
-        <translation type="obsolete">Длина кривой</translation>
-    </message>
-    <message>
         <source>Arcs</source>
         <translation>Дуги</translation>
     </message>
     <message>
         <source>Arc</source>
         <translation>Дуга</translation>
-    </message>
-    <message>
-        <source>Length of arc</source>
-        <translation type="obsolete">Длина дуги</translation>
-    </message>
-    <message>
-        <source>Name %1</source>
-        <translation type="obsolete">Обозначение %1</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -1682,7 +1378,7 @@
     </message>
     <message>
         <source>Could not save Sex</source>
-        <translation>Не удалось сохранить стать</translation>
+        <translation>Не удалось сохранить пол</translation>
     </message>
     <message>
         <source>Could not save BirthDate</source>
@@ -1717,20 +1413,8 @@
         <translation>Не удалось сохранить мерки</translation>
     </message>
     <message>
-        <source>Can&apos;t convert toDouble value.</source>
-        <translation type="vanished">Не могу конвертировать к toDouble значение.</translation>
-    </message>
-    <message>
-        <source>Calculated value</source>
-        <translation type="obsolete">Расчитаное значение</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>Длина</translation>
-    </message>
-    <message>
         <source>Tables of Variables</source>
-        <translation>Таблици переменных</translation>
+        <translation>Таблицы переменных</translation>
     </message>
     <message>
         <source>Base size: %1 %3; Base height: %2 %3</source>
@@ -1748,10 +1432,6 @@
 <context>
     <name>DialogIndividualMeasurements</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Диалог</translation>
-    </message>
-    <message>
         <source>Individual measurements</source>
         <translation>Индивидуальные мерки</translation>
     </message>
@@ -1766,10 +1446,6 @@
     <message>
         <source>Path:</source>
         <translation>Путь:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <source>Given name:</source>
@@ -1793,7 +1469,7 @@
     </message>
     <message>
         <source>Please try again or change file</source>
-        <translation>Пожайлуста попробуйте снова или смените файл</translation>
+        <translation>Попробуйте снова или смените файл</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -1820,20 +1496,8 @@
         <translation>Миллиметры</translation>
     </message>
     <message>
-        <source>Milimiters</source>
-        <translation type="vanished">Milimiters</translation>
-    </message>
-    <message>
         <source>Inches</source>
         <translation>Дюймы</translation>
-    </message>
-    <message>
-        <source>centimeter</source>
-        <translation type="vanished">сантиметры</translation>
-    </message>
-    <message>
-        <source>inch</source>
-        <translation type="vanished">дюймы</translation>
     </message>
 </context>
 <context>
@@ -1883,11 +1547,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Выстора:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation>Высота:</translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
@@ -1949,10 +1609,6 @@
 <context>
     <name>DialogLine</name>
     <message>
-        <source>Line</source>
-        <translation type="vanished">Линия</translation>
-    </message>
-    <message>
         <source>First point</source>
         <translation>Первая точка</translation>
     </message>
@@ -1966,7 +1622,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -1983,14 +1639,6 @@
 </context>
 <context>
     <name>DialogLineIntersect</name>
-    <message>
-        <source>Point of line intersection</source>
-        <translation type="obsolete">Точка пересичения линий</translation>
-    </message>
-    <message>
-        <source>Intersection of lines</source>
-        <translation type="vanished">Пересичение линий</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
@@ -2025,22 +1673,14 @@
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Точка пересичения линий</translation>
+        <translation>Точка пересечения линий</translation>
     </message>
 </context>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
-        <source>Line intersect axis</source>
-        <translation type="vanished">Пересечение линии и оси</translation>
-    </message>
-    <message>
         <source>Angle</source>
         <translation>Угол</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -2163,7 +1803,7 @@
     </message>
     <message>
         <source>Individual</source>
-        <translation>Индивиндуальные</translation>
+        <translation>Индивидуальные</translation>
     </message>
     <message>
         <source>Use for creation pattern individual measurements</source>
@@ -2173,24 +1813,24 @@
 <context>
     <name>DialogNormal</name>
     <message>
-        <source>Normal</source>
-        <translation type="vanished">Перпендикуляр</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
+        <source>Insert variable into formula</source>
+        <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
         <source>Value of length</source>
         <translation>Значение длины</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation>Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2202,35 +1842,7 @@
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Доп. угол градусы</translation>
-    </message>
-    <message>
-        <source>Input data</source>
-        <translation>Входные данные</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
-    </message>
-    <message>
-        <source>Formula for calculation of length of normal</source>
-        <translation type="vanished">Формула расчета длины перпендикуляра</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation>Имя точки</translation>
-    </message>
-    <message>
-        <source>Insert variable into formula</source>
-        <translation>Вставить переменную в формулу</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Доп. угол в градусах</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2241,12 +1853,12 @@
         <translation>Показать линию с первой точки до этой</translation>
     </message>
     <message>
-        <source>Size and height</source>
-        <translation>Размер и рост</translation>
+        <source>Input data</source>
+        <translation>Входные данные</translation>
     </message>
     <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
+        <source>Size and height</source>
+        <translation>Размер и рост</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2274,11 +1886,11 @@
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
+        <translation>Скрыть пустые мерки</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2332,159 +1944,15 @@
         <translation>Все роста (см)</translation>
     </message>
     <message>
-        <source>92</source>
-        <translation type="vanished">92</translation>
-    </message>
-    <message>
-        <source>146</source>
-        <translation type="vanished">146</translation>
-    </message>
-    <message>
-        <source>98</source>
-        <translation type="vanished">9</translation>
-    </message>
-    <message>
-        <source>152</source>
-        <translation type="vanished">152</translation>
-    </message>
-    <message>
-        <source>104</source>
-        <translation type="vanished">104</translation>
-    </message>
-    <message>
-        <source>158</source>
-        <translation type="vanished">158</translation>
-    </message>
-    <message>
-        <source>110</source>
-        <translation type="vanished">110</translation>
-    </message>
-    <message>
-        <source>164</source>
-        <translation type="vanished">164 </translation>
-    </message>
-    <message>
-        <source>116</source>
-        <translation type="vanished">116</translation>
-    </message>
-    <message>
-        <source>170</source>
-        <translation type="vanished">170</translation>
-    </message>
-    <message>
-        <source>122</source>
-        <translation type="vanished">122</translation>
-    </message>
-    <message>
-        <source>176</source>
-        <translation type="vanished">176</translation>
-    </message>
-    <message>
-        <source>128</source>
-        <translation type="vanished">128</translation>
-    </message>
-    <message>
-        <source>182</source>
-        <translation type="vanished">182</translation>
-    </message>
-    <message>
-        <source>134</source>
-        <translation type="vanished">134</translation>
-    </message>
-    <message>
-        <source>188</source>
-        <translation type="vanished">188</translation>
-    </message>
-    <message>
-        <source>140</source>
-        <translation type="vanished">140</translation>
-    </message>
-    <message>
-        <source>194</source>
-        <translation type="vanished">194</translation>
-    </message>
-    <message>
         <source>All sizes (cm)</source>
         <translation>Все размеры (см)</translation>
-    </message>
-    <message>
-        <source>22</source>
-        <translation type="vanished">2</translation>
-    </message>
-    <message>
-        <source>40</source>
-        <translation type="vanished">4</translation>
-    </message>
-    <message>
-        <source>24</source>
-        <translation type="vanished">24</translation>
-    </message>
-    <message>
-        <source>42</source>
-        <translation type="vanished">42</translation>
-    </message>
-    <message>
-        <source>26</source>
-        <translation type="vanished">2</translation>
-    </message>
-    <message>
-        <source>44</source>
-        <translation type="vanished">44 года</translation>
-    </message>
-    <message>
-        <source>28</source>
-        <translation type="vanished">28</translation>
-    </message>
-    <message>
-        <source>46</source>
-        <translation type="vanished">46</translation>
-    </message>
-    <message>
-        <source>30</source>
-        <translation type="vanished">30</translation>
-    </message>
-    <message>
-        <source>48</source>
-        <translation type="vanished">48</translation>
-    </message>
-    <message>
-        <source>32</source>
-        <translation type="vanished">32</translation>
-    </message>
-    <message>
-        <source>50</source>
-        <translation type="vanished">50</translation>
-    </message>
-    <message>
-        <source>34</source>
-        <translation type="vanished">34</translation>
-    </message>
-    <message>
-        <source>52</source>
-        <translation type="vanished">52</translation>
-    </message>
-    <message>
-        <source>36</source>
-        <translation type="vanished">36</translation>
-    </message>
-    <message>
-        <source>54</source>
-        <translation type="vanished">54</translation>
-    </message>
-    <message>
-        <source>38</source>
-        <translation type="vanished">38</translation>
-    </message>
-    <message>
-        <source>56</source>
-        <translation type="vanished">56 </translation>
     </message>
 </context>
 <context>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>XML редактор</translation>
+        <translation>XML-редактор</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -2513,10 +1981,6 @@
     <message>
         <source>Remove attribute</source>
         <translation>Удалить атрибут</translation>
-    </message>
-    <message>
-        <source>Remove attibute</source>
-        <translation type="vanished">Удалить attibute</translation>
     </message>
     <message>
         <source>Remove node</source>
@@ -2556,7 +2020,7 @@
     </message>
     <message>
         <source>Cannot delete previously created node</source>
-        <translation>Не вдається видалити раніше створений вузол</translation>
+        <translation>Невозможно удалить ранее созданный узел</translation>
     </message>
     <message>
         <source>No changes left</source>
@@ -2564,7 +2028,7 @@
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation>Не могу отменить изменения</translation>
+        <translation>Невозможно отменить изменения</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
@@ -2580,7 +2044,7 @@
     </message>
     <message>
         <source>Node Name</source>
-        <translation>Имя Узла</translation>
+        <translation>Имя узла</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2622,48 +2086,32 @@
 <context>
     <name>DialogPointOfContact</name>
     <message>
-        <source>Point of contact</source>
-        <translation type="vanished">Точка касания</translation>
-    </message>
-    <message>
         <source>Radius</source>
         <translation>Радиус</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
+        <source>Insert variable into formula</source>
+        <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
         <source>Value of radius</source>
         <translation>Значение радиуса</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Center of arc</source>
-        <translation>Центр дуги</translation>
-    </message>
-    <message>
-        <source>Formula for calculation of radius of arc</source>
-        <translation type="vanished">Формула расчета радиуса дуги</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
     </message>
     <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation>Вставить переменную в формулу</translation>
+        <source>Center of arc</source>
+        <translation>Центр дуги</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation>Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Top of the line</source>
@@ -2678,36 +2126,16 @@
         <translation>Входные данные</translation>
     </message>
     <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula.</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу.</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation>Прибавки</translation>
-    </message>
-    <message>
         <source>Size and height</source>
         <translation>Размер и рост</translation>
     </message>
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation>Прибавки</translation>
     </message>
     <message>
         <source>Length of lines</source>
@@ -2722,12 +2150,20 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
-        <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
     </message>
     <message>
-        <source>Select point of center of arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <source>Hide empty measurements</source>
+        <translation>Скрыть пустые мерки</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula.</source>
+        <translation>Переменные - кликните дважды для вставки в формулу.</translation>
+    </message>
+    <message>
+        <source>Select second point of line</source>
+        <translation>Выберить вторую точку линии</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -2737,36 +2173,16 @@
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
-    </message>
-    <message>
-        <source>vertical point</source>
-        <translation type="vanished">Точка вертикали</translation>
-    </message>
-    <message>
-        <source>horizontal point</source>
-        <translation type="vanished">Точка горизонтали</translation>
     </message>
     <message>
         <source>First point of angle</source>
         <translation>Первая точка угла</translation>
     </message>
     <message>
-        <source>Point of intersection</source>
-        <translation type="vanished">Точка пересечения</translation>
-    </message>
-    <message>
         <source>Second point of angle</source>
         <translation>Вторая точка угла</translation>
-    </message>
-    <message>
-        <source>Select point horizontally</source>
-        <translation type="vanished">Выберить точку по горозинтали</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -2782,50 +2198,30 @@
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
-        <translation>Выберить точку по горозинтали</translation>
+        <translation>Выберите точку по горизонтали</translation>
     </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
-        <source>Point of shoulder</source>
-        <translation type="vanished">Точка плеча</translation>
-    </message>
-    <message>
         <source>Length</source>
         <translation>Длина</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation>Значение длины</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
-        <source>Formula for calculation of length of line</source>
-        <translation type="vanished">Формула расчета длины линии</translation>
-    </message>
-    <message>
-        <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation>Имя точки</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
         <translation>Вставить переменную в формулу</translation>
     </message>
     <message>
+        <source>Value of length</source>
+        <translation>Значение длины</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation>Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2845,35 +2241,11 @@
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Показать линию с первой точки к нашей</translation>
+        <translation>Показать линию от первой точки к этой</translation>
     </message>
     <message>
         <source>Input data</source>
         <translation>Входные данные</translation>
-    </message>
-    <message>
-        <source>Size and growth</source>
-        <translation type="obsolete">Размер и рост</translation>
-    </message>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Стандартная таблица</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation>Спрятать пустые мерки</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation>Переменные - кликнете дважды для вставки в формулу</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation>Прибавки</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -2882,6 +2254,10 @@
     <message>
         <source>Measurements</source>
         <translation>Мерки</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation>Прибавки</translation>
     </message>
     <message>
         <source>Length of lines</source>
@@ -2896,16 +2272,24 @@
         <translation>Длина кривых</translation>
     </message>
     <message>
+        <source>Angle of lines</source>
+        <translation>Уголы линий</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation>Спрятать пустые мерки</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation>Переменные - кликните дважды для вставки в формулу</translation>
+    </message>
+    <message>
         <source>Select first point of line</source>
         <translation>Выберить первую точку линии</translation>
     </message>
     <message>
         <source>Select second point of line</source>
         <translation>Выберить вторую точку линии</translation>
-    </message>
-    <message>
-        <source>Select point of shoulder</source>
-        <translation type="vanished">Выберить точку плеча</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -2945,10 +2329,6 @@
 </context>
 <context>
     <name>DialogSpline</name>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">Кривая</translation>
-    </message>
     <message>
         <source>First point</source>
         <translation>Первая точка</translation>
@@ -2992,10 +2372,6 @@
 </context>
 <context>
     <name>DialogSplinePath</name>
-    <message>
-        <source>Curve path</source>
-        <translation type="vanished">Сложная кривая</translation>
-    </message>
     <message>
         <source>Curved path</source>
         <translation>Сложная кривая</translation>
@@ -3059,48 +2435,8 @@
 <context>
     <name>DialogTool</name>
     <message>
-        <source>Wrong details id.</source>
-        <translation type="obsolete">Неправильный id детали.</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="vanished">Линия</translation>
-    </message>
-    <message>
-        <source>No line</source>
-        <translation type="vanished">Без линии</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find point by name</source>
-        <translation type="obsolete">Не могу найти точку за именем</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>Growth</source>
-        <translation type="obsolete">Рост</translation>
-    </message>
-    <message>
-        <source>Dash Line</source>
-        <translation type="vanished">Пунктирная линия(-)</translation>
-    </message>
-    <message>
-        <source>Dot Line</source>
-        <translation type="vanished">Пунктирная линия(.)</translation>
-    </message>
-    <message>
-        <source>Dash Dot Line</source>
-        <translation type="vanished">Пунктирная линия(-.)</translation>
-    </message>
-    <message>
-        <source>Dash Dot Dot Line</source>
-        <translation type="vanished">Пунктирная линия(-..)</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find object by name</source>
-        <translation type="vanished">Не могу найти объект за именем</translation>
     </message>
     <message>
         <source>Empty field</source>
@@ -3145,14 +2481,6 @@
 </context>
 <context>
     <name>DialogTriangle</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
-        <source>Triangle</source>
-        <translation type="vanished">Треугольник</translation>
-    </message>
     <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
@@ -3232,34 +2560,6 @@
 <context>
     <name>DialogUnionDetails</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Диалог</translation>
-    </message>
-    <message>
-        <source>Do you really want union details? This operation can&apos;t be undone.</source>
-        <translation type="vanished">Вы точно хотите объединить детали? Эту операцию нельзя будет отменить.</translation>
-    </message>
-    <message>
-        <source>Select first point</source>
-        <translation type="vanished">Выберить первую точку</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Выберить вторую точку</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Выберите другую точку</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Выберить деталь</translation>
-    </message>
-    <message>
-        <source>Union details</source>
-        <translation type="vanished">Объединение деталей</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3273,7 +2573,7 @@
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation>Деталь должна иметь по крайней мере две точки и три объекты</translation>
+        <translation>Деталь должна иметь по крайней мере две точки и три объекта</translation>
     </message>
     <message>
         <source>Select a second point</source>
@@ -3289,7 +2589,7 @@
     </message>
     <message>
         <source>Select a point on edge</source>
-        <translation>Выберите точку на ребре</translation>
+        <translation>Выберить точку на ребре</translation>
     </message>
 </context>
 <context>
@@ -3446,12 +2746,12 @@
         <translation>Инструмент точка перпендикуляра</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
+        <source>Perpendicular point along line</source>
+        <translation>Перпендикулярная точка вдоль линии</translation>
     </message>
     <message>
-        <source>Special point on shoulder.</source>
-        <translation type="vanished">Инструмент точка плеча.</translation>
+        <source>Point along bisector</source>
+        <translation>Инструмент точка бисектрисы</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -3462,20 +2762,8 @@
         <translation>Инструмент точка вдоль линии</translation>
     </message>
     <message>
-        <source>Point along bisector</source>
-        <translation>Инструмент точка бисектрисы</translation>
-    </message>
-    <message>
-        <source>Point at intersection of arc and line.</source>
-        <translation type="vanished">Инструмент точка касания.</translation>
-    </message>
-    <message>
-        <source>Tool point of height.</source>
-        <translation type="obsolete">Инструмент точка высоты.</translation>
-    </message>
-    <message>
-        <source>Tool triangle.</source>
-        <translation type="vanished">Инструмент угольник.</translation>
+        <source>...</source>
+        <translation>...</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -3486,12 +2774,12 @@
         <translation>Линия</translation>
     </message>
     <message>
-        <source>Tool line.</source>
-        <translation type="obsolete">Инструмент линия.</translation>
+        <source>Line between points</source>
+        <translation>Линия между точками</translation>
     </message>
     <message>
-        <source>Tool point of line intersection.</source>
-        <translation type="obsolete">Инструмент точка пересичения линий.</translation>
+        <source>Point at line intersection</source>
+        <translation>Точка пересичения линий</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
@@ -3502,14 +2790,6 @@
         <translation>Кривая</translation>
     </message>
     <message>
-        <source>Tool curve.</source>
-        <translation type="obsolete">Инструмент кривая.</translation>
-    </message>
-    <message>
-        <source>Tool path curve.</source>
-        <translation type="obsolete">Инструмент сложная кривая.</translation>
-    </message>
-    <message>
         <source>Tools for creating arcs.</source>
         <translation>Инструменты создания дуг.</translation>
     </message>
@@ -3518,96 +2798,12 @@
         <translation>Дуга</translation>
     </message>
     <message>
-        <source>Tool arc.</source>
-        <translation type="obsolete">Инструмент дуга.</translation>
-    </message>
-    <message>
         <source>Tools for creating details.</source>
         <translation>Инструменты создания деталей.</translation>
     </message>
     <message>
         <source>Detail</source>
         <translation>Деталь</translation>
-    </message>
-    <message>
-        <source>Tool new detail.</source>
-        <translation type="vanished">Инструмент новая деталь.</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Файл</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Помощь</translation>
-    </message>
-    <message>
-        <source>Pattern piece</source>
-        <translation type="obsolete">Чертеж</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation>Режим деталей</translation>
-    </message>
-    <message>
-        <source>Pointer tools</source>
-        <translation>Инструмент указатель</translation>
-    </message>
-    <message>
-        <source>New pattern piece</source>
-        <translation>Новый чертеж</translation>
-    </message>
-    <message>
-        <source>Add new pattern piece</source>
-        <translation>Добавить новый чертеж</translation>
-    </message>
-    <message>
-        <source>Perpendicular point along line</source>
-        <translation>Перпендикулярная точка вдоль линии</translation>
-    </message>
-    <message>
-        <source>Tool to make point from x &amp; y of two other points.</source>
-        <translation type="vanished">Инструмент, чтобы сделать точку от х и у двух других точек.</translation>
-    </message>
-    <message>
-        <source>Line between points</source>
-        <translation>Линия между точками</translation>
-    </message>
-    <message>
-        <source>Point at line intersection</source>
-        <translation>Точка пересичения линий</translation>
-    </message>
-    <message>
-        <source>Curve tool.</source>
-        <translation type="vanished">Инструмент кривая.</translation>
-    </message>
-    <message>
-        <source>Tool for path curve.</source>
-        <translation type="vanished">Инструмент сложная кривая.</translation>
-    </message>
-    <message>
-        <source>Tool segment a pathed curve.</source>
-        <translation type="vanished">Инструмент разрезания сложной кривой.</translation>
-    </message>
-    <message>
-        <source>Tool for segmenting a curve.</source>
-        <translation type="vanished">Инструмент разрезания кривой.</translation>
-    </message>
-    <message>
-        <source>Point of intersection line and axis</source>
-        <translation type="vanished">Точка пересечения линии и оси</translation>
-    </message>
-    <message>
-        <source>Arc tool.</source>
-        <translation type="vanished">Инструмент дуга.</translation>
-    </message>
-    <message>
-        <source>Cut arc tool.</source>
-        <translation type="vanished">Инструмент разрезания дуги.</translation>
-    </message>
-    <message>
-        <source>Tool for union two details.</source>
-        <translation type="vanished">Инструмент объединения двух деталей.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -3620,6 +2816,38 @@
     <message>
         <source>&amp;Pattern piece</source>
         <translation>&amp;Чертеж</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation>Мерки</translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation>Окно</translation>
+    </message>
+    <message>
+        <source>Toolbar files</source>
+        <translation>Панель инструментов файлы</translation>
+    </message>
+    <message>
+        <source>ToolBar modes</source>
+        <translation>Панель инструментов режимы</translation>
+    </message>
+    <message>
+        <source>Toolbar pattern</source>
+        <translation>Панель инструментов лекала</translation>
+    </message>
+    <message>
+        <source>Toolbar options</source>
+        <translation>Панель инструментов настройки</translation>
+    </message>
+    <message>
+        <source>Toolbar tools</source>
+        <translation>Панель инструментов</translation>
+    </message>
+    <message>
+        <source>Tool options</source>
+        <translation>Параметры инструметнов</translation>
     </message>
     <message>
         <source>New</source>
@@ -3670,50 +2898,6 @@
         <translation>Сохранить &amp;как...</translation>
     </message>
     <message>
-        <source>Options...</source>
-        <translation type="vanished">Параметры...</translation>
-    </message>
-    <message>
-        <source>Pattern properties</source>
-        <translation>Свойства лекала</translation>
-    </message>
-    <message>
-        <source>Save as</source>
-        <translation>Сохранить как</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation>Мерки</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation>Окно</translation>
-    </message>
-    <message>
-        <source>Toolbar files</source>
-        <translation>Панель инструментов файлы</translation>
-    </message>
-    <message>
-        <source>ToolBar modes</source>
-        <translation>Панель инструментов режимы</translation>
-    </message>
-    <message>
-        <source>Toolbar pattern</source>
-        <translation>Панель инструментов лекала</translation>
-    </message>
-    <message>
-        <source>Toolbar options</source>
-        <translation>Панель инструментов настройки</translation>
-    </message>
-    <message>
-        <source>Toolbar tools</source>
-        <translation>Панель инструментов</translation>
-    </message>
-    <message>
-        <source>Tool options</source>
-        <translation>Параметры инструметнов</translation>
-    </message>
-    <message>
         <source>Save not yet saved pattern</source>
         <translation>Сохранить еще не сохраненное лекало</translation>
     </message>
@@ -3738,8 +2922,24 @@
         <translation>Детали</translation>
     </message>
     <message>
+        <source>Details mode</source>
+        <translation>Режим деталей</translation>
+    </message>
+    <message>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
+    </message>
+    <message>
+        <source>Pointer tools</source>
+        <translation>Инструмент указатель</translation>
+    </message>
+    <message>
+        <source>New pattern piece</source>
+        <translation>Новый чертеж</translation>
+    </message>
+    <message>
+        <source>Add new pattern piece</source>
+        <translation>Добавить новый чертеж</translation>
     </message>
     <message>
         <source>Ctrl+Shift+N</source>
@@ -3750,8 +2950,36 @@
         <translation>Изменить имя чертежа</translation>
     </message>
     <message>
+        <source>Table of variables</source>
+        <translation>Таблица переменных</translation>
+    </message>
+    <message>
+        <source>Tables of variables</source>
+        <translation>Таблици переменных</translation>
+    </message>
+    <message>
+        <source>Ctrl+T</source>
+        <translation>Ctrl+T</translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation>История</translation>
+    </message>
+    <message>
+        <source>Ctrl+H</source>
+        <translation>Ctrl+H</translation>
+    </message>
+    <message>
         <source>Export pattern (layout)</source>
         <translation>Экспорт чертежа (роскладка)</translation>
+    </message>
+    <message>
+        <source>Create layout</source>
+        <translation>Создать раскладку</translation>
+    </message>
+    <message>
+        <source>Ctrl+L</source>
+        <translation>Ctrl+L</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -3778,8 +3006,24 @@
         <translation>Свойства</translation>
     </message>
     <message>
+        <source>Pattern properties</source>
+        <translation>Свойства лекала</translation>
+    </message>
+    <message>
         <source>Zoom in</source>
         <translation>Увеличить</translation>
+    </message>
+    <message>
+        <source>zoom in</source>
+        <translation>приблизить</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation>Уменьшить</translation>
+    </message>
+    <message>
+        <source>Edit pattern XML code</source>
+        <translation>Редактировать XML код чертежа</translation>
     </message>
     <message>
         <source>Original zoom </source>
@@ -3818,148 +3062,16 @@
         <translation>Закрыть окно</translation>
     </message>
     <message>
-        <source>Zoom In</source>
-        <translation type="vanished">Увеличить</translation>
+        <source>Online help</source>
+        <translation>Справка в Интернете</translation>
     </message>
     <message>
-        <source>zoom in</source>
-        <translation>приблизить</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation type="vanished">Уменьшить</translation>
-    </message>
-    <message>
-        <source>Zoom out</source>
-        <translation>Уменьшить</translation>
-    </message>
-    <message>
-        <source>Edit pattern XML code</source>
-        <translation>Редактировать XML код чертежа</translation>
-    </message>
-    <message>
-        <source>ZoomOriginal</source>
-        <translation type="vanished">ZoomOriginal</translation>
-    </message>
-    <message>
-        <source>ZoomFitBest</source>
-        <translation type="vanished">ZoomFitBest</translation>
-    </message>
-    <message>
-        <source>Deatils mode</source>
-        <translation type="obsolete">Режим деталей</translation>
-    </message>
-    <message>
-        <source>Tools pointer</source>
-        <translation type="obsolete">Инструмент указатель</translation>
-    </message>
-    <message>
-        <source>Table of variables</source>
-        <translation>Таблица переменных</translation>
-    </message>
-    <message>
-        <source>Tables of variables</source>
-        <translation>Таблици переменных</translation>
-    </message>
-    <message>
-        <source>Ctrl+T</source>
-        <translation>Ctrl+T</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation>История</translation>
-    </message>
-    <message>
-        <source>Ctrl+H</source>
-        <translation>Ctrl+H</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="vanished">Роскладка</translation>
-    </message>
-    <message>
-        <source>Create layout</source>
-        <translation>Создать раскладку</translation>
-    </message>
-    <message>
-        <source>Ctrl+L</source>
-        <translation>Ctrl+L</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Про Qt</translation>
-    </message>
-    <message>
-        <source>About Valentina</source>
-        <translation type="vanished">Про Valentina</translation>
-    </message>
-    <message>
-        <source>Exit</source>
-        <translation type="obsolete">Выход</translation>
-    </message>
-    <message>
-        <source>Drawing %1</source>
-        <translation type="obsolete">Чертеж %1</translation>
-    </message>
-    <message>
-        <source>Drawing:</source>
-        <translation type="obsolete">Чертеж:</translation>
-    </message>
-    <message>
-        <source>Error creating drawing with the name</source>
-        <translation type="obsolete">Ошибка создания чертежа с именем</translation>
-    </message>
-    <message>
-        <source>Error saving change!!!</source>
-        <translation type="vanished">Пошибка сохранение изменений!!!</translation>
-    </message>
-    <message>
-        <source>Create new pattern piece to start working.</source>
-        <translation type="obsolete">Создайте новый чертеж  для начала работы.</translation>
-    </message>
-    <message>
-        <source>Enter a label for the pattern piece.</source>
-        <translation type="vanished">Введите имя чертежа.</translation>
-    </message>
-    <message>
-        <source>Error. Pattern piece of same label already exists.</source>
-        <translation type="vanished">Ошибка. Чертеж с таким именем уже сущевствует.</translation>
-    </message>
-    <message>
-        <source>Pattern piece:</source>
-        <translation>Чертеж:</translation>
+        <source>Show online help</source>
+        <translation>Показать справку</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
         <translation>Чертеж %1</translation>
-    </message>
-    <message>
-        <source>Error creating pattern with the name </source>
-        <translation type="vanished">Ошибка создания чертежа с именем</translation>
-    </message>
-    <message>
-        <source>Enter a new label for the pattern piece.</source>
-        <translation>Введите новое имя для чертежа.</translation>
-    </message>
-    <message>
-        <source>Error. Pattern piece of same name already exists.</source>
-        <translation type="vanished">Ошибка. Чертеж с таким именем уже сувществует.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t save new label of pattern piece</source>
-        <translation type="vanished">Не могу сохранить новое имя чертежа</translation>
-    </message>
-    <message>
-        <source>Select point</source>
-        <translation>Выберить точку</translation>
-    </message>
-    <message>
-        <source>Select first point</source>
-        <translation>Выберить первую точку</translation>
-    </message>
-    <message>
-        <source>Select point of shoulder</source>
-        <translation type="vanished">Выберить точку плеча</translation>
     </message>
     <message>
         <source>Individual measurements is under development</source>
@@ -3970,6 +3082,14 @@
 For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
         <translation>У вас не будет возможности создать файл с индивидуальными мерками независимо от файла лекала.
 Для того что бы отрыть файл лекала сохраните оба вайла: выкройку и мерки. Вы хотите продолжить?</translation>
+    </message>
+    <message>
+        <source>Select point</source>
+        <translation>Выберить точку</translation>
+    </message>
+    <message>
+        <source>Select first point</source>
+        <translation>Выберить первую точку</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -4004,6 +3124,18 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
         <translation>Выберить сложною кривую</translation>
     </message>
     <message>
+        <source>Select points, arcs, curves clockwise.</source>
+        <translation>Выберить точки, дуги, кривые за часовой стрелкой.</translation>
+    </message>
+    <message>
+        <source>Select base point</source>
+        <translation>Выберить базовую точку</translation>
+    </message>
+    <message>
+        <source>Select first point of axis</source>
+        <translation>Выберить первую тчоку оси</translation>
+    </message>
+    <message>
         <source>Select detail</source>
         <translation>Выберить деталь</translation>
     </message>
@@ -4016,12 +3148,60 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
         <translation>Выберите кривую</translation>
     </message>
     <message>
+        <source>About Qt</source>
+        <translation>Про Qt</translation>
+    </message>
+    <message>
+        <source>Height: </source>
+        <translation>Рост:</translation>
+    </message>
+    <message>
         <source>Size: </source>
         <translation>Размеры: </translation>
     </message>
     <message>
+        <source>Pattern Piece: </source>
+        <translation>Чертеж:</translation>
+    </message>
+    <message>
+        <source>Pattern files (*.val)</source>
+        <translation>Файл лекала (*.val)</translation>
+    </message>
+    <message>
         <source>pattern</source>
         <translation>Чертеж</translation>
+    </message>
+    <message>
+        <source>/pattern.val</source>
+        <translation>/лекало.val</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation>Сохранить как</translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation>Не удалось сохранить файл</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation>Открыть файл</translation>
+    </message>
+    <message>
+        <source>Error parsing file.</source>
+        <translation>Ошибка парсинга файла.</translation>
+    </message>
+    <message>
+        <source>Error can&apos;t convert value.</source>
+        <translation>Ошибка, не могу конвертовать значение.</translation>
+    </message>
+    <message>
+        <source>Error empty parameter.</source>
+        <translation>Ошибка, пустой параметр.</translation>
+    </message>
+    <message>
+        <source>Error wrong id.</source>
+        <translation>Ошибка, неправильный id.</translation>
     </message>
     <message>
         <source>Critical error!</source>
@@ -4040,8 +3220,17 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
         <translation>Файл сохранен</translation>
     </message>
     <message>
-        <source>Could not save file</source>
-        <translation>Не удалось сохранить файл</translation>
+        <source>untitled.val</source>
+        <translation>без_имени.val</translation>
+    </message>
+    <message>
+        <source>Unsaved change</source>
+        <translation>Не сохраненные изменения</translation>
+    </message>
+    <message>
+        <source>The pattern has been modified.
+Do you want to save your changes?</source>
+        <translation>Лекало было изменено. Вы хотите сохранить ваши изменения?</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -4052,8 +3241,16 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
         <translation>&amp;Повторить</translation>
     </message>
     <message>
-        <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
-        <translation type="vanished">Мерки используют другие единицы измерения нежели лекало. Ето леколо требует мерки в %1</translation>
+        <source>Pattern piece:</source>
+        <translation>Чертеж:</translation>
+    </message>
+    <message>
+        <source>Enter a new label for the pattern piece.</source>
+        <translation>Введите новое имя для чертежа.</translation>
+    </message>
+    <message>
+        <source>This file already opened in another window.</source>
+        <translation>Этот файл уже открыт в другом окне.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
@@ -4066,6 +3263,10 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     <message>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
+    </message>
+    <message>
+        <source>File loaded</source>
+        <translation>Файл загружен</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -4090,206 +3291,6 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     <message>
         <source>Individual measurements (*.vit)</source>
         <translation>Индивидуальные мерки (*.vit)</translation>
-    </message>
-    <message>
-        <source>Can not save pattern</source>
-        <translation type="vanished">Не могу сохранить лекало</translation>
-    </message>
-    <message>
-        <source>untitled.val</source>
-        <translation>без_имени.val</translation>
-    </message>
-    <message>
-        <source>Unsaved change</source>
-        <translation>Не сохраненные изменения</translation>
-    </message>
-    <message>
-        <source>The pattern has been modified.
-Do you want to save your changes?</source>
-        <translation>Лекало было изменено. Вы хотите сохранить ваши изменения?</translation>
-    </message>
-    <message>
-        <source>&amp;%1 %2</source>
-        <translation type="obsolete">&amp;%1 %2</translation>
-    </message>
-    <message>
-        <source>Cannot read file %1:
-%2.</source>
-        <translation type="vanished">Не могу прочитать файл %1:\n%2. </translation>
-    </message>
-    <message>
-        <source>File loaded</source>
-        <translation>Файл загружен</translation>
-    </message>
-    <message>
-        <source>The pattern has been modified.</source>
-        <translation type="obsolete">Лекало было изменено.</translation>
-    </message>
-    <message>
-        <source>Do you want to save your changes?</source>
-        <translation type="obsolete">Вы хочете сохранить изменения?</translation>
-    </message>
-    <message>
-        <source>Parsing pattern file error.</source>
-        <translation type="vanished">Ошибка парсинга файла лекала.</translation>
-    </message>
-    <message>
-        <source>Validation file error.</source>
-        <translation type="vanished">Ошибка валидации файла.</translation>
-    </message>
-    <message>
-        <source>Growth: </source>
-        <translation type="obsolete">Рост:</translation>
-    </message>
-    <message>
-        <source> Size: </source>
-        <translation type="vanished">Размер:</translation>
-    </message>
-    <message>
-        <source>Drawing: </source>
-        <translation type="obsolete">Чертеж:</translation>
-    </message>
-    <message>
-        <source>Lekalo files (*.xml);;All files (*.*)</source>
-        <translation type="obsolete">Файлы лекала (*.xml);;Все файлы (*.*)</translation>
-    </message>
-    <message>
-        <source>Lekalo files (*.xml)</source>
-        <translation type="obsolete">Файл лекала (*.xml)</translation>
-    </message>
-    <message>
-        <source>Error saving file. Can&apos;t save file.</source>
-        <translation type="obsolete">Ошибка сохранения файла. Не могу сохранить файл.</translation>
-    </message>
-    <message>
-        <source>Open file</source>
-        <translation>Открыть файл</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open pattern file %1:
-%2.</source>
-        <translation type="vanished">Не могу окрыть файл лекала %1:\n%2.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open schema file %1:
-%2.</source>
-        <translation type="vanished">Не могу окрыть файл схемы %1:\n%2.</translation>
-    </message>
-    <message>
-        <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка не уникальный id.</translation>
-    </message>
-    <message>
-        <source>Got empty file name.</source>
-        <translation type="vanished">Получено пустое имя файла.</translation>
-    </message>
-    <message>
-        <source>Could not copy temp file to pattern file</source>
-        <translation type="vanished">Не могу скопировать временный файл у файл лекала</translation>
-    </message>
-    <message>
-        <source>Could not remove pattern file</source>
-        <translation type="vanished">Не смог удалить файл лекала</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open pattern file. File name empty</source>
-        <translation type="obsolete">Не могу открыть файл лекала. Пустое имя файла</translation>
-    </message>
-    <message>
-        <source>Error!</source>
-        <translation type="vanished">Ошибка!</translation>
-    </message>
-    <message>
-        <source>Select points, arcs, curves clockwise.</source>
-        <translation>Выберить точки, дуги, кривые за часовой стрелкой.</translation>
-    </message>
-    <message>
-        <source>Select base point</source>
-        <translation>Выберить базовую точку</translation>
-    </message>
-    <message>
-        <source>Select first point of axis</source>
-        <translation>Выберить первую тчоку оси</translation>
-    </message>
-    <message>
-        <source>Select point vertically</source>
-        <translation type="vanished">Выберить точку по вертикали</translation>
-    </message>
-    <message>
-        <source>Based on Qt %2 (32 bit)</source>
-        <translation type="vanished">Базируется на Qt %2 (32 bit)</translation>
-    </message>
-    <message>
-        <source>Built on %3 at %4</source>
-        <translation type="vanished">Создано %3 в %4</translation>
-    </message>
-    <message>
-        <source>Height: </source>
-        <translation>Рост:</translation>
-    </message>
-    <message>
-        <source>Pattern Piece: </source>
-        <translation>Чертеж:</translation>
-    </message>
-    <message>
-        <source>Pattern files (*.val)</source>
-        <translation>Файл лекала (*.val)</translation>
-    </message>
-    <message>
-        <source>/pattern.val</source>
-        <translation>/лекало.val</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open pattern file.</source>
-        <translation type="obsolete">Не могу открыть файл лекала.</translation>
-    </message>
-    <message>
-        <source>Empty schema path.</source>
-        <translation type="obsolete">Пустой путь к схеме.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open schema file.</source>
-        <translation type="obsolete">Не могу открыть файл схемы.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open pattern file. File name is empty</source>
-        <translation type="obsolete">Не могу открыть файл лекала. Имя файла пустое</translation>
-    </message>
-    <message>
-        <source>Error parsing file.</source>
-        <translation>Ошибка парсинга файла.</translation>
-    </message>
-    <message>
-        <source>Error can&apos;t convert value.</source>
-        <translation>Ошибка, не могу конвертовать значение.</translation>
-    </message>
-    <message>
-        <source>Error empty parameter.</source>
-        <translation>Ошибка, пустой параметр.</translation>
-    </message>
-    <message>
-        <source>Error wrong id.</source>
-        <translation>Ошибка, неправильный id.</translation>
-    </message>
-    <message>
-        <source>Error parsing pattern file.</source>
-        <translation type="obsolete">Ошибка парсинга файла лекала.</translation>
-    </message>
-    <message>
-        <source>Error in line %1 column %2</source>
-        <translation type="vanished">Ошибка в линии %1 столбец %2</translation>
-    </message>
-    <message>
-        <source>Online help</source>
-        <translation>Справка в Интернете</translation>
-    </message>
-    <message>
-        <source>Show online help</source>
-        <translation>Показать справку</translation>
-    </message>
-    <message>
-        <source>This file already opened in another window.</source>
-        <translation>Этот файл уже открыт в другом окне.</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -4376,16 +3377,6 @@ Do you want to save your changes?</source>
         <translation>Огол</translation>
     </message>
     <message>
-        <source>Head girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват головы</translation>
-    </message>
-    <message>
-        <source>Around fullest part of Head</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват головы</translation>
-    </message>
-    <message>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>mid_neck_girth</translation>
@@ -4394,16 +3385,6 @@ Do you want to save your changes?</source>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ош</translation>
-    </message>
-    <message>
-        <source>Neck Base girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват шеи</translation>
-    </message>
-    <message>
-        <source>Around Neck at base</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват шеи</translation>
     </message>
     <message>
         <source>head_and_neck_length</source>
@@ -4421,44 +3402,14 @@ Do you want to save your changes?</source>
         <translation>Дтс</translation>
     </message>
     <message>
-        <source>Back Center length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина спины до талии с учетом выступа лопаток</translation>
-    </message>
-    <message>
-        <source>Back Neck Center to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина спины до талии с учетом выступа лопаток</translation>
-    </message>
-    <message>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шп</translation>
     </message>
     <message>
-        <source>Shoulder length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина плечевого ската</translation>
-    </message>
-    <message>
-        <source>NeckPoint to ShoulderTip</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина плечевого ската</translation>
-    </message>
-    <message>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дб</translation>
-    </message>
-    <message>
-        <source>Side Waist length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина боковой части</translation>
-    </message>
-    <message>
-        <source>Armpit to Waist side</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина боковой части</translation>
     </message>
     <message>
         <source>trunk_length</source>
@@ -4476,29 +3427,9 @@ Do you want to save your changes?</source>
         <translation>ОгI</translation>
     </message>
     <message>
-        <source>Upper Chest girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват груди первый</translation>
-    </message>
-    <message>
-        <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват груди первый</translation>
-    </message>
-    <message>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ОгII</translation>
-    </message>
-    <message>
-        <source>Bust girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват груди второй</translation>
-    </message>
-    <message>
-        <source>Around fullest part of Bust, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват груди второй</translation>
     </message>
     <message>
         <source>under_bust_girth</source>
@@ -4506,29 +3437,9 @@ Do you want to save your changes?</source>
         <translation>ОгIII</translation>
     </message>
     <message>
-        <source>Under Bust girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват груди третий</translation>
-    </message>
-    <message>
-        <source>Around Chest below the Bust, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват груди третий</translation>
-    </message>
-    <message>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>От</translation>
-    </message>
-    <message>
-        <source>Waist girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват талии</translation>
-    </message>
-    <message>
-        <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват талии.</translation>
     </message>
     <message>
         <source>high_hip_girth</source>
@@ -4541,29 +3452,9 @@ Do you want to save your changes?</source>
         <translation>Об</translation>
     </message>
     <message>
-        <source>Hip girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
-        <source>Around Hip, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шг1</translation>
-    </message>
-    <message>
-        <source>Front Upper Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Ширина груди первая</translation>
-    </message>
-    <message>
-        <source>Across Front UpperChest, smallest width from armscye to armscye</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Ширина груди первая</translation>
     </message>
     <message>
         <source>front_chest_width</source>
@@ -4571,29 +3462,9 @@ Do you want to save your changes?</source>
         <translation>Шг2</translation>
     </message>
     <message>
-        <source>Front Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Ширина груди вторая</translation>
-    </message>
-    <message>
-        <source>Across Front Chest, from armfold to armfold</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Ширина груди вторая</translation>
-    </message>
-    <message>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>dпл</translation>
-    </message>
-    <message>
-        <source>Front Across Shoulder width</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Плечевой диаметр</translation>
-    </message>
-    <message>
-        <source>From ShoulderTip to ShoulderTip, across Front</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Плечевой диаметр</translation>
     </message>
     <message>
         <source>across_back_shoulder_width</source>
@@ -4611,29 +3482,9 @@ Do you want to save your changes?</source>
         <translation>Шс</translation>
     </message>
     <message>
-        <source>Back Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Ширина спины</translation>
-    </message>
-    <message>
-        <source>Across Back Chest, from armfold to armfold</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Ширина спины</translation>
-    </message>
-    <message>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Цг</translation>
-    </message>
-    <message>
-        <source>BustPoint to BustPoint</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние между сосковыми точками</translation>
-    </message>
-    <message>
-        <source>Distance between BustPoints, across Chest</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние между сосковыми точками</translation>
     </message>
     <message>
         <source>halter_bustpoint_to_bustpoint</source>
@@ -4646,16 +3497,6 @@ Do you want to save your changes?</source>
         <translation>Вг</translation>
     </message>
     <message>
-        <source>NeckPoint to BustPoint</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
-    </message>
-    <message>
-        <source>From NeckPoint to BustPoint</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
-    </message>
-    <message>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>crotch_length</translation>
@@ -4664,16 +3505,6 @@ Do you want to save your changes?</source>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпс</translation>
-    </message>
-    <message>
-        <source>Rise height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от линии талии до подъягодичной складки</translation>
-    </message>
-    <message>
-        <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от линии талии до подъягодичной складки</translation>
     </message>
     <message>
         <source>shoulder_drop</source>
@@ -4816,44 +3647,14 @@ Do you want to save your changes?</source>
         <translation>Олк</translation>
     </message>
     <message>
-        <source>Elbow Girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват локтя</translation>
-    </message>
-    <message>
-        <source>Around Elbow with elbow bent</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват локтя</translation>
-    </message>
-    <message>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Оп</translation>
     </message>
     <message>
-        <source>Upperarm Girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват плеча</translation>
-    </message>
-    <message>
-        <source>Around UpperArm</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват плеча</translation>
-    </message>
-    <message>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Озап</translation>
-    </message>
-    <message>
-        <source>Wrist girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват запястья</translation>
-    </message>
-    <message>
-        <source>Around Wrist</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват запястья</translation>
     </message>
     <message>
         <source>scye_depth</source>
@@ -4864,16 +3665,6 @@ Do you want to save your changes?</source>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дзап</translation>
-    </message>
-    <message>
-        <source>Shoulder and Arm length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
-    </message>
-    <message>
-        <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
     </message>
     <message>
         <source>underarm_length</source>
@@ -4891,29 +3682,9 @@ Do you want to save your changes?</source>
         <translation>Дрлок</translation>
     </message>
     <message>
-        <source>Elbow length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина руки до локтя</translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина руки до локтя</translation>
-    </message>
-    <message>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дрзап</translation>
-    </message>
-    <message>
-        <source>Arm length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина рукава до линии обхвата запястья</translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина рукава до линии обхвата запястья</translation>
     </message>
     <message>
         <source>hand_width</source>
@@ -4931,29 +3702,9 @@ Do you want to save your changes?</source>
         <translation>Окис</translation>
     </message>
     <message>
-        <source>Hand girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват кисти</translation>
-    </message>
-    <message>
-        <source>Around Hand</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват кисти</translation>
-    </message>
-    <message>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Обед</translation>
-    </message>
-    <message>
-        <source>Thigh girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват бедра</translation>
-    </message>
-    <message>
-        <source>Around Thigh</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват бедра</translation>
     </message>
     <message>
         <source>mid_thigh_girth</source>
@@ -4966,29 +3717,9 @@ Do you want to save your changes?</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <source>Knee girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват колена</translation>
-    </message>
-    <message>
-        <source>Around Knee</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват колена</translation>
-    </message>
-    <message>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ои</translation>
-    </message>
-    <message>
-        <source>Calf girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват икры</translation>
-    </message>
-    <message>
-        <source>Around Calf</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват икры</translation>
     </message>
     <message>
         <source>ankle_girth</source>
@@ -4996,29 +3727,9 @@ Do you want to save your changes?</source>
         <translation>Ощ</translation>
     </message>
     <message>
-        <source>Ankle girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват щиколотки</translation>
-    </message>
-    <message>
-        <source>Around Ankle</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват щиколотки</translation>
-    </message>
-    <message>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вк</translation>
-    </message>
-    <message>
-        <source>Knee height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота коленной точки</translation>
-    </message>
-    <message>
-        <source>Knee to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота коленной точки</translation>
     </message>
     <message>
         <source>ankle_height</source>
@@ -5046,16 +3757,6 @@ Do you want to save your changes?</source>
         <translation>Вшт</translation>
     </message>
     <message>
-        <source>Nape height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота точки основания шеи сзади</translation>
-    </message>
-    <message>
-        <source>Nape to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота точки основания шеи сзади</translation>
-    </message>
-    <message>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>cervicale_to_knee_height</translation>
@@ -5066,16 +3767,6 @@ Do you want to save your changes?</source>
         <translation>Влт</translation>
     </message>
     <message>
-        <source>Waist height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота линии талии</translation>
-    </message>
-    <message>
-        <source>Waist side to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота линии талии</translation>
-    </message>
-    <message>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>high_hip_height</translation>
@@ -5084,11 +3775,6 @@ Do you want to save your changes?</source>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>hip_height</translation>
-    </message>
-    <message>
-        <source>Hip side to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Боковая сторона ступни</translation>
     </message>
     <message>
         <source>waist_to_hip_height</source>
@@ -5106,29 +3792,9 @@ Do you want to save your changes?</source>
         <translation>Дн</translation>
     </message>
     <message>
-        <source>Crotch height/Inseam</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина ноги по внутренней поверхности</translation>
-    </message>
-    <message>
-        <source>Crotch to Floor along inside leg</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина ноги по внутренней поверхности</translation>
-    </message>
-    <message>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Сг</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Размер</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>height_front_neck_base_point</source>
@@ -5136,29 +3802,9 @@ Do you want to save your changes?</source>
         <translation>Втос</translation>
     </message>
     <message>
-        <source>Height front neck base point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота точки основания шеи спереди</translation>
-    </message>
-    <message>
-        <source>Height of the point base of the neck in front</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота точки основания шеи спереди</translation>
-    </message>
-    <message>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Втош</translation>
-    </message>
-    <message>
-        <source>Height base neck side point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота точки основания шеи сбоку</translation>
-    </message>
-    <message>
-        <source>Height of the base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота точки основания шеи сбоку</translation>
     </message>
     <message>
         <source>height_shoulder_point</source>
@@ -5166,29 +3812,9 @@ Do you want to save your changes?</source>
         <translation>Впт</translation>
     </message>
     <message>
-        <source>Height shoulder point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота плечевой точки</translation>
-    </message>
-    <message>
-        <source>The height of the shoulder point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота плечевой точки</translation>
-    </message>
-    <message>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вст</translation>
-    </message>
-    <message>
-        <source>Height nipple point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота сосковой точки</translation>
-    </message>
-    <message>
-        <source>Height nipple point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота сосковой точки</translation>
     </message>
     <message>
         <source>height_back_angle_axilla</source>
@@ -5196,29 +3822,9 @@ Do you want to save your changes?</source>
         <translation>Взу</translation>
     </message>
     <message>
-        <source>Height back angle axilla</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота заднего угла подмышечной впадины</translation>
-    </message>
-    <message>
-        <source>Height back angle axilla</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота заднего угла подмышечной впадины</translation>
-    </message>
-    <message>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Влоп</translation>
-    </message>
-    <message>
-        <source>Height scapular point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота лопаточной точки</translation>
-    </message>
-    <message>
-        <source>Height scapular point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота лопаточной точки</translation>
     </message>
     <message>
         <source>height_under_buttock_folds</source>
@@ -5226,29 +3832,9 @@ Do you want to save your changes?</source>
         <translation>Впс</translation>
     </message>
     <message>
-        <source>Height under buttock folds</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота подъягодичной складки</translation>
-    </message>
-    <message>
-        <source>Height under buttock folds</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота подъягодичной складки</translation>
-    </message>
-    <message>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ОбI</translation>
-    </message>
-    <message>
-        <source>Hips excluding protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват бедер без учета выступания живота</translation>
-    </message>
-    <message>
-        <source>Hips excluding protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <source>girth_foot_instep</source>
@@ -5256,29 +3842,9 @@ Do you want to save your changes?</source>
         <translation>Ос</translation>
     </message>
     <message>
-        <source>Girth foot instep</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват подъема стопы</translation>
-    </message>
-    <message>
-        <source>Girth foot instep</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват подъема стопы</translation>
-    </message>
-    <message>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дсб</translation>
-    </message>
-    <message>
-        <source>Side waist to floor</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от линии талии до пола сбоку</translation>
-    </message>
-    <message>
-        <source>The distance from the side waist to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от линии талии до пола сбоку</translation>
     </message>
     <message>
         <source>front_waist_to_floor</source>
@@ -5286,29 +3852,9 @@ Do you want to save your changes?</source>
         <translation>Дсп</translation>
     </message>
     <message>
-        <source>Front waist to floor</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от линии талии до пола спереди</translation>
-    </message>
-    <message>
-        <source>The distance from the front waist to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от линии талии до пола спереди</translation>
-    </message>
-    <message>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дпоб</translation>
-    </message>
-    <message>
-        <source>Arc through groin area</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Дуга через паховую область</translation>
-    </message>
-    <message>
-        <source>Arc through groin area</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Дуга через паховую область</translation>
     </message>
     <message>
         <source>waist_to_plane_seat</source>
@@ -5316,29 +3862,9 @@ Do you want to save your changes?</source>
         <translation>Вс</translation>
     </message>
     <message>
-        <source>Waist to plane seat</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от линии талии до плоскости сидения</translation>
-    </message>
-    <message>
-        <source>The distance from the waist to the plane seat</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от линии талии до плоскости сидения</translation>
-    </message>
-    <message>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Длуч</translation>
-    </message>
-    <message>
-        <source>Neck to radial point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the side of the radial point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
     </message>
     <message>
         <source>neck_to_third_finger</source>
@@ -5346,29 +3872,9 @@ Do you want to save your changes?</source>
         <translation>ДIIIп</translation>
     </message>
     <message>
-        <source>Neck to third finger</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
-    </message>
-    <message>
-        <source>Distance from the base of the neck side point to the end of the third finger</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
-    </message>
-    <message>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впрп</translation>
-    </message>
-    <message>
-        <source>Neck to first line chest circumference</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
     </message>
     <message>
         <source>front_waist_length</source>
@@ -5376,29 +3882,9 @@ Do you want to save your changes?</source>
         <translation>Дтп</translation>
     </message>
     <message>
-        <source>Front waist length</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии талии спереди (длани талии спереди)</translation>
-    </message>
-    <message>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дп</translation>
-    </message>
-    <message>
-        <source>Arc through shoulder joint</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Дуга через высшую точку плечевого сустава</translation>
-    </message>
-    <message>
-        <source>Arc through the highest point of the shoulder joint</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Дуга через высшую точку плечевого сустава</translation>
     </message>
     <message>
         <source>neck_to_back_line_chest_circumference</source>
@@ -5406,29 +3892,9 @@ Do you want to save your changes?</source>
         <translation>Впрз</translation>
     </message>
     <message>
-        <source>Neck to back line chest circumference</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
-    </message>
-    <message>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ДтсI</translation>
-    </message>
-    <message>
-        <source>Waist to neck side</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
-    </message>
-    <message>
-        <source>The distance from the waist to the back base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
     </message>
     <message>
         <source>arc_length_upper_body</source>
@@ -5436,29 +3902,9 @@ Do you want to save your changes?</source>
         <translation>Двчт</translation>
     </message>
     <message>
-        <source>Arc length upper body</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
-    </message>
-    <message>
-        <source>Arc length of the upper body through the base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
-    </message>
-    <message>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Шг</translation>
-    </message>
-    <message>
-        <source>Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Ширина груди</translation>
-    </message>
-    <message>
-        <source>Chest width</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Ширина груди</translation>
     </message>
     <message>
         <source>anteroposterior_diameter_hands</source>
@@ -5466,29 +3912,9 @@ Do you want to save your changes?</source>
         <translation>dпзр</translation>
     </message>
     <message>
-        <source>Anteroposterior diameter hands</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Передне-задний диаметр руки</translation>
-    </message>
-    <message>
-        <source>Anteroposterior diameter of the hands</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Передне-задний диаметр руки</translation>
-    </message>
-    <message>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вкт</translation>
-    </message>
-    <message>
-        <source>Height clavicular point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота ключичной точки</translation>
-    </message>
-    <message>
-        <source>Height clavicular point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота ключичной точки</translation>
     </message>
     <message>
         <source>height_armhole_slash</source>
@@ -5496,29 +3922,9 @@ Do you want to save your changes?</source>
         <translation>Впрк</translation>
     </message>
     <message>
-        <source>Height armhole slash</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
-    </message>
-    <message>
-        <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
-    </message>
-    <message>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Впк</translation>
-    </message>
-    <message>
-        <source>Slash shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота плеча косая</translation>
-    </message>
-    <message>
-        <source>Slash shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота плеча косая</translation>
     </message>
     <message>
         <source>half_girth_neck</source>
@@ -5526,29 +3932,9 @@ Do you want to save your changes?</source>
         <translation>Сш</translation>
     </message>
     <message>
-        <source>Half girth neck</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват шеи</translation>
-    </message>
-    <message>
-        <source>Half girth neck</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват шеи</translation>
-    </message>
-    <message>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Сш1</translation>
-    </message>
-    <message>
-        <source>Half girth neck for shirts</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват шеи для сорочек</translation>
-    </message>
-    <message>
-        <source>Half girth neck for shirts</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват шеи для сорочек</translation>
     </message>
     <message>
         <source>half_girth_chest_first</source>
@@ -5556,29 +3942,9 @@ Do you want to save your changes?</source>
         <translation>СгI</translation>
     </message>
     <message>
-        <source>Half girth chest first</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват груди первый</translation>
-    </message>
-    <message>
-        <source>Half girth chest first</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват груди первый</translation>
-    </message>
-    <message>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>СгII</translation>
-    </message>
-    <message>
-        <source>Half girth chest second</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват груди второй</translation>
-    </message>
-    <message>
-        <source>Half girth chest second</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват груди второй</translation>
     </message>
     <message>
         <source>half_girth_chest_third</source>
@@ -5586,29 +3952,9 @@ Do you want to save your changes?</source>
         <translation>СгIII</translation>
     </message>
     <message>
-        <source>Half girth chest third</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват груди третий</translation>
-    </message>
-    <message>
-        <source>Half girth chest third</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват груди третий</translation>
-    </message>
-    <message>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Ст</translation>
-    </message>
-    <message>
-        <source>Half girth waist</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват талии</translation>
-    </message>
-    <message>
-        <source>Half girth waist</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват талии</translation>
     </message>
     <message>
         <source>half_girth_hips_considering_protruding_abdomen</source>
@@ -5616,29 +3962,9 @@ Do you want to save your changes?</source>
         <translation>Сб</translation>
     </message>
     <message>
-        <source>Half girth hips considering protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
-        <source>Half girth hips considering protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват бедер с учетом выступания живота</translation>
-    </message>
-    <message>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>СбI</translation>
-    </message>
-    <message>
-        <source>Half girth hips excluding protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Полуобхват бедер без учета выступания живота</translation>
-    </message>
-    <message>
-        <source>Half girth hips excluding protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Полуобхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <source>girth_knee_flexed_feet</source>
@@ -5646,29 +3972,9 @@ Do you want to save your changes?</source>
         <translation>Окс</translation>
     </message>
     <message>
-        <source>Girth knee flexed feet</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Обхват колена в согнутом положении ноги</translation>
-    </message>
-    <message>
-        <source>Girth knee flexed feet</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Обхват колена в согнутом положении ноги</translation>
-    </message>
-    <message>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>dш</translation>
-    </message>
-    <message>
-        <source>Neck transverse diameter</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Поперечный диаметр шеи</translation>
-    </message>
-    <message>
-        <source>Neck transverse diameter</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Поперечный диаметр шеи</translation>
     </message>
     <message>
         <source>front_slash_shoulder_height</source>
@@ -5676,29 +3982,9 @@ Do you want to save your changes?</source>
         <translation>Впкп</translation>
     </message>
     <message>
-        <source>Front slash shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота плеча косая спереди</translation>
-    </message>
-    <message>
-        <source>Front slash shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота плеча косая спереди</translation>
-    </message>
-    <message>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дтн1</translation>
-    </message>
-    <message>
-        <source>Neck to front waist line</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от точки основания шеи до линии талии спереди</translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the waist line front</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от точки основания шеи до линии талии спереди</translation>
     </message>
     <message>
         <source>hand_vertical_diameter</source>
@@ -5706,29 +3992,9 @@ Do you want to save your changes?</source>
         <translation>dвр</translation>
     </message>
     <message>
-        <source>Hand vertical diameter</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Вертикальный диаметр руки</translation>
-    </message>
-    <message>
-        <source>Hand vertical diameter</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Вертикальный диаметр руки</translation>
-    </message>
-    <message>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дшк</translation>
-    </message>
-    <message>
-        <source>Neck to knee point</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от шейной точки до колена</translation>
-    </message>
-    <message>
-        <source>Distance from neck to knee point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от шейной точки до колена</translation>
     </message>
     <message>
         <source>waist_to_knee</source>
@@ -5736,29 +4002,9 @@ Do you want to save your changes?</source>
         <translation>Дтк</translation>
     </message>
     <message>
-        <source>Waist to knee</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от линии талии до колена</translation>
-    </message>
-    <message>
-        <source>The distance from the waist to the knee</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от линии талии до колена</translation>
-    </message>
-    <message>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Вп</translation>
-    </message>
-    <message>
-        <source>Shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота плеча</translation>
-    </message>
-    <message>
-        <source>Shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота плеча</translation>
     </message>
     <message>
         <source>head_height</source>
@@ -5766,29 +4012,9 @@ Do you want to save your changes?</source>
         <translation>Вгол</translation>
     </message>
     <message>
-        <source>Head height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Высота головы</translation>
-    </message>
-    <message>
-        <source>Head height</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Высота головы</translation>
-    </message>
-    <message>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Пкор</translation>
-    </message>
-    <message>
-        <source>Body position</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Положение корпуса</translation>
-    </message>
-    <message>
-        <source>Body position</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Положение корпуса</translation>
     </message>
     <message>
         <source>arc_behind_shoulder_girdle</source>
@@ -5796,29 +4022,9 @@ Do you want to save your changes?</source>
         <translation>Дпз</translation>
     </message>
     <message>
-        <source>Arc behind shoulder girdle</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Дуга плечевого пояса сзади</translation>
-    </message>
-    <message>
-        <source>Arc behind the shoulder girdle</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Дуга плечевого пояса сзади</translation>
-    </message>
-    <message>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>Дшош</translation>
-    </message>
-    <message>
-        <source>Neck to neck base</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
-    </message>
-    <message>
-        <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
     </message>
     <message>
         <source>depth_waist_first</source>
@@ -5826,29 +4032,9 @@ Do you want to save your changes?</source>
         <translation>Гт1</translation>
     </message>
     <message>
-        <source>Depth waist first</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Глубина талии первая</translation>
-    </message>
-    <message>
-        <source>Depth waist first</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Глубина талии первая</translation>
-    </message>
-    <message>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
         <translation>ГтII</translation>
-    </message>
-    <message>
-        <source>Depth waist second</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Глубина талии вторая</translation>
-    </message>
-    <message>
-        <source>Depth waist second</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Глубина талии вторая</translation>
     </message>
 </context>
 <context>
@@ -6027,11 +4213,6 @@ Do you want to save your changes?</source>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
         <translation>NeckPoint to NeckPoint across Nape</translation>
-    </message>
-    <message>
-        <source>front_upper-bust_arc</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">front_upper-bust_arc</translation>
     </message>
     <message>
         <source>Front upper-bust arc</source>
@@ -7289,14 +5470,6 @@ Do you want to save your changes?</source>
         <source>Count steps (0 - no limit)</source>
         <translation>Количество шагов (0 - без ограничений)</translation>
     </message>
-    <message>
-        <source>Undone</source>
-        <translation type="vanished">Отменить</translation>
-    </message>
-    <message>
-        <source>Count steps</source>
-        <translation type="vanished">Количество шагов</translation>
-    </message>
 </context>
 <context>
     <name>PostfixOperators</name>
@@ -7314,49 +5487,6 @@ Do you want to save your changes?</source>
         <source>in</source>
         <comment>inch</comment>
         <translation>дюйм</translation>
-    </message>
-</context>
-<context>
-    <name>QCommandLineParser</name>
-    <message>
-        <source>Displays version information.</source>
-        <translation type="vanished">Показать информацию о версии.</translation>
-    </message>
-    <message>
-        <source>Displays this help.</source>
-        <translation type="vanished">Показать эту справку.</translation>
-    </message>
-    <message>
-        <source>Unknown option &apos;%1&apos;.</source>
-        <translation type="vanished">Неизвестный параметр &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Unknown options: %1.</source>
-        <translation type="vanished">Неизвестные параметры: %1.</translation>
-    </message>
-    <message>
-        <source>Missing value after &apos;%1&apos;.</source>
-        <translation type="vanished">Пропущено значение после &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation type="vanished">Неожиданое значение после &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>[options]</source>
-        <translation type="vanished">[параметры]</translation>
-    </message>
-    <message>
-        <source>Usage: %1</source>
-        <translation type="vanished">Использование: %1</translation>
-    </message>
-    <message>
-        <source>Options:</source>
-        <translation type="vanished">Параметры:</translation>
-    </message>
-    <message>
-        <source>Arguments:</source>
-        <translation type="vanished">Аргументы:</translation>
     </message>
 </context>
 <context>
@@ -7391,11 +5521,6 @@ Do you want to save your changes?</source>
     <message>
         <source>inch</source>
         <translation>дюймы</translation>
-    </message>
-    <message>
-        <source>in</source>
-        <comment>inch abbreviation</comment>
-        <translation type="obsolete">дюйм</translation>
     </message>
     <message>
         <source>Property</source>
@@ -7643,52 +5768,12 @@ Do you want to save your changes?</source>
         <translation>Создать раскладку</translation>
     </message>
     <message>
-        <source>Next</source>
-        <translation type="vanished">Следующая</translation>
-    </message>
-    <message>
-        <source>Next detail</source>
-        <translation type="vanished">Следующая деталь</translation>
-    </message>
-    <message>
-        <source>Turn</source>
-        <translation type="vanished">Перевернуть</translation>
-    </message>
-    <message>
-        <source>Turn the detail 90 degrees</source>
-        <translation type="vanished">Перевернуть детальна на 90 градусов </translation>
-    </message>
-    <message>
-        <source>Turn the detail 180 degrees</source>
-        <translation type="obsolete">Перевернуть детальна на 180 градусов</translation>
+        <source>Stop</source>
+        <translation>Стоп</translation>
     </message>
     <message>
         <source>Stop laying</source>
         <translation>Прекратить укладку</translation>
-    </message>
-    <message>
-        <source>Enlarge letter</source>
-        <translation type="vanished">Увеличить лист</translation>
-    </message>
-    <message>
-        <source>Enlarge the length of the sheet</source>
-        <translation type="vanished">Увеличить длину листа</translation>
-    </message>
-    <message>
-        <source>Enlarge the length of sheet</source>
-        <translation type="obsolete">Увеличить длину листа</translation>
-    </message>
-    <message>
-        <source>Reduce sheet</source>
-        <translation type="vanished">Уменьшить лист</translation>
-    </message>
-    <message>
-        <source>Reduce the length of the sheet</source>
-        <translation type="vanished">Уменьшить длину листа</translation>
-    </message>
-    <message>
-        <source>Mirroring</source>
-        <translation type="vanished">Отражение</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -7697,22 +5782,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Стоп</translation>
-    </message>
-    <message>
-        <source>0 details left.</source>
-        <translation type="vanished">0 деталей осталось.</translation>
-    </message>
-    <message>
-        <source>Collisions not found.</source>
-        <translation type="vanished">Колизии не обнаружены.</translation>
-    </message>
-    <message>
-        <source>%1 details left.</source>
-        <translation type="vanished">%1 деталей осталось.</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -7739,24 +5808,12 @@ Do you want to save your changes?</source>
         <translation>EPS файл (*.eps)</translation>
     </message>
     <message>
-        <source>Collisions found.</source>
-        <translation type="vanished">Найдены колизии.</translation>
-    </message>
-    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Создание файла &apos;%1&apos; не удалось! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
         <translation>Критическая ошибка!</translation>
-    </message>
-    <message>
-        <source>SVG Generator Example Drawing</source>
-        <translation type="vanished">SVG Generator Example Drawing</translation>
-    </message>
-    <message>
-        <source>An SVG drawing created by the SVG Generator Example provided with Qt.</source>
-        <translation type="vanished">An SVG drawing created by the SVG Generator Example provided with Qt.</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
@@ -7826,22 +5883,7 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VAbstractNode</name>
-    <message>
-        <source>Can&apos;t find tag Modeling</source>
-        <translation type="vanished">Не могу найти тег Modeling</translation>
-    </message>
-</context>
-<context>
     <name>VAbstractTool</name>
-    <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Подтвердить удаление.</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Вы точно хотите удалить?</translation>
-    </message>
     <message>
         <source>black</source>
         <translation>черный</translation>
@@ -7882,10 +5924,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VApplication</name>
     <message>
-        <source>Error!</source>
-        <translation type="vanished">Ошибка!</translation>
-    </message>
-    <message>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
     </message>
@@ -7909,29 +5947,6 @@ Do you want to save your changes?</source>
         <source>Something&apos;s wrong!!</source>
         <translation>Что то не так!!!</translation>
     </message>
-    <message>
-        <source>Could not copy temp file to document file</source>
-        <translation type="vanished">Не удалось скопировать временный файл в выходной файл</translation>
-    </message>
-    <message>
-        <source>Could not remove document file</source>
-        <translation type="vanished">Не удалось удалить файл документа.</translation>
-    </message>
-    <message>
-        <source>Something wrong!!</source>
-        <translation type="obsolete">Что то не так!!!</translation>
-    </message>
-</context>
-<context>
-    <name>VArc</name>
-    <message>
-        <source>Can&apos;t find id = %1 in table.</source>
-        <translation type="obsolete">Не могу найти id = %1 в таблице.</translation>
-    </message>
-    <message>
-        <source>Angle of arc can&apos;t be 0 degree.</source>
-        <translation type="obsolete">Угол дуги не может быть 0 градусов.</translation>
-    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -7950,18 +5965,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VDomDocument</name>
-    <message>
-        <source>Can&apos;t find tool id = %1 in table.</source>
-        <translation type="vanished">Не могу найти инструмент с id = %1 в таблице.</translation>
-    </message>
-    <message>
-        <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t convert toLongLong parameter</source>
-        <translation type="vanished">Не могу конвертировать toLongLong параметр</translation>
-    </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Не могу конвертировать toUInt параметр</translation>
@@ -7990,6 +5993,10 @@ Do you want to save your changes?</source>
         <translation>Не могу окрыть файл схемы %1:\n%2.</translation>
     </message>
     <message>
+        <source>Could not load schema file.</source>
+        <translation>Неудалось открыть файл схемы.</translation>
+    </message>
+    <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Ошибка валидации файла %3 в строке %1 столбца %2</translation>
     </message>
@@ -8002,124 +6009,12 @@ Do you want to save your changes?</source>
         <translation>Не удалось получить узел.</translation>
     </message>
     <message>
-        <source>Validation error in line %1 column %2</source>
-        <translation type="vanished">Ошибка валидации линия %1 столбик %2</translation>
-    </message>
-    <message>
-        <source>Parcing error in line %1 column %2</source>
-        <translation type="vanished">Ошибка разбора линия %1 столбец %2</translation>
+        <source>Got wrong parameter id. Need only id &gt; 0.</source>
+        <translation>Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
         <translation>Этот id не уникальный.</translation>
-    </message>
-    <message>
-        <source>Error creating or updating detail</source>
-        <translation type="vanished">Ошибка создания или обновления детали</translation>
-    </message>
-    <message>
-        <source>Error creating or updating single point</source>
-        <translation type="vanished">Ошибка создания или обновления базовой точки</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of end line</source>
-        <translation type="vanished">Ошибка создания или обновления точки на конце линии</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point along line</source>
-        <translation type="vanished">Ошибка создания или обновления точки вдоль линии</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of shoulder</source>
-        <translation type="vanished">Ошибка создания или обновления точки плеча</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of normal</source>
-        <translation type="vanished">Ошибка создания или обновления точки нормали</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of bisector</source>
-        <translation type="vanished">Ошибка создания или обновления точки бисектрисы</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of lineintersection</source>
-        <translation type="vanished">Ошибка создания или обновления точки пересичения линий</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of contact</source>
-        <translation type="vanished">Ошибка создания или обновления точки прикосновения</translation>
-    </message>
-    <message>
-        <source>Error creating or updating modeling point</source>
-        <translation type="vanished">Ошибка создания или обновления точки</translation>
-    </message>
-    <message>
-        <source>Error creating or updating height</source>
-        <translation type="vanished">Ошибка создания или обновления высоты</translation>
-    </message>
-    <message>
-        <source>Error creating or updating triangle</source>
-        <translation type="vanished">Ошибка создания или обновления треугольника</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of intersection</source>
-        <translation type="vanished">Ошибка создания или обновления точки пересичения</translation>
-    </message>
-    <message>
-        <source>Error creating or updating cut spline point</source>
-        <translation type="vanished">Ошибка создания или обновления точки разрезания сплайна</translation>
-    </message>
-    <message>
-        <source>Error creating or updating cut spline path point</source>
-        <translation type="vanished">Ошибка создания или обновления точки разрезания сложного сплайна</translation>
-    </message>
-    <message>
-        <source>Error creating or updating cut arc point</source>
-        <translation type="vanished">Ошибка создания или обновления точки разрезания дуги</translation>
-    </message>
-    <message>
-        <source>Error creating or updating line</source>
-        <translation type="vanished">Ошибка создания или обновления линии</translation>
-    </message>
-    <message>
-        <source>Error creating or updating simple curve</source>
-        <translation type="vanished">Ошибка создания или обновления кривой</translation>
-    </message>
-    <message>
-        <source>Error creating or updating curve path</source>
-        <translation type="vanished">Ошибка создания или обновления сложной кривой</translation>
-    </message>
-    <message>
-        <source>Error creating or updating modeling simple curve</source>
-        <translation type="vanished">Ошибка создания или обновления модельной кривой</translation>
-    </message>
-    <message>
-        <source>Error creating or updating modeling curve path</source>
-        <translation type="vanished">Ошибка создания или обновления сложной модельной кривой</translation>
-    </message>
-    <message>
-        <source>Error creating or updating simple arc</source>
-        <translation type="vanished">Ошибка создания или обновления дуги</translation>
-    </message>
-    <message>
-        <source>Error creating or updating modeling arc</source>
-        <translation type="vanished">Ошибка создания или обновления модельной дуги</translation>
-    </message>
-    <message>
-        <source>Error creating or updating union details</source>
-        <translation type="vanished">Ошибка создания или обновления объединения деталей</translation>
-    </message>
-    <message>
-        <source>Error!</source>
-        <translation type="vanished">Ошибка!</translation>
-    </message>
-    <message>
-        <source>Error parsing file.</source>
-        <translation type="vanished">Ошибка парсинга файла.</translation>
-    </message>
-    <message>
-        <source>Could not load schema file.</source>
-        <translation>Неудалось открыть файл схемы.</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
@@ -8133,24 +6028,16 @@ Do you want to save your changes?</source>
 <context>
     <name>VDrawTool</name>
     <message>
+        <source>Edit wrong formula</source>
+        <translation>Редактировать неправильную формулу</translation>
+    </message>
+    <message>
         <source>Options</source>
         <translation>Параметры</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
-    </message>
-    <message>
-        <source>Can not find the element after which you want to insert.</source>
-        <translation type="vanished">Не могу найти елемент после которого вы хочете вставить.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find tag Calculation</source>
-        <translation type="vanished">Не могу найти тег Calculation</translation>
-    </message>
-    <message>
-        <source>Edit wrong formula</source>
-        <translation>Редактировать неправильную формулу</translation>
     </message>
 </context>
 <context>
@@ -8179,24 +6066,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VFormulaPropertyEditor</name>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-</context>
-<context>
-    <name>VModelingTool</name>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Параметры</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Удалить</translation>
-    </message>
-</context>
-<context>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
@@ -8208,18 +6077,7 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VPE::VColorPropertyEditor</name>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-</context>
-<context>
     <name>VPE::VFileEditWidget</name>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
     <message>
         <source>Directory</source>
         <translation>Директория</translation>
@@ -8232,20 +6090,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <source>Can&apos;t find tool id = %1 in table.</source>
-        <translation type="vanished">Не могу найти инструмент с id = %1 в таблице.</translation>
+        <source>Can&apos;t find tool in table.</source>
+        <translation>Не могу найти инструмент в таблице.</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
         <translation>Ошибка не уникальный id.</translation>
-    </message>
-    <message>
-        <source>Error!</source>
-        <translation type="vanished">Ошибка!</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find tool in table.</source>
-        <translation>Не могу найти инструмент в таблице.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -8374,14 +6224,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error creating or updating union details</source>
         <translation>Ошибка создания или обновления объединения деталей</translation>
-    </message>
-    <message>
-        <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
-        <translation type="vanished">Этот id не уникальный.</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -8568,20 +6410,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VToolTriangle</name>
-    <message>
-        <source>Can&apos;t find point.</source>
-        <translation type="vanished">Не могу найти точку.</translation>
-    </message>
-</context>
-<context>
-    <name>VToolUnionDetails</name>
-    <message>
-        <source>Can&apos;t find tag Modeling</source>
-        <translation type="vanished">Не могу найти тег Modeling</translation>
-    </message>
-</context>
-<context>
     <name>Variables</name>
     <message>
         <source>Line_</source>
@@ -8608,15 +6436,6 @@ Do you want to save your changes?</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation>СлСпл</translation>
     </message>
-    <message>
-        <source>SplPath</source>
-        <comment>Do not add symbol _ to enf of name</comment>
-        <translation type="vanished">СлСпл</translation>
-    </message>
-    <message>
-        <source>SplPath</source>
-        <translation type="vanished">СлСпл</translation>
-    </message>
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
@@ -8641,10 +6460,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VisToolSplinePath</name>
-    <message>
-        <source>&lt;b&gt;Curve path&lt;/b&gt;: &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Сложная кривая&lt;/b&gt;: &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
-    </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
         <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек</translation>
