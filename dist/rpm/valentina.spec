@@ -33,7 +33,7 @@ BuildRequires: update-desktop-files
 
 Requires:   poppler-utils
 
-Version:	0.3.0
+Version:	0.3.1
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
