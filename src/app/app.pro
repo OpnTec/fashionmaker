@@ -341,6 +341,9 @@ unix{
     libraries.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
     libraries.files += $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
+    # Utility pdftops need for saving a layout image to PS and EPS formates.
+    xpdf.path = $$PREFIX/
+    xpdf.files += $${PWD}../../dist/macx/bin64/pdftops
 
     # logo on macx.
     ICON = ../../dist/Valentina.icns
@@ -351,7 +354,8 @@ unix{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        libraries
+        libraries \
+        xpdf
     }
 }
 
