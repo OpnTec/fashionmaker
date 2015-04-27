@@ -1,3 +1,9 @@
+win32{
+    unset(QMAKE_COPY)
+    # Because "copy" doesn't support files that containe plus sign (+) in name we will use xcopy instead.
+    QMAKE_COPY = xcopy /y
+}
+
 defineTest(minQtVersion) {
     maj = $$1
     min = $$2
