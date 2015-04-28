@@ -40,7 +40,7 @@
 #endif
 
 
-enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4 };
+enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4, Letter, Legal };
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutSettings::DialogLayoutSettings(QWidget *parent)
@@ -319,6 +319,8 @@ void DialogLayoutSettings::InitTemplates()
     ui->comboBoxTemplates->addItem(ico, "A2 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A2)));
     ui->comboBoxTemplates->addItem(ico, "A3 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A3)));
     ui->comboBoxTemplates->addItem(ico, "A4 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A4)));
+    ui->comboBoxTemplates->addItem(ico, "Letter "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Letter)));
+    ui->comboBoxTemplates->addItem(ico, "Legal "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Legal)));
 
     TemplateSelected();
 }
@@ -359,6 +361,14 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::A4:
             width = VAbstractMeasurements::UnitConvertor(210, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Letter:
+            width = VAbstractMeasurements::UnitConvertor(8.5, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Legal:
+            width = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(17, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         default:
             break;
