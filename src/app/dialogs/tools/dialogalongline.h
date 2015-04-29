@@ -75,6 +75,8 @@ public slots:
      */
     void                FormulaTextChanged();
     void                PointChanged();
+
+    void                FXLength();
 protected:
     virtual void        ShowVisualization();
     /**

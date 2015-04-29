@@ -1803,6 +1803,10 @@ QString VApplication::PostfixOperator(const QString &name) const
  */
 QString VApplication::FormulaFromUser(const QString &formula)
 {
+    if (formula.isEmpty())
+    {
+        return formula;
+    }
     QString newFormula = formula;// Local copy for making changes
 
     Calculator *cal = new Calculator(formula);// Eval formula
@@ -1901,6 +1905,11 @@ QString VApplication::FormulaFromUser(const QString &formula)
  */
 QString VApplication::FormulaToUser(const QString &formula)
 {
+    if (formula.isEmpty())
+    {
+        return formula;
+    }
+
     QString newFormula = formula;// Local copy for making changes
 
     QMap<int, QString> tokens;
