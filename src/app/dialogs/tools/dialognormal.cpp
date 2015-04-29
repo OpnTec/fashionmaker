@@ -31,6 +31,7 @@
 #include "../visualization/vistoolnormal.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -43,7 +44,6 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
       line(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -61,8 +61,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
 
     InitArrow(ui);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogNormal::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogNormal::PutVal);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogNormal::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
@@ -97,6 +96,19 @@ void DialogNormal::PointNameChanged()
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
