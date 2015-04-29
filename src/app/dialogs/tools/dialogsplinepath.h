@@ -62,7 +62,6 @@ public slots:
     void               Angle2Changed( qreal index );
     void               KAsm1Changed(qreal d);
     void               KAsm2Changed(qreal d);
-    virtual void       UpdateList();
     virtual void       ShowDialog(bool click);
     void               PathUpdated(const VSplinePath &path);
 protected:

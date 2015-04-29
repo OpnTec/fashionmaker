@@ -35,9 +35,7 @@ const QString VAbstractSpline::TagName = QStringLiteral("spline");
 VAbstractSpline::VAbstractSpline(VPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
       sceneType(SceneObject::Unknown), isHovered(false), detailsMode(false)
-{
-    ignoreFullUpdate = true;
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::~VAbstractSpline()

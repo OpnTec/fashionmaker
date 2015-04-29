@@ -1084,45 +1084,6 @@ void DialogTool::ValChenged(int row)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief UpdateList update lists of variables
- */
-void DialogTool::UpdateList()
-{
-    SCASSERT(radioButtonSizeGrowth != nullptr);
-    SCASSERT(radioButtonStandardTable != nullptr);
-    SCASSERT(radioButtonIncrements != nullptr);
-    SCASSERT(radioButtonLengthLine != nullptr);
-    SCASSERT(radioButtonLengthArc != nullptr);
-    SCASSERT(radioButtonLengthCurve != nullptr);
-
-    if (radioButtonSizeGrowth->isChecked())
-    {
-        SizeHeight();
-    }
-    if (radioButtonStandardTable->isChecked())
-    {
-        ShowVariable(data->DataMeasurements());
-    }
-    if (radioButtonIncrements->isChecked())
-    {
-        ShowVariable(data->DataIncrements());
-    }
-    if (radioButtonLengthLine->isChecked())
-    {
-        ShowVariable(data->DataLengthLines());
-    }
-    if (radioButtonLengthArc->isChecked())
-    {
-        ShowVariable(data->DataLengthArcs());
-    }
-    if (radioButtonLengthCurve->isChecked())
-    {
-        ShowVariable(data->DataLengthSplines());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 DialogTool::GetToolId() const
 {

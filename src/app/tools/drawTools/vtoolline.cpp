@@ -54,7 +54,6 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
 {
     this->typeLine = typeLine;
     this->lineColor = lineColor;
-    ignoreFullUpdate = true;
     //Line
     const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);

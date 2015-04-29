@@ -53,7 +53,6 @@ VToolTriangle::VToolTriangle(VPattern *doc, VContainer *data, const quint32 &id,
     :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
-    ignoreFullUpdate = true;
     if (typeCreation == Source::FromGui)
     {
         AddToFile();

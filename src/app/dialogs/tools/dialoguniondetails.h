@@ -52,7 +52,6 @@ public:
     int        getIndexD2() const;
 public slots:
     void             ChosenObject(quint32 id, const SceneObject &type);
-    virtual void     UpdateList();
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
 
