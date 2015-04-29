@@ -34,6 +34,8 @@
 #include "../../visualization/vistoolcurveintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "dialogeditwrongformula.h"
+
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -43,7 +45,6 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 {
     ui->setupUi(this);
 
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -59,8 +60,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::PutAngle);
-    connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogCurveIntersectAxis::PutVal);
+    connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCurveIntersectAxis::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCurveIntersectAxis::AngleTextChanged);
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::DeployAngleTextEdit);
@@ -222,12 +222,6 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogCurveIntersectAxis::PutAngle()
-{
-    PutValHere(ui->plainTextEditFormula, ui->listWidget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::EvalAngle()
 {
     Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, degreeSymbol, false);
@@ -243,6 +237,19 @@ void DialogCurveIntersectAxis::AngleTextChanged()
 void DialogCurveIntersectAxis::DeployAngleTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::FXAngle()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit angle"));
+    dialog->SetFormula(GetAngle());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetAngle(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
