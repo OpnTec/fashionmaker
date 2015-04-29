@@ -34,6 +34,7 @@
 #include "../../visualization/vistoolbisector.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -46,7 +47,6 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
       line(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -63,9 +63,7 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
     FillComboBoxPoints(ui->comboBoxThirdPoint);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogBisector::PutHere);
-    connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogBisector::PutVal);
-
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogBisector::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogBisector::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogBisector::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
@@ -108,6 +106,19 @@ void DialogBisector::PointNameChanged()
     ChangeColor(ui->labelSecondPoint, color);
     ChangeColor(ui->labelThirdPoint, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
