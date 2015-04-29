@@ -242,9 +242,10 @@ unix{
         # Path to resources in app bundle
         RESOURCES_DIR = "Contents/Resources"
         FRAMEWORKS_DIR = "Contents/Frameworks"
+        MACOS_DIR = "Contents/MacOS"
         # On macx we will use app bundle. Bundle doesn't need bin directory inside.
         # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
-        target.path = $$PREFIX/
+        target.path = $$MACOS_DIR
 
         # Copy in bundle translation files.
         exists($${TRANSLATIONS_PATH}/valentina_ru_RU.qm){
@@ -342,8 +343,8 @@ unix{
     libraries.files += $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
     # Utility pdftops need for saving a layout image to PS and EPS formates.
-    xpdf.path = $$PREFIX/
-    xpdf.files += $${PWD}../../dist/macx/bin64/pdftops
+    xpdf.path = $$MACOS_DIR
+    xpdf.files += $${PWD}/../../dist/macx/bin64/pdftops
 
     # logo on macx.
     ICON = ../../dist/Valentina.icns
