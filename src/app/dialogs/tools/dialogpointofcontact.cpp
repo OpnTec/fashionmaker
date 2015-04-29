@@ -33,6 +33,7 @@
 #include "../../visualization/vistoolpointofcontact.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,7 +46,6 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
       radius(QString()), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -60,24 +60,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxPoints(ui->comboBoxCenter);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogPointOfContact::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogPointOfContact::PutVal);
-
-    if (qApp->patternType() == MeasurementsType::Standard)
-    {
-        SizeHeight();
-        connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
-    }
-    else
-    {
-        radioButtonSizeGrowth->setVisible(false);
-        Measurements();
-    }
-    connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogPointOfContact::Measurements);
-    connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogPointOfContact::Increments);
-    connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogPointOfContact::LengthLines);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogPointOfContact::LengthArcs);
-    connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogPointOfContact::LengthCurves);
+    connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogPointOfContact::FXRadius);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
@@ -130,6 +113,19 @@ void DialogPointOfContact::PointNameChanged()
     ChangeColor(ui->labelSecondPoint, color);
     ChangeColor(ui->labelArcCenter, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::FXRadius()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit radius"));
+    dialog->SetFormula(getRadius());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        setRadius(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
