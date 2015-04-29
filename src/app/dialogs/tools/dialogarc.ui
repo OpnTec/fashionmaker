@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>425</width>
-    <height>577</height>
+    <height>329</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -87,16 +87,13 @@
       </spacer>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonPutHereRadius">
-       <property name="toolTip">
-        <string>Insert variable into the formula</string>
-       </property>
+      <widget class="QToolButton" name="toolButtonExprRadius">
        <property name="text">
         <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+         <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -265,16 +262,13 @@
       </spacer>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonPutHereF1">
-       <property name="toolTip">
-        <string>Insert variable into formula</string>
-       </property>
+      <widget class="QToolButton" name="toolButtonExprF1">
        <property name="text">
         <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+         <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -443,16 +437,13 @@
       </spacer>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonPutHereF2">
-       <property name="toolTip">
-        <string>Insert marked variable into formula</string>
-       </property>
+      <widget class="QToolButton" name="toolButtonExprF2">
        <property name="text">
-        <string notr="true">...</string>
+        <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+         <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -556,194 +547,38 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Center point</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBoxBasePoint">
-             <property name="toolTip">
-              <string>Select point of center of arc</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="comboBoxColor"/>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Color</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Input data</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonSizeGrowth">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Size and height</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonStandardTable">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Measurements</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonIncrements">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Increments</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonLengthLine">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of lines</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonLengthArc">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of arcs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonLengthSpline">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of curves</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonAngleLine">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Angle of lines</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Center point</string>
+       </property>
+      </widget>
      </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QCheckBox" name="checkBoxHideEmpty">
-         <property name="text">
-          <string>Hide empty measurements</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QListWidget" name="listWidget">
-         <property name="toolTip">
-          <string>Variables</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboBoxBasePoint">
+       <property name="toolTip">
+        <string>Select point of center of arc</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboBoxColor"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Color</string>
+       </property>
+      </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelDescription">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -759,23 +594,11 @@
  </widget>
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
-  <tabstop>toolButtonPutHereRadius</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>plainTextEditF1</tabstop>
-  <tabstop>toolButtonPutHereF1</tabstop>
   <tabstop>pushButtonGrowLengthF1</tabstop>
   <tabstop>plainTextEditF2</tabstop>
-  <tabstop>toolButtonPutHereF2</tabstop>
   <tabstop>pushButtonGrowLengthF2</tabstop>
-  <tabstop>radioButtonSizeGrowth</tabstop>
-  <tabstop>radioButtonStandardTable</tabstop>
-  <tabstop>radioButtonIncrements</tabstop>
-  <tabstop>radioButtonLengthLine</tabstop>
-  <tabstop>radioButtonLengthArc</tabstop>
-  <tabstop>radioButtonLengthSpline</tabstop>
-  <tabstop>radioButtonAngleLine</tabstop>
-  <tabstop>checkBoxHideEmpty</tabstop>
-  <tabstop>listWidget</tabstop>
   <tabstop>comboBoxBasePoint</tabstop>
   <tabstop>comboBoxColor</tabstop>
  </tabstops>
