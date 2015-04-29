@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 
     QTranslator qtTranslator;
 #if defined(Q_OS_WIN)
-    qtTranslator.load("qt_" + checkedLocale, QCoreApplication::applicationDirPath());
+    qtTranslator.load("qt_" + checkedLocale, qApp->translationsPath());
 #else
     qtTranslator.load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 #endif
