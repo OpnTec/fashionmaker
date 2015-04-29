@@ -78,6 +78,11 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionSave, &QAction::triggered, this, &TableWindow::SaveLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
+
+#if defined(Q_OS_MAC)
+    // On Mac deafault icon size is 32x32.
+    ui->toolBar->setIconSize(QSize(24, 24));
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
