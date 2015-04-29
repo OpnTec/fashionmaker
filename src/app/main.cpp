@@ -88,6 +88,14 @@ int main(int argc, char *argv[])
 #endif
     app.installTranslator(&qtTranslator);
 
+    QTranslator qtxmlTranslator;
+#if defined(Q_OS_WIN)
+    qtxmlTranslator.load("qtxmlpatterns_" + checkedLocale, qApp->translationsPath());
+#else
+    qtxmlTranslator.load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    app.installTranslator(&qtxmlTranslator);
+
     QTranslator appTranslator;
     appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     app.installTranslator(&appTranslator);
