@@ -41,6 +41,7 @@ class VToolSinglePoint : public VToolPoint
 public:
     VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                       const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
+    virtual ~VToolSinglePoint();
     virtual void setDialog();
     static const QString ToolType;
     virtual int  type() const {return Type;}

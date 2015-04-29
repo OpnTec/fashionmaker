@@ -98,6 +98,13 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolSplinePath::~VToolSplinePath()
+{
+    //Disable cursor-arrow-openhand
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */

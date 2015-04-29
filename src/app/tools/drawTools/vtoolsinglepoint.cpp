@@ -69,6 +69,13 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolSinglePoint::~VToolSinglePoint()
+{
+    //Disable cursor-arrow-openhand
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setDialog set dialog when user want change tool option.
  */

@@ -70,6 +70,13 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VControlPointSpline::~VControlPointSpline()
+{
+    //Disable cursor-arrow-openhand
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     /* From question on StackOverflow

@@ -42,6 +42,7 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 public:
     VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
     VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
+    virtual ~VGraphicsSimpleTextItem();
 
     qint32       FontSize()const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);

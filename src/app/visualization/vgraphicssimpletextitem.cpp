@@ -71,6 +71,13 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphic
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VGraphicsSimpleTextItem::~VGraphicsSimpleTextItem()
+{
+    //Disable cursor-arrow-openhand
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     /* From question on StackOverflow
