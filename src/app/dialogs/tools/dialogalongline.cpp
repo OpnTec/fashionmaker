@@ -31,6 +31,7 @@
 #include "../../visualization/vistoolalongline.h"
 #include "../../tools/vabstracttool.h"
 #include "../../widgets/vmaingraphicsscene.h"
+#include "dialogeditwrongformula.h"
 
 #include <QPushButton>
 
@@ -45,7 +46,6 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
       formula(QString()), formulaBaseHeight(0), line(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -62,11 +62,10 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogAlongLine::PutHere);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogAlongLine::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
-    connect(listWidget, &QListWidget::itemDoubleClicked, this, &DialogTool::PutVal);
     connect(ui->comboBoxFirstPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -98,6 +97,19 @@ void DialogAlongLine::PointChanged()
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>678</height>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -87,16 +87,13 @@
       </spacer>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButtonPutHere">
-       <property name="toolTip">
-        <string>Insert variable into formula</string>
-       </property>
+      <widget class="QToolButton" name="toolButtonExprLength">
        <property name="text">
         <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../share/resources/icon.qrc">
-         <normaloff>:/icon/24x24/putHere.png</normaloff>:/icon/24x24/putHere.png</iconset>
+         <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -200,457 +197,261 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelEditNamePoint">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Point label</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEditNamePoint"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelFirstPoint">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>First point</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboBoxFirstPoint">
+       <property name="toolTip">
+        <string>First point of line</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelSecondPoint">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Second point</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="comboBoxSecondPoint">
+       <property name="toolTip">
+        <string>Second point of line</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <layout class="QFormLayout" name="formLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelEditNamePoint">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Point label</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditNamePoint"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelFirstPoint">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>First point</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBoxFirstPoint">
-           <property name="toolTip">
-            <string>First point of line</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="labelSecondPoint">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Second point</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="comboBoxSecondPoint">
-           <property name="toolTip">
-            <string>Second point of line</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Additional angle degrees</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout">
-             <property name="sizeConstraint">
-              <enum>QLayout::SetMinimumSize</enum>
-             </property>
-             <property name="horizontalSpacing">
-              <number>29</number>
-             </property>
-             <property name="verticalSpacing">
-              <number>6</number>
-             </property>
-             <item row="0" column="2">
-              <widget class="QToolButton" name="toolButtonArrowRightUp">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowRightUp.png</normaloff>:/icon/32x32/arrowRightUp.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QToolButton" name="toolButtonArrowLeftUp">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowLeftUp.png</normaloff>:/icon/32x32/arrowLeftUp.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QToolButton" name="toolButtonArrowLeft">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowLeft.png</normaloff>:/icon/32x32/arrowLeft.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QToolButton" name="toolButtonArrowRight">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowRight.png</normaloff>:/icon/32x32/arrowRight.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QToolButton" name="toolButtonArrowUp">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowUp.png</normaloff>:/icon/32x32/arrowUp.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QToolButton" name="toolButtonArrowDown">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowDown.png</normaloff>:/icon/32x32/arrowDown.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QToolButton" name="toolButtonArrowLeftDown">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowLeftDown.png</normaloff>:/icon/32x32/arrowLeftDown.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QToolButton" name="toolButtonArrowRightDown">
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../share/resources/icon.qrc">
-                 <normaloff>:/icon/32x32/arrowRightDown.png</normaloff>:/icon/32x32/arrowRightDown.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>32</width>
-                 <height>32</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>56</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="minimum">
-                <double>-360.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>360.000000000000000</double>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <layout class="QFormLayout" name="formLayout_2">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Type of line</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBoxLineType">
-             <property name="minimumSize">
-              <size>
-               <width>80</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>110</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string>Show line from first point to this point</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>80</width>
-               <height>14</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="comboBoxLineColor"/>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Line color</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Input data</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonSizeGrowth">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Size and height</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonStandardTable">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Measurements</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonIncrements">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Increments</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonLengthLine">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of lines</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonLengthArc">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of arcs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonLengthSpline">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of curves</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonAngleLine">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Angle of lines</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+      <widget class="QLabel" name="label_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Additional angle degrees</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QCheckBox" name="checkBoxHideEmpty">
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMinimumSize</enum>
+       </property>
+       <property name="horizontalSpacing">
+        <number>29</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>6</number>
+       </property>
+       <item row="1" column="2">
+        <widget class="QToolButton" name="toolButtonArrowRight">
          <property name="text">
-          <string>Hide empty measurements</string>
+          <string notr="true">...</string>
          </property>
-         <property name="checked">
-          <bool>true</bool>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowRight.png</normaloff>:/icon/32x32/arrowRight.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QListWidget" name="listWidget">
-         <property name="toolTip">
-          <string>Variables - Click twice to insert into formula</string>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>56</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="minimum">
+          <double>-360.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>360.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QToolButton" name="toolButtonArrowLeftUp">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowLeftUp.png</normaloff>:/icon/32x32/arrowLeftUp.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QToolButton" name="toolButtonArrowRightUp">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowRightUp.png</normaloff>:/icon/32x32/arrowRightUp.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QToolButton" name="toolButtonArrowUp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowUp.png</normaloff>:/icon/32x32/arrowUp.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QToolButton" name="toolButtonArrowLeft">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowLeft.png</normaloff>:/icon/32x32/arrowLeft.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QToolButton" name="toolButtonArrowLeftDown">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowLeftDown.png</normaloff>:/icon/32x32/arrowLeftDown.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QToolButton" name="toolButtonArrowDown">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowDown.png</normaloff>:/icon/32x32/arrowDown.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QToolButton" name="toolButtonArrowRightDown">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../share/resources/icon.qrc">
+           <normaloff>:/icon/32x32/arrowRightDown.png</normaloff>:/icon/32x32/arrowRightDown.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -659,14 +460,50 @@
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="labelDescription">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Type of line</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboBoxLineType">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>110</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Show line from first point to this point</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>80</width>
+         <height>14</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboBoxLineColor"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Line color</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -682,7 +519,6 @@
  </widget>
  <tabstops>
   <tabstop>plainTextEditFormula</tabstop>
-  <tabstop>toolButtonPutHere</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
   <tabstop>lineEditNamePoint</tabstop>
   <tabstop>comboBoxFirstPoint</tabstop>
@@ -696,15 +532,6 @@
   <tabstop>toolButtonArrowLeftDown</tabstop>
   <tabstop>toolButtonArrowLeft</tabstop>
   <tabstop>toolButtonArrowLeftUp</tabstop>
-  <tabstop>radioButtonSizeGrowth</tabstop>
-  <tabstop>radioButtonStandardTable</tabstop>
-  <tabstop>radioButtonIncrements</tabstop>
-  <tabstop>radioButtonLengthLine</tabstop>
-  <tabstop>radioButtonLengthArc</tabstop>
-  <tabstop>radioButtonLengthSpline</tabstop>
-  <tabstop>radioButtonAngleLine</tabstop>
-  <tabstop>checkBoxHideEmpty</tabstop>
-  <tabstop>listWidget</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

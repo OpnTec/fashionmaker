@@ -33,6 +33,7 @@
 #include "../../container/vcontainer.h"
 #include "../../xml/vpattern.h"
 #include "../../visualization/vistoolcutsplinepath.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,7 +46,6 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
       path(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -59,8 +59,7 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
     FillComboBoxSplinesPath(ui->comboBoxSplinePath);
     FillComboBoxLineColors(ui->comboBoxColor);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSplinePath::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSplinePath::PutVal);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSplinePath::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSplinePath::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutSplinePath::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSplinePath::DeployFormulaTextEdit);
@@ -177,6 +176,19 @@ void DialogCutSplinePath::closeEvent(QCloseEvent *event)
 void DialogCutSplinePath::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

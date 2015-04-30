@@ -54,7 +54,6 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
 {
     baseColor = Qt::red;
     this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())/factor));
-    ignoreFullUpdate = true;
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
@@ -67,6 +66,13 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     {
         RefreshDataInFile();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSinglePoint::~VToolSinglePoint()
+{
+    //Disable cursor-arrow-openhand
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

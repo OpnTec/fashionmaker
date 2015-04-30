@@ -52,7 +52,6 @@ VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, con
     :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), p1LineId(p1LineId),
       p2LineId(p2LineId)
 {
-    ignoreFullUpdate = true;
     if (typeCreation == Source::FromGui)
     {
         AddToFile();
@@ -95,7 +94,6 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     SCASSERT(dialog != nullptr);
     DialogHeight *dialogTool = qobject_cast<DialogHeight*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    disconnect(doc, &VPattern::FullUpdateFromFile, dialogTool, &DialogHeight::UpdateList);
     const QString pointName = dialogTool->getPointName();
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();

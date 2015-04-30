@@ -40,20 +40,21 @@ class VToolSplinePath:public VAbstractSpline
 public:
     VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                     QGraphicsItem * parent = nullptr);
-     virtual void setDialog();
-     static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
-     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
-                                    VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
-                                    const Source &typeCreation);
-     static const QString ToolType;
-     static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
-     virtual int  type() const {return Type;}
-     enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
+    virtual ~VToolSplinePath();
+    virtual void setDialog();
+    static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc, VContainer *data);
+    static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
+                                VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
+                                const Source &typeCreation);
+    static const QString ToolType;
+    static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
 
-     VSplinePath getSplinePath()const;
-     void        setSplinePath(const VSplinePath &splPath);
+    VSplinePath getSplinePath()const;
+    void        setSplinePath(const VSplinePath &splPath);
 
-     virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show);
 signals:
     /**
      * @brief RefreshLine refresh control line.

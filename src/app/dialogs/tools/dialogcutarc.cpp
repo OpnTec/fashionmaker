@@ -34,6 +34,7 @@
 #include "../../visualization/vistoolcutarc.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -46,7 +47,6 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
       path(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -60,9 +60,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxArcs(ui->comboBoxArc);
     FillComboBoxLineColors(ui->comboBoxColor);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutArc::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutArc::PutVal);
-
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutArc::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
@@ -74,6 +72,19 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
 void DialogCutArc::FormulaTextChanged()
 {
     this->FormulaChangedPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

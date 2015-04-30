@@ -72,9 +72,6 @@ public slots:
     virtual void EnableToolMove(bool move);
 protected:
 
-    /** @brief ignoreFullUpdate ignore or not full updates. */
-    bool         ignoreFullUpdate;
-
     /** @brief nameActivDraw name of tool's pattern peace. */
     QString      nameActivDraw;
 
@@ -142,10 +139,6 @@ protected:
 
             connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
             connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
-            if (ignoreFullUpdate == false)
-            {
-                connect(doc, &VPattern::FullUpdateFromFile, dialog, &DialogTool::UpdateList);
-            }
 
             tool->setDialog();
 

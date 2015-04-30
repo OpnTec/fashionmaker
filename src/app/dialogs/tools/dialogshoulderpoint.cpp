@@ -34,6 +34,7 @@
 #include "../../visualization/vistoolshoulderpoint.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -46,7 +47,6 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
       formulaBaseHeight(0), line (nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -63,8 +63,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
     FillComboBoxPoints(ui->comboBoxP3);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogShoulderPoint::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogShoulderPoint::PutVal);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogShoulderPoint::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogShoulderPoint::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogShoulderPoint::FormulaTextChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogShoulderPoint::DeployFormulaTextEdit);
@@ -107,6 +106,19 @@ void DialogShoulderPoint::PointNameChanged()
     ChangeColor(ui->labelSecondPoint, color);
     ChangeColor(ui->labelThirdPoint, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

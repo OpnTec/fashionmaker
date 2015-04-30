@@ -64,7 +64,6 @@ public:
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
     virtual void   PointNameChanged();
-    virtual void   UpdateList();
 protected:
     virtual void   ShowVisualization();
     /**

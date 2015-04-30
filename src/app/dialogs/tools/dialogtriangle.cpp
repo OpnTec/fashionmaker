@@ -196,15 +196,6 @@ void DialogTriangle::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTriangle::UpdateList()
-{
-    /*
-     * Does nothing. We redefine this slot because it is only one now way block update list of variable.
-     * This dialog doesn't work with formula. Don't delete. Help avoid crash.
-     */
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogTriangle::ShowVisualization()
 {
     if (prepare == false)

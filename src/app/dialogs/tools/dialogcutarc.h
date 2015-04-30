@@ -69,6 +69,7 @@ public slots:
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
     void              FormulaTextChanged();
+    void              FXLength();
 protected:
     virtual void      ShowVisualization();
     /**

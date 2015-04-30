@@ -73,6 +73,7 @@ public slots:
      */
     void           FormulaTextChanged();
     virtual void   PointNameChanged();
+    void           FXRadius();
 protected:
     virtual void   ShowVisualization();
     /**

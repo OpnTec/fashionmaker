@@ -141,15 +141,6 @@ void DialogLine::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLine::UpdateList()
-{
-    /*
-     * Does nothing. We redefine this slot because it is only one now way block update list of variables.
-     * This dialog doesn't work with formula. Don't delete. Help avoid crash.
-     */
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogLine::ShowVisualization()
 {
     if (prepare == false)

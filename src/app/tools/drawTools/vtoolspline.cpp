@@ -97,7 +97,10 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSpline::~VToolSpline()
-{}
+{
+    //Disable cursor-arrow-openhand
+    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

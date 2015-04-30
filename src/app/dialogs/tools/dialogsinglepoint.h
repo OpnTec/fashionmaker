@@ -51,7 +51,6 @@ public:
 
 public slots:
     void           mousePress(const QPointF &scenePos);
-    virtual void   UpdateList();
 protected:
     /**
      * @brief SaveData Put dialog data in local variables

@@ -36,6 +36,7 @@
 #include "../../container/vcontainer.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../visualization/vistoolarc.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -50,8 +51,6 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
       angleF2(INT_MIN)
 {
     ui->setupUi(this);
-
-    InitVariables(ui);
 
     plainTextEditFormula = ui->plainTextEditFormula;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
@@ -78,9 +77,9 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
 
     CheckState();
 
-    connect(ui->toolButtonPutHereRadius, &QPushButton::clicked, this, &DialogArc::PutRadius);
-    connect(ui->toolButtonPutHereF1, &QPushButton::clicked, this, &DialogArc::PutF1);
-    connect(ui->toolButtonPutHereF2, &QPushButton::clicked, this, &DialogArc::PutF2);
+    connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogArc::FXRadius);
+    connect(ui->toolButtonExprF1, &QPushButton::clicked, this, &DialogArc::FXF1);
+    connect(ui->toolButtonExprF2, &QPushButton::clicked, this, &DialogArc::FXF2);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
     connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArc::F1Changed);
@@ -261,43 +260,6 @@ void DialogArc::closeEvent(QCloseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief PutRadius put variable into formula of radius
- */
-void DialogArc::PutRadius()
-{
-    PutValHere(ui->plainTextEditFormula, ui->listWidget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PutF1 put variable into formula of first angle
- */
-void DialogArc::PutF1()
-{
-    PutValHere(ui->plainTextEditF1, ui->listWidget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PutF2 put variable into formula of second angle
- */
-void DialogArc::PutF2()
-{
-    PutValHere(ui->plainTextEditF2, ui->listWidget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief LineAngles show variable angles of lines
- */
-// cppcheck-suppress unusedFunction
-void DialogArc::LineAngles()
-{
-    ShowLineAngles();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RadiusChanged after change formula of radius calculate value and show result
  */
 void DialogArc::RadiusChanged()
@@ -327,6 +289,45 @@ void DialogArc::F2Changed()
     labelEditFormula = ui->labelEditF2;
     labelResultCalculation = ui->labelResultF2;
     ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::FXRadius()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit radius"));
+    dialog->SetFormula(GetRadius());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetRadius(dialog->GetFormula());
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::FXF1()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit first angle"));
+    dialog->SetFormula(GetF1());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetF1(dialog->GetFormula());
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::FXF2()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit second angle"));
+    dialog->SetFormula(GetF2());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetF2(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -375,27 +376,6 @@ void DialogArc::EvalF()
     angleF2 = Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
 
     CheckAngles();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowLineAngles show varibles angles of lines
- */
-void DialogArc::ShowLineAngles()
-{
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
-    ui->listWidget->blockSignals(false);
-    const QMap<QString, QSharedPointer<VLineAngle> > lineAnglesTable = data->DataAngleLines();
-    QMap<QString, QSharedPointer<VLineAngle> >::const_iterator i;
-    for (i = lineAnglesTable.constBegin(); i != lineAnglesTable.constEnd(); ++i)
-    {
-        QListWidgetItem *item = new QListWidgetItem(i.key());
-
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        ui->listWidget->addItem(item);
-    }
-    ui->listWidget->setCurrentRow (0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

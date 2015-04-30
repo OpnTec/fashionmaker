@@ -50,6 +50,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     ToolButton = new QToolButton(this);
     ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
     ToolButton->setText("...");
+    ToolButton->setIcon(QIcon("://icon/16x16/fx.png"));
     ToolButton->setFixedWidth(20);
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy

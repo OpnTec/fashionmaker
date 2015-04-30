@@ -250,15 +250,6 @@ void DialogHeight::PointNameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogHeight::UpdateList()
-{
-    /*
-     * Does nothing. We redefine this slot because it is only one now way block update list of variable.
-     * This dialog doesn't work with formula. Don't delete. Help avoid crash.
-     */
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::ShowVisualization()
 {
     if (prepare == false)

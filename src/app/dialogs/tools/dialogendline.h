@@ -76,10 +76,13 @@ public slots:
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
     void             FormulaTextChanged();
-    void             PutAngle();
+
     void             EvalAngle();
     void             AngleTextChanged();
     void             DeployAngleTextEdit();
+
+    void             FXAngle();
+    void             FXLength();
 protected:
     virtual void     ShowVisualization();
     /**

@@ -70,14 +70,13 @@ public slots:
     void DeployFormulaTextEdit();
     void DeployF1TextEdit();
     void DeployF2TextEdit();
-    void          PutRadius();
-    void          PutF1();
-    void          PutF2();
-    // cppcheck-suppress unusedFunction
-    void          LineAngles();
     void          RadiusChanged();
     void          F1Changed();
     void          F2Changed();
+
+    void          FXRadius();
+    void          FXF1();
+    void          FXF2();
 protected:
     virtual void  CheckState();
     virtual void  ShowVisualization();
@@ -131,7 +130,6 @@ private:
 
     void          EvalRadius();
     void          EvalF();
-    void          ShowLineAngles();
     void          CheckAngles();
 };
 

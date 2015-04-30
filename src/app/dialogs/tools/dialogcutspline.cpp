@@ -33,6 +33,7 @@
 #include "../../container/vcontainer.h"
 #include "../../xml/vpattern.h"
 #include "../../visualization/vistoolcutspline.h"
+#include "dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -45,7 +46,6 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
       path(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -59,8 +59,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     FillComboBoxSplines(ui->comboBoxSpline);
     FillComboBoxLineColors(ui->comboBoxColor);
 
-    connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogCutSpline::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogCutSpline::PutVal);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSpline::NamePointChanged);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutSpline::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
@@ -177,6 +176,19 @@ void DialogCutSpline::closeEvent(QCloseEvent *event)
 void DialogCutSpline::DeployFormulaTextEdit()
 {
     DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

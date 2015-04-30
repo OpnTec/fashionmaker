@@ -111,17 +111,7 @@ public slots:
     void             ArrowRightUp();
     void             ArrowRightDown();
     virtual void     EvalFormula();
-    void             SizeHeight();
-    void             Measurements();
-    void             LengthLines();
-    void             LengthArcs();
-    void             LengthCurves();
-    void             AngleLines();
-    void             Increments();
-    void             PutHere();
-    void             PutVal(QListWidgetItem * item);
-    virtual void     ValChenged(int row);
-    virtual void     UpdateList();
+
     virtual void     PointNameChanged(){}
 protected:
     Q_DISABLE_COPY(DialogTool)
@@ -160,42 +150,15 @@ protected:
 
     /** @brief plainTextEditFormula formula */
     QPlainTextEdit   *plainTextEditFormula;
-    /** @brief listWidget listWidget with variables */
-    QListWidget      *listWidget;
 
     /** @brief labelResultCalculation label with result of calculation */
     QLabel           *labelResultCalculation;
-
-    /** @brief labelDescription description of variable */
-    QLabel           *labelDescription;
 
     /** @brief labelEditNamePoint label used when need show wrong name of point */
     QLabel           *labelEditNamePoint;
 
     /** @brief labelEditFormula label used when need show wrong formula */
     QLabel           *labelEditFormula;
-
-    /** @brief radioButtonSizeGrowth radio button for base variables */
-    QRadioButton     *radioButtonSizeGrowth;
-
-    /** @brief radioButtonStandardTable radio button for standard table variables */
-    QRadioButton     *radioButtonStandardTable;
-
-    /** @brief radioButtonIncrements radio button for increments variables */
-    QRadioButton     *radioButtonIncrements;
-
-    /** @brief radioButtonLengthLine radio button for lengths od lines variables */
-    QRadioButton     *radioButtonLengthLine;
-
-    /** @brief radioButtonLengthArc radio button for lengths of arcs variables */
-    QRadioButton     *radioButtonLengthArc;
-
-    /** @brief radioButtonLengthCurve radio button for lengths of curves variables */
-    QRadioButton     *radioButtonLengthCurve;
-
-    QRadioButton     *radioButtonAngleLine;
-
-    QCheckBox        *checkBoxHideEmpty;
 
     const QColor     okColor;
     const QColor     errorColor;
@@ -228,11 +191,7 @@ protected:
 
     virtual void     CheckState();
     QString          GetComboBoxCurrentData(const QComboBox *box)const;
-    template <class key, class val>
-    void             ShowVariable(const QMap<key, val> var);
     void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
-    void             PutValHere(QLineEdit *lineEdit, QListWidget *listWidget);
-    void             PutValHere(QPlainTextEdit *plainTextEdit, QListWidget *listWidget);
     void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
@@ -261,41 +220,6 @@ protected:
         connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, &DialogTool::ArrowLeftDown);
         connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, &DialogTool::ArrowRightUp);
         connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this, &DialogTool::ArrowRightDown);
-    }
-    template <typename T>
-    void             InitVariables(T *ui)
-    {
-        listWidget = ui->listWidget;
-        labelDescription = ui->labelDescription;
-        radioButtonSizeGrowth = ui->radioButtonSizeGrowth;
-        radioButtonStandardTable = ui->radioButtonStandardTable;
-        radioButtonIncrements = ui->radioButtonIncrements;
-        radioButtonLengthLine = ui->radioButtonLengthLine;
-        radioButtonLengthArc = ui->radioButtonLengthArc;
-        radioButtonLengthCurve = ui->radioButtonLengthSpline;
-        radioButtonAngleLine = ui->radioButtonAngleLine;
-        checkBoxHideEmpty = ui->checkBoxHideEmpty;
-
-        connect(listWidget, &QListWidget::currentRowChanged, this, &DialogTool::ValChenged);
-
-        if (qApp->patternType() == MeasurementsType::Standard)
-        {
-            SizeHeight();
-            connect(radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogTool::SizeHeight);
-        }
-        else
-        {
-            radioButtonSizeGrowth->setEnabled(false);
-            radioButtonStandardTable->setChecked(true);
-            Measurements();
-        }
-        connect(radioButtonStandardTable, &QRadioButton::clicked, this, &DialogTool::Measurements);
-        connect(radioButtonIncrements, &QRadioButton::clicked, this, &DialogTool::Increments);
-        connect(radioButtonLengthLine, &QRadioButton::clicked, this, &DialogTool::LengthLines);
-        connect(radioButtonLengthArc, &QRadioButton::clicked, this, &DialogTool::LengthArcs);
-        connect(radioButtonLengthCurve, &QRadioButton::clicked, this, &DialogTool::LengthCurves);
-        connect(radioButtonAngleLine, &QRadioButton::clicked, this, &DialogTool::AngleLines);
-        connect(checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogTool::Measurements);
     }
     template <typename T>
     /**

@@ -64,6 +64,7 @@ public slots:
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void         DeployFormulaTextEdit();
+    void         FXLength();
 protected:
     virtual void ShowVisualization();
     /**

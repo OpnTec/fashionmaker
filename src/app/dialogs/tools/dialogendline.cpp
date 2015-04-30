@@ -34,6 +34,7 @@
 #include "../../visualization/vistoolendline.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
+#include "dialogeditwrongformula.h"
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
       formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0), line(nullptr)
 {
     ui->setupUi(this);
-    InitVariables(ui);
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;
@@ -65,8 +65,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     FillComboBoxTypeLine(ui->comboBoxLineType, VAbstractTool::LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->toolButtonPutHereLength, &QPushButton::clicked, this, &DialogEndLine::PutHere);
-    connect(ui->toolButtonPutHereAngle, &QPushButton::clicked, this, &DialogEndLine::PutAngle);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogEndLine::FXLength);
+    connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogEndLine::FXAngle);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
 
@@ -79,15 +79,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     connect(timerFormula, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
 
     line = new VisToolEndLine(data);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PutAngle put variable into formula of angle
- */
-void DialogEndLine::PutAngle()
-{
-    PutValHere(ui->plainTextEditAngle, ui->listWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,6 +116,32 @@ void DialogEndLine::DeployFormulaTextEdit()
 void DialogEndLine::DeployAngleTextEdit()
 {
     DeployFormula(ui->plainTextEditAngle, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::FXAngle()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit angle"));
+    dialog->SetFormula(GetAngle());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetAngle(dialog->GetFormula());
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::FXLength()
+{
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    dialog->setWindowTitle(tr("Edit length"));
+    dialog->SetFormula(GetFormula());
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormula(dialog->GetFormula());
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -349,7 +349,7 @@
        <item>
         <widget class="QListWidget" name="listWidget">
          <property name="toolTip">
-          <string>Variables</string>
+          <string>Double click for add to formula</string>
          </property>
         </widget>
        </item>

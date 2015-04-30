@@ -66,10 +66,10 @@ public:
     virtual void ShowDialog(bool click);
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type);
-    void         PutAngle();
     void         EvalAngle();
     void         AngleTextChanged();
     void         DeployAngleTextEdit();
+    void         FXAngle();
 protected:
     virtual void ShowVisualization();
     /**
