@@ -63,6 +63,17 @@ public slots:
      */
     void         DeployFormulaTextEdit();
     virtual void EvalFormula();
+    void         ValChenged(int row);
+    void         SizeHeight();
+    void         PutHere();
+    void         PutVal(QListWidgetItem * item);
+
+    void         Measurements();
+    void         LengthLines();
+    void         LengthArcs();
+    void         LengthCurves();
+    void         AngleLines();
+    void         Increments();
 protected:
     virtual void CheckState();
     virtual void closeEvent(QCloseEvent *event);
@@ -79,6 +90,11 @@ private:
     bool checkZero;
     QString postfix;
     bool restoreCursor;
+
+    void InitVariables();
+
+    template <class key, class val>
+    void ShowVariable(const QMap<key, val> var);
 };
 
 
