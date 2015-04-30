@@ -260,7 +260,10 @@
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
-    <string>Generate a layout</string>
+    <string>Create Layout</string>
+   </property>
+   <property name="toolTip">
+    <string>Create Layout</string>
    </property>
   </action>
   <action name="actionPrint_pre_view">
