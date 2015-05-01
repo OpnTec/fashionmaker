@@ -947,7 +947,7 @@ void MainWindow::ToolBarDraws()
     ui->toolBarDraws->addAction(ui->actionOptionDraw);
     ui->actionOptionDraw->setEnabled(false);
 
-    ui->toolBarDraws->addAction(ui->actionTable);
+    // Don't add to toolbar!
     ui->actionTable->setEnabled(false);
 
     // Don't add to toolbar!
