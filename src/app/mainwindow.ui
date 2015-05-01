@@ -796,7 +796,6 @@
     </property>
     <addaction name="actionNewDraw"/>
     <addaction name="actionOptionDraw"/>
-    <addaction name="actionHistory"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
     <addaction name="actionZoomFitBest"/>
@@ -819,9 +818,16 @@
     </property>
     <addaction name="actionCloseWindow"/>
    </widget>
+   <widget class="QMenu" name="menuHistory">
+    <property name="title">
+     <string>History</string>
+    </property>
+    <addaction name="actionHistory"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPatternPiece"/>
    <addaction name="menuMeasurements"/>
+   <addaction name="menuHistory"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>

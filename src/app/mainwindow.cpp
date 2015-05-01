@@ -950,7 +950,7 @@ void MainWindow::ToolBarDraws()
     ui->toolBarDraws->addAction(ui->actionTable);
     ui->actionTable->setEnabled(false);
 
-    ui->toolBarDraws->addAction(ui->actionHistory);
+    // Don't add to toolbar!
     ui->actionHistory->setEnabled(false);
     connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
 
