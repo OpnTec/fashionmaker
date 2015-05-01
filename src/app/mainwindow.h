@@ -63,30 +63,36 @@ public slots:
 
     void               ActionDraw(bool checked);
     void               ActionDetails(bool checked);
-    void               ActionNewPP();
     void               ActionLayout(bool checked);
+
     void               ActionTable(bool checked);
     void               ActionHistory(bool checked);
-    void               ActionDetailsMode(bool checked);
+    void               ActionCurveDetailsMode(bool checked);
+    void               DrawOption();
 
     void               tableClosed();
     void               ClosedActionTable();
     void               ClosedActionHistory();
 
+    void               New();
     bool               SaveAs();
     bool               Save();
     void               Open();
+    void               NewPP();
+
     void               Preferences();
     void               RepotBug();
     void               OnlineHelp();
-    void               NewPattern();
+    void               About();
+    void               AboutQt();
+    void               PatternProperties();
     void               ShowToolTip(const QString &toolTip);
     void               OpenRecentFile();
     void               Clear();
     void               ResetWindow();
 
     void               currentPPChanged(int index);
-    void               OptionDraw();
+
     void               ChangedSize(const QString &text);
     void               ChangedHeight(const QString & text);
 
@@ -117,10 +123,6 @@ public slots:
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);
 
-    void               About();
-    void               AboutQt();
-    void               PatternProperties();
-
 //tmp
     void                LastUsedTool();
 
@@ -129,7 +131,9 @@ public slots:
      */
     void               EditPatternCode();
     void               FullParseFile();
+
     void               SetEnabledGUI(bool enabled);
+
     void               ClickEndVisualization();
     void               Layout();
     void               UpdateGradation();
@@ -225,8 +229,10 @@ private:
     void               ToolBarTools();
     void               InitToolButtons();
     void               CancelTool();
+
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
+
     void               SaveCurrentScene();
     void               RestoreCurrentScene();
     void               MinimumScrollBar();
@@ -276,6 +282,8 @@ private:
     void               FileClosedCorrect();
     QStringList        GetUnlokedRestoreFileList()const;
     void               ToolBarStyle(QToolBar *bar);
+
+    void               AddPP(const QString &PPName, const QString &path);
 };
 
 #endif // MAINWINDOW_H

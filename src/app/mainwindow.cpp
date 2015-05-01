@@ -148,114 +148,49 @@ MainWindow::MainWindow(QWidget *parent)
 /**
  * @brief ActionNewPP add to scene new pattern piece.
  */
-void MainWindow::ActionNewPP()
+void MainWindow::NewPP()
 {
     qCDebug(vMainWindow, "New PP.");
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
     qCDebug(vMainWindow, "Generated PP name: %s", patternPieceName.toUtf8().constData());
-    QString path;
-    if (comboBoxDraws->count() == 0)
-    {
-        qCDebug(vMainWindow, "First PP");
-        DialogMeasurements measurements(this);
-        if (measurements.exec() == QDialog::Rejected)
-        {
-            qCDebug(vMainWindow, "Creation PP was canceled");
-            return;
-        }
-        if (measurements.type() == MeasurementsType::Standard)
-        {
-            qCDebug(vMainWindow, "PP with standard measurements");
-            qApp->setPatternType(MeasurementsType::Standard);
-            DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
-            if (stMeasurements.exec() == QDialog::Accepted)
-            {
-                patternPieceName = stMeasurements.name();
-                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
-                path = stMeasurements.tablePath();
-                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
-                VStandardMeasurements m(pattern);
-                m.setXMLContent(path);
-                m.SetSize();
-                m.SetHeight();
-                m.Measurements();
-            }
-            else
-            {
-                qCDebug(vMainWindow, "Selection standard measurements canceled.");
-                return;
-            }
-        }
-        else
-        {
-            qCDebug(vMainWindow, "PP with individual measurements.");
-            QMessageBox::StandardButton ret;
-            ret = QMessageBox::question(this, tr("Individual measurements is under development"),
-                                        tr("There is no way create individual measurements file independent on the "
-                                           "pattern file.\nFor opening pattern need keep both files: pattern and "
-                                           "measurements. Do you want continue?"),
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-            if (ret == QMessageBox::No)
-            {
-                return;
-            }
 
-            qApp->setPatternType(MeasurementsType::Individual);
-            DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
-            if (indMeasurements.exec() == QDialog::Accepted)
-            {
-                patternPieceName = indMeasurements.name();
-                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
-                path = indMeasurements.tablePath();
-                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
-                VIndividualMeasurements m(pattern);
-                m.setXMLContent(path);
-                m.Measurements();
-            }
-            else
-            {
-                qCDebug(vMainWindow, "Selection individual measurements canceled.");
-                return;
-            }
-        }
+    qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
+    patternPieceName = PatternPieceName(patternPieceName);
+    qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
+    if (patternPieceName.isEmpty())
+    {
+        qCDebug(vMainWindow, "Name empty.");
+        return;
+    }
 
-        //Set scene size to size scene view
-        VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-        VAbstractTool::NewSceneRect(sceneDetails, ui->view);
-        ToolBarOption();
-    }
-    else
+    AddPP(patternPieceName, doc->MPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::AddPP(const QString &PPName, const QString &path)
+{
+    if (doc->appendPP(PPName) == false)
     {
-        qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
-        patternPieceName = PatternPieceName(patternPieceName);
-        qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
-        if (patternPieceName.isEmpty())
-        {
-            qCDebug(vMainWindow, "Name empty.");
-            return;
-        }
-        path = doc->MPath();
-    }
-    if (doc->appendPP(patternPieceName) == false)
-    {
-        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", patternPieceName.toUtf8().constData());
+        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", PPName.toUtf8().constData());
         return;
     }
     comboBoxDraws->blockSignals(true);
-    comboBoxDraws->addItem(patternPieceName);
+    comboBoxDraws->addItem(PPName);
 
     pattern->ClearGObjects();
     //Create single point
     ui->view->itemClicked(nullptr);//hide options previous tool
-    QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
+    const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const quint32 id = pattern->AddGObject(new VPointF(30+comboBoxDraws->count()*5, 40, label, 5, 10));
-    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Source::FromGui, patternPieceName, path);
+    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Source::FromGui, PPName, path);
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
+
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolSinglePoint::Disable);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
     connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolSinglePoint::EnableToolMove);
+
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     SCASSERT(tools != nullptr);
     tools->insert(id, spoint);
@@ -263,7 +198,7 @@ void MainWindow::ActionNewPP()
     SetEnableTool(true);
     SetEnableWidgets(true);
 
-    const qint32 index = comboBoxDraws->findText(patternPieceName);
+    const qint32 index = comboBoxDraws->findText(PPName);
     if ( index != -1 )
     { // -1 for not found
         comboBoxDraws->setCurrentIndex(index);
@@ -273,13 +208,15 @@ void MainWindow::ActionNewPP()
         comboBoxDraws->setCurrentIndex(0);
     }
     comboBoxDraws->blockSignals(false);
+
+    ui->actionNewDraw->setEnabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */
-void MainWindow::OptionDraw()
+void MainWindow::DrawOption()
 {
     const QString activDraw = doc->GetNameActivPP();
     const QString nameDraw = PatternPieceName(activDraw);
@@ -935,27 +872,18 @@ void MainWindow::SetDefaultSize(int value)
  */
 void MainWindow::ToolBarDraws()
 {
-    QLabel *labelPtternPieceName = new QLabel(tr("Pattern Piece: "));
-    ui->toolBarDraws->addWidget(labelPtternPieceName);
+    ui->toolBarDraws->addWidget(new QLabel(tr("Pattern Piece: ")));
 
+    // By using Qt UI Designer we can't add QComboBox to toolbar
     comboBoxDraws = new QComboBox;
     ui->toolBarDraws->addWidget(comboBoxDraws);
     comboBoxDraws->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    comboBoxDraws->setEnabled(false);
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::currentPPChanged);
 
     ui->toolBarDraws->addAction(ui->actionOptionDraw);
-    ui->actionOptionDraw->setEnabled(false);
-
-    // Don't add to toolbar!
-    ui->actionTable->setEnabled(false);
-
-    // Don't add to toolbar!
-    ui->actionHistory->setEnabled(false);
-    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
-
-    connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
-    ui->actionLayout->setEnabled(false);
+    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::DrawOption);
 }
 
 void MainWindow::ToolBarTools()
@@ -1601,14 +1529,7 @@ void MainWindow::FullParseFile()
 
     GlobalChangePP(patternPiece);
 
-    if (comboBoxDraws->count() > 0)
-    {
-        SetEnableTool(true);
-    }
-    else
-    {
-        SetEnableTool(false);
-    }
+    SetEnableTool(comboBoxDraws->count() > 0);
     SetEnableWidgets(true);
 }
 
@@ -1651,37 +1572,9 @@ void MainWindow::SetEnabledGUI(bool enabled)
             ArrowTool();
             qApp->getUndoStack()->clear();
         }
-        comboBoxDraws->setEnabled(enabled);
-        ui->actionOptionDraw->setEnabled(enabled);
-        ui->actionSave->setEnabled(enabled);
-        ui->actionSaveAs->setEnabled(enabled);
-        ui->actionPattern_properties->setEnabled(enabled);
-        ui->actionEdit_pattern_code->setEnabled(enabled);
-        ui->actionZoomIn->setEnabled(enabled);
-        ui->actionZoomOut->setEnabled(enabled);
-        ui->actionArrowTool->setEnabled(enabled);
-        ui->actionHistory->setEnabled(enabled);
-        ui->actionNewDraw->setEnabled(enabled);
-        ui->actionDraw->setEnabled(enabled);
-        ui->actionTable->setEnabled(enabled);
-        ui->actionZoomFitBest->setEnabled(enabled);
-        ui->actionZoomOriginal->setEnabled(enabled);
-        ui->actionShowCurveDetails->setEnabled(enabled);
-
-        if (enabled)
-        {
-            Layout();
-        }
-        else
-        {
-            ui->actionDetails->setEnabled(enabled);
-            ui->actionLayout->setEnabled(enabled);
-        }
+        SetEnableWidgets(enabled);
 
         guiEnabled = enabled;
-
-        sceneDraw->SetDisable(!enabled);
-        ui->view->setEnabled(enabled);
 
         SetEnableTool(enabled);
         ui->toolBarOption->setEnabled(enabled);
@@ -1689,6 +1582,48 @@ void MainWindow::SetEnabledGUI(bool enabled)
         QApplication::setOverrideCursor(Qt::ArrowCursor);
     #endif
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SetEnableWidgets enable action button.
+ * @param enable enable value.
+ */
+void MainWindow::SetEnableWidgets(bool enable)
+{
+    comboBoxDraws->setEnabled(enable);
+    ui->actionOptionDraw->setEnabled(enable);
+    if (enable && not curFile.isEmpty())
+    {
+        ui->actionSave->setEnabled(enable);
+    }
+    ui->actionSaveAs->setEnabled(enable);
+    ui->actionPattern_properties->setEnabled(enable);
+    ui->actionEdit_pattern_code->setEnabled(enable);
+    ui->actionZoomIn->setEnabled(enable);
+    ui->actionZoomOut->setEnabled(enable);
+    ui->actionArrowTool->setEnabled(enable);
+    ui->actionHistory->setEnabled(enable);
+    ui->actionNewDraw->setEnabled(enable);
+    ui->actionDraw->setEnabled(enable);
+    ui->actionTable->setEnabled(enable);
+    ui->actionZoomFitBest->setEnabled(enable);
+    ui->actionZoomOriginal->setEnabled(enable);
+    ui->actionShowCurveDetails->setEnabled(enable);
+
+    if (enable)
+    {
+        Layout();
+    }
+    else
+    {
+        ui->actionDetails->setEnabled(enable);
+        ui->actionLayout->setEnabled(enable);
+    }
+
+    //Now we want allow user call context menu
+    sceneDraw->SetDisable(!enable);
+    ui->view->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1774,9 +1709,89 @@ void MainWindow::UpdateSizesList(const QStringList &list)
 /**
  * @brief NewPattern create new empty pattern.
  */
-void MainWindow::NewPattern()
+void MainWindow::New()
 {
-    OpenNewValentina();
+    if (comboBoxDraws->count() == 0)
+    {
+        qCDebug(vMainWindow, "New PP.");
+        QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
+        qCDebug(vMainWindow, "Generated PP name: %s", patternPieceName.toUtf8().constData());
+        QString path;
+
+        qCDebug(vMainWindow, "First PP");
+        DialogMeasurements measurements(this);
+        if (measurements.exec() == QDialog::Rejected)
+        {
+            qCDebug(vMainWindow, "Creation PP was canceled");
+            return;
+        }
+        if (measurements.type() == MeasurementsType::Standard)
+        {
+            qCDebug(vMainWindow, "PP with standard measurements");
+            qApp->setPatternType(MeasurementsType::Standard);
+            DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
+            if (stMeasurements.exec() == QDialog::Accepted)
+            {
+                patternPieceName = stMeasurements.name();
+                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
+                path = stMeasurements.tablePath();
+                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
+                VStandardMeasurements m(pattern);
+                m.setXMLContent(path);
+                m.SetSize();
+                m.SetHeight();
+                m.Measurements();
+            }
+            else
+            {
+                qCDebug(vMainWindow, "Selection standard measurements canceled.");
+                return;
+            }
+        }
+        else
+        {
+            qCDebug(vMainWindow, "PP with individual measurements.");
+            QMessageBox::StandardButton ret;
+            ret = QMessageBox::question(this, tr("Individual measurements is under development"),
+                                        tr("There is no way create individual measurements file independent on the "
+                                           "pattern file.\nFor opening pattern need keep both files: pattern and "
+                                           "measurements. Do you want continue?"),
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+            if (ret == QMessageBox::No)
+            {
+                return;
+            }
+
+            qApp->setPatternType(MeasurementsType::Individual);
+            DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
+            if (indMeasurements.exec() == QDialog::Accepted)
+            {
+                patternPieceName = indMeasurements.name();
+                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
+                path = indMeasurements.tablePath();
+                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
+                VIndividualMeasurements m(pattern);
+                m.setXMLContent(path);
+                m.Measurements();
+            }
+            else
+            {
+                qCDebug(vMainWindow, "Selection individual measurements canceled.");
+                return;
+            }
+        }
+
+        //Set scene size to size scene view
+        VAbstractTool::NewSceneRect(sceneDraw, ui->view);
+        VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+        ToolBarOption();
+
+        AddPP(patternPieceName, path);
+    }
+    else
+    {
+        OpenNewValentina();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1812,34 +1827,6 @@ void MainWindow::ChangedHeight(const QString &text)
 {
     pattern->SetHeight(text.toInt());
     doc->LiteParseTree(Document::LiteParse);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetEnableWidgets enable action button.
- * @param enable enable value.
- */
-void MainWindow::SetEnableWidgets(bool enable)
-{
-    ui->actionSaveAs->setEnabled(enable);
-    ui->actionDraw->setEnabled(enable);
-    ui->actionOptionDraw->setEnabled(enable);
-    if (enable == true && curFile.isEmpty() == false)
-    {
-        ui->actionSave->setEnabled(enable);
-    }
-    Layout();
-    ui->actionTable->setEnabled(enable);
-    ui->actionHistory->setEnabled(enable);
-    ui->actionPattern_properties->setEnabled(enable);
-    ui->actionEdit_pattern_code->setEnabled(enable);
-    ui->actionZoomIn->setEnabled(enable);
-    ui->actionZoomOut->setEnabled(enable);
-    ui->actionZoomFitBest->setEnabled(enable);
-    ui->actionZoomOriginal->setEnabled(enable);
-    ui->actionShowCurveDetails->setEnabled(enable);
-    //Now we want allow user call context menu
-    ui->view->setEnabled(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1896,7 +1883,7 @@ void MainWindow::ActionHistory(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ActionDetailsMode(bool checked)
+void MainWindow::ActionCurveDetailsMode(bool checked)
 {
     ui->view->itemClicked(nullptr);
     sceneDraw->EnableDetailsMode(checked);
@@ -2371,12 +2358,13 @@ void MainWindow::CreateActions()
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ArrowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
-    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::ActionNewPP);
-    connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::OptionDraw);
+    connect(ui->actionLayout, &QAction::triggered, this, &MainWindow::ActionLayout);
+    connect(ui->actionHistory, &QAction::triggered, this, &MainWindow::ActionHistory);
+    connect(ui->actionNewDraw, &QAction::triggered, this, &MainWindow::NewPP);
     connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::SaveAs);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::Save);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::Open);
-    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::NewPattern);
+    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::New);
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable);
     connect(ui->actionAbout_Qt, &QAction::triggered, this, &MainWindow::AboutQt);
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
@@ -2389,7 +2377,7 @@ void MainWindow::CreateActions()
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
     connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
-    connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionDetailsMode);
+    connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
