@@ -775,8 +775,6 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
-    <addaction name="actionLayout"/>
-    <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -824,8 +822,17 @@
     </property>
     <addaction name="actionHistory"/>
    </widget>
+   <widget class="QMenu" name="menuMode">
+    <property name="title">
+     <string>Mode</string>
+    </property>
+    <addaction name="actionDraw"/>
+    <addaction name="actionDetails"/>
+    <addaction name="actionLayout"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPatternPiece"/>
+   <addaction name="menuMode"/>
    <addaction name="menuMeasurements"/>
    <addaction name="menuHistory"/>
    <addaction name="menuWindow"/>
