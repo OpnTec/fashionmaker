@@ -1195,10 +1195,10 @@
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
-    <string>Export pattern</string>
+    <string>Layout</string>
    </property>
    <property name="toolTip">
-    <string>Create layout</string>
+    <string>Create a layout</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
