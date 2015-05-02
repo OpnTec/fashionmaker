@@ -183,13 +183,14 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 {
     VBestSquare bestResult;
     QThreadPool *thread_pool = QThreadPool::globalInstance();
+    thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
 
     for (int j=1; j <= d->globalContour.EdgesCount(); ++j)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            QCoreApplication::processEvents();
+            //QCoreApplication::processEvents();
 
             VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease);
             //Info for debug
@@ -208,15 +209,14 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
         }
     }
 
-    if (thread_pool->waitForDone() == false)
-    {
-        return false;
-    }
+    thread_pool->waitForDone();
 
     QCoreApplication::processEvents();
 
     if (stop)
     {
+        qDeleteAll(threads.begin(), threads.end());
+        threads.clear();
         return false;
     }
 

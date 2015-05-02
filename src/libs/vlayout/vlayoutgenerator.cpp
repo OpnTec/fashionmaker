@@ -34,6 +34,7 @@
 #include <QImage>
 #include <QDir>
 #include <QGraphicsItem>
+#include <QThreadPool>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
@@ -183,6 +184,9 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration = true;
     state = LayoutErrors::ProcessStoped;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    QThreadPool::globalInstance()->clear();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

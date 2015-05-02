@@ -58,12 +58,12 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detai
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
-    QCoreApplication::processEvents();
-
     if (*stop)
     {
         return;
     }
+
+    QCoreApplication::processEvents();
 
     // We should use copy of the detail.
     VLayoutDetail workDetail = detail;
