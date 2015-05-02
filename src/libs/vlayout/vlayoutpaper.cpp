@@ -35,6 +35,7 @@
 #include <QCoreApplication>
 #include <QThreadPool>
 #include <QPen>
+#include <QGraphicsScene>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
@@ -259,10 +260,32 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsRectItem *VLayoutPaper::GetPaperItem() const
+QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
 {
-    QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(),
-                                                            d->globalContour.GetHeight()));
+    QGraphicsRectItem *paper;
+    if (autoCrop)
+    {
+        QGraphicsScene *scene = new QGraphicsScene();
+        QList<QGraphicsItem *> list = GetDetails();
+        for (int i=0; i < list.size(); ++i)
+        {
+            scene->addItem(list.at(i));
+        }
+        const int height = scene->itemsBoundingRect().toRect().height() + static_cast<int>(d->layoutWidth)*2;
+        delete scene;
+        if (d->globalContour.GetHeight() > height)
+        {
+            paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
+        }
+        else
+        {
+            paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
+        }
+    }
+    else
+    {
+        paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
+    }
     paper->setPen(QPen(Qt::black, 1));
     paper->setBrush(QBrush(Qt::white));
     return paper;

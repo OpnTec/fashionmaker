@@ -39,11 +39,13 @@ namespace Ui
     class DialogLayoutSettings;
 }
 
+class VLayoutGenerator;
+
 class DialogLayoutSettings : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogLayoutSettings(QWidget *parent = 0);
+    DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = 0);
     ~DialogLayoutSettings();
 
     int GetPaperHeight() const;
@@ -67,6 +69,9 @@ public:
     int GetIncrease() const;
     void SetIncrease(int increase);
 
+    bool GetAutoCrop() const;
+    void SetAutoCrop(bool crop);
+
 public slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();
@@ -75,11 +80,14 @@ public slots:
     void PaperSizeChanged();
     void Swap(bool checked);
 
+    void DialogAccepted();
+
 private:
     Q_DISABLE_COPY(DialogLayoutSettings)
     Ui::DialogLayoutSettings *ui;
     Unit oldPaperUnit;
     Unit oldLayoutUnit;
+    VLayoutGenerator *generator;
 
     void InitPaperUnits();
     void InitLayoutUnits();

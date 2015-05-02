@@ -69,7 +69,7 @@ public:
 
     bool ArrangeDetail(const VLayoutDetail &detail, bool &stop);
     int  Count() const;
-    QGraphicsRectItem *GetPaperItem() const;
+    QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
     QList<QGraphicsItem *> GetDetails() const;
 
 private:

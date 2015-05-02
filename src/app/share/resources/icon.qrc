@@ -58,5 +58,6 @@
         <file>icon/32x32/pdf.png</file>
         <file>icon/24x24/fx.png</file>
         <file>icon/16x16/fx.png</file>
+        <file>icon/16x16/roll.png</file>
     </qresource>
 </RCC>

@@ -413,21 +413,14 @@ void TableWindow::PrintToPdf()
 //---------------------------------------------------------------------------------------------------------------------
 void TableWindow::Layout()
 {
-    DialogLayoutSettings layout(this);
+    VLayoutGenerator lGenerator(this);
+    lGenerator.SetDetails(listDetails);
+
+    DialogLayoutSettings layout(&lGenerator, this);
     if (layout.exec() == QDialog::Rejected)
     {
         return;
     }
-
-    VLayoutGenerator lGenerator(this);
-    lGenerator.SetDetails(listDetails);
-    lGenerator.SetLayoutWidth(layout.GetLayoutWidth());
-    lGenerator.SetCaseType(layout.GetGroup());
-    lGenerator.SetPaperHeight(layout.GetPaperHeight());
-    lGenerator.SetPaperWidth(layout.GetPaperWidth());
-    lGenerator.SetShift(layout.GetShift());
-    lGenerator.SetRotate(layout.GetRotate());
-    lGenerator.SetRotationIncrease(layout.GetIncrease());
 
     DialogLayoutProgress progress(listDetails.count(), this);
 
@@ -732,7 +725,7 @@ void TableWindow::PrepareSceneList()
         ui->listWidget->addItem(item);
     }
 
-    if (scenes.isEmpty() == false)
+    if (not scenes.isEmpty())
     {
         ui->listWidget->setCurrentRow(0);
         EnableActions(true);
@@ -757,7 +750,7 @@ QIcon TableWindow::ScenePreview(int i) const
                             Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
         scenes.at(i)->render(&painter);
-        image.scaled(101, 146, Qt::KeepAspectRatio);
+        painter.end();
     }
     else
     {

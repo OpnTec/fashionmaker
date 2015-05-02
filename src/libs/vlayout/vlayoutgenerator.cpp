@@ -38,7 +38,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
-      stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180)
+      stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180),
+      autoCrop(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,7 +162,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
     QList<QGraphicsItem *> list;
     for (int i=0; i < papers.count(); ++i)
     {
-        list.append(papers.at(i).GetPaperItem());
+        list.append(papers.at(i).GetPaperItem(autoCrop));
     }
     return list;
 }
@@ -182,6 +183,18 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration = true;
     state = LayoutErrors::ProcessStoped;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::GetAutoCrop() const
+{
+    return autoCrop;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetAutoCrop(bool value)
+{
+    autoCrop = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

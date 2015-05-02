@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>661</width>
-    <height>289</height>
+    <height>317</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -194,6 +194,13 @@
              </layout>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxAutoCrop">
+            <property name="text">
+             <string>Auto crop unused length</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -522,7 +529,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>

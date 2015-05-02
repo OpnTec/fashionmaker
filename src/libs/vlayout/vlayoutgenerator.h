@@ -73,6 +73,9 @@ public:
     int GetRotationIncrease() const;
     void SetRotationIncrease(int value);
 
+    bool GetAutoCrop() const;
+    void SetAutoCrop(bool value);
+
 signals:
     void Start();
     void Arranged(int count);
@@ -93,6 +96,7 @@ private:
     unsigned int shift;
     bool rotate;
     int rotationIncrease;
+    bool autoCrop;
 
     void CheckDetailsSize();
 };

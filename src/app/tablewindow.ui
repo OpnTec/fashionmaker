@@ -117,8 +117,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>200</width>
-         <height>200</height>
+         <width>180</width>
+         <height>180</height>
         </size>
        </property>
        <property name="movement">
@@ -129,6 +129,12 @@
        </property>
        <property name="isWrapping" stdset="0">
         <bool>true</bool>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Adjust</enum>
+       </property>
+       <property name="spacing">
+        <number>3</number>
        </property>
        <property name="viewMode">
         <enum>QListView::IconMode</enum>

@@ -32,6 +32,7 @@
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../core/vsettings.h"
 #include "../../xml/vabstractmeasurements.h"
+#include "../../libs/vlayout/vlayoutgenerator.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../../utils/vmath.h"
@@ -40,11 +41,13 @@
 #endif
 
 
-enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4, Letter, Legal };
+enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in,
+                                      Roll44in};
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLayoutSettings::DialogLayoutSettings(QWidget *parent)
-    : QDialog(parent), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm), oldLayoutUnit(Unit::Mm)
+DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent)
+    : QDialog(parent), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm), oldLayoutUnit(Unit::Mm),
+      generator(generator)
 {
     ui->setupUi(this);
 
@@ -68,6 +71,9 @@ DialogLayoutSettings::DialogLayoutSettings(QWidget *parent)
     connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
     connect(ui->comboBoxLayoutUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::ConvertLayoutSize);
+
+    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    connect(bOk, &QPushButton::clicked, this, &DialogLayoutSettings::DialogAccepted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,6 +203,18 @@ void DialogLayoutSettings::SetIncrease(int increase)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::GetAutoCrop() const
+{
+    return ui->checkBoxAutoCrop->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetAutoCrop(bool autoCrop)
+{
+    ui->checkBoxAutoCrop->setChecked(autoCrop);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
     const QSizeF size = Template();
@@ -273,6 +291,22 @@ void DialogLayoutSettings::Swap(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::DialogAccepted()
+{
+    SCASSERT(generator != nullptr)
+    generator->SetLayoutWidth(GetLayoutWidth());
+    generator->SetCaseType(GetGroup());
+    generator->SetPaperHeight(GetPaperHeight());
+    generator->SetPaperWidth(GetPaperWidth());
+    generator->SetShift(GetShift());
+    generator->SetRotate(GetRotate());
+    generator->SetRotationIncrease(GetIncrease());
+    generator->SetAutoCrop(GetAutoCrop());
+
+    accepted();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::InitPaperUnits()
 {
     ui->comboBoxPaperSizeUnit->addItem(tr("Millimiters"), QVariant(VDomDocument::UnitsToStr(Unit::Mm)));
@@ -311,16 +345,27 @@ void DialogLayoutSettings::InitLayoutUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::InitTemplates()
 {
-    const QIcon ico("://icon/16x16/template.png");
+    const QIcon icoPaper("://icon/16x16/template.png");
+    const QIcon icoRoll("://icon/16x16/roll.png");
     const QString pdi = QString("(%1ppi)").arg(VApplication::PrintDPI);
 
-    ui->comboBoxTemplates->addItem(ico, "A0 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A0)));
-    ui->comboBoxTemplates->addItem(ico, "A1 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A1)));
-    ui->comboBoxTemplates->addItem(ico, "A2 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A2)));
-    ui->comboBoxTemplates->addItem(ico, "A3 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A3)));
-    ui->comboBoxTemplates->addItem(ico, "A4 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A4)));
-    ui->comboBoxTemplates->addItem(ico, "Letter "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Letter)));
-    ui->comboBoxTemplates->addItem(ico, "Legal "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Legal)));
+    ui->comboBoxTemplates->addItem(icoPaper, "A0 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A0)));
+    ui->comboBoxTemplates->addItem(icoPaper, "A1 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A1)));
+    ui->comboBoxTemplates->addItem(icoPaper, "A2 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A2)));
+    ui->comboBoxTemplates->addItem(icoPaper, "A3 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A3)));
+    ui->comboBoxTemplates->addItem(icoPaper, "A4 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A4)));
+    ui->comboBoxTemplates->addItem(icoPaper, tr("Letter ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Letter)));
+    ui->comboBoxTemplates->addItem(icoPaper, tr("Legal ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Legal)));
+    ui->comboBoxTemplates->addItem(icoRoll,
+                                   tr("Roll 24in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll24in)));
+    ui->comboBoxTemplates->addItem(icoRoll,
+                                   tr("Roll 30in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll30in)));
+    ui->comboBoxTemplates->addItem(icoRoll,
+                                   tr("Roll 36in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll36in)));
+    ui->comboBoxTemplates->addItem(icoRoll,
+                                   tr("Roll 42in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll42in)));
+    ui->comboBoxTemplates->addItem(icoRoll,
+                                   tr("Roll 44in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll44in)));
 
     TemplateSelected();
 }
@@ -343,32 +388,64 @@ QSizeF DialogLayoutSettings::Template()
     switch (temp)
     {
         case PaperSizeTemplate::A0:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(1189, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A1:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(594, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A2:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(420, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(594, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A3:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(420, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A4:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(210, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Letter:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(8.5, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Legal:
+            SetAutoCrop(false);
             width = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(17, Unit::Inch, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Roll24in:
+            SetAutoCrop(true);
+            width = VAbstractMeasurements::UnitConvertor(24, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Roll30in:
+            SetAutoCrop(true);
+            width = VAbstractMeasurements::UnitConvertor(30, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Roll36in:
+            SetAutoCrop(true);
+            width = VAbstractMeasurements::UnitConvertor(36, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Roll42in:
+            SetAutoCrop(true);
+            width = VAbstractMeasurements::UnitConvertor(42, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            return QSizeF(width, height);
+        case PaperSizeTemplate::Roll44in:
+            SetAutoCrop(true);
+            width = VAbstractMeasurements::UnitConvertor(44, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         default:
             break;
