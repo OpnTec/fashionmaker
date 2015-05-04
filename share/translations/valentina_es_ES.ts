@@ -195,11 +195,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Editando Patrón</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Confrimar la eliminacion del objeto</translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1508,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar la mejor posición para las piezas de trabajo. Por favor, espere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrar la mejor posición para las piezas de trabajo. Por favor, espere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -1525,6 +1525,10 @@
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
         <translation>Piezas de trabajo no están ordenadas, y no coinciden con el papel</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2564,22 +2568,6 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realmente quiere detalles de la unión?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Select first point</source>
-        <translation type="vanished">Selección primer punto </translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Selección segundo punto</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Selección otro segundo punto</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Selección de detalle</translation>
-    </message>
-    <message>
         <source>Union tool</source>
         <translation>herramienta de unión</translation>
     </message>
@@ -3501,17 +3489,17 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>separación_pechos</translation>
     </message>
     <message>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>pecho-dercho_nuca_pecho-izquierdo</translation>
     </message>
     <message>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>base_de_cuello_a_pecho</translation>
     </message>
     <message>
         <source>crotch_length</source>
@@ -3521,7 +3509,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_de_tiro</translation>
     </message>
     <message>
         <source>shoulder_drop</source>
@@ -3676,7 +3664,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>profundidad_sisa</translation>
     </message>
     <message>
         <source>shoulder_and_arm_length</source>
@@ -3851,207 +3839,207 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>caderas_excluyendo_abdomen_protuberante</translation>
     </message>
     <message>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>circunferencia_empeine_pie</translation>
     </message>
     <message>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>lateral_de_cintura_al_suelo</translation>
     </message>
     <message>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>frontal_de_cintura_al_suelo</translation>
     </message>
     <message>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>arco_a_través_de_la_ingle</translation>
     </message>
     <message>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>circunferencia_caderas_nalgas</translation>
     </message>
     <message>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello_a_punto_radial</translation>
     </message>
     <message>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello_tercer_dedo</translation>
     </message>
     <message>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>del_cuello_a_primera_línea_contorno_de_pecho</translation>
     </message>
     <message>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cintura_delantera</translation>
     </message>
     <message>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>arco_a_través_de_la_articulación_del_hombro</translation>
     </message>
     <message>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>del_cuello_al_contorno_pecho_en espalda</translation>
     </message>
     <message>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cintura_a_base_cuello_espalda</translation>
     </message>
     <message>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>arco_cuerpo_por_base_cuello_lateral</translation>
     </message>
     <message>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_de_pecho</translation>
     </message>
     <message>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>diametro_anterioposterior_mano</translation>
     </message>
     <message>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_punto_clavicular</translation>
     </message>
     <message>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_sisa</translation>
     </message>
     <message>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_hombro</translation>
     </message>
     <message>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_cuello</translation>
     </message>
     <message>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Medio_contorno_cuello_para_camisetas</translation>
     </message>
     <message>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_pecho_primero</translation>
     </message>
     <message>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_pecho_segundo</translation>
     </message>
     <message>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_pecho_tercero</translation>
     </message>
     <message>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_pecho</translation>
     </message>
     <message>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_cadera_considerando_abdomen_prominente</translation>
     </message>
     <message>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>medio_contorno_cadera_excluyendo_abdomen_prominente</translation>
     </message>
     <message>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>contorno_rodila_agachado</translation>
     </message>
     <message>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>diámetro_transversal_cuello</translation>
     </message>
     <message>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_hombros_frontal</translation>
     </message>
     <message>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello_a_contorno_cintura_frontal</translation>
     </message>
     <message>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>diametro_vertical_mano</translation>
     </message>
     <message>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello_a_rodilla</translation>
     </message>
     <message>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>cintura_a_rodilla</translation>
     </message>
     <message>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_hombros</translation>
     </message>
     <message>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_cabeza</translation>
     </message>
     <message>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>posición_del_cuerpo</translation>
     </message>
     <message>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>arco_detras_cintura_escapular</translation>
     </message>
     <message>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>de_cuello_a_base_cuello</translation>
     </message>
     <message>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>profundidad_cintura_primera</translation>
     </message>
     <message>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>profundidad_cintura_segunda</translation>
     </message>
 </context>
 <context>
@@ -4059,237 +4047,237 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno cabeza maximo</translation>
     </message>
     <message>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mitad del contorno de cuello</translation>
     </message>
     <message>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno base de cuello</translation>
     </message>
     <message>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia vertical de coronilla a nuca</translation>
     </message>
     <message>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Centro cuello delantero sobre línea de pecho a centro cintura frontal</translation>
     </message>
     <message>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Centro cuello espalda centro cintura espalda</translation>
     </message>
     <message>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello punta hombro</translation>
     </message>
     <message>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Axila a lado cintura</translation>
     </message>
     <message>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alrededor del cuerpo por hombro medio pasando por pecho entrepierna y volver a hombro medio</translation>
     </message>
     <message>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alrededor de brazos y torso, a nivel bíceps, paralelo al suelo con brazos caidos</translation>
     </message>
     <message>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno pecho a la altura del cruce de brazos, paralelo al suelo en la espalda y no paralelo en el delantero</translation>
     </message>
     <message>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno parte sobresaliente del pecho paralelo al suelo</translation>
     </message>
     <message>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno pecho bajo el busto paralelo al suelo</translation>
     </message>
     <message>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno de cintura por la parte mas estrecha, no suele ser paralela al suelo.</translation>
     </message>
     <message>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno cadera alta paralelo suelo</translation>
     </message>
     <message>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Contorno cadera paralelo al suelo</translation>
     </message>
     <message>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pecho delantero superior, menor distancia de sisa a sisa</translation>
     </message>
     <message>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pecho delantero, de brazo a brazo</translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Delantero punta hombro a punta hombro</translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Espalda punta hombro a punta hombro</translation>
     </message>
     <message>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pecho superior en espalda menor medida entre sisas</translation>
     </message>
     <message>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pecho en espalda de brazo a brazo</translation>
     </message>
     <message>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia entre busto por el pecho</translation>
     </message>
     <message>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia entre busto pasando por la nuca</translation>
     </message>
     <message>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia desde el busto hasta el cuello</translation>
     </message>
     <message>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desde centro delantero cintura, pasando por la entrepierna al centro  espalda cintura</translation>
     </message>
     <message>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sentados en silla, medir desde lado derecho cintura hasta asiento de la silla</translation>
     </message>
     <message>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia vertical desde el cuello al hombro</translation>
     </message>
     <message>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grados del ángulo desde el cuello al hombro, requiere gniómetro</translation>
     </message>
     <message>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Punta del hombro a centro cintura delantero</translation>
     </message>
     <message>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Punta del hombro a centro cintura espalda</translation>
     </message>
     <message>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desde parte derecha cuello bajando por el pecho a la cintura</translation>
     </message>
     <message>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desde parte derecha cuello bajando por la espalda a la cintura</translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>De punto a punto de cuello pasando por el centro del cuello</translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>De punto a punto de cuello pasando por la nuca</translation>
     </message>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Arco busto delantero</translation>
     </message>
     <message>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Arco busto espalda</translation>
     </message>
     <message>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cintura delantera lado a lado</translation>
     </message>
     <message>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cintura espalda lado a lado</translation>
     </message>
     <message>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cadera superior delantero lado lado </translation>
     </message>
     <message>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cadera superior espalda lado lado </translation>
     </message>
     <message>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cadera delantero lado lado </translation>
     </message>
     <message>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cadera espalda lado lado </translation>
     </message>
     <message>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello delantero a pliegue brazo</translation>
     </message>
     <message>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello espalda a pliegue brazo</translation>
     </message>
     <message>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello atraves del pecho a lado cintura</translation>
     </message>
     <message>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>cuello atraves de espalda a lado cintura</translation>
     </message>
     <message>
         <source>Front Neck Center straight down to UpperChest line</source>
@@ -4534,7 +4522,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia delantera desde la cintura al suelo</translation>
     </message>
     <message>
         <source>Arc through groin area</source>
@@ -4699,7 +4687,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Body position</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Posición del cuerpo</translation>
     </message>
     <message>
         <source>Arc behind the shoulder girdle</source>
@@ -4902,7 +4890,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Arco busto delantero</translation>
     </message>
     <message>
         <source>Back UpperBust arc</source>
@@ -5037,17 +5025,17 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Largo de brazo</translation>
     </message>
     <message>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ancho de mano</translation>
     </message>
     <message>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Largo de mano</translation>
     </message>
     <message>
         <source>Hand girth</source>
@@ -5367,7 +5355,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Body position</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Posición del cuerpo</translation>
     </message>
     <message>
         <source>Arc behind shoulder girdle</source>
@@ -5901,14 +5889,6 @@ Quiere guardar los cambios?</translation>
 </context>
 <context>
     <name>VAbstractTool</name>
-    <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Confirmar borrado</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Realmente quiere borrarlo?</translation>
-    </message>
     <message>
         <source>black</source>
         <translation>negro</translation>
@@ -6497,7 +6477,7 @@ Quiere guardar los cambios?</translation>
     <name>main</name>
     <message>
         <source>Pattern making program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa generando patrón</translation>
     </message>
     <message>
         <source>Pattern file.</source>

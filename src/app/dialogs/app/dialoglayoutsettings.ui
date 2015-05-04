@@ -17,6 +17,10 @@
    <iconset resource="../../share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../share/resources/icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -529,7 +533,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

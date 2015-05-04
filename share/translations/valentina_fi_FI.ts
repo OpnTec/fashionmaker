@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>%Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -191,15 +191,15 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoa kerätystä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedosta. &lt;/a&gt; </translation>
+        <translation>Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoja kerätyistä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedoista. &lt;/a&gt; </translation>
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaavan muuttaminen</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Varmista kohdan poistaminen</translation>
     </message>
 </context>
 <context>
@@ -278,7 +278,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -488,7 +488,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -603,7 +603,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -694,7 +694,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -777,7 +777,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -856,7 +856,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1061,7 +1061,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1124,7 +1124,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -1199,15 +1199,15 @@
     </message>
     <message>
         <source>%3 - normal to line %1_%2</source>
-        <translation>%3 - normaali viivaan %1_%2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%4 - bisector of angle %1_%2_%3</source>
-        <translation>%4 - puolikkaan kulma %1_%2_%3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
-        <translation>%5 - viivojen leikkaus %1_%2 and %3_%4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curve %1_%2</source>
@@ -1215,7 +1215,7 @@
     </message>
     <message>
         <source>Arc with center in point %1</source>
-        <translation>Kaari jonka keskipiste on %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curve point %1</source>
@@ -1223,23 +1223,23 @@
     </message>
     <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
-        <translation>%4 - Kaaren, jonka keskipiste on %1, kontaktipiste viivan %2_%3 kanssa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
-        <translation>Kohtisuora viiva pisteestä %1 viivaan %2_%3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
-        <translation>Kolmio: akseli %1_%2, pisteissä %3 ja %4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 - point of intersection %2 and %3</source>
-        <translation>%1 - leikkauspiste %2 ja %3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 - cut arc with center %2</source>
-        <translation>%1 - leikkaa kaari keskipisteessä %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 - cut curve %2_%3</source>
@@ -1251,11 +1251,11 @@
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
-        <translation>%1 - viivan %2_%3 ja akselin %4</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 - point of intersection curve and axis through point %2</source>
-        <translation>%1 - käyrän ja akselin leikkaus pisteessä %2</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1508,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etsitään parasta paikkaa kaavoille. Hetkinen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etsitään parasta paikkaa kaavoille. Hetkinen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -1524,7 +1524,11 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Useita osia ei voitu järjestää koska ne ei mahdu paperille</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1641,7 +1645,7 @@
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First line</source>
@@ -1708,7 +1712,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1830,7 +1834,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2032,7 +2036,7 @@
     </message>
     <message>
         <source>&lt;no value&gt;</source>
-        <translation>&lt;ei arvoa&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unchanged</source>
@@ -2103,7 +2107,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -2174,7 +2178,7 @@
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -2221,7 +2225,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2324,7 +2328,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
 </context>
 <context>
@@ -2483,7 +2487,7 @@
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -2562,22 +2566,6 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Haluatko todella unionin yksityiskohdat?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Select first point</source>
-        <translation type="vanished">Valitse ensimmäinen piste</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Valitse toinen piste</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Valitse eri toinen piste</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Valitse yksityiskohta</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -3401,22 +3389,22 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Kaulan_pohjan_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pään_ja_kaulan_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>keski_etu_vyötärön_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>keski_taka_vyötärön_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>shoulder_length</source>
@@ -3426,7 +3414,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>sivu_vyötärön_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>trunk_length</source>
@@ -3441,7 +3429,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ylä_rinan_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>bust_girth</source>
@@ -3516,7 +3504,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>haaran_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>rise_height</source>
@@ -3526,52 +3514,52 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>olkapään_pudotus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>olkapään_kulma_asteissa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_olkapaan_kulman_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taka_olkapään_kulman_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_olkapäästä_vyötäröön_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taka_olkapäästä_vyötäröön_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_kaulan_kaari</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taka_kaulan_kaari</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_ylä_rinnan_kaari</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taka_ylä_rinnan_kaari</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_waist_arc</source>
@@ -3586,12 +3574,12 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_ylä_lonkan_kaari</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taka_ylä_lonkan_kaari</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_hip_arc</source>
@@ -3626,27 +3614,27 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_niskasta_ylä_rintaan_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_kaulasta_rintaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_vyötäröstä_ylä_rintaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>etu_vyötäröstä_ala_rintaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taka_vyötäröstä_ylä_rintaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>strap_length</source>
@@ -3656,22 +3644,22 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>olkapään_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kyynärpään_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ylä_käsivarren_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ranteen_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>scye_depth</source>
@@ -3681,12 +3669,12 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>olkapään_ja_käden_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kainalon_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cervicale_to_wrist_length</source>
@@ -3696,77 +3684,77 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>olkapäästä_kyynärpäähän</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>käsivarren_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>käden_leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>käden_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>käden_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>reiden_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>keski_reiden_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>polven_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pohkeen_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>nilkan_ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>polven_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>nilkan_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>jalkaterän_leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>jalkaterän_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cervicale_height</source>
@@ -3781,32 +3769,32 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>vyötärön_korkeus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ylä_lonkan_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>lonkan_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>vyötäröstä_lonkkaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>vyötäröstä_polveen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>haaran_pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>size</source>
@@ -3921,7 +3909,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rinnan_leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>anteroposterior_diameter_hands</source>
@@ -4189,7 +4177,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Istu kovalla tuolilla ja mittaa etäisyys vyötärön sivusta tuoliin</translation>
     </message>
     <message>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
@@ -4589,7 +4577,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Chest width</source>
         <comment>Full measurement description</comment>
-        <translation>Rinnan leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anteroposterior diameter of the hands</source>
@@ -4614,32 +4602,32 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Half girth neck</source>
         <comment>Full measurement description</comment>
-        <translation>Puolet kaulan ympärysmitasta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
-        <translation>Puolet kaulan ympärysmitasta paitoihin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
-        <translation>Puolet rinnan ympärysmitasta 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
-        <translation>Puolet rinnan ympärysmitasta 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
-        <translation>Puolet rinnan ympärysmitasta 3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth waist</source>
         <comment>Full measurement description</comment>
-        <translation>Puolet vyötärön ympärysmitasta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
@@ -4689,17 +4677,17 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Olkapään pituus</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement description</comment>
-        <translation>Pään pituus</translation>
+        <translation type="unfinished">Pään pituus</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement description</comment>
-        <translation>Kehon sijainti</translation>
+        <translation type="unfinished">Kehon sijainti</translation>
     </message>
     <message>
         <source>Arc behind the shoulder girdle</source>
@@ -4727,42 +4715,42 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
-        <translation>Pään ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mid-neck girth</source>
         <comment>Full measurement name</comment>
-        <translation>Keski kaulan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
-        <translation>Kaulan pohjan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Head and Neck length</source>
         <comment>Full measurement name</comment>
-        <translation>Pään ja kaulan pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Etu keskustan pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Taka keskustan pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shoulder length</source>
         <comment>Full measurement name</comment>
-        <translation>Olkapään pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Side Waist length</source>
         <comment>Full measurement name</comment>
-        <translation>Sivu vyötärön pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Trunk length</source>
@@ -4772,67 +4760,67 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Shoulder girth</source>
         <comment>Full measurement name</comment>
-        <translation>Olkapään ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Upper Chest girth</source>
         <comment>Full measurement name</comment>
-        <translation>Ylä rinnan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bust girth</source>
         <comment>Full measurement name</comment>
-        <translation>Rinnan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Under Bust girth</source>
         <comment>Full measurement name</comment>
-        <translation>Ala rinnan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waist girth</source>
         <comment>Full measurement name</comment>
-        <translation>Vyötärön ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HighHip girth</source>
         <comment>Full measurement name</comment>
-        <translation>Ylä lonkan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hip girth</source>
         <comment>Full measurement name</comment>
-        <translation>Lonkan ympärysmitta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Upper Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Etu ylä rinnan pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Etu rinnan leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Across Shoulder width</source>
         <comment>Full measurement name</comment>
-        <translation>Etu olkapäästä olkapäähän leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Across Shoulder width</source>
         <comment>Full measurement name</comment>
-        <translation>Taka olkapäästä olkapäähän leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Upper Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Taka ylä rinnan leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Taka rinnan leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>BustPoint to BustPoint</source>
@@ -4852,7 +4840,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Crotch length</source>
         <comment>Full measurement name</comment>
-        <translation>Haaran pituus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rise height</source>
@@ -4862,7 +4850,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Shoulder Drop</source>
         <comment>Full measurement name</comment>
-        <translation>Olkapään pudotus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shoulder Slope degrees</source>
@@ -5257,7 +5245,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Chest width</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Rinnan leveys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anteroposterior diameter hands</source>
@@ -5282,32 +5270,32 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Half girth neck</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Puolet kaulan ympärysmitasta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Puolet kaulan ympärysmitasta paitoihin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth chest first</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Puolet rinnan ympärysmitasta 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth chest second</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Puolet rinnan ympärysmitasta 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth chest third</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Puolet rinnan ympärysmitasta 3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth waist</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Puolet vyötärön ympärysmitasta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
@@ -5352,17 +5340,17 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vyötäröstä polveen</translation>
     </message>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Olkapään pituus</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Pään pituus</translation>
+        <translation>Pään pituus</translation>
     </message>
     <message>
         <source>Body position</source>
@@ -5394,7 +5382,7 @@ Haluatko tallentaa muutokset?</translation>
     <name>MoveLabel</name>
     <message>
         <source>Move point label</source>
-        <translation>Siirrä pistenimilappu</translation>
+        <translation>Siirrä pisteen nimi</translation>
     </message>
 </context>
 <context>
@@ -5599,47 +5587,47 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä osoitin muuttujaan</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä operaattori &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä lopetus kaavalle kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä argumentin erotin kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllätävä sulku &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä funktio &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä arvo &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä muuttuja &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktion argumentteja käytetty ilman funktiota (kohdassa $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
@@ -5649,12 +5637,12 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Liian monta parametriä funktiossa &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Liian vähän parametrejä funktiossa &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
@@ -5684,22 +5672,22 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä merkki kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekstistä puuttuu sulku kohdassa $POS$</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekstityypin funktio kutsuttu ei-teksti muuttujalla</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekstityyppiä käytetty numeerisen argumentin sijaan</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
@@ -5719,29 +5707,29 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desimaalierotin on sama funktion argumentti erottimen kanssa.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>If-then-else operattorista puuttuu else osa</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kaksoispiste väärässä paikassa $POS$</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>&quot;$TOK$&quot; operaattorin edessä pitää olla sulku</translation>
     </message>
 </context>
 <context>
     <name>RenamePP</name>
     <message>
         <source>Rename pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Uudelleen nimeä kaavan osa</translation>
     </message>
 </context>
 <context>
@@ -5749,7 +5737,7 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ensimmäisen ryhmän standardi miesten hahmo, rinnanympärys 100 cm</translation>
     </message>
 </context>
 <context>
@@ -5849,15 +5837,15 @@ Haluatko tallentaa muutokset?</translation>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Älä kysy uudelleen</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Älä kysy &amp;uudelleen</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Älä näytä &amp;uudelleen</translation>
     </message>
 </context>
 <context>
@@ -5931,11 +5919,11 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Varmista poistaminen</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Haluatko todella poistaa?</translation>
     </message>
 </context>
 <context>
@@ -6304,7 +6292,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Position</source>
@@ -6412,7 +6400,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Point intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivan ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -6424,7 +6412,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyrän ja akselin leikkauspiste</translation>
     </message>
 </context>
 <context>

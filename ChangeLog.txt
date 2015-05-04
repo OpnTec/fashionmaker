@@ -1,3 +1,14 @@
+# Version 0.3.1 Released April 24, 2015
+- [#263] Regression. Union tool doesn't work.
+- For tool Curve intersect axis fixed wrong calculation point in case with too small scene rect size.
+- Fixed crash if a seam allowance doesn't contain 0 points.
+- [#267] Error in the creation of obj files.
+- QMuParser. Bugfix for Bulkmode: Expressions with like "a=b, b*10" did not compute properly.
+- QMuParser. Fix for ParserTokenReader::ExtractOperatorToken incorrectly uses ValidInfixOprtChars().
+- Example of file name in dialog Save Layout appears only after user change format.
+- Fixed regression with removing loops in seam allowance.
+- Removed transparent field for a layout png file.
+
 # Version 0.3.0 Released March 23, 2015
 - Fixed creation equidistant if points less than 4.
 - [#203], [#89], [#90] New Layout Editor.

@@ -87,6 +87,10 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionSave_to_p_df, &QAction::triggered, this, &TableWindow::PrintToPdf);
 
     ReadSettings();
+#if defined(Q_OS_MAC)
+    // On Mac deafault icon size is 32x32.
+    ui->toolBar->setIconSize(QSize(24, 24));
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

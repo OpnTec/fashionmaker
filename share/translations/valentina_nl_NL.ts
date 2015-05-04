@@ -1507,10 +1507,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1524,6 +1520,10 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2562,22 +2562,6 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je echt gezamenlijke details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Select first point</source>
-        <translation type="vanished">Selecteer eerste punt</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Selecteer tweede punt</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Selecteer een ander tweede punt</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Selecteer een detail</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -5899,14 +5883,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VAbstractTool</name>
-    <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Bevestig de verwijdering.</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Wil je echt verwijderen?</translation>
-    </message>
     <message>
         <source>black</source>
         <translation type="unfinished"></translation>

@@ -44,8 +44,8 @@ extern const QString APP_VERSION_STR;
 
 // Change version number in version.cpp too.
 
-#define VER_FILEVERSION             0,3,0,0
-#define VER_FILEVERSION_STR         "0.3.0.0\0"
+#define VER_FILEVERSION             0,3,1,0
+#define VER_FILEVERSION_STR         "0.3.1.0\0"
 
 #define VER_PRODUCTVERSION          VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR

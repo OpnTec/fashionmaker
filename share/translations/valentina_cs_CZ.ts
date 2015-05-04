@@ -195,11 +195,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravování střihu</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrdit smazání položky</translation>
     </message>
 </context>
 <context>
@@ -350,11 +350,11 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Bod ve vzdálenosti podél čáry</translation>
+        <translation>Bod ve vzdálenosti podél čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -465,7 +465,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
 </context>
 <context>
@@ -572,11 +572,11 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation type="unfinished">Bod podél osy úhlu</translation>
+        <translation>Bod podél osy úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -659,15 +659,15 @@
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod průsečíku oblouku a čáry</translation>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod osy</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -742,11 +742,11 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybraný oblouk</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
 </context>
 <context>
@@ -821,11 +821,11 @@
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdělení jednoduché křivky</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
 </context>
 <context>
@@ -904,7 +904,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva</translation>
     </message>
 </context>
 <context>
@@ -1117,7 +1117,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -1164,7 +1164,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -1507,10 +1507,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1524,6 +1520,10 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1634,7 +1634,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -1772,7 +1772,7 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bod osy</translation>
     </message>
     <message>
         <source>Second point of line</source>
@@ -1780,7 +1780,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -1910,7 +1910,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -2297,7 +2297,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -2367,7 +2367,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva</translation>
     </message>
 </context>
 <context>
@@ -2410,7 +2410,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva</translation>
     </message>
 </context>
 <context>
@@ -2562,22 +2562,6 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opravdu chcete sjednotit detaily?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Select first point</source>
-        <translation type="vanished">Vybrat první bod</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Vybrat druhý bod</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Vybrat jiný druhý bod</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Vybrat detail</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -2831,7 +2815,7 @@
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Díl střihu</translation>
+        <translation>&amp;Střih</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -3339,7 +3323,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozdělení jednoduché křivky</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -3347,7 +3331,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bod průsečíku oblouku a čáry</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -5902,14 +5886,6 @@ Chcete uložit své změny?</translation>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Potvrďte smazání.</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Opravdu chcete smazat?</translation>
-    </message>
-    <message>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6424,11 +6400,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva čáry</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>

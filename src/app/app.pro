@@ -243,9 +243,10 @@ unix{
         # Path to resources in app bundle
         RESOURCES_DIR = "Contents/Resources"
         FRAMEWORKS_DIR = "Contents/Frameworks"
+        MACOS_DIR = "Contents/MacOS"
         # On macx we will use app bundle. Bundle doesn't need bin directory inside.
         # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
-        target.path = $$PREFIX/
+        target.path = $$MACOS_DIR
 
         # Copy in bundle translation files.
         exists($${TRANSLATIONS_PATH}/valentina_ru_RU.qm){
@@ -342,6 +343,9 @@ unix{
     libraries.files += $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
     libraries.files += $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
+    # Utility pdftops need for saving a layout image to PS and EPS formates.
+    xpdf.path = $$MACOS_DIR
+    xpdf.files += $${PWD}/../../dist/macx/bin64/pdftops
 
     # logo on macx.
     ICON = ../../dist/Valentina.icns
@@ -352,8 +356,146 @@ unix{
 
     QMAKE_BUNDLE_DATA += \
         standard \
-        libraries
+        libraries \
+        xpdf
     }
+}
+
+# "make install" command for Windows.
+# Depend on nsis script and create installer in folder "package"
+win32{
+    package.path = $${OUT_PWD}/package/valentina
+    package.files += \
+        $${OUT_PWD}/$${DESTDIR}/valentina.exe \
+        $${OUT_PWD}/$${DESTDIR}/valentina.exe.dbg \
+        $$PWD/../../dist/win/valentina.ico \
+        $$PWD/../../dist/win/curl.exe \
+        $$PWD/../../dist/win/exchndl.dll \
+        $$PWD/../../dist/win/dbghelp.dll \
+        $$PWD/../../dist/win/mgwhelp.dll \
+        $$PWD/../../dist/win/symsrv.dll \
+        $$PWD/../../dist/win/symsrv.yes \
+        $$PWD/../../dist/win/pdftops.exe \
+        $$PWD/../../AUTHORS.txt \
+        $$PWD/../../LICENSE_GPL.txt \
+        $$PWD/../../README.txt \
+        $$PWD/../../ChangeLog.txt \
+        $$PWD/../libs/qmuparser/LICENSE_BSD.txt \
+        $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/qmuparser2.dll \
+        $${OUT_PWD}/../libs/qmuparser/$${DESTDIR}/qmuparser2.dll.dbg \
+        $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll \
+        $${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll.dbg \
+        $$[QT_INSTALL_BINS]/icudt*.dll \ # Different name for different Qt releases
+        $$[QT_INSTALL_BINS]/icuin*.dll \ # Different name for different Qt releases
+        $$[QT_INSTALL_BINS]/icuuc*.dll \ # Different name for different Qt releases
+        $$[QT_INSTALL_BINS]/Qt5Core.dll \
+        $$[QT_INSTALL_BINS]/Qt5Gui.dll \
+        $$[QT_INSTALL_BINS]/Qt5Network.dll \
+        $$[QT_INSTALL_BINS]/Qt5PrintSupport.dll \
+        $$[QT_INSTALL_BINS]/Qt5Svg.dll \
+        $$[QT_INSTALL_BINS]/Qt5Widgets.dll \
+        $$[QT_INSTALL_BINS]/Qt5Xml.dll \
+        $$[QT_INSTALL_BINS]/Qt5XmlPatterns.dll \
+        $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
+        $$[QT_INSTALL_BINS]/libstdc++-6.dll \
+        $$[QT_INSTALL_BINS]/libwinpthread-1.dll
+    INSTALLS += package
+
+    package_tables.path = $${OUT_PWD}/package/valentina/tables/standard
+    package_tables.files += $${OUT_PWD}/$${DESTDIR}/tables/standard/GOST_man_ru.vst
+    INSTALLS += package_tables
+
+    package_translations.path = $${OUT_PWD}/package/valentina/translations
+    package_translations.files += \
+        $$INSTALL_TRANSLATIONS \ # Valentina
+        $$[QT_INSTALL_TRANSLATIONS]/qt_ar.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_pl.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_pt.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_ru.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_sk.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_sl.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_sv.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_uk.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_zh_TW.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_ca.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_cs.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_da.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_de.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_es.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_fa.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_fi.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_fr.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_gl.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_he.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_hu.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_it.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_ja.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_ko.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_lt.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_uk.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ca.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_cs.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_de.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_hu.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_it.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ja.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ru.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_sk.qm
+    INSTALLS += package_translations
+
+    package_bearer.path = $${OUT_PWD}/package/valentina/bearer
+    package_bearer.files += \
+        $$[QT_INSTALL_PLUGINS]/bearer/qgenericbearer.dll \
+        $$[QT_INSTALL_PLUGINS]/bearer/qnativewifibearer.dll
+    INSTALLS += package_bearer
+
+    package_iconengines.path = $${OUT_PWD}/package/valentina/iconengines
+    package_iconengines.files += $$[QT_INSTALL_PLUGINS]/iconengines/qsvgicon.dll
+    INSTALLS += package_iconengines
+
+    package_imageformats.path = $${OUT_PWD}/package/valentina/imageformats
+    package_imageformats.files += \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qdds.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qgif.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qicns.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qico.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qjp2.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qjpeg.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qmng.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qsvg.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qtga.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qtiff.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qwbmp.dll \
+        $$[QT_INSTALL_PLUGINS]/imageformats/qwebp.dll \
+    INSTALLS += package_imageformats
+
+    package_platforms.path = $${OUT_PWD}/package/valentina/platforms
+    package_platforms.files += $$[QT_INSTALL_PLUGINS]/platforms/qwindows.dll
+    INSTALLS += package_platforms
+
+    package_printsupport.path = $${OUT_PWD}/package/valentina/printsupport
+    package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
+    INSTALLS += package_printsupport
+
+    package_nsis.path = $${OUT_PWD}/package
+    package_nsis.files += $$PWD/../../dist/win/nsis/valentina.nsi
+    INSTALLS += package_nsis
+
+    package_nsis_headers.path = $${OUT_PWD}/package/headers
+    package_nsis_headers.files += \
+        $$PWD/../../dist/win/nsis/headers/fileassoc.nsh \
+        $$PWD/../../dist/win/nsis/headers/fileversion.nsh
+    INSTALLS += package_nsis_headers
+
+    # Do the packaging
+    # First, mangle all of INSTALLS values. We depend on them.
+    unset(MANGLED_INSTALLS)
+    for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
+    build_package.path = $${OUT_PWD}/package
+    build_package.commands = \"C:/Program Files/NSIS/makensisw.exe\" \"$${OUT_PWD}/package/valentina.nsi\"
+    build_package.depends = $${MANGLED_INSTALLS}
+    INSTALLS += build_package
 }
 
 # Some systems use special name for lrelease. For example opensuse 13.2 has lrelease-qt5.
