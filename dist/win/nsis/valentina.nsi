@@ -13,7 +13,7 @@ SetCompressor /FINAL /SOLID lzma
 !define MUI_PRODUCT "Valentina"
 !define MUI_FILE "valentina"
 
-!insertmacro GetPEVersionLocal "c:\pack\valentina\valentina.exe" ver
+!insertmacro GetPEVersionLocal "valentina\valentina.exe" ver
 !define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}"
 
 !define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
@@ -191,7 +191,7 @@ SectionIn RO ; define mandatory sections
  
 ;Add files
 SetOutPath "$INSTDIR" ; Set output path to the installation directory.
-File /r "c:\pack\valentina\*.*"
+File /r "valentina\*.*"
 
 ;create start-menu items  
 !define START_LINK_DIR "$SMPROGRAMS\${MUI_PRODUCT}"
