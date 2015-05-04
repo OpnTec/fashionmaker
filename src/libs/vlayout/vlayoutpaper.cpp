@@ -190,8 +190,6 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            //QCoreApplication::processEvents();
-
             VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease);
             //Info for debug
             #ifdef LAYOUT_DEBUG

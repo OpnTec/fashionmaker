@@ -375,6 +375,9 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const i
         return CrossingType::EdgeError;
     }
 
+    const QLineF gEdge = gContour.GlobalEdge(globalI);
+    const QLineF dEdge = detail.Edge(detailI);
+
     for (int i = 1; i <= globalEdgesCount; i++)
     {
         const QLineF globalEdge = gContour.GlobalEdge(i);
@@ -397,11 +400,9 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const i
             }
 
             QPointF xPoint;
-            QLineF::IntersectType type = globalEdge.intersect(detailEdge, &xPoint);
-
-            if (type == QLineF::BoundedIntersection)
+            if (globalEdge.intersect(detailEdge, &xPoint) == QLineF::BoundedIntersection)
             {
-                if (TrueIntersection(gContour.GlobalEdge(globalI), detail.Edge(detailI), xPoint))
+                if (TrueIntersection(gEdge, dEdge, xPoint))
                 {
                     return CrossingType::Intersection;
                 }
@@ -653,11 +654,23 @@ void VPosition::Rotate(int increase)
 bool VPosition::TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const
 {
     const QPointF pX = RoundedPoint(p);
-    const QPointF gP1 = RoundedPoint(gEdge.p1());
-    const QPointF gP2 = RoundedPoint(gEdge.p2());
-    const QPointF dP1 = RoundedPoint(dEdge.p1());
-    const QPointF dP2 = RoundedPoint(dEdge.p2());
-    return !(pX == gP1 || pX == gP2 || pX == dP1 || pX == dP2);
+
+    QPointF xPoint;
+    if (gEdge.intersect(dEdge, &xPoint) == QLineF::NoIntersection)
+    {
+        const QPointF gP1 = RoundedPoint(gEdge.p1());
+        const QPointF gP2 = RoundedPoint(gEdge.p2());
+        const QPointF dP1 = RoundedPoint(dEdge.p1());
+        const QPointF dP2 = RoundedPoint(dEdge.p2());
+
+        // If two edges are same line ignorring all intersection point that are equal to the start or the end point
+        return !(pX == gP1 || pX == gP2 || pX == dP1 || pX == dP2);
+    }
+    else
+    {
+        // Rotation case. Ignore intersection only in the point of edges intersection.
+        return pX != RoundedPoint(xPoint);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
