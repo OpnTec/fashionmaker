@@ -425,27 +425,27 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::Roll24in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(24, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll30in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(30, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll36in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(36, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll42in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(42, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll44in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(44, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(120, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         default:
             break;
