@@ -197,9 +197,6 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     splPath1->SetKCurve(splPath->GetKCurve());
     splPath2->SetKCurve(splPath->GetKCurve());
 
-    splPath1->setMaxCountPoints(splPath->CountPoint());
-    splPath2->setMaxCountPoints(splPath->CountPoint());
-
     if (typeCreation == Source::FromGui)
     {
         splPath1id = data->AddGObject(splPath1);

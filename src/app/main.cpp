@@ -82,11 +82,19 @@ int main(int argc, char *argv[])
 
     QTranslator qtTranslator;
 #if defined(Q_OS_WIN)
-    qtTranslator.load("qt_" + checkedLocale, QCoreApplication::applicationDirPath());
+    qtTranslator.load("qt_" + checkedLocale, qApp->translationsPath());
 #else
     qtTranslator.load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 #endif
     app.installTranslator(&qtTranslator);
+
+    QTranslator qtxmlTranslator;
+#if defined(Q_OS_WIN)
+    qtxmlTranslator.load("qtxmlpatterns_" + checkedLocale, qApp->translationsPath());
+#else
+    qtxmlTranslator.load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    app.installTranslator(&qtxmlTranslator);
 
     QTranslator appTranslator;
     appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());

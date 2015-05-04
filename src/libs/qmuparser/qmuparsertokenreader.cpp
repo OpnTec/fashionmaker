@@ -343,7 +343,8 @@ int QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_
 int QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) const
 {
     const std::wstring m_strFormulaStd = m_strFormula.toStdWString();
-    const std::wstring oprtCharsStd = m_pParser->ValidInfixOprtChars().toStdWString();
+    // Changed as per Issue 6: https://code.google.com/p/muparser/issues/detail?id=6
+    const std::wstring oprtCharsStd = m_pParser->ValidOprtChars().toStdWString();
 
     int iEnd = static_cast<int>( m_strFormulaStd.find_first_not_of ( oprtCharsStd, static_cast<std::size_t>(a_iPos) ) );
     if ( iEnd == static_cast<int>( string_type::npos ) )

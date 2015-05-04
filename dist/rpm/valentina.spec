@@ -1,5 +1,9 @@
 Name:valentina
 
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+BuildRequires: ccache
+
 # Fedora specifics
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
 BuildRequires: pkgconfig(Qt5Core)
@@ -11,7 +15,10 @@ BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
 BuildRequires: qt5-qtsvg-devel >= 5.2.0
 BuildRequires: qt5-qttools-devel >= 5.2.0
-BuildRequires: ccache
+
+Requires:      qt5-qtsvg >= 5.2.0
+Requires:      qt5-qtbase-gui >= 5.2.0
+Requires:      qt5-qtxmlpatterns >= 5.2.0
 %endif
 
 # SUSE Specifics
@@ -21,20 +28,30 @@ BuildRequires: libqt5-qttools
 BuildRequires: libQt5Svg-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 BuildRequires: libqt5-linguist-devel
-BuildRequires: ccache
 BuildRequires: update-desktop-files
 %endif
 
-Version:	0.3.0
+Requires:   poppler-utils
+
+Version:	0.3.1
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
 Source0:	%{name}-%{version}.tar
-Requires:   poppler-utils
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
 Packager:   Roman Telezhinskyi <dismine@gmail.com>   
+
+# Disables debug packages and stripping of binaries:
+%global _enable_debug_package 0
+%global __debug_install_post %{nil} 
+%global debug_package %{nil}
+%if 0%{?suse_version} >= 1320
+%global suse_insert_debug_package %{nil} 
+%global _suse_insert_debug_package %{nil} 
+%global _suse_insert_debug_package_seen %{nil}
+%endif
 
 %description
 Valentina is a cross-platform patternmaking program which allows designers 
@@ -55,6 +72,7 @@ qmake-qt5 PREFIX=%{buildroot}%{_prefix} Valentina.pro -r
 %{__make} %{?jobs:-j %jobs}
 
 %install
+export NO_DEBUGINFO_STRIP_DEBUG=true
 %{__make} install
 gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %{__install} -Dm 644 dist/debian/%{name}.1.gz %{buildroot}%{_mandir}/man1/%{name}.1.gz
@@ -63,13 +81,19 @@ gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %suse_update_desktop_file -r %{name} VectorGraphics
 %endif
 
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
 %doc README.txt LICENSE_GPL.txt 
 %doc %{_mandir}/man1/%{name}.1.gz
-%{_bindir}/*
-%{_libdir}/*
+%{_bindir}/valentina
+%{_libdir}/libvpropertyexplorer.so
+%{_libdir}/libvpropertyexplorer.so.*
+%{_libdir}/libqmuparser.so
+%{_libdir}/libqmuparser.so.*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/*
 %dir %{_datadir}/%{name}
@@ -82,13 +106,8 @@ gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %clean
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 
-%post
-ldconfig
-
 
 %changelog
 * Mon Dec 22 2014 Roman Telezhinskyi
  - Initial build
-
-
 

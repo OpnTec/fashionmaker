@@ -82,10 +82,10 @@ public:
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 
     QPainterPath ContourPath(const VContainer *data) const;
+    QVector<VNodeDetail> listNodePoint()const;
 private:
     QSharedDataPointer<VDetailData> d;
 
-    QVector<VNodeDetail> listNodePoint()const;
     static int indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
 
     QPointF StartSegment(const VContainer *data, const int &i) const;

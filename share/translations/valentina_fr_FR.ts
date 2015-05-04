@@ -1507,10 +1507,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1524,6 +1520,10 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2564,23 +2564,31 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voulez-vous vraiment fusionner les propriétés ?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Select first point</source>
-        <translation>Choisir le premier point</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation>Choisir le deuxième point</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation>Choisir un autre deuxième point</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation>Choisir les détails</translation>
-    </message>
-    <message>
         <source>Union tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a first point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece should have at least two points and three objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a second point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a unique point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a point on edge</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5879,14 +5887,6 @@ Voulez-vous sauvegarder les changements ? </translation>
 </context>
 <context>
     <name>VAbstractTool</name>
-    <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Confirmer la suppression.</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Voulez vous vraiment supprimer ? </translation>
-    </message>
     <message>
         <source>black</source>
         <translation type="unfinished"></translation>

@@ -78,6 +78,11 @@ TableWindow::TableWindow(QWidget *parent)
     connect(ui->actionSave, &QAction::triggered, this, &TableWindow::SaveLayout);
     connect(ui->actionLayout, &QAction::triggered, this, &TableWindow::Layout);
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &TableWindow::ShowPaper);
+
+#if defined(Q_OS_MAC)
+    // On Mac deafault icon size is 32x32.
+    ui->toolBar->setIconSize(QSize(24, 24));
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,7 +353,7 @@ void TableWindow::PngFile(const QString &name, int i) const
         painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
                             Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter);
+        scenes.at(i)->render(&painter, r, r);
         image.save(name);
     }
 }

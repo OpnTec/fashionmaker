@@ -1,3 +1,96 @@
+# Version 0.3.1 Released April 24, 2015
+- [#263] Regression. Union tool doesn't work.
+- For tool Curve intersect axis fixed wrong calculation point in case with too small scene rect size.
+- Fixed crash if a seam allowance doesn't contain 0 points.
+- [#267] Error in the creation of obj files.
+- QMuParser. Bugfix for Bulkmode: Expressions with like "a=b, b*10" did not compute properly.
+- QMuParser. Fix for ParserTokenReader::ExtractOperatorToken incorrectly uses ValidInfixOprtChars().
+- Example of file name in dialog Save Layout appears only after user change format.
+- Fixed regression with removing loops in seam allowance.
+- Removed transparent field for a layout png file.
+
+# Version 0.3.0 Released March 23, 2015
+- Fixed creation equidistant if points less than 4.
+- [#203], [#89], [#90] New Layout Editor.
+- To File/Preferences/Paths added path to export a layout.
+- [#223] Fixed removing stale lock file on Windows.
+- [#222], [#204], [#207], [#205], [#212], [#218], [#210], [#219], [#220], [#248] Minor changes in GUI.
+- [#230] Fixed hangs if curve path has not unique points.
+- [#196] Fixed crash Detail dialog.
+- [#208] Vertical bar for tool "Point from X and Y".
+- Fixed package (.dmg) for Mac OSX.
+- [#171] Show images for pen styles instead of just names.
+- [#74] Fold Line in pattern piece. Pattern format updated to version 0.1.3.
+- [#242] Tool Dialogs: Label at bottom doesn't update for empty lists.
+- [#217] Bug with mouse cursor.
+- Dynamic update tool property browser after applying options changes.
+- [#215] Drag a curve to edit it.
+- [#184] Delete button "Equal" in dialogs.
+- [#183] Message "Changes saved" in dialog Increments.
+- [#234] Fixed problem with formula editing in vtooloptionspropertybrowser and "," decimal separator .
+- Continue improving log system.
+- Close property browser when reset window.
+- [#241] Repeat last used tool.
+- [#253] Show detail information about standard measurements file in dialog Increments.
+- [#249] Set default base height and base size according base values in standard measurements file.
+- New localization language - Spanish.
+- Fixed bug with About Valentina dialog on Windows.
+- [#235] Delete point without confirmation / configurable.
+- Version for Mac OS support export to .ps, .eps.
+- New localization language - Finnish.
+
+# Version 0.2.9 Released January 1, 2015
+- Export a layout to Wavefront .obj format.
+- New validation rules for point labels
+- Export layout in two new formats .ps and .eps.
+- Fixed support .svg format.
+- Support individual measurements.
+- Support mm, cm and inch units in patterns.
+- New math parser. 
+- Support language independent measurements.
+- Apply button in tool dialog.
+- Multi lines formula fields.
+- Recent file list.
+- Support local separator for numbers in formulas.
+- Support Clang.
+- Support Undo/Redo.
+- Optimization parsing pattern file.
+- New logo.
+- Support zoom to original scaling and Zoom Fit Best.
+- Use Zoom Fit Best for pattern piece after selection.
+- Open patterns from list of command line arguments. File association with pattern file format (.val).
+- Additional chackings in tool dialog.
+- Visualization for draw tools.
+- Allow user fix broken formula.
+- All point labels must be unique.
+- Support gradation options (only for standard measurements).
+- Fix special line that join point and label.
+- Show path direction when selected.
+- Show tools buttons in two columns instead of three.
+- Show cursor if item can be moved.
+- Second way edit tool property.
+- Zoom under mouse pointer.
+- Auto creation label.
+- Show in tooltip parser error message.
+- Show curve foot if only curve is selected.
+- Option hide unused measurements in list.
+- New tool line intersect axis.
+- New tool arc(curve) intersect axis.
+- Save and restore last window position and size.
+- User manual.
+- Propose reopen files after crash.
+- Use form layout in tool dialog.
+- Support delete action if you select tool from label.
+- Button "Stop using tool".
+- Value for angle also can be formula.
+- Fixed disabling GUI after error.
+- Don't set scroll bars to minimum after creation layout.
+- Menu Help->Report Bug...
+- Option "Standard table" in dialog changed to better "Measurements".
+- Fixed tool cut curved path.
+- Menu Window->Close window.
+- Support creation and sending crash reports. Only for Windows and Mingw compiler.
+
 # Version 0.2.2 Released February 11, 2014
 - Macros Q_DECL_NOEXCEPT_EXPR don't work in gcc 4.6.
 - Change in build dependency for deb package. Add new architecture for deb file.
@@ -5,7 +98,9 @@
 - Fix valentina.desktop.
 
 # Version 0.2.1 Released December 8, 2013
-- Problem with compilation in console in Ubuntu.
+- Problem with compilation in console on Ubuntu.
 - Problem with compilation on windows with msvc.
 
 # Version 0.2.0 Released October 29, 2013
+- First public release.
+

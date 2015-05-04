@@ -87,12 +87,30 @@ void DialogUnionDetails::UpdateList()
  */
 bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const
 {
-    if (idDetail == 0)
+    if (idDetail == NULL_ID)
     {
         return false;
     }
-    VDetail det = data->GetDetail(idDetail);
+    const VDetail det = data->GetDetail(idDetail);
     return det.Containes(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
+{
+    if (idDetail == NULL_ID)
+    {
+        return false;
+    }
+    const VDetail det = data->GetDetail(idDetail);
+    if (det.CountNode() >= 3 && det.listNodePoint().size() >= 2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,13 +124,21 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
 void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
                                        int &index)
 {
-    if (idDetail == 0)
+    if (idDetail == NULL_ID)
     {
         if (type == SceneObject::Detail)
         {
-            idDetail = id;
-            emit ToolTip(tr("Select first point"));
-            return;
+            if (CheckDetail(id))
+            {
+                idDetail = id;
+                emit ToolTip(tr("Select a first point"));
+                return;
+            }
+            else
+            {
+                emit ToolTip(tr("Workpiece should have at least two points and three objects"));
+                return;
+            }
         }
     }
     if (CheckObject(id, idDetail) == false)
@@ -125,14 +151,14 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
         {
             p1 = id;
             ++numberP;
-            emit ToolTip(tr("Select second point"));
+            emit ToolTip(tr("Select a second point"));
             return;
         }
         if (numberP == 1)
         {
             if (id == p1)
             {
-                emit ToolTip(tr("Select another second point"));
+                emit ToolTip(tr("Select a unique point"));
                 return;
             }
             VDetail d = data->GetDetail(idDetail);
@@ -154,13 +180,13 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                     numberP = 0;
                     p1 = 0;
                     p2 = 0;
-                    emit ToolTip(tr("Select detail"));
+                    emit ToolTip(tr("Select a detail"));
                     return;
                 }
             }
             else
             {
-                emit ToolTip(tr("Select another second point"));
+                emit ToolTip(tr("Select a point on edge"));
                 return;
             }
         }

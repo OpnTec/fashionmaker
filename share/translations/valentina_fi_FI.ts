@@ -19,7 +19,7 @@
     <name>AddToCalc</name>
     <message>
         <source>Add object</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää objecti</translation>
     </message>
 </context>
 <context>
@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>%Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Desimaalierotin osat</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -191,7 +191,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoa kerätystä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedosta. &lt;/a&gt; </translation>
+        <translation>Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoja kerätyistä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedoista. &lt;/a&gt; </translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -278,7 +278,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -488,7 +488,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -603,7 +603,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -694,7 +694,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -777,7 +777,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -856,7 +856,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -915,7 +915,7 @@
     </message>
     <message>
         <source>Bias X</source>
-        <translation type="unfinished"></translation>
+        <translation>Vinouma X</translation>
     </message>
     <message>
         <source>cm</source>
@@ -923,7 +923,7 @@
     </message>
     <message>
         <source>Bias Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Vinouma Y</translation>
     </message>
     <message>
         <source>Options</source>
@@ -982,7 +982,7 @@
     </message>
     <message>
         <source>_</source>
-        <translation type="unfinished">-</translation>
+        <translation>_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1061,7 +1061,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1124,7 +1124,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -1270,7 +1270,7 @@
     </message>
     <message>
         <source>Load another measurements table</source>
-        <translation type="unfinished"></translation>
+        <translation>Lataa toinen mittataulukko</translation>
     </message>
     <message>
         <source>Personal information</source>
@@ -1508,7 +1508,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etsitään parasta paikkaa kaavoille. Hetkinen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etsitään parasta paikkaa kaavoille. Hetkinen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -1524,6 +1524,10 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1641,7 +1645,7 @@
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First line</source>
@@ -1708,7 +1712,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1768,7 +1772,7 @@
     </message>
     <message>
         <source>Point intersect line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivan ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Axis Point</source>
@@ -1799,7 +1803,7 @@
     </message>
     <message>
         <source>Use for creation pattern standard measurement table</source>
-        <translation type="unfinished"></translation>
+        <translation>Luo kaava standardi mittoihin perustuen</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -1807,7 +1811,7 @@
     </message>
     <message>
         <source>Use for creation pattern individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Luo kaava yksilön mittoihin perustuen</translation>
     </message>
 </context>
 <context>
@@ -1830,7 +1834,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2040,7 +2044,7 @@
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Edellistä attribuuttia ei voitu poistaa</translation>
     </message>
     <message>
         <source>Node Name</source>
@@ -2103,7 +2107,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -2167,14 +2171,14 @@
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaaren ja viivan leikkauspiste</translation>
     </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -2190,15 +2194,15 @@
     </message>
     <message>
         <source>X: vertical point</source>
-        <translation type="unfinished"></translation>
+        <translation>X: pystysuora piste</translation>
     </message>
     <message>
         <source>Y: horizontal point</source>
-        <translation type="unfinished"></translation>
+        <translation>Y: vaakasuora piste</translation>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse piste Y arvolle (vaakasuora)</translation>
     </message>
 </context>
 <context>
@@ -2221,7 +2225,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2324,7 +2328,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
 </context>
 <context>
@@ -2335,11 +2339,11 @@
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ensimmäisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ensimmäisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -2347,11 +2351,11 @@
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Toisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Toisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -2382,19 +2386,19 @@
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ensimmäisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ensimmäisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Toisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Toisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -2472,7 +2476,7 @@
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Parsimis virhe: %1</translation>
+        <translation>Jäsentämis virhe: %1</translation>
     </message>
     <message>
         <source>Line Angle</source>
@@ -2483,7 +2487,7 @@
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -2564,24 +2568,32 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Haluatko todella unionin yksityiskohdat?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Select first point</source>
-        <translation>Valitse ensimmäinen piste</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation>Valitse toinen piste</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation>Valitse eri toinen piste</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation>Valitse yksityiskohta</translation>
-    </message>
-    <message>
         <source>Union tool</source>
         <translation>Unioni työkalu</translation>
+    </message>
+    <message>
+        <source>Select a first point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workpiece should have at least two points and three objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a second point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a unique point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a point on edge</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2716,7 +2728,7 @@
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohjelma on saatavilla sellaisena kuin se on ilman mitään takuita, mukaan lukien suunnitelun, kaupallisuuden tai tiettyyn tarkoitukseen sopivuuden suhteen. </translation>
     </message>
 </context>
 <context>
@@ -2751,7 +2763,7 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Piste viivaa pitkin</translation>
+        <translation>Piste viivaa pitkin</translation>
     </message>
     <message>
         <source>...</source>
@@ -2759,7 +2771,7 @@
     </message>
     <message>
         <source>Tools for creating lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkaluja viivojen luomiseen.</translation>
     </message>
     <message>
         <source>Line</source>
@@ -2775,7 +2787,7 @@
     </message>
     <message>
         <source>Tools for creating curves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkaluja käyrien luomiseen.</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -2783,7 +2795,7 @@
     </message>
     <message>
         <source>Tools for creating arcs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkaluja kaarien luomiseen.</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -2791,7 +2803,7 @@
     </message>
     <message>
         <source>Tools for creating details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkaluja yksityiskohtien luomiseen.</translation>
     </message>
     <message>
         <source>Detail</source>
@@ -2891,7 +2903,7 @@
     </message>
     <message>
         <source>Save not yet saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna tallentamaton kaava</translation>
     </message>
     <message>
         <source>Ctrl+Shift+S</source>
@@ -2939,15 +2951,15 @@
     </message>
     <message>
         <source>Change the label of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuta kaavan nimeä</translation>
     </message>
     <message>
         <source>Table of variables</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuttujien taulukko</translation>
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuttujien taulukko</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
@@ -2955,7 +2967,7 @@
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished">Historia</translation>
+        <translation>Historia</translation>
     </message>
     <message>
         <source>Ctrl+H</source>
@@ -2963,31 +2975,31 @@
     </message>
     <message>
         <source>Export pattern (layout)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie kaava toiseen ohjelmaan (sommittelu)</translation>
     </message>
     <message>
         <source>Create layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Luo sommittelu</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+L</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietoja &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;About Valentina</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tietoja Valentinasta</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
+        <translation>L&amp;opeta</translation>
     </message>
     <message>
         <source>Exit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopeta ohjelma</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
@@ -2995,39 +3007,39 @@
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Pattern properties</source>
-        <translation type="unfinished">Kaavan asetukset</translation>
+        <translation>Kaavan asetukset</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarkenna</translation>
     </message>
     <message>
         <source>zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>tarkenna</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Loitonna</translation>
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuta kaavan XML koodia</translation>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation type="unfinished"></translation>
+        <translation>Alkuperäinen tarkennus</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation type="unfinished"></translation>
+        <translation>Alkuperäinen tarkennus</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarkenna sopivasti</translation>
     </message>
     <message>
         <source>Ctrl+=</source>
@@ -3035,88 +3047,89 @@
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopeta</translation>
     </message>
     <message>
         <source>Stop using tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopeta työkalun käyttö</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilmoita ohjelmistovirheestä...</translation>
     </message>
     <message>
         <source>Report bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilmoita ohjelmistovirheestä</translation>
     </message>
     <message>
         <source>Close window</source>
-        <translation type="unfinished"></translation>
+        <translation>Sulje ikkuna</translation>
     </message>
     <message>
         <source>Online help</source>
-        <translation type="unfinished"></translation>
+        <translation>Online apua</translation>
     </message>
     <message>
         <source>Show online help</source>
-        <translation type="unfinished"></translation>
+        <translation>Näytä online apu</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaavan osa %1</translation>
     </message>
     <message>
         <source>Individual measurements is under development</source>
-        <translation type="unfinished"></translation>
+        <translation>Yksilölliset mitat ovat kehityksen alla</translation>
     </message>
     <message>
         <source>There is no way create individual measurements file independent on the pattern file.
 For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei ole mahdollista luoda mittatiedostoa ilma kaava tiedostoa.
+Avataksesi kaava tarvitaan kaava ja mittatiedosto. Haluatko jatkaa?</translation>
     </message>
     <message>
         <source>Select point</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse piste</translation>
     </message>
     <message>
         <source>Select first point</source>
-        <translation type="unfinished">Valitse ensimmäinen piste</translation>
+        <translation>Valitse ensimmäinen piste</translation>
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation type="unfinished">Valitse viivan ensimmäinen piste</translation>
+        <translation>Valitse viivan ensimmäinen piste</translation>
     </message>
     <message>
         <source>Select first point of angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse kulman ensimmäinen piste</translation>
     </message>
     <message>
         <source>Select first point of first line</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse ensimmäisen viivan ensimmäinen piste</translation>
     </message>
     <message>
         <source>Select first point curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse ensimmäinen käyrän piste</translation>
     </message>
     <message>
         <source>Select simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse yksinkertainen käyrä</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">Valitse kaaren keskipiste</translation>
+        <translation>Valitse kaaren keskipiste</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation type="unfinished">Valitse käyrän piste</translation>
+        <translation>Valitse käyrän piste</translation>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse käyräpolku</translation>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse pisteet, kaaret, käyrät myötäpäivään</translation>
     </message>
     <message>
         <source>Select base point</source>
@@ -3124,176 +3137,177 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>Select first point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse akselin ensimmäinen piste</translation>
     </message>
     <message>
         <source>Select detail</source>
-        <translation type="unfinished">Valitse yksityiskohta</translation>
+        <translation>Valitse yksityiskohta</translation>
     </message>
     <message>
         <source>Select arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse kaari</translation>
     </message>
     <message>
         <source>Select curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse käyrä</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietoja Qt:stä</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pituus:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Koko:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kaavan osa:</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaava tiedostot (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>kaava</translation>
     </message>
     <message>
         <source>/pattern.val</source>
-        <translation type="unfinished"></translation>
+        <translation>/kaava.val</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Talenna nimellä</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedostoa ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Avaa tiedosto</translation>
+        <translation>Avaa tiedosto</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe tiedoston jäsennyksessä.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: arvoa ei voi muuntaa</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: tyhjä parametri</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: väärä id.</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kriittinen virhe!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä</translation>
     </message>
     <message>
         <source>Bad id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Väärä id.</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedosto tallennettu</translation>
     </message>
     <message>
         <source>untitled.val</source>
-        <translation type="unfinished"></translation>
+        <translation>nimetön.val</translation>
     </message>
     <message>
         <source>Unsaved change</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallentamattomia muutoksia</translation>
     </message>
     <message>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaavaa on muutettu
+Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Peru</translation>
+        <translation>&amp;Peru</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tee uudelleen</translation>
     </message>
     <message>
         <source>Pattern piece:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaavan osa:</translation>
     </message>
     <message>
         <source>Enter a new label for the pattern piece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Syötä uusi nimi kaavan osalle.</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämä tiedosto on jo avattu toiseen ikkunaan.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation type="unfinished">Väärät yksiköt.</translation>
+        <translation>Väärät yksiköt.</translation>
     </message>
     <message>
         <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohjelma ei tue standardi tauluja tuuma koossa.</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedostovirhe.</translation>
     </message>
     <message>
         <source>File loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedosto ladattu</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation type="unfinished"></translation>
+        <translation>Valentina ei sulkeutunut oikein. Haluatko uudelleen avata tiedostot (%1)?</translation>
     </message>
     <message>
         <source>Reopen files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Avaa uudelleen tiedosto.</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittatiedosto &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
     </message>
     <message>
         <source>could not be found. Do you want to update the file location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei löytynyt. Haluatko päivittää tiedoston sijainnin?</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation type="unfinished">Standardi mitat (*.vst)</translation>
+        <translation>Standardi mitat (*.vst)</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation type="unfinished">Yksilölliset mitat (*.vit)</translation>
+        <translation>Yksilölliset mitat (*.vit)</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation type="unfinished">Olkapään erityispiste</translation>
+        <translation>Valitse olkapään erityispiste</translation>
     </message>
     <message>
         <source>Triangle tool</source>
-        <translation type="unfinished">Kolmio työkalu</translation>
+        <translation>Kolmio työkalu</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaaren ja viivan leikkauspiste</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -3301,63 +3315,63 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point intersect line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivan ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Simple curve</source>
-        <translation type="unfinished">Yksinkertainen käyrä</translation>
+        <translation>Yksinkertainen käyrä</translation>
     </message>
     <message>
         <source>Curved path</source>
-        <translation type="unfinished">Mutkikas käyrä</translation>
+        <translation>Mutkikas käyrä</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished">Jaa segmentteihin yksinkertainen käyrä</translation>
+        <translation>Jaa segmentteihin yksinkertainen käyrä</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation type="unfinished">Jaa käyrä segmentteihin</translation>
+        <translation>Jaa käyrä segmentteihin</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished">Käyrän ja akselin leikkauspiste</translation>
+        <translation>Kaaren ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation type="unfinished">Kaaren segmentti</translation>
+        <translation>Kaaren segmentti</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaaren ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished">Saumavara työkalu</translation>
+        <translation>Saumavara työkalu</translation>
     </message>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished">Unioni työkalu</translation>
+        <translation>Unioni työkalu</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>työkalupalkki</translation>
     </message>
     <message>
         <source>Last Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Viimeisin työkalu</translation>
     </message>
     <message>
         <source>Activate last used tool again</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivoi viimeksi käytetty työkalu uudestaan</translation>
     </message>
     <message>
         <source>L</source>
-        <translation type="unfinished"></translation>
+        <translation>L</translation>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse piste arvolle X (pystysuora)</translation>
     </message>
 </context>
 <context>
@@ -3365,12 +3379,12 @@ Do you want to save your changes?</source>
     <message>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>pään_ympärysmitta</translation>
     </message>
     <message>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>keski_kaulan_ympärysmitta</translation>
     </message>
     <message>
         <source>neck_base_girth</source>
@@ -3395,7 +3409,7 @@ Do you want to save your changes?</source>
     <message>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>olkapään_pituus</translation>
     </message>
     <message>
         <source>side_waist_length</source>
@@ -3410,7 +3424,7 @@ Do you want to save your changes?</source>
     <message>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>olkapään_ympärysmitta</translation>
     </message>
     <message>
         <source>upper_chest_girth</source>
@@ -3420,57 +3434,57 @@ Do you want to save your changes?</source>
     <message>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>rinnan_ympärysmitta</translation>
     </message>
     <message>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ala_rinnan_ympärysmitta</translation>
     </message>
     <message>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>vyötärön_ympärysmitta</translation>
     </message>
     <message>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ylä_lonkan_ympärysmitta</translation>
     </message>
     <message>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>lonkan_ympärysmitta</translation>
     </message>
     <message>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ylä_etu_rinnan_leveys</translation>
     </message>
     <message>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>etu_rinnan_leveys</translation>
     </message>
     <message>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>yli_etu_olkapään_leveys</translation>
     </message>
     <message>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>yli_taka_olkapään_leveys</translation>
     </message>
     <message>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ylä_selän_leveys</translation>
     </message>
     <message>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>selän_leveys</translation>
     </message>
     <message>
         <source>bustpoint_to_bustpoint</source>
@@ -3550,12 +3564,12 @@ Do you want to save your changes?</source>
     <message>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>etu_vyötärö_kaari</translation>
     </message>
     <message>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>taka_vyötärö_kaari</translation>
     </message>
     <message>
         <source>front_upper_hip_arc</source>
@@ -3570,32 +3584,32 @@ Do you want to save your changes?</source>
     <message>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>etu_lonkan_kaari</translation>
     </message>
     <message>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>taka_lonkan_kaari</translation>
     </message>
     <message>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>rinnan_kaarevuus</translation>
     </message>
     <message>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>selän_kaarevuus</translation>
     </message>
     <message>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>etu_vyötärön_kaarevuus</translation>
     </message>
     <message>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>taka_vyötärön_kaarevuus</translation>
     </message>
     <message>
         <source>front_neck_to_upper_chest_height</source>
@@ -3785,7 +3799,7 @@ Do you want to save your changes?</source>
     <message>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>koko</translation>
     </message>
     <message>
         <source>height_front_neck_base_point</source>
@@ -4163,7 +4177,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Istu kovalla tuolilla ja mittaa etäisyys vyötärön sivusta tuoliin</translation>
     </message>
     <message>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
@@ -4298,12 +4312,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kainalon ympäri</translation>
     </message>
     <message>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kyynärpään ympäri kyynärpää taivutettuna</translation>
     </message>
     <message>
         <source>Around UpperArm</source>
@@ -4358,12 +4372,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Käden ympäri</translation>
     </message>
     <message>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Reiden ympäri</translation>
     </message>
     <message>
         <source>Around MidThigh</source>
@@ -4373,27 +4387,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Polven ympäri</translation>
     </message>
     <message>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pohkeen ympäri</translation>
     </message>
     <message>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nilkan ympäri</translation>
     </message>
     <message>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Polvesta lattiaan</translation>
     </message>
     <message>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nilkasta lattiaan</translation>
     </message>
     <message>
         <source>Widest part of Foot side to side</source>
@@ -4453,7 +4467,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Size</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Height of the point base of the neck in front</source>
@@ -4663,17 +4677,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Olkapään pituus</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pään pituus</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kehon sijainti</translation>
     </message>
     <message>
         <source>Arc behind the shoulder girdle</source>
@@ -5121,7 +5135,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Size</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Koko</translation>
+        <translation>Koko</translation>
     </message>
     <message>
         <source>Height front neck base point</source>
@@ -5326,22 +5340,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vyötäröstä polveen</translation>
     </message>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Olkapään pituus</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pään pituus</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kehon sijainti</translation>
     </message>
     <message>
         <source>Arc behind shoulder girdle</source>
@@ -5368,98 +5382,98 @@ Do you want to save your changes?</source>
     <name>MoveLabel</name>
     <message>
         <source>Move point label</source>
-        <translation type="unfinished"></translation>
+        <translation>Siirrä pisteen nimi</translation>
     </message>
 </context>
 <context>
     <name>MoveSPoint</name>
     <message>
         <source>Move single point</source>
-        <translation type="unfinished"></translation>
+        <translation>Siirrä yksi piste</translation>
     </message>
 </context>
 <context>
     <name>MoveSpline</name>
     <message>
         <source>Move spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Siirrä splini</translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
     <message>
         <source>Move spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Siirrä splinipolku</translation>
     </message>
 </context>
 <context>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Avaa kansio</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="unfinished"></translation>
+        <translation>Valentinan käyttämä polku</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletus</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyyppi</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Polku</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Yksilölliset mitat</translation>
+        <translation>Yksilölliset mitat</translation>
     </message>
     <message>
         <source>Patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaavat</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardi mitat</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Sommittelu</translation>
     </message>
 </context>
 <context>
     <name>PatternPage</name>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyttäjä</translation>
     </message>
     <message>
         <source>User name</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyttäjätunnus</translation>
     </message>
     <message>
         <source>Graphical output</source>
-        <translation type="unfinished"></translation>
+        <translation>Graafinen tulos</translation>
     </message>
     <message>
         <source>Use antialiasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Käytä pehmennystä</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Laske vaiheet (0 - ei rajaa)</translation>
     </message>
 </context>
 <context>
@@ -5467,65 +5481,65 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation>tuuma</translation>
     </message>
 </context>
 <context>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Käännetty käyttäen Qt %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aloita luomalla uusi kaava.</translation>
     </message>
     <message>
         <source>Add node</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää solmu</translation>
     </message>
     <message>
         <source>Move detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Siirrä yksityiskohta</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>inch</source>
-        <translation type="unfinished"></translation>
+        <translation>tuuma</translation>
     </message>
     <message>
         <source>Property</source>
         <extracomment>The text that appears in the first column header</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ominaisuus</translation>
     </message>
     <message>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>px</source>
-        <translation type="unfinished"></translation>
+        <translation>pikseliä</translation>
     </message>
 </context>
 <context>
@@ -5533,37 +5547,37 @@ Do you want to save your changes?</source>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Odottomaton ilmimuoto &quot;$TOK$&quot;  paikassa $POS$.</translation>
     </message>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sisäinen virhe</translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä funktio, muuttuja tai vakio nimeltä:  &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä binäärinen operaatio: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä infix operaattori: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä postfix operaattori: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä osoitin palautus funktioon.</translation>
     </message>
     <message>
         <source>Expression is empty.</source>
@@ -5573,107 +5587,107 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä osoitin muuttujaan</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä operaattori &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä lopetus kaavalle kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä argumentin erotin kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllätävä sulku &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä funktio &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä arvo &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä muuttuja &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktion argumentteja käytetty ilman funktiota (kohdassa $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sulkeet puuttuvat</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Liian monta parametriä funktiossa &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Liian vähän parametrejä funktiossa &quot;$TOK$&quot; kohdassa $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nollalla jakaminen</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Domain virhe</translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nimikonflikti</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Väärä operaattorin prioriteetti arvo (täytyy olla suurempi tai yhtä suuri kuin nolla)</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Käyttäjän asettama binääri operaattori &quot;$TOK$&quot; on konfliktissa ohjelman operaattorin kanssa.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä merkki kohdassa $POS$</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekstistä puuttuu sulku kohdassa $POS$</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekstityypin funktio kutsuttu ei-teksti muuttujalla</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekstityyppiä käytetty numeerisen argumentin sijaan</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
@@ -5683,39 +5697,39 @@ Do you want to save your changes?</source>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktion tulos on tekstiä</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jäsentämis virhe.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desimaalierotin on sama funktion argumentti erottimen kanssa.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>If-then-else operattorista puuttuu else osa</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kaksoispiste väärässä paikassa $POS$</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>&quot;$TOK$&quot; operaattorin edessä pitää olla sulku</translation>
     </message>
 </context>
 <context>
     <name>RenamePP</name>
     <message>
         <source>Rename pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Uudelleen nimeä kaavan osa</translation>
     </message>
 </context>
 <context>
@@ -5723,538 +5737,540 @@ Do you want to save your changes?</source>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ensimmäisen ryhmän standardi miesten hahmo, rinnanympärys 100 cm</translation>
     </message>
 </context>
 <context>
     <name>SaveDetailOptions</name>
     <message>
         <source>Save detail option</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna yksityiskohtan asetus</translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
     <message>
         <source>Save tool option</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna työkalun asetus</translation>
     </message>
 </context>
 <context>
     <name>TableWindow</name>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Luo sommittelu</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>työkalupalkki</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Talenna</translation>
     </message>
     <message>
         <source>Save layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna sommittelu</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopeta</translation>
     </message>
     <message>
         <source>Stop laying</source>
-        <translation type="unfinished"></translation>
+        <translation>Lopeta sommitelu</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarkenna</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Loitonna</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>nimetön</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Svg tiedostot (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF tiedostot (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvat (*.png)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation>PS tiedostot (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished"></translation>
+        <translation>EPS tiedostot (*.eps)</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedoston &apos;%1&apos; luonti epäonnistui! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kriittinen virhe!</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Sommittelu sivut</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Sommittelu</translation>
     </message>
 </context>
 <context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Älä kysy uudelleen</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Älä kysy &amp;uudelleen</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Älä näytä &amp;uudelleen</translation>
     </message>
 </context>
 <context>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe varmuuskopio %1 tiedoston luonnissa.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versiotietoja ei voitu palattaa</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Liian monta merkkiä &lt;%1&gt; tiedostossa</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versio &quot;%1&quot; väärä.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versio &quot;0.0.0&quot; väärä.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Väärä versio. Pienin tuettu versio on %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Väärä versio. Suurin tuettu versio on %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: id ei ole yksikäsitteinen</translation>
     </message>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versiota ei voitu vaihtaa</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>musta</translation>
     </message>
     <message>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>vihreä</translation>
     </message>
     <message>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>sininen</translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>tummanpunainen</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>tummanvihreä</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>tummansininen</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>keltainen</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Varmista poistaminen</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Haluatko todella poistaa?</translation>
     </message>
 </context>
 <context>
     <name>VApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jäsentämis virhe tiedostossa. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Väärä id. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvoa ei voi muuttaa. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyhjä parametri. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Väärä id. Ohjelma lopetetaan.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Joku on vialla!!</translation>
     </message>
 </context>
 <context>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
-        <translation type="unfinished"></translation>
+        <translation>Objektia ei löydy</translation>
     </message>
     <message>
         <source>Can&apos;t cast object</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei voi luoda objektia</translation>
     </message>
     <message>
         <source>Can&apos;t find object. Type mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Objektia ei löydy. Tyypin yhteensopimattomuus.</translation>
     </message>
 </context>
 <context>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei voi muuntaa toUInt parametriä</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei voi muuntaa toBool parametriä</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyhjä parametri</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei voinut muuntaa toDouble parametriä</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedostoa %1 ei voitu avata:
+%2</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skeematiedostoa %1 ei voitu avata.
+%2.</translation>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skeematiedostoa ei voitu avata.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarkastus virhe tiedostossa %3 rivillä %1 kohdassa %2</translation>
     </message>
     <message>
         <source>Parsing error file %3 in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Jäsentämis virhe tiedostossa %3 rivillä %1 kohdassa %2</translation>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
-        <translation type="unfinished"></translation>
+        <translation>Solmua ei voitu palauttaa</translation>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Väärä parametri id. Täytyy olla id &gt; 0</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämä id ei ole yksikäsitteinen</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilapäistiedostoa ei voitu kopioida dokumenttiin</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenttitiedostoa ei voitu poistaa</translation>
     </message>
 </context>
 <context>
     <name>VDrawTool</name>
     <message>
         <source>Edit wrong formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Muutit väärää kaavaa</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
     <name>VException</name>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kriittinen virhe!</translation>
     </message>
 </context>
 <context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
 </context>
 <context>
     <name>VFormulaProperty</name>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Arvo</translation>
+        <translation>Arvo</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Matemaattinen kaava</translation>
+        <translation>Matemaattinen kaava</translation>
     </message>
 </context>
 <context>
     <name>VPE::VBoolProperty</name>
     <message>
         <source>True</source>
-        <translation type="unfinished"></translation>
+        <translation>Tosi</translation>
     </message>
     <message>
         <source>False</source>
-        <translation type="unfinished"></translation>
+        <translation>Epätosi</translation>
     </message>
 </context>
 <context>
     <name>VPE::VFileEditWidget</name>
     <message>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Kansio</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Avaa Tiedosto</translation>
     </message>
 </context>
 <context>
     <name>VPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkalua ei löydy taulukosta</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: id ei ole yksikäsitteinen</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe tiedoston jäsennyksessä.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: arvoa ei voi muuntaa</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: tyhjä parametri</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: väärä id.</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kriittinen virhe!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe tiedoston (std::bad_alloc) jäsennyksessä</translation>
     </message>
     <message>
         <source>Error creating or updating detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä yksityiskohtaa</translation>
     </message>
     <message>
         <source>Error creating or updating single point</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä yksi piste</translation>
     </message>
     <message>
         <source>Error creating or updating point of end line</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä päätepiste</translation>
     </message>
     <message>
         <source>Error creating or updating point along line</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä piste viivalla</translation>
     </message>
     <message>
         <source>Error creating or updating point of shoulder</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä olkapääpiste</translation>
     </message>
     <message>
         <source>Error creating or updating point of normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä normaalipiste</translation>
     </message>
     <message>
         <source>Error creating or updating point of bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä jakopiste</translation>
     </message>
     <message>
         <source>Error creating or updating point of lineintersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä viivojen leikkaus</translation>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä kontaktipiste</translation>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä mallinnuspiste</translation>
     </message>
     <message>
         <source>Error creating or updating height</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä pituus</translation>
     </message>
     <message>
         <source>Error creating or updating triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä kolmio</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä leikkauspiste</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline point</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä leikatessa splinipiste</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline path point</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä leikatessa polun piste</translation>
     </message>
     <message>
         <source>Error creating or updating cut arc point</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä kaaren leikkauspiste</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä akselin ja viivan leikkauspiste</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä akselin ja käyrän leikkauspiste</translation>
     </message>
     <message>
         <source>Error creating or updating line</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä viivaa</translation>
     </message>
     <message>
         <source>Error creating or updating simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä yksinkertaista viivaa</translation>
     </message>
     <message>
         <source>Error creating or updating curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä käyräpolku</translation>
     </message>
     <message>
         <source>Error creating or updating modeling simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä yksinkertaista mallinnus käyrää</translation>
     </message>
     <message>
         <source>Error creating or updating modeling curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä mallinnus käyrää</translation>
     </message>
     <message>
         <source>Error creating or updating simple arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä yksinkertaista kaarta</translation>
     </message>
     <message>
         <source>Error creating or updating modeling arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä mallinnuskaarta</translation>
     </message>
     <message>
         <source>Error creating or updating union details</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe luodessa tai päivittäessä unioni yksityiskohtaa</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedostovirhe.</translation>
     </message>
 </context>
 <context>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yllättävä versio &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe palauttaessa varmuuskopio tiedostoa: %1.</translation>
     </message>
 </context>
 <context>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pisteitä ei ole tarpeeksi splinin luomiseen</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämä splini ei ole olemassa</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation type="unfinished"></translation>
+        <translation>Slinipolkua ei voi leikata yhdellä pisteellä</translation>
     </message>
 </context>
 <context>
     <name>VTableGraphicsView</name>
     <message>
         <source>can&apos;t find detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Yksityiskohtaa ei löytynyt</translation>
     </message>
     <message>
         <source>detail found</source>
-        <translation type="unfinished"></translation>
+        <translation>Yksityiskohta löytyi</translation>
     </message>
 </context>
 <context>
@@ -6276,7 +6292,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Position</source>
@@ -6284,79 +6300,79 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation type="unfinished">Piste viivaa pitkin</translation>
+        <translation>Piste viivaa pitkin</translation>
     </message>
     <message>
         <source>Line type</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivan tyyppi</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Pituus</translation>
+        <translation>Pituus</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Kulma</translation>
+        <translation>Kulma</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Piste viivaa pitkin</translation>
+        <translation>Piste viivaa pitkin</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Kaari</translation>
+        <translation>Kaari</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Säde</translation>
+        <translation>Säde</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation type="unfinished">Ensimmäinen kulma</translation>
+        <translation>Ensimmäinen kulma</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation type="unfinished">Toinen kulma</translation>
+        <translation>Toinen kulma</translation>
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation type="unfinished">Piste puolikasta pitkin</translation>
+        <translation>Piste puolikasta pitkin</translation>
     </message>
     <message>
         <source>Cut arc tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Leikkaa kaari työkalu</translation>
     </message>
     <message>
         <source>Tool for segmenting a curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkalu käyrän segmentointiin</translation>
     </message>
     <message>
         <source>Tool segment a pathed curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkalu polun segmentointiin</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
-        <translation type="unfinished">Kohtisuorapiste viivaa pitkin</translation>
+        <translation>Kohtisuorapiste viivaa pitkin</translation>
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished">Pisteiden välinen viiva</translation>
+        <translation>Pisteiden välinen viiva</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished">Viivojen leikkauspiste</translation>
+        <translation>Viivojen leikkauspiste</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation type="unfinished">Piste kohtisuoraa pitkin</translation>
+        <translation>Piste kohtisuoraa pitkin</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation type="unfinished">Kulman lisäasteet</translation>
+        <translation>Kulman lisäasteet</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaaren ja viivan leikkauspiste</translation>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
@@ -6364,39 +6380,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation type="unfinished">Olkapään erityispiste</translation>
+        <translation>Olkapään erityispiste</translation>
     </message>
     <message>
         <source>Curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyrä työkalu</translation>
     </message>
     <message>
         <source>Curve factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyrän kerroin</translation>
     </message>
     <message>
         <source>Tool for path curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkalu käyrälle</translation>
     </message>
     <message>
         <source>Tool triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolmiotyökalu</translation>
     </message>
     <message>
         <source>Point intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivan ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Viivan väri</translation>
+        <translation>Viivan väri</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Väri</translation>
+        <translation>Väri</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyrän ja akselin leikkauspiste</translation>
     </message>
 </context>
 <context>
@@ -6404,27 +6420,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Viiva_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>KulmaViiva_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kaari_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>SplPath</translation>
     </message>
 </context>
 <context>

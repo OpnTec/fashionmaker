@@ -135,6 +135,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCurrentFile("");
     WindowsLocale();
+
+#if defined(Q_OS_MAC)
+    // On Mac deafault icon size is 32x32.
+    ui->toolBarArrows->setIconSize(QSize(24, 24));
+    ui->toolBarDraws->setIconSize(QSize(24, 24));
+    ui->toolBarOption->setIconSize(QSize(24, 24));
+    ui->toolBarStages->setIconSize(QSize(24, 24));
+    ui->toolBarTools->setIconSize(QSize(24, 24));
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

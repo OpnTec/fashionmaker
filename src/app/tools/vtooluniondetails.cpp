@@ -164,7 +164,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 
                 VPointF *p1 = new VPointF(spline->GetP1());
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
-                //quint32 idP1 = data->AddGObject(p1);
 
                 VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
@@ -174,7 +173,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
 
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
-                //quint32 idP4 = data->AddGObject(p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
@@ -201,7 +199,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);
                 const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
-                qint32 k = splinePath->getMaxCountPoints();
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
@@ -209,24 +206,16 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                             splinePath->at(i).KAsm1(), splinePath->GetKCurve());
 
                     VPointF *p1 = new VPointF(spline.GetP1());
-                    BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
-                    //quint32 idP1 = data->AddGObject(p1);
-                    --k;
+                    BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
 
                     VPointF p2 = VPointF(spline.GetP2());
-                    BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
+                    BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
 
                     VPointF p3 = VPointF(spline.GetP3());
-                    BiasRotatePoint(&p3, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
+                    BiasRotatePoint(&p3, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
 
                     VPointF *p4 = new VPointF(spline.GetP4());
-                    BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                    angle);
-                    //quint32 idP4 = data->AddGObject(p4);
-                    --k;
+                    BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
@@ -238,11 +227,6 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                                               splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
                     delete p4;
                     delete p1;
-                }
-                while (k>=0)
-                {
-                    data->getNextId();
-                    --k;
                 }
                 idObject = data->AddGObject(path);
 
@@ -286,10 +270,10 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
                 point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
-                ++idCount;
+                ++idCount;// For parent
                 data->UpdateGObject(idDetail+idCount, point);
 
-                ++idCount;
+                ++idCount;// For child
             }
         }
         break;
@@ -300,24 +284,25 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
                 VPointF p1 = VPointF(arc->GetP1());
                 BiasRotatePoint(&p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
+
                 VPointF p2 = VPointF(arc->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
+
                 VPointF *center = new VPointF(arc->GetCenter());
                 BiasRotatePoint(center, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
                                 angle);
 
                 QLineF l1(center->toQPointF(), p1.toQPointF());
                 QLineF l2(center->toQPointF(), p2.toQPointF());
-                ++idCount;
-                center->setMode(Draw::Modeling);
-                data->UpdateGObject(idDetail+idCount, center);
+
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
                 arc1->setMode(Draw::Modeling);
-                ++idCount;
+                ++idCount;// For parent
                 data->UpdateGObject(idDetail+idCount, arc1);
 
-                ++idCount;
+                ++idCount;// For child
+                delete center;
             }
         }
         break;
@@ -329,8 +314,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
 
                 VPointF *p1 = new VPointF(spline->GetP1());
                 BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
-                ++idCount;
-                data->UpdateGObject(idDetail+idCount, p1);
 
                 VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
@@ -340,16 +323,16 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
 
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
-                ++idCount;
-                data->UpdateGObject(idDetail+idCount, p4);
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
 
-                ++idCount;
+                ++idCount;// For parent
                 data->UpdateGObject(idDetail+idCount, spl);
 
-                ++idCount;
+                ++idCount;// For child
+                delete p1;
+                delete p4;
             }
         }
         break;
@@ -361,7 +344,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 path->setMode(Draw::Modeling);
                 const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
                 SCASSERT(splinePath != nullptr);
-                qint32 k = splinePath->getMaxCountPoints();
                 for (qint32 i = 1; i <= splinePath->Count(); ++i)
                 {
                     VSpline spline(splinePath->at(i-1).P(), splinePath->at(i).P(),
@@ -371,9 +353,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                     VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
                                     angle);
-                    ++idCount;
-                    data->UpdateGObject(idDetail+idCount, p1);
-                    --k;
 
                     VPointF p2 = VPointF(spline.GetP2());
                     BiasRotatePoint(&p2, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
@@ -386,9 +365,6 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                     VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
                                     angle);
-                    ++idCount;
-                    data->UpdateGObject(idDetail+idCount, p4);
-                    --k;
 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
@@ -398,19 +374,14 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                     }
                     path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
                                               splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    delete p1;
+                    delete p4;
                 }
 
-                while (k>=0)
-                {
-                    data->getNextId();
-                    --k;
-                    ++idCount;
-                }
-
-                ++idCount;
+                ++idCount;//For parent
                 data->UpdateGObject(idDetail+idCount, path);
 
-                ++idCount;
+                ++idCount;// For child
             }
         }
         break;
@@ -511,6 +482,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             doc->UpdateToolData(id, data);
         }
     }
+    //First add tool to file
     VAbstractTool::AddRecord(id, Tool::UnionDetails, doc);
     if (parse == Document::FullParse)
     {
@@ -528,6 +500,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         }
 
     }
+    //Then create new details
     VNodeDetail det1p1;
     VNodeDetail det1p2;
     d1.NodeOnEdge(indexD1, det1p1, det1p2);
@@ -550,28 +523,42 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     point4.setX(point4.x()+dx);
     point4.setY(point4.y()+dy);
 
-    const qreal angle = QLineF(point4.toQPointF(), point3.toQPointF()).angleTo(QLineF(point1.toQPointF(),
-                                                                                      point2.toQPointF()));
-    qint32 pointsD2 = 0; //Keeps count points second detail, what we already add.
+    const QLineF p4p3 = QLineF(point4.toQPointF(), point3.toQPointF());
+    const QLineF p1p2 = QLineF(point1.toQPointF(), point2.toQPointF());
+
+    // How many points do we need to skip?
+    // If lengths of edges not equal we should left the second point of the second detail.
+    qint32 skip;
+    if (qFuzzyCompare(p1p2.length(), p4p3.length()))
+    {
+        skip = 2;
+    }
+    else
+    {
+        skip = 1;
+    }
+
+    const qreal angle = p4p3.angleTo(p1p2);
+    qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.
+
+    const qint32 countNodeD1 = d1.RemoveEdge(indexD1).CountNode();
+    const qint32 countNodeD2 = d2.RemoveEdge(indexD2).CountNode();
 
     if (typeCreation == Source::FromGui)
     {
-        qint32 j = 0, i = 0;
+        qint32 i = 0;
         VDetail newDetail;
         do
         {
             AddToNewDetail(unionDetails, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id);
             ++i;
-            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < d2.RemoveEdge(indexD2).CountNode()-2)
+            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
             {
+                qint32 j = 0;
+                FindIndexJ(pointsD2, d2, indexD2, j);
                 do
                 {
-                    FindJ(pointsD2, d2, indexD2, j);
-                    if (pointsD2 == d2.RemoveEdge(indexD2).CountNode() -2)
-                    {
-                        break;
-                    }
-                    if (j >= d2.RemoveEdge(indexD2).CountNode())
+                    if (j >= countNodeD2)
                     {
                         j=0;
                     }
@@ -579,9 +566,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                                    det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
+                } while (pointsD2 < countNodeD2-skip);
             }
-        } while (i < d1.RemoveEdge(indexD1).CountNode());
+        } while (i < countNodeD1);
 
         newDetail.setName("Detail");
         newDetail.setWidth(d1.getWidth());
@@ -604,20 +591,17 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     else
     {
         quint32 idCount = 0;
-        qint32 j = 0, i = 0;
+        qint32 i = 0;
         do
         {
             UpdatePoints(id, data, d1.RemoveEdge(indexD1), i, idCount);
             ++i;
-            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < d2.RemoveEdge(indexD2).CountNode()-2)
+            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
             {
+                qint32 j = 0;
+                FindIndexJ(pointsD2, d2, indexD2, j);
                 do
                 {
-                    FindJ(pointsD2, d2, indexD2, j);
-                    if (pointsD2 == d2.RemoveEdge(indexD2).CountNode()-2)
-                    {
-                        break;
-                    }
                     if (j >= d2.RemoveEdge(indexD2).CountNode())
                     {
                         j=0;
@@ -625,9 +609,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     UpdatePoints(id, data, d2.RemoveEdge(indexD2), j, idCount, dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 < d2.RemoveEdge(indexD2).CountNode());
+                } while (pointsD2 < countNodeD2-skip);
             }
-        } while (i<d1.RemoveEdge(indexD1).CountNode());
+        } while (i<countNodeD1);
     }
     return nullptr;
 }
@@ -643,21 +627,23 @@ void VToolUnionDetails::PointsOnEdge(const VDetail &d, const quint32 &index, VPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::FindJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j)
+void VToolUnionDetails::FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j)
 {
     if (pointsD2 == 0)
     {
         VNodeDetail node1;
         VNodeDetail node2;
         d2.NodeOnEdge(indexD2, node1, node2);
-        int k = d2.RemoveEdge(indexD2).indexOfNode(node2.getId());
-        if (k == d2.RemoveEdge(indexD2).CountNode()-1)
-        {
+        const VDetail removedD2 = d2.RemoveEdge(indexD2);
+        const int k = removedD2.indexOfNode(node2.getId());
+        SCASSERT(k != -1)
+        if (k == removedD2.CountNode()-1)
+        {//We have last node in detail, we wil begin from 0
             j = 0;
         }
         else
-        {
-            j = d2.RemoveEdge(indexD2).indexOfNode(node2.getId())+1;
+        {// Continue from next node
+            j = k+1;
         }
     }
 }

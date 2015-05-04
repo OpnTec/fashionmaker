@@ -63,6 +63,9 @@ private:
                                       double a_fVar2 );
     static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
 
+    // Test Bulkmode
+    int EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass);
+
     // Multiarg callbacks
     static qreal f1of1 ( qreal v )
     {
@@ -301,6 +304,8 @@ private:
     int TestStrArg();
     // cppcheck-suppress functionStatic
     int TestIfThenElse();
+    // cppcheck-suppress functionStatic
+    int TestBulkMode();
 
     static void Q_NORETURN Abort();
 };

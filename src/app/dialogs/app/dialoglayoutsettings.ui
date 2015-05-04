@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Creation a layout</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../share/resources/icon.qrc">
+    <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_6">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -405,6 +409,13 @@
           <item row="1" column="2">
            <widget class="QComboBox" name="comboBoxLayoutUnit"/>
           </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string notr="true">×2</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -511,7 +522,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

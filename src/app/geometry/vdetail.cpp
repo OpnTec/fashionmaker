@@ -186,7 +186,7 @@ void VDetail::setId(const quint32 &id)
 bool VDetail::OnEdge(const quint32 &p1, const quint32 &p2) const
 {
     QVector<VNodeDetail> list = listNodePoint();
-    if (list.size() < 3)
+    if (list.size() < 2)
     {
         qDebug()<<"Not enough points.";
         return false;
@@ -289,10 +289,10 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
     VDetail det(*this);
     det.ClearNodes();
 
-    QVector<VNodeDetail> list = this->listNodePoint();
-    quint32 edge = static_cast<quint32>(list.size());
+    // Edge can be only segment. We ignore all curves inside segments.
+    const quint32 edges = static_cast<quint32>(listNodePoint().size());
     quint32 k = 0;
-    for (quint32 i=0; i<edge; ++i)
+    for (quint32 i=0; i<edges; ++i)
     {
         if (i == index)
         {
@@ -304,20 +304,14 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
             VNodeDetail p1;
             VNodeDetail p2;
             this->NodeOnEdge(i, p1, p2);
-            int j1 = this->indexOfNode(p1.getId());
+            const int j1 = this->indexOfNode(p1.getId());
             int j2 = this->indexOfNode(p2.getId());
             if (j2 == 0)
             {
-                j2 = this->CountNode()-1;
-                if (j1 == j2)
-                {
-                    det.append(this->at(j1));
-                    ++k;
-                    continue;
-                }
+                j2 = this->CountNode();
             }
             for (int j=j1; j<j2; ++j)
-            {
+            {// Add "segment" except last point. Inside can be curves too.
                 det.append(this->at(j));
                 ++k;
             }
@@ -462,15 +456,18 @@ QPainterPath VDetail::ContourPath(const VContainer *data) const
     // seam allowence
     if (getSeamAllowance() == true)
     {
-        QPainterPath ekv;
-        ekv.moveTo(pointsEkv.at(0));
-        for (qint32 i = 1; i < pointsEkv.count(); ++i)
+        if (not pointsEkv.isEmpty())
         {
-            ekv.lineTo(pointsEkv.at(i));
-        }
+            QPainterPath ekv;
+            ekv.moveTo(pointsEkv.at(0));
+            for (qint32 i = 1; i < pointsEkv.count(); ++i)
+            {
+                ekv.lineTo(pointsEkv.at(i));
+            }
 
-        path.addPath(ekv);
-        path.setFillRule(Qt::WindingFill);
+            path.addPath(ekv);
+            path.setFillRule(Qt::WindingFill);
+        }
     }
 
     return path;

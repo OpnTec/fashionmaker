@@ -84,6 +84,8 @@ private:
     quint32           p2;
 
     bool             CheckObject(const quint32 &id, const quint32 &idDetail) const;
+    bool             CheckDetail(const quint32 &idDetail) const;
+
     void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
                                    int &index);
 };

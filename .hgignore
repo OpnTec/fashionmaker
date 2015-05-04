@@ -26,6 +26,7 @@ obj/
 uic/
 rcc/
 man/
+build/
 
 # Ignore Coverity Scan Build Tool
 cov-int/

@@ -43,15 +43,15 @@ class VSplinePathData : public QSharedData
 public:
 
     VSplinePathData()
-        : path(QVector<VSplinePoint>()), kCurve(1), maxCountPoints(0)
+        : path(QVector<VSplinePoint>()), kCurve(1)
     {}
 
     VSplinePathData(qreal kCurve)
-        : path(QVector<VSplinePoint>()), kCurve(kCurve), maxCountPoints(0)
+        : path(QVector<VSplinePoint>()), kCurve(kCurve)
     {}
 
     VSplinePathData(const VSplinePathData &splPath)
-        : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve), maxCountPoints(splPath.maxCountPoints)
+        : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve)
     {}
 
     virtual ~VSplinePathData();
@@ -64,10 +64,6 @@ public:
      * @brief kCurve coefficient of curvature spline.
      */
     qreal         kCurve;
-    /**
-     * @brief maxCountPoints max count of points what can have spline path.
-     */
-    qint32        maxCountPoints;
 };
 
 VSplinePathData::~VSplinePathData()

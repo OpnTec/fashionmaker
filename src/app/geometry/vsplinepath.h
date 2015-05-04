@@ -173,18 +173,6 @@ public:
      */
     QPointF       CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
                                 QPointF &spl2p3) const;
-    /**
-     * @brief getMaxCountPoints return max count of points what can have spline path. This method use tool union detail.
-     * Because cutting point can change position spline can have diffirent count of points. Need know max value. This
-     * value stored from cuted spline path.
-     * @return count.
-     */
-    qint32 getMaxCountPoints() const;
-    /**
-     * @brief setMaxCountPoints set max count points from cuted spline path.
-     * @param value max count.
-     */
-    void setMaxCountPoints(const qint32 &value);
 
     int Segment(const QPointF &p) const;
 private:
