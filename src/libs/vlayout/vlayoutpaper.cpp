@@ -154,7 +154,7 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, bool &stop)
+bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop)
 {
     // First need set size of paper
     if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
@@ -179,14 +179,12 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
+bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 {
     VBestSquare bestResult;
     QThreadPool *thread_pool = QThreadPool::globalInstance();
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
-
-    QCoreApplication::processEvents();
 
     for (int j=1; j <= d->globalContour.EdgesCount(); ++j)
     {
@@ -209,9 +207,13 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
         }
     }
 
-    thread_pool->waitForDone();
-
-    QCoreApplication::processEvents();
+    // Wait for done
+    do
+    {
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
+    }
+    while(thread_pool->activeThreadCount() > 0 && not stop);
 
     if (stop)
     {

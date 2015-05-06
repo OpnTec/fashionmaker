@@ -46,11 +46,9 @@ class QPainterPath;
 class VPosition : public QRunnable
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,
+    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop, bool rotate,
               int rotationIncrease);
     virtual ~VPosition(){}
-
-    virtual void run();
 
     quint32 getPaperIndex() const;
     void setPaperIndex(const quint32 &value);
@@ -81,7 +79,7 @@ private:
     quint32 frame;
     quint32 detailsCount;
     QVector<VLayoutDetail> details;
-    bool *stop;
+    volatile bool *stop;
     bool rotate;
     int rotationIncrease;
 
@@ -98,6 +96,8 @@ private:
         Inside = 1,
         EdgeError = 2
     };
+
+    virtual void run();
 
     void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 

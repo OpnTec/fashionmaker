@@ -46,8 +46,8 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,
-                     int rotationIncrease)
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop,
+                     bool rotate, int rotationIncrease)
     :QRunnable(), bestResult(VBestSquare()), gContour(gContour), detail(detail), i(i), j(j), paperIndex(0), frame(0),
       detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate), rotationIncrease(rotationIncrease)
 {
@@ -64,8 +64,6 @@ void VPosition::run()
     {
         return;
     }
-
-    QCoreApplication::processEvents();
 
     // We should use copy of the detail.
     VLayoutDetail workDetail = detail;
@@ -653,8 +651,6 @@ void VPosition::Rotate(int increase)
         {
             return;
         }
-
-        QCoreApplication::processEvents();
 
         // We should use copy of the detail.
         VLayoutDetail workDetail = detail;

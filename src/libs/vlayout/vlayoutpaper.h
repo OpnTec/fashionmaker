@@ -67,7 +67,7 @@ public:
 
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutDetail &detail, bool &stop);
+    bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);
     int  Count() const;
     QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
     QList<QGraphicsItem *> GetDetails() const;
@@ -75,7 +75,7 @@ public:
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutDetail &detail, bool &stop);
+    bool AddToSheet(const VLayoutDetail &detail, volatile bool &stop);
 
     bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
 

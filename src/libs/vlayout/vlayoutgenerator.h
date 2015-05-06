@@ -91,7 +91,7 @@ private:
     VBank *bank;
     int paperHeight;
     int paperWidth;
-    bool stopGeneration;
+    volatile bool stopGeneration;
     LayoutErrors state;
     unsigned int shift;
     bool rotate;
