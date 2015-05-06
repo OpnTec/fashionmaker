@@ -59,7 +59,8 @@ public slots:
 private:
     Q_DISABLE_COPY(DialogLayoutProgress)
     Ui::DialogLayoutProgress *ui;
-    int maxCount;
+    const int maxCount;
+    QMovie *movie;
 };
 
 #endif // DIALOGLAYOUTPROGRESS_H

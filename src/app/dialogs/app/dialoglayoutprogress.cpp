@@ -33,10 +33,11 @@
 
 #include <QMessageBox>
 #include <QPushButton>
+#include <QtSvgDepends>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count)
+    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count), movie(nullptr)
 {
     ui->setupUi(this);
 
@@ -45,7 +46,11 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     ui->progressBar->setMaximum(maxCount);
     ui->progressBar->setValue(0);
 
-    ui->labelMessage->setText(tr("Arranged: %1 from %2").arg(0).arg(count));
+    ui->labelMessage->setText(tr("Arranged workpieces: %1 from %2").arg(0).arg(count));
+
+    movie = new QMovie("://icon/16x16/progress.gif");
+    ui->labelProgress->setMovie (movie);
+    movie->start ();
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr);
@@ -59,6 +64,7 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
 DialogLayoutProgress::~DialogLayoutProgress()
 {
     delete ui;
+    delete movie;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,7 +77,7 @@ void DialogLayoutProgress::Start()
 void DialogLayoutProgress::Arranged(int count)
 {
     ui->progressBar->setValue(count);
-    ui->labelMessage->setText(tr("Arranged: %1 from %2").arg(count).arg(maxCount));
+    ui->labelMessage->setText(tr("Arranged workpieces: %1 from %2").arg(count).arg(maxCount));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -65,6 +65,13 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QLabel" name="labelProgress">
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="labelMessage">
        <property name="text">
         <string notr="true">Arranged:</string>
