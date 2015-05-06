@@ -201,6 +201,14 @@
         <source>Confirm item deletion</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -266,7 +274,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Variable in die Formel einfügen</translation>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -306,43 +314,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -354,6 +362,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -369,7 +381,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Variable in die Formel einfügen</translation>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -385,7 +397,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Variable in die Formel einfügen</translation>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -397,7 +409,7 @@
     </message>
     <message>
         <source>Insert marked variable into formula</source>
-        <translation>Markierte Variable in die Formel einfügen</translation>
+        <translation type="vanished">Markierte Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -413,43 +425,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variablen</translation>
+        <translation type="vanished">Variablen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -467,6 +479,22 @@
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
@@ -476,7 +504,7 @@
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
-        <translation>Markierte Variable in die Formel einfügen</translation>
+        <translation type="vanished">Markierte Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -524,43 +552,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -576,6 +604,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -615,43 +647,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Weitere Maße</translation>
+        <translation type="vanished">Weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variablen</translation>
+        <translation type="vanished">Variablen</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -667,6 +699,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -698,43 +734,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -746,6 +782,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -781,43 +821,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -825,6 +865,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -860,43 +904,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -904,6 +948,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1026,7 +1074,35 @@
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variablen</translation>
+        <translation type="vanished">Variablen</translation>
+    </message>
+    <message>
+        <source>Double click for add to formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Größe</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Konfektion</translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="unfinished">Linienlänge</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Bogenlänge</translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="unfinished">Kurvenlänge</translation>
+    </message>
+    <message>
+        <source>Line Angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1073,43 +1149,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variablen</translation>
+        <translation type="vanished">Variablen</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1117,6 +1193,14 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1503,10 +1587,6 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1523,16 +1603,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Create a Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
-    <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paper size</source>
         <translation type="unfinished"></translation>
@@ -1603,6 +1683,42 @@
     </message>
     <message>
         <source>Pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Layout erstellen</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1720,43 +1836,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Weitere Maße</translation>
+        <translation type="vanished">Weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variablen</translation>
+        <translation type="vanished">Variablen</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1780,6 +1896,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1818,7 +1938,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Variable in die Formel einfügen</translation>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1854,43 +1974,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1910,6 +2030,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2091,7 +2215,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Variable in die Formel einfügen</translation>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2123,43 +2247,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula.</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein.</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein.</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2168,6 +2292,10 @@
     <message>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished">Laufender Schnittpunkt auf Kreisbogen</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2209,7 +2337,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Variable in die Formel einfügen</translation>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2245,43 +2373,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingangsgrößen</translation>
+        <translation type="vanished">Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Konfektion und Größe</translation>
+        <translation type="vanished">Konfektion und Größe</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="vanished">Maße</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>weitere Maße</translation>
+        <translation type="vanished">weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Linienlängen</translation>
+        <translation type="vanished">Linienlängen</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Kurvenlängen</translation>
+        <translation type="vanished">Kurvenlängen</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Winkel einer Linie</translation>
+        <translation type="vanished">Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Unbestückte Größen ausblenden</translation>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2297,6 +2425,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2452,31 +2584,27 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Größe</translation>
+        <translation type="vanished">Größe</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Konfektion</translation>
+        <translation type="vanished">Konfektion</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation>Linienlänge</translation>
+        <translation type="vanished">Linienlänge</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Bogenlänge</translation>
+        <translation type="vanished">Bogenlänge</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>Kurvenlänge</translation>
+        <translation type="vanished">Kurvenlänge</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
         <translation>Auswertungsfehler: %1</translation>
-    </message>
-    <message>
-        <source>Line Angle</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2562,6 +2690,22 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Soll die Details wirklich vereinigt werden?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Select first point</source>
+        <translation type="vanished">Ersten Punkt auswählen</translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">Zweiten Punkt auswählen</translation>
+    </message>
+    <message>
+        <source>Select another second point</source>
+        <translation type="vanished">Einen anderen zweiten Punkt auswählen</translation>
+    </message>
+    <message>
+        <source>Select detail</source>
+        <translation type="vanished">Detail auswählen</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -2971,11 +3115,11 @@
     </message>
     <message>
         <source>Export pattern (layout)</source>
-        <translation>Schnittmuster-Layout exportieren...</translation>
+        <translation type="vanished">Schnittmuster-Layout exportieren...</translation>
     </message>
     <message>
         <source>Create layout</source>
-        <translation>Layout erstellen</translation>
+        <translation type="vanished">Layout erstellen</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
@@ -3366,6 +3510,38 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Layout erstellen</translation>
+    </message>
+    <message>
+        <source>Show Curve Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide control points and curve direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5490,6 +5666,49 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
 </context>
 <context>
+    <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Displays this help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown options: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[options]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
@@ -5757,11 +5976,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Werkzeugleiste</translation>
+        <translation type="vanished">Werkzeugleiste</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="vanished">Speichern</translation>
     </message>
     <message>
         <source>Save layout</source>
@@ -5769,11 +5988,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="vanished">Stop</translation>
     </message>
     <message>
         <source>Stop laying</source>
-        <translation>Legen stoppen</translation>
+        <translation type="vanished">Legen stoppen</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -5825,6 +6044,74 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Auswählen...</translation>
+    </message>
+    <message>
+        <source>Toolbar print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Strg+S</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to p&amp;df</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5884,6 +6171,14 @@ Sollen die Änderungen gespeichert werden?</translation>
 </context>
 <context>
     <name>VAbstractTool</name>
+    <message>
+        <source>Confirm the deletion.</source>
+        <translation type="vanished">Löschen bestätigen.</translation>
+    </message>
+    <message>
+        <source>Do you really want delete?</source>
+        <translation type="vanished">Wirklich löschen?</translation>
+    </message>
     <message>
         <source>black</source>
         <translation type="unfinished"></translation>

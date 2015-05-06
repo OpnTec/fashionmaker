@@ -201,6 +201,14 @@
         <source>Confirm item deletion</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -266,7 +274,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Voeg variabele info in de formule</translation>
+        <translation type="vanished">Voeg variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -306,43 +314,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -354,6 +362,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -369,7 +381,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Voeg variabele info in de formule</translation>
+        <translation type="vanished">Voeg variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -385,7 +397,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Voeg variabele info in de formule</translation>
+        <translation type="vanished">Voeg variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -397,7 +409,7 @@
     </message>
     <message>
         <source>Insert marked variable into formula</source>
-        <translation>Voeg gemarkeerde variabele info in de formule</translation>
+        <translation type="vanished">Voeg gemarkeerde variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -413,43 +425,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variabelen</translation>
+        <translation type="vanished">Variabelen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -467,6 +479,22 @@
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
@@ -476,7 +504,7 @@
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
-        <translation>Voeg gemarkeerde variabele info in de formule</translation>
+        <translation type="vanished">Voeg gemarkeerde variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -524,43 +552,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -576,6 +604,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -615,43 +647,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variabelen</translation>
+        <translation type="vanished">Variabelen</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -667,6 +699,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -698,43 +734,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -746,6 +782,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -781,43 +821,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -825,6 +865,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -860,43 +904,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -904,6 +948,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1026,7 +1074,35 @@
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variabelen</translation>
+        <translation type="vanished">Variabelen</translation>
+    </message>
+    <message>
+        <source>Double click for add to formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Hoogte</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Maat</translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="unfinished">Lijn lengte</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Booglengte</translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="unfinished">Krommingslengte</translation>
+    </message>
+    <message>
+        <source>Line Angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1073,43 +1149,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variabelen</translation>
+        <translation type="vanished">Variabelen</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1117,6 +1193,14 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1503,10 +1587,6 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1523,16 +1603,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Create a Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
-    <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paper size</source>
         <translation type="unfinished"></translation>
@@ -1603,6 +1683,42 @@
     </message>
     <message>
         <source>Pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Maak een opmaak</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1720,43 +1836,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variabelen</translation>
+        <translation type="vanished">Variabelen</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1780,6 +1896,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1818,7 +1938,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Voeg variabele info in de formule</translation>
+        <translation type="vanished">Voeg variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1854,43 +1974,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijnen</translation>
+        <translation type="vanished">Hoek van de lijnen</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1910,6 +2030,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2091,7 +2215,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Voeg variabele info in de formule</translation>
+        <translation type="vanished">Voeg variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2123,43 +2247,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula.</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2168,6 +2292,10 @@
     <message>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished">Kruispunt van boog en lijn</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2209,7 +2337,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Voeg variabele info in de formule</translation>
+        <translation type="vanished">Voeg variabele info in de formule</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2245,43 +2373,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Breng data in</translation>
+        <translation type="vanished">Breng data in</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Maat en hoogte</translation>
+        <translation type="vanished">Maat en hoogte</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maten</translation>
+        <translation type="vanished">Maten</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Vergroten of verkleinen</translation>
+        <translation type="vanished">Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Lijnlengte</translation>
+        <translation type="vanished">Lijnlengte</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Lengte van kromming</translation>
+        <translation type="vanished">Lengte van kromming</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Hoek van de lijn</translation>
+        <translation type="vanished">Hoek van de lijn</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Verberg ongeschreven maten</translation>
+        <translation type="vanished">Verberg ongeschreven maten</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabelen - Klik 2 keer om formule in te voeren</translation>
+        <translation type="vanished">Variabelen - Klik 2 keer om formule in te voeren</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2297,6 +2425,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2452,31 +2584,27 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Hoogte</translation>
+        <translation type="vanished">Hoogte</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation>Lijn lengte</translation>
+        <translation type="vanished">Lijn lengte</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Booglengte</translation>
+        <translation type="vanished">Booglengte</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>Krommingslengte</translation>
+        <translation type="vanished">Krommingslengte</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
         <translation>Fout bij uitpakken: %1</translation>
-    </message>
-    <message>
-        <source>Line Angle</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2562,6 +2690,22 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je echt gezamenlijke details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Select first point</source>
+        <translation type="vanished">Selecteer eerste punt</translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">Selecteer tweede punt</translation>
+    </message>
+    <message>
+        <source>Select another second point</source>
+        <translation type="vanished">Selecteer een ander tweede punt</translation>
+    </message>
+    <message>
+        <source>Select detail</source>
+        <translation type="vanished">Selecteer een detail</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -2971,11 +3115,11 @@
     </message>
     <message>
         <source>Export pattern (layout)</source>
-        <translation>Exporteer patroon ( opmaak)</translation>
+        <translation type="vanished">Exporteer patroon ( opmaak)</translation>
     </message>
     <message>
         <source>Create layout</source>
-        <translation>Maak opmaak</translation>
+        <translation type="vanished">Maak opmaak</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
@@ -3365,6 +3509,38 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Maak een opmaak</translation>
+    </message>
+    <message>
+        <source>Show Curve Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide control points and curve direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5489,6 +5665,49 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Displays this help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown options: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[options]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
@@ -5756,11 +5975,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Werkbalk</translation>
+        <translation type="vanished">Werkbalk</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Opslaan</translation>
+        <translation type="vanished">Opslaan</translation>
     </message>
     <message>
         <source>Save layout</source>
@@ -5768,11 +5987,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="vanished">Stop</translation>
     </message>
     <message>
         <source>Stop laying</source>
-        <translation>Stop plaatsen</translation>
+        <translation type="vanished">Stop plaatsen</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -5824,6 +6043,74 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Verander</translation>
+    </message>
+    <message>
+        <source>Toolbar print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to p&amp;df</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5883,6 +6170,14 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VAbstractTool</name>
+    <message>
+        <source>Confirm the deletion.</source>
+        <translation type="vanished">Bevestig de verwijdering.</translation>
+    </message>
+    <message>
+        <source>Do you really want delete?</source>
+        <translation type="vanished">Wil je echt verwijderen?</translation>
+    </message>
     <message>
         <source>black</source>
         <translation type="unfinished"></translation>

@@ -201,6 +201,14 @@
         <source>Confirm item deletion</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -265,10 +273,6 @@
         <translation>אורך</translation>
     </message>
     <message>
-        <source>Insert variable into the formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
     </message>
@@ -305,44 +309,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -354,6 +326,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -368,10 +344,6 @@
         <translation>רדיוס</translation>
     </message>
     <message>
-        <source>Insert variable into the formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>ערך הרדיוס</translation>
     </message>
@@ -384,19 +356,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of first angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert marked variable into formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -412,44 +376,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Error</source>
@@ -467,16 +399,28 @@
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
     <message>
         <source>Length</source>
         <translation>אורך</translation>
-    </message>
-    <message>
-        <source>Insert marked variable into the formula</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -523,44 +467,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -576,6 +488,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -614,44 +530,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation type="unfinished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation type="unfinished">אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">אורך העקומות</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -667,6 +551,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -697,44 +585,12 @@
         <translation>תווית הנקודה</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -746,6 +602,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -780,44 +640,12 @@
         <translation>תווית הנקודה</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -825,6 +653,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -859,44 +691,12 @@
         <translation>תווית הנקודה</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -904,6 +704,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1025,7 +829,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Variables</source>
+        <source>Double click for add to formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="unfinished">אורך הקו</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="unfinished">אורך העקומה</translation>
+    </message>
+    <message>
+        <source>Line Angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1072,44 +900,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1117,6 +913,14 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1503,10 +1307,6 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1523,16 +1323,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Create a Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
-    <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paper size</source>
         <translation type="unfinished"></translation>
@@ -1603,6 +1403,42 @@
     </message>
     <message>
         <source>Pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1719,44 +1555,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation type="unfinished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation type="unfinished">אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1780,6 +1584,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1817,10 +1625,6 @@
         <translation type="unfinished">אורך</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
     </message>
@@ -1853,44 +1657,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1910,6 +1682,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2090,10 +1866,6 @@
         <translation>רדיוס</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>ערך הרדיוס</translation>
     </message>
@@ -2122,44 +1894,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation type="unfinished">אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2167,6 +1907,10 @@
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2208,10 +1952,6 @@
         <translation>אורך</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation>ערך האורך</translation>
     </message>
@@ -2244,44 +1984,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Length of lines</source>
-        <translation>אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקווים</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>אורך העקומות</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2297,6 +2005,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2451,31 +2163,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Line length</source>
-        <translation>אורך הקו</translation>
-    </message>
-    <message>
-        <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">אורך הקו</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>אורך העקומה</translation>
+        <translation type="vanished">אורך העקומה</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2562,6 +2258,14 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first point</source>
+        <translation type="vanished">לבחור נקודה ראשונה</translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">לבחור נקודה שנייה</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -2970,14 +2674,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export pattern (layout)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3365,6 +3061,38 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Curve Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide control points and curve direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5489,6 +5217,49 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Displays this help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown options: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[options]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
@@ -5755,23 +5526,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save</source>
-        <translation>שמור</translation>
+        <translation type="vanished">שמור</translation>
     </message>
     <message>
         <source>Save layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop laying</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5824,6 +5583,74 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to p&amp;df</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

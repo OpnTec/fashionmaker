@@ -195,11 +195,19 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Upravování střihu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Potvrdit smazání položky</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -266,7 +274,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Vložit proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -306,43 +314,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -350,11 +358,15 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Bod ve vzdálenosti podél čáry</translation>
+        <translation type="unfinished">Bod ve vzdálenosti podél čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,7 +381,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Vložit proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -385,7 +397,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Vložit proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -397,7 +409,7 @@
     </message>
     <message>
         <source>Insert marked variable into formula</source>
-        <translation>Vložit označenou proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit označenou proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -413,43 +425,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Proměnné</translation>
+        <translation type="vanished">Proměnné</translation>
     </message>
     <message>
         <source>Error</source>
@@ -465,7 +477,23 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -476,7 +504,7 @@
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
-        <translation>Vložit označenou proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit označenou proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -524,43 +552,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -572,11 +600,15 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Bod podél osy úhlu</translation>
+        <translation type="unfinished">Bod podél osy úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -615,43 +647,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Proměnné</translation>
+        <translation type="vanished">Proměnné</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -659,15 +691,19 @@
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation>Bod průsečíku oblouku a čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>Bod osy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -698,43 +734,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -742,11 +778,15 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Vybraný oblouk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -781,51 +821,55 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation>Rozdělení jednoduché křivky</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -860,43 +904,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -904,7 +948,11 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1026,7 +1074,35 @@
     </message>
     <message>
         <source>Variables</source>
-        <translation>Proměnné</translation>
+        <translation type="vanished">Proměnné</translation>
+    </message>
+    <message>
+        <source>Double click for add to formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Velikost</translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="unfinished">Délka čáry</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Délka oblouku</translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="unfinished">Délka křivky</translation>
+    </message>
+    <message>
+        <source>Line Angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1073,43 +1149,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Proměnné</translation>
+        <translation type="vanished">Proměnné</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1117,7 +1193,15 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1164,7 +1248,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1503,10 +1587,6 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1523,16 +1603,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Create a Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
-    <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paper size</source>
         <translation type="unfinished"></translation>
@@ -1605,6 +1685,42 @@
         <source>Pixels</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Vytvořit rozvržení</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -1634,7 +1750,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1720,43 +1836,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Proměnné</translation>
+        <translation type="vanished">Proměnné</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1772,7 +1888,7 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished">Bod osy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second point of line</source>
@@ -1780,7 +1896,11 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1818,7 +1938,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Vložit proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1854,43 +1974,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1910,7 +2030,11 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2091,7 +2215,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Vložit proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2123,43 +2247,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula.</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce.</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce.</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2168,6 +2292,10 @@
     <message>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished">Bod v průsečíku oblouku a čáry</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2209,7 +2337,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Vložit proměnnou do vzorce</translation>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2245,43 +2373,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Vstupní data</translation>
+        <translation type="vanished">Vstupní data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Velikost a výška</translation>
+        <translation type="vanished">Velikost a výška</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Míry</translation>
+        <translation type="vanished">Míry</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Přídavky</translation>
+        <translation type="vanished">Přídavky</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Délka čar</translation>
+        <translation type="vanished">Délka čar</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Délka křivek</translation>
+        <translation type="vanished">Délka křivek</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Úhel čar</translation>
+        <translation type="vanished">Úhel čar</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Skrýt prázdné míry</translation>
+        <translation type="vanished">Skrýt prázdné míry</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2297,7 +2425,11 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2367,7 +2499,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2410,7 +2542,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2452,31 +2584,27 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Výška</translation>
+        <translation type="vanished">Výška</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation>Délka čáry</translation>
+        <translation type="vanished">Délka čáry</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Délka oblouku</translation>
+        <translation type="vanished">Délka oblouku</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>Délka křivky</translation>
+        <translation type="vanished">Délka křivky</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
         <translation>Chyba zpracování: %1</translation>
-    </message>
-    <message>
-        <source>Line Angle</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2562,6 +2690,22 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opravdu chcete sjednotit detaily?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Select first point</source>
+        <translation type="vanished">Vybrat první bod</translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">Vybrat druhý bod</translation>
+    </message>
+    <message>
+        <source>Select another second point</source>
+        <translation type="vanished">Vybrat jiný druhý bod</translation>
+    </message>
+    <message>
+        <source>Select detail</source>
+        <translation type="vanished">Vybrat detail</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -2815,7 +2959,7 @@
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Střih</translation>
+        <translation>&amp;Díl střihu</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2971,11 +3115,11 @@
     </message>
     <message>
         <source>Export pattern (layout)</source>
-        <translation>Vyvést střih (rozvržení)</translation>
+        <translation type="vanished">Vyvést střih (rozvržení)</translation>
     </message>
     <message>
         <source>Create layout</source>
-        <translation>Vytvořit rozvržení</translation>
+        <translation type="vanished">Vytvořit rozvržení</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
@@ -3323,7 +3467,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished">Rozdělení jednoduché křivky</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -3331,7 +3475,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished">Bod průsečíku oblouku a čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -3367,6 +3511,38 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Vytvořit rozvržení</translation>
+    </message>
+    <message>
+        <source>Show Curve Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide control points and curve direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5491,6 +5667,49 @@ Chcete uložit své změny?</translation>
     </message>
 </context>
 <context>
+    <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Displays this help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown options: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[options]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
@@ -5758,11 +5977,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Nástrojový pruh</translation>
+        <translation type="vanished">Nástrojový pruh</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Uložit</translation>
+        <translation type="vanished">Uložit</translation>
     </message>
     <message>
         <source>Save layout</source>
@@ -5770,11 +5989,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Zastavit</translation>
+        <translation type="vanished">Zastavit</translation>
     </message>
     <message>
         <source>Stop laying</source>
-        <translation>Zastavit kladení</translation>
+        <translation type="vanished">Zastavit kladení</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -5826,6 +6045,74 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Upravit</translation>
+    </message>
+    <message>
+        <source>Toolbar print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to p&amp;df</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5885,6 +6172,14 @@ Chcete uložit své změny?</translation>
 </context>
 <context>
     <name>VAbstractTool</name>
+    <message>
+        <source>Confirm the deletion.</source>
+        <translation type="vanished">Potvrďte smazání.</translation>
+    </message>
+    <message>
+        <source>Do you really want delete?</source>
+        <translation type="vanished">Opravdu chcete smazat?</translation>
+    </message>
     <message>
         <source>black</source>
         <translation type="unfinished"></translation>
@@ -6400,11 +6695,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished">Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>

@@ -195,11 +195,19 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Editando Patrón</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Confrimar la eliminacion del objeto</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -266,7 +274,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Insertar variable en la fórmula</translation>
+        <translation type="vanished">Insertar variable en la fórmula</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -306,43 +314,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud del arco</translation>
+        <translation type="vanished">Longitud del arco</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Haga clic dos veces para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Haga clic dos veces para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -355,6 +363,10 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,7 +381,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Insertar variable en la fórmula</translation>
+        <translation type="vanished">Insertar variable en la fórmula</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -385,7 +397,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Introducir variable en la fórmula</translation>
+        <translation type="vanished">Introducir variable en la fórmula</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -397,7 +409,7 @@
     </message>
     <message>
         <source>Insert marked variable into formula</source>
-        <translation>Insertar variable marcada en la fórmula</translation>
+        <translation type="vanished">Insertar variable marcada en la fórmula</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -413,43 +425,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variables</translation>
+        <translation type="vanished">Variables</translation>
     </message>
     <message>
         <source>Error</source>
@@ -467,6 +479,22 @@
         <source>Color</source>
         <translation>Color</translation>
     </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
@@ -476,7 +504,7 @@
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
-        <translation>Insertar variable marcada en la fórmula</translation>
+        <translation type="vanished">Insertar variable marcada en la fórmula</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -524,43 +552,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulos de las líneas</translation>
+        <translation type="vanished">Ángulos de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -577,6 +605,10 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -615,43 +647,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variables</translation>
+        <translation type="vanished">Variables</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -668,6 +700,10 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -698,43 +734,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -747,6 +783,10 @@
     <message>
         <source>Color</source>
         <translation>Color</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -781,43 +821,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud del arco</translation>
+        <translation type="vanished">Longitud del arco</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -826,6 +866,10 @@
     <message>
         <source>Color</source>
         <translation>Color</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -860,43 +904,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud del arco</translation>
+        <translation type="vanished">Longitud del arco</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -905,6 +949,10 @@
     <message>
         <source>Color</source>
         <translation>Color</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1026,7 +1074,35 @@
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variables</translation>
+        <translation type="vanished">Variables</translation>
+    </message>
+    <message>
+        <source>Double click for add to formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished">Altura</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Tamaño</translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="unfinished">Longitud de línea</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Longitud de arco</translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="unfinished">Longitud de curva</translation>
+    </message>
+    <message>
+        <source>Line Angle</source>
+        <translation type="unfinished">Ángulo de la línea</translation>
     </message>
 </context>
 <context>
@@ -1073,43 +1149,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud del arco</translation>
+        <translation type="vanished">Longitud del arco</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variables</translation>
+        <translation type="vanished">Variables</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1118,6 +1194,14 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1504,7 +1588,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Creation a layout</source>
-        <translation>Creación de un diseño</translation>
+        <translation type="vanished">Creación de un diseño</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1527,6 +1611,10 @@
         <translation>Piezas de trabajo no están ordenadas, y no coinciden con el papel</translation>
     </message>
     <message>
+        <source>Create a Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1535,7 +1623,7 @@
     <name>DialogLayoutSettings</name>
     <message>
         <source>Creation a layout</source>
-        <translation>Creación de un diseño</translation>
+        <translation type="vanished">Creación de un diseño</translation>
     </message>
     <message>
         <source>Paper size</source>
@@ -1608,6 +1696,42 @@
     <message>
         <source>Pixels</source>
         <translation>Píxeles</translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Crear un diseño</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1724,43 +1848,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>Variables</translation>
+        <translation type="vanished">Variables</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1785,6 +1909,10 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1822,7 +1950,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Introducir variable en la fórmula</translation>
+        <translation type="vanished">Introducir variable en la fórmula</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1858,43 +1986,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1915,6 +2043,10 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2095,7 +2227,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Introducir variable en la fórmula</translation>
+        <translation type="vanished">Introducir variable en la fórmula</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2127,43 +2259,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula.</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2172,6 +2304,10 @@
     <message>
         <source>Point at intersection of arc and line</source>
         <translation>Punto de intersección del arco y la línea</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2213,7 +2349,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Introducir variable en la fórmula</translation>
+        <translation type="vanished">Introducir variable en la fórmula</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2249,43 +2385,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Introducir datos</translation>
+        <translation type="vanished">Introducir datos</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Alto y ancho</translation>
+        <translation type="vanished">Alto y ancho</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Medidas</translation>
+        <translation type="vanished">Medidas</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>Incrementos</translation>
+        <translation type="vanished">Incrementos</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Longitud de las líneas</translation>
+        <translation type="vanished">Longitud de las líneas</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longitud de los arcos</translation>
+        <translation type="vanished">Longitud de los arcos</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Longitud de las curvas</translation>
+        <translation type="vanished">Longitud de las curvas</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Ángulo de las líneas</translation>
+        <translation type="vanished">Ángulo de las líneas</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Ocultar medidas vacías</translation>
+        <translation type="vanished">Ocultar medidas vacías</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variables - Doble click para insertar en la fórmula</translation>
+        <translation type="vanished">Variables - Doble click para insertar en la fórmula</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2302,6 +2438,10 @@
     <message>
         <source>Line color</source>
         <translation>Color de la línea</translation>
+    </message>
+    <message>
+        <source>Edit length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2456,23 +2596,23 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Altura</translation>
+        <translation type="vanished">Altura</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation type="vanished">Tamaño</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation>Longitud de línea</translation>
+        <translation type="vanished">Longitud de línea</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Longitud de arco</translation>
+        <translation type="vanished">Longitud de arco</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>Longitud de curva</translation>
+        <translation type="vanished">Longitud de curva</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -2480,7 +2620,7 @@
     </message>
     <message>
         <source>Line Angle</source>
-        <translation>Ángulo de la línea</translation>
+        <translation type="vanished">Ángulo de la línea</translation>
     </message>
 </context>
 <context>
@@ -2566,6 +2706,22 @@
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realmente quiere detalles de la unión?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Select first point</source>
+        <translation type="vanished">Selección primer punto </translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">Selección segundo punto</translation>
+    </message>
+    <message>
+        <source>Select another second point</source>
+        <translation type="vanished">Selección otro segundo punto</translation>
+    </message>
+    <message>
+        <source>Select detail</source>
+        <translation type="vanished">Selección de detalle</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -2975,11 +3131,11 @@
     </message>
     <message>
         <source>Export pattern (layout)</source>
-        <translation>Exportar patrón (diseño)</translation>
+        <translation type="vanished">Exportar patrón (diseño)</translation>
     </message>
     <message>
         <source>Create layout</source>
-        <translation>Crear diseño</translation>
+        <translation type="vanished">Crear diseño</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
@@ -3373,6 +3529,38 @@ Quiere guardar los cambios?</translation>
         <source>Select point for X value (vertical)</source>
         <translation>Seleccionar punto para valor X (vertical)</translation>
     </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished">Diseño</translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished">Crear un diseño</translation>
+    </message>
+    <message>
+        <source>Show Curve Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide control points and curve direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Measurements</name>
@@ -3489,17 +3677,17 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>separación_pechos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pecho-dercho_nuca_pecho-izquierdo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>base_de_cuello_a_pecho</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>crotch_length</source>
@@ -3509,7 +3697,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_de_tiro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>shoulder_drop</source>
@@ -3664,7 +3852,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>profundidad_sisa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>shoulder_and_arm_length</source>
@@ -3839,207 +4027,207 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>caderas_excluyendo_abdomen_protuberante</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_empeine_pie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>lateral_de_cintura_al_suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>frontal_de_cintura_al_suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_a_través_de_la_ingle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_caderas_nalgas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cuello_a_punto_radial</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cuello_tercer_dedo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>del_cuello_a_primera_línea_contorno_de_pecho</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cintura_delantera</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_a_través_de_la_articulación_del_hombro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>del_cuello_al_contorno_pecho_en espalda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cintura_a_base_cuello_espalda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cuerpo_por_base_cuello_lateral</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ancho_de_pecho</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>diametro_anterioposterior_mano</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_punto_clavicular</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_sisa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_hombro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Medio_contorno_cuello_para_camisetas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_pecho_primero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_pecho_segundo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_pecho_tercero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_pecho</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_cadera_considerando_abdomen_prominente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>medio_contorno_cadera_excluyendo_abdomen_prominente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>contorno_rodila_agachado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>diámetro_transversal_cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_hombros_frontal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cuello_a_contorno_cintura_frontal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>diametro_vertical_mano</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cuello_a_rodilla</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cintura_a_rodilla</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_hombros</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cabeza</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>posición_del_cuerpo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_detras_cintura_escapular</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>de_cuello_a_base_cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>profundidad_cintura_primera</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>profundidad_cintura_segunda</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4047,237 +4235,237 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno cabeza maximo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
-        <translation>Mitad del contorno de cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno base de cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
-        <translation>Distancia vertical de coronilla a nuca</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Centro cuello delantero sobre línea de pecho a centro cintura frontal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Centro cuello espalda centro cintura espalda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
-        <translation>cuello punta hombro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>Axila a lado cintura</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
-        <translation>Alrededor del cuerpo por hombro medio pasando por pecho entrepierna y volver a hombro medio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
-        <translation>Alrededor de brazos y torso, a nivel bíceps, paralelo al suelo con brazos caidos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno pecho a la altura del cruce de brazos, paralelo al suelo en la espalda y no paralelo en el delantero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno parte sobresaliente del pecho paralelo al suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno pecho bajo el busto paralelo al suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno de cintura por la parte mas estrecha, no suele ser paralela al suelo.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno cadera alta paralelo suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Contorno cadera paralelo al suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Pecho delantero superior, menor distancia de sisa a sisa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Pecho delantero, de brazo a brazo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
-        <translation>Delantero punta hombro a punta hombro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
-        <translation>Espalda punta hombro a punta hombro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Pecho superior en espalda menor medida entre sisas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Pecho en espalda de brazo a brazo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
-        <translation>Distancia entre busto por el pecho</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
-        <translation>Distancia entre busto pasando por la nuca</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
-        <translation>Distancia desde el busto hasta el cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Desde centro delantero cintura, pasando por la entrepierna al centro  espalda cintura</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation>Sentados en silla, medir desde lado derecho cintura hasta asiento de la silla</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
-        <translation>Distancia vertical desde el cuello al hombro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
-        <translation>Grados del ángulo desde el cuello al hombro, requiere gniómetro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Punta del hombro a centro cintura delantero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Punta del hombro a centro cintura espalda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation>Desde parte derecha cuello bajando por el pecho a la cintura</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation>Desde parte derecha cuello bajando por la espalda a la cintura</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
-        <translation>De punto a punto de cuello pasando por el centro del cuello</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
-        <translation>De punto a punto de cuello pasando por la nuca</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
-        <translation>Arco busto delantero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Arco busto espalda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Cintura delantera lado a lado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Cintura espalda lado a lado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>cadera superior delantero lado lado </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>cadera superior espalda lado lado </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>cadera delantero lado lado </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>cadera espalda lado lado </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation>cuello delantero a pliegue brazo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation>cuello espalda a pliegue brazo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>cuello atraves del pecho a lado cintura</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>cuello atraves de espalda a lado cintura</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Front Neck Center straight down to UpperChest line</source>
@@ -4522,7 +4710,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Distancia delantera desde la cintura al suelo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arc through groin area</source>
@@ -4687,7 +4875,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Body position</source>
         <comment>Full measurement description</comment>
-        <translation type="unfinished">Posición del cuerpo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arc behind the shoulder girdle</source>
@@ -4890,7 +5078,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
-        <translation type="unfinished">Arco busto delantero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back UpperBust arc</source>
@@ -5025,17 +5213,17 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
-        <translation>Largo de brazo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
-        <translation>Ancho de mano</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
-        <translation>Largo de mano</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hand girth</source>
@@ -5355,7 +5543,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Body position</source>
         <comment>Full measurement name</comment>
-        <translation>Posición del cuerpo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arc behind shoulder girdle</source>
@@ -5492,6 +5680,49 @@ Quiere guardar los cambios?</translation>
         <source>in</source>
         <comment>inch</comment>
         <translation>in</translation>
+    </message>
+</context>
+<context>
+    <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Displays this help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown options: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[options]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5762,11 +5993,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Barra de herramientas</translation>
+        <translation type="vanished">Barra de herramientas</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation type="vanished">Guardar</translation>
     </message>
     <message>
         <source>Save layout</source>
@@ -5774,11 +6005,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Parar</translation>
-    </message>
-    <message>
-        <source>Stop laying</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Parar</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -5831,6 +6058,74 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Layout</source>
         <translation>Diseño</translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Toolbar print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished">Ctrl+S</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to p&amp;df</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5889,6 +6184,14 @@ Quiere guardar los cambios?</translation>
 </context>
 <context>
     <name>VAbstractTool</name>
+    <message>
+        <source>Confirm the deletion.</source>
+        <translation type="vanished">Confirmar borrado</translation>
+    </message>
+    <message>
+        <source>Do you really want delete?</source>
+        <translation type="vanished">Realmente quiere borrarlo?</translation>
+    </message>
     <message>
         <source>black</source>
         <translation>negro</translation>
@@ -6477,7 +6780,7 @@ Quiere guardar los cambios?</translation>
     <name>main</name>
     <message>
         <source>Pattern making program.</source>
-        <translation>Programa generando patrón</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pattern file.</source>

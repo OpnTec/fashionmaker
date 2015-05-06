@@ -201,6 +201,14 @@
         <source>Confirm item deletion</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DelTool</name>
@@ -266,7 +274,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>Masukkan variabel ke dalam rumus</translation>
+        <translation type="vanished">Masukkan variabel ke dalam rumus</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -306,43 +314,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukkan data</translation>
+        <translation type="vanished">masukkan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Ukuran dan tinggi</translation>
+        <translation type="vanished">Ukuran dan tinggi</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>penambahan</translation>
+        <translation type="vanished">penambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Panjang garis</translation>
+        <translation type="vanished">Panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Panjang busur</translation>
+        <translation type="vanished">Panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Panjang kurva</translation>
+        <translation type="vanished">Panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Sudut garis</translation>
+        <translation type="vanished">Sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Sembunyikan pengukuran kosong</translation>
+        <translation type="vanished">Sembunyikan pengukuran kosong</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="vanished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -354,6 +362,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -370,7 +382,7 @@
     </message>
     <message>
         <source>Insert variable into the formula</source>
-        <translation>sisipkan variabel ke dalam formula</translation>
+        <translation type="vanished">sisipkan variabel ke dalam formula</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -386,7 +398,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>sisipkan variabel ke dalam formula</translation>
+        <translation type="vanished">sisipkan variabel ke dalam formula</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -398,7 +410,7 @@
     </message>
     <message>
         <source>Insert marked variable into formula</source>
-        <translation>sisipkan variabel yang ditandai ke dalam formula</translation>
+        <translation type="vanished">sisipkan variabel yang ditandai ke dalam formula</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -414,43 +426,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukkan data</translation>
+        <translation type="vanished">masukkan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>ukuran dan tinggi</translation>
+        <translation type="vanished">ukuran dan tinggi</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>tambahan</translation>
+        <translation type="vanished">tambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>panjang garis</translation>
+        <translation type="vanished">panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>panjang busur</translation>
+        <translation type="vanished">panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>panjang kurva</translation>
+        <translation type="vanished">panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>sudut garis</translation>
+        <translation type="vanished">sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>sembunyikan pengukuran yang kosong</translation>
+        <translation type="vanished">sembunyikan pengukuran yang kosong</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>variabel</translation>
+        <translation type="vanished">variabel</translation>
     </message>
     <message>
         <source>Error</source>
@@ -468,6 +480,22 @@
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
@@ -477,7 +505,7 @@
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
-        <translation>sisipkan variabel yang ditandai ke dalam rumus</translation>
+        <translation type="vanished">sisipkan variabel yang ditandai ke dalam rumus</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -525,43 +553,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukan data</translation>
+        <translation type="vanished">masukan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>ukuran dan panjang</translation>
+        <translation type="vanished">ukuran dan panjang</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>tambahan</translation>
+        <translation type="vanished">tambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Panjang garis</translation>
+        <translation type="vanished">Panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Panjang busur</translation>
+        <translation type="vanished">Panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Panjang kurva</translation>
+        <translation type="vanished">Panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Sudut garis</translation>
+        <translation type="vanished">Sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Sembunyikan pengukuran kosong</translation>
+        <translation type="vanished">Sembunyikan pengukuran kosong</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="vanished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -577,6 +605,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -616,43 +648,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukan data</translation>
+        <translation type="vanished">masukan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>ukuran dan panjang</translation>
+        <translation type="vanished">ukuran dan panjang</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>tambahan</translation>
+        <translation type="vanished">tambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>panjang garis</translation>
+        <translation type="vanished">panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>panjang busur</translation>
+        <translation type="vanished">panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Panjang kurva</translation>
+        <translation type="vanished">Panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Sudut garis</translation>
+        <translation type="vanished">Sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Sembunyikan pengukuran kosong</translation>
+        <translation type="vanished">Sembunyikan pengukuran kosong</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation>variabel</translation>
+        <translation type="vanished">variabel</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -668,6 +700,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -699,43 +735,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukan data</translation>
+        <translation type="vanished">masukan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>ukuran dan panjang</translation>
+        <translation type="vanished">ukuran dan panjang</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>tambahan</translation>
+        <translation type="vanished">tambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>panjang garis</translation>
+        <translation type="vanished">panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>panjang busur</translation>
+        <translation type="vanished">panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Panjang kurva</translation>
+        <translation type="vanished">Panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Sudut garis</translation>
+        <translation type="vanished">Sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Sembunyikan pengukuran kosong</translation>
+        <translation type="vanished">Sembunyikan pengukuran kosong</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="vanished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -747,6 +783,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -782,43 +822,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukan data</translation>
+        <translation type="vanished">masukan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>ukuran dan panjang</translation>
+        <translation type="vanished">ukuran dan panjang</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>tambahan</translation>
+        <translation type="vanished">tambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>panjang garis</translation>
+        <translation type="vanished">panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>panjang busur</translation>
+        <translation type="vanished">panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Panjang kurva</translation>
+        <translation type="vanished">Panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Sudut garis</translation>
+        <translation type="vanished">Sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Sembunyikan pengukuran kosong</translation>
+        <translation type="vanished">Sembunyikan pengukuran kosong</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="vanished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -826,6 +866,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -861,43 +905,43 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>masukan data</translation>
+        <translation type="vanished">masukan data</translation>
     </message>
     <message>
         <source>Size and height</source>
-        <translation>ukuran dan panjang</translation>
+        <translation type="vanished">ukuran dan panjang</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>pengukuran</translation>
+        <translation type="vanished">pengukuran</translation>
     </message>
     <message>
         <source>Increments</source>
-        <translation>tambahan</translation>
+        <translation type="vanished">tambahan</translation>
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>panjang garis</translation>
+        <translation type="vanished">panjang garis</translation>
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>panjang busur</translation>
+        <translation type="vanished">panjang busur</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Panjang kurva</translation>
+        <translation type="vanished">Panjang kurva</translation>
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Sudut garis</translation>
+        <translation type="vanished">Sudut garis</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Sembunyikan pengukuran kosong</translation>
+        <translation type="vanished">Sembunyikan pengukuran kosong</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation>Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="vanished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -905,6 +949,10 @@
     </message>
     <message>
         <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1027,7 +1075,35 @@
     </message>
     <message>
         <source>Variables</source>
-        <translation>variabel</translation>
+        <translation type="vanished">variabel</translation>
+    </message>
+    <message>
+        <source>Double click for add to formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1073,44 +1149,12 @@
         <translation type="unfinished">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurements</source>
-        <translation type="unfinished">pengukuran</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pengukuran</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation type="unfinished">variabel</translation>
+        <translation type="obsolete">variabel</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1118,6 +1162,14 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1504,10 +1556,6 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1524,16 +1572,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Create a Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
-    <message>
-        <source>Creation a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Paper size</source>
         <translation type="unfinished"></translation>
@@ -1604,6 +1652,42 @@
     </message>
     <message>
         <source>Pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1720,44 +1804,12 @@
         <translation type="unfinished">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurements</source>
-        <translation type="unfinished">pengukuran</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pengukuran</translation>
     </message>
     <message>
         <source>Variables</source>
-        <translation type="unfinished">variabel</translation>
+        <translation type="obsolete">variabel</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1781,6 +1833,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1818,10 +1874,6 @@
         <translation type="unfinished">panjang</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1854,44 +1906,12 @@
         <translation type="unfinished">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurements</source>
-        <translation type="unfinished">pengukuran</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pengukuran</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="obsolete">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1911,6 +1931,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2092,10 +2116,6 @@
 </translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation type="unfinished">nilai radius</translation>
     </message>
@@ -2124,44 +2144,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurements</source>
-        <translation type="unfinished">pengukuran</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pengukuran</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2169,6 +2153,10 @@
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2210,10 +2198,6 @@
         <translation type="unfinished">panjang</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value of length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2246,44 +2230,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measurements</source>
-        <translation type="unfinished">pengukuran</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pengukuran</translation>
     </message>
     <message>
         <source>Variables - Click twice to insert into formula</source>
-        <translation type="unfinished">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
+        <translation type="obsolete">Variabel - Klik dua kali untuk menyisipkan ke dalam rumus</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2299,6 +2251,10 @@
     </message>
     <message>
         <source>Line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2453,31 +2409,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Curve length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2972,14 +2904,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export pattern (layout)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3368,6 +3292,38 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pointer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config pattern piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Curve Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide control points and curve direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5492,6 +5448,49 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
+    <name>QCommandLineParser</name>
+    <message>
+        <source>Displays version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Displays this help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown option &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown options: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Missing value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected value after &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[options]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCoreApplication</name>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
@@ -5758,23 +5757,11 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save</source>
-        <translation type="unfinished">Simpan</translation>
+        <translation type="obsolete">Simpan</translation>
     </message>
     <message>
         <source>Save layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop laying</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5827,6 +5814,74 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back to main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print pre&amp;view...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to p&amp;df</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
