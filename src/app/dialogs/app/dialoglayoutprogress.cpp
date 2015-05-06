@@ -36,14 +36,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogLayoutProgress)
+    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count)
 {
     ui->setupUi(this);
 
     qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
-    ui->progressBar->setMaximum(count);
+    ui->progressBar->setMaximum(maxCount);
     ui->progressBar->setValue(0);
+
+    ui->labelMessage->setText(tr("Arranged: %1 from %2").arg(0).arg(count));
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr);
@@ -69,6 +71,7 @@ void DialogLayoutProgress::Start()
 void DialogLayoutProgress::Arranged(int count)
 {
     ui->progressBar->setValue(count);
+    ui->labelMessage->setText(tr("Arranged: %1 from %2").arg(count).arg(maxCount));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -43,7 +43,7 @@ class DialogLayoutProgress : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogLayoutProgress(int count, QWidget *parent = 0);
+    DialogLayoutProgress(int count, QWidget *parent = 0);
     ~DialogLayoutProgress();
 
 signals:
@@ -59,6 +59,7 @@ public slots:
 private:
     Q_DISABLE_COPY(DialogLayoutProgress)
     Ui::DialogLayoutProgress *ui;
+    int maxCount;
 };
 
 #endif // DIALOGLAYOUTPROGRESS_H
