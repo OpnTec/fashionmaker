@@ -68,6 +68,8 @@ public:
     static void DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
                           int detailsCount, const QVector<VLayoutDetail> &details = QVector<VLayoutDetail>());
 
+    static int Bias(int length, int maxLength);
+
 private:
     Q_DISABLE_COPY(VPosition)
     VBestSquare bestResult;

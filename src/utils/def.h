@@ -32,6 +32,14 @@
 #include <csignal>
 #include <QtGlobal>
 
+/* QImage supports a maximum of 32768x32768 px images (signed short).
+ * This follows from the condition: width * height * colordepth < INT_MAX (4 billion) -> 32768 * 32768 * 4 = 4 billion.
+ * The second condition is of course that malloc is able to allocate the requested memory.
+ *
+ * If you really need bigger images you will have to use another wrapper or split into multiple QImage's.
+ */
+#define QIMAGE_MAX 32768
+
 /*
  * This macros SCASSERT (for Stop and Continue Assert) will break into the debugger on the line of the assert and allow
  * you to continue afterwards should you choose to.

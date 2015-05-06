@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vposition.h"
+#include "../../utils/def.h"
 
 #include <QPointF>
 #include <QRectF>
@@ -37,6 +38,7 @@
 #include <QPainter>
 #include <QCoreApplication>
 #include <QDir>
+#include <QtWidgets>
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../utils/vmath.h"
 #else
@@ -149,33 +151,42 @@ VBestSquare VPosition::getBestResult() const
 void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
                           int detailsCount, const QVector<VLayoutDetail> &details)
 {
-    QImage frameImage(contour.GetWidth()*2, contour.GetHeight()*2, QImage::Format_RGB32);
+    const int biasWidth = Bias(contour.GetWidth(), QIMAGE_MAX);
+    const int biasHeight = Bias(contour.GetHeight(), QIMAGE_MAX);
+
+    QImage frameImage(contour.GetWidth()+biasWidth, contour.GetHeight()+biasHeight, QImage::Format_RGB32);
+
+    if (frameImage.isNull())
+    {
+        return;
+    }
+
     frameImage.fill(Qt::white);
     QPainter paint;
     paint.begin(&frameImage);
 
     paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawRect(QRectF(contour.GetWidth()/2, contour.GetHeight()/2, contour.GetWidth(), contour.GetHeight()));
+    paint.drawRect(QRectF(biasWidth/2, biasHeight/2, contour.GetWidth(), contour.GetHeight()));
 
     paint.setPen(QPen(Qt::black, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     QPainterPath p;
     if (contour.GetContour().isEmpty())
     {
         p = DrawContour(contour.CutEdge(QLineF(0, 0, contour.GetWidth(), 0)));
-        p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+        p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
     else
     {
         p = DrawContour(contour.GetContour());
-        p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+        p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
 
 #ifdef SHOW_CANDIDATE
     paint.setPen(QPen(Qt::darkGreen, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawContour(detail.GetLayoutAllowencePoints());
-    p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+    p.translate(biasWidth/2, biasHeight/2);
     paint.drawPath(p);
 #else
     Q_UNUSED(detail)
@@ -185,7 +196,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
 #ifdef ARRANGED_DETAILS
     paint.setPen(QPen(Qt::blue, 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawDetails(details);
-    p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+    p.translate(biasWidth/2, biasHeight/2);
     paint.drawPath(p);
 #else
     Q_UNUSED(details)
@@ -195,6 +206,19 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(paperIndex)
             .arg(detailsCount).arg(frame);
     frameImage.save (path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPosition::Bias(int length, int maxLength)
+{
+    if (length < maxLength && length*2 < maxLength)
+    {
+        return length;
+    }
+    else
+    {
+        return maxLength-length;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

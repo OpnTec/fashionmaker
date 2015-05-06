@@ -746,15 +746,23 @@ QIcon TableWindow::ScenePreview(int i) const
         const QRectF r = paper->rect();
         // Create the image with the exact size of the shrunk scene
         image = QImage(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_RGB32);
-        image.fill(Qt::white);
-        QPainter painter(&image);
-        painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-        painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
-                            Qt::RoundJoin));
-        painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter);
-        painter.end();
+
+        if (not image.isNull())
+        {
+            image.fill(Qt::white);
+            QPainter painter(&image);
+            painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+            painter.setRenderHint(QPainter::Antialiasing, true);
+            painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
+            painter.setBrush ( QBrush ( Qt::NoBrush ) );
+            scenes.at(i)->render(&painter);
+            painter.end();
+        }
+        else
+        {
+            qWarning()<<"Cannot create image. Size too big";
+        }
     }
     else
     {

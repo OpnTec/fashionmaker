@@ -218,9 +218,14 @@ void DialogLayoutSettings::SetAutoCrop(bool autoCrop)
 void DialogLayoutSettings::TemplateSelected()
 {
     const QSizeF size = Template();
+
+    oldPaperUnit = PaperUnit();
+    ui->doubleSpinBoxPaperWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
+    ui->doubleSpinBoxPaperHeight->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
+
     ui->doubleSpinBoxPaperWidth->setValue(size.width());
     ui->doubleSpinBoxPaperHeight->setValue(size.height());
-    oldPaperUnit = PaperUnit();
+
     CorrectPaperDecimals();
     PaperSizeChanged();
 }
@@ -231,6 +236,10 @@ void DialogLayoutSettings::ConvertPaperSize()
     const Unit paperUnit = PaperUnit();
     const qreal width = ui->doubleSpinBoxPaperWidth->value();
     const qreal height = ui->doubleSpinBoxPaperHeight->value();
+
+    ui->doubleSpinBoxPaperWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, paperUnit));
+    ui->doubleSpinBoxPaperHeight->setMaximum(qApp->fromPixel(QIMAGE_MAX, paperUnit));
+
     ui->doubleSpinBoxPaperWidth->setValue(VAbstractMeasurements::UnitConvertor(width, oldPaperUnit, paperUnit));
     ui->doubleSpinBoxPaperHeight->setValue(VAbstractMeasurements::UnitConvertor(height, oldPaperUnit, paperUnit));
     oldPaperUnit = paperUnit;
@@ -244,6 +253,10 @@ void DialogLayoutSettings::ConvertLayoutSize()
     const Unit unit = LayoutUnit();
     const qreal layoutWidth = ui->doubleSpinBoxLayoutWidth->value();
     const qreal shift = ui->doubleSpinBoxShift->value();
+
+    ui->doubleSpinBoxLayoutWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, unit));
+    ui->doubleSpinBoxShift->setMaximum(qApp->fromPixel(QIMAGE_MAX, unit));
+
     ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(layoutWidth, oldLayoutUnit, unit));
     ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(shift, oldLayoutUnit, unit));
     oldLayoutUnit = unit;
@@ -425,27 +438,27 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::Roll24in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(24, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll30in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(30, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll36in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(36, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll42in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(42, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll44in:
             SetAutoCrop(true);
             width = VAbstractMeasurements::UnitConvertor(44, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(6000, Unit::Inch, paperUnit);
+            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         default:
             break;
