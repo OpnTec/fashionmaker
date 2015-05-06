@@ -45,7 +45,7 @@ public:
     int        GContourEdge() const;
     int        DetailEdge() const;
     QTransform Matrix() const;
-    bool       ValideResult() const;
+    bool       ValidResult() const;
     bool       Mirror() const;
     BestFrom   Type() const;
 

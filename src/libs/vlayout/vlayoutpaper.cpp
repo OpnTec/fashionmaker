@@ -236,7 +236,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail)
 {
-    if (bestResult.ValideResult())
+    if (bestResult.ValidResult())
     {
         VLayoutDetail workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
@@ -258,7 +258,7 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail
 #endif
     }
 
-    return bestResult.ValideResult(); // Do we have the best result?
+    return bestResult.ValidResult(); // Do we have the best result?
 }
 
 //---------------------------------------------------------------------------------------------------------------------

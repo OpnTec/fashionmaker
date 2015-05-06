@@ -52,7 +52,7 @@ void VBestSquare::NewResult(qint64 square, int i, int j, const QTransform &matri
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquare &best)
 {
-    if (best.ValideResult())
+    if (best.ValidResult())
     {
         NewResult(best.BestSquare(), best.GContourEdge(), best.DetailEdge(), best.Matrix(), best.Mirror(), best.Type());
     }
@@ -83,7 +83,7 @@ QTransform VBestSquare::Matrix() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::ValideResult() const
+bool VBestSquare::ValidResult() const
 {
     return valideResult;
 }
