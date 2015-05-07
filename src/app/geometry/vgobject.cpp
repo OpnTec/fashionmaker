@@ -353,7 +353,7 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VGObject::PointInSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
+bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
     const qreal eps = 1e-8;
 
