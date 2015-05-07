@@ -29,11 +29,12 @@
 #include "tst_vabstractdetail.h"
 #include "../../libs/vlayout/vabstractdetail.h"
 
-#include <QtTest>
+#include <QPointF>
+#include <QVector>
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_VAbstractDetail::TST_VAbstractDetail(QObject *parent) :
-    QObject(parent)
+TST_VAbstractDetail::TST_VAbstractDetail(QObject *parent)
+    :AbstractTest(parent)
 {
 }
 
@@ -319,16 +320,4 @@ QVector<QPointF> TST_VAbstractDetail::OutputPointsCase2() const
     points += QPointF(-2.79526, 4.83848);
 
     return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VAbstractDetail::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const
-{
-    // Begin comparison
-    QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes equal
-    for (int i=0; i < ekv.size(); i++)
-    {
-        // Check each point
-        QCOMPARE(ekv.at(i).toPoint(), ekvOrig.at(i).toPoint()); // Don't use comparison float values
-    }
 }

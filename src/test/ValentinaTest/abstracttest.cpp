@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   tst_vabstractdetail.h
+ **  @file   abstracttest.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   16 4, 2015
+ **  @date   7 5, 2015
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,24 @@
  **
  *************************************************************************/
 
-#ifndef TST_VABSTRACTDETAIL_H
-#define TST_VABSTRACTDETAIL_H
-
 #include "abstracttest.h"
 
-class TST_VAbstractDetail : public AbstractTest
+#include <QtTest>
+
+//---------------------------------------------------------------------------------------------------------------------
+AbstractTest::AbstractTest(QObject *parent) :
+    QObject(parent)
 {
-    Q_OBJECT
-public:
-    explicit TST_VAbstractDetail(QObject *parent = 0);
+}
 
-signals:
-
-private slots:
-    void EquidistantRemoveLoop() const;
-
-private:
-    void Case1() const;
-    void Case2() const;
-
-    QVector<QPointF> InputPointsCase1() const;
-    QVector<QPointF> OutputPointsCase1() const;
-
-    QVector<QPointF> InputPointsCase2() const;
-    QVector<QPointF> OutputPointsCase2() const;
-
-};
-
-#endif // TST_VABSTRACTDETAIL_H
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const
+{
+    // Begin comparison
+    QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes equal
+    for (int i=0; i < ekv.size(); i++)
+    {
+        // Check each point
+        QCOMPARE(ekv.at(i).toPoint(), ekvOrig.at(i).toPoint()); // Don't use comparison float values
+    }
+}

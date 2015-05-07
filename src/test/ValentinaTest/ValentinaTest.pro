@@ -36,11 +36,15 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 SOURCES += \
     qttestmainlambda.cpp \
     tst_vposter.cpp \
-    tst_vabstractdetail.cpp
+    tst_vabstractdetail.cpp \
+    tst_vspline.cpp \
+    abstracttest.cpp
 
 HEADERS += \
     tst_vposter.h \
-    tst_vabstractdetail.h
+    tst_vabstractdetail.h \
+    tst_vspline.h \
+    abstracttest.h
 
 CONFIG(debug, debug|release){
     # Debug mode
@@ -96,3 +100,12 @@ DEPENDPATH += $$PWD/../../libs/vlayout
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+
+# VGeometry static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
+
+INCLUDEPATH += $$PWD/../../libs/vgeometry
+DEPENDPATH += $$PWD/../../libs/vgeometry
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a

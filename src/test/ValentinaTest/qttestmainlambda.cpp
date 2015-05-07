@@ -30,6 +30,7 @@
 
 #include "tst_vposter.h"
 #include "tst_vabstractdetail.h"
+#include "tst_vspline.h"
 
 int main(int argc, char** argv)
 {
@@ -44,6 +45,7 @@ int main(int argc, char** argv)
 
     ASSERT_TEST(new TST_VPoster());
     ASSERT_TEST(new TST_VAbstractDetail());
+    ASSERT_TEST(new TST_VSpline());
 
     return status;
 }
