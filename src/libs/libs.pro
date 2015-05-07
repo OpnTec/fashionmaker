@@ -4,4 +4,5 @@ SUBDIRS = qmuparser \
     vpropertyexplorer \
     ifc \
     vobj \
-    vlayout
+    vlayout \
+    vgeometry

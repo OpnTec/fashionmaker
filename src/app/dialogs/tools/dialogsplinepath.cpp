@@ -28,7 +28,7 @@
 
 #include "dialogsplinepath.h"
 #include "ui_dialogsplinepath.h"
-#include "../../geometry/vsplinepoint.h"
+#include "../../libs/vgeometry/vsplinepoint.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolsplinepath.h"
 

@@ -28,7 +28,7 @@
 
 #include "vtoolpointofintersection.h"
 #include "../../dialogs/tools/dialogpointofintersection.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolpointofintersection.h"
 
 const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfIntersection");

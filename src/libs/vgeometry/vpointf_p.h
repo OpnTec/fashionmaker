@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vabstractcurve.h
+ **  @file   vpointf_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   25 6, 2014
+ **  @date   20 8, 2014
  **
  **  @brief
  **  @copyright
@@ -26,35 +26,62 @@
  **
  *************************************************************************/
 
-#ifndef VABSTRACTCURVE_H
-#define VABSTRACTCURVE_H
+#ifndef VPOINTF_P_H
+#define VPOINTF_P_H
 
-#include "vgobject.h"
+#include <QSharedData>
+#include "vgeometrydef.h"
 #include <QPointF>
 
-enum class PathDirection : char { Hide, Show };
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
 
-class QPainterPath;
-class QLineF;
-
-class VAbstractCurve :public VGObject
+class VPointFData : public QSharedData
 {
 public:
-    VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
-    VAbstractCurve(const VAbstractCurve &curve);
-    VAbstractCurve& operator= (const VAbstractCurve &curve);
 
-    virtual QVector<QPointF> GetPoints() const =0;
-    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
+    VPointFData()
+        : _mx(0), _my(0), _x(0), _y(0)
+    {}
 
-    virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
-    virtual qreal            GetLength() const =0;
-    virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
-protected:
-    QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
-private:
-    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin);
-    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end);
+    VPointFData(const VPointFData &point)
+        :QSharedData(point), _mx(point._mx), _my(point._my), _x(point._x), _y(point._y)
+    {}
+
+    VPointFData(const QPointF &point)
+        :_mx(0), _my(0), _x(point.x()), _y(point.y())
+    {}
+
+    VPointFData(qreal x, qreal y, qreal mx, qreal my)
+        :_mx(mx), _my(my), _x(x), _y(y)
+    {}
+
+    VPointFData(const QPointF &point, qreal mx, qreal my)
+        :_mx(mx), _my(my), _x(point.x()), _y(point.y())
+    {}
+
+    virtual ~VPointFData();
+
+    /** @brief _mx offset name respect to x */
+    qreal   _mx;
+
+    /** @brief _my offset name respect to y */
+    qreal   _my;
+
+    /** @brief _x x coordinate */
+    qreal   _x;
+
+    /** @brief _y y coordinate */
+    qreal   _y;
 };
 
-#endif // VABSTRACTCURVE_H
+VPointFData::~VPointFData()
+{}
+
+#ifdef Q_CC_GNU
+#pragma GCC diagnostic pop
+#endif
+
+#endif // VPOINTF_P_H

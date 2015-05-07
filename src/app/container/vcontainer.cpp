@@ -28,8 +28,8 @@
 
 #include "vcontainer.h"
 #include "../core/vapplication.h"
-#include "../geometry/varc.h"
-#include "../geometry/vsplinepath.h"
+#include "../libs/vgeometry/varc.h"
+#include "../libs/vgeometry/vsplinepath.h"
 #include "../../utils/logging.h"
 
 #include <QLineF>

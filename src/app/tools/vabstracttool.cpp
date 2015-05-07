@@ -35,7 +35,7 @@
 #include "../../libs/vpropertyexplorer/checkablemessagebox.h"
 #include "../undocommands/deltool.h"
 #include "../core/vapplication.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
 #include "../widgets/vmaingraphicsview.h"
 #include "../core/vsettings.h"

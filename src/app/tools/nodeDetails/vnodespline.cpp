@@ -29,7 +29,7 @@
 #include "vnodespline.h"
 
 #include "../../core/vapplication.h"
-#include "../../geometry/vspline.h"
+#include "../../libs/vgeometry/vspline.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 

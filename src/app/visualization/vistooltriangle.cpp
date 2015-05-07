@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistooltriangle.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../container/vcontainer.h"
 #include "../tools/drawTools/vtooltriangle.h"
 #include <QtCore/qmath.h>

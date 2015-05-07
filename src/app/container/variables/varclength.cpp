@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "varclength.h"
-#include "../geometry/vabstractcurve.h"
+#include "../libs/vgeometry/vabstractcurve.h"
 #include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------

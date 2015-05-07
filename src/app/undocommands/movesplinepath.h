@@ -30,7 +30,7 @@
 #define MOVESPLINEPATH_H
 
 #include "vundocommand.h"
-#include "../geometry/vsplinepath.h"
+#include "../libs/vgeometry/vsplinepath.h"
 
 class QGraphicsScene;
 

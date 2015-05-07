@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolsplinepath.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 9, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,42 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLSPLINEPATH_H
-#define VISTOOLSPLINEPATH_H
-
-#include "vispath.h"
-#include "../libs/vgeometry/vsplinepath.h"
-
-enum class Mode : char {Creation, Show};
-
-class VisToolSplinePath : public VisPath
-{
-    Q_OBJECT
-public:
-    VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolSplinePath();
-
-    virtual void RefreshGeometry();
-
-    void         setPath(const VSplinePath &value);
-    VSplinePath  getPath();
-
-    virtual int  type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
-
-    Mode getMode() const;
-    void setMode(const Mode &value);
-signals:
-    void PathChanged(const VSplinePath &path);
-
-protected:
-    Q_DISABLE_COPY(VisToolSplinePath)
-    QVector<QGraphicsEllipseItem *> points;
-    QGraphicsLineItem               *line;
-    VSplinePath                     path;
-    Mode                            mode;
-
-    QGraphicsEllipseItem * getPoint(unsigned int i);
-};
-
-#endif // VISTOOLSPLINEPATH_H
+// Build the precompiled headers.
+#include "stable.h"

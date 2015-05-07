@@ -29,7 +29,7 @@
 #include "dialogcutsplinepath.h"
 #include "ui_dialogcutsplinepath.h"
 
-#include "../../geometry/vsplinepath.h"
+#include "../../libs/vgeometry/vsplinepath.h"
 #include "../../container/vcontainer.h"
 #include "../../xml/vpattern.h"
 #include "../../visualization/vistoolcutsplinepath.h"

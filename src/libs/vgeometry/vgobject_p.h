@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpointf_p.h
+ **  @file   vgobject_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   20 8, 2014
  **
@@ -26,62 +26,56 @@
  **
  *************************************************************************/
 
-#ifndef VPOINTF_P_H
-#define VPOINTF_P_H
+#ifndef VGOBJECT_P_H
+#define VGOBJECT_P_H
 
 #include <QSharedData>
-#include "../options.h"
-#include <QPointF>
+#include "vgeometrydef.h"
+#include "../ifc/ifcdef.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
 #endif
 
-class VPointFData : public QSharedData
+class VGObjectData : public QSharedData
 {
 public:
-
-    VPointFData()
-        : _mx(0), _my(0), _x(0), _y(0)
+    VGObjectData()
+        :_id(NULL_ID), type(GOType::Unknown), idObject(NULL_ID), _name(QString()), mode(Draw::Calculation)
     {}
 
-    VPointFData(const VPointFData &point)
-        :QSharedData(point), _mx(point._mx), _my(point._my), _x(point._x), _y(point._y)
+    VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
+        :_id(NULL_ID), type(type), idObject(idObject), _name(QString()), mode(mode)
     {}
 
-    VPointFData(const QPointF &point)
-        :_mx(0), _my(0), _x(point.x()), _y(point.y())
+    VGObjectData(const VGObjectData &obj)
+        :QSharedData(obj), _id(obj._id), type(obj.type), idObject(obj.idObject), _name(obj._name), mode(obj.mode)
     {}
 
-    VPointFData(qreal x, qreal y, qreal mx, qreal my)
-        :_mx(mx), _my(my), _x(x), _y(y)
-    {}
+    virtual ~VGObjectData();
 
-    VPointFData(const QPointF &point, qreal mx, qreal my)
-        :_mx(mx), _my(my), _x(point.x()), _y(point.y())
-    {}
+    /** @brief _id id in container. Ned for arcs, spline and spline paths. */
+    quint32 _id;
 
-    virtual ~VPointFData();
+    /** @brief type type of graphical object */
+    GOType  type;
 
-    /** @brief _mx offset name respect to x */
-    qreal   _mx;
+    /** @brief idObject id of parent object. Only for modeling. All another return 0. */
+    quint32 idObject;
 
-    /** @brief _my offset name respect to y */
-    qreal   _my;
+    /** @brief _name object name */
+    QString _name;
 
-    /** @brief _x x coordinate */
-    qreal   _x;
-
-    /** @brief _y y coordinate */
-    qreal   _y;
+    /** @brief mode object created in calculation or drawing mode */
+    Draw    mode;
 };
 
-VPointFData::~VPointFData()
+VGObjectData::~VGObjectData()
 {}
 
 #ifdef Q_CC_GNU
 #pragma GCC diagnostic pop
 #endif
 
-#endif // VPOINTF_P_H
+#endif // VGOBJECT_P_H

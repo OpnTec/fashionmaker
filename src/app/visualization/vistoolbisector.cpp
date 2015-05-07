@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolbisector.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../container/vcontainer.h"
 #include "../tools/drawTools/vtoolbisector.h"
 

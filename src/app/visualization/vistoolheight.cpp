@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolheight.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../tools/drawTools/vtoolheight.h"
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,9 +29,9 @@
 #include "vtooluniondetails.h"
 #include "nodeDetails/nodedetails.h"
 #include "vtooldetail.h"
-#include "../geometry/vpointf.h"
-#include "../geometry/varc.h"
-#include "../geometry/vsplinepath.h"
+#include "../libs/vgeometry/vpointf.h"
+#include "../libs/vgeometry/varc.h"
+#include "../libs/vgeometry/vsplinepath.h"
 #include "../dialogs/tools/dialoguniondetails.h"
 #include "../undocommands/adduniondetails.h"
 

@@ -34,9 +34,6 @@
 #include <QPointF>
 #include <QtCore/qmath.h>
 
-#include "../container/vformula.h"
-
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VArc default constructor.
@@ -253,10 +250,10 @@ QString VArc::GetFormulaF1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VArc::SetFormulaF1(const VFormula &value)
+void VArc::SetFormulaF1(const QString &formula, qreal value)
 {
-    d->formulaF1 = value.GetFormula(FormulaType::FromUser);
-    d->f1 = value.getDoubleValue();
+    d->formulaF1 = formula;
+    d->f1 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,10 +277,10 @@ QString VArc::GetFormulaF2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VArc::SetFormulaF2(const VFormula &value)
+void VArc::SetFormulaF2(const QString &formula, qreal value)
 {
-    d->formulaF2 = value.GetFormula(FormulaType::FromUser);
-    d->f2 = value.getDoubleValue();
+    d->formulaF2 = formula;
+    d->f2 = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,10 +304,10 @@ QString VArc::GetFormulaRadius() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VArc::SetFormulaRadius(const VFormula &value)
+void VArc::SetFormulaRadius(const QString &formula, qreal value)
 {
-    d->formulaRadius = value.GetFormula(FormulaType::FromUser);
-    d->radius = value.getDoubleValue();
+    d->formulaRadius = formula;
+    d->radius = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

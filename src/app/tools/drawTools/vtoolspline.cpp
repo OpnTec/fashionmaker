@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolspline.h"
-#include "../../geometry/vspline.h"
+#include "../../libs/vgeometry/vspline.h"
 #include "../../dialogs/tools/dialogspline.h"
 #include "../../undocommands/movespline.h"
 #include "../../visualization/vistoolspline.h"

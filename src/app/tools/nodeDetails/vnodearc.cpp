@@ -29,7 +29,7 @@
 #include "vnodearc.h"
 
 #include "../../core/vapplication.h"
-#include "../../geometry/varc.h"
+#include "../../libs/vgeometry/varc.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 

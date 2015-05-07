@@ -29,7 +29,7 @@
 #include "vtoolarc.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogarc.h"
-#include "../../geometry/varc.h"
+#include "../../libs/vgeometry/varc.h"
 #include "../container/vformula.h"
 #include "../../visualization/vistoolarc.h"
 
@@ -222,7 +222,7 @@ void VToolArc::SetFormulaRadius(const VFormula &value)
         {
             QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
             QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-            arc->SetFormulaRadius(value);
+            arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
         }
     }
@@ -251,7 +251,7 @@ void VToolArc::SetFormulaF1(const VFormula &value)
 
         if (qFuzzyCompare(value.getDoubleValue() + 1, arc->GetF2() + 1)==false)// Angles can't be equal
         {
-            arc->SetFormulaF1(value);
+            arc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
         }
     }
@@ -279,7 +279,7 @@ void VToolArc::SetFormulaF2(const VFormula &value)
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
         if (qFuzzyCompare(value.getDoubleValue() + 1, arc->GetF1() + 1)==false)// Angles can't be equal
         {
-            arc->SetFormulaF2(value);
+            arc->SetFormulaF2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
         }
     }

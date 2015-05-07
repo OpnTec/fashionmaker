@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vistoolsplinepath.h
+ **  @file   vgeometrydef.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 9, 2014
+ **  @date   7 5, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,42 +26,18 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLSPLINEPATH_H
-#define VISTOOLSPLINEPATH_H
+#ifndef VGEOMETRYDEF_H
+#define VGEOMETRYDEF_H
 
-#include "vispath.h"
-#include "../libs/vgeometry/vsplinepath.h"
+#include <QString>
 
-enum class Mode : char {Creation, Show};
+enum class Draw : char { Calculation, Modeling };
+enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
+enum class SplinePointPosition : char { FirstPoint, LastPoint };
 
-class VisToolSplinePath : public VisPath
-{
-    Q_OBJECT
-public:
-    VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolSplinePath();
+// variables name
+extern const QString arc_;
+extern const QString spl_;
+extern const QString splPath;
 
-    virtual void RefreshGeometry();
-
-    void         setPath(const VSplinePath &value);
-    VSplinePath  getPath();
-
-    virtual int  type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
-
-    Mode getMode() const;
-    void setMode(const Mode &value);
-signals:
-    void PathChanged(const VSplinePath &path);
-
-protected:
-    Q_DISABLE_COPY(VisToolSplinePath)
-    QVector<QGraphicsEllipseItem *> points;
-    QGraphicsLineItem               *line;
-    VSplinePath                     path;
-    Mode                            mode;
-
-    QGraphicsEllipseItem * getPoint(unsigned int i);
-};
-
-#endif // VISTOOLSPLINEPATH_H
+#endif // VGEOMETRYDEF_H

@@ -30,7 +30,8 @@
 #define VSIMPLECURVE_H
 
 #include <QGraphicsPathItem>
-#include "../geometry/vabstractcurve.h"
+#include "../libs/vgeometry/vabstractcurve.h"
+#include "../options.h"
 
 enum class SimpleCurvePoint : char { FirstPoint, ForthPoint };
 

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpointofcontact.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../tools/drawTools/vtoolpointofcontact.h"
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -572,9 +572,14 @@ DEPENDPATH += $$PWD/../libs/vlayout
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/vlayout.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/libvlayout.a
 
-# For build qt backport code
-win32: LIBS+= libole32 libuuid
+# VGeometry static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vgeometry/$${DESTDIR}/ -lvgeometry
 
+INCLUDEPATH += $$PWD/../libs/vgeometry
+DEPENDPATH += $$PWD/../libs/vgeometry
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/vgeometry.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
 # Strip after you link all libaries.
 CONFIG(release, debug|release){

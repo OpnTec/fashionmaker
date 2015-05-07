@@ -43,7 +43,7 @@
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
 #include "../../libs/qmuparser/qmuparsererror.h"
-#include "../geometry/varc.h"
+#include "../libs/vgeometry/varc.h"
 
 #include <QMessageBox>
 #include <QUndoStack>

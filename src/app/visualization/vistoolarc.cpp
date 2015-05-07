@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vistoolarc.h"
-#include "../geometry/vpointf.h"
-#include "../geometry/varc.h"
+#include "../libs/vgeometry/vpointf.h"
+#include "../libs/vgeometry/varc.h"
 #include "../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------

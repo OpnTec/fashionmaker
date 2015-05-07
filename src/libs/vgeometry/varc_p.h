@@ -30,7 +30,7 @@
 #define VARC_P_H
 
 #include <QSharedData>
-#include "../options.h"
+#include "vgeometrydef.h"
 #include "vpointf.h"
 
 #ifdef Q_CC_GNU

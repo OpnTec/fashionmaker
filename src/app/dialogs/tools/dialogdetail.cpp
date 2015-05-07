@@ -30,9 +30,9 @@
 
 #include <QDebug>
 
-#include "../../geometry/varc.h"
-#include "../../geometry/vpointf.h"
-#include "../../geometry/vsplinepath.h"
+#include "../../libs/vgeometry/varc.h"
+#include "../../libs/vgeometry/vpointf.h"
+#include "../../libs/vgeometry/vsplinepath.h"
 #include "../../container/vcontainer.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../xml/vabstractmeasurements.h"

@@ -28,7 +28,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "geometry/vspline.h"
+#include "../libs/vgeometry/vspline.h"
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"

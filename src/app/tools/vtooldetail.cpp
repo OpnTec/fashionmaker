@@ -28,8 +28,8 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
-#include "../geometry/varc.h"
-#include "../geometry/vsplinepath.h"
+#include "../libs/vgeometry/varc.h"
+#include "../libs/vgeometry/vsplinepath.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"

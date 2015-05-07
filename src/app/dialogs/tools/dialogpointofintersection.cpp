@@ -29,7 +29,7 @@
 #include "dialogpointofintersection.h"
 #include "ui_dialogpointofintersection.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolpointofintersection.h"
 #include "../../widgets/vmaingraphicsscene.h"

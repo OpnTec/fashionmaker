@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vgobject_p.h
+ **  @file   vsplinepath_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   20 8, 2014
  **
@@ -26,55 +26,50 @@
  **
  *************************************************************************/
 
-#ifndef VGOBJECT_P_H
-#define VGOBJECT_P_H
+#ifndef VSPLINEPATH_P_H
+#define VSPLINEPATH_P_H
 
 #include <QSharedData>
-#include "../options.h"
+#include "vsplinepoint.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
 #endif
 
-class VGObjectData : public QSharedData
+class VSplinePathData : public QSharedData
 {
 public:
-    VGObjectData()
-        :_id(NULL_ID), type(GOType::Unknown), idObject(NULL_ID), _name(QString()), mode(Draw::Calculation)
+
+    VSplinePathData()
+        : path(QVector<VSplinePoint>()), kCurve(1)
     {}
 
-    VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
-        :_id(NULL_ID), type(type), idObject(idObject), _name(QString()), mode(mode)
+    VSplinePathData(qreal kCurve)
+        : path(QVector<VSplinePoint>()), kCurve(kCurve)
     {}
 
-    VGObjectData(const VGObjectData &obj)
-        :QSharedData(obj), _id(obj._id), type(obj.type), idObject(obj.idObject), _name(obj._name), mode(obj.mode)
+    VSplinePathData(const VSplinePathData &splPath)
+        : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve)
     {}
 
-    virtual ~VGObjectData();
+    virtual ~VSplinePathData();
 
-    /** @brief _id id in container. Ned for arcs, spline and spline paths. */
-    quint32 _id;
-
-    /** @brief type type of graphical object */
-    GOType  type;
-
-    /** @brief idObject id of parent object. Only for modeling. All another return 0. */
-    quint32 idObject;
-
-    /** @brief _name object name */
-    QString _name;
-
-    /** @brief mode object created in calculation or drawing mode */
-    Draw    mode;
+    /**
+     * @brief path list spline point.
+     */
+    QVector<VSplinePoint> path;
+    /**
+     * @brief kCurve coefficient of curvature spline.
+     */
+    qreal         kCurve;
 };
 
-VGObjectData::~VGObjectData()
+VSplinePathData::~VSplinePathData()
 {}
 
 #ifdef Q_CC_GNU
 #pragma GCC diagnostic pop
 #endif
 
-#endif // VGOBJECT_P_H
+#endif // VSPLINEPATH_P_H

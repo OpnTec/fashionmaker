@@ -28,7 +28,7 @@
 
 #include "vistoollineintersectaxis.h"
 #include "../container/vcontainer.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../tools/drawTools/vtoollineintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------

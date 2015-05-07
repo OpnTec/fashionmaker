@@ -30,7 +30,6 @@
 #define VSPLINE_P_H
 
 #include <QSharedData>
-#include "../options.h"
 #include "vpointf.h"
 #include <QLineF>
 #include <QtCore/qmath.h>

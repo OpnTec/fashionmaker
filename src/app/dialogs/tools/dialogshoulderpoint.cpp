@@ -29,7 +29,7 @@
 #include "dialogshoulderpoint.h"
 #include "ui_dialogshoulderpoint.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolshoulderpoint.h"
 #include "../../widgets/vmaingraphicsscene.h"

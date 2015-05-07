@@ -29,7 +29,7 @@
 #include "dialoglineintersect.h"
 #include "ui_dialoglineintersect.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoollineintersect.h"
 #include "../../widgets/vmaingraphicsscene.h"

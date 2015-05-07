@@ -29,7 +29,7 @@
 #include "dialogcutarc.h"
 #include "ui_dialogcutarc.h"
 
-#include "../../geometry/varc.h"
+#include "../../libs/vgeometry/varc.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolcutarc.h"
 #include "../../widgets/vmaingraphicsscene.h"

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoollineintersect.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 #include "../container/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------

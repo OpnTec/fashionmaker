@@ -29,7 +29,7 @@
 #include "dialogline.h"
 #include "ui_dialogline.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolline.h"
 #include "../../core/vapplication.h"

@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vsplinepath_p.h
+ **  @file   stable.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 8, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,51 +26,27 @@
  **
  *************************************************************************/
 
-#ifndef VSPLINEPATH_P_H
-#define VSPLINEPATH_P_H
+#ifndef STABLE_H
+#define STABLE_H
 
-#include <QSharedData>
-#include "../options.h"
-#include "vsplinepoint.h"
-
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
+/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
+#ifndef __clang__
+#pragma message("Compiling precompiled headers for VGeometry library.\n")
 #endif
 
-class VSplinePathData : public QSharedData
-{
-public:
+/* Add C includes here */
 
-    VSplinePathData()
-        : path(QVector<VSplinePoint>()), kCurve(1)
-    {}
+#if defined __cplusplus
+/* Add C++ includes here */
 
-    VSplinePathData(qreal kCurve)
-        : path(QVector<VSplinePoint>()), kCurve(kCurve)
-    {}
-
-    VSplinePathData(const VSplinePathData &splPath)
-        : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve)
-    {}
-
-    virtual ~VSplinePathData();
-
-    /**
-     * @brief path list spline point.
-     */
-    QVector<VSplinePoint> path;
-    /**
-     * @brief kCurve coefficient of curvature spline.
-     */
-    qreal         kCurve;
-};
-
-VSplinePathData::~VSplinePathData()
-{}
-
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
+#ifdef QT_CORE_LIB
+#include <QtCore>
 #endif
 
-#endif // VSPLINEPATH_P_H
+#ifdef QT_GUI_LIB
+#   include <QtGui>
+#endif
+
+#endif/*__cplusplus*/
+
+#endif // STABLE_H

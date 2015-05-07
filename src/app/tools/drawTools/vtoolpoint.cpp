@@ -28,7 +28,7 @@
 
 #include "vtoolpoint.h"
 #include "../../utils/logging.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vgraphicssimpletextitem.h"
 #include "../../undocommands/movelabel.h"
 

@@ -29,7 +29,7 @@
 #include "vtoolalongline.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/ifc/exception/vexceptionobjecterror.h"
 #include "../../visualization/vistoolalongline.h"
 

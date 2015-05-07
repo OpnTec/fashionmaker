@@ -29,7 +29,7 @@
 #include "vtoolline.h"
 #include "../../dialogs/tools/dialogline.h"
 #include <QKeyEvent>
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../dialogs/tools/dialogline.h"
 #include "../../visualization/vistoolline.h"
 

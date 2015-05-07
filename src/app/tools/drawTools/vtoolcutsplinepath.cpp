@@ -29,11 +29,10 @@
 #include "vtoolcutsplinepath.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogcutsplinepath.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolcutsplinepath.h"
 #include "vabstractspline.h"
-
-#include "../../geometry/vsplinepath.h"
+#include "../../libs/vgeometry/vsplinepath.h"
 
 const QString VToolCutSplinePath::ToolType       = QStringLiteral("cutSplinePath");
 const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");

@@ -32,7 +32,7 @@
 #include "../../undocommands/movespoint.h"
 #include "../../undocommands/addpatternpiece.h"
 #include "../../undocommands/deletepatternpiece.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../options.h"
 
 #include <QMessageBox>

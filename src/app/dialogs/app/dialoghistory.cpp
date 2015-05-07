@@ -28,9 +28,9 @@
 
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
-#include "../../geometry/varc.h"
-#include "../../geometry/vsplinepath.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/varc.h"
+#include "../../libs/vgeometry/vsplinepath.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../tools/vabstracttool.h"
 #include "../../tools/drawTools/vtoolcutspline.h"
 #include "../../tools/drawTools/vtoolcutsplinepath.h"

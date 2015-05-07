@@ -29,7 +29,7 @@
 #ifndef VGOBJECT_H
 #define VGOBJECT_H
 
-#include "../options.h"
+#include "vgeometrydef.h"
 #include <QString>
 #include <QtGlobal>
 #include <QSharedDataPointer>

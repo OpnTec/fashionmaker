@@ -31,9 +31,9 @@
 
 #include "variables.h"
 #include "../geometry/vdetail.h"
-#include "../geometry/vgobject.h"
+#include "../libs/vgeometry/vgobject.h"
 #include "../libs/ifc/exception/vexceptionbadid.h"
-#include "../geometry/vabstractcurve.h"
+#include "../libs/vgeometry/vabstractcurve.h"
 
 #include <QCoreApplication>
 #include <QHash>

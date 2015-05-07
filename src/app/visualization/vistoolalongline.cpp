@@ -28,7 +28,7 @@
 
 #include "vistoolalongline.h"
 #include "../container/vcontainer.h"
-#include "../geometry/vpointf.h"
+#include "../libs/vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)

@@ -29,7 +29,7 @@
 #include "dialogbisector.h"
 #include "ui_dialogbisector.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolbisector.h"
 #include "../../widgets/vmaingraphicsscene.h"

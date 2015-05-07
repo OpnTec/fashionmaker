@@ -28,7 +28,7 @@
 
 #include "vsplinepath.h"
 #include "vsplinepath_p.h"
-#include "../libs/ifc/exception/vexception.h"
+#include "../ifc/exception/vexception.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../utils/vmath.h"

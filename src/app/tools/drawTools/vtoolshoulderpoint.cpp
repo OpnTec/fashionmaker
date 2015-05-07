@@ -29,7 +29,7 @@
 #include "vtoolshoulderpoint.h"
 #include "../../container/calculator.h"
 #include "../../dialogs/tools/dialogshoulderpoint.h"
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolshoulderpoint.h"
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");

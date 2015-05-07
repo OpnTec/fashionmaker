@@ -30,6 +30,7 @@
 #define OPTIONS_H
 
 #include "../libs/ifc/ifcdef.h"
+#include "../libs/vgeometry/vgeometrydef.h"
 #include "../../utils/def.h"
 
 #ifdef Q_OS_WIN32
@@ -119,11 +120,8 @@ enum class Vis : unsigned char
 };
 
 enum class Source : char { FromGui, FromFile, FromTool };
-enum class Draw : char { Calculation, Modeling };
 enum class NodeDetail : char { Contour, Modeling };
 enum class Contour : char { OpenContour, CloseContour };
-enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
-enum class SplinePointPosition : char { FirstPoint, LastPoint };
 enum class VarType : char { Measurement, Increment, LineLength, SplineLength, ArcLength, LineAngle, Unknown };
 
 enum class GHeights : unsigned char { ALL,
@@ -281,9 +279,6 @@ extern const QString depthWaistSecond_M;
 // variables name
 extern const QString line_;
 extern const QString angleLine_;
-extern const QString arc_;
-extern const QString spl_;
-extern const QString splPath;
 
 // functions
 extern const QString sin_F;

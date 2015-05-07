@@ -28,7 +28,7 @@
 
 #include "vistoolcutsplinepath.h"
 #include "../container/vcontainer.h"
-#include "../geometry/vsplinepath.h"
+#include "../libs/vgeometry/vsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)

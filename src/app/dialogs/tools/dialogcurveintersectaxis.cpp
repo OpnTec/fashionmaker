@@ -29,7 +29,7 @@
 #include "dialogcurveintersectaxis.h"
 #include "ui_dialogcurveintersectaxis.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoolcurveintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"

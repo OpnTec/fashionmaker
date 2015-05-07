@@ -29,7 +29,7 @@
 #include "vcurvelength.h"
 #include "vcurvelength_p.h"
 #include "../core/vapplication.h"
-#include "../geometry/vabstractcurve.h"
+#include "../libs/vgeometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()

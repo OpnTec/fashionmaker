@@ -29,7 +29,7 @@
 #include "dialoglineintersectaxis.h"
 #include "ui_dialoglineintersectaxis.h"
 
-#include "../../geometry/vpointf.h"
+#include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vcontainer.h"
 #include "../../visualization/vistoollineintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
