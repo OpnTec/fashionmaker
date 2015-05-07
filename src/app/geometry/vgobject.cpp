@@ -353,30 +353,67 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief IsPointOnLineSegment Check if the point is on the line segment.
+ *
+ * Original idea http://www.sunshine2k.de/coding/java/PointOnLine/PointOnLine.html
+ */
 bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    const qreal eps = 1e-8;
-
-    qreal a = p2.y() - p1.y();
-    qreal b = p1.x() - p2.x();
-    qreal c = - a * p1.x() - b * p1.y();
-    if (qAbs(a * t.x() + b * t.y() + c) > eps)
+    // The test point must lie inside the bounding box spanned by the two line points.
+    if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
     {
+        // test point not in x-range
         return false;
     }
 
-    return PointInBox (t, p1, p2);
+    if (not ( (p1.y() <= t.y() && t.y() <= p2.y()) || (p2.y() <= t.y() && t.y() <= p1.y()) ))
+    {
+        // test point not in y-range
+        return false;
+    }
+
+    // Test via the perp dot product (PDP)
+    return IsPointOnLineviaPDP(t, p1, p2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VGObject::PointInBox(const QPointF &t, const QPointF &p1, const QPointF &p2)
+/**
+ * @brief IsPointOnLineviaPDP use the perp dot product (PDP) way.
+ *
+ *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
+ */
+bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
-    const qreal eps = 1e-8;
+    return ( qAbs(PerpDotProduct(p1, p2, t) < GetEpsilon(p1, p2)) );
+}
 
-    return  (qAbs (t.x() - qMin(p1.x(), p2.x())) <= eps || qMin(p1.x(), p2.x()) <= t.x()) &&
-            (qAbs (qMax(p1.x(), p2.x()) - t.x()) <= eps || qMax(p1.x(), p2.x()) >= t.x()) &&
-            (qAbs (t.y() - qMin(p1.y(), p2.y())) <= eps || qMin(p1.y(), p2.y()) <= t.y()) &&
-            (qAbs (qMax(p1.y(), p2.y()) - t.y()) <= eps || qMax(p1.y(), p2.y()) >= t.y());
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PerpDotProduct Calculates the area of the parallelogram of the three points.
+ * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
+ * @return 2 * triangleArea(a,b,c)
+ */
+double VGObject::PerpDotProduct(const QPointF &t, const QPointF &p1, const QPointF &p2)
+{
+    return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetEpsilon solve the floating-point accuraccy problem.
+ *
+ * There is the floating-point accuraccy problem, so instead of checking against zero, some epsilon value has to be
+ * used. Because the size of the pdp value depends on the length of the vectors, no static value can be used. One
+ * approach is to compare the pdp/area value to the fraction of another area which also depends on the length of the
+ * line e1=(p1, p2), e.g. the area of the square with side e1 which is computed below
+ */
+double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
+{
+    const int dx1 = p2.toPoint().x() - p1.toPoint().x();
+    const int dy1 = p2.toPoint().y() - p1.toPoint().y();
+    const double epsilon = 0.003 * (dx1 * dx1 + dy1 * dy1);
+    return epsilon;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
