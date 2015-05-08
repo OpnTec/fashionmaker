@@ -29,6 +29,7 @@
 #ifndef DIALOGLAYOUTSETTINGS_H
 #define DIALOGLAYOUTSETTINGS_H
 
+#include <QCloseEvent>
 #include <QDialog>
 
 #include "../../libs/vlayout/vbank.h"
@@ -84,6 +85,7 @@ public slots:
     void Swap(bool checked);
 
     void DialogAccepted();
+    void RestoreDefaults();
 
 private:
     Q_DISABLE_COPY(DialogLayoutSettings)
@@ -106,6 +108,11 @@ private:
 
     void MinimumPaperSize();
     void MinimumLayoutSize();
+
+    void ReadSettings();
+    void WriteSettings() const;
+
+    void SheetSize(const QSizeF &size);
 };
 
 #endif // DIALOGLAYOUTSETTINGS_H

@@ -53,11 +53,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 
     qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
-    InitPaperUnits();
-    InitLayoutUnits();
-    InitTemplates();
-    MinimumPaperSize();
-    MinimumLayoutSize();
+    ReadSettings();
 
     connect(ui->comboBoxTemplates,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
@@ -74,6 +70,9 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     connect(bOk, &QPushButton::clicked, this, &DialogLayoutSettings::DialogAccepted);
+
+    QPushButton *bRestoreDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
+    connect(bRestoreDefaults, &QPushButton::clicked, this, &DialogLayoutSettings::RestoreDefaults);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,7 +195,7 @@ void DialogLayoutSettings::SetIncrease(int increase)
 
     if (index == -1)
     {
-        index = 21;
+        index = 21;//180 degree
     }
 
     ui->comboBoxIncrease->setCurrentIndex(index);
@@ -231,15 +230,7 @@ void DialogLayoutSettings::TemplateSelected()
 {
     const QSizeF size = Template();
 
-    oldPaperUnit = PaperUnit();
-    ui->doubleSpinBoxPaperWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
-    ui->doubleSpinBoxPaperHeight->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
-
-    ui->doubleSpinBoxPaperWidth->setValue(size.width());
-    ui->doubleSpinBoxPaperHeight->setValue(size.height());
-
-    CorrectPaperDecimals();
-    PaperSizeChanged();
+    SheetSize(size);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,7 +320,20 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
 
+    WriteSettings();
     accepted();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::RestoreDefaults()
+{
+    ui->comboBoxTemplates->setCurrentIndex(0);//A0
+
+    SetLayoutWidth(VSettings::GetDefLayoutWidth());
+    SetShift(VSettings::GetDefLayoutShift());
+    SetGroup(VSettings::GetDefLayoutGroup());
+    SetRotate(VSettings::GetDefLayoutRotate());
+    SetIncrease(VSettings::GetDefLayoutRotationIncrease());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,9 +367,6 @@ void DialogLayoutSettings::InitLayoutUnits()
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
     }
-
-    ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(2.5, Unit::Mm, oldLayoutUnit));
-    ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(50, Unit::Mm, oldLayoutUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -393,7 +394,7 @@ void DialogLayoutSettings::InitTemplates()
     ui->comboBoxTemplates->addItem(icoRoll,
                                    tr("Roll 44in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll44in)));
 
-    TemplateSelected();
+    ui->comboBoxTemplates->setCurrentIndex(-1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -595,4 +596,56 @@ void DialogLayoutSettings::MinimumLayoutSize()
 {
     const qreal value = VAbstractMeasurements::UnitConvertor(1, Unit::Px, oldLayoutUnit);
     ui->doubleSpinBoxLayoutWidth->setMinimum(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::ReadSettings()
+{
+    InitPaperUnits();
+    InitLayoutUnits();
+    InitTemplates();
+    MinimumPaperSize();
+    MinimumLayoutSize();
+
+    SetLayoutWidth(qApp->getSettings()->GetLayoutWidth());
+    SetShift(qApp->getSettings()->GetLayoutShift());
+
+    const qreal width = VAbstractMeasurements::UnitConvertor(qApp->getSettings()->GetLayoutPaperWidth(), Unit::Px,
+                                                             LayoutUnit());
+    const qreal height = VAbstractMeasurements::UnitConvertor(qApp->getSettings()->GetLayoutPaperHeight(), Unit::Px,
+                                                              LayoutUnit());
+    SheetSize(QSizeF(width, height));
+    SetGroup(qApp->getSettings()->GetLayoutGroup());
+    SetRotate(qApp->getSettings()->GetLayoutRotate());
+    SetIncrease(qApp->getSettings()->GetLayoutRotationIncrease());
+    SetAutoCrop(qApp->getSettings()->GetLayoutAutoCrop());
+    SetSaveLength(qApp->getSettings()->GetLayoutSaveLength());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::WriteSettings() const
+{
+    qApp->getSettings()->SetLayoutWidth(GetLayoutWidth());
+    qApp->getSettings()->SetLayoutGroup(GetGroup());
+    qApp->getSettings()->SetLayoutPaperHeight(GetPaperHeight());
+    qApp->getSettings()->SetLayoutPaperWidth(GetPaperWidth());
+    qApp->getSettings()->SetLayoutShift(GetShift());
+    qApp->getSettings()->SetLayoutRotate(GetRotate());
+    qApp->getSettings()->SetLayoutRotationIncrease(GetIncrease());
+    qApp->getSettings()->SetLayoutAutoCrop(GetAutoCrop());
+    qApp->getSettings()->SetLayoutSaveLength(IsSaveLength());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SheetSize(const QSizeF &size)
+{
+    oldPaperUnit = PaperUnit();
+    ui->doubleSpinBoxPaperWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
+    ui->doubleSpinBoxPaperHeight->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
+
+    ui->doubleSpinBoxPaperWidth->setValue(size.width());
+    ui->doubleSpinBoxPaperHeight->setValue(size.height());
+
+    CorrectPaperDecimals();
+    PaperSizeChanged();
 }

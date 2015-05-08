@@ -30,6 +30,7 @@
 #define VSETTINGS_H
 
 #include <QSettings>
+#include "../../libs/vlayout/vbank.h"
 
 class VSettings : public QSettings
 {
@@ -133,6 +134,38 @@ public:
     QString GetUserPassword() const;
     void SetUserPassword(const QString &value);
 
+    int GetLayoutPaperHeight() const;
+    void SetLayoutPaperHeight(int value);
+
+    int GetLayoutPaperWidth() const;
+    void SetLayoutPaperWidth(int value);
+
+    unsigned int GetLayoutShift() const;
+    static unsigned int GetDefLayoutShift();
+    void SetLayoutShift(unsigned int value);
+
+    unsigned int GetLayoutWidth() const;
+    static unsigned int GetDefLayoutWidth();
+    void SetLayoutWidth(unsigned int value);
+
+    Cases GetLayoutGroup() const;
+    static Cases GetDefLayoutGroup();
+    void SetLayoutGroup(const Cases &value);
+
+    bool GetLayoutRotate() const;
+    static bool GetDefLayoutRotate();
+    void SetLayoutRotate(bool value);
+
+    int GetLayoutRotationIncrease() const;
+    static int GetDefLayoutRotationIncrease();
+    void SetLayoutRotationIncrease(int value);
+
+    bool GetLayoutAutoCrop() const;
+    void SetLayoutAutoCrop(bool value);
+
+    bool GetLayoutSaveLength() const;
+    void SetLayoutSaveLength(bool value);
+
 private:
     Q_DISABLE_COPY(VSettings)
     static const QString SettingConfigurationOsSeparator;
@@ -170,6 +203,16 @@ private:
     static const QString SettingCommunityUsername;
     static const QString SettingCommunitySavePassword;
     static const QString SettingCommunityUserPassword;
+
+    static const QString SettingLayoutWidth;
+    static const QString SettingLayoutSorting;
+    static const QString SettingLayoutPaperHeight;
+    static const QString SettingLayoutPaperWidth;
+    static const QString SettingLayoutShift;
+    static const QString SettingLayoutRotate;
+    static const QString SettingLayoutRotationIncrease;
+    static const QString SettingLayoutAutoCrop;
+    static const QString SettingLayoutSaveLength;
 };
 
 #endif // VSETTINGS_H

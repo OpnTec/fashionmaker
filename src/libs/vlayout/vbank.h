@@ -36,7 +36,7 @@
 class QPointF;
 class VLayoutDetail;
 
-enum class Cases : char { CaseThreeGroup, CaseTwoGroup, CaseDesc};
+enum class Cases : char { CaseThreeGroup, CaseTwoGroup, CaseDesc, UnknownCase};
 
 class VBank
 {
