@@ -40,7 +40,7 @@
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
       stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180),
-      autoCrop(false)
+      autoCrop(false), saveLength(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,6 +106,7 @@ void VLayoutGenerator::Generate()
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
             paper.SetRotationIncrease(rotationIncrease);
+            paper.SetSaveLength(saveLength);
             do
             {
                 const int index = bank->GetTiket();
@@ -187,6 +188,18 @@ void VLayoutGenerator::Abort()
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QThreadPool::globalInstance()->clear();
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsSaveLength() const
+{
+    return saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetSaveLength(bool value)
+{
+    saveLength = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

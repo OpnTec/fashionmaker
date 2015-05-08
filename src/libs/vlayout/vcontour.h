@@ -33,6 +33,7 @@
 
 #include <QVector>
 #include <QSharedDataPointer>
+#include <QSizeF>
 
 class VContourData;
 class QPointF;
@@ -59,6 +60,8 @@ public:
 
     int  GetWidth() const;
     void SetWidth(int width);
+
+    QSizeF GetSize() const;
 
     QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
 

@@ -65,6 +65,9 @@ public:
     int GetRotationIncrease() const;
     void SetRotationIncrease(int value);
 
+    bool IsSaveLength() const;
+    void SetSaveLength(bool value);
+
     void SetPaperIndex(quint32 index);
 
     bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);

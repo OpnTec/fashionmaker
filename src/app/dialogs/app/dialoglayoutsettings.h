@@ -72,6 +72,9 @@ public:
     bool GetAutoCrop() const;
     void SetAutoCrop(bool crop);
 
+    bool IsSaveLength() const;
+    void SetSaveLength(bool save);
+
 public slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();

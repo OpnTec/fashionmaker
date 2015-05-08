@@ -148,6 +148,18 @@ void VLayoutPaper::SetRotationIncrease(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::IsSaveLength() const
+{
+    return d->saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetSaveLength(bool value)
+{
+    d->saveLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetPaperIndex(quint32 index)
 {
     d->paperIndex = index;
@@ -181,7 +193,7 @@ int VLayoutPaper::Count() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 {
-    VBestSquare bestResult;
+    VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength);
     QThreadPool *thread_pool = QThreadPool::globalInstance();
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
@@ -190,7 +202,8 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease);
+            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease,
+                                              d->saveLength);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);

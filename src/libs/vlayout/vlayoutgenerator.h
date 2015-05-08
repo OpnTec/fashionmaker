@@ -76,6 +76,9 @@ public:
     bool GetAutoCrop() const;
     void SetAutoCrop(bool value);
 
+    bool IsSaveLength() const;
+    void SetSaveLength(bool value);
+
 signals:
     void Start();
     void Arranged(int count);
@@ -97,6 +100,7 @@ private:
     bool rotate;
     int rotationIncrease;
     bool autoCrop;
+    bool saveLength;
 
     void CheckDetailsSize();
 };

@@ -47,7 +47,7 @@ class VPosition : public QRunnable
 {
 public:
     VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop, bool rotate,
-              int rotationIncrease);
+              int rotationIncrease, bool saveLength);
     virtual ~VPosition(){}
 
     quint32 getPaperIndex() const;

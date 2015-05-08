@@ -117,6 +117,12 @@ void VContour::SetWidth(int width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QSizeF VContour::GetSize() const
+{
+    return QSizeF(d->paperWidth, d->paperHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const
 {
     QVector<QPointF> newContour;

@@ -47,9 +47,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop,
-                     bool rotate, int rotationIncrease)
-    :QRunnable(), bestResult(VBestSquare()), gContour(gContour), detail(detail), i(i), j(j), paperIndex(0), frame(0),
-      detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate), rotationIncrease(rotationIncrease)
+                     bool rotate, int rotationIncrease, bool saveLength)
+    :QRunnable(), bestResult(VBestSquare(gContour.GetSize(), saveLength)), gContour(gContour), detail(detail), i(i),
+      j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate),
+      rotationIncrease(rotationIncrease)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
@@ -225,9 +226,8 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &deta
 {
     QVector<QPointF> newGContour = gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
-    const QRectF rec = QPolygonF(newGContour).boundingRect();
-    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), globalI, detJ, detail.GetMatrix(),
-                         detail.IsMirror(), type);
+    const QSizeF size = QPolygonF(newGContour).boundingRect().size();
+    bestResult.NewResult(size, globalI, detJ, detail.GetMatrix(), detail.IsMirror(), type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
