@@ -153,19 +153,9 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     const int biasWidth = Bias(contour.GetWidth(), QIMAGE_MAX);
     const int biasHeight = Bias(contour.GetHeight(), QIMAGE_MAX);
 
-    QImage frameImage(contour.GetWidth()+biasWidth, contour.GetHeight()+biasHeight, QImage::Format_RGB32);
-
-    if (frameImage.isNull())
-    {
-        return;
-    }
-
-    frameImage.fill(Qt::white);
+    QPicture picture;
     QPainter paint;
-    paint.begin(&frameImage);
-
-    paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawRect(QRectF(biasWidth/2, biasHeight/2, contour.GetWidth(), contour.GetHeight()));
+    paint.begin(&picture);
 
     paint.setPen(QPen(Qt::black, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     QPainterPath p;
@@ -201,7 +191,32 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     Q_UNUSED(details)
 #endif
 
+    // Calculate bounding rect before draw sheet rect
+    const QRect pictureRect = picture.boundingRect();
+
+    // Sheet
+    paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.drawRect(QRectF(biasWidth/2, biasHeight/2, contour.GetWidth(), contour.GetHeight()));
+
     paint.end();
+
+    // Dump frame to image
+    // Note. If program was build with Address Sanitizer possible crashes. Address Sanitizer doesn't support big
+    // allocations. See page https://bitbucket.org/dismine/valentina/wiki/developers/Address_Sanitizer
+    QImage frameImage(pictureRect.width()+biasWidth, pictureRect.height()+biasHeight, QImage::Format_RGB32);
+
+    if (frameImage.isNull())
+    {
+        return;
+    }
+
+    frameImage.fill(Qt::white);
+
+    QPainter paintFrameImage;
+    paintFrameImage.begin(&frameImage);
+    paintFrameImage.drawPicture(0, 0, picture);
+    paintFrameImage.end();
+
     const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(paperIndex)
             .arg(detailsCount).arg(frame);
     frameImage.save (path);
