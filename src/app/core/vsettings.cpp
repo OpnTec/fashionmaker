@@ -35,6 +35,12 @@
 
 #include "../xml/vabstractmeasurements.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../../utils/vmath.h"
+#else
+#   include <QtMath>
+#endif
+
 const QString VSettings::SettingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
 const QString VSettings::SettingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
 const QString VSettings::SettingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
@@ -485,7 +491,7 @@ void VSettings::SetUserPassword(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 int VSettings::GetLayoutPaperHeight() const
 {
-    const int def = VAbstractMeasurements::UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px);
+    const int def = qFloor(VAbstractMeasurements::UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
     bool ok = false;
     const int height = value(SettingLayoutPaperHeight, def).toInt(&ok);
     if (ok)
@@ -507,7 +513,7 @@ void VSettings::SetLayoutPaperHeight(int value)
 //---------------------------------------------------------------------------------------------------------------------
 int VSettings::GetLayoutPaperWidth() const
 {
-    const int def = VAbstractMeasurements::UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px);
+    const int def = qFloor(VAbstractMeasurements::UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
     bool ok = false;
     const int width = value(SettingLayoutPaperWidth, def).toInt(&ok);
     if (ok)
@@ -545,7 +551,7 @@ unsigned int VSettings::GetLayoutShift() const
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int VSettings::GetDefLayoutShift()
 {
-    return VAbstractMeasurements::UnitConvertor(50, Unit::Mm, Unit::Px);
+    return static_cast<unsigned int>(VAbstractMeasurements::UnitConvertor(50, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -573,7 +579,7 @@ unsigned int VSettings::GetLayoutWidth() const
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int VSettings::GetDefLayoutWidth()
 {
-    return VAbstractMeasurements::UnitConvertor(2.5, Unit::Mm, Unit::Px);
+    return static_cast<unsigned int>(VAbstractMeasurements::UnitConvertor(2.5, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
