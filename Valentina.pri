@@ -168,8 +168,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wstrict-overflow=5 \
     -Wundef \
     -Wno-unused \
-    -ftrapv \
-    -fsanitize=address #gcc’s 4.8.0 Address Sanitizer
+    -ftrapv
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \

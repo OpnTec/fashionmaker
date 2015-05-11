@@ -70,15 +70,20 @@ CONFIG(debug, debug|release){
     unix {
         #Turn on compilers warnings.
         *-g++{
-        QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            QMAKE_CXXFLAGS += \
+                # Key -isystem disable checking errors in system headers.
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
 
-        #gcc’s 4.8.0 Address Sanitizer
-        #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-        QMAKE_CFLAGS+=-fsanitize=address -fno-omit-frame-pointer
-        QMAKE_LFLAGS+=-fsanitize=address
+            noAddressSanitizer{
+                # do nothing
+            } else {
+                #gcc’s 4.8.0 Address Sanitizer
+                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
+                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
+                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
+                QMAKE_LFLAGS += -fsanitize=address
+            }
         }
         clang*{
         QMAKE_CXXFLAGS += \
