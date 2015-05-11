@@ -60,7 +60,7 @@ QWidget *TextDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem 
     QLineEdit *editor = new QLineEdit(parent);
     editor->setLocale(parent->locale());
     //Same regex pattern in xsd file
-    editor->setValidator( new QRegExpValidator(QRegExp(regex)) );
+    editor->setValidator( new QRegularExpressionValidator(QRegularExpression(regex)) );
     connect(editor, &QLineEdit::editingFinished, this, &TextDelegate::commitAndCloseEditor);
     return editor;
 }

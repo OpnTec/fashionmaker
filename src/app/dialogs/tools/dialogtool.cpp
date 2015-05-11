@@ -712,11 +712,9 @@ void DialogTool::NamePointChanged()
     if (edit)
     {
         QString name = edit->text();
-        name.replace(" ", "");
-        QRegExpValidator v(QRegExp(nameRegExp), this);
-        int pos = 0;
+        QRegularExpression rx(nameRegExp);
         if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false) ||
-                v.validate(name, pos) == QValidator::Invalid)
+            rx.match(name).hasMatch() == false)
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);
