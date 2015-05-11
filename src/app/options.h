@@ -31,6 +31,7 @@
 
 #include "../libs/ifc/ifcdef.h"
 #include "../libs/vgeometry/vgeometrydef.h"
+#include "../libs/qmuparser/qmudef.h"
 #include "../../utils/def.h"
 
 #ifdef Q_OS_WIN32
@@ -49,7 +50,6 @@ class QStringList;
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
 
-extern const QString nameRegExp;
 extern const QString degreeSymbol;
 
 extern const QString cursorArrowOpenHand;

@@ -30,9 +30,6 @@
 #include <QString>
 #include <QStringList>
 
-//Same regexp in pattern.xsd shema file. Don't forget synchronize.
-const QString nameRegExp = QStringLiteral("^([^0-9-*/^+=\\s\\(\\)%:;!.,`'\"]){1,1}([^-*/^+=\\s\\(\\)%:;!.,`'\"]){0,}$");
-
 // From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
 // furthermore blows up the binary sizes.
 const QString degreeSymbol = QStringLiteral("°");

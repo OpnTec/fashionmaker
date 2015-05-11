@@ -25,4 +25,5 @@ HEADERS += \
     $$PWD/qmuparserbase.h \
     $$PWD/qmuparsertest.h \
     $$PWD/stable.h \
-    $$PWD/qmutranslation.h
+    $$PWD/qmutranslation.h \
+    $$PWD/qmudef.h

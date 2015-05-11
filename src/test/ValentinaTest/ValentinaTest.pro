@@ -38,13 +38,15 @@ SOURCES += \
     tst_vposter.cpp \
     tst_vabstractdetail.cpp \
     tst_vspline.cpp \
-    abstracttest.cpp
+    abstracttest.cpp \
+    tst_nameregexp.cpp
 
 HEADERS += \
     tst_vposter.h \
     tst_vabstractdetail.h \
     tst_vspline.h \
-    abstracttest.h
+    abstracttest.h \
+    tst_nameregexp.h
 
 CONFIG(debug, debug|release){
     # Debug mode

@@ -79,7 +79,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     ShowUnits();
 
-    TextDelegate *textDelegate = new TextDelegate(nameRegExp, data, ui->tableWidgetIncrement);
+    TextDelegate *textDelegate = new TextDelegate(NameRegExp(), data, ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(0, textDelegate);// name
     DoubleSpinBoxDelegate *doubleDelegate = new DoubleSpinBoxDelegate(ui->tableWidgetIncrement);
     ui->tableWidgetIncrement->setItemDelegateForColumn(2, doubleDelegate);// base value
