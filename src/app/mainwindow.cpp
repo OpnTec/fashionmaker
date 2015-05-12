@@ -1178,6 +1178,8 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionOptionDraw->setEnabled(true);
         ui->actionNewDraw->setEnabled(true);
 
+        ui->toolBarOption->setVisible(true);
+
         ui->dockWidgetLayoutPages->setVisible(false);
         ui->dockWidgetToolOptions->setVisible(true);
     }
@@ -1223,6 +1225,8 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+
+        ui->toolBarOption->setVisible(false);
 
         ui->dockWidgetLayoutPages->setVisible(false);
         ui->dockWidgetToolOptions->setVisible(true);
@@ -1277,6 +1281,8 @@ void MainWindow::ActionLayout(bool checked)
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+
+        ui->toolBarOption->setVisible(false);
 
         ui->dockWidgetLayoutPages->setVisible(true);
         ui->dockWidgetToolOptions->setVisible(false);
