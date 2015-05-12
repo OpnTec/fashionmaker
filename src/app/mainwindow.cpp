@@ -131,6 +131,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBarStages->setIconSize(QSize(24, 24));
     ui->toolBarTools->setIconSize(QSize(24, 24));
 #endif
+
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &MainWindow::ShowPaper);
+    ui->dockWidgetLayoutPages->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2218,6 +2221,8 @@ void MainWindow::ReadSettings()
  */
 void MainWindow::WriteSettings()
 {
+    ActionDraw(true);
+
     qApp->getSettings()->SetGeometry(saveGeometry());
     qApp->getSettings()->SetWindowState(saveState());
     qApp->getSettings()->SetToolbarsState(saveState(APP_VERSION));
@@ -2733,6 +2738,22 @@ void MainWindow::ToolBarStyles()
     ToolBarStyle(ui->toolBarStages);
     ToolBarStyle(ui->toolBarTools);
     ToolBarStyle(ui->mainToolBar);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ShowPaper(int index)
+{
+    if (index < 0 || index > scenes.size())
+    {
+        ui->view->setScene(tempSceneLayout);
+        //EnableActions(false);
+    }
+    else
+    {
+        ui->view->setScene(scenes.at(index));
+    }
+
+    ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -138,6 +138,8 @@ public slots:
     void               GlobalChangePP(const QString &patternPiece);
     void               WindowsLocale();
     void               ToolBarStyles();
+
+    void               ShowPaper(int index);
 signals:
     void               RefreshHistory();
     void               EnableItemMove(bool move);
