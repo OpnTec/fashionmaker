@@ -1340,6 +1340,11 @@ void MainWindow::ActionLayout(bool checked)
         ui->dockWidgetToolOptions->setVisible(false);
 
         ShowPaper(ui->listWidget->currentRow());
+
+        if (scenes.isEmpty())
+        {
+            ui->toolButtonLayoutSettings->click();
+        }
     }
     else
     {

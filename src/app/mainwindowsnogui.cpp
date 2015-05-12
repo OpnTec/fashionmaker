@@ -57,6 +57,9 @@ MainWindowsNoGUI::~MainWindowsNoGUI()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 {
+    QToolButton *tButton = qobject_cast< QToolButton * >(this->sender());
+    SCASSERT(tButton != nullptr)
+
     if (checked)
     {
         VLayoutGenerator lGenerator(this);
@@ -65,6 +68,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
         DialogLayoutSettings layout(&lGenerator, this);
         if (layout.exec() == QDialog::Rejected)
         {
+            tButton->setChecked(false);
             return;
         }
 
@@ -98,13 +102,11 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
             default:
                 break;
         }
+        tButton->setChecked(false);
     }
     else
     {
-        if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
-        {
-            tButton->setChecked(true);
-        }
+        tButton->setChecked(true);
     }
 }
 
