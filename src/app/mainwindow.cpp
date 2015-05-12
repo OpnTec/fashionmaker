@@ -1338,6 +1338,8 @@ void MainWindow::ActionLayout(bool checked)
 
         ui->dockWidgetLayoutPages->setVisible(true);
         ui->dockWidgetToolOptions->setVisible(false);
+
+        ShowPaper(ui->listWidget->currentRow());
     }
     else
     {
@@ -2549,6 +2551,7 @@ QString MainWindow::PatternPieceName(const QString &text)
 MainWindow::~MainWindow()
 {
     CancelTool();
+    ClearLayout();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     delete lock; // Unlock pattern file
@@ -2743,7 +2746,7 @@ void MainWindow::ToolBarStyles()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
-    if (index < 0 || index > scenes.size())
+    if (index < 0 || index >= scenes.size())
     {
         ui->view->setScene(tempSceneLayout);
         //EnableActions(false);
@@ -2751,6 +2754,7 @@ void MainWindow::ShowPaper(int index)
     else
     {
         ui->view->setScene(scenes.at(index));
+        //EnableActions(true);
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
