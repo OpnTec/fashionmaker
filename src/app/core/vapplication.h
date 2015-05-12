@@ -38,7 +38,6 @@
 class VApplication;// used in define
 class QUndoStack;
 class VMainGraphicsView;
-class VMainGraphicsScene;
 class VPattern;
 class QFile;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
@@ -110,8 +109,8 @@ public:
     void               OpenSettings();
     VSettings          *getSettings();
 
-    VMainGraphicsScene *getCurrentScene() const;
-    void               setCurrentScene(VMainGraphicsScene *value);
+    QGraphicsScene    *getCurrentScene() const;
+    void               setCurrentScene(QGraphicsScene *value);
 
     void               setCurrentDocument(VPattern *doc);
     VPattern           *getCurrentDocument()const;
@@ -151,7 +150,7 @@ private:
     QMap<QString, qmu::QmuTranslation> stDescriptions;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
-    VMainGraphicsScene *currentScene;
+    QGraphicsScene     *currentScene;
     QTimer             *autoSaveTimer;
     /**
      * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window

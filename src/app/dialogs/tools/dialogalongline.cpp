@@ -117,7 +117,8 @@ void DialogAlongLine::ShowVisualization()
 {
     if (prepare == false)
     {
-        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolAlongLine::SetFactor);
         scene->addItem(line);
         line->RefreshGeometry();

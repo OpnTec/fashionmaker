@@ -260,7 +260,8 @@ void VToolPointOfIntersection::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolPointOfIntersection * visual = new VisToolPointOfIntersection(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

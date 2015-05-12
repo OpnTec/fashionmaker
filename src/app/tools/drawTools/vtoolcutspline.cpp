@@ -202,7 +202,8 @@ void VToolCutSpline::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolCutSpline * visual = new VisToolCutSpline(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

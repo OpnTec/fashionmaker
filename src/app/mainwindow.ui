@@ -24,6 +24,9 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QToolBox" name="toolBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
         <horstretch>2</horstretch>
@@ -40,7 +43,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -685,6 +688,9 @@
        <layout class="QFormLayout" name="formLayout_5">
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonNewDetail">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="toolTip">
            <string>Seam allowance tool</string>
           </property>
@@ -741,6 +747,9 @@
        <layout class="QFormLayout" name="formLayout_6">
         <item row="0" column="0">
          <widget class="QToolButton" name="toolButtonLayoutSettings">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Settings</string>
           </property>

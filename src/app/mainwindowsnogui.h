@@ -33,7 +33,8 @@
 
 #include "../geometry/vdetail.h"
 #include "../libs/vlayout/vlayoutdetail.h"
-#include "../widgets/vmaingraphicsscene.h"
+
+class QGraphicsScene;
 
 class MainWindowsNoGUI : public QMainWindow
 {
@@ -42,23 +43,37 @@ public:
     MainWindowsNoGUI(QWidget *parent = nullptr);
     virtual ~MainWindowsNoGUI();
 
+public slots:
+    void ToolLayoutSettings(bool checked);
+
 protected:
     QVector<VLayoutDetail> listDetails;
 
     /** @brief currentScene pointer to current scene. */
-    VMainGraphicsScene *currentScene;
+    QGraphicsScene *currentScene;
 
-    VMainGraphicsScene *tempSceneLayout;
+    QGraphicsScene *tempSceneLayout;
 
     /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
     VContainer         *pattern;
 
+    QList<QGraphicsItem *> papers;
+    QList<QGraphicsItem *> shadows;
+    QList<QGraphicsScene *> scenes;
+    QList<QList<QGraphicsItem *> > details;
+
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
 
     void InitTempLayoutScene();
+    virtual void ClearLayout()=0;
+    virtual void PrepareSceneList()=0;
+    QIcon ScenePreview(int i) const;
 
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
+
+    void CreateShadows();
+    void CreateScenes();
 
 };
 

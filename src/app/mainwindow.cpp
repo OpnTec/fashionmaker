@@ -264,7 +264,11 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         helpLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         dialogTool = new Dialog(pattern, 0, this);
-        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
+
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         ui->view->itemClicked(nullptr);
@@ -273,7 +277,6 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
@@ -304,7 +307,11 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         ui->view->setShowToolOptions(false);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, 0, this);
-        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
+
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
@@ -315,7 +322,6 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
@@ -331,7 +337,10 @@ void MainWindow::ClosedDialog(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, currentScene, doc, pattern));
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, scene, doc, pattern));
         ui->view->itemClicked(tool);
     }
     ArrowTool();
@@ -351,8 +360,11 @@ void MainWindow::ClosedDialogWithApply(int result)
         // Only create tool if not already created with apply
         if (dialogTool->GetAssociatedTool() == nullptr)
         {
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+            SCASSERT(scene != nullptr);
+
             dialogTool->SetAssociatedTool(
-                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
         }
         else
         { // Or update associated tool with data
@@ -382,8 +394,11 @@ void MainWindow::ApplyDialog()
     // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)
     {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
         dialogTool->SetAssociatedTool(
-                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
     }
     else
     { // Or update associated tool with data
@@ -793,6 +808,33 @@ void MainWindow::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClearLayout()
+{
+    qDeleteAll (scenes);
+    scenes.clear();
+    shadows.clear();
+    papers.clear();
+    ui->listWidget->clear();
+    //EnableActions(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PrepareSceneList()
+{
+    for (int i=1; i<=scenes.size(); ++i)
+    {
+        QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1), QString::number(i));
+        ui->listWidget->addItem(item);
+    }
+
+    if (not scenes.isEmpty())
+    {
+        ui->listWidget->setCurrentRow(0);
+        //EnableActions(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolBarOption enable option toolbar.
  */
@@ -944,6 +986,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
+    connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1120,13 +1163,16 @@ void MainWindow::SaveCurrentScene()
 {
     if (mode == Draw::Calculation || mode == Draw::Modeling)
     {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
         /*Save transform*/
-        currentScene->setTransform(ui->view->transform());
+        scene->setTransform(ui->view->transform());
         /*Save scroll bars value for previous scene.*/
         QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
-        currentScene->setHorScrollBar(horScrollBar->value());
+        scene->setHorScrollBar(horScrollBar->value());
         QScrollBar *verScrollBar = ui->view->verticalScrollBar();
-        currentScene->setVerScrollBar(verScrollBar->value());
+        scene->setVerScrollBar(verScrollBar->value());
     }
 }
 
@@ -1136,13 +1182,16 @@ void MainWindow::SaveCurrentScene()
  */
 void MainWindow::RestoreCurrentScene()
 {
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+    SCASSERT(scene != nullptr);
+
     /*Set transform for current scene*/
-    ui->view->setTransform(currentScene->transform());
+    ui->view->setTransform(scene->transform());
     /*Set value for current scene scroll bar.*/
     QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
-    horScrollBar->setValue(currentScene->getHorScrollBar());
+    horScrollBar->setValue(scene->getHorScrollBar());
     QScrollBar *verScrollBar = ui->view->verticalScrollBar();
-    verScrollBar->setValue(currentScene->getVerScrollBar());
+    verScrollBar->setValue(scene->getVerScrollBar());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -146,6 +146,9 @@ protected:
     virtual void       showEvent(QShowEvent *event);
     virtual void       closeEvent(QCloseEvent *event);
     virtual void       customEvent(QEvent * event);
+
+    virtual void       ClearLayout();
+    virtual void       PrepareSceneList();
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */

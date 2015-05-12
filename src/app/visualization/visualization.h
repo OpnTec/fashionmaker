@@ -87,7 +87,7 @@ protected:
     void         AddItem(Item *item)
     {
         SCASSERT(item != nullptr);
-        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
         SCASSERT(scene != nullptr);
 
         scene->addItem(item);

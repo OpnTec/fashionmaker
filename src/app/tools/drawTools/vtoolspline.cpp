@@ -237,7 +237,8 @@ void VToolSpline::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolSpline *visual = new VisToolSpline(getData(), this);
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
 
             const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);

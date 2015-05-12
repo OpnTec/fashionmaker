@@ -261,7 +261,7 @@ void DialogEndLine::ShowDialog(bool click)
         if (click)
         {
             /*We will ignore click if poinet is in point circle*/
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
             SCASSERT(scene != nullptr);
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
@@ -287,7 +287,8 @@ void DialogEndLine::ShowVisualization()
     if (prepare == false)
     {
         //TODO move to parent class!
-        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolEndLine::SetFactor);
         scene->addItem(line);
         line->RefreshGeometry();

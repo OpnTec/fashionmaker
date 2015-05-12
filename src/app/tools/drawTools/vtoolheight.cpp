@@ -291,7 +291,8 @@ void VToolHeight::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolHeight * visual = new VisToolHeight(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

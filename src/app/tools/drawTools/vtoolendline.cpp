@@ -287,7 +287,8 @@ void VToolEndLine::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolEndLine * visual = new VisToolEndLine(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

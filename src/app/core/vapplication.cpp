@@ -2068,14 +2068,14 @@ VSettings *VApplication::getSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMainGraphicsScene *VApplication::getCurrentScene() const
+QGraphicsScene *VApplication::getCurrentScene() const
 {
     SCASSERT(currentScene != nullptr);
     return currentScene;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::setCurrentScene(VMainGraphicsScene *value)
+void VApplication::setCurrentScene(QGraphicsScene *value)
 {
     currentScene = value;
 }
