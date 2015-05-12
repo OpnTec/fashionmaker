@@ -29,15 +29,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "widgets/vmaingraphicsscene.h"
+#include "mainwindowsnogui.h"
 #include "widgets/vmaingraphicsview.h"
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 #include "xml/vdomdocument.h"
-#include "../libs/vlayout/vlayoutdetail.h"
+
 
 namespace Ui
 {
@@ -49,7 +48,7 @@ class VToolOptionsPropertyBrowser;
 /**
  * @brief The MainWindow class main windows.
  */
-class MainWindow : public QMainWindow
+class MainWindow : public MainWindowsNoGUI
 {
     Q_OBJECT
 public:
@@ -70,7 +69,6 @@ public slots:
     void               ActionCurveDetailsMode(bool checked);
     void               DrawOption();
 
-    void               tableClosed();
     void               ClosedActionTable();
     void               ClosedActionHistory();
 
@@ -141,13 +139,6 @@ public slots:
     void               WindowsLocale();
     void               ToolBarStyles();
 signals:
-    /**
-     * @brief ModelChosen emit after calculation all details.
-     * @param listDetails list of details.
-     * @param description pattern description.
-     */
-    void               ModelChosen(QVector<VLayoutDetail> listDetails, const QString &curFile,
-                                   const QString &description);
     void               RefreshHistory();
     void               EnableItemMove(bool move);
 protected:
@@ -160,9 +151,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::MainWindow     *ui;
 
-    /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
-    VContainer         *pattern;
-
     /** @brief doc dom document container */
     VPattern           *doc;
 
@@ -171,9 +159,6 @@ private:
 
     /** @brief tool last used tool */
     Tool               lastUsedTool;
-
-    /** @brief currentScene pointer to current scene. */
-    VMainGraphicsScene *currentScene;
 
     /** @brief sceneDraw draw scene. */
     VMainGraphicsScene *sceneDraw;
@@ -284,6 +269,8 @@ private:
     void               ToolBarStyle(QToolBar *bar);
 
     void               AddPP(const QString &PPName, const QString &path);
+
+    void               InitScenes();
 };
 
 #endif // MAINWINDOW_H

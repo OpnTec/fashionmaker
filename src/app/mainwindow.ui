@@ -40,7 +40,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -734,6 +734,32 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_6">
+       <attribute name="label">
+        <string>Layout</string>
+       </attribute>
+       <layout class="QFormLayout" name="formLayout_6">
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonLayoutSettings">
+          <property name="text">
+           <string>Settings</string>
+          </property>
+          <property name="icon">
+           <iconset theme="emblem-system"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
     <item>
@@ -990,6 +1016,40 @@
    </attribute>
    <addaction name="actionArrowTool"/>
   </widget>
+  <widget class="QDockWidget" name="dockWidgetLayoutPages">
+   <property name="features">
+    <set>QDockWidget::NoDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Layout pages</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>150</width>
+         <height>200</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionNew">
    <property name="icon">
     <iconset theme="document-new">
@@ -1202,6 +1262,9 @@
    </property>
   </action>
   <action name="actionLayout">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="enabled">
     <bool>false</bool>
    </property>

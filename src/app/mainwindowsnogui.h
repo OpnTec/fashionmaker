@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vgeometrydef.h
+ **  @file   mainwindowsnogui.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 5, 2015
+ **  @date   12 5, 2015
  **
  **  @brief
  **  @copyright
@@ -26,18 +26,40 @@
  **
  *************************************************************************/
 
-#ifndef VGEOMETRYDEF_H
-#define VGEOMETRYDEF_H
+#ifndef MAINWINDOWSNOGUI_H
+#define MAINWINDOWSNOGUI_H
 
-#include <QString>
+#include <QMainWindow>
 
-enum class Draw : char { Calculation, Modeling, Layout };
-enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
-enum class SplinePointPosition : char { FirstPoint, LastPoint };
+#include "../geometry/vdetail.h"
+#include "../libs/vlayout/vlayoutdetail.h"
+#include "../widgets/vmaingraphicsscene.h"
 
-// variables name
-extern const QString arc_;
-extern const QString spl_;
-extern const QString splPath;
+class MainWindowsNoGUI : public QMainWindow
+{
+    Q_OBJECT
+public:
+    MainWindowsNoGUI(QWidget *parent = nullptr);
+    virtual ~MainWindowsNoGUI();
 
-#endif // VGEOMETRYDEF_H
+protected:
+    QVector<VLayoutDetail> listDetails;
+
+    /** @brief currentScene pointer to current scene. */
+    VMainGraphicsScene *currentScene;
+
+    VMainGraphicsScene *tempSceneLayout;
+
+    /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
+    VContainer         *pattern;
+
+    void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
+
+    void InitTempLayoutScene();
+
+private:
+    Q_DISABLE_COPY(MainWindowsNoGUI)
+
+};
+
+#endif // MAINWINDOWSNOGUI_H

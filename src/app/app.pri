@@ -19,7 +19,8 @@ SOURCES += \
         $$PWD/tablewindow.cpp \
         $$PWD/stable.cpp \
         $$PWD/version.cpp \
-        $$PWD/options.cpp
+        $$PWD/options.cpp \
+        $$PWD/mainwindowsnogui.cpp
 
 # Some header files
 HEADERS  += \
@@ -27,7 +28,8 @@ HEADERS  += \
         $$PWD/options.h \
         $$PWD/tablewindow.h \
         $$PWD/stable.h \
-        $$PWD/version.h
+        $$PWD/version.h \
+        $$PWD/mainwindowsnogui.h
 
 # Main forms
 FORMS    += \
