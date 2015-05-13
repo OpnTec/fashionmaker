@@ -1229,8 +1229,17 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionHistory->setEnabled(true);
         ui->actionOptionDraw->setEnabled(true);
         ui->actionNewDraw->setEnabled(true);
+        ui->actionTable->setEnabled(true);
+        ui->actionArrowTool->setEnabled(true);
+        ui->actionShowCurveDetails->setEnabled(true);
+        actionDockWidgetToolOptions->setEnabled(true);
+        undoAction->setEnabled(true);
+        redoAction->setEnabled(true);
 
-        ui->toolBarOption->setVisible(true);
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            ui->toolBarOption->setVisible(true);
+        }
 
         ui->dockWidgetLayoutPages->setVisible(false);
         ui->dockWidgetToolOptions->setVisible(true);
@@ -1277,11 +1286,22 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+        ui->actionTable->setEnabled(false);
+        ui->actionArrowTool->setEnabled(true);
+        ui->actionShowCurveDetails->setEnabled(false);
+        actionDockWidgetToolOptions->setEnabled(true);
+        undoAction->setEnabled(true);
+        redoAction->setEnabled(true);
 
-        ui->toolBarOption->setVisible(false);
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            ui->toolBarOption->setVisible(true);
+        }
 
         ui->dockWidgetLayoutPages->setVisible(false);
         ui->dockWidgetToolOptions->setVisible(true);
+
+        helpLabel->setText("");
     }
     else
     {
@@ -1333,8 +1353,18 @@ void MainWindow::ActionLayout(bool checked)
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+        ui->actionArrowTool->setEnabled(false);
+        ui->actionTable->setEnabled(false);
+        ui->actionShowCurveDetails->setEnabled(false);
+        actionDockWidgetToolOptions->setEnabled(false);
+        undoAction->setEnabled(false);
+        redoAction->setEnabled(false);
+        mouseCoordinate->setText("");
 
-        ui->toolBarOption->setVisible(false);
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            ui->toolBarOption->setVisible(false);
+        }
 
         ui->dockWidgetLayoutPages->setVisible(true);
         ui->dockWidgetToolOptions->setVisible(false);
@@ -1345,6 +1375,8 @@ void MainWindow::ActionLayout(bool checked)
         {
             ui->toolButtonLayoutSettings->click();
         }
+
+        helpLabel->setText("");
     }
     else
     {
@@ -2295,13 +2327,13 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 
     //Add Undo/Redo actions.
-    QAction *undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
-    QAction *redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
@@ -2312,7 +2344,8 @@ void MainWindow::CreateMenus()
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
 
     //Add dock
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
+    actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
 
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);

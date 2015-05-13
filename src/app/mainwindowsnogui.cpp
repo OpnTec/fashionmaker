@@ -42,7 +42,8 @@
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
     : QMainWindow(parent), listDetails(QVector<VLayoutDetail>()), currentScene(nullptr), tempSceneLayout(nullptr),
       pattern(new VContainer()), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
-      scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >())
+      scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()), undoAction(nullptr),
+      redoAction(nullptr), actionDockWidgetToolOptions(nullptr)
 {
     InitTempLayoutScene();
 }

@@ -50,7 +50,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>272</height>
         </rect>
        </property>
@@ -337,7 +337,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -413,7 +413,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>156</height>
         </rect>
        </property>
@@ -567,7 +567,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>104</height>
         </rect>
        </property>
@@ -741,6 +741,14 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page_6">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>87</width>
+         <height>58</height>
+        </rect>
+       </property>
        <attribute name="label">
         <string>Layout</string>
        </attribute>
@@ -754,7 +762,9 @@
            <string>Settings</string>
           </property>
           <property name="icon">
-           <iconset theme="emblem-system"/>
+           <iconset theme="emblem-system">
+            <normaloff/>
+           </iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1474,6 +1484,9 @@
    </property>
   </action>
   <action name="actionLast_tool">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Last Tool</string>
    </property>

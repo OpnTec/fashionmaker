@@ -62,6 +62,10 @@ protected:
     QList<QGraphicsScene *> scenes;
     QList<QList<QGraphicsItem *> > details;
 
+    QAction *undoAction;
+    QAction *redoAction;
+    QAction *actionDockWidgetToolOptions;
+
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
 
     void InitTempLayoutScene();
