@@ -353,7 +353,8 @@ void VToolShoulderPoint::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolShoulderPoint * visual = new VisToolShoulderPoint(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

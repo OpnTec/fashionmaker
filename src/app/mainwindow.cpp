@@ -73,10 +73,10 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    :QMainWindow(parent), ui(new Ui::MainWindow), pattern(nullptr), doc(nullptr), currentTool(Tool::Arrow),
-      lastUsedTool(Tool::Arrow), currentScene(nullptr), sceneDraw(nullptr), sceneDetails(nullptr),
+    :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), currentTool(Tool::Arrow),
+      lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
       mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), dialogTable(nullptr), dialogTool(nullptr),
-      dialogHistory(nullptr), comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
+      dialogHistory(nullptr), comboBoxDraws(nullptr), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
       gradationSizes(nullptr),
@@ -95,32 +95,12 @@ MainWindow::MainWindow(QWidget *parent)
     CreateMenus();
     ToolBarDraws();
     InitToolButtons();
-
-    sceneDraw = new VMainGraphicsScene();
-    currentScene = sceneDraw;
-    qApp->setCurrentScene(currentScene);
-    connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
-    connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
-    sceneDetails = new VMainGraphicsScene();
-    connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
-
-    ui->view->setScene(currentScene);
-
-    sceneDraw->setTransform(ui->view->transform());
-    sceneDetails->setTransform(ui->view->transform());
-
-    connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
-    QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    policy.setHorizontalStretch(12);
-    ui->view->setSizePolicy(policy);
-    qApp->setSceneView(ui->view);
+    InitScenes();
 
     helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
     ui->statusBar->addWidget(helpLabel);
 
     ToolBarTools();
-
-    pattern = new VContainer();
 
     doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
@@ -151,6 +131,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBarStages->setIconSize(QSize(24, 24));
     ui->toolBarTools->setIconSize(QSize(24, 24));
 #endif
+
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &MainWindow::ShowPaper);
+    ui->dockWidgetLayoutPages->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,6 +205,29 @@ void MainWindow::AddPP(const QString &PPName, const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::InitScenes()
+{
+    sceneDraw = new VMainGraphicsScene();
+    currentScene = sceneDraw;
+    qApp->setCurrentScene(currentScene);
+    connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
+    connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
+    sceneDetails = new VMainGraphicsScene();
+    connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
+
+    ui->view->setScene(currentScene);
+
+    sceneDraw->setTransform(ui->view->transform());
+    sceneDetails->setTransform(ui->view->transform());
+
+    connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+    QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    policy.setHorizontalStretch(12);
+    ui->view->setSizePolicy(policy);
+    qApp->setSceneView(ui->view);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */
@@ -261,7 +267,11 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         helpLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         dialogTool = new Dialog(pattern, 0, this);
-        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
+
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         ui->view->itemClicked(nullptr);
@@ -270,7 +280,6 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
@@ -301,7 +310,11 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         ui->view->setShowToolOptions(false);
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, 0, this);
-        connect(currentScene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
+
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
@@ -312,7 +325,6 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     {
         if (QToolButton *tButton = qobject_cast< QToolButton * >(this->sender()))
         {
-            SCASSERT(tButton != nullptr);
             tButton->setChecked(true);
         }
     }
@@ -328,7 +340,10 @@ void MainWindow::ClosedDialog(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, currentScene, doc, pattern));
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(DrawTool::Create(dialogTool, scene, doc, pattern));
         ui->view->itemClicked(tool);
     }
     ArrowTool();
@@ -348,8 +363,11 @@ void MainWindow::ClosedDialogWithApply(int result)
         // Only create tool if not already created with apply
         if (dialogTool->GetAssociatedTool() == nullptr)
         {
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+            SCASSERT(scene != nullptr);
+
             dialogTool->SetAssociatedTool(
-                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+                    dynamic_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
         }
         else
         { // Or update associated tool with data
@@ -379,8 +397,11 @@ void MainWindow::ApplyDialog()
     // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)
     {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
         dialogTool->SetAssociatedTool(
-                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, currentScene, doc, pattern)));
+                static_cast<VAbstractTool * > (DrawTool::Create(dialogTool, scene, doc, pattern)));
     }
     else
     { // Or update associated tool with data
@@ -705,16 +726,6 @@ void MainWindow::ShowToolTip(const QString &toolTip)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief tableClosed handle after close layout window.
- */
-void MainWindow::tableClosed()
-{
-    ui->actionDetails->setChecked(true);
-    show();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OpenRecentFile()
 {
     QAction *action = qobject_cast<QAction *>(sender());
@@ -796,6 +807,33 @@ void MainWindow::customEvent(QEvent *event)
     if (event->type() == UNDO_EVENT)
     {
         qApp->getUndoStack()->undo();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClearLayout()
+{
+    qDeleteAll (scenes);
+    scenes.clear();
+    shadows.clear();
+    papers.clear();
+    ui->listWidget->clear();
+    SetLayoutModeActions(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PrepareSceneList()
+{
+    for (int i=1; i<=scenes.size(); ++i)
+    {
+        QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1), QString::number(i));
+        ui->listWidget->addItem(item);
+    }
+
+    if (not scenes.isEmpty())
+    {
+        ui->listWidget->setCurrentRow(0);
+        SetLayoutModeActions(true);
     }
 }
 
@@ -951,6 +989,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
+    connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1125,13 +1164,19 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
  */
 void MainWindow::SaveCurrentScene()
 {
-    /*Save transform*/
-    currentScene->setTransform(ui->view->transform());
-    /*Save scroll bars value for previous scene.*/
-    QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
-    currentScene->setHorScrollBar(horScrollBar->value());
-    QScrollBar *verScrollBar = ui->view->verticalScrollBar();
-    currentScene->setVerScrollBar(verScrollBar->value());
+    if (mode == Draw::Calculation || mode == Draw::Modeling)
+    {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        /*Save transform*/
+        scene->setTransform(ui->view->transform());
+        /*Save scroll bars value for previous scene.*/
+        QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
+        scene->setHorScrollBar(horScrollBar->value());
+        QScrollBar *verScrollBar = ui->view->verticalScrollBar();
+        scene->setVerScrollBar(verScrollBar->value());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1140,13 +1185,16 @@ void MainWindow::SaveCurrentScene()
  */
 void MainWindow::RestoreCurrentScene()
 {
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+    SCASSERT(scene != nullptr);
+
     /*Set transform for current scene*/
-    ui->view->setTransform(currentScene->transform());
+    ui->view->setTransform(scene->transform());
     /*Set value for current scene scroll bar.*/
     QScrollBar *horScrollBar = ui->view->horizontalScrollBar();
-    horScrollBar->setValue(currentScene->getHorScrollBar());
+    horScrollBar->setValue(scene->getHorScrollBar());
     QScrollBar *verScrollBar = ui->view->verticalScrollBar();
-    verScrollBar->setValue(currentScene->getVerScrollBar());
+    verScrollBar->setValue(scene->getVerScrollBar());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1160,11 +1208,13 @@ void MainWindow::ActionDraw(bool checked)
     {
         qCDebug(vMainWindow, "Show draw scene");
         ui->actionDetails->setChecked(false);
+        ui->actionLayout->setChecked(false);
         SaveCurrentScene();
 
         currentScene = sceneDraw;
         ui->view->setScene(currentScene);
-        connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+        connect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor,
+                Qt::UniqueConnection);
         RestoreCurrentScene();
 
         mode = Draw::Calculation;
@@ -1179,7 +1229,20 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionHistory->setEnabled(true);
         ui->actionOptionDraw->setEnabled(true);
         ui->actionNewDraw->setEnabled(true);
+        ui->actionTable->setEnabled(true);
+        ui->actionArrowTool->setEnabled(true);
+        ui->actionShowCurveDetails->setEnabled(true);
+        actionDockWidgetToolOptions->setEnabled(true);
+        undoAction->setEnabled(true);
+        redoAction->setEnabled(true);
 
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            ui->toolBarOption->setVisible(true);
+        }
+
+        ui->dockWidgetLayoutPages->setVisible(false);
+        ui->dockWidgetToolOptions->setVisible(true);
     }
     else
     {
@@ -1198,11 +1261,12 @@ void MainWindow::ActionDetails(bool checked)
     {
         qCDebug(vMainWindow, "Show details scene");
         ui->actionDraw->setChecked(false);
+        ui->actionLayout->setChecked(false);
         SaveCurrentScene();
 
         currentScene = sceneDetails;
         ui->view->itemClicked(nullptr);
-        ui->view->setScene(sceneDetails);
+        ui->view->setScene(currentScene);
         disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
@@ -1211,20 +1275,112 @@ void MainWindow::ActionDetails(bool checked)
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
         comboBoxDraws->setEnabled(false);
 
-
+        if (mode == Draw::Calculation)
+        {
+            currentToolBoxIndex = ui->toolBox->currentIndex();
+        }
         mode = Draw::Modeling;
         SetEnableTool(true);
-        currentToolBoxIndex = ui->toolBox->currentIndex();
         ui->toolBox->setCurrentIndex(4);
 
         ui->actionHistory->setEnabled(false);
         ui->actionOptionDraw->setEnabled(false);
         ui->actionNewDraw->setEnabled(false);
+        ui->actionTable->setEnabled(false);
+        ui->actionArrowTool->setEnabled(true);
+        ui->actionShowCurveDetails->setEnabled(false);
+        actionDockWidgetToolOptions->setEnabled(true);
+        undoAction->setEnabled(true);
+        redoAction->setEnabled(true);
 
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            ui->toolBarOption->setVisible(true);
+        }
+
+        ui->dockWidgetLayoutPages->setVisible(false);
+        ui->dockWidgetToolOptions->setVisible(true);
+
+        helpLabel->setText("");
     }
     else
     {
         ui->actionDetails->setChecked(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ActionLayout begin creation layout.
+ * @param checked true - button checked.
+ */
+void MainWindow::ActionLayout(bool checked)
+{
+    if (checked)
+    {
+        qCDebug(vMainWindow, "Show layout scene");
+        ui->actionDraw->setChecked(false);
+        ui->actionDetails->setChecked(false);
+        SaveCurrentScene();
+
+        const QHash<quint32, VDetail> *details = pattern->DataDetails();
+        if (details->count() == 0)
+        {
+            Layout();
+            return;
+        }
+
+        PrepareDetailsForLayout(details);
+
+        currentScene = tempSceneLayout;
+        ui->view->itemClicked(nullptr);
+        ui->view->setScene(currentScene);
+        disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
+
+        drawMode = false;
+        currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+        comboBoxDraws->setCurrentIndex(-1);
+        comboBoxDraws->setEnabled(false);
+
+        if (mode == Draw::Calculation)
+        {
+            currentToolBoxIndex = ui->toolBox->currentIndex();
+        }
+        mode = Draw::Layout;
+        SetEnableTool(true);
+        ui->toolBox->setCurrentIndex(5);
+
+        ui->actionHistory->setEnabled(false);
+        ui->actionOptionDraw->setEnabled(false);
+        ui->actionNewDraw->setEnabled(false);
+        ui->actionArrowTool->setEnabled(false);
+        ui->actionTable->setEnabled(false);
+        ui->actionShowCurveDetails->setEnabled(false);
+        actionDockWidgetToolOptions->setEnabled(false);
+        undoAction->setEnabled(false);
+        redoAction->setEnabled(false);
+        mouseCoordinate->setText("");
+
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            ui->toolBarOption->setVisible(false);
+        }
+
+        ui->dockWidgetLayoutPages->setVisible(true);
+        ui->dockWidgetToolOptions->setVisible(false);
+
+        ShowPaper(ui->listWidget->currentRow());
+
+        if (scenes.isEmpty())
+        {
+            ui->toolButtonLayoutSettings->click();
+        }
+
+        helpLabel->setText("");
+    }
+    else
+    {
+        ui->actionLayout->setChecked(true);
     }
 }
 
@@ -1644,16 +1800,19 @@ void MainWindow::ClickEndVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::Layout()
 {
-    const QHash<quint32, VDetail> *details = pattern->DataDetails();
-    if (details->size() > 0)
+    if (pattern->DataDetails()->size() > 0)
     {
         ui->actionDetails->setEnabled(true);
         ui->actionLayout->setEnabled(true);
+        SetLayoutModeActions(true);
     }
     else
     {
+        listDetails.clear();
         ui->actionDetails->setEnabled(false);
         ui->actionLayout->setEnabled(false);
+        ui->actionDraw->setChecked(true);
+        SetLayoutModeActions(false);
     }
 }
 
@@ -1813,6 +1972,7 @@ void MainWindow::PatternWasModified(bool saved)
     {
         setWindowModified(!saved);
         ui->actionSave->setEnabled(!saved);
+        isLayoutStale = true;
     }
 }
 
@@ -1900,41 +2060,6 @@ void MainWindow::ActionCurveDetailsMode(bool checked)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ActionLayout begin creation layout.
- * @param checked true - button checked.
- */
-void MainWindow::ActionLayout(bool checked)
-{
-    Q_UNUSED(checked);
-    ActionDetails(true);//Get all list of details.
-    QVector<VLayoutDetail> listDetails;
-    const QHash<quint32, VDetail> *details = pattern->DataDetails();
-    if (details->count() == 0)
-    {
-        return;
-    }
-    hide();//Now we can hide window
-    QHashIterator<quint32, VDetail> idetail(*details);
-    while (idetail.hasNext())
-    {
-        idetail.next();
-        VLayoutDetail det = VLayoutDetail();
-        det.SetCountourPoints(idetail.value().ContourPoints(pattern));
-        det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern), idetail.value().getSeamAllowance());
-        det.setName(idetail.value().getName());
-        det.setWidth(qApp->toPixel(idetail.value().getWidth()));
-
-        listDetails.append(det);
-    }
-    QString description = doc->GetDescription();
-
-    QString fileName;
-    curFile.isEmpty() ? fileName = "unnamed" : fileName = curFile;
-    emit ModelChosen(listDetails, fileName, description);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief ClosedActionHistory actions after closing history window with variables.
  */
 void MainWindow::ClosedActionHistory()
@@ -1952,14 +2077,23 @@ void MainWindow::SetEnableTool(bool enable)
 {
     bool drawTools = false;
     bool modelingTools = false;
-    if (mode == Draw::Calculation)
+    bool layoutTools = false;
+
+    switch (mode)
     {
-        drawTools = enable;
+        case Draw::Calculation:
+            drawTools = enable;
+            break;
+        case Draw::Modeling:
+            modelingTools = enable;
+            break;
+        case Draw::Layout:
+            layoutTools = enable;
+            break;
+        default:
+            break;
     }
-    else
-    {
-        modelingTools = enable;
-    }
+
     //Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
     ui->toolButtonLine->setEnabled(drawTools);
@@ -1987,6 +2121,26 @@ void MainWindow::SetEnableTool(bool enable)
 
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
+
+    //Layout tools
+    ui->toolButtonLayoutSettings->setEnabled(layoutTools);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetLayoutModeActions(bool enable)
+{
+    bool value = enable;
+    if (scenes.isEmpty())
+    {
+        value = false;
+    }
+    ui->actionExportAs->setEnabled(value);
+    ui->actionPrintPreview->setEnabled(value);
+    ui->actionPrintPreviewTailed->setEnabled(value);
+    ui->actionSaveAsPDF->setEnabled(value);
+    ui->actionSaveAsTiledPDF->setEnabled(value);
+    ui->actionPrint->setEnabled(value);
+    ui->actionPrintTiled->setEnabled(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2126,6 +2280,8 @@ void MainWindow::ReadSettings()
  */
 void MainWindow::WriteSettings()
 {
+    ActionDraw(true);
+
     qApp->getSettings()->SetGeometry(saveGeometry());
     qApp->getSettings()->SetWindowState(saveState());
     qApp->getSettings()->SetToolbarsState(saveState(APP_VERSION));
@@ -2191,13 +2347,13 @@ void MainWindow::CreateMenus()
     UpdateRecentFileActions();
 
     //Add Undo/Redo actions.
-    QAction *undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
-    QAction *redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
@@ -2208,7 +2364,8 @@ void MainWindow::CreateMenus()
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
 
     //Add dock
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
+    actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
 
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
@@ -2387,6 +2544,14 @@ void MainWindow::CreateActions()
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
     connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
+
+    connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
+    connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
+    connect(ui->actionPrintPreviewTailed, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
+    connect(ui->actionSaveAsPDF, &QAction::triggered, this, &MainWindow::SaveAsPDF);
+    connect(ui->actionSaveAsTiledPDF, &QAction::triggered, this, &MainWindow::SaveAsTiledPDF);
+    connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);
+    connect(ui->actionPrintTiled, &QAction::triggered, this, &MainWindow::PrintTiled);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
@@ -2452,11 +2617,11 @@ QString MainWindow::PatternPieceName(const QString &text)
 MainWindow::~MainWindow()
 {
     CancelTool();
+    ClearLayout();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     delete lock; // Unlock pattern file
 #endif
-    delete pattern;
     delete doc;
     delete sceneDetails;
     delete sceneDraw;
@@ -2642,6 +2807,23 @@ void MainWindow::ToolBarStyles()
     ToolBarStyle(ui->toolBarStages);
     ToolBarStyle(ui->toolBarTools);
     ToolBarStyle(ui->mainToolBar);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ShowPaper(int index)
+{
+    if (index < 0 || index >= scenes.size())
+    {
+        ui->view->setScene(tempSceneLayout);
+        SetLayoutModeActions(false);
+    }
+    else
+    {
+        ui->view->setScene(scenes.at(index));
+        SetLayoutModeActions(true);
+    }
+
+    ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -67,7 +67,7 @@ void Visualization::setScenePos(const QPointF &value)
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::VisualMode(const quint32 &pointId)
 {
-    VMainGraphicsScene *scene = qApp->getCurrentScene();
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
     SCASSERT(scene != nullptr);
 
     this->point1Id = pointId;

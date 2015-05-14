@@ -31,7 +31,7 @@
 
 #include <QString>
 
-enum class Draw : char { Calculation, Modeling };
+enum class Draw : char { Calculation, Modeling, Layout };
 enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
 enum class SplinePointPosition : char { FirstPoint, LastPoint };
 

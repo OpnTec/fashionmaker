@@ -239,7 +239,8 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolLineIntersectAxis * visual = new VisToolLineIntersectAxis(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

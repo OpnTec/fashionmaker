@@ -29,7 +29,6 @@
 #include "mainwindow.h"
 #include "core/vapplication.h"
 #include "core/vsettings.h"
-#include "tablewindow.h"
 #include "version.h"
 
 #include <QTextCodec>
@@ -118,9 +117,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
     app.setMainWindow(&w);
-    TableWindow table;
-    QObject::connect(&w, &MainWindow::ModelChosen, &table, &TableWindow::ModelChosen);
-    QObject::connect(&table, &TableWindow::closed, &w, &MainWindow::tableClosed);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("main", "Pattern making program."));

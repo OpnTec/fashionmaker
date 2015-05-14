@@ -2,7 +2,6 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
-    $$PWD/vtablegraphicsview.h \
     $$PWD/vmaingraphicsview.h \
     $$PWD/vmaingraphicsscene.h \
     $$PWD/doubledelegate.h \
@@ -13,7 +12,6 @@ HEADERS += \
     $$PWD/vwidgetpopup.h
 
 SOURCES += \
-    $$PWD/vtablegraphicsview.cpp \
     $$PWD/vmaingraphicsview.cpp \
     $$PWD/vmaingraphicsscene.cpp \
     $$PWD/doubledelegate.cpp \

@@ -185,7 +185,8 @@ void DialogSpline::ShowVisualization()
 {
     if (prepare == false)
     {
-        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
         connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
         scene->addItem(path);
         path->RefreshGeometry();

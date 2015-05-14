@@ -227,7 +227,8 @@ void VToolCurveIntersectAxis::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolCurveIntersectAxis * visual = new VisToolCurveIntersectAxis(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

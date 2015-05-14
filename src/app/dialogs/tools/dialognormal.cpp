@@ -116,7 +116,8 @@ void DialogNormal::ShowVisualization()
 {
     if (prepare == false)
     {
-        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
         scene->addItem(line);
         line->RefreshGeometry();

@@ -355,7 +355,8 @@ void VToolPointOfContact::ShowVisualization(bool show)
         if (vis == nullptr)
         {
             VisToolPointOfContact * visual = new VisToolPointOfContact(getData());
-            VMainGraphicsScene *scene = qApp->getCurrentScene();
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr)
             connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
             scene->addItem(visual);
 

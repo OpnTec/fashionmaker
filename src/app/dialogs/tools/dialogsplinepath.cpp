@@ -267,7 +267,8 @@ void DialogSplinePath::ShowVisualization()
 {
     if (prepare == false)
     {
-        VMainGraphicsScene *scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
         connect(scene, &VMainGraphicsScene::NewFactor, visPath, &Visualization::SetFactor);
         scene->addItem(visPath);
         visPath->setMode(Mode::Show);

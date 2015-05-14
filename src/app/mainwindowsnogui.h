@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tablewindow.h
+ **  @file   mainwindowsnogui.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   12 5, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,74 +26,80 @@
  **
  *************************************************************************/
 
-#ifndef TABLEWINDOW_H
-#define TABLEWINDOW_H
+#ifndef MAINWINDOWSNOGUI_H
+#define MAINWINDOWSNOGUI_H
 
-#include <QLabel>
 #include <QMainWindow>
 
-#include "../../libs/vlayout/vlayoutdetail.h"
-#include "../../libs/vlayout/vbank.h"
-
-namespace Ui
-{
-    class TableWindow;
-}
+#include "../geometry/vdetail.h"
+#include "../libs/vlayout/vlayoutdetail.h"
+#include "xml/vpattern.h"
 
 class QGraphicsScene;
-class QGraphicsRectItem;
 class QPrinter;
 
-/**
- * @brief TableWindow class layout window.
- */
-class TableWindow : public QMainWindow
+class MainWindowsNoGUI : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit TableWindow(QWidget *parent = nullptr);
-    ~TableWindow();
+    MainWindowsNoGUI(QWidget *parent = nullptr);
+    virtual ~MainWindowsNoGUI();
 
 public slots:
-    void ModelChosen(QVector<VLayoutDetail> listDetails, const QString &fileName, const QString &description);
-    void Layout();
-    void StopTable();
-    void SaveLayout();
-    void ShowPaper(int index);
-    void PrintPreview();
-    void Print (QPrinter *printer);
-    void LayoutPrint();
-    void PrintToPdf();
-
-signals:
-    /** @brief closed emit if window is closing. */
-    void                  closed();
+    void ToolLayoutSettings(bool checked);
+    void ExportLayoutAs();
+    void SaveAsPDF();
+    void SaveAsTiledPDF();
+    void PrintPages (QPrinter *printer);
+    void PrintPreviewOrigin();
+    void PrintPreviewTiled();
+    void PrintOrigin();
+    void PrintTiled();
 
 protected:
-    void                  closeEvent(QCloseEvent *event);
-    void                  moveToCenter();
-    void                  showEvent ( QShowEvent * event );
-
-private:
-    Q_DISABLE_COPY(TableWindow)
-    /** @brief ui keeps information about user interface */
-    Ui::TableWindow*      ui;
-
-    /** @brief listDetails list of details. */
     QVector<VLayoutDetail> listDetails;
+
+    /** @brief currentScene pointer to current scene. */
+    QGraphicsScene *currentScene;
+
+    QGraphicsScene *tempSceneLayout;
+
+    /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
+    VContainer         *pattern;
+
+    /** @brief doc dom document container */
+    VPattern           *doc;
 
     QList<QGraphicsItem *> papers;
     QList<QGraphicsItem *> shadows;
     QList<QGraphicsScene *> scenes;
     QList<QList<QGraphicsItem *> > details;
 
-    /** @brief fileName keep name of pattern file. */
-    QString               fileName;
+    QAction *undoAction;
+    QAction *redoAction;
+    QAction *actionDockWidgetToolOptions;
 
-    /** @brief description pattern description */
-    QString               description;
+    /** @brief fileName name current pattern file. */
+    QString            curFile;
 
-    QGraphicsScene* tempScene;
+    bool isLayoutStale;
+
+    void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
+
+    void InitTempLayoutScene();
+    virtual void ClearLayout()=0;
+    virtual void PrepareSceneList()=0;
+    QIcon ScenePreview(int i) const;
+
+private:
+    Q_DISABLE_COPY(MainWindowsNoGUI)
+
+    bool isTiled;
+
+    void CreateShadows();
+    void CreateScenes();
+
+    QMap<QString, QString> InitFormates() const;
 
     void SvgFile(const QString &name, int i)const;
     void PngFile(const QString &name, int i)const;
@@ -105,17 +111,16 @@ private:
 
     QVector<QImage> AllSheets();
 
-    void ClearLayout();
-    void CreateShadows();
-    void CreateScenes();
-    void PrepareSceneList();
-    QIcon ScenePreview(int i) const;
-    QMap<QString, QString> InitFormates() const;
+    void SaveLayoutAs();
+    void PrintPreview();
+    void LayoutPrint();
 
-    void EnableActions(bool enable);
-    void ToolBarStyle(QToolBar *bar);
-    void ReadSettings();
-    void ToolBarStyles();
+    void SetPrinterSettings(QPrinter *printer);
+
+    bool isPagesUniform() const;
+    QString FileName() const;
+
+    int ContinueIfLayoutStale();
 };
 
-#endif // TABLEWINDOW_H
+#endif // MAINWINDOWSNOGUI_H
