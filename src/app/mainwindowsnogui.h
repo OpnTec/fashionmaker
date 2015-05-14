@@ -33,8 +33,10 @@
 
 #include "../geometry/vdetail.h"
 #include "../libs/vlayout/vlayoutdetail.h"
+#include "xml/vpattern.h"
 
 class QGraphicsScene;
+class QPrinter;
 
 class MainWindowsNoGUI : public QMainWindow
 {
@@ -45,6 +47,14 @@ public:
 
 public slots:
     void ToolLayoutSettings(bool checked);
+    void ExportLayoutAs();
+    void SaveAsPDF();
+    void SaveAsTiledPDF();
+    void PrintPages (QPrinter *printer);
+    void PrintPreviewOrigin();
+    void PrintPreviewTiled();
+    void PrintOrigin();
+    void PrintTiled();
 
 protected:
     QVector<VLayoutDetail> listDetails;
@@ -57,6 +67,9 @@ protected:
     /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
     VContainer         *pattern;
 
+    /** @brief doc dom document container */
+    VPattern           *doc;
+
     QList<QGraphicsItem *> papers;
     QList<QGraphicsItem *> shadows;
     QList<QGraphicsScene *> scenes;
@@ -65,6 +78,11 @@ protected:
     QAction *undoAction;
     QAction *redoAction;
     QAction *actionDockWidgetToolOptions;
+
+    /** @brief fileName name current pattern file. */
+    QString            curFile;
+
+    bool isLayoutStale;
 
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
 
@@ -76,9 +94,33 @@ protected:
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
+    bool isTiled;
+
     void CreateShadows();
     void CreateScenes();
 
+    QMap<QString, QString> InitFormates() const;
+
+    void SvgFile(const QString &name, int i)const;
+    void PngFile(const QString &name, int i)const;
+    void PdfFile(const QString &name, int i)const;
+    void EpsFile(const QString &name, int i)const;
+    void PsFile(const QString &name, int i)const;
+    void PdfToPs(const QStringList &params)const;
+    void ObjFile(const QString &name, int i)const;
+
+    QVector<QImage> AllSheets();
+
+    void SaveLayoutAs();
+    void PrintPreview();
+    void LayoutPrint();
+
+    void SetPrinterSettings(QPrinter *printer);
+
+    bool isPagesUniform() const;
+    QString FileName() const;
+
+    int ContinueIfLayoutStale();
 };
 
 #endif // MAINWINDOWSNOGUI_H

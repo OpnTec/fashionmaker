@@ -35,8 +35,6 @@
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
-#include "xml/vdomdocument.h"
-
 
 namespace Ui
 {
@@ -156,8 +154,7 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::MainWindow     *ui;
 
-    /** @brief doc dom document container */
-    VPattern           *doc;
+
 
     /** @brief tool current tool */
     Tool               currentTool;
@@ -186,9 +183,6 @@ private:
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;
-
-    /** @brief fileName name current pattern file. */
-    QString            curFile;
 
     /** @brief mode keep current draw mode. */
     Draw               mode;
@@ -222,6 +216,7 @@ private:
 
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
+    void               SetLayoutModeActions(bool enable);
 
     void               SaveCurrentScene();
     void               RestoreCurrentScene();

@@ -50,7 +50,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>272</height>
         </rect>
        </property>
@@ -337,7 +337,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>58</height>
         </rect>
        </property>
@@ -413,7 +413,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>156</height>
         </rect>
        </property>
@@ -567,7 +567,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>105</width>
          <height>104</height>
         </rect>
        </property>
@@ -745,8 +745,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>87</width>
-         <height>58</height>
+         <width>105</width>
+         <height>380</height>
         </rect>
        </property>
        <attribute name="label">
@@ -815,10 +815,26 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <widget class="QMenu" name="menuLayout">
+     <property name="title">
+      <string>Layout</string>
+     </property>
+     <addaction name="actionSaveAsPDF"/>
+     <addaction name="actionPrintPreview"/>
+     <addaction name="actionPrint"/>
+     <addaction name="separator"/>
+     <addaction name="actionSaveAsTiledPDF"/>
+     <addaction name="actionPrintPreviewTailed"/>
+     <addaction name="actionPrintTiled"/>
+     <addaction name="separator"/>
+     <addaction name="actionExportAs"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="menuLayout"/>
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="separator"/>
@@ -1512,6 +1528,115 @@
    </property>
    <property name="shortcut">
     <string>F2</string>
+   </property>
+  </action>
+  <action name="actionSaveAsPDF">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/icon.qrc">
+     <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save as PDF</string>
+   </property>
+   <property name="toolTip">
+    <string>Save original layout</string>
+   </property>
+  </action>
+  <action name="actionSaveAsTiledPDF">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/icon.qrc">
+     <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save as tiled PDF</string>
+   </property>
+   <property name="toolTip">
+    <string>Split and save a layout into smaller pages</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-print">
+     <normaloff/>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print original a layout</string>
+   </property>
+  </action>
+  <action name="actionPrintTiled">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-print">
+     <normaloff/>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Print tiled</string>
+   </property>
+   <property name="toolTip">
+    <string>Split and print a layout into smaller pages (for regular printers)</string>
+   </property>
+  </action>
+  <action name="actionPrintPreview">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-print-preview">
+     <normaloff/>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Print preview</string>
+   </property>
+   <property name="toolTip">
+    <string>Print preview original layout</string>
+   </property>
+  </action>
+  <action name="actionPrintPreviewTailed">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-print-preview">
+     <normaloff/>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Print preview tailed</string>
+   </property>
+   <property name="toolTip">
+    <string>Print preview tailed layout</string>
+   </property>
+  </action>
+  <action name="actionExportAs">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/icon.qrc">
+     <normaloff>:/icon/32x32/export_to_picture_document.png</normaloff>:/icon/32x32/export_to_picture_document.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export As...</string>
+   </property>
+   <property name="toolTip">
+    <string>Export original layout</string>
    </property>
   </action>
  </widget>

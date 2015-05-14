@@ -60,5 +60,6 @@
         <file>icon/16x16/fx.png</file>
         <file>icon/16x16/roll.png</file>
         <file>icon/16x16/progress.gif</file>
+        <file>icon/32x32/export_to_picture_document.png</file>
     </qresource>
 </RCC>

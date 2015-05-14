@@ -73,10 +73,10 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), doc(nullptr), currentTool(Tool::Arrow),
+    :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
       mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), dialogTable(nullptr), dialogTool(nullptr),
-      dialogHistory(nullptr), comboBoxDraws(nullptr), curFile(QString()), mode(Draw::Calculation), currentDrawIndex(0),
+      dialogHistory(nullptr), comboBoxDraws(nullptr), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
       gradationSizes(nullptr),
@@ -818,7 +818,7 @@ void MainWindow::ClearLayout()
     shadows.clear();
     papers.clear();
     ui->listWidget->clear();
-    //EnableActions(false);
+    SetLayoutModeActions(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -833,7 +833,7 @@ void MainWindow::PrepareSceneList()
     if (not scenes.isEmpty())
     {
         ui->listWidget->setCurrentRow(0);
-        //EnableActions(true);
+        SetLayoutModeActions(true);
     }
 }
 
@@ -1804,6 +1804,7 @@ void MainWindow::Layout()
     {
         ui->actionDetails->setEnabled(true);
         ui->actionLayout->setEnabled(true);
+        SetLayoutModeActions(true);
     }
     else
     {
@@ -1811,6 +1812,7 @@ void MainWindow::Layout()
         ui->actionDetails->setEnabled(false);
         ui->actionLayout->setEnabled(false);
         ui->actionDraw->setChecked(true);
+        SetLayoutModeActions(false);
     }
 }
 
@@ -1970,6 +1972,7 @@ void MainWindow::PatternWasModified(bool saved)
     {
         setWindowModified(!saved);
         ui->actionSave->setEnabled(!saved);
+        isLayoutStale = true;
     }
 }
 
@@ -2121,6 +2124,23 @@ void MainWindow::SetEnableTool(bool enable)
 
     //Layout tools
     ui->toolButtonLayoutSettings->setEnabled(layoutTools);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetLayoutModeActions(bool enable)
+{
+    bool value = enable;
+    if (scenes.isEmpty())
+    {
+        value = false;
+    }
+    ui->actionExportAs->setEnabled(value);
+    ui->actionPrintPreview->setEnabled(value);
+    ui->actionPrintPreviewTailed->setEnabled(value);
+    ui->actionSaveAsPDF->setEnabled(value);
+    ui->actionSaveAsTiledPDF->setEnabled(value);
+    ui->actionPrint->setEnabled(value);
+    ui->actionPrintTiled->setEnabled(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2524,6 +2544,14 @@ void MainWindow::CreateActions()
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
     connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
+
+    connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
+    connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
+    connect(ui->actionPrintPreviewTailed, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
+    connect(ui->actionSaveAsPDF, &QAction::triggered, this, &MainWindow::SaveAsPDF);
+    connect(ui->actionSaveAsTiledPDF, &QAction::triggered, this, &MainWindow::SaveAsTiledPDF);
+    connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);
+    connect(ui->actionPrintTiled, &QAction::triggered, this, &MainWindow::PrintTiled);
     ui->actionEdit_pattern_code->setEnabled(false);
 
     //Actions for recent files loaded by a main window application.
@@ -2787,12 +2815,12 @@ void MainWindow::ShowPaper(int index)
     if (index < 0 || index >= scenes.size())
     {
         ui->view->setScene(tempSceneLayout);
-        //EnableActions(false);
+        SetLayoutModeActions(false);
     }
     else
     {
         ui->view->setScene(scenes.at(index));
-        //EnableActions(true);
+        SetLayoutModeActions(true);
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);
