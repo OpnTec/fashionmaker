@@ -16,7 +16,6 @@ include(core/core.pri)
 SOURCES += \
         $$PWD/main.cpp \
         $$PWD/mainwindow.cpp \
-        $$PWD/tablewindow.cpp \
         $$PWD/stable.cpp \
         $$PWD/version.cpp \
         $$PWD/options.cpp \
@@ -26,14 +25,10 @@ SOURCES += \
 HEADERS  += \
         $$PWD/mainwindow.h \
         $$PWD/options.h \
-        $$PWD/tablewindow.h \
         $$PWD/stable.h \
         $$PWD/version.h \
         $$PWD/mainwindowsnogui.h
 
 # Main forms
 FORMS    += \
-        $$PWD/mainwindow.ui \
-        $$PWD/tablewindow.ui
-
-
+        $$PWD/mainwindow.ui

@@ -29,7 +29,6 @@
 #include "mainwindow.h"
 #include "core/vapplication.h"
 #include "core/vsettings.h"
-#include "tablewindow.h"
 #include "version.h"
 
 #include <QTextCodec>
