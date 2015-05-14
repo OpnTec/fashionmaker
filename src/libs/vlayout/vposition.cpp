@@ -660,7 +660,7 @@ QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::Rotate(int increase)
 {
-    for (int angle = 0; angle <= 360; angle = angle+increase)
+    for (int angle = 0; angle < 360; angle = angle+increase)
     {
         if (*stop)
         {
