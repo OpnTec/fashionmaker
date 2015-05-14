@@ -123,6 +123,15 @@ qreal Calculator::EvalFormula(const QString &formula)
     // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
     RemoveAll(tokens, QStringLiteral("-"));
 
+    for (int i = 0; i < builInFunctions.size(); ++i)
+    {
+        if (tokens.isEmpty())
+        {
+            break;
+        }
+        RemoveAll(tokens, builInFunctions.at(i));
+    }
+
     if (tokens.isEmpty())
     {
         return result; // We have found only numbers in expression.
@@ -185,11 +194,6 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
                 DefineVar(data->HeightName(), &vVarVal[1]);
                 found = true;
             }
-        }
-
-        if (builInFunctions.contains(i.value()))
-        {// We have found built-in function
-            found = true;
         }
 
         if (found == false)
