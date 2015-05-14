@@ -1516,6 +1516,8 @@ void VApplication::InitFunctions()
     functions.insert(max_F, QmuTranslation::translate("Functions", "max", "max of all arguments"));
     functions.insert(sum_F, QmuTranslation::translate("Functions", "sum", "sum of all arguments"));
     functions.insert(avg_F, QmuTranslation::translate("Functions", "avg", "mean value of all arguments"));
+    functions.insert(fmod_F, QmuTranslation::translate("Functions", "fmod",
+                                         "Returns the floating-point remainder of numer/denom (rounded towards zero)"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

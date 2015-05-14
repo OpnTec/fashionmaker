@@ -306,6 +306,7 @@ extern const QString min_F;
 extern const QString max_F;
 extern const QString sum_F;
 extern const QString avg_F;
+extern const QString fmod_F;
 
 extern const QStringList builInFunctions;
 
