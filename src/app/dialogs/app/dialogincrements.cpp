@@ -127,7 +127,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     }
     else
     {
-        QRegExpValidator *reg = new QRegExpValidator(QRegExp("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"));
+        QRegularExpressionValidator *reg =
+             new QRegularExpressionValidator(QRegularExpression("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"));
         ui->lineEditMail->setValidator(reg);
 
         HideColumns(ui->tableWidgetMeasurements);
