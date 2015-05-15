@@ -65,6 +65,7 @@ public:
 
     QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
 
+    QLineF EmptySheetEdge() const;
     int    EdgesCount() const;
     QLineF GlobalEdge(int i) const;
     QVector<QPointF> CutEdge(const QLineF &edge) const;

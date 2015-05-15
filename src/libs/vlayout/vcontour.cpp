@@ -213,8 +213,7 @@ int VContour::EdgesCount() const
             return 1;
         }
 
-        const QLineF axis = QLineF(0, 0, d->paperWidth, 0);
-        const int n = qFloor(axis.length()/d->shift);
+        const int n = qFloor(EmptySheetEdge().length()/d->shift);
         if (n <= 0)
         {
             return 1;
@@ -236,7 +235,7 @@ QLineF VContour::GlobalEdge(int i) const
     if (d->globalContour.isEmpty())
     {
         // Because sheet is blank we have one global edge for all cases - Ox axis.
-        const QLineF axis = QLineF(0, 0, d->paperWidth - 5, 0);
+        const QLineF axis = EmptySheetEdge();
         if (d->shift == 0)
         {
             return axis;
@@ -327,4 +326,10 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detai
         ++processedEdges;
         ++j;
     }while (processedEdges < nD);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VContour::EmptySheetEdge() const
+{
+    return QLineF(0, 0, d->paperWidth - 5, 0);
 }
