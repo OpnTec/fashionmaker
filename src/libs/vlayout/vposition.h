@@ -82,6 +82,10 @@ private:
     volatile bool *stop;
     bool rotate;
     int rotationIncrease;
+    /**
+     * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.
+     */
+    qreal angle_between;
 
     enum class CrossingType : char
     {
@@ -101,7 +105,7 @@ private:
 
     void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 
-    bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const;
+    bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge);
     bool CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const;
 
     CrossingType Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const;
@@ -109,7 +113,7 @@ private:
     qreal        CheckSide(const QLineF &edge, const QPointF &p) const;
     bool         SheetContains(const QRectF &rect) const;
 
-    void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const;
+    void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge);
     void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
     QPolygonF GlobalPolygon() const;

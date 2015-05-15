@@ -50,7 +50,7 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detai
                      bool rotate, int rotationIncrease, bool saveLength)
     :QRunnable(), bestResult(VBestSquare(gContour.GetSize(), saveLength)), gContour(gContour), detail(detail), i(i),
       j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate),
-      rotationIncrease(rotationIncrease)
+      rotationIncrease(rotationIncrease), angle_between(0)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
@@ -161,7 +161,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     QPainterPath p;
     if (contour.GetContour().isEmpty())
     {
-        p = DrawContour(contour.CutEdge(QLineF(0, 0, contour.GetWidth(), 0)));
+        p = DrawContour(contour.CutEdge(contour.EmptySheetEdge()));
         p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
@@ -195,8 +195,10 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     const QRect pictureRect = picture.boundingRect();
 
     // Sheet
+#ifdef SHOW_SHEET
     paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     paint.drawRect(QRectF(biasWidth/2, biasHeight/2, contour.GetWidth(), contour.GetHeight()));
+#endif
 
     paint.end();
 
@@ -246,7 +248,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const
+bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagMirror = false;
@@ -263,7 +265,14 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) cons
     CrossingType type = CrossingType::Intersection;
     if (SheetContains(detail.BoundingRect()))
     {
-        type = Crossing(detail, j, dEdge);
+        if (not gContour.GetContour().isEmpty())
+        {
+            type = Crossing(detail, j, dEdge);
+        }
+        else
+        {
+            type = CrossingType::NoIntersection;
+        }
     }
 
     switch (type)
@@ -561,7 +570,7 @@ bool VPosition::SheetContains(const QRectF &rect) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const
+void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge)
 {
     QLineF detailEdge = detail.Edge(dEdge);
 
@@ -571,11 +580,14 @@ void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, co
 
     detailEdge.translate(dx, dy); // Use values for translate detail edge.
 
-    const qreal angle_between = globalEdge.angleTo(detailEdge); // Seek angle between two edges.
+    angle_between = globalEdge.angleTo(detailEdge); // Seek angle between two edges.
 
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
-    detail.Rotate(detailEdge.p2(), -angle_between);
+    if (not qFuzzyCompare(angle_between+360, 0+360))
+    {
+        detail.Rotate(detailEdge.p2(), -angle_between);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -660,7 +672,12 @@ QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::Rotate(int increase)
 {
-    for (int angle = 0; angle < 360; angle = angle+increase)
+    int startAngle = 0;
+    if (qFuzzyCompare(angle_between+360, 0+360))
+    {
+        startAngle = increase;
+    }
+    for (int angle = startAngle; angle < 360; angle = angle+increase)
     {
         if (*stop)
         {

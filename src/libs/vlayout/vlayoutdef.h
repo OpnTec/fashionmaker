@@ -57,6 +57,7 @@ enum class BestFrom : char
 #   define SHOW_VERTICES         // Show contour vertices
 #   define SHOW_DIRECTION        // Show contour direction
 #   define ARRANGED_DETAILS      // Show already arranged details
+//#   define SHOW_SHEET            // Show sheet rect
 
 // Debugging
 #   define SHOW_CANDIDATE        // Show each position
