@@ -70,22 +70,26 @@ defineReplace(set_PCH){
 }
 
 defineReplace(enable_ccache){
-    # ccache support only Unix systems.
-    unix:{
-        # This need for turn on ccache.
-        *-g++{
-            QMAKE_CC = ccache gcc
-            export(QMAKE_CC) # export value to global variable.
+    no_ccache{ # For enable run qmake with CONFIG+=no_ccache
+        # do nothing
+    } else {
+        # ccache support only Unix systems.
+        unix:{
+            # This need for turn on ccache.
+            *-g++{
+                QMAKE_CC = ccache gcc
+                export(QMAKE_CC) # export value to global variable.
 
-            QMAKE_CXX = ccache g++
-            export(QMAKE_CXX) # export value to global variable.
-        }
-        clang*{
-            QMAKE_CC = ccache clang
-            export(QMAKE_CC) # export value to global variable.
+                QMAKE_CXX = ccache g++
+                export(QMAKE_CXX) # export value to global variable.
+            }
+            clang*{
+                QMAKE_CC = ccache clang
+                export(QMAKE_CC) # export value to global variable.
 
-            QMAKE_CXX = ccache clang++
-            export(QMAKE_CXX) # export value to global variable.
+                QMAKE_CXX = ccache clang++
+                export(QMAKE_CXX) # export value to global variable.
+            }
         }
     }
     return(true)
