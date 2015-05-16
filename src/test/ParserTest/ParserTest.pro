@@ -83,9 +83,13 @@ CONFIG(debug, debug|release){
     # Release mode
     DEFINES += QT_NO_DEBUG_OUTPUT
 
-    # Turn on debug symbols in release mode on Unix systems.
-    # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-    unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+    noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+        # do nothing
+    } else {
+        # Turn on debug symbols in release mode on Unix systems.
+        # On Mac OS X temporarily disabled. Need find way how to strip binary file.
+        unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+    }
 }
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../libs/qmuparser/bin/ -lqmuparser2
@@ -95,12 +99,20 @@ else:unix: LIBS += -L$$OUT_PWD/../../libs/qmuparser/bin/ -lqmuparser
 INCLUDEPATH += $$PWD/../../libs/qmuparser
 DEPENDPATH += $$PWD/../../libs/qmuparser
 
-# Strip after you link all libaries.
-CONFIG(release, debug|release){
-    unix:!macx{
-        # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-        QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+    # do nothing
+} else {
+    noStripDebugSymbols { # For enable run qmake with CONFIG+=noStripDebugSymbols
+        # do nothing
+    } else {
+        # Strip after you link all libaries.
+        CONFIG(release, debug|release){
+            unix:!macx{
+                # Strip debug symbols.
+                QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
+                QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
+                QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+            }
+        }
     }
 }

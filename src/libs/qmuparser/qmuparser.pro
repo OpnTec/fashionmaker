@@ -104,16 +104,28 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
-    !macx:!win32-msvc*{
-        # Turn on debug symbols in release mode on Unix systems.
-        # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
-        QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_LFLAGS_RELEASE =
+    noStripDebugSymbols {
+        # do nothing
+    } else {
+        !macx:!win32-msvc*{
+            noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+                # do nothing
+            } else {
+                # Turn on debug symbols in release mode on Unix systems.
+                # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
+                QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+                QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+                QMAKE_LFLAGS_RELEASE =
 
-        # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
-        QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+                noStripDebugSymbols { # For enable run qmake with CONFIG+=noStripDebugSymbols
+                    # do nothing
+                } else {
+                    # Strip debug symbols.
+                    QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
+                    QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
+                    QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+                }
+            }
+        }
     }
 }

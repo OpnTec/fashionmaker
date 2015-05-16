@@ -129,12 +129,16 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
-    # Turn on debug symbols in release mode on Unix systems.
-    # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-    !macx:!win32-msvc*{
-        QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_LFLAGS_RELEASE =
+    noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+        # do nothing
+    } else {
+        # Turn on debug symbols in release mode on Unix systems.
+        # On Mac OS X temporarily disabled. Need find way how to strip binary file.
+        !macx:!win32-msvc*{
+            QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_LFLAGS_RELEASE =
+        }
     }
 
     macx{
@@ -595,23 +599,30 @@ DEPENDPATH += $$PWD/../libs/vgeometry
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
-# Strip after you link all libaries.
-CONFIG(release, debug|release){
-    win32:!win32-msvc*{
-        # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
-        QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
-    }
+noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+    # do nothing
+} else {
+    noStripDebugSymbols { # For enable run qmake with CONFIG+=noStripDebugSymbols
+        # do nothing
+    } else {
+        # Strip after you link all libaries.
+        CONFIG(release, debug|release){
+            win32:!win32-msvc*{
+                # Strip debug symbols.
+                QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
+                QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
+                QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+            }
 
-    unix:!macx{
-        # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
-        QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
+            unix:!macx{
+                # Strip debug symbols.
+                QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
+                QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
+                QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
+            }
+        }
     }
 }
-
 
 
 macx{
