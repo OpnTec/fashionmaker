@@ -78,7 +78,7 @@ CONFIG(debug, debug|release){
             QMAKE_CXXFLAGS -= \
                 -Wswitch-default
 
-            noAddressSanitizer{
+            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
             } else {
                 #gcc’s 4.8.0 Address Sanitizer

@@ -88,7 +88,7 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
                 $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
 
-            noAddressSanitizer{
+            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
             } else {
                 #gcc’s 4.8.0 Address Sanitizer
