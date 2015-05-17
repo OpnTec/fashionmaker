@@ -114,7 +114,6 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
             case LayoutErrors::PrepareLayoutError:
             case LayoutErrors::PaperSizeError:
             case LayoutErrors::EmptyPaperError:
-                ClearLayout();
                 break;
             default:
                 break;
