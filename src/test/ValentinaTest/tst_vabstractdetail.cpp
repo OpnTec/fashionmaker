@@ -42,7 +42,9 @@ TST_VAbstractDetail::TST_VAbstractDetail(QObject *parent)
 void TST_VAbstractDetail::EquidistantRemoveLoop() const
 {
     // These are two real cases where equdistant has loop.
-    // Code should clean loops.
+    // See issue #298. Segmented Curve isn't selected in Seam Allowance tool.
+    // https://bitbucket.org/dismine/valentina/issue/298/segmented-curve-isnt-selected-in-seam
+    // Code should clean loops in path.
     Case1();
     Case2();
 }
