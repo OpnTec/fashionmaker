@@ -227,26 +227,27 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
 QVector<QPointF> VAbstractDetail::RemoveDublicates(const QVector<QPointF> &points)
 {
     QVector<QPointF> p = points;
-    for (int i = 0; i < p.size(); i++)
-    {
-        QPointF current = p.at(i);
 
-        for (int j = i; j < p.size(); j++)
+    if (not p.isEmpty() && p.size() > 1)
+    {
+        // Path can't be closed
+        if (p.first() == p.last())
         {
-            if (j == i)
-            {
-                continue;
-            }
-            else
-            {
-                QPointF temp = p.at(j);
-                if (current == temp)
-                {
-                    QVector<QPointF>::iterator iter = p.begin() + j;
-                    p.erase(iter);
-                    j--;
-                }
-            }
+        #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+            p.remove(p.size() - 1);
+        #else
+            p.removeLast();
+        #endif
+        }
+    }
+
+    for (int i = 0; i < p.size()-1; ++i)
+    {
+        if (p.at(i) == p.at(i+1))
+        {
+            p.erase(p.begin() + i + 1);
+            --i;
+            continue;
         }
     }
 
