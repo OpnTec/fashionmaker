@@ -101,7 +101,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
         switch (lGenerator.State())
         {
             case LayoutErrors::NoError:
-                ClearLayout();
+                CleanLayout();
                 papers = lGenerator.GetPapersItems();// Blank sheets
                 details = lGenerator.GetAllDetails();// All details
                 CreateShadows();

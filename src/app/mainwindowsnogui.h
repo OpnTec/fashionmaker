@@ -87,7 +87,7 @@ protected:
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
 
     void InitTempLayoutScene();
-    virtual void ClearLayout()=0;
+    virtual void CleanLayout()=0;
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
 

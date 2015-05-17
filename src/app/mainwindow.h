@@ -147,7 +147,7 @@ protected:
     virtual void       closeEvent(QCloseEvent *event);
     virtual void       customEvent(QEvent * event);
 
-    virtual void       ClearLayout();
+    virtual void       CleanLayout();
     virtual void       PrepareSceneList();
 private:
     Q_DISABLE_COPY(MainWindow)

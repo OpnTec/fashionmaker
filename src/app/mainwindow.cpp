@@ -811,7 +811,7 @@ void MainWindow::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ClearLayout()
+void MainWindow::CleanLayout()
 {
     qDeleteAll (scenes);
     scenes.clear();
@@ -2617,7 +2617,7 @@ QString MainWindow::PatternPieceName(const QString &text)
 MainWindow::~MainWindow()
 {
     CancelTool();
-    ClearLayout();
+    CleanLayout();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     delete lock; // Unlock pattern file
