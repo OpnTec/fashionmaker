@@ -33,8 +33,7 @@ Compiling Valentina
 Prerequisites:   
    * Qt 5.2.0 or later (On Unix development packages needed)   
    * mercurial (only for working with repository)   
-   * On Unix:   
-     - ccache   
+   * On Unix:     
      - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
        clang (clang 3.4 recommended)
      - xpdf package (tool pdftops).    
@@ -48,8 +47,8 @@ The installed toolchains have to match the one Qt was compiled with.
 
 You can build Valentina with
 
-    cd $SOURCE_DIRECTORY
-    qmake Valentina.pro -r (or qmake-qt5, depending on your platform)
+    cd $SOURCE_DIRECTORY\build
+    qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache (or qmake-qt5, depending on your platform)
     make (or mingw32-make or nmake or jom, depending on your platform)
 
 Note:In order to build and use Valentina, the PATH environment variable 
@@ -69,7 +68,7 @@ Unix systems:
 Default prefix for command "make install" is /usr. For using another 
 prefix build with qmake command:
 
-qmake PREFIX=/usr/local PREFIX_LIB=/usr/lib/i386-linux-gnu Valentina.pro -r
+qmake PREFIX=/usr/local PREFIX_LIB=/usr/lib/i386-linux-gnu Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache
 
 where /usr/local is a new prefix for installation binary files and /usr/lib/i386-linux-gnu is new prefix for install libraries.
 
