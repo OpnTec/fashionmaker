@@ -88,7 +88,7 @@ CONFIG(debug, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        unix:!macx:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+        !macx:!win32-msvc*:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
     }
 }
 

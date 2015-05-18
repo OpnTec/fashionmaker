@@ -83,11 +83,15 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
-    !macx:!win32-msvc*{
-        # Turn on debug symbols in release mode on Unix systems.
-        # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
-        QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_LFLAGS_RELEASE =
+    noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+        # do nothing
+    } else {
+        !macx:!win32-msvc*{
+            # Turn on debug symbols in release mode on Unix systems.
+            # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
+            QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_LFLAGS_RELEASE =
+        }
     }
 }
