@@ -79,6 +79,9 @@ public:
     bool IsSaveLength() const;
     void SetSaveLength(bool value);
 
+    bool IsUnitePages() const;
+    void SetUnitePages(bool value);
+
 signals:
     void Start();
     void Arranged(int count);
@@ -101,6 +104,7 @@ private:
     int rotationIncrease;
     bool autoCrop;
     bool saveLength;
+    bool unitePages;
 
     void CheckDetailsSize();
 };

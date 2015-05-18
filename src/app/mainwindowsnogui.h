@@ -121,6 +121,11 @@ private:
     QString FileName() const;
 
     int ContinueIfLayoutStale();
+
+    void UnitePages();
+    QList<QGraphicsItem *> MoveDetails(qreal length, const QList<QGraphicsItem *> &details);
+    void UnitePapers(int j, QList<QGraphicsItem *> &nPapers, qreal width, qreal length);
+    void UniteDetails(int j, QList<QList<QGraphicsItem *> > &nDetails, qreal length, int i);
 };
 
 #endif // MAINWINDOWSNOGUI_H

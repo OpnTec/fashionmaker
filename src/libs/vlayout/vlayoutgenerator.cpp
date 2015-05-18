@@ -40,7 +40,7 @@
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
     :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
       stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180),
-      autoCrop(false), saveLength(false)
+      autoCrop(false), saveLength(false), unitePages(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,6 +188,18 @@ void VLayoutGenerator::Abort()
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     QThreadPool::globalInstance()->clear();
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsUnitePages() const
+{
+    return unitePages;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetUnitePages(bool value)
+{
+    unitePages = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

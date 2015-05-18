@@ -226,6 +226,18 @@ void DialogLayoutSettings::SetSaveLength(bool save)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::IsUnitePages() const
+{
+    return ui->checkBoxUnitePages->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetUnitePages(bool save)
+{
+    ui->checkBoxUnitePages->setChecked(save);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
     const QSizeF size = Template();
@@ -319,6 +331,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetRotationIncrease(GetIncrease());
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
+    generator->SetUnitePages(IsUnitePages());
 
     WriteSettings();
     accepted();
@@ -415,85 +428,73 @@ QSizeF DialogLayoutSettings::Template()
     switch (temp)
     {
         case PaperSizeTemplate::A0:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(false);
 
             width = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(1189, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A1:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(false);
 
             width = VAbstractMeasurements::UnitConvertor(594, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A2:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(false);
 
             width = VAbstractMeasurements::UnitConvertor(420, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(594, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A3:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(false);
 
             width = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(420, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A4:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(false);
 
             width = VAbstractMeasurements::UnitConvertor(210, Unit::Mm, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Letter:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(false);
 
             width = VAbstractMeasurements::UnitConvertor(8.5, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Legal:
-            SetAutoCrop(false);
-            SetSaveLength(false);
+            SetAdditionalOptions(true);
 
             width = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(17, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll24in:
-            SetAutoCrop(true);
-            SetSaveLength(true);
+            SetAdditionalOptions(true);
 
             width = VAbstractMeasurements::UnitConvertor(24, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll30in:
-            SetAutoCrop(true);
-            SetSaveLength(true);
+            SetAdditionalOptions(true);
 
             width = VAbstractMeasurements::UnitConvertor(30, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll36in:
-            SetAutoCrop(true);
-            SetSaveLength(true);
+            SetAdditionalOptions(true);
 
             width = VAbstractMeasurements::UnitConvertor(36, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll42in:
-            SetAutoCrop(true);
-            SetSaveLength(true);
+            SetAdditionalOptions(true);
 
             width = VAbstractMeasurements::UnitConvertor(42, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll44in:
-            SetAutoCrop(true);
-            SetSaveLength(true);
+            SetAdditionalOptions(true);
 
             width = VAbstractMeasurements::UnitConvertor(44, Unit::Inch, paperUnit);
             height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
@@ -620,6 +621,7 @@ void DialogLayoutSettings::ReadSettings()
     SetIncrease(qApp->getSettings()->GetLayoutRotationIncrease());
     SetAutoCrop(qApp->getSettings()->GetLayoutAutoCrop());
     SetSaveLength(qApp->getSettings()->GetLayoutSaveLength());
+    SetUnitePages(qApp->getSettings()->GetLayoutUnitePages());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -634,6 +636,7 @@ void DialogLayoutSettings::WriteSettings() const
     qApp->getSettings()->SetLayoutRotationIncrease(GetIncrease());
     qApp->getSettings()->SetLayoutAutoCrop(GetAutoCrop());
     qApp->getSettings()->SetLayoutSaveLength(IsSaveLength());
+    qApp->getSettings()->SetLayoutUnitePages(IsUnitePages());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -648,4 +651,12 @@ void DialogLayoutSettings::SheetSize(const QSizeF &size)
 
     CorrectPaperDecimals();
     PaperSizeChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetAdditionalOptions(bool value)
+{
+    SetAutoCrop(value);
+    SetSaveLength(value);
+    SetUnitePages(value);
 }

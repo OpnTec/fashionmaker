@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>661</width>
-    <height>317</height>
+    <height>345</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -202,6 +202,13 @@
            <widget class="QCheckBox" name="checkBoxAutoCrop">
             <property name="text">
              <string>Auto crop unused length</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxUnitePages">
+            <property name="text">
+             <string>Unite pages (if possible)</string>
             </property>
            </widget>
           </item>

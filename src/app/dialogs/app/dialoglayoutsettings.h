@@ -76,6 +76,9 @@ public:
     bool IsSaveLength() const;
     void SetSaveLength(bool save);
 
+    bool IsUnitePages() const;
+    void SetUnitePages(bool save);
+
 public slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();
@@ -113,6 +116,7 @@ private:
     void WriteSettings() const;
 
     void SheetSize(const QSizeF &size);
+    void SetAdditionalOptions(bool value);
 };
 
 #endif // DIALOGLAYOUTSETTINGS_H

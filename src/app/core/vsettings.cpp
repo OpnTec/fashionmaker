@@ -87,6 +87,7 @@ const QString VSettings::SettingLayoutRotate                     = QStringLitera
 const QString VSettings::SettingLayoutRotationIncrease           = QStringLiteral("layout/rotationIncrease");
 const QString VSettings::SettingLayoutAutoCrop                   = QStringLiteral("layout/autoCrop");
 const QString VSettings::SettingLayoutSaveLength                 = QStringLiteral("layout/saveLength");
+const QString VSettings::SettingLayoutUnitePages                 = QStringLiteral("layout/unitePages");
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -698,6 +699,18 @@ bool VSettings::GetLayoutSaveLength() const
 void VSettings::SetLayoutSaveLength(bool value)
 {
     setValue(SettingLayoutSaveLength, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetLayoutUnitePages() const
+{
+    return value(SettingLayoutUnitePages, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetLayoutUnitePages(bool value)
+{
+    setValue(SettingLayoutUnitePages, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -166,6 +166,9 @@ public:
     bool GetLayoutSaveLength() const;
     void SetLayoutSaveLength(bool value);
 
+    bool GetLayoutUnitePages() const;
+    void SetLayoutUnitePages(bool value);
+
 private:
     Q_DISABLE_COPY(VSettings)
     static const QString SettingConfigurationOsSeparator;
@@ -213,6 +216,7 @@ private:
     static const QString SettingLayoutRotationIncrease;
     static const QString SettingLayoutAutoCrop;
     static const QString SettingLayoutSaveLength;
+    static const QString SettingLayoutUnitePages;
 };
 
 #endif // VSETTINGS_H
