@@ -165,7 +165,7 @@ void MainWindowsNoGUI::ExportLayoutAs()
             brush->setColor( QColor( Qt::white ) );
             scenes[i]->setBackgroundBrush( *brush );
             shadows[i]->setVisible(false);
-            paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));
+            paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
             const QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj";
             switch (suffix.indexOf(suf))
             {
@@ -195,7 +195,7 @@ void MainWindowsNoGUI::ExportLayoutAs()
                     qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
                     break;
             }
-            paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+            paper->setPen(QPen(Qt::black, 1));
             brush->setColor( QColor( Qt::gray ) );
             brush->setStyle( Qt::SolidPattern );
             scenes[i]->setBackgroundBrush( *brush );
