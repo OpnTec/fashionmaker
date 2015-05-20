@@ -509,7 +509,7 @@ void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
         painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine()), Qt::SolidLine, Qt::RoundCap,
                             Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter);
+        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
     }
 }
@@ -526,7 +526,7 @@ void MainWindowsNoGUI::PngFile(const QString &name, int i) const
     {
         const QRectF r = paper->rect();
         // Create the image with the exact size of the shrunk scene
-        QImage image(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_ARGB32);
+        QImage image(r.size().toSize(), QImage::Format_ARGB32);
         image.fill(Qt::transparent);                                              // Start all pixels transparent
         QPainter painter(&image);
         painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
@@ -534,7 +534,7 @@ void MainWindowsNoGUI::PngFile(const QString &name, int i) const
         painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
                             Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter, r, r);
+        scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
         image.save(name);
     }
 }
@@ -578,7 +578,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
                             Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
-        scenes.at(i)->render(&painter);
+        scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
         painter.end();
     }
 }
@@ -654,7 +654,7 @@ void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
         generator.setResolution(static_cast<int>(qApp->PrintDPI));
         QPainter painter;
         painter.begin(&generator);
-        scenes.at(i)->render(&painter);
+        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
     }
 }
