@@ -1,3 +1,7 @@
+# Version 0.3.3 Released May 20, 2015
+- [#297] Scaling Error - Print.
+- [#304] Layout appears different than my pattern.
+
 # Version 0.3.2 Released May 15, 2015
 - [#298] Segmented Curve isn't selected in Seam Allowance tool.
 - [#299] Error when opening .val file.
