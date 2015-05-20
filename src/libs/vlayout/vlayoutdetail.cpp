@@ -69,14 +69,7 @@ QVector<QPointF> VLayoutDetail::GetContourPoints() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutDetail::SetCountourPoints(const QVector<QPointF> &points)
 {
-    d->contour = points;
-    // Contour can't be closed
-    if (d->contour.first() == d->contour.last())
-    {
-        d->contour.removeLast();
-    }
-
-    d->contour = RemoveDublicates(RoundPoints(d->contour));
+    d->contour = RemoveDublicates(RoundPoints(points));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,12 +87,6 @@ void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool 
         d->seamAllowence = points;
         if (not d->seamAllowence.isEmpty())
         {
-            // Seam allowence can't be closed
-            if (d->seamAllowence.first() == d->seamAllowence.last())
-            {
-                d->seamAllowence.removeLast();
-            }
-
             d->seamAllowence = RemoveDublicates(RoundPoints(d->seamAllowence));
         }
         else
