@@ -31,6 +31,8 @@
 
 #include "../../core/vapplication.h"
 #include "../../utils/logging.h"
+#include "../../widgets/vmaingraphicsscene.h"
+#include "../../visualization/visualization.h"
 
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -177,6 +179,8 @@ protected:
     /** @brief number number of handled objects */
     qint32           number;
 
+    Visualization   *vis;
+
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
 
@@ -260,6 +264,34 @@ protected:
         labelResultCalculation = ui->labelResultCalculation;
         plainTextEditFormula = ui->plainTextEditFormula;
         labelEditFormula = ui->labelEditFormula;
+    }
+    template <typename T>
+    void             AddVisualization()
+    {
+        if (prepare == false)
+        {
+            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+            SCASSERT(scene != nullptr);
+
+            T *toolVis = qobject_cast<T *>(vis);
+            SCASSERT(toolVis != nullptr);
+
+            connect(scene, &VMainGraphicsScene::NewFactor, toolVis, &Visualization::SetFactor);
+            scene->addItem(toolVis);
+            toolVis->RefreshGeometry();
+        }
+    }
+
+    template <typename T>
+    void             DeleteVisualization()
+    {
+        T *toolVis = qobject_cast<T *>(vis);
+        SCASSERT(toolVis != nullptr);
+
+        if (qApp->getCurrentScene()->items().contains(toolVis))
+        { // In some cases scene delete object yourself. If not make check program will crash.
+            delete vis;
+        }
     }
 
     void             ChangeColor(QWidget *widget, const QColor &color);

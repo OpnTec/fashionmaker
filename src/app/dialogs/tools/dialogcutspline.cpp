@@ -42,8 +42,7 @@
  * @param parent parent widget
  */
 DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()), formulaBaseHeight(0),
-      path(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitFormulaUI(ui);
@@ -64,16 +63,13 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutSpline::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
 
-    path = new VisToolCutSpline(data);
+    vis = new VisToolCutSpline(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutSpline::~DialogCutSpline()
 {
-    if (qApp->getCurrentScene()->items().contains(path))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete path;
-    }
+    DeleteVisualization<VisToolCutSpline>();
     delete ui;
 }
 
@@ -103,7 +99,11 @@ void DialogCutSpline::SetFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+
+    VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->setLength(formula);
+
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
@@ -115,6 +115,9 @@ void DialogCutSpline::SetFormula(const QString &value)
 void DialogCutSpline::setSplineId(const quint32 &value)
 {
     setCurrentSplineId(ui->comboBoxSpline, value, ComboBoxCutSpline::CutSpline);
+
+    VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->setPoint1Id(value);
 }
 
@@ -144,7 +147,7 @@ void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxSpline, ""))
             {
-                path->VisualMode(id);
+                vis->VisualMode(id);
                 prepare = true;
                 this->setModal(true);
                 this->show();
@@ -159,6 +162,9 @@ void DialogCutSpline::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
+
+    VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
+    SCASSERT(path != nullptr);
 
     path->setPoint1Id(getSplineId());
     path->setLength(formula);
@@ -194,14 +200,7 @@ void DialogCutSpline::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
-        scene->addItem(path);
-        path->RefreshGeometry();
-    }
+    AddVisualization<VisToolCutSpline>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

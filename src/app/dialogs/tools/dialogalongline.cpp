@@ -43,7 +43,7 @@
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine),
-      formula(QString()), formulaBaseHeight(0), line(nullptr)
+      formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitFormulaUI(ui);
@@ -71,7 +71,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
 
-    line = new VisToolAlongLine(data);
+    vis = new VisToolAlongLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,14 +115,7 @@ void DialogAlongLine::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolAlongLine::SetFactor);
-        scene->addItem(line);
-        line->RefreshGeometry();
-    }
+    AddVisualization<VisToolAlongLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,10 +127,7 @@ void DialogAlongLine::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogAlongLine::~DialogAlongLine()
 {
-    if (qApp->getCurrentScene()->items().contains(line))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete line;
-    }
+    DeleteVisualization<VisToolAlongLine>();
     delete ui;
 }
 
@@ -153,6 +143,9 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+            SCASSERT(line != nullptr);
+
             const QString toolTip = tr("Select second point of line");
             switch (number)
             {
@@ -195,6 +188,9 @@ void DialogAlongLine::SaveData()
     formula = ui->plainTextEditFormula->toPlainText();
     formula.replace("\n", " ");
 
+    VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+    SCASSERT(line != nullptr);
+
     line->setPoint1Id(GetFirstPointId());
     line->setPoint2Id(GetSecondPointId());
     line->setLength(formula);
@@ -217,6 +213,9 @@ void DialogAlongLine::closeEvent(QCloseEvent *event)
 void DialogAlongLine::SetSecondPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
+
+    VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint2Id(value);
 }
 
@@ -228,6 +227,9 @@ void DialogAlongLine::SetSecondPointId(const quint32 &value)
 void DialogAlongLine::SetFirstPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
+
+    VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint1Id(value);
 }
 
@@ -245,7 +247,11 @@ void DialogAlongLine::SetFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+
+    VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setLength(formula);
+
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
@@ -257,7 +263,7 @@ void DialogAlongLine::SetFormula(const QString &value)
 void DialogAlongLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

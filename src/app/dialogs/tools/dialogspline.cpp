@@ -42,7 +42,7 @@
  */
 DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-      kCurve(1), path(nullptr)
+      kCurve(1)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -56,16 +56,13 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogSpline::PointNameChanged);
 
-    path = new VisToolSpline(data);
+    vis = new VisToolSpline(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSpline::~DialogSpline()
 {
-    if (qApp->getCurrentScene()->items().contains(path))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete path;
-    }
+    DeleteVisualization<VisToolSpline>();
     delete ui;
 }
 
@@ -91,6 +88,9 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+            SCASSERT(path != nullptr);
+
             switch (number)
             {
                 case 0:
@@ -147,6 +147,9 @@ void DialogSpline::SaveData()
     kAsm2 = ui->doubleSpinBoxKasm2->value();
     kCurve = ui->doubleSpinBoxKcurve->value();
 
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
+
     path->setPoint1Id(GetP1());
     path->setPoint4Id(GetP4());
     path->SetAngle1(angle1);
@@ -183,14 +186,7 @@ void DialogSpline::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
-        scene->addItem(path);
-        path->RefreshGeometry();
-    }
+    AddVisualization<VisToolSpline>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,6 +198,9 @@ void DialogSpline::SetKCurve(const qreal &value)
 {
     kCurve = value;
     ui->doubleSpinBoxKcurve->setValue(value);
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->SetKCurve(kCurve);
 }
 
@@ -226,6 +225,9 @@ void DialogSpline::SetKAsm2(const qreal &value)
 {
     kAsm2 = value;
     ui->doubleSpinBoxKasm2->setValue(value);
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->SetKAsm2(kAsm2);
 }
 
@@ -238,6 +240,9 @@ void DialogSpline::SetKAsm1(const qreal &value)
 {
     kAsm1 = value;
     ui->doubleSpinBoxKasm1->setValue(value);
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->SetKAsm1(kAsm1);
 }
 
@@ -250,6 +255,9 @@ void DialogSpline::SetAngle2(const qreal &value)
 {
     angle2 = value;
     ui->spinBoxAngle2->setValue(static_cast<qint32>(value));
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->SetAngle2(angle2);
 }
 
@@ -262,6 +270,9 @@ void DialogSpline::SetAngle1(const qreal &value)
 {
     angle1 = value;
     ui->spinBoxAngle1->setValue(static_cast<qint32>(value));
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->SetAngle1(angle1);
 }
 
@@ -273,6 +284,9 @@ void DialogSpline::SetAngle1(const qreal &value)
 void DialogSpline::SetP4(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxP4, value);
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->setPoint4Id(value);
 }
 
@@ -284,6 +298,9 @@ void DialogSpline::SetP4(const quint32 &value)
 void DialogSpline::SetP1(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxP1, value);
+
+    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
     path->setPoint1Id(value);
 }
 

@@ -44,7 +44,7 @@ class DialogUnionDetails : public DialogTool
     Q_OBJECT
 public:
     DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogUnionDetails();
+    virtual ~DialogUnionDetails();
 
     quint32          getD1() const;
     quint32          getD2() const;

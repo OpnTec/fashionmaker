@@ -36,8 +36,6 @@ namespace Ui
     class DialogPointOfIntersection;
 }
 
-class VisToolPointOfIntersection;
-
 /**
  * @brief The DialogPointOfIntersection class dialog for ToolPointOfIntersection. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogPointOfIntersection : public DialogTool
     Q_OBJECT
 public:
     DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogPointOfIntersection();
+    virtual ~DialogPointOfIntersection();
 
     void           SetPointName(const QString &value);
 
@@ -69,8 +67,6 @@ private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfIntersection *ui;
-
-    VisToolPointOfIntersection *line;
 };
 
 #endif // DIALOGPOINTOFINTERSECTION_H

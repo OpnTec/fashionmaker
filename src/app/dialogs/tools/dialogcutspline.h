@@ -36,8 +36,6 @@ namespace Ui
     class DialogCutSpline;
 }
 
-class VisToolCutSpline;
-
 /**
  * @brief The DialogCutSpline class dialog for ToolCutSpline.
  */
@@ -46,7 +44,7 @@ class DialogCutSpline : public DialogTool
     Q_OBJECT
 public:
     DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogCutSpline();
+    virtual ~DialogCutSpline();
 
     void                SetPointName(const QString &value);
 
@@ -83,8 +81,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                 formulaBaseHeight;
-
-    VisToolCutSpline     *path;
 };
 
 #endif // DIALOGCUTSPLINE_H

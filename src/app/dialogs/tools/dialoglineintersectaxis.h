@@ -36,15 +36,13 @@ namespace Ui
     class DialogLineIntersectAxis;
 }
 
-class VisToolLineIntersectAxis;
-
 class DialogLineIntersectAxis : public DialogTool
 {
     Q_OBJECT
 
 public:
     DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogLineIntersectAxis();
+    virtual ~DialogLineIntersectAxis();
 
     void         SetPointName(const QString &value);
 
@@ -87,8 +85,6 @@ private:
 
     QString formulaAngle;
     int     formulaBaseHeightAngle;
-
-    VisToolLineIntersectAxis *line;
 };
 
 #endif // DIALOGLINEINTERSECTAXIS_H

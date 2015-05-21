@@ -43,7 +43,7 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -63,16 +63,13 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogLine::PointNameChanged);
 
-    line = new VisToolLine(data);
+    vis = new VisToolLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLine::~DialogLine()
 {
-    if (qApp->getCurrentScene()->items().contains(line))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete line;
-    }
+    DeleteVisualization<VisToolLine>();
     delete ui;
 }
 
@@ -84,6 +81,9 @@ DialogLine::~DialogLine()
 void DialogLine::SetSecondPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
+
+    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint2Id(value);
 }
 
@@ -95,7 +95,7 @@ void DialogLine::SetSecondPoint(const quint32 &value)
 void DialogLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,6 +118,9 @@ void DialogLine::SetLineColor(const QString &value)
 void DialogLine::SetFirstPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
+
+    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint1Id(value);
 }
 
@@ -143,19 +146,15 @@ void DialogLine::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolLine::SetFactor);
-        scene->addItem(line);
-        line->RefreshGeometry();
-    }
+    AddVisualization<VisToolLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SaveData()
 {
+    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    SCASSERT(line != nullptr);
+
     line->setPoint1Id(GetFirstPoint());
     line->setPoint2Id(GetSecondPoint());
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
@@ -180,7 +179,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
                     if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
                     {
                         number++;
-                        line->VisualMode(id);
+                        vis->VisualMode(id);
                     }
                     break;
                 case 1:

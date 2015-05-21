@@ -36,8 +36,6 @@ namespace Ui
     class DialogTriangle;
 }
 
-class VisToolTriangle;
-
 /**
  * @brief The DialogTriangle class dialog for ToolTriangle. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogTriangle : public DialogTool
     Q_OBJECT
 public:
     DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogTriangle();
+    virtual ~DialogTriangle();
 
     quint32        GetAxisP1Id() const;
     void           SetAxisP1Id(const quint32 &value);
@@ -75,8 +73,6 @@ private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;
-
-    VisToolTriangle *line;
 };
 
 #endif // DIALOGTRIANGLE_H

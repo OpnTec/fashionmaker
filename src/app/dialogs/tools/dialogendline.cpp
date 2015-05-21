@@ -45,7 +45,7 @@
  */
 DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEndLine),
-      formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0), line(nullptr)
+      formulaLength(QString()), formulaAngle(QString()), formulaBaseHeight(0), formulaBaseHeightAngle(0)
 {
     ui->setupUi(this);
     InitFormulaUI(ui);
@@ -78,7 +78,7 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
 
     connect(timerFormula, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
 
-    line = new VisToolEndLine(data);
+    vis = new VisToolEndLine(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,8 +158,8 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxBasePoint, ""))
             {
-                line->VisualMode(id);
-                connect(line, &VisToolEndLine::ToolTip, this, &DialogTool::ShowVisToolTip);
+                vis->VisualMode(id);
+                connect(vis, &Visualization::ToolTip, this, &DialogTool::ShowVisToolTip);
                 prepare = true;
             }
         }
@@ -185,7 +185,7 @@ void DialogEndLine::SetPointName(const QString &value)
 void DialogEndLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -203,7 +203,11 @@ void DialogEndLine::SetFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formulaLength);
+
+    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setLength(formulaLength);
+
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
@@ -222,7 +226,11 @@ void DialogEndLine::SetAngle(const QString &value)
         this->DeployAngleTextEdit();
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
+
+    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    SCASSERT(line != nullptr);
     line->SetAngle(formulaAngle);
+
     MoveCursorToEnd(ui->plainTextEditAngle);
 }
 
@@ -234,6 +242,9 @@ void DialogEndLine::SetAngle(const QString &value)
 void DialogEndLine::SetBasePointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxBasePoint, value);
+
+    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint1Id(value);
 }
 
@@ -274,6 +285,10 @@ void DialogEndLine::ShowDialog(bool click)
             }
         }
         this->setModal(true);
+
+        VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+        SCASSERT(line != nullptr);
+
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
         emit ToolTip("");
         timerFormula->start();
@@ -284,15 +299,7 @@ void DialogEndLine::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        //TODO move to parent class!
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisToolEndLine::SetFactor);
-        scene->addItem(line);
-        line->RefreshGeometry();
-    }
+    AddVisualization<VisToolEndLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -305,6 +312,9 @@ void DialogEndLine::SaveData()
 
     formulaAngle = ui->plainTextEditAngle->toPlainText();
     formulaAngle.replace("\n", " ");
+
+    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    SCASSERT(line != nullptr);
 
     line->setPoint1Id(GetBasePointId());
     line->setLength(formulaLength);
@@ -324,10 +334,7 @@ void DialogEndLine::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::~DialogEndLine()
 {
-    if (qApp->getCurrentScene()->items().contains(line))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete line;
-    }
+    DeleteVisualization<VisToolEndLine>();
     delete ui;
 }
 

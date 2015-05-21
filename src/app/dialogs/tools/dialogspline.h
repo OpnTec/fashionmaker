@@ -36,8 +36,6 @@ namespace Ui
     class DialogSpline;
 }
 
-class VisToolSpline;
-
 /**
  * @brief The DialogSpline class dialog for ToolSpline. Help create spline and edit option.
  */
@@ -46,7 +44,7 @@ class DialogSpline : public DialogTool
     Q_OBJECT
 public:
     DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogSpline();
+    virtual ~DialogSpline();
 
     quint32       GetP1() const;
     void          SetP1(const quint32 &value);
@@ -100,8 +98,6 @@ private:
 
     /** @brief kCurve coefficient curve */
     qreal         kCurve;
-
-    VisToolSpline *path;
 };
 
 #endif // DIALOGSPLINE_H

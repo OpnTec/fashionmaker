@@ -47,8 +47,7 @@
 DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
       timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), radius(QString()), f1(QString()), f2(QString()),
-      formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), path(nullptr), angleF1(INT_MIN),
-      angleF2(INT_MIN)
+      formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), angleF1(INT_MIN), angleF2(INT_MIN)
 {
     ui->setupUi(this);
 
@@ -89,7 +88,7 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
 
-    path = new VisToolArc(data);
+    vis = new VisToolArc(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,10 +112,7 @@ void DialogArc::DeployF2TextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogArc::~DialogArc()
 {
-    if (qApp->getCurrentScene()->items().contains(path))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete path;
-    }
+    DeleteVisualization<VisToolArc>();
     delete ui;
 }
 
@@ -128,7 +124,7 @@ DialogArc::~DialogArc()
 void DialogArc::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxBasePoint, value);
-    path->setPoint1Id(value);
+    vis->setPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,7 +141,11 @@ void DialogArc::SetF2(const QString &value)
         this->DeployF2TextEdit();
     }
     ui->plainTextEditF2->setPlainText(f2);
+
+    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr);
     path->setF2(f2);
+
     MoveCursorToEnd(ui->plainTextEditF2);
 }
 
@@ -175,7 +175,11 @@ void DialogArc::SetF1(const QString &value)
         this->DeployF1TextEdit();
     }
     ui->plainTextEditF1->setPlainText(f1);
+
+    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr);
     path->setF1(f1);
+
     MoveCursorToEnd(ui->plainTextEditF1);
 }
 
@@ -193,7 +197,11 @@ void DialogArc::SetRadius(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(radius);
+
+    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr);
     path->setRadius(radius);
+
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
@@ -211,7 +219,7 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxBasePoint, ""))
             {
-                path->VisualMode(id);
+                vis->VisualMode(id);
                 prepare = true;
                 this->setModal(true);
                 this->show();
@@ -223,14 +231,7 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, path, &Visualization::SetFactor);
-        scene->addItem(path);
-        path->RefreshGeometry();
-    }
+    AddVisualization<VisToolArc>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,6 +243,9 @@ void DialogArc::SaveData()
     f1.replace("\n", " ");
     f2 = ui->plainTextEditF2->toPlainText();
     f2.replace("\n", " ");
+
+    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr);
 
     path->setPoint1Id(GetCenter());
     path->setRadius(radius);

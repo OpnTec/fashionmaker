@@ -42,8 +42,7 @@
  * @param parent parent widget
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact),
-      radius(QString()), formulaBaseHeight(0), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), radius(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitFormulaUI(ui);
@@ -71,16 +70,13 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
     connect(ui->comboBoxCenter, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogPointOfContact::PointNameChanged);
 
-    line = new VisToolPointOfContact(data);
+    vis = new VisToolPointOfContact(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfContact::~DialogPointOfContact()
 {
-    if (qApp->getCurrentScene()->items().contains(line))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete line;
-    }
+    DeleteVisualization<VisToolPointOfContact>();
     delete ui;
 }
 
@@ -131,14 +127,7 @@ void DialogPointOfContact::FXRadius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
-        scene->addItem(line);
-        line->RefreshGeometry();
-    }
+    AddVisualization<VisToolPointOfContact>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,6 +148,9 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+            SCASSERT(line != nullptr);
+
             switch (number)
             {
                 case 0:
@@ -213,6 +205,9 @@ void DialogPointOfContact::SaveData()
     radius = ui->plainTextEditFormula->toPlainText();
     radius.replace("\n", " ");
 
+    VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+    SCASSERT(line != nullptr);
+
     line->setPoint1Id(GetFirstPoint());
     line->setLineP2Id(GetSecondPoint());
     line->setRadiusId(getCenter());
@@ -235,6 +230,9 @@ void DialogPointOfContact::closeEvent(QCloseEvent *event)
 void DialogPointOfContact::SetSecondPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
+
+    VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+    SCASSERT(line != nullptr);
     line->setLineP2Id(value);
 }
 
@@ -246,6 +244,9 @@ void DialogPointOfContact::SetSecondPoint(const quint32 &value)
 void DialogPointOfContact::SetFirstPoint(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
+
+    VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint1Id(value);
 }
 
@@ -257,6 +258,9 @@ void DialogPointOfContact::SetFirstPoint(const quint32 &value)
 void DialogPointOfContact::setCenter(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxCenter, value);
+
+    VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+    SCASSERT(line != nullptr);
     line->setRadiusId(value);
 }
 
@@ -274,7 +278,11 @@ void DialogPointOfContact::setRadius(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(radius);
+
+    VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+    SCASSERT(line != nullptr);
     line->setRadius(radius);
+
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 

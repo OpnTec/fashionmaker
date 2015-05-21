@@ -37,8 +37,6 @@ namespace Ui
     class DialogPointOfContact;
 }
 
-class VisToolPointOfContact;
-
 /**
  * @brief The DialogPointOfContact class dialog for ToolPointOfContact. Help create point and edit option.
  */
@@ -92,8 +90,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
-
-    VisToolPointOfContact *line;
 };
 
 #endif // DIALOGPOINTOFCONTACT_H

@@ -36,8 +36,6 @@ namespace Ui
     class DialogShoulderPoint;
 }
 
-class VisToolShoulderPoint;
-
 /**
  * @brief The DialogShoulderPoint class dialog for ToolShoulderPoint. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogShoulderPoint : public DialogTool
     Q_OBJECT
 public:
     DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogShoulderPoint();
+    virtual ~DialogShoulderPoint();
 
     void           SetPointName(const QString &value);
 
@@ -97,7 +95,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int             formulaBaseHeight;
-    VisToolShoulderPoint *line;
 };
 
 #endif // DIALOGSHOULDERPOINT_H

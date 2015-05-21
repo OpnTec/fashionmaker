@@ -40,8 +40,7 @@
  * @param parent parent widget
  */
 DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), formula(QString()), angle(0), formulaBaseHeight(0),
-      line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), formula(QString()), angle(0), formulaBaseHeight(0)
 {
     ui->setupUi(this);
     InitFormulaUI(ui);
@@ -70,7 +69,7 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->comboBoxSecondPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogNormal::PointNameChanged);
 
-    line = new VisToolNormal(data);
+    vis = new VisToolNormal(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -114,14 +113,7 @@ void DialogNormal::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
-        scene->addItem(line);
-        line->RefreshGeometry();
-    }
+    AddVisualization<VisToolNormal>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,10 +125,7 @@ void DialogNormal::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogNormal::~DialogNormal()
 {
-    if (qApp->getCurrentScene()->items().contains(line))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete line;
-    }
+    DeleteVisualization<VisToolNormal>();
     delete ui;
 }
 
@@ -152,6 +141,9 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
+            SCASSERT(line != nullptr);
+
             switch (number)
             {
                 case 0:
@@ -189,6 +181,9 @@ void DialogNormal::SaveData()
     formula.replace("\n", " ");
     angle = ui->doubleSpinBoxAngle->value();
 
+    VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
+    SCASSERT(line != nullptr);
+
     line->setPoint1Id(GetFirstPointId());
     line->setPoint2Id(GetSecondPointId());
     line->setLength(formula);
@@ -212,6 +207,9 @@ void DialogNormal::closeEvent(QCloseEvent *event)
 void DialogNormal::SetSecondPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
+
+    VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint2Id(value);
 }
 
@@ -235,6 +233,9 @@ void DialogNormal::SetLineColor(const QString &value)
 void DialogNormal::SetFirstPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
+
+    VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint1Id(value);
 }
 
@@ -247,6 +248,9 @@ void DialogNormal::SetAngle(const qreal &value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);
+
+    VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
+    SCASSERT(line != nullptr);
     line->SetAngle(angle);
 }
 
@@ -264,7 +268,11 @@ void DialogNormal::SetFormula(const QString &value)
         this->DeployFormulaTextEdit();
     }
     ui->plainTextEditFormula->setPlainText(formula);
+
+    VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
+    SCASSERT(line != nullptr);
     line->setLength(formula);
+
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
@@ -276,7 +284,7 @@ void DialogNormal::SetFormula(const QString &value)
 void DialogNormal::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

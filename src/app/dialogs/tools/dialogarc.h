@@ -36,8 +36,6 @@ namespace Ui
     class DialogArc;
 }
 
-class VisToolArc;
-
 /**
  * @brief The DialogArc class dialog for ToolArc. Help create arc and edit option.
  */
@@ -46,7 +44,7 @@ class DialogArc : public DialogTool
     Q_OBJECT
 public:
     DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogArc();
+    virtual ~DialogArc();
 
     quint32       GetCenter() const;
     void          SetCenter(const quint32 &value);
@@ -122,8 +120,6 @@ private:
     int           formulaBaseHeight;
     int           formulaBaseHeightF1;
     int           formulaBaseHeightF2;
-
-    VisToolArc    *path;
 
     qreal         angleF1;
     qreal         angleF2;

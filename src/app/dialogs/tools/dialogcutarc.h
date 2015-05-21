@@ -36,8 +36,6 @@ namespace Ui
     class DialogCutArc;
 }
 
-class VisToolCutArc;
-
 /**
  * @brief The DialogCutArc class dialog for ToolCutArc.
  */
@@ -47,7 +45,7 @@ class DialogCutArc : public DialogTool
 public:
 
     DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogCutArc();
+    virtual ~DialogCutArc();
 
     void              SetPointName(const QString &value);
 
@@ -87,8 +85,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
-
-    VisToolCutArc     *path;
 };
 
 #endif // DIALOGCUTARC_H

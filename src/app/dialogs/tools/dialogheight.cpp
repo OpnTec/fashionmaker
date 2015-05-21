@@ -42,7 +42,7 @@
  * @param parent parent widget
  */
 DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight), line(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight)
 {
     ui->setupUi(this);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
@@ -64,16 +64,13 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->comboBoxP2Line, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
 
-    line = new VisToolHeight(data);
+    vis = new VisToolHeight(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogHeight::~DialogHeight()
 {
-    if (qApp->getCurrentScene()->items().contains(line))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete line;
-    }
+    DeleteVisualization<VisToolHeight>();
     delete ui;
 }
 
@@ -96,7 +93,7 @@ void DialogHeight::SetPointName(const QString &value)
 void DialogHeight::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    line->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
+    vis->setLineStyle(VAbstractTool::LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,6 +104,9 @@ void DialogHeight::SetTypeLine(const QString &value)
 void DialogHeight::SetBasePointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxBasePoint, value);
+
+    VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
+    SCASSERT(line != nullptr);
     line->setPoint1Id(value);
 }
 
@@ -118,6 +118,9 @@ void DialogHeight::SetBasePointId(const quint32 &value)
 void DialogHeight::SetP1LineId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxP1Line, value);
+
+    VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
+    SCASSERT(line != nullptr);
     line->setLineP1Id(value);
 }
 
@@ -129,6 +132,9 @@ void DialogHeight::SetP1LineId(const quint32 &value)
 void DialogHeight::SetP2LineId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxP2Line, value);
+
+    VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
+    SCASSERT(line != nullptr);
     line->setLineP2Id(value);
 }
 
@@ -156,6 +162,9 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
+            SCASSERT(line != nullptr);
+
             switch (number)
             {
                 case (0):
@@ -208,6 +217,9 @@ void DialogHeight::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
+    VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
+    SCASSERT(line != nullptr);
+
     line->setPoint1Id(GetBasePointId());
     line->setLineP1Id(GetP1LineId());
     line->setLineP2Id(GetP2LineId());
@@ -252,14 +264,7 @@ void DialogHeight::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogHeight::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VisLine::SetFactor);
-        scene->addItem(line);
-        line->RefreshGeometry();
-    }
+    AddVisualization<VisLine>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

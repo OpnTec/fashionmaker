@@ -36,8 +36,6 @@ namespace Ui
     class DialogLineIntersect;
 }
 
-class VisToolLineIntersect;
-
 /**
  * @brief The DialogLineIntersect class dialog for ToolLineIntersect. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogLineIntersect : public DialogTool
     Q_OBJECT
 public:
     DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogLineIntersect();
+    virtual ~DialogLineIntersect();
 
     quint32                 GetP1Line1() const;
     void                    SetP1Line1(const quint32 &value);
@@ -79,8 +77,6 @@ private:
 
     /** @brief flagPoint keep state of point */
     bool                    flagPoint;
-
-    VisToolLineIntersect    *line;
 
     virtual void            CheckState();
     bool                    CheckIntersecion();

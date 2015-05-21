@@ -36,8 +36,6 @@ namespace Ui
     class DialogNormal;
 }
 
-class VisToolNormal;
-
 /**
  * @brief The DialogNormal class dialog for ToolNormal. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogNormal : public DialogTool
     Q_OBJECT
 public:
     DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogNormal();
+    virtual ~DialogNormal();
 
     void             SetPointName(const QString &value);
 
@@ -100,8 +98,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int              formulaBaseHeight;
-
-    VisToolNormal    *line;
 };
 
 #endif // DIALOGNORMAL_H

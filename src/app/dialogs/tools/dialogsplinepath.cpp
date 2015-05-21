@@ -39,7 +39,7 @@
  * @param parent parent widget
  */
 DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()), visPath(nullptr)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -60,16 +60,13 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
     connect(ui->doubleSpinBoxKasm2,  static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
             this, &DialogSplinePath::KAsm2Changed);
 
-    visPath = new VisToolSplinePath(data);
+    vis = new VisToolSplinePath(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSplinePath::~DialogSplinePath()
 {
-    if (qApp->getCurrentScene()->items().contains(visPath))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete visPath;
-    }
+    DeleteVisualization<VisToolSplinePath>();
     delete ui;
 }
 
@@ -90,6 +87,8 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.GetKCurve());
 
+    VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+    SCASSERT(visPath != nullptr);
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
 }
@@ -125,7 +124,11 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         emit ToolTip(tr("Select point of curve path"));
 
         SavePath();
+
+        VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+        SCASSERT(visPath != nullptr);
         visPath->setPath(path);
+
         if (path.CountPoint() == 1)
         {
             visPath->VisualMode(NULL_ID);
@@ -144,6 +147,8 @@ void DialogSplinePath::SaveData()
 {
     SavePath();
 
+    VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+    SCASSERT(visPath != nullptr);
     visPath->setPath(path);
     visPath->RefreshGeometry();
 }
@@ -268,7 +273,11 @@ void DialogSplinePath::ShowVisualization()
     if (prepare == false)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
+        SCASSERT(scene != nullptr);
+
+        VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+        SCASSERT(visPath != nullptr);
+
         connect(scene, &VMainGraphicsScene::NewFactor, visPath, &Visualization::SetFactor);
         scene->addItem(visPath);
         visPath->setMode(Mode::Show);

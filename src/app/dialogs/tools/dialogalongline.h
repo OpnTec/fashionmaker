@@ -31,8 +31,6 @@
 
 #include "dialogtool.h"
 
-class VisToolAlongLine;
-
 namespace Ui
 {
     class DialogAlongLine;
@@ -46,7 +44,7 @@ class DialogAlongLine : public DialogTool
     Q_OBJECT
 public:
     DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogAlongLine();
+    virtual ~DialogAlongLine();
 
     void                SetPointName(const QString &value);
 
@@ -95,7 +93,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
-    VisToolAlongLine    *line;
 };
 
 #endif // DIALOGALONGLINE_H

@@ -36,8 +36,6 @@ namespace Ui
     class DialogLine;
 }
 
-class VisToolLine;
-
 /**
  * @brief The DialogLine class dialog for ToolLine. Help create line and edit option.
  */
@@ -46,7 +44,7 @@ class DialogLine : public DialogTool
     Q_OBJECT
 public:
     DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogLine();
+    virtual ~DialogLine();
 
     quint32        GetFirstPoint() const;
     void           SetFirstPoint(const quint32 &value);
@@ -73,9 +71,6 @@ private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogLine *ui;
-
-    VisToolLine    *line;
-
 };
 
 #endif // DIALOGLINE_H

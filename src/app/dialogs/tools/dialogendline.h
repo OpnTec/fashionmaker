@@ -36,8 +36,6 @@ namespace Ui
     class DialogEndLine;
 }
 
-class VisToolEndLine;
-
 /**
  * @brief The DialogEndLine class dialog for ToolEndLine. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogEndLine : public DialogTool
     Q_OBJECT
 public:
     DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogEndLine();
+    virtual ~DialogEndLine();
 
     void              SetPointName(const QString &value);
 
@@ -105,8 +103,6 @@ private:
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
     int               formulaBaseHeightAngle;
-
-    VisToolEndLine    *line;
 };
 
 #endif // DIALOGENDLINE_H

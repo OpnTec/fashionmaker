@@ -36,8 +36,6 @@ namespace Ui
     class DialogBisector;
 }
 
-class VisToolBisector;
-
 /**
  * @brief The DialogBisector class dialog for ToolBisector. Help create point and edit option.
  */
@@ -47,7 +45,7 @@ class DialogBisector : public DialogTool
 public:
 
     DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogBisector();
+    virtual ~DialogBisector();
 
     void               SetPointName(const QString &value);
 
@@ -98,8 +96,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                formulaBaseHeight;
-    VisToolBisector    *line;
-
 };
 
 #endif // DIALOGBISECTOR_H

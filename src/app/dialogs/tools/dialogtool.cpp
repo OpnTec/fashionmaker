@@ -62,7 +62,7 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
       timerFormula(nullptr), bOk(nullptr), bApply(nullptr), spinBoxAngle(nullptr), plainTextEditFormula(nullptr),
       labelResultCalculation(nullptr), labelEditNamePoint(nullptr), labelEditFormula(nullptr),
       okColor(QColor(76, 76, 76)), errorColor(Qt::red), associatedTool(nullptr),
-      toolId(toolId), prepare(false), pointName(QString()), number(0)
+      toolId(toolId), prepare(false), pointName(QString()), number(0), vis(nullptr)
 {
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);

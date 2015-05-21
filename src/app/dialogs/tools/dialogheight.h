@@ -36,8 +36,6 @@ namespace Ui
     class DialogHeight;
 }
 
-class VisToolHeight;
-
 /**
  * @brief The DialogHeight class dialog for ToolHeight. Help create point and edit option.
  */
@@ -46,7 +44,7 @@ class DialogHeight : public DialogTool
     Q_OBJECT
 public:
     DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogHeight();
+    virtual ~DialogHeight();
 
     void             SetPointName(const QString &value);
 
@@ -78,8 +76,6 @@ private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHeight *ui;
-
-    VisToolHeight    *line;
 };
 
 #endif // DIALOGHEIGHT_H

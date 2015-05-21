@@ -44,7 +44,7 @@ class DialogSinglePoint : public DialogTool
     Q_OBJECT
 public:
     DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    ~DialogSinglePoint();
+    virtual ~DialogSinglePoint();
 
     void           SetData(const QString &name, const QPointF &point);
     QPointF        GetPoint()const;
