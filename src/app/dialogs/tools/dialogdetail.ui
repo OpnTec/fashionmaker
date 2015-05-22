@@ -10,6 +10,18 @@
     <height>342</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>565</width>
+    <height>342</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>565</width>
+    <height>342</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Seam allowance tool</string>
   </property>

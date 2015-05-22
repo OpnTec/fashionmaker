@@ -71,7 +71,6 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
 
     CheckState();
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogStandardMeasurements::CheckState);
-    this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

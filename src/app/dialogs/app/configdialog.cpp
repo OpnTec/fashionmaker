@@ -93,7 +93,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     setWindowTitle(tr("Config Dialog"));
 
     this->setFixedSize(QSize(750, 550));
-    this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
     qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 

@@ -10,6 +10,18 @@
     <height>284</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>419</width>
+    <height>284</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>419</width>
+    <height>284</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Point intersect curve and axis</string>
   </property>

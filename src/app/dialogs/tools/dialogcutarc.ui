@@ -10,6 +10,18 @@
     <height>218</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>412</width>
+    <height>218</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>412</width>
+    <height>218</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Segment an arc</string>
   </property>

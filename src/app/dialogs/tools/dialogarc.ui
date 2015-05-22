@@ -10,6 +10,18 @@
     <height>329</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>425</width>
+    <height>329</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>425</width>
+    <height>329</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Arc</string>
   </property>

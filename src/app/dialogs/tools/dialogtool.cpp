@@ -67,7 +67,6 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
     SCASSERT(data != nullptr);
     timerFormula = new QTimer(this);
     connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
-    this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
 }
 
 
