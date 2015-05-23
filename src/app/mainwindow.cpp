@@ -1233,8 +1233,14 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionArrowTool->setEnabled(true);
         ui->actionShowCurveDetails->setEnabled(true);
         actionDockWidgetToolOptions->setEnabled(true);
-        undoAction->setEnabled(true);
-        redoAction->setEnabled(true);
+        if (qApp->getUndoStack()->canUndo())
+        {
+            undoAction->setEnabled(true);
+        }
+        if (qApp->getUndoStack()->canRedo())
+        {
+            redoAction->setEnabled(true);
+        }
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -1290,8 +1296,14 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionArrowTool->setEnabled(true);
         ui->actionShowCurveDetails->setEnabled(false);
         actionDockWidgetToolOptions->setEnabled(true);
-        undoAction->setEnabled(true);
-        redoAction->setEnabled(true);
+        if (qApp->getUndoStack()->canUndo())
+        {
+            undoAction->setEnabled(true);
+        }
+        if (qApp->getUndoStack()->canRedo())
+        {
+            redoAction->setEnabled(true);
+        }
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
