@@ -288,26 +288,7 @@ void VToolArc::SetFormulaF2(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArc::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolArc>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolArc *visual = qobject_cast<VisToolArc *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolArc>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -79,6 +79,31 @@ protected:
     virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void            keyReleaseEvent(QKeyEvent * event);
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+
+    template <typename T>
+    void ShowToolVisualization(bool show)
+    {
+        if (show)
+        {
+            if (vis == nullptr)
+            {
+                AddVisualization<T>();
+                SetVisualization();
+            }
+            else
+            {
+                if (T *visual = qobject_cast<T *>(vis))
+                {
+                    visual->show();
+                }
+            }
+        }
+        else
+        {
+            delete vis;
+            vis = nullptr;
+        }
+    }
 private:
     Q_DISABLE_COPY(VToolPoint)
 };

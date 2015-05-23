@@ -293,26 +293,7 @@ void VToolHeight::SetP2LineId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolHeight::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolHeight>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolHeight>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

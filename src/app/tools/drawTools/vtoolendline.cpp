@@ -289,24 +289,5 @@ void VToolEndLine::SetFormulaAngle(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEndLine::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolEndLine>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolEndLine>(show);
 }

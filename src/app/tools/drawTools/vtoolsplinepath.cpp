@@ -313,35 +313,7 @@ void VToolSplinePath::setSplinePath(const VSplinePath &splPath)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolSplinePath>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
-
-    if (detailsMode)
-    {
-        ShowHandles(detailsMode);
-    }
-    else
-    {
-        ShowHandles(show);
-    }
+    ShowToolVisualization<VisToolSplinePath>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -187,26 +187,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutArc::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolCutArc>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolCutArc>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

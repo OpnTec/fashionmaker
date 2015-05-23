@@ -357,26 +357,7 @@ void VToolPointOfContact::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolPointOfContact>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolPointOfContact>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

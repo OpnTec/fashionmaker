@@ -234,26 +234,7 @@ void VToolLineIntersectAxis::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolLineIntersectAxis>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolLineIntersectAxis>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

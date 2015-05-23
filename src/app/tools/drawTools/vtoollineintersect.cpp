@@ -311,26 +311,7 @@ void VToolLineIntersect::SetP2Line2(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolLineIntersect>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolLineIntersect>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

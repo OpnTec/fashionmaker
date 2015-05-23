@@ -31,7 +31,6 @@
 #include "../../dialogs/tools/dialogcutspline.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolcutspline.h"
-#include "vabstractspline.h"
 #include "../../libs/vgeometry/vspline.h"
 
 const QString VToolCutSpline::ToolType   = QStringLiteral("cutSpline");
@@ -197,37 +196,7 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSpline::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolCutSpline>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolCutSpline * visual = qobject_cast<VisToolCutSpline *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
-    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
-    {
-        if (detailsMode)
-        {
-            parentCurve->ShowHandles(detailsMode);
-        }
-        else
-        {
-            parentCurve->ShowHandles(show);
-        }
-    }
+    ShowToolVisualization<VisToolCutSpline>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

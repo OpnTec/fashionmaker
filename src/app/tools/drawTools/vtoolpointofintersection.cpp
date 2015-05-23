@@ -262,26 +262,7 @@ void VToolPointOfIntersection::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolPointOfIntersection>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolPointOfIntersection *visual = qobject_cast<VisToolPointOfIntersection *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolPointOfIntersection>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

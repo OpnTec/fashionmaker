@@ -327,26 +327,7 @@ void VToolTriangle::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolTriangle>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolTriangle>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

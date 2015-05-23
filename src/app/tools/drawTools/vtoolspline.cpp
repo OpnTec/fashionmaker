@@ -232,35 +232,7 @@ void VToolSpline::setSpline(const VSpline &spl)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolSpline>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
-
-    if (detailsMode)
-    {
-        ShowHandles(detailsMode);
-    }
-    else
-    {
-        ShowHandles(show);
-    }
+    ShowToolVisualization<VisToolSpline>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

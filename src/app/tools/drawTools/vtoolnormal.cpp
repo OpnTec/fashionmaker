@@ -326,24 +326,5 @@ void VToolNormal::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolNormal::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolNormal>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolNormal>(show);
 }

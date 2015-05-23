@@ -222,26 +222,7 @@ void VToolCurveIntersectAxis::setCurveId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolCurveIntersectAxis>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolCurveIntersectAxis>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -190,26 +190,7 @@ void VToolAlongLine::SetSecondPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolAlongLine::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolAlongLine>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolAlongLine * visual = qobject_cast<VisToolAlongLine *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolAlongLine>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

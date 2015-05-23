@@ -31,6 +31,7 @@
 
 #include "vtoolpoint.h"
 #include "../../visualization/vsimplecurve.h"
+#include "vabstractspline.h"
 
 class VFormula;
 
@@ -76,6 +77,42 @@ protected:
     void          RefreshGeometry();
     virtual void  RemoveReferens();
     void          FullUpdateCurveFromFile(const QString &attrCurve);
+
+    template <typename T>
+    void ShowToolVisualization(bool show)
+    {
+        if (show)
+        {
+            if (vis == nullptr)
+            {
+                AddVisualization<T>();
+                SetVisualization();
+            }
+            else
+            {
+                if (T *visual = qobject_cast<T *>(vis))
+                {
+                    visual->show();
+                }
+            }
+        }
+        else
+        {
+            delete vis;
+            vis = nullptr;
+        }
+        if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
+        {
+            if (detailsMode)
+            {
+                parentCurve->ShowHandles(detailsMode);
+            }
+            else
+            {
+                parentCurve->ShowHandles(show);
+            }
+        }
+    }
 private:
     Q_DISABLE_COPY(VToolCut)
 };

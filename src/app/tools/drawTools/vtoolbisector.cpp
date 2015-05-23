@@ -359,26 +359,7 @@ void VToolBisector::SetThirdPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBisector::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolBisector>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolBisector>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

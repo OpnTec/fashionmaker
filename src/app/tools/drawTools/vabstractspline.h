@@ -90,6 +90,41 @@ protected:
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement);
+
+    template <typename T>
+    void ShowToolVisualization(bool show)
+    {
+        if (show)
+        {
+            if (vis == nullptr)
+            {
+                AddVisualization<T>();
+                SetVisualization();
+            }
+            else
+            {
+                if (T *visual = qobject_cast<T *>(vis))
+                {
+                    visual->show();
+                }
+            }
+        }
+        else
+        {
+            delete vis;
+            vis = nullptr;
+        }
+
+        if (detailsMode)
+        {
+            ShowHandles(detailsMode);
+        }
+        else
+        {
+            ShowHandles(show);
+        }
+    }
+
 private:
     Q_DISABLE_COPY(VAbstractSpline)
 };

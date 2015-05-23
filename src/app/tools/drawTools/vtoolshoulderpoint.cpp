@@ -355,26 +355,7 @@ void VToolShoulderPoint::setPShoulder(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolShoulderPoint::ShowVisualization(bool show)
 {
-    if (show)
-    {
-        if (vis == nullptr)
-        {
-            AddVisualization<VisToolShoulderPoint>();
-            SetVisualization();
-        }
-        else
-        {
-            if (VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis))
-            {
-                visual->show();
-            }
-        }
-    }
-    else
-    {
-        delete vis;
-        vis = nullptr;
-    }
+    ShowToolVisualization<VisToolShoulderPoint>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
