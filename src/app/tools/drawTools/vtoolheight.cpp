@@ -197,16 +197,7 @@ void VToolHeight::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
-        visual->setPoint1Id(basePointId);
-        visual->setLineP1Id(p1LineId);
-        visual->setLineP2Id(p2LineId);
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,6 +257,22 @@ void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolHeight::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(basePointId);
+        visual->setLineP1Id(p1LineId);
+        visual->setLineP2Id(p2LineId);
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolHeight::GetP2LineId() const
 {
     return p2LineId;
@@ -290,23 +297,12 @@ void VToolHeight::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolHeight * visual = new VisToolHeight(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(basePointId);
-            visual->setLineP1Id(p1LineId);
-            visual->setLineP2Id(p2LineId);
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolHeight>();
+            SetVisualization();
         }
         else
         {
-            VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
-            if (visual != nullptr)
+            if (VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis))
             {
                 visual->show();
             }

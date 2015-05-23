@@ -63,6 +63,7 @@ protected:
                                PathDirection direction = PathDirection::Hide);
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
     virtual void  ReadToolAttributes(const QDomElement &domElement);
+    virtual void  SetVisualization();
 private:
     Q_DISABLE_COPY(VToolCutSpline)
 };

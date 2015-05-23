@@ -31,6 +31,9 @@
 
 #include "vdatatool.h"
 #include "../xml/vpattern.h"
+#include "../core/vapplication.h"
+#include "../widgets/vmaingraphicsscene.h"
+#include "../visualization/visualization.h"
 
 class QDomElement;
 class QLineF;
@@ -166,6 +169,20 @@ protected:
     static int              ConfirmDeletion();
     void                    SaveOption(QSharedPointer<VGObject> &obj);
     virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)=0;
+
+    template <typename T>
+    void AddVisualization()
+    {
+        T *visual = new T(getData());
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr)
+        connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+        scene->addItem(visual);
+
+        vis = visual;
+    }
+
+    virtual void SetVisualization()=0;
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

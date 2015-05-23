@@ -195,15 +195,7 @@ void VToolLine::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
-        visual->setPoint1Id(firstPoint);
-        visual->setPoint2Id(secondPoint);
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,6 +395,21 @@ void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(firstPoint);
+        visual->setPoint2Id(secondPoint);
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLine::GetSecondPoint() const
 {
     return secondPoint;
@@ -427,22 +434,12 @@ void VToolLine::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolLine * visual = new VisToolLine(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(firstPoint);
-            visual->setPoint2Id(secondPoint);
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolLine>();
+            SetVisualization();
         }
         else
         {
-            VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
-            if (visual != nullptr)
+            if (VisToolLine *visual = qobject_cast<VisToolLine *>(vis))
             {
                 visual->show();
             }

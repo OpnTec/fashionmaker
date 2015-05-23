@@ -238,24 +238,12 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolLineIntersectAxis * visual = new VisToolLineIntersectAxis(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(firstPointId);
-            visual->setPoint2Id(secondPointId);
-            visual->setAxisPointId(basePointId);
-            visual->SetAngle(qApp->FormulaToUser(formulaAngle));
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolLineIntersectAxis>();
+            SetVisualization();
         }
         else
         {
-            VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
-            if (visual != nullptr)
+            if (VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis))
             {
                 visual->show();
             }
@@ -273,17 +261,7 @@ void VToolLineIntersectAxis::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
-        visual->setPoint1Id(firstPointId);
-        visual->setPoint2Id(secondPointId);
-        visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,4 +314,21 @@ void VToolLineIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
     firstPointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
     secondPointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
     formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersectAxis::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(firstPointId);
+        visual->setPoint2Id(secondPointId);
+        visual->setAxisPointId(basePointId);
+        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }

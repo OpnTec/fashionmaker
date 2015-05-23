@@ -201,21 +201,12 @@ void VToolCutSpline::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolCutSpline * visual = new VisToolCutSpline(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(curveCutId);
-            visual->setLength(qApp->FormulaToUser(formula));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolCutSpline>();
+            SetVisualization();
         }
         else
         {
-            VisToolCutSpline * visual = qobject_cast<VisToolCutSpline *>(vis);
-            if (visual != nullptr)
+            if (VisToolCutSpline * visual = qobject_cast<VisToolCutSpline *>(vis))
             {
                 visual->show();
             }
@@ -247,14 +238,7 @@ void VToolCutSpline::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
-        visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->FormulaToUser(formula));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,4 +324,18 @@ void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
     formula = doc->GetParametrString(domElement, AttrLength, "");
     curveCutId = doc->GetParametrUInt(domElement, AttrSpline, NULL_ID_STR);
     lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutSpline::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(qApp->FormulaToUser(formula));
+        visual->RefreshGeometry();
+    }
 }

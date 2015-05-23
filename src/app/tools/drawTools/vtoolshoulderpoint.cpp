@@ -231,17 +231,7 @@ void VToolShoulderPoint::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
-        visual->setPoint1Id(pShoulder);
-        visual->setLineP1Id(basePointId);
-        visual->setLineP2Id(p2Line);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,6 +316,23 @@ void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolShoulderPoint::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(pShoulder);
+        visual->setLineP1Id(basePointId);
+        visual->setLineP2Id(p2Line);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 VToolShoulderPoint::getPShoulder() const
 {
@@ -352,24 +359,12 @@ void VToolShoulderPoint::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolShoulderPoint * visual = new VisToolShoulderPoint(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(pShoulder);
-            visual->setLineP1Id(basePointId);
-            visual->setLineP2Id(p2Line);
-            visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolShoulderPoint>();
+            SetVisualization();
         }
         else
         {
-            VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
-            if (visual != nullptr)
+            if (VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis))
             {
                 visual->show();
             }

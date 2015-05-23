@@ -248,16 +248,7 @@ void VToolPointOfContact::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-
-    if (vis != nullptr)
-    {
-        VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
-        visual->setPoint1Id(firstPointId);
-        visual->setLineP2Id(secondPointId);
-        visual->setRadiusId(center);
-        visual->setRadius(qApp->FormulaToUser(arcRadius));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -336,6 +327,22 @@ void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfContact::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(firstPointId);
+        visual->setLineP2Id(secondPointId);
+        visual->setRadiusId(center);
+        visual->setRadius(qApp->FormulaToUser(arcRadius));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointOfContact::GetSecondPointId() const
 {
     return secondPointId;
@@ -354,23 +361,12 @@ void VToolPointOfContact::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolPointOfContact * visual = new VisToolPointOfContact(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(firstPointId);
-            visual->setLineP2Id(secondPointId);
-            visual->setRadiusId(center);
-            visual->setRadius(qApp->FormulaToUser(arcRadius));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolPointOfContact>();
+            SetVisualization();
         }
         else
         {
-            VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
-            if (visual != nullptr)
+            if (VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis))
             {
                 visual->show();
             }

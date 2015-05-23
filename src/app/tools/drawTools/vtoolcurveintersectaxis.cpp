@@ -226,23 +226,12 @@ void VToolCurveIntersectAxis::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolCurveIntersectAxis * visual = new VisToolCurveIntersectAxis(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(curveId);
-            visual->setAxisPointId(basePointId);
-            visual->SetAngle(qApp->FormulaToUser(formulaAngle));
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolCurveIntersectAxis>();
+            SetVisualization();
         }
         else
         {
-            VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
-            if (visual != nullptr)
+            if (VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis))
             {
                 visual->show();
             }
@@ -319,4 +308,20 @@ void VToolCurveIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
     basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
     curveId = doc->GetParametrUInt(domElement, AttrCurve, NULL_ID_STR);
     formulaAngle = doc->GetParametrString(domElement, AttrAngle, "");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCurveIntersectAxis::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(curveId);
+        visual->setAxisPointId(basePointId);
+        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
 }

@@ -167,14 +167,7 @@ void VToolPointOfIntersection::FullUpdateFromFile()
 {
     ReadAttributes();
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-
-    if (vis != nullptr)
-    {
-        VisToolPointOfIntersection *visual = qobject_cast<VisToolPointOfIntersection *>(vis);
-        visual->setPoint1Id(firstPointId);
-        visual->setPoint2Id(secondPointId);
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -235,6 +228,20 @@ void VToolPointOfIntersection::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPointOfIntersection::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolPointOfIntersection *visual = qobject_cast<VisToolPointOfIntersection *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(firstPointId);
+        visual->setPoint2Id(secondPointId);
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolPointOfIntersection::GetSecondPointId() const
 {
     return secondPointId;
@@ -259,21 +266,12 @@ void VToolPointOfIntersection::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolPointOfIntersection * visual = new VisToolPointOfIntersection(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(firstPointId);
-            visual->setPoint2Id(secondPointId);
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolPointOfIntersection>();
+            SetVisualization();
         }
         else
         {
-            VisToolPointOfIntersection *visual = qobject_cast<VisToolPointOfIntersection *>(vis);
-            if (visual != nullptr)
+            if (VisToolPointOfIntersection *visual = qobject_cast<VisToolPointOfIntersection *>(vis))
             {
                 visual->show();
             }

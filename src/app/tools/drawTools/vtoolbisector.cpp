@@ -322,6 +322,23 @@ void VToolBisector::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolBisector::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(firstPointId);
+        visual->setPoint2Id(basePointId);
+        visual->setPoint3Id(thirdPointId);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolBisector::GetThirdPointId() const
 {
     return thirdPointId;
@@ -346,24 +363,12 @@ void VToolBisector::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolBisector * visual = new VisToolBisector(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(firstPointId);
-            visual->setPoint2Id(basePointId);
-            visual->setPoint3Id(thirdPointId);
-            visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolBisector>();
+            SetVisualization();
         }
         else
         {
-            VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
-            if (visual != nullptr)
+            if (VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis))
             {
                 visual->show();
             }

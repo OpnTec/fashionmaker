@@ -317,21 +317,12 @@ void VToolSplinePath::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolSplinePath *visual = new VisToolSplinePath(getData(), this);
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-
-            QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
-            visual->setPath(*splPath.data());
-            visual->setMode(Mode::Show);
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolSplinePath>();
+            SetVisualization();
         }
         else
         {
-            VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
-            if (visual != nullptr)
+            if (VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis))
             {
                 visual->show();
             }
@@ -564,6 +555,21 @@ void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
+        SCASSERT(visual != nullptr);
+
+        QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+        visual->setPath(*splPath.data());
+        visual->setMode(Mode::Show);
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
@@ -601,12 +607,5 @@ void VToolSplinePath::RefreshGeometry()
         controlPoints[j-1]->blockSignals(false);
     }
 
-    if (vis != nullptr)
-    {
-        VisToolSplinePath *visual = qobject_cast<VisToolSplinePath *>(vis);
-        QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
-        visual->setPath(*splPath.data());
-        visual->setMode(Mode::Show);
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }

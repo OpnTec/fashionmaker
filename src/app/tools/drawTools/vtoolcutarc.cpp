@@ -191,21 +191,12 @@ void VToolCutArc::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolCutArc * visual = new VisToolCutArc(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(curveCutId);
-            visual->setLength(qApp->FormulaToUser(formula));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolCutArc>();
+            SetVisualization();
         }
         else
         {
-            VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
-            if (visual != nullptr)
+            if (VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis))
             {
                 visual->show();
             }
@@ -226,14 +217,7 @@ void VToolCutArc::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
-        visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->FormulaToUser(formula));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -319,4 +303,18 @@ void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
     formula = doc->GetParametrString(domElement, AttrLength, "");
     curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
     lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutArc::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(qApp->FormulaToUser(formula));
+        visual->RefreshGeometry();
+    }
 }

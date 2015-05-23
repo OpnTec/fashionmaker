@@ -222,16 +222,7 @@ void VToolTriangle::FullUpdateFromFile()
 {
     ReadAttributes();
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-
-    if (vis != nullptr)
-    {
-        VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
-        visual->setPoint1Id(axisP1Id);
-        visual->setPoint2Id(axisP2Id);
-        visual->setHypotenuseP1Id(firstPointId);
-        visual->setHypotenuseP2Id(secondPointId);
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,6 +291,22 @@ void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolTriangle::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(axisP1Id);
+        visual->setPoint2Id(axisP2Id);
+        visual->setHypotenuseP1Id(firstPointId);
+        visual->setHypotenuseP2Id(secondPointId);
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolTriangle::GetSecondPointId() const
 {
     return secondPointId;
@@ -324,23 +331,12 @@ void VToolTriangle::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolTriangle * visual = new VisToolTriangle(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(axisP1Id);
-            visual->setPoint2Id(axisP2Id);
-            visual->setHypotenuseP1Id(firstPointId);
-            visual->setHypotenuseP2Id(secondPointId);
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolTriangle>();
+            SetVisualization();
         }
         else
         {
-            VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
-            if (visual != nullptr)
+            if (VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis))
             {
                 visual->show();
             }

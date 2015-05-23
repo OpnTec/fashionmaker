@@ -99,6 +99,7 @@ protected:
     virtual void       RemoveReferens();
     virtual void       keyReleaseEvent(QKeyEvent * event);
     virtual void       SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void       SetVisualization() {}
 private:
     Q_DISABLE_COPY(VToolDetail)
     /** @brief dialog dialog options. */

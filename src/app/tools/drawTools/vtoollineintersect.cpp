@@ -195,16 +195,7 @@ void VToolLineIntersect::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-
-    if (vis != nullptr)
-    {
-        VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
-        visual->setPoint1Id(p1Line1);
-        visual->setLine1P2Id(p2Line1);
-        visual->setLine2P1Id(p1Line2);
-        visual->setLine2P2Id(p2Line2);
-        vis->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -284,6 +275,22 @@ void VToolLineIntersect::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLineIntersect::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(p1Line1);
+        visual->setLine1P2Id(p2Line1);
+        visual->setLine2P1Id(p1Line2);
+        visual->setLine2P2Id(p2Line2);
+        vis->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLineIntersect::GetP2Line2() const
 {
     return p2Line2;
@@ -308,23 +315,12 @@ void VToolLineIntersect::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolLineIntersect * visual = new VisToolLineIntersect(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(p1Line1);
-            visual->setLine1P2Id(p2Line1);
-            visual->setLine2P1Id(p1Line2);
-            visual->setLine2P2Id(p2Line2);
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolLineIntersect>();
+            SetVisualization();
         }
         else
         {
-            VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
-            if (visual != nullptr)
+            if (VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis))
             {
                 visual->show();
             }

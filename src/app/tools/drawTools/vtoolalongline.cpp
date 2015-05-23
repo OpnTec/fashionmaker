@@ -73,16 +73,7 @@ void VToolAlongLine::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolAlongLine * visual = qobject_cast<VisToolAlongLine *>(vis);
-        visual->setPoint1Id(basePointId);
-        visual->setPoint2Id(secondPointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -164,6 +155,21 @@ void VToolAlongLine::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolAlongLine::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolAlongLine *visual = qobject_cast<VisToolAlongLine *>(vis);
+        SCASSERT(visual != nullptr)
+        visual->setPoint1Id(basePointId);
+        visual->setPoint2Id(secondPointId);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolAlongLine::GetSecondPointId() const
 {
     return secondPointId;
@@ -188,23 +194,12 @@ void VToolAlongLine::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolAlongLine *visual = new VisToolAlongLine(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(basePointId);
-            visual->setPoint2Id(secondPointId);
-            visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolAlongLine>();
+            SetVisualization();
         }
         else
         {
-            VisToolAlongLine * visual = qobject_cast<VisToolAlongLine *>(vis);
-            if (visual != nullptr)
+            if (VisToolAlongLine * visual = qobject_cast<VisToolAlongLine *>(vis))
             {
                 visual->show();
             }

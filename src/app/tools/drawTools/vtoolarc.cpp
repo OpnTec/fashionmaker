@@ -292,25 +292,12 @@ void VToolArc::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolArc * visual = new VisToolArc(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-
-            visual->setPoint1Id(arc->GetCenter().id());
-            visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
-            visual->setF1(qApp->FormulaToUser(arc->GetFormulaF1()));
-            visual->setF2(qApp->FormulaToUser(arc->GetFormulaF2()));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolArc>();
+            SetVisualization();
         }
         else
         {
-            VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
-            if (visual != nullptr)
+            if (VisToolArc *visual = qobject_cast<VisToolArc *>(vis))
             {
                 visual->show();
             }
@@ -375,6 +362,23 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolArc::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+        VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
+        SCASSERT(visual != nullptr)
+
+        visual->setPoint1Id(arc->GetCenter().id());
+        visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
+        visual->setF1(qApp->FormulaToUser(arc->GetFormulaF1()));
+        visual->setF2(qApp->FormulaToUser(arc->GetFormulaF2()));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry  refresh item on scene.
  */
@@ -383,15 +387,5 @@ void VToolArc::RefreshGeometry()
     this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
     this->setPath(ToolPath());
 
-    if (vis != nullptr)
-    {
-        const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-        VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
-
-        visual->setPoint1Id(arc->GetCenter().id());
-        visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(qApp->FormulaToUser(arc->GetFormulaF1()));
-        visual->setF2(qApp->FormulaToUser(arc->GetFormulaF2()));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }

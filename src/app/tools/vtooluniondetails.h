@@ -87,6 +87,7 @@ protected:
     virtual void AddToFile();
     virtual void RefreshDataInFile();
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void SetVisualization() {}
 private:
     Q_DISABLE_COPY(VToolUnionDetails)
     /** @brief d1 first detail. */

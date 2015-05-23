@@ -245,21 +245,12 @@ void VToolCutSplinePath::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolCutSplinePath *visual = new VisToolCutSplinePath(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(curveCutId);
-            visual->setLength(qApp->FormulaToUser(formula));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolCutSplinePath>();
+            SetVisualization();
         }
         else
         {
-            VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
-            if (visual != nullptr)
+            if (VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis))
             {
                 visual->show();
             }
@@ -291,14 +282,7 @@ void VToolCutSplinePath::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
-        visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->FormulaToUser(formula));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -386,4 +370,18 @@ void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
     formula = doc->GetParametrString(domElement, AttrLength, "");
     curveCutId = doc->GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
     lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCutSplinePath::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(curveCutId);
+        visual->setLength(qApp->FormulaToUser(formula));
+        visual->RefreshGeometry();
+    }
 }

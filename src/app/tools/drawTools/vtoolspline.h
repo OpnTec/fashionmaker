@@ -69,6 +69,7 @@ protected:
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void SetVisualization();
 private:
     Q_DISABLE_COPY(VToolSpline)
     void         RefreshGeometry ();

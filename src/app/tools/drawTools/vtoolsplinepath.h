@@ -86,6 +86,7 @@ protected:
     virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent * event);
     virtual void  hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void  SetVisualization();
 private:
     QPointF oldPosition;
 

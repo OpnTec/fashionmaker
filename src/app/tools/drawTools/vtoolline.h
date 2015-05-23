@@ -80,6 +80,7 @@ protected:
     virtual void     SaveDialog(QDomElement &domElement);
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
     virtual void     ReadToolAttributes(const QDomElement &domElement);
+    virtual void     SetVisualization();
 private:
     /** @brief firstPoint id first line point. */
     quint32           firstPoint;

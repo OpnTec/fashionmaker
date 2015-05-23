@@ -189,16 +189,7 @@ void VToolEndLine::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
-        visual->setPoint1Id(basePointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
+    SetVisualization();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -258,6 +249,22 @@ void VToolEndLine::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolEndLine::SetVisualization()
+{
+    if (vis != nullptr)
+    {
+        VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+        SCASSERT(visual != nullptr);
+
+        visual->setPoint1Id(basePointId);
+        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
+        visual->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VFormula VToolEndLine::GetFormulaAngle() const
 {
     VFormula fAngle(formulaAngle, getData());
@@ -286,23 +293,12 @@ void VToolEndLine::ShowVisualization(bool show)
     {
         if (vis == nullptr)
         {
-            VisToolEndLine * visual = new VisToolEndLine(getData());
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr)
-            connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-            scene->addItem(visual);
-
-            visual->setPoint1Id(basePointId);
-            visual->setLength(qApp->FormulaToUser(formulaLength));
-            visual->SetAngle(qApp->FormulaToUser(formulaAngle));
-            visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-            visual->RefreshGeometry();
-            vis = visual;
+            AddVisualization<VisToolEndLine>();
+            SetVisualization();
         }
         else
         {
-            VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
-            if (visual != nullptr)
+            if (VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis))
             {
                 visual->show();
             }
