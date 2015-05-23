@@ -64,12 +64,13 @@ public:
 
 public slots:
     virtual void ShowTool(quint32 id, bool enable);
-    virtual void ChangedActivDraw(const QString &newName) = 0;
+    virtual void ChangedActivDraw(const QString &newName);
     void         ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void FullUpdateFromGuiOk(int result);
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
     virtual void EnableToolMove(bool move);
+    virtual void Disable(bool disable)=0;
 protected:
 
     /** @brief nameActivDraw name of tool's pattern peace. */

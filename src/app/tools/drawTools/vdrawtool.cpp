@@ -74,6 +74,16 @@ void VDrawTool::ShowTool(quint32 id, bool enable)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
+ * @param newName new name active pattern peace.
+ */
+void VDrawTool::ChangedActivDraw(const QString &newName)
+{
+    Disable(!(nameActivDraw == newName));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief ChangedNameDraw save new name active pattern peace.
  * @param oldName old name.
  * @param newName new name active pattern peace. new name.

@@ -58,16 +58,6 @@ VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolCut::ChangedActivDraw(const QString &newName)
-{
-    Disable(!(nameActivDraw == newName));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCut::HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction)
 {
     VSimpleCurve* simpleCurve = qobject_cast<VSimpleCurve*>(sender());

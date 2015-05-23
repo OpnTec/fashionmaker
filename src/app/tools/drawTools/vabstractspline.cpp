@@ -90,16 +90,6 @@ void VAbstractSpline::DetailsMode(bool mode)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VAbstractSpline::ChangedActivDraw(const QString &newName)
-{
-    Disable(!(nameActivDraw == newName));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief ShowTool highlight tool.
  * @param id object id in container
  * @param enable enable or disable highlight.

@@ -64,10 +64,9 @@ public:
     virtual void     SetLineColor(const QString &value);
 public slots:
     virtual void     FullUpdateFromFile();
-    virtual void     ChangedActivDraw(const QString &newName);
     virtual void     ShowTool(quint32 id, bool enable);
     virtual void     SetFactor(qreal factor);
-    void             Disable(bool disable);
+    virtual void     Disable(bool disable);
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     AddToFile();

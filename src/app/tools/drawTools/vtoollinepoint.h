@@ -55,9 +55,8 @@ public:
     void              SetAngle(const qreal &value);
 
 public slots:
-    virtual void      ChangedActivDraw(const QString &newName);
     virtual void      SetFactor(qreal factor);
-    void              Disable(bool disable);
+    virtual void      Disable(bool disable);
 protected:
     /** @brief formula string with length formula. */
     QString           formulaLength;

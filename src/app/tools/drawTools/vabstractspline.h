@@ -51,7 +51,7 @@ public:
 
 public slots:
     virtual void     FullUpdateFromFile ();
-    void             Disable(bool disable);
+    virtual void     Disable(bool disable);
     void             DetailsMode(bool mode);
 signals:
     /**
@@ -80,7 +80,6 @@ protected:
      * @brief RefreshGeometry  refresh item on scene.
      */
     virtual void     RefreshGeometry ()=0;
-    virtual void     ChangedActivDraw ( const QString &newName );
     virtual void     ShowTool(quint32 id, bool enable);
     virtual void     SetFactor(qreal factor);
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event );

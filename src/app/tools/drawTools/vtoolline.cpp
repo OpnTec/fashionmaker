@@ -230,16 +230,6 @@ void VToolLine::Disable(bool disable)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolLine::ChangedActivDraw(const QString &newName)
-{
-    Disable(!(nameActivDraw == newName));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */

@@ -53,10 +53,9 @@ public:
     void                    setEnabled(bool enabled);
 public slots:
     void                    NameChangePosition(const QPointF &pos);
-    virtual void            ChangedActivDraw(const QString &newName);
     virtual void            ShowTool(quint32 id, bool enable);
     virtual void            SetFactor(qreal factor);
-    void                    Disable(bool disable);
+    virtual void            Disable(bool disable);
     void                    DeleteFromLabel();
     virtual void            EnableToolMove(bool move);
     void                    PointChoosed();

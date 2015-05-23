@@ -66,16 +66,6 @@ VToolLinePoint::~VToolLinePoint()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ChangedActivDraw disable or enable context menu after change active pattern peace.
- * @param newName new name active pattern peace.
- */
-void VToolLinePoint::ChangedActivDraw(const QString &newName)
-{
-    Disable(!(nameActivDraw == newName));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief RefreshGeometry  refresh item on scene.
  */
 void VToolLinePoint::RefreshGeometry()
