@@ -75,7 +75,7 @@ void VAbstractSpline::Disable(bool disable)
 {
     enabled = !disable;
     this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor, Qt::SolidLine,
                       Qt::RoundCap));
     emit setEnabledPoint(enabled);
 }
