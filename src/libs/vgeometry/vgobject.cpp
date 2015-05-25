@@ -261,6 +261,19 @@ QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1, QPointF &p2)
+{
+    if (qFuzzyCompare(c1.x(), c2.x()) && qFuzzyCompare(c1.y(), c2.y()) && qFuzzyCompare(r1, r2))
+    {
+        return 3;// Circles are equal
+    }
+    const double a = 2.0 * (c2.x() - c1.x());
+    const double b = 2.0 * (c2.y() - c1.y());
+    const double c = c1.x() * c1.x() + c1.y() * c1.y() - r1 * r1 - (c2.x() * c2.x() + c2.y() * c2.y() - r2 * r2);
+    return LineIntersectCircle (c1, r1, CreateSegment(a, b, c), p1, p2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief LineIntersectCircle find point intersection line and circle.
  * @param center arc center.
@@ -414,6 +427,18 @@ double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
     const int dy1 = p2.toPoint().y() - p1.toPoint().y();
     const double epsilon = 0.003 * (dx1 * dx1 + dy1 * dy1);
     return epsilon;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QLineF VGObject::CreateSegment(double a, double b, double c)
+{
+    const double x1 = 0;
+    const double y1 = (-a*x1-c)/b;
+
+    const double x2 = 1000;
+    const double y2 = (-a*x2-c)/b;
+
+    return QLineF(x1, y1, x2, y2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
