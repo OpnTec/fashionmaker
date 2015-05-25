@@ -79,7 +79,7 @@ void VDrawTool::ShowTool(quint32 id, bool enable)
  */
 void VDrawTool::ChangedActivDraw(const QString &newName)
 {
-    Disable(!(nameActivDraw == newName));
+    Disable(!(nameActivDraw == newName), newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,6 +180,19 @@ QColor VDrawTool::CorrectColor(const QColor &color) const
     else
     {
         return Qt::gray;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDrawTool::CorrectDisable(bool disable, const QString &namePP) const
+{
+    if (disable)
+    {
+        return disable;
+    }
+    else
+    {
+        return !(nameActivDraw == namePP);
     }
 }
 

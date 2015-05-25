@@ -100,9 +100,9 @@ void VMainGraphicsScene::setTransform(const QTransform &transform)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMainGraphicsScene::SetDisable(bool disable)
+void VMainGraphicsScene::SetDisableTools(bool disable, const QString &namePP)
 {
-    emit DisableItem(disable);
+    emit DisableItem(disable, namePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

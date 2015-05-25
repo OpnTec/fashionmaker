@@ -68,9 +68,9 @@ void VToolCut::HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirecti
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::Disable(bool disable)
+void VToolCut::Disable(bool disable, const QString &namePP)
 {
-    VToolPoint::Disable(disable);
+    VToolPoint::Disable(disable, namePP);
     firstCurve->ChangedActivDraw(enabled);
     secondCurve->ChangedActivDraw(enabled);
 }

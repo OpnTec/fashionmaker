@@ -70,7 +70,7 @@ public slots:
     virtual void FullUpdateFromGuiApply();
     virtual void SetFactor(qreal factor);
     virtual void EnableToolMove(bool move);
-    virtual void Disable(bool disable)=0;
+    virtual void Disable(bool disable, const QString &namePP)=0;
 protected:
 
     /** @brief nameActivDraw name of tool's pattern peace. */
@@ -94,7 +94,9 @@ protected:
     void         SaveDialogChange();
     virtual void AddToFile();
     virtual void RefreshDataInFile();
+
     QColor       CorrectColor(const QColor &color) const;
+    bool         CorrectDisable(bool disable, const QString &namePP) const;
 
     void         ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;

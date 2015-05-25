@@ -99,10 +99,10 @@ void VToolLinePoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLinePoint::Disable(bool disable)
+void VToolLinePoint::Disable(bool disable, const QString &namePP)
 {
-    VToolPoint::Disable(disable);
-    mainLine->setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+    VToolPoint::Disable(disable, namePP);
+    mainLine->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
                           LineStyleToPenStyle(typeLine)));
     mainLine->setEnabled(enabled);
 }

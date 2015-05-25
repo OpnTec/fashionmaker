@@ -47,7 +47,7 @@ public:
     void          setVerScrollBar(const qint32 &value);
     QTransform    transform() const;
     void          setTransform(const QTransform &transform);
-    void          SetDisable(bool enabled);
+    void          SetDisableTools(bool enabled, const QString &namePP);
     QPointF       getScenePos() const;
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
@@ -79,7 +79,7 @@ signals:
      * @param factor scene scale factor.
      */
     void          NewFactor(qreal factor);
-    void          DisableItem(bool disable);
+    void          DisableItem(bool disable, const QString &namePP);
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
 private:

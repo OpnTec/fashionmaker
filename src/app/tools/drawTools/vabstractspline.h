@@ -51,7 +51,7 @@ public:
 
 public slots:
     virtual void     FullUpdateFromFile ();
-    virtual void     Disable(bool disable);
+    virtual void     Disable(bool disable, const QString &namePP);
     void             DetailsMode(bool mode);
 signals:
     /**

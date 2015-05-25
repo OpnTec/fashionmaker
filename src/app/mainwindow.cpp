@@ -1798,8 +1798,8 @@ void MainWindow::SetEnableWidgets(bool enable)
         ui->actionLayout->setEnabled(enable);
     }
 
-    //Now we want allow user call context menu
-    sceneDraw->SetDisable(!enable);
+    //Now we don't want allow user call context menu
+    sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
     ui->view->setEnabled(enable);
 }
 

@@ -66,7 +66,7 @@ public slots:
     virtual void     FullUpdateFromFile();
     virtual void     ShowTool(quint32 id, bool enable);
     virtual void     SetFactor(qreal factor);
-    virtual void     Disable(bool disable);
+    virtual void     Disable(bool disable, const QString &namePP);
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void     AddToFile();

@@ -163,9 +163,9 @@ void VToolPoint::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::Disable(bool disable)
+void VToolPoint::Disable(bool disable, const QString &namePP)
 {
-    enabled = !disable;
+    enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
     namePoint->setEnabled(enabled);
 }

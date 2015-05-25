@@ -53,7 +53,7 @@ public:
 public slots:
     virtual void  CurveChoosed(quint32 id)=0;
     void          HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
-    virtual void  Disable(bool disable);
+    virtual void  Disable(bool disable, const QString &namePP);
     void          DetailsMode(bool mode);
 protected:
     /** @brief formula keep formula of length */

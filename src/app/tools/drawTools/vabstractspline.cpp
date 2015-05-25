@@ -71,9 +71,9 @@ void VAbstractSpline::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::Disable(bool disable)
+void VAbstractSpline::Disable(bool disable, const QString &namePP)
 {
-    enabled = !disable;
+    enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
     this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor, Qt::SolidLine,
                       Qt::RoundCap));

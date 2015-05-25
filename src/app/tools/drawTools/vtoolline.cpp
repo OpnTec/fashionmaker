@@ -221,11 +221,12 @@ void VToolLine::SetFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLine::Disable(bool disable)
+void VToolLine::Disable(bool disable, const QString &namePP)
 {
-    enabled = !disable;
+    enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    this->setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor,
+                      LineStyleToPenStyle(typeLine)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

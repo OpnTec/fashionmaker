@@ -55,7 +55,7 @@ public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            ShowTool(quint32 id, bool enable);
     virtual void            SetFactor(qreal factor);
-    virtual void            Disable(bool disable);
+    virtual void            Disable(bool disable, const QString &namePP);
     void                    DeleteFromLabel();
     virtual void            EnableToolMove(bool move);
     void                    PointChoosed();
