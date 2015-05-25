@@ -2128,6 +2128,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonLineIntersectAxis->setEnabled(drawTools);
     ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
     ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
+    ui->toolButtonPointOfIntersectionArcs->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 

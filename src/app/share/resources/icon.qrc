@@ -61,5 +61,6 @@
         <file>icon/16x16/roll.png</file>
         <file>icon/16x16/progress.gif</file>
         <file>icon/32x32/export_to_picture_document.png</file>
+        <file>icon/32x32/point_of_intersection_arcs.png</file>
     </qresource>
 </RCC>

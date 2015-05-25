@@ -24,5 +24,6 @@
         <file>cursor/line_intersect_axis_cursor.png</file>
         <file>cursor/arc_intersect_axis_cursor.png</file>
         <file>cursor/curve_intersect_axis_cursor.png</file>
+        <file>cursor/point_of_intersection_arcs.png</file>
     </qresource>
 </RCC>
