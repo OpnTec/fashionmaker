@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   drawtools.h
+ **  @file   vistoolpointofintersectionarcs.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   27 5, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,29 +26,35 @@
  **
  *************************************************************************/
 
-#ifndef DRAWTOOLS_H
-#define DRAWTOOLS_H
+#ifndef VISTOOLPOINTOFINTERSECTIONARCS_H
+#define VISTOOLPOINTOFINTERSECTIONARCS_H
 
-#include "vtoolalongline.h"
-#include "vtoolarc.h"
-#include "vtoolbisector.h"
-#include "vtoolendline.h"
-#include "vtoolline.h"
-#include "vtoollineintersect.h"
-#include "vtoolnormal.h"
-#include "vtoolpointofcontact.h"
-#include "vtoolshoulderpoint.h"
-#include "vtoolsinglepoint.h"
-#include "vtoolspline.h"
-#include "vtoolsplinepath.h"
-#include "vtoolheight.h"
-#include "vtooltriangle.h"
-#include "vtoolpointofintersection.h"
-#include "vtoolpointofintersectionarcs.h"
-#include "vtoolcutspline.h"
-#include "vtoolcutsplinepath.h"
-#include "vtoolcutarc.h"
-#include "vtoollineintersectaxis.h"
-#include "vtoolcurveintersectaxis.h"
+#include "visline.h"
+#include "../xml/vpattern.h"
 
-#endif // DRAWTOOLS_H
+class VisToolPointOfIntersectionArcs : public VisLine
+{
+    Q_OBJECT
+public:
+    VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolPointOfIntersectionArcs();
+
+    virtual void RefreshGeometry();
+
+    void         setArc1Id(const quint32 &value);
+    void         setArc2Id(const quint32 &value);
+    void         setCrossPoint(const CrossArcPoint &value);
+
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
+private:
+    Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
+    quint32              arc1Id;
+    quint32              arc2Id;
+    CrossArcPoint        crossPoint;
+    QGraphicsEllipseItem *point;
+    QGraphicsPathItem    *arc1Path;
+    QGraphicsPathItem    *arc2Path;
+};
+
+#endif // VISTOOLPOINTOFINTERSECTIONARCS_H

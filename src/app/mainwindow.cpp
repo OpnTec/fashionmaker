@@ -696,6 +696,16 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PointOfIntersectionArcs(bool checked)
+{
+    SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
+                                                     "://cursor/point_of_intersection_arcs.png",
+                                                     tr("Select first an arc"),
+                                                     &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionArcs>,
+                                                     &MainWindow::ApplyDialog<VToolPointOfIntersectionArcs>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief About show widows about.
  */
@@ -990,6 +1000,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
+    connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this, &MainWindow::PointOfIntersectionArcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1102,6 +1113,9 @@ void MainWindow::CancelTool()
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(false);
             ui->toolButtonArcIntersectAxis->setChecked(false);
+            break;
+        case Tool::PointOfIntersectionArcs:
+            ui->toolButtonPointOfIntersectionArcs->setChecked(false);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:

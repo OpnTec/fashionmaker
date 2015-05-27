@@ -86,14 +86,15 @@ enum class Tool : unsigned char
     Height,
     Triangle,
     LineIntersectAxis,
+    PointOfIntersectionArcs,
     CurveIntersectAxis,
     PointOfIntersection,
-    UnionDetails // 30
+    UnionDetails // 31
 };
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline = 31, // increase this value if need more positions in Tool enum
+    ControlPointSpline = 32, // increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
     SimpleSplinePath,
     Line,
@@ -109,6 +110,7 @@ enum class Vis : unsigned char
     ToolNormal,
     ToolPointOfContact,
     ToolPointOfIntersection,
+    ToolPointOfIntersectionArcs,
     ToolShoulderPoint,
     ToolSpline,
     ToolTriangle,

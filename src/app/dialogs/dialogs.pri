@@ -44,7 +44,8 @@ HEADERS += \
     $$PWD/tools/dialogcurveintersectaxis.h \
     $$PWD/app/dialoglayoutsettings.h \
     $$PWD/app/dialoglayoutprogress.h \
-    dialogs/app/dialogsavelayout.h
+    $$PWD/app/dialogsavelayout.h \
+    $$PWD/tools/dialogpointofintersectionarcs.h
 
 SOURCES += \
     $$PWD/tools/dialogtriangle.cpp \
@@ -87,7 +88,8 @@ SOURCES += \
     $$PWD/tools/dialogcurveintersectaxis.cpp \
     $$PWD/app/dialoglayoutsettings.cpp \
     $$PWD/app/dialoglayoutprogress.cpp \
-    dialogs/app/dialogsavelayout.cpp
+    $$PWD/app/dialogsavelayout.cpp \
+    $$PWD/tools/dialogpointofintersectionarcs.cpp
 
 FORMS += \
     $$PWD/tools/dialogtriangle.ui \
@@ -124,4 +126,5 @@ FORMS += \
     $$PWD/tools/dialogcurveintersectaxis.ui \
     $$PWD/app/dialoglayoutsettings.ui \
     $$PWD/app/dialoglayoutprogress.ui \
-    dialogs/app/dialogsavelayout.ui
+    $$PWD/app/dialogsavelayout.ui \
+    $$PWD/tools/dialogpointofintersectionarcs.ui
