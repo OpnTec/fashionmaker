@@ -874,10 +874,13 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionArcs(VPropert
                 {
                     case 0:
                         cross = CrossArcsPoint::FirstPoint;
+                        break;
                     case 1:
                         cross = CrossArcsPoint::SecondPoint;
+                        break;
                     default:
                         cross = CrossArcsPoint::FirstPoint;
+                        break;
                 }
             }
             i->SetCrossArcsPoint(cross);

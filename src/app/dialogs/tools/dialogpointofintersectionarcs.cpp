@@ -223,6 +223,7 @@ void DialogPointOfIntersectionArcs::SaveData()
 
     point->setArc1Id(GetFirstArcId());
     point->setArc2Id(GetSecondArcId());
+    point->setCrossPoint(GetCrossArcPoint());
     point->RefreshGeometry();
 }
 
