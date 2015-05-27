@@ -90,7 +90,6 @@ private:
     static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static double  PerpDotProduct(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static double  GetEpsilon(const QPointF &p1, const QPointF &p2);
-    static QLineF  CreateSegment(double a, double b, double c);
 };
 
 #endif // VGOBJECT_H

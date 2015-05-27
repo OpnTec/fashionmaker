@@ -696,7 +696,7 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::PointOfIntersectionArcs(bool checked)
+void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 {
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
                                                      "://cursor/point_of_intersection_arcs.png",
@@ -1000,7 +1000,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
-    connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this, &MainWindow::PointOfIntersectionArcs);
+    connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersectionArcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2476,6 +2476,10 @@ void MainWindow::LastUsedTool()
         case Tool::PointOfIntersection:
             ui->toolButtonPointOfIntersection->setChecked(true);
             ToolPointOfIntersection(true);
+            break;
+        case Tool::PointOfIntersectionArcs:
+            ui->toolButtonPointOfIntersectionArcs->setChecked(true);
+            ToolPointOfIntersectionArcs(true);
             break;
         case Tool::CutSpline:
             ui->toolButtonSplineCutPoint->setChecked(true);

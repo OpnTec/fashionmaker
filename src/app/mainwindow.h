@@ -115,13 +115,13 @@ public slots:
     void               ToolCutArc(bool checked);
     void               ToolLineIntersectAxis(bool checked);
     void               ToolCurveIntersectAxis(bool checked);
-    void               PointOfIntersectionArcs(bool checked);
+    void               ToolPointOfIntersectionArcs(bool checked);
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);
 
 //tmp
-    void                LastUsedTool();
+    void               LastUsedTool();
 
     /**
      * @brief Edit XML code of pattern

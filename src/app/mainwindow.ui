@@ -50,7 +50,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>272</height>
         </rect>
        </property>
@@ -337,7 +337,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -413,7 +413,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>156</height>
         </rect>
        </property>
@@ -683,6 +683,9 @@
             <height>32</height>
            </size>
           </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -692,7 +695,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -768,8 +771,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
-         <height>380</height>
+         <width>98</width>
+         <height>58</height>
         </rect>
        </property>
        <attribute name="label">

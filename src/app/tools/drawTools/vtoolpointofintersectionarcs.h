@@ -40,17 +40,17 @@ class VToolPointOfIntersectionArcs : public VToolPoint
 
 public:
     VToolPointOfIntersectionArcs(VPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
-                                 const quint32 &secondArcId, CrossArcPoint crossPoint, const Source &typeCreation,
+                                 const quint32 &secondArcId, CrossArcsPoint crossPoint, const Source &typeCreation,
                                  QGraphicsItem * parent = nullptr);
     virtual void setDialog();
     static VToolPointOfIntersectionArcs *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VPattern *doc,
                                                 VContainer *data);
     static VToolPointOfIntersectionArcs *Create(const quint32 _id, const QString &pointName, const quint32 &firstArcId,
-                                                const quint32 &secondArcId, CrossArcPoint crossPoint,
+                                                const quint32 &secondArcId, CrossArcsPoint crossPoint,
                                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                                 VPattern *doc, VContainer *data, const Document &parse,
                                                 const Source &typeCreation);
-    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossArcPoint crossPoint);
+    static QPointF FindPoint(const VArc *arc1, const VArc *arc2, const CrossArcsPoint crossPoint);
     static const QString ToolType;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };
@@ -61,8 +61,8 @@ public:
     quint32 GetSecondArcId() const;
     void    SetSecondArcId(const quint32 &value);
 
-    CrossArcPoint  GetCrossArcPoint() const;
-    void           SetCrossArcPoint(CrossArcPoint &value);
+    CrossArcsPoint GetCrossArcsPoint() const;
+    void           SetCrossArcsPoint(CrossArcsPoint &value);
 
     virtual void ShowVisualization(bool show);
 public slots:
@@ -83,7 +83,7 @@ private:
     /** @brief secondArcId id second arc. */
     quint32       secondArcId;
 
-    CrossArcPoint crossPoint;
+    CrossArcsPoint crossPoint;
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONARCS_H

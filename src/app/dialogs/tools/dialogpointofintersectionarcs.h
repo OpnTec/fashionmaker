@@ -53,8 +53,8 @@ public:
     quint32        GetSecondArcId() const;
     void           SetSecondArcId(const quint32 &value);
 
-    CrossArcPoint  GetCrossArcPoint() const;
-    void           SetCrossArcPoint(CrossArcPoint &p);
+    CrossArcsPoint GetCrossArcPoint() const;
+    void           SetCrossArcPoint(CrossArcsPoint &p);
 
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);

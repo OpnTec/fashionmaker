@@ -40,10 +40,11 @@ public:
     virtual ~VisToolPointOfIntersectionArcs();
 
     virtual void RefreshGeometry();
+    virtual void VisualMode(const quint32 &id);
 
     void         setArc1Id(const quint32 &value);
     void         setArc2Id(const quint32 &value);
-    void         setCrossPoint(const CrossArcPoint &value);
+    void         setCrossPoint(const CrossArcsPoint &value);
 
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
@@ -51,7 +52,7 @@ private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
     quint32              arc1Id;
     quint32              arc2Id;
-    CrossArcPoint        crossPoint;
+    CrossArcsPoint       crossPoint;
     QGraphicsEllipseItem *point;
     QGraphicsPathItem    *arc1Path;
     QGraphicsPathItem    *arc2Path;

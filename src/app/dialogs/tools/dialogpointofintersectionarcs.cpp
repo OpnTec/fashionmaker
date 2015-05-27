@@ -106,7 +106,7 @@ void DialogPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossArcPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
+CrossArcsPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
 {
     int value;
     bool ok = false;
@@ -117,25 +117,25 @@ CrossArcPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
 #endif
     if (not ok)
     {
-        return CrossArcPoint::FirstPoint;
+        return CrossArcsPoint::FirstPoint;
     }
 
     switch(value)
     {
         case 1:
-            return CrossArcPoint::FirstPoint;
+            return CrossArcsPoint::FirstPoint;
             break;
         case 2:
-            return CrossArcPoint::SecondPoint;
+            return CrossArcsPoint::SecondPoint;
             break;
         default:
-            return CrossArcPoint::FirstPoint;
+            return CrossArcsPoint::FirstPoint;
             break;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossArcPoint &p)
+void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossArcsPoint &p)
 {
     const qint32 index = ui->comboBoxResult->findData(static_cast<int>(p));
     if (index != -1)
@@ -164,15 +164,15 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
                     if (SetObject(id, ui->comboBoxArc1, tr("Select second an arc")))
                     {
                         number++;
-                        point->setArc1Id(id);
-                        point->RefreshGeometry();
+                        point->VisualMode(id);
                     }
                     break;
                 case 1:
-                    if (getCurrentObjectId(ui->comboBoxArc2) != id)
+                    if (getCurrentObjectId(ui->comboBoxArc1) != id)
                     {
                         if (SetObject(id, ui->comboBoxArc2, ""))
                         {
+                            number = 0;
                             point->setArc2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
@@ -229,6 +229,6 @@ void DialogPointOfIntersectionArcs::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::FillComboBoxCrossArcPoints()
 {
-    ui->comboBoxResult->addItem(tr("First point"), QVariant(static_cast<int>(CrossArcPoint::FirstPoint)));
-    ui->comboBoxResult->addItem(tr("Second point"), QVariant(static_cast<int>(CrossArcPoint::SecondPoint)));
+    ui->comboBoxResult->addItem(tr("First point"), QVariant(static_cast<int>(CrossArcsPoint::FirstPoint)));
+    ui->comboBoxResult->addItem(tr("Second point"), QVariant(static_cast<int>(CrossArcsPoint::SecondPoint)));
 }
