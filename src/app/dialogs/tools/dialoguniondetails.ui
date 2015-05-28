@@ -9,19 +9,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>244</width>
+    <width>300</width>
     <height>78</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>244</width>
+    <width>300</width>
     <height>78</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>244</width>
+    <width>300</width>
     <height>78</height>
    </size>
   </property>
@@ -36,7 +36,7 @@
    <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

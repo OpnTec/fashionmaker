@@ -9,19 +9,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>250</width>
+    <width>300</width>
     <height>202</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>250</width>
+    <width>300</width>
     <height>202</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>250</width>
+    <width>300</width>
     <height>202</height>
    </size>
   </property>
@@ -38,92 +38,80 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>241</width>
-     <height>129</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>241</width>
-     <height>129</height>
-    </size>
-   </property>
-   <property name="toolTip">
-    <string>Coordinates on the sheet</string>
-   </property>
-   <property name="title">
-    <string>Coordinates</string>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
-     <widget class="QLabel" name="labelYCor">
-      <property name="text">
-       <string>Y coordinate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="labelXCor">
-      <property name="text">
-       <string>X coordinate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QDoubleSpinBox" name="doubleSpinBoxX"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QDoubleSpinBox" name="doubleSpinBoxY"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="labelEditName">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>10</y>
-     <width>81</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Point label</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEditName">
-   <property name="geometry">
-    <rect>
-     <x>15</x>
-     <y>9</y>
-     <width>146</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>170</y>
-     <width>221</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="lineEditName">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelEditName">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Point label</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="maximumSize">
+      <size>
+       <width>241</width>
+       <height>129</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Coordinates on the sheet</string>
+     </property>
+     <property name="title">
+      <string>Coordinates</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="1">
+       <widget class="QLabel" name="labelYCor">
+        <property name="text">
+         <string>Y coordinate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="labelXCor">
+        <property name="text">
+         <string>X coordinate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxX"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxY"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>lineEditName</tabstop>
