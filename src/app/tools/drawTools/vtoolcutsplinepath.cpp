@@ -238,17 +238,6 @@ void VToolCutSplinePath::ShowVisualization(bool show)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolCutSplinePath::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief CurveChoosed send signal about selection splinePath.
  * @param id object id in container.
  */

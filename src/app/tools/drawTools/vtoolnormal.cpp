@@ -192,17 +192,6 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolNormal::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

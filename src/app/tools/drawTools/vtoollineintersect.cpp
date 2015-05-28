@@ -182,17 +182,6 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolLineIntersect::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

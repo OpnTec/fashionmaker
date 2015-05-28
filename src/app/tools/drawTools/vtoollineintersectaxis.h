@@ -66,8 +66,6 @@ public:
     void         SetSecondPointId(const quint32 &value);
 
     virtual void ShowVisualization(bool show);
-public slots:
-    virtual void FullUpdateFromFile();
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void SaveDialog(QDomElement &domElement);

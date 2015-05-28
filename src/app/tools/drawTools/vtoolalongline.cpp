@@ -59,17 +59,6 @@ VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, cons
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolAlongLine::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

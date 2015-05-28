@@ -218,17 +218,6 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolShoulderPoint::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

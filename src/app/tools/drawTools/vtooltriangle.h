@@ -67,8 +67,6 @@ public:
     void    SetSecondPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show);
-public slots:
-    virtual void   FullUpdateFromFile();
 protected:
     virtual void   RemoveReferens();
     virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

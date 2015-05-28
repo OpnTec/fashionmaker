@@ -55,7 +55,6 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
     virtual void  ShowVisualization(bool show);
 public slots:
-    virtual void  FullUpdateFromFile();
     virtual void  CurveChoosed(quint32 id);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

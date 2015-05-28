@@ -231,14 +231,6 @@ void VToolLineIntersectAxis::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogLineIntersectAxis>(this, event);

@@ -65,7 +65,6 @@ public:
 
     virtual void ShowVisualization(bool show);
 public slots:
-    virtual void FullUpdateFromFile();
     virtual void SetFactor(qreal factor);
 protected:
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

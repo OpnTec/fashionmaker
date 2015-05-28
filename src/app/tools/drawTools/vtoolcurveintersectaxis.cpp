@@ -219,23 +219,6 @@ void VToolCurveIntersectAxis::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
-        visual->setPoint1Id(curveId);
-        visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCurveIntersectAxis::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     ContextMenu<DialogCurveIntersectAxis>(this, event);

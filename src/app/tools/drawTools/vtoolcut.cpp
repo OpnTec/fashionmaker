@@ -82,6 +82,17 @@ void VToolCut::DetailsMode(bool mode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
+void VToolCut::FullUpdateFromFile()
+{
+    ReadAttributes();
+    RefreshGeometry();
+    SetVisualization();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 VToolCut::getCurveCutId() const
 {

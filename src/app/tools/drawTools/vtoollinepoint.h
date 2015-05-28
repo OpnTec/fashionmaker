@@ -57,6 +57,7 @@ public:
 public slots:
     virtual void      SetFactor(qreal factor);
     virtual void      Disable(bool disable, const QString &namePP);
+    virtual void      FullUpdateFromFile();
 protected:
     /** @brief formula string with length formula. */
     QString           formulaLength;

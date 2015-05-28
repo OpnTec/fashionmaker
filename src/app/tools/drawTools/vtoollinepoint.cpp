@@ -117,6 +117,17 @@ void VToolLinePoint::Disable(bool disable, const QString &namePP)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
+void VToolLinePoint::FullUpdateFromFile()
+{
+    ReadAttributes();
+    RefreshGeometry();
+    SetVisualization();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VToolLinePoint::GetAngle() const
 {
     return angle;

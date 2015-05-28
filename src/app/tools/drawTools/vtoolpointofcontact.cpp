@@ -235,17 +235,6 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolPointOfContact::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

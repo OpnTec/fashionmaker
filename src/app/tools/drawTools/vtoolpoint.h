@@ -59,6 +59,7 @@ public slots:
     void                    DeleteFromLabel();
     virtual void            EnableToolMove(bool move);
     void                    PointChoosed();
+    virtual void            FullUpdateFromFile();
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;

@@ -65,8 +65,6 @@ public:
     void           SetCrossArcsPoint(CrossArcsPoint &value);
 
     virtual void ShowVisualization(bool show);
-public slots:
-    virtual void FullUpdateFromFile();
 protected:
     virtual void RemoveReferens();
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

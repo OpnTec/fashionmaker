@@ -55,6 +55,7 @@ public slots:
     void          HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
     virtual void  Disable(bool disable, const QString &namePP);
     void          DetailsMode(bool mode);
+    virtual void  FullUpdateFromFile();
 protected:
     /** @brief formula keep formula of length */
     QString       formula;

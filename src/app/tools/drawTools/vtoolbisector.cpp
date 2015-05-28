@@ -214,27 +214,6 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VToolBisector::FullUpdateFromFile()
-{
-    ReadAttributes();
-    RefreshGeometry();
-
-    if (vis != nullptr)
-    {
-        VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
-        visual->setPoint1Id(firstPointId);
-        visual->setPoint2Id(basePointId);
-        visual->setPoint3Id(thirdPointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
-        visual->RefreshGeometry();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */

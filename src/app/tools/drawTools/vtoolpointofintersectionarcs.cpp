@@ -210,14 +210,6 @@ void VToolPointOfIntersectionArcs::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::FullUpdateFromFile()
-{
-    ReadAttributes();
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-    SetVisualization();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::RemoveReferens()
 {
     doc->DecrementReferens(firstArcId);

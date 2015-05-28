@@ -190,6 +190,17 @@ void VToolPoint::PointChoosed()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief FullUpdateFromFile update tool data form file.
+ */
+void VToolPoint::FullUpdateFromFile()
+{
+    ReadAttributes();
+    RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    SetVisualization();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.
  */
