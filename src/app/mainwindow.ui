@@ -28,29 +28,34 @@
        <bool>true</bool>
       </property>
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-        <horstretch>2</horstretch>
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
         <verstretch>1</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
        <size>
-        <width>105</width>
+        <width>120</width>
         <height>0</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="toolTip">
        <string/>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>120</width>
          <height>272</height>
         </rect>
        </property>
@@ -337,7 +342,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>120</width>
          <height>58</height>
         </rect>
        </property>
@@ -413,7 +418,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>120</width>
          <height>156</height>
         </rect>
        </property>
@@ -567,7 +572,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>105</width>
+         <width>120</width>
          <height>104</height>
         </rect>
        </property>
@@ -695,7 +700,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>120</width>
          <height>58</height>
         </rect>
        </property>
@@ -771,8 +776,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>98</width>
-         <height>58</height>
+         <width>120</width>
+         <height>386</height>
         </rect>
        </property>
        <attribute name="label">
