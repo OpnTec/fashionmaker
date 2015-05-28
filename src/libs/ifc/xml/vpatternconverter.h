@@ -58,6 +58,7 @@ private:
     void ToV0_1_1();
     void ToV0_1_2();
     void ToV0_1_3();
+    void ToV0_1_4();
 };
 
 #endif // VPATTERNCONVERTER_H
