@@ -312,16 +312,9 @@ void VToolCutSplinePath::RefreshCurve(VSimpleCurve *curve, quint32 curveId, Simp
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCutSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    VToolCut::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrName, point->name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
-    doc->SetAttribute(tag, AttrColor, lineColor);
-
     doc->SetAttribute(tag, AttrLength, formula);
     doc->SetAttribute(tag, AttrSplinePath, curveCutId);
 }

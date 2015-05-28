@@ -331,27 +331,6 @@ QMap<QString, quint32> VAbstractTool::PointsList() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
-{
-    qCDebug(vTool, "Saving tool options");
-    QDomElement oldDomElement = doc->elementById(id);
-    if (oldDomElement.isElement())
-    {
-        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
-
-        SaveOptions(newDomElement, obj);
-
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
-    }
-    else
-    {
-        qCDebug(vTool, "Can't find tool with id = %u", id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractTool::ToolCreation(const Source &typeCreation)
 {
     if (typeCreation == Source::FromGui)

@@ -78,6 +78,7 @@ protected:
     virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void            keyReleaseEvent(QKeyEvent * event);
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
+    virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 
     template <typename T>
     void ShowToolVisualization(bool show)

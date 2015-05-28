@@ -259,15 +259,9 @@ void VToolTriangle::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    VToolPoint::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrName, point->name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
-
     doc->SetAttribute(tag, AttrAxisP1, axisP1Id);
     doc->SetAttribute(tag, AttrAxisP2, axisP2Id);
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);

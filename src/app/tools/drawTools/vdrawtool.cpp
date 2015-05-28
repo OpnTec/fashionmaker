@@ -171,6 +171,35 @@ void VDrawTool::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
+{
+    qCDebug(vTool, "Saving tool options");
+    QDomElement oldDomElement = doc->elementById(id);
+    if (oldDomElement.isElement())
+    {
+        QDomElement newDomElement = oldDomElement.cloneNode().toElement();
+
+        SaveOptions(newDomElement, obj);
+
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
+    }
+    else
+    {
+        qCDebug(vTool, "Can't find tool with id = %u", id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    Q_UNUSED(obj)
+
+    doc->SetAttribute(tag, VDomDocument::AttrId, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QColor VDrawTool::CorrectColor(const QColor &color) const
 {
     if (enabled)

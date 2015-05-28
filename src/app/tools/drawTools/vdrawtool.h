@@ -94,6 +94,8 @@ protected:
     void         SaveDialogChange();
     virtual void AddToFile();
     virtual void RefreshDataInFile();
+    void         SaveOption(QSharedPointer<VGObject> &obj);
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 
     QColor       CorrectColor(const QColor &color) const;
     bool         CorrectDisable(bool disable, const QString &namePP) const;

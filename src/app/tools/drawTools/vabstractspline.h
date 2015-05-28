@@ -89,6 +89,7 @@ protected:
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement);
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 
     template <typename T>
     void ShowToolVisualization(bool show)

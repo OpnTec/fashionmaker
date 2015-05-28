@@ -88,6 +88,15 @@ void VToolLinePoint::RemoveReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    VToolPoint::SaveOptions(tag, obj);
+
+    doc->SetAttribute(tag, AttrTypeLine, typeLine);
+    doc->SetAttribute(tag, AttrLineColor, lineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.

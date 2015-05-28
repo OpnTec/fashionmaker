@@ -245,15 +245,9 @@ void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    VToolPoint::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrName, point->name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
-
     doc->SetAttribute(tag, AttrFirstArc, firstArcId);
     doc->SetAttribute(tag, AttrSecondArc, secondArcId);
     doc->SetAttribute(tag, AttrCrossPoint, static_cast<int>(crossPoint));

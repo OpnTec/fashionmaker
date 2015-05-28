@@ -742,13 +742,6 @@ void VToolUnionDetails::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolUnionDetails::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
-{
-    Q_UNUSED(tag)
-    Q_UNUSED(obj)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddDetail add detail to xml file.
  * @param domElement tag in xml tree.

@@ -243,15 +243,9 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLineIntersect::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
-    SCASSERT(point.isNull() == false);
+    VToolPoint::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrName, point->name());
-    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
-    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
-
     doc->SetAttribute(tag, AttrP1Line1, p1Line1);
     doc->SetAttribute(tag, AttrP2Line1, p2Line1);
     doc->SetAttribute(tag, AttrP1Line2, p1Line2);

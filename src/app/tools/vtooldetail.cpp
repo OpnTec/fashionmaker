@@ -374,13 +374,6 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
-{
-    Q_UNUSED(tag)
-    Q_UNUSED(obj)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.

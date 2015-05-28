@@ -321,10 +321,11 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
+    VAbstractSpline::SaveOptions(tag, obj);
+
     QSharedPointer<VSpline> spl = qSharedPointerDynamicCast<VSpline>(obj);
     SCASSERT(spl.isNull() == false);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrPoint1, spl->GetP1().id());
     doc->SetAttribute(tag, AttrPoint4, spl->GetP4().id());
@@ -333,7 +334,6 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
-    doc->SetAttribute(tag, AttrColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

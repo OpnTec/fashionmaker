@@ -360,9 +360,8 @@ void VToolLine::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    Q_UNUSED(obj)
+    VDrawTool::SaveOptions(tag, obj);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrFirstPoint, firstPoint);
     doc->SetAttribute(tag, AttrSecondPoint, secondPoint);
     doc->SetAttribute(tag, AttrTypeLine, typeLine);

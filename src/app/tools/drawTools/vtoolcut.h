@@ -76,6 +76,7 @@ protected:
     void          RefreshGeometry();
     virtual void  RemoveReferens();
     void          FullUpdateCurveFromFile(const QString &attrCurve);
+    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 
     template <typename T>
     void ShowToolVisualization(bool show)

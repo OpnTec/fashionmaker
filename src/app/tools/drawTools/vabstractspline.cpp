@@ -222,6 +222,14 @@ void VAbstractSpline::ReadToolAttributes(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    VDrawTool::SaveOptions(tag, obj);
+
+    doc->SetAttribute(tag, AttrColor, lineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ShowHandles(bool show)
 {
     for (int i = 0; i < controlPoints.size(); ++i)

@@ -72,6 +72,7 @@ protected:
 
     virtual void      RefreshGeometry();
     virtual void      RemoveReferens();
+    virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 private:
     Q_DISABLE_COPY(VToolLinePoint)
 };

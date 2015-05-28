@@ -323,16 +323,16 @@ void VToolArc::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
+    VAbstractSpline::SaveOptions(tag, obj);
+
     QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
     SCASSERT(arc.isNull() == false);
 
-    doc->SetAttribute(tag, VDomDocument::AttrId, id);
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCenter, arc->GetCenter().id());
     doc->SetAttribute(tag, AttrRadius, arc->GetFormulaRadius());
     doc->SetAttribute(tag, AttrAngle1, arc->GetFormulaF1());
     doc->SetAttribute(tag, AttrAngle2, arc->GetFormulaF2());
-    doc->SetAttribute(tag, AttrColor, lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

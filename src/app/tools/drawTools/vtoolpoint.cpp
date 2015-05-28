@@ -333,6 +333,19 @@ void VToolPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    VDrawTool::SaveOptions(tag, obj);
+
+    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    SCASSERT(point.isNull() == false);
+
+    doc->SetAttribute(tag, AttrName, point->name());
+    doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
+    doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolPoint::setEnabled(bool enabled)
 {
     QGraphicsEllipseItem::setEnabled(enabled);

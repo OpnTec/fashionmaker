@@ -155,3 +155,11 @@ void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
         curveCutId = domElement.attribute(attrCurve, "").toUInt();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+{
+    VToolPoint::SaveOptions(tag, obj);
+
+    doc->SetAttribute(tag, AttrColor, lineColor);
+}

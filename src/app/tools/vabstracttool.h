@@ -170,8 +170,6 @@ protected:
     virtual void            RemoveReferens(){}
     virtual void            DeleteTool(bool ask = true);
     static int              ConfirmDeletion();
-    void                    SaveOption(QSharedPointer<VGObject> &obj);
-    virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)=0;
 
     template <typename T>
     void AddVisualization()

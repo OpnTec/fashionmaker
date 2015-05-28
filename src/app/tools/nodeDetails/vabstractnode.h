@@ -62,7 +62,6 @@ protected:
     virtual void decrementReferens();
     virtual void RemoveReferens();
     virtual void RestoreReferens();
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
     virtual void SetVisualization() {}
 };
 
