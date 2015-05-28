@@ -54,15 +54,7 @@ VToolAlongLine::VToolAlongLine(VPattern *doc, VContainer *data, quint32 id, cons
                                QGraphicsItem *parent)
     :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, firstPointId, 0, parent), secondPointId(secondPointId)
 {
-
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

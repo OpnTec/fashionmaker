@@ -56,14 +56,7 @@ VToolNormal::VToolNormal(VPattern *doc, VContainer *data, const quint32 &id, con
     secondPointId(secondPointId)
 {
 
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

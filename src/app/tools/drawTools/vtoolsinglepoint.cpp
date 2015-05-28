@@ -58,14 +58,7 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
     SetColorLabel(Qt::black);
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

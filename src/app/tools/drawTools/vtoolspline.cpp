@@ -85,14 +85,7 @@ VToolSpline::VToolSpline(VPattern *doc, VContainer *data, quint32 id, const QStr
 
     ShowHandles(false);
 
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -56,14 +56,7 @@ VNodeSplinePath::VNodeSplinePath(VPattern *doc, VContainer *data, quint32 id, qu
     RefreshGeometry();
     this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
 
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

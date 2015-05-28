@@ -41,14 +41,7 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(VPattern *doc, VConta
                                                            QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), firstArcId(firstArcId), secondArcId(secondArcId), crossPoint(pType)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

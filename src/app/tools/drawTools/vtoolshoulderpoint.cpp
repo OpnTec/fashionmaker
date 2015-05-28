@@ -55,14 +55,7 @@ VToolShoulderPoint::VToolShoulderPoint(VPattern *doc, VContainer *data, const qu
     :VToolLinePoint(doc, data, id, typeLine, lineColor, formula, p1Line, 0, parent), p2Line(p2Line),
       pShoulder(pShoulder)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

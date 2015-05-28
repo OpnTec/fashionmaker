@@ -64,14 +64,7 @@ VToolUnionDetails::VToolUnionDetails(VPattern *doc, VContainer *data, const quin
                                      const Source &typeCreation, QObject *parent)
     :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

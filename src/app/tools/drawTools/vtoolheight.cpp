@@ -52,14 +52,7 @@ VToolHeight::VToolHeight(VPattern *doc, VContainer *data, const quint32 &id, con
     :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), p1LineId(p1LineId),
       p2LineId(p2LineId)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

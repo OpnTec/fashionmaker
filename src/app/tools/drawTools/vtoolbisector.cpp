@@ -58,14 +58,7 @@ VToolBisector::VToolBisector(VPattern *doc, VContainer *data, const quint32 &id,
     this->firstPointId = firstPointId;
     this->thirdPointId = thirdPointId;
 
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

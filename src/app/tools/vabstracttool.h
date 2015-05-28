@@ -186,6 +186,7 @@ protected:
     }
 
     virtual void SetVisualization()=0;
+    void ToolCreation(const Source &typeCreation);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

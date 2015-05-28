@@ -352,6 +352,19 @@ void VAbstractTool::SaveOption(QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::ToolCreation(const Source &typeCreation)
+{
+    if (typeCreation == Source::FromGui)
+    {
+        AddToFile();
+    }
+    else
+    {
+        RefreshDataInFile();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Styles return list of all line styles.
  * @return list of all line styles.

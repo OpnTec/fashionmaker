@@ -58,14 +58,7 @@ VToolCutSplinePath::VToolCutSplinePath(VPattern *doc, VContainer *data, const qu
     RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
     RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
 
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

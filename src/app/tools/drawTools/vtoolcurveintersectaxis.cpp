@@ -45,14 +45,7 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(VPattern *doc, VContainer *data
     :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), formulaAngle(formulaAngle),
       curveId(curveId)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

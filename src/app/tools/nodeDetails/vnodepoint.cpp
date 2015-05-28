@@ -65,14 +65,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

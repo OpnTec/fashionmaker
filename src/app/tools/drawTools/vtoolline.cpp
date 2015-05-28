@@ -64,14 +64,7 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
 
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

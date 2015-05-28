@@ -56,14 +56,7 @@ VToolPointOfContact::VToolPointOfContact(VPattern *doc, VContainer *data, const 
     : VToolPoint(doc, data, id, parent), arcRadius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -55,14 +55,7 @@ VToolEndLine::VToolEndLine(VPattern *doc, VContainer *data, const quint32 &id,  
     :VToolLinePoint(doc, data, id, typeLine, lineColor, formulaLength, basePointId, 0, parent),
       formulaAngle(formulaAngle)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

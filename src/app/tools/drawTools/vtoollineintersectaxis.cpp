@@ -45,14 +45,7 @@ VToolLineIntersectAxis::VToolLineIntersectAxis(VPattern *doc, VContainer *data, 
     :VToolLinePoint(doc, data, id, typeLine, lineColor, QString(), basePointId, 0, parent), formulaAngle(formulaAngle),
       firstPointId(firstPointId), secondPointId(secondPointId)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

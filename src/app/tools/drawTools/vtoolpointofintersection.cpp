@@ -49,14 +49,7 @@ VToolPointOfIntersection::VToolPointOfIntersection(VPattern *doc, VContainer *da
                                                    const Source &typeCreation, QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId)
 {
-    if (typeCreation == Source::FromGui)
-    {
-        AddToFile();
-    }
-    else
-    {
-        RefreshDataInFile();
-    }
+    ToolCreation(typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
