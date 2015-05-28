@@ -261,6 +261,45 @@ QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1, QPointF &p2)
+{
+    if (qFuzzyCompare(c1.x(), c2.x()) && qFuzzyCompare(c1.y(), c2.y()) && qFuzzyCompare(r1, r2))
+    {
+        return 3;// Circles are equal
+    }
+    const double a = - 2.0 * (c2.x() - c1.x());
+    const double b = - 2.0 * (c2.y() - c1.y());
+    const double c = (c2.x() - c1.x())* (c2.x() - c1.x()) + (c2.y() - c1.y()) * (c2.y() - c1.y()) + r1 * r1 - r2 * r2;
+
+    const double x0 = -a*c/(a*a+b*b);
+    const double y0 = -b*c/(a*a+b*b);
+
+    if (c*c > r1*r1*(a*a+b*b))
+    {
+        return 0;
+    }
+    else if (qFuzzyCompare(c*c, r1*r1*(a*a+b*b)))
+    {
+        p1 = QPointF(x0 + c1.x(), y0  + c1.y());
+        return 1;
+    }
+    else
+    {
+        const double d = r1*r1 - c*c/(a*a+b*b);
+        const double mult = sqrt (d / (a*a+b*b));
+
+        const double ax = x0 + b * mult;
+        const double bx = x0 - b * mult;
+        const double ay = y0 - a * mult;
+        const double by = y0 + a * mult;
+
+        p1 = QPointF(ax + c1.x(), ay + c1.y());
+        p2 = QPointF(bx + c1.x(), by + c1.y());
+        return 2;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief LineIntersectCircle find point intersection line and circle.
  * @param center arc center.
@@ -276,10 +315,10 @@ qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const 
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);
     // projection center of circle on to line
-    QPointF p = ClosestPoint (line, center);
+    const QPointF p = ClosestPoint (line, center);
     // how many solutions?
     qint32 flag = 0;
-    qreal d = QLineF (center, p).length();
+    const qreal d = QLineF (center, p).length();
     if (qFuzzyCompare(d, radius))
     {
         flag = 1;
@@ -296,8 +335,8 @@ qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const 
         }
     }
     // find distance from projection to points of intersection
-    qreal k = qSqrt (qAbs(radius * radius - d * d));
-    qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
+    const qreal k = qSqrt (qAbs(radius * radius - d * d));
+    const qreal t = QLineF (QPointF (0, 0), QPointF (b, - a)).length();
     // add to projection a vectors aimed to points of intersection
     p1 = addVector (p, QPointF (0, 0), QPointF (- b, a), k / t);
     p2 = addVector (p, QPointF (0, 0), QPointF (b, - a), k / t);

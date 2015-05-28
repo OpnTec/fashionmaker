@@ -116,6 +116,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolPointOfIntersection::Type:
             ShowOptionsToolPointOfIntersection(item);
             break;
+        case VToolPointOfIntersectionArcs::Type:
+            ShowOptionsToolPointOfIntersectionArcs(item);
+            break;
         case VToolShoulderPoint::Type:
             ShowOptionsToolShoulderPoint(item);
             break;
@@ -202,6 +205,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolPointOfIntersection::Type:
             UpdateOptionsToolPointOfIntersection();
+            break;
+        case VToolPointOfIntersectionArcs::Type:
+            UpdateOptionsToolPointOfIntersectionArcs();
             break;
         case VToolShoulderPoint::Type:
             UpdateOptionsToolShoulderPoint();
@@ -305,6 +311,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         case VToolPointOfIntersection::Type:
             ChangeDataToolPointOfIntersection(prop);
             break;
+        case VToolPointOfIntersectionArcs::Type:
+            ChangeDataToolPointOfIntersectionArcs(prop);
+            break;
         case VToolShoulderPoint::Type:
             ChangeDataToolShoulderPoint(prop);
             break;
@@ -386,6 +395,16 @@ void VToolOptionsPropertyBrowser::AddPropertyPointName(Tool *i, const QString &p
     VProperty* itemName = new VProperty(propertyName);
     itemName->setValue(i->name());
     AddProperty(itemName, VAbstractTool::AttrName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &propertyName)
+{
+    VEnumProperty* itemProperty = new VEnumProperty(propertyName);
+    itemProperty->setLiterals(QStringList()<< tr("First point") << tr("Second point"));
+    itemProperty->setValue(static_cast<int>(i->GetCrossArcsPoint())-1);
+    AddProperty(itemProperty, VAbstractTool::AttrCrossPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -828,6 +847,52 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersection(VProperty *p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionArcs(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolPointOfIntersectionArcs *i = qgraphicsitem_cast<VToolPointOfIntersectionArcs *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // VAbstractTool::AttrName
+            SetPointName<VToolPointOfIntersectionArcs>(value.toString());
+            break;
+        case 28: // VAbstractTool::AttrCrossPoint
+        {
+            const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
+            bool ok = false;
+            const int val = value.toInt(&ok);
+
+            CrossArcsPoint cross = CrossArcsPoint::FirstPoint;
+            if (ok)
+            {
+                switch(val)
+                {
+                    case 0:
+                        cross = CrossArcsPoint::FirstPoint;
+                        break;
+                    case 1:
+                        cross = CrossArcsPoint::SecondPoint;
+                        break;
+                    default:
+                        cross = CrossArcsPoint::FirstPoint;
+                        break;
+                }
+            }
+            i->SetCrossArcsPoint(cross);
+            break;
+        }
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ChangeDataToolShoulderPoint(VProperty *property)
 {
     SCASSERT(property != nullptr)
@@ -1172,6 +1237,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionArcs(QGraphicsItem *item)
+{
+    VToolPointOfIntersectionArcs *i = qgraphicsitem_cast<VToolPointOfIntersectionArcs *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool to make point from intersection two arcs"));
+
+    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyCrossPoint(i, tr("Take"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *item)
 {
     VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(item);
@@ -1486,6 +1562,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionArcs()
+{
+    VToolPointOfIntersectionArcs *i = qgraphicsitem_cast<VToolPointOfIntersectionArcs *>(currentItem);
+
+    idToProperty[VAbstractTool::AttrName]->setValue(i->name());
+    idToProperty[VAbstractTool::AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossArcsPoint())-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
 {
     VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(currentItem);
@@ -1611,6 +1696,7 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << VAbstractTool::AttrAxisP2          /* 24 */
                                      << VAbstractTool::AttrKCurve          /* 25 */
                                      << VAbstractTool::AttrLineColor       /* 26 */
-                                     << VAbstractTool::AttrColor;          /* 27 */
+                                     << VAbstractTool::AttrColor           /* 27 */
+                                     << VAbstractTool::AttrCrossPoint;     /* 28 */
     return attr;
 }

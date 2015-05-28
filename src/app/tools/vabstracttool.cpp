@@ -76,6 +76,9 @@ const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
 const QString VAbstractTool::AttrCurve       = QStringLiteral("curve");
 const QString VAbstractTool::AttrLineColor   = QStringLiteral("lineColor");
 const QString VAbstractTool::AttrColor       = QStringLiteral("color");
+const QString VAbstractTool::AttrFirstArc    = QStringLiteral("firstArc");
+const QString VAbstractTool::AttrSecondArc   = QStringLiteral("secondArc");
+const QString VAbstractTool::AttrCrossPoint  = QStringLiteral("crossPoint");
 
 const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");

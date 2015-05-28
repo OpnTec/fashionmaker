@@ -51,6 +51,7 @@
 #include "tools/dialogpointofintersection.h"
 #include "tools/dialoglineintersectaxis.h"
 #include "tools/dialogcurveintersectaxis.h"
+#include "tools/dialogpointofintersectionarcs.h"
 
 #include "app/dialoghistory.h"
 #include "app/dialogincrements.h"

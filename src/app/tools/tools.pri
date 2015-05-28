@@ -38,7 +38,8 @@ HEADERS += \
     $$PWD/drawTools/vabstractspline.h \
     $$PWD/drawTools/vtoolcut.h \
     $$PWD/drawTools/vtoollineintersectaxis.h \
-    $$PWD/drawTools/vtoolcurveintersectaxis.h
+    $$PWD/drawTools/vtoolcurveintersectaxis.h \
+    $$PWD/drawTools/vtoolpointofintersectionarcs.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -74,4 +75,5 @@ SOURCES += \
     $$PWD/drawTools/vabstractspline.cpp \
     $$PWD/drawTools/vtoolcut.cpp \
     $$PWD/drawTools/vtoollineintersectaxis.cpp \
-    $$PWD/drawTools/vtoolcurveintersectaxis.cpp
+    $$PWD/drawTools/vtoolcurveintersectaxis.cpp \
+    $$PWD/drawTools/vtoolpointofintersectionarcs.cpp

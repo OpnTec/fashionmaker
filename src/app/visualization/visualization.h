@@ -52,7 +52,7 @@ public:
     void         setPoint1Id(const quint32 &value);
     void         setLineStyle(const Qt::PenStyle &value);
     void         setScenePos(const QPointF &value);
-    void         VisualMode(const quint32 &pointId);
+    virtual void VisualMode(const quint32 &pointId);
     void         setMainColor(const QColor &value);
 signals:
     void         ToolTip(const QString &toolTip);

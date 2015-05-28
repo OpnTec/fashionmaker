@@ -91,6 +91,9 @@ public:
     static const QString    AttrCurve;
     static const QString    AttrLineColor;
     static const QString    AttrColor;
+    static const QString    AttrFirstArc;
+    static const QString    AttrSecondArc;
+    static const QString    AttrCrossPoint;
 
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;

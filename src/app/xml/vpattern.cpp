@@ -1142,7 +1142,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VNodePoint::ToolType << VToolHeight::ToolType << VToolTriangle::ToolType
                                        << VToolPointOfIntersection::ToolType << VToolCutSpline::ToolType
                                        << VToolCutSplinePath::ToolType << VToolCutArc::ToolType
-                                       << VToolLineIntersectAxis::ToolType << VToolCurveIntersectAxis::ToolType;
+                                       << VToolLineIntersectAxis::ToolType << VToolCurveIntersectAxis::ToolType
+                                       << VToolPointOfIntersectionArcs::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1630,6 +1631,26 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
                                             domElement);
                 excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+                throw excep;
+            }
+            break;
+        case 17: //VToolPointOfIntersectionArcs::ToolType
+            try
+            {
+                PointsCommonAttributes(domElement, id, name, mx, my);
+                const quint32 firstArcId = GetParametrUInt(domElement, VAbstractTool::AttrFirstArc, NULL_ID_STR);
+                const quint32 secondArcId = GetParametrUInt(domElement, VAbstractTool::AttrSecondArc, NULL_ID_STR);
+                const CrossArcsPoint crossPoint = static_cast<CrossArcsPoint>(GetParametrUInt(domElement,
+                                                                                          VAbstractTool::AttrCrossPoint,
+                                                                                          "1"));
+
+                VToolPointOfIntersectionArcs::Create(id, name, firstArcId, secondArcId, crossPoint, mx, my, scene, this,
+                                                     data, parse, Source::FromFile);
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of intersection arcs"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }
             break;

@@ -165,17 +165,7 @@ void DialogPointOfIntersection::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
-
-        VisToolPointOfIntersection *toolVis = qobject_cast<VisToolPointOfIntersection *>(vis);
-        SCASSERT(toolVis != nullptr);
-
-        connect(scene, &VMainGraphicsScene::NewFactor, toolVis, &Visualization::SetFactor);
-        toolVis->RefreshGeometry();
-    }
+    AddVisualization<VisToolPointOfIntersection>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
