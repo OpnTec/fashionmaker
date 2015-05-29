@@ -129,20 +129,75 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
     const int res = VGObject::IntersectionCircles(arc1->GetCenter().toQPointF(), arc1->GetRadius(),
                                             arc2->GetCenter().toQPointF(), arc2->GetRadius(), p1, p2);
 
+    QLineF r1Arc1(arc1->GetCenter().toQPointF(), p1);
+    r1Arc1.setLength(r1Arc1.length()+10);
+
+    QLineF r1Arc2(arc2->GetCenter().toQPointF(), p1);
+    r1Arc2.setLength(r1Arc2.length()+10);
+
+    QLineF r2Arc1(arc1->GetCenter().toQPointF(), p2);
+    r2Arc1.setLength(r2Arc1.length()+10);
+
+    QLineF r2Arc2(arc2->GetCenter().toQPointF(), p2);
+    r2Arc2.setLength(r2Arc2.length()+10);
+
     switch(res)
     {
         case 2:
-            if (pType == CrossArcsPoint::FirstPoint)
+        {
+            int localRes = 0;
+            bool flagP1 = false;
+
+            if (arc1->IsIntersectLine(r1Arc1)  && arc2->IsIntersectLine(r1Arc2))
+            {
+                ++localRes;
+                flagP1 = true;
+            }
+
+            if (arc1->IsIntersectLine(r2Arc1)  && arc2->IsIntersectLine(r2Arc2))
+            {
+                ++localRes;
+            }
+
+            switch(localRes)
+            {
+                case 2:
+                    if (pType == CrossArcsPoint::FirstPoint)
+                    {
+                        return p1;
+                    }
+                    else
+                    {
+                        return p2;
+                    }
+                    break;
+                case 1:
+                    if (flagP1)
+                    {
+                        return p1;
+                    }
+                    else
+                    {
+                        return p2;
+                    }
+                    break;
+                case 0:
+                default:
+                    return QPointF(0, 0);
+                    break;
+            }
+
+            break;
+        }
+        case 1:
+            if (arc1->IsIntersectLine(r1Arc1) && arc2->IsIntersectLine(r1Arc2))
             {
                 return p1;
             }
             else
             {
-                return p2;
+                return QPointF(0, 0);
             }
-            break;
-        case 1:
-            return p1;
             break;
         case 3:
         case 0:

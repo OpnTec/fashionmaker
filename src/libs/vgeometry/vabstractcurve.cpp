@@ -170,6 +170,13 @@ QVector<QPointF> VAbstractCurve::IntersectLine(const QLineF &line) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
+{
+    const QVector<QPointF> points = IntersectLine(line);
+    return not points.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
 {
     QPainterPath path;
