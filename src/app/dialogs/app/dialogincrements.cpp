@@ -94,6 +94,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillMeasurements();
     FillIncrements();
     FillLengthLines();
+    FillLengthLinesAngle();
     FillLengthSplines();
     FillLengthArcs();
 
@@ -356,6 +357,12 @@ void DialogIncrements::FillLengthLines()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::FillLengthLinesAngle()
+{
+    FillTable(data->DataAngleLines(), ui->tableWidgetLinesAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillLengthSplines fill data for table of splines lengths
  */
@@ -385,25 +392,27 @@ void DialogIncrements::SetItemViewOnly(QTableWidgetItem *item)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowUnits()
 {
-    ShowHeaderUnits(ui->tableWidgetIncrement, 2);// base value
-    ShowHeaderUnits(ui->tableWidgetIncrement, 3);// in sizes
-    ShowHeaderUnits(ui->tableWidgetIncrement, 4);// in heights
+    const QString unit = VDomDocument::UnitsToStr(qApp->patternUnit());
 
-    ShowHeaderUnits(ui->tableWidgetMeasurements, 2);// base value
-    ShowHeaderUnits(ui->tableWidgetMeasurements, 3);// in sizes
-    ShowHeaderUnits(ui->tableWidgetMeasurements, 4);// in heights
+    ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit);// base value
+    ShowHeaderUnits(ui->tableWidgetIncrement, 3, unit);// in sizes
+    ShowHeaderUnits(ui->tableWidgetIncrement, 4, unit);// in heights
 
-    ShowHeaderUnits(ui->tableWidgetLines, 1);// lengths
-    ShowHeaderUnits(ui->tableWidgetSplines, 1);// lengths
-    ShowHeaderUnits(ui->tableWidgetArcs, 1);// lengths
+    ShowHeaderUnits(ui->tableWidgetMeasurements, 2, unit);// base value
+    ShowHeaderUnits(ui->tableWidgetMeasurements, 3, unit);// in sizes
+    ShowHeaderUnits(ui->tableWidgetMeasurements, 4, unit);// in heights
+
+    ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
+    ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
+    ShowHeaderUnits(ui->tableWidgetArcs, 1, unit);// lengths
+    ShowHeaderUnits(ui->tableWidgetLinesAngle, 1, "°");// lengths
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column)
+void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
 {
     SCASSERT(table != nullptr);
 
-    const QString unit = VDomDocument::UnitsToStr(qApp->patternUnit());
     const QString header = table->horizontalHeaderItem(column)->text();
     const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);

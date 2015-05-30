@@ -99,6 +99,7 @@ private:
     template <typename T>
     void                 FillTable(const QMap<QString, T> varTable, QTableWidget *table);
     void                 FillLengthLines();
+    void                 FillLengthLinesAngle();
     void                 FillLengthSplines();
     void                 FillLengthArcs();
     void                 AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base,
@@ -106,7 +107,7 @@ private:
     void                 HideColumns(QTableWidget *table);
     void                 SetItemViewOnly(QTableWidgetItem *item);
     void                 ShowUnits();
-    void                 ShowHeaderUnits(QTableWidget *table, int column);
+    void                 ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
     void                 ShowSuccess() const;
 };
 
