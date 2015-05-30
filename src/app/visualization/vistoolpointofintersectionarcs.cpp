@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), arc1Id(NULL_ID), arc2Id(NULL_ID), crossPoint(CrossArcsPoint::FirstPoint), point(nullptr),
+    : VisLine(data, parent), arc1Id(NULL_ID), arc2Id(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint), point(nullptr),
       arc1Path(nullptr), arc2Path(nullptr)
 {
     arc1Path = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
@@ -95,7 +95,7 @@ void VisToolPointOfIntersectionArcs::setArc2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionArcs::setCrossPoint(const CrossArcsPoint &value)
+void VisToolPointOfIntersectionArcs::setCrossPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
 }

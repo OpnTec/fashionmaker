@@ -33,6 +33,7 @@
 #include "../../utils/logging.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../visualization/visualization.h"
+#include "../../xml/vpattern.h"
 
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -192,6 +193,7 @@ protected:
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
+    void             FillComboBoxCrossCirclesPoints(QComboBox *box) const;
 
     virtual void     CheckState();
     QString          GetComboBoxCurrentData(const QComboBox *box)const;
@@ -208,7 +210,10 @@ protected:
     void             setCurrentSplinePathId(QComboBox *box, const quint32 &value,
                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
     void             setCurrentCurveId(QComboBox *box, const quint32 &value) const;
-    quint32          getCurrentObjectId(QComboBox *box) const;
+
+    quint32           getCurrentObjectId(QComboBox *box) const;
+    CrossCirclesPoint getCurrentCrossPoint(QComboBox *box) const;
+
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
     template <typename T>

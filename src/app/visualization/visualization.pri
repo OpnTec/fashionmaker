@@ -27,7 +27,8 @@ HEADERS += \
     $$PWD/vistoolcutsplinepath.h \
     $$PWD/vistoollineintersectaxis.h \
     $$PWD/vistoolcurveintersectaxis.h \
-    $$PWD/vistoolpointofintersectionarcs.h
+    $$PWD/vistoolpointofintersectionarcs.h \
+    visualization/vistoolpointofintersectioncircles.h
 
 SOURCES += \
     $$PWD/vgraphicssimpletextitem.cpp \
@@ -55,4 +56,5 @@ SOURCES += \
     $$PWD/vistoolcutsplinepath.cpp \
     $$PWD/vistoollineintersectaxis.cpp \
     $$PWD/vistoolcurveintersectaxis.cpp \
-    $$PWD/vistoolpointofintersectionarcs.cpp
+    $$PWD/vistoolpointofintersectionarcs.cpp \
+    visualization/vistoolpointofintersectioncircles.cpp

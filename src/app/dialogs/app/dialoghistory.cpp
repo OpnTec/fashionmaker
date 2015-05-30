@@ -388,6 +388,10 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 return QString(tr("%1 - point of arcs intersection")).arg(PointName(tool.getId()));
             }
+            case Tool::PointOfIntersectionCircles:
+            {
+                return QString(tr("%1 - point of circles intersection")).arg(PointName(tool.getId()));
+            }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Detail:

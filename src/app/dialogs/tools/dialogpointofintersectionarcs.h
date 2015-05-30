@@ -42,7 +42,7 @@ class DialogPointOfIntersectionArcs : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
+    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = 0);
     virtual ~DialogPointOfIntersectionArcs();
 
     void           SetPointName(const QString &value);
@@ -53,8 +53,8 @@ public:
     quint32        GetSecondArcId() const;
     void           SetSecondArcId(const quint32 &value);
 
-    CrossArcsPoint GetCrossArcPoint() const;
-    void           SetCrossArcPoint(CrossArcsPoint &p);
+    CrossCirclesPoint GetCrossArcPoint() const;
+    void              SetCrossArcPoint(CrossCirclesPoint &p);
 
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type);
@@ -71,8 +71,6 @@ private:
     Q_DISABLE_COPY(DialogPointOfIntersectionArcs)
 
     Ui::DialogPointOfIntersectionArcs *ui;
-
-    void FillComboBoxCrossArcPoints();
 };
 
 #endif // DIALOGPOINTOFINTERSECTIONARCS_H

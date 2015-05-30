@@ -38,7 +38,7 @@ class VMainGraphicsScene;
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
-enum class CrossArcsPoint : char {FirstPoint = 1, SecondPoint = 2};
+enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
 
 /**
  * @brief The VPattern class working with pattern file.

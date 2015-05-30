@@ -312,6 +312,15 @@ void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FillComboBoxCrossCirclesPoints(QComboBox *box) const
+{
+    SCASSERT(box != nullptr);
+
+    box->addItem(tr("First point"), QVariant(static_cast<int>(CrossCirclesPoint::FirstPoint)));
+    box->addItem(tr("Second point"), QVariant(static_cast<int>(CrossCirclesPoint::SecondPoint)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
 {
     SCASSERT(box != nullptr)
@@ -571,6 +580,35 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
     else
     {
         return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+CrossCirclesPoint DialogTool::getCurrentCrossPoint(QComboBox *box) const
+{
+    int value;
+    bool ok = false;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    value = box->itemData(box->currentIndex()).toInt(&ok);
+#else
+    value = box->currentData().toInt(&ok);
+#endif
+    if (not ok)
+    {
+        return CrossCirclesPoint::FirstPoint;
+    }
+
+    switch(value)
+    {
+        case 1:
+            return CrossCirclesPoint::FirstPoint;
+            break;
+        case 2:
+            return CrossCirclesPoint::SecondPoint;
+            break;
+        default:
+            return CrossCirclesPoint::FirstPoint;
+            break;
     }
 }
 

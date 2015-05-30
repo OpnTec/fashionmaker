@@ -1143,7 +1143,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointOfIntersection::ToolType << VToolCutSpline::ToolType
                                        << VToolCutSplinePath::ToolType << VToolCutArc::ToolType
                                        << VToolLineIntersectAxis::ToolType << VToolCurveIntersectAxis::ToolType
-                                       << VToolPointOfIntersectionArcs::ToolType;
+                                       << VToolPointOfIntersectionArcs::ToolType
+                                       << VToolPointOfIntersectionCircles::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1640,7 +1641,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 PointsCommonAttributes(domElement, id, name, mx, my);
                 const quint32 firstArcId = GetParametrUInt(domElement, VAbstractTool::AttrFirstArc, NULL_ID_STR);
                 const quint32 secondArcId = GetParametrUInt(domElement, VAbstractTool::AttrSecondArc, NULL_ID_STR);
-                const CrossArcsPoint crossPoint = static_cast<CrossArcsPoint>(GetParametrUInt(domElement,
+                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
                                                                                           VAbstractTool::AttrCrossPoint,
                                                                                           "1"));
 
@@ -1650,6 +1651,37 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (const VExceptionBadId &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of intersection arcs"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 18: //VToolPointOfIntersectionCircles::ToolType
+            try
+            {
+                PointsCommonAttributes(domElement, id, name, mx, my);
+                const quint32 c1CenterId = GetParametrUInt(domElement, VAbstractTool::AttrC1Center, NULL_ID_STR);
+                const quint32 c2CenterId = GetParametrUInt(domElement, VAbstractTool::AttrC2Center, NULL_ID_STR);
+                const QString c1Radius = GetParametrString(domElement, VAbstractTool::AttrC1Radius);
+                QString c1R = c1Radius;
+                const QString c2Radius = GetParametrString(domElement, VAbstractTool::AttrC2Radius);
+                QString c2R = c2Radius;
+                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                          VAbstractTool::AttrCrossPoint,
+                                                                                          "1"));
+
+                VToolPointOfIntersectionCircles::Create(id, name, c1CenterId, c2CenterId, c1R, c2R, crossPoint, mx, my,
+                                                        scene, this, data, parse, Source::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (c1R != c1Radius || c2R != c2Radius)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrC1Center, c1R);
+                    SetAttribute(domElement, VAbstractTool::AttrC2Center, c2R);
+                    haveLiteChange();
+                }
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point of intersection circles"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }

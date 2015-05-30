@@ -699,10 +699,20 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
 void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 {
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
-                                                     "://cursor/point_of_intersection_arcs.png",
-                                                     tr("Select first an arc"),
-                                                     &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionArcs>,
-                                                     &MainWindow::ApplyDialog<VToolPointOfIntersectionArcs>);
+                                                          "://cursor/point_of_intersection_arcs.png",
+                                                          tr("Select first an arc"),
+                                                       &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionArcs>,
+                                                          &MainWindow::ApplyDialog<VToolPointOfIntersectionArcs>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolPointOfIntersectionCircles(bool checked)
+{
+    SetToolButtonWithApply<DialogPointOfIntersectionCircles>(checked, Tool::PointOfIntersectionCircles,
+                                                             "://cursor/point_of_intersection_circles.png",
+                                                             tr("Select first circle center "),
+                                                    &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionCircles>,
+                                                          &MainWindow::ApplyDialog<VToolPointOfIntersectionCircles>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1000,7 +1010,10 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
     connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
-    connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersectionArcs);
+    connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this,
+            &MainWindow::ToolPointOfIntersectionArcs);
+    connect(ui->toolButtonPointOfIntersectionCircles, &QToolButton::clicked, this,
+            &MainWindow::ToolPointOfIntersectionCircles);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1116,6 +1129,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::PointOfIntersectionArcs:
             ui->toolButtonPointOfIntersectionArcs->setChecked(false);
+            break;
+        case Tool::PointOfIntersectionCircles:
+            ui->toolButtonPointOfIntersectionCircles->setChecked(false);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:
@@ -2143,6 +2159,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
     ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
     ui->toolButtonPointOfIntersectionArcs->setEnabled(drawTools);
+    ui->toolButtonPointOfIntersectionCircles->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -2504,6 +2521,10 @@ void MainWindow::LastUsedTool()
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(true);
             ToolCurveIntersectAxis(true);
+            break;
+        case Tool::PointOfIntersectionCircles:
+            ui->toolButtonPointOfIntersectionCircles->setChecked(true);
+            ToolPointOfIntersectionCircles(true);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:

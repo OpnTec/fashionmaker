@@ -126,6 +126,10 @@
 																			     <xs:attribute name="firstArc" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="secondArc" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="crossPoint" type="xs:unsignedInt"></xs:attribute>
+																			     <xs:attribute name="c1Center" type="xs:unsignedInt"></xs:attribute>
+																			     <xs:attribute name="c2Center" type="xs:unsignedInt"></xs:attribute>
+																			     <xs:attribute name="c1Radius" type="xs:string"></xs:attribute>
+																			     <xs:attribute name="c2Radius" type="xs:string"></xs:attribute>
 																	       </xs:complexType>
                                                                      </xs:element>                                                              
 																     <xs:element name="line" minOccurs="0" maxOccurs="unbounded">

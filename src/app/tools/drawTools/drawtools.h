@@ -45,6 +45,7 @@
 #include "vtooltriangle.h"
 #include "vtoolpointofintersection.h"
 #include "vtoolpointofintersectionarcs.h"
+#include "vtoolpointofintersectioncircles.h"
 #include "vtoolcutspline.h"
 #include "vtoolcutsplinepath.h"
 #include "vtoolcutarc.h"

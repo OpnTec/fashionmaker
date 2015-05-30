@@ -69,6 +69,9 @@ private:
     void SetPointName(const QString &name);
 
     template<class Tool>
+    void SetCrossCirclesPoint(const QVariant value);
+
+    template<class Tool>
     void AddPropertyPointName(Tool *i, const QString &propertyName);
 
     template<class Tool>
@@ -100,6 +103,7 @@ private:
     void ChangeDataToolPointOfContact(VPE::VProperty *property);
     void ChangeDataToolPointOfIntersection(VPE::VProperty *property);
     void ChangeDataToolPointOfIntersectionArcs(VPE::VProperty *property);
+    void ChangeDataToolPointOfIntersectionCircles(VPE::VProperty *property);
     void ChangeDataToolShoulderPoint(VPE::VProperty *property);
     void ChangeDataToolSpline(VPE::VProperty *property);
     void ChangeDataToolSplinePath(VPE::VProperty *property);
@@ -122,6 +126,7 @@ private:
     void ShowOptionsToolPointOfContact(QGraphicsItem *item);
     void ShowOptionsToolPointOfIntersection(QGraphicsItem *item);
     void ShowOptionsToolPointOfIntersectionArcs(QGraphicsItem *item);
+    void ShowOptionsToolPointOfIntersectionCircles(QGraphicsItem *item);
     void ShowOptionsToolShoulderPoint(QGraphicsItem *item);
     void ShowOptionsToolSpline(QGraphicsItem *item);
     void ShowOptionsToolSplinePath(QGraphicsItem *item);
@@ -144,6 +149,7 @@ private:
     void UpdateOptionsToolPointOfContact();
     void UpdateOptionsToolPointOfIntersection();
     void UpdateOptionsToolPointOfIntersectionArcs();
+    void UpdateOptionsToolPointOfIntersectionCircles();
     void UpdateOptionsToolShoulderPoint();
     void UpdateOptionsToolSpline();
     void UpdateOptionsToolSplinePath();

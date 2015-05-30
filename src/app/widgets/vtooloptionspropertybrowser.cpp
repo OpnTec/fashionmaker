@@ -119,6 +119,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolPointOfIntersectionArcs::Type:
             ShowOptionsToolPointOfIntersectionArcs(item);
             break;
+        case VToolPointOfIntersectionCircles::Type:
+            ShowOptionsToolPointOfIntersectionCircles(item);
+            break;
         case VToolShoulderPoint::Type:
             ShowOptionsToolShoulderPoint(item);
             break;
@@ -208,6 +211,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolPointOfIntersectionArcs::Type:
             UpdateOptionsToolPointOfIntersectionArcs();
+            break;
+        case VToolPointOfIntersectionCircles::Type:
+            UpdateOptionsToolPointOfIntersectionCircles();
             break;
         case VToolShoulderPoint::Type:
             UpdateOptionsToolShoulderPoint();
@@ -314,6 +320,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         case VToolPointOfIntersectionArcs::Type:
             ChangeDataToolPointOfIntersectionArcs(prop);
             break;
+        case VToolPointOfIntersectionCircles::Type:
+            ChangeDataToolPointOfIntersectionCircles(prop);
+            break;
         case VToolShoulderPoint::Type:
             ChangeDataToolShoulderPoint(prop);
             break;
@@ -403,7 +412,7 @@ void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &
 {
     VEnumProperty* itemProperty = new VEnumProperty(propertyName);
     itemProperty->setLiterals(QStringList()<< tr("First point") << tr("Second point"));
-    itemProperty->setValue(static_cast<int>(i->GetCrossArcsPoint())-1);
+    itemProperty->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
     AddProperty(itemProperty, VAbstractTool::AttrCrossPoint);
 }
 
@@ -459,6 +468,40 @@ void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
         {
             i->setName(name);
         }
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetCrossCirclesPoint(const QVariant value)
+{
+    if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        bool ok = false;
+        const int val = value.toInt(&ok);
+
+        CrossCirclesPoint cross = CrossCirclesPoint::FirstPoint;
+        if (ok)
+        {
+            switch(val)
+            {
+                case 0:
+                    cross = CrossCirclesPoint::FirstPoint;
+                    break;
+                case 1:
+                    cross = CrossCirclesPoint::SecondPoint;
+                    break;
+                default:
+                    cross = CrossCirclesPoint::FirstPoint;
+                    break;
+            }
+        }
+        i->SetCrossCirclesPoint(cross);
     }
     else
     {
@@ -864,28 +907,42 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionArcs(VPropert
         case 28: // VAbstractTool::AttrCrossPoint
         {
             const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
-            bool ok = false;
-            const int val = value.toInt(&ok);
-
-            CrossArcsPoint cross = CrossArcsPoint::FirstPoint;
-            if (ok)
-            {
-                switch(val)
-                {
-                    case 0:
-                        cross = CrossArcsPoint::FirstPoint;
-                        break;
-                    case 1:
-                        cross = CrossArcsPoint::SecondPoint;
-                        break;
-                    default:
-                        cross = CrossArcsPoint::FirstPoint;
-                        break;
-                }
-            }
-            i->SetCrossArcsPoint(cross);
+            SetCrossCirclesPoint<VToolPointOfIntersectionArcs>(value);
             break;
         }
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolPointOfIntersectionCircles *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // VAbstractTool::AttrName
+            SetPointName<VToolPointOfIntersectionCircles>(value.toString());
+            break;
+        case 28: // VAbstractTool::AttrCrossPoint
+        {
+            const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
+            SetCrossCirclesPoint<VToolPointOfIntersectionCircles>(value);
+            break;
+        }
+        case 29: // VAbstractTool::AttrC1Radius
+            i->SetFirstCircleRadius(value.value<VFormula>());
+            break;
+        case 30: // VAbstractTool::AttrC2Radius
+            i->SetSecondCircleRadius(value.value<VFormula>());
+            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1248,6 +1305,19 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionArcs(QGraphi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCircles(QGraphicsItem *item)
+{
+    VToolPointOfIntersectionCircles *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool to make point from intersection two circles"));
+
+    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyFormula(tr("First circle radius"), i->GetFirstCircleRadius(), VAbstractTool::AttrC1Radius);
+    AddPropertyFormula(tr("Second circle radius"), i->GetSecondCircleRadius(), VAbstractTool::AttrC2Radius);
+    AddPropertyCrossPoint(i, tr("Take"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *item)
 {
     VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(item);
@@ -1567,7 +1637,24 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionArcs()
     VToolPointOfIntersectionArcs *i = qgraphicsitem_cast<VToolPointOfIntersectionArcs *>(currentItem);
 
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
-    idToProperty[VAbstractTool::AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossArcsPoint())-1);
+    idToProperty[VAbstractTool::AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCircles()
+{
+    VToolPointOfIntersectionCircles *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(currentItem);
+
+    idToProperty[VAbstractTool::AttrName]->setValue(i->name());
+    idToProperty[VAbstractTool::AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
+
+    QVariant c1Radius;
+    c1Radius.setValue(i->GetFirstCircleRadius());
+    idToProperty[VAbstractTool::AttrC1Radius]->setValue(c1Radius);
+
+    QVariant c2Radius;
+    c2Radius.setValue(i->GetSecondCircleRadius());
+    idToProperty[VAbstractTool::AttrC2Radius]->setValue(c2Radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1697,6 +1784,8 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << VAbstractTool::AttrKCurve          /* 25 */
                                      << VAbstractTool::AttrLineColor       /* 26 */
                                      << VAbstractTool::AttrColor           /* 27 */
-                                     << VAbstractTool::AttrCrossPoint;     /* 28 */
+                                     << VAbstractTool::AttrCrossPoint      /* 28 */
+                                     << VAbstractTool::AttrC1Radius        /* 29 */
+                                     << VAbstractTool::AttrC2Radius;       /* 30 */
     return attr;
 }

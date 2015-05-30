@@ -94,6 +94,10 @@ public:
     static const QString    AttrFirstArc;
     static const QString    AttrSecondArc;
     static const QString    AttrCrossPoint;
+    static const QString    AttrC1Center;
+    static const QString    AttrC2Center;
+    static const QString    AttrC1Radius;
+    static const QString    AttrC2Radius;
 
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;

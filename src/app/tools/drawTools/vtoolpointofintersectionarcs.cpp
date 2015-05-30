@@ -37,7 +37,7 @@ const QString VToolPointOfIntersectionArcs::ToolType = QStringLiteral("pointOfIn
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(VPattern *doc, VContainer *data, const quint32 &id,
                                                            const quint32 &firstArcId, const quint32 &secondArcId,
-                                                           CrossArcsPoint pType, const Source &typeCreation,
+                                                           CrossCirclesPoint pType, const Source &typeCreation,
                                                            QGraphicsItem *parent)
     :VToolPoint(doc, data, id, parent), firstArcId(firstArcId), secondArcId(secondArcId), crossPoint(pType)
 {
@@ -66,7 +66,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(DialogTool *d
     SCASSERT(dialogTool != nullptr);
     const quint32 firstArcId = dialogTool->GetFirstArcId();
     const quint32 secondArcId = dialogTool->GetSecondArcId();
-    const CrossArcsPoint pType = dialogTool->GetCrossArcPoint();
+    const CrossCirclesPoint pType = dialogTool->GetCrossArcPoint();
     const QString pointName = dialogTool->getPointName();
     VToolPointOfIntersectionArcs *point = nullptr;
     point = Create(0, pointName, firstArcId, secondArcId, pType, 5, 10, scene, doc, data, Document::FullParse,
@@ -81,7 +81,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(DialogTool *d
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32 _id, const QString &pointName,
                                                                    const quint32 &firstArcId,
-                                                                   const quint32 &secondArcId, CrossArcsPoint pType,
+                                                                   const quint32 &secondArcId, CrossCirclesPoint pType,
                                                                    const qreal &mx, const qreal &my,
                                                                    VMainGraphicsScene *scene, VPattern *doc,
                                                                    VContainer *data, const Document &parse,
@@ -123,7 +123,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossArcsPoint pType)
+QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType)
 {
     QPointF p1, p2;
     const int res = VGObject::IntersectionCircles(arc1->GetCenter().toQPointF(), arc1->GetRadius(),
@@ -162,7 +162,7 @@ QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *ar
             switch(localRes)
             {
                 case 2:
-                    if (pType == CrossArcsPoint::FirstPoint)
+                    if (pType == CrossCirclesPoint::FirstPoint)
                     {
                         return p1;
                     }
@@ -244,13 +244,13 @@ void VToolPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossArcsPoint VToolPointOfIntersectionArcs::GetCrossArcsPoint() const
+CrossCirclesPoint VToolPointOfIntersectionArcs::GetCrossCirclesPoint() const
 {
     return crossPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::SetCrossArcsPoint(CrossArcsPoint &value)
+void VToolPointOfIntersectionArcs::SetCrossCirclesPoint(CrossCirclesPoint &value)
 {
     crossPoint = value;
 
@@ -305,7 +305,7 @@ void VToolPointOfIntersectionArcs::ReadToolAttributes(const QDomElement &domElem
 {
     firstArcId = doc->GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
     secondArcId = doc->GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
-    crossPoint = static_cast<CrossArcsPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, "1"));
+    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, "1"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

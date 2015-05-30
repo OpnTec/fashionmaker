@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolpointofintersectionarcs.h
+ **  @file   vistoolpointofintersectioncircles.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   27 5, 2015
+ **  @date   29 5, 2015
  **
  **  @brief
  **  @copyright
@@ -26,36 +26,40 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLPOINTOFINTERSECTIONARCS_H
-#define VISTOOLPOINTOFINTERSECTIONARCS_H
+#ifndef VISTOOLPOINTOFINTERSECTIONCIRCLES_H
+#define VISTOOLPOINTOFINTERSECTIONCIRCLES_H
 
 #include "visline.h"
 #include "../xml/vpattern.h"
 
-class VisToolPointOfIntersectionArcs : public VisLine
+class VisToolPointOfIntersectionCircles : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersectionArcs();
+    VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolPointOfIntersectionCircles();
 
     virtual void RefreshGeometry();
     virtual void VisualMode(const quint32 &id);
 
-    void         setArc1Id(const quint32 &value);
-    void         setArc2Id(const quint32 &value);
+    void         setPoint2Id(const quint32 &value);
+    void         setC1Radius(const QString &value);
+    void         setC2Radius(const QString &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
     virtual int  type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
-    Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
-    quint32              arc1Id;
-    quint32              arc2Id;
-    CrossCirclesPoint       crossPoint;
+    Q_DISABLE_COPY(VisToolPointOfIntersectionCircles)
+    quint32              point2Id;
+    qreal                c1Radius;
+    qreal                c2Radius;
+    CrossCirclesPoint    crossPoint;
     QGraphicsEllipseItem *point;
-    QGraphicsPathItem    *arc1Path;
-    QGraphicsPathItem    *arc2Path;
+    QGraphicsEllipseItem *c1Center;
+    QGraphicsEllipseItem *c2Center;
+    QGraphicsEllipseItem *c1Path;
+    QGraphicsEllipseItem *c2Path;
 };
 
-#endif // VISTOOLPOINTOFINTERSECTIONARCS_H
+#endif // VISTOOLPOINTOFINTERSECTIONCIRCLES_H
