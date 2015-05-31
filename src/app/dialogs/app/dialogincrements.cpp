@@ -97,6 +97,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillLengthLinesAngle();
     FillLengthSplines();
     FillLengthArcs();
+    FillRadiusesArcs();
 
     if (qApp->patternType() == MeasurementsType::Standard)
     {
@@ -381,6 +382,12 @@ void DialogIncrements::FillLengthArcs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::FillRadiusesArcs()
+{
+    FillTable(data->DataRadiusesArcs(), ui->tableWidgetRadiusesArcs);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SetItemViewOnly(QTableWidgetItem *item)
 {
     // set the item non-editable (view only), and non-selectable
@@ -406,6 +413,7 @@ void DialogIncrements::ShowUnits()
     ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetArcs, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetLinesAngle, 1, "°");// lengths
+    ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);// radius
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   variables.h
+ **  @file   VArcRadiusData.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   30 5, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,16 +26,42 @@
  **
  *************************************************************************/
 
-#ifndef VARIABLES_H
-#define VARIABLES_H
+#ifndef VARCRADIUSDATA_H
+#define VARCRADIUSDATA_H
 
-#include "variables/vinternalvariable.h"
-#include "variables/vmeasurement.h"
-#include "variables/vincrement.h"
-#include "variables/varclength.h"
-#include "variables/vsplinelength.h"
-#include "variables/vlinelength.h"
-#include "variables/vlineangle.h"
-#include "variables/varcradius.h"
+#include <QSharedData>
 
-#endif // VARIABLES_H
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
+class VArcRadiusData : public QSharedData
+{
+public:
+
+    VArcRadiusData()
+        :arcId(NULL_ID)
+    {}
+
+    VArcRadiusData(const quint32 &arcId)
+        :arcId(arcId)
+    {}
+
+    VArcRadiusData(const VArcRadiusData &var)
+        :QSharedData(var), arcId(var.arcId)
+    {}
+
+    virtual  ~VArcRadiusData();
+
+    quint32 arcId;
+};
+
+VArcRadiusData::~VArcRadiusData()
+{}
+
+#ifdef Q_CC_GNU
+#pragma GCC diagnostic pop
+#endif
+
+#endif // VARCRADIUSDATA_H

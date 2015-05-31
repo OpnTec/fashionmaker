@@ -102,6 +102,7 @@ private:
     void                 FillLengthLinesAngle();
     void                 FillLengthSplines();
     void                 FillLengthArcs();
+    void                 FillRadiusesArcs();
     void                 AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base,
                                             const qreal &ksize, const qreal &kheight, const QString &description);
     void                 HideColumns(QTableWidget *table);

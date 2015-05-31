@@ -186,6 +186,7 @@ const QString depthWaistSecond_M                  = QStringLiteral("depth_waist_
 //variables
 const QString line_      = QStringLiteral("Line_");
 const QString angleLine_ = QStringLiteral("AngleLine_");
+const QString radiusArc_ = QStringLiteral("Radius");
 
 //functions
 const QString sin_F   = QStringLiteral("sin");

@@ -13,7 +13,8 @@ SOURCES += \
     $$PWD/variables/vcurvelength.cpp \
     $$PWD/variables/vlinelength.cpp \
     $$PWD/variables/vsplinelength.cpp \
-    $$PWD/vformula.cpp
+    $$PWD/vformula.cpp \
+    $$PWD/variables/varcradius.cpp
 
 HEADERS += \
     $$PWD/vcontainer.h \
@@ -35,4 +36,6 @@ HEADERS += \
     $$PWD/variables/vlineangle_p.h \
     $$PWD/variables/vlinelength_p.h \
     $$PWD/variables/vmeasurement_p.h \
-    $$PWD/vformula.h
+    $$PWD/vformula.h \
+    $$PWD/variables/varcradius.h \
+    $$PWD/variables/varcradius_p.h

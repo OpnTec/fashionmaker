@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   variables.h
+ **  @file   varcradius.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   30 5, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,16 +26,28 @@
  **
  *************************************************************************/
 
-#ifndef VARIABLES_H
-#define VARIABLES_H
+#ifndef VARCRADIUS_H
+#define VARCRADIUS_H
 
-#include "variables/vinternalvariable.h"
-#include "variables/vmeasurement.h"
-#include "variables/vincrement.h"
-#include "variables/varclength.h"
-#include "variables/vsplinelength.h"
-#include "variables/vlinelength.h"
-#include "variables/vlineangle.h"
-#include "variables/varcradius.h"
+#include "vinternalvariable.h"
 
-#endif // VARIABLES_H
+class VArc;
+class VArcRadiusData;
+
+class VArcRadius :public VInternalVariable
+{
+public:
+    VArcRadius();
+    VArcRadius(const VArc *arc, quint32 arcId);
+    VArcRadius(const VArcRadius &var);
+    VArcRadius &operator=(const VArcRadius &var);
+    virtual ~VArcRadius();
+
+    virtual bool Filter(quint32 id);
+    void         SetValue(const VArc *arc);
+    quint32      GetArcId() const;
+private:
+    QSharedDataPointer<VArcRadiusData> d;
+};
+
+#endif // VARCRADIUS_H

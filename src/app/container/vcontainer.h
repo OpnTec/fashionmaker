@@ -157,6 +157,7 @@ public:
     quint32            AddGObject(VGObject *obj);
     quint32            AddDetail(VDetail detail);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
+    void               AddArc(const quint32 &arcId, const quint32 &parentId = 0);
 
     template <typename TLength>
     /**
@@ -223,6 +224,7 @@ public:
     const QMap<QString, QSharedPointer<VSplineLength> > DataLengthSplines() const;
     const QMap<QString, QSharedPointer<VArcLength> >    DataLengthArcs() const;
     const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
+    const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
 
     static bool        IsUnique(const QString &name);
 

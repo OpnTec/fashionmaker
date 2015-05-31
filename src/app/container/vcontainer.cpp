@@ -316,6 +316,16 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddArc(const quint32 &arcId, const quint32 &parentId)
+{
+    AddCurveLength<VArcLength>(arcId, parentId);
+
+    const QSharedPointer<VArc> arc = GeometricObject<VArc>(arcId);
+    VArcRadius *radius = new VArcRadius(arc.data(), arcId);
+    AddVariable(radius->GetName(), radius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddObject add object to container
  * @param obj container
@@ -415,6 +425,12 @@ const QMap<QString, QSharedPointer<VArcLength> > VContainer::DataLengthArcs() co
 const QMap<QString, QSharedPointer<VLineAngle> > VContainer::DataAngleLines() const
 {
     return DataVar<VLineAngle>(VarType::LineAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, QSharedPointer<VArcRadius> > VContainer::DataRadiusesArcs() const
+{
+    return DataVar<VArcRadius>(VarType::ArcRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

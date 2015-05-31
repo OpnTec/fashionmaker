@@ -1485,7 +1485,9 @@ void VApplication::InitVariables()
     variables.insert(arc_, QmuTranslation::translate("Variables", "Arc_", "Left symbol _ in name"));
     variables.insert(spl_, QmuTranslation::translate("Variables", "Spl_", "Left symbol _ in name"));
     variables.insert(splPath, QmuTranslation::translate("Variables", "SplPath",
-                                                      "Do not add symbol _ to the end of name"));
+                                                        "Do not add symbol _ to the end of name"));
+    variables.insert(radiusArc_, QmuTranslation::translate("Variables", "Radius",
+                                                           "Do not add symbol _ to the end of name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

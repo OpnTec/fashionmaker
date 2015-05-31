@@ -342,6 +342,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonRadiusesArcs">
+           <property name="text">
+            <string>Radius of arcs</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

@@ -182,6 +182,14 @@ void DialogEditWrongFormula::ValChenged(int row)
         ui->labelDescription->setText(desc);
         return;
     }
+    if (ui->radioButtonRadiusesArcs->isChecked())
+    {
+        QString desc = QString("%1(%2) - %3").arg(item->text())
+                .arg(*data->GetVariable<VArcRadius>(qApp->VarFromUser(item->text()))->GetValue())
+                .arg(tr("Arc radius"));
+        ui->labelDescription->setText(desc);
+        return;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,6 +264,13 @@ void DialogEditWrongFormula::LengthLines()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataLengthLines());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::RadiusArcs()
+{
+    ui->checkBoxHideEmpty->setEnabled(false);
+    ShowVariable(data->DataRadiusesArcs());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -364,6 +379,7 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthCurves);
     connect(ui->radioButtonAngleLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::AngleLines);
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
+    connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
