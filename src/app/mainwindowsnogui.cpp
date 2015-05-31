@@ -46,6 +46,7 @@
 #include <QPrinter>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
+#include <QPrinterInfo>
 
 #ifdef Q_OS_WIN
 #   define PDFTOPS "pdftops.exe"

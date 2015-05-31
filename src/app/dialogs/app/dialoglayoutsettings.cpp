@@ -40,6 +40,8 @@
 #   include <QtMath>
 #endif
 
+#include <QPushButton>
+
 
 enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in,
                                       Roll44in};
