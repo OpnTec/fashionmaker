@@ -26,11 +26,20 @@
 
 #include <QString>
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wattributes"
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 QMUPARSERSHARED_EXPORT inline QString NameRegExp()
 {
     //Same regexp in pattern.xsd shema file. Don't forget synchronize.
     return QStringLiteral("^([^0-9*/^+\\-=\\s()?%:;!.,`'\"]){1,1}([^*/^+\\-=\\s()?%:;!.,`'\"]){0,}$");
 }
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif
 
 #endif // QMUDEF_H
