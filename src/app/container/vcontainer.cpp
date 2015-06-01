@@ -321,7 +321,7 @@ void VContainer::AddArc(const quint32 &arcId, const quint32 &parentId)
     AddCurveLength<VArcLength>(arcId, parentId);
 
     const QSharedPointer<VArc> arc = GeometricObject<VArc>(arcId);
-    VArcRadius *radius = new VArcRadius(arc.data(), arcId);
+    VArcRadius *radius = new VArcRadius(arcId, parentId, arc.data());
     AddVariable(radius->GetName(), radius);
 }
 

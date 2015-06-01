@@ -29,12 +29,11 @@
 #ifndef VCURVELENGTH_H
 #define VCURVELENGTH_H
 
-#include "vinternalvariable.h"
+#include "vcurvevariable.h"
 
 class VAbstractCurve;
-class VCurveLengthData;
 
-class VCurveLength : public VInternalVariable
+class VCurveLength : public VCurveVariable
 {
 public:
     VCurveLength();
@@ -42,16 +41,6 @@ public:
     VCurveLength(const VCurveLength &var);
     VCurveLength &operator=(const VCurveLength &var);
     virtual ~VCurveLength();
-
-    virtual bool Filter(quint32 id);
-
-    quint32      GetId() const;
-    void         SetId(const quint32 &id);
-
-    quint32      GetParentId() const;
-    void         SetParentId(const quint32 &value);
-private:
-    QSharedDataPointer<VCurveLengthData> d;
 };
 
 #endif // VCURVELENGTH_H

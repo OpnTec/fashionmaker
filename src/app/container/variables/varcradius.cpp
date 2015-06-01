@@ -27,33 +27,30 @@
  *************************************************************************/
 
 #include "varcradius.h"
-#include "varcradius_p.h"
 #include "../libs/vgeometry/varc.h"
 #include "../core/vapplication.h"
 
-#include <QLineF>
-
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius()
-    :VInternalVariable(), d(new VArcRadiusData)
+    :VCurveVariable()
 {
     SetType(VarType::ArcRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const VArc *arc, quint32 arcId)
-    :VInternalVariable(), d(new VArcRadiusData(arcId))
+VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc)
+    :VCurveVariable(id, parentId)
 {
     SCASSERT(arc != nullptr);
 
     SetType(VarType::ArcRadius);
     SetName(QString(radiusArc_+"%1").arg(arc->name()));
-    SetValue(arc);
+    SetValue(qApp->fromPixel(arc->GetRadius()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius(const VArcRadius &var)
-    :VInternalVariable(var), d(var.d)
+    :VCurveVariable(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,31 +60,10 @@ VArcRadius &VArcRadius::operator=(const VArcRadius &var)
     {
         return *this;
     }
-    VInternalVariable::operator=(var);
-    d = var.d;
+    VCurveVariable::operator=(var);
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::~VArcRadius()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VArcRadius::Filter(quint32 id)
-{
-    return id == d->arcId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VArcRadius::SetValue(const VArc *arc)
-{
-    SCASSERT(arc != nullptr);
-
-    VInternalVariable::SetValue(qApp->fromPixel(arc->GetRadius()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-quint32 VArcRadius::GetArcId() const
-{
-    return d->arcId;
-}

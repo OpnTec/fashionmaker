@@ -26,43 +26,81 @@
  **
  *************************************************************************/
 
-#include "vcurvelength.h"
+#include "vcurvevariable.h"
+#include "vcurvevariable_p.h"
 #include "../core/vapplication.h"
 #include "../libs/vgeometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength::VCurveLength()
-    :VCurveVariable()
+VCurveVariable::VCurveVariable()
+    :VInternalVariable(), d(new VCurveVariableData)
 {
     SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve)
-    :VCurveVariable(id, parentId)
+VCurveVariable::VCurveVariable(const quint32 &id, const quint32 &parentId)
+    :VInternalVariable(), d(new VCurveVariableData(id, parentId))
 {
     SetType(VarType::Unknown);
-    SCASSERT(curve != nullptr);
-    SetName(curve->name());
-    SetValue(qApp->fromPixel(curve->GetLength()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength::VCurveLength(const VCurveLength &var)
-    :VCurveVariable(var)
+VCurveVariable::VCurveVariable(const VCurveVariable &var)
+    :VInternalVariable(var), d(var.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength &VCurveLength::operator=(const VCurveLength &var)
+VCurveVariable &VCurveVariable::operator=(const VCurveVariable &var)
 {
     if ( &var == this )
     {
         return *this;
     }
-    VCurveVariable::operator=(var);
+    VInternalVariable::operator=(var);
+    d = var.d;
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength::~VCurveLength()
+VCurveVariable::~VCurveVariable()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCurveVariable::Filter(quint32 id)
+{
+    if (d->parentId != 0)//Do not check if value zero
+    {// Not all curves have parents. Only those who was created after cutting the parent curve.
+        return d->id == id || d->parentId == id;
+    }
+    else
+    {
+        return d->id == id;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+quint32 VCurveVariable::GetId() const
+{
+    return d->id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurveVariable::SetId(const quint32 &id)
+{
+    d->id = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+quint32 VCurveVariable::GetParentId() const
+{
+    return d->parentId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCurveVariable::SetParentId(const quint32 &value)
+{
+    d->parentId = value;
+}

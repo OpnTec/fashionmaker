@@ -36,29 +36,29 @@
     #pragma GCC diagnostic ignored "-Weffc++"
 #endif
 
-class VCurveLengthData : public QSharedData
+class VCurveVariableData : public QSharedData
 {
 public:
 
-    VCurveLengthData()
+    VCurveVariableData()
         :id(NULL_ID), parentId(NULL_ID)
     {}
 
-    VCurveLengthData(const quint32 &id, const quint32 &parentId)
+    VCurveVariableData(const quint32 &id, const quint32 &parentId)
         :id(id), parentId(parentId)
     {}
 
-    VCurveLengthData(const VCurveLengthData &var)
+    VCurveVariableData(const VCurveVariableData &var)
         :QSharedData(var), id(var.id), parentId(var.parentId)
     {}
 
-    virtual  ~VCurveLengthData();
+    virtual  ~VCurveVariableData();
 
     quint32 id;
     quint32 parentId;
 };
 
-VCurveLengthData::~VCurveLengthData()
+VCurveVariableData::~VCurveVariableData()
 {}
 
 #ifdef Q_CC_GNU

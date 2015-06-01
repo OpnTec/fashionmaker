@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   varcradius.h
+ **  @file   vcurvelength.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   30 5, 2015
+ **  @date   15 8, 2014
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,21 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef VARCRADIUS_H
-#define VARCRADIUS_H
+#ifndef VCURVEVARIABLE_H
+#define VCURVEVARIABLE_H
 
-#include "vcurvevariable.h"
+#include "vinternalvariable.h"
 
-class VArc;
+class VAbstractCurve;
+class VCurveVariableData;
 
-class VArcRadius :public VCurveVariable
+class VCurveVariable : public VInternalVariable
 {
 public:
-    VArcRadius();
-    VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc);
-    VArcRadius(const VArcRadius &var);
-    VArcRadius &operator=(const VArcRadius &var);
-    virtual ~VArcRadius();
+    VCurveVariable();
+    VCurveVariable(const quint32 &id, const quint32 &parentId);
+    VCurveVariable(const VCurveVariable &var);
+    VCurveVariable &operator=(const VCurveVariable &var);
+    virtual ~VCurveVariable();
+
+    virtual bool Filter(quint32 id);
+
+    quint32      GetId() const;
+    void         SetId(const quint32 &id);
+
+    quint32      GetParentId() const;
+    void         SetParentId(const quint32 &value);
+private:
+    QSharedDataPointer<VCurveVariableData> d;
 };
 
-#endif // VARCRADIUS_H
+#endif // VCURVEVARIABLE_H
