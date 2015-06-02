@@ -123,86 +123,86 @@ void DialogEditWrongFormula::ValChenged(int row)
     {
         if (item->text()==data->HeightName())
         {
-            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->height()).arg(tr("Height"));
+            const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->height()).arg(tr("Height"));
             ui->labelDescription->setText(desc);
         }
         if (item->text()==data->SizeName())
         {
-            QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg(tr("Size"));
+            const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg(tr("Size"));
             ui->labelDescription->setText(desc);
         }
         return;
     }
     if (ui->radioButtonStandardTable->isChecked())
     {
-        QString name = qApp->VarFromUser(item->text());
-        QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(name))
-                .arg(stable->GetGuiText());
+        const QString name = qApp->VarFromUser(item->text());
+        const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
+        const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(name))
+                                                   .arg(stable->GetGuiText());
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonIncrements->isChecked())
     {
-        QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
-        QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(item->text()))
-                .arg(incr->GetDescription());
+        const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
+        const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(item->text()))
+                                                   .arg(incr->GetDescription());
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonLengthLine->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VLengthLine>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Line length"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                      .arg(*data->GetVariable<VLengthLine>(qApp->VarFromUser(item->text()))->GetValue())
+                                      .arg(tr("Line length"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonLengthArc->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VArcLength>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Arc length"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                       .arg(*data->GetVariable<VArcLength>(qApp->VarFromUser(item->text()))->GetValue())
+                                       .arg(tr("Arc length"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonLengthSpline->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VSplineLength>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Curve length"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                    .arg(*data->GetVariable<VSplineLength>(qApp->VarFromUser(item->text()))->GetValue())
+                                    .arg(tr("Curve length"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonAngleLine->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VLineAngle>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Line Angle"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                       .arg(*data->GetVariable<VLineAngle>(qApp->VarFromUser(item->text()))->GetValue())
+                                       .arg(tr("Line Angle"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonRadiusesArcs->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VArcRadius>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Arc radius"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                       .arg(*data->GetVariable<VArcRadius>(qApp->VarFromUser(item->text()))->GetValue())
+                                       .arg(tr("Arc radius"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonAnglesArcs->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VArcAngle>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Arc angle"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                        .arg(*data->GetVariable<VArcAngle>(qApp->VarFromUser(item->text()))->GetValue())
+                                        .arg(tr("Arc angle"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonAnglesCurves->isChecked())
     {
-        QString desc = QString("%1(%2) - %3").arg(item->text())
-                .arg(*data->GetVariable<VCurveAngle>(qApp->VarFromUser(item->text()))->GetValue())
-                .arg(tr("Curve angle"));
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                      .arg(*data->GetVariable<VCurveAngle>(qApp->VarFromUser(item->text()))->GetValue())
+                                      .arg(tr("Curve angle"));
         ui->labelDescription->setText(desc);
         return;
     }
