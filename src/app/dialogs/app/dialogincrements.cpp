@@ -93,11 +93,13 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     FillMeasurements();
     FillIncrements();
-    FillLengthLines();
-    FillLengthLinesAngle();
-    FillLengthSplines();
+    FillLengthsLines();
+    FillLengthLinesAngles();
+    FillLengthsCurves();
     FillLengthArcs();
     FillRadiusesArcs();
+    FillAnglesArcs();
+    FillAnglesCurves();
 
     if (qApp->patternType() == MeasurementsType::Standard)
     {
@@ -352,22 +354,22 @@ void DialogIncrements::FillTable(const QMap<QString, T> varTable, QTableWidget *
 /**
  * @brief FillLengthLines fill data for table of lines lengths
  */
-void DialogIncrements::FillLengthLines()
+void DialogIncrements::FillLengthsLines()
 {
     FillTable(data->DataLengthLines(), ui->tableWidgetLines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillLengthLinesAngle()
+void DialogIncrements::FillLengthLinesAngles()
 {
-    FillTable(data->DataAngleLines(), ui->tableWidgetLinesAngle);
+    FillTable(data->DataAngleLines(), ui->tableWidgetLinesAngles);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillLengthSplines fill data for table of splines lengths
  */
-void DialogIncrements::FillLengthSplines()
+void DialogIncrements::FillLengthsCurves()
 {
     FillTable(data->DataLengthSplines(), ui->tableWidgetSplines);
 }
@@ -385,6 +387,18 @@ void DialogIncrements::FillLengthArcs()
 void DialogIncrements::FillRadiusesArcs()
 {
     FillTable(data->DataRadiusesArcs(), ui->tableWidgetRadiusesArcs);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::FillAnglesArcs()
+{
+    FillTable(data->DataAnglesArcs(), ui->tableWidgetAnglesArcs);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::FillAnglesCurves()
+{
+    FillTable(data->DataAnglesCurves(), ui->tableWidgetAnglesCurves);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -412,8 +426,10 @@ void DialogIncrements::ShowUnits()
     ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetArcs, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetLinesAngle, 1, "°");// lengths
+    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, "°");// angle
     ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);// radius
+    ShowHeaderUnits(ui->tableWidgetAnglesArcs, 1, "°");// angle
+    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, "°");// angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -471,10 +487,10 @@ void DialogIncrements::FullUpdateFromFile()
     ui->tableWidgetIncrement->blockSignals(false);
 
     ui->tableWidgetLines->clearContents();
-    FillLengthLines();
+    FillLengthsLines();
 
     ui->tableWidgetSplines->clearContents();
-    FillLengthSplines();
+    FillLengthsCurves();
 
     ui->tableWidgetArcs->clearContents();
     FillLengthArcs();

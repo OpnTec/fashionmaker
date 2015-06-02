@@ -213,11 +213,11 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VPattern *doc, VContainer 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
                     {
-                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1()+180,
-                                                  splinePath->at(i-1).KAsm2(), spl.GetAngle1()));
+                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetStartAngle()+180,
+                                                  splinePath->at(i-1).KAsm2(), spl.GetStartAngle()));
                     }
-                    path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
-                                              splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetEndAngle(),
+                                              splinePath->at(i).KAsm2(), spl.GetEndAngle()+180));
                     delete p4;
                     delete p1;
                 }
@@ -362,11 +362,11 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
                     if (i==1)
                     {
-                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetAngle1()+180,
-                                                  splinePath->at(i-1).KAsm2(), spl.GetAngle1()));
+                        path->append(VSplinePoint(*p1, splinePath->at(i-1).KAsm1(), spl.GetStartAngle()+180,
+                                                  splinePath->at(i-1).KAsm2(), spl.GetStartAngle()));
                     }
-                    path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetAngle2(),
-                                              splinePath->at(i).KAsm2(), spl.GetAngle2()+180));
+                    path->append(VSplinePoint(*p4, splinePath->at(i).KAsm1(), spl.GetEndAngle(),
+                                              splinePath->at(i).KAsm2(), spl.GetEndAngle()+180));
                     delete p1;
                     delete p4;
                 }

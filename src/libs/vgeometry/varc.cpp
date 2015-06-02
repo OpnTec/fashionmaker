@@ -261,7 +261,7 @@ void VArc::SetFormulaF1(const QString &formula, qreal value)
  * @brief GetF1 return formula for start angle.
  * @return string with formula.
  */
-qreal VArc::GetF1() const
+qreal VArc::GetStartAngle() const
 {
     return d->f1;
 }
@@ -288,7 +288,7 @@ void VArc::SetFormulaF2(const QString &formula, qreal value)
  * @brief GetF2 return formula for end angle.
  * @return string with formula.
  */
-qreal VArc::GetF2() const
+qreal VArc::GetEndAngle() const
 {
     return d->f2;
 }

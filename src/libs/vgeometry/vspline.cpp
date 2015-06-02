@@ -691,7 +691,7 @@ VPointF VSpline::GetP4() const
  * @brief GetAngle1 return first angle control line.
  * @return angle.
  */
-qreal VSpline::GetAngle1() const
+qreal VSpline::GetStartAngle() const
 {
     return d->angle1;
 }
@@ -701,7 +701,7 @@ qreal VSpline::GetAngle1() const
  * @brief GetAngle2 return second angle control line.
  * @return angle.
  */
-qreal VSpline::GetAngle2() const
+qreal VSpline::GetEndAngle() const
 {
     return d->angle2;
 }

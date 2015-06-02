@@ -71,6 +71,8 @@ public slots:
     void         Measurements();
     void         LengthLines();
     void         RadiusArcs();
+    void         AnglesArcs();
+    void         AnglesCurves();
     void         LengthArcs();
     void         LengthCurves();
     void         AngleLines();

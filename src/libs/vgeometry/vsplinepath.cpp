@@ -255,6 +255,32 @@ int VSplinePath::Segment(const QPointF &p) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VSplinePath::GetStartAngle() const
+{
+    if (CountPoint() > 0)
+    {
+        return GetSplinePath().first().Angle1();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSplinePath::GetEndAngle() const
+{
+    if (CountPoint() > 0)
+    {
+        return GetSplinePath().last().Angle2();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::CountPoint() const
 {
     return d->path.size();

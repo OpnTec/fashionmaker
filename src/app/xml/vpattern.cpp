@@ -2612,6 +2612,8 @@ void VPattern::PrepareForParse(const Document &parse)
         data->ClearVariables(VarType::LineLength);
         data->ClearVariables(VarType::SplineLength);
         data->ClearVariables(VarType::ArcRadius);
+        data->ClearVariables(VarType::ArcAngle);
+        data->ClearVariables(VarType::SplineAngle);
     }
 }
 

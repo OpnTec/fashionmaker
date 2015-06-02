@@ -107,8 +107,8 @@ void VToolSpline::setDialog()
     const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
     dialogTool->SetP1(spl->GetP1().id());
     dialogTool->SetP4(spl->GetP4().id());
-    dialogTool->SetAngle1(spl->GetAngle1());
-    dialogTool->SetAngle2(spl->GetAngle2());
+    dialogTool->SetAngle1(spl->GetStartAngle());
+    dialogTool->SetAngle2(spl->GetEndAngle());
     dialogTool->SetKAsm1(spl->GetKasm1());
     dialogTool->SetKAsm2(spl->GetKasm2());
     dialogTool->SetKCurve(spl->GetKcurve());
@@ -177,12 +177,12 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddCurveLength<VSplineLength>(id);
+        data->AddCurve<VSpline>(id);
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddCurveLength<VSplineLength>(id);
+        data->AddCurve<VSpline>(id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -310,8 +310,8 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
     doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
     doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
-    doc->SetAttribute(domElement, AttrAngle1, spl.GetAngle1());
-    doc->SetAttribute(domElement, AttrAngle2, spl.GetAngle2());
+    doc->SetAttribute(domElement, AttrAngle1, spl.GetStartAngle());
+    doc->SetAttribute(domElement, AttrAngle2, spl.GetEndAngle());
     doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
     doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
     doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
@@ -329,8 +329,8 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrPoint1, spl->GetP1().id());
     doc->SetAttribute(tag, AttrPoint4, spl->GetP4().id());
-    doc->SetAttribute(tag, AttrAngle1, spl->GetAngle1());
-    doc->SetAttribute(tag, AttrAngle2, spl->GetAngle2());
+    doc->SetAttribute(tag, AttrAngle1, spl->GetStartAngle());
+    doc->SetAttribute(tag, AttrAngle2, spl->GetEndAngle());
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
@@ -452,8 +452,8 @@ void VToolSpline::SetVisualization()
         const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
         visual->setPoint1Id(spl->GetP1().id());
         visual->setPoint4Id(spl->GetP4().id());
-        visual->SetAngle1(spl->GetAngle1());
-        visual->SetAngle2(spl->GetAngle2());
+        visual->SetAngle1(spl->GetStartAngle());
+        visual->SetAngle2(spl->GetEndAngle());
         visual->SetKAsm1(spl->GetKasm1());
         visual->SetKAsm2(spl->GetKasm2());
         visual->SetKCurve(spl->GetKcurve());

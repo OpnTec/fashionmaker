@@ -159,18 +159,19 @@ public:
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     void               AddArc(const quint32 &arcId, const quint32 &parentId = 0);
 
-    template <typename TLength>
-    /**
-     * @brief AddCurveLength add length of curve type to the container
-     * @param id id of variables
-     * @param parentId if of parent object.
-     *
-     * Parent id - id of cutting point
-     */
-    void               AddCurveLength(const quint32 &id, const quint32 &parentId = 0)
+    template <typename T>
+    void               AddCurve(const quint32 &id, const quint32 &parentId = 0)
     {
-        const QSharedPointer<VAbstractCurve> var = GeometricObject<VAbstractCurve>(id);
-        AddVariable(var->name(), new TLength(id, parentId, var.data()));
+        const QSharedPointer<T> curve = GeometricObject<T>(id);
+
+        VSplineLength *length = new VSplineLength(id, parentId, curve.data());
+        AddVariable(length->GetName(), length);
+
+        VSplineAngle *startAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
+        AddVariable(startAngle->GetName(), startAngle);
+
+        VSplineAngle *endAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
+        AddVariable(endAngle->GetName(), endAngle);
     }
 
     template <typename T>
@@ -225,6 +226,8 @@ public:
     const QMap<QString, QSharedPointer<VArcLength> >    DataLengthArcs() const;
     const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
     const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
+    const QMap<QString, QSharedPointer<VArcAngle> >     DataAnglesArcs() const;
+    const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
 
     static bool        IsUnique(const QString &name);
 

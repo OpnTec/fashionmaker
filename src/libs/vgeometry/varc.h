@@ -53,11 +53,11 @@ public:
 
     QString            GetFormulaF1 () const;
     void               SetFormulaF1 (const QString &formula, qreal value);
-    qreal              GetF1 () const;
+    virtual qreal      GetStartAngle () const;
 
     QString            GetFormulaF2 () const;
     void               SetFormulaF2 (const QString &formula, qreal value);
-    qreal              GetF2 () const;
+    virtual qreal      GetEndAngle () const;
 
     QString            GetFormulaRadius () const;
     void               SetFormulaRadius (const QString &formula, qreal value);

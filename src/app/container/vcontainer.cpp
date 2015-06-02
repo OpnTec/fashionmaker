@@ -316,13 +316,21 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddArc(const quint32 &arcId, const quint32 &parentId)
+void VContainer::AddArc(const quint32 &id, const quint32 &parentId)
 {
-    AddCurveLength<VArcLength>(arcId, parentId);
+    const QSharedPointer<VArc> arc = GeometricObject<VArc>(id);
 
-    const QSharedPointer<VArc> arc = GeometricObject<VArc>(arcId);
-    VArcRadius *radius = new VArcRadius(arcId, parentId, arc.data());
+    VArcLength *length = new VArcLength(id, parentId, arc.data());
+    AddVariable(length->GetName(), length);
+
+    VArcRadius *radius = new VArcRadius(id, parentId, arc.data());
     AddVariable(radius->GetName(), radius);
+
+    VArcAngle *startAngle = new VArcAngle(id, parentId, arc.data(), CurveAngle::StartAngle);
+    AddVariable(startAngle->GetName(), startAngle);
+
+    VArcAngle *endAngle = new VArcAngle(id, parentId, arc.data(), CurveAngle::EndAngle);
+    AddVariable(endAngle->GetName(), endAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -431,6 +439,18 @@ const QMap<QString, QSharedPointer<VLineAngle> > VContainer::DataAngleLines() co
 const QMap<QString, QSharedPointer<VArcRadius> > VContainer::DataRadiusesArcs() const
 {
     return DataVar<VArcRadius>(VarType::ArcRadius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, QSharedPointer<VArcAngle> > VContainer::DataAnglesArcs() const
+{
+    return DataVar<VArcAngle>(VarType::ArcAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
+{
+    return DataVar<VCurveAngle>(VarType::SplineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

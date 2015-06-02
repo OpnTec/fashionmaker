@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   varcradius.cpp
+ **  @file   vcurveangle.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   30 5, 2015
+ **  @date   1 6, 2015
  **
  **  @brief
  **  @copyright
@@ -26,35 +26,39 @@
  **
  *************************************************************************/
 
-#include "varcradius.h"
-#include "../libs/vgeometry/varc.h"
-#include "../core/vapplication.h"
+#include "vcurveangle.h"
+#include "../libs/vgeometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius()
+VCurveAngle::VCurveAngle()
     :VCurveVariable()
 {
-    SetType(VarType::ArcRadius);
+    SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc)
+VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle)
     :VCurveVariable(id, parentId)
 {
-    SCASSERT(arc != nullptr);
-
-    SetType(VarType::ArcRadius);
-    SetName(QString(radius_V+"%1").arg(arc->name()));
-    SetValue(qApp->fromPixel(arc->GetRadius()));
+    SetType(VarType::Unknown);
+    SCASSERT(curve != nullptr);
+    if (angle == CurveAngle::StartAngle)
+    {
+        SetValue(curve->GetStartAngle());
+    }
+    else
+    {
+        SetValue(curve->GetEndAngle());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const VArcRadius &var)
+VCurveAngle::VCurveAngle(const VCurveAngle &var)
     :VCurveVariable(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius &VArcRadius::operator=(const VArcRadius &var)
+VCurveAngle &VCurveAngle::operator=(const VCurveAngle &var)
 {
     if ( &var == this )
     {
@@ -65,5 +69,5 @@ VArcRadius &VArcRadius::operator=(const VArcRadius &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::~VArcRadius()
+VCurveAngle::~VCurveAngle()
 {}

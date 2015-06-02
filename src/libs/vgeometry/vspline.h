@@ -57,8 +57,10 @@ public:
     QPointF GetP2 () const;
     QPointF GetP3 () const;
     VPointF GetP4 () const;
-    qreal   GetAngle1 () const;
-    qreal   GetAngle2() const;
+
+    virtual qreal GetStartAngle () const;
+    virtual qreal GetEndAngle() const;
+
     qreal   GetLength () const;
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;

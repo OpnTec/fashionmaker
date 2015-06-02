@@ -79,11 +79,11 @@ void VisToolCutSplinePath::RefreshGeometry()
                 {
                     if (i == p1)
                     {
-                        spPath1.append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
-                                                      spl1.GetAngle1()));
+                        spPath1.append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetStartAngle()+180, spl1.GetKasm1(),
+                                                      spl1.GetStartAngle()));
                         VSplinePoint cutPoint;
-                        cutPoint = VSplinePoint(p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(),
-                                                spl1.GetAngle2()+180);
+                        cutPoint = VSplinePoint(p, spl1.GetKasm2(), spl1.GetEndAngle(), spl2.GetKasm1(),
+                                                spl1.GetEndAngle()+180);
                         spPath1.append(cutPoint);
                         continue;
                     }
@@ -93,11 +93,11 @@ void VisToolCutSplinePath::RefreshGeometry()
                 {
                     if (i == p2)
                     {
-                        const VSplinePoint cutPoint = VSplinePoint(p, spl1.GetKasm2(), spl2.GetAngle1()+180,
-                                                                   spl2.GetKasm1(), spl2.GetAngle1());
+                        const VSplinePoint cutPoint = VSplinePoint(p, spl1.GetKasm2(), spl2.GetStartAngle()+180,
+                                                                   spl2.GetKasm1(), spl2.GetStartAngle());
                         spPath2.append(cutPoint);
-                        spPath2.append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
-                                                      spl2.GetAngle2()+180));
+                        spPath2.append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetEndAngle(), splP2.KAsm2(),
+                                                      spl2.GetEndAngle()+180));
                         continue;
                     }
                     spPath2.append(splPath->at(i));

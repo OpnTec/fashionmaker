@@ -37,5 +37,7 @@
 #include "variables/vlinelength.h"
 #include "variables/vlineangle.h"
 #include "variables/varcradius.h"
+#include "variables/varcangle.h"
+#include "variables/vsplineangle.h"
 
 #endif // VARIABLES_H

@@ -162,10 +162,10 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
         {
             if (i == p1)
             {
-                splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetAngle1()+180, spl1.GetKasm1(),
-                                              spl1.GetAngle1()));
+                splPath1->append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetStartAngle()+180, spl1.GetKasm1(),
+                                              spl1.GetStartAngle()));
                 VSplinePoint cutPoint;
-                cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetAngle2(), spl2.GetKasm1(), spl1.GetAngle2()+180);
+                cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl1.GetEndAngle(), spl2.GetKasm1(), spl1.GetEndAngle()+180);
                 splPath1->append(cutPoint);
                 continue;
             }
@@ -175,11 +175,11 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
         {
             if (i == p2)
             {
-                const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetAngle1()+180,
-                                                           spl2.GetKasm1(), spl2.GetAngle1());
+                const VSplinePoint cutPoint = VSplinePoint(*p, spl1.GetKasm2(), spl2.GetStartAngle()+180,
+                                                           spl2.GetKasm1(), spl2.GetStartAngle());
                 splPath2->append(cutPoint);
-                splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetAngle2(), splP2.KAsm2(),
-                                              spl2.GetAngle2()+180));
+                splPath2->append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetEndAngle(), splP2.KAsm2(),
+                                              spl2.GetEndAngle()+180));
                 continue;
             }
             splPath2->append(splPath->at(i));
@@ -191,18 +191,18 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     if (typeCreation == Source::FromGui)
     {
         splPath1id = data->AddGObject(splPath1);
-        data->AddCurveLength<VSplineLength>(splPath1id, id);
+        data->AddCurve<VSplinePath>(splPath1id, id);
 
         splPath2id = data->AddGObject(splPath2);
-        data->AddCurveLength<VSplineLength>(splPath2id, id);
+        data->AddCurve<VSplinePath>(splPath2id, id);
     }
     else
     {
         data->UpdateGObject(splPath1id, splPath1);
-        data->AddCurveLength<VSplineLength>(splPath1id, id);
+        data->AddCurve<VSplinePath>(splPath1id, id);
 
         data->UpdateGObject(splPath2id, splPath2);
-        data->AddCurveLength<VSplineLength>(splPath2id, id);
+        data->AddCurve<VSplinePath>(splPath2id, id);
 
         if (parse != Document::FullParse)
         {

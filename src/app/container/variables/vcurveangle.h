@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vgeometrydef.cpp
+ **  @file   vcurveangle.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 5, 2015
+ **  @date   1 6, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,19 +26,23 @@
  **
  *************************************************************************/
 
-#include "vgeometrydef.h"
+#ifndef VCURVEANGLE_H
+#define VCURVEANGLE_H
 
-//variables
-const QString spl_          = QStringLiteral("Spl_");
-const QString arc_          = QStringLiteral("Arc_");
-const QString splPath       = QStringLiteral("SplPath");
-const QString radius_V      = QStringLiteral("Radius");
-const QString radiusArc_    = radius_V + arc_;
-const QString angle1_V      = QStringLiteral("Angle1");
-const QString angle2_V      = QStringLiteral("Angle2");
-const QString angle1Arc_    = angle1_V + arc_;
-const QString angle2Arc_    = angle2_V + arc_;
-const QString angle1Spl_    = angle1_V + spl_;
-const QString angle2Spl_    = angle2_V + spl_;
-const QString angle1SplPath = angle1_V + splPath;
-const QString angle2SplPath = angle2_V + splPath;
+#include "vcurvevariable.h"
+
+class VAbstractCurve;
+
+enum class CurveAngle : char { StartAngle, EndAngle };
+
+class VCurveAngle : public VCurveVariable
+{
+public:
+    VCurveAngle();
+    VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
+    VCurveAngle(const VCurveAngle &var);
+    VCurveAngle &operator=(const VCurveAngle &var);
+    virtual ~VCurveAngle();
+};
+
+#endif // VCURVEANGLE_H

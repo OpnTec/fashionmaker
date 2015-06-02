@@ -175,6 +175,9 @@ public:
                                 QPointF &spl2p3) const;
 
     int Segment(const QPointF &p) const;
+
+    virtual qreal GetStartAngle () const;
+    virtual qreal GetEndAngle () const;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

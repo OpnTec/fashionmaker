@@ -158,12 +158,12 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(path);
-        data->AddCurveLength<VSplineLength>(id);
+        data->AddCurve<VSplinePath>(id);
     }
     else
     {
         data->UpdateGObject(id, path);
-        data->AddCurveLength<VSplineLength>(id);
+        data->AddCurve<VSplinePath>(id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -230,12 +230,12 @@ void VToolSplinePath::EnableToolMove(bool move)
 void VToolSplinePath::UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const
 {
     VSplinePoint p = splPath.GetSplinePoint(indexSpline, SplinePointPosition::FirstPoint);
-    p.SetAngle2(spl.GetAngle1());
+    p.SetAngle2(spl.GetStartAngle());
     p.SetKAsm2(spl.GetKasm1());
     splPath.UpdatePoint(indexSpline, SplinePointPosition::FirstPoint, p);
 
     p = splPath.GetSplinePoint(indexSpline, SplinePointPosition::LastPoint);
-    p.SetAngle2(spl.GetAngle2()-180);
+    p.SetAngle2(spl.GetEndAngle()-180);
     p.SetKAsm1(spl.GetKasm2());
     splPath.UpdatePoint(indexSpline, SplinePointPosition::LastPoint, p);
 }

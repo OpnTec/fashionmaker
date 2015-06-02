@@ -52,6 +52,9 @@ public:
     virtual qreal            GetLength() const =0;
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
     virtual bool             IsIntersectLine(const QLineF &line) const;
+
+    virtual qreal            GetStartAngle () const=0;
+    virtual qreal            GetEndAngle () const=0;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 private:

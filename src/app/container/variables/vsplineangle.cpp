@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   varcradius.cpp
+ **  @file   vsplineangle.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   30 5, 2015
+ **  @date   1 6, 2015
  **
  **  @brief
  **  @copyright
@@ -26,44 +26,48 @@
  **
  *************************************************************************/
 
-#include "varcradius.h"
-#include "../libs/vgeometry/varc.h"
-#include "../core/vapplication.h"
+#include "vsplineangle.h"
+#include "../libs/vgeometry/vabstractcurve.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius()
-    :VCurveVariable()
+VSplineAngle::VSplineAngle()
+    :VCurveAngle()
 {
-    SetType(VarType::ArcRadius);
+    SetType(VarType::SplineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc)
-    :VCurveVariable(id, parentId)
+VSplineAngle::VSplineAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle)
+    :VCurveAngle(id, parentId, curve, angle)
 {
-    SCASSERT(arc != nullptr);
-
-    SetType(VarType::ArcRadius);
-    SetName(QString(radius_V+"%1").arg(arc->name()));
-    SetValue(qApp->fromPixel(arc->GetRadius()));
+    SetType(VarType::SplineAngle);
+    SCASSERT(curve != nullptr);
+    if (angle == CurveAngle::StartAngle)
+    {
+        SetName(QString(angle1_V+"%1").arg(curve->name()));
+    }
+    else
+    {
+        SetName(QString(angle2_V+"%1").arg(curve->name()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const VArcRadius &var)
-    :VCurveVariable(var)
+VSplineAngle::VSplineAngle(const VSplineAngle &var)
+    :VCurveAngle(var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius &VArcRadius::operator=(const VArcRadius &var)
+VSplineAngle &VSplineAngle::operator=(const VSplineAngle &var)
 {
     if ( &var == this )
     {
         return *this;
     }
-    VCurveVariable::operator=(var);
+    VCurveAngle::operator=(var);
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::~VArcRadius()
+VSplineAngle::~VSplineAngle()
 {}
