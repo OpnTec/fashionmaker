@@ -168,32 +168,17 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     switch (typeTool)
     {
         case (Tool::NodePoint):
-        {
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
-            name = point->name();
-            break;
-        }
         case (Tool::NodeArc):
-        {
-            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(id);
-            name = arc->name();
-            break;
-        }
         case (Tool::NodeSpline):
-        {
-            const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(id);
-            name = spl->name();
-            break;
-        }
         case (Tool::NodeSplinePath):
         {
-            const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(id);
-            name = splPath->name();
+            const QSharedPointer<VGObject> obj = data->GeometricObject<VGObject>(id);
+            name = obj->name();
             break;
         }
         default:
             qDebug()<<"Got wrong tools. Ignore.";
-            break;
+            return;
     }
 
     QListWidgetItem *item = new QListWidgetItem(name);
