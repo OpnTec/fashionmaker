@@ -48,8 +48,18 @@ The installed toolchains have to match the one Qt was compiled with.
 You can build Valentina with
 
     cd $SOURCE_DIRECTORY\build
-    qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache (or qmake-qt5, depending on your platform)
+    qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache
     make (or mingw32-make or nmake or jom, depending on your platform)
+
+Note: On some platforms e.g. Fedora, all Qt-tools come as qmake-qt5 
+    etc. In this case you should install qtchooser. This wrapper 
+    resolves the Qt version with respect to QT_SELECT. So run 
+
+    export QT_SELECT=5
+
+    prior to qmake. You will not come along with just using qmake-qt5
+    here.
+
 
 Note:In order to build and use Valentina, the PATH environment variable 
 needs to be extended:
