@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   visline.h
+ **  @file   vistoolpointfromcircleandtangent.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   21 7, 2014
+ **  @date   5 6, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,37 +26,39 @@
  **
  *************************************************************************/
 
-#ifndef VISLINE_H
-#define VISLINE_H
+#ifndef VISTOOLPOINTFROMCIRCLEANDTANGENT_H
+#define VISTOOLPOINTFROMCIRCLEANDTANGENT_H
 
-#include "visualization.h"
-#include <QGraphicsLineItem>
-#include <QPointF>
+#include "visline.h"
+#include "../xml/vpattern.h"
 
-class VContainer;
-
-class VisLine: public Visualization, public QGraphicsLineItem
+class VisToolPointFromCircleAndTangent : public VisLine
 {
     Q_OBJECT
 public:
-    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine();
+    VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolPointFromCircleAndTangent();
+
+    virtual void RefreshGeometry();
+
+    void         setPoint2Id(const quint32 &value);
+    void         setCRadius(const QString &value);
+    void         setCrossPoint(const CrossCirclesPoint &value);
 
     virtual int  type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Line)};
-protected:
-    qreal        CorrectAngle(const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint) const;
-    QLineF       Axis(const QPointF &p, const qreal &angle) const;
-    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen();
-    virtual void AddOnScene();
-
-    void         DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent,
-                         const QColor &color, Qt::PenStyle style);
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
 private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY(VisToolPointFromCircleAndTangent)
+    quint32              point2Id;
+    qreal                cRadius;
+    CrossCirclesPoint    crossPoint;
+    QGraphicsEllipseItem *point;
+    QGraphicsEllipseItem *tangent;
+    QGraphicsEllipseItem *cCenter;
+    QGraphicsEllipseItem *cPath;
+    QGraphicsLineItem    *tangent2;
+
+    void FindRays(const QPointF &p, const QPointF &center, qreal radius);
 };
 
-#endif // VISLINE_H
+#endif // VISTOOLPOINTFROMCIRCLEANDTANGENT_H

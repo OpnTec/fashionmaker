@@ -650,7 +650,7 @@
            <string>Point intersect arc and axis</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -676,7 +676,7 @@
            <string>Point of intersection arcs</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
@@ -702,11 +702,37 @@
            <string>Point of intersection circles</string>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/point_of_intersection_circles.png</normaloff>:/icon/32x32/point_of_intersection_circles.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QToolButton" name="toolButtonPointFromCircleAndTangent">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point from circle and tangent</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/point_from_circle_and_tangent.png</normaloff>:/icon/32x32/point_from_circle_and_tangent.png</iconset>
           </property>
           <property name="iconSize">
            <size>

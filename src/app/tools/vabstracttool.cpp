@@ -83,6 +83,9 @@ const QString VAbstractTool::AttrC1Center    = QStringLiteral("c1Center");
 const QString VAbstractTool::AttrC2Center    = QStringLiteral("c2Center");
 const QString VAbstractTool::AttrC1Radius    = QStringLiteral("c1Radius");
 const QString VAbstractTool::AttrC2Radius    = QStringLiteral("c2Radius");
+const QString VAbstractTool::AttrCCenter     = QStringLiteral("cCenter");
+const QString VAbstractTool::AttrTangent     = QStringLiteral("tangent");
+const QString VAbstractTool::AttrCRadius     = QStringLiteral("cRadius");
 
 const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
 const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");

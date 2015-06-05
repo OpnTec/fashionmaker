@@ -117,6 +117,7 @@ public slots:
     void               ToolCurveIntersectAxis(bool checked);
     void               ToolPointOfIntersectionArcs(bool checked);
     void               ToolPointOfIntersectionCircles(bool checked);
+    void               ToolPointFromCircleAndTangent(bool checked);
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);

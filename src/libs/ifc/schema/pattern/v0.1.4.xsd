@@ -130,6 +130,9 @@
 																			     <xs:attribute name="c2Center" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="c1Radius" type="xs:string"></xs:attribute>
 																			     <xs:attribute name="c2Radius" type="xs:string"></xs:attribute>
+																			     <xs:attribute name="cRadius" type="xs:string"></xs:attribute>
+																			     <xs:attribute name="tangent" type="xs:unsignedInt"></xs:attribute>
+																			     <xs:attribute name="cCenter" type="xs:unsignedInt"></xs:attribute>
 																	       </xs:complexType>
                                                                      </xs:element>                                                              
 																     <xs:element name="line" minOccurs="0" maxOccurs="unbounded">

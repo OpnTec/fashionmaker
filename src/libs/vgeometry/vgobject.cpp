@@ -226,6 +226,27 @@ QLineF VGObject::BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VGObject::ContactPoints(const QPointF &p, const QPointF &center, qreal radius, QPointF &p1, QPointF &p2)
+{
+    const int flag = PointInCircle(p, center, radius);
+
+    if (flag == 0)
+    {
+        return 0;
+    }
+
+    if (flag == 1)
+    {
+        p1 = p;
+        return 1;
+    }
+
+    const double d = QLineF (p, center).length();
+    const double k = sqrt (d * d - radius * radius);
+    return IntersectionCircles(p, k, center, radius, p1, p2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief LineIntersectRect find point intersection line and rect.
  * @param rec rect.
@@ -453,6 +474,21 @@ double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
     const int dy1 = p2.toPoint().y() - p1.toPoint().y();
     const double epsilon = 0.003 * (dx1 * dx1 + dy1 * dy1);
     return epsilon;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radius)
+{
+    const double d = QLineF (p, center).length();
+    if (qFuzzyCompare(radius, d))
+    {
+        return 1; // on circle
+    }
+    if (radius > d)
+    {
+        return 0; // outside circle
+    }
+    return 2; // inside circle
 }
 
 //---------------------------------------------------------------------------------------------------------------------

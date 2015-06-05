@@ -128,3 +128,15 @@ void VisLine::AddOnScene()
 {
     AddItem(this);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisLine::DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
+                      Qt::PenStyle style)
+{
+    SCASSERT (lineItem != nullptr);
+
+    const qreal angle = QLineF(p, pTangent).angle();
+    const QPointF endRay = Ray(p, angle);
+    const QLineF tangent = VGObject::BuildLine(p, QLineF(p, endRay).length(), angle);
+    DrawLine(lineItem, tangent, color, style);
+}

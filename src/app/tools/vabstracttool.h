@@ -98,6 +98,9 @@ public:
     static const QString    AttrC2Center;
     static const QString    AttrC1Radius;
     static const QString    AttrC2Radius;
+    static const QString    AttrCCenter;
+    static const QString    AttrTangent;
+    static const QString    AttrCRadius;
 
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;

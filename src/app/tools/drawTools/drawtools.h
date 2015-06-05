@@ -51,5 +51,6 @@
 #include "vtoolcutarc.h"
 #include "vtoollineintersectaxis.h"
 #include "vtoolcurveintersectaxis.h"
+#include "vtoolpointfromcircleandtangent.h"
 
 #endif // DRAWTOOLS_H

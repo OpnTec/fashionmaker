@@ -72,6 +72,7 @@ public:
     static QLineF  BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect);
     static QLineF  BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect);
 
+    static int     ContactPoints (const QPointF &p, const QPointF &center, qreal radius, QPointF &p1, QPointF &p2);
     static QPointF LineIntersectRect(const QRectF &rec, const QLineF &line);
     static int     IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1,
                                        QPointF &p2);
@@ -90,6 +91,8 @@ private:
     static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static double  PerpDotProduct(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static double  GetEpsilon(const QPointF &p1, const QPointF &p2);
+
+    static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };
 
 #endif // VGOBJECT_H

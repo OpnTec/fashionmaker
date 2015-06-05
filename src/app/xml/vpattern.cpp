@@ -1144,7 +1144,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolCutSplinePath::ToolType << VToolCutArc::ToolType
                                        << VToolLineIntersectAxis::ToolType << VToolCurveIntersectAxis::ToolType
                                        << VToolPointOfIntersectionArcs::ToolType
-                                       << VToolPointOfIntersectionCircles::ToolType;
+                                       << VToolPointOfIntersectionCircles::ToolType
+                                       << VToolPointFromCircleAndTangent::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1682,6 +1683,34 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (const VExceptionBadId &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point of intersection circles"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 19: //VToolPointFromCircleAndTangent::ToolType
+            try
+            {
+                PointsCommonAttributes(domElement, id, name, mx, my);
+                const quint32 cCenterId = GetParametrUInt(domElement, VAbstractTool::AttrCCenter, NULL_ID_STR);
+                const quint32 tangentId = GetParametrUInt(domElement, VAbstractTool::AttrTangent, NULL_ID_STR);
+                const QString cRadius = GetParametrString(domElement, VAbstractTool::AttrCRadius);
+                QString cR = cRadius;
+                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                          VAbstractTool::AttrCrossPoint,
+                                                                                          "1"));
+
+                VToolPointFromCircleAndTangent::Create(id, name, cCenterId, cR, tangentId, crossPoint, mx, my,
+                                                       scene, this, data, parse, Source::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (cR != cRadius)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrCCenter, cR);
+                    haveLiteChange();
+                }
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point from circle and tangent"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }

@@ -63,5 +63,6 @@
         <file>icon/32x32/export_to_picture_document.png</file>
         <file>icon/32x32/point_of_intersection_arcs.png</file>
         <file>icon/32x32/point_of_intersection_circles.png</file>
+        <file>icon/32x32/point_from_circle_and_tangent.png</file>
     </qresource>
 </RCC>
