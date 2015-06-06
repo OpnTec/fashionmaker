@@ -47,7 +47,8 @@ HEADERS += \
     $$PWD/app/dialogsavelayout.h \
     $$PWD/tools/dialogpointofintersectionarcs.h \
     $$PWD/tools/dialogpointofintersectioncircles.h \
-    $$PWD/tools/dialogpointfromcircleandtangent.h
+    $$PWD/tools/dialogpointfromcircleandtangent.h \
+    dialogs/tools/dialogpointfromarcandtangent.h
 
 SOURCES += \
     $$PWD/tools/dialogtriangle.cpp \
@@ -93,7 +94,8 @@ SOURCES += \
     $$PWD/app/dialogsavelayout.cpp \
     $$PWD/tools/dialogpointofintersectionarcs.cpp \
     $$PWD/tools/dialogpointofintersectioncircles.cpp \
-    $$PWD/tools/dialogpointfromcircleandtangent.cpp
+    $$PWD/tools/dialogpointfromcircleandtangent.cpp \
+    dialogs/tools/dialogpointfromarcandtangent.cpp
 
 FORMS += \
     $$PWD/tools/dialogtriangle.ui \
@@ -133,4 +135,5 @@ FORMS += \
     $$PWD/app/dialogsavelayout.ui \
     $$PWD/tools/dialogpointofintersectionarcs.ui \
     $$PWD/tools/dialogpointofintersectioncircles.ui \
-    $$PWD/tools/dialogpointfromcircleandtangent.ui
+    $$PWD/tools/dialogpointfromcircleandtangent.ui \
+    dialogs/tools/dialogpointfromarcandtangent.ui

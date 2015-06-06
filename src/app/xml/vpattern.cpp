@@ -1145,7 +1145,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolLineIntersectAxis::ToolType << VToolCurveIntersectAxis::ToolType
                                        << VToolPointOfIntersectionArcs::ToolType
                                        << VToolPointOfIntersectionCircles::ToolType
-                                       << VToolPointFromCircleAndTangent::ToolType;
+                                       << VToolPointFromCircleAndTangent::ToolType
+                                       << VToolPointFromArcAndTangent::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolSinglePoint::ToolType
@@ -1711,6 +1712,26 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (const VExceptionBadId &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point from circle and tangent"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 20: //VToolPointFromArcAndTangent::ToolType
+            try
+            {
+                PointsCommonAttributes(domElement, id, name, mx, my);
+                const quint32 arcId = GetParametrUInt(domElement, VAbstractTool::AttrArc, NULL_ID_STR);
+                const quint32 tangentId = GetParametrUInt(domElement, VAbstractTool::AttrTangent, NULL_ID_STR);
+                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                          VAbstractTool::AttrCrossPoint,
+                                                                                          "1"));
+
+                VToolPointFromArcAndTangent::Create(id, name, arcId, tangentId, crossPoint, mx, my,
+                                                    scene, this, data, parse, Source::FromFile);
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating point from arc and tangent"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }

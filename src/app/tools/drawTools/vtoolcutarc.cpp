@@ -34,7 +34,6 @@
 #include "../../visualization/vistoolcutarc.h"
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
-const QString VToolCutArc::AttrArc  = QStringLiteral("arc");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

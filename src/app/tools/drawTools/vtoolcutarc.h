@@ -47,7 +47,6 @@ public:
                                 const qreal &mx, const qreal &my, const QString &color, VMainGraphicsScene *scene,
                                 VPattern *doc, VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
-    static const QString AttrArc;
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutArc)};
     virtual void ShowVisualization(bool show);

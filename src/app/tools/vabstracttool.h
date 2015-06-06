@@ -101,6 +101,7 @@ public:
     static const QString    AttrCCenter;
     static const QString    AttrTangent;
     static const QString    AttrCRadius;
+    static const QString    AttrArc;
 
     static const QString    TypeLineNone;
     static const QString    TypeLineLine;

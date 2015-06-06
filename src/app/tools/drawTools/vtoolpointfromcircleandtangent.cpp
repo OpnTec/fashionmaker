@@ -56,6 +56,7 @@ void VToolPointFromCircleAndTangent::setDialog()
     dialogTool->SetCircleCenterId(circleCenterId);
     dialogTool->SetCircleRadius(circleRadius);
     dialogTool->SetCrossCirclesPoint(crossPoint);
+    dialogTool->SetTangentPointId(tangentPointId);
     dialogTool->SetPointName(p->name());
 }
 
@@ -110,7 +111,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::PointOfIntersectionCircles, doc);
+    VDrawTool::AddRecord(id, Tool::PointFromCircleAndTangent, doc);
     if (parse == Document::FullParse)
     {
         VToolPointFromCircleAndTangent *point = new VToolPointFromCircleAndTangent(doc, data, id, circleCenterId,

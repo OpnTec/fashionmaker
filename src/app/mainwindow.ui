@@ -573,7 +573,7 @@
          <x>0</x>
          <y>0</y>
          <width>120</width>
-         <height>150</height>
+         <height>196</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -733,6 +733,32 @@
           <property name="icon">
            <iconset resource="share/resources/icon.qrc">
             <normaloff>:/icon/32x32/point_from_circle_and_tangent.png</normaloff>:/icon/32x32/point_from_circle_and_tangent.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QToolButton" name="toolButtonPointFromArcAndTangent">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point from arc and tangent</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/point_from_arc_and_tangent.png</normaloff>:/icon/32x32/point_from_arc_and_tangent.png</iconset>
           </property>
           <property name="iconSize">
            <size>

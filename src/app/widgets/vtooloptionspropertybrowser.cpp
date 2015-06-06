@@ -155,6 +155,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolPointFromCircleAndTangent::Type:
             ShowOptionsToolPointFromCircleAndTangent(item);
             break;
+        case VToolPointFromArcAndTangent::Type:
+            ShowOptionsToolPointFromArcAndTangent(item);
+            break;
         default:
             break;
     }
@@ -244,6 +247,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolPointFromCircleAndTangent::Type:
             UpdateOptionsToolPointFromCircleAndTangent();
+            break;
+        case VToolPointFromArcAndTangent::Type:
+            UpdateOptionsToolPointFromArcAndTangent();
             break;
         default:
             break;
@@ -349,6 +355,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolPointFromCircleAndTangent::Type:
             ChangeDataToolPointFromCircleAndTangent(prop);
+            break;
+        case VToolPointFromArcAndTangent::Type:
+            ChangeDataToolPointFromArcAndTangent(prop);
             break;
         default:
             break;
@@ -987,6 +996,31 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointFromCircleAndTangent(VPrope
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolPointFromArcAndTangent(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // VAbstractTool::AttrName
+            SetPointName<VToolPointFromArcAndTangent>(value.toString());
+            break;
+        case 28: // VAbstractTool::AttrCrossPoint
+        {
+            const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
+            SetCrossCirclesPoint<VToolPointFromArcAndTangent>(value);
+            break;
+        }
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ChangeDataToolShoulderPoint(VProperty *property)
 {
     SCASSERT(property != nullptr)
@@ -1367,6 +1401,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromCircleAndTangent(QGrap
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromArcAndTangent(QGraphicsItem *item)
+{
+    VToolPointFromArcAndTangent *i = qgraphicsitem_cast<VToolPointFromArcAndTangent *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool to make point from arc and tangent"));
+
+    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyCrossPoint(i, tr("Take"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *item)
 {
     VToolShoulderPoint *i = qgraphicsitem_cast<VToolShoulderPoint *>(item);
@@ -1717,6 +1762,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromCircleAndTangent()
     QVariant cRadius;
     cRadius.setValue(i->GetCircleRadius());
     idToProperty[VAbstractTool::AttrCRadius]->setValue(cRadius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromArcAndTangent()
+{
+    VToolPointFromArcAndTangent *i = qgraphicsitem_cast<VToolPointFromArcAndTangent *>(currentItem);
+
+    idToProperty[VAbstractTool::AttrName]->setValue(i->name());
+    idToProperty[VAbstractTool::AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

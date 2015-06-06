@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   drawtools.h
+ **  @file   vistoolpointfromarcandtangent.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   6 6, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,32 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef DRAWTOOLS_H
-#define DRAWTOOLS_H
+#ifndef VISTOOLPOINTFROMARCANDTANGENT_H
+#define VISTOOLPOINTFROMARCANDTANGENT_H
 
-#include "vtoolalongline.h"
-#include "vtoolarc.h"
-#include "vtoolbisector.h"
-#include "vtoolendline.h"
-#include "vtoolline.h"
-#include "vtoollineintersect.h"
-#include "vtoolnormal.h"
-#include "vtoolpointofcontact.h"
-#include "vtoolshoulderpoint.h"
-#include "vtoolsinglepoint.h"
-#include "vtoolspline.h"
-#include "vtoolsplinepath.h"
-#include "vtoolheight.h"
-#include "vtooltriangle.h"
-#include "vtoolpointofintersection.h"
-#include "vtoolpointofintersectionarcs.h"
-#include "vtoolpointofintersectioncircles.h"
-#include "vtoolcutspline.h"
-#include "vtoolcutsplinepath.h"
-#include "vtoolcutarc.h"
-#include "vtoollineintersectaxis.h"
-#include "vtoolcurveintersectaxis.h"
-#include "vtoolpointfromcircleandtangent.h"
-#include "vtoolpointfromarcandtangent.h"
+#include "visline.h"
+#include "../xml/vpattern.h"
 
-#endif // DRAWTOOLS_H
+class VisToolPointFromArcAndTangent : public VisLine
+{
+    Q_OBJECT
+public:
+    VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolPointFromArcAndTangent();
+
+    virtual void RefreshGeometry();
+
+    void         setArcId(const quint32 &value);
+    void         setCrossPoint(const CrossCirclesPoint &value);
+
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointFromArcAndTangent)};
+private:
+    Q_DISABLE_COPY(VisToolPointFromArcAndTangent)
+    quint32              arcId;
+    CrossCirclesPoint    crossPoint;
+    QGraphicsEllipseItem *point;
+    QGraphicsEllipseItem *tangent;
+    QGraphicsPathItem    *arcPath;
+    QGraphicsLineItem    *tangentLine2;
+
+    void FindRays(const QPointF &p, const VArc *arc);
+};
+
+#endif // VISTOOLPOINTFROMARCANDTANGENT_H

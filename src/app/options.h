@@ -91,12 +91,13 @@ enum class Tool : unsigned char
     CurveIntersectAxis,
     PointOfIntersection,
     PointFromCircleAndTangent,
-    UnionDetails // 33
+    PointFromArcAndTangent,
+    UnionDetails // 34
 };
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline = 34, // increase this value if need more positions in Tool enum
+    ControlPointSpline = 35, // increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
     SimpleSplinePath,
     Line,
@@ -115,6 +116,7 @@ enum class Vis : unsigned char
     ToolPointOfIntersectionArcs,
     ToolPointOfIntersectionCircles,
     ToolPointFromCircleAndTangent,
+    ToolPointFromArcAndTangent,
     ToolShoulderPoint,
     ToolSpline,
     ToolTriangle,
