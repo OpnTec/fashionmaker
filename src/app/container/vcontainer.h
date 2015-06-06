@@ -95,62 +95,13 @@ public:
     ~VContainer();
 
     template <typename T>
-    const QSharedPointer<T> GeometricObject(const quint32 &id) const
-    {
-        QSharedPointer<VGObject> gObj = QSharedPointer<VGObject>();
-        if (d->gObjects.contains(id))
-        {
-            gObj = d->gObjects.value(id);
-        }
-        else
-        {
-            throw VExceptionBadId(tr("Can't find object"), id);
-        }
-
-        try
-        {
-            QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(gObj);
-            SCASSERT(obj.isNull() == false);
-            return obj;
-        }
-        catch (const std::bad_alloc &)
-        {
-            throw VExceptionBadId(tr("Can't cast object"), id);
-        }
-    }
-
+    const QSharedPointer<T> GeometricObject(const quint32 &id) const;
     const QSharedPointer<VGObject> GetGObject(quint32 id) const;
     const VDetail      GetDetail(quint32 id) const;
     qreal              GetTableValue(const QString& name) const;
     template <typename T>
-    /**
-     * @brief GetVariable return varible by name
-     * @param name variable's name
-     * @return variable
-     */
-    QSharedPointer<T> GetVariable(QString name) const
-    {
-        SCASSERT(name.isEmpty()==false);
-        if (d->variables.contains(name))
-        {
-            try
-            {
-                QSharedPointer<T> value = qSharedPointerDynamicCast<T>(d->variables.value(name));
-                SCASSERT(value.isNull() == false);
-                return value;
-            }
-            catch (const std::bad_alloc &)
-            {
-                throw VExceptionBadId(tr("Can't cast object"), name);
-            }
-        }
-        else
-        {
-            throw VExceptionBadId(tr("Can't find object"), name);
-        }
-    }
-
-    static quint32     getId(){return _id;}
+    QSharedPointer<T> GetVariable(QString name) const;
+    static quint32     getId();
     static quint32     getNextId();
     static void        UpdateId(quint32 newId);
 
@@ -160,37 +111,9 @@ public:
     void               AddArc(const quint32 &arcId, const quint32 &parentId = 0);
 
     template <typename T>
-    void               AddCurve(const quint32 &id, const quint32 &parentId = 0)
-    {
-        const QSharedPointer<T> curve = GeometricObject<T>(id);
-
-        VSplineLength *length = new VSplineLength(id, parentId, curve.data());
-        AddVariable(length->GetName(), length);
-
-        VSplineAngle *startAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
-        AddVariable(startAngle->GetName(), startAngle);
-
-        VSplineAngle *endAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
-        AddVariable(endAngle->GetName(), endAngle);
-    }
-
+    void               AddCurve(const quint32 &id, const quint32 &parentId = 0);
     template <typename T>
-    void               AddVariable(const QString& name, T *var)
-    {
-        if (d->variables.contains(name))
-        {
-            if (d->variables.value(name)->GetType() == var->GetType())
-            {
-                d->variables[name].clear();
-            }
-            else
-            {
-                throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
-            }
-        }
-        d->variables[name] = QSharedPointer<T>(var);
-        uniqueNames.insert(name);
-    }
+    void               AddVariable(const QString& name, T *var);
 
     void               UpdateGObject(quint32 id, VGObject* obj);
     void               UpdateDetail(quint32 id, const VDetail &detail);
@@ -243,10 +166,7 @@ private:
     QSharedDataPointer<VContainerData> d;
 
     template <class T>
-    uint qHash( const QSharedPointer<T> &p )
-    {
-        return qHash( p.data() );
-    }
+    uint qHash( const QSharedPointer<T> &p );
 
     template <typename key, typename val>
     // cppcheck-suppress functionStatic
@@ -262,4 +182,105 @@ private:
     const QMap<QString, QSharedPointer<T> > DataVar(const VarType &type) const;
 };
 
+
+
+/*
+*  Defintion of templated member functions of VContainer
+*/
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
+{
+    QSharedPointer<VGObject> gObj = QSharedPointer<VGObject>();
+   if (d->gObjects.contains(id))
+   {
+       gObj = d->gObjects.value(id);
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), id);
+    }
+    try
+    {
+        QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(gObj);
+        SCASSERT(obj.isNull() == false);
+        return obj;
+     }
+     catch (const std::bad_alloc &)
+     {
+        throw VExceptionBadId(tr("Can't cast object"), id);
+     }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+* @brief GetVariable return varible by name
+* @param name variable's name
+* @return variable
+*/
+template <typename T>
+QSharedPointer<T> VContainer::GetVariable(QString name) const
+{
+    SCASSERT(name.isEmpty()==false);
+    if (d->variables.contains(name))
+    {
+        try
+        {
+            QSharedPointer<T> value = qSharedPointerDynamicCast<T>(d->variables.value(name));
+            SCASSERT(value.isNull() == false);
+            return value;
+        }
+        catch (const std::bad_alloc &)
+        {
+            throw VExceptionBadId(tr("Can't cast object"), name);
+        }
+    }
+    else
+    {
+        throw VExceptionBadId(tr("Can't find object"), name);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::AddCurve(const quint32 &id, const quint32 &parentId)
+{
+    const QSharedPointer<T> curve = GeometricObject<T>(id);
+    VSplineLength *length = new VSplineLength(id, parentId, curve.data());
+    AddVariable(length->GetName(), length);
+
+    VSplineAngle *startAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
+    AddVariable(startAngle->GetName(), startAngle);
+
+    VSplineAngle *endAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
+    AddVariable(endAngle->GetName(), endAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::AddVariable(const QString& name, T *var)
+{
+    if (d->variables.contains(name))
+    {
+        if (d->variables.value(name)->GetType() == var->GetType())
+        {
+            d->variables[name].clear();
+        }
+        else
+        {
+            throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
+        }
+    }
+    d->variables[name] = QSharedPointer<T>(var);
+    uniqueNames.insert(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+uint VContainer::qHash( const QSharedPointer<T> &p )
+{
+    return qHash( p.data() );
+}
 #endif // VCONTAINER_H
