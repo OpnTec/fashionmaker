@@ -9,29 +9,10 @@
         <file>icon/32x32/table.png</file>
         <file>icon/24x24/putHere.png</file>
         <file>icon/24x24/equal.png</file>
-        <file>icon/32x32/segment.png</file>
-        <file>icon/32x32/line.png</file>
-        <file>icon/32x32/along_line.png</file>
-        <file>icon/32x32/shoulder.png</file>
-        <file>icon/32x32/normal.png</file>
-        <file>icon/32x32/bisector.png</file>
-        <file>icon/32x32/intersect.png</file>
-        <file>icon/32x32/spline.png</file>
-        <file>icon/32x32/arc.png</file>
-        <file>icon/32x32/splinePath.png</file>
         <file>icon/32x32/history.png</file>
         <file>icon/32x32/put_after.png</file>
-        <file>icon/32x32/point_of_contact.png</file>
-        <file>icon/32x32/new_detail.png</file>
         <file>icon/32x32/layout.png</file>
         <file>icon/16x16/mirror.png</file>
-        <file>icon/32x32/height.png</file>
-        <file>icon/32x32/triangle.png</file>
-        <file>icon/32x32/point_of_intersection.png</file>
-        <file>icon/32x32/spline_cut_point.png</file>
-        <file>icon/32x32/splinePath_cut_point.png</file>
-        <file>icon/32x32/union.png</file>
-        <file>icon/32x32/arc_cut.png</file>
         <file>icon/config.png</file>
         <file>icon/pattern_config.png</file>
         <file>icon/Graduation.png</file>
@@ -49,9 +30,6 @@
         <file>icon/path_config.png</file>
         <file>icon/16x16/info.png</file>
         <file>icon/16x16/measurement.png</file>
-        <file>icon/32x32/line_intersect_axis.png</file>
-        <file>icon/32x32/arc_intersect_axis.png</file>
-        <file>icon/32x32/curve_intersect_axis.png</file>
         <file>icon/16x16/landscape.png</file>
         <file>icon/16x16/portrait.png</file>
         <file>icon/16x16/template.png</file>
@@ -61,9 +39,5 @@
         <file>icon/16x16/roll.png</file>
         <file>icon/16x16/progress.gif</file>
         <file>icon/32x32/export_to_picture_document.png</file>
-        <file>icon/32x32/point_of_intersection_arcs.png</file>
-        <file>icon/32x32/point_of_intersection_circles.png</file>
-        <file>icon/32x32/point_from_circle_and_tangent.png</file>
-        <file>icon/32x32/point_from_arc_and_tangent.png</file>
     </qresource>
 </RCC>

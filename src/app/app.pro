@@ -57,7 +57,8 @@ RESOURCES += \
     share/resources/cursor.qrc \ # Tools cursor icons.
     share/resources/theme.qrc \ # Windows theme icons.
     share/resources/measurements.qrc \ # For measurements files that we save as resource.
-    share/resources/flags.qrc
+    share/resources/flags.qrc \
+    share/resources/toolicon.qrc
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

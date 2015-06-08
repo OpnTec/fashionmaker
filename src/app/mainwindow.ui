@@ -48,7 +48,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
@@ -87,8 +87,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/normal.png</normaloff>:/icon/32x32/normal.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/normal.png</normaloff>:/toolicon/32x32/normal.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -113,8 +113,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/shoulder.png</normaloff>:/icon/32x32/shoulder.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/shoulder.png</normaloff>:/toolicon/32x32/shoulder.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -139,8 +139,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/triangle.png</normaloff>:/icon/32x32/triangle.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/triangle.png</normaloff>:/toolicon/32x32/triangle.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -165,8 +165,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/height.png</normaloff>:/icon/32x32/height.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/height.png</normaloff>:/toolicon/32x32/height.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -191,8 +191,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/bisector.png</normaloff>:/icon/32x32/bisector.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/bisector.png</normaloff>:/toolicon/32x32/bisector.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -217,8 +217,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/point_of_contact.png</normaloff>:/icon/32x32/point_of_contact.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/point_of_contact.png</normaloff>:/toolicon/32x32/point_of_contact.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -243,8 +243,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/point_of_intersection.png</normaloff>:/icon/32x32/point_of_intersection.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/point_of_intersection.png</normaloff>:/toolicon/32x32/point_of_intersection.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -269,8 +269,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/segment.png</normaloff>:/icon/32x32/segment.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/segment.png</normaloff>:/toolicon/32x32/segment.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -295,8 +295,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/along_line.png</normaloff>:/icon/32x32/along_line.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/along_line.png</normaloff>:/toolicon/32x32/along_line.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -321,8 +321,8 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/line_intersect_axis.png</normaloff>:/icon/32x32/line_intersect_axis.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/line_intersect_axis.png</normaloff>:/toolicon/32x32/line_intersect_axis.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -371,8 +371,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/line.png</normaloff>:/icon/32x32/line.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/line.png</normaloff>:/toolicon/32x32/line.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -397,8 +397,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/intersect.png</normaloff>:/icon/32x32/intersect.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/intersect.png</normaloff>:/toolicon/32x32/intersect.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -447,8 +447,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/spline.png</normaloff>:/icon/32x32/spline.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/spline.png</normaloff>:/toolicon/32x32/spline.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -473,8 +473,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/splinePath.png</normaloff>:/icon/32x32/splinePath.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/splinePath.png</normaloff>:/toolicon/32x32/splinePath.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -499,8 +499,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/spline_cut_point.png</normaloff>:/icon/32x32/spline_cut_point.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/spline_cut_point.png</normaloff>:/toolicon/32x32/spline_cut_point.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -525,8 +525,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/splinePath_cut_point.png</normaloff>:/icon/32x32/splinePath_cut_point.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/splinePath_cut_point.png</normaloff>:/toolicon/32x32/splinePath_cut_point.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -551,8 +551,8 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/curve_intersect_axis.png</normaloff>:/icon/32x32/curve_intersect_axis.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/curve_intersect_axis.png</normaloff>:/toolicon/32x32/curve_intersect_axis.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -601,8 +601,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/arc.png</normaloff>:/icon/32x32/arc.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/arc.png</normaloff>:/toolicon/32x32/arc.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -627,8 +627,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/arc_cut.png</normaloff>:/icon/32x32/arc_cut.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/arc_cut.png</normaloff>:/toolicon/32x32/arc_cut.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -653,8 +653,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/arc_intersect_axis.png</normaloff>:/icon/32x32/arc_intersect_axis.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/arc_intersect_axis.png</normaloff>:/toolicon/32x32/arc_intersect_axis.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -679,8 +679,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/point_of_intersection_arcs.png</normaloff>:/icon/32x32/point_of_intersection_arcs.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/point_of_intersection_arcs.png</normaloff>:/toolicon/32x32/point_of_intersection_arcs.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -705,8 +705,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/point_of_intersection_circles.png</normaloff>:/icon/32x32/point_of_intersection_circles.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/point_of_intersection_circles.png</normaloff>:/toolicon/32x32/point_of_intersection_circles.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -731,8 +731,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/point_from_circle_and_tangent.png</normaloff>:/icon/32x32/point_from_circle_and_tangent.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/point_from_circle_and_tangent.png</normaloff>:/toolicon/32x32/point_from_circle_and_tangent.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -757,8 +757,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/point_from_arc_and_tangent.png</normaloff>:/icon/32x32/point_from_arc_and_tangent.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/point_from_arc_and_tangent.png</normaloff>:/toolicon/32x32/point_from_arc_and_tangent.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -807,8 +807,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/new_detail.png</normaloff>:/icon/32x32/new_detail.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/new_detail.png</normaloff>:/toolicon/32x32/new_detail.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -833,8 +833,8 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
-            <normaloff>:/icon/32x32/union.png</normaloff>:/icon/32x32/union.png</iconset>
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/union.png</normaloff>:/toolicon/32x32/union.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1762,6 +1762,7 @@
  </tabstops>
  <resources>
   <include location="share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>
