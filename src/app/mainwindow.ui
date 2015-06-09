@@ -45,17 +45,17 @@
        </font>
       </property>
       <property name="toolTip">
-       <string/>
+       <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>272</height>
         </rect>
        </property>
@@ -73,6 +73,9 @@
          <normaloff>:/icon/16x16/toolsectionpoint.png</normaloff>:/icon/16x16/toolsectionpoint.png</iconset>
        </attribute>
        <attribute name="label">
+        <string>Point</string>
+       </attribute>
+       <attribute name="toolTip">
         <string>Point</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout">
@@ -346,7 +349,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -364,6 +367,9 @@
          <normaloff>:/icon/16x16/toolsectionline.png</normaloff>:/icon/16x16/toolsectionline.png</iconset>
        </attribute>
        <attribute name="label">
+        <string>Line</string>
+       </attribute>
+       <attribute name="toolTip">
         <string>Line</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_2">
@@ -429,7 +435,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>156</height>
         </rect>
        </property>
@@ -447,6 +453,9 @@
          <normaloff>:/icon/16x16/toolsectioncurve.png</normaloff>:/icon/16x16/toolsectioncurve.png</iconset>
        </attribute>
        <attribute name="label">
+        <string>Curve</string>
+       </attribute>
+       <attribute name="toolTip">
         <string>Curve</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_3">
@@ -608,6 +617,9 @@
          <normaloff>:/icon/16x16/toolsectionarc.png</normaloff>:/icon/16x16/toolsectionarc.png</iconset>
        </attribute>
        <attribute name="label">
+        <string>Arc</string>
+       </attribute>
+       <attribute name="toolTip">
         <string>Arc</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_4">
@@ -829,7 +841,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -847,6 +859,9 @@
          <normaloff>:/icon/16x16/toolsectiondetail.png</normaloff>:/icon/16x16/toolsectiondetail.png</iconset>
        </attribute>
        <attribute name="label">
+        <string>Detail</string>
+       </attribute>
+       <attribute name="toolTip">
         <string>Detail</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_5">
@@ -912,8 +927,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>98</width>
-         <height>58</height>
+         <width>130</width>
+         <height>386</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -921,6 +936,9 @@
          <normaloff>:/icon/16x16/toolsectionlayout.png</normaloff>:/icon/16x16/toolsectionlayout.png</iconset>
        </attribute>
        <attribute name="label">
+        <string>Layout</string>
+       </attribute>
+       <attribute name="toolTip">
         <string>Layout</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_6">
