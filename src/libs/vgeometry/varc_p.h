@@ -44,23 +44,34 @@ public:
 
     VArcData ()
         : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-          center(VPointF())
+          center(VPointF()), isFlipped(false), formulaLength()
     {}
 
     VArcData (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
                 QString formulaF2)
         : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-          center(center)
+          center(center), isFlipped(false), formulaLength()
     {}
 
     VArcData(VPointF center, qreal radius, qreal f1, qreal f2)
         : f1(f1), formulaF1(QString("%1").arg(f1)), f2(f2), formulaF2(QString("%1").arg(f2)), radius(radius),
-          formulaRadius(QString("%1").arg(radius)), center(center)
+          formulaRadius(QString("%1").arg(radius)), center(center), isFlipped(false), formulaLength()
+    {}
+
+    VArcData (QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1 )
+        : f1(f1), formulaF1(formulaF1), f2(0), formulaF2("0"), radius(radius), formulaRadius(formulaRadius),
+          center(center), isFlipped(false), formulaLength(formulaLength)
+    {}
+
+    VArcData(VPointF center, qreal radius, qreal f1)
+        : f1(f1), formulaF1(QString("%1").arg(f1)), f2(0), formulaF2("0"), radius(radius),
+          formulaRadius(QString("%1").arg(radius)), center(center), isFlipped(false), formulaLength()
     {}
 
     VArcData(const VArcData &arc)
         : QSharedData(arc), f1(arc.f1), formulaF1(arc.formulaF1), f2(arc.f2), formulaF2(arc.formulaF2),
-          radius(arc.radius), formulaRadius(arc.formulaRadius), center(arc.center)
+          radius(arc.radius), formulaRadius(arc.formulaRadius), center(arc.center), isFlipped(arc.isFlipped),
+          formulaLength(arc.formulaLength)
     {}
 
     virtual ~VArcData();
@@ -85,6 +96,10 @@ public:
 
     /** @brief center center point of arc. */
     VPointF            center;
+
+    bool               isFlipped;
+
+    QString            formulaLength;
 };
 
 VArcData::~VArcData()

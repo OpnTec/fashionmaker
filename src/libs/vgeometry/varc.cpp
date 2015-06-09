@@ -55,17 +55,32 @@ VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QStri
     : VAbstractCurve(GOType::Arc, idObject, mode),
       d (new VArcData(center, radius, formulaRadius, f1, formulaF1, f2, formulaF2))
 {
-    setName(QString (arc_+"%1").arg(this->GetCenter().name()));
+    ArcName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
     : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1, f2))
 {
-    setName(QString (arc_+"%1").arg(this->GetCenter().name()));
-    d->formulaF1 = QString("%1").arg(f1);
-    d->formulaF2 = QString("%1").arg(f2);
-    d->formulaRadius = QString("%1").arg(radius);
+    ArcName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArc::VArc(qreal length, QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1,
+           QString formulaF1, quint32 idObject, Draw mode)
+    : VAbstractCurve(GOType::Arc, idObject, mode),
+      d (new VArcData(formulaLength, center, radius, formulaRadius, f1, formulaF1))
+{
+    ArcName();
+    FindF2(length);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArc::VArc(qreal length, VPointF center, qreal radius, qreal f1)
+    : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1))
+{
+    ArcName();
+    FindF2(length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,7 +120,13 @@ VArc::~VArc()
  */
 qreal VArc::GetLength() const
 {
-    return (M_PI * d->radius)/180 * AngleArc();
+    qreal length = (M_PI * d->radius)/180 * AngleArc();
+    if (d->isFlipped)
+    {
+        length = length * -1;
+    }
+
+    return length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,7 +171,15 @@ qreal VArc::AngleArc() const
     l1.setAngle(d->f1);
     QLineF l2(0, 0, 100, 100);
     l2.setAngle(d->f2);
-    return l1.angleTo(l2);
+
+    qreal ang = l1.angleTo(l2);
+
+    if (d->isFlipped)
+    {
+        ang = 360 - ang;
+    }
+
+    return ang;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -162,18 +191,27 @@ QVector<QPointF> VArc::GetPoints() const
 {
     QVector<QPointF> points;
     qreal i = 0;
-    qreal angle = AngleArc();
-    qint32 k = static_cast<qint32>(angle);
-    qreal s = angle/(k/4);
+    const qreal angle = AngleArc();
+    const qint32 k = static_cast<qint32>(angle);
+    const qreal s = angle/(k/4);
     do
     {
-        QLineF line(d->center.toQPointF(), GetP1());
+        QPointF pStart;
+        if (d->isFlipped)
+        {
+            pStart = GetP2();
+        }
+        else
+        {
+            pStart = GetP1();
+        }
+        QLineF line(d->center.toQPointF(), pStart);
         line.setAngle(line.angle()+i);
         points.append(line.p2());
         i = i + s;
         if (i > angle)
         {
-            QLineF line(d->center.toQPointF(), GetP1());
+            QLineF line(d->center.toQPointF(), pStart);
             line.setAngle(line.angle()+angle);
             points.append(line.p2());
         }
@@ -237,6 +275,42 @@ void VArc::setId(const quint32 &id)
 {
     VAbstractCurve::setId(id);
     setName(QString (arc_+"%1_%2").arg(d->center.name()).arg(id));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::ArcName()
+{
+    setName(QString (arc_+"%1").arg(this->GetCenter().name()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::FindF2(qreal length)
+{
+    length < 0 ? d->isFlipped = true : d->isFlipped = false;
+
+    if (length >= MaxLength())
+    {
+        length = MaxLength();
+    }
+
+    qreal arcAngle = (qAbs(length)*180)/(M_PI*d->radius);
+
+    if (d->isFlipped)
+    {
+        arcAngle = arcAngle * -1;
+    }
+
+    QLineF startAngle(0, 0, 100, 0);
+    startAngle.setAngle(d->f1 + arcAngle);// We use QLineF just because it is easy way correct angle value
+
+    d->f2 = startAngle.angle();
+    d->formulaF2 = QString("%1").arg(d->f2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VArc::MaxLength() const
+{
+    return 2*M_PI*d->radius;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,4 +408,17 @@ VPointF VArc::GetCenter() const
 void VArc::SetCenter(const VPointF &value)
 {
     d->center = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VArc::GetFormulaLength() const
+{
+    return d->formulaLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VArc::SetFormulaLength(const QString &formula, qreal value)
+{
+    d->formulaLength = formula;
+    FindF2(value);
 }

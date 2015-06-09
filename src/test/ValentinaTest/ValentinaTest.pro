@@ -40,7 +40,8 @@ SOURCES += \
     tst_vspline.cpp \
     abstracttest.cpp \
     tst_nameregexp.cpp \
-    tst_vlayoutdetail.cpp
+    tst_vlayoutdetail.cpp \
+    tst_varc.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -48,7 +49,8 @@ HEADERS += \
     tst_vspline.h \
     abstracttest.h \
     tst_nameregexp.h \
-    tst_vlayoutdetail.h
+    tst_vlayoutdetail.h \
+    tst_varc.h
 
 CONFIG(debug, debug|release){
     # Debug mode

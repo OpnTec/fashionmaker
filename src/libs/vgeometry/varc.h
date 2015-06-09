@@ -47,6 +47,9 @@ public:
     VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
          QString formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VArc (VPointF center, qreal radius, qreal f1, qreal f2);
+    VArc (qreal length, QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1,
+          QString formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VArc (qreal length, VPointF center, qreal radius, qreal f1);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
     virtual ~VArc();
@@ -66,7 +69,10 @@ public:
     VPointF            GetCenter () const;
     void               SetCenter (const VPointF &value);
 
+    QString            GetFormulaLength () const;
+    void               SetFormulaLength (const QString &formula, qreal value);
     qreal              GetLength () const;
+
     QPointF            GetP1() const;
     QPointF            GetP2 () const;
     qreal              AngleArc() const;
@@ -76,6 +82,11 @@ public:
     virtual void       setId(const quint32 &id);
 private:
     QSharedDataPointer<VArcData> d;
+
+    void ArcName();
+    void FindF2(qreal length);
+
+    qreal MaxLength() const;
 };
 
 #endif // VARC_H
