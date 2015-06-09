@@ -92,6 +92,7 @@ private:
     void ChangeDataToolEndLine(VPE::VProperty *property);
     void ChangeDataToolAlongLine(VPE::VProperty *property);
     void ChangeDataToolArc(VPE::VProperty *property);
+    void ChangeDataToolArcWithLength(VPE::VProperty *property);
     void ChangeDataToolBisector(VPE::VProperty *property);
     void ChangeDataToolCutArc(VPE::VProperty *property);
     void ChangeDataToolCutSpline(VPE::VProperty *property);
@@ -117,6 +118,7 @@ private:
     void ShowOptionsToolEndLine(QGraphicsItem *item);
     void ShowOptionsToolAlongLine(QGraphicsItem *item);
     void ShowOptionsToolArc(QGraphicsItem *item);
+    void ShowOptionsToolArcWithLength(QGraphicsItem *item);
     void ShowOptionsToolBisector(QGraphicsItem *item);
     void ShowOptionsToolCutArc(QGraphicsItem *item);
     void ShowOptionsToolCutSpline(QGraphicsItem *item);
@@ -142,6 +144,7 @@ private:
     void UpdateOptionsToolEndLine();
     void UpdateOptionsToolAlongLine();
     void UpdateOptionsToolArc();
+    void UpdateOptionsToolArcWithLength();
     void UpdateOptionsToolBisector();
     void UpdateOptionsToolCutArc();
     void UpdateOptionsToolCutSpline();

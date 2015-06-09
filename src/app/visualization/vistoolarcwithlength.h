@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   drawtools.h
+ **  @file   vistoolarcwithlength.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   9 6, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,33 +26,30 @@
  **
  *************************************************************************/
 
-#ifndef DRAWTOOLS_H
-#define DRAWTOOLS_H
+#ifndef VISTOOLARCWITHLENGTH_H
+#define VISTOOLARCWITHLENGTH_H
 
-#include "vtoolalongline.h"
-#include "vtoolarc.h"
-#include "vtoolarcwithlength.h"
-#include "vtoolbisector.h"
-#include "vtoolendline.h"
-#include "vtoolline.h"
-#include "vtoollineintersect.h"
-#include "vtoolnormal.h"
-#include "vtoolpointofcontact.h"
-#include "vtoolshoulderpoint.h"
-#include "vtoolsinglepoint.h"
-#include "vtoolspline.h"
-#include "vtoolsplinepath.h"
-#include "vtoolheight.h"
-#include "vtooltriangle.h"
-#include "vtoolpointofintersection.h"
-#include "vtoolpointofintersectionarcs.h"
-#include "vtoolpointofintersectioncircles.h"
-#include "vtoolcutspline.h"
-#include "vtoolcutsplinepath.h"
-#include "vtoolcutarc.h"
-#include "vtoollineintersectaxis.h"
-#include "vtoolcurveintersectaxis.h"
-#include "vtoolpointfromcircleandtangent.h"
-#include "vtoolpointfromarcandtangent.h"
+#include "vispath.h"
 
-#endif // DRAWTOOLS_H
+class VisToolArcWithLength : public VisPath
+{
+    Q_OBJECT
+public:
+    VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolArcWithLength();
+
+    virtual void RefreshGeometry();
+    void         setRadius(const QString &expression);
+    void         setF1(const QString &expression);
+    void         setLength(const QString &expression);
+    virtual int  type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
+private:
+    Q_DISABLE_COPY(VisToolArcWithLength)
+    QGraphicsEllipseItem *arcCenter;
+    qreal                radius;
+    qreal                f1;
+    qreal                length;
+};
+
+#endif // VISTOOLARCWITHLENGTH_H

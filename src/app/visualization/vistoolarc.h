@@ -29,7 +29,6 @@
 #ifndef VISTOOLARC_H
 #define VISTOOLARC_H
 
-
 #include "vispath.h"
 
 class VisToolArc : public VisPath

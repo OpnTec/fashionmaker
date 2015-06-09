@@ -86,6 +86,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolArc::Type:
             ShowOptionsToolArc(item);
             break;
+        case VToolArcWithLength::Type:
+            ShowOptionsToolArcWithLength(item);
+            break;
         case VToolBisector::Type:
             ShowOptionsToolBisector(item);
             break;
@@ -184,6 +187,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolArc::Type:
             UpdateOptionsToolArc();
+            break;
+        case VToolArcWithLength::Type:
+            UpdateOptionsToolArcWithLength();
             break;
         case VToolBisector::Type:
             UpdateOptionsToolBisector();
@@ -298,6 +304,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolArc::Type:
             ChangeDataToolArc(prop);
+            break;
+        case VToolArcWithLength::Type:
+            ChangeDataToolArcWithLength(prop);
             break;
         case VToolBisector::Type:
             ChangeDataToolBisector(prop);
@@ -640,6 +649,36 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VProperty *property)
             break;
         case 10: // VAbstractTool::AttrAngle2
             i->SetFormulaF2(value.value<VFormula>());
+            break;
+        case 27: // VAbstractTool::AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolArcWithLength(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolArcWithLength *i = qgraphicsitem_cast<VToolArcWithLength *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 8: // VAbstractTool::AttrRadius
+            i->SetFormulaRadius(value.value<VFormula>());
+            break;
+        case 9: // VAbstractTool::AttrAngle1
+            i->SetFormulaF1(value.value<VFormula>());
+            break;
+        case 4: // VAbstractTool::AttrLength
+            i->SetFormulaLength(value.value<VFormula>());
             break;
         case 27: // VAbstractTool::AttrTypeColor
             i->SetLineColor(value.toString());
@@ -1240,6 +1279,19 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *item)
+{
+    VToolArcWithLength *i = qgraphicsitem_cast<VToolArcWithLength *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Arc with given length"));
+
+    AddPropertyFormula(tr("Radius"), i->GetFormulaRadius(), VAbstractTool::AttrRadius);
+    AddPropertyFormula(tr("First angle"), i->GetFormulaF1(), VAbstractTool::AttrAngle1);
+    AddPropertyFormula(tr("Length"), i->GetFormulaLength(), VAbstractTool::AttrLength);
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), VAbstractTool::AttrColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
 {
     VToolBisector *i = qgraphicsitem_cast<VToolBisector *>(item);
@@ -1555,7 +1607,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
 {
     VToolArc *i = qgraphicsitem_cast<VToolArc *>(currentItem);
 
-
     QVariant valueRadius;
     valueRadius.setValue(i->GetFormulaRadius());
     idToProperty[VAbstractTool::AttrRadius]->setValue(valueRadius);
@@ -1567,6 +1618,27 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     QVariant valueSecondAngle;
     valueSecondAngle.setValue(i->GetFormulaF2());
     idToProperty[VAbstractTool::AttrAngle2]->setValue(valueSecondAngle);
+
+    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    idToProperty[VAbstractTool::AttrColor]->setValue(index);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
+{
+    VToolArcWithLength *i = qgraphicsitem_cast<VToolArcWithLength *>(currentItem);
+
+    QVariant valueRadius;
+    valueRadius.setValue(i->GetFormulaRadius());
+    idToProperty[VAbstractTool::AttrRadius]->setValue(valueRadius);
+
+    QVariant valueFirstAngle;
+    valueFirstAngle.setValue(i->GetFormulaF1());
+    idToProperty[VAbstractTool::AttrAngle1]->setValue(valueFirstAngle);
+
+    QVariant valueLength;
+    valueLength.setValue(i->GetFormulaLength());
+    idToProperty[VAbstractTool::AttrLength]->setValue(valueLength);
 
     const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     idToProperty[VAbstractTool::AttrColor]->setValue(index);

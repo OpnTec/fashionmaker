@@ -75,6 +75,7 @@ enum class Tool : unsigned char
     CutSpline,
     CutArc,
     Arc,
+    ArcWithLength,
     SplinePath,
     CutSplinePath,
     PointOfContact,
@@ -92,18 +93,19 @@ enum class Tool : unsigned char
     PointOfIntersection,
     PointFromCircleAndTangent,
     PointFromArcAndTangent,
-    UnionDetails // 34
+    UnionDetails // 35
 };
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline = 35, // increase this value if need more positions in Tool enum
+    ControlPointSpline = 36, // increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
     SimpleSplinePath,
     Line,
     Path,
     ToolAlongLine,
     ToolArc,
+    ToolArcWithLength,
     ToolBisector,
     ToolCutArc,
     ToolEndLine,

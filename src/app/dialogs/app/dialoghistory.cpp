@@ -276,6 +276,13 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 SCASSERT(arc != nullptr);
                 return QString(tr("Arc with center in point %1")).arg(PointName(arc->GetCenter().id()));
             }
+            case Tool::ArcWithLength:
+            {
+                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
+                SCASSERT(arc != nullptr);
+                return QString(tr("Arc with center in point %1 and length %2")).arg(PointName(arc->GetCenter().id()))
+                        .arg(arc->GetLength());
+            }
             case Tool::SplinePath:
             {
                 const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());

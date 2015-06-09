@@ -26,5 +26,6 @@
         <file>toolicon/32x32/triangle.png</file>
         <file>toolicon/32x32/union.png</file>
         <file>toolicon/32x32/new_detail.png</file>
+        <file>toolicon/32x32/arc_with_length.png</file>
     </qresource>
 </RCC>

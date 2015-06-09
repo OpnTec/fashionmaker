@@ -185,7 +185,7 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
     {
         /*Need find coordinate midle of curve.
           Universal way is take all points and find sum.*/
-        const qreal seek_length = GetLength()/2.0;
+        const qreal seek_length = qAbs(GetLength())/2.0;
         qreal found_length = 0;
         QLineF arrow;
         for (qint32 i = 1; i <= points.size()-1; ++i)

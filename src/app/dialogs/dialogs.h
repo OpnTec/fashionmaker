@@ -31,6 +31,7 @@
 
 #include "tools/dialogalongline.h"
 #include "tools/dialogarc.h"
+#include "tools/dialogarcwithlength.h"
 #include "tools/dialogbisector.h"
 #include "tools/dialogdetail.h"
 #include "tools/dialogendline.h"

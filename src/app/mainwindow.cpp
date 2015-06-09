@@ -736,6 +736,16 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolArcWithLength(bool checked)
+{
+    SetToolButtonWithApply<DialogArcWithLength>(checked, Tool::ArcWithLength,
+                                                "://cursor/arc_with_length_cursor.png",
+                                                tr("Select point of the center of the arc"),
+                                                &MainWindow::ClosedDialogWithApply<VToolArcWithLength>,
+                                                &MainWindow::ApplyDialog<VToolArcWithLength>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief About show widows about.
  */
@@ -1037,6 +1047,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonPointFromCircleAndTangent, &QToolButton::clicked, this,
             &MainWindow::ToolPointFromCircleAndTangent);
     connect(ui->toolButtonPointFromArcAndTangent, &QToolButton::clicked, this, &MainWindow::ToolPointFromArcAndTangent);
+    connect(ui->toolButtonArcWithLength, &QToolButton::clicked, this, &MainWindow::ToolArcWithLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1113,6 +1124,9 @@ void MainWindow::CancelTool()
         case Tool::Arc:
             ui->toolButtonArc->setChecked(false);
             break;
+        case Tool::ArcWithLength:
+            ui->toolButtonArcWithLength->setChecked(false);
+            break;
         case Tool::SplinePath:
             ui->toolButtonSplinePath->setChecked(false);
             break;
@@ -1155,6 +1169,12 @@ void MainWindow::CancelTool()
             break;
         case Tool::PointOfIntersectionCircles:
             ui->toolButtonPointOfIntersectionCircles->setChecked(false);
+            break;
+        case Tool::PointFromCircleAndTangent:
+            ui->toolButtonPointFromCircleAndTangent->setChecked(false);
+            break;
+        case Tool::PointFromArcAndTangent:
+            ui->toolButtonPointFromArcAndTangent->setChecked(false);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:
@@ -2185,6 +2205,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonPointOfIntersectionCircles->setEnabled(drawTools);
     ui->toolButtonPointFromCircleAndTangent->setEnabled(drawTools);
     ui->toolButtonPointFromArcAndTangent->setEnabled(drawTools);
+    ui->toolButtonArcWithLength->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -2558,6 +2579,10 @@ void MainWindow::LastUsedTool()
         case Tool::PointFromArcAndTangent:
             ui->toolButtonPointFromArcAndTangent->setChecked(true);
             ToolPointFromArcAndTangent(true);
+            break;
+        case Tool::ArcWithLength:
+            ui->toolButtonArcWithLength->setChecked(true);
+            ToolArcWithLength(true);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:

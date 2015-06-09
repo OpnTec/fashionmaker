@@ -48,14 +48,14 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>272</height>
         </rect>
        </property>
@@ -346,7 +346,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>145</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -429,8 +429,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>145</width>
-         <height>104</height>
+         <width>100</width>
+         <height>156</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -590,8 +590,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>145</width>
-         <height>150</height>
+         <width>130</width>
+         <height>196</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -796,6 +796,32 @@
           </property>
          </widget>
         </item>
+        <item row="3" column="1">
+         <widget class="QToolButton" name="toolButtonArcWithLength">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Arc with given length</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/arc_with_length.png</normaloff>:/toolicon/32x32/arc_with_length.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_5">
@@ -803,7 +829,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>145</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -886,8 +912,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>145</width>
-         <height>386</height>
+         <width>98</width>
+         <height>58</height>
         </rect>
        </property>
        <attribute name="icon">

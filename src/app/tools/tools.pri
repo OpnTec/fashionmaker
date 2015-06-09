@@ -42,7 +42,8 @@ HEADERS += \
     $$PWD/drawTools/vtoolpointofintersectionarcs.h \
     $$PWD/drawTools/vtoolpointofintersectioncircles.h \
     $$PWD/drawTools/vtoolpointfromcircleandtangent.h \
-    tools/drawTools/vtoolpointfromarcandtangent.h
+    $$PWD/drawTools/vtoolpointfromarcandtangent.h \
+    $$PWD/drawTools/vtoolarcwithlength.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -82,4 +83,5 @@ SOURCES += \
     $$PWD/drawTools/vtoolpointofintersectionarcs.cpp \
     $$PWD/drawTools/vtoolpointofintersectioncircles.cpp \
     $$PWD/drawTools/vtoolpointfromcircleandtangent.cpp \
-    tools/drawTools/vtoolpointfromarcandtangent.cpp
+    $$PWD/drawTools/vtoolpointfromarcandtangent.cpp \
+    $$PWD/drawTools/vtoolarcwithlength.cpp

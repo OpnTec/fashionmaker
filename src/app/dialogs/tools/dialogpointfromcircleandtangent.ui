@@ -137,7 +137,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Value of first angle</string>
+        <string>Radius</string>
        </property>
        <property name="text">
         <string notr="true">_</string>

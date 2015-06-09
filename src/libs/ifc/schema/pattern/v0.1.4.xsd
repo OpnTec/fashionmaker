@@ -153,6 +153,7 @@
 																			     <xs:attribute name="center" type="xs:unsignedInt"></xs:attribute>
 																			     <xs:attribute name="type" type="xs:string"></xs:attribute>
 																			     <xs:attribute name="color" type="colors"></xs:attribute>
+																			     <xs:attribute name="length" type="xs:string"></xs:attribute>
 																		   </xs:complexType>
 																     </xs:element>
 																     <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">

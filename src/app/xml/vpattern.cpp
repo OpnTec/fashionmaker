@@ -2091,7 +2091,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
     quint32 id = 0;
-    QStringList arcs = QStringList() << VToolArc::ToolType << VNodeArc::ToolType;
+    QStringList arcs = QStringList() << VToolArc::ToolType << VNodeArc::ToolType << VToolArcWithLength::ToolType;
 
     switch (arcs.indexOf(type))
     {
@@ -2148,6 +2148,44 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             {
                 VExceptionObjectError excep(tr("Error creating or updating modeling arc"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 2: //VToolArcWithLength::ToolType
+            try
+            {
+                ToolsCommonAttributes(domElement, id);
+                const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
+                const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
+                QString r = radius;//need for saving fixed formula;
+                const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
+                QString f1Fix = f1;//need for saving fixed formula;
+                const QString length = GetParametrString(domElement, VAbstractTool::AttrLength, "10");
+                QString lengthFix = length;//need for saving fixed length;
+                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                        VAbstractTool::ColorBlack);
+
+                VToolArcWithLength::Create(id, center, r, f1Fix, lengthFix, color, scene, this, data, parse,
+                                           Source::FromFile);
+                //Rewrite attribute formula. Need for situation when we have wrong formula.
+                if (r != radius || f1Fix != f1 || lengthFix != length)
+                {
+                    SetAttribute(domElement, VAbstractTool::AttrRadius, r);
+                    SetAttribute(domElement, VAbstractTool::AttrAngle1, f1Fix);
+                    SetAttribute(domElement, VAbstractTool::AttrLength, lengthFix);
+                    haveLiteChange();
+                }
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
                 throw excep;
             }
             break;
