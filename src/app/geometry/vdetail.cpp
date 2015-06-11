@@ -29,8 +29,7 @@
 #include "vdetail.h"
 #include "vdetail_p.h"
 #include "../container/vcontainer.h"
-#include "vpointf.h"
-#include "../core/vapplication.h"
+#include "../libs/vgeometry/vpointf.h"
 
 #include <QDebug>
 #include <QString>
@@ -428,11 +427,13 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
 
     if (getClosed() == true)
     {
-        pointsEkv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, qApp->toPixel(getWidth()));
+        pointsEkv = Equidistant(pointsEkv, EquidistantType::CloseEquidistant, ToPixel(getWidth(),
+                                                                                      *data->GetPatternUnit()));
     }
     else
     {
-        pointsEkv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, qApp->toPixel(getWidth()));
+        pointsEkv = Equidistant(pointsEkv, EquidistantType::OpenEquidistant, ToPixel(getWidth(),
+                                                                                     *data->GetPatternUnit()));
     }
     return pointsEkv;
 }

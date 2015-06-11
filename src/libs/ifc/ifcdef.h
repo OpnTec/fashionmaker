@@ -59,4 +59,44 @@ static const quint32 null_id = 0;
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
 
+extern const qreal PrintDPI;
+
+//---------------------------------------------------------------------------------------------------------------------
+inline double ToPixel(double val, const Unit &unit)
+{
+    switch (unit)
+    {
+        case Unit::Mm:
+            return (val / 25.4) * PrintDPI;
+        case Unit::Cm:
+            return ((val * 10.0) / 25.4) * PrintDPI;
+        case Unit::Inch:
+            return val * PrintDPI;
+        case Unit::Px:
+            return val;
+        default:
+            break;
+    }
+    return 0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline double FromPixel(double pix, const Unit &unit)
+{
+    switch (unit)
+    {
+        case Unit::Mm:
+            return (pix / PrintDPI) * 25.4;
+        case Unit::Cm:
+            return ((pix / PrintDPI) * 25.4) / 10.0;
+        case Unit::Inch:
+            return pix / PrintDPI;
+        case Unit::Px:
+            return pix;
+        default:
+            break;
+    }
+    return 0;
+}
+
 #endif // IFCDEF_H

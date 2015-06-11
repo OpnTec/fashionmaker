@@ -47,8 +47,8 @@ QSet<const QString> VContainer::uniqueNames = QSet<const QString>();
 /**
  * @brief VContainer create empty container
  */
-VContainer::VContainer(const VTranslateVars *trVars)
-    :d(new VContainerData(trVars))
+VContainer::VContainer(const VTranslateVars *trVars, const Unit *patternUnit)
+    :d(new VContainerData(trVars, patternUnit))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -463,6 +463,12 @@ const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves()
 bool VContainer::IsUnique(const QString &name)
 {
     return (!uniqueNames.contains(name) && !builInFunctions.contains(name));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const Unit *VContainer::GetPatternUnit() const
+{
+    return d->patternUnit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

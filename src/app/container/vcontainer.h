@@ -51,15 +51,15 @@ class VContainerData : public QSharedData
 {
 public:
 
-    VContainerData(const VTranslateVars *trVars)
+    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit)
         :sizeName(size_M), heightName(height_M), gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
           variables(QHash<QString, QSharedPointer<VInternalVariable> > ()), details(QHash<quint32, VDetail>()),
-          trVars(trVars)
+          trVars(trVars), patternUnit(patternUnit)
     {}
 
     VContainerData(const VContainerData &data)
         :QSharedData(data), sizeName(data.sizeName), heightName(data.heightName), gObjects(data.gObjects),
-          variables(data.variables), details(data.details), trVars(data.trVars)
+          variables(data.variables), details(data.details), trVars(data.trVars), patternUnit(data.patternUnit)
     {}
 
     virtual ~VContainerData();
@@ -81,6 +81,7 @@ public:
     QHash<quint32, VDetail> details;
 
     const VTranslateVars *trVars;
+    const Unit *patternUnit;
 };
 
 #ifdef Q_CC_GNU
@@ -94,7 +95,7 @@ class VContainer
 {
     Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
-    VContainer(const VTranslateVars *trVars);
+    VContainer(const VTranslateVars *trVars, const Unit *patternUnit);
     VContainer &operator=(const VContainer &data);
     VContainer(const VContainer &data);
     ~VContainer();
@@ -158,6 +159,8 @@ public:
     const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
 
     static bool        IsUnique(const QString &name);
+
+    const Unit *GetPatternUnit() const;
 
 private:
     /**

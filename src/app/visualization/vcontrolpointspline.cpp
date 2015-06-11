@@ -49,7 +49,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position)
 {
     //create circle
-    radius = (1.5/*mm*/ / 25.4) * VApplication::PrintDPI;
+    radius = (1.5/*mm*/ / 25.4) * PrintDPI;
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);

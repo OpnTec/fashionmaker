@@ -62,22 +62,20 @@ public:
     static void        CheckFactor(qreal &oldFactor, const qreal &Newfactor);
     virtual bool       notify(QObject * receiver, QEvent * event);
     Unit               patternUnit() const;
+    const Unit        *patternUnitP() const;
     void               setPatternUnit(const Unit &patternUnit);
     MeasurementsType   patternType() const;
     void               setPatternType(const MeasurementsType &patternType);
 
     void               InitOptions();
 
-    double             toPixel(double val, const Unit &unit) const;
     double             toPixel(double val) const;
-    double             fromPixel(double pix, const Unit &unit) const;
     double             fromPixel(double pix) const;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     static bool        TryLock(QLockFile *lock);
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
-    static const qreal PrintDPI;
     QString            translationsPath() const;
     qreal              widthMainLine() const;
     qreal              widthHairLine() const;
@@ -186,6 +184,12 @@ private:
 inline Unit VApplication::patternUnit() const
 {
     return _patternUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline const Unit *VApplication::patternUnitP() const
+{
+    return &_patternUnit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

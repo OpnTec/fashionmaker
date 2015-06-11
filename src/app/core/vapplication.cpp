@@ -143,8 +143,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 //---------------------------------------------------------------------------------------------------------------------
 
-const qreal VApplication::PrintDPI = 96.0;
-
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
 const QString VApplication::GistFileName = QStringLiteral("gist.json");
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
@@ -286,56 +284,6 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
       qCritical() << "Exception thrown:" << e.what();
     }
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::toPixel(double val, const Unit &unit) const
-{
-    switch (unit)
-    {
-        case Unit::Mm:
-            return (val / 25.4) * PrintDPI;
-        case Unit::Cm:
-            return ((val * 10.0) / 25.4) * PrintDPI;
-        case Unit::Inch:
-            return val * PrintDPI;
-        case Unit::Px:
-            return val;
-        default:
-            break;
-    }
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::toPixel(double val) const
-{
-    return toPixel(val, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::fromPixel(double pix, const Unit &unit) const
-{
-    switch (unit)
-    {
-        case Unit::Mm:
-            return (pix / PrintDPI) * 25.4;
-        case Unit::Cm:
-            return ((pix / PrintDPI) * 25.4) / 10.0;
-        case Unit::Inch:
-            return pix / PrintDPI;
-        case Unit::Px:
-            return pix;
-        default:
-            break;
-    }
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::fromPixel(double pix) const
-{
-    return fromPixel(pix, _patternUnit);
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
@@ -610,6 +558,18 @@ void VApplication::InitOptions()
        //This does not happen under GNOME or KDE
        QIcon::setThemeName("win.icon.theme");
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VApplication::toPixel(double val) const
+{
+    return ToPixel(val, _patternUnit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VApplication::fromPixel(double pix) const
+{
+    return FromPixel(pix, _patternUnit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -216,7 +216,7 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
                 case Unit::Inch:
                     return value / 25.4;
                 case Unit::Px:
-                    return (value / 25.4) * VApplication::PrintDPI;
+                    return (value / 25.4) * PrintDPI;
                 default:
                     break;
             }
@@ -231,7 +231,7 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
                 case Unit::Inch:
                     return value / 2.54;
                 case Unit::Px:
-                    return ((value * 10.0) / 25.4) * VApplication::PrintDPI;
+                    return ((value * 10.0) / 25.4) * PrintDPI;
                 default:
                     break;
             }
@@ -246,7 +246,7 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
                 case Unit::Inch:
                     return value;
                 case Unit::Px:
-                    return value * VApplication::PrintDPI;
+                    return value * PrintDPI;
                 default:
                     break;
             }
@@ -255,11 +255,11 @@ qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const 
             switch (to)
             {
                 case Unit::Mm:
-                    return (value / VApplication::PrintDPI) * 25.4;
+                    return (value / PrintDPI) * 25.4;
                 case Unit::Cm:
-                    return ((value / VApplication::PrintDPI) * 25.4) / 10.0;
+                    return ((value / PrintDPI) * 25.4) / 10.0;
                 case Unit::Inch:
-                    return value / VApplication::PrintDPI;
+                    return value / PrintDPI;
                 case Unit::Px:
                     return value;
                 default:
