@@ -42,7 +42,7 @@ VFormula::VFormula()
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
-    :formula(qApp->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container),
+    :formula(qApp->TrVars()->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container),
       toolId(NULL_ID), postfix(QString()), _error(true), dValue(0)
 {
     this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
@@ -102,7 +102,7 @@ QString VFormula::GetFormula(FormulaType type) const
     }
     else
     {
-        return qApp->FormulaFromUser(formula);
+        return qApp->TrVars()->FormulaFromUser(formula);
     }
 }
 
@@ -113,7 +113,7 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::ToUser)
         {
-            formula = qApp->FormulaToUser(value);
+            formula = qApp->TrVars()->FormulaToUser(value);
         }
         else
         {
@@ -226,7 +226,7 @@ void VFormula::Eval()
         try
         {
             Calculator *cal = new Calculator(data);
-            QString expression = qApp->FormulaFromUser(formula);
+            QString expression = qApp->TrVars()->FormulaFromUser(formula);
             const qreal result = cal->EvalFormula(expression);
             delete cal;
 

@@ -288,7 +288,7 @@ void DialogShoulderPoint::SetP1Line(const quint32 &value)
  */
 void DialogShoulderPoint::SetFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -341,7 +341,7 @@ QString DialogShoulderPoint::GetTypeLine() const
  */
 QString DialogShoulderPoint::GetFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

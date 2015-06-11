@@ -105,6 +105,8 @@ int main(int argc, char *argv[])
     appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
     app.installTranslator(&appTranslator);
 
+    app.InitTrVars();//Very important do it after load QM files.
+
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
     {

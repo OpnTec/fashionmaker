@@ -18,7 +18,8 @@ SOURCES += \
     $$PWD/variables/vcurvevariable.cpp \
     container/variables/vcurveangle.cpp \
     container/variables/varcangle.cpp \
-    container/variables/vsplineangle.cpp
+    container/variables/vsplineangle.cpp \
+    container/vtranslatevars.cpp
 
 HEADERS += \
     $$PWD/vcontainer.h \
@@ -45,4 +46,5 @@ HEADERS += \
     $$PWD/variables/vcurvevariable_p.h \
     container/variables/vcurveangle.h \
     container/variables/varcangle.h \
-    container/variables/vsplineangle.h
+    container/variables/vsplineangle.h \
+    container/vtranslatevars.h

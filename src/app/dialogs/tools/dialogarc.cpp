@@ -134,7 +134,7 @@ void DialogArc::SetCenter(const quint32 &value)
  */
 void DialogArc::SetF2(const QString &value)
 {
-    f2 = qApp->FormulaToUser(value);
+    f2 = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (f2.length() > 80)
     {
@@ -168,7 +168,7 @@ void DialogArc::SetColor(const QString &value)
  */
 void DialogArc::SetF1(const QString &value)
 {
-    f1 = qApp->FormulaToUser(value);
+    f1 = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (f1.length() > 80)
     {
@@ -190,7 +190,7 @@ void DialogArc::SetF1(const QString &value)
  */
 void DialogArc::SetRadius(const QString &value)
 {
-    radius = qApp->FormulaToUser(value);
+    radius = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (radius.length() > 80)
     {
@@ -424,7 +424,7 @@ quint32 DialogArc::GetCenter() const
  */
 QString DialogArc::GetRadius() const
 {
-    return qApp->FormulaFromUser(radius);
+    return qApp->TrVars()->FormulaFromUser(radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -434,7 +434,7 @@ QString DialogArc::GetRadius() const
  */
 QString DialogArc::GetF1() const
 {
-    return qApp->FormulaFromUser(f1);
+    return qApp->TrVars()->FormulaFromUser(f1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -444,5 +444,5 @@ QString DialogArc::GetF1() const
  */
 QString DialogArc::GetF2() const
 {
-    return qApp->FormulaFromUser(f2);
+    return qApp->TrVars()->FormulaFromUser(f2);
 }

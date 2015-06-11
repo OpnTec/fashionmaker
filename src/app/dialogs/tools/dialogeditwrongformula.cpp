@@ -135,7 +135,7 @@ void DialogEditWrongFormula::ValChenged(int row)
     }
     if (ui->radioButtonStandardTable->isChecked())
     {
-        const QString name = qApp->VarFromUser(item->text());
+        const QString name = qApp->TrVars()->VarFromUser(item->text());
         const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
         const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(name))
                                                    .arg(stable->GetGuiText());
@@ -153,56 +153,56 @@ void DialogEditWrongFormula::ValChenged(int row)
     if (ui->radioButtonLengthLine->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                      .arg(*data->GetVariable<VLengthLine>(qApp->VarFromUser(item->text()))->GetValue())
-                                      .arg(tr("Line length"));
+                            .arg(*data->GetVariable<VLengthLine>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                            .arg(tr("Line length"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonLengthArc->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                       .arg(*data->GetVariable<VArcLength>(qApp->VarFromUser(item->text()))->GetValue())
-                                       .arg(tr("Arc length"));
+                             .arg(*data->GetVariable<VArcLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                             .arg(tr("Arc length"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonLengthSpline->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                    .arg(*data->GetVariable<VSplineLength>(qApp->VarFromUser(item->text()))->GetValue())
-                                    .arg(tr("Curve length"));
+                          .arg(*data->GetVariable<VSplineLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                          .arg(tr("Curve length"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonAngleLine->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                       .arg(*data->GetVariable<VLineAngle>(qApp->VarFromUser(item->text()))->GetValue())
-                                       .arg(tr("Line Angle"));
+                             .arg(*data->GetVariable<VLineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                             .arg(tr("Line Angle"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonRadiusesArcs->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                       .arg(*data->GetVariable<VArcRadius>(qApp->VarFromUser(item->text()))->GetValue())
-                                       .arg(tr("Arc radius"));
+                             .arg(*data->GetVariable<VArcRadius>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                             .arg(tr("Arc radius"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonAnglesArcs->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                        .arg(*data->GetVariable<VArcAngle>(qApp->VarFromUser(item->text()))->GetValue())
-                                        .arg(tr("Arc angle"));
+                              .arg(*data->GetVariable<VArcAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                              .arg(tr("Arc angle"));
         ui->labelDescription->setText(desc);
         return;
     }
     if (ui->radioButtonAnglesCurves->isChecked())
     {
         const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                      .arg(*data->GetVariable<VCurveAngle>(qApp->VarFromUser(item->text()))->GetValue())
-                                      .arg(tr("Curve angle"));
+                            .arg(*data->GetVariable<VCurveAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
+                            .arg(tr("Curve angle"));
         ui->labelDescription->setText(desc);
         return;
     }
@@ -357,7 +357,7 @@ void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::SetFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -383,7 +383,7 @@ void DialogEditWrongFormula::setPostfix(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogEditWrongFormula::GetFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

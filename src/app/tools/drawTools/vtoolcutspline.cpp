@@ -279,7 +279,7 @@ void VToolCutSpline::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->FormulaToUser(formula));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formula));
         visual->RefreshGeometry();
     }
 }

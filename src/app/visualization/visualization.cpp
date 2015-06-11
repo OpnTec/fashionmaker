@@ -145,7 +145,7 @@ qreal Visualization::FindVal(const QString &expression)
             // Replace line return with spaces for calc if exist
             QString formula = expression;
             formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);
+            formula = qApp->TrVars()->FormulaFromUser(formula);
             Calculator *cal = new Calculator(Visualization::data);
             val = cal->EvalFormula(formula);
             delete cal;

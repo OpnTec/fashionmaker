@@ -269,7 +269,7 @@ void VToolCurveIntersectAxis::SetVisualization()
 
         visual->setPoint1Id(curveId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

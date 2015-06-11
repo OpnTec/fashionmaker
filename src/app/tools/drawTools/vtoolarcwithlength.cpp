@@ -302,9 +302,9 @@ void VToolArcWithLength::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->setPoint1Id(arc->GetCenter().id());
-        visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(qApp->FormulaToUser(arc->GetFormulaF1()));
-        visual->setLength(qApp->FormulaToUser(arc->GetFormulaLength()));
+        visual->setRadius(qApp->TrVars()->FormulaToUser(arc->GetFormulaRadius()));
+        visual->setF1(qApp->TrVars()->FormulaToUser(arc->GetFormulaF1()));
+        visual->setLength(qApp->TrVars()->FormulaToUser(arc->GetFormulaLength()));
         visual->RefreshGeometry();
     }
 }

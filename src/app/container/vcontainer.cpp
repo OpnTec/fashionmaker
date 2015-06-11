@@ -489,7 +489,7 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
         if (i.value()->GetType() == type)
         {
             QSharedPointer<T> var = GetVariable<T>(i.key());
-            map.insert(qApp->VarToUser(i.key()), var);
+            map.insert(qApp->TrVars()->VarToUser(i.key()), var);
         }
     }
     return map;

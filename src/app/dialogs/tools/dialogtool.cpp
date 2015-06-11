@@ -460,7 +460,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             // Replace line return character with spaces for calc if exist
             QString formula = text;
             formula.replace("\n", " ");
-            formula = qApp->FormulaFromUser(formula);// Translate to internal look.
+            formula = qApp->TrVars()->FormulaFromUser(formula);// Translate to internal look.
             Calculator *cal = new Calculator(data);
             result = cal->EvalFormula(formula);
             delete cal;

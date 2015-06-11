@@ -231,8 +231,8 @@ void VToolEndLine::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(basePointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

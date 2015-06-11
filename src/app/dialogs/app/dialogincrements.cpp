@@ -214,7 +214,7 @@ void DialogIncrements::FillMeasurements()
         if (qApp->patternType() == MeasurementsType::Standard)
         {
             QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(
-                                                              data->GetTableValue(qApp->VarFromUser(iMap.key()))));
+                                                         data->GetTableValue(qApp->TrVars()->VarFromUser(iMap.key()))));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
@@ -915,7 +915,8 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);// name column
             QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
 
-            QSharedPointer<VMeasurement> measur = data->GetVariable<VMeasurement>(qApp->VarFromUser(itemName->text()));
+            QSharedPointer<VMeasurement> measur = data->GetVariable<VMeasurement>(
+                                                                         qApp->TrVars()->VarFromUser(itemName->text()));
             const QString tag = measur->TagName();
             QDomNodeList list = m->elementsByTagName(tag);
             QDomElement domElement = list.at(0).toElement();
