@@ -549,6 +549,70 @@ void VApplication::setPatternUnit(const Unit &patternUnit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitOptions()
+{
+    setApplicationDisplayName(VER_PRODUCTNAME_STR);
+    setApplicationName(VER_INTERNALNAME_STR);
+    setOrganizationName(VER_COMPANYNAME_STR);
+    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    // Setting the Application version
+    setApplicationVersion(APP_VERSION_STR);
+
+    OpenSettings();
+
+#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
+    // Catch and send report
+    VApplication::DrMingw();
+    this->CollectReports();
+#endif
+
+    // Run creation log after sending crash report
+    StartLogging();
+
+    qDebug()<<"Version:"<<APP_VERSION_STR;
+    qDebug()<<"Build revision:"<<BUILD_REVISION;
+    qDebug()<<buildCompatibilityString();
+    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
+    qDebug()<<"Command-line arguments:"<<this->arguments();
+    qDebug()<<"Process ID:"<<this->applicationPid();
+
+    const QString checkedLocale = getSettings()->GetLocale();
+    qDebug()<<"Checked locale:"<<checkedLocale;
+
+    QTranslator *qtTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN)
+    qtTranslator->load("qt_" + checkedLocale, translationsPath());
+#else
+    qtTranslator->load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtTranslator);
+
+    QTranslator *qtxmlTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN)
+    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, translationsPath());
+#else
+    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtxmlTranslator);
+
+    QTranslator *appTranslator = new QTranslator(this);
+    appTranslator->load("valentina_" + checkedLocale, translationsPath());
+    installTranslator(appTranslator);
+
+    InitTrVars();//Very important do it after load QM files.
+
+    static const char * GENERIC_ICON_TO_CHECK = "document-open";
+    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    {
+       //If there is no default working icon theme then we should
+       //use an icon theme that we provide via a .qrc file
+       //This case happens under Windows and Mac OS X
+       //This does not happen under GNOME or KDE
+       QIcon::setThemeName("win.icon.theme");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QWidget *VApplication::getMainWindow() const
 {
     return mainWindow;

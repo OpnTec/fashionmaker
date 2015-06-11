@@ -28,19 +28,12 @@
 
 #include "mainwindow.h"
 #include "core/vapplication.h"
-#include "core/vsettings.h"
-#include "version.h"
 
-#include <QTextCodec>
-#include <QMessageBox>
-#include <QThread>
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../core/backport/qcommandlineparser.h"
 #else
 #   include <QCommandLineParser>
 #endif
-#include <QtXml>
-#include <QLibraryInfo>
 
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
@@ -56,66 +49,7 @@ int main(int argc, char *argv[])
     QT_REQUIRE_VERSION(argc, argv, "5.0.0");
 
     VApplication app(argc, argv);
-
-    app.setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    app.setApplicationName(VER_INTERNALNAME_STR);
-    app.setOrganizationName(VER_COMPANYNAME_STR);
-    app.setOrganizationDomain(VER_COMPANYDOMAIN_STR);
-    // Setting the Application version
-    app.setApplicationVersion(APP_VERSION_STR);
-
-    app.OpenSettings();
-
-#if defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    // Catch and send report
-    VApplication::DrMingw();
-    app.CollectReports();
-#endif
-
-    // Run creation log after sending crash report
-    app.StartLogging();
-
-    qDebug()<<"Version:"<<APP_VERSION_STR;
-    qDebug()<<"Build revision:"<<BUILD_REVISION;
-    qDebug()<<buildCompatibilityString();
-    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
-    qDebug()<<"Command-line arguments:"<<app.arguments();
-    qDebug()<<"Process ID:"<<app.applicationPid();
-
-    const QString checkedLocale = qApp->getSettings()->GetLocale();
-    qDebug()<<"Checked locale:"<<checkedLocale;
-
-    QTranslator qtTranslator;
-#if defined(Q_OS_WIN)
-    qtTranslator.load("qt_" + checkedLocale, qApp->translationsPath());
-#else
-    qtTranslator.load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-    app.installTranslator(&qtTranslator);
-
-    QTranslator qtxmlTranslator;
-#if defined(Q_OS_WIN)
-    qtxmlTranslator.load("qtxmlpatterns_" + checkedLocale, qApp->translationsPath());
-#else
-    qtxmlTranslator.load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-    app.installTranslator(&qtxmlTranslator);
-
-    QTranslator appTranslator;
-    appTranslator.load("valentina_" + checkedLocale, qApp->translationsPath());
-    app.installTranslator(&appTranslator);
-
-    app.InitTrVars();//Very important do it after load QM files.
-
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
-    {
-        //If there is no default working icon theme then we should
-        //use an icon theme that we provide via a .qrc file
-        //This case happens under Windows and Mac OS X
-        //This does not happen under GNOME or KDE
-        QIcon::setThemeName("win.icon.theme");
-    }
+    app.InitOptions();
 
     MainWindow w;
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));

@@ -66,6 +66,8 @@ public:
     MeasurementsType   patternType() const;
     void               setPatternType(const MeasurementsType &patternType);
 
+    void               InitOptions();
+
     double             toPixel(double val, const Unit &unit) const;
     double             toPixel(double val) const;
     double             fromPixel(double pix, const Unit &unit) const;
