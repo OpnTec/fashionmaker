@@ -40,6 +40,8 @@
 #include <QSet>
 #include <QSharedPointer>
 
+class VTranslateVars;
+
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
@@ -49,14 +51,15 @@ class VContainerData : public QSharedData
 {
 public:
 
-    VContainerData()
+    VContainerData(const VTranslateVars *trVars)
         :sizeName(size_M), heightName(height_M), gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
-          variables(QHash<QString, QSharedPointer<VInternalVariable> > ()), details(QHash<quint32, VDetail>())
+          variables(QHash<QString, QSharedPointer<VInternalVariable> > ()), details(QHash<quint32, VDetail>()),
+          trVars(trVars)
     {}
 
     VContainerData(const VContainerData &data)
         :QSharedData(data), sizeName(data.sizeName), heightName(data.heightName), gObjects(data.gObjects),
-          variables(data.variables), details(data.details)
+          variables(data.variables), details(data.details), trVars(data.trVars)
     {}
 
     virtual ~VContainerData();
@@ -76,6 +79,8 @@ public:
      * @brief details container of details
      */
     QHash<quint32, VDetail> details;
+
+    const VTranslateVars *trVars;
 };
 
 #ifdef Q_CC_GNU
@@ -89,7 +94,7 @@ class VContainer
 {
     Q_DECLARE_TR_FUNCTIONS(VContainer)
 public:
-    VContainer();
+    VContainer(const VTranslateVars *trVars);
     VContainer &operator=(const VContainer &data);
     VContainer(const VContainer &data);
     ~VContainer();
@@ -98,7 +103,7 @@ public:
     const QSharedPointer<T> GeometricObject(const quint32 &id) const;
     const QSharedPointer<VGObject> GetGObject(quint32 id) const;
     const VDetail      GetDetail(quint32 id) const;
-    qreal              GetTableValue(const QString& name) const;
+    qreal              GetTableValue(const QString& name, MeasurementsType patternType) const;
     template <typename T>
     QSharedPointer<T> GetVariable(QString name) const;
     static quint32     getId();

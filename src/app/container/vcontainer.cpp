@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vcontainer.h"
-#include "../core/vapplication.h"
 #include "../libs/vgeometry/varc.h"
 #include "../libs/vgeometry/vsplinepath.h"
 #include "../../utils/logging.h"
+#include "vtranslatevars.h"
 
 #include <QLineF>
 #include <QtAlgorithms>
@@ -47,8 +47,8 @@ QSet<const QString> VContainer::uniqueNames = QSet<const QString>();
 /**
  * @brief VContainer create empty container
  */
-VContainer::VContainer()
-    :d(new VContainerData)
+VContainer::VContainer(const VTranslateVars *trVars)
+    :d(new VContainerData(trVars))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -384,10 +384,10 @@ void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VContainer::GetTableValue(const QString &name) const
+qreal VContainer::GetTableValue(const QString &name, MeasurementsType patternType) const
 {
     QSharedPointer<VVariable> m = GetVariable<VVariable>(name);
-    if (qApp->patternType() == MeasurementsType::Standard)
+    if (patternType == MeasurementsType::Standard)
     {
         m->SetValue(size(), height());
     }
@@ -489,7 +489,7 @@ const QMap<QString, QSharedPointer<T> > VContainer::DataVar(const VarType &type)
         if (i.value()->GetType() == type)
         {
             QSharedPointer<T> var = GetVariable<T>(i.key());
-            map.insert(qApp->TrVars()->VarToUser(i.key()), var);
+            map.insert(d->trVars->VarToUser(i.key()), var);
         }
     }
     return map;

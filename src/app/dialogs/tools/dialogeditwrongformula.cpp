@@ -137,7 +137,8 @@ void DialogEditWrongFormula::ValChenged(int row)
     {
         const QString name = qApp->TrVars()->VarFromUser(item->text());
         const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-        const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(name))
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                                   .arg(data->GetTableValue(name, qApp->patternType()))
                                                    .arg(stable->GetGuiText());
         ui->labelDescription->setText(desc);
         return;
@@ -145,7 +146,8 @@ void DialogEditWrongFormula::ValChenged(int row)
     if (ui->radioButtonIncrements->isChecked())
     {
         const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
-        const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->GetTableValue(item->text()))
+        const QString desc = QString("%1(%2) - %3").arg(item->text())
+                                                   .arg(data->GetTableValue(item->text(), qApp->patternType()))
                                                    .arg(incr->GetDescription());
         ui->labelDescription->setText(desc);
         return;

@@ -57,7 +57,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
     : QMainWindow(parent), listDetails(QVector<VLayoutDetail>()), currentScene(nullptr), tempSceneLayout(nullptr),
-      pattern(new VContainer()), doc(nullptr), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
+      pattern(new VContainer(qApp->TrVars())), doc(nullptr), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
       scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()), undoAction(nullptr),
       redoAction(nullptr), actionDockWidgetToolOptions(nullptr), curFile(QString()), isLayoutStale(true), isTiled(false)
 {

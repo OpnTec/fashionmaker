@@ -214,7 +214,8 @@ void DialogIncrements::FillMeasurements()
         if (qApp->patternType() == MeasurementsType::Standard)
         {
             QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(
-                                                         data->GetTableValue(qApp->TrVars()->VarFromUser(iMap.key()))));
+                                                         data->GetTableValue(qApp->TrVars()->VarFromUser(iMap.key()),
+                                                              qApp->patternType())));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
@@ -286,7 +287,7 @@ void DialogIncrements::FillIncrements()
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            item = new QTableWidgetItem(qApp->LocaleToString(data->GetTableValue(iMap.value())));
+            item = new QTableWidgetItem(qApp->LocaleToString(data->GetTableValue(iMap.value(), qApp->patternType())));
             item->setTextAlignment(Qt::AlignHCenter);
             SetItemViewOnly(item);
             ui->tableWidgetIncrement->setItem(currentRow, 1, item);
