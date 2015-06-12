@@ -30,7 +30,7 @@
 #include "ui_dialogcutspline.h"
 
 #include "../../libs/vgeometry/vspline.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../xml/vpattern.h"
 #include "../../visualization/vistoolcutspline.h"
 #include "dialogeditwrongformula.h"
@@ -210,7 +210,7 @@ void DialogCutSpline::ShowVisualization()
  */
 QString DialogCutSpline::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

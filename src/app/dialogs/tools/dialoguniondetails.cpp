@@ -28,8 +28,8 @@
 
 #include "dialoguniondetails.h"
 #include "ui_dialoguniondetails.h"
-#include "../../geometry/vdetail.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vdetail.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

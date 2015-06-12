@@ -30,7 +30,7 @@
 #include "ui_dialogcurveintersectaxis.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolcurveintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -99,7 +99,7 @@ void DialogCurveIntersectAxis::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogCurveIntersectAxis::GetAngle() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaAngle);
+    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

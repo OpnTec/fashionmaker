@@ -28,7 +28,7 @@
 
 #include "vistoolpointofintersection.h"
 #include "../libs/vgeometry/vpointf.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent)

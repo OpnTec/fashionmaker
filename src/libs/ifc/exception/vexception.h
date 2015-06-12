@@ -32,7 +32,7 @@
 #include <QException>
 #include <QString>
 #include <QCoreApplication>
-#include "ifcdef.h"
+#include "../ifcdef.h"
 
 class QWidget;
 

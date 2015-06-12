@@ -30,7 +30,7 @@
 #include "ui_dialogbisector.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolbisector.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -342,7 +342,7 @@ QString DialogBisector::GetTypeLine() const
  */
 QString DialogBisector::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolcutspline.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogcutspline.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolcutspline.h"

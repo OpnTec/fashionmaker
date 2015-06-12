@@ -30,7 +30,7 @@
 #include "ui_dialogspline.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolspline.h"
 #include <QDebug>
 

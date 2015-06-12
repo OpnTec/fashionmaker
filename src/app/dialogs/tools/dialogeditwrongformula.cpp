@@ -28,7 +28,7 @@
 
 #include "dialogeditwrongformula.h"
 #include "ui_dialogeditwrongformula.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
@@ -385,7 +385,7 @@ void DialogEditWrongFormula::setPostfix(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogEditWrongFormula::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -30,7 +30,7 @@
 #include "ui_dialogendline.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolendline.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -355,7 +355,7 @@ QString DialogEndLine::GetTypeLine() const
  */
 QString DialogEndLine::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaLength);
+    return qApp->TrVars()->FormulaFromUser(formulaLength, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -365,7 +365,7 @@ QString DialogEndLine::GetFormula() const
  */
 QString DialogEndLine::GetAngle() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaAngle);
+    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

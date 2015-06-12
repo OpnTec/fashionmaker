@@ -942,7 +942,7 @@ void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
             qCDebug(vDialog, "Changed value to %f", base);
 
             // Convert value to measurements table unit
-            base = VAbstractMeasurements::UnitConvertor(base, qApp->patternUnit(), m->MUnit());
+            base = UnitConvertor(base, qApp->patternUnit(), m->MUnit());
 
             m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, QString("%1").arg(base));
             QString error;

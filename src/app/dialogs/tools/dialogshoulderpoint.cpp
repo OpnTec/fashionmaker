@@ -30,7 +30,7 @@
 #include "ui_dialogshoulderpoint.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolshoulderpoint.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -341,7 +341,7 @@ QString DialogShoulderPoint::GetTypeLine() const
  */
 QString DialogShoulderPoint::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

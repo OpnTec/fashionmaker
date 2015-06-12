@@ -29,7 +29,7 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../../utils/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)

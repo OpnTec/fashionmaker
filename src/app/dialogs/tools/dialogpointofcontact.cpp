@@ -29,7 +29,7 @@
 #include "dialogpointofcontact.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolpointofcontact.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"
@@ -304,7 +304,7 @@ void DialogPointOfContact::SetPointName(const QString &value)
  */
 QString DialogPointOfContact::getRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(radius);
+    return qApp->TrVars()->FormulaFromUser(radius, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

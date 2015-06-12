@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolcutarc.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogcutarc.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vgeometry/varc.h"

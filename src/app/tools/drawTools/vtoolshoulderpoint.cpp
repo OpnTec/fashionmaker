@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolshoulderpoint.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogshoulderpoint.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolshoulderpoint.h"

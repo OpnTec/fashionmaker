@@ -32,7 +32,7 @@
 #include <QApplication>
 #include "../options.h"
 #include "../widgets/vmaingraphicsview.h"
-#include "../container/vtranslatevars.h"
+#include "../libs/vpatterndb/vtranslatevars.h"
 #include "vsettings.h"
 
 class VApplication;// used in define

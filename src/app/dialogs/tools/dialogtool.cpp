@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "dialogtool.h"
-#include "../../container/calculator.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/calculator.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../libs/vgeometry/varc.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vgeometry/vsplinepath.h"
@@ -460,8 +460,9 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             // Replace line return character with spaces for calc if exist
             QString formula = text;
             formula.replace("\n", " ");
-            formula = qApp->TrVars()->FormulaFromUser(formula);// Translate to internal look.
-            Calculator *cal = new Calculator(data);
+            // Translate to internal look.
+            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+            Calculator *cal = new Calculator(data, qApp->patternType());
             result = cal->EvalFormula(formula);
             delete cal;
 

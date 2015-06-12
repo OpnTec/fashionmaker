@@ -600,6 +600,15 @@ DEPENDPATH += $$PWD/../libs/vgeometry
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
+#VPatternDB staic library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/ -lvpatterndb
+
+INCLUDEPATH += $$PWD/../libs/vpatterndb
+DEPENDPATH += $$PWD/../libs/vpatterndb
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing
 } else {

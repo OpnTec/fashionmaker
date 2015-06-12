@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolpointofcontact.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogpointofcontact.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../container/vformula.h"

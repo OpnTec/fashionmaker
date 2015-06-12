@@ -30,7 +30,7 @@
 #include "ui_dialoglineintersect.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoollineintersect.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"

@@ -28,7 +28,7 @@
 
 #include "visualization.h"
 #include "../tools/drawTools/vdrawtool.h"
-#include "../container/calculator.h"
+#include "../libs/vpatterndb/calculator.h"
 
 #include <QGraphicsEllipseItem>
 
@@ -145,8 +145,8 @@ qreal Visualization::FindVal(const QString &expression)
             // Replace line return with spaces for calc if exist
             QString formula = expression;
             formula.replace("\n", " ");
-            formula = qApp->TrVars()->FormulaFromUser(formula);
-            Calculator *cal = new Calculator(Visualization::data);
+            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+            Calculator *cal = new Calculator(Visualization::data, qApp->patternType());
             val = cal->EvalFormula(formula);
             delete cal;
         }

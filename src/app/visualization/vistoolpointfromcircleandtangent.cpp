@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpointfromcircleandtangent.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../tools/drawTools/vtoolpointfromcircleandtangent.h"
 #include "../libs/vgeometry/vpointf.h"
 

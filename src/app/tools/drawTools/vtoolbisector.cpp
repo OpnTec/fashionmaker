@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolbisector.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogbisector.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolbisector.h"

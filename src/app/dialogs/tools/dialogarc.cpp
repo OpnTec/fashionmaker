@@ -33,7 +33,7 @@
 #include <QTimer>
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../visualization/vistoolarc.h"
 #include "dialogeditwrongformula.h"
@@ -424,7 +424,7 @@ quint32 DialogArc::GetCenter() const
  */
 QString DialogArc::GetRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(radius);
+    return qApp->TrVars()->FormulaFromUser(radius, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -434,7 +434,7 @@ QString DialogArc::GetRadius() const
  */
 QString DialogArc::GetF1() const
 {
-    return qApp->TrVars()->FormulaFromUser(f1);
+    return qApp->TrVars()->FormulaFromUser(f1, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -444,5 +444,5 @@ QString DialogArc::GetF1() const
  */
 QString DialogArc::GetF2() const
 {
-    return qApp->TrVars()->FormulaFromUser(f2);
+    return qApp->TrVars()->FormulaFromUser(f2, qApp->getSettings()->GetOsSeparator());
 }

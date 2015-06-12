@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolarcwithlength.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogarcwithlength.h"
 #include "../../libs/vgeometry/varc.h"
 #include "../container/vformula.h"

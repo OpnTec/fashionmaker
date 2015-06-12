@@ -33,7 +33,7 @@
 #include "../../libs/vgeometry/varc.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vgeometry/vsplinepath.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../xml/vabstractmeasurements.h"
 
@@ -53,7 +53,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     ui.labelUnitY->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
 
     // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
-    ui.doubleSpinBoxSeams->setValue(VAbstractMeasurements::UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
+    ui.doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);

@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vformula.h"
-#include "../container/calculator.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/calculator.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 #include "../core/vsettings.h"
 #include <QDebug>
@@ -102,7 +102,7 @@ QString VFormula::GetFormula(FormulaType type) const
     }
     else
     {
-        return qApp->TrVars()->FormulaFromUser(formula);
+        return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
     }
 }
 
@@ -225,8 +225,8 @@ void VFormula::Eval()
     {
         try
         {
-            Calculator *cal = new Calculator(data);
-            QString expression = qApp->TrVars()->FormulaFromUser(formula);
+            Calculator *cal = new Calculator(data, qApp->patternType());
+            QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
             const qreal result = cal->EvalFormula(expression);
             delete cal;
 

@@ -28,7 +28,7 @@
 
 #include "vtoolcurveintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../libs/vgeometry/vpointf.h"

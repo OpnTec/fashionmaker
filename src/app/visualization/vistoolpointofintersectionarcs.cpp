@@ -28,7 +28,7 @@
 
 #include "vistoolpointofintersectionarcs.h"
 #include "../libs/vgeometry/varc.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../tools/drawTools/vtoolpointofintersectionarcs.h"
 
 //---------------------------------------------------------------------------------------------------------------------

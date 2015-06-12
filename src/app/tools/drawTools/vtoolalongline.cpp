@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolalongline.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/ifc/exception/vexceptionobjecterror.h"

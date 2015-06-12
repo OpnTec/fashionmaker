@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpointfromarcandtangent.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../tools/drawTools/vtoolpointfromarcandtangent.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../libs/vgeometry/varc.h"
