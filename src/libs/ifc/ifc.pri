@@ -11,4 +11,4 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/stable.cpp \
-    ifcdef.cpp
+    $$PWD/ifcdef.cpp

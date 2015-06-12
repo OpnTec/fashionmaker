@@ -29,7 +29,7 @@
 #ifndef VTOOLRECORD_H
 #define VTOOLRECORD_H
 
-#include "../options.h"
+#include "../../utils/def.h"
 
 #include <QString>
 
