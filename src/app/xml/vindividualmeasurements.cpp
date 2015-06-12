@@ -70,7 +70,8 @@ void VIndividualMeasurements::ReadMeasurement(const QDomElement &domElement, con
 {
     qreal value = GetParametrDouble(domElement, AttrValue, "0.0");
     value = UnitConvertor(value, MUnit(), qApp->patternUnit());
-    data->AddVariable(tag, new VMeasurement(tag, value, qApp->GuiText(tag), qApp->Description(tag), tag));
+    data->AddVariable(tag, new VMeasurement(tag, value, qApp->TrVars()->GuiText(tag),
+                                            qApp->TrVars()->Description(tag), tag));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

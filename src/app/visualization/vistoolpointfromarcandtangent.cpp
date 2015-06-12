@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpointfromarcandtangent.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../tools/drawTools/vtoolpointfromarcandtangent.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../libs/vgeometry/varc.h"
@@ -99,12 +99,9 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
         case 2:
         {
             int localRes = 0;
-            bool flagP1 = false;
-
             if (arc->IsIntersectLine(r1Arc))
             {
                 ++localRes;
-                flagP1 = true;
             }
 
             if (arc->IsIntersectLine(r2Arc))

@@ -31,7 +31,7 @@
 #include <qmuparsererror.h>
 #include "../dialogs/tools/dialogeditwrongformula.h"
 #include "../dialogs/app/dialogundo.h"
-#include "../container/calculator.h"
+#include "../libs/vpatterndb/calculator.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
 #include "../../libs/ifc/exception/vexceptionundo.h"
@@ -285,7 +285,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
     Calculator *cal = nullptr;
     try
     {
-        cal = new Calculator(data);
+        cal = new Calculator(data, qApp->patternType());
         result = cal->EvalFormula(formula);
         delete cal;
     }
@@ -316,7 +316,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                         /* Need delete dialog here because parser in dialog don't allow use correct separator for
                          * parsing here. */
                         delete dialog;
-                        Calculator *cal1 = new Calculator(data);
+                        Calculator *cal1 = new Calculator(data, qApp->patternType());
                         result = cal1->EvalFormula(formula);
                         delete cal1; /* Here can be memory leak, but dialog already check this formula and probability
                                       * very low. */

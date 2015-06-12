@@ -28,7 +28,7 @@
 
 #include "vtoolcurveintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../libs/vgeometry/vpointf.h"
@@ -269,7 +269,7 @@ void VToolCurveIntersectAxis::SetVisualization()
 
         visual->setPoint1Id(curveId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

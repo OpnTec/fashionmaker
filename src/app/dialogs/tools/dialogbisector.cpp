@@ -30,7 +30,7 @@
 #include "ui_dialogbisector.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolbisector.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -230,7 +230,7 @@ void DialogBisector::SetTypeLine(const QString &value)
  */
 void DialogBisector::SetFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -342,7 +342,7 @@ QString DialogBisector::GetTypeLine() const
  */
 QString DialogBisector::GetFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -30,8 +30,8 @@
 #define VPATTERN_H
 
 #include "../libs/ifc/xml/vdomdocument.h"
-#include "vtoolrecord.h"
-#include "../container/vcontainer.h"
+#include "../libs/ifc/xml/vtoolrecord.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 class VDataTool;
 class VMainGraphicsScene;

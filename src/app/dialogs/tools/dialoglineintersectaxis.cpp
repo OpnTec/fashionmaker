@@ -30,7 +30,7 @@
 #include "ui_dialoglineintersectaxis.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoollineintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
@@ -107,13 +107,13 @@ void DialogLineIntersectAxis::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogLineIntersectAxis::GetAngle() const
 {
-    return qApp->FormulaFromUser(formulaAngle);
+    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::SetAngle(const QString &value)
 {
-    formulaAngle = qApp->FormulaToUser(value);
+    formulaAngle = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formulaAngle.length() > 80)
@@ -203,7 +203,7 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+            qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
             if (line.length() <= radius)
             {
                 return;

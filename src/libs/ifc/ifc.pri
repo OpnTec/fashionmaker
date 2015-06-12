@@ -10,4 +10,5 @@ HEADERS += \
     $$PWD/ifcdef.h
 
 SOURCES += \
-    $$PWD/stable.cpp
+    $$PWD/stable.cpp \
+    $$PWD/ifcdef.cpp

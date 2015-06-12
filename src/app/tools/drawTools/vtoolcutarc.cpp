@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolcutarc.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogcutarc.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vgeometry/varc.h"
@@ -269,7 +269,7 @@ void VToolCutArc::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->FormulaToUser(formula));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formula));
         visual->RefreshGeometry();
     }
 }

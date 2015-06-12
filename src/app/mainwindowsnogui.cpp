@@ -28,13 +28,13 @@
 
 #include "mainwindowsnogui.h"
 #include "../core/vapplication.h"
-#include "../container/vcontainer.h"
-#include "../../libs/vobj/vobjpaintdevice.h"
+#include "../libs/vpatterndb/vcontainer.h"
+#include "../libs/vobj/vobjpaintdevice.h"
 #include "../dialogs/app/dialoglayoutsettings.h"
-#include "../../libs/vlayout/vlayoutgenerator.h"
+#include "../libs/vlayout/vlayoutgenerator.h"
 #include "../dialogs/app/dialoglayoutprogress.h"
 #include "../dialogs/app/dialogsavelayout.h"
-#include "../../libs/vlayout/vposter.h"
+#include "../libs/vlayout/vposter.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -57,9 +57,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
     : QMainWindow(parent), listDetails(QVector<VLayoutDetail>()), currentScene(nullptr), tempSceneLayout(nullptr),
-      pattern(new VContainer()), doc(nullptr), papers(QList<QGraphicsItem *>()), shadows(QList<QGraphicsItem *>()),
-      scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()), undoAction(nullptr),
-      redoAction(nullptr), actionDockWidgetToolOptions(nullptr), curFile(QString()), isLayoutStale(true), isTiled(false)
+      pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
+      shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
+      undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), curFile(QString()),
+      isLayoutStale(true), isTiled(false)
 {
     InitTempLayoutScene();
 }
@@ -502,7 +503,7 @@ void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
         generator.setViewBox(paper->rect());
         generator.setTitle("Valentina. Pattern layout");
         generator.setDescription(doc->GetDescription());
-        generator.setResolution(static_cast<int>(qApp->PrintDPI));
+        generator.setResolution(static_cast<int>(PrintDPI));
         QPainter painter;
         painter.begin(&generator);
         painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
@@ -556,7 +557,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         printer.setOutputFileName(name);
         printer.setDocName(FileName());
         const QRectF r = paper->rect();
-        printer.setResolution(static_cast<int>(qApp->PrintDPI));
+        printer.setResolution(static_cast<int>(PrintDPI));
         // Set orientation
         if (paper->rect().height()>= paper->rect().width())
         {
@@ -566,7 +567,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         {
             printer.setOrientation(QPrinter::Landscape);
         }
-        printer.setPaperSize ( QSizeF(qApp->fromPixel(r.width(), Unit::Mm), qApp->fromPixel(r.height(), Unit::Mm)),
+        printer.setPaperSize ( QSizeF(FromPixel(r.width(), Unit::Mm), FromPixel(r.height(), Unit::Mm)),
                                QPrinter::Millimeter );
         QPainter painter;
         if (painter.begin( &printer ) == false)
@@ -652,7 +653,7 @@ void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
         VObjPaintDevice generator;
         generator.setFileName(name);
         generator.setSize(paper->rect().size().toSize());
-        generator.setResolution(static_cast<int>(qApp->PrintDPI));
+        generator.setResolution(static_cast<int>(PrintDPI));
         QPainter painter;
         painter.begin(&generator);
         scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
@@ -730,7 +731,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
         qApp->getSettings()->SetPathLayout(f.absolutePath());
 
         printer.setOutputFileName(fileName);
-        printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+        printer.setResolution(static_cast<int>(PrintDPI));
         PrintPages( &printer );
     }
 }
@@ -764,7 +765,7 @@ void MainWindowsNoGUI::PrintPreview()
     }
 
     QPrinter printer(def, QPrinter::ScreenResolution);
-    printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+    printer.setResolution(static_cast<int>(PrintDPI));
     SetPrinterSettings(&printer);
     // display print preview dialog
     QPrintPreviewDialog  preview(&printer);
@@ -790,7 +791,7 @@ void MainWindowsNoGUI::LayoutPrint()
     dialog.setOption(QPrintDialog::PrintCurrentPage, false);
     if ( dialog.exec() == QDialog::Accepted )
     {
-        printer.setResolution(static_cast<int>(VApplication::PrintDPI));
+        printer.setResolution(static_cast<int>(PrintDPI));
         PrintPages( &printer );
     }
 }
@@ -820,8 +821,8 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-        printer->setPaperSize ( QSizeF(qApp->fromPixel(paper->rect().width(), Unit::Mm),
-                                       qApp->fromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
+        printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
+                                       FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
     }
 
     printer->setDocName(FileName());

@@ -30,7 +30,7 @@
 #define VABSTRACTMEASUREMENTS_H
 
 #include "../libs/ifc/xml/vdomdocument.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 class VAbstractMeasurements : public VDomDocument
 {
@@ -41,7 +41,6 @@ public:
     Unit         MUnit() const;
     static const QString TagUnit;
     static const QString AttrValue;
-    static qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
 protected:
     /** @brief data container with data. */
     VContainer     *data;

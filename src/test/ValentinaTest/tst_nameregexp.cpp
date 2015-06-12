@@ -38,6 +38,7 @@ TST_NameRegExp::TST_NameRegExp(QObject *parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_NameRegExp::TestNameRegExp_data()
 {
     QTest::addColumn<QString>("name");
@@ -97,6 +98,7 @@ void TST_NameRegExp::TestNameRegExp_data()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_NameRegExp::TestNameRegExp()
 {
     const QRegularExpression re(NameRegExp());

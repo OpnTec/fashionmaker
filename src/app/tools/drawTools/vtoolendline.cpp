@@ -28,7 +28,7 @@
 
 #include "vtoolendline.h"
 #include "../../widgets/vmaingraphicsscene.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogendline.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../libs/vgeometry/vpointf.h"
@@ -231,8 +231,8 @@ void VToolEndLine::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(basePointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

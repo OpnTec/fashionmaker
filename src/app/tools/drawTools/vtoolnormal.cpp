@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolnormal.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialognormal.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolnormal.h"
@@ -272,7 +272,7 @@ void VToolNormal::SetVisualization()
 
         visual->setPoint1Id(basePointId);
         visual->setPoint2Id(secondPointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
         visual->SetAngle(angle);
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolalongline.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogalongline.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/ifc/exception/vexceptionobjecterror.h"
@@ -136,7 +136,7 @@ void VToolAlongLine::SetVisualization()
         SCASSERT(visual != nullptr)
         visual->setPoint1Id(basePointId);
         visual->setPoint2Id(secondPointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

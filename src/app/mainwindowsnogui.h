@@ -31,7 +31,7 @@
 
 #include <QMainWindow>
 
-#include "../geometry/vdetail.h"
+#include "../libs/vpatterndb/vdetail.h"
 #include "../libs/vlayout/vlayoutdetail.h"
 #include "xml/vpattern.h"
 

@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolbisector.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogbisector.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolbisector.h"
@@ -296,7 +296,7 @@ void VToolBisector::SetVisualization()
         visual->setPoint1Id(firstPointId);
         visual->setPoint2Id(basePointId);
         visual->setPoint3Id(thirdPointId);
-        visual->setLength(qApp->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

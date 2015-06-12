@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vtoolarcwithlength.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogarcwithlength.h"
 #include "../../libs/vgeometry/varc.h"
-#include "../container/vformula.h"
+#include "../core/vformula.h"
 #include "../../visualization/vistoolarcwithlength.h"
 
 #include <QKeyEvent>
@@ -302,9 +302,9 @@ void VToolArcWithLength::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->setPoint1Id(arc->GetCenter().id());
-        visual->setRadius(qApp->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(qApp->FormulaToUser(arc->GetFormulaF1()));
-        visual->setLength(qApp->FormulaToUser(arc->GetFormulaLength()));
+        visual->setRadius(qApp->TrVars()->FormulaToUser(arc->GetFormulaRadius()));
+        visual->setF1(qApp->TrVars()->FormulaToUser(arc->GetFormulaF1()));
+        visual->setLength(qApp->TrVars()->FormulaToUser(arc->GetFormulaLength()));
         visual->RefreshGeometry();
     }
 }

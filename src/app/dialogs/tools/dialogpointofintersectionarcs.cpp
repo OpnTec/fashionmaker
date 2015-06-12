@@ -30,7 +30,7 @@
 #include "ui_dialogpointofintersectionarcs.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolpointofintersectionarcs.h"
 #include "../../widgets/vmaingraphicsscene.h"
 

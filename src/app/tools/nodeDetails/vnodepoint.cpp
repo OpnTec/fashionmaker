@@ -55,7 +55,7 @@ VNodePoint::VNodePoint(VPattern *doc, VContainer *data, quint32 id, quint32 idPo
     :VAbstractNode(doc, data, id, idPoint, idTool, qoParent), QGraphicsEllipseItem(parent), radius(0),
       namePoint(nullptr), lineName(nullptr)
 {
-    radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
+    radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
@@ -286,7 +286,7 @@ void VNodePoint::RefreshLine()
     VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
     QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
     lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
+    if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
     {
         lineName->setVisible(false);
     }

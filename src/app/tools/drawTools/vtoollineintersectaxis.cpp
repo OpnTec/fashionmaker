@@ -28,7 +28,7 @@
 
 #include "vtoollineintersectaxis.h"
 #include "../../widgets/vmaingraphicsscene.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialoglineintersectaxis.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"
 #include "../../libs/vgeometry/vpointf.h"
@@ -285,7 +285,7 @@ void VToolLineIntersectAxis::SetVisualization()
         visual->setPoint1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

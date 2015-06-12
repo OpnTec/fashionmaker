@@ -492,7 +492,7 @@ void VSettings::SetUserPassword(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 int VSettings::GetLayoutPaperHeight() const
 {
-    const int def = qFloor(VAbstractMeasurements::UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
+    const int def = qFloor(UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
     bool ok = false;
     const int height = value(SettingLayoutPaperHeight, def).toInt(&ok);
     if (ok)
@@ -514,7 +514,7 @@ void VSettings::SetLayoutPaperHeight(int value)
 //---------------------------------------------------------------------------------------------------------------------
 int VSettings::GetLayoutPaperWidth() const
 {
-    const int def = qFloor(VAbstractMeasurements::UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
+    const int def = qFloor(UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
     bool ok = false;
     const int width = value(SettingLayoutPaperWidth, def).toInt(&ok);
     if (ok)
@@ -552,7 +552,7 @@ unsigned int VSettings::GetLayoutShift() const
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int VSettings::GetDefLayoutShift()
 {
-    return static_cast<unsigned int>(VAbstractMeasurements::UnitConvertor(50, Unit::Mm, Unit::Px));
+    return static_cast<unsigned int>(UnitConvertor(50, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -580,7 +580,7 @@ unsigned int VSettings::GetLayoutWidth() const
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int VSettings::GetDefLayoutWidth()
 {
-    return static_cast<unsigned int>(VAbstractMeasurements::UnitConvertor(2.5, Unit::Mm, Unit::Px));
+    return static_cast<unsigned int>(UnitConvertor(2.5, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

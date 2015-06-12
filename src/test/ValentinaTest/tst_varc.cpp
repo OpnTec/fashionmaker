@@ -37,6 +37,7 @@ TST_VArc::TST_VArc(QObject *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_VArc::CompareTwoWays()
 {
     const VPointF center;
@@ -59,6 +60,7 @@ void TST_VArc::CompareTwoWays()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_VArc::NegativeArc()
 {
     const VPointF center;

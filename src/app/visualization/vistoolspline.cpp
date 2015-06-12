@@ -29,7 +29,7 @@
 #include "vistoolspline.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../libs/vgeometry/vspline.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 const int EMPTY_ANGLE = -1;
 

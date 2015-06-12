@@ -28,7 +28,7 @@
 
 #include "vistoolcutarc.h"
 #include "../libs/vgeometry/varc.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)

@@ -29,7 +29,7 @@
 #include "vistoolarcwithlength.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../libs/vgeometry/varc.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolArcWithLength::VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent)

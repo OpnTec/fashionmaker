@@ -64,7 +64,7 @@ QString VStandardMeasurements::OrigDescription ()
 //---------------------------------------------------------------------------------------------------------------------
 QString VStandardMeasurements::TrDescription()
 {
-    const QString trDesc = qApp->STDescription(Id());
+    const QString trDesc = qApp->TrVars()->STDescription(Id());
     if (trDesc.isEmpty() == false)
     {
         return trDesc;
@@ -115,8 +115,8 @@ void VStandardMeasurements::ReadMeasurement(const QDomElement &domElement, const
         qWarning()<<"Standard table can't use inch unit.";
     }
 
-    data->AddVariable(tag, new VMeasurement(tag, value, size_increase, height_increase, qApp->GuiText(tag),
-                                            qApp->Description(tag), tag));
+    data->AddVariable(tag, new VMeasurement(tag, value, size_increase, height_increase, qApp->TrVars()->GuiText(tag),
+                                            qApp->TrVars()->Description(tag), tag));
 }
 
 

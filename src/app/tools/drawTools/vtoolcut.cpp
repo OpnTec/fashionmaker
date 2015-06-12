@@ -28,7 +28,7 @@
 
 #include "vtoolcut.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vformula.h"
+#include "../../core/vformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VPattern *doc, VContainer *data, const quint32 &id, const QString &formula,

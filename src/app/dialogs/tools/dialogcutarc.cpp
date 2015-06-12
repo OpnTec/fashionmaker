@@ -30,7 +30,7 @@
 #include "ui_dialogcutarc.h"
 
 #include "../../libs/vgeometry/varc.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolcutarc.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"
@@ -183,7 +183,7 @@ void DialogCutArc::SetColor(const QString &value)
  */
 void DialogCutArc::SetFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -216,7 +216,7 @@ void DialogCutArc::SetPointName(const QString &value)
  */
 QString DialogCutArc::GetFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

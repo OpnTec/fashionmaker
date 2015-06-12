@@ -39,6 +39,7 @@ TST_VAbstractDetail::TST_VAbstractDetail(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 void TST_VAbstractDetail::EquidistantRemoveLoop() const
 {
     // These are two real cases where equdistant has loop.

@@ -30,7 +30,7 @@
 #include "ui_dialogcutsplinepath.h"
 
 #include "../../libs/vgeometry/vsplinepath.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../xml/vpattern.h"
 #include "../../visualization/vistoolcutsplinepath.h"
 #include "dialogeditwrongformula.h"
@@ -91,7 +91,7 @@ void DialogCutSplinePath::SetPointName(const QString &value)
  */
 void DialogCutSplinePath::SetFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -210,7 +210,7 @@ void DialogCutSplinePath::ShowVisualization()
  */
 QString DialogCutSplinePath::GetFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

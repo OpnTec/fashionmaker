@@ -30,7 +30,7 @@
 #include "ui_dialogpointfromcircleandtangent.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolpointfromcircleandtangent.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "dialogeditwrongformula.h"
@@ -111,13 +111,14 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointFromCircleAndTangent::GetCircleRadius() const
 {
-    return qApp->FormulaFromUser(ui->plainTextEditRadius->toPlainText());
+    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditRadius->toPlainText(),
+                                           qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
 {
-    const QString formula = qApp->FormulaToUser(value);
+    const QString formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (formula.length() > 80)
     {

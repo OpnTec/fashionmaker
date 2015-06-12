@@ -261,7 +261,7 @@ void DialogNormal::SetAngle(const qreal &value)
  */
 void DialogNormal::SetFormula(const QString &value)
 {
-    formula = qApp->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value);
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -315,7 +315,7 @@ QString DialogNormal::GetTypeLine() const
  */
 QString DialogNormal::GetFormula() const
 {
-    return qApp->FormulaFromUser(formula);
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vtoolpointofcontact.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogpointofcontact.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vformula.h"
+#include "../../core/vformula.h"
 #include "../../visualization/vistoolpointofcontact.h"
 #include <QtCore/qmath.h>
 
@@ -313,7 +313,7 @@ void VToolPointOfContact::SetVisualization()
         visual->setPoint1Id(firstPointId);
         visual->setLineP2Id(secondPointId);
         visual->setRadiusId(center);
-        visual->setRadius(qApp->FormulaToUser(arcRadius));
+        visual->setRadius(qApp->TrVars()->FormulaToUser(arcRadius));
         visual->RefreshGeometry();
     }
 }

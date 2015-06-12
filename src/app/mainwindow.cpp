@@ -895,8 +895,8 @@ void MainWindow::ToolBarOption()
 {
     if (qApp->patternType() == MeasurementsType::Standard)
     {
-        const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights());
-        const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes());
+        const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
+        const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit());
 
         gradationHeights = SetGradationList(tr("Height: "), listHeights);
         SetDefaultHeight(static_cast<int>(pattern->height()));
@@ -1904,8 +1904,8 @@ void MainWindow::Layout()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateGradation()
 {
-    UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights()));
-    UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes()));
+    UpdateHeightsList(VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit()));
+    UpdateSizesList(VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

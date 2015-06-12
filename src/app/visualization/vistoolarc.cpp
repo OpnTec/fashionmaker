@@ -29,7 +29,7 @@
 #include "vistoolarc.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../libs/vgeometry/varc.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)

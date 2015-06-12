@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpointofintersectioncircles.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../tools/drawTools/vtoolpointofintersectioncircles.h"
 #include "../libs/vgeometry/vpointf.h"
 

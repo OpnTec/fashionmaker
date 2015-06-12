@@ -29,7 +29,7 @@
 #include "dialogtriangle.h"
 #include "ui_dialogtriangle.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistooltriangle.h"
 #include "../../widgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"

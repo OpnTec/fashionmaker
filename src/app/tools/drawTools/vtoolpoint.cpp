@@ -50,7 +50,7 @@ VToolPoint::VToolPoint(VPattern *doc, VContainer *data, quint32 id, QGraphicsIte
     :VDrawTool(doc, data, id), QGraphicsEllipseItem(parent), radius(DefPointRadius), namePoint(nullptr),
       lineName(nullptr)
 {
-    radius = qApp->toPixel(DefPointRadius/*mm*/, Unit::Mm);
+    radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::contextMenuEvent);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
@@ -279,7 +279,7 @@ void VToolPoint::RefreshLine()
         lineName->setLine(QLineF(p1, pRec - scenePos()));
         lineName->setPen(QPen(CorrectColor(Qt::black), qApp->toPixel(qApp->widthHairLine())/factor));
 
-        if (QLineF(p1, pRec - scenePos()).length() <= qApp->toPixel(4, Unit::Mm))
+        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
         {
             lineName->setVisible(false);
         }

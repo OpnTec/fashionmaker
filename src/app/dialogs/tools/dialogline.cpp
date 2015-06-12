@@ -30,7 +30,7 @@
 #include "ui_dialogline.h"
 
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolline.h"
 #include "../../core/vapplication.h"
 #include "../../widgets/vmaingraphicsscene.h"

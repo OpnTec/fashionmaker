@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vabstractmeasurements.h"
-#include "../core/vapplication.h"
 
 const QString VAbstractMeasurements::TagUnit   = QStringLiteral("unit");
 const QString VAbstractMeasurements::AttrValue = QStringLiteral("value");
@@ -199,77 +198,6 @@ Unit VAbstractMeasurements::MUnit() const
 {
     const QString unit = UniqueTagText(TagUnit, UnitCM);
     return VDomDocument::StrToUnits(unit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractMeasurements::UnitConvertor(qreal value, const Unit &from, const Unit &to)
-{
-    switch (from)
-    {
-        case Unit::Mm:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return value;
-                case Unit::Cm:
-                    return value / 10.0;
-                case Unit::Inch:
-                    return value / 25.4;
-                case Unit::Px:
-                    return (value / 25.4) * VApplication::PrintDPI;
-                default:
-                    break;
-            }
-            break;
-        case Unit::Cm:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return value * 10.0;
-                case Unit::Cm:
-                    return value;
-                case Unit::Inch:
-                    return value / 2.54;
-                case Unit::Px:
-                    return ((value * 10.0) / 25.4) * VApplication::PrintDPI;
-                default:
-                    break;
-            }
-            break;
-        case Unit::Inch:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return value * 25.4;
-                case Unit::Cm:
-                    return value * 2.54;
-                case Unit::Inch:
-                    return value;
-                case Unit::Px:
-                    return value * VApplication::PrintDPI;
-                default:
-                    break;
-            }
-            break;
-        case Unit::Px:
-            switch (to)
-            {
-                case Unit::Mm:
-                    return (value / VApplication::PrintDPI) * 25.4;
-                case Unit::Cm:
-                    return ((value / VApplication::PrintDPI) * 25.4) / 10.0;
-                case Unit::Inch:
-                    return value / VApplication::PrintDPI;
-                case Unit::Px:
-                    return value;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
-    }
-    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

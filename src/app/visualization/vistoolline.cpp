@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolline.h"
-#include "../container/vcontainer.h"
+#include "../libs/vpatterndb/vcontainer.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../tools/drawTools/vdrawtool.h"
 

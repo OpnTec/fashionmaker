@@ -31,7 +31,7 @@
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
 #include "../../core/vsettings.h"
-#include "../../container/vcontainer.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 #include "../../utils/logging.h"
 
 #include <QDir>

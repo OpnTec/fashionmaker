@@ -31,7 +31,6 @@
 #include "../../core/vapplication.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../core/vsettings.h"
-#include "../../xml/vabstractmeasurements.h"
 #include "../../libs/vlayout/vlayoutgenerator.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
@@ -86,51 +85,51 @@ DialogLayoutSettings::~DialogLayoutSettings()
 //---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::GetPaperHeight() const
 {
-    return qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxPaperHeight->value(), oldPaperUnit, Unit::Px));
+    return qFloor(UnitConvertor(ui->doubleSpinBoxPaperHeight->value(), oldPaperUnit, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::SetPaperHeight(int value)
 {
-    ui->doubleSpinBoxPaperHeight->setValue(VAbstractMeasurements::UnitConvertor(value, Unit::Px, PaperUnit()));
+    ui->doubleSpinBoxPaperHeight->setValue(UnitConvertor(value, Unit::Px, PaperUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::GetPaperWidth() const
 {
-    return qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxPaperWidth->value(), oldPaperUnit, Unit::Px));
+    return qFloor(UnitConvertor(ui->doubleSpinBoxPaperWidth->value(), oldPaperUnit, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::SetPaperWidth(int value)
 {
-    ui->doubleSpinBoxPaperWidth->setValue(VAbstractMeasurements::UnitConvertor(value, Unit::Px, PaperUnit()));
+    ui->doubleSpinBoxPaperWidth->setValue(UnitConvertor(value, Unit::Px, PaperUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int DialogLayoutSettings::GetShift() const
 {
-    return static_cast<quint32>(qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxShift->value(),
+    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxShift->value(),
                                                                             oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::SetShift(unsigned int value)
 {
-    ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(value, Unit::Px, LayoutUnit()));
+    ui->doubleSpinBoxShift->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int DialogLayoutSettings::GetLayoutWidth() const
 {
-    return static_cast<quint32>(qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(),
+    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(),
                                                                             oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::SetLayoutWidth(unsigned int value)
 {
-    ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(value, Unit::Px, LayoutUnit()));
+    ui->doubleSpinBoxLayoutWidth->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -254,11 +253,11 @@ void DialogLayoutSettings::ConvertPaperSize()
     const qreal width = ui->doubleSpinBoxPaperWidth->value();
     const qreal height = ui->doubleSpinBoxPaperHeight->value();
 
-    ui->doubleSpinBoxPaperWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, paperUnit));
-    ui->doubleSpinBoxPaperHeight->setMaximum(qApp->fromPixel(QIMAGE_MAX, paperUnit));
+    ui->doubleSpinBoxPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
+    ui->doubleSpinBoxPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
 
-    ui->doubleSpinBoxPaperWidth->setValue(VAbstractMeasurements::UnitConvertor(width, oldPaperUnit, paperUnit));
-    ui->doubleSpinBoxPaperHeight->setValue(VAbstractMeasurements::UnitConvertor(height, oldPaperUnit, paperUnit));
+    ui->doubleSpinBoxPaperWidth->setValue(UnitConvertor(width, oldPaperUnit, paperUnit));
+    ui->doubleSpinBoxPaperHeight->setValue(UnitConvertor(height, oldPaperUnit, paperUnit));
     oldPaperUnit = paperUnit;
     CorrectPaperDecimals();
     MinimumPaperSize();
@@ -271,11 +270,11 @@ void DialogLayoutSettings::ConvertLayoutSize()
     const qreal layoutWidth = ui->doubleSpinBoxLayoutWidth->value();
     const qreal shift = ui->doubleSpinBoxShift->value();
 
-    ui->doubleSpinBoxLayoutWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, unit));
-    ui->doubleSpinBoxShift->setMaximum(qApp->fromPixel(QIMAGE_MAX, unit));
+    ui->doubleSpinBoxLayoutWidth->setMaximum(FromPixel(QIMAGE_MAX, unit));
+    ui->doubleSpinBoxShift->setMaximum(FromPixel(QIMAGE_MAX, unit));
 
-    ui->doubleSpinBoxLayoutWidth->setValue(VAbstractMeasurements::UnitConvertor(layoutWidth, oldLayoutUnit, unit));
-    ui->doubleSpinBoxShift->setValue(VAbstractMeasurements::UnitConvertor(shift, oldLayoutUnit, unit));
+    ui->doubleSpinBoxLayoutWidth->setValue(UnitConvertor(layoutWidth, oldLayoutUnit, unit));
+    ui->doubleSpinBoxShift->setValue(UnitConvertor(shift, oldLayoutUnit, unit));
     oldLayoutUnit = unit;
     CorrectLayoutDecimals();
     MinimumLayoutSize();
@@ -389,7 +388,7 @@ void DialogLayoutSettings::InitTemplates()
 {
     const QIcon icoPaper("://icon/16x16/template.png");
     const QIcon icoRoll("://icon/16x16/roll.png");
-    const QString pdi = QString("(%1ppi)").arg(VApplication::PrintDPI);
+    const QString pdi = QString("(%1ppi)").arg(PrintDPI);
 
     ui->comboBoxTemplates->addItem(icoPaper, "A0 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A0)));
     ui->comboBoxTemplates->addItem(icoPaper, "A1 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A1)));
@@ -432,74 +431,74 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::A0:
             SetAdditionalOptions(false);
 
-            width = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(1189, Unit::Mm, paperUnit);
+            width = UnitConvertor(841, Unit::Mm, paperUnit);
+            height = UnitConvertor(1189, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A1:
             SetAdditionalOptions(false);
 
-            width = VAbstractMeasurements::UnitConvertor(594, Unit::Mm, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(841, Unit::Mm, paperUnit);
+            width = UnitConvertor(594, Unit::Mm, paperUnit);
+            height = UnitConvertor(841, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A2:
             SetAdditionalOptions(false);
 
-            width = VAbstractMeasurements::UnitConvertor(420, Unit::Mm, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(594, Unit::Mm, paperUnit);
+            width = UnitConvertor(420, Unit::Mm, paperUnit);
+            height = UnitConvertor(594, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A3:
             SetAdditionalOptions(false);
 
-            width = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(420, Unit::Mm, paperUnit);
+            width = UnitConvertor(297, Unit::Mm, paperUnit);
+            height = UnitConvertor(420, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::A4:
             SetAdditionalOptions(false);
 
-            width = VAbstractMeasurements::UnitConvertor(210, Unit::Mm, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(297, Unit::Mm, paperUnit);
+            width = UnitConvertor(210, Unit::Mm, paperUnit);
+            height = UnitConvertor(297, Unit::Mm, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Letter:
             SetAdditionalOptions(false);
 
-            width = VAbstractMeasurements::UnitConvertor(8.5, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
+            width = UnitConvertor(8.5, Unit::Inch, paperUnit);
+            height = UnitConvertor(11, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Legal:
             SetAdditionalOptions(true);
 
-            width = VAbstractMeasurements::UnitConvertor(11, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(17, Unit::Inch, paperUnit);
+            width = UnitConvertor(11, Unit::Inch, paperUnit);
+            height = UnitConvertor(17, Unit::Inch, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll24in:
             SetAdditionalOptions(true);
 
-            width = VAbstractMeasurements::UnitConvertor(24, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
+            width = UnitConvertor(24, Unit::Inch, paperUnit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll30in:
             SetAdditionalOptions(true);
 
-            width = VAbstractMeasurements::UnitConvertor(30, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
+            width = UnitConvertor(30, Unit::Inch, paperUnit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll36in:
             SetAdditionalOptions(true);
 
-            width = VAbstractMeasurements::UnitConvertor(36, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
+            width = UnitConvertor(36, Unit::Inch, paperUnit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll42in:
             SetAdditionalOptions(true);
 
-            width = VAbstractMeasurements::UnitConvertor(42, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
+            width = UnitConvertor(42, Unit::Inch, paperUnit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         case PaperSizeTemplate::Roll44in:
             SetAdditionalOptions(true);
 
-            width = VAbstractMeasurements::UnitConvertor(44, Unit::Inch, paperUnit);
-            height = VAbstractMeasurements::UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
+            width = UnitConvertor(44, Unit::Inch, paperUnit);
+            height = UnitConvertor(QIMAGE_MAX, Unit::Px, paperUnit);
             return QSizeF(width, height);
         default:
             break;
@@ -578,18 +577,16 @@ void DialogLayoutSettings::CorrectLayoutDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::Label()
 {
-    const int width = qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxPaperWidth->value(), PaperUnit(),
-                                                                  Unit::Px));
-    const int height = qFloor(VAbstractMeasurements::UnitConvertor(ui->doubleSpinBoxPaperHeight->value(),
-                                                                   PaperUnit(), Unit::Px));
-    QString text = QString("%1 x %2 px, \n%3 ppi").arg(width).arg(height).arg(VApplication::PrintDPI);
+    const int width = qFloor(UnitConvertor(ui->doubleSpinBoxPaperWidth->value(), PaperUnit(), Unit::Px));
+    const int height = qFloor(UnitConvertor(ui->doubleSpinBoxPaperHeight->value(), PaperUnit(), Unit::Px));
+    QString text = QString("%1 x %2 px, \n%3 ppi").arg(width).arg(height).arg(PrintDPI);
     ui->labelSizeDescription->setText(text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::MinimumPaperSize()
 {
-    const qreal value = VAbstractMeasurements::UnitConvertor(1, Unit::Px, oldPaperUnit);
+    const qreal value = UnitConvertor(1, Unit::Px, oldPaperUnit);
     ui->doubleSpinBoxPaperWidth->setMinimum(value);
     ui->doubleSpinBoxPaperHeight->setMinimum(value);
 }
@@ -597,7 +594,7 @@ void DialogLayoutSettings::MinimumPaperSize()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::MinimumLayoutSize()
 {
-    const qreal value = VAbstractMeasurements::UnitConvertor(1, Unit::Px, oldLayoutUnit);
+    const qreal value = UnitConvertor(1, Unit::Px, oldLayoutUnit);
     ui->doubleSpinBoxLayoutWidth->setMinimum(value);
 }
 
@@ -613,10 +610,8 @@ void DialogLayoutSettings::ReadSettings()
     SetLayoutWidth(qApp->getSettings()->GetLayoutWidth());
     SetShift(qApp->getSettings()->GetLayoutShift());
 
-    const qreal width = VAbstractMeasurements::UnitConvertor(qApp->getSettings()->GetLayoutPaperWidth(), Unit::Px,
-                                                             LayoutUnit());
-    const qreal height = VAbstractMeasurements::UnitConvertor(qApp->getSettings()->GetLayoutPaperHeight(), Unit::Px,
-                                                              LayoutUnit());
+    const qreal width = UnitConvertor(qApp->getSettings()->GetLayoutPaperWidth(), Unit::Px, LayoutUnit());
+    const qreal height = UnitConvertor(qApp->getSettings()->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
     SheetSize(QSizeF(width, height));
     SetGroup(qApp->getSettings()->GetLayoutGroup());
     SetRotate(qApp->getSettings()->GetLayoutRotate());
@@ -645,8 +640,8 @@ void DialogLayoutSettings::WriteSettings() const
 void DialogLayoutSettings::SheetSize(const QSizeF &size)
 {
     oldPaperUnit = PaperUnit();
-    ui->doubleSpinBoxPaperWidth->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
-    ui->doubleSpinBoxPaperHeight->setMaximum(qApp->fromPixel(QIMAGE_MAX, oldPaperUnit));
+    ui->doubleSpinBoxPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, oldPaperUnit));
+    ui->doubleSpinBoxPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, oldPaperUnit));
 
     ui->doubleSpinBoxPaperWidth->setValue(size.width());
     ui->doubleSpinBoxPaperHeight->setValue(size.height());

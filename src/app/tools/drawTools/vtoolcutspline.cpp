@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoolcutspline.h"
-#include "../../container/calculator.h"
+#include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogcutspline.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../visualization/vistoolcutspline.h"
@@ -279,7 +279,7 @@ void VToolCutSpline::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(curveCutId);
-        visual->setLength(qApp->FormulaToUser(formula));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formula));
         visual->RefreshGeometry();
     }
 }

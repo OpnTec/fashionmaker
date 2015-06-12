@@ -6,11 +6,13 @@ HEADERS += \
     $$PWD/undoevent.h \
     $$PWD/vsettings.h \
     $$PWD/backport/qcommandlineoption.h \
-    $$PWD/backport/qcommandlineparser.h
+    $$PWD/backport/qcommandlineparser.h \
+    $$PWD/vformula.h
 
 SOURCES += \
     $$PWD/vapplication.cpp \
     $$PWD/undoevent.cpp \
     $$PWD/vsettings.cpp \
     $$PWD/backport/qcommandlineoption.cpp \
-    $$PWD/backport/qcommandlineparser.cpp
+    $$PWD/backport/qcommandlineparser.cpp \
+    $$PWD/vformula.cpp

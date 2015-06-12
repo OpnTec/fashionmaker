@@ -32,7 +32,7 @@
 #include <QApplication>
 #include "../options.h"
 #include "../widgets/vmaingraphicsview.h"
-#include "../../libs/qmuparser/qmutranslation.h"
+#include "../libs/vpatterndb/vtranslatevars.h"
 #include "vsettings.h"
 
 class VApplication;// used in define
@@ -62,31 +62,23 @@ public:
     static void        CheckFactor(qreal &oldFactor, const qreal &Newfactor);
     virtual bool       notify(QObject * receiver, QEvent * event);
     Unit               patternUnit() const;
+    const Unit        *patternUnitP() const;
     void               setPatternUnit(const Unit &patternUnit);
     MeasurementsType   patternType() const;
     void               setPatternType(const MeasurementsType &patternType);
 
-    double             toPixel(double val, const Unit &unit) const;
+    void               InitOptions();
+
     double             toPixel(double val) const;
-    double             fromPixel(double pix, const Unit &unit) const;
     double             fromPixel(double pix) const;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     static bool        TryLock(QLockFile *lock);
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
-    static const qreal PrintDPI;
     QString            translationsPath() const;
     qreal              widthMainLine() const;
     qreal              widthHairLine() const;
-    QString            VarToUser(const QString &var) const;
-    QString            VarFromUser(const QString &var) const;
-    QString            GuiText(const QString &measurement) const;
-    QString            Description(const QString &measurement) const;
-    QString            PostfixOperator(const QString &name) const;
-
-    QString            FormulaFromUser(const QString &formula);
-    QString            FormulaToUser(const QString &formula);
 
     template <typename T>
     QString            LocaleToString(const T &value)
@@ -119,10 +111,12 @@ public:
     static void        restoreOverrideCursor(const QString & pixmapPath);
 
     static QStringList LabelLanguages();
-    QString            STDescription(const QString &id)const;
 
     void               StartLogging();
     QTextStream       *LogFile();
+
+    const VTranslateVars *TrVars();
+    void               InitTrVars();
 
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
@@ -141,13 +135,7 @@ private:
     MeasurementsType   _patternType;
     qreal              _widthMainLine;
     qreal              _widthHairLine;
-    QMap<QString, qmu::QmuTranslation> measurements;
-    QMap<QString, qmu::QmuTranslation> guiTexts;
-    QMap<QString, qmu::QmuTranslation> descriptions;
-    QMap<QString, qmu::QmuTranslation> variables;
-    QMap<QString, qmu::QmuTranslation> functions;
-    QMap<QString, qmu::QmuTranslation> postfixOperators;
-    QMap<QString, qmu::QmuTranslation> stDescriptions;
+    VTranslateVars     *trVars;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
     QGraphicsScene     *currentScene;
@@ -174,22 +162,6 @@ private:
     QLockFile          *logLock;
 #endif
     void               InitLineWidth();
-    void               InitMeasurements();
-    void               InitVariables();
-    void               InitFunctions();
-    void               InitPostfixOperators();
-    void               InitSTDescriptions();
-    bool               MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool               VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool               PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token,
-                                                int &bias) const;
-    bool               FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool               VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    void               CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
-                                            QMap<int, QString> &numbers);
-    void               BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
-    void               InitMeasurement(const QString &name, const qmu::QmuTranslation &m, const qmu::QmuTranslation &g,
-                                       const qmu::QmuTranslation &d);
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static const QString GistFileName;
@@ -212,6 +184,12 @@ private:
 inline Unit VApplication::patternUnit() const
 {
     return _patternUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline const Unit *VApplication::patternUnitP() const
+{
+    return &_patternUnit;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
