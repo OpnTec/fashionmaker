@@ -1,5 +1,4 @@
 # Suport subdirectories. Just better project code tree.
-include(container/container.pri)
 include(dialogs/dialogs.pri)
 include(tools/tools.pri)
 include(widgets/widgets.pri)

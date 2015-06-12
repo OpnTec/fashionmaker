@@ -30,7 +30,7 @@
 #include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogpointofcontact.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../container/vformula.h"
+#include "../../core/vformula.h"
 #include "../../visualization/vistoolpointofcontact.h"
 #include <QtCore/qmath.h>
 

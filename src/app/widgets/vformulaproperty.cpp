@@ -32,7 +32,7 @@
 #include "../../libs/vpropertyexplorer/vproperty_p.h"
 #include "vformulapropertyeditor.h"
 #include "../../libs/vpropertyexplorer/vproperties.h"
-#include "../container/vformula.h"
+#include "../core/vformula.h"
 
 enum class ChildType : char {Invalid = 0, Value = 1, Formula = 2};
 

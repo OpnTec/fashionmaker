@@ -30,7 +30,7 @@
 #include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialogarc.h"
 #include "../../libs/vgeometry/varc.h"
-#include "../container/vformula.h"
+#include "../core/vformula.h"
 #include "../../visualization/vistoolarc.h"
 
 #include <QKeyEvent>
