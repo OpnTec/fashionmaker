@@ -76,7 +76,7 @@ private:
                          const qmu::QmuTranslation &d);
 
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
-    void BiasTokens(int position, int bias, QMap<int, QString> &tokens) const;
+    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
 };
 
 #endif // VTRANSLATEVARS_H

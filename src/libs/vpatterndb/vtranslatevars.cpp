@@ -1077,7 +1077,7 @@ void VTranslateVars::CorrectionsPositions(int position, int bias, QMap<int, QStr
  * @param bias difference between original token length and translated
  * @param tokens all tokens
  */
-void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &tokens) const
+void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &tokens)
 {
     QMap<int, QString> newTokens;
     QMap<int, QString>::const_iterator i = tokens.constBegin();

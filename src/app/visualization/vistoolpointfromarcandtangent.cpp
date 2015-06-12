@@ -99,12 +99,9 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
         case 2:
         {
             int localRes = 0;
-            bool flagP1 = false;
-
             if (arc->IsIntersectLine(r1Arc))
             {
                 ++localRes;
-                flagP1 = true;
             }
 
             if (arc->IsIntersectLine(r2Arc))
