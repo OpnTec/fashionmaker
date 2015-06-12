@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vabstractmeasurements.h"
-#include "../core/vapplication.h"
 
 const QString VAbstractMeasurements::TagUnit   = QStringLiteral("unit");
 const QString VAbstractMeasurements::AttrValue = QStringLiteral("value");

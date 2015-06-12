@@ -72,6 +72,7 @@ QVariant VFormulaProperty::data (int column, int role) const
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 Qt::ItemFlags VFormulaProperty::flags(int column) const
 {
     if (column == DPC_Name || column == DPC_Data)
