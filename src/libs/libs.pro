@@ -1,5 +1,4 @@
 TEMPLATE = subdirs
-CONFIG   += ordered
 SUBDIRS = \
     qmuparser \
     vpropertyexplorer \
@@ -8,3 +7,5 @@ SUBDIRS = \
     vlayout \
     vgeometry \
     vpatterndb
+
+vgeometry.depends = ifc
