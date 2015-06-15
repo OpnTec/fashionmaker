@@ -52,9 +52,6 @@ class QStringList;
 
 extern const QString degreeSymbol;
 
-extern const QString cursorArrowOpenHand;
-extern const QString cursorArrowCloseHand;
-
 enum class Source : char { FromGui, FromFile, FromTool };
 enum class Contour : char { OpenContour, CloseContour };
 

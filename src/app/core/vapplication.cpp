@@ -609,48 +609,6 @@ void VApplication::setCurrentScene(QGraphicsScene *value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::setOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
-    {
-        oldPixmap = oldCursor->pixmap();
-    }
-    QPixmap newPixmap(pixmapPath);
-
-    QImage oldImage = oldPixmap.toImage();
-    QImage newImage = newPixmap.toImage();
-
-    if (oldImage != newImage )
-    {
-        QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::restoreOverrideCursor(const QString &pixmapPath)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
-    {
-        oldPixmap = oldCursor->pixmap();
-    }
-    QPixmap newPixmap(pixmapPath);
-
-    QImage oldImage = oldPixmap.toImage();
-    QImage newImage = newPixmap.toImage();
-
-    if (oldImage == newImage )
-    {
-        QApplication::restoreOverrideCursor();
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QStringList VApplication::LabelLanguages()
 {
     QStringList list = QStringList() << "de" // German

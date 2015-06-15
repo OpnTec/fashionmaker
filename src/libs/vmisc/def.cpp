@@ -28,6 +28,8 @@
 
 #include "def.h"
 
+#include <QApplication>
+
 // Keep synchronize all names with initialization in VApllication class!!!!!
 //measurements
 //head and neck
@@ -216,3 +218,48 @@ const QStringList builInFunctions = QStringList() << sin_F  << cos_F   << tan_F 
 const QString cm_Oprt = QStringLiteral("cm");
 const QString mm_Oprt = QStringLiteral("mm");
 const QString in_Oprt = QStringLiteral("in");
+
+const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
+const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
+    {
+        oldPixmap = oldCursor->pixmap();
+    }
+    QPixmap newPixmap(pixmapPath);
+
+    QImage oldImage = oldPixmap.toImage();
+    QImage newImage = newPixmap.toImage();
+
+    if (oldImage != newImage )
+    {
+        QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
+    }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RestoreOverrideCursor(const QString &pixmapPath)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
+    {
+        oldPixmap = oldCursor->pixmap();
+    }
+    QPixmap newPixmap(pixmapPath);
+
+    QImage oldImage = oldPixmap.toImage();
+    QImage newImage = newPixmap.toImage();
+
+    if (oldImage == newImage )
+    {
+        QApplication::restoreOverrideCursor();
+    }
+#endif
+}

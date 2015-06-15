@@ -27,12 +27,10 @@
  *************************************************************************/
 
 #include "vcontrolpointspline.h"
-#include "../tools/vabstracttool.h"
 
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 #include <QStyleOptionGraphicsItem>
-#include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -54,7 +52,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(patternUnit))));
+    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -66,7 +64,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     QPointF p1, p2;
     VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
-    controlLine->setPen(QPen(Qt::red, qApp->toPixel(WidthHairLine(patternUnit))));
+    controlLine->setPen(QPen(Qt::red, ToPixel(WidthHairLine(patternUnit), patternUnit)));
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -74,7 +72,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
 VControlPointSpline::~VControlPointSpline()
 {
     //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,17 +95,17 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
  */
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(patternUnit))));
-    VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
+    this->setPen(QPen(Qt::black, ToPixel(WidthMainLine(patternUnit), patternUnit)));
+    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(patternUnit))));
+    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
     //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
     QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
@@ -134,7 +132,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
+        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
     }
     QGraphicsEllipseItem::mousePressEvent(event);
 }
@@ -145,7 +143,7 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         //Disable cursor-arrow-closehand
-        VApplication::restoreOverrideCursor(cursorArrowCloseHand);
+        RestoreOverrideCursor(cursorArrowCloseHand);
     }
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
@@ -184,14 +182,14 @@ void VControlPointSpline::setEnabledPoint(bool enable)
 {
     if (enable == true)
     {
-        this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(patternUnit))));
+        this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         this->setFlag(QGraphicsItem::ItemIsMovable, true);
         this->setAcceptHoverEvents(true);
     }
     else
     {
-        this->setPen(QPen(Qt::gray, qApp->toPixel(WidthHairLine(patternUnit))));
+        this->setPen(QPen(Qt::gray, ToPixel(WidthHairLine(patternUnit), patternUnit)));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         this->setFlag(QGraphicsItem::ItemIsMovable, false);
         this->setAcceptHoverEvents(false);

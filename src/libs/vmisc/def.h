@@ -368,4 +368,10 @@ extern const QString cm_Oprt;
 extern const QString mm_Oprt;
 extern const QString in_Oprt;
 
+extern const QString cursorArrowOpenHand;
+extern const QString cursorArrowCloseHand;
+
+void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
+void RestoreOverrideCursor(const QString & pixmapPath);
+
 #endif // DEF_H

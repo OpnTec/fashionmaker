@@ -32,7 +32,7 @@
 #include <QGraphicsEllipseItem>
 #include <QObject>
 #include "../libs/vgeometry/vsplinepath.h"
-#include "../options.h"
+#include "../libs/vmisc/def.h"
 
 /**
  * @brief The VControlPointSpline class control spline point.

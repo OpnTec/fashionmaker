@@ -95,7 +95,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
 VToolSplinePath::~VToolSplinePath()
 {
     //Disable cursor-arrow-openhand
-    VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -412,7 +412,7 @@ void VToolSplinePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            VApplication::setOverrideCursor(cursorArrowCloseHand, 1, 1);
+            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             oldPosition = event->scenePos();
             event->accept();
         }
@@ -428,7 +428,7 @@ void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             //Disable cursor-arrow-closehand
-            VApplication::restoreOverrideCursor(cursorArrowCloseHand);
+            RestoreOverrideCursor(cursorArrowCloseHand);
         }
     }
     VAbstractSpline::mouseReleaseEvent(event);
@@ -502,7 +502,7 @@ void VToolSplinePath::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
+        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
     }
 
     VAbstractSpline::hoverEnterEvent(event);
@@ -514,7 +514,7 @@ void VToolSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         //Disable cursor-arrow-openhand
-        VApplication::restoreOverrideCursor(cursorArrowOpenHand);
+        RestoreOverrideCursor(cursorArrowOpenHand);
     }
 
     VAbstractSpline::hoverLeaveEvent(event);

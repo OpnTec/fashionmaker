@@ -7,6 +7,8 @@
 # File with common stuff for whole project
 include(../../../Valentina.pri)
 
+QT += widgets
+
 # Name of library
 TARGET = vmisc
 
