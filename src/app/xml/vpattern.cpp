@@ -38,7 +38,7 @@
 #include "../libs/ifc/exception/vexceptionemptyparameter.h"
 #include "../libs/ifc/exception/vexceptionundo.h"
 #include "../libs/ifc/xml/vpatternconverter.h"
-#include "../core/undoevent.h"
+#include "../libs/vmisc/undoevent.h"
 #include "../core/vsettings.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
