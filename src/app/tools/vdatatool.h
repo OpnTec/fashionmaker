@@ -30,7 +30,7 @@
 #define VDATATOOL_H
 
 #include "../libs/vpatterndb/vcontainer.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)
 

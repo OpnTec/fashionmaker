@@ -32,7 +32,7 @@
 #include "../libs/ifc/ifcdef.h"
 #include "../libs/vgeometry/vgeometrydef.h"
 #include "../libs/qmuparser/qmudef.h"
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 
 #ifdef Q_OS_WIN32
 #   if defined( Q_CC_MSVC )        // MSVC USED

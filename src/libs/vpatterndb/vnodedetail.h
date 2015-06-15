@@ -32,7 +32,7 @@
 #include <QMetaType>
 #include <QSharedDataPointer>
 
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 
 class VNodeDetailData;
 

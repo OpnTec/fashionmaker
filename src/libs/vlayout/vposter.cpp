@@ -35,7 +35,7 @@
 #   include <QtMath>
 #endif
 
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPoster::VPoster(const QPrinter *printer)

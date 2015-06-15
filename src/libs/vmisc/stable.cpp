@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vinternalvariable.h
+ **  @file   stable.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef VINTERNALVARIABLE_H
-#define VINTERNALVARIABLE_H
-
-#include <QString>
-#include <QSharedDataPointer>
-#include "../vmisc/def.h"
-
-class VInternalVariableData;
-
-class VInternalVariable
-{
-public:
-    VInternalVariable();
-    VInternalVariable(const VInternalVariable &var);
-    VInternalVariable &operator=(const VInternalVariable &var);
-    virtual ~VInternalVariable();
-
-    qreal        GetValue() const;
-    qreal*       GetValue();
-    void         SetValue(const qreal &value);
-
-    QString      GetName() const;
-    void         SetName(const QString &name);
-
-    VarType      GetType() const;
-    void         SetType(const VarType &type);
-
-    virtual bool Filter(quint32 id);
-
-    virtual bool IsNotUsed() const;
-private:
-    QSharedDataPointer<VInternalVariableData> d;
-};
-
-#endif // VINTERNALVARIABLE_H
+// Build the precompiled headers.
+#include "stable.h"

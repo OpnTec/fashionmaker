@@ -15,7 +15,8 @@ DEPENDPATH +=  \
             ../src/libs/vobj \
             ../src/libs/vlayout \
 			../src/libs/vgeometry \
-			../src/libs/vpatterndb
+			../src/libs/vpatterndb \
+			../src/libs/vmisc
 
 include(../src/app/app.pri)
 include(../src/libs/qmuparser/qmuparser.pri)

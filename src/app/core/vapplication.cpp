@@ -34,7 +34,7 @@
 #include "../libs/ifc/exception/vexceptionwrongid.h"
 #include "vmaingraphicsview.h"
 #include "../version.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 
 #include <QDebug>
 #include <QDir>

@@ -25,7 +25,6 @@ CONFIG -= debug_and_release debug_and_release_target
 DEFINES += QT_MESSAGELOGCONTEXT
 
 include(vgeometry.pri)
-include(../../utils/utils.pri)
 
 # This is static library so no need in "make install"
 

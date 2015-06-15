@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vinternalvariable.h
+ **  @file   stable.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   10 12, 2014
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,27 @@
  **
  *************************************************************************/
 
-#ifndef VINTERNALVARIABLE_H
-#define VINTERNALVARIABLE_H
+#ifndef STABLE_H
+#define STABLE_H
 
-#include <QString>
-#include <QSharedDataPointer>
-#include "../vmisc/def.h"
+/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
+#ifndef __clang__
+#pragma message("Compiling precompiled headers for VMisc library.\n")
+#endif
 
-class VInternalVariableData;
+/* Add C includes here */
 
-class VInternalVariable
-{
-public:
-    VInternalVariable();
-    VInternalVariable(const VInternalVariable &var);
-    VInternalVariable &operator=(const VInternalVariable &var);
-    virtual ~VInternalVariable();
+#if defined __cplusplus
+/* Add C++ includes here */
 
-    qreal        GetValue() const;
-    qreal*       GetValue();
-    void         SetValue(const qreal &value);
+#ifdef QT_CORE_LIB
+#include <QtCore>
+#endif
 
-    QString      GetName() const;
-    void         SetName(const QString &name);
+#ifdef QT_GUI_LIB
+#   include <QtGui>
+#endif
 
-    VarType      GetType() const;
-    void         SetType(const VarType &type);
+#endif/*__cplusplus*/
 
-    virtual bool Filter(quint32 id);
-
-    virtual bool IsNotUsed() const;
-private:
-    QSharedDataPointer<VInternalVariableData> d;
-};
-
-#endif // VINTERNALVARIABLE_H
+#endif // STABLE_H

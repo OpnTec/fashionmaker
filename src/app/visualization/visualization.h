@@ -34,7 +34,7 @@
 
 #include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 #include "../../libs/vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)

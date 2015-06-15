@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vposition.h"
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 
 #include <QPointF>
 #include <QRectF>

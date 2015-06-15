@@ -28,7 +28,7 @@
 
 #include "vtranslatevars.h"
 #include "calculator.h"
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 #include "../vgeometry/vgeometrydef.h"
 
 using namespace qmu;

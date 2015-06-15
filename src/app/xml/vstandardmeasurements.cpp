@@ -29,6 +29,7 @@
 #include "vstandardmeasurements.h"
 #include <QDebug>
 #include "../core/vapplication.h"
+#include "../../libs/vmisc/def.h"
 
 const QString VStandardMeasurements::TagDescription      = QStringLiteral("description");
 const QString VStandardMeasurements::TagId               = QStringLiteral("id");

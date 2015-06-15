@@ -32,7 +32,7 @@
 #include <QUndoCommand>
 #include <QDomElement>
 
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 #include "../xml/vpattern.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)

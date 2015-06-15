@@ -44,7 +44,7 @@
 #include "vtooloptionspropertybrowser.h"
 #include "options.h"
 #include "../libs/ifc/xml/vpatternconverter.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 
 #include <QInputDialog>
 #include <QDebug>

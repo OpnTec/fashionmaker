@@ -1,18 +1,16 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-01-02T15:39:01
+# Project created by QtCreator 2015-06-15T14:07:14
 #
 #-------------------------------------------------
 
 # File with common stuff for whole project
 include(../../../Valentina.pri)
 
-QT += core gui widgets printsupport
-
 # Name of library
-TARGET = vlayout
+TARGET = vmisc
 
-# We want create library
+# We want to create a library
 TEMPLATE = lib
 
 CONFIG += \
@@ -26,7 +24,7 @@ CONFIG -= debug_and_release debug_and_release_target
 # We need this information also in release builds. For this need define QT_MESSAGELOGCONTEXT.
 DEFINES += QT_MESSAGELOGCONTEXT
 
-include(vlayout.pri)
+include(vmisc.pri)
 
 # This is static library so no need in "make install"
 
@@ -71,10 +69,10 @@ CONFIG(debug, debug|release){
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
 
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+        # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
         # want them in global list. Compromise decision delete them from local list.
         QMAKE_CXXFLAGS -= \
-            -Wundefined-reinterpret-cast
+            -Wmissing-prototypes
         }
     } else {
         *-g++{
@@ -101,6 +99,3 @@ CONFIG(debug, debug|release){
         }
     }
 }
-
-RESOURCES += \
-    share/icons.qrc

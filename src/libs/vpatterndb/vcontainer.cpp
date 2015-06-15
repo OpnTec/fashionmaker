@@ -29,7 +29,7 @@
 #include "vcontainer.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 #include "vtranslatevars.h"
 
 #include <QLineF>

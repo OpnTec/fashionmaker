@@ -46,7 +46,6 @@ UI_DIR = uic
 
 # Suport subdirectories. Just better project code tree.
 include(app.pri)
-include(../utils/utils.pri)
 
 # This include path help promoute VMainGraphicsView on main window. Without it compiler can't find path to custom view
 INCLUDEPATH += "$${PWD}/widgets"
@@ -600,7 +599,7 @@ DEPENDPATH += $$PWD/../libs/vgeometry
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
-#VPatternDB staic library
+#VPatternDB static library
 unix|win32: LIBS += -L$$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/ -lvpatterndb
 
 INCLUDEPATH += $$PWD/../libs/vpatterndb
@@ -608,6 +607,15 @@ DEPENDPATH += $$PWD/../libs/vpatterndb
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+
+#VMisc static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vmisc/$${DESTDIR}/ -lvmisc
+
+INCLUDEPATH += $$PWD/../libs/vmisc
+DEPENDPATH += $$PWD/../libs/vmisc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vmisc/$${DESTDIR}/vmisc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vmisc/$${DESTDIR}/libvmisc.a
 
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing
