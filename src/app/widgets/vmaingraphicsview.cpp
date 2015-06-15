@@ -32,7 +32,6 @@
 #include <QWheelEvent>
 #include <QApplication>
 #include <QScrollBar>
-#include "../tools/vabstracttool.h"
 #include "../visualization/vsimplecurve.h"
 
 #include <QGraphicsItem>
@@ -193,7 +192,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
 void VMainGraphicsView::ZoomIn()
 {
     scale(1.1, 1.1);
-    VAbstractTool::NewSceneRect(this->scene(), this);
+    VMainGraphicsView::NewSceneRect(this->scene(), this);
     emit NewFactor(1.1);
 }
 
@@ -201,7 +200,7 @@ void VMainGraphicsView::ZoomIn()
 void VMainGraphicsView::ZoomOut()
 {
     scale(1.0/1.1, 1.0/1.1);
-    VAbstractTool::NewSceneRect(this->scene(), this);
+    VMainGraphicsView::NewSceneRect(this->scene(), this);
     emit NewFactor(1.0/1.1);
 }
 
@@ -254,7 +253,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
                     }
                     for (int i = 0; i < list.size(); ++i)
                     {
-                        if (qApp->getCurrentScene()->items().contains(list.at(i)))
+                        if (this->scene()->items().contains(list.at(i)))
                         {
                             if (list.at(i)->type() <= VSimpleCurve::Type &&
                                 list.at(i)->type() > QGraphicsItem::UserType)
@@ -296,4 +295,38 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 void VMainGraphicsView::setShowToolOptions(bool value)
 {
     showToolOptions = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
+ * @param sc scene.
+ * @param view view.
+ */
+void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
+{
+    SCASSERT(sc != nullptr);
+    SCASSERT(view != nullptr);
+
+    const QRectF rect = sc->itemsBoundingRect();
+    const QRect rec0 = QRect(0, 0, view->rect().width()-2, view->rect().height()-2);
+    const QTransform t = view->transform();
+
+    QRectF rec1;
+    if (t.m11() < 1)
+    {
+        const qreal width = rec0.width()/t.m11();
+        const qreal height = rec0.height()/t.m22();
+        rec1 = QRect(0, 0, static_cast<qint32>(width), static_cast<qint32>(height));
+
+        rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
+        const QPolygonF polygone = view->mapToScene(rec1.toRect());
+        rec1 = polygone.boundingRect();
+    }
+    else
+    {
+        rec1 = rec0;
+    }
+    rec1 = rec1.united(rect.toRect());
+    sc->setSceneRect(rec1);
 }

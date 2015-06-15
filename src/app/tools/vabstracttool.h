@@ -53,7 +53,6 @@ class VAbstractTool: public VDataTool
 public:
     VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractTool();
-    static void             NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
     quint32                 getId() const;
     static const QString    AttrType;
     static const QString    AttrMx;

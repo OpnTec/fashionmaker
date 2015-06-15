@@ -72,7 +72,7 @@ void MoveDetail::undo()
         emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
+        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {
@@ -98,7 +98,7 @@ void MoveDetail::redo()
         redoFlag = true;
 
         QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
+        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

@@ -104,6 +104,8 @@ public:
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
 
+    static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
+
 signals:
     /**
      * @brief NewFactor send new scale factor.

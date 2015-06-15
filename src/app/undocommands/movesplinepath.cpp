@@ -95,7 +95,7 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
         emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
+        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

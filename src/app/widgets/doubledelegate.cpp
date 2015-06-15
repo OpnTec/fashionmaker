@@ -28,7 +28,7 @@
 
 #include "doubledelegate.h"
 #include <QDoubleSpinBox>
-#include "../options.h"
+#include "../../utils/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

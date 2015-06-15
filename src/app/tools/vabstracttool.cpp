@@ -126,43 +126,6 @@ VAbstractTool::~VAbstractTool()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief NewSceneRect calculate scene rect what contains all items and doesn't less that size of scene view.
- * @param sc scene.
- * @param view view.
- */
-void VAbstractTool::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
-{
-    SCASSERT(sc != nullptr);
-    SCASSERT(view != nullptr);
-
-    QRectF rect = sc->itemsBoundingRect();
-
-    QRect  rec0 = view->rect();
-    rec0 = QRect(0, 0, rec0.width()-2, rec0.height()-2);
-
-    QTransform t = view->transform();
-
-    QRectF rec1;
-    if (t.m11() < 1)
-    {
-        qreal width = rec0.width()/t.m11();
-        qreal height = rec0.height()/t.m22();
-        rec1 = QRect(0, 0, static_cast<qint32>(width), static_cast<qint32>(height));
-
-        rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
-        QPolygonF polygone =  view->mapToScene(rec1.toRect());
-        rec1 = polygone.boundingRect();
-    }
-    else
-    {
-        rec1 = rec0;
-    }
-    rec1 = rec1.united(rect.toRect());
-    sc->setSceneRect(rec1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief DeleteTool full delete object form scene and file.
  */
 void VAbstractTool::DeleteTool(bool ask)

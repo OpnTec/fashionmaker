@@ -81,7 +81,7 @@ void AddToCalc::undo()
         doc->setCursor(0);
     }
     emit NeedFullParsing();
-    VAbstractTool::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
     doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
 }
 
@@ -121,7 +121,7 @@ void AddToCalc::redo()
         return;
     }
     RedoFullParsing();
-    VAbstractTool::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
+    VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

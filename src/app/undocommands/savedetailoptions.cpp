@@ -71,7 +71,7 @@ void SaveDetailOptions::undo()
         emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
+        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {
@@ -108,7 +108,7 @@ void SaveDetailOptions::redo()
         emit NeedLiteParsing(Document::LiteParse);
 
         QList<QGraphicsView*> listV = scene->views();
-        VAbstractTool::NewSceneRect(scene, listV[0]);
+        VMainGraphicsView::NewSceneRect(scene, listV[0]);
     }
     else
     {

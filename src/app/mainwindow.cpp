@@ -2035,8 +2035,8 @@ void MainWindow::New()
         }
 
         //Set scene size to size scene view
-        VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-        VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+        VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+        VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
         ToolBarOption();
 
         AddPP(patternPieceName, path);
@@ -2782,8 +2782,8 @@ void MainWindow::LoadPattern(const QString &fileName)
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     // On this stage scene empty. Fit scene size to view size
-    VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-    VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup++; // turn checking on
@@ -3102,8 +3102,8 @@ void MainWindow::ZoomFirstShow()
     ActionDraw(true);
     ui->view->ZoomFitBest();
 
-    VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-    VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
     ActionDetails(true);
     ui->view->ZoomFitBest();

@@ -123,7 +123,7 @@ void MoveLabel::Do(double mx, double my)
         emit NeedLiteParsing(Document::LitePPParse);
 
         QList<QGraphicsView*> list = scene->views();
-        VAbstractTool::NewSceneRect(scene, list[0]);
+        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

@@ -34,6 +34,7 @@
 #include <QStringList>
 
 enum class NodeDetail : char { Contour, Modeling };
+enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
 
 enum class Tool : unsigned char
 {
