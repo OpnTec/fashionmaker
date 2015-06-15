@@ -30,7 +30,7 @@
 #include "ui_dialogstandardmeasurements.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
-#include "../../core/vsettings.h"
+#include "../../libs/vmisc/vsettings.h"
 #include "../../libs/vpatterndb/vcontainer.h"
 #include "../vmisc/logging.h"
 

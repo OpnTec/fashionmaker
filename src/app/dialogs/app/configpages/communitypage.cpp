@@ -29,7 +29,7 @@
 #include "communitypage.h"
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
-#include "../../../core/vsettings.h"
+#include "../../../../libs/vmisc/vsettings.h"
 #include <QGroupBox>
 #include <QLabel>
 #include <QSettings>

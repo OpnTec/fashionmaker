@@ -33,7 +33,7 @@
 #include "../../libs/vwidgets/vwidgetpopup.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
-#include "../../core/vsettings.h"
+#include "../../libs/vmisc/vsettings.h"
 
 #include <QFileDialog>
 #include <QDir>

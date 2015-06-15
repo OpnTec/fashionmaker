@@ -39,7 +39,7 @@
 #include "../libs/ifc/exception/vexceptionundo.h"
 #include "../libs/ifc/xml/vpatternconverter.h"
 #include "../libs/vmisc/undoevent.h"
-#include "../core/vsettings.h"
+#include "../libs/vmisc/vsettings.h"
 #include "vstandardmeasurements.h"
 #include "vindividualmeasurements.h"
 #include "../../libs/qmuparser/qmuparsererror.h"

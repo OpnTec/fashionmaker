@@ -30,7 +30,7 @@
 #include "../libs/vpatterndb/calculator.h"
 #include "../libs/vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
-#include "../core/vsettings.h"
+#include "../libs/vmisc/vsettings.h"
 #include <QDebug>
 
 //VFormula

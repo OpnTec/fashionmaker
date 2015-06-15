@@ -30,7 +30,7 @@
 #include "ui_dialoglayoutsettings.h"
 #include "../../core/vapplication.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
-#include "../../core/vsettings.h"
+#include "../../libs/vmisc/vsettings.h"
 #include "../../libs/vlayout/vlayoutgenerator.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)

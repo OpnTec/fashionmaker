@@ -39,7 +39,7 @@
 #include "xml/vindividualmeasurements.h"
 #include "core/vapplication.h"
 #include "../libs/vmisc/undoevent.h"
-#include "core/vsettings.h"
+#include "../libs/vmisc/vsettings.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
