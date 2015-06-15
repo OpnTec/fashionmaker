@@ -2,8 +2,6 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
-    $$PWD/vgraphicssimpletextitem.h \
-    $$PWD/vcontrolpointspline.h \
     $$PWD/visline.h \
     $$PWD/vistoolline.h \
     $$PWD/vistoolendline.h \
@@ -33,8 +31,6 @@ HEADERS += \
     $$PWD/vistoolarcwithlength.h
 
 SOURCES += \
-    $$PWD/vgraphicssimpletextitem.cpp \
-    $$PWD/vcontrolpointspline.cpp \
     $$PWD/visline.cpp \
     $$PWD/vistoolline.cpp \
     $$PWD/vistoolendline.cpp \

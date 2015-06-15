@@ -33,6 +33,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
+#include <QGraphicsScene>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -31,7 +31,7 @@
 
 #include <QGraphicsSimpleTextItem>
 #include <QObject>
-#include "../libs/vmisc/def.h"
+#include "../vmisc/def.h"
 
 /**
  * @brief The VGraphicsSimpleTextItem class pointer label.
