@@ -28,7 +28,7 @@
 
 #include "dialognormal.h"
 #include "ui_dialognormal.h"
-#include "../visualization/vistoolnormal.h"
+#include "../../visualization/vistoolnormal.h"
 #include "../../../libs/vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 #include "dialogeditwrongformula.h"

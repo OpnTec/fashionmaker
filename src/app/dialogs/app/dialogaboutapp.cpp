@@ -33,7 +33,7 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include "../../options.h"
-#include "../core/vapplication.h"
+#include "../../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :

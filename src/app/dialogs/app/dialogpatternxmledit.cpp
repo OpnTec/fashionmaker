@@ -28,7 +28,7 @@
 
 #include "dialogpatternxmledit.h"
 #include "ui_dialogpatternxmledit.h"
-#include "../core/vapplication.h"
+#include "../../core/vapplication.h"
 
 #include <QInputDialog>
 #include <QMessageBox>

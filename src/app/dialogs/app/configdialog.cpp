@@ -33,7 +33,7 @@
 #include <QVBoxLayout>
 #include <QStackedWidget>
 #include <QCloseEvent>
-#include "../core/vapplication.h"
+#include "../../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :

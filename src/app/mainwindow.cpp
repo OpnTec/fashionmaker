@@ -41,7 +41,7 @@
 #include "../libs/vmisc/undoevent.h"
 #include "core/vsettings.h"
 #include "undocommands/renamepp.h"
-#include "vtooloptionspropertybrowser.h"
+#include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
 #include "../libs/ifc/xml/vpatternconverter.h"
 #include "../vmisc/logging.h"

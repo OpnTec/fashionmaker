@@ -28,7 +28,7 @@
 
 #include "dialogmeasurements.h"
 #include "ui_dialogmeasurements.h"
-#include "../core/vapplication.h"
+#include "../../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMeasurements::DialogMeasurements(QWidget *parent) :

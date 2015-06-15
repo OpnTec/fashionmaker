@@ -28,7 +28,7 @@
 
 #include "dialogsavelayout.h"
 #include "ui_dialogsavelayout.h"
-#include "../options.h"
+#include "../../options.h"
 #include "../../core/vapplication.h"
 #include "../../core/vsettings.h"
 
