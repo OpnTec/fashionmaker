@@ -28,7 +28,7 @@
 
 #include "textdelegate.h"
 #include <QLineEdit>
-#include "../libs/vpatterndb/vcontainer.h"
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

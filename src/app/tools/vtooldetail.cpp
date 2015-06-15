@@ -30,7 +30,7 @@
 #include "nodeDetails/nodedetails.h"
 #include "../libs/vgeometry/varc.h"
 #include "../libs/vgeometry/vsplinepath.h"
-#include "../widgets/vmaingraphicsscene.h"
+#include "../libs/vwidgets/vmaingraphicsscene.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"
 #include <QKeyEvent>

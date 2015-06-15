@@ -30,7 +30,7 @@
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
 #include "../../../core/vsettings.h"
-#include "../../../widgets/vmaingraphicsview.h"
+#include "../../../../libs/vwidgets/vmaingraphicsview.h"
 #include <QGroupBox>
 #include <QLabel>
 #include <QSettings>

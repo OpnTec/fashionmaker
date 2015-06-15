@@ -30,7 +30,7 @@
 #include "ui_dialogalongline.h"
 #include "../../visualization/vistoolalongline.h"
 #include "../../tools/vabstracttool.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../../libs/vwidgets/vmaingraphicsscene.h"
 #include "dialogeditwrongformula.h"
 
 #include <QPushButton>

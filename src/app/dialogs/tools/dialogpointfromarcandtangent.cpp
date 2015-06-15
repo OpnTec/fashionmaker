@@ -32,7 +32,7 @@
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolpointfromarcandtangent.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../../libs/vwidgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *data, const quint32 &toolId,

@@ -4,7 +4,6 @@
 HEADERS += \
     $$PWD/vgraphicssimpletextitem.h \
     $$PWD/vcontrolpointspline.h \
-    $$PWD/vsimplecurve.h \
     $$PWD/visline.h \
     $$PWD/vistoolline.h \
     $$PWD/vistoolendline.h \
@@ -36,7 +35,6 @@ HEADERS += \
 SOURCES += \
     $$PWD/vgraphicssimpletextitem.cpp \
     $$PWD/vcontrolpointspline.cpp \
-    $$PWD/vsimplecurve.cpp \
     $$PWD/visline.cpp \
     $$PWD/vistoolline.cpp \
     $$PWD/vistoolendline.cpp \

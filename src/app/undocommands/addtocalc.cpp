@@ -30,8 +30,8 @@
 #include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
-#include "../widgets/vmaingraphicsscene.h"
-#include "../widgets/vmaingraphicsview.h"
+#include "../libs/vwidgets/vmaingraphicsscene.h"
+#include "../libs/vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)

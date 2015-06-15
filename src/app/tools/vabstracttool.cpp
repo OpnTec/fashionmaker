@@ -37,7 +37,7 @@
 #include "../core/vapplication.h"
 #include "../libs/vgeometry/vpointf.h"
 #include "../undocommands/savetooloptions.h"
-#include "../widgets/vmaingraphicsview.h"
+#include "../libs/vwidgets/vmaingraphicsview.h"
 #include "../core/vsettings.h"
 
 const QString VAbstractTool::AttrType        = QStringLiteral("type");

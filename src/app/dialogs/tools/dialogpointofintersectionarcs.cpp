@@ -32,7 +32,7 @@
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolpointofintersectionarcs.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../../libs/vwidgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId,

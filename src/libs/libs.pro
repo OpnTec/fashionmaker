@@ -7,6 +7,7 @@ SUBDIRS = \
     vlayout \
     vgeometry \
     vpatterndb \
-    vmisc
+    vmisc \
+    vwidgets
 
 vgeometry.depends = ifc

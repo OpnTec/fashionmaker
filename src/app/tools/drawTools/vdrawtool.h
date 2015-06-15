@@ -34,7 +34,7 @@
 #include <QGraphicsSceneContextMenuEvent>
 #include <QGraphicsView>
 #include "../../dialogs/tools/dialogtool.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../../libs/vwidgets/vmaingraphicsscene.h"
 #include "../../xml/vpattern.h"
 
 /**

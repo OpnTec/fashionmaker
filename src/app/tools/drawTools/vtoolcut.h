@@ -30,7 +30,7 @@
 #define VTOOLCUT_H
 
 #include "vtoolpoint.h"
-#include "../../visualization/vsimplecurve.h"
+#include "../../libs/vwidgets/vsimplecurve.h"
 #include "vabstractspline.h"
 
 class VFormula;

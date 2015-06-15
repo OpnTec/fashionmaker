@@ -31,7 +31,7 @@
 
 #include <QApplication>
 #include "../options.h"
-#include "../widgets/vmaingraphicsview.h"
+#include "../libs/vwidgets/vmaingraphicsview.h"
 #include "../libs/vpatterndb/vtranslatevars.h"
 #include "vsettings.h"
 

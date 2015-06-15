@@ -32,7 +32,7 @@
 #include <QWheelEvent>
 #include <QApplication>
 #include <QScrollBar>
-#include "../visualization/vsimplecurve.h"
+#include "vsimplecurve.h"
 
 #include <QGraphicsItem>
 #include <QMouseEvent>

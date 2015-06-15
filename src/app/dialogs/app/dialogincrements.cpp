@@ -28,9 +28,9 @@
 
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
-#include "../../widgets/doubledelegate.h"
-#include "../../widgets/textdelegate.h"
-#include "../../widgets/vwidgetpopup.h"
+#include "../../libs/vwidgets/doubledelegate.h"
+#include "../../libs/vwidgets/textdelegate.h"
+#include "../../libs/vwidgets/vwidgetpopup.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
 #include "../../core/vsettings.h"

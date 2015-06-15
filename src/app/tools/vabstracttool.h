@@ -32,7 +32,7 @@
 #include "vdatatool.h"
 #include "../xml/vpattern.h"
 #include "../core/vapplication.h"
-#include "../widgets/vmaingraphicsscene.h"
+#include "../libs/vwidgets/vmaingraphicsscene.h"
 #include "../visualization/visualization.h"
 
 class QDomElement;

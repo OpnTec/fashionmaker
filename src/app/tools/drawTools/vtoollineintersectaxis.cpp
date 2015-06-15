@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vtoollineintersectaxis.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../../libs/vwidgets/vmaingraphicsscene.h"
 #include "../../libs/vpatterndb/calculator.h"
 #include "../../dialogs/tools/dialoglineintersectaxis.h"
 #include "../../dialogs/tools/dialogeditwrongformula.h"

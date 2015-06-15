@@ -33,7 +33,7 @@
 #include "../../libs/vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolline.h"
 #include "../../core/vapplication.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../../libs/vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------

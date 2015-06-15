@@ -30,8 +30,8 @@
 #define DIALOGTOOL_H
 
 #include "../../core/vapplication.h"
-#include "../vmisc/logging.h"
-#include "../../widgets/vmaingraphicsscene.h"
+#include "../libs/vmisc/logging.h"
+#include "../libs/vwidgets/vmaingraphicsscene.h"
 #include "../../visualization/visualization.h"
 #include "../../xml/vpattern.h"
 
