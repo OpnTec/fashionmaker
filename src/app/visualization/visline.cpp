@@ -120,7 +120,8 @@ QLineF VisLine::Axis(const QPointF &p1, const QPointF &p2) const
 //---------------------------------------------------------------------------------------------------------------------
 void VisLine::InitPen()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
+                      lineStyle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

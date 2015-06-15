@@ -44,16 +44,17 @@
  * @param parent parent object.
  */
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
-                                         const QPointF &controlPoint, const QPointF &splinePoint,
+                                         const QPointF &controlPoint, const QPointF &splinePoint, Unit patternUnit,
                                          QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position)
+    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position),
+      patternUnit(patternUnit)
 {
     //create circle
     radius = (1.5/*mm*/ / 25.4) * PrintDPI;
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
+    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(patternUnit))));
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -65,7 +66,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
     QPointF p1, p2;
     VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
     controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
-    controlLine->setPen(QPen(Qt::red, qApp->toPixel(qApp->widthHairLine())));
+    controlLine->setPen(QPen(Qt::red, qApp->toPixel(WidthHairLine(patternUnit))));
     controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -96,7 +97,7 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
  */
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+    this->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(patternUnit))));
     VApplication::setOverrideCursor(cursorArrowOpenHand, 1, 1);
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
@@ -104,7 +105,7 @@ void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
+    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(patternUnit))));
     //Disable cursor-arrow-openhand
     VApplication::restoreOverrideCursor(cursorArrowOpenHand);
     QGraphicsEllipseItem::hoverLeaveEvent(event);
@@ -183,14 +184,14 @@ void VControlPointSpline::setEnabledPoint(bool enable)
 {
     if (enable == true)
     {
-        this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())));
+        this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(patternUnit))));
         this->setFlag(QGraphicsItem::ItemIsSelectable, true);
         this->setFlag(QGraphicsItem::ItemIsMovable, true);
         this->setAcceptHoverEvents(true);
     }
     else
     {
-        this->setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())));
+        this->setPen(QPen(Qt::gray, qApp->toPixel(WidthHairLine(patternUnit))));
         this->setFlag(QGraphicsItem::ItemIsSelectable, false);
         this->setFlag(QGraphicsItem::ItemIsMovable, false);
         this->setAcceptHoverEvents(false);

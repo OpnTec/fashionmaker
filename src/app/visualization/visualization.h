@@ -35,10 +35,9 @@
 #include "../core/vapplication.h"
 #include "../widgets/vmaingraphicsscene.h"
 #include "../../utils/logging.h"
+#include "../../libs/vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
-
-class VContainer;
 
 class Visualization : public QObject
 {
@@ -99,7 +98,7 @@ protected:
     Item         *InitItem(const QColor &color, QGraphicsItem *parent)
     {
         Item *item = new Item(parent);
-        item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+        item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*data->GetPatternUnit()))/factor));
         item->setZValue(1);
         item->setFlags(QGraphicsItem::ItemStacksBehindParent);
         item->setVisible(false);

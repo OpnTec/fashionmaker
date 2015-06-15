@@ -75,7 +75,8 @@ void VAbstractSpline::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor, Qt::SolidLine,
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
                       Qt::RoundCap));
     emit setEnabledPoint(enabled);
 }
@@ -119,7 +120,8 @@ void VAbstractSpline::SetFactor(qreal factor)
 void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor, Qt::SolidLine,
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor, Qt::SolidLine,
                       Qt::RoundCap));
     this->setPath(ToolPath(PathDirection::Show));
     isHovered = true;
@@ -135,7 +137,8 @@ void VAbstractSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     if (detailsMode)
     {
         this->setPath(ToolPath(PathDirection::Show));
@@ -244,10 +247,12 @@ void VAbstractSpline::setEnabled(bool enabled)
     QGraphicsPathItem::setEnabled(enabled);
     if (enabled)
     {
-        setPen(QPen(QColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
+        setPen(QPen(QColor(lineColor),
+                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
     else
     {
-        setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())/factor));
+        setPen(QPen(Qt::gray,
+                    qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
 }

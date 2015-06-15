@@ -61,6 +61,9 @@ static const quint32 null_id = 0;
 
 extern const qreal PrintDPI;
 
+qreal WidthMainLine(Unit patternUnit);
+qreal WidthHairLine(Unit patternUnit);
+
 //---------------------------------------------------------------------------------------------------------------------
 inline double ToPixel(double val, const Unit &unit)
 {

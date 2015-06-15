@@ -77,8 +77,6 @@ public:
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     QString            translationsPath() const;
-    qreal              widthMainLine() const;
-    qreal              widthHairLine() const;
 
     template <typename T>
     QString            LocaleToString(const T &value)
@@ -133,8 +131,6 @@ private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
     MeasurementsType   _patternType;
-    qreal              _widthMainLine;
-    qreal              _widthHairLine;
     VTranslateVars     *trVars;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
@@ -202,18 +198,6 @@ inline MeasurementsType VApplication::patternType() const
 inline void VApplication::setPatternType(const MeasurementsType &patternType)
 {
     _patternType = patternType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qreal VApplication::widthMainLine() const
-{
-    return _widthMainLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qreal VApplication::widthHairLine() const
-{
-    return _widthHairLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

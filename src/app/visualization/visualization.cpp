@@ -109,7 +109,7 @@ QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsIte
     QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
     point->setZValue(1);
     point->setBrush(QBrush(Qt::NoBrush));
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor));
+    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor));
     point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
     point->setVisible(false);
@@ -169,7 +169,7 @@ void Visualization::DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, c
     SCASSERT (point != nullptr);
 
     point->setPos(pos);
-    point->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
+    point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
     point->setVisible(true);
 }
 
@@ -178,7 +178,7 @@ void Visualization::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, co
 {
     SCASSERT (lineItem != nullptr);
 
-    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
+    lineItem->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
     lineItem->setLine(line);
     lineItem->setVisible(true);
 }
@@ -189,7 +189,8 @@ void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &pa
 {
     SCASSERT (pathItem != nullptr);
 
-    pathItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style, cap));
+    pathItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style,
+                          cap));
     pathItem->setPath(path);
     pathItem->setVisible(true);
 }

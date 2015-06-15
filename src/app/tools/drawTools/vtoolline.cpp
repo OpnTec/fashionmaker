@@ -62,7 +62,8 @@ VToolLine::VToolLine(VPattern *doc, VContainer *data, quint32 id, quint32 firstP
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                      LineStyleToPenStyle(typeLine)));
 
     ToolCreation(typeCreation);
 }
@@ -218,7 +219,8 @@ void VToolLine::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
-    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor,
+    this->setPen(QPen(CorrectColor(baseColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
 }
 
@@ -270,7 +272,8 @@ void VToolLine::RefreshDataInFile()
 void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthMainLine())/factor,
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
 }
 
@@ -284,7 +287,8 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (vis == nullptr)
     {
-        this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+        this->setPen(QPen(CorrectColor(lineColor),
+                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     }
 }

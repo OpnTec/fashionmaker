@@ -43,7 +43,8 @@ VisPath::~VisPath()
 //---------------------------------------------------------------------------------------------------------------------
 void VisPath::InitPen()
 {
-    this->setPen(QPen(mainColor, qApp->toPixel(qApp->widthHairLine())/factor, lineStyle));
+    this->setPen(QPen(mainColor, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor,
+                      lineStyle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

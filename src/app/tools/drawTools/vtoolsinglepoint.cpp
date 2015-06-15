@@ -53,7 +53,7 @@ VToolSinglePoint::VToolSinglePoint (VPattern *doc, VContainer *data, quint32 id,
     :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
 {
     baseColor = Qt::red;
-    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, false);
@@ -258,7 +258,7 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolSinglePoint::SetColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
-    lineName->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor));
+    lineName->setPen(QPen(color, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

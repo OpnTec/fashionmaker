@@ -31,7 +31,7 @@
 
 #include <QGraphicsPathItem>
 #include "../libs/vgeometry/vabstractcurve.h"
-#include "../options.h"
+#include "../../utils/def.h"
 
 enum class SimpleCurvePoint : char { FirstPoint, ForthPoint };
 
@@ -42,7 +42,7 @@ class VSimpleCurve : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint curvePosition,
+    VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint curvePosition, Unit patternUnit,
                  qreal *factor = nullptr, QObject *parent = 0);
     void            ChangedActivDraw(const bool &flag);
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
@@ -79,6 +79,8 @@ private:
     SimpleCurvePoint  curvePosition;
 
     bool              enabled;
+
+    Unit              patternUnit;
 
     QColor CorrectColor(const QColor &color) const;
 };

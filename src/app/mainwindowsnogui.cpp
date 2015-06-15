@@ -400,8 +400,8 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
             QPainter painter(&image);
             painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
             painter.setRenderHint(QPainter::Antialiasing, true);
-            painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
-                                Qt::RoundJoin));
+            painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                                Qt::RoundCap, Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
             scenes.at(i)->render(&painter);
             painter.end();
@@ -508,8 +508,8 @@ void MainWindowsNoGUI::SvgFile(const QString &name, int i) const
         painter.begin(&generator);
         painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
         painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine()), Qt::SolidLine, Qt::RoundCap,
-                            Qt::RoundJoin));
+        painter.setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                            Qt::RoundCap, Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
         scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
@@ -533,8 +533,8 @@ void MainWindowsNoGUI::PngFile(const QString &name, int i) const
         QPainter painter(&image);
         painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
         painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
-                            Qt::RoundJoin));
+        painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                            Qt::RoundCap, Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
         scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
         image.save(name);
@@ -577,8 +577,8 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         }
         painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
         painter.setRenderHint(QPainter::Antialiasing, true);
-        painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
-                            Qt::RoundJoin));
+        painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                            Qt::RoundCap, Qt::RoundJoin));
         painter.setBrush ( QBrush ( Qt::NoBrush ) );
         scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
         painter.end();
@@ -685,15 +685,15 @@ QVector<QImage> MainWindowsNoGUI::AllSheets()
             QPainter painter(&image);
             painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
             painter.setRenderHint(QPainter::Antialiasing, true);
-            painter.setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine()), Qt::SolidLine, Qt::RoundCap,
-                                Qt::RoundJoin));
+            painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                                Qt::RoundCap, Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
             scenes.at(i)->render(&painter);
             painter.end();
             images.append(image);
 
             // Resore
-            paper->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthMainLine())));
+            paper->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit()))));
             brush->setColor( QColor( Qt::gray ) );
             brush->setStyle( Qt::SolidPattern );
             scenes[i]->setBackgroundBrush( *brush );

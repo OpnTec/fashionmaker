@@ -221,7 +221,8 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthMainLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor),
+                      qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -233,7 +234,8 @@ void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
@@ -245,7 +247,8 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void VToolPoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    this->setPen(QPen(CorrectColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(baseColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
@@ -277,7 +280,8 @@ void VToolPoint::RefreshLine()
         VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
         QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - scenePos()));
-        lineName->setPen(QPen(CorrectColor(Qt::black), qApp->toPixel(qApp->widthHairLine())/factor));
+        lineName->setPen(QPen(CorrectColor(Qt::black),
+                              qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
 
         if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
         {
@@ -362,10 +366,10 @@ void VToolPoint::setEnabled(bool enabled)
     QGraphicsEllipseItem::setEnabled(enabled);
     if (enabled)
     {
-        setPen(QPen(QColor(baseColor), qApp->toPixel(qApp->widthHairLine())/factor));
+        setPen(QPen(QColor(baseColor), qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
     else
     {
-        setPen(QPen(Qt::gray, qApp->toPixel(qApp->widthHairLine())/factor));
+        setPen(QPen(Qt::gray, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
 }

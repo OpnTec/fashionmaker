@@ -47,7 +47,7 @@ VToolArcWithLength::VToolArcWithLength(VPattern *doc, VContainer *data, quint32 
     lineColor = color;
 
     this->setPath(ToolPath());
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
@@ -312,7 +312,8 @@ void VToolArcWithLength::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::RefreshGeometry()
 {
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setPath(ToolPath());
 
     SetVisualization();

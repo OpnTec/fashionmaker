@@ -157,9 +157,8 @@ const QString VApplication::GistFileName = QStringLiteral("gist.json");
  */
 VApplication::VApplication(int &argc, char **argv)
     : QApplication(argc, argv), _patternUnit(Unit::Cm), _patternType(MeasurementsType::Individual),
-      _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), trVars(nullptr),
-      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr), mainWindow(nullptr),
-      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr),
+      trVars(nullptr), undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr),
+      mainWindow(nullptr), openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr),
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       out(nullptr), logLock(nullptr)
 #else
@@ -167,8 +166,6 @@ VApplication::VApplication(int &argc, char **argv)
 #endif
 {
     undoStack = new QUndoStack(this);
-
-    InitLineWidth();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -350,27 +347,6 @@ QString VApplication::translationsPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::InitLineWidth()
-{
-    switch (_patternUnit)
-    {
-        case Unit::Mm:
-            _widthMainLine = DefWidth;
-            break;
-        case Unit::Cm:
-            _widthMainLine = DefWidth/10.0;
-            break;
-        case Unit::Inch:
-            _widthMainLine = DefWidth/25.4;
-            break;
-        default:
-            _widthMainLine = DefWidth;
-            break;
-    }
-    _widthHairLine = _widthMainLine/3.0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::LogDirPath() const
 {
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
@@ -493,7 +469,6 @@ void VApplication::ClearOldLogs() const
 void VApplication::setPatternUnit(const Unit &patternUnit)
 {
     _patternUnit = patternUnit;
-    InitLineWidth();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

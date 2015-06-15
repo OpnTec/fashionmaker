@@ -54,7 +54,8 @@ VToolLinePoint::VToolLinePoint(VPattern *doc, VContainer *data, const quint32 &i
     QPointF point1 = data->GeometricObject<VPointF>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<VPointF>(id)->toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
-    mainLine->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor, LineStyleToPenStyle(typeLine)));
+    mainLine->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
+                          LineStyleToPenStyle(typeLine)));
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
 }
 
@@ -70,7 +71,8 @@ VToolLinePoint::~VToolLinePoint()
  */
 void VToolLinePoint::RefreshGeometry()
 {
-    mainLine->setPen(QPen(CorrectColor(QColor(lineColor)), qApp->toPixel(qApp->widthHairLine())/factor,
+    mainLine->setPen(QPen(CorrectColor(QColor(lineColor)),
+                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF point = VDrawTool::data.GeometricObject<VPointF>(id)->toQPointF();
@@ -111,7 +113,8 @@ void VToolLinePoint::SetFactor(qreal factor)
 void VToolLinePoint::Disable(bool disable, const QString &namePP)
 {
     VToolPoint::Disable(disable, namePP);
-    mainLine->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor,
+    mainLine->setPen(QPen(CorrectColor(lineColor),
+                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     mainLine->setEnabled(enabled);
 }

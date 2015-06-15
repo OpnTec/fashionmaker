@@ -56,7 +56,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
     lineColor = color;
 
     this->setPath(ToolPath());
-    this->setPen(QPen(Qt::black, qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -67,7 +67,8 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
     {
         VSpline spl = splPath->GetSpline(i);
         VControlPointSpline *controlPoint = new VControlPointSpline(i, SplinePointPosition::FirstPoint, spl.GetP2(),
-                                                                     spl.GetP1().toQPointF(), this);
+                                                                     spl.GetP1().toQPointF(), *data->GetPatternUnit(),
+                                                                    this);
         connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSplinePath::ControlPointChangePosition);
         connect(this, &VToolSplinePath::RefreshLine, controlPoint, &VControlPointSpline::RefreshLine);
@@ -76,7 +77,7 @@ VToolSplinePath::VToolSplinePath(VPattern *doc, VContainer *data, quint32 id, co
         controlPoints.append(controlPoint);
 
         controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, spl.GetP3(), spl.GetP4().toQPointF(),
-                                               this);
+                                               *data->GetPatternUnit(), this);
         connect(controlPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSplinePath::ControlPointChangePosition);
         connect(this, &VToolSplinePath::RefreshLine, controlPoint, &VControlPointSpline::RefreshLine);
@@ -548,7 +549,8 @@ void VToolSplinePath::RefreshGeometry()
     {
         this->setPath(ToolPath());
     }
-    this->setPen(QPen(CorrectColor(lineColor), qApp->toPixel(qApp->widthHairLine())/factor));
+    this->setPen(QPen(CorrectColor(lineColor),
+                      qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
     for (qint32 i = 1; i<=splPath->Count(); ++i)
     {

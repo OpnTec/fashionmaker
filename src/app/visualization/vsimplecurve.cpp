@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vsimplecurve.h"
-#include "../core/vapplication.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 #include <QStyleOptionGraphicsItem>
@@ -40,18 +39,18 @@
  * @param currentColor current color.
  * @param parent parent object.
  */
-VSimpleCurve::VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint pointPosition, qreal *factor,
-                           QObject *parent)
+VSimpleCurve::VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint pointPosition, Unit patternUnit,
+                           qreal *factor, QObject *parent)
     :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor),
-      curvePosition(pointPosition), enabled(true)
+      curvePosition(pointPosition), enabled(true), patternUnit(patternUnit)
 {
     if (factor == nullptr)
     {
-        setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
+        setPen(QPen(currentColor, ToPixel(WidthHairLine(patternUnit), patternUnit)));
     }
     else
     {
-        setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())/ *factor));
+        setPen(QPen(currentColor, ToPixel(WidthHairLine(patternUnit), patternUnit)/ *factor));
     }
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
@@ -62,7 +61,7 @@ void VSimpleCurve::ChangedActivDraw(const bool &flag)
 {
     enabled = flag;
     setEnabled(enabled);
-    setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/ *factor));
+    setPen(QPen(CorrectColor(currentColor), ToPixel(WidthHairLine(patternUnit), patternUnit)/ *factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,11 +101,11 @@ void VSimpleCurve::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthMainLine())));
+        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthMainLine(patternUnit), patternUnit)));
     }
     else
     {
-        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthMainLine())/ *factor));
+        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthMainLine(patternUnit), patternUnit)/ *factor));
     }
     emit HoverPath(id, curvePosition, PathDirection::Show);
 }
@@ -121,11 +120,11 @@ void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (factor == nullptr)
     {
-        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())));
+        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthHairLine(patternUnit), patternUnit)));
     }
     else
     {
-        this->setPen(QPen(CorrectColor(currentColor), qApp->toPixel(qApp->widthHairLine())/ *factor));
+        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthHairLine(patternUnit), patternUnit)/ *factor));
     }
 
     emit HoverPath(id, curvePosition, PathDirection::Hide);

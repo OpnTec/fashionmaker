@@ -135,7 +135,7 @@ void VisToolTriangle::DrawAimedAxis(QGraphicsPathItem *item, const QLineF &line,
 {
     SCASSERT (item != nullptr);
 
-    item->setPen(QPen(color, qApp->toPixel(qApp->widthHairLine())/factor, style));
+    item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*Visualization::data->GetPatternUnit()))/factor, style));
 
     QPainterPath path;
     path.moveTo(line.p1());

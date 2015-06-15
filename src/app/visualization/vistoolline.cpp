@@ -70,6 +70,6 @@ void VisToolLine::DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, cons
 {
     SCASSERT (lineItem != nullptr);
 
-    lineItem->setPen(QPen(color, qApp->toPixel(qApp->widthMainLine())/factor, style));
+    lineItem->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor, style));
     lineItem->setLine(line);
 }

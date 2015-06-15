@@ -53,7 +53,7 @@ VNodeArc::VNodeArc(VPattern *doc, VContainer *data, quint32 id, quint32 idArc, c
     :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
 {
     RefreshGeometry();
-    this->setPen(QPen(baseColor, qApp->toPixel(qApp->widthHairLine())));
+    this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
 
     ToolCreation(typeCreation);
 }
@@ -191,7 +191,7 @@ void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthMainLine())));
+    this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(qApp->widthHairLine())));
+    this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
