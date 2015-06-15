@@ -33,7 +33,7 @@
 #include <QLocale>
 #include <QApplication>
 
-#include "../xml/vabstractmeasurements.h"
+#include "../../libs/ifc/ifcdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../libs/vmisc/vmath.h"
