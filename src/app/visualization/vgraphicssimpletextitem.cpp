@@ -34,8 +34,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 
-#include "../core/vapplication.h"
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGraphicsSimpleTextItem default constructor.
