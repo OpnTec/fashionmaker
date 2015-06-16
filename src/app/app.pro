@@ -47,9 +47,6 @@ UI_DIR = uic
 # Suport subdirectories. Just better project code tree.
 include(app.pri)
 
-# This include path help promoute VMainGraphicsView on main window. Without it compiler can't find path to custom view
-INCLUDEPATH += "$${PWD}/widgets"
-
 # Resource files. This files will be included in binary.
 RESOURCES += \
     share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
