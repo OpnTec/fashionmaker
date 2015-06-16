@@ -28,11 +28,10 @@
 
 #include "savetooloptions.h"
 #include "../options.h"
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VPattern *doc, const quint32 &id,
-                                 QUndoCommand *parent)
+SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc,
+                                 const quint32 &id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldXml(oldXml), newXml(newXml)
 {
     setText(tr("Save tool option"));

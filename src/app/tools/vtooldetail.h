@@ -82,7 +82,7 @@ public:
     static const QString NodeSpline;
     static const QString NodeSplinePath;
     void               Remove(bool ask);
-    static void        AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node);
+    static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VNodeDetail &node);
     virtual int        type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Detail)};
     virtual QString    getTagName() const;

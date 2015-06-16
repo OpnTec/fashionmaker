@@ -27,12 +27,11 @@
  *************************************************************************/
 
 #include "deltool.h"
-#include "../xml/vpattern.h"
 #include <QGraphicsItem>
 #include "../tools/vtooldetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DelTool::DelTool(VPattern *doc, quint32 id, QUndoCommand *parent)
+DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID),
       nameActivDraw(doc->GetNameActivPP())
 {

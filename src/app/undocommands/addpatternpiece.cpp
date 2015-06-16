@@ -27,11 +27,10 @@
  *************************************************************************/
 
 #include "addpatternpiece.h"
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
-                                 QUndoCommand *parent)
+AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
+                                 const QString &mPath, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), namePP(namePP), mPath(mPath)
 {
     SCASSERT(namePP.isEmpty() == false);

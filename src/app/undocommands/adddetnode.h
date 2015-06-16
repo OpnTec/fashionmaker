@@ -35,7 +35,7 @@ class AddDetNode : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddDetNode(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    AddDetNode(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
     virtual ~AddDetNode();
     virtual void undo();
     virtual void redo();

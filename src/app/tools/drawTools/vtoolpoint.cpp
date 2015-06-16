@@ -29,7 +29,7 @@
 #include "vtoolpoint.h"
 #include "../vmisc/logging.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../visualization/vgraphicssimpletextitem.h"
+#include "../../libs/vwidgets/vgraphicssimpletextitem.h"
 #include "../../undocommands/movelabel.h"
 
 #include <QKeyEvent>

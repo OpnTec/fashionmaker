@@ -35,7 +35,7 @@ class AddPatternPiece : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddPatternPiece(const QDomElement &xml, VPattern *doc, const QString &namePP, const QString &mPath,
+    AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP, const QString &mPath,
                     QUndoCommand *parent = 0);
     virtual ~AddPatternPiece();
     virtual void undo();

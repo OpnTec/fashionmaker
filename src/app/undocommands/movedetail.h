@@ -37,7 +37,7 @@ class MoveDetail : public VUndoCommand
 {
     Q_OBJECT
 public:
-    MoveDetail(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+    MoveDetail(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = 0);
     virtual ~MoveDetail();
     virtual void undo();

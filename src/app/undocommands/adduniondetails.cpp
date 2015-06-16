@@ -27,10 +27,9 @@
  *************************************************************************/
 
 #include "adduniondetails.h"
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddUnionDetails::AddUnionDetails(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+AddUnionDetails::AddUnionDetails(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent)
 {
     setText(tr("Add union details"));
@@ -47,7 +46,7 @@ void AddUnionDetails::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement modelingElement;
-    if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagModeling, modelingElement))
     {
         QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
@@ -66,7 +65,7 @@ void AddUnionDetails::undo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
         return;
     }
     emit NeedFullParsing();
@@ -78,13 +77,13 @@ void AddUnionDetails::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement modelingElement;
-    if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagModeling, modelingElement))
     {
         modelingElement.appendChild(xml);
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
         return;
     }
     RedoFullParsing();

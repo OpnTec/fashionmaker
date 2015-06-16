@@ -31,8 +31,8 @@
 #include <QGraphicsView>
 
 //---------------------------------------------------------------------------------------------------------------------
-SaveDetailOptions::SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VPattern *doc, const quint32 &id,
-                                     QGraphicsScene *scene, QUndoCommand *parent)
+SaveDetailOptions::SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VAbstractPattern *doc,
+                                     const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldDet(oldDet), newDet(newDet), scene(scene)
 {
     setText(tr("Save detail option"));

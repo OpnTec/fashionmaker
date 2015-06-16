@@ -38,8 +38,8 @@ class MoveSplinePath : public VUndoCommand
 {
     Q_OBJECT
 public:
-    MoveSplinePath(VPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath, const quint32 &id,
-                   QGraphicsScene *scene, QUndoCommand *parent = 0);
+    MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
+                   const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent = 0);
     virtual ~MoveSplinePath();
     virtual void undo();
     virtual void redo();

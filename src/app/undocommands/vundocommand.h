@@ -33,7 +33,7 @@
 #include <QDomElement>
 
 #include "../vmisc/logging.h"
-#include "../xml/vpattern.h"
+#include "../libs/ifc/xml/vabstractpattern.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
@@ -57,7 +57,7 @@ class VUndoCommand : public QObject, public QUndoCommand
 {
     Q_OBJECT
 public:
-    VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
     virtual ~VUndoCommand();
 signals:
     void ClearScene();
@@ -65,7 +65,7 @@ signals:
     void NeedLiteParsing(const Document &parse);
 protected:
     QDomElement  xml;
-    VPattern     *doc;
+    VAbstractPattern *doc;
     quint32      nodeId;
     bool         redoFlag;
     virtual void RedoFullParsing();

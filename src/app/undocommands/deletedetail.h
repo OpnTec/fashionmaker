@@ -36,7 +36,7 @@ class DeleteDetail : public VUndoCommand
 {
     Q_OBJECT
 public:
-    DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent = 0);
+    DeleteDetail(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = 0);
     virtual ~DeleteDetail();
     virtual void undo();
     virtual void redo();

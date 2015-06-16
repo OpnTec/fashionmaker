@@ -35,7 +35,7 @@ class AddUnionDetails : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddUnionDetails(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    AddUnionDetails(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
     virtual ~AddUnionDetails();
     virtual void undo();
     virtual void redo();

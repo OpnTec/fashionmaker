@@ -30,7 +30,7 @@
 
 #include "../../core/vapplication.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../visualization/vgraphicssimpletextitem.h"
+#include "../../libs/vwidgets/vgraphicssimpletextitem.h"
 #include <QPen>
 #include <QBrush>
 #include <QGraphicsSceneMouseEvent>

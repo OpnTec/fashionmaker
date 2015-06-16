@@ -27,10 +27,9 @@
  *************************************************************************/
 
 #include "adddetnode.h"
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddDetNode::AddDetNode(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+AddDetNode::AddDetNode(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent)
 {
     setText(QObject::tr("Add node"));
@@ -47,7 +46,7 @@ void AddDetNode::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement modelingElement;
-    if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagModeling, modelingElement))
     {
         QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
@@ -66,7 +65,7 @@ void AddDetNode::undo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
         return;
     }
 }
@@ -77,13 +76,13 @@ void AddDetNode::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement modelingElement;
-    if (doc->GetActivNodeElement(VPattern::TagModeling, modelingElement))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagModeling, modelingElement))
     {
         modelingElement.appendChild(xml);
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
         return;
     }
 }

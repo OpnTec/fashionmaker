@@ -31,13 +31,11 @@
 
 #include "vundocommand.h"
 
-class VPattern;
-
 class AddDet : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddDet(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    AddDet(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
     virtual ~AddDet();
     // cppcheck-suppress unusedFunction
     virtual void undo();

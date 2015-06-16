@@ -27,11 +27,10 @@
  *************************************************************************/
 
 #include "deletedetail.h"
-#include "../xml/vpattern.h"
 #include "../tools/vtooldetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeleteDetail::DeleteDetail(VPattern *doc, quint32 id, QUndoCommand *parent)
+DeleteDetail::DeleteDetail(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID)
 {
     setText(tr("Delete tool"));

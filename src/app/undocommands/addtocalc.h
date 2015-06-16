@@ -35,7 +35,7 @@ class AddToCalc : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddToCalc(const QDomElement &xml, VPattern *doc, QUndoCommand *parent = 0);
+    AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
     virtual ~AddToCalc();
     virtual void undo();
     virtual void redo();

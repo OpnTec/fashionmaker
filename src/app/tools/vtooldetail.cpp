@@ -442,7 +442,7 @@ void VToolDetail::RemoveReferens()
  * @param domElement tag in xml tree.
  * @param node node of detail.
  */
-void VToolDetail::AddNode(VPattern *doc, QDomElement &domElement, const VNodeDetail &node)
+void VToolDetail::AddNode(VAbstractPattern *doc, QDomElement &domElement, const VNodeDetail &node)
 {
     QDomElement nod = doc->createElement(TagNode);
 

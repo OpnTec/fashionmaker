@@ -29,13 +29,12 @@
 #include "movedetail.h"
 #include <QGraphicsScene>
 #include <QDomElement>
-#include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveDetail::MoveDetail(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-                       QUndoCommand *parent)
+MoveDetail::MoveDetail(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
+                       QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(scene)
 {
     setText(QObject::tr("Move detail"));

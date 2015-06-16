@@ -271,7 +271,7 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
  * @param node tag in file.
  * @param path spline path.
  */
-void VToolSplinePath::UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path)
+void VToolSplinePath::UpdatePathPoint(VAbstractPattern *doc, QDomNode& node, const VSplinePath &path)
 {
     SCASSERT(doc != nullptr);
     QDomElement element = node.toElement();
@@ -344,7 +344,7 @@ void VToolSplinePath::RefreshDataInFile()
  * @param domElement dom element.
  * @param splPoint spline path point.
  */
-void VToolSplinePath::AddPathPoint(VPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint)
+void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint)
 {
     SCASSERT(doc != nullptr);
     QDomElement pathPoint = doc->createElement(AttrPathPoint);

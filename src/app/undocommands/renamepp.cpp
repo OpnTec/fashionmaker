@@ -30,10 +30,9 @@
 
 #include <QComboBox>
 #include "../options.h"
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-RenamePP::RenamePP(VPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
+RenamePP::RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
     :VUndoCommand(QDomElement(), doc, parent), combo(combo), newPPname(newPPname), oldPPname(QString())
 {
     setText(tr("Rename pattern piece"));

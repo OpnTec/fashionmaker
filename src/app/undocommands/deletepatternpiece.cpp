@@ -27,11 +27,10 @@
  *************************************************************************/
 
 #include "deletepatternpiece.h"
-#include "../xml/vpattern.h"
 #include "addpatternpiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUndoCommand *parent)
+DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
       previousPPName(QString())
 {
@@ -41,7 +40,7 @@ DeletePatternPiece::DeletePatternPiece(VPattern *doc, const QString &namePP, QUn
     patternPiece = patternP.cloneNode().toElement();
     mPath = doc->MPath();
     QDomNode previousPP = patternP.previousSibling();//find previous pattern piece
-    previousPPName = doc->GetParametrString(previousPP.toElement(), VPattern::AttrName, "");
+    previousPPName = doc->GetParametrString(previousPP.toElement(), VAbstractPattern::AttrName, "");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

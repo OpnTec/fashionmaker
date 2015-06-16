@@ -30,10 +30,9 @@
 #include "../tools/vabstracttool.h"
 #include <QDomElement>
 #include <QGraphicsView>
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSpline::MoveSpline(VPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
+MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
                        QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldSpline(*oldSpl), newSpline(newSpl), scene(scene)
 {

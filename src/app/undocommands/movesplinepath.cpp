@@ -31,7 +31,7 @@
 #include "../tools/drawTools/vtoolsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSplinePath::MoveSplinePath(VPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
+MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
                                const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldSplinePath(oldSplPath), newSplinePath(newSplPath), scene(scene)
 {

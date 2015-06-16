@@ -27,14 +27,13 @@
  *************************************************************************/
 
 #include "addtocalc.h"
-#include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
 #include "../libs/vwidgets/vmaingraphicsscene.h"
 #include "../libs/vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddToCalc::AddToCalc(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP()), cursor(doc->getCursor())
 {
     setText(tr("Add object"));

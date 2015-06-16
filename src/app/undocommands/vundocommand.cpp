@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vundocommand.h"
-#include "../xml/vpattern.h"
+#include "../../libs/vmisc/def.h"
 
 Q_LOGGING_CATEGORY(vUndo, "v.undo")
 
 //---------------------------------------------------------------------------------------------------------------------
-VUndoCommand::VUndoCommand(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
 {
     SCASSERT(doc != nullptr);

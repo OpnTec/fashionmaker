@@ -37,7 +37,7 @@ class MoveSPoint : public VUndoCommand
 {
     Q_OBJECT
 public:
-    MoveSPoint(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+    MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = 0);
     virtual ~MoveSPoint();
     virtual void undo();

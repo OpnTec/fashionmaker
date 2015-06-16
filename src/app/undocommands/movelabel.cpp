@@ -29,12 +29,11 @@
 #include "movelabel.h"
 #include <QGraphicsScene>
 #include <QDomElement>
-#include "../xml/vpattern.h"
 #include "../tools/vabstracttool.h"
 #include "../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveLabel::MoveLabel(VPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
+MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                      QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldMx(0.0), oldMy(0.0), newMx(x), newMy(y), scene(scene)
 {

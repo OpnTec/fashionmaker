@@ -27,10 +27,9 @@
  *************************************************************************/
 
 #include "adddet.h"
-#include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddDet::AddDet(const QDomElement &xml, VPattern *doc, QUndoCommand *parent)
+AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent)
 {
     setText(tr("Add detail"));
@@ -48,7 +47,7 @@ void AddDet::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement element;
-    if (doc->GetActivNodeElement(VPattern::TagDetails, element))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagDetails, element))
     {
         QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
@@ -67,7 +66,7 @@ void AddDet::undo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagDetails.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagDetails.toUtf8().constData());
         return;
     }
     emit NeedFullParsing();
@@ -80,13 +79,13 @@ void AddDet::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement element;
-    if (doc->GetActivNodeElement(VPattern::TagDetails, element))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagDetails, element))
     {
         element.appendChild(xml);
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VPattern::TagDetails.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagDetails.toUtf8().constData());
         return;
     }
     RedoFullParsing();

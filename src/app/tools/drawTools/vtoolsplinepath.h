@@ -47,7 +47,7 @@ public:
                                 VMainGraphicsScene  *scene, VPattern *doc, VContainer *data, const Document &parse,
                                 const Source &typeCreation);
     static const QString ToolType;
-    static void  UpdatePathPoint(VPattern *doc, QDomNode& node, const VSplinePath &path);
+    static void  UpdatePathPoint(VAbstractPattern *doc, QDomNode& node, const VSplinePath &path);
     virtual int  type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
 
@@ -91,7 +91,7 @@ private:
     QPointF oldPosition;
 
     void          RefreshGeometry();
-    static void   AddPathPoint(VPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
+    static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
     void          RefreshSplinePath(VSplinePath &splPath);
 };

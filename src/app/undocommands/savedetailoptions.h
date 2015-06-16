@@ -38,7 +38,7 @@ class SaveDetailOptions : public VUndoCommand
 {
     Q_OBJECT
 public:
-    SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VPattern *doc, const quint32 &id,
+    SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VAbstractPattern *doc, const quint32 &id,
                       QGraphicsScene *scene, QUndoCommand *parent = 0);
     virtual ~SaveDetailOptions();
     virtual void undo();
