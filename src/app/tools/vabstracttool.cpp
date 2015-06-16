@@ -111,13 +111,13 @@ const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
  * @param id object id in container.
  * @param parent parent object.
  */
-VAbstractTool::VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent)
+VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VDataTool(data, parent), doc(doc), id(id), baseColor(Qt::black), vis(nullptr)
 {
     SCASSERT(doc != nullptr);
-    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VPattern::haveLiteChange);
-    connect(this->doc, &VPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
-    connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VPattern::LiteParseTree);
+    connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);
+    connect(this->doc, &VAbstractPattern::FullUpdateFromFile, this, &VAbstractTool::FullUpdateFromFile);
+    connect(this, &VAbstractTool::LiteUpdateTree, this->doc, &VAbstractPattern::LiteParseTree);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ void VAbstractTool::DeleteTool(bool ask)
             }
         }
         DelTool *delTool = new DelTool(doc, id);
-        connect(delTool, &DelTool::NeedFullParsing, doc, &VPattern::NeedFullParsing);
+        connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
     }
 }
@@ -333,7 +333,7 @@ const QStringList VAbstractTool::StylesList()
  * @param toolType tool type
  * @param doc dom document container
  */
-void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VPattern *doc)
+void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
 {
     QVector<VToolRecord> *history = doc->getHistory();
     VToolRecord record = VToolRecord(id, toolType, doc->GetNameActivPP());

@@ -264,7 +264,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
-        connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveCommand);
     }
     delete dialog;
@@ -335,7 +335,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         QPointF newPos = value.toPointF();
 
         MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, this->scene());
-        connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(moveDet);
     }
 

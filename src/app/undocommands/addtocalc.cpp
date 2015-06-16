@@ -53,7 +53,7 @@ void AddToCalc::undo()
     doc->setCursor(cursor);
 
     QDomElement calcElement;
-    if (doc->GetActivNodeElement(VPattern::TagCalculation, calcElement))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
         QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
@@ -93,7 +93,7 @@ void AddToCalc::redo()
     doc->setCursor(cursor);
 
     QDomElement calcElement;
-    if (doc->GetActivNodeElement(VPattern::TagCalculation, calcElement))
+    if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
         if (cursor <= 0)
         {

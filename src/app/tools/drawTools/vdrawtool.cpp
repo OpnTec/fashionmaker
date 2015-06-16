@@ -131,7 +131,7 @@ void VDrawTool::SaveDialogChange()
         SaveDialog(newDomElement);
 
         SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveOptions);
     }
     else
@@ -182,7 +182,7 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
         SaveOptions(newDomElement, obj);
 
         SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, doc, id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveOptions);
     }
     else

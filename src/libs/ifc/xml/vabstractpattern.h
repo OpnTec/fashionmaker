@@ -205,6 +205,7 @@ signals:
     void           SetCurrentPP(const QString &patterPiece);
 
 public slots:
+    virtual void   LiteParseTree(const Document &parse)=0;
     void           haveLiteChange();
     void           ShowHistoryTool(quint32 id, bool enable);
     void           NeedFullParsing();

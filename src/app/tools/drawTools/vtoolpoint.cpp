@@ -136,7 +136,7 @@ void VToolPoint::NameChangePosition(const QPointF &pos)
 void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
 {
     MoveLabel *moveLabel = new MoveLabel(doc, mx, my, id, this->scene());
-    connect(moveLabel, &MoveLabel::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    connect(moveLabel, &MoveLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveLabel);
 }
 

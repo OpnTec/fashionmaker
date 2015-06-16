@@ -146,7 +146,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         QPointF newPos = value.toPointF();
 
         MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), id, this->scene());
-        connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+        connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(moveSP);
     }
     return QGraphicsItem::itemChange(change, value);

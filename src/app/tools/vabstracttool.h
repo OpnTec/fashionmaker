@@ -30,7 +30,7 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
-#include "../xml/vpattern.h"
+#include "../../libs/ifc/xml/vabstractpattern.h"
 #include "../core/vapplication.h"
 #include "../libs/vwidgets/vmaingraphicsscene.h"
 #include "../visualization/visualization.h"
@@ -51,7 +51,7 @@ class VAbstractTool: public VDataTool
 {
     Q_OBJECT
 public:
-    VAbstractTool(VPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
+    VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractTool();
     quint32                 getId() const;
     static const QString    AttrType;
@@ -124,7 +124,7 @@ public:
     static const QStringList      Colors();
     static QMap<QString, QString> ColorsList();
 
-    static void             AddRecord(const quint32 id, const Tool &toolType, VPattern *doc);
+    static void             AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
 
     const VContainer        *getData() const;
 
@@ -153,7 +153,7 @@ signals:
     void                    LiteUpdateTree(const Document &parse);
 protected:
     /** @brief doc dom document container */
-    VPattern                *doc;
+    VAbstractPattern         *doc;
 
     /** @brief id object id. */
     const quint32            id;

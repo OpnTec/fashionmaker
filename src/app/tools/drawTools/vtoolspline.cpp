@@ -253,7 +253,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     }
 
     MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
-    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSpl);
 }
 
@@ -416,7 +416,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4(), spline->GetKcurve());
 
     MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
-    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VPattern::LiteParseTree);
+    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSpl);
 }
 
