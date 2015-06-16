@@ -78,6 +78,23 @@ public:
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 
+    QStringList    getPatternPieces() const;
+
+    QMap<GHeights, bool> GetGradationHeights() const;
+    void                 SetGradationHeights(const QMap<GHeights, bool> &options);
+
+    QMap<GSizes, bool>   GetGradationSizes() const;
+    void                 SetGradationSizes(const QMap<GSizes, bool> &options);
+
+    QString        GetDescription() const;
+    void           SetDescription(const QString &text);
+
+    QString        GetNotes() const;
+    void           SetNotes(const QString &text);
+
+    QString        GetVersion() const;
+    void           SetVersion();
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
@@ -187,6 +204,12 @@ signals:
     void           CheckLayout();
     void           SetCurrentPP(const QString &patterPiece);
 
+public slots:
+    void           haveLiteChange();
+    void           ShowHistoryTool(quint32 id, bool enable);
+    void           NeedFullParsing();
+    void           ClearScene();
+
 protected:
     /** @brief nameActivDraw name current pattern peace. */
     QString        nameActivPP;
@@ -200,9 +223,14 @@ protected:
     /** @brief history history records. */
     QVector<VToolRecord> history;
 
+    /** @brief patternPieces list of patern pieces names for combobox*/
+    QStringList    patternPieces;
+
     void           ToolExists(const quint32 &id) const;
 
     void           SetActivPP(const QString& name);
+
+    void           CheckTagExists(const QString &tag);
 
 private:
     Q_DISABLE_COPY(VAbstractPattern)

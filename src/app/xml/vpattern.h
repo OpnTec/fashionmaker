@@ -62,48 +62,28 @@ public:
     quint32        SPointActiveDraw();
 
     virtual bool   SaveDocument(const QString &fileName, QString &error) const;
-    QStringList    getPatternPieces() const;
+
     QRectF         ActiveDrawBoundingRect() const;
 
-    QMap<GHeights, bool> GetGradationHeights() const;
-    void                 SetGradationHeights(const QMap<GHeights, bool> &options);
+    QString        GetAuthor() const;
+    void           SetAuthor(const QString &text);
 
-    QMap<GSizes, bool>   GetGradationSizes() const;
-    void                 SetGradationSizes(const QMap<GSizes, bool> &options);
-
-    QString              GetAuthor() const;
-    void                 SetAuthor(const QString &text);
-
-    QString              GetDescription() const;
-    void                 SetDescription(const QString &text);
-
-    QString              GetNotes() const;
-    void                 SetNotes(const QString &text);
-
-    QString              GetVersion() const;
-    void                 SetVersion();
-
-    QString              GenerateLabel(const LabelType &type)const;
+    QString        GenerateLabel(const LabelType &type)const;
 
 public slots:
     void           LiteParseTree(const Document &parse);
-    void           haveLiteChange();
-    void           ShowHistoryTool(quint32 id, bool enable);
-    void           NeedFullParsing();
-    void           ClearScene();
+
 protected:
     virtual void   customEvent(QEvent * event);
+
 private:
     Q_DISABLE_COPY(VPattern)
 
     /** @brief data container with data. */
     VContainer     *data;
 
-    /** @brief patternPieces list of patern pieces names for combobox*/
-    QStringList    patternPieces;
-
     /** @brief mode current draw mode. */
-    Draw    *mode;
+    Draw           *mode;
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
@@ -137,14 +117,7 @@ private:
     template <typename T>
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
-    void           CheckTagExists(const QString &tag);
     QString        GetLabelBase(unsigned int index)const;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QStringList VPattern::getPatternPieces() const
-{
-    return patternPieces;
-}
 
 #endif // VPATTERN_H
