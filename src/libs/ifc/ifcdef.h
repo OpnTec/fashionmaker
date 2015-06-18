@@ -37,7 +37,6 @@
 #endif /*Q_OS_WIN32*/
 
 enum class Unit : char { Mm, Cm, Inch, Px };
-enum class MeasurementsType : char { Standard, Individual };
 
 static const quint32 null_id = 0;
 

@@ -7,7 +7,8 @@ SOURCES += \
     $$PWD/undoevent.cpp \
     $$PWD/backport/qcommandlineoption.cpp \
     $$PWD/backport/qcommandlineparser.cpp \
-    $$PWD/vsettings.cpp
+    $$PWD/vsettings.cpp \
+    $$PWD/vabstractapplication.cpp
 
 HEADERS += \
     $$PWD/stable.h \
@@ -17,4 +18,5 @@ HEADERS += \
     $$PWD/undoevent.h \
     $$PWD/backport/qcommandlineoption.h \
     $$PWD/backport/qcommandlineparser.h \
-    $$PWD/vsettings.h
+    $$PWD/vsettings.h \
+    $$PWD/vabstractapplication.h

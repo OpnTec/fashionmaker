@@ -35,7 +35,7 @@
 #include <QLabel>
 #include <QSpacerItem>
 
-#include "../core/vformula.h"
+#include "../../libs/vpatterndb/vformula.h"
 
 class VFormulaPropertyEditor : public QWidget
 {

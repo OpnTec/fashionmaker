@@ -30,7 +30,7 @@
 #define VTOOLLINEPOINT_H
 
 #include "vtoolpoint.h"
-#include "../../core/vformula.h"
+#include "../../../libs/vpatterndb/vformula.h"
 
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.

@@ -27,10 +27,11 @@
  *************************************************************************/
 
 #include "vformula.h"
-#include "../libs/vpatterndb/calculator.h"
-#include "../libs/vpatterndb/vcontainer.h"
-#include "../core/vapplication.h"
-#include "../libs/vmisc/vsettings.h"
+#include "calculator.h"
+#include "vcontainer.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vsettings.h"
+#include "vtranslatevars.h"
 #include <QDebug>
 
 //VFormula

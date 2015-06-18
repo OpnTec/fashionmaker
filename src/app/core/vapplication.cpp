@@ -156,9 +156,9 @@ const QString VApplication::GistFileName = QStringLiteral("gist.json");
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : QApplication(argc, argv), _patternUnit(Unit::Cm), _patternType(MeasurementsType::Individual),
+    : VAbstractApplication(argc, argv), _patternUnit(Unit::Cm),
       trVars(nullptr), undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr),
-      mainWindow(nullptr), openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr),
+      mainWindow(nullptr), openingPattern(false), doc(nullptr), log(nullptr),
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       out(nullptr), logLock(nullptr)
 #else
@@ -570,29 +570,6 @@ bool VApplication::getOpeningPattern() const
 void VApplication::setOpeningPattern()
 {
     openingPattern = !openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VApplication::OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VApplication::OpenSettings()
-{
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                             QApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VApplication::getSettings hide settings constructor.
- * @return pointer to class for acssesing to settings in ini file.
- */
-VSettings *VApplication::getSettings()
-{
-    SCASSERT(settings != nullptr);
-    return settings;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

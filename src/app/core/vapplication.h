@@ -29,13 +29,13 @@
 #ifndef VAPPLICATION_H
 #define VAPPLICATION_H
 
-#include <QApplication>
+#include "../libs/vmisc/vabstractapplication.h"
 #include "../options.h"
 #include "../libs/vwidgets/vmaingraphicsview.h"
 #include "../libs/vpatterndb/vtranslatevars.h"
 #include "vsettings.h"
 
-class VApplication;// used in define
+class VApplication;// use in define
 class QUndoStack;
 class VMainGraphicsView;
 class VPattern;
@@ -47,12 +47,12 @@ class QLockFile;
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<VApplication*>(QCoreApplication::instance()))
+#define qApp (static_cast<VApplication*>(VAbstractApplication::instance()))
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
  */
-class VApplication : public QApplication
+class VApplication : public VAbstractApplication
 {
     Q_OBJECT
 public:
@@ -64,8 +64,6 @@ public:
     Unit               patternUnit() const;
     const Unit        *patternUnitP() const;
     void               setPatternUnit(const Unit &patternUnit);
-    MeasurementsType   patternType() const;
-    void               setPatternType(const MeasurementsType &patternType);
 
     void               InitOptions();
 
@@ -78,14 +76,6 @@ public:
 
     QString            translationsPath() const;
 
-    template <typename T>
-    QString            LocaleToString(const T &value)
-    {
-        QLocale loc;
-        qApp->getSettings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
-        return loc.toString(value);
-    }
-
     QUndoStack         *getUndoStack() const;
     VMainGraphicsView  *getSceneView() const;
     void               setSceneView(VMainGraphicsView *value);
@@ -95,9 +85,6 @@ public:
     void               setMainWindow(QWidget *value);
     bool               getOpeningPattern() const;
     void               setOpeningPattern();
-
-    void               OpenSettings();
-    VSettings          *getSettings();
 
     QGraphicsScene    *getCurrentScene() const;
     void               setCurrentScene(QGraphicsScene *value);
@@ -110,7 +97,7 @@ public:
     void               StartLogging();
     QTextStream       *LogFile();
 
-    const VTranslateVars *TrVars();
+    virtual const VTranslateVars *TrVars();
     void               InitTrVars();
 
 
@@ -127,7 +114,6 @@ private slots:
 private:
     Q_DISABLE_COPY(VApplication)
     Unit               _patternUnit;
-    MeasurementsType   _patternType;
     VTranslateVars     *trVars;
     QUndoStack         *undoStack;
     VMainGraphicsView  *sceneView;
@@ -143,10 +129,6 @@ private:
      * we can allow user use Undo option.
      */
     bool               openingPattern;
-    /**
-     * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
-     */
-    VSettings          *settings;
 
     VPattern           *doc;
     QFile              *log;
@@ -183,18 +165,6 @@ inline Unit VApplication::patternUnit() const
 inline const Unit *VApplication::patternUnitP() const
 {
     return &_patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline MeasurementsType VApplication::patternType() const
-{
-    return _patternType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VApplication::setPatternType(const MeasurementsType &patternType)
-{
-    _patternType = patternType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

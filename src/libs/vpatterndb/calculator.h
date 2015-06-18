@@ -30,7 +30,7 @@
 #define CALCULATOR_H
 
 #include "../qmuparser/qmuparser.h"
-#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
 
 class VContainer;
 

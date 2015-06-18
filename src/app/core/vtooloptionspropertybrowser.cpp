@@ -34,7 +34,7 @@
 #include "../../libs/vwidgets/vcontrolpointspline.h"
 #include "../../libs/vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
-#include "../core/vformula.h"
+#include "../../libs/vpatterndb/vformula.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
