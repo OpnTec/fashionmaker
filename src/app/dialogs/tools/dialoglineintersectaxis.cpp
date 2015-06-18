@@ -107,7 +107,7 @@ void DialogLineIntersectAxis::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogLineIntersectAxis::GetAngle() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

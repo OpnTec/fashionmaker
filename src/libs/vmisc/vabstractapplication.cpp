@@ -54,7 +54,7 @@ void VAbstractApplication::OpenSettings()
  * @brief getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
  */
-VSettings *VAbstractApplication::getSettings()
+VSettings *VAbstractApplication::Settings()
 {
     SCASSERT(settings != nullptr);
     return settings;

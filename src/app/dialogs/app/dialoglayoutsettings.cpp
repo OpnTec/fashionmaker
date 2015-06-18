@@ -52,7 +52,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     ReadSettings();
 
@@ -359,8 +359,8 @@ void DialogLayoutSettings::InitPaperUnits()
     ui->comboBoxPaperSizeUnit->addItem(tr("Pixels"), QVariant(VDomDocument::UnitsToStr(Unit::Px)));
 
     // set default unit
-    oldPaperUnit = VDomDocument::StrToUnits(qApp->getSettings()->GetUnit());
-    const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(qApp->getSettings()->GetUnit());
+    oldPaperUnit = VDomDocument::StrToUnits(qApp->Settings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(qApp->Settings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxPaperSizeUnit->setCurrentIndex(indexUnit);
@@ -375,8 +375,8 @@ void DialogLayoutSettings::InitLayoutUnits()
     ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
 
     // set default unit
-    oldLayoutUnit = VDomDocument::StrToUnits(qApp->getSettings()->GetUnit());
-    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(qApp->getSettings()->GetUnit());
+    oldLayoutUnit = VDomDocument::StrToUnits(qApp->Settings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(qApp->Settings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
@@ -607,33 +607,33 @@ void DialogLayoutSettings::ReadSettings()
     MinimumPaperSize();
     MinimumLayoutSize();
 
-    SetLayoutWidth(qApp->getSettings()->GetLayoutWidth());
-    SetShift(qApp->getSettings()->GetLayoutShift());
+    SetLayoutWidth(qApp->Settings()->GetLayoutWidth());
+    SetShift(qApp->Settings()->GetLayoutShift());
 
-    const qreal width = UnitConvertor(qApp->getSettings()->GetLayoutPaperWidth(), Unit::Px, LayoutUnit());
-    const qreal height = UnitConvertor(qApp->getSettings()->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
+    const qreal width = UnitConvertor(qApp->Settings()->GetLayoutPaperWidth(), Unit::Px, LayoutUnit());
+    const qreal height = UnitConvertor(qApp->Settings()->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
     SheetSize(QSizeF(width, height));
-    SetGroup(qApp->getSettings()->GetLayoutGroup());
-    SetRotate(qApp->getSettings()->GetLayoutRotate());
-    SetIncrease(qApp->getSettings()->GetLayoutRotationIncrease());
-    SetAutoCrop(qApp->getSettings()->GetLayoutAutoCrop());
-    SetSaveLength(qApp->getSettings()->GetLayoutSaveLength());
-    SetUnitePages(qApp->getSettings()->GetLayoutUnitePages());
+    SetGroup(qApp->Settings()->GetLayoutGroup());
+    SetRotate(qApp->Settings()->GetLayoutRotate());
+    SetIncrease(qApp->Settings()->GetLayoutRotationIncrease());
+    SetAutoCrop(qApp->Settings()->GetLayoutAutoCrop());
+    SetSaveLength(qApp->Settings()->GetLayoutSaveLength());
+    SetUnitePages(qApp->Settings()->GetLayoutUnitePages());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::WriteSettings() const
 {
-    qApp->getSettings()->SetLayoutWidth(GetLayoutWidth());
-    qApp->getSettings()->SetLayoutGroup(GetGroup());
-    qApp->getSettings()->SetLayoutPaperHeight(GetPaperHeight());
-    qApp->getSettings()->SetLayoutPaperWidth(GetPaperWidth());
-    qApp->getSettings()->SetLayoutShift(GetShift());
-    qApp->getSettings()->SetLayoutRotate(GetRotate());
-    qApp->getSettings()->SetLayoutRotationIncrease(GetIncrease());
-    qApp->getSettings()->SetLayoutAutoCrop(GetAutoCrop());
-    qApp->getSettings()->SetLayoutSaveLength(IsSaveLength());
-    qApp->getSettings()->SetLayoutUnitePages(IsUnitePages());
+    qApp->Settings()->SetLayoutWidth(GetLayoutWidth());
+    qApp->Settings()->SetLayoutGroup(GetGroup());
+    qApp->Settings()->SetLayoutPaperHeight(GetPaperHeight());
+    qApp->Settings()->SetLayoutPaperWidth(GetPaperWidth());
+    qApp->Settings()->SetLayoutShift(GetShift());
+    qApp->Settings()->SetLayoutRotate(GetRotate());
+    qApp->Settings()->SetLayoutRotationIncrease(GetIncrease());
+    qApp->Settings()->SetLayoutAutoCrop(GetAutoCrop());
+    qApp->Settings()->SetLayoutSaveLength(IsSaveLength());
+    qApp->Settings()->SetLayoutUnitePages(IsUnitePages());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -385,7 +385,7 @@ void DialogEditWrongFormula::setPostfix(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogEditWrongFormula::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

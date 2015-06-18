@@ -56,7 +56,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     qCDebug(vDialog, "Showing variables.");
     if (qApp->patternType() == MeasurementsType::Individual)
@@ -613,7 +613,7 @@ void DialogIncrements::OpenTable()
         const QString filter(tr("Individual measurements (*.vit)"));
 
         //Use standard path to individual measurements
-        const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
+        const QString path = qApp->Settings()->GetPathIndividualMeasurements();
 
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
@@ -656,7 +656,7 @@ void DialogIncrements::OpenTable()
     {
         const QString filter(tr("Standard measurements (*.vst)"));
         //Use standard path to standard measurements
-        const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+        const QString path = qApp->Settings()->GetPathStandardMeasurements();
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
         {

@@ -355,7 +355,7 @@ QString DialogEndLine::GetTypeLine() const
  */
 QString DialogEndLine::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaLength, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -365,7 +365,7 @@ QString DialogEndLine::GetFormula() const
  */
 QString DialogEndLine::GetAngle() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

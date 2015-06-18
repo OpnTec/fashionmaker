@@ -103,7 +103,7 @@ QString VFormula::GetFormula(FormulaType type) const
     }
     else
     {
-        return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+        return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
     }
 }
 
@@ -227,7 +227,7 @@ void VFormula::Eval()
         try
         {
             Calculator *cal = new Calculator(data, qApp->patternType());
-            QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+            QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             const qreal result = cal->EvalFormula(expression);
             delete cal;
 

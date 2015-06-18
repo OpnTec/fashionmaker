@@ -216,7 +216,7 @@ void DialogCutArc::SetPointName(const QString &value)
  */
 QString DialogCutArc::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

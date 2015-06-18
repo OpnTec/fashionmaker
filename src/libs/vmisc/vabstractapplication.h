@@ -53,7 +53,7 @@ public:
     void             setPatternType(const MeasurementsType &patternType);
 
     void             OpenSettings();
-    VSettings        *getSettings();
+    VSettings        *Settings();
 
     template <typename T>
     QString          LocaleToString(const T &value);
@@ -85,7 +85,7 @@ template <typename T>
 QString VAbstractApplication::LocaleToString(const T &value)
 {
     QLocale loc;
-    qApp->getSettings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
+    qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
     return loc.toString(value);
 }
 

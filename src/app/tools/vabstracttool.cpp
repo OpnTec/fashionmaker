@@ -149,7 +149,7 @@ void VAbstractTool::DeleteTool(bool ask)
 //---------------------------------------------------------------------------------------------------------------------
 int VAbstractTool::ConfirmDeletion()
 {
-    if (false == qApp->getSettings()->GetConfirmItemDelete())
+    if (false == qApp->Settings()->GetConfirmItemDelete())
     {
         return QMessageBox::Yes;
     }
@@ -165,7 +165,7 @@ int VAbstractTool::ConfirmDeletion()
 
     if (dialogResult == QDialog::Accepted)
     {
-        qApp->getSettings()->SetConfirmItemDelete(not msgBox.isChecked());
+        qApp->Settings()->SetConfirmItemDelete(not msgBox.isChecked());
     }
 
     return dialogResult == QDialog::Accepted ? QMessageBox::Yes : QMessageBox::No;

@@ -257,7 +257,7 @@ protected:
         SCASSERT(bCancel != nullptr);
         connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
-        qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+        qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
     }
     template <typename T>
     /**

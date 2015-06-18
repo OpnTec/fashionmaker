@@ -67,23 +67,23 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::Apply()
 {
-    qApp->getSettings()->SetAutosaveState(autoSaveCheck->isChecked());
-    qApp->getSettings()->SetAutosaveTime(autoTime->value());
+    qApp->Settings()->SetAutosaveState(autoSaveCheck->isChecked());
+    qApp->Settings()->SetAutosaveTime(autoTime->value());
 
     QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
     SCASSERT(autoSaveTimer);
 
     autoSaveCheck->isChecked() ? autoSaveTimer->start(autoTime->value()*60000) : autoSaveTimer->stop();
 
-    qApp->getSettings()->SetOsSeparator(osOptionCheck->isChecked());
-    qApp->getSettings()->SetSendReportState(sendReportCheck->isChecked());
-    qApp->getSettings()->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
-    qApp->getSettings()->SetToolBarStyle(toolBarStyleCheck->isChecked());
+    qApp->Settings()->SetOsSeparator(osOptionCheck->isChecked());
+    qApp->Settings()->SetSendReportState(sendReportCheck->isChecked());
+    qApp->Settings()->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
+    qApp->Settings()->SetToolBarStyle(toolBarStyleCheck->isChecked());
 
     if (langChanged)
     {
         const QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
-        qApp->getSettings()->SetLocale(locale);
+        qApp->Settings()->SetLocale(locale);
         langChanged = false;
         const QString text = tr("Setup user interface language updated and will be used the next time start") + " " +
                                 QApplication::applicationName();
@@ -92,7 +92,7 @@ void ConfigurationPage::Apply()
     if (this->unitChanged)
     {
         const QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
-        qApp->getSettings()->SetUnit(unit);
+        qApp->Settings()->SetUnit(unit);
         this->unitChanged = false;
         const QString text = tr("Default unit updated and will be used the next pattern creation");
         QMessageBox::information(this, QApplication::applicationName(), text);
@@ -100,7 +100,7 @@ void ConfigurationPage::Apply()
     if (labelLangChanged)
     {
         const QString locale = qvariant_cast<QString>(labelCombo->itemData(labelCombo->currentIndex()));
-        qApp->getSettings()->SetLabelLanguage(locale);
+        qApp->Settings()->SetLabelLanguage(locale);
         labelLangChanged = false;
     }
 }
@@ -129,11 +129,11 @@ QGroupBox *ConfigurationPage::SaveGroup()
     QGroupBox *saveGroup = new QGroupBox(tr("Save"));
 
     autoSaveCheck = new QCheckBox(tr("Auto-save modified pattern"));
-    autoSaveCheck->setChecked(qApp->getSettings()->GetAutosaveState());
+    autoSaveCheck->setChecked(qApp->Settings()->GetAutosaveState());
 
     autoTime = new QSpinBox();
     autoTime->setRange(1, 60);
-    autoTime->setValue(qApp->getSettings()->GetAutosaveTime());
+    autoTime->setValue(qApp->Settings()->GetAutosaveTime());
     autoTime->setSuffix(tr("min"));
 
     QHBoxLayout *autosaveLayout = new QHBoxLayout;
@@ -181,7 +181,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     }
 
     // set default translators and language checked
-    qint32 index = langCombo->findData(qApp->getSettings()->GetLocale());
+    qint32 index = langCombo->findData(qApp->Settings()->GetLocale());
     if (index != -1)
     {
         langCombo->setCurrentIndex(index);
@@ -197,7 +197,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
-    osOptionCheck->setChecked(qApp->getSettings()->GetOsSeparator());
+    osOptionCheck->setChecked(qApp->Settings()->GetOsSeparator());
 
     QHBoxLayout *separatorLayout = new QHBoxLayout;
     separatorLayout->addWidget(separatorLabel);
@@ -212,7 +212,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     this->unitCombo->addItem(tr("Inches"), "in");
 
     // set default unit
-    qint32 indexUnit = this->unitCombo->findData(qApp->getSettings()->GetUnit());
+    qint32 indexUnit = this->unitCombo->findData(qApp->Settings()->GetUnit());
     if (indexUnit != -1)
     {
         this->unitCombo->setCurrentIndex(indexUnit);
@@ -231,7 +231,7 @@ QGroupBox *ConfigurationPage::LangGroup()
 
     SetLabelComboBox(VApplication::LabelLanguages());
 
-    index = labelCombo->findData(qApp->getSettings()->GetLabelLanguage());
+    index = labelCombo->findData(qApp->Settings()->GetLabelLanguage());
     if (index != -1)
     {
         labelCombo->setCurrentIndex(index);
@@ -261,7 +261,7 @@ QGroupBox *ConfigurationPage::SendGroup()
     QGroupBox *sendGroup = new QGroupBox(tr("Send crash reports"));
 
     sendReportCheck = new QCheckBox(tr("Send crash reports (recommended)"));
-    sendReportCheck->setChecked(qApp->getSettings()->GetSendReportState());
+    sendReportCheck->setChecked(qApp->Settings()->GetSendReportState());
 
     QLabel *description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
                                         "problem. We do not collect any personal information. Find more about what "
@@ -286,7 +286,7 @@ QGroupBox *ConfigurationPage::DrawGroup()
     QGroupBox *drawGroup = new QGroupBox(tr("Pattern Editing"));
 
     askPointDeletionCheck = new QCheckBox(tr("Confirm item deletion"));
-    askPointDeletionCheck->setChecked(qApp->getSettings()->GetConfirmItemDelete());
+    askPointDeletionCheck->setChecked(qApp->Settings()->GetConfirmItemDelete());
 
     QVBoxLayout *editLayout = new QVBoxLayout;
     editLayout->addWidget(askPointDeletionCheck);
@@ -301,7 +301,7 @@ QGroupBox *ConfigurationPage::ToolBarGroup()
     QGroupBox *toolBarGroup = new QGroupBox(tr("Toolbar"));
 
     toolBarStyleCheck = new QCheckBox(tr("The text appears under the icon. (recommended for beginners.)"));
-    toolBarStyleCheck->setChecked(qApp->getSettings()->GetToolBarStyle());
+    toolBarStyleCheck->setChecked(qApp->Settings()->GetToolBarStyle());
 
     QVBoxLayout *editLayout = new QVBoxLayout;
     editLayout->addWidget(toolBarStyleCheck);

@@ -315,7 +315,7 @@ QString DialogNormal::GetTypeLine() const
  */
 QString DialogNormal::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

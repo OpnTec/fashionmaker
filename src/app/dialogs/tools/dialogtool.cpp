@@ -461,7 +461,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             QString formula = text;
             formula.replace("\n", " ");
             // Translate to internal look.
-            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->getSettings()->GetOsSeparator());
+            formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             Calculator *cal = new Calculator(data, qApp->patternType());
             result = cal->EvalFormula(formula);
             delete cal;

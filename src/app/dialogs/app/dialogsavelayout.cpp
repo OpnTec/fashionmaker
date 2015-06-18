@@ -43,7 +43,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
@@ -67,7 +67,7 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this, &DialogSaveLayout::Browse);
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
-    ui->lineEditPath->setText(qApp->getSettings()->GetPathLayout());
+    ui->lineEditPath->setText(qApp->Settings()->GetPathLayout());
     ShowExample();//Show example for current format.
 }
 

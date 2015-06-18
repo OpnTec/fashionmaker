@@ -499,7 +499,7 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    const QString checkedLocale = getSettings()->GetLocale();
+    const QString checkedLocale = Settings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator *qtTranslator = new QTranslator(this);
@@ -641,7 +641,7 @@ const VTranslateVars *VApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    trVars = new VTranslateVars(getSettings());
+    trVars = new VTranslateVars(Settings());
 }
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

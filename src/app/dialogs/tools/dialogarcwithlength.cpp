@@ -109,7 +109,7 @@ void DialogArcWithLength::SetCenter(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArcWithLength::GetRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(radius, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ void DialogArcWithLength::SetRadius(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArcWithLength::GetF1() const
 {
-    return qApp->TrVars()->FormulaFromUser(f1, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
 }
 
 void DialogArcWithLength::SetF1(const QString &value)
@@ -156,7 +156,7 @@ void DialogArcWithLength::SetF1(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogArcWithLength::GetLength() const
 {
-    return qApp->TrVars()->FormulaFromUser(length, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(length, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

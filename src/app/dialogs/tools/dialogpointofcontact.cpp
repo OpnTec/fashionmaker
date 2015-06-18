@@ -304,7 +304,7 @@ void DialogPointOfContact::SetPointName(const QString &value)
  */
 QString DialogPointOfContact::getRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(radius, qApp->getSettings()->GetOsSeparator());
+    return qApp->TrVars()->FormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
