@@ -33,7 +33,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-#include "ifcdef.h"
+#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/logging.h"
 

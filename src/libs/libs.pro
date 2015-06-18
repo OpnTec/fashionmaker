@@ -8,6 +8,5 @@ SUBDIRS = \
     vgeometry \
     vpatterndb \
     vmisc \
-    vwidgets
-
-vgeometry.depends = ifc
+    vwidgets \
+    vtools

@@ -31,10 +31,10 @@
 #include "../../libs/vgeometry/varc.h"
 #include "../../libs/vgeometry/vsplinepath.h"
 #include "../../libs/vgeometry/vpointf.h"
-#include "../../tools/vabstracttool.h"
-#include "../../tools/drawTools/vtoolcutspline.h"
-#include "../../tools/drawTools/vtoolcutsplinepath.h"
-#include "../../tools/drawTools/vtoolcutarc.h"
+#include "../../libs/vtools/tools/vabstracttool.h"
+#include "../../libs/vtools/tools/drawTools/vtoolcutspline.h"
+#include "../../libs/vtools/tools/drawTools/vtoolcutsplinepath.h"
+#include "../../libs/vtools/tools/drawTools/vtoolcutarc.h"
 #include "../../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------

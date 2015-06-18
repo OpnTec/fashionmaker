@@ -27,15 +27,43 @@
  *************************************************************************/
 
 #include "vabstractapplication.h"
+#include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
-    :QApplication(argc, argv), _patternType(MeasurementsType::Individual), settings(nullptr)
+    :QApplication(argc, argv),
+      undoStack(nullptr),
+      mainWindow(nullptr),
+      _patternUnit(Unit::Cm),
+      _patternType(MeasurementsType::Individual),
+      settings(nullptr),
+      currentScene(nullptr),
+      sceneView(nullptr),
+      doc(nullptr),
+      openingPattern(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::~VAbstractApplication()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit VAbstractApplication::patternUnit() const
+{
+    return _patternUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const Unit *VAbstractApplication::patternUnitP() const
+{
+    return &_patternUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
+{
+    _patternUnit = patternUnit;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,4 +86,42 @@ VSettings *VAbstractApplication::Settings()
 {
     SCASSERT(settings != nullptr);
     return settings;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+QGraphicsScene *VAbstractApplication::getCurrentScene() const
+{
+    SCASSERT(currentScene != nullptr);
+    return currentScene;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setCurrentScene(QGraphicsScene *value)
+{
+    currentScene = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VMainGraphicsView *VAbstractApplication::getSceneView() const
+{
+    return sceneView;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setSceneView(VMainGraphicsView *value)
+{
+    sceneView = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VAbstractApplication::toPixel(double val) const
+{
+    return ToPixel(val, _patternUnit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+double VAbstractApplication::fromPixel(double pix) const
+{
+    return FromPixel(pix, _patternUnit);
 }

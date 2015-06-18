@@ -35,8 +35,11 @@
 #include <QObject>
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
+enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
+enum class LabelType : char {NewPatternPiece, NewLabel};
 
 class VDataTool;
+class VContainer;
 
 class VAbstractPattern : public QObject, public VDomDocument
 {
@@ -63,6 +66,10 @@ public:
 
     virtual void   IncrementReferens(quint32 id) const=0;
     virtual void   DecrementReferens(quint32 id) const=0;
+
+    virtual QString GenerateLabel(const LabelType &type)const=0;
+
+    virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
     QHash<quint32, VDataTool *> *getTools();
     VDataTool     *getTool(const quint32 &id);

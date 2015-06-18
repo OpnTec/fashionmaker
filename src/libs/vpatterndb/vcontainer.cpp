@@ -454,9 +454,9 @@ const QMap<QString, QSharedPointer<VArcAngle> > VContainer::DataAnglesArcs() con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
+const QMap<QString, QSharedPointer<VSplineAngle> > VContainer::DataAnglesCurves() const
 {
-    return DataVar<VCurveAngle>(VarType::SplineAngle);
+    return DataVar<VSplineAngle>(VarType::SplineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,12 +47,6 @@
 class QString;
 class QStringList;
 
-#define SceneSize 50000
-#define DefPointRadius 1.5//mm
-
-extern const QString degreeSymbol;
-
-enum class Source : char { FromGui, FromFile, FromTool };
 enum class Contour : char { OpenContour, CloseContour };
 
 #endif // OPTIONS_H

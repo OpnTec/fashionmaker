@@ -30,11 +30,15 @@
 #define VABSTRACTAPPLICATION_H
 
 #include <QApplication>
+#include <QGraphicsScene>
 #include "def.h"
 #include "vsettings.h"
 
 class VAbstractApplication;// use in define
 class VTranslateVars;
+class VAbstractPattern;
+class VMainGraphicsView;
+class QUndoStack;
 
 #if defined(qApp)
 #undef qApp
@@ -49,23 +53,67 @@ public:
 
     virtual const VTranslateVars *TrVars()=0;
 
+    Unit             patternUnit() const;
+    const Unit      *patternUnitP() const;
+    void             setPatternUnit(const Unit &patternUnit);
+
     MeasurementsType patternType() const;
     void             setPatternType(const MeasurementsType &patternType);
 
     void             OpenSettings();
-    VSettings        *Settings();
+    VSettings       *Settings();
 
     template <typename T>
     QString          LocaleToString(const T &value);
 
+    QGraphicsScene  *getCurrentScene() const;
+    void             setCurrentScene(QGraphicsScene *value);
+
+    VMainGraphicsView *getSceneView() const;
+    void               setSceneView(VMainGraphicsView *value);
+
+    double           toPixel(double val) const;
+    double           fromPixel(double pix) const;
+
+    void             setCurrentDocument(VAbstractPattern *doc);
+    VAbstractPattern *getCurrentDocument()const;
+
+    bool             getOpeningPattern() const;
+    void             setOpeningPattern();
+
+    QWidget         *getMainWindow() const;
+    void             setMainWindow(QWidget *value);
+
+    QUndoStack      *getUndoStack() const;
+
+protected:
+    QUndoStack         *undoStack;
+
+    /**
+     * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window
+     * modality doesn't work.
+     */
+    QWidget            *mainWindow;
 
 private:
     Q_DISABLE_COPY(VAbstractApplication)
+    Unit               _patternUnit;
     MeasurementsType   _patternType;
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
     VSettings          *settings;
+
+    QGraphicsScene     *currentScene;
+    VMainGraphicsView  *sceneView;
+
+    VAbstractPattern   *doc;
+
+    /**
+     * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
+     * we can allow user use Undo option.
+     */
+    bool               openingPattern;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -87,6 +135,50 @@ QString VAbstractApplication::LocaleToString(const T &value)
     QLocale loc;
     qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
     return loc.toString(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::setCurrentDocument(VAbstractPattern *doc)
+{
+    this->doc = doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VAbstractPattern *VAbstractApplication::getCurrentDocument() const
+{
+    SCASSERT(doc != nullptr)
+    return doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool VAbstractApplication::getOpeningPattern() const
+{
+    return openingPattern;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::setOpeningPattern()
+{
+    openingPattern = !openingPattern;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QWidget *VAbstractApplication::getMainWindow() const
+{
+    return mainWindow;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VAbstractApplication::setMainWindow(QWidget *value)
+{
+    SCASSERT(value != nullptr)
+    mainWindow = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QUndoStack *VAbstractApplication::getUndoStack() const
+{
+    return undoStack;
 }
 
 #endif // VABSTRACTAPPLICATION_H

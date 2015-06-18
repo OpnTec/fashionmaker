@@ -36,9 +36,6 @@
 class VDataTool;
 class VMainGraphicsScene;
 
-enum class LabelType : char {NewPatternPiece, NewLabel};
-enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
-
 /**
  * @brief The VPattern class working with pattern file.
  */
@@ -54,7 +51,7 @@ public:
     void           Parse(const Document &parse);
 
     void           setCurrentData();
-    void           UpdateToolData(const quint32 &id, VContainer *data);
+    virtual void   UpdateToolData(const quint32 &id, VContainer *data);
 
     virtual void   IncrementReferens(quint32 id) const;
     virtual void   DecrementReferens(quint32 id) const;
@@ -68,7 +65,7 @@ public:
     QString        GetAuthor() const;
     void           SetAuthor(const QString &text);
 
-    QString        GenerateLabel(const LabelType &type)const;
+    virtual QString GenerateLabel(const LabelType &type)const;
 
 public slots:
     void           LiteParseTree(const Document &parse);

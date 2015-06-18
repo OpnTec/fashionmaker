@@ -32,7 +32,7 @@
 #include "../libs/ifc/exception/vexceptionconversionerror.h"
 #include "../libs/ifc/exception/vexceptionemptyparameter.h"
 #include "../libs/ifc/exception/vexceptionwrongid.h"
-#include "vmaingraphicsview.h"
+#include "../libs/vwidgets/vmaingraphicsview.h"
 #include "../version.h"
 #include "../vmisc/logging.h"
 
@@ -156,9 +156,9 @@ const QString VApplication::GistFileName = QStringLiteral("gist.json");
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv), _patternUnit(Unit::Cm),
-      trVars(nullptr), undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr),
-      mainWindow(nullptr), openingPattern(false), doc(nullptr), log(nullptr),
+    : VAbstractApplication(argc, argv),
+      trVars(nullptr), autoSaveTimer(nullptr),
+      log(nullptr),
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       out(nullptr), logLock(nullptr)
 #else
@@ -220,15 +220,6 @@ void VApplication::NewValentina(const QString &fileName)
         {
             qCWarning(vApp, "Could not run process. The operation timed out or an error occurred.");
         }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::CheckFactor(qreal &oldFactor, const qreal &Newfactor)
-{
-    if (Newfactor <= 2 && Newfactor >= 0.5)
-    {
-        oldFactor = Newfactor;
     }
 }
 
@@ -466,12 +457,6 @@ void VApplication::ClearOldLogs() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::setPatternUnit(const Unit &patternUnit)
-{
-    _patternUnit = patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitOptions()
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
@@ -533,56 +518,6 @@ void VApplication::InitOptions()
        //This does not happen under GNOME or KDE
        QIcon::setThemeName("win.icon.theme");
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::toPixel(double val) const
-{
-    return ToPixel(val, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::fromPixel(double pix) const
-{
-    return FromPixel(pix, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QWidget *VApplication::getMainWindow() const
-{
-    return mainWindow;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setMainWindow(QWidget *value)
-{
-    SCASSERT(value != nullptr)
-    mainWindow = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VApplication::getOpeningPattern() const
-{
-    return openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setOpeningPattern()
-{
-    openingPattern = !openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsScene *VApplication::getCurrentScene() const
-{
-    SCASSERT(currentScene != nullptr);
-    return currentScene;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setCurrentScene(QGraphicsScene *value)
-{
-    currentScene = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

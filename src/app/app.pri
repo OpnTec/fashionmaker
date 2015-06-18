@@ -1,9 +1,6 @@
 # Suport subdirectories. Just better project code tree.
 include(dialogs/dialogs.pri)
-include(tools/tools.pri)
 include(xml/xml.pri)
-include(undocommands/undocommands.pri)
-include(visualization/visualization.pri)
 include(core/core.pri)
 
 # ADD TO EACH PATH $$PWD VARIABLE!!!!!!

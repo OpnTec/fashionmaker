@@ -30,13 +30,12 @@
 #define IFCDEF_H
 
 #include <QtGlobal>
+#include "../vmisc/def.h"
 
 #ifdef Q_OS_WIN32
     extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
     #include <windows.h>
 #endif /*Q_OS_WIN32*/
-
-enum class Unit : char { Mm, Cm, Inch, Px };
 
 static const quint32 null_id = 0;
 
@@ -58,14 +57,7 @@ static const quint32 null_id = 0;
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
 
-extern const qreal PrintDPI;
-
 qreal WidthMainLine(Unit patternUnit);
 qreal WidthHairLine(Unit patternUnit);
-
-double ToPixel(double val, const Unit &unit);
-double FromPixel(double pix, const Unit &unit);
-
-qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
 
 #endif // IFCDEF_H

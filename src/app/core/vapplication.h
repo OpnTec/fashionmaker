@@ -36,7 +36,6 @@
 #include "vsettings.h"
 
 class VApplication;// use in define
-class QUndoStack;
 class VMainGraphicsView;
 class VPattern;
 class QFile;
@@ -59,16 +58,9 @@ public:
     VApplication(int &argc, char ** argv);
     virtual ~VApplication();
     static void        NewValentina(const QString &fileName = QString());
-    static void        CheckFactor(qreal &oldFactor, const qreal &Newfactor);
     virtual bool       notify(QObject * receiver, QEvent * event);
-    Unit               patternUnit() const;
-    const Unit        *patternUnitP() const;
-    void               setPatternUnit(const Unit &patternUnit);
 
     void               InitOptions();
-
-    double             toPixel(double val) const;
-    double             fromPixel(double pix) const;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     static bool        TryLock(QLockFile *lock);
@@ -76,21 +68,8 @@ public:
 
     QString            translationsPath() const;
 
-    QUndoStack         *getUndoStack() const;
-    VMainGraphicsView  *getSceneView() const;
-    void               setSceneView(VMainGraphicsView *value);
     QTimer             *getAutoSaveTimer() const;
     void               setAutoSaveTimer(QTimer *value);
-    QWidget            *getMainWindow() const;
-    void               setMainWindow(QWidget *value);
-    bool               getOpeningPattern() const;
-    void               setOpeningPattern();
-
-    QGraphicsScene    *getCurrentScene() const;
-    void               setCurrentScene(QGraphicsScene *value);
-
-    void               setCurrentDocument(VPattern *doc);
-    VPattern           *getCurrentDocument()const;
 
     static QStringList LabelLanguages();
 
@@ -99,7 +78,6 @@ public:
 
     virtual const VTranslateVars *TrVars();
     void               InitTrVars();
-
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static void        DrMingw();
@@ -113,24 +91,9 @@ private slots:
 
 private:
     Q_DISABLE_COPY(VApplication)
-    Unit               _patternUnit;
     VTranslateVars     *trVars;
-    QUndoStack         *undoStack;
-    VMainGraphicsView  *sceneView;
-    QGraphicsScene     *currentScene;
     QTimer             *autoSaveTimer;
-    /**
-     * @brief mainWindow pointer to main window. Usefull if need create modal dialog. Without pointer to main window
-     * modality doesn't work.
-     */
-    QWidget            *mainWindow;
-    /**
-     * @brief openingPattern true when we opening pattern. If something will be wrong in formula this help understand if
-     * we can allow user use Undo option.
-     */
-    bool               openingPattern;
 
-    VPattern           *doc;
     QFile              *log;
     QTextStream        *out;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
@@ -156,36 +119,6 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Unit VApplication::patternUnit() const
-{
-    return _patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline const Unit *VApplication::patternUnitP() const
-{
-    return &_patternUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QUndoStack *VApplication::getUndoStack() const
-{
-    return undoStack;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline VMainGraphicsView *VApplication::getSceneView() const
-{
-    return sceneView;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VApplication::setSceneView(VMainGraphicsView *value)
-{
-    sceneView = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 inline QTimer *VApplication::getAutoSaveTimer() const
 {
     return autoSaveTimer;
@@ -195,19 +128,6 @@ inline QTimer *VApplication::getAutoSaveTimer() const
 inline void VApplication::setAutoSaveTimer(QTimer *value)
 {
     autoSaveTimer = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VApplication::setCurrentDocument(VPattern *doc)
-{
-    this->doc = doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline VPattern *VApplication::getCurrentDocument() const
-{
-    SCASSERT(doc != nullptr)
-    return doc;
 }
 
 #endif // VAPPLICATION_H

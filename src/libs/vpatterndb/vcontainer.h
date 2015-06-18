@@ -156,7 +156,7 @@ public:
     const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
     const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
     const QMap<QString, QSharedPointer<VArcAngle> >     DataAnglesArcs() const;
-    const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
+    const QMap<QString, QSharedPointer<VSplineAngle> >  DataAnglesCurves() const;
 
     static bool        IsUnique(const QString &name);
 

@@ -34,6 +34,8 @@
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
 #include "../../libs/vmisc/vsettings.h"
+#include "../../libs/qmuparser/qmudef.h"
+#include "../../libs/vpatterndb/vtranslatevars.h"
 
 #include <QFileDialog>
 #include <QDir>

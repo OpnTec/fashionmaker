@@ -33,9 +33,14 @@
 #include <QtGlobal>
 #include <QStringList>
 
+#define SceneSize 50000
+#define DefPointRadius 1.5//mm
+
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
 enum class MeasurementsType : char { Standard, Individual };
+enum class Unit : char { Mm, Cm, Inch, Px };
+enum class Source : char { FromGui, FromFile, FromTool };
 
 enum class Tool : unsigned char
 {
@@ -372,7 +377,18 @@ extern const QString in_Oprt;
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 
+extern const QString degreeSymbol;
+
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void RestoreOverrideCursor(const QString & pixmapPath);
+
+extern const qreal PrintDPI;
+
+double ToPixel(double val, const Unit &unit);
+double FromPixel(double pix, const Unit &unit);
+
+qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
+
+void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 
 #endif // DEF_H
