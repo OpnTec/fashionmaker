@@ -26,7 +26,7 @@
    <string>Segment a curved path</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../share/resources/icon.qrc">
+   <iconset resource="../../../../app/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -101,7 +101,7 @@
         <string notr="true">...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
+        <iconset resource="../../../../app/share/resources/icon.qrc">
          <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
@@ -118,7 +118,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+        <pixmap resource="../../../../app/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -284,7 +284,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../../share/resources/icon.qrc"/>
+  <include location="../../../../app/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

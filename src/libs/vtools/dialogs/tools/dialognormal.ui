@@ -26,7 +26,7 @@
    <string>Point along perpendicular</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../share/resources/icon.qrc">
+   <iconset resource="../../../../app/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -104,7 +104,7 @@
         <string notr="true">...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../share/resources/icon.qrc">
+        <iconset resource="../../../../app/share/resources/icon.qrc">
          <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
@@ -121,7 +121,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+        <pixmap resource="../../../../app/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -309,7 +309,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowRight.png</normaloff>:/icon/32x32/arrowRight.png</iconset>
          </property>
          <property name="iconSize">
@@ -348,7 +348,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowLeftUp.png</normaloff>:/icon/32x32/arrowLeftUp.png</iconset>
          </property>
          <property name="iconSize">
@@ -365,7 +365,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowRightUp.png</normaloff>:/icon/32x32/arrowRightUp.png</iconset>
          </property>
          <property name="iconSize">
@@ -388,7 +388,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowUp.png</normaloff>:/icon/32x32/arrowUp.png</iconset>
          </property>
          <property name="iconSize">
@@ -405,7 +405,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowLeft.png</normaloff>:/icon/32x32/arrowLeft.png</iconset>
          </property>
          <property name="iconSize">
@@ -422,7 +422,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowLeftDown.png</normaloff>:/icon/32x32/arrowLeftDown.png</iconset>
          </property>
          <property name="iconSize">
@@ -439,7 +439,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowDown.png</normaloff>:/icon/32x32/arrowDown.png</iconset>
          </property>
          <property name="iconSize">
@@ -456,7 +456,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset resource="../../share/resources/icon.qrc">
+          <iconset resource="../../../../app/share/resources/icon.qrc">
            <normaloff>:/icon/32x32/arrowRightDown.png</normaloff>:/icon/32x32/arrowRightDown.png</iconset>
          </property>
          <property name="iconSize">
@@ -547,7 +547,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../../share/resources/icon.qrc"/>
+  <include location="../../../../app/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>
