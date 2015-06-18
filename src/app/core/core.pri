@@ -3,16 +3,12 @@
 
 HEADERS += \
     $$PWD/vapplication.h \
-    $$PWD/undoevent.h \
-    $$PWD/vsettings.h \
-    $$PWD/backport/qcommandlineoption.h \
-    $$PWD/backport/qcommandlineparser.h \
-    $$PWD/vformula.h
+    $$PWD/vformulaproperty.h \
+    $$PWD/vformulapropertyeditor.h \
+    $$PWD/vtooloptionspropertybrowser.h
 
 SOURCES += \
     $$PWD/vapplication.cpp \
-    $$PWD/undoevent.cpp \
-    $$PWD/vsettings.cpp \
-    $$PWD/backport/qcommandlineoption.cpp \
-    $$PWD/backport/qcommandlineparser.cpp \
-    $$PWD/vformula.cpp
+    $$PWD/vformulaproperty.cpp \
+    $$PWD/vformulapropertyeditor.cpp \
+    $$PWD/vtooloptionspropertybrowser.cpp

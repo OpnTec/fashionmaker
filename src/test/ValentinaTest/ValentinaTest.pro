@@ -41,7 +41,8 @@ SOURCES += \
     abstracttest.cpp \
     tst_nameregexp.cpp \
     tst_vlayoutdetail.cpp \
-    tst_varc.cpp
+    tst_varc.cpp \
+    stable.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -50,7 +51,14 @@ HEADERS += \
     abstracttest.h \
     tst_nameregexp.h \
     tst_vlayoutdetail.h \
-    tst_varc.h
+    tst_varc.h \
+    stable.h
+
+# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+$$enable_ccache()
+
+# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
+$$set_PCH()
 
 CONFIG(debug, debug|release){
     # Debug mode

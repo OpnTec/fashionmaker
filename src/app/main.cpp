@@ -30,7 +30,7 @@
 #include "core/vapplication.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../core/backport/qcommandlineparser.h"
+#   include "../libs/vmisc/backport/qcommandlineparser.h"
 #else
 #   include <QCommandLineParser>
 #endif

@@ -29,7 +29,7 @@
 #include "vcontainer.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 #include "vtranslatevars.h"
 
 #include <QLineF>
@@ -454,9 +454,9 @@ const QMap<QString, QSharedPointer<VArcAngle> > VContainer::DataAnglesArcs() con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
+const QMap<QString, QSharedPointer<VSplineAngle> > VContainer::DataAnglesCurves() const
 {
-    return DataVar<VCurveAngle>(VarType::SplineAngle);
+    return DataVar<VSplineAngle>(VarType::SplineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -33,8 +33,9 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-#include "ifcdef.h"
-#include "../../../utils/logging.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 

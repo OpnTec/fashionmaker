@@ -25,7 +25,6 @@ CONFIG -= debug_and_release debug_and_release_target
 DEFINES += QT_MESSAGELOGCONTEXT
 
 include(vgeometry.pri)
-include(../../utils/utils.pri)
 
 # This is static library so no need in "make install"
 
@@ -95,12 +94,3 @@ CONFIG(debug, debug|release){
         }
     }
 }
-
-# IFC static library
-unix|win32: LIBS += -L$$OUT_PWD/../ifc/$${DESTDIR}/ -lifc
-
-INCLUDEPATH += $$PWD/../ifc
-DEPENDPATH += $$PWD/../ifc
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../ifc/$${DESTDIR}/ifc.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../ifc/$${DESTDIR}/libifc.a

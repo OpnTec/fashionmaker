@@ -32,7 +32,7 @@
 #include "../libs/ifc/ifcdef.h"
 #include "../libs/vgeometry/vgeometrydef.h"
 #include "../libs/qmuparser/qmudef.h"
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 
 #ifdef Q_OS_WIN32
 #   if defined( Q_CC_MSVC )        // MSVC USED
@@ -47,18 +47,6 @@
 class QString;
 class QStringList;
 
-#define SceneSize 50000
-#define DefPointRadius 1.5//mm
-
-extern const QString degreeSymbol;
-
-extern const QString cursorArrowOpenHand;
-extern const QString cursorArrowCloseHand;
-
-enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
-
-
-enum class Source : char { FromGui, FromFile, FromTool };
 enum class Contour : char { OpenContour, CloseContour };
 
 #endif // OPTIONS_H

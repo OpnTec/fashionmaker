@@ -28,4 +28,32 @@
 
 #include "ifcdef.h"
 
-const qreal PrintDPI = 96.0;
+#define DefWidth 1.2//mm
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal WidthMainLine(Unit patternUnit)
+{
+    qreal _widthMainLine = DefWidth;
+    switch (patternUnit)
+    {
+        case Unit::Mm:
+            _widthMainLine = DefWidth;
+            break;
+        case Unit::Cm:
+            _widthMainLine = DefWidth/10.0;
+            break;
+        case Unit::Inch:
+            _widthMainLine = DefWidth/25.4;
+            break;
+        default:
+            _widthMainLine = DefWidth;
+            break;
+    }
+    return _widthMainLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal WidthHairLine(Unit patternUnit)
+{
+    return WidthMainLine(patternUnit)/3.0;
+}

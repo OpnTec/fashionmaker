@@ -29,7 +29,7 @@
 #include "pathpage.h"
 #include "../../../options.h"
 #include "../../../core/vapplication.h"
-#include "../../../core/vsettings.h"
+#include "../../../../libs/vmisc/vsettings.h"
 #include <QDir>
 #include <QGroupBox>
 #include <QLabel>
@@ -62,10 +62,10 @@ PathPage::PathPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::Apply()
 {
-    qApp->getSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
-    qApp->getSettings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
-    qApp->getSettings()->SetPathPattern(pathTable->item(2, 1)->text());
-    qApp->getSettings()->SetPathLayout(pathTable->item(3, 1)->text());
+    qApp->Settings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
+    qApp->Settings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
+    qApp->Settings()->SetPathPattern(pathTable->item(2, 1)->text());
+    qApp->Settings()->SetPathLayout(pathTable->item(3, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,16 +113,16 @@ void PathPage::EditPath()
     switch (row)
     {
         case 0: // individual measurements
-            path = qApp->getSettings()->GetPathIndividualMeasurements();
+            path = qApp->Settings()->GetPathIndividualMeasurements();
             break;
         case 1: // standard measurements
-            path = qApp->getSettings()->GetPathStandardMeasurements();
+            path = qApp->Settings()->GetPathStandardMeasurements();
             break;
         case 2: // pattern path
-            path = qApp->getSettings()->GetPathPattern();
+            path = qApp->Settings()->GetPathPattern();
             break;
         case 3: // layout path
-            path = qApp->getSettings()->GetPathLayout();
+            path = qApp->Settings()->GetPathLayout();
             break;
         default:
             break;
@@ -182,29 +182,29 @@ void PathPage::InitTable()
 
     {
         pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathIndividualMeasurements());
-        item->setToolTip(qApp->getSettings()->GetPathIndividualMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathIndividualMeasurements());
+        item->setToolTip(qApp->Settings()->GetPathIndividualMeasurements());
         pathTable->setItem(0, 1, item);
     }
 
     {
         pathTable->setItem(1, 0, new QTableWidgetItem(tr("Standard measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathStandardMeasurements());
-        item->setToolTip(qApp->getSettings()->GetPathStandardMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathStandardMeasurements());
+        item->setToolTip(qApp->Settings()->GetPathStandardMeasurements());
         pathTable->setItem(1, 1, item);
     }
 
     {
         pathTable->setItem(2, 0, new QTableWidgetItem(tr("Patterns")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathPattern());
-        item->setToolTip(qApp->getSettings()->GetPathPattern());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathPattern());
+        item->setToolTip(qApp->Settings()->GetPathPattern());
         pathTable->setItem(2, 1, item);
     }
 
     {
         pathTable->setItem(3, 0, new QTableWidgetItem(tr("Layout")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->getSettings()->GetPathLayout());
-        item->setToolTip(qApp->getSettings()->GetPathLayout());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathLayout());
+        item->setToolTip(qApp->Settings()->GetPathLayout());
         pathTable->setItem(3, 1, item);
     }
 

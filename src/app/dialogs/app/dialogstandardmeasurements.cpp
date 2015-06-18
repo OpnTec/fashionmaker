@@ -30,9 +30,9 @@
 #include "ui_dialogstandardmeasurements.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../core/vapplication.h"
-#include "../../core/vsettings.h"
+#include "../../libs/vmisc/vsettings.h"
 #include "../../libs/vpatterndb/vcontainer.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 
 #include <QDir>
 #include <QPushButton>
@@ -47,7 +47,7 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
@@ -153,7 +153,7 @@ void DialogStandardMeasurements::LoadStandardTables()
     qCDebug(vStMeasur, "Loading standard table.");
     QStringList filters{"*.vst"};
     //Use standard path to standard measurements
-    const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+    const QString path = qApp->Settings()->GetPathStandardMeasurements();
     QDir tablesDir(path);
     tablesDir.setNameFilters(filters);
     tablesDir.setCurrent(path);

@@ -21,7 +21,8 @@ SOURCES += \
     $$PWD/variables/vmeasurement.cpp \
     $$PWD/variables/vsplineangle.cpp \
     $$PWD/variables/vsplinelength.cpp \
-    $$PWD/variables/vvariable.cpp
+    $$PWD/variables/vvariable.cpp \
+    $$PWD/vformula.cpp
 
 HEADERS += \
     $$PWD/vcontainer.h \
@@ -54,4 +55,5 @@ HEADERS += \
     $$PWD/variables/vsplineangle.h \
     $$PWD/variables/vsplinelength.h \
     $$PWD/variables/vvariable.h \
-    $$PWD/variables/vvariable_p.h
+    $$PWD/variables/vvariable_p.h \
+    $$PWD/vformula.h

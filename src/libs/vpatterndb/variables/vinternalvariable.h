@@ -31,7 +31,7 @@
 
 #include <QString>
 #include <QSharedDataPointer>
-#include "../../utils/def.h"
+#include "../vmisc/def.h"
 
 class VInternalVariableData;
 

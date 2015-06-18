@@ -46,10 +46,6 @@ UI_DIR = uic
 
 # Suport subdirectories. Just better project code tree.
 include(app.pri)
-include(../utils/utils.pri)
-
-# This include path help promoute VMainGraphicsView on main window. Without it compiler can't find path to custom view
-INCLUDEPATH += "$${PWD}/widgets"
 
 # Resource files. This files will be included in binary.
 RESOURCES += \
@@ -87,6 +83,7 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${UI_DIR}" \
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
+                -isystem "$${OUT_PWD}/../libs/vtools/$${UI_DIR}" \ # For VTools UI files
                 $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
 
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
@@ -105,6 +102,7 @@ CONFIG(debug, debug|release){
             -isystem "$${OUT_PWD}/$${UI_DIR}" \
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
+            -isystem "$${OUT_PWD}/../libs/vtools/$${UI_DIR}" \ # For VTools UI files
             $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
 
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
@@ -564,6 +562,27 @@ else:unix: LIBS += -L$${OUT_PWD}/../libs/vpropertyexplorer/$${DESTDIR} -lvproper
 INCLUDEPATH += $${PWD}/../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../libs/vpropertyexplorer
 
+# When the GNU linker sees a library, it discards all symbols that it doesn't need.
+# Add dependent library the first.
+
+#VPatternDB static library (depend on vgeometry)
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vpatterndb/$${DESTDIR} -lvpatterndb
+
+INCLUDEPATH += $$PWD/../libs/vpatterndb
+DEPENDPATH += $$PWD/../libs/vpatterndb
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+
+# VGeometry static library (depend on ifc)
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vgeometry/$${DESTDIR}/ -lvgeometry
+
+INCLUDEPATH += $$PWD/../libs/vgeometry
+DEPENDPATH += $$PWD/../libs/vgeometry
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/vgeometry.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+
 # IFC static library
 unix|win32: LIBS += -L$$OUT_PWD/../libs/ifc/$${DESTDIR}/ -lifc
 
@@ -591,23 +610,33 @@ DEPENDPATH += $$PWD/../libs/vlayout
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/vlayout.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vlayout/$${DESTDIR}/libvlayout.a
 
-# VGeometry static library
-unix|win32: LIBS += -L$$OUT_PWD/../libs/vgeometry/$${DESTDIR}/ -lvgeometry
+#VTools static library (depend on vwidgets and vmisc)
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vtools/$${DESTDIR}/ -lvtools
 
-INCLUDEPATH += $$PWD/../libs/vgeometry
-DEPENDPATH += $$PWD/../libs/vgeometry
+INCLUDEPATH += $$PWD/../libs/vtools
+INCLUDEPATH += $$OUT_PWD/../libs/vtools/$${UI_DIR} # For UI files
+DEPENDPATH += $$PWD/../libs/vtools
 
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/vgeometry.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vtools/$${DESTDIR}/vtools.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vtools/$${DESTDIR}/libvtools.a
 
-#VPatternDB staic library
-unix|win32: LIBS += -L$$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/ -lvpatterndb
+#VMisc static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vmisc/$${DESTDIR}/ -lvmisc
 
-INCLUDEPATH += $$PWD/../libs/vpatterndb
-DEPENDPATH += $$PWD/../libs/vpatterndb
+INCLUDEPATH += $$PWD/../libs/vmisc
+DEPENDPATH += $$PWD/../libs/vmisc
 
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vmisc/$${DESTDIR}/vmisc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vmisc/$${DESTDIR}/libvmisc.a
+
+#VWidgets static library
+unix|win32: LIBS += -L$$OUT_PWD/../libs/vwidgets/$${DESTDIR}/ -lvwidgets
+
+INCLUDEPATH += $$PWD/../libs/vwidgets
+DEPENDPATH += $$PWD/../libs/vwidgets
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vwidgets/$${DESTDIR}/vwidgets.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../libs/vwidgets/$${DESTDIR}/libvwidgets.a
 
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing

@@ -28,12 +28,14 @@
 
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
-#include "../../widgets/doubledelegate.h"
-#include "../../widgets/textdelegate.h"
-#include "../../widgets/vwidgetpopup.h"
+#include "../../libs/vwidgets/doubledelegate.h"
+#include "../../libs/vwidgets/textdelegate.h"
+#include "../../libs/vwidgets/vwidgetpopup.h"
 #include "../../xml/vstandardmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
-#include "../../core/vsettings.h"
+#include "../../libs/vmisc/vsettings.h"
+#include "../../libs/qmuparser/qmudef.h"
+#include "../../libs/vpatterndb/vtranslatevars.h"
 
 #include <QFileDialog>
 #include <QDir>
@@ -56,7 +58,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     qCDebug(vDialog, "Showing variables.");
     if (qApp->patternType() == MeasurementsType::Individual)
@@ -613,7 +615,7 @@ void DialogIncrements::OpenTable()
         const QString filter(tr("Individual measurements (*.vit)"));
 
         //Use standard path to individual measurements
-        const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
+        const QString path = qApp->Settings()->GetPathIndividualMeasurements();
 
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
@@ -656,7 +658,7 @@ void DialogIncrements::OpenTable()
     {
         const QString filter(tr("Standard measurements (*.vst)"));
         //Use standard path to standard measurements
-        const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+        const QString path = qApp->Settings()->GetPathStandardMeasurements();
         const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
         if (filePath.isEmpty())
         {

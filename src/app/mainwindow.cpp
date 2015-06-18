@@ -38,13 +38,13 @@
 #include "xml/vstandardmeasurements.h"
 #include "xml/vindividualmeasurements.h"
 #include "core/vapplication.h"
-#include "core/undoevent.h"
-#include "core/vsettings.h"
+#include "../libs/vmisc/undoevent.h"
+#include "../libs/vmisc/vsettings.h"
 #include "undocommands/renamepp.h"
-#include "vtooloptionspropertybrowser.h"
+#include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
 #include "../libs/ifc/xml/vpatternconverter.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -1480,7 +1480,7 @@ bool MainWindow::SaveAs()
     QString dir;
     if (curFile.isEmpty())
     {
-        dir = qApp->getSettings()->GetPathPattern() + "/" + tr("pattern") + ".val";
+        dir = qApp->Settings()->GetPathPattern() + "/" + tr("pattern") + ".val";
     }
     else
     {
@@ -1513,9 +1513,9 @@ bool MainWindow::SaveAs()
     if (oldFileName != curFile)
     {// Now we have new file name after save as.
      // But still have previous name in restore list. We should delete them.
-        QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
+        QStringList restoreFiles = qApp->Settings()->GetRestoreFileList();
         restoreFiles.removeAll(oldFileName);
-        qApp->getSettings()->SetRestoreFileList(restoreFiles);
+        qApp->Settings()->SetRestoreFileList(restoreFiles);
     }
     return result;
 }
@@ -1564,7 +1564,7 @@ void MainWindow::Open()
     qCDebug(vMainWindow, "Openning new file.");
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
-    const QStringList files = qApp->getSettings()->GetRecentFileList();
+    const QStringList files = qApp->Settings()->GetRecentFileList();
     QString dir;
     if (files.isEmpty())
     {
@@ -1676,9 +1676,9 @@ void MainWindow::FileClosedCorrect()
     WriteSettings();
 
     //File was closed correct.
-    QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
+    QStringList restoreFiles = qApp->Settings()->GetRestoreFileList();
     restoreFiles.removeAll(curFile);
-    qApp->getSettings()->SetRestoreFileList(restoreFiles);
+    qApp->Settings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
     QFile autofile(curFile +".autosave");
@@ -2035,8 +2035,8 @@ void MainWindow::New()
         }
 
         //Set scene size to size scene view
-        VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-        VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+        VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+        VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
         ToolBarOption();
 
         AddPP(patternPieceName, path);
@@ -2309,7 +2309,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     else
     {
         qCDebug(vMainWindow, "Updating recent file list.");
-        QStringList files = qApp->getSettings()->GetRecentFileList();
+        QStringList files = qApp->Settings()->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
         while (files.size() > MaxRecentFiles)
@@ -2317,14 +2317,14 @@ void MainWindow::setCurrentFile(const QString &fileName)
             files.removeLast();
         }
 
-        qApp->getSettings()->SetRecentFileList(files);
+        qApp->Settings()->SetRecentFileList(files);
         UpdateRecentFileActions();
 
         qCDebug(vMainWindow, "Updating restore file list.");
-        QStringList restoreFiles = qApp->getSettings()->GetRestoreFileList();
+        QStringList restoreFiles = qApp->Settings()->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
-        qApp->getSettings()->SetRestoreFileList(restoreFiles);
+        qApp->Settings()->SetRestoreFileList(restoreFiles);
     }
     shownName+="[*]";
     setWindowTitle(shownName);
@@ -2348,17 +2348,17 @@ QString MainWindow::strippedName(const QString &fullFileName)
 void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
-    restoreGeometry(qApp->getSettings()->GetGeometry());
-    restoreState(qApp->getSettings()->GetWindowState());
-    restoreState(qApp->getSettings()->GetToolbarsState(), APP_VERSION);
+    restoreGeometry(qApp->Settings()->GetGeometry());
+    restoreState(qApp->Settings()->GetWindowState());
+    restoreState(qApp->Settings()->GetToolbarsState(), APP_VERSION);
 
     // Scene antialiasing
-    const bool graphOutputValue = qApp->getSettings()->GetGraphicalOutput();
+    const bool graphOutputValue = qApp->Settings()->GetGraphicalOutput();
     ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
-    qApp->getUndoStack()->setUndoLimit(qApp->getSettings()->GetUndoCount());
+    qApp->getUndoStack()->setUndoLimit(qApp->Settings()->GetUndoCount());
 
     // Text under tool buton icon
     ToolBarStyles();
@@ -2372,9 +2372,9 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    qApp->getSettings()->SetGeometry(saveGeometry());
-    qApp->getSettings()->SetWindowState(saveState());
-    qApp->getSettings()->SetToolbarsState(saveState(APP_VERSION));
+    qApp->Settings()->SetGeometry(saveGeometry());
+    qApp->Settings()->SetWindowState(saveState());
+    qApp->Settings()->SetToolbarsState(saveState(APP_VERSION));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2406,7 +2406,7 @@ bool MainWindow::MaybeSave()
 void MainWindow::UpdateRecentFileActions()
 {
     qCDebug(vMainWindow, "Updating recent file actions.");
-    const QStringList files = qApp->getSettings()->GetRecentFileList();
+    const QStringList files = qApp->Settings()->GetRecentFileList();
     const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
     for (int i = 0; i < numRecentFiles; ++i)
@@ -2685,9 +2685,9 @@ void MainWindow::InitAutoSave()
     connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     autoSaveTimer->stop();
 
-    if (qApp->getSettings()->GetAutosaveState())
+    if (qApp->Settings()->GetAutosaveState())
     {
-        const qint32 autoTime = qApp->getSettings()->GetAutosaveTime();
+        const qint32 autoTime = qApp->Settings()->GetAutosaveTime();
         autoSaveTimer->start(autoTime*60000);
         qCDebug(vMainWindow, "Autosaving each %d minutes.", autoTime);
     }
@@ -2782,8 +2782,8 @@ void MainWindow::LoadPattern(const QString &fileName)
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     // On this stage scene empty. Fit scene size to view size
-    VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-    VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup++; // turn checking on
@@ -2871,7 +2871,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QStringList restoreFiles;
     //Take all files that need to be restored
-    QStringList files = qApp->getSettings()->GetRestoreFileList();
+    QStringList files = qApp->Settings()->GetRestoreFileList();
     if (files.size() > 0)
     {
         for (int i = 0; i < files.size(); ++i)
@@ -2893,7 +2893,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
             files.removeAll(restoreFiles.at(i));
         }
 
-        qApp->getSettings()->SetRestoreFileList(files);
+        qApp->Settings()->SetRestoreFileList(files);
 
     }
     return restoreFiles;
@@ -2905,7 +2905,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::WindowsLocale()
 {
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2939,7 +2939,7 @@ void MainWindow::ShowPaper(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStyle(QToolBar *bar)
 {
-    if (qApp->getSettings()->GetToolBarStyle())
+    if (qApp->Settings()->GetToolBarStyle())
     {
         bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     }
@@ -3023,14 +3023,14 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
             {
                 filter = tr("Standard measurements (*.vst)");
                 //Use standard path to standard measurements
-                const QString path = qApp->getSettings()->GetPathStandardMeasurements();
+                const QString path = qApp->Settings()->GetPathStandardMeasurements();
                 mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
             else
             {
                 filter = tr("Individual measurements (*.vit)");
                 //Use standard path to individual measurements
-                const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
+                const QString path = qApp->Settings()->GetPathIndividualMeasurements();
                 mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
 
@@ -3102,8 +3102,8 @@ void MainWindow::ZoomFirstShow()
     ActionDraw(true);
     ui->view->ZoomFitBest();
 
-    VAbstractTool::NewSceneRect(sceneDraw, ui->view);
-    VAbstractTool::NewSceneRect(sceneDetails, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
+    VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
     ActionDetails(true);
     ui->view->ZoomFitBest();

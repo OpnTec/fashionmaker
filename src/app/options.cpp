@@ -28,10 +28,3 @@
 
 #include "options.h"
 #include <QString>
-
-// From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
-// furthermore blows up the binary sizes.
-const QString degreeSymbol = QStringLiteral("°");
-
-const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
-const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");

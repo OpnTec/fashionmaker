@@ -30,7 +30,8 @@
 #define MAINWINDOW_H
 
 #include "mainwindowsnogui.h"
-#include "widgets/vmaingraphicsview.h"
+#include "../libs/vwidgets/vmaingraphicsview.h"
+#include "../libs/vtools/dialogs/tooldialogs.h"
 #include "dialogs/dialogs.h"
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"

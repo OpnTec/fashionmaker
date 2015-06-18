@@ -30,7 +30,7 @@
 #include "ui_dialogindividualmeasurements.h"
 #include "../../xml/vindividualmeasurements.h"
 #include "../../core/vapplication.h"
-#include "../../core/vsettings.h"
+#include "../../libs/vmisc/vsettings.h"
 #include "../../libs/vpatterndb/vcontainer.h"
 
 #include <QFileDialog>
@@ -47,7 +47,7 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
@@ -199,7 +199,7 @@ void DialogIndividualMeasurements::CheckState()
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
-    const QString path = qApp->getSettings()->GetPathIndividualMeasurements();
+    const QString path = qApp->Settings()->GetPathIndividualMeasurements();
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
     if (fileName.isEmpty())
@@ -228,7 +228,7 @@ void DialogIndividualMeasurements::OpenTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::NewTable()
 {
-    const QString dir = qApp->getSettings()->GetPathIndividualMeasurements()+"/measurements.vit";
+    const QString dir = qApp->Settings()->GetPathIndividualMeasurements()+"/measurements.vit";
     QString name = QFileDialog::getSaveFileName(this, tr("Where save measurements?"), dir,
                                                 tr("Individual measurements (*.vit)"));
 
@@ -256,7 +256,7 @@ void DialogIndividualMeasurements::InitUnits()
     ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
 
     // set default unit
-    const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->getSettings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->Settings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxUnits->setCurrentIndex(indexUnit);

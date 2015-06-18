@@ -28,7 +28,7 @@
 
 #include "dialogpatternxmledit.h"
 #include "ui_dialogpatternxmledit.h"
-#include "../core/vapplication.h"
+#include "../../core/vapplication.h"
 
 #include <QInputDialog>
 #include <QMessageBox>
@@ -46,7 +46,7 @@ DialogPatternXmlEdit::DialogPatternXmlEdit(QWidget *parent, VPattern *xmldoc)
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     this->xmlmodel = new VXMLTreeView();
     this->doc=xmldoc;

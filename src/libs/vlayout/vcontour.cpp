@@ -33,7 +33,7 @@
 #include <QPointF>
 #include <QLineF>
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../../utils/vmath.h"
+#   include "../libs/vmisc/vmath.h"
 #else
 #   include <QtMath>
 #endif

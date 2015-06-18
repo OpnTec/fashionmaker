@@ -32,9 +32,9 @@
 #include "../libs/ifc/exception/vexceptionconversionerror.h"
 #include "../libs/ifc/exception/vexceptionemptyparameter.h"
 #include "../libs/ifc/exception/vexceptionwrongid.h"
-#include "vmaingraphicsview.h"
+#include "../libs/vwidgets/vmaingraphicsview.h"
 #include "../version.h"
-#include "../../utils/logging.h"
+#include "../vmisc/logging.h"
 
 #include <QDebug>
 #include <QDir>
@@ -156,10 +156,9 @@ const QString VApplication::GistFileName = QStringLiteral("gist.json");
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : QApplication(argc, argv), _patternUnit(Unit::Cm), _patternType(MeasurementsType::Individual),
-      _widthMainLine(DefWidth), _widthHairLine(DefWidth/3.0), trVars(nullptr),
-      undoStack(nullptr), sceneView(nullptr), currentScene(nullptr), autoSaveTimer(nullptr), mainWindow(nullptr),
-      openingPattern(false), settings(nullptr), doc(nullptr), log(nullptr),
+    : VAbstractApplication(argc, argv),
+      trVars(nullptr), autoSaveTimer(nullptr),
+      log(nullptr),
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       out(nullptr), logLock(nullptr)
 #else
@@ -167,8 +166,6 @@ VApplication::VApplication(int &argc, char **argv)
 #endif
 {
     undoStack = new QUndoStack(this);
-
-    InitLineWidth();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -223,15 +220,6 @@ void VApplication::NewValentina(const QString &fileName)
         {
             qCWarning(vApp, "Could not run process. The operation timed out or an error occurred.");
         }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::CheckFactor(qreal &oldFactor, const qreal &Newfactor)
-{
-    if (Newfactor <= 2 && Newfactor >= 0.5)
-    {
-        oldFactor = Newfactor;
     }
 }
 
@@ -347,27 +335,6 @@ QString VApplication::translationsPath() const
         }
     #endif
 #endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::InitLineWidth()
-{
-    switch (_patternUnit)
-    {
-        case Unit::Mm:
-            _widthMainLine = DefWidth;
-            break;
-        case Unit::Cm:
-            _widthMainLine = DefWidth/10.0;
-            break;
-        case Unit::Inch:
-            _widthMainLine = DefWidth/25.4;
-            break;
-        default:
-            _widthMainLine = DefWidth;
-            break;
-    }
-    _widthHairLine = _widthMainLine/3.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -490,13 +457,6 @@ void VApplication::ClearOldLogs() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::setPatternUnit(const Unit &patternUnit)
-{
-    _patternUnit = patternUnit;
-    InitLineWidth();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitOptions()
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
@@ -524,7 +484,7 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    const QString checkedLocale = getSettings()->GetLocale();
+    const QString checkedLocale = Settings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator *qtTranslator = new QTranslator(this);
@@ -558,121 +518,6 @@ void VApplication::InitOptions()
        //This does not happen under GNOME or KDE
        QIcon::setThemeName("win.icon.theme");
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::toPixel(double val) const
-{
-    return ToPixel(val, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-double VApplication::fromPixel(double pix) const
-{
-    return FromPixel(pix, _patternUnit);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QWidget *VApplication::getMainWindow() const
-{
-    return mainWindow;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setMainWindow(QWidget *value)
-{
-    SCASSERT(value != nullptr)
-    mainWindow = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VApplication::getOpeningPattern() const
-{
-    return openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setOpeningPattern()
-{
-    openingPattern = !openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VApplication::OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VApplication::OpenSettings()
-{
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                             QApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VApplication::getSettings hide settings constructor.
- * @return pointer to class for acssesing to settings in ini file.
- */
-VSettings *VApplication::getSettings()
-{
-    SCASSERT(settings != nullptr);
-    return settings;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QGraphicsScene *VApplication::getCurrentScene() const
-{
-    SCASSERT(currentScene != nullptr);
-    return currentScene;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setCurrentScene(QGraphicsScene *value)
-{
-    currentScene = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::setOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
-    {
-        oldPixmap = oldCursor->pixmap();
-    }
-    QPixmap newPixmap(pixmapPath);
-
-    QImage oldImage = oldPixmap.toImage();
-    QImage newImage = newPixmap.toImage();
-
-    if (oldImage != newImage )
-    {
-        QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::restoreOverrideCursor(const QString &pixmapPath)
-{
-#ifndef QT_NO_CURSOR
-    QPixmap oldPixmap;
-    if (QCursor *oldCursor = QGuiApplication::overrideCursor())
-    {
-        oldPixmap = oldCursor->pixmap();
-    }
-    QPixmap newPixmap(pixmapPath);
-
-    QImage oldImage = oldPixmap.toImage();
-    QImage newImage = newPixmap.toImage();
-
-    if (oldImage == newImage )
-    {
-        QApplication::restoreOverrideCursor();
-    }
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -731,7 +576,7 @@ const VTranslateVars *VApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    trVars = new VTranslateVars(getSettings());
+    trVars = new VTranslateVars(Settings());
 }
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

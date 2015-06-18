@@ -6,6 +6,7 @@ SUBDIRS = \
     vobj \
     vlayout \
     vgeometry \
-    vpatterndb
-
-vgeometry.depends = ifc
+    vpatterndb \
+    vmisc \
+    vwidgets \
+    vtools

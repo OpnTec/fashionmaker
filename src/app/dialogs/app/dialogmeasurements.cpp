@@ -28,7 +28,7 @@
 
 #include "dialogmeasurements.h"
 #include "ui_dialogmeasurements.h"
-#include "../core/vapplication.h"
+#include "../../core/vapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMeasurements::DialogMeasurements(QWidget *parent) :
@@ -36,7 +36,7 @@ DialogMeasurements::DialogMeasurements(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qApp->getSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     connect(ui->toolButtonStandard, &QToolButton::clicked, this, &DialogMeasurements::StandardMeasurements);
     connect(ui->toolButtonIndividual, &QToolButton::clicked, this, &DialogMeasurements::IndividualMeasurements);
