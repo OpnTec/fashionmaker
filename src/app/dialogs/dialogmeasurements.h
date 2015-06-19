@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   dialogs.h
+ **  @file   dialogpatterntype.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   21 2, 2014
  **
  **  @brief
  **  @copyright
@@ -26,17 +26,30 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef DIALOGMEASUREMENTS_H
+#define DIALOGMEASUREMENTS_H
 
-#include "dialoghistory.h"
-#include "dialogincrements.h"
-#include "configdialog.h"
-#include "dialogpatternproperties.h"
-#include "dialogmeasurements.h"
-#include "dialogindividualmeasurements.h"
-#include "dialogstandardmeasurements.h"
-#include "dialogaboutapp.h"
-#include "dialogpatternxmledit.h"
+#include <QDialog>
+#include "../options.h"
 
-#endif // DIALOGS_H
+namespace Ui
+{
+    class DialogMeasurements;
+}
+
+class DialogMeasurements : public QDialog
+{
+    Q_OBJECT
+public:
+    explicit DialogMeasurements(QWidget *parent = nullptr);
+    ~DialogMeasurements();
+    MeasurementsType type() const;
+private:
+    Q_DISABLE_COPY(DialogMeasurements)
+    Ui::DialogMeasurements *ui;
+    MeasurementsType result;
+    void StandardMeasurements();
+    void IndividualMeasurements();
+};
+
+#endif // DIALOGMEASUREMENTS_H

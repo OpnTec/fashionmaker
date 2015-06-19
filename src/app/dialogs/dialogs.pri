@@ -3,51 +3,51 @@
 
 HEADERS += \
     $$PWD/dialogs.h \
-    $$PWD/app/dialogincrements.h \
-    $$PWD/app/dialoghistory.h \
-    $$PWD/app/configdialog.h \
-    $$PWD/app/configpages/pages.h \
-    $$PWD/app/dialogpatternproperties.h \
-    $$PWD/app/dialogmeasurements.h \
-    $$PWD/app/dialogstandardmeasurements.h \
-    $$PWD/app/dialogindividualmeasurements.h \
-    $$PWD/app/dialogaboutapp.h \
-    $$PWD/app/dialogpatternxmledit.h \
-    $$PWD/app/configpages/configurationpage.h \
-    $$PWD/app/configpages/patternpage.h \
-    $$PWD/app/configpages/communitypage.h \
-    $$PWD/app/configpages/pathpage.h \
-    $$PWD/app/dialoglayoutsettings.h \
-    $$PWD/app/dialoglayoutprogress.h \
-    $$PWD/app/dialogsavelayout.h
+    $$PWD/dialogincrements.h \
+    $$PWD/dialoghistory.h \
+    $$PWD/configdialog.h \
+    $$PWD/configpages/pages.h \
+    $$PWD/dialogpatternproperties.h \
+    $$PWD/dialogmeasurements.h \
+    $$PWD/dialogstandardmeasurements.h \
+    $$PWD/dialogindividualmeasurements.h \
+    $$PWD/dialogaboutapp.h \
+    $$PWD/dialogpatternxmledit.h \
+    $$PWD/configpages/configurationpage.h \
+    $$PWD/configpages/patternpage.h \
+    $$PWD/configpages/communitypage.h \
+    $$PWD/configpages/pathpage.h \
+    $$PWD/dialoglayoutsettings.h \
+    $$PWD/dialoglayoutprogress.h \
+    $$PWD/dialogsavelayout.h
 
 SOURCES += \
-    $$PWD/app/dialogincrements.cpp \
-    $$PWD/app/dialoghistory.cpp \
-    $$PWD/app/configdialog.cpp \
-    $$PWD/app/dialogpatternproperties.cpp \
-    $$PWD/app/dialogmeasurements.cpp \
-    $$PWD/app/dialogstandardmeasurements.cpp \
-    $$PWD/app/dialogindividualmeasurements.cpp \
-    $$PWD/app/dialogaboutapp.cpp \
-    $$PWD/app/dialogpatternxmledit.cpp \
-    $$PWD/app/configpages/configurationpage.cpp \
-    $$PWD/app/configpages/patternpage.cpp \
-    $$PWD/app/configpages/communitypage.cpp \
-    $$PWD/app/configpages/pathpage.cpp \
-    $$PWD/app/dialoglayoutsettings.cpp \
-    $$PWD/app/dialoglayoutprogress.cpp \
-    $$PWD/app/dialogsavelayout.cpp
+    $$PWD/dialogincrements.cpp \
+    $$PWD/dialoghistory.cpp \
+    $$PWD/configdialog.cpp \
+    $$PWD/dialogpatternproperties.cpp \
+    $$PWD/dialogmeasurements.cpp \
+    $$PWD/dialogstandardmeasurements.cpp \
+    $$PWD/dialogindividualmeasurements.cpp \
+    $$PWD/dialogaboutapp.cpp \
+    $$PWD/dialogpatternxmledit.cpp \
+    $$PWD/configpages/configurationpage.cpp \
+    $$PWD/configpages/patternpage.cpp \
+    $$PWD/configpages/communitypage.cpp \
+    $$PWD/configpages/pathpage.cpp \
+    $$PWD/dialoglayoutsettings.cpp \
+    $$PWD/dialoglayoutprogress.cpp \
+    $$PWD/dialogsavelayout.cpp
 
 FORMS += \
-    $$PWD/app/dialogincrements.ui \
-    $$PWD/app/dialoghistory.ui \
-    $$PWD/app/dialogpatternproperties.ui \
-    $$PWD/app/dialogmeasurements.ui \
-    $$PWD/app/dialogstandardmeasurements.ui \
-    $$PWD/app/dialogindividualmeasurements.ui \
-    $$PWD/app/dialogaboutapp.ui \
-    $$PWD/app/dialogpatternxmledit.ui \
-    $$PWD/app/dialoglayoutsettings.ui \
-    $$PWD/app/dialoglayoutprogress.ui \
-    $$PWD/app/dialogsavelayout.ui
+    $$PWD/dialogincrements.ui \
+    $$PWD/dialoghistory.ui \
+    $$PWD/dialogpatternproperties.ui \
+    $$PWD/dialogmeasurements.ui \
+    $$PWD/dialogstandardmeasurements.ui \
+    $$PWD/dialogindividualmeasurements.ui \
+    $$PWD/dialogaboutapp.ui \
+    $$PWD/dialogpatternxmledit.ui \
+    $$PWD/dialoglayoutsettings.ui \
+    $$PWD/dialoglayoutprogress.ui \
+    $$PWD/dialogsavelayout.ui

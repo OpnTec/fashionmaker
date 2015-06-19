@@ -30,10 +30,10 @@
 #include "core/vapplication.h"
 #include "../libs/vpatterndb/vcontainer.h"
 #include "../libs/vobj/vobjpaintdevice.h"
-#include "dialogs/app/dialoglayoutsettings.h"
+#include "dialogs/dialoglayoutsettings.h"
 #include "../libs/vlayout/vlayoutgenerator.h"
-#include "dialogs/app/dialoglayoutprogress.h"
-#include "dialogs/app/dialogsavelayout.h"
+#include "dialogs/dialoglayoutprogress.h"
+#include "dialogs/dialogsavelayout.h"
 #include "../libs/vlayout/vposter.h"
 
 #include <QFileDialog>
