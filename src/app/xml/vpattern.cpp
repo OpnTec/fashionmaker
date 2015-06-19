@@ -294,7 +294,7 @@ quint32 VPattern::SPointActiveDraw()
             if (domElement.isNull() == false)
             {
                 if (domElement.tagName() == VToolPoint::TagName &&
-                        domElement.attribute(AttrType, "") == VToolSinglePoint::ToolType)
+                        domElement.attribute(AttrType, "") == VToolBasePoint::ToolType)
                 {
                     return GetParametrId(domElement);
                 }
@@ -666,7 +666,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
     QString typeLine;
     QString lineColor;
 
-    QStringList points = QStringList() << VToolSinglePoint::ToolType << VToolEndLine::ToolType
+    QStringList points = QStringList() << VToolBasePoint::ToolType << VToolEndLine::ToolType
                                        << VToolAlongLine::ToolType << VToolShoulderPoint::ToolType
                                        << VToolNormal::ToolType << VToolBisector::ToolType
                                        << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType
@@ -680,9 +680,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointFromArcAndTangent::ToolType;
     switch (points.indexOf(type))
     {
-        case 0: //VToolSinglePoint::ToolType
+        case 0: //VToolBasePoint::ToolType
         {
-            VToolSinglePoint *spoint = 0;
+            VToolBasePoint *spoint = 0;
             try
             {
                 PointsCommonAttributes(domElement, id, name, mx, my);
@@ -690,19 +690,19 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                 const qreal y = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
 
                 data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-                VDrawTool::AddRecord(id, Tool::SinglePoint, this);
+                VDrawTool::AddRecord(id, Tool::BasePoint, this);
                 if (parse != Document::FullParse)
                 {
                     UpdateToolData(id, data);
                 }
                 if (parse == Document::FullParse)
                 {
-                    spoint = new VToolSinglePoint(this, data, id, Source::FromFile, nameActivPP, MPath());
+                    spoint = new VToolBasePoint(this, data, id, Source::FromFile, nameActivPP, MPath());
                     scene->addItem(spoint);
-                    connect(spoint, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-                    connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
-                    connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolSinglePoint::Disable);
-                    connect(scene, &VMainGraphicsScene::EnableToolMove, spoint, &VToolSinglePoint::EnableToolMove);
+                    connect(spoint, &VToolBasePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+                    connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
+                    connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
+                    connect(scene, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
                     tools[id] = spoint;
                 }
             }
@@ -1900,8 +1900,8 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Arrow:
                     Q_UNREACHABLE();
                     break;
-                case Tool::SinglePoint:
-                    rec = ToolBoundingRect<VToolSinglePoint>(rec, tool.getId());
+                case Tool::BasePoint:
+                    rec = ToolBoundingRect<VToolBasePoint>(rec, tool.getId());
                     break;
                 case Tool::EndLine:
                     rec = ToolBoundingRect<VToolEndLine>(rec, tool.getId());

@@ -39,7 +39,7 @@
 #include "vtoolnormal.h"
 #include "vtoolpointofcontact.h"
 #include "vtoolshoulderpoint.h"
-#include "vtoolsinglepoint.h"
+#include "vtoolbasepoint.h"
 #include "vtoolspline.h"
 #include "vtoolsplinepath.h"
 #include "vtoolheight.h"

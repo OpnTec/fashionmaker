@@ -49,7 +49,7 @@ enum class Tool : unsigned char
     LinePoint,
     AbstractSpline,
     Cut,
-    SinglePoint,
+    BasePoint,
     EndLine,
     Line,
     AlongLine,

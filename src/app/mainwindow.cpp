@@ -174,19 +174,19 @@ void MainWindow::AddPP(const QString &PPName, const QString &path)
     ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const quint32 id = pattern->AddGObject(new VPointF(30+comboBoxDraws->count()*5, 40, label, 5, 10));
-    VToolSinglePoint *spoint = new VToolSinglePoint(doc, pattern, id, Source::FromGui, PPName, path);
+    VToolBasePoint *spoint = new VToolBasePoint(doc, pattern, id, Source::FromGui, PPName, path);
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
 
     connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
-    connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolSinglePoint::Disable);
-    connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolSinglePoint::SetFactor);
-    connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolSinglePoint::EnableToolMove);
+    connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
+    connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
+    connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
 
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     SCASSERT(tools != nullptr);
     tools->insert(id, spoint);
-    VDrawTool::AddRecord(id, Tool::SinglePoint, doc);
+    VDrawTool::AddRecord(id, Tool::BasePoint, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);
 
@@ -1093,7 +1093,7 @@ void MainWindow::CancelTool()
             helpLabel->setText("");
             ui->actionStopTool->setEnabled(true);
             return;
-        case Tool::SinglePoint:
+        case Tool::BasePoint:
             Q_UNREACHABLE();
             //Nothing to do here because we can't create this tool from main window.
             break;
@@ -2476,7 +2476,7 @@ void MainWindow::LastUsedTool()
             ui->actionArrowTool->setChecked(true);
             ArrowTool();
             break;
-        case Tool::SinglePoint:
+        case Tool::BasePoint:
             Q_UNREACHABLE();
             //Nothing to do here because we can't create this tool from main window.
             break;

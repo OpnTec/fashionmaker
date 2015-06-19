@@ -26,26 +26,26 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLSINGLEPOINT_H
-#define VTOOLSINGLEPOINT_H
+#ifndef VTOOLBASEPOINT_H
+#define VTOOLBASEPOINT_H
 
 #include "vtoolpoint.h"
 
 /**
- * @brief The VToolSinglePoint class tool for creation pattern base point. Obly base point can move. All object
+ * @brief The VToolBasePoint class tool for creation pattern base point. Obly base point can move. All object
  * pattern peace depend on base point.
  */
-class VToolSinglePoint : public VToolPoint
+class VToolBasePoint : public VToolPoint
 {
     Q_OBJECT
 public:
-    VToolSinglePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                       const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
-    virtual ~VToolSinglePoint();
+    virtual ~VToolBasePoint();
     virtual void setDialog();
     static const QString ToolType;
     virtual int  type() const {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
+    enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
     virtual void ShowVisualization(bool show);
 public slots:
     virtual void FullUpdateFromFile();
@@ -77,4 +77,4 @@ private:
 
 };
 
-#endif // VTOOLSINGLEPOINT_H
+#endif // VTOOLBASEPOINT_H

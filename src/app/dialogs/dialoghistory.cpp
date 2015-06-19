@@ -213,7 +213,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::Arrow:
                 Q_UNREACHABLE();
                 break;
-            case Tool::SinglePoint:
+            case Tool::BasePoint:
             {
                 return QString(tr("%1 - Base point")).arg(PointName(tool.getId()));
             }

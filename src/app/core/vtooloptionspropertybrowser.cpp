@@ -74,7 +74,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     switch (item->type())
     {
-        case VToolSinglePoint::Type:
+        case VToolBasePoint::Type:
             ShowOptionsToolSinglePoint(item);
             break;
         case VToolEndLine::Type:
@@ -176,7 +176,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
 
     switch (currentItem->type())
     {
-        case VToolSinglePoint::Type:
+        case VToolBasePoint::Type:
             UpdateOptionsToolSinglePoint();
             break;
         case VToolEndLine::Type:
@@ -293,7 +293,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
 
     switch (currentItem->type())
     {
-        case VToolSinglePoint::Type:
+        case VToolBasePoint::Type:
             ChangeDataToolSinglePoint(prop);
             break;
         case VToolEndLine::Type:
@@ -555,7 +555,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSinglePoint(VProperty *property)
     switch (PropertiesList().indexOf(id))
     {
         case 0: // VAbstractTool::AttrName
-            SetPointName<VToolSinglePoint>(value.toString());
+            SetPointName<VToolBasePoint>(value.toString());
             break;
         case 1: // QLatin1String("position")
             currentItem->setPos(value.toPointF());
@@ -1227,7 +1227,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VProperty *pr
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
-    VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(item);
+    VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(item);
     i->ShowVisualization(true);
     formView->setTitle(tr("Base point"));
 
@@ -1551,7 +1551,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
 {
-    VToolSinglePoint *i = qgraphicsitem_cast<VToolSinglePoint *>(currentItem);
+    VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(currentItem);
     idToProperty[VAbstractTool::AttrName]->setValue(i->name());
     idToProperty[QLatin1String("position")]->setValue(i->pos());
 }

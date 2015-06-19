@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vtoolsinglepoint.h"
+#include "vtoolbasepoint.h"
 #include "../../dialogs/tools/dialogsinglepoint.h"
 #include "../../../vwidgets/vgraphicssimpletextitem.h"
 #include "../../undocommands/movespoint.h"
@@ -36,19 +36,19 @@
 
 #include <QMessageBox>
 
-const QString VToolSinglePoint::ToolType = QStringLiteral("single");
+const QString VToolBasePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VToolSinglePoint constructor.
+ * @brief VToolBasePoint constructor.
  * @param doc dom document container.
  * @param data container with variables.
  * @param id object id in container.
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolSinglePoint::VToolSinglePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                    const QString &namePP, const QString &mPath, QGraphicsItem * parent )
+VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                                const QString &namePP, const QString &mPath, QGraphicsItem * parent )
     :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
 {
     baseColor = Qt::red;
@@ -61,7 +61,7 @@ VToolSinglePoint::VToolSinglePoint (VAbstractPattern *doc, VContainer *data, qui
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSinglePoint::~VToolSinglePoint()
+VToolBasePoint::~VToolBasePoint()
 {
     //Disable cursor-arrow-openhand
     RestoreOverrideCursor(cursorArrowOpenHand);
@@ -71,7 +71,7 @@ VToolSinglePoint::~VToolSinglePoint()
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolSinglePoint::setDialog()
+void VToolBasePoint::setDialog()
 {
     SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
@@ -81,7 +81,7 @@ void VToolSinglePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::ShowVisualization(bool show)
+void VToolBasePoint::ShowVisualization(bool show)
 {
     Q_UNUSED(show); //don't have any visualization for base point yet
 }
@@ -90,7 +90,7 @@ void VToolSinglePoint::ShowVisualization(bool show)
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */
-void VToolSinglePoint::AddToFile()
+void VToolBasePoint::AddToFile()
 {
     Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
 
@@ -124,7 +124,7 @@ void VToolSinglePoint::AddToFile()
  * @param value value.
  * @return value.
  */
-QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange && scene())
     {
@@ -155,7 +155,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 /**
  * @brief decrementReferens decrement referens parents objects.
  */
-void VToolSinglePoint::decrementReferens()
+void VToolBasePoint::decrementReferens()
 {
     if (_referens > 1)
     {
@@ -164,7 +164,7 @@ void VToolSinglePoint::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::DeleteTool(bool ask)
+void VToolBasePoint::DeleteTool(bool ask)
 {
     if (_referens <= 1)
     {
@@ -187,7 +187,7 @@ void VToolSinglePoint::DeleteTool(bool ask)
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolSinglePoint::SaveDialog(QDomElement &domElement)
+void VToolBasePoint::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
@@ -200,7 +200,7 @@ void VToolSinglePoint::SaveDialog(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     VToolPoint::hoverEnterEvent(event);
 
@@ -211,7 +211,7 @@ void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void VToolBasePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     VToolPoint::hoverLeaveEvent(event);
 
@@ -223,7 +223,7 @@ void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
@@ -236,7 +236,7 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VToolBasePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
@@ -254,14 +254,14 @@ void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  * @brief SetColorLabel change color for label and label line.
  * @param color new color.
  */
-void VToolSinglePoint::SetColorLabel(const Qt::GlobalColor &color)
+void VToolBasePoint::SetColorLabel(const Qt::GlobalColor &color)
 {
     namePoint->setBrush(color);
     lineName->setPen(QPen(color, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VToolPoint::SaveOptions(tag, obj);
 
@@ -274,7 +274,7 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::ReadToolAttributes(const QDomElement &domElement)
+void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
 {
     Q_UNUSED(domElement);
     // This tool doesn't need read attributes from file.
@@ -285,7 +285,7 @@ void VToolSinglePoint::ReadToolAttributes(const QDomElement &domElement)
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */
-void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
+void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
@@ -308,7 +308,7 @@ void VToolSinglePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
-void  VToolSinglePoint::FullUpdateFromFile()
+void  VToolBasePoint::FullUpdateFromFile()
 {
     VPointF point = *VAbstractTool::data.GeometricObject<VPointF>(id);
     RefreshPointGeometry(point);
@@ -319,14 +319,14 @@ void  VToolSinglePoint::FullUpdateFromFile()
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */
-void VToolSinglePoint::SetFactor(qreal factor)
+void VToolBasePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*(VAbstractTool::data.GeometricObject<VPointF>(id)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSinglePoint::EnableToolMove(bool move)
+void VToolBasePoint::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
     VToolPoint::EnableToolMove(move);

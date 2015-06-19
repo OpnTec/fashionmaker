@@ -9,7 +9,7 @@ HEADERS += \
     $$PWD/drawTools/vtooltriangle.h \
     $$PWD/drawTools/vtoolsplinepath.h \
     $$PWD/drawTools/vtoolspline.h \
-    $$PWD/drawTools/vtoolsinglepoint.h \
+    $$PWD/drawTools/vtoolbasepoint.h \
     $$PWD/drawTools/vtoolshoulderpoint.h \
     $$PWD/drawTools/vtoolpointofintersection.h \
     $$PWD/drawTools/vtoolpointofcontact.h \
@@ -52,7 +52,7 @@ SOURCES += \
     $$PWD/drawTools/vtooltriangle.cpp \
     $$PWD/drawTools/vtoolsplinepath.cpp \
     $$PWD/drawTools/vtoolspline.cpp \
-    $$PWD/drawTools/vtoolsinglepoint.cpp \
+    $$PWD/drawTools/vtoolbasepoint.cpp \
     $$PWD/drawTools/vtoolshoulderpoint.cpp \
     $$PWD/drawTools/vtoolpointofintersection.cpp \
     $$PWD/drawTools/vtoolpointofcontact.cpp \
