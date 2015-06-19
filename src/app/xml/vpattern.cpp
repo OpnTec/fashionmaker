@@ -1749,7 +1749,13 @@ void VPattern::SetAuthor(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GenerateLabel(const LabelType &type) const
+/**
+ * @brief GenerateLabel create label for pattern piece of point.
+ * @param type type of the label.
+ * @param reservedName reversed point name. Use when need reserve name, but point is not in data base yet.
+ * @return unique name for current pattern piece.
+ */
+QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
 {
     QDomNodeList drawList = elementsByTagName(TagDraw);
 
@@ -1805,7 +1811,7 @@ QString VPattern::GenerateLabel(const LabelType &type) const
             {
                 break;
             }
-        } while (data->IsUnique(name) == false);
+        } while (data->IsUnique(name) == false || name == reservedName);
         qCDebug(vXML, "Point label: %s", name.toUtf8().constData());
         return name;
     }

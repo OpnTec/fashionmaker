@@ -65,7 +65,7 @@ public:
     QString        GetAuthor() const;
     void           SetAuthor(const QString &text);
 
-    virtual QString GenerateLabel(const LabelType &type)const;
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const;
 
 public slots:
     void           LiteParseTree(const Document &parse);

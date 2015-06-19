@@ -67,7 +67,7 @@ public:
     virtual void   IncrementReferens(quint32 id) const=0;
     virtual void   DecrementReferens(quint32 id) const=0;
 
-    virtual QString GenerateLabel(const LabelType &type)const=0;
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const=0;
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
