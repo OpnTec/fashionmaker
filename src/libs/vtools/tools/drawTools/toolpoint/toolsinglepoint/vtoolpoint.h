@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINT_H
 #define VTOOLPOINT_H
 
-#include "vdrawtool.h"
+#include "../../vdrawtool.h"
 #include <QGraphicsEllipseItem>
 
 class VPointF;

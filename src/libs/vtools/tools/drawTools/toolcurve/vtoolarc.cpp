@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtoolarc.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogarc.h"
-#include "../../../vgeometry/varc.h"
-#include "../../../vpatterndb/vformula.h"
-#include "../../visualization/vistoolarc.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../dialogs/tools/dialogarc.h"
+#include "../vgeometry/varc.h"
+#include "../vpatterndb/vformula.h"
+#include "../../../visualization/vistoolarc.h"
 
 #include <QKeyEvent>
 

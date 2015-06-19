@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vtoolpointfromcircleandtangent.h"
-#include "../../dialogs/tools/dialogpointfromcircleandtangent.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vgeometry/varc.h"
-#include "../../visualization/vistoolpointfromcircleandtangent.h"
-#include "../../libs/vpatterndb/vformula.h"
+#include "../../../../dialogs/tools/dialogpointfromcircleandtangent.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../../../../visualization/vistoolpointfromcircleandtangent.h"
+#include "../vpatterndb/vformula.h"
 
 const QString VToolPointFromCircleAndTangent::ToolType = QStringLiteral("pointFromCircleAndTangent");
 

@@ -29,9 +29,9 @@
 #ifndef VTOOLCUT_H
 #define VTOOLCUT_H
 
-#include "vtoolpoint.h"
-#include "../../../vwidgets/vsimplecurve.h"
-#include "vabstractspline.h"
+#include "../vtoolpoint.h"
+#include "../vwidgets/vsimplecurve.h"
+#include "../../../toolcurve/vabstractspline.h"
 
 class VFormula;
 

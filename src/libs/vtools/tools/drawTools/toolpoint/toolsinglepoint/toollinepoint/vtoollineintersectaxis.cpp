@@ -27,13 +27,13 @@
  *************************************************************************/
 
 #include "vtoollineintersectaxis.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialoglineintersectaxis.h"
-#include "../../dialogs/support/dialogeditwrongformula.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../visualization/vistoollineintersectaxis.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../../dialogs/tools/dialoglineintersectaxis.h"
+#include "../../../../../dialogs/support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../../../../../visualization/vistoollineintersectaxis.h"
 
 const QString VToolLineIntersectAxis::ToolType = QStringLiteral("lineIntersectAxis");
 

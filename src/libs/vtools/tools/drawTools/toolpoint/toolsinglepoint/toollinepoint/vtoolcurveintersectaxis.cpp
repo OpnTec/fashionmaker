@@ -27,13 +27,13 @@
  *************************************************************************/
 
 #include "vtoolcurveintersectaxis.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogcurveintersectaxis.h"
-#include "../../dialogs/support/dialogeditwrongformula.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../visualization/vistoolcurveintersectaxis.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
+#include "../../../../../dialogs/support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../../../../../visualization/vistoolcurveintersectaxis.h"
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");
 

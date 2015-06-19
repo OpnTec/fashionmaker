@@ -29,8 +29,8 @@
 #ifndef VABSTRACTSPLINE_H
 #define VABSTRACTSPLINE_H
 
-#include "vdrawtool.h"
-#include "../../../vwidgets/vcontrolpointspline.h"
+#include "../vdrawtool.h"
+#include "../vwidgets/vcontrolpointspline.h"
 
 #include <QGraphicsPathItem>
 

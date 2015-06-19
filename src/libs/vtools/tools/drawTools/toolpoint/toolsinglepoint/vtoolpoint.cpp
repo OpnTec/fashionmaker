@@ -28,9 +28,9 @@
 
 #include "vtoolpoint.h"
 #include "../vmisc/logging.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vwidgets/vgraphicssimpletextitem.h"
-#include "../../undocommands/movelabel.h"
+#include "../vgeometry/vpointf.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../../../../undocommands/movelabel.h"
 
 #include <QKeyEvent>
 

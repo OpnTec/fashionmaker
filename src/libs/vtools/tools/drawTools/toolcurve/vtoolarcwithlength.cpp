@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtoolarcwithlength.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogarcwithlength.h"
-#include "../../../vgeometry/varc.h"
-#include "../../../vpatterndb/vformula.h"
-#include "../../visualization/vistoolarcwithlength.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../dialogs/tools/dialogarcwithlength.h"
+#include "../vgeometry/varc.h"
+#include "../vpatterndb/vformula.h"
+#include "../../../visualization/vistoolarcwithlength.h"
 
 #include <QKeyEvent>
 

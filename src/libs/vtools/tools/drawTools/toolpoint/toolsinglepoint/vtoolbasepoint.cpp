@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtoolbasepoint.h"
-#include "../../dialogs/tools/dialogsinglepoint.h"
-#include "../../../vwidgets/vgraphicssimpletextitem.h"
-#include "../../undocommands/movespoint.h"
-#include "../../undocommands/addpatternpiece.h"
-#include "../../undocommands/deletepatternpiece.h"
-#include "../../../vgeometry/vpointf.h"
+#include "../../../../dialogs/tools/dialogsinglepoint.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../../../../undocommands/movespoint.h"
+#include "../../../../undocommands/addpatternpiece.h"
+#include "../../../../undocommands/deletepatternpiece.h"
+#include "../vgeometry/vpointf.h"
 
 #include <QMessageBox>
 

@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vtoolsplinepath.h"
-#include "../../dialogs/tools/dialogsplinepath.h"
-#include "../../undocommands/movesplinepath.h"
-#include "../../visualization/vistoolsplinepath.h"
+#include "../../../dialogs/tools/dialogsplinepath.h"
+#include "../../../undocommands/movesplinepath.h"
+#include "../../../visualization/vistoolsplinepath.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../libs/vmisc/vmath.h"

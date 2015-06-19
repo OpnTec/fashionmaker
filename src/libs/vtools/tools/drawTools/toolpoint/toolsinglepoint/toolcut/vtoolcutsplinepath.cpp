@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtoolcutsplinepath.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogcutsplinepath.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../visualization/vistoolcutsplinepath.h"
-#include "../../../vgeometry/vsplinepath.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../../dialogs/tools/dialogcutsplinepath.h"
+#include "../vgeometry/vpointf.h"
+#include "../../../../../visualization/vistoolcutsplinepath.h"
+#include "../vgeometry/vsplinepath.h"
 
 const QString VToolCutSplinePath::ToolType       = QStringLiteral("cutSplinePath");
 const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");

@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vtoolcutspline.cpp
+ **  @file   vtoolcutarc.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 12, 2013
+ **  @date   7 1, 2014
  **
  **  @brief
  **  @copyright
@@ -26,32 +26,33 @@
  **
  *************************************************************************/
 
-#include "vtoolcutspline.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogcutspline.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../visualization/vistoolcutspline.h"
-#include "../../../vgeometry/vspline.h"
+#include "vtoolcutarc.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../../dialogs/tools/dialogcutarc.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../../../../../visualization/vistoolcutarc.h"
 
-const QString VToolCutSpline::ToolType   = QStringLiteral("cutSpline");
-const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
+const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VToolCutSpline constructor.
+ * @brief VToolCutArc constructor.
  * @param doc dom document container.
  * @param data container with variables.
  * @param id object id in container.
- * @param formula string with formula length first spline.
- * @param splineId id spline in data container.
+ * @param formula string with formula length first arc.
+ * @param arcId id arc in data container.
+ * @param arc1id id first cutting arc.
+ * @param arc2id id second cutting arc.
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
-VToolCutSpline::VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                               const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id,
-                               const QString &color, const Source &typeCreation, QGraphicsItem *parent)
-    :VToolCut(doc, data, id, formula, splineId, spl1id, spl2id, color, parent)
+VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                         const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id, const QString &color,
+                         const Source &typeCreation, QGraphicsItem * parent)
+    :VToolCut(doc, data, id, formula, arcId, arc1id, arc2id, color, parent)
 {
     RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
     RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
@@ -63,39 +64,37 @@ VToolCutSpline::VToolCutSpline(VAbstractPattern *doc, VContainer *data, const qu
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolCutSpline::setDialog()
+void VToolCutArc::setDialog()
 {
     SCASSERT(dialog != nullptr);
-    DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
+    DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     dialogTool->SetFormula(formula);
-    dialogTool->setSplineId(curveCutId);
+    dialogTool->setArcId(curveCutId);
     dialogTool->SetPointName(point->name());
     dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Create help create tool from GUI.
+ * @brief Create help create tool form GUI.
  * @param dialog dialog.
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene,
-                            VAbstractPattern *doc, VContainer *data)
+VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
-    DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
+    DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
-    const quint32 splineId = dialogTool->getSplineId();
+    const quint32 arcId = dialogTool->getArcId();
     const QString color = dialogTool->GetColor();
-    VToolCutSpline* point = nullptr;
-    point = Create(0, pointName, formula, splineId, 5, 10, color, scene, doc, data, Document::FullParse,
-                   Source::FromGui);
+    VToolCutArc* point = nullptr;
+    point=Create(0, pointName, formula, arcId, 5, 10, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -108,8 +107,8 @@ VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *s
  * @brief Create help create tool.
  * @param _id tool id, 0 if tool doesn't exist yet.
  * @param pointName point name.
- * @param formula string with formula length first spline.
- * @param splineId id spline in data container.
+ * @param formula string with formula length first arc.
+ * @param arcId id arc in data container.
  * @param mx label bias x axis.
  * @param my label bias y axis.
  * @param scene pointer to scene.
@@ -118,89 +117,81 @@ VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *s
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  */
-VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString &formula,
-                                       const quint32 &splineId, const qreal &mx, const qreal &my, const QString &color,
-                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
-                                       const Document &parse, const Source &typeCreation)
+VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
+                                 const qreal &mx, const qreal &my, const QString &color, VMainGraphicsScene *scene,
+                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                 const Source &typeCreation)
 {
-    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
+    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(qApp->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
+    VArc arc1;
+    VArc arc2;
+    QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
 
     quint32 id = _id;
-    quint32 spl1id = 0;
-    quint32 spl2id = 0;
+    quint32 arc1id = 0;
+    quint32 arc2id = 0;
     if (typeCreation == Source::FromGui)
     {
-        VPointF *p = new VPointF(point, pointName, mx, my);
-        id = data->AddGObject(p);
+        id = data->AddGObject(new VPointF(point, pointName, mx, my));
+        arc1id = data->AddGObject(new VArc(arc1));
+        arc2id = data->AddGObject(new VArc(arc2));
 
-        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
-        spl1id = data->AddGObject(spline1);
-        data->AddCurve<VSpline>(spl1id, id);
-
-        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
-        spl2id = data->AddGObject(spline2);
-        data->AddCurve<VSpline>(spl2id, id);
+        data->AddArc(arc1id, id);
+        data->AddArc(arc2id, id);
     }
     else
     {
-        VPointF *p = new VPointF(point, pointName, mx, my);
-        data->UpdateGObject(id, p);
+        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
+        arc1id = id + 1;
+        arc2id = id + 2;
 
-        spl1id = id + 1;
-        spl2id = id + 2;
+        data->UpdateGObject(arc1id, new VArc(arc1));
+        data->UpdateGObject(arc2id, new VArc(arc2));
 
-        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
-        data->UpdateGObject(spl1id, spline1);
-        data->AddCurve<VSpline>(spl1id, id);
-
-        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
-        data->UpdateGObject(spl2id, spline2);
-        data->AddCurve<VSpline>(spl2id, id);
+        data->AddArc(arc1id, id);
+        data->AddArc(arc2id, id);
 
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
         }
     }
-    VDrawTool::AddRecord(id, Tool::CutSpline, doc);
+
+    VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
-        VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, spl1id, spl2id, color,
-                                                   typeCreation);
+        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, color, typeCreation);
         scene->addItem(point);
         connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutSpline::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutSpline::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutSpline::EnableToolMove);
-        connect(scene, &VMainGraphicsScene::CurveDetailsMode, point, &VToolCutSpline::DetailsMode);
+        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutArc::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutArc::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutArc::EnableToolMove);
         doc->AddTool(id, point);
-        doc->AddTool(spl1id, point);
-        doc->AddTool(spl2id, point);
-        doc->IncrementReferens(splineId);
+        doc->AddTool(arc1id, point);
+        doc->AddTool(arc2id, point);
+        doc->IncrementReferens(arcId);
         return point;
     }
     return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutSpline::ShowVisualization(bool show)
+void VToolCutArc::ShowVisualization(bool show)
 {
-    ShowToolVisualization<VisToolCutSpline>(show);
+    ShowToolVisualization<VisToolCutArc>(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CurveChoosed send signal about selection from spline.
+ * @brief CurveChoosed send signal about selection from cutted arc.
  * @param id object id in container.
  */
-void VToolCutSpline::CurveChoosed(quint32 id)
+void VToolCutArc::CurveChoosed(quint32 id)
 {
-    emit ChoosedTool(id, SceneObject::Spline);
+    emit ChoosedTool(id, SceneObject::Arc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -208,23 +199,23 @@ void VToolCutSpline::CurveChoosed(quint32 id)
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */
-void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolCutArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogCutSpline>(this, event);
+    ContextMenu<DialogCutArc>(this, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutSpline::SaveDialog(QDomElement &domElement)
+void VToolCutArc::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
-    DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
+    DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
-    doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
+    doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
@@ -234,49 +225,49 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
  * @param curve curve.
  * @param curveId curve id.
  */
-void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
-                                  PathDirection direction)
+void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
+                               PathDirection direction)
 {
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(curveId);
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(curveId);
     QPainterPath path;
-    path.addPath(spl->GetPath(direction));
+    path.addPath(arc->GetPath(direction));
     path.setFillRule( Qt::WindingFill );
     if (curvePosition == SimpleCurvePoint::FirstPoint)
     {
-        path.translate(-spl->GetP1().toQPointF().x(), -spl->GetP1().toQPointF().y());
+        path.translate(-arc->GetP1().x(), -arc->GetP1().y());
     }
     else
     {
-        path.translate(-spl->GetP4().toQPointF().x(), -spl->GetP4().toQPointF().y());
+        path.translate(-arc->GetP2().x(), -arc->GetP2().y());
     }
     curve->SetCurrentColor(QColor(lineColor));
     curve->setPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+void VToolCutArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VToolCut::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrLength, formula);
-    doc->SetAttribute(tag, AttrSpline, curveCutId);
+    doc->SetAttribute(tag, AttrArc, curveCutId);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
+void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 {
     formula = doc->GetParametrString(domElement, AttrLength, "");
-    curveCutId = doc->GetParametrUInt(domElement, AttrSpline, NULL_ID_STR);
+    curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
     lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCutSpline::SetVisualization()
+void VToolCutArc::SetVisualization()
 {
     if (vis != nullptr)
     {
-        VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
+        VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
         SCASSERT(visual != nullptr);
 
         visual->setPoint1Id(curveCutId);

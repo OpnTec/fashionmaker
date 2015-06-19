@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vtoolspline.h"
-#include "../../../vgeometry/vspline.h"
-#include "../../dialogs/tools/dialogspline.h"
-#include "../../undocommands/movespline.h"
-#include "../../visualization/vistoolspline.h"
+#include "../vgeometry/vspline.h"
+#include "../../../dialogs/tools/dialogspline.h"
+#include "../../../undocommands/movespline.h"
+#include "../../../visualization/vistoolspline.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../libs/vmisc/vmath.h"

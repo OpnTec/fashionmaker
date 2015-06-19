@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtoolalongline.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogalongline.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../ifc/exception/vexceptionobjecterror.h"
-#include "../../visualization/vistoolalongline.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../../dialogs/tools/dialogalongline.h"
+#include "../vgeometry/vpointf.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
+#include "../../../../../visualization/vistoolalongline.h"
 
 const QString VToolAlongLine::ToolType = QStringLiteral("alongLine");
 

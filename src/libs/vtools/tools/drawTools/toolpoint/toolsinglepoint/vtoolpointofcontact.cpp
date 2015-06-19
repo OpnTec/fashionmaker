@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vtoolpointofcontact.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogpointofcontact.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vpatterndb/vformula.h"
-#include "../../visualization/vistoolpointofcontact.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../dialogs/tools/dialogpointofcontact.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vformula.h"
+#include "../../../../visualization/vistoolpointofcontact.h"
 #include <QtCore/qmath.h>
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");

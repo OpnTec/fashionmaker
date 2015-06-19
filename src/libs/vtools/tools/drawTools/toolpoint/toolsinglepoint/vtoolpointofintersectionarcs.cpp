@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vtoolpointofintersectionarcs.h"
-#include "../../dialogs/tools/dialogpointofintersectionarcs.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vgeometry/varc.h"
-#include "../../visualization/vistoolpointofintersectionarcs.h"
+#include "../../../../dialogs/tools/dialogpointofintersectionarcs.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../../../../visualization/vistoolpointofintersectionarcs.h"
 
 const QString VToolPointOfIntersectionArcs::ToolType = QStringLiteral("pointOfIntersectionArcs");
 

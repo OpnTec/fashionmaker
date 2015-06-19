@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vtoolpointfromarcandtangent.h"
-#include "../../dialogs/tools/dialogpointfromarcandtangent.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vgeometry/varc.h"
-#include "../../visualization/vistoolpointfromarcandtangent.h"
+#include "../../../../dialogs/tools/dialogpointfromarcandtangent.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../../../../visualization/vistoolpointfromarcandtangent.h"
 
 const QString VToolPointFromArcAndTangent::ToolType = QStringLiteral("pointFromArcAndTangent");
 

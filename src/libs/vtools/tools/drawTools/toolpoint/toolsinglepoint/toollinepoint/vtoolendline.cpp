@@ -27,13 +27,13 @@
  *************************************************************************/
 
 #include "vtoolendline.h"
-#include "../../../vwidgets/vmaingraphicsscene.h"
-#include "../../../vpatterndb/calculator.h"
-#include "../../../vpatterndb/vtranslatevars.h"
-#include "../../dialogs/tools/dialogendline.h"
-#include "../../dialogs/support/dialogeditwrongformula.h"
-#include "../../../vgeometry/vpointf.h"
-#include "../../visualization/vistoolendline.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../../../../../dialogs/tools/dialogendline.h"
+#include "../../../../../dialogs/support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../../../../../visualization/vistoolendline.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 

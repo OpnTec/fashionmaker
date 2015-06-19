@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vtoolpointofintersectioncircles.h"
-#include "../../dialogs/tools/dialogpointofintersectioncircles.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vgeometry/varc.h"
-#include "../../visualization/vistoolpointofintersectioncircles.h"
-#include "../../libs/vpatterndb/vformula.h"
+#include "../../../../dialogs/tools/dialogpointofintersectioncircles.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../../../../visualization/vistoolpointofintersectioncircles.h"
+#include "../vpatterndb/vformula.h"
 
 const QString VToolPointOfIntersectionCircles::ToolType = QStringLiteral("pointOfIntersectionCircles");
 

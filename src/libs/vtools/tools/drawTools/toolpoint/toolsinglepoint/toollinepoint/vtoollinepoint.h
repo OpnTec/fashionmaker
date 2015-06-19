@@ -29,8 +29,8 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
-#include "vtoolpoint.h"
-#include "../../../vpatterndb/vformula.h"
+#include "../vtoolpoint.h"
+#include "../vpatterndb/vformula.h"
 
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.
