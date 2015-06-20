@@ -29,12 +29,12 @@
 #ifndef VTOOLPOINTOFINTERSECTION_H
 #define VTOOLPOINTOFINTERSECTION_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 /**
  * @brief The VToolPointOfIntersection class tool for creation point intersection two lines.
  */
-class VToolPointOfIntersection : public VToolPoint
+class VToolPointOfIntersection : public VToolSinglePoint
 {
     Q_OBJECT
 public:

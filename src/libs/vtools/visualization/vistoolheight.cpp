@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vistoolheight.h"
-#include "../../vgeometry/vpointf.h"
-#include "../tools/drawTools/vtoolheight.h"
+#include "../vgeometry/vpointf.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)

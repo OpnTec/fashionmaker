@@ -29,11 +29,11 @@
 #ifndef VTOOLPOINTOFINTERSECTIONARCS_H
 #define VTOOLPOINTOFINTERSECTIONARCS_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 class VArc;
 
-class VToolPointOfIntersectionArcs : public VToolPoint
+class VToolPointOfIntersectionArcs : public VToolSinglePoint
 {
     Q_OBJECT
 

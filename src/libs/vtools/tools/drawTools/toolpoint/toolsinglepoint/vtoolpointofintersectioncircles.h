@@ -29,11 +29,11 @@
 #ifndef VTOOLPOINTOFINTERSECTIONCIRCLES_H
 #define VTOOLPOINTOFINTERSECTIONCIRCLES_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 class VFormula;
 
-class VToolPointOfIntersectionCircles : public VToolPoint
+class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
     Q_OBJECT
 public:

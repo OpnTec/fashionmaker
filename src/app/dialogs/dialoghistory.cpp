@@ -32,9 +32,9 @@
 #include "../../libs/vgeometry/vsplinepath.h"
 #include "../../libs/vgeometry/vpointf.h"
 #include "../../libs/vtools/tools/vabstracttool.h"
-#include "../../libs/vtools/tools/drawTools/vtoolcutspline.h"
-#include "../../libs/vtools/tools/drawTools/vtoolcutsplinepath.h"
-#include "../../libs/vtools/tools/drawTools/vtoolcutarc.h"
+#include "../../libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
+#include "../../libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
+#include "../../libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------

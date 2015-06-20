@@ -29,13 +29,13 @@
 #ifndef VTOOLTRIANGLE_H
 #define VTOOLTRIANGLE_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 /**
  * @brief The VToolTriangle class for tool that find point intersection two foots right triangle
  * (triangle with 90 degree).
  */
-class VToolTriangle : public VToolPoint
+class VToolTriangle : public VToolSinglePoint
 {
     Q_OBJECT
 public:

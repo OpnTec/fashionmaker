@@ -173,7 +173,7 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
         VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, spl1id, spl2id, color,
                                                    typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutSpline::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutSpline::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutSpline::EnableToolMove);

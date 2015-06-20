@@ -34,7 +34,7 @@
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
                    const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id, const QString &color,
                    QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), formula(formula), firstCurve(nullptr), secondCurve(nullptr),
+    :VToolSinglePoint(doc, data, id, parent), formula(formula), firstCurve(nullptr), secondCurve(nullptr),
       curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id), detailsMode(false)
 {
     Q_ASSERT_X(curveCutId > 0, Q_FUNC_INFO, "curveCutId <= 0");
@@ -72,7 +72,7 @@ void VToolCut::HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirecti
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::Disable(bool disable, const QString &namePP)
 {
-    VToolPoint::Disable(disable, namePP);
+    VToolSinglePoint::Disable(disable, namePP);
     firstCurve->ChangedActivDraw(enabled);
     secondCurve->ChangedActivDraw(enabled);
 }
@@ -143,7 +143,7 @@ void VToolCut::RefreshGeometry()
 {
     RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
     RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
+    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrColor, lineColor);
 }

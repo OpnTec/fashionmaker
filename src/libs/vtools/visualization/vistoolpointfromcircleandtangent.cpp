@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vistoolpointfromcircleandtangent.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../tools/drawTools/vtoolpointfromcircleandtangent.h"
-#include "../../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)

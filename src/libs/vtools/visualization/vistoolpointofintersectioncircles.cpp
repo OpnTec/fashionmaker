@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vistoolpointofintersectioncircles.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../tools/drawTools/vtoolpointofintersectioncircles.h"
-#include "../../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent)

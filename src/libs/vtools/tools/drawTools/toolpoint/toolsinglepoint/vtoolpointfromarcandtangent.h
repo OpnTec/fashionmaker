@@ -29,9 +29,9 @@
 #ifndef VTOOLPOINTFROMARCANDTANGENT_H
 #define VTOOLPOINTFROMARCANDTANGENT_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
-class VToolPointFromArcAndTangent : public VToolPoint
+class VToolPointFromArcAndTangent : public VToolSinglePoint
 {
     Q_OBJECT
 public:

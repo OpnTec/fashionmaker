@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vtoolpoint.cpp
+ **  @file   vtoolsinglepoint.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   November 15, 2013
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 #include "../vmisc/logging.h"
 #include "../vgeometry/vpointf.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
@@ -34,29 +34,29 @@
 
 #include <QKeyEvent>
 
-Q_LOGGING_CATEGORY(vToolPoint, "v.toolPoint")
+Q_LOGGING_CATEGORY(vToolSinglePoint, "v.toolSinglePoint")
 
-const QString VToolPoint::TagName = QStringLiteral("point");
+const QString VToolSinglePoint::TagName = QStringLiteral("point");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VToolPoint constructor.
+ * @brief VToolSinglePoint constructor.
  * @param doc dom document container.
  * @param data container with variables.
  * @param id object id in container.
  * @param parent parent object.
  */
-VToolPoint::VToolPoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsEllipseItem(parent), radius(DefPointRadius), namePoint(nullptr),
+VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
+    :VAbstractPoint(doc, data, id), QGraphicsEllipseItem(parent), radius(DefPointRadius), namePoint(nullptr),
       lineName(nullptr)
 {
     radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolPoint::contextMenuEvent);
-    connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolPoint::DeleteFromLabel);
-    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolPoint::PointChoosed);
+    connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
+    connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
     lineName = new QGraphicsLineItem(this);
-    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolPoint::NameChangePosition);
+    connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
@@ -65,11 +65,11 @@ VToolPoint::VToolPoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPoint::~VToolPoint()
+VToolSinglePoint::~VToolSinglePoint()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void VToolSinglePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     /* From question on StackOverflow
      * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
@@ -82,7 +82,7 @@ void VToolPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPoint::name() const
+QString VToolSinglePoint::name() const
 {
     try
     {
@@ -90,14 +90,14 @@ QString VToolPoint::name() const
     }
     catch (const VExceptionBadId &e)
     {
-        qCDebug(vToolPoint, "Error! Couldn't get point name. %s %s", e.ErrorMessage().toUtf8().constData(),
+        qCDebug(vToolSinglePoint, "Error! Couldn't get point name. %s %s", e.ErrorMessage().toUtf8().constData(),
                 e.DetailedInformation().toUtf8().constData());
         return QString("");// Return empty string for property browser
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::setName(const QString &name)
+void VToolSinglePoint::setName(const QString &name)
 {
     // Don't know if need check name here.
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
@@ -106,9 +106,9 @@ void VToolPoint::setName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPoint::getTagName() const
+QString VToolSinglePoint::getTagName() const
 {
-    return VToolPoint::TagName;
+    return VToolSinglePoint::TagName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ QString VToolPoint::getTagName() const
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.
  */
-void VToolPoint::NameChangePosition(const QPointF &pos)
+void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
     QPointF p = pos - this->pos();
@@ -133,7 +133,7 @@ void VToolPoint::NameChangePosition(const QPointF &pos)
  * @param mx label bias x axis.
  * @param my label bias y axis.
  */
-void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
+void VToolSinglePoint::UpdateNamePosition(qreal mx, qreal my)
 {
     MoveLabel *moveLabel = new MoveLabel(doc, mx, my, id, this->scene());
     connect(moveLabel, &MoveLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -146,7 +146,7 @@ void VToolPoint::UpdateNamePosition(qreal mx, qreal my)
  * @param id object id in container.
  * @param enable enable or disable highlight.
  */
-void VToolPoint::ShowTool(quint32 id, bool enable)
+void VToolSinglePoint::ShowTool(quint32 id, bool enable)
 {
     ShowItem(this, id, enable);
 }
@@ -156,14 +156,14 @@ void VToolPoint::ShowTool(quint32 id, bool enable)
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
  */
-void VToolPoint::SetFactor(qreal factor)
+void VToolSinglePoint::SetFactor(qreal factor)
 {
     VDrawTool::SetFactor(factor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::Disable(bool disable, const QString &namePP)
+void VToolSinglePoint::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->setEnabled(enabled);
@@ -171,19 +171,19 @@ void VToolPoint::Disable(bool disable, const QString &namePP)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::DeleteFromLabel()
+void VToolSinglePoint::DeleteFromLabel()
 {
     DeleteTool(); //Leave this method immediately after call!!!
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::EnableToolMove(bool move)
+void VToolSinglePoint::EnableToolMove(bool move)
 {
     namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::PointChoosed()
+void VToolSinglePoint::PointChoosed()
 {
     emit ChoosedTool(id, SceneObject::Point);
 }
@@ -192,7 +192,7 @@ void VToolPoint::PointChoosed()
 /**
  * @brief FullUpdateFromFile update tool data form file.
  */
-void VToolPoint::FullUpdateFromFile()
+void VToolSinglePoint::FullUpdateFromFile()
 {
     ReadAttributes();
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
@@ -204,7 +204,7 @@ void VToolPoint::FullUpdateFromFile()
  * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.
  */
-void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
@@ -218,7 +218,7 @@ void VToolPoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  * @brief hoverEnterEvent handle hover enter events.
  * @param event hover enter event.
  */
-void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(CorrectColor(baseColor),
@@ -231,7 +231,7 @@ void VToolPoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  * @brief hoverLeaveEvent handle hover leave events.
  * @param event hover leave event.
  */
-void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void VToolSinglePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(CorrectColor(baseColor),
@@ -244,7 +244,7 @@ void VToolPoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  * @brief RefreshPointGeometry refresh point on scene.
  * @param point point.
  */
-void VToolPoint::RefreshPointGeometry(const VPointF &point)
+void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     this->setPen(QPen(CorrectColor(baseColor),
@@ -269,7 +269,7 @@ void VToolPoint::RefreshPointGeometry(const VPointF &point)
 /**
  * @brief RefreshLine refresh line to label on scene.
  */
-void VToolPoint::RefreshLine()
+void VToolSinglePoint::RefreshLine()
 {
     QRectF nRec = namePoint->sceneBoundingRect();
     nRec.translate(- scenePos());
@@ -305,7 +305,7 @@ void VToolPoint::RefreshLine()
  * @param value value.
  * @return value.
  */
-QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
@@ -328,7 +328,7 @@ QVariant VToolPoint::itemChange(QGraphicsItem::GraphicsItemChange change, const 
  * @brief keyReleaseEvent handle key release events.
  * @param event key release event.
  */
-void VToolPoint::keyReleaseEvent(QKeyEvent *event)
+void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
 {
     switch (event->key())
     {
@@ -342,13 +342,13 @@ void VToolPoint::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void VToolSinglePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     Q_UNUSED(event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
+void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VDrawTool::SaveOptions(tag, obj);
 
@@ -361,7 +361,7 @@ void VToolPoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPoint::setEnabled(bool enabled)
+void VToolSinglePoint::setEnabled(bool enabled)
 {
     QGraphicsEllipseItem::setEnabled(enabled);
     if (enabled)

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vtoolpoint.h
+ **  @file   vtoolsinglepoint.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   November 15, 2013
  **
@@ -26,24 +26,24 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLPOINT_H
-#define VTOOLPOINT_H
+#ifndef VTOOLSINGLEPOINT_H
+#define VTOOLSINGLEPOINT_H
 
-#include "../../vdrawtool.h"
+#include "../vabstractpoint.h"
 #include <QGraphicsEllipseItem>
 
 class VPointF;
 class VGraphicsSimpleTextItem;
 
 /**
- * @brief The VToolPoint class parent for all tools what create points.
+ * @brief The VToolSinglePoint class parent for all tools what create points.
  */
-class VToolPoint: public VDrawTool, public QGraphicsEllipseItem
+class VToolSinglePoint: public VAbstractPoint, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-    VToolPoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VToolPoint();
+    VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
+    virtual ~VToolSinglePoint();
     virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     QString                 name() const;
     void                    setName(const QString &name);
@@ -106,7 +106,7 @@ protected:
         }
     }
 private:
-    Q_DISABLE_COPY(VToolPoint)
+    Q_DISABLE_COPY(VToolSinglePoint)
 };
 
-#endif // VTOOLPOINT_H
+#endif // VTOOLSINGLEPOINT_H

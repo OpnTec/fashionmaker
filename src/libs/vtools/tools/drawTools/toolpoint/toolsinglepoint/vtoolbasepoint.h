@@ -29,13 +29,13 @@
 #ifndef VTOOLBASEPOINT_H
 #define VTOOLBASEPOINT_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 /**
  * @brief The VToolBasePoint class tool for creation pattern base point. Obly base point can move. All object
  * pattern peace depend on base point.
  */
-class VToolBasePoint : public VToolPoint
+class VToolBasePoint : public VToolSinglePoint
 {
     Q_OBJECT
 public:

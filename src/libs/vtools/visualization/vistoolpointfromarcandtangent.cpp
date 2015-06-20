@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vistoolpointfromarcandtangent.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../tools/drawTools/vtoolpointfromarcandtangent.h"
-#include "../../vgeometry/vpointf.h"
-#include "../../vgeometry/varc.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent)

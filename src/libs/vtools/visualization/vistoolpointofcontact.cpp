@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vistoolpointofcontact.h"
-#include "../../vgeometry/vpointf.h"
-#include "../tools/drawTools/vtoolpointofcontact.h"
+#include "../vgeometry/vpointf.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent)

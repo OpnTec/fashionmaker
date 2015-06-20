@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vistoolcurveintersectaxis.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../../vgeometry/vpointf.h"
-#include "../tools/drawTools/vtoolcurveintersectaxis.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vgeometry/vpointf.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent)

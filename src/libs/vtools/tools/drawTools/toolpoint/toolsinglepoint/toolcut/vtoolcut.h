@@ -29,13 +29,13 @@
 #ifndef VTOOLCUT_H
 #define VTOOLCUT_H
 
-#include "../vtoolpoint.h"
+#include "../vtoolsinglepoint.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../../../toolcurve/vabstractspline.h"
 
 class VFormula;
 
-class VToolCut : public VToolPoint
+class VToolCut : public VToolSinglePoint
 {
     Q_OBJECT
 public:

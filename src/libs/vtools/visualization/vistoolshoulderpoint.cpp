@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vistoolshoulderpoint.h"
-#include "../tools/drawTools/vtoolshoulderpoint.h"
-#include "../../vgeometry/vpointf.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent)

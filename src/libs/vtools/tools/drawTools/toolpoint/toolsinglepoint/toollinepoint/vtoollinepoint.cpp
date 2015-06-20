@@ -45,7 +45,7 @@
 VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
+    :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
       mainLine(nullptr)
 {
     this->typeLine = typeLine;
@@ -74,7 +74,7 @@ void VToolLinePoint::RefreshGeometry()
     mainLine->setPen(QPen(CorrectColor(QColor(lineColor)),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
-    VToolPoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
+    VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
     QPointF point = VDrawTool::data.GeometricObject<VPointF>(id)->toQPointF();
     QPointF basePoint = VDrawTool::data.GeometricObject<VPointF>(basePointId)->toQPointF();
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
@@ -92,7 +92,7 @@ void VToolLinePoint::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrTypeLine, typeLine);
     doc->SetAttribute(tag, AttrLineColor, lineColor);
@@ -112,7 +112,7 @@ void VToolLinePoint::SetFactor(qreal factor)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::Disable(bool disable, const QString &namePP)
 {
-    VToolPoint::Disable(disable, namePP);
+    VToolSinglePoint::Disable(disable, namePP);
     mainLine->setPen(QPen(CorrectColor(lineColor),
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));

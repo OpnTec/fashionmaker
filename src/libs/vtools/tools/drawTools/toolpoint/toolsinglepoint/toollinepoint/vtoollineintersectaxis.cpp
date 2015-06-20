@@ -140,7 +140,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
                                                                    basePointId, firstPointId, secondPointId,
                                                                    typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersectAxis::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersectAxis::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolLineIntersectAxis::EnableToolMove);

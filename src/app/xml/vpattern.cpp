@@ -293,7 +293,7 @@ quint32 VPattern::SPointActiveDraw()
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == VToolPoint::TagName &&
+                if (domElement.tagName() == VToolSinglePoint::TagName &&
                         domElement.attribute(AttrType, "") == VToolBasePoint::ToolType)
                 {
                     return GetParametrId(domElement);

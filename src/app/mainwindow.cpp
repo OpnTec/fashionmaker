@@ -178,7 +178,7 @@ void MainWindow::AddPP(const QString &PPName, const QString &path)
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
 
-    connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
+    connect(spoint, &VToolSinglePoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
     connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);

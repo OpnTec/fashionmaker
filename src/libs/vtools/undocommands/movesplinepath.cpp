@@ -28,7 +28,7 @@
 
 #include "movesplinepath.h"
 #include <QDomElement>
-#include "../tools/drawTools/vtoolsplinepath.h"
+#include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
