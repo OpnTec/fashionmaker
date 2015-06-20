@@ -114,7 +114,7 @@ void DialogCutSplinePath::SetFormula(const QString &value)
  */
 void DialogCutSplinePath::setSplinePathId(const quint32 &value)
 {
-    setCurrentSplinePathId(ui->comboBoxSplinePath, value, ComboBoxCutSpline::CutSpline);
+    setCurrentSplinePathId(ui->comboBoxSplinePath, value, FillComboBox::NoChildren);
 
     VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr);

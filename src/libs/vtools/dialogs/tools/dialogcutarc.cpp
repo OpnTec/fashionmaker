@@ -157,7 +157,7 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
  */
 void DialogCutArc::setArcId(const quint32 &value)
 {
-    setCurrentArcId(ui->comboBoxArc, value, ComboBoxCutArc::CutArc);
+    setCurrentArcId(ui->comboBoxArc, value, FillComboBox::NoChildren);
 
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr);
