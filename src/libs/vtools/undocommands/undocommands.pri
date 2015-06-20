@@ -20,7 +20,6 @@ HEADERS += \
     $$PWD/renamepp.h \
     $$PWD/movelabel.h
 
-
 SOURCES += \
     $$PWD/addtocalc.cpp \
     $$PWD/addpatternpiece.cpp \
@@ -39,4 +38,3 @@ SOURCES += \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
     $$PWD/movelabel.cpp
-

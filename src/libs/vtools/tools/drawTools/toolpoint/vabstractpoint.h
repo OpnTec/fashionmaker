@@ -30,12 +30,95 @@
 #define VABSTRACTPOINT_H
 
 #include "../vdrawtool.h"
+#include "../vgeometry/vpointf.h"
 
 class VAbstractPoint: public VDrawTool
 {
+    Q_OBJECT
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id);
     virtual ~VAbstractPoint();
+
+    virtual QString      getTagName() const;
+    static const QString TagName;
+
+    template <typename T>
+    void ShowToolVisualization(bool show);
+
+public slots:
+    virtual void ShowTool(quint32 id, bool enable);
+    void         DeleteFromLabel();
+
+protected:
+    QString PointName(quint32 id) const;
+    void    SetPointName(quint32 id, const QString &name);
+
+    template <typename T>
+    void    ChangePosition(T *item, quint32 id, const QPointF &pos);
+
+    virtual void UpdateNamePosition()=0;
+    virtual void RefreshLine()=0;
+
+    template <typename T>
+    void SetToolEnabled(T *item, bool enabled);
+
+private:
+    Q_DISABLE_COPY(VAbstractPoint)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractPoint::ShowToolVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            AddVisualization<T>();
+            SetVisualization();
+        }
+        else
+        {
+            if (T *visual = qobject_cast<T *>(vis))
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractPoint::SetToolEnabled(T *item, bool enabled)
+{
+    item->setEnabled(enabled);
+    if (enabled)
+    {
+        item->setPen(QPen(QColor(baseColor),
+                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    }
+    else
+    {
+        item->setPen(QPen(Qt::gray, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractPoint::ChangePosition(T *item, quint32 id, const QPointF &pos)
+{
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    const QPointF p = pos - item->pos();
+    point->setMx(p.x());
+    point->setMy(p.y());
+    RefreshLine();
+    VAbstractTool::data.UpdateGObject(id, point);
+    UpdateNamePosition();
+}
 
 #endif // VABSTRACTPOINT_H

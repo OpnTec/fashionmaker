@@ -44,7 +44,8 @@ HEADERS += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h \
     $$PWD/drawTools/toolcurve/vtoolarcwithlength.h \
-    $$PWD/drawTools/toolpoint/vabstractpoint.h
+    $$PWD/drawTools/toolpoint/vabstractpoint.h \
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -86,4 +87,5 @@ SOURCES += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.cpp \
     $$PWD/drawTools/toolcurve/vtoolarcwithlength.cpp \
-    $$PWD/drawTools/toolpoint/vabstractpoint.cpp
+    $$PWD/drawTools/toolpoint/vabstractpoint.cpp \
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.cpp

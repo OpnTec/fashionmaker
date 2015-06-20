@@ -105,74 +105,83 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;
 
     template <typename Dialog, typename Tool>
-    /**
-     * @brief ContextMenu show context menu for tool.
-     * @param tool tool.
-     * @param event context menu event.
-     * @param showRemove true - tool have option delete.
-     */
-    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove = true)
-    {
-        SCASSERT(tool != nullptr);
-        SCASSERT(event != nullptr);
+    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove = true);
 
-        QMenu menu;
-        QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
-        QAction *actionRemove = nullptr;
-        actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
-        if (showRemove)
-        {
-            if (_referens > 1)
-            {
-                actionRemove->setEnabled(false);
-            }
-            else
-            {
-                actionRemove->setEnabled(true);
-            }
-        }
-        else
-        {
-            actionRemove->setEnabled(false);
-        }
-
-        QAction *selectedAction = menu.exec(event->screenPos());
-        if (selectedAction == actionOption)
-        {
-            qApp->getSceneView()->itemClicked(nullptr);
-            dialog = new Dialog(getData(), id, qApp->getMainWindow());
-            dialog->setModal(true);
-
-            connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
-            connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
-
-            tool->setDialog();
-
-            dialog->show();
-        }
-        if (selectedAction == actionRemove)
-        {
-            DeleteTool();
-            return; //Leave this method immediately after call!!!
-        }
-    }
     template <typename Item>
-    /**
-     * @brief ShowItem highlight tool.
-     * @param item tool.
-     * @param id object id in container.
-     * @param enable enable or disable highlight.
-     */
-    void ShowItem(Item *item, quint32 id, bool enable)
-    {
-        SCASSERT(item != nullptr);
-        if (id == item->id)
-        {
-            ShowVisualization(enable);
-        }
-    }
+    void ShowItem(Item *item, quint32 id, bool enable);
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Dialog, typename Tool>
+/**
+ * @brief ContextMenu show context menu for tool.
+ * @param tool tool.
+ * @param event context menu event.
+ * @param showRemove true - tool have option delete.
+ */
+void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove)
+{
+    SCASSERT(tool != nullptr);
+    SCASSERT(event != nullptr);
+
+    QMenu menu;
+    QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionRemove = nullptr;
+    actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    if (showRemove)
+    {
+        if (_referens > 1)
+        {
+            actionRemove->setEnabled(false);
+        }
+        else
+        {
+            actionRemove->setEnabled(true);
+        }
+    }
+    else
+    {
+        actionRemove->setEnabled(false);
+    }
+
+    QAction *selectedAction = menu.exec(event->screenPos());
+    if (selectedAction == actionOption)
+    {
+        qApp->getSceneView()->itemClicked(nullptr);
+        dialog = new Dialog(getData(), id, qApp->getMainWindow());
+        dialog->setModal(true);
+
+        connect(dialog, &DialogTool::DialogClosed, tool, &Tool::FullUpdateFromGuiOk);
+        connect(dialog, &DialogTool::DialogApplied, tool, &Tool::FullUpdateFromGuiApply);
+
+        tool->setDialog();
+
+        dialog->show();
+    }
+    if (selectedAction == actionRemove)
+    {
+        DeleteTool();
+        return; //Leave this method immediately after call!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Item>
+/**
+ * @brief ShowItem highlight tool.
+ * @param item tool.
+ * @param id object id in container.
+ * @param enable enable or disable highlight.
+ */
+void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
+{
+    SCASSERT(item != nullptr);
+    if (id == item->id)
+    {
+        ShowVisualization(enable);
+    }
+}
 
 #endif // VDRAWTOOL_H

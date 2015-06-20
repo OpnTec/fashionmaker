@@ -45,7 +45,8 @@ enum class Source : char { FromGui, FromFile, FromTool };
 enum class Tool : unsigned char
 {
     Arrow,
-    Point,
+    SinglePoint,
+    DoublePoint,
     LinePoint,
     AbstractSpline,
     Cut,
@@ -79,14 +80,15 @@ enum class Tool : unsigned char
     PointOfIntersection,
     PointFromCircleAndTangent,
     PointFromArcAndTangent,
-    UnionDetails // 35
+    UnionDetails // 36
 };
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline = 36, // increase this value if need more positions in Tool enum
+    ControlPointSpline = 37, // increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
     SimpleSplinePath,
+    SimplePoint,
     Line,
     Path,
     ToolAlongLine,
