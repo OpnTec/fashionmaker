@@ -32,7 +32,8 @@ HEADERS += \
     $$PWD/tools/dialogtriangle.h \
     $$PWD/tools/dialoguniondetails.h \
     $$PWD/support/dialogeditwrongformula.h \
-    $$PWD/support/dialogundo.h
+    $$PWD/support/dialogundo.h \
+    $$PWD/tools/dialogtruedarts.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -64,7 +65,8 @@ SOURCES += \
     $$PWD/tools/dialogtriangle.cpp \
     $$PWD/tools/dialoguniondetails.cpp \
     $$PWD/support/dialogeditwrongformula.cpp \
-    $$PWD/support/dialogundo.cpp
+    $$PWD/support/dialogundo.cpp \
+    $$PWD/tools/dialogtruedarts.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -95,4 +97,5 @@ FORMS += \
     $$PWD/tools/dialogtriangle.ui \
     $$PWD/tools/dialoguniondetails.ui \
     $$PWD/support/dialogeditwrongformula.ui \
-    $$PWD/support/dialogundo.ui
+    $$PWD/support/dialogundo.ui \
+    $$PWD/tools/dialogtruedarts.ui

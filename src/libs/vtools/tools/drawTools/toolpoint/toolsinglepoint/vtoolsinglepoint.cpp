@@ -112,7 +112,7 @@ void VToolSinglePoint::NameChangePosition(const QPointF &pos)
  * @param mx label bias x axis.
  * @param my label bias y axis.
  */
-void VToolSinglePoint::UpdateNamePosition()
+void VToolSinglePoint::UpdateNamePosition(quint32 id)
 {
     VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
     MoveLabel *moveLabel = new MoveLabel(doc, point->mx(), point->my(), id, this->scene());
@@ -224,7 +224,7 @@ void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
     namePoint->setText(point.name());
     namePoint->setPos(QPointF(point.mx(), point.my()));
     namePoint->blockSignals(false);
-    RefreshLine();
+    RefreshLine(id);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
@@ -232,8 +232,10 @@ void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
 /**
  * @brief RefreshLine refresh line to label on scene.
  */
-void VToolSinglePoint::RefreshLine()
+void VToolSinglePoint::RefreshLine(quint32 id)
 {
+    Q_UNUSED(id)
+
     QRectF nRec = namePoint->sceneBoundingRect();
     nRec.translate(- scenePos());
     if (this->rect().intersects(nRec) == false)

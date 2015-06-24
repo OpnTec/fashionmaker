@@ -71,12 +71,12 @@ protected:
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
 
-    virtual void            UpdateNamePosition();
+    virtual void            UpdateNamePosition(quint32 id);
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            RefreshPointGeometry(const VPointF &point);
-    virtual void            RefreshLine();
+    virtual void            RefreshLine(quint32 id);
     virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void            keyReleaseEvent(QKeyEvent * event);
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

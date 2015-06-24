@@ -56,8 +56,8 @@ protected:
     template <typename T>
     void    ChangePosition(T *item, quint32 id, const QPointF &pos);
 
-    virtual void UpdateNamePosition()=0;
-    virtual void RefreshLine()=0;
+    virtual void UpdateNamePosition(quint32 id)=0;
+    virtual void RefreshLine(quint32 id)=0;
 
     template <typename T>
     void SetToolEnabled(T *item, bool enabled);
@@ -116,9 +116,9 @@ void VAbstractPoint::ChangePosition(T *item, quint32 id, const QPointF &pos)
     const QPointF p = pos - item->pos();
     point->setMx(p.x());
     point->setMy(p.y());
-    RefreshLine();
     VAbstractTool::data.UpdateGObject(id, point);
-    UpdateNamePosition();
+    RefreshLine(id);
+    UpdateNamePosition(id);
 }
 
 #endif // VABSTRACTPOINT_H

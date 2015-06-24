@@ -18,7 +18,8 @@ HEADERS += \
     $$PWD/deletedetail.h \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
-    $$PWD/movelabel.h
+    $$PWD/movelabel.h \
+    $$PWD/movedoublelabel.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -37,4 +38,5 @@ SOURCES += \
     $$PWD/deletedetail.cpp \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
-    $$PWD/movelabel.cpp
+    $$PWD/movelabel.cpp \
+    $$PWD/movedoublelabel.cpp

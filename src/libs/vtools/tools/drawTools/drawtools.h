@@ -54,5 +54,6 @@
 #include "toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
 #include "toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
 #include "toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
+#include "toolpoint/tooldoublepoint/vtooltruedarts.h"
 
 #endif // DRAWTOOLS_H

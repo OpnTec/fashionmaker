@@ -407,6 +407,13 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 return QString(tr("%1 - point from arc and tangent")).arg(PointName(tool.getId()));
             }
+            case Tool::TrueDarts:
+            {
+                return QString(tr("Correction the dart %1_%2_%3"))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrDartP1)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrDartP2)))
+                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrDartP2)));
+            }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Detail:

@@ -29,7 +29,7 @@
 #include "vtooldoublepoint.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../undocommands/movelabel.h"
+#include "../../../../undocommands/movedoublelabel.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
@@ -43,13 +43,15 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(firstPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
     connect(firstPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(firstPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label1ChangePosition);
+    firstPoint->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
 
     secondPoint = new VSimplePoint(p2id, QColor(baseColor), *data->GetPatternUnit(), &factor);
     secondPoint->setParentItem(this);
     connect(secondPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point2Choosed);
-    connect(firstPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
-    connect(firstPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
-    connect(firstPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label2ChangePosition);
+    connect(secondPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
+    connect(secondPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
+    connect(secondPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label2ChangePosition);
+    secondPoint->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p2id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,13 +104,13 @@ void VToolDoublePoint::SetEnabled(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Label1ChangePosition(const QPointF &pos)
 {
-    ChangePosition(this, p1id, pos);
+    ChangePosition(firstPoint, p1id, pos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Label2ChangePosition(const QPointF &pos)
 {
-    ChangePosition(this, p2id, pos);
+    ChangePosition(secondPoint, p2id, pos);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -157,28 +159,39 @@ void VToolDoublePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::UpdateNamePosition()
+void VToolDoublePoint::UpdateNamePosition(quint32 id)
 {
-    qApp->getUndoStack()->beginMacro("move labels");
+    if (id == p1id)
+    {
+        VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
 
-    VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
-    MoveLabel *moveLabel1 = new MoveLabel(doc, p1->mx(), p1->my(), p1id, this->scene());
-    connect(moveLabel1, &MoveLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(moveLabel1);
+        MoveDoubleLabel *moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id,
+                                                         this->scene());
+        connect(moveLabel, &MoveDoubleLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(moveLabel);
+    }
+    else if (id == p2id)
+    {
+        VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
 
-    VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
-    MoveLabel *moveLabel2 = new MoveLabel(doc, p2->mx(), p2->my(), p2id, this->scene());
-    connect(moveLabel2, &MoveLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(moveLabel2);
-
-    qApp->getUndoStack()->endMacro();
+        MoveDoubleLabel *moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id,
+                                                         this->scene());
+        connect(moveLabel, &MoveDoubleLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(moveLabel);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::RefreshLine()
+void VToolDoublePoint::RefreshLine(quint32 id)
 {
-    firstPoint->RefreshLine();
-    secondPoint->RefreshLine();
+    if (id == p1id)
+    {
+        firstPoint->RefreshLine();
+    }
+    else if (id == p2id)
+    {
+        secondPoint->RefreshLine();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,12 +256,6 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
         doc->SetAttribute(tag, AttrName1, point->name());
         doc->SetAttribute(tag, AttrMx1, qApp->fromPixel(point->mx()));
         doc->SetAttribute(tag, AttrMy1, qApp->fromPixel(point->my()));
-
-        VPointF *p = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
-
-        doc->SetAttribute(tag, AttrName2, p->name());
-        doc->SetAttribute(tag, AttrMx2, qApp->fromPixel(p->mx()));
-        doc->SetAttribute(tag, AttrMy2, qApp->fromPixel(p->my()));
     }
     else if (obj->id() == p2id)
     {
@@ -258,22 +265,18 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
         doc->SetAttribute(tag, AttrName2, point->name());
         doc->SetAttribute(tag, AttrMx2, qApp->fromPixel(point->mx()));
         doc->SetAttribute(tag, AttrMy2, qApp->fromPixel(point->my()));
-
-        VPointF *p = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
-
-        doc->SetAttribute(tag, AttrName1, p->name());
-        doc->SetAttribute(tag, AttrMx1, qApp->fromPixel(p->mx()));
-        doc->SetAttribute(tag, AttrMy1, qApp->fromPixel(p->my()));
     }
     else
     {
         VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
-        VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
+        VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
 
+        doc->SetAttribute(tag, AttrPoint1, p1id);
         doc->SetAttribute(tag, AttrName1, p1->name());
         doc->SetAttribute(tag, AttrMx1, qApp->fromPixel(p1->mx()));
         doc->SetAttribute(tag, AttrMy1, qApp->fromPixel(p1->my()));
 
+        doc->SetAttribute(tag, AttrPoint2, p2id);
         doc->SetAttribute(tag, AttrName2, p2->name());
         doc->SetAttribute(tag, AttrMx2, qApp->fromPixel(p2->mx()));
         doc->SetAttribute(tag, AttrMy2, qApp->fromPixel(p2->my()));

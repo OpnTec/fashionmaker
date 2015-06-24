@@ -75,8 +75,8 @@ protected:
     quint32      p1id;
     quint32      p2id;
 
-    virtual void UpdateNamePosition();
-    virtual void RefreshLine();
+    virtual void UpdateNamePosition(quint32 id);
+    virtual void RefreshLine(quint32 id);
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void keyReleaseEvent(QKeyEvent * event);
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );

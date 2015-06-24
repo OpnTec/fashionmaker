@@ -121,6 +121,7 @@ public slots:
     void               ToolPointFromCircleAndTangent(bool checked);
     void               ToolPointFromArcAndTangent(bool checked);
     void               ToolArcWithLength(bool checked);
+    void               ToolTrueDarts(bool checked);
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);
