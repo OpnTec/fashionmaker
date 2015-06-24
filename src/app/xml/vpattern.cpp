@@ -293,7 +293,7 @@ quint32 VPattern::SPointActiveDraw()
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == VToolPoint::TagName &&
+                if (domElement.tagName() == VToolSinglePoint::TagName &&
                         domElement.attribute(AttrType, "") == VToolBasePoint::ToolType)
                 {
                     return GetParametrId(domElement);
@@ -677,7 +677,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointOfIntersectionArcs::ToolType
                                        << VToolPointOfIntersectionCircles::ToolType
                                        << VToolPointFromCircleAndTangent::ToolType
-                                       << VToolPointFromArcAndTangent::ToolType;
+                                       << VToolPointFromArcAndTangent::ToolType
+                                       << VToolTrueDarts::ToolType;
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
@@ -1263,6 +1264,40 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             catch (const VExceptionBadId &e)
             {
                 VExceptionObjectError excep(tr("Error creating or updating point from arc and tangent"), domElement);
+                excep.AddMoreInformation(e.ErrorMessage());
+                throw excep;
+            }
+            break;
+        case 21: //VToolTrueDarts::ToolType
+            try
+            {
+                ToolsCommonAttributes(domElement, id);
+
+                const quint32 p1Id = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, NULL_ID_STR);
+                const quint32 p2Id = GetParametrUInt(domElement, VAbstractTool::AttrPoint2, NULL_ID_STR);
+
+                const quint32 baseLineP1Id = GetParametrUInt(domElement, VAbstractTool::AttrBaseLineP1, NULL_ID_STR);
+                const quint32 baseLineP2Id = GetParametrUInt(domElement, VAbstractTool::AttrBaseLineP2, NULL_ID_STR);
+                const quint32 dartP1Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP1, NULL_ID_STR);
+                const quint32 dartP2Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP2, NULL_ID_STR);
+                const quint32 dartP3Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP3, NULL_ID_STR);
+
+                const QString name1 = GetParametrString(domElement, VAbstractTool::AttrName1, "A");
+                const qreal mx1 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx1, "10.0"));
+                const qreal my1 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy1, "15.0"));
+
+                const QString name2 = GetParametrString(domElement, VAbstractTool::AttrName2, "A");
+                const qreal mx2 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx2, "10.0"));
+                const qreal my2 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy2, "15.0"));
+
+                VToolTrueDarts::Create(id, p1Id, p2Id,
+                                       baseLineP1Id, baseLineP2Id, dartP1Id, dartP2Id, dartP3Id,
+                                       name1, mx1, my1, name2, mx2, my2,
+                                       scene, this, data, parse, Source::FromFile);
+            }
+            catch (const VExceptionBadId &e)
+            {
+                VExceptionObjectError excep(tr("Error creating or updating true darts"), domElement);
                 excep.AddMoreInformation(e.ErrorMessage());
                 throw excep;
             }

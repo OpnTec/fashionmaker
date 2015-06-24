@@ -39,19 +39,11 @@
  * @param currentColor current color.
  * @param parent parent object.
  */
-VSimpleCurve::VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint pointPosition, Unit patternUnit,
+VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, SimpleCurvePoint pointPosition, Unit patternUnit,
                            qreal *factor, QObject *parent)
-    :QObject(parent), QGraphicsPathItem(), id (id), factor(factor), currentColor(currentColor),
-      curvePosition(pointPosition), enabled(true), patternUnit(patternUnit)
+    :VAbstractSimple(id, currentColor, patternUnit, factor, parent), QGraphicsPathItem(), curvePosition(pointPosition)
 {
-    if (factor == nullptr)
-    {
-        setPen(QPen(currentColor, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    }
-    else
-    {
-        setPen(QPen(currentColor, ToPixel(WidthHairLine(patternUnit), patternUnit)/ *factor));
-    }
+    SetPen(this, currentColor, WidthHairLine(patternUnit));
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setAcceptHoverEvents(true);
 }
@@ -61,7 +53,7 @@ void VSimpleCurve::ChangedActivDraw(const bool &flag)
 {
     enabled = flag;
     setEnabled(enabled);
-    setPen(QPen(CorrectColor(currentColor), ToPixel(WidthHairLine(patternUnit), patternUnit)/ *factor));
+    SetPen(this, currentColor, WidthHairLine(patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,20 +85,13 @@ void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief hoverMoveEvent handle hover move events.
+ * @brief hoverEnterEvent handle hover enter events.
  * @param event hover move event.
  */
-void VSimpleCurve::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (factor == nullptr)
-    {
-        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthMainLine(patternUnit), patternUnit)));
-    }
-    else
-    {
-        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthMainLine(patternUnit), patternUnit)/ *factor));
-    }
+    SetPen(this, currentColor, WidthMainLine(patternUnit));
     emit HoverPath(id, curvePosition, PathDirection::Show);
 }
 
@@ -118,16 +103,14 @@ void VSimpleCurve::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    if (factor == nullptr)
-    {
-        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    }
-    else
-    {
-        this->setPen(QPen(CorrectColor(currentColor), ToPixel(WidthHairLine(patternUnit), patternUnit)/ *factor));
-    }
-
+    SetPen(this, currentColor, WidthHairLine(patternUnit));
     emit HoverPath(id, curvePosition, PathDirection::Hide);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->ignore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,24 +124,5 @@ QColor VSimpleCurve::GetCurrentColor() const
 void VSimpleCurve::SetCurrentColor(const QColor &value)
 {
     currentColor = value;
-    setPen(QPen(CorrectColor(currentColor), pen().widthF()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    event->ignore();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QColor VSimpleCurve::CorrectColor(const QColor &color) const
-{
-    if (enabled)
-    {
-        return color;
-    }
-    else
-    {
-        return Qt::gray;
-    }
+    SetPen(this, CorrectColor(currentColor), pen().widthF());
 }

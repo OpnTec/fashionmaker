@@ -29,5 +29,6 @@
         <file>cursor/point_from_circle_and_tangent_cursor.png</file>
         <file>cursor/point_from_arc_and_tangent_cursor.png</file>
         <file>cursor/arc_with_length_cursor.png</file>
+        <file>cursor/true_darts_cursor.png</file>
     </qresource>
 </RCC>

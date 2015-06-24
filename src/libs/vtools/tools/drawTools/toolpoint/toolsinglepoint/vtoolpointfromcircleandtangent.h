@@ -29,11 +29,11 @@
 #ifndef VTOOLPOINTFROMCIRCLEANDTANGENT_H
 #define VTOOLPOINTFROMCIRCLEANDTANGENT_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 class VFormula;
 
-class VToolPointFromCircleAndTangent : public VToolPoint
+class VToolPointFromCircleAndTangent : public VToolSinglePoint
 {
     Q_OBJECT
 public:

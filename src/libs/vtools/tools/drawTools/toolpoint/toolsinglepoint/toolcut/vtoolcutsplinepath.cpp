@@ -72,6 +72,7 @@ void VToolCutSplinePath::setDialog()
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    dialogTool->SetChildrenId(curve1id, curve2id);
     dialogTool->SetFormula(formula);
     dialogTool->setSplinePathId(curveCutId);
     dialogTool->SetPointName(point->name());
@@ -217,7 +218,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
         VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
                                                            splPath2id, color, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolCutSplinePath::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolCutSplinePath::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolCutSplinePath::EnableToolMove);

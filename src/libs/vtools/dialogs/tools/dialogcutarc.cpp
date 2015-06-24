@@ -43,7 +43,8 @@
  * @param parent parent widget
  */
 DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0)
+    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0),
+      ch1(NULL_ID), ch2(NULL_ID)
 {
     ui->setupUi(this);
     InitFormulaUI(ui);
@@ -56,7 +57,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     flagFormula = false;
     CheckState();
 
-    FillComboBoxArcs(ui->comboBoxArc);
+    FillComboBoxArcs(ui->comboBoxArc, FillComboBox::NoChildren, ch1, ch2);
     FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
@@ -157,7 +158,7 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
  */
 void DialogCutArc::setArcId(const quint32 &value)
 {
-    setCurrentArcId(ui->comboBoxArc, value, ComboBoxCutArc::CutArc);
+    setCurrentArcId(ui->comboBoxArc, value, FillComboBox::NoChildren, ch1, ch2);
 
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr);
@@ -174,6 +175,14 @@ QString DialogCutArc::GetColor() const
 void DialogCutArc::SetColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::SetChildrenId(const quint32 &ch1, const quint32 &ch2)
+{
+    this->ch1 = ch1;
+    this->ch2 = ch2;
+    FillComboBoxArcs(ui->comboBoxArc, FillComboBox::NoChildren, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

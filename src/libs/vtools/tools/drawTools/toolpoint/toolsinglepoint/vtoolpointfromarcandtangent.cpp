@@ -39,7 +39,7 @@ VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(VAbstractPattern *doc, 
                                                          quint32 arcId, quint32 tangentPointId,
                                                          CrossCirclesPoint crossPoint, const Source &typeCreation,
                                                          QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), arcId(arcId), tangentPointId(tangentPointId), crossPoint(crossPoint)
+    :VToolSinglePoint(doc, data, id, parent), arcId(arcId), tangentPointId(tangentPointId), crossPoint(crossPoint)
 {
     ToolCreation(typeCreation);
 }
@@ -287,7 +287,7 @@ void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrArc, arcId);

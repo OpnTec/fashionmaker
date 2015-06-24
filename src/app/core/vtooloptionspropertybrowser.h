@@ -69,10 +69,22 @@ private:
     void SetPointName(const QString &name);
 
     template<class Tool>
+    void SetPointName1(const QString &name);
+
+    template<class Tool>
+    void SetPointName2(const QString &name);
+
+    template<class Tool>
     void SetCrossCirclesPoint(const QVariant value);
 
     template<class Tool>
     void AddPropertyPointName(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyPointName1(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyPointName2(Tool *i, const QString &propertyName);
 
     template<class Tool>
     void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
@@ -94,6 +106,7 @@ private:
     void ChangeDataToolArc(VPE::VProperty *property);
     void ChangeDataToolArcWithLength(VPE::VProperty *property);
     void ChangeDataToolBisector(VPE::VProperty *property);
+    void ChangeDataToolTrueDarts(VPE::VProperty *property);
     void ChangeDataToolCutArc(VPE::VProperty *property);
     void ChangeDataToolCutSpline(VPE::VProperty *property);
     void ChangeDataToolCutSplinePath(VPE::VProperty *property);
@@ -120,6 +133,7 @@ private:
     void ShowOptionsToolArc(QGraphicsItem *item);
     void ShowOptionsToolArcWithLength(QGraphicsItem *item);
     void ShowOptionsToolBisector(QGraphicsItem *item);
+    void ShowOptionsToolTrueDarts(QGraphicsItem *item);
     void ShowOptionsToolCutArc(QGraphicsItem *item);
     void ShowOptionsToolCutSpline(QGraphicsItem *item);
     void ShowOptionsToolCutSplinePath(QGraphicsItem *item);
@@ -146,6 +160,7 @@ private:
     void UpdateOptionsToolArc();
     void UpdateOptionsToolArcWithLength();
     void UpdateOptionsToolBisector();
+    void UpdateOptionsToolTrueDarts();
     void UpdateOptionsToolCutArc();
     void UpdateOptionsToolCutSpline();
     void UpdateOptionsToolCutSplinePath();

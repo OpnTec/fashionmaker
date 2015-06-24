@@ -178,7 +178,7 @@ void MainWindow::AddPP(const QString &PPName, const QString &path)
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
 
-    connect(spoint, &VToolPoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
+    connect(spoint, &VToolSinglePoint::ChoosedTool, sceneDraw, &VMainGraphicsScene::ChoosedItem);
     connect(sceneDraw, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
     connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
@@ -309,7 +309,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         ui->view->setCursor(cur);
         ui->view->setShowToolOptions(false);
         helpLabel->setText(toolTip);
-        dialogTool = new Dialog(pattern, 0, this);
+        dialogTool = new Dialog(pattern, NULL_ID, this);
 
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr);
@@ -746,6 +746,16 @@ void MainWindow::ToolArcWithLength(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolTrueDarts(bool checked)
+{
+    SetToolButtonWithApply<DialogTrueDarts>(checked, Tool::TrueDarts,
+                                                "://cursor/true_darts_cursor.png",
+                                                tr("Select the first base line point"),
+                                                &MainWindow::ClosedDialogWithApply<VToolTrueDarts>,
+                                                &MainWindow::ApplyDialog<VToolTrueDarts>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief About show widows about.
  */
@@ -1048,6 +1058,7 @@ void MainWindow::InitToolButtons()
             &MainWindow::ToolPointFromCircleAndTangent);
     connect(ui->toolButtonPointFromArcAndTangent, &QToolButton::clicked, this, &MainWindow::ToolPointFromArcAndTangent);
     connect(ui->toolButtonArcWithLength, &QToolButton::clicked, this, &MainWindow::ToolArcWithLength);
+    connect(ui->toolButtonTrueDarts, &QToolButton::clicked, this, &MainWindow::ToolTrueDarts);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1175,6 +1186,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::PointFromArcAndTangent:
             ui->toolButtonPointFromArcAndTangent->setChecked(false);
+            break;
+        case Tool::TrueDarts:
+            ui->toolButtonTrueDarts->setChecked(false);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:
@@ -2206,6 +2220,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonPointFromCircleAndTangent->setEnabled(drawTools);
     ui->toolButtonPointFromArcAndTangent->setEnabled(drawTools);
     ui->toolButtonArcWithLength->setEnabled(drawTools);
+    ui->toolButtonTrueDarts->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -2583,6 +2598,10 @@ void MainWindow::LastUsedTool()
         case Tool::ArcWithLength:
             ui->toolButtonArcWithLength->setChecked(true);
             ToolArcWithLength(true);
+            break;
+        case Tool::TrueDarts:
+            ui->toolButtonTrueDarts->setChecked(true);
+            ToolTrueDarts(true);
             break;
         case Tool::NodePoint:
         case Tool::NodeArc:

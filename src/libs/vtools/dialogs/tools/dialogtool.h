@@ -53,8 +53,7 @@ class VContainer;
 class QPlainTextEdit;
 class VAbstractTool;
 
-enum class ComboBoxCutSpline : char { CutSpline, NoCutSpline };
-enum class ComboBoxCutArc : char { CutArc, NoCutArc};
+enum class FillComboBox : char { Whole, NoChildren};
 
 /**
  * @brief The DialogTool class parent for all dialog of tools.
@@ -185,11 +184,14 @@ protected:
     virtual void     closeEvent ( QCloseEvent * event );
     virtual void     showEvent( QShowEvent *event );
 
-    void             FillComboBoxPoints(QComboBox *box)const;
-    void             FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc)const;
-    void             FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
-    void             FillComboBoxSplinesPath(QComboBox *box,
-                                             ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline)const;
+    void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
+                                        const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+    void             FillComboBoxArcs(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
+                                      const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+    void             FillComboBoxSplines(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
+                                         const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+    void             FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
+                                             const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
@@ -202,13 +204,19 @@ protected:
     void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
                           bool checkZero = true);
-    void             setCurrentPointId(QComboBox *box, const quint32 &value) const;
+
+    void             setCurrentPointId(QComboBox *box, const quint32 &value,
+                                       FillComboBox rule = FillComboBox::NoChildren,
+                                       const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
     void             setCurrentSplineId(QComboBox *box, const quint32 &value,
-                                        ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
+                                        FillComboBox rule = FillComboBox::NoChildren,
+                                        const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
     void             setCurrentArcId(QComboBox *box, const quint32 &value,
-                                     ComboBoxCutArc cut = ComboBoxCutArc::NoCutArc) const;
+                                     FillComboBox rule = FillComboBox::NoChildren,
+                                     const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
     void             setCurrentSplinePathId(QComboBox *box, const quint32 &value,
-                                            ComboBoxCutSpline cut = ComboBoxCutSpline::NoCutSpline) const;
+                                            FillComboBox rule = FillComboBox::NoChildren,
+                                            const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
     void             setCurrentCurveId(QComboBox *box, const quint32 &value) const;
 
     quint32           getCurrentObjectId(QComboBox *box) const;
@@ -308,7 +316,11 @@ protected:
     void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
     bool             eventFilter(QObject *object, QEvent *event);
 private:
-    void             FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
+    void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
+
+    template <typename GObject>
+    void FillCombo(QComboBox *box, GOType gType, FillComboBox rule = FillComboBox::Whole,
+                   const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

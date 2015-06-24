@@ -29,14 +29,14 @@
 #ifndef VTOOLPOINTOFCONTACT_H
 #define VTOOLPOINTOFCONTACT_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 class VFormula;
 
 /**
  * @brief The VToolPointOfContact class tool for creation point intersection line and arc.
  */
-class VToolPointOfContact : public VToolPoint
+class VToolPointOfContact : public VToolSinglePoint
 {
     Q_OBJECT
 public:

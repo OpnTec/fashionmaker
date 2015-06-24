@@ -31,27 +31,27 @@
 
 #include <QGraphicsPathItem>
 #include "../vgeometry/vabstractcurve.h"
-#include "../vmisc/def.h"
+#include "vabstractsimple.h"
 
 enum class SimpleCurvePoint : char { FirstPoint, ForthPoint };
 
 /**
  * @brief The VSimpleSpline class for simple spline. This object used when we cut spline and want show peaces.
  */
-class VSimpleCurve : public QObject, public QGraphicsPathItem
+class VSimpleCurve : public VAbstractSimple, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VSimpleCurve(quint32 id, QColor currentColor, SimpleCurvePoint curvePosition, Unit patternUnit,
+    VSimpleCurve(quint32 id, const QColor &currentColor, SimpleCurvePoint curvePosition, Unit patternUnit,
                  qreal *factor = nullptr, QObject *parent = 0);
-    void            ChangedActivDraw(const bool &flag);
+    virtual void    ChangedActivDraw(const bool &flag);
     virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
     virtual int     type() const {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleSplinePath)};
 
     QColor GetCurrentColor() const;
-    void SetCurrentColor(const QColor &value);
+    void   SetCurrentColor(const QColor &value);
 
 signals:
     /**
@@ -63,26 +63,15 @@ signals:
 protected:
     virtual void    mousePressEvent(QGraphicsSceneMouseEvent * event);
     virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void    hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void    hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
 private:
     Q_DISABLE_COPY(VSimpleCurve)
-    /** @brief id spline id. */
-    quint32           id;
 
-    /** @brief factor scale factor. */
-    qreal             *factor;
-
-    /** @brief currentColor current color. */
-    QColor            currentColor;
 
     SimpleCurvePoint  curvePosition;
 
-    bool              enabled;
 
-    Unit              patternUnit;
-
-    QColor CorrectColor(const QColor &color) const;
 };
 
 #endif // VSIMPLECURVE_H

@@ -49,7 +49,7 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  */
 VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                                 const QString &namePP, const QString &mPath, QGraphicsItem * parent )
-    :VToolPoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
+    :VToolSinglePoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
 {
     baseColor = Qt::red;
     this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
@@ -202,7 +202,7 @@ void VToolBasePoint::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    VToolPoint::hoverEnterEvent(event);
+    VToolSinglePoint::hoverEnterEvent(event);
 
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
@@ -213,7 +213,7 @@ void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    VToolPoint::hoverLeaveEvent(event);
+    VToolSinglePoint::hoverLeaveEvent(event);
 
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
@@ -232,7 +232,7 @@ void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
     }
-    VToolPoint::mousePressEvent(event);
+    VToolSinglePoint::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,7 +246,7 @@ void VToolBasePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             RestoreOverrideCursor(cursorArrowCloseHand);
         }
     }
-    VToolPoint::mouseReleaseEvent(event);
+    VToolSinglePoint::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,7 +263,7 @@ void VToolBasePoint::SetColorLabel(const Qt::GlobalColor &color)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
     SCASSERT(point.isNull() == false);
@@ -329,5 +329,5 @@ void VToolBasePoint::SetFactor(qreal factor)
 void VToolBasePoint::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
-    VToolPoint::EnableToolMove(move);
+    VToolSinglePoint::EnableToolMove(move);
 }

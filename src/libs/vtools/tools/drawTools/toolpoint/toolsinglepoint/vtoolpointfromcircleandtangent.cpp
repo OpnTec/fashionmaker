@@ -41,7 +41,7 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(VAbstractPattern 
                                                                quint32 circleCenterId, const QString &circleRadius,
                                                                quint32 tangentPointId, CrossCirclesPoint crossPoint,
                                                                const Source &typeCreation, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), circleCenterId(circleCenterId), tangentPointId(tangentPointId),
+    :VToolSinglePoint(doc, data, id, parent), circleCenterId(circleCenterId), tangentPointId(tangentPointId),
       circleRadius(circleRadius), crossPoint(crossPoint)
 {
     ToolCreation(typeCreation);
@@ -272,7 +272,7 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCCenter, circleCenterId);

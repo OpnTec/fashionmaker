@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vtoolpoint.h
+ **  @file   vtoolsinglepoint.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   November 15, 2013
  **
@@ -26,37 +26,38 @@
  **
  *************************************************************************/
 
-#ifndef VTOOLPOINT_H
-#define VTOOLPOINT_H
+#ifndef VTOOLSINGLEPOINT_H
+#define VTOOLSINGLEPOINT_H
 
-#include "../../vdrawtool.h"
+#include "../vabstractpoint.h"
 #include <QGraphicsEllipseItem>
 
 class VPointF;
 class VGraphicsSimpleTextItem;
 
 /**
- * @brief The VToolPoint class parent for all tools what create points.
+ * @brief The VToolSinglePoint class parent for all tools what create points.
  */
-class VToolPoint: public VDrawTool, public QGraphicsEllipseItem
+class VToolSinglePoint: public VAbstractPoint, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-    VToolPoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VToolPoint();
+    VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
+    virtual ~VToolSinglePoint();
+
+    virtual int   type() const {return Type;}
+    enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
+
     virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     QString                 name() const;
     void                    setName(const QString &name);
-    virtual QString         getTagName() const;
-    static const QString    TagName;
 
-    void                    setEnabled(bool enabled);
+    void                    SetEnabled(bool enabled);
+
 public slots:
     void                    NameChangePosition(const QPointF &pos);
-    virtual void            ShowTool(quint32 id, bool enable);
     virtual void            SetFactor(qreal factor);
     virtual void            Disable(bool disable, const QString &namePP);
-    void                    DeleteFromLabel();
     virtual void            EnableToolMove(bool move);
     void                    PointChoosed();
     virtual void            FullUpdateFromFile();
@@ -70,43 +71,18 @@ protected:
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
 
-    virtual void            UpdateNamePosition(qreal mx, qreal my);
+    virtual void            UpdateNamePosition(quint32 id);
     virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
     virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
     virtual void            RefreshPointGeometry(const VPointF &point);
-    void                    RefreshLine();
+    virtual void            RefreshLine(quint32 id);
     virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void            keyReleaseEvent(QKeyEvent * event);
     virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
     virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-
-    template <typename T>
-    void ShowToolVisualization(bool show)
-    {
-        if (show)
-        {
-            if (vis == nullptr)
-            {
-                AddVisualization<T>();
-                SetVisualization();
-            }
-            else
-            {
-                if (T *visual = qobject_cast<T *>(vis))
-                {
-                    visual->show();
-                }
-            }
-        }
-        else
-        {
-            delete vis;
-            vis = nullptr;
-        }
-    }
 private:
-    Q_DISABLE_COPY(VToolPoint)
+    Q_DISABLE_COPY(VToolSinglePoint)
 };
 
-#endif // VTOOLPOINT_H
+#endif // VTOOLSINGLEPOINT_H

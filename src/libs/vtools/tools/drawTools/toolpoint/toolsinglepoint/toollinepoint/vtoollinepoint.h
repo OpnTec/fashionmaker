@@ -29,13 +29,13 @@
 #ifndef VTOOLLINEPOINT_H
 #define VTOOLLINEPOINT_H
 
-#include "../vtoolpoint.h"
+#include "../vtoolsinglepoint.h"
 #include "../vpatterndb/vformula.h"
 
 /**
  * @brief The VToolLinePoint class parent for all tools what create point with line.
  */
-class VToolLinePoint : public VToolPoint
+class VToolLinePoint : public VToolSinglePoint
 {
     Q_OBJECT
 public:

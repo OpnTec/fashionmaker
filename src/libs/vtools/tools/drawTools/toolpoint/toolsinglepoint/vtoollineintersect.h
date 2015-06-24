@@ -29,12 +29,12 @@
 #ifndef VTOOLLINEINTERSECT_H
 #define VTOOLLINEINTERSECT_H
 
-#include "vtoolpoint.h"
+#include "vtoolsinglepoint.h"
 
 /**
  * @brief The VToolLineIntersect class help find point intersection lines.
  */
-class VToolLineIntersect:public VToolPoint
+class VToolLineIntersect:public VToolSinglePoint
 {
     Q_OBJECT
 public:

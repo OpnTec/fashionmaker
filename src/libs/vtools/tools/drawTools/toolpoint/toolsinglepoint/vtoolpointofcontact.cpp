@@ -54,7 +54,7 @@ VToolPointOfContact::VToolPointOfContact(VAbstractPattern *doc, VContainer *data
                                          const QString &radius, const quint32 &center,
                                          const quint32 &firstPointId, const quint32 &secondPointId,
                                          const Source &typeCreation, QGraphicsItem *parent)
-    : VToolPoint(doc, data, id, parent), arcRadius(radius), center(center), firstPointId(firstPointId),
+    : VToolSinglePoint(doc, data, id, parent), arcRadius(radius), center(center), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
     ToolCreation(typeCreation);
@@ -285,7 +285,7 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfContact::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrRadius, arcRadius);

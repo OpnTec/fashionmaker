@@ -58,6 +58,17 @@ public:
     static const QString    AttrMx;
     static const QString    AttrMy;
     static const QString    AttrName;
+    static const QString    AttrMx1;
+    static const QString    AttrMy1;
+    static const QString    AttrName1;
+    static const QString    AttrMx2;
+    static const QString    AttrMy2;
+    static const QString    AttrName2;
+    static const QString    AttrBaseLineP1;
+    static const QString    AttrBaseLineP2;
+    static const QString    AttrDartP1;
+    static const QString    AttrDartP2;
+    static const QString    AttrDartP3;
     static const QString    AttrX;
     static const QString    AttrY;
     static const QString    AttrTypeLine;
@@ -79,6 +90,7 @@ public:
     static const QString    AttrP2Line2;
     static const QString    AttrPShoulder;
     static const QString    AttrPoint1;
+    static const QString    AttrPoint2;
     static const QString    AttrPoint4;
     static const QString    AttrKAsm1;
     static const QString    AttrKAsm2;

@@ -50,7 +50,7 @@ const QString VToolTriangle::ToolType = QStringLiteral("triangle");
 VToolTriangle::VToolTriangle(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
                              const quint32 &axisP2Id, const quint32 &firstPointId, const quint32 &secondPointId,
                              const Source &typeCreation, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
+    :VToolSinglePoint(doc, data, id, parent), axisP1Id(axisP1Id), axisP2Id(axisP2Id), firstPointId(firstPointId),
       secondPointId(secondPointId)
 {
     ToolCreation(typeCreation);
@@ -249,7 +249,7 @@ void VToolTriangle::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTriangle::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrAxisP1, axisP1Id);

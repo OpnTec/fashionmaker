@@ -44,7 +44,7 @@ VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(VAbstractPatter
                                                                  const QString &secondCircleRadius,
                                                                  CrossCirclesPoint crossPoint,
                                                                  const Source &typeCreation, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), firstCircleCenterId(firstCircleCenterId),
+    :VToolSinglePoint(doc, data, id, parent), firstCircleCenterId(firstCircleCenterId),
       secondCircleCenterId(secondCircleCenterId), firstCircleRadius(firstCircleRadius),
       secondCircleRadius(secondCircleRadius), crossPoint(crossPoint)
 {
@@ -308,7 +308,7 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrC1Center, firstCircleCenterId);

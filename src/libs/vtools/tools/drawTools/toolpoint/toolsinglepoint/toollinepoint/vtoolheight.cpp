@@ -158,7 +158,7 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
         VToolHeight *point = new VToolHeight(doc, data, id, typeLine, lineColor, basePointId, p1LineId, p2LineId,
                                              typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolHeight::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolHeight::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolHeight::EnableToolMove);

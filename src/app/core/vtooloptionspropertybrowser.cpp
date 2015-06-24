@@ -32,6 +32,7 @@
 #include "../../libs/vwidgets/vmaingraphicsview.h"
 #include "../../libs/vwidgets/vgraphicssimpletextitem.h"
 #include "../../libs/vwidgets/vcontrolpointspline.h"
+#include "../../libs/vwidgets/vsimplepoint.h"
 #include "../../libs/vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
 #include "../../libs/vpatterndb/vformula.h"
@@ -161,6 +162,13 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolPointFromArcAndTangent::Type:
             ShowOptionsToolPointFromArcAndTangent(item);
             break;
+        case VSimplePoint::Type:
+            currentItem = item->parentItem();
+            ShowItemOptions(currentItem);
+            break;
+        case VToolTrueDarts::Type:
+            ShowOptionsToolTrueDarts(item);
+            break;
         default:
             break;
     }
@@ -256,6 +264,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolPointFromArcAndTangent::Type:
             UpdateOptionsToolPointFromArcAndTangent();
+            break;
+        case VToolTrueDarts::Type:
+            UpdateOptionsToolTrueDarts();
             break;
         default:
             break;
@@ -368,6 +379,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         case VToolPointFromArcAndTangent::Type:
             ChangeDataToolPointFromArcAndTangent(prop);
             break;
+        case VToolTrueDarts::Type:
+            ChangeDataToolTrueDarts(prop);
+            break;
         default:
             break;
     }
@@ -431,6 +445,25 @@ void VToolOptionsPropertyBrowser::AddPropertyPointName(Tool *i, const QString &p
     VProperty* itemName = new VProperty(propertyName);
     itemName->setValue(i->name());
     AddProperty(itemName, VAbstractTool::AttrName);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyPointName1(Tool *i, const QString &propertyName)
+{
+    VProperty* itemName = new VProperty(propertyName);
+    itemName->setValue(i->nameP1());
+    AddProperty(itemName, VAbstractTool::AttrName1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyPointName2(Tool *i, const QString &propertyName)
+{
+    VProperty* itemName = new VProperty(propertyName);
+    itemName->setValue(i->nameP2());
+    AddProperty(itemName, VAbstractTool::AttrName2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -502,6 +535,59 @@ void VToolOptionsPropertyBrowser::SetPointName(const QString &name)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetPointName1(const QString &name)
+{
+    if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        if (name == i->nameP1())
+        {
+            return;
+        }
+
+        QRegularExpression rx(NameRegExp());
+        if (name.isEmpty() || VContainer::IsUnique(name) == false || rx.match(name).hasMatch() == false)
+        {
+            idToProperty[VAbstractTool::AttrName1]->setValue(i->nameP1());
+        }
+        else
+        {
+            i->setNameP1(name);
+        }
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetPointName2(const QString &name)
+{
+    if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        if (name == i->nameP2())
+        {
+            return;
+        }
+
+        QRegularExpression rx(NameRegExp());
+        if (name.isEmpty() || VContainer::IsUnique(name) == false || rx.match(name).hasMatch() == false)
+        {
+            idToProperty[VAbstractTool::AttrName2]->setValue(i->nameP2());
+        }
+        else
+        {
+            i->setNameP2(name);
+        }
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
@@ -712,6 +798,30 @@ void VToolOptionsPropertyBrowser::ChangeDataToolBisector(VProperty *property)
             break;
         case 26: // VAbstractTool::AttrTypeLineColor
             i->SetLineColor(value.toString());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolTrueDarts(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolTrueDarts *i = qgraphicsitem_cast<VToolTrueDarts *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 32: // VAbstractTool::AttrName1
+            SetPointName1<VToolTrueDarts>(value.toString());
+            break;
+        case 33: // VAbstractTool::AttrName2
+            SetPointName2<VToolTrueDarts>(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1305,6 +1415,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolTrueDarts(QGraphicsItem *item)
+{
+    VToolTrueDarts *i = qgraphicsitem_cast<VToolTrueDarts *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("True darts"));
+
+    AddPropertyPointName1(i, tr("Point 1 label"));
+    AddPropertyPointName2(i, tr("Point 2 label"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 {
     VToolCutArc *i = qgraphicsitem_cast<VToolCutArc *>(item);
@@ -1667,6 +1788,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolTrueDarts()
+{
+    VToolTrueDarts *i = qgraphicsitem_cast<VToolTrueDarts *>(currentItem);
+
+    idToProperty[VAbstractTool::AttrName1]->setValue(i->nameP1());
+    idToProperty[VAbstractTool::AttrName2]->setValue(i->nameP2());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
 {
     VToolCutArc *i = qgraphicsitem_cast<VToolCutArc *>(currentItem);
@@ -1975,6 +2105,8 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << VAbstractTool::AttrCrossPoint      /* 28 */
                                      << VAbstractTool::AttrC1Radius        /* 29 */
                                      << VAbstractTool::AttrC2Radius        /* 30 */
-                                     << VAbstractTool::AttrCRadius;        /* 31 */
+                                     << VAbstractTool::AttrCRadius         /* 31 */
+                                     << VAbstractTool::AttrName1           /* 32 */
+                                     << VAbstractTool::AttrName2;          /* 33 */
     return attr;
 }

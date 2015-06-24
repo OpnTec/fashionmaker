@@ -115,146 +115,28 @@ void DialogTool::showEvent(QShowEvent *event)
  * @brief FillComboBoxPoints fill comboBox list of points
  * @param box comboBox
  */
-void DialogTool::FillComboBoxPoints(QComboBox *box) const
+void DialogTool::FillComboBoxPoints(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
-    SCASSERT(box != nullptr);
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
-    QMap<QString, quint32> list;
-    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
-    {
-        if (i.key() != toolId)
-        {
-            QSharedPointer<VGObject> obj = i.value();
-            if (obj->getType() == GOType::Point && obj->getMode() == Draw::Calculation)
-            {
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(i.key());
-                list[point->name()] = i.key();
-            }
-        }
-    }
-    FillList(box, list);
+    FillCombo<VPointF>(box, GOType::Point, rule, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxArcs(QComboBox *box, ComboBoxCutArc cut) const
+void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
-    SCASSERT(box != nullptr);
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
-    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
-    QMap<QString, quint32> list;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
-    {
-        if (cut == ComboBoxCutArc::CutArc)
-        {
-            if (i.key() != toolId + 1 && i.key() != toolId + 2)
-            {
-                QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
-                {
-                    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(i.key());
-                    list[arc->name()] = i.key();
-                }
-            }
-        }
-        else
-        {
-            if (i.key() != toolId)
-            {
-                QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == GOType::Arc && obj->getMode() == Draw::Calculation)
-                {
-                    const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(i.key());
-                    list[arc->name()] = i.key();
-                }
-            }
-        }
-    }
-    FillList(box, list);
+    FillCombo<VArc>(box, GOType::Arc, rule, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillComboBoxSplines fill comboBox list of splines
- * @param box comboBox
- * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
- */
-void DialogTool::FillComboBoxSplines(QComboBox *box, ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplines(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
-    SCASSERT(box != nullptr);
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
-    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
-    QMap<QString, quint32> list;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
-    {
-        if (cut == ComboBoxCutSpline::CutSpline)
-        {
-            if (i.key() != toolId + 1 && i.key() != toolId + 2)
-            {
-                QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
-                {
-                    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(i.key());
-                    list[spl->name()] = i.key();
-                }
-            }
-        }
-        else
-        {
-            if (i.key() != toolId)
-            {
-                QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == GOType::Spline && obj->getMode() == Draw::Calculation)
-                {
-                    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(i.key());
-                    list[spl->name()] = i.key();
-                }
-            }
-        }
-    }
-    FillList(box, list);
+    FillCombo<VSpline>(box, GOType::Spline, rule, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillComboBoxSplinesPath
- * @param box comboBox
- * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
- */
-void DialogTool::FillComboBoxSplinesPath(QComboBox *box, ComboBoxCutSpline cut) const
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule, const quint32 &ch1,
+                                         const quint32 &ch2) const
 {
-    SCASSERT(box != nullptr);
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
-    QMap<QString, quint32> list;
-    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
-    {
-        if (cut == ComboBoxCutSpline::CutSpline)
-        {
-            if (i.key() != toolId + 1 && i.key() != toolId + 2)
-            {
-                QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
-                {
-                    const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(i.key());
-                    list[splPath->name()] = i.key();
-                }
-            }
-        }
-        else
-        {
-            if (i.key() != toolId)
-            {
-                QSharedPointer<VGObject> obj = i.value();
-                if (obj->getType() == GOType::SplinePath && obj->getMode() == Draw::Calculation)
-                {
-                    const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(i.key());
-                    list[splPath->name()] = i.key();
-                }
-            }
-        }
-    }
-    FillList(box, list);
+    FillCombo<VSplinePath>(box, GOType::SplinePath, rule, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -505,13 +387,14 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value) const
+void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value, FillComboBox rule,
+                                   const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr);
 
     box->blockSignals(true);
 
-    FillComboBoxPoints(box);
+    FillComboBoxPoints(box, rule, ch1, ch2);
     ChangeCurrentData(box, value);
 
     box->blockSignals(false);
@@ -520,28 +403,24 @@ void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value) const
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setCurrentSplineId set current spline id in combobox
- * @param box combobox
- * @param value spline id
- * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::setCurrentSplineId(QComboBox *box, const quint32 &value, ComboBoxCutSpline cut) const
+void DialogTool::setCurrentSplineId(QComboBox *box, const quint32 &value, FillComboBox rule,
+                                    const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxSplines(box, cut);
+    FillComboBoxSplines(box, rule, ch1, ch2);
     ChangeCurrentData(box, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setCurrentArcId
- * @param box combobox
- * @param value arc id
- * @param cut if set to ComboMode::CutArc don't show id+1 and id+2
  */
-void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, ComboBoxCutArc cut) const
+void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, FillComboBox rule,
+                                 const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxArcs(box, cut);
+    FillComboBoxArcs(box, rule, ch1, ch2);
     ChangeCurrentData(box, value);
 }
 
@@ -552,10 +431,11 @@ void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, ComboBoxC
  * @param value splinePath id
  * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
-void DialogTool::setCurrentSplinePathId(QComboBox *box, const quint32 &value, ComboBoxCutSpline cut) const
+void DialogTool::setCurrentSplinePathId(QComboBox *box, const quint32 &value, FillComboBox rule,
+                                        const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxSplinesPath(box, cut);
+    FillComboBoxSplinesPath(box, rule, ch1, ch2);
     ChangeCurrentData(box, value);
 }
 
@@ -921,4 +801,47 @@ void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 {
     this->associatedTool=tool;
     SetToolId(tool->getId());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename GObject>
+void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, const quint32 &ch1,
+                           const quint32 &ch2) const
+{
+    SCASSERT(box != nullptr);
+    box->blockSignals(true);
+
+    const QHash<quint32, QSharedPointer<VGObject> > *objs = data->DataGObjects();
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    QMap<QString, quint32> list;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    {
+        if (rule == FillComboBox::NoChildren)
+        {
+            if (i.key() != toolId && i.key() != ch1 && i.key() != ch2)
+            {
+                QSharedPointer<VGObject> obj = i.value();
+                if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
+                {
+                    const QSharedPointer<GObject> arc = data->GeometricObject<GObject>(i.key());
+                    list[arc->name()] = i.key();
+                }
+            }
+        }
+        else
+        {
+            if (i.key() != toolId)
+            {
+                QSharedPointer<VGObject> obj = i.value();
+                if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
+                {
+                    const QSharedPointer<GObject> arc = data->GeometricObject<GObject>(i.key());
+                    list[arc->name()] = i.key();
+                }
+            }
+        }
+    }
+    FillList(box, list);
+
+    box->blockSignals(false);
 }

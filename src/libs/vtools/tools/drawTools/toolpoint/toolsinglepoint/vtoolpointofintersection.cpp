@@ -47,7 +47,7 @@ const QString VToolPointOfIntersection::ToolType = QStringLiteral("pointOfInters
 VToolPointOfIntersection::VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id,
                                                    const quint32 &firstPointId, const quint32 &secondPointId,
                                                    const Source &typeCreation, QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId)
+    :VToolSinglePoint(doc, data, id, parent), firstPointId(firstPointId), secondPointId(secondPointId)
 {
     ToolCreation(typeCreation);
 }
@@ -191,7 +191,7 @@ void VToolPointOfIntersection::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersection::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrFirstPoint, firstPointId);

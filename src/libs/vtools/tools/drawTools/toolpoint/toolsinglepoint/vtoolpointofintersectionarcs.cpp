@@ -39,7 +39,7 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(VAbstractPattern *doc
                                                            const quint32 &firstArcId, const quint32 &secondArcId,
                                                            CrossCirclesPoint pType, const Source &typeCreation,
                                                            QGraphicsItem *parent)
-    :VToolPoint(doc, data, id, parent), firstArcId(firstArcId), secondArcId(secondArcId), crossPoint(pType)
+    :VToolSinglePoint(doc, data, id, parent), firstArcId(firstArcId), secondArcId(secondArcId), crossPoint(pType)
 {
     ToolCreation(typeCreation);
 }
@@ -292,7 +292,7 @@ void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
-    VToolPoint::SaveOptions(tag, obj);
+    VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrFirstArc, firstArcId);

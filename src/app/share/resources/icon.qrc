@@ -45,5 +45,6 @@
         <file>icon/16x16/toolsectionpoint.png</file>
         <file>icon/16x16/toolsectiondetail.png</file>
         <file>icon/16x16/toolsectionlayout.png</file>
+        <file>toolicon/32x32/true_darts.png</file>
     </qresource>
 </RCC>

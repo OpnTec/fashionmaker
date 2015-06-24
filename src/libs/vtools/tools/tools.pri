@@ -13,7 +13,7 @@ HEADERS += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersection.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h \
-    $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpoint.h \
+    $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h \
@@ -43,7 +43,10 @@ HEADERS += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h \
-    $$PWD/drawTools/toolcurve/vtoolarcwithlength.h
+    $$PWD/drawTools/toolcurve/vtoolarcwithlength.h \
+    $$PWD/drawTools/toolpoint/vabstractpoint.h \
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.h \
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h
 
 SOURCES += \
     $$PWD/vtooldetail.cpp \
@@ -56,7 +59,7 @@ SOURCES += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersection.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp \
-    $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpoint.cpp \
+    $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolsinglepoint.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp \
@@ -84,4 +87,7 @@ SOURCES += \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.cpp \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.cpp \
-    $$PWD/drawTools/toolcurve/vtoolarcwithlength.cpp
+    $$PWD/drawTools/toolcurve/vtoolarcwithlength.cpp \
+    $$PWD/drawTools/toolpoint/vabstractpoint.cpp \
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.cpp \
+    $$PWD/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.cpp

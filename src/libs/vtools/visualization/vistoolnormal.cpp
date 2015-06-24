@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vistoolnormal.h"
-#include "../../vgeometry/vpointf.h"
-#include "../tools/drawTools/vtoolnormal.h"
+#include "../vgeometry/vpointf.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)

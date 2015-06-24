@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vistoolbisector.h"
-#include "../../vgeometry/vpointf.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../tools/drawTools/vtoolbisector.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)
