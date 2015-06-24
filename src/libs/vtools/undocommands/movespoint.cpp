@@ -38,7 +38,7 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
                        QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(scene)
 {
-    setText(tr("Move single point"));
+    setText(tr("move single point"));
     nodeId = id;
     qCDebug(vUndo, "SPoint id %u", nodeId);
 

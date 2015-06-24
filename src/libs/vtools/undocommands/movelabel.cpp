@@ -38,7 +38,7 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, co
                      QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldMx(0.0), oldMy(0.0), newMx(x), newMy(y), scene(scene)
 {
-    setText(tr("Move point label"));
+    setText(tr("move point label"));
     nodeId = id;
     qCDebug(vUndo, "Point id %u", nodeId);
 

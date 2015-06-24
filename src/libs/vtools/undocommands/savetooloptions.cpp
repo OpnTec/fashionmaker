@@ -33,7 +33,7 @@ SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &n
                                  const quint32 &id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldXml(oldXml), newXml(newXml)
 {
-    setText(tr("Save tool option"));
+    setText(tr("save tool option"));
     nodeId = id;
 }
 

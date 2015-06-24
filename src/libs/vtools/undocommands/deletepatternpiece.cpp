@@ -34,7 +34,7 @@ DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &nam
     : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
       previousPPName(QString())
 {
-    setText(tr("Delete pattern piece %1").arg(namePP));
+    setText(tr("delete pattern piece %1").arg(namePP));
 
     QDomElement patternP = doc->GetPPElement(namePP);
     patternPiece = patternP.cloneNode().toElement();

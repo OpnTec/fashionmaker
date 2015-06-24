@@ -33,7 +33,7 @@
 DeleteDetail::DeleteDetail(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID)
 {
-    setText(tr("Delete tool"));
+    setText(tr("delete tool"));
     nodeId = id;
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())

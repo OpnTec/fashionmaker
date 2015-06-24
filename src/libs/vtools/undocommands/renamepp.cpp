@@ -34,7 +34,7 @@
 RenamePP::RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent)
     :VUndoCommand(QDomElement(), doc, parent), combo(combo), newPPname(newPPname), oldPPname(QString())
 {
-    setText(tr("Rename pattern piece"));
+    setText(tr("rename pattern piece"));
     SCASSERT(combo != nullptr);
     oldPPname = doc->GetNameActivPP();
 }

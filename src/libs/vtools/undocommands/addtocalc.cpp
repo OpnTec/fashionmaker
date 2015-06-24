@@ -35,7 +35,7 @@
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP()), cursor(doc->getCursor())
 {
-    setText(tr("Add object"));
+    setText(tr("add object"));
     nodeId = doc->GetParametrId(xml);
 }
 

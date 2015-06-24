@@ -32,7 +32,7 @@
 AddUnionDetails::AddUnionDetails(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent)
 {
-    setText(tr("Add union details"));
+    setText(tr("add union details"));
     nodeId = doc->GetParametrId(xml);
 }
 

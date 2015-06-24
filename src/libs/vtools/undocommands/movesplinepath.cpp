@@ -35,7 +35,7 @@ MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplP
                                const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), oldSplinePath(oldSplPath), newSplinePath(newSplPath), scene(scene)
 {
-    setText(tr("Move spline path"));
+    setText(tr("move spline path"));
     nodeId = id;
 
     SCASSERT(scene != nullptr);

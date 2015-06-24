@@ -35,7 +35,7 @@ AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, 
 {
     SCASSERT(namePP.isEmpty() == false);
     SCASSERT(mPath.isEmpty() == false);
-    setText(tr("Add pattern piece %1").arg(namePP));
+    setText(tr("add pattern piece %1").arg(namePP));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

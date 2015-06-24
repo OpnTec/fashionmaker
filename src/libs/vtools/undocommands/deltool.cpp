@@ -35,7 +35,7 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID),
       nameActivDraw(doc->GetNameActivPP())
 {
-    setText(tr("Delete tool"));
+    setText(tr("delete tool"));
     nodeId = id;
     siblingId = doc->SiblingNodeId(nodeId);
     parentNode = doc->ParentNodeById(nodeId);

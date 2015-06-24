@@ -32,7 +32,7 @@
 AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent)
 {
-    setText(tr("Add detail"));
+    setText(tr("add detail"));
     nodeId = doc->GetParametrId(xml);
 }
 
