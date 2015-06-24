@@ -70,6 +70,7 @@ void VToolCutArc::setDialog()
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    dialogTool->SetChildrenId(curve1id, curve2id);
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
     dialogTool->SetPointName(point->name());

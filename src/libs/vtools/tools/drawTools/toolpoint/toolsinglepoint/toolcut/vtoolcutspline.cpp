@@ -69,6 +69,7 @@ void VToolCutSpline::setDialog()
     DialogCutSpline *dialogTool = qobject_cast<DialogCutSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+    dialogTool->SetChildrenId(curve1id, curve2id);
     dialogTool->SetFormula(formula);
     dialogTool->setSplineId(curveCutId);
     dialogTool->SetPointName(point->name());
