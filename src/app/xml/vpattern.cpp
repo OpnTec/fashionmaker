@@ -659,648 +659,95 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
-    QStringList points = QStringList() << VToolBasePoint::ToolType << VToolEndLine::ToolType
-                                       << VToolAlongLine::ToolType << VToolShoulderPoint::ToolType
-                                       << VToolNormal::ToolType << VToolBisector::ToolType
-                                       << VToolLineIntersect::ToolType << VToolPointOfContact::ToolType
-                                       << VNodePoint::ToolType << VToolHeight::ToolType << VToolTriangle::ToolType
-                                       << VToolPointOfIntersection::ToolType << VToolCutSpline::ToolType
-                                       << VToolCutSplinePath::ToolType << VToolCutArc::ToolType
-                                       << VToolLineIntersectAxis::ToolType << VToolCurveIntersectAxis::ToolType
-                                       << VToolPointOfIntersectionArcs::ToolType
-                                       << VToolPointOfIntersectionCircles::ToolType
-                                       << VToolPointFromCircleAndTangent::ToolType
-                                       << VToolPointFromArcAndTangent::ToolType
-                                       << VToolTrueDarts::ToolType;
+    QStringList points = QStringList() << VToolBasePoint::ToolType                  /*0*/
+                                       << VToolEndLine::ToolType                    /*1*/
+                                       << VToolAlongLine::ToolType                  /*2*/
+                                       << VToolShoulderPoint::ToolType              /*3*/
+                                       << VToolNormal::ToolType                     /*4*/
+                                       << VToolBisector::ToolType                   /*5*/
+                                       << VToolLineIntersect::ToolType              /*6*/
+                                       << VToolPointOfContact::ToolType             /*7*/
+                                       << VNodePoint::ToolType                      /*8*/
+                                       << VToolHeight::ToolType                     /*9*/
+                                       << VToolTriangle::ToolType                   /*10*/
+                                       << VToolPointOfIntersection::ToolType        /*11*/
+                                       << VToolCutSpline::ToolType                  /*12*/
+                                       << VToolCutSplinePath::ToolType              /*13*/
+                                       << VToolCutArc::ToolType                     /*14*/
+                                       << VToolLineIntersectAxis::ToolType          /*15*/
+                                       << VToolCurveIntersectAxis::ToolType         /*16*/
+                                       << VToolPointOfIntersectionArcs::ToolType    /*17*/
+                                       << VToolPointOfIntersectionCircles::ToolType /*18*/
+                                       << VToolPointFromCircleAndTangent::ToolType  /*19*/
+                                       << VToolPointFromArcAndTangent::ToolType     /*20*/
+                                       << VToolTrueDarts::ToolType;                 /*21*/
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
-        {
-            VToolBasePoint *spoint = 0;
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const qreal x = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
-                const qreal y = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
-
-                data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-                VDrawTool::AddRecord(id, Tool::BasePoint, this);
-                if (parse != Document::FullParse)
-                {
-                    UpdateToolData(id, data);
-                }
-                if (parse == Document::FullParse)
-                {
-                    spoint = new VToolBasePoint(this, data, id, Source::FromFile, nameActivPP, MPath());
-                    scene->addItem(spoint);
-                    connect(spoint, &VToolBasePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-                    connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
-                    connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
-                    connect(scene, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
-                    tools[id] = spoint;
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating single point"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                scene->removeItem(spoint);
-                delete spoint;
-                throw excep;
-            }
+            ParseToolBasePoint(scene, domElement, parse);
             break;
-        }
         case 1: //VToolEndLine::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                QString f = formula;//need for saving fixed formula;
-
-                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
-
-                const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
-                QString angleFix = angle;
-
-                VToolEndLine::Create(id, name, typeLine, lineColor, f, angleFix, basePointId, mx, my, scene, this, data,
-                                     parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula || angleFix != angle)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolEndLine(scene, domElement, parse);
             break;
         case 2: //VToolAlongLine::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-
-                VToolAlongLine::Create(id, name, typeLine, lineColor, f, firstPointId, secondPointId, mx, my, scene,
-                                       this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolAlongLine(scene, domElement, parse);
             break;
         case 3: //VToolShoulderPoint::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 p1Line = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, NULL_ID_STR);
-                const quint32 p2Line = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, NULL_ID_STR);
-                const quint32 pShoulder = GetParametrUInt(domElement, VAbstractTool::AttrPShoulder, NULL_ID_STR);
-
-                VToolShoulderPoint::Create(id, f, p1Line, p2Line, pShoulder, typeLine, lineColor, name, mx, my, scene,
-                                           this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolShoulderPoint(scene, domElement, parse);
             break;
         case 4: //VToolNormal::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-                const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
-
-                VToolNormal::Create(id, f, firstPointId, secondPointId, typeLine, lineColor, name, angle, mx, my, scene,
-                                    this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolNormal(scene, domElement, parse);
             break;
         case 5: //VToolBisector::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-                const quint32 thirdPointId = GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, NULL_ID_STR);
-
-                VToolBisector::Create(id, f, firstPointId, secondPointId, thirdPointId,
-                                    typeLine, lineColor, name, mx, my, scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolBisector(scene, domElement, parse);
             break;
         case 6: //VToolLineIntersect::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 p1Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, NULL_ID_STR);
-                const quint32 p2Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, NULL_ID_STR);
-                const quint32 p1Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line2, NULL_ID_STR);
-                const quint32 p2Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, NULL_ID_STR);
-
-                VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name,
-                                            mx, my, scene, this, data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of lineintersection"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolLineIntersect(scene, domElement, parse);
             break;
         case 7: //VToolPointOfContact::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
-                QString f = radius;//need for saving fixed formula;
-                const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-
-                VToolPointOfContact::Create(id, f, center, firstPointId, secondPointId, name, mx, my, scene, this,
-                                            data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != radius)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrRadius, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolPointOfContact(scene, domElement, parse);
             break;
         case 8: //VNodePoint::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, mx, my);
-                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
-                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-                const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
-                data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
-                                                    Draw::Modeling));
-                VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating modeling point"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseNodePoint(scene, domElement, parse);
             break;
         case 9: //VToolHeight::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
-                const quint32 p1LineId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, NULL_ID_STR);
-                const quint32 p2LineId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, NULL_ID_STR);
-
-                VToolHeight::Create(id, name, typeLine, lineColor, basePointId, p1LineId, p2LineId,
-                                    mx, my, scene, this, data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating height"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolHeight(scene, domElement, parse);
             break;
         case 10: //VToolTriangle::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 axisP1Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, NULL_ID_STR);
-                const quint32 axisP2Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, NULL_ID_STR);
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-
-                VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this,
-                                      data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating triangle"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolTriangle(scene, domElement, parse);
             break;
         case 11: //VToolPointOfIntersection::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
-
-                VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
-                                                 parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolPointOfIntersection(scene, domElement, parse);
             break;
         case 12: //VToolCutSpline::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-
-                VToolCutSpline::Create(id, name, f, splineId, mx, my, color, scene, this, data, parse,
-                                       Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolCutSpline(scene, domElement, parse);
             break;
         case 13: //VToolCutSplinePath::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath,
-                                                             NULL_ID_STR);
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-
-                VToolCutSplinePath::Create(id, name, f, splinePathId, mx, my, color, scene, this, data, parse,
-                                           Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolCutSplinePath(scene, domElement, parse);
             break;
         case 14: //VToolCutArc::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
-                QString f = formula;//need for saving fixed formula;
-                const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, NULL_ID_STR);
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-
-                VToolCutArc::Create(id, name, f, arcId, mx, my, color, scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (f != formula)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrLength, f);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolCutArc(scene, domElement, parse);
             break;
         case 15: //VToolLineIntersectAxis::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-
-                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
-                const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, NULL_ID_STR);
-                const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, NULL_ID_STR);
-
-                const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
-                QString angleFix = angle;
-
-                VToolLineIntersectAxis::Create(id, name, typeLine, lineColor, angleFix, basePointId, firstPointId,
-                                               secondPointId, mx, my, scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (angleFix != angle)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
-                                            domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
-                                            domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolLineIntersectAxis(scene, domElement, parse);
             break;
         case 16: //VToolCurveIntersectAxis::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
-
-                const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
-                const quint32 curveId = GetParametrUInt(domElement, VAbstractTool::AttrCurve, NULL_ID_STR);
-                const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
-                QString angleFix = angle;
-
-                VToolCurveIntersectAxis::Create(id, name, typeLine, lineColor, angleFix, basePointId, curveId, mx, my,
-                                                scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (angleFix != angle)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
-                                            domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
-                                            domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolCurveIntersectAxis(scene, domElement, parse);
             break;
         case 17: //VToolPointOfIntersectionArcs::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 firstArcId = GetParametrUInt(domElement, VAbstractTool::AttrFirstArc, NULL_ID_STR);
-                const quint32 secondArcId = GetParametrUInt(domElement, VAbstractTool::AttrSecondArc, NULL_ID_STR);
-                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
-                                                                                          VAbstractTool::AttrCrossPoint,
-                                                                                          "1"));
-
-                VToolPointOfIntersectionArcs::Create(id, name, firstArcId, secondArcId, crossPoint, mx, my, scene, this,
-                                                     data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection arcs"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolPointOfIntersectionArcs(scene, domElement, parse);
             break;
         case 18: //VToolPointOfIntersectionCircles::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 c1CenterId = GetParametrUInt(domElement, VAbstractTool::AttrC1Center, NULL_ID_STR);
-                const quint32 c2CenterId = GetParametrUInt(domElement, VAbstractTool::AttrC2Center, NULL_ID_STR);
-                const QString c1Radius = GetParametrString(domElement, VAbstractTool::AttrC1Radius);
-                QString c1R = c1Radius;
-                const QString c2Radius = GetParametrString(domElement, VAbstractTool::AttrC2Radius);
-                QString c2R = c2Radius;
-                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
-                                                                                          VAbstractTool::AttrCrossPoint,
-                                                                                          "1"));
-
-                VToolPointOfIntersectionCircles::Create(id, name, c1CenterId, c2CenterId, c1R, c2R, crossPoint, mx, my,
-                                                        scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (c1R != c1Radius || c2R != c2Radius)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrC1Center, c1R);
-                    SetAttribute(domElement, VAbstractTool::AttrC2Center, c2R);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point of intersection circles"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolPointOfIntersectionCircles(scene, domElement, parse);
             break;
         case 19: //VToolPointFromCircleAndTangent::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 cCenterId = GetParametrUInt(domElement, VAbstractTool::AttrCCenter, NULL_ID_STR);
-                const quint32 tangentId = GetParametrUInt(domElement, VAbstractTool::AttrTangent, NULL_ID_STR);
-                const QString cRadius = GetParametrString(domElement, VAbstractTool::AttrCRadius);
-                QString cR = cRadius;
-                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
-                                                                                          VAbstractTool::AttrCrossPoint,
-                                                                                          "1"));
-
-                VToolPointFromCircleAndTangent::Create(id, name, cCenterId, cR, tangentId, crossPoint, mx, my,
-                                                       scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (cR != cRadius)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrCCenter, cR);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point from circle and tangent"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolPointFromCircleAndTangent(scene, domElement, parse);
             break;
         case 20: //VToolPointFromArcAndTangent::ToolType
-            try
-            {
-                PointsCommonAttributes(domElement, id, name, mx, my);
-                const quint32 arcId = GetParametrUInt(domElement, VAbstractTool::AttrArc, NULL_ID_STR);
-                const quint32 tangentId = GetParametrUInt(domElement, VAbstractTool::AttrTangent, NULL_ID_STR);
-                const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
-                                                                                          VAbstractTool::AttrCrossPoint,
-                                                                                          "1"));
-
-                VToolPointFromArcAndTangent::Create(id, name, arcId, tangentId, crossPoint, mx, my,
-                                                    scene, this, data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating point from arc and tangent"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolPointFromArcAndTangent(scene, domElement, parse);
             break;
         case 21: //VToolTrueDarts::ToolType
-            try
-            {
-                ToolsCommonAttributes(domElement, id);
-
-                const quint32 p1Id = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, NULL_ID_STR);
-                const quint32 p2Id = GetParametrUInt(domElement, VAbstractTool::AttrPoint2, NULL_ID_STR);
-
-                const quint32 baseLineP1Id = GetParametrUInt(domElement, VAbstractTool::AttrBaseLineP1, NULL_ID_STR);
-                const quint32 baseLineP2Id = GetParametrUInt(domElement, VAbstractTool::AttrBaseLineP2, NULL_ID_STR);
-                const quint32 dartP1Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP1, NULL_ID_STR);
-                const quint32 dartP2Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP2, NULL_ID_STR);
-                const quint32 dartP3Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP3, NULL_ID_STR);
-
-                const QString name1 = GetParametrString(domElement, VAbstractTool::AttrName1, "A");
-                const qreal mx1 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx1, "10.0"));
-                const qreal my1 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy1, "15.0"));
-
-                const QString name2 = GetParametrString(domElement, VAbstractTool::AttrName2, "A");
-                const qreal mx2 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx2, "10.0"));
-                const qreal my2 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy2, "15.0"));
-
-                VToolTrueDarts::Create(id, p1Id, p2Id,
-                                       baseLineP1Id, baseLineP2Id, dartP1Id, dartP2Id, dartP3Id,
-                                       name1, mx1, my1, name2, mx2, my2,
-                                       scene, this, data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating true darts"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolTrueDarts(scene, domElement, parse);
             break;
         default:
             qDebug() << "Illegal point type in VDomDocument::ParsePointElement().";
@@ -1436,6 +883,1144 @@ QString VPattern::GetLabelBase(unsigned int index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    VToolBasePoint *spoint = 0;
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const qreal x = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrX, "10.0"));
+        const qreal y = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrY, "10.0"));
+
+        data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
+        VDrawTool::AddRecord(id, Tool::BasePoint, this);
+        if (parse != Document::FullParse)
+        {
+            UpdateToolData(id, data);
+        }
+        if (parse == Document::FullParse)
+        {
+            spoint = new VToolBasePoint(this, data, id, Source::FromFile, nameActivPP, MPath());
+            scene->addItem(spoint);
+            connect(spoint, &VToolBasePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+            connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
+            connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
+            connect(scene, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
+            tools[id] = spoint;
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating single point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        scene->removeItem(spoint);
+        delete spoint;
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+        QString f = formula;//need for saving fixed formula;
+
+        const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
+
+        const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
+        QString angleFix = angle;
+
+        VToolEndLine::Create(id, name, typeLine, lineColor, f, angleFix, basePointId, mx, my, scene, this, data,
+                             parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula || angleFix != angle)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of end line"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
+
+        VToolAlongLine::Create(id, name, typeLine, lineColor, f, firstPointId, secondPointId, mx, my, scene,
+                               this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point along line"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 p1Line = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, NULL_ID_STR);
+        const quint32 p2Line = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, NULL_ID_STR);
+        const quint32 pShoulder = GetParametrUInt(domElement, VAbstractTool::AttrPShoulder, NULL_ID_STR);
+
+        VToolShoulderPoint::Create(id, f, p1Line, p2Line, pShoulder, typeLine, lineColor, name, mx, my, scene,
+                                   this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of shoulder"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
+        const qreal angle = GetParametrDouble(domElement, VAbstractTool::AttrAngle, "0.0");
+
+        VToolNormal::Create(id, f, firstPointId, secondPointId, typeLine, lineColor, name, angle, mx, my, scene,
+                            this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of normal"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "100.0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
+        const quint32 thirdPointId = GetParametrUInt(domElement, VAbstractTool::AttrThirdPoint, NULL_ID_STR);
+
+        VToolBisector::Create(id, f, firstPointId, secondPointId, thirdPointId,
+                            typeLine, lineColor, name, mx, my, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of bisector"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 p1Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line1, NULL_ID_STR);
+        const quint32 p2Line1Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line1, NULL_ID_STR);
+        const quint32 p1Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP1Line2, NULL_ID_STR);
+        const quint32 p2Line2Id = GetParametrUInt(domElement, VAbstractTool::AttrP2Line2, NULL_ID_STR);
+
+        VToolLineIntersect::Create(id, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, name,
+                                    mx, my, scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of lineintersection"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "0");
+        QString f = radius;//need for saving fixed formula;
+        const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
+
+        VToolPointOfContact::Create(id, f, center, firstPointId, secondPointId, name, mx, my, scene, this,
+                                    data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != radius)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrRadius, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of contact"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseNodePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, mx, my);
+        const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
+        const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
+        data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
+                                            Draw::Modeling));
+        VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating modeling point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+        const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
+        const quint32 p1LineId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, NULL_ID_STR);
+        const quint32 p2LineId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, NULL_ID_STR);
+
+        VToolHeight::Create(id, name, typeLine, lineColor, basePointId, p1LineId, p2LineId,
+                            mx, my, scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating height"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 axisP1Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP1, NULL_ID_STR);
+        const quint32 axisP2Id = GetParametrUInt(domElement, VAbstractTool::AttrAxisP2, NULL_ID_STR);
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
+
+        VToolTriangle::Create(id, name, axisP1Id, axisP2Id, firstPointId, secondPointId, mx, my, scene, this,
+                              data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating triangle"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                            const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrFirstPoint, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrSecondPoint, NULL_ID_STR);
+
+        VToolPointOfIntersection::Create(id, name, firstPointId, secondPointId, mx, my, scene, this, data,
+                                         parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+
+        VToolCutSpline::Create(id, name, f, splineId, mx, my, color, scene, this, data, parse,
+                               Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cut spline point"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath,
+                                                     NULL_ID_STR);
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+
+        VToolCutSplinePath::Create(id, name, f, splinePathId, mx, my, color, scene, this, data, parse,
+                                   Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cut spline path point"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const QString formula = GetParametrString(domElement, VAbstractTool::AttrLength, "0");
+        QString f = formula;//need for saving fixed formula;
+        const quint32 arcId = GetParametrUInt(domElement, VToolCutArc::AttrArc, NULL_ID_STR);
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+
+        VToolCutArc::Create(id, name, f, arcId, mx, my, color, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (f != formula)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrLength, f);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cut arc point"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement,
+                                          const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+
+        const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
+        const quint32 firstPointId = GetParametrUInt(domElement, VAbstractTool::AttrP1Line, NULL_ID_STR);
+        const quint32 secondPointId = GetParametrUInt(domElement, VAbstractTool::AttrP2Line, NULL_ID_STR);
+
+        const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
+        QString angleFix = angle;
+
+        VToolLineIntersectAxis::Create(id, name, typeLine, lineColor, angleFix, basePointId, firstPointId,
+                                       secondPointId, mx, my, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (angleFix != angle)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
+                                    domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection line and axis"),
+                                    domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement,
+                                           const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+    QString typeLine;
+    QString lineColor;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
+
+        const quint32 basePointId = GetParametrUInt(domElement, VAbstractTool::AttrBasePoint, NULL_ID_STR);
+        const quint32 curveId = GetParametrUInt(domElement, VAbstractTool::AttrCurve, NULL_ID_STR);
+        const QString angle = GetParametrString(domElement, VAbstractTool::AttrAngle, "0.0");
+        QString angleFix = angle;
+
+        VToolCurveIntersectAxis::Create(id, name, typeLine, lineColor, angleFix, basePointId, curveId, mx, my,
+                                        scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (angleFix != angle)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrAngle, angleFix);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
+                                    domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection curve and axis"),
+                                    domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                                const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 firstArcId = GetParametrUInt(domElement, VAbstractTool::AttrFirstArc, NULL_ID_STR);
+        const quint32 secondArcId = GetParametrUInt(domElement, VAbstractTool::AttrSecondArc, NULL_ID_STR);
+        const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                  VAbstractTool::AttrCrossPoint,
+                                                                                  "1"));
+
+        VToolPointOfIntersectionArcs::Create(id, name, firstArcId, secondArcId, crossPoint, mx, my, scene, this,
+                                             data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection arcs"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement,
+                                                   const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 c1CenterId = GetParametrUInt(domElement, VAbstractTool::AttrC1Center, NULL_ID_STR);
+        const quint32 c2CenterId = GetParametrUInt(domElement, VAbstractTool::AttrC2Center, NULL_ID_STR);
+        const QString c1Radius = GetParametrString(domElement, VAbstractTool::AttrC1Radius);
+        QString c1R = c1Radius;
+        const QString c2Radius = GetParametrString(domElement, VAbstractTool::AttrC2Radius);
+        QString c2R = c2Radius;
+        const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                  VAbstractTool::AttrCrossPoint,
+                                                                                  "1"));
+
+        VToolPointOfIntersectionCircles::Create(id, name, c1CenterId, c2CenterId, c1R, c2R, crossPoint, mx, my,
+                                                scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (c1R != c1Radius || c2R != c2Radius)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrC1Center, c1R);
+            SetAttribute(domElement, VAbstractTool::AttrC2Center, c2R);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection circles"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDomElement &domElement,
+                                                  const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 cCenterId = GetParametrUInt(domElement, VAbstractTool::AttrCCenter, NULL_ID_STR);
+        const quint32 tangentId = GetParametrUInt(domElement, VAbstractTool::AttrTangent, NULL_ID_STR);
+        const QString cRadius = GetParametrString(domElement, VAbstractTool::AttrCRadius);
+        QString cR = cRadius;
+        const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                  VAbstractTool::AttrCrossPoint,
+                                                                                  "1"));
+
+        VToolPointFromCircleAndTangent::Create(id, name, cCenterId, cR, tangentId, crossPoint, mx, my,
+                                               scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (cR != cRadius)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrCCenter, cR);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point from circle and tangent"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                               const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    QString name;
+    qreal mx = 0;
+    qreal my = 0;
+
+    try
+    {
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const quint32 arcId = GetParametrUInt(domElement, VAbstractTool::AttrArc, NULL_ID_STR);
+        const quint32 tangentId = GetParametrUInt(domElement, VAbstractTool::AttrTangent, NULL_ID_STR);
+        const CrossCirclesPoint crossPoint = static_cast<CrossCirclesPoint>(GetParametrUInt(domElement,
+                                                                                  VAbstractTool::AttrCrossPoint,
+                                                                                  "1"));
+
+        VToolPointFromArcAndTangent::Create(id, name, arcId, tangentId, crossPoint, mx, my,
+                                            scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point from arc and tangent"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    try
+    {
+        ToolsCommonAttributes(domElement, id);
+
+        const quint32 p1Id = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, NULL_ID_STR);
+        const quint32 p2Id = GetParametrUInt(domElement, VAbstractTool::AttrPoint2, NULL_ID_STR);
+
+        const quint32 baseLineP1Id = GetParametrUInt(domElement, VAbstractTool::AttrBaseLineP1, NULL_ID_STR);
+        const quint32 baseLineP2Id = GetParametrUInt(domElement, VAbstractTool::AttrBaseLineP2, NULL_ID_STR);
+        const quint32 dartP1Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP1, NULL_ID_STR);
+        const quint32 dartP2Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP2, NULL_ID_STR);
+        const quint32 dartP3Id = GetParametrUInt(domElement, VAbstractTool::AttrDartP3, NULL_ID_STR);
+
+        const QString name1 = GetParametrString(domElement, VAbstractTool::AttrName1, "A");
+        const qreal mx1 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx1, "10.0"));
+        const qreal my1 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy1, "15.0"));
+
+        const QString name2 = GetParametrString(domElement, VAbstractTool::AttrName2, "A");
+        const qreal mx2 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMx2, "10.0"));
+        const qreal my2 = qApp->toPixel(GetParametrDouble(domElement, VAbstractTool::AttrMy2, "15.0"));
+
+        VToolTrueDarts::Create(id, p1Id, p2Id,
+                               baseLineP1Id, baseLineP2Id, dartP1Id, dartP2Id, dartP3Id,
+                               name1, mx1, my1, name2, mx2, my2,
+                               scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating true darts"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    try
+    {
+        ToolsCommonAttributes(domElement, id);
+        const quint32 point1 = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, NULL_ID_STR);
+        const quint32 point4 = GetParametrUInt(domElement, VAbstractTool::AttrPoint4, NULL_ID_STR);
+        const qreal angle1 = GetParametrDouble(domElement, VAbstractTool::AttrAngle1, "270.0");
+        const qreal angle2 = GetParametrDouble(domElement, VAbstractTool::AttrAngle2, "90.0");
+        const qreal kAsm1 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm1, "1.0");
+        const qreal kAsm2 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm2, "1.0");
+        const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+
+        VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, this, data,
+                            parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple curve"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    try
+    {
+        ToolsCommonAttributes(domElement, id);
+        const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+        VSplinePath *path = new VSplinePath(kCurve);
+
+        const QDomNodeList nodeList = domElement.childNodes();
+        const qint32 num = nodeList.size();
+        for (qint32 i = 0; i < num; ++i)
+        {
+            const QDomElement element = nodeList.at(i).toElement();
+            if (element.isNull() == false)
+            {
+                if (element.tagName() == VAbstractTool::AttrPathPoint)
+                {
+                    const qreal kAsm1 = GetParametrDouble(element, VAbstractTool::AttrKAsm1, "1.0");
+                    const qreal angle = GetParametrDouble(element, VAbstractTool::AttrAngle, "0");
+                    const qreal kAsm2 = GetParametrDouble(element, VAbstractTool::AttrKAsm2, "1.0");
+                    const quint32 pSpline = GetParametrUInt(element, VAbstractTool::AttrPSpline, NULL_ID_STR);
+                    const VPointF p = *data->GeometricObject<VPointF>(pSpline);
+
+                    QLineF line(0, 0, 100, 0);
+                    line.setAngle(angle+180);
+
+                    VSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
+                    path->append(splPoint);
+                    if (parse == Document::FullParse)
+                    {
+                        IncrementReferens(pSpline);
+                    }
+                }
+            }
+        }
+
+        VToolSplinePath::Create(id, path, color, scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating curve path"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseNodeSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    quint32 idObject = 0;
+    quint32 idTool = 0;
+
+    try
+    {
+        SplinesCommonAttributes(domElement, id, idObject, idTool);
+        VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
+        spl->setIdObject(idObject);
+        spl->setMode(Draw::Modeling);
+        data->UpdateGObject(id, spl);
+        VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating modeling simple curve"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseNodeSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+    quint32 idObject = 0;
+    quint32 idTool = 0;
+
+    try
+    {
+        SplinesCommonAttributes(domElement, id, idObject, idTool);
+        VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
+        path->setIdObject(idObject);
+        path->setMode(Draw::Modeling);
+        data->UpdateGObject(id, path);
+        VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating modeling curve path"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    try
+    {
+        ToolsCommonAttributes(domElement, id);
+        const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
+        const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
+        QString r = radius;//need for saving fixed formula;
+        const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
+        QString f1Fix = f1;//need for saving fixed formula;
+        const QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
+        QString f2Fix = f2;//need for saving fixed formula;
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+
+        VToolArc::Create(id, center, r, f1Fix, f2Fix, color, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (r != radius || f1Fix != f1 || f2Fix != f2)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrRadius, r);
+            SetAttribute(domElement, VAbstractTool::AttrAngle1, f1Fix);
+            SetAttribute(domElement, VAbstractTool::AttrAngle2, f2Fix);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseNodeArc(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    try
+    {
+        ToolsCommonAttributes(domElement, id);
+        const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
+        const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
+        VArc *arc = new VArc(*data->GeometricObject<VArc>(idObject));
+        arc->setIdObject(idObject);
+        arc->setMode(Draw::Modeling);
+        data->UpdateGObject(id, arc);
+        VNodeArc::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating modeling arc"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    quint32 id = 0;
+
+    try
+    {
+        ToolsCommonAttributes(domElement, id);
+        const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
+        const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
+        QString r = radius;//need for saving fixed formula;
+        const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
+        QString f1Fix = f1;//need for saving fixed formula;
+        const QString length = GetParametrString(domElement, VAbstractTool::AttrLength, "10");
+        QString lengthFix = length;//need for saving fixed length;
+        const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
+                                                VAbstractTool::ColorBlack);
+
+        VToolArcWithLength::Create(id, center, r, f1Fix, lengthFix, color, scene, this, data, parse,
+                                   Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (r != radius || f1Fix != f1 || lengthFix != length)
+        {
+            SetAttribute(domElement, VAbstractTool::AttrRadius, r);
+            SetAttribute(domElement, VAbstractTool::AttrAngle1, f1Fix);
+            SetAttribute(domElement, VAbstractTool::AttrLength, lengthFix);
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ParseSplineElement parse spline tag.
  * @param scene scene.
@@ -1450,121 +2035,27 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    quint32 id = 0;
-    quint32 idObject = 0;
-    quint32 idTool = 0;
-
-    QStringList splines = QStringList() << VToolSpline::ToolType << VToolSplinePath::ToolType << VNodeSpline::ToolType
-                                        << VNodeSplinePath::ToolType;
+    QStringList splines = QStringList() << VToolSpline::ToolType      /*0*/
+                                        << VToolSplinePath::ToolType  /*1*/
+                                        << VNodeSpline::ToolType      /*2*/
+                                        << VNodeSplinePath::ToolType; /*3*/
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::ToolType
             qCDebug(vXML, "VToolSpline.");
-            try
-            {
-                ToolsCommonAttributes(domElement, id);
-                const quint32 point1 = GetParametrUInt(domElement, VAbstractTool::AttrPoint1, NULL_ID_STR);
-                const quint32 point4 = GetParametrUInt(domElement, VAbstractTool::AttrPoint4, NULL_ID_STR);
-                const qreal angle1 = GetParametrDouble(domElement, VAbstractTool::AttrAngle1, "270.0");
-                const qreal angle2 = GetParametrDouble(domElement, VAbstractTool::AttrAngle2, "90.0");
-                const qreal kAsm1 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm1, "1.0");
-                const qreal kAsm2 = GetParametrDouble(domElement, VAbstractTool::AttrKAsm2, "1.0");
-                const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-
-                VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, this, data,
-                                    parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating simple curve"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolSpline(scene, domElement, parse);
             break;
         case 1: //VToolSplinePath::ToolType
             qCDebug(vXML, "VToolSplinePath.");
-            try
-            {
-                ToolsCommonAttributes(domElement, id);
-                const qreal kCurve = GetParametrDouble(domElement, VAbstractTool::AttrKCurve, "1.0");
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-                VSplinePath *path = new VSplinePath(kCurve);
-
-                const QDomNodeList nodeList = domElement.childNodes();
-                const qint32 num = nodeList.size();
-                for (qint32 i = 0; i < num; ++i)
-                {
-                    const QDomElement element = nodeList.at(i).toElement();
-                    if (element.isNull() == false)
-                    {
-                        if (element.tagName() == VAbstractTool::AttrPathPoint)
-                        {
-                            const qreal kAsm1 = GetParametrDouble(element, VAbstractTool::AttrKAsm1, "1.0");
-                            const qreal angle = GetParametrDouble(element, VAbstractTool::AttrAngle, "0");
-                            const qreal kAsm2 = GetParametrDouble(element, VAbstractTool::AttrKAsm2, "1.0");
-                            const quint32 pSpline = GetParametrUInt(element, VAbstractTool::AttrPSpline, NULL_ID_STR);
-                            const VPointF p = *data->GeometricObject<VPointF>(pSpline);
-
-                            QLineF line(0, 0, 100, 0);
-                            line.setAngle(angle+180);
-
-                            VSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
-                            path->append(splPoint);
-                            if (parse == Document::FullParse)
-                            {
-                                IncrementReferens(pSpline);
-                            }
-                        }
-                    }
-                }
-
-                VToolSplinePath::Create(id, path, color, scene, this, data, parse, Source::FromFile);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating curve path"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseToolSplinePath(scene, domElement, parse);
             break;
         case 2: //VNodeSpline::ToolType
             qCDebug(vXML, "VNodeSpline.");
-            try
-            {
-                SplinesCommonAttributes(domElement, id, idObject, idTool);
-                VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
-                spl->setIdObject(idObject);
-                spl->setMode(Draw::Modeling);
-                data->UpdateGObject(id, spl);
-                VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating modeling simple curve"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseNodeSpline(scene, domElement, parse);
             break;
         case 3: //VNodeSplinePath::ToolType
             qCDebug(vXML, "VNodeSplinePath.");
-            try
-            {
-                SplinesCommonAttributes(domElement, id, idObject, idTool);
-                VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
-                path->setIdObject(idObject);
-                path->setMode(Draw::Modeling);
-                data->UpdateGObject(id, path);
-                VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating modeling curve path"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseNodeSplinePath(scene, domElement, parse);
             break;
         default:
             qCDebug(vXML, "Illegal spline type in VDomDocument::ParseSplineElement().");
@@ -1587,104 +2078,20 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    quint32 id = 0;
-    QStringList arcs = QStringList() << VToolArc::ToolType << VNodeArc::ToolType << VToolArcWithLength::ToolType;
+    QStringList arcs = QStringList() << VToolArc::ToolType            /*0*/
+                                     << VNodeArc::ToolType            /*1*/
+                                     << VToolArcWithLength::ToolType; /*2*/
 
     switch (arcs.indexOf(type))
     {
         case 0: //VToolArc::ToolType
-            try
-            {
-                ToolsCommonAttributes(domElement, id);
-                const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
-                const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
-                QString r = radius;//need for saving fixed formula;
-                const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
-                QString f1Fix = f1;//need for saving fixed formula;
-                const QString f2 = GetParametrString(domElement, VAbstractTool::AttrAngle2, "270");
-                QString f2Fix = f2;//need for saving fixed formula;
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-
-                VToolArc::Create(id, center, r, f1Fix, f2Fix, color, scene, this, data, parse, Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (r != radius || f1Fix != f1 || f2Fix != f2)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrRadius, r);
-                    SetAttribute(domElement, VAbstractTool::AttrAngle1, f1Fix);
-                    SetAttribute(domElement, VAbstractTool::AttrAngle2, f2Fix);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolArc(scene, domElement, parse);
             break;
         case 1: //VNodeArc::ToolType
-            try
-            {
-                ToolsCommonAttributes(domElement, id);
-                const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
-                const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-                VArc *arc = new VArc(*data->GeometricObject<VArc>(idObject));
-                arc->setIdObject(idObject);
-                arc->setMode(Draw::Modeling);
-                data->UpdateGObject(id, arc);
-                VNodeArc::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating modeling arc"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
+            ParseNodeArc(scene, domElement, parse);
             break;
         case 2: //VToolArcWithLength::ToolType
-            try
-            {
-                ToolsCommonAttributes(domElement, id);
-                const quint32 center = GetParametrUInt(domElement, VAbstractTool::AttrCenter, NULL_ID_STR);
-                const QString radius = GetParametrString(domElement, VAbstractTool::AttrRadius, "10");
-                QString r = radius;//need for saving fixed formula;
-                const QString f1 = GetParametrString(domElement, VAbstractTool::AttrAngle1, "180");
-                QString f1Fix = f1;//need for saving fixed formula;
-                const QString length = GetParametrString(domElement, VAbstractTool::AttrLength, "10");
-                QString lengthFix = length;//need for saving fixed length;
-                const QString color = GetParametrString(domElement, VAbstractTool::AttrColor,
-                                                        VAbstractTool::ColorBlack);
-
-                VToolArcWithLength::Create(id, center, r, f1Fix, lengthFix, color, scene, this, data, parse,
-                                           Source::FromFile);
-                //Rewrite attribute formula. Need for situation when we have wrong formula.
-                if (r != radius || f1Fix != f1 || lengthFix != length)
-                {
-                    SetAttribute(domElement, VAbstractTool::AttrRadius, r);
-                    SetAttribute(domElement, VAbstractTool::AttrAngle1, f1Fix);
-                    SetAttribute(domElement, VAbstractTool::AttrLength, lengthFix);
-                    haveLiteChange();
-                }
-            }
-            catch (const VExceptionBadId &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-                excep.AddMoreInformation(e.ErrorMessage());
-                throw excep;
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                VExceptionObjectError excep(tr("Error creating or updating simple arc"), domElement);
-                excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
-                throw excep;
-            }
+            ParseToolArcWithLength(scene, domElement, parse);
             break;
         default:
             qDebug() << "Illegal arc type in VDomDocument::ParseArcElement().";

@@ -115,6 +115,42 @@ private:
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
     QString        GetLabelBase(unsigned int index)const;
+
+    void ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseNodePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                          const Document &parse);
+    void ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement,
+                                             const Document &parse);
+    void ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDomElement &domElement,
+                                            const Document &parse);
+    void ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const QDomElement &domElement,
+                                         const Document &parse);
+    void ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+
+    void ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseNodeSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseNodeSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+
+    void ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseNodeArc(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 };
 
 #endif // VPATTERN_H
