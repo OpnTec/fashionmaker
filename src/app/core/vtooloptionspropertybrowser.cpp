@@ -813,8 +813,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolTrueDarts(VProperty *property)
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolTrueDarts *i = qgraphicsitem_cast<VToolTrueDarts *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 32: // VAbstractTool::AttrName1

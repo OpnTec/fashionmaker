@@ -708,7 +708,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             ParseToolPointOfContact(scene, domElement, parse);
             break;
         case 8: //VNodePoint::ToolType
-            ParseNodePoint(scene, domElement, parse);
+            ParseNodePoint(domElement, parse);
             break;
         case 9: //VToolHeight::ToolType
             ParseToolHeight(scene, domElement, parse);
@@ -1229,9 +1229,8 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseNodePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &parse)
 {
-    SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
     quint32 id = 0;
@@ -1849,9 +1848,8 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseNodeSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &parse)
 {
-    SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
     quint32 id = 0;
@@ -1876,9 +1874,8 @@ void VPattern::ParseNodeSpline(VMainGraphicsScene *scene, const QDomElement &dom
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseNodeSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document &parse)
 {
-    SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
     quint32 id = 0;
@@ -1948,9 +1945,8 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseNodeArc(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse)
 {
-    SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
     quint32 id = 0;
@@ -2051,11 +2047,11 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             break;
         case 2: //VNodeSpline::ToolType
             qCDebug(vXML, "VNodeSpline.");
-            ParseNodeSpline(scene, domElement, parse);
+            ParseNodeSpline(domElement, parse);
             break;
         case 3: //VNodeSplinePath::ToolType
             qCDebug(vXML, "VNodeSplinePath.");
-            ParseNodeSplinePath(scene, domElement, parse);
+            ParseNodeSplinePath(domElement, parse);
             break;
         default:
             qCDebug(vXML, "Illegal spline type in VDomDocument::ParseSplineElement().");
@@ -2088,7 +2084,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             ParseToolArc(scene, domElement, parse);
             break;
         case 1: //VNodeArc::ToolType
-            ParseNodeArc(scene, domElement, parse);
+            ParseNodeArc(domElement, parse);
             break;
         case 2: //VToolArcWithLength::ToolType
             ParseToolArcWithLength(scene, domElement, parse);

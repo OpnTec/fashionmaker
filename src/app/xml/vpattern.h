@@ -124,7 +124,7 @@ private:
     void ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
-    void ParseNodePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseNodePoint(const QDomElement &domElement, const Document &parse);
     void ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
@@ -145,11 +145,11 @@ private:
 
     void ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
-    void ParseNodeSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
-    void ParseNodeSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseNodeSpline(const QDomElement &domElement, const Document &parse);
+    void ParseNodeSplinePath(const QDomElement &domElement, const Document &parse);
 
     void ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
-    void ParseNodeArc(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseNodeArc(const QDomElement &domElement, const Document &parse);
     void ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 };
 
