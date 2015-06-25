@@ -10,18 +10,6 @@
     <height>245</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>300</width>
-    <height>245</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>300</width>
-    <height>245</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Perpendicular point along line</string>
   </property>

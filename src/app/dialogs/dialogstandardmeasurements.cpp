@@ -71,6 +71,10 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
 
     CheckState();
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogStandardMeasurements::CheckState);
+
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

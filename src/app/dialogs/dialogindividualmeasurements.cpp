@@ -73,6 +73,10 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
             &DialogIndividualMeasurements::CheckState);
     connect(ui->toolButtonOpenExist, &QToolButton::clicked, this, &DialogIndividualMeasurements::OpenTable);
     connect(ui->toolButtonOpenNew, &QToolButton::clicked, this, &DialogIndividualMeasurements::NewTable);
+
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

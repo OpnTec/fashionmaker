@@ -40,6 +40,10 @@ DialogMeasurements::DialogMeasurements(QWidget *parent) :
 
     connect(ui->toolButtonStandard, &QToolButton::clicked, this, &DialogMeasurements::StandardMeasurements);
     connect(ui->toolButtonIndividual, &QToolButton::clicked, this, &DialogMeasurements::IndividualMeasurements);
+
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

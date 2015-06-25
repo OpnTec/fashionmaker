@@ -90,6 +90,8 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogArc::DeployF2TextEdit);
 
     vis = new VisToolArc(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

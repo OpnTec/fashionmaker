@@ -13,18 +13,6 @@
     <height>145</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>387</width>
-    <height>145</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>387</width>
-    <height>145</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Broken formula</string>
   </property>

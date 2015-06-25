@@ -10,18 +10,6 @@
     <height>317</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>488</width>
-    <height>317</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>488</width>
-    <height>317</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Special point on shoulder</string>
   </property>

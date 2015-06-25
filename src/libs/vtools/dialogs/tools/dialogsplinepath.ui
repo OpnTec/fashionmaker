@@ -10,18 +10,6 @@
     <height>322</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>528</width>
-    <height>322</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>528</width>
-    <height>322</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Curved path</string>
   </property>

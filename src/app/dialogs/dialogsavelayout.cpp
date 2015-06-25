@@ -69,6 +69,10 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
 
     ui->lineEditPath->setText(qApp->Settings()->GetPathLayout());
     ShowExample();//Show example for current format.
+
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

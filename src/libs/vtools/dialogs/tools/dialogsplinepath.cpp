@@ -61,6 +61,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
             this, &DialogSplinePath::KAsm2Changed);
 
     vis = new VisToolSplinePath(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

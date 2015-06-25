@@ -272,6 +272,14 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::FixateSize()
+{
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ValFormulaChanged handle change formula
  * @param flag flag state of formula

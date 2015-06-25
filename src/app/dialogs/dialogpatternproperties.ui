@@ -10,18 +10,6 @@
     <height>562</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>657</width>
-    <height>562</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>657</width>
-    <height>562</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Pattern properties</string>
   </property>

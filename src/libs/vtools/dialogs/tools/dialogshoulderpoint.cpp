@@ -76,6 +76,8 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
             this, &DialogShoulderPoint::PointNameChanged);
 
     vis = new VisToolShoulderPoint(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

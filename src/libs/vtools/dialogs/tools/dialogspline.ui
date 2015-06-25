@@ -10,18 +10,6 @@
     <height>233</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>540</width>
-    <height>233</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>540</width>
-    <height>233</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Simple curve</string>
   </property>

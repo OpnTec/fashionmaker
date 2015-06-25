@@ -10,18 +10,6 @@
     <height>251</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>498</width>
-    <height>251</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>498</width>
-    <height>251</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Point at intersection of arc and line</string>
   </property>

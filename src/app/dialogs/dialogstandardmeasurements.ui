@@ -13,12 +13,6 @@
     <height>113</height>
    </rect>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>430</width>
-    <height>113</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Standard table</string>
   </property>

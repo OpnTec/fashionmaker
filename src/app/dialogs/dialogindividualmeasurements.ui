@@ -13,18 +13,6 @@
     <height>295</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>505</width>
-    <height>295</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>505</width>
-    <height>295</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Individual measurements</string>
   </property>

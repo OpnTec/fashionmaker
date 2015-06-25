@@ -93,6 +93,8 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
             &DialogPointOfIntersectionCircles::DeployCircle2RadiusTextEdit);
 
     vis = new VisToolPointOfIntersectionCircles(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -65,6 +65,10 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     FontPointSize(ui->label_contrib_label, 11);
     FontPointSize(ui->label_Valentina_Built, 11);
     FontPointSize(ui->label_QT_Version, 11);
+
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

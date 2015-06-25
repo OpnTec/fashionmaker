@@ -13,18 +13,6 @@
     <height>119</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>566</width>
-    <height>119</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>566</width>
-    <height>119</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Create a Layout</string>
   </property>

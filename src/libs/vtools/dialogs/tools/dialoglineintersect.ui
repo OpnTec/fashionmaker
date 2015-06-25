@@ -10,18 +10,6 @@
     <height>196</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>367</width>
-    <height>196</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>367</width>
-    <height>196</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Point at line intersection</string>
   </property>

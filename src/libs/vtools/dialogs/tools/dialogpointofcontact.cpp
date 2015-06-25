@@ -71,6 +71,8 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32
             this, &DialogPointOfContact::PointNameChanged);
 
     vis = new VisToolPointOfContact(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

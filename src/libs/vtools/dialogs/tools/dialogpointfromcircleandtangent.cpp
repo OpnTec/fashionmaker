@@ -77,6 +77,8 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
             &DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit);
 
     vis = new VisToolPointFromCircleAndTangent(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

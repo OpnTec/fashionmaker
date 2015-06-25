@@ -80,6 +80,10 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     SetOptions(sizes);
 
     gradationChanged = false;//Set to default value after initialization
+
+    adjustSize();
+    setMaximumSize(size());
+    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

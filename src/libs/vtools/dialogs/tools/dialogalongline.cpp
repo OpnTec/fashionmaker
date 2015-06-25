@@ -73,6 +73,8 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
             this, &DialogAlongLine::PointChanged);
 
     vis = new VisToolAlongLine(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

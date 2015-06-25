@@ -85,6 +85,8 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
     connect(ui->pushButtonGrowLengthArcLength, &QPushButton::clicked, this, &DialogArcWithLength::DeployLengthTextEdit);
 
     vis = new VisToolArcWithLength(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

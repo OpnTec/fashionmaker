@@ -65,6 +65,8 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
             this, &DialogTriangle::PointNameChanged);
 
     vis = new VisToolTriangle(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

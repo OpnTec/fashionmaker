@@ -71,6 +71,8 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogNormal::PointNameChanged);
 
     vis = new VisToolNormal(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

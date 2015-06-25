@@ -69,6 +69,8 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, 
             this, &DialogTrueDarts::PointNameChanged);
 
     vis = new VisToolTrueDarts(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -57,6 +57,8 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogSpline::PointNameChanged);
 
     vis = new VisToolSpline(data);
+
+    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
