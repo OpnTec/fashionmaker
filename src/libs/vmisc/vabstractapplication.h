@@ -95,14 +95,16 @@ protected:
      */
     QWidget            *mainWindow;
 
-private:
-    Q_DISABLE_COPY(VAbstractApplication)
-    Unit               _patternUnit;
-    MeasurementsType   _patternType;
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
     VSettings          *settings;
+
+private:
+    Q_DISABLE_COPY(VAbstractApplication)
+    Unit               _patternUnit;
+    MeasurementsType   _patternType;
+
 
     QGraphicsScene     *currentScene;
     VMainGraphicsView  *sceneView;

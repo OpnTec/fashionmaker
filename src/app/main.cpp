@@ -29,6 +29,8 @@
 #include "mainwindow.h"
 #include "core/vapplication.h"
 
+#include <QMessageBox> // For QT_REQUIRE_VERSION
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../libs/vmisc/backport/qcommandlineparser.h"
 #else
