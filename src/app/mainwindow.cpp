@@ -1352,6 +1352,19 @@ void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
     {
+        const QHash<quint32, VDetail> *details = pattern->DataDetails();
+        if(not qApp->getOpeningPattern())
+        {
+            if (details->count() == 0)
+            {
+                QMessageBox::information(this, tr("Detail mode"), tr("You can't use now the Detail mode. "
+                                                                     "Please, create at least one workpiece."),
+                                         QMessageBox::Ok, QMessageBox::Ok);
+                Layout();
+                return;
+            }
+        }
+
         qCDebug(vMainWindow, "Show details scene");
         ui->actionDraw->setChecked(false);
         ui->actionLayout->setChecked(false);
@@ -1417,17 +1430,23 @@ void MainWindow::ActionLayout(bool checked)
 {
     if (checked)
     {
+        const QHash<quint32, VDetail> *details = pattern->DataDetails();
+        if(not qApp->getOpeningPattern())
+        {
+            if (details->count() == 0)
+            {
+                QMessageBox::information(this, tr("Layout mode"), tr("You can't use now the Layout mode. "
+                                                                     "Please, create at least one workpiece."),
+                                         QMessageBox::Ok, QMessageBox::Ok);
+                Layout();
+                return;
+            }
+        }
+
         qCDebug(vMainWindow, "Show layout scene");
         ui->actionDraw->setChecked(false);
         ui->actionDetails->setChecked(false);
         SaveCurrentScene();
-
-        const QHash<quint32, VDetail> *details = pattern->DataDetails();
-        if (details->count() == 0)
-        {
-            Layout();
-            return;
-        }
 
         PrepareDetailsForLayout(details);
 
@@ -1642,9 +1661,9 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Unlocked pattern file.");
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
-    ui->actionDetails->setChecked(false);
+    ui->actionDetails->setChecked(true);
     ui->actionDraw->setChecked(true);
-    ui->actionDraw->setEnabled(false);
+    ui->actionLayout->setEnabled(true);
     qCDebug(vMainWindow, "Returned to Draw mode.");
     setCurrentFile(QString());
     pattern->Clear();
@@ -1870,20 +1889,12 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionHistory->setEnabled(enable);
     ui->actionNewDraw->setEnabled(enable);
     ui->actionDraw->setEnabled(enable);
+    ui->actionDetails->setEnabled(enable);
+    ui->actionLayout->setEnabled(enable);
     ui->actionTable->setEnabled(enable);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enable);
-
-    if (enable)
-    {
-        Layout();
-    }
-    else
-    {
-        ui->actionDetails->setEnabled(enable);
-        ui->actionLayout->setEnabled(enable);
-    }
 
     //Now we don't want allow user call context menu
     sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
@@ -1901,15 +1912,13 @@ void MainWindow::Layout()
 {
     if (pattern->DataDetails()->size() > 0)
     {
-        ui->actionDetails->setEnabled(true);
-        ui->actionLayout->setEnabled(true);
         SetLayoutModeActions(true);
     }
     else
     {
         listDetails.clear();
-        ui->actionDetails->setEnabled(false);
-        ui->actionLayout->setEnabled(false);
+        ui->actionDetails->setChecked(false);
+        ui->actionLayout->setChecked(false);
         ui->actionDraw->setChecked(true);
         SetLayoutModeActions(false);
     }
@@ -2875,10 +2884,10 @@ void MainWindow::LoadPattern(const QString &fileName)
         helpLabel->setText(tr("File loaded"));
         qCDebug(vMainWindow, "File loaded.");
 
-        qApp->setOpeningPattern();// End opening file
-
         //Fit scene size to best size for first show
         ZoomFirstShow();
+
+        qApp->setOpeningPattern();// End opening file
 
         ui->actionDraw->setChecked(true);
     }
