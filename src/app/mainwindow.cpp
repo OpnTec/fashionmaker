@@ -78,7 +78,8 @@ MainWindow::MainWindow(QWidget *parent)
       mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), dialogTable(nullptr), dialogTool(nullptr),
       dialogHistory(nullptr), comboBoxDraws(nullptr), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
-      separatorAct(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
+      separatorAct(nullptr),
+      leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
       gradationSizes(nullptr),
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       toolOptions(nullptr), lock(nullptr)
@@ -94,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
     CreateActions();
     CreateMenus();
     ToolBarDraws();
+    ToolBarStages();
     InitToolButtons();
     InitScenes();
 
@@ -974,6 +976,18 @@ void MainWindow::SetDefaultSize(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBarStages()
+{
+    leftGoToStage = new QLabel(this);
+    leftGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_left_to_right_arrow.png"));
+    ui->toolBarStages->insertWidget(ui->actionDetails, leftGoToStage);
+
+    rightGoToStage = new QLabel(this);
+    rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
+    ui->toolBarStages->insertWidget(ui->actionLayout, rightGoToStage);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolBarDraws enable draw toolbar.
  */
@@ -1294,6 +1308,10 @@ void MainWindow::ActionDraw(bool checked)
     if (checked)
     {
         qCDebug(vMainWindow, "Show draw scene");
+
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_left_to_right_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
+
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(false);
         SaveCurrentScene();
@@ -1366,6 +1384,10 @@ void MainWindow::ActionDetails(bool checked)
         }
 
         qCDebug(vMainWindow, "Show details scene");
+
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
+
         ui->actionDraw->setChecked(false);
         ui->actionLayout->setChecked(false);
         SaveCurrentScene();
@@ -1444,6 +1466,10 @@ void MainWindow::ActionLayout(bool checked)
         }
 
         qCDebug(vMainWindow, "Show layout scene");
+
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_right_to_left_arrow.png"));
+
         ui->actionDraw->setChecked(false);
         ui->actionDetails->setChecked(false);
         SaveCurrentScene();

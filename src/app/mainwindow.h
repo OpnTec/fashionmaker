@@ -206,6 +206,8 @@ private:
     enum { MaxRecentFiles = 5 };
     QAction            *recentFileActs[MaxRecentFiles];
     QAction            *separatorAct;
+    QLabel             *leftGoToStage;
+    QLabel             *rightGoToStage;
     QTimer             *autoSaveTimer;
     bool               guiEnabled;
     QComboBox          *gradationHeights;
@@ -216,6 +218,7 @@ private:
 #endif
 
     void               ToolBarOption();
+    void               ToolBarStages();
     void               ToolBarDraws();
     void               ToolBarTools();
     void               InitToolButtons();
