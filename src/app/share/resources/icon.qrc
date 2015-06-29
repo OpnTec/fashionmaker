@@ -50,5 +50,6 @@
         <file>icon/24x24/fast_forward_right_to_left_arrow.png</file>
         <file>icon/24x24/left_to_right_arrow.png</file>
         <file>icon/24x24/right_to_left_arrow.png</file>
+        <file>icon/32x32/clockwise.png</file>
     </qresource>
 </RCC>
