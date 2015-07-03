@@ -155,8 +155,7 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
                             point->setArc2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                     break;

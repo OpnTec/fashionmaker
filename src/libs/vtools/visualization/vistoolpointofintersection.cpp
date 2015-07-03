@@ -66,13 +66,14 @@ void VisToolPointOfIntersection::RefreshGeometry()
         if (point2Id <= NULL_ID)
         {
             axisL2 = Axis(Visualization::scenePos, 180);
+            ShowIntersection(axisL1, axisL2, supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
             DrawPoint(axisP2, second->toQPointF(), supportColor);
             axisL2 = Axis(second->toQPointF(), 180);
-            ShowIntersection(axisL1, axisL2);
+            ShowIntersection(axisL1, axisL2, mainColor);
         }
         DrawLine(axis2, axisL2, supportColor, Qt::DashLine);
     }
@@ -85,14 +86,14 @@ void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2)
+void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color)
 {
     QPointF p;
     QLineF::IntersectType intersect = axis1.intersect(axis2, &p);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
         point->setVisible(true);
-        DrawPoint(point, p, mainColor);
+        DrawPoint(point, p, color);
     }
     else
     {

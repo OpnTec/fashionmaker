@@ -60,7 +60,7 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
             this, &DialogPointOfIntersection::PointNameChanged);
 
     vis = new VisToolPointOfIntersection(data);
-    vis->VisualMode(NULL_ID);
+    vis->VisualMode(NULL_ID);//Show vertical axis
 
     FixateSize();
 }
@@ -119,8 +119,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
                             line->setPoint2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                     break;

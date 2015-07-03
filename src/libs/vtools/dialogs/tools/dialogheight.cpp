@@ -201,8 +201,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                             line->setLineP2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                 }

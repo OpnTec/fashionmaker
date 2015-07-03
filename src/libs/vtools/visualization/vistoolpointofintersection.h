@@ -51,7 +51,7 @@ private:
     QGraphicsEllipseItem *axisP2;
     QGraphicsLineItem    *axis2;//axis1 is class themself
 
-    void         ShowIntersection(const QLineF &axis1, const QLineF &axis2);
+    void         ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color);
 };
 
 #endif // VISTOOLPOINTOFINTERSECTION_H

@@ -144,8 +144,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                             line->setHypotenuseP2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                 }

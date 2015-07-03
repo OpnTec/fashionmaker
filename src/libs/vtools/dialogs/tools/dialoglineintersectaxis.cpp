@@ -212,15 +212,14 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
                 return;
             }
         }
-        this->setModal(true);
 
         VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
         SCASSERT(line != nullptr);
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
         emit ToolTip("");
-        timerFormula->start();
-        this->show();
+
+        DialogAccepted();// Just set default values and don't show dialog
     }
 }
 

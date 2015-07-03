@@ -284,8 +284,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
                             points->setD3PointId(id);
                             points->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                     break;

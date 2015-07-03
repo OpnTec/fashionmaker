@@ -136,20 +136,27 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                             prepare = true;
                             flagPoint = CheckIntersecion();
                             CheckState();
-                            this->setModal(true);
-                            this->show();
-                            connect(ui->comboBoxP1Line1,
-                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                    &DialogLineIntersect::PointChanged);
-                            connect(ui->comboBoxP2Line1,
-                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                    &DialogLineIntersect::PointChanged);
-                            connect(ui->comboBoxP1Line2,
-                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                    &DialogLineIntersect::PointChanged);
-                            connect(ui->comboBoxP2Line2,
-                                    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                                    &DialogLineIntersect::PointChanged);
+                            if (flagPoint)
+                            {
+                                DialogAccepted();
+                            }
+                            else
+                            {
+                                this->setModal(true);
+                                this->show();
+                                connect(ui->comboBoxP1Line1,
+                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                        &DialogLineIntersect::PointChanged);
+                                connect(ui->comboBoxP2Line1,
+                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                        &DialogLineIntersect::PointChanged);
+                                connect(ui->comboBoxP1Line2,
+                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                        &DialogLineIntersect::PointChanged);
+                                connect(ui->comboBoxP2Line2,
+                                        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                                        &DialogLineIntersect::PointChanged);
+                            }
                         }
                     }
                 }

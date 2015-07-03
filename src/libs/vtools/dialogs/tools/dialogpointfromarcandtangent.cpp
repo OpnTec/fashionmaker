@@ -155,8 +155,7 @@ void DialogPointFromArcAndTangent::ChosenObject(quint32 id, const SceneObject &t
                             point->setArcId(id);
                             point->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                     break;

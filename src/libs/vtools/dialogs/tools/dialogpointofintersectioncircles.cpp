@@ -241,8 +241,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                             point->setPoint2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
-                            this->setModal(true);
-                            this->show();
+                            DialogAccepted();
                         }
                     }
                     break;
