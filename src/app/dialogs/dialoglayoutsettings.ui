@@ -396,7 +396,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="labelLayoutWidth">
             <property name="text">
-             <string>Layout width:</string>
+             <string>Gap width:</string>
             </property>
            </widget>
           </item>
@@ -546,7 +546,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>
