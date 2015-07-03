@@ -343,7 +343,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
     {
         flag = false;
         ChangeColor(labelEditFormula, Qt::red);
-        label->setText(tr("Error"));
+        label->setText(tr("Error") + " (" + postfix + ")");
         label->setToolTip(tr("Empty field"));
     }
     else
@@ -364,7 +364,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             {
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
-                label->setText(tr("Error"));
+                label->setText(tr("Error") + " (" + postfix + ")");
                 label->setToolTip(tr("Value can't be 0"));
             }
             else
@@ -378,7 +378,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
         }
         catch (qmu::QmuParserError &e)
         {
-            label->setText(tr("Error"));
+            label->setText(tr("Error") + " (" + postfix + ")");
             flag = false;
             ChangeColor(labelEditFormula, Qt::red);
             emit ToolTip(tr("Parser error: %1").arg(e.GetMsg()));
