@@ -82,19 +82,10 @@ public:
     QDomElement    elementById(const QString& id);
     QDomElement    elementById(quint32 id);
     void           removeAllChilds(QDomElement &element);
+
     template <typename T>
-    /**
-     * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
-     * @param domElement element in xml tree.
-     * @param name name of attribute.
-     * @param value value of attribute.
-     */
-    void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
-    {
-        QString val = QString().setNum(value);
-        val = val.replace(",", ".");
-        domElement.setAttribute(name, val);
-    }
+    void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
+
     quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
@@ -132,6 +123,21 @@ private:
 
     bool           find(const QDomElement &node, const QString& id);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
+ * @param domElement element in xml tree.
+ * @param name name of attribute.
+ * @param value value of attribute.
+ */
+inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
+{
+    QString val = QString().setNum(value);
+    val = val.replace(",", ".");
+    domElement.setAttribute(name, val);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>

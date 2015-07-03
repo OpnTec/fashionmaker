@@ -94,41 +94,45 @@ protected:
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     template <typename T>
-    void ShowToolVisualization(bool show)
-    {
-        if (show)
-        {
-            if (vis == nullptr)
-            {
-                AddVisualization<T>();
-                SetVisualization();
-            }
-            else
-            {
-                if (T *visual = qobject_cast<T *>(vis))
-                {
-                    visual->show();
-                }
-            }
-        }
-        else
-        {
-            delete vis;
-            vis = nullptr;
-        }
-
-        if (detailsMode)
-        {
-            ShowHandles(detailsMode);
-        }
-        else
-        {
-            ShowHandles(show);
-        }
-    }
+    void ShowToolVisualization(bool show);
 
 private:
     Q_DISABLE_COPY(VAbstractSpline)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void VAbstractSpline::ShowToolVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            AddVisualization<T>();
+            SetVisualization();
+        }
+        else
+        {
+            if (T *visual = qobject_cast<T *>(vis))
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+
+    if (detailsMode)
+    {
+        ShowHandles(detailsMode);
+    }
+    else
+    {
+        ShowHandles(show);
+    }
+}
 
 #endif // VABSTRACTSPLINE_H

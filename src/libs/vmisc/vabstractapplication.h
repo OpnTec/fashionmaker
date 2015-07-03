@@ -132,7 +132,7 @@ inline void VAbstractApplication::setPatternType(const MeasurementsType &pattern
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-QString VAbstractApplication::LocaleToString(const T &value)
+inline QString VAbstractApplication::LocaleToString(const T &value)
 {
     QLocale loc;
     qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);

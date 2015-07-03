@@ -191,16 +191,7 @@ protected:
     static int              ConfirmDeletion();
 
     template <typename T>
-    void AddVisualization()
-    {
-        T *visual = new T(getData());
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr)
-        connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
-        scene->addItem(visual);
-
-        vis = visual;
-    }
+    void AddVisualization();
 
     virtual void SetVisualization()=0;
     void ToolCreation(const Source &typeCreation);
@@ -227,4 +218,18 @@ inline const VContainer *VAbstractTool::getData() const
 {
     return &data;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void VAbstractTool::AddVisualization()
+{
+    T *visual = new T(getData());
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    SCASSERT(scene != nullptr)
+    connect(scene, &VMainGraphicsScene::NewFactor, visual, &Visualization::SetFactor);
+    scene->addItem(visual);
+
+    vis = visual;
+}
+
 #endif // VABSTRACTTOOL_H

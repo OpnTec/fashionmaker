@@ -106,19 +106,10 @@ public:
     void               SetArgSep(char_type cArgSep);
     QChar              GetArgSep() const;
     void Q_NORETURN    Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_strTok = QString() ) const;
-    /**
-     * @fn void qmu::QmuParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun,
-     * bool a_bAllowOpt = true)
-     * @brief Define a parser function without arguments.
-     * @param a_strName Name of the function
-     * @param a_pFun Pointer to the callback function
-     * @param a_bAllowOpt A flag indicating this function may be optimized
-     */
+
     template<typename T>
-    void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true)
-    {
-        AddCallback( a_strName, QmuParserCallback(a_pFun, a_bAllowOpt), m_FunDef, ValidNameChars() );
-    }
+    void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true);
+
     void setAllowSubexpressions(bool value);
 
     std::locale getLocale() const;
@@ -262,6 +253,21 @@ private:
                                  const QString &a_szCharSet) const;
     void               StackDump(const QStack<token_type > &a_stVal, const QStack<token_type > &a_stOprt) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @fn void qmu::QmuParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun,
+ * bool a_bAllowOpt = true)
+ * @brief Define a parser function without arguments.
+ * @param a_strName Name of the function
+ * @param a_pFun Pointer to the callback function
+ * @param a_bAllowOpt A flag indicating this function may be optimized
+ */
+template<typename T>
+inline void QmuParserBase::DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt)
+{
+    AddCallback( a_strName, QmuParserCallback(a_pFun, a_bAllowOpt), m_FunDef, ValidNameChars() );
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

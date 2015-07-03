@@ -224,88 +224,24 @@ protected:
 
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
-    template <typename T>
-    void             InitArrow(T *ui)
-    {
-        SCASSERT(ui != nullptr);
-        spinBoxAngle = ui->doubleSpinBoxAngle;
-        connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
-        connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
-        connect(ui->toolButtonArrowLeft, &QPushButton::clicked, this, &DialogTool::ArrowLeft);
-        connect(ui->toolButtonArrowRight, &QPushButton::clicked, this, &DialogTool::ArrowRight);
-        connect(ui->toolButtonArrowLeftUp, &QPushButton::clicked, this, &DialogTool::ArrowLeftUp);
-        connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, &DialogTool::ArrowLeftDown);
-        connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, &DialogTool::ArrowRightUp);
-        connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this, &DialogTool::ArrowRightDown);
-    }
-    template <typename T>
-    /**
-     * @brief InitOkCancelApply initialise OK / Cancel and Apply buttons
-     * @param ui Dialog container
-     */
-    void             InitOkCancelApply(T *ui)
-    {
-        InitOkCancel(ui);
-        bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
-        SCASSERT(bApply != nullptr);
-        connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
-    }
-    template <typename T>
-    /**
-     * @brief InitOkCancel initialise OK and Cancel buttons
-     * @param ui Dialog container
-     */
-    void             InitOkCancel(T *ui)
-    {
-        bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-        SCASSERT(bOk != nullptr);
-        connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
-
-        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        SCASSERT(bCancel != nullptr);
-        connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
-
-        qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
-    }
-    template <typename T>
-    /**
-     * @brief InitFormulaUI initialise ui object for formula fild
-     * @param ui Dialog container
-     */
-    void             InitFormulaUI(T *ui)
-    {
-        labelResultCalculation = ui->labelResultCalculation;
-        plainTextEditFormula = ui->plainTextEditFormula;
-        labelEditFormula = ui->labelEditFormula;
-    }
-    template <typename T>
-    void             AddVisualization()
-    {
-        if (prepare == false)
-        {
-            VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-            SCASSERT(scene != nullptr);
-
-            T *toolVis = qobject_cast<T *>(vis);
-            SCASSERT(toolVis != nullptr);
-
-            connect(scene, &VMainGraphicsScene::NewFactor, toolVis, &Visualization::SetFactor);
-            scene->addItem(toolVis);
-            toolVis->RefreshGeometry();
-        }
-    }
 
     template <typename T>
-    void             DeleteVisualization()
-    {
-        T *toolVis = qobject_cast<T *>(vis);
-        SCASSERT(toolVis != nullptr);
+    void             InitArrow(T *ui);
 
-        if (qApp->getCurrentScene()->items().contains(toolVis))
-        { // In some cases scene delete object yourself. If not make check program will crash.
-            delete vis;
-        }
-    }
+    template <typename T>
+    void             InitOkCancelApply(T *ui);
+
+    template <typename T>
+    void             InitOkCancel(T *ui);
+
+    template <typename T>
+    void             InitFormulaUI(T *ui);
+
+    template <typename T>
+    void             AddVisualization();
+
+    template <typename T>
+    void             DeleteVisualization();
 
     void             ChangeColor(QWidget *widget, const QColor &color);
     virtual void     ShowVisualization() {}
@@ -328,6 +264,99 @@ private:
 inline VAbstractTool *DialogTool::GetAssociatedTool()
 {
     return this->associatedTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void DialogTool::InitArrow(T *ui)
+{
+    SCASSERT(ui != nullptr);
+    spinBoxAngle = ui->doubleSpinBoxAngle;
+    connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
+    connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
+    connect(ui->toolButtonArrowLeft, &QPushButton::clicked, this, &DialogTool::ArrowLeft);
+    connect(ui->toolButtonArrowRight, &QPushButton::clicked, this, &DialogTool::ArrowRight);
+    connect(ui->toolButtonArrowLeftUp, &QPushButton::clicked, this, &DialogTool::ArrowLeftUp);
+    connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, &DialogTool::ArrowLeftDown);
+    connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, &DialogTool::ArrowRightUp);
+    connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this, &DialogTool::ArrowRightDown);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief InitOkCancelApply initialise OK / Cancel and Apply buttons
+ * @param ui Dialog container
+ */
+inline void DialogTool::InitOkCancelApply(T *ui)
+{
+    InitOkCancel(ui);
+    bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+    SCASSERT(bApply != nullptr);
+    connect(bApply, &QPushButton::clicked, this, &DialogTool::DialogApply);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief InitOkCancel initialise OK and Cancel buttons
+ * @param ui Dialog container
+ */
+inline void DialogTool::InitOkCancel(T *ui)
+{
+    bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    SCASSERT(bOk != nullptr);
+    connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
+
+    QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    SCASSERT(bCancel != nullptr);
+    connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+
+    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief InitFormulaUI initialise ui object for formula fild
+ * @param ui Dialog container
+ */
+inline void DialogTool::InitFormulaUI(T *ui)
+{
+    labelResultCalculation = ui->labelResultCalculation;
+    plainTextEditFormula = ui->plainTextEditFormula;
+    labelEditFormula = ui->labelEditFormula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void DialogTool::AddVisualization()
+{
+    if (prepare == false)
+    {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+        SCASSERT(scene != nullptr);
+
+        T *toolVis = qobject_cast<T *>(vis);
+        SCASSERT(toolVis != nullptr);
+
+        connect(scene, &VMainGraphicsScene::NewFactor, toolVis, &Visualization::SetFactor);
+        scene->addItem(toolVis);
+        toolVis->RefreshGeometry();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void DialogTool::DeleteVisualization()
+{
+    T *toolVis = qobject_cast<T *>(vis);
+    SCASSERT(toolVis != nullptr);
+
+    if (qApp->getCurrentScene()->items().contains(toolVis))
+    { // In some cases scene delete object yourself. If not make check program will crash.
+        delete vis;
+    }
 }
 
 #endif // DIALOGTOOL_H

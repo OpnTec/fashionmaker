@@ -81,42 +81,47 @@ protected:
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     template <typename T>
-    void ShowToolVisualization(bool show)
-    {
-        if (show)
-        {
-            if (vis == nullptr)
-            {
-                AddVisualization<T>();
-                SetVisualization();
-            }
-            else
-            {
-                if (T *visual = qobject_cast<T *>(vis))
-                {
-                    visual->show();
-                }
-            }
-        }
-        else
-        {
-            delete vis;
-            vis = nullptr;
-        }
-        if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
-        {
-            if (detailsMode)
-            {
-                parentCurve->ShowHandles(detailsMode);
-            }
-            else
-            {
-                parentCurve->ShowHandles(show);
-            }
-        }
-    }
+    void ShowToolVisualization(bool show);
+
 private:
     Q_DISABLE_COPY(VToolCut)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void VToolCut::ShowToolVisualization(bool show)
+{
+    if (show)
+    {
+        if (vis == nullptr)
+        {
+            AddVisualization<T>();
+            SetVisualization();
+        }
+        else
+        {
+            if (T *visual = qobject_cast<T *>(vis))
+            {
+                visual->show();
+            }
+        }
+    }
+    else
+    {
+        delete vis;
+        vis = nullptr;
+    }
+    if (VAbstractSpline *parentCurve = qobject_cast<VAbstractSpline *>(doc->getTool(curveCutId)))
+    {
+        if (detailsMode)
+        {
+            parentCurve->ShowHandles(detailsMode);
+        }
+        else
+        {
+            parentCurve->ShowHandles(show);
+        }
+    }
+}
 
 #endif // VTOOLCUT_H

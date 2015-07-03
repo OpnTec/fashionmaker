@@ -83,29 +83,37 @@ protected:
                           Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item>
-    void         AddItem(Item *item)
-    {
-        SCASSERT(item != nullptr);
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
-
-        scene->addItem(item);
-        connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);
-        connect(scene, &VMainGraphicsScene::mouseMove, item, &Visualization::MousePos);
-    }
+    void         AddItem(Item *item);
 
     template <class Item>
-    Item         *InitItem(const QColor &color, QGraphicsItem *parent)
-    {
-        Item *item = new Item(parent);
-        item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*data->GetPatternUnit()))/factor));
-        item->setZValue(1);
-        item->setFlags(QGraphicsItem::ItemStacksBehindParent);
-        item->setVisible(false);
-        return item;
-    }
+    Item         *InitItem(const QColor &color, QGraphicsItem *parent);
 private:
     Q_DISABLE_COPY(Visualization)
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Item>
+inline void Visualization::AddItem(Item *item)
+{
+    SCASSERT(item != nullptr);
+    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    SCASSERT(scene != nullptr);
+
+    scene->addItem(item);
+    connect(scene, &VMainGraphicsScene::NewFactor, item, &Visualization::SetFactor);
+    connect(scene, &VMainGraphicsScene::mouseMove, item, &Visualization::MousePos);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class Item>
+inline Item *Visualization::InitItem(const QColor &color, QGraphicsItem *parent)
+{
+    Item *item = new Item(parent);
+    item->setPen(QPen(color, qApp->toPixel(WidthHairLine(*data->GetPatternUnit()))/factor));
+    item->setZValue(1);
+    item->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    item->setVisible(false);
+    return item;
+}
 
 #endif // VISUALIZATION_H
