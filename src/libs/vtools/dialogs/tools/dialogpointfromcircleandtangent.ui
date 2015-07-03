@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Point from circle and tangent</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../../../../app/share/resources/icon.qrc">
