@@ -155,7 +155,17 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
                     obj->getType() == GOType::SplinePath) && obj->getMode() == Draw::Calculation)
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(i.key());
-                list[curve->name()] = i.key();
+
+                QString newName = curve->name();
+                int bias = 0;
+                if (qApp->TrVars()->VariablesToUser(newName, 0, curve->name(), bias))
+                {
+                    list[newName] = i.key();
+                }
+                else
+                {
+                    list[curve->name()] = i.key();
+                }
             }
         }
     }
@@ -508,9 +518,7 @@ CrossCirclesPoint DialogTool::getCurrentCrossPoint(QComboBox *box) const
 bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &toolTip)
 {
     SCASSERT(box != nullptr);
-    const QSharedPointer<VGObject> obj = data->GetGObject(id);
-    SCASSERT(obj.isNull() == false);
-    const qint32 index = box->findText(obj->name());
+    const qint32 index = box->findData(id);
     if ( index != -1 )
     { // -1 for not found
         box->setCurrentIndex(index);
@@ -519,7 +527,7 @@ bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
     }
     else
     {
-        qWarning()<<"Can't find object by name"<<obj->name();
+        qWarning()<<"Can't find object by id"<<id;
     }
     return false;
 }
@@ -832,7 +840,17 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
                 if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
                 {
                     const QSharedPointer<GObject> arc = data->GeometricObject<GObject>(i.key());
-                    list[arc->name()] = i.key();
+
+                    QString newName = arc->name();
+                    int bias = 0;
+                    if (qApp->TrVars()->VariablesToUser(newName, 0, arc->name(), bias))
+                    {
+                        list[newName] = i.key();
+                    }
+                    else
+                    {
+                        list[arc->name()] = i.key();
+                    }
                 }
             }
         }
@@ -844,7 +862,17 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
                 if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
                 {
                     const QSharedPointer<GObject> arc = data->GeometricObject<GObject>(i.key());
-                    list[arc->name()] = i.key();
+
+                    QString newName = arc->name();
+                    int bias = 0;
+                    if (qApp->TrVars()->VariablesToUser(newName, 0, arc->name(), bias))
+                    {
+                        list[newName] = i.key();
+                    }
+                    else
+                    {
+                        list[arc->name()] = i.key();
+                    }
                 }
             }
         }
