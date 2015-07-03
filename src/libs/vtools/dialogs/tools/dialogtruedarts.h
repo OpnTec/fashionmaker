@@ -65,17 +65,17 @@ public:
 
     void               SetChildrenId(const quint32 &ch1, const quint32 &ch2);
 public slots:
-    virtual void       ChosenObject(quint32 id, const SceneObject &type);
-    virtual void       PointNameChanged();
+    virtual void       ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void       PointNameChanged() Q_DECL_OVERRIDE;
     void               NameDartPoint1Changed();
     void               NameDartPoint2Changed();
 protected:
-    virtual void       ShowVisualization();
+    virtual void       ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void       SaveData();
-    virtual void       CheckState();
+    virtual void       SaveData() Q_DECL_OVERRIDE;
+    virtual void       CheckState() Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(DialogTrueDarts)

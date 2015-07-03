@@ -36,14 +36,14 @@ class VisToolLineIntersect :public VisLine
     Q_OBJECT
 public:
     VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLineIntersect();
+    virtual ~VisToolLineIntersect() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setLine1P2Id(const quint32 &value);
     void         setLine2P1Id(const quint32 &value);
     void         setLine2P2Id(const quint32 &value);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersect)};
 private:
     Q_DISABLE_COPY(VisToolLineIntersect)

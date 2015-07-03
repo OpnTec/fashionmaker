@@ -41,9 +41,9 @@ public:
     VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
     VLineAngle(const VLineAngle &var);
     VLineAngle &operator=(const VLineAngle &var);
-    virtual ~VLineAngle();
+    virtual ~VLineAngle() Q_DECL_OVERRIDE;
 
-    virtual bool Filter(quint32 id);
+    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
     void         SetValue(const VPointF *p1, const VPointF *p2);
     quint32      GetP1Id() const;
     quint32      GetP2Id() const;

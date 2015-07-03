@@ -57,14 +57,14 @@ public:
     void              SetCrossCirclesPoint(CrossCirclesPoint &p);
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type);
+    virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
 
 protected:
-    virtual void   ShowVisualization();
+    virtual void   ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData();
+    virtual void   SaveData() Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(DialogPointFromArcAndTangent)

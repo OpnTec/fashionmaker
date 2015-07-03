@@ -42,7 +42,7 @@ public:
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
     VCurveAngle(const VCurveAngle &var);
     VCurveAngle &operator=(const VCurveAngle &var);
-    virtual ~VCurveAngle();
+    virtual ~VCurveAngle() Q_DECL_OVERRIDE;
 };
 
 #endif // VCURVEANGLE_H

@@ -38,7 +38,7 @@ public:
     VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 arcId,
                                 quint32 tangentPointId, CrossCirclesPoint crossPoint, const Source &typeCreation,
                                 QGraphicsItem * parent = nullptr);
-    virtual void setDialog();
+    virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointFromArcAndTangent *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                                VContainer *data);
     static VToolPointFromArcAndTangent *Create(const quint32 _id, const QString &pointName, quint32 arcId,
@@ -47,7 +47,7 @@ public:
                                                VContainer *data, const Document &parse, const Source &typeCreation);
     static QPointF FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType);
     static const QString ToolType;
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointFromArcAndTangent) };
 
     quint32 GetTangentPointId() const;
@@ -59,14 +59,14 @@ public:
     CrossCirclesPoint GetCrossCirclesPoint() const;
     void              SetCrossCirclesPoint(CrossCirclesPoint &value);
 
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void RemoveReferens();
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void ReadToolAttributes(const QDomElement &domElement);
-    virtual void SetVisualization();
+    virtual void RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolPointFromArcAndTangent)
 

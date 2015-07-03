@@ -44,7 +44,7 @@ class DialogSpline : public DialogTool
     Q_OBJECT
 public:
     DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogSpline();
+    virtual ~DialogSpline() Q_DECL_OVERRIDE;
 
     quint32       GetP1() const;
     void          SetP1(const quint32 &value);
@@ -70,14 +70,14 @@ public:
     QString       GetColor() const;
     void          SetColor(const QString &value);
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type);
-    virtual void  PointNameChanged();
+    virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void  PointNameChanged() Q_DECL_OVERRIDE;
 protected:
-    virtual void  ShowVisualization();
+    virtual void  ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData();
+    virtual void  SaveData() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogSpline)
 

@@ -36,12 +36,12 @@ class VisToolPointOfIntersection : public VisLine
     Q_OBJECT
 public:
     VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersection();
+    virtual ~VisToolPointOfIntersection() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setPoint2Id(const quint32 &value);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersection)

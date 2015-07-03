@@ -36,9 +36,9 @@ class VisToolSpline : public VisPath
     Q_OBJECT
 public:
     VisToolSpline(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolSpline();
+    virtual ~VisToolSpline() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setPoint4Id(const quint32 &value);
     void         SetAngle1(const qreal &value);
@@ -47,7 +47,7 @@ public:
     void         SetKAsm2(const qreal &value);
     void         SetKCurve(const qreal &value);
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
 protected:
     Q_DISABLE_COPY(VisToolSpline)

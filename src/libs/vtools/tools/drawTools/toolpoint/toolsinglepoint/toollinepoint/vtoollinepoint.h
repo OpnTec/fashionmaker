@@ -42,8 +42,8 @@ public:
     VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const
                    QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
                    QGraphicsItem * parent = nullptr);
-    virtual ~VToolLinePoint();
-    virtual int       type() const {return Type;}
+    virtual ~VToolLinePoint() Q_DECL_OVERRIDE;
+    virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
     VFormula          GetFormulaLength() const;
     void              SetFormulaLength(const VFormula &value);
@@ -55,9 +55,9 @@ public:
     void              SetAngle(const qreal &value);
 
 public slots:
-    virtual void      SetFactor(qreal factor);
-    virtual void      Disable(bool disable, const QString &namePP);
-    virtual void      FullUpdateFromFile();
+    virtual void      SetFactor(qreal factor) Q_DECL_OVERRIDE;
+    virtual void      Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void      FullUpdateFromFile() Q_DECL_OVERRIDE;
 protected:
     /** @brief formula string with length formula. */
     QString           formulaLength;
@@ -72,8 +72,8 @@ protected:
     QGraphicsLineItem *mainLine;
 
     virtual void      RefreshGeometry();
-    virtual void      RemoveReferens();
-    virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void      RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLinePoint)
 };

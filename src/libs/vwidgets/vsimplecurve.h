@@ -44,10 +44,11 @@ class VSimpleCurve : public VAbstractSimple, public QGraphicsPathItem
 public:
     VSimpleCurve(quint32 id, const QColor &currentColor, SimpleCurvePoint curvePosition, Unit patternUnit,
                  qreal *factor = nullptr, QObject *parent = 0);
-    virtual void    ChangedActivDraw(const bool &flag);
-    virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    virtual void    ChangedActivDraw(const bool &flag) Q_DECL_OVERRIDE;
+    virtual void    paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
+                          QWidget * widget = 0) Q_DECL_OVERRIDE;
 
-    virtual int     type() const {return Type;}
+    virtual int     type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleSplinePath)};
 
     QColor GetCurrentColor() const;
@@ -61,10 +62,10 @@ signals:
     void            Choosed(quint32 id);
     void            HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
 protected:
-    virtual void    mousePressEvent(QGraphicsSceneMouseEvent * event);
-    virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void    hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void    mousePressEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
+    virtual void    mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void    hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void    hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VSimpleCurve)
 

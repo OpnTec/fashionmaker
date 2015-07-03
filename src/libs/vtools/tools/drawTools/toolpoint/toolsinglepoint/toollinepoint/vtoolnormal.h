@@ -42,7 +42,7 @@ public:
                 const QString &lineColor,
                 const QString &formula, const qreal &angle, const quint32 &firstPointId, const quint32 &secondPointId,
                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    virtual void   setDialog();
+    virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolNormal* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolNormal* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
                                const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
@@ -53,22 +53,22 @@ public:
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
                              const qreal &angle = 0);
     static const QString ToolType;
-    virtual int    type() const {return Type;}
+    virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Normal)};
 
     quint32 GetSecondPointId() const;
     void    SetSecondPointId(const quint32 &value);
 
-    virtual void   ShowVisualization(bool show);
+    virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 public slots:
-    virtual void   SetFactor(qreal factor);
+    virtual void   SetFactor(qreal factor) Q_DECL_OVERRIDE;
 protected:
-    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   RemoveReferens();
-    virtual void   SaveDialog(QDomElement &domElement);
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void   ReadToolAttributes(const QDomElement &domElement);
-    virtual void   SetVisualization();
+    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void   RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void   SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;

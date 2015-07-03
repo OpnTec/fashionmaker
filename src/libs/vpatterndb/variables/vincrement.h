@@ -44,7 +44,7 @@ public:
                QString description = QString());
     VIncrement(const VIncrement &incr);
     VIncrement &operator=(const VIncrement &incr);
-    virtual ~VIncrement();
+    virtual ~VIncrement() Q_DECL_OVERRIDE;
 
     quint32 getId() const;
     void    setId(const quint32 &value);

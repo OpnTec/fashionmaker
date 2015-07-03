@@ -48,7 +48,7 @@ public:
     VDetail(const QString &name, const QVector<VNodeDetail> &nodes);
     VDetail(const VDetail &detail);
     VDetail &operator=(const VDetail &detail);
-    virtual ~VDetail();
+    virtual ~VDetail() Q_DECL_OVERRIDE;
 
     void           append(const VNodeDetail &node);
     void           Clear();

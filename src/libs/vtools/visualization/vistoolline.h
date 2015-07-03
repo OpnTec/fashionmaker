@@ -36,15 +36,15 @@ class VisToolLine : public VisLine
     Q_OBJECT
 public:
     VisToolLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLine();
+    virtual ~VisToolLine() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setPoint2Id(const quint32 &value);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLine)};
 protected:
     virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine);
+                          Qt::PenStyle style = Qt::SolidLine) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisToolLine)
     quint32      point2Id;

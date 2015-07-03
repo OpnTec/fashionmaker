@@ -43,7 +43,7 @@ public:
     VLayoutDetail();
     VLayoutDetail(const VLayoutDetail &detail);
     VLayoutDetail &operator=(const VLayoutDetail &detail);
-    virtual ~VLayoutDetail();
+    virtual ~VLayoutDetail() Q_DECL_OVERRIDE;
 
     QVector<QPointF> GetContourPoints() const;
     void SetCountourPoints(const QVector<QPointF> &points);

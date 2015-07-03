@@ -36,9 +36,9 @@ class DeletePatternPiece : public VUndoCommand
     Q_OBJECT
 public:
     DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent = 0);
-    virtual ~DeletePatternPiece();
-    virtual void undo();
-    virtual void redo();
+    virtual ~DeletePatternPiece() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DeletePatternPiece)
     QString     namePP;

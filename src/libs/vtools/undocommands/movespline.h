@@ -40,11 +40,11 @@ class MoveSpline : public VUndoCommand
 public:
     MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &spl, const quint32 &id,
                QGraphicsScene *scene, QUndoCommand *parent = 0);
-    virtual ~MoveSpline();
-    virtual void undo();
-    virtual void redo();
-    virtual bool mergeWith(const QUndoCommand *command);
-    virtual int  id() const;
+    virtual ~MoveSpline() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
     quint32      getSplineId() const;
     VSpline      getNewSpline() const;
 private:

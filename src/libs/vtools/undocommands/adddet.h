@@ -36,11 +36,11 @@ class AddDet : public VUndoCommand
     Q_OBJECT
 public:
     AddDet(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
-    virtual ~AddDet();
+    virtual ~AddDet() Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
-    virtual void undo();
+    virtual void undo() Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
-    virtual void redo();
+    virtual void redo() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(AddDet)
 };

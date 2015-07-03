@@ -38,8 +38,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VAbstractPropertyFactory
 {
 public:
     //! Empty virtual destructor
-    virtual ~VAbstractPropertyFactory()
-    {}
+    virtual ~VAbstractPropertyFactory() {}
 
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string

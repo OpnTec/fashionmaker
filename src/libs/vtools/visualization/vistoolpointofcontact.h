@@ -36,13 +36,13 @@ class VisToolPointOfContact : public VisLine
     Q_OBJECT
 public:
     VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfContact();
+    virtual ~VisToolPointOfContact() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setLineP2Id(const quint32 &value);
     void         setRadiusId(const quint32 &value);
     void         setRadius(const QString &expression);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
 private:
     Q_DISABLE_COPY(VisToolPointOfContact)

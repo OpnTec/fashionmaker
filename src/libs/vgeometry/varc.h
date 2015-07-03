@@ -52,15 +52,15 @@ public:
     VArc (qreal length, VPointF center, qreal radius, qreal f1);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
-    virtual ~VArc();
+    virtual ~VArc() Q_DECL_OVERRIDE;
 
     QString            GetFormulaF1 () const;
     void               SetFormulaF1 (const QString &formula, qreal value);
-    virtual qreal      GetStartAngle () const;
+    virtual qreal      GetStartAngle () const Q_DECL_OVERRIDE;
 
     QString            GetFormulaF2 () const;
     void               SetFormulaF2 (const QString &formula, qreal value);
-    virtual qreal      GetEndAngle () const;
+    virtual qreal      GetEndAngle () const Q_DECL_OVERRIDE;
 
     QString            GetFormulaRadius () const;
     void               SetFormulaRadius (const QString &formula, qreal value);
@@ -79,7 +79,7 @@ public:
     QVector<QPointF>   GetPoints () const;
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
     QPointF            CutArc (const qreal &length) const;
-    virtual void       setId(const quint32 &id);
+    virtual void       setId(const quint32 &id) Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VArcData> d;
 

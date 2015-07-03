@@ -40,7 +40,7 @@ public:
     VSplineAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
     VSplineAngle(const VSplineAngle &var);
     VSplineAngle &operator=(const VSplineAngle &var);
-    virtual ~VSplineAngle();
+    virtual ~VSplineAngle() Q_DECL_OVERRIDE;
 };
 
 #endif // VSPLINEANGLE_H

@@ -49,7 +49,7 @@ class VAbstractApplication : public QApplication
 {
 public:
     VAbstractApplication(int &argc, char ** argv);
-    virtual ~VAbstractApplication();
+    virtual ~VAbstractApplication() Q_DECL_OVERRIDE;
 
     virtual const VTranslateVars *TrVars()=0;
 

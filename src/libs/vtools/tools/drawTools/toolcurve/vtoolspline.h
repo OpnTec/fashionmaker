@@ -40,8 +40,8 @@ class VToolSpline:public VAbstractSpline
 public:
     VToolSpline (VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
                  QGraphicsItem * parent = nullptr );
-    virtual ~VToolSpline();
-    virtual void setDialog();
+    virtual ~VToolSpline() Q_DECL_OVERRIDE;
+    virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
                                const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
@@ -49,28 +49,28 @@ public:
                                VContainer *data,
                                const Document &parse, const Source &typeCreation);
     static const QString ToolType;
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
 
     VSpline getSpline()const;
     void    setSpline(const VSpline &spl);
 
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 public slots:
     void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
                                              const QPointF &pos);
-    virtual void EnableToolMove(bool move);
+    virtual void EnableToolMove(bool move) Q_DECL_OVERRIDE;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void RemoveReferens();
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void SetVisualization();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event) Q_DECL_OVERRIDE;
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSpline)
     void         RefreshGeometry ();

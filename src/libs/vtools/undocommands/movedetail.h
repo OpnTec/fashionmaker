@@ -39,12 +39,12 @@ class MoveDetail : public VUndoCommand
 public:
     MoveDetail(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = 0);
-    virtual ~MoveDetail();
-    virtual void undo();
-    virtual void redo();
+    virtual ~MoveDetail() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
-    virtual bool mergeWith(const QUndoCommand *command);
-    virtual int  id() const;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
     quint32      getDetId() const;
     double       getNewX() const;
     double       getNewY() const;

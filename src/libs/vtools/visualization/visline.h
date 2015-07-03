@@ -40,9 +40,9 @@ class VisLine: public Visualization, public QGraphicsLineItem
     Q_OBJECT
 public:
     VisLine(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisLine();
+    virtual ~VisLine() Q_DECL_OVERRIDE;
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Line)};
 protected:
     qreal        CorrectAngle(const qreal &angle) const;
@@ -50,8 +50,8 @@ protected:
     QPointF      Ray(const QPointF &firstPoint) const;
     QLineF       Axis(const QPointF &p, const qreal &angle) const;
     QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen();
-    virtual void AddOnScene();
+    virtual void InitPen() Q_DECL_OVERRIDE;
+    virtual void AddOnScene() Q_DECL_OVERRIDE;
 
     void         DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent,
                          const QColor &color, Qt::PenStyle style);

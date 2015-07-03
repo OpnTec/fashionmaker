@@ -68,8 +68,7 @@ public:
         : Properties(properties), EditorWidgets(QList<SEditorWidget>()), UpdateEditors(true)
     {}
 
-    virtual ~VPropertyFormWidgetPrivate()
-    {}
+    virtual ~VPropertyFormWidgetPrivate() {}
 };
 
 #ifdef Q_CC_CLANG

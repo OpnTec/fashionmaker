@@ -73,7 +73,7 @@ signals:
      */
     void                 haveLiteChange();
 protected:
-    virtual void         closeEvent ( QCloseEvent * event );
+    virtual void         closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogIncrements)
 

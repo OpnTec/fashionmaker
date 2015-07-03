@@ -56,9 +56,9 @@ class VApplication : public VAbstractApplication
     Q_OBJECT
 public:
     VApplication(int &argc, char ** argv);
-    virtual ~VApplication();
+    virtual ~VApplication() Q_DECL_OVERRIDE;
     static void        NewValentina(const QString &fileName = QString());
-    virtual bool       notify(QObject * receiver, QEvent * event);
+    virtual bool       notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
     void               InitOptions();
 

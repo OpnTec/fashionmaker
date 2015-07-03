@@ -45,7 +45,7 @@ public:
     VDetail          getDetail() const;
     void             setDetail(const VDetail &value);
 public slots:
-    virtual void     ChosenObject(quint32 id, const SceneObject &type);
+    virtual void     ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     void             BiasXChanged(qreal d);
     void             BiasYChanged(qreal d);
     void             AlowenceChanged(qreal d);
@@ -58,8 +58,8 @@ protected:
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void     SaveData();
-    virtual void     CheckState();
+    virtual void     SaveData() Q_DECL_OVERRIDE;
+    virtual void     CheckState() Q_DECL_OVERRIDE;
 private:
 
     /** @brief ui keeps information about user interface */

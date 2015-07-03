@@ -39,20 +39,21 @@ class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
     Q_OBJECT
 public:
     VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VAbstractSpline();
+    virtual ~VAbstractSpline() Q_DECL_OVERRIDE;
     // cppcheck-suppress duplInheritedMember
     static const QString TagName;
-    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-    virtual int      type() const {return Type;}
+    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
+                           QWidget * widget = 0) Q_DECL_OVERRIDE;
+    virtual int      type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
-    virtual QString  getTagName() const;
+    virtual QString  getTagName() const Q_DECL_OVERRIDE;
     void             ShowHandles(bool show);
 
     void setEnabled(bool enabled);
 
 public slots:
-    virtual void     FullUpdateFromFile ();
-    virtual void     Disable(bool disable, const QString &namePP);
+    virtual void     FullUpdateFromFile () Q_DECL_OVERRIDE;
+    virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void             DetailsMode(bool mode);
 signals:
     /**
@@ -81,16 +82,16 @@ protected:
      * @brief RefreshGeometry  refresh item on scene.
      */
     virtual void     RefreshGeometry ()=0;
-    virtual void     ShowTool(quint32 id, bool enable);
-    virtual void     SetFactor(qreal factor);
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void     keyReleaseEvent(QKeyEvent * event);
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
+    virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
+    virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
+    virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
-    virtual void     ReadToolAttributes(const QDomElement &domElement);
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     template <typename T>
     void ShowToolVisualization(bool show)

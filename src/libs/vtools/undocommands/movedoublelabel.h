@@ -41,11 +41,11 @@ class MoveDoubleLabel : public VUndoCommand
 public:
     MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
                     const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent = 0);
-    virtual ~MoveDoubleLabel();
-    virtual void undo();
-    virtual void redo();
-    virtual bool mergeWith(const QUndoCommand *command);
-    virtual int  id() const;
+    virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
     quint32      getPointId() const;
     double       getNewMx() const;
     double       getNewMy() const;

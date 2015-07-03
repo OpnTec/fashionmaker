@@ -43,9 +43,10 @@ class VControlPointSpline : public QObject, public QGraphicsEllipseItem
 public:
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
                         const QPointF &splinePoint, Unit patternUnit, QGraphicsItem * parent = nullptr);
-    virtual ~VControlPointSpline();
-    virtual void      paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
-    virtual int       type() const {return Type;}
+    virtual ~VControlPointSpline() Q_DECL_OVERRIDE;
+    virtual void      paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
+                            QWidget * widget = 0) Q_DECL_OVERRIDE;
+    virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
 signals:
     /**
@@ -72,12 +73,12 @@ protected:
     /** @brief controlLine pointer to line control point. */
     QGraphicsLineItem *controlLine;
 
-    virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
-    QVariant          itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event );
-    virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event );
+    virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void      hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    QVariant          itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
+    virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VControlPointSpline)
     /** @brief indexSpline index spline in list.. */

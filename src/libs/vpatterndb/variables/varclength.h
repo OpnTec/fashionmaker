@@ -40,7 +40,7 @@ public:
     VArcLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *arc, Unit patternUnit);
     VArcLength(const VArcLength &var);
     VArcLength &operator=(const VArcLength &var);
-    virtual ~VArcLength();
+    virtual ~VArcLength() Q_DECL_OVERRIDE;
 };
 
 #endif // VARCLENGTH_H

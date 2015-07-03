@@ -45,7 +45,7 @@ class DialogPointOfContact : public DialogTool
     Q_OBJECT
 public:
     DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfContact();
+    virtual ~DialogPointOfContact() Q_DECL_OVERRIDE;
 
     void           SetPointName(const QString &value);
 
@@ -61,7 +61,7 @@ public:
     quint32        GetSecondPoint() const;
     void           SetSecondPoint(const quint32 &value);
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type);
+    virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -70,15 +70,15 @@ public slots:
      * @brief FormulaTextChanged when formula text changes for validation and calc
      */
     void           FormulaTextChanged();
-    virtual void   PointNameChanged();
+    virtual void   PointNameChanged() Q_DECL_OVERRIDE;
     void           FXRadius();
 protected:
-    virtual void   ShowVisualization();
+    virtual void   ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData();
-    virtual void   closeEvent(QCloseEvent *event);
+    virtual void   SaveData() Q_DECL_OVERRIDE;
+    virtual void   closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
 

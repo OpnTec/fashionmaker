@@ -52,7 +52,7 @@ class VAbstractTool: public VDataTool
     Q_OBJECT
 public:
     VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VAbstractTool();
+    virtual ~VAbstractTool() Q_DECL_OVERRIDE;
     quint32                 getId() const;
     static const QString    AttrType;
     static const QString    AttrMx;
@@ -186,7 +186,7 @@ protected:
     /**
      * @brief RemoveReferens decrement value of reference.
      */
-    virtual void            RemoveReferens(){}
+    virtual void            RemoveReferens() {}
     virtual void            DeleteTool(bool ask = true);
     static int              ConfirmDeletion();
 

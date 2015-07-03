@@ -41,7 +41,7 @@ public:
     VColorPropertyEditor(QWidget *parent);
 
     //! Destructor
-    virtual ~VColorPropertyEditor();
+    virtual ~VColorPropertyEditor() Q_DECL_OVERRIDE;
 
 
     //! Returns the color currently set

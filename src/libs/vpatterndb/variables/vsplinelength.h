@@ -41,7 +41,7 @@ public:
     VSplineLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *path, Unit patternUnit);
     VSplineLength(const VSplineLength &var);
     VSplineLength &operator=(const VSplineLength &var);
-    virtual ~VSplineLength();
+    virtual ~VSplineLength() Q_DECL_OVERRIDE;
 };
 
 #endif // VSPLINELENGTH_H

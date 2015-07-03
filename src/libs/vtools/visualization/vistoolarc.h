@@ -36,13 +36,13 @@ class VisToolArc : public VisPath
     Q_OBJECT
 public:
     VisToolArc(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolArc();
+    virtual ~VisToolArc() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setRadius(const QString &expression);
     void         setF1(const QString &expression);
     void         setF2(const QString &expression);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolArc)};
 private:
     Q_DISABLE_COPY(VisToolArc)

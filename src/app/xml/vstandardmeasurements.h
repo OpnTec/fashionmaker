@@ -43,7 +43,7 @@ class VStandardMeasurements:public VAbstractMeasurements
 {
 public:
     VStandardMeasurements(VContainer *data);
-    virtual ~VStandardMeasurements();
+    virtual ~VStandardMeasurements() Q_DECL_OVERRIDE;
     QString      OrigDescription ();
     QString      TrDescription ();
     QString      Id();
@@ -63,7 +63,7 @@ public:
     static const QString AttrHeight_increase;
     static const QString AttrBase;
 protected:
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag);
+    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VStandardMeasurements)
     qreal        TakeParametr(const QString &tag, const QString &attr, qreal defValue) const;

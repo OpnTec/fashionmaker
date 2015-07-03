@@ -47,7 +47,7 @@ class VDrawTool : public VAbstractTool
 public:
 
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual      ~VDrawTool();
+    virtual      ~VDrawTool() Q_DECL_OVERRIDE;
 
     /** @brief factor scene scale factor. */
     static qreal factor;
@@ -93,8 +93,8 @@ protected:
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement)=0;
     void         SaveDialogChange();
-    virtual void AddToFile();
-    virtual void RefreshDataInFile();
+    virtual void AddToFile() Q_DECL_OVERRIDE;
+    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
     void         SaveOption(QSharedPointer<VGObject> &obj);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
 

@@ -82,22 +82,22 @@ public:
     static const QString NodeSplinePath;
     void               Remove(bool ask);
     static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VNodeDetail &node);
-    virtual int        type() const {return Type;}
+    virtual int        type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Detail)};
-    virtual QString    getTagName() const;
-    virtual void       ShowVisualization(bool show);
+    virtual QString    getTagName() const Q_DECL_OVERRIDE;
+    virtual void       ShowVisualization(bool show) Q_DECL_OVERRIDE;
 public slots:
-    virtual void       FullUpdateFromFile ();
+    virtual void       FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void       FullUpdateFromGuiOk(int result);
 protected:
-    virtual void       AddToFile ();
-    virtual void       RefreshDataInFile();
-    virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void       mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void       RemoveReferens();
-    virtual void       keyReleaseEvent(QKeyEvent * event);
-    virtual void       SetVisualization() {}
+    virtual void       AddToFile () Q_DECL_OVERRIDE;
+    virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
+    virtual QVariant   itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
+    virtual void       mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void       RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
+    virtual void       SetVisualization() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VToolDetail)
     /** @brief dialog dialog options. */
@@ -114,7 +114,7 @@ private:
      * @param node node of detail.
      */
     void               InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
-    virtual void       DeleteTool(bool ask = true);
+    virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
 };
 
 #endif // VTOOLDETAIL_H

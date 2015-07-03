@@ -42,7 +42,7 @@ public:
     VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
              const quint32 &curveCutId,
              const quint32 &curve1id, const quint32 &curve2id, const QString &color, QGraphicsItem * parent = nullptr);
-    virtual int   type() const {return Type;}
+    virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
     VFormula GetFormula() const;
@@ -54,9 +54,9 @@ public:
 public slots:
     virtual void  CurveChoosed(quint32 id)=0;
     void          HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
-    virtual void  Disable(bool disable, const QString &namePP);
+    virtual void  Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void          DetailsMode(bool mode);
-    virtual void  FullUpdateFromFile();
+    virtual void  FullUpdateFromFile() Q_DECL_OVERRIDE;
 protected:
     /** @brief formula keep formula of length */
     QString       formula;
@@ -76,9 +76,9 @@ protected:
     virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
                                PathDirection direction = PathDirection::Hide)=0;
     void          RefreshGeometry();
-    virtual void  RemoveReferens();
+    virtual void  RemoveReferens() Q_DECL_OVERRIDE;
     void          FullUpdateCurveFromFile(const QString &attrCurve);
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     template <typename T>
     void ShowToolVisualization(bool show)

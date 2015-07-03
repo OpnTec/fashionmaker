@@ -52,7 +52,7 @@ class MainWindow : public MainWindowsNoGUI
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    virtual ~MainWindow();
+    virtual ~MainWindow() Q_DECL_OVERRIDE;
     void               LoadPattern(const QString &curFile);
     void               ReopenFilesAfterCrash(QStringList &args);
 public slots:
@@ -149,13 +149,13 @@ signals:
     void               RefreshHistory();
     void               EnableItemMove(bool move);
 protected:
-    virtual void       keyPressEvent(QKeyEvent *event);
-    virtual void       showEvent(QShowEvent *event);
-    virtual void       closeEvent(QCloseEvent *event);
-    virtual void       customEvent(QEvent * event);
+    virtual void       keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
+    virtual void       showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void       closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void       customEvent(QEvent * event) Q_DECL_OVERRIDE;
 
-    virtual void       CleanLayout();
-    virtual void       PrepareSceneList();
+    virtual void       CleanLayout() Q_DECL_OVERRIDE;
+    virtual void       PrepareSceneList() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */

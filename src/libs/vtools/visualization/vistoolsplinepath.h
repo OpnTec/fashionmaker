@@ -39,14 +39,14 @@ class VisToolSplinePath : public VisPath
     Q_OBJECT
 public:
     VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolSplinePath();
+    virtual ~VisToolSplinePath() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setPath(const VSplinePath &value);
     VSplinePath  getPath();
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
 
     Mode getMode() const;

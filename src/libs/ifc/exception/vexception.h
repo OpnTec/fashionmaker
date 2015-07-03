@@ -46,11 +46,11 @@ public:
     VException(const QString &what);
     VException(const VException &e);
     VException &operator=(const VException &e);
-    virtual ~VException() V_NOEXCEPT_EXPR (true){}
+    virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
 
-    Q_NORETURN virtual void raise() const;
+    Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
-    virtual VException *clone() const;
+    virtual VException *clone() const Q_DECL_OVERRIDE;
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         What() const;

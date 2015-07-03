@@ -52,7 +52,7 @@ public:
         :QSharedData(var), arcId(var.arcId)
     {}
 
-    virtual  ~VArcRadiusData();
+    virtual  ~VArcRadiusData() Q_DECL_OVERRIDE;
 
     quint32 arcId;
 };

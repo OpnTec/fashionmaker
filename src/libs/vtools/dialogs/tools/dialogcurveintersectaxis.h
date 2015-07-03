@@ -42,7 +42,7 @@ class DialogCurveIntersectAxis : public DialogTool
 
 public:
     DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogCurveIntersectAxis();
+    virtual ~DialogCurveIntersectAxis() Q_DECL_OVERRIDE;
 
     void         SetPointName(const QString &value);
 
@@ -61,20 +61,20 @@ public:
     QString      GetLineColor() const;
     void         SetLineColor(const QString &value);
 
-    virtual void ShowDialog(bool click);
+    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type);
+    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     void         EvalAngle();
     void         AngleTextChanged();
     void         DeployAngleTextEdit();
     void         FXAngle();
 protected:
-    virtual void ShowVisualization();
+    virtual void ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData();
-    virtual void closeEvent(QCloseEvent *event);
+    virtual void SaveData() Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogCurveIntersectAxis)
     Ui::DialogCurveIntersectAxis *ui;

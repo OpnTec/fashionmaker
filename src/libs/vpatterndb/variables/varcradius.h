@@ -41,7 +41,7 @@ public:
     VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit);
     VArcRadius(const VArcRadius &var);
     VArcRadius &operator=(const VArcRadius &var);
-    virtual ~VArcRadius();
+    virtual ~VArcRadius() Q_DECL_OVERRIDE;
 };
 
 #endif // VARCRADIUS_H

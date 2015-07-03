@@ -42,12 +42,12 @@ class VAbstractNode : public VAbstractTool
 public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                   const quint32 &idTool, QObject *parent = nullptr);
-    virtual      ~VAbstractNode() {}
+    virtual      ~VAbstractNode() Q_DECL_OVERRIDE {}
     static const QString AttrIdObject;
     static const QString AttrIdTool;
     virtual void DeleteNode();
     virtual void RestoreNode();
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
     /** @brief idNodenode id. */
     quint32       idNode;
@@ -59,8 +59,8 @@ protected:
     QColor        currentColor;
 
     void         AddToModeling(const QDomElement &domElement);
-    virtual void decrementReferens();
-    virtual void RemoveReferens();
+    virtual void decrementReferens() Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() Q_DECL_OVERRIDE;
     virtual void RestoreReferens();
     virtual void SetVisualization() {}
 };

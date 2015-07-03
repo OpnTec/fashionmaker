@@ -38,7 +38,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VFileEditWidget : public QWidget
 
 public:
     VFileEditWidget(QWidget* parent, bool is_directory = false);
-    virtual ~VFileEditWidget();
+    virtual ~VFileEditWidget() Q_DECL_OVERRIDE;
 
 
     //! This function returns the file currently set to this editor

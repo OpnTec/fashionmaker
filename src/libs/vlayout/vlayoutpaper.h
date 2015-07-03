@@ -45,7 +45,7 @@ public:
     VLayoutPaper(int height, int width);
     VLayoutPaper(const VLayoutPaper &paper);
     VLayoutPaper &operator=(const VLayoutPaper &paper);
-    virtual ~VLayoutPaper();
+    ~VLayoutPaper();
 
     int  GetHeight() const;
     void SetHeight(int height);

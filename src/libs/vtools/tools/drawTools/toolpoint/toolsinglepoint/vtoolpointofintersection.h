@@ -41,7 +41,7 @@ public:
     VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
                              const quint32 &secondPointId, const Source &typeCreation,
                              QGraphicsItem * parent = nullptr);
-    virtual void setDialog();
+    virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersection *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                             VContainer *data);
     static VToolPointOfIntersection *Create(const quint32 _id, const QString &pointName, const quint32 &firstPointId,
@@ -49,7 +49,7 @@ public:
                                             VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                             const Document &parse, const Source &typeCreation);
     static const QString ToolType;
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
 
     quint32 GetFirstPointId() const;
@@ -58,14 +58,14 @@ public:
     quint32 GetSecondPointId() const;
     void    SetSecondPointId(const quint32 &value);
 
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void RemoveReferens();
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void ReadToolAttributes(const QDomElement &domElement);
-    virtual void SetVisualization();
+    virtual void RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
     /** @brief firstPointId id first line point. */

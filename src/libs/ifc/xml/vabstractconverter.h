@@ -36,10 +36,10 @@ class VAbstractConverter :public VDomDocument
     Q_DECLARE_TR_FUNCTIONS(VAbstractConverter)
 public:
     VAbstractConverter(const QString &fileName);
-    virtual ~VAbstractConverter();
+    virtual ~VAbstractConverter() Q_DECL_OVERRIDE;
 
     void         Convert();
-    virtual bool SaveDocument(const QString &fileName, QString &error) const;
+    virtual bool SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
 protected:
     int     ver;

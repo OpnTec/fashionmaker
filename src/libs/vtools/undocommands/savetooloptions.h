@@ -37,11 +37,11 @@ class SaveToolOptions : public VUndoCommand
 public:
     SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, VAbstractPattern *doc, const quint32 &id,
                     QUndoCommand *parent = 0);
-    virtual ~SaveToolOptions();
-    virtual void undo();
-    virtual void redo();
-    virtual bool mergeWith(const QUndoCommand *command);
-    virtual int  id() const;
+    virtual ~SaveToolOptions() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
     QDomElement  getNewXml() const;
     quint32 getToolId() const;
 private:

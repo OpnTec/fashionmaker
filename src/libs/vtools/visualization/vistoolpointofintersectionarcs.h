@@ -37,16 +37,16 @@ class VisToolPointOfIntersectionArcs : public VisLine
     Q_OBJECT
 public:
     VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointOfIntersectionArcs();
+    virtual ~VisToolPointOfIntersectionArcs() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
-    virtual void VisualMode(const quint32 &id);
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
 
     void         setArc1Id(const quint32 &value);
     void         setArc2Id(const quint32 &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)

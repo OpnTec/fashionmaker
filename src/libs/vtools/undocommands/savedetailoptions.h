@@ -40,11 +40,11 @@ class SaveDetailOptions : public VUndoCommand
 public:
     SaveDetailOptions(const VDetail &oldDet, const VDetail &newDet, VAbstractPattern *doc, const quint32 &id,
                       QGraphicsScene *scene, QUndoCommand *parent = 0);
-    virtual ~SaveDetailOptions();
-    virtual void undo();
-    virtual void redo();
-    virtual bool mergeWith(const QUndoCommand *command);
-    virtual int  id() const;
+    virtual ~SaveDetailOptions() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
     quint32      getDetId() const;
     VDetail      getNewDet() const;
 private:

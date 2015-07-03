@@ -47,7 +47,7 @@ public:
     VContour(int height, int width);
     VContour(const VContour &contour);
     VContour &operator=(const VContour &contour);
-    virtual ~VContour();
+    ~VContour();
 
     void SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;

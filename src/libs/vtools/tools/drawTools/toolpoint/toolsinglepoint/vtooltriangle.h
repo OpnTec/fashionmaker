@@ -43,7 +43,7 @@ public:
                   const quint32 &axisP2Id,
                   const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
                   QGraphicsItem * parent = nullptr);
-    virtual void   setDialog();
+    virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolTriangle *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolTriangle *Create(const quint32 _id, const QString &pointName, const quint32 &axisP1Id,
@@ -53,7 +53,7 @@ public:
     static QPointF FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                              const QPointF &secondPoint);
     static const QString ToolType;
-    virtual int    type() const {return Type;}
+    virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};
 
     quint32 GetAxisP1Id() const;
@@ -68,14 +68,14 @@ public:
     quint32 GetSecondPointId() const;
     void    SetSecondPointId(const quint32 &value);
 
-    virtual void   ShowVisualization(bool show);
+    virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void   RemoveReferens();
-    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   SaveDialog(QDomElement &domElement);
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void   ReadToolAttributes(const QDomElement &domElement);
-    virtual void   SetVisualization();
+    virtual void   RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void   SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolTriangle)
     /** @brief axisP1Id id first axis point. */

@@ -50,7 +50,7 @@ public:
                  const QString &description = QString(), const QString &TagName = QString());
     VMeasurement(const VMeasurement &m);
     VMeasurement &operator=(const VMeasurement &m);
-    virtual ~VMeasurement();
+    virtual ~VMeasurement() Q_DECL_OVERRIDE;
 
     QString            GetGuiText() const;
     QString            TagName() const;

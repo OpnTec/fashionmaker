@@ -37,9 +37,9 @@ class DeleteDetail : public VUndoCommand
     Q_OBJECT
 public:
     DeleteDetail(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = 0);
-    virtual ~DeleteDetail();
-    virtual void undo();
-    virtual void redo();
+    virtual ~DeleteDetail() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DeleteDetail)
     QDomNode parentNode;

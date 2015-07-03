@@ -39,8 +39,8 @@ public:
                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
                            const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
                            QGraphicsItem * parent = nullptr);
-    virtual ~VToolLineIntersectAxis();
-    virtual void setDialog();
+    virtual ~VToolLineIntersectAxis() Q_DECL_OVERRIDE;
+    virtual void setDialog() Q_DECL_OVERRIDE;
 
     static VToolLineIntersectAxis *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                           VContainer *data);
@@ -54,7 +54,7 @@ public:
     static QPointF FindPoint(const QLineF &axis, const QLineF &line);
 
     static const QString ToolType;
-    virtual int       type() const {return Type;}
+    virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersectAxis)};
 
     VFormula     GetFormulaAngle() const;
@@ -66,13 +66,13 @@ public:
     quint32      GetSecondPointId() const;
     void         SetSecondPointId(const quint32 &value);
 
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void ReadToolAttributes(const QDomElement &domElement);
-    virtual void SetVisualization();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLineIntersectAxis)
     QString formulaAngle;

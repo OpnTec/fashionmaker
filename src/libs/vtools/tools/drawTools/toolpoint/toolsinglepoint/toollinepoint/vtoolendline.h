@@ -43,8 +43,8 @@ public:
                  const QString &lineColor,
                  const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
                  const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    virtual ~VToolEndLine();
-    virtual void setDialog();
+    virtual ~VToolEndLine() Q_DECL_OVERRIDE;
+    virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                 VContainer *data);
     static VToolEndLine *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
@@ -54,18 +54,18 @@ public:
                                 const Document &parse,
                                 const Source &typeCreation);
     static const QString ToolType;
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
 
     VFormula     GetFormulaAngle() const;
     void         SetFormulaAngle(const VFormula &value);
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void ReadToolAttributes(const QDomElement &domElement);
-    virtual void SetVisualization();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     QString formulaAngle;
 };

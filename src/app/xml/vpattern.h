@@ -46,32 +46,32 @@ public:
     VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
 
-    virtual void   CreateEmptyFile(const QString &tablePath);
+    virtual void   CreateEmptyFile(const QString &tablePath) Q_DECL_OVERRIDE;
 
     void           Parse(const Document &parse);
 
     void           setCurrentData();
-    virtual void   UpdateToolData(const quint32 &id, VContainer *data);
+    virtual void   UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
 
-    virtual void   IncrementReferens(quint32 id) const;
-    virtual void   DecrementReferens(quint32 id) const;
+    virtual void   IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void   DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
 
     quint32        SPointActiveDraw();
 
-    virtual bool   SaveDocument(const QString &fileName, QString &error) const;
+    virtual bool   SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
     QRectF         ActiveDrawBoundingRect() const;
 
     QString        GetAuthor() const;
     void           SetAuthor(const QString &text);
 
-    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const;
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
 
 public slots:
     void           LiteParseTree(const Document &parse);
 
 protected:
-    virtual void   customEvent(QEvent * event);
+    virtual void   customEvent(QEvent * event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VPattern)

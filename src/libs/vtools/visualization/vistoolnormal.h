@@ -36,15 +36,15 @@ class VisToolNormal : public VisLine
     Q_OBJECT
 public:
     VisToolNormal(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolNormal();
+    virtual ~VisToolNormal() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setPoint2Id(const quint32 &value);
     void         setLength(const QString &expression);
     qreal        GetAngle() const;
     void         SetAngle(const qreal &value);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
 private:
     Q_DISABLE_COPY(VisToolNormal)

@@ -38,16 +38,16 @@ class VisToolLineIntersectAxis : public VisLine
     Q_OBJECT
 public:
     VisToolLineIntersectAxis(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolLineIntersectAxis();
+    virtual ~VisToolLineIntersectAxis() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     QString      Angle() const;
     void         SetAngle(const QString &expression);
     void         setPoint2Id(const quint32 &value);
     void         setAxisPointId(const quint32 &value);
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
 private:
     Q_DISABLE_COPY(VisToolLineIntersectAxis)

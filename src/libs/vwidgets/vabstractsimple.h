@@ -38,7 +38,7 @@ class VAbstractSimple : public QObject
 public:
     VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor = nullptr,
                     QObject *parent = 0);
-    virtual ~VAbstractSimple();
+    virtual ~VAbstractSimple() Q_DECL_OVERRIDE;
 
     virtual void ChangedActivDraw(const bool &flag)=0;
 

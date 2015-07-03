@@ -36,11 +36,11 @@ class VisToolCutSplinePath : public VisPath
     Q_OBJECT
 public:
     VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolCutSplinePath();
+    virtual ~VisToolCutSplinePath() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setLength(const QString &expression);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
 protected:
     Q_DISABLE_COPY(VisToolCutSplinePath)

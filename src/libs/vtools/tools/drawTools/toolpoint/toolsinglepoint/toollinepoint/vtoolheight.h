@@ -43,7 +43,7 @@ public:
                 const QString &lineColor,
                 const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    virtual void   setDialog();
+    virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolHeight *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
                                const QString &lineColor, const quint32 &basePointId, const quint32 &p1LineId,
@@ -52,7 +52,7 @@ public:
                                const Source &typeCreation);
     static QPointF FindPoint(const QLineF &line, const QPointF &point);
     static const QString ToolType;
-    virtual int    type() const {return Type;}
+    virtual int    type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Height)};
 
     quint32 GetP1LineId() const;
@@ -61,13 +61,13 @@ public:
     quint32 GetP2LineId() const;
     void    SetP2LineId(const quint32 &value);
 
-    virtual void   ShowVisualization(bool show);
+    virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void   SaveDialog(QDomElement &domElement);
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void   ReadToolAttributes(const QDomElement &domElement);
-    virtual void   SetVisualization();
+    virtual void   contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void   SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;

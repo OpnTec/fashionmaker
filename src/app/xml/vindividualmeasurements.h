@@ -45,9 +45,9 @@ class VIndividualMeasurements:public VAbstractMeasurements
 {
 public:
     VIndividualMeasurements(VContainer *data);
-    virtual ~VIndividualMeasurements();
+    virtual ~VIndividualMeasurements() Q_DECL_OVERRIDE;
     void         setUnit(const Unit &unit);
-    virtual void Measurements();
+    virtual void Measurements() Q_DECL_OVERRIDE;
     QString      FamilyName() const;
     void         setFamilyName(const QString &text);
     QString      GivenName() const;
@@ -70,7 +70,7 @@ public:
     static QString GenderToStr(const SexType &sex);
     static SexType StrToGender(const QString &sex);
 protected:
-    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag);
+    virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VIndividualMeasurements)
 };

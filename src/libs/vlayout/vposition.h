@@ -48,7 +48,7 @@ class VPosition : public QRunnable
 public:
     VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop, bool rotate,
               int rotationIncrease, bool saveLength);
-    virtual ~VPosition(){}
+    virtual ~VPosition() Q_DECL_OVERRIDE{}
 
     quint32 getPaperIndex() const;
     void setPaperIndex(const quint32 &value);
@@ -101,7 +101,7 @@ private:
         EdgeError = 2
     };
 
-    virtual void run();
+    virtual void run() Q_DECL_OVERRIDE;
 
     void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 

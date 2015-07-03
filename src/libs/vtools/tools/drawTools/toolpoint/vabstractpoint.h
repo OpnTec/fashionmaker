@@ -37,16 +37,16 @@ class VAbstractPoint: public VDrawTool
     Q_OBJECT
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id);
-    virtual ~VAbstractPoint();
+    virtual ~VAbstractPoint() Q_DECL_OVERRIDE;
 
-    virtual QString      getTagName() const;
+    virtual QString      getTagName() const Q_DECL_OVERRIDE;
     static const QString TagName;
 
     template <typename T>
     void ShowToolVisualization(bool show);
 
 public slots:
-    virtual void ShowTool(quint32 id, bool enable);
+    virtual void ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     void         DeleteFromLabel();
 
 protected:

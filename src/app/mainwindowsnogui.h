@@ -43,7 +43,7 @@ class MainWindowsNoGUI : public QMainWindow
     Q_OBJECT
 public:
     MainWindowsNoGUI(QWidget *parent = nullptr);
-    virtual ~MainWindowsNoGUI();
+    virtual ~MainWindowsNoGUI() Q_DECL_OVERRIDE;
 
 public slots:
     void ToolLayoutSettings(bool checked);

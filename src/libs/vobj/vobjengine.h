@@ -40,18 +40,18 @@ class VObjEngine : public QPaintEngine
 {
 public:
     VObjEngine();
-    virtual ~VObjEngine();
+    virtual ~VObjEngine() Q_DECL_OVERRIDE;
 
-    virtual bool begin(QPaintDevice *pdev);
-    virtual bool end();
-    virtual void updateState(const QPaintEngineState &state);
-    virtual void drawPath(const QPainterPath &path);
-    virtual Type type() const;
-    virtual void drawPoints(const QPointF *points, int pointCount);
-    virtual void drawPoints(const QPoint *points, int pointCount);
-    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr);
-    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode);
-    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode);
+    virtual bool begin(QPaintDevice *pdev) Q_DECL_OVERRIDE;
+    virtual bool end() Q_DECL_OVERRIDE;
+    virtual void updateState(const QPaintEngineState &state) Q_DECL_OVERRIDE;
+    virtual void drawPath(const QPainterPath &path) Q_DECL_OVERRIDE;
+    virtual Type type() const Q_DECL_OVERRIDE;
+    virtual void drawPoints(const QPointF *points, int pointCount) Q_DECL_OVERRIDE;
+    virtual void drawPoints(const QPoint *points, int pointCount) Q_DECL_OVERRIDE;
+    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) Q_DECL_OVERRIDE;
+    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
+    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) Q_DECL_OVERRIDE;
 
     QSize getSize() const;
     void setSize(const QSize &value);

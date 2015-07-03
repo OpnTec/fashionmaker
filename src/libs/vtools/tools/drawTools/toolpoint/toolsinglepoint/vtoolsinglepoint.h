@@ -43,12 +43,13 @@ class VToolSinglePoint: public VAbstractPoint, public QGraphicsEllipseItem
     Q_OBJECT
 public:
     VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
-    virtual ~VToolSinglePoint();
+    virtual ~VToolSinglePoint() Q_DECL_OVERRIDE;
 
-    virtual int   type() const {return Type;}
+    virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
 
-    virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    virtual void            paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
+                                  QWidget * widget = 0) Q_DECL_OVERRIDE;
     QString                 name() const;
     void                    setName(const QString &name);
 
@@ -56,11 +57,11 @@ public:
 
 public slots:
     void                    NameChangePosition(const QPointF &pos);
-    virtual void            SetFactor(qreal factor);
-    virtual void            Disable(bool disable, const QString &namePP);
-    virtual void            EnableToolMove(bool move);
+    virtual void            SetFactor(qreal factor) Q_DECL_OVERRIDE;
+    virtual void            Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void            EnableToolMove(bool move) Q_DECL_OVERRIDE;
     void                    PointChoosed();
-    virtual void            FullUpdateFromFile();
+    virtual void            FullUpdateFromFile() Q_DECL_OVERRIDE;
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;
@@ -71,16 +72,16 @@ protected:
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
 
-    virtual void            UpdateNamePosition(quint32 id);
-    virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void            UpdateNamePosition(quint32 id) Q_DECL_OVERRIDE;
+    virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void            RefreshPointGeometry(const VPointF &point);
-    virtual void            RefreshLine(quint32 id);
-    virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void            keyReleaseEvent(QKeyEvent * event);
-    virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void            RefreshLine(quint32 id) Q_DECL_OVERRIDE;
+    virtual QVariant        itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
+    virtual void            keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
+    virtual void            contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void            SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSinglePoint)
 };

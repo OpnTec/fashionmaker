@@ -37,13 +37,13 @@ class VisPath : public Visualization, public QGraphicsPathItem
     Q_OBJECT
 public:
     VisPath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisPath();
+    virtual ~VisPath() Q_DECL_OVERRIDE;
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::Path)};
 protected:
-    virtual void InitPen();
-    virtual void AddOnScene();
+    virtual void InitPen() Q_DECL_OVERRIDE;
+    virtual void AddOnScene() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VisPath)
 };

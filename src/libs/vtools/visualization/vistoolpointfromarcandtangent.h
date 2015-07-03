@@ -37,14 +37,14 @@ class VisToolPointFromArcAndTangent : public VisLine
     Q_OBJECT
 public:
     VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointFromArcAndTangent();
+    virtual ~VisToolPointFromArcAndTangent() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setArcId(const quint32 &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromArcAndTangent)};
 private:
     Q_DISABLE_COPY(VisToolPointFromArcAndTangent)

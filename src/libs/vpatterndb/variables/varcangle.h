@@ -40,7 +40,7 @@ public:
     VArcAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
     VArcAngle(const VArcAngle &var);
     VArcAngle &operator=(const VArcAngle &var);
-    virtual ~VArcAngle();
+    virtual ~VArcAngle() Q_DECL_OVERRIDE;
 };
 
 #endif // VARCANGLE_H

@@ -36,20 +36,20 @@ class VPatternConverter : public VAbstractConverter
     Q_DECLARE_TR_FUNCTIONS(VPatternConverter)
 public:
     VPatternConverter(const QString &fileName);
-    virtual ~VPatternConverter();
+    virtual ~VPatternConverter() Q_DECL_OVERRIDE;
 
     static const QString    PatternMaxVerStr;
     static const QString    CurrentSchema;
 
 protected:
-    virtual int     MinVer() const;
-    virtual int     MaxVer() const;
+    virtual int     MinVer() const Q_DECL_OVERRIDE;
+    virtual int     MaxVer() const Q_DECL_OVERRIDE;
 
-    virtual QString MinVerStr() const;
-    virtual QString MaxVerStr() const;
+    virtual QString MinVerStr() const Q_DECL_OVERRIDE;
+    virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
 
     QString         XSDSchema(int ver) const;
-    virtual void    ApplyPatches();
+    virtual void    ApplyPatches() Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VPatternConverter)

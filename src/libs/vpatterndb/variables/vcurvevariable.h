@@ -41,9 +41,9 @@ public:
     VCurveVariable(const quint32 &id, const quint32 &parentId);
     VCurveVariable(const VCurveVariable &var);
     VCurveVariable &operator=(const VCurveVariable &var);
-    virtual ~VCurveVariable();
+    virtual ~VCurveVariable() Q_DECL_OVERRIDE;
 
-    virtual bool Filter(quint32 id);
+    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
 
     quint32      GetId() const;
     void         SetId(const quint32 &id);

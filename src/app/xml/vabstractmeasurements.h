@@ -36,7 +36,7 @@ class VAbstractMeasurements : public VDomDocument
 {
 public:
     VAbstractMeasurements(VContainer *data);
-    virtual ~VAbstractMeasurements();
+    virtual ~VAbstractMeasurements() Q_DECL_OVERRIDE;
     virtual void Measurements();
     Unit         MUnit() const;
     static const QString TagUnit;

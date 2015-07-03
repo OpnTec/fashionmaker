@@ -49,20 +49,20 @@ class DialogEditWrongFormula : public DialogTool
     Q_OBJECT
 public:
     explicit DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogEditWrongFormula();
+    virtual ~DialogEditWrongFormula() Q_DECL_OVERRIDE;
 
     QString      GetFormula() const;
     void         SetFormula(const QString &value);
     void         setCheckZero(bool value);
     void         setPostfix(const QString &value);
 public slots:
-    virtual void DialogAccepted();
-    virtual void DialogRejected();
+    virtual void DialogAccepted() Q_DECL_OVERRIDE;
+    virtual void DialogRejected() Q_DECL_OVERRIDE;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void         DeployFormulaTextEdit();
-    virtual void EvalFormula();
+    virtual void EvalFormula() Q_DECL_OVERRIDE;
     void         ValChenged(int row);
     void         SizeHeight();
     void         PutHere();
@@ -78,8 +78,8 @@ public slots:
     void         AngleLines();
     void         Increments();
 protected:
-    virtual void CheckState();
-    virtual void closeEvent(QCloseEvent *event);
+    virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;

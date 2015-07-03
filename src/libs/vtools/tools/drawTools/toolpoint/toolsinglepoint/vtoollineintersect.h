@@ -41,7 +41,7 @@ public:
     VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
                        const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
-    virtual void setDialog();
+    virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolLineIntersect *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                       VContainer *data);
     static VToolLineIntersect *Create(const quint32 _id, const quint32 &p1Line1Id, const quint32 &p2Line1Id,
@@ -50,7 +50,7 @@ public:
                                       VAbstractPattern *doc,
                                       VContainer *data, const Document &parse, const Source &typeCreation);
     static const QString ToolType;
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
     quint32 GetP1Line1() const;
@@ -65,16 +65,16 @@ public:
     quint32 GetP2Line2() const;
     void    SetP2Line2(const quint32 &value);
 
-    virtual void ShowVisualization(bool show);
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 public slots:
-    virtual void SetFactor(qreal factor);
+    virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void RemoveReferens();
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void ReadToolAttributes(const QDomElement &domElement);
-    virtual void SetVisualization();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;

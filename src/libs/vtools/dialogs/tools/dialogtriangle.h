@@ -44,7 +44,7 @@ class DialogTriangle : public DialogTool
     Q_OBJECT
 public:
     DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogTriangle();
+    virtual ~DialogTriangle() Q_DECL_OVERRIDE;
 
     quint32        GetAxisP1Id() const;
     void           SetAxisP1Id(const quint32 &value);
@@ -60,14 +60,14 @@ public:
 
     void           SetPointName(const QString &value);
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type);
-    virtual void   PointNameChanged();
+    virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void   PointNameChanged() Q_DECL_OVERRIDE;
 protected:
     virtual void   ShowVisualization();
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData();
+    virtual void   SaveData() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogTriangle)
 

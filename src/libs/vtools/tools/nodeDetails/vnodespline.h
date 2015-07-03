@@ -47,19 +47,19 @@ public:
                                const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
-    virtual void DeleteNode();
-    virtual void RestoreNode();
-    virtual int  type() const {return Type;}
+    virtual void DeleteNode() Q_DECL_OVERRIDE;
+    virtual void RestoreNode() Q_DECL_OVERRIDE;
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodeSpline)};
-    virtual QString getTagName() const;
+    virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:
-    virtual void FullUpdateFromFile ();
+    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE;
 protected:
-    virtual void AddToFile ();
-    virtual void RefreshDataInFile();
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event );
+    virtual void AddToFile () Q_DECL_OVERRIDE;
+    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
 private:
     void         RefreshGeometry ();
 };

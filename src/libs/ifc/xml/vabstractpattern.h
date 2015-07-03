@@ -46,7 +46,7 @@ class VAbstractPattern : public QObject, public VDomDocument
     Q_OBJECT
 public:
     VAbstractPattern(QObject *parent = nullptr);
-    virtual ~VAbstractPattern();
+    virtual ~VAbstractPattern() Q_DECL_OVERRIDE;
 
     virtual void   CreateEmptyFile(const QString &tablePath)=0;
 

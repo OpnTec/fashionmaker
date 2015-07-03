@@ -37,15 +37,15 @@ class VisToolPointFromCircleAndTangent : public VisLine
     Q_OBJECT
 public:
     VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolPointFromCircleAndTangent();
+    virtual ~VisToolPointFromCircleAndTangent() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
     void         setPoint2Id(const quint32 &value);
     void         setCRadius(const QString &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
 private:
     Q_DISABLE_COPY(VisToolPointFromCircleAndTangent)

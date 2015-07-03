@@ -44,7 +44,7 @@ class DialogCutSplinePath : public DialogTool
     Q_OBJECT
 public:
     DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual ~DialogCutSplinePath();
+    virtual ~DialogCutSplinePath() Q_DECL_OVERRIDE;
 
     void         SetPointName(const QString &value);
 
@@ -59,19 +59,19 @@ public:
 
     void         SetChildrenId(const quint32 &ch1, const quint32 &ch2);
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type);
+    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void         DeployFormulaTextEdit();
     void         FXLength();
 protected:
-    virtual void ShowVisualization();
+    virtual void ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData();
-    virtual void closeEvent(QCloseEvent *event);
+    virtual void SaveData() Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogCutSplinePath)
 

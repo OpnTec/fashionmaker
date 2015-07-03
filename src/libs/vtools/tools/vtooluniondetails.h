@@ -77,17 +77,17 @@ public:
                               const qreal &angle = 0);
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                  const qreal &angle);
-    virtual QString getTagName() const;
-    virtual void ShowVisualization(bool show);
+    virtual QString getTagName() const Q_DECL_OVERRIDE;
+    virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
-    virtual void FullUpdateFromFile (){}
+    virtual void FullUpdateFromFile () Q_DECL_OVERRIDE {}
 protected:
-    virtual void AddToFile();
-    virtual void RefreshDataInFile();
-    virtual void SetVisualization() {}
+    virtual void AddToFile() Q_DECL_OVERRIDE;
+    virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VToolUnionDetails)
     /** @brief d1 first detail. */

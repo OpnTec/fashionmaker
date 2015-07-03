@@ -60,7 +60,7 @@ public:
     void          SetColor(const QString &value);
 
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type);
+    virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -77,13 +77,13 @@ public slots:
     void          FXLength();
 
 protected:
-    virtual void  CheckState();
-    virtual void  ShowVisualization();
+    virtual void  CheckState() Q_DECL_OVERRIDE;
+    virtual void  ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData();
-    virtual void  closeEvent(QCloseEvent *event);
+    virtual void  SaveData() Q_DECL_OVERRIDE;
+    virtual void  closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(DialogArcWithLength)

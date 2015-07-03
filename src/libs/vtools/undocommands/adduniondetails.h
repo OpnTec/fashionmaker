@@ -36,9 +36,9 @@ class AddUnionDetails : public VUndoCommand
     Q_OBJECT
 public:
     AddUnionDetails(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
-    virtual ~AddUnionDetails();
-    virtual void undo();
-    virtual void redo();
+    virtual ~AddUnionDetails() Q_DECL_OVERRIDE;
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(AddUnionDetails)
 };

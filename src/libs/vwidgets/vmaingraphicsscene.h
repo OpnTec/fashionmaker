@@ -55,8 +55,8 @@ public slots:
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
 protected:
-    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief mouseMove send new mouse position.

@@ -50,7 +50,7 @@ public:
 
     static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                              const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
-    virtual void   setDialog();
+    virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolTrueDarts* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
     static VToolTrueDarts* Create(quint32 _id,
@@ -65,10 +65,10 @@ public:
                                   VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
                                   const Document &parse, const Source &typeCreation);
     static const QString ToolType;
-    virtual int    type() const {return Type;}
+    virtual int    type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::TrueDarts)};
 
-    virtual void   ShowVisualization(bool show);
+    virtual void   ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
     quint32 GetBaseLineP1Id() const;
     void    SetBaseLineP1Id(const quint32 &value);
@@ -86,12 +86,12 @@ public:
     void    SetDartP3Id(const quint32 &value);
 
 protected:
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void RemoveReferens();
-    virtual void SaveDialog(QDomElement &domElement);
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void ReadToolAttributes(const QDomElement &domElement);
-    virtual void SetVisualization();
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void SetVisualization() Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VToolTrueDarts)

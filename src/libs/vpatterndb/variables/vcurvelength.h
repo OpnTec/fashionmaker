@@ -41,7 +41,7 @@ public:
     VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, Unit patternUnit);
     VCurveLength(const VCurveLength &var);
     VCurveLength &operator=(const VCurveLength &var);
-    virtual ~VCurveLength();
+    virtual ~VCurveLength() Q_DECL_OVERRIDE;
 };
 
 #endif // VCURVELENGTH_H

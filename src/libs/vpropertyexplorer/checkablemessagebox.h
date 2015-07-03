@@ -42,7 +42,7 @@ class Q_DECL_EXPORT CheckableMessageBox : public QDialog
 
 public:
     explicit CheckableMessageBox(QWidget *parent);
-    virtual ~CheckableMessageBox();
+    virtual ~CheckableMessageBox() Q_DECL_OVERRIDE;
 
     static QDialogButtonBox::StandardButton
         question(QWidget *parent,

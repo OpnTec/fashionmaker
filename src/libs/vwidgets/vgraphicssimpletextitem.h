@@ -42,11 +42,11 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 public:
     VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
     VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
-    virtual ~VGraphicsSimpleTextItem();
+    virtual ~VGraphicsSimpleTextItem() Q_DECL_OVERRIDE;
 
     qint32       FontSize()const;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
-    virtual int  type() const {return Type;}
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) Q_DECL_OVERRIDE;
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
     void setEnabled(bool enabled);
@@ -65,12 +65,12 @@ signals:
     void         PointChoosed();
 protected:
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event );
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event );
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event );
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event );
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event );
-    virtual void keyReleaseEvent ( QKeyEvent * event );
+    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
+    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
+    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) Q_DECL_OVERRIDE;
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
 private:
     /** @brief fontSize label font size. */
     qint32       fontSize;

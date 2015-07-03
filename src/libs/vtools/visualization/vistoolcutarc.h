@@ -36,11 +36,11 @@ class VisToolCutArc : public VisPath
     Q_OBJECT
 public:
     VisToolCutArc(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolCutArc();
+    virtual ~VisToolCutArc() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setLength(const QString &expression);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
 protected:
     Q_DISABLE_COPY(VisToolCutArc)

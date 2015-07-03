@@ -51,7 +51,7 @@ public:
 protected:
     // cppcheck-suppress unusedFunction
     virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation);
+                               const QUrl &identifier, const QSourceLocation &sourceLocation) Q_DECL_OVERRIDE;
 private:
     QtMsgType       m_messageType;
     QString         m_description;

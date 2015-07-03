@@ -42,16 +42,16 @@ class VToolArc :public VAbstractSpline
 public:
     VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
              QGraphicsItem * parent = nullptr);
-    virtual void     setDialog();
+    virtual void     setDialog() Q_DECL_OVERRIDE;
     static VToolArc* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolArc* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
                             const QString &color, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
                             const Document &parse, const Source &typeCreation);
     static const QString TagName;
     static const QString ToolType;
-    virtual int      type() const {return Type;}
+    virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Arc)};
-    virtual QString  getTagName() const;
+    virtual QString  getTagName() const Q_DECL_OVERRIDE;
 
     quint32          getCenter() const;
     void             setCenter(const quint32 &value);
@@ -65,13 +65,13 @@ public:
     VFormula         GetFormulaF2() const;
     void             SetFormulaF2(const VFormula &value);
 
-    virtual void     ShowVisualization(bool show);
+    virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
-    virtual void     RemoveReferens();
-    virtual void     SaveDialog(QDomElement &domElement);
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual void     SetVisualization();
+    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     RemoveReferens() Q_DECL_OVERRIDE;
+    virtual void     SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
+    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+    virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
     void             RefreshGeometry();
 };

@@ -30,6 +30,7 @@
 #define VINTERNALVARIABLE_P_H
 
 #include <QSharedData>
+#include "../vmisc/def.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push

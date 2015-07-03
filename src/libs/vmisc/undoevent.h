@@ -38,7 +38,7 @@ class UndoEvent : public QEvent
 {
 public:
     UndoEvent();
-    virtual ~UndoEvent();
+    virtual ~UndoEvent() Q_DECL_OVERRIDE;
 };
 
 #endif // UNDOEVENT_H

@@ -57,7 +57,7 @@ public:
      * @param splPath spline path.
      */
     VSplinePath(const VSplinePath& splPath);
-    virtual ~VSplinePath();
+    virtual ~VSplinePath() Q_DECL_OVERRIDE;
     /**
      * @brief append add point in the end of list points.
      * @param point new point.
@@ -176,8 +176,8 @@ public:
 
     int Segment(const QPointF &p) const;
 
-    virtual qreal GetStartAngle () const;
-    virtual qreal GetEndAngle () const;
+    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
+    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

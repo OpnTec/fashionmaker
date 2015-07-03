@@ -43,7 +43,7 @@ public:
     VVariable(const QString &name, const qreal &base, const QString &description = QString());
     VVariable(const VVariable &var);
     VVariable &operator=(const VVariable &var);
-    virtual ~VVariable();
+    virtual ~VVariable() Q_DECL_OVERRIDE;
 
     qreal   GetBase() const;
     void    SetBase(const qreal &value);
@@ -59,7 +59,7 @@ public:
 
     void    SetValue(const qreal &size, const qreal &height, Unit patternUnit);
 
-    virtual bool IsNotUsed() const;
+    virtual bool IsNotUsed() const Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VVariableData> d;
 };

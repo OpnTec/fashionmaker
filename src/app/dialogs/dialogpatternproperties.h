@@ -46,7 +46,7 @@ class DialogPatternProperties : public QDialog
     Q_OBJECT
 public:
     DialogPatternProperties(VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogPatternProperties();
+    virtual ~DialogPatternProperties() Q_DECL_OVERRIDE;
 signals:
     void         UpdateGradation();
 public slots:

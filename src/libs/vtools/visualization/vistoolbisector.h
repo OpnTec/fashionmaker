@@ -36,13 +36,13 @@ class VisToolBisector :public VisLine
     Q_OBJECT
 public:
     VisToolBisector(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolBisector();
+    virtual ~VisToolBisector() Q_DECL_OVERRIDE;
 
-    virtual void RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void         setPoint2Id(const quint32 &value);
     void         setPoint3Id(const quint32 &value);
     void         setLength(const QString &expression);
-    virtual int  type() const {return Type;}
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
 private:
     Q_DISABLE_COPY(VisToolBisector)

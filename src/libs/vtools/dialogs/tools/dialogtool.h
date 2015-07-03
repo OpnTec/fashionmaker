@@ -63,7 +63,7 @@ class DialogTool : public QDialog
     Q_OBJECT
 public:
     DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
-    virtual          ~DialogTool();
+    virtual          ~DialogTool() Q_DECL_OVERRIDE;
 
     VAbstractTool*   GetAssociatedTool();
     void             SetAssociatedTool(VAbstractTool* tool);
@@ -114,7 +114,7 @@ public slots:
     void             ArrowRightDown();
     virtual void     EvalFormula();
 
-    virtual void     PointNameChanged(){}
+    virtual void     PointNameChanged() {}
 protected:
     Q_DISABLE_COPY(DialogTool)
 
@@ -181,8 +181,8 @@ protected:
 
     Visualization   *vis;
 
-    virtual void     closeEvent ( QCloseEvent * event );
-    virtual void     showEvent( QShowEvent *event );
+    virtual void     closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
 
     void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
                                         const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
@@ -308,11 +308,11 @@ protected:
     }
 
     void             ChangeColor(QWidget *widget, const QColor &color);
-    virtual void     ShowVisualization(){}
+    virtual void     ShowVisualization() {}
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void     SaveData(){}
+    virtual void     SaveData() {}
     void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
     bool             eventFilter(QObject *object, QEvent *event);
     void             FixateSize();
