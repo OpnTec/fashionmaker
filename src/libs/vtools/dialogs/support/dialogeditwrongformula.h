@@ -48,7 +48,7 @@ class DialogEditWrongFormula : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogEditWrongFormula() Q_DECL_OVERRIDE;
 
     QString      GetFormula() const;
@@ -98,6 +98,8 @@ private:
 
     template <class key, class val>
     void ShowVariable(const QMap<key, val> var);
+
+    void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };
 
 

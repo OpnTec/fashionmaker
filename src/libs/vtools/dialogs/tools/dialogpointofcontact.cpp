@@ -119,6 +119,7 @@ void DialogPointOfContact::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(getRadius());
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         setRadius(dialog->GetFormula());

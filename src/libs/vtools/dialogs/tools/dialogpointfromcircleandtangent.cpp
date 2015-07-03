@@ -251,6 +251,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetCircleRadius());
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetCircleRadius(dialog->GetFormula());

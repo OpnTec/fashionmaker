@@ -305,6 +305,7 @@ void DialogArc::FXRadius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetRadius(dialog->GetFormula());
@@ -318,6 +319,7 @@ void DialogArc::FXF1()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first angle"));
     dialog->SetFormula(GetF1());
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         SetF1(dialog->GetFormula());
@@ -331,6 +333,7 @@ void DialogArc::FXF2()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second angle"));
     dialog->SetFormula(GetF2());
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         SetF2(dialog->GetFormula());

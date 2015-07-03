@@ -124,89 +124,81 @@ void DialogEditWrongFormula::ValChenged(int row)
     {
         if (item->text()==data->HeightName())
         {
-            const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->height()).arg(tr("Height"));
-            ui->labelDescription->setText(desc);
+            SetDescription(item->text(), data->height(), VDomDocument::UnitsToStr(qApp->patternUnit(), true),
+                           tr("Height"));
+            return;
         }
+
         if (item->text()==data->SizeName())
         {
-            const QString desc = QString("%1(%2) - %3").arg(item->text()).arg(data->size()).arg(tr("Size"));
-            ui->labelDescription->setText(desc);
+            SetDescription(item->text(), data->size(), VDomDocument::UnitsToStr(qApp->patternUnit(), true),
+                           tr("Size"));
+            return;
         }
-        return;
+
     }
     if (ui->radioButtonStandardTable->isChecked())
     {
         const QString name = qApp->TrVars()->VarFromUser(item->text());
         const QSharedPointer<VMeasurement> stable = data->GetVariable<VMeasurement>(name);
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                                   .arg(data->GetTableValue(name, qApp->patternType()))
-                                                   .arg(stable->GetGuiText());
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(), data->GetTableValue(name, qApp->patternType()),
+                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), stable->GetGuiText());
         return;
     }
     if (ui->radioButtonIncrements->isChecked())
     {
         const QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(item->text());
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                                                   .arg(data->GetTableValue(item->text(), qApp->patternType()))
-                                                   .arg(incr->GetDescription());
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(), data->GetTableValue(item->text(), qApp->patternType()),
+                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), incr->GetDescription());
         return;
     }
     if (ui->radioButtonLengthLine->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                            .arg(*data->GetVariable<VLengthLine>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                            .arg(tr("Line length"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VLengthLine>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
         return;
     }
     if (ui->radioButtonLengthArc->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                             .arg(*data->GetVariable<VArcLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                             .arg(tr("Arc length"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VArcLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Arc length"));
         return;
     }
     if (ui->radioButtonLengthSpline->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                          .arg(*data->GetVariable<VSplineLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                          .arg(tr("Curve length"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VSplineLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
         return;
     }
     if (ui->radioButtonAngleLine->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                             .arg(*data->GetVariable<VLineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                             .arg(tr("Line Angle"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VLineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       degreeSymbol, tr("Line Angle"));
         return;
     }
     if (ui->radioButtonRadiusesArcs->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                             .arg(*data->GetVariable<VArcRadius>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                             .arg(tr("Arc radius"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VArcRadius>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
         return;
     }
     if (ui->radioButtonAnglesArcs->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                              .arg(*data->GetVariable<VArcAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                              .arg(tr("Arc angle"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VArcAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       degreeSymbol, tr("Arc angle"));
         return;
     }
     if (ui->radioButtonAnglesCurves->isChecked())
     {
-        const QString desc = QString("%1(%2) - %3").arg(item->text())
-                           .arg(*data->GetVariable<VSplineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue())
-                           .arg(tr("Curve angle"));
-        ui->labelDescription->setText(desc);
+        SetDescription(item->text(),
+                       *data->GetVariable<VSplineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       degreeSymbol, tr("Curve angle"));
         return;
     }
 }
@@ -415,6 +407,14 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
     connect(ui->radioButtonAnglesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesArcs);
     connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesCurves);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, const QString &unit,
+                                            const QString &description)
+{
+    const QString desc = QString("%1(%2 %3) - %4").arg(name).arg(value).arg(unit).arg(description);
+    ui->labelDescription->setText(desc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

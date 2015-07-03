@@ -329,6 +329,7 @@ void DialogLineIntersectAxis::FXAngle()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         SetAngle(dialog->GetFormula());

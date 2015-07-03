@@ -306,6 +306,7 @@ void DialogPointOfIntersectionCircles::FXCircle1Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first circle radius"));
     dialog->SetFormula(GetFirstCircleRadius());
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFirstCircleRadius(dialog->GetFormula());
@@ -319,6 +320,7 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second circle radius"));
     dialog->SetFormula(GetSecondCircleRadius());
+    dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
         SetSecondCircleRadius(dialog->GetFormula());
