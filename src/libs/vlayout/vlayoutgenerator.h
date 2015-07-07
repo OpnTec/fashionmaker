@@ -105,8 +105,6 @@ private:
     bool autoCrop;
     bool saveLength;
     bool unitePages;
-
-    void CheckDetailsSize();
 };
 
 #endif // VLAYOUTGENERATOR_H

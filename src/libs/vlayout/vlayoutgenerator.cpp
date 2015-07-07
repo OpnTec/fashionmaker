@@ -92,7 +92,6 @@ void VLayoutGenerator::Generate()
 
     if (bank->Prepare())
     {
-        CheckDetailsSize();
         while (bank->AllDetailsCount() > 0)
         {
             if (stopGeneration)
@@ -254,18 +253,6 @@ bool VLayoutGenerator::GetRotate() const
 void VLayoutGenerator::SetRotate(bool value)
 {
     rotate = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::CheckDetailsSize()
-{
-    const QRectF rec = bank->GetBiggestBoundingRect();
-    if (rec.width() > paperWidth || rec.height() > paperHeight)
-    {
-        state = LayoutErrors::PaperSizeError;
-        emit Error(state);
-        stopGeneration = true;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

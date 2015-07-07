@@ -35,7 +35,6 @@ enum class LayoutErrors : char
 {
     NoError,
     PrepareLayoutError,
-    PaperSizeError,
     ProcessStoped,
     EmptyPaperError
 };

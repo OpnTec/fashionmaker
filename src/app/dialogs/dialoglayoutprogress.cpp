@@ -96,10 +96,6 @@ void DialogLayoutProgress::Error(const LayoutErrors &state)
             text = tr("Couldn't prepare data for creation layout");
             QMessageBox::critical(this, tr("Critical error"), text, QMessageBox::Ok, QMessageBox::Ok);
             break;
-        case LayoutErrors::PaperSizeError:
-            text = tr("Wrong paper size");
-            QMessageBox::critical(this, tr("Critical error"), text, QMessageBox::Ok, QMessageBox::Ok);
-            break;
         case LayoutErrors::ProcessStoped:
             break;
         case LayoutErrors::EmptyPaperError:
