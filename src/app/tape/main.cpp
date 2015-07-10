@@ -27,13 +27,35 @@
  *************************************************************************/
 
 #include "tmainwindow.h"
-#include <QApplication>
+#include "mapplication.h"
+
+#include <QMessageBox> // For QT_REQUIRE_VERSION
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    TMainWindow w;
-    w.show();
+    Q_INIT_RESOURCE(icon);
 
-    return a.exec();
+    QT_REQUIRE_VERSION(argc, argv, "5.0.0");
+
+    MApplication app(argc, argv);
+    if (not app.IsTheOnly())
+    {
+        return 0;
+    }
+
+    QStringList args = QCoreApplication::arguments();
+    if (args.count() > 1)
+    {
+        args.removeFirst();
+        for (int i = 0; i < args.size(); ++i)
+        {
+            app.NewMainWindow();
+            app.MainWindow()->LoadFile(args.at(i));
+        }
+    }
+    else
+    {
+        app.NewMainWindow();
+    }
+    return app.exec();
 }

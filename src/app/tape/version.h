@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tmainwindow.cpp
+ **  @file   version.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 7, 2015
+ **  @date   November 15, 2013
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2013-2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,25 +26,13 @@
  **
  *************************************************************************/
 
-#include "tmainwindow.h"
-#include "ui_tmainwindow.h"
+#ifndef VERSION_H
+#define VERSION_H
 
-//---------------------------------------------------------------------------------------------------------------------
-TMainWindow::TMainWindow(QWidget *parent)
-    :QMainWindow(parent),
-      ui(new Ui::TMainWindow)
-{
-    ui->setupUi(this);
-}
+#include "../../libs/vmisc/projectversion.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-TMainWindow::~TMainWindow()
-{
-    delete ui;
-}
+#define VER_INTERNALNAME_STR        "Tape"
+#define VER_ORIGINALFILENAME_STR    "tape.exe"
+#define VER_PRODUCTNAME_STR         "Tape"
 
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::LoadFile(const QString &path)
-{
-
-}
+#endif // VERSION_H

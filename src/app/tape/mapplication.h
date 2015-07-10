@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   tmainwindow.cpp
+ **  @file   mapplication.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 7, 2015
+ **  @date   8 7, 2015
  **
  **  @brief
  **  @copyright
@@ -26,25 +26,45 @@
  **
  *************************************************************************/
 
-#include "tmainwindow.h"
-#include "ui_tmainwindow.h"
+#ifndef MAPPLICATION_H
+#define MAPPLICATION_H
 
-//---------------------------------------------------------------------------------------------------------------------
-TMainWindow::TMainWindow(QWidget *parent)
-    :QMainWindow(parent),
-      ui(new Ui::TMainWindow)
+#include <QApplication>
+
+class TMainWindow;
+class QLocalServer;
+
+class MApplication : public QApplication
 {
-    ui->setupUi(this);
-}
+    Q_OBJECT
 
-//---------------------------------------------------------------------------------------------------------------------
-TMainWindow::~TMainWindow()
-{
-    delete ui;
-}
+public:
+    MApplication(int &argc, char **argv);
+    virtual ~MApplication() Q_DECL_OVERRIDE;
 
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::LoadFile(const QString &path)
-{
+    static MApplication *instance();
 
-}
+    bool IsTheOnly() const;
+    TMainWindow *MainWindow();
+    QList<TMainWindow*> MainWindows();
+
+#if defined(Q_WS_MAC)
+    bool event(QEvent *event);
+#endif
+
+public slots:
+    TMainWindow *NewMainWindow();
+
+private slots:
+    void OpenFile(const QString &path);
+    void NewLocalSocketConnection();
+
+private:
+    Q_DISABLE_COPY(MApplication)
+    QList<QPointer<TMainWindow> > mainWindows;
+    QLocalServer *localServer;
+
+    void Clean();
+};
+
+#endif // MAPPLICATION_H

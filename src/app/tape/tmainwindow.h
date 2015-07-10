@@ -44,6 +44,9 @@ public:
     explicit TMainWindow(QWidget *parent = 0);
     virtual ~TMainWindow() Q_DECL_OVERRIDE;
 
+public slots:
+    void LoadFile(const QString &path);
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

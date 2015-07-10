@@ -8,7 +8,8 @@ SOURCES += \
     $$PWD/backport/qcommandlineoption.cpp \
     $$PWD/backport/qcommandlineparser.cpp \
     $$PWD/vsettings.cpp \
-    $$PWD/vabstractapplication.cpp
+    $$PWD/vabstractapplication.cpp \
+    projectversion.cpp
 
 HEADERS += \
     $$PWD/stable.h \
@@ -19,4 +20,5 @@ HEADERS += \
     $$PWD/backport/qcommandlineoption.h \
     $$PWD/backport/qcommandlineparser.h \
     $$PWD/vsettings.h \
-    $$PWD/vabstractapplication.h
+    $$PWD/vabstractapplication.h \
+    projectversion.h

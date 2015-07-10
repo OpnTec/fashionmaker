@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core gui widgets
+QT       += core gui widgets network
 
 # Name of binary file
 TARGET = tape
@@ -42,6 +42,11 @@ UI_DIR = uic
 
 # Suport subdirectories. Just better project code tree.
 include(tape.pri)
+
+# Compilation will fail without this files after we added them to this section.
+OTHER_FILES += \
+    share/resources/tape.rc \ # For Windows system.
+    share/resources/icon/64x64/logo.ico # Tape's logo.
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 macx {
@@ -91,10 +96,6 @@ CONFIG(debug, debug|release){
         }
     }
 
-    #Calculate latest tag distance and build revision only in release mode. Change number each time requare
-    #recompilation precompiled headers file.
-    DEFINES += "LATEST_TAG_DISTANCE=0"
-    DEFINES += "BUILD_REVISION=\\\"unknown\\\""
 }else{
     # Release mode
     DEFINES += V_NO_ASSERT
@@ -113,33 +114,28 @@ CONFIG(debug, debug|release){
             QMAKE_LFLAGS_RELEASE =
         }
     }
-
-    macx{
-        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
-    }else {
-        HG = hg # All other platforms all OK.
-    }
-    #latest tag distance number for using in version
-    HG_DISTANCE=$$system($${HG} log -r. --template '{latesttagdistance}')
-    isEmpty(HG_DISTANCE){
-        HG_DISTANCE = 0 # if we can't find local revision left 0.
-    }
-    message("Latest tag distance:" $${HG_DISTANCE})
-    DEFINES += "LATEST_TAG_DISTANCE=$${HG_DISTANCE}" # Make available latest tag distance number in sources.
-
-    #build revision number for using in version
-    unix {
-        HG_HESH=$$system("$${HG} log -r. --template '{node|short}'")
-    } else {
-        # Use escape character before "|" on Windows
-        HG_HESH=$$system($${HG} log -r. --template "{node^|short}")
-    }
-    isEmpty(HG_HESH){
-        HG_HESH = "unknown" # if we can't find build revision left unknown.
-    }
-    message("Build revision:" $${HG_HESH})
-    DEFINES += "BUILD_REVISION=\\\"$${HG_HESH}\\\"" # Make available build revision number in sources.
 }
+
+# Path to recource file.
+win32:RC_FILE = share/resources/tape.rc
+
+#VMisc static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vmisc/$${DESTDIR}/ -lvmisc
+
+INCLUDEPATH += $$PWD/../../libs/vmisc
+DEPENDPATH += $$PWD/../../libs/vmisc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/vmisc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/libvmisc.a
+
+#VWidgets static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
+
+INCLUDEPATH += $$PWD/../../libs/vwidgets
+DEPENDPATH += $$PWD/../../libs/vwidgets
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
 
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing
@@ -165,3 +161,6 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         }
     }
 }
+
+RESOURCES += \
+    share/resources/icon.qrc
