@@ -29,8 +29,8 @@
 #ifndef VABSTRACTMEASUREMENTS_H
 #define VABSTRACTMEASUREMENTS_H
 
-#include "../libs/ifc/xml/vdomdocument.h"
-#include "../libs/vpatterndb/vcontainer.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vpatterndb/vcontainer.h"
 
 class VAbstractMeasurements : public VDomDocument
 {

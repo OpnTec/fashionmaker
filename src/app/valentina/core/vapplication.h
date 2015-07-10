@@ -29,10 +29,10 @@
 #ifndef VAPPLICATION_H
 #define VAPPLICATION_H
 
-#include "../libs/vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../options.h"
-#include "../libs/vwidgets/vmaingraphicsview.h"
-#include "../libs/vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "vsettings.h"
 
 class VApplication;// use in define

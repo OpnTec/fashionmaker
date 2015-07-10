@@ -29,9 +29,9 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-#include "../libs/ifc/ifcdef.h"
-#include "../libs/vgeometry/vgeometrydef.h"
-#include "../libs/qmuparser/qmudef.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../qmuparser/qmudef.h"
 #include "../vmisc/def.h"
 
 #ifdef Q_OS_WIN32

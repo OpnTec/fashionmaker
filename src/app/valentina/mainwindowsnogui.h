@@ -31,8 +31,8 @@
 
 #include <QMainWindow>
 
-#include "../libs/vpatterndb/vdetail.h"
-#include "../libs/vlayout/vlayoutdetail.h"
+#include "../vpatterndb/vdetail.h"
+#include "../vlayout/vlayoutdetail.h"
 #include "xml/vpattern.h"
 
 class QGraphicsScene;

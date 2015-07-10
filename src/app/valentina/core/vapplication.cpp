@@ -27,12 +27,12 @@
  *************************************************************************/
 
 #include "vapplication.h"
-#include "../libs/ifc/exception/vexceptionobjecterror.h"
-#include "../libs/ifc/exception/vexceptionbadid.h"
-#include "../libs/ifc/exception/vexceptionconversionerror.h"
-#include "../libs/ifc/exception/vexceptionemptyparameter.h"
-#include "../libs/ifc/exception/vexceptionwrongid.h"
-#include "../libs/vwidgets/vmaingraphicsview.h"
+#include "..//ifc/exception/vexceptionobjecterror.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../ifc/exception/vexceptionconversionerror.h"
+#include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/exception/vexceptionwrongid.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
 #include "../vmisc/logging.h"
 

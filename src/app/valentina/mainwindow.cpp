@@ -28,7 +28,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "../libs/vgeometry/vspline.h"
+#include "../vgeometry/vspline.h"
 #include "exception/vexceptionobjecterror.h"
 #include "exception/vexceptionconversionerror.h"
 #include "exception/vexceptionemptyparameter.h"
@@ -38,12 +38,12 @@
 #include "xml/vstandardmeasurements.h"
 #include "xml/vindividualmeasurements.h"
 #include "core/vapplication.h"
-#include "../libs/vmisc/undoevent.h"
-#include "../libs/vmisc/vsettings.h"
+#include "../vmisc/undoevent.h"
+#include "../vmisc/vsettings.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
-#include "../libs/ifc/xml/vpatternconverter.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/logging.h"
 
 #include <QInputDialog>

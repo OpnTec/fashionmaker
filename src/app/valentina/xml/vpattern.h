@@ -29,9 +29,9 @@
 #ifndef VPATTERN_H
 #define VPATTERN_H
 
-#include "../libs/ifc/xml/vabstractpattern.h"
-#include "../libs/ifc/xml/vtoolrecord.h"
-#include "../libs/vpatterndb/vcontainer.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vtoolrecord.h"
+#include "../vpatterndb/vcontainer.h"
 
 class VDataTool;
 class VMainGraphicsScene;
