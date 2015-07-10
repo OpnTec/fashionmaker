@@ -8,18 +8,18 @@
 
 TEMPLATE = app
 DEPENDPATH +=  \
-            ../src/app \
+            ../src/app/valentina \
             ../src/libs/qmuparser \
             ../src/libs/vpropertyexplorer \
             ../src/libs/ifc \
             ../src/libs/vobj \
             ../src/libs/vlayout \
-			../src/libs/vgeometry \
-			../src/libs/vpatterndb \
-			../src/libs/vmisc \
-			../src/libs/vtools
+            ../src/libs/vgeometry \
+            ../src/libs/vpatterndb \
+            ../src/libs/vmisc \
+            ../src/libs/vtools
 
-include(../src/app/app.pri)
+include(../src/app/valentina/valentina.pri)
 include(../src/libs/qmuparser/qmuparser.pri)
 include(../src/libs/vpropertyexplorer/vpropertyexplorer.pri)
 include(../src/libs/ifc/ifc.pri)
