@@ -35,6 +35,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       ui(new Ui::TMainWindow)
 {
     ui->setupUi(this);
+
+    ui->tabWidget->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
