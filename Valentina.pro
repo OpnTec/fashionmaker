@@ -1,4 +1,4 @@
-include(Valentina.pri)
+include(common.pri)
 
 #Check if Qt version >= 5.0.0
 !minQtVersion(5, 0, 0) {

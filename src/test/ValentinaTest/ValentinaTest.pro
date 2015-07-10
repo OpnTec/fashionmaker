@@ -9,7 +9,7 @@ QT       += testlib gui printsupport
 TARGET = ValentinaTests
 
 # File with common stuff for whole project
-include(../../../Valentina.pri)
+include(../../../common.pri)
 
 # CONFIG += testcase adds a  'make check' which is great. But by default it also
 # adds a 'make install' that installs the test cases, which we do not want.
@@ -54,10 +54,10 @@ HEADERS += \
     tst_varc.h \
     stable.h
 
-# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+# Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
+# Set precompiled headers. Function set_PCH() defined in common.pri.
 $$set_PCH()
 
 CONFIG(debug, debug|release){
@@ -70,7 +70,7 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${UI_DIR}" \
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
@@ -88,11 +88,11 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${UI_DIR}" \
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     } else {
         *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     }
 }else{

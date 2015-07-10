@@ -7,7 +7,7 @@
 # Compilation main binary file
 
 # File with common stuff for whole project
-include(../../../Valentina.pri)
+include(../../../common.pri)
 
 # Here we don't see "network" library, but, i think, "printsupport" depend on this library, so we still need this
 # library in installer.
@@ -61,7 +61,7 @@ OTHER_FILES += \
     share/resources/valentina.rc \ # For Windows system.
     share/resources/icon/64x64/icon64x64.ico # Valentina's logo.
 
-# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+# Set using ccache. Function enable_ccache() defined in common.pri.
 macx {
     CONFIG(debug, debug|release){
         $$enable_ccache()# Use only in debug mode on Mac
@@ -70,7 +70,7 @@ macx {
     $$enable_ccache()
 }
 
-# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
+# Set precompiled headers. Function set_PCH() defined in common.pri.
 $$set_PCH()
 
 CONFIG(debug, debug|release){
@@ -84,7 +84,7 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
                 -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-                $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
@@ -103,7 +103,7 @@ CONFIG(debug, debug|release){
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
             -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-            $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
         # want them in global list. Compromise decision delete them from local list.
@@ -113,7 +113,7 @@ CONFIG(debug, debug|release){
         }
     } else {
         *-g++{
-        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     }
 

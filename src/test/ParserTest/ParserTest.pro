@@ -7,7 +7,7 @@
 # Build QMuParser tests.
 
 # File with common stuff for whole project
-include(../../../Valentina.pri)
+include(../../../common.pri)
 
 # We use many core functions.
 QT       += core
@@ -40,10 +40,10 @@ SOURCES += \
     main.cpp \
     stable.cpp
 
-# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+# Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
+# Set precompiled headers. Function set_PCH() defined in common.pri.
 $$set_PCH()
 
 CONFIG(debug, debug|release){
@@ -52,7 +52,7 @@ CONFIG(debug, debug|release){
         #Turn on compilers warnings.
         *-g++{
             QMAKE_CXXFLAGS += \
-                $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
@@ -66,7 +66,7 @@ CONFIG(debug, debug|release){
         }
         clang*{
         QMAKE_CXXFLAGS += \
-            $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
         # want them in global list. Compromise decision delete them from local list.
@@ -75,7 +75,7 @@ CONFIG(debug, debug|release){
         }
     } else {
         *-g++{
-        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+        QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     }
 
