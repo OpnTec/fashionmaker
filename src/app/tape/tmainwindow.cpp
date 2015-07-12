@@ -29,6 +29,7 @@
 #include "tmainwindow.h"
 #include "ui_tmainwindow.h"
 #include "mapplication.h"
+#include "dialogs/dialogabouttape.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
@@ -108,7 +109,9 @@ void TMainWindow::ShowWindow()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AboutApplication()
 {
-
+    DialogAboutTape * aboutDialog = new DialogAboutTape(this);
+    aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    aboutDialog->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
