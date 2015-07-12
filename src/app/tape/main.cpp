@@ -34,6 +34,7 @@
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(tapeicon);
+    Q_INIT_RESOURCE(theme);
 
     QT_REQUIRE_VERSION(argc, argv, "5.0.0");
 

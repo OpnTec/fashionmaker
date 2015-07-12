@@ -28,6 +28,10 @@ DEFINES += QT_MESSAGELOGCONTEXT
 
 include(vmisc.pri)
 
+# Resource files. This files will be included in binary.
+RESOURCES += \
+    share/resources/theme.qrc \ # Windows theme icons.
+
 # This is static library so no need in "make install"
 
 # directory for executable file
