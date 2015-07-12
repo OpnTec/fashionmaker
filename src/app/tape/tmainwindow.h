@@ -47,6 +47,14 @@ public:
 public slots:
     void LoadFile(const QString &path);
 
+private slots:
+    void FileOpen();
+    void FileSave();
+    void FileSaveAs();
+    void AboutToShowWindowMenu();
+    void ShowWindow();
+    void AboutApplication();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

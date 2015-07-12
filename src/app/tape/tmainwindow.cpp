@@ -28,6 +28,7 @@
 
 #include "tmainwindow.h"
 #include "ui_tmainwindow.h"
+#include "mapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
@@ -54,7 +55,91 @@ void TMainWindow::LoadFile(const QString &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetupMenu()
+void TMainWindow::FileOpen()
 {
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FileSave()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FileSaveAs()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AboutToShowWindowMenu()
+{
+    ui->menuWindow->clear();
+    QList<TMainWindow*> windows = MApplication::instance()->MainWindows();
+    for (int i = 0; i < windows.count(); ++i)
+    {
+        TMainWindow *window = windows.at(i);
+        QAction *action = ui->menuWindow->addAction(window->windowTitle(), this, SLOT(ShowWindow()));
+        action->setData(i);
+        action->setCheckable(true);
+        if (window == this)
+        {
+            action->setChecked(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowWindow()
+{
+    if (QAction *action = qobject_cast<QAction*>(sender()))
+    {
+        const QVariant v = action->data();
+        if (v.canConvert<int>())
+        {
+            const int offset = qvariant_cast<int>(v);
+            QList<TMainWindow*> windows = MApplication::instance()->MainWindows();
+            windows.at(offset)->activateWindow();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AboutApplication()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetupMenu()
+{
+    // File
+    connect(ui->actionOpen, &QAction::triggered, this, &TMainWindow::FileOpen);
+    ui->actionOpen->setShortcuts(QKeySequence::Open);
+
+    connect(ui->actionSave, &QAction::triggered, this, &TMainWindow::FileSave);
+    ui->actionOpen->setShortcuts(QKeySequence::Save);
+
+    connect(ui->actionSaveAs, &QAction::triggered, this, &TMainWindow::FileSaveAs);
+    ui->actionOpen->setShortcuts(QKeySequence::SaveAs);
+
+    QAction *separatorAct = new QAction(this);
+    separatorAct->setSeparator(true);
+    ui->menuFile->insertAction(ui->actionQuit, separatorAct);
+
+    connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
+    ui->actionQuit->setShortcuts(QKeySequence::Quit);
+
+    // Edit
+    //ui->actionUndo->setShortcuts(QKeySequence::Undo);
+    //ui->actionRedo->setShortcuts(QKeySequence::Redo);
+
+    // Window
+    connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
+    AboutToShowWindowMenu();
+
+    // Help
+    connect(ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
+    connect(ui->actionAboutTape, &QAction::triggered, this, &TMainWindow::AboutApplication);
 }

@@ -392,7 +392,7 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
@@ -416,7 +416,13 @@
     <addaction name="actionAboutQt"/>
     <addaction name="actionAboutTape"/>
    </widget>
-   <addaction name="menu_File"/>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
