@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>531</width>
-    <height>406</height>
+    <width>742</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>TMainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="share/resources/tapeicon.qrc">
+    <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -28,6 +32,10 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
+       <attribute name="icon">
+        <iconset resource="share/resources/tapeicon.qrc">
+         <normaloff>:/tapeicon/16x16/measurement.png</normaloff>:/tapeicon/16x16/measurement.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>Measuremnts</string>
        </attribute>
@@ -38,6 +46,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabInformation">
+       <attribute name="icon">
+        <iconset resource="share/resources/tapeicon.qrc">
+         <normaloff>:/tapeicon/16x16/info.png</normaloff>:/tapeicon/16x16/info.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>Information</string>
        </attribute>
@@ -51,10 +63,37 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>531</width>
+     <width>742</width>
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAboutQt"/>
+    <addaction name="actionAboutTape"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menuWindow"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -65,8 +104,45 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open ...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Save As ...</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About &amp;Qt</string>
+   </property>
+  </action>
+  <action name="actionAboutTape">
+   <property name="text">
+    <string>About Tape</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="share/resources/tapeicon.qrc"/>
+ </resources>
  <connections/>
 </ui>

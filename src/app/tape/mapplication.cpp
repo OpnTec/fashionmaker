@@ -45,7 +45,7 @@ MApplication::MApplication(int &argc, char **argv)
     setOrganizationDomain(VER_COMPANYDOMAIN_STR);
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
-    setWindowIcon(QIcon(":/icon/64x64/logo.png"));
+    setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
 
     const QString serverName = QCoreApplication::applicationName();
     QLocalSocket socket;

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tapeicon/64x64/logo.png</file>
+        <file>tapeicon/16x16/info.png</file>
+        <file>tapeicon/16x16/measurement.png</file>
+    </qresource>
+</RCC>

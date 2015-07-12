@@ -43,6 +43,9 @@ UI_DIR = uic
 # Suport subdirectories. Just better project code tree.
 include(tape.pri)
 
+RESOURCES += \
+    share/resources/tapeicon.qrc
+
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
     share/resources/tape.rc \ # For Windows system.
@@ -161,6 +164,3 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
         }
     }
 }
-
-RESOURCES += \
-    share/resources/icon.qrc

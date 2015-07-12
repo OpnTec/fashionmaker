@@ -33,7 +33,7 @@
 
 int main(int argc, char *argv[])
 {
-    Q_INIT_RESOURCE(icon);
+    Q_INIT_RESOURCE(tapeicon);
 
     QT_REQUIRE_VERSION(argc, argv, "5.0.0");
 

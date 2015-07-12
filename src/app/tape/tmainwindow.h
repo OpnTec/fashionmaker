@@ -50,6 +50,8 @@ public slots:
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
+
+    void SetupMenu();
 };
 
 #endif // TMAINWINDOW_H

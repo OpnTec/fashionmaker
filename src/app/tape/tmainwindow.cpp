@@ -35,8 +35,9 @@ TMainWindow::TMainWindow(QWidget *parent)
       ui(new Ui::TMainWindow)
 {
     ui->setupUi(this);
-
     ui->tabWidget->setVisible(false);
+
+    SetupMenu();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -47,6 +48,13 @@ TMainWindow::~TMainWindow()
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::LoadFile(const QString &path)
+{
+    ui->labelToolTip->setVisible(false);
+    ui->tabWidget->setVisible(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetupMenu()
 {
 
 }
