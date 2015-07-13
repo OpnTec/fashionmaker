@@ -4,5 +4,6 @@
         <file>tapeicon/16x16/info.png</file>
         <file>tapeicon/16x16/measurement.png</file>
         <file>tapeicon/24x24/equal.png</file>
+        <file>tapeicon/24x24/fx.png</file>
     </qresource>
 </RCC>

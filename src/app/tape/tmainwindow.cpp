@@ -30,6 +30,7 @@
 #include "ui_tmainwindow.h"
 #include "mapplication.h"
 #include "dialogs/dialogabouttape.h"
+#include "dialogs/dialognewmeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
@@ -53,6 +54,18 @@ void TMainWindow::LoadFile(const QString &path)
 {
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FileNew()
+{
+    DialogNewMeasurements measurements(this);
+    if (measurements.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    InitNew(measurements.Type());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,14 +131,17 @@ void TMainWindow::AboutApplication()
 void TMainWindow::SetupMenu()
 {
     // File
+    connect(ui->actionNew, &QAction::triggered, this, &TMainWindow::FileNew);
+    ui->actionNew->setShortcuts(QKeySequence::New);
+
     connect(ui->actionOpen, &QAction::triggered, this, &TMainWindow::FileOpen);
     ui->actionOpen->setShortcuts(QKeySequence::Open);
 
     connect(ui->actionSave, &QAction::triggered, this, &TMainWindow::FileSave);
-    ui->actionOpen->setShortcuts(QKeySequence::Save);
+    ui->actionSave->setShortcuts(QKeySequence::Save);
 
     connect(ui->actionSaveAs, &QAction::triggered, this, &TMainWindow::FileSaveAs);
-    ui->actionOpen->setShortcuts(QKeySequence::SaveAs);
+    ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
     QAction *separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
@@ -145,4 +161,63 @@ void TMainWindow::SetupMenu()
     // Help
     connect(ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
     connect(ui->actionAboutTape, &QAction::triggered, this, &TMainWindow::AboutApplication);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitNew(MeasurementsType type)
+{
+    ui->labelToolTip->setVisible(false);
+    ui->tabWidget->setVisible(true);
+
+    if (type == MeasurementsType::Standard)
+    {
+        // Tab Measurements
+        delete ui->labelValue;
+        delete ui->horizontalLayoutValue;
+
+        // Tab Information
+        delete ui->labelGivenName;
+        delete ui->lineEditGivenName;
+        delete ui->labelFamilyName;
+        delete ui->lineEditFamilyName;
+        delete ui->labelBirthDate;
+        delete ui->dateEditBirthDate;
+        delete ui->labelSex;
+        delete ui->comboBoxSex;
+        delete ui->labelEmail;
+        delete ui->lineEditEmail;
+    }
+    else
+    {
+        // Tab Measurements
+        delete ui->labelBaseValue;
+        delete ui->doubleSpinBoxBaseValue;
+        delete ui->labelInSizes;
+        delete ui->doubleSpinBoxInSizes;
+        delete ui->labelInHeights;
+        delete ui->doubleSpinBoxInHeights;
+
+        // Tab Information
+        delete ui->labelBaseSize;
+        delete ui->labelBaseSizeValue;
+        delete ui->labelBaseHeight;
+        delete ui->labelBaseHeightValue;
+    }
+
+    InitTable(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitTable(MeasurementsType type)
+{
+    if (type == MeasurementsType::Standard)
+    {
+        ui->tableWidget->setColumnHidden( 1, true );// value
+    }
+    else
+    {
+        ui->tableWidget->setColumnHidden( 2, true );// base value
+        ui->tableWidget->setColumnHidden( 3, true );// in sizes
+        ui->tableWidget->setColumnHidden( 4, true );// in heights
+    }
 }

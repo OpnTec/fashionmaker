@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   tmainwindow.h
+ **  @file   dialognewmeasurements.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 7, 2015
+ **  @date   12 7, 2015
  **
  **  @brief
  **  @copyright
@@ -26,45 +26,44 @@
  **
  *************************************************************************/
 
-#ifndef TMAINWINDOW_H
-#define TMAINWINDOW_H
+#ifndef DIALOGNEWMEASUREMENTS_H
+#define DIALOGNEWMEASUREMENTS_H
 
-#include <QMainWindow>
+#include <QDialog>
 
 #include "../vmisc/def.h"
 
 namespace Ui
 {
-    class TMainWindow;
+    class DialogNewMeasurements;
 }
 
-class TMainWindow : public QMainWindow
+class DialogNewMeasurements : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit TMainWindow(QWidget *parent = 0);
-    virtual ~TMainWindow() Q_DECL_OVERRIDE;
+    explicit DialogNewMeasurements(QWidget *parent = 0);
+    ~DialogNewMeasurements();
 
-public slots:
-    void LoadFile(const QString &path);
+    MeasurementsType Type() const;
+    Unit MUnit() const;
+    int BaseSize() const;
+    int BaseHeight() const;
 
 private slots:
-    void FileNew();
-    void FileOpen();
-    void FileSave();
-    void FileSaveAs();
-    void AboutToShowWindowMenu();
-    void ShowWindow();
-    void AboutApplication();
+    void CurrentTypeChanged(int index);
+    void CurrentUnitChanged(int index);
 
 private:
-    Q_DISABLE_COPY(TMainWindow)
-    Ui::TMainWindow *ui;
+    Q_DISABLE_COPY(DialogNewMeasurements)
+    Ui::DialogNewMeasurements *ui;
 
-    void SetupMenu();
-    void InitNew(MeasurementsType type);
-    void InitTable(MeasurementsType type);
+    void InitMTypes();
+    void InitStandards();
+    void InitHeightsList();
+    void InitSizesList();
+    void InitUnits(const MeasurementsType &type);
 };
 
-#endif // TMAINWINDOW_H
+#endif // DIALOGNEWMEASUREMENTS_H

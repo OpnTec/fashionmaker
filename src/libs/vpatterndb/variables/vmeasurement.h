@@ -57,6 +57,8 @@ public:
     void               setTagName(const QString &TagName);
     static QStringList ListHeights(QMap<GHeights, bool> heights, Unit patternUnit);
     static QStringList ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit);
+    static QStringList WholeListHeights(Unit patternUnit);
+    static QStringList WholeListSizes(Unit patternUnit);
 private:
     QSharedDataPointer<VMeasurementData> d;
 

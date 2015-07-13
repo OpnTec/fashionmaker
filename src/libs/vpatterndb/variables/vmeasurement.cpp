@@ -117,10 +117,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
     if (list.isEmpty())
     {
         // from 92 cm to 194 cm
-        for (int i = 92; i<= 194; i = i+6)
-        {
-            ListValue(list, i, patternUnit);
-        }
+        list = VMeasurement::WholeListHeights(patternUnit);
     }
     return list;
 }
@@ -148,19 +145,53 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
     if (list.isEmpty())
     {
         // from 22 cm to 56 cm
-        for (int i = 22; i<= 56; i = i+2)
-        {
-           ListValue(list, i, patternUnit);
-        }
+        list = VMeasurement::WholeListSizes(patternUnit);
     }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurement::WholeListHeights(Unit patternUnit)
+{
+    QStringList list;
+    if (patternUnit == Unit::Inch)
+    {
+        qWarning()<<"Standard table doesn't support inches.";
+        return list;
+    }
+    // from 92 cm to 194 cm
+    for (int i = 92; i<= 194; i = i+6)
+    {
+        ListValue(list, i, patternUnit);
+    }
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurement::WholeListSizes(Unit patternUnit)
+{
+    QStringList list;
+    if (patternUnit == Unit::Inch)
+    {
+        qWarning()<<"Standard table doesn't support inches.";
+        return list;
+    }
+
+    // from 22 cm to 56 cm
+    for (int i = 22; i<= 56; i = i+2)
+    {
+       ListValue(list, i, patternUnit);
+    }
+
     return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurement::ListValue(QStringList &list, qreal value, Unit patternUnit)
 {
-    qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
-    QString strVal = QString("%1").arg(val);
+    const qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
+    const QString strVal = QString("%1").arg(val);
     list.append(strVal);
 }
 
