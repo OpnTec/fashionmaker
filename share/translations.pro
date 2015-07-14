@@ -17,7 +17,8 @@ DEPENDPATH +=  \
             ../src/libs/vgeometry \
             ../src/libs/vpatterndb \
             ../src/libs/vmisc \
-            ../src/libs/vtools
+            ../src/libs/vtools \
+            ../src/libs/vformat
 
 include(../src/app/valentina/valentina.pri)
 include(../src/libs/qmuparser/qmuparser.pri)
@@ -29,6 +30,7 @@ include(../src/libs/vgeometry/vgeometry.pri)
 include(../src/libs/vpatterndb/vpatterndb.pri)
 include(../src/libs/vmisc/vmisc.pri)
 include(../src/libs/vtools/vtools.pri)
+include(../src/libs/vformat/vformat.pri)
 
 # Add here path to new translation file with name "valentina_*_*.ts" if you want to add new language.
 # Same paths in variable INSTALL_TRANSLATIONS (app.pro).

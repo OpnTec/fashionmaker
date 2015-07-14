@@ -9,4 +9,5 @@ SUBDIRS = \
     vpatterndb \
     vmisc \
     vwidgets \
-    vtools
+    vtools \
+    vformat
