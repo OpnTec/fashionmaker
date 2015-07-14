@@ -5,5 +5,9 @@
         <file>tapeicon/16x16/measurement.png</file>
         <file>tapeicon/24x24/equal.png</file>
         <file>tapeicon/24x24/fx.png</file>
+        <file>tapeicon/24x24/orange_plus.png</file>
+        <file>tapeicon/24x24/red_plus.png</file>
+        <file>tapeicon/24x24/padlock_locked.png</file>
+        <file>tapeicon/24x24/padlock_opened.png</file>
     </qresource>
 </RCC>

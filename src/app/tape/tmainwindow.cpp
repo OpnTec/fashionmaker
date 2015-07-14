@@ -171,6 +171,8 @@ void TMainWindow::InitNew(MeasurementsType type)
 
     if (type == MeasurementsType::Standard)
     {
+        ui->labelMType->setText(tr("Standard measurements"));
+
         // Tab Measurements
         delete ui->labelValue;
         delete ui->horizontalLayoutValue;
@@ -189,6 +191,8 @@ void TMainWindow::InitNew(MeasurementsType type)
     }
     else
     {
+        ui->labelMType->setText(tr("Individual measurements"));
+
         // Tab Measurements
         delete ui->labelBaseValue;
         delete ui->doubleSpinBoxBaseValue;
