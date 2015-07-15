@@ -28,7 +28,15 @@
 
 #include "vmeasurements.h"
 
+//---------------------------------------------------------------------------------------------------------------------
+VMeasurements::VMeasurements(VContainer *data)
+    :VDomDocument(),
+      data(data)
+{
+    SCASSERT(data != nullptr)
+}
 
-VMeasurements::VMeasurements()
+//---------------------------------------------------------------------------------------------------------------------
+VMeasurements::~VMeasurements()
 {
 }

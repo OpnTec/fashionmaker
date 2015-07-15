@@ -161,8 +161,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::MainWindow     *ui;
 
-
-
     /** @brief tool current tool */
     Tool               currentTool;
 

@@ -32,6 +32,7 @@
 #include <QMainWindow>
 
 #include "../vmisc/def.h"
+#include "../vformat/vmeasurements.h"
 
 namespace Ui
 {
@@ -48,10 +49,10 @@ public:
 
 public slots:
     void LoadFile(const QString &path);
-
-private slots:
     void FileNew();
     void FileOpen();
+
+private slots:
     void FileSave();
     void FileSaveAs();
     void AboutToShowWindowMenu();
@@ -61,9 +62,11 @@ private slots:
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
+    VMeasurements *m;
+    VContainer *data;
 
     void SetupMenu();
-    void InitNew(MeasurementsType type);
+    void InitNew(MeasurementsType type, Unit unit);
     void InitTable(MeasurementsType type);
 };
 

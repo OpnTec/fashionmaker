@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vmeasurements.h
+ **  @file   vtapesettings.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   14 7, 2015
+ **  @date   15 7, 2015
  **
  **  @brief
  **  @copyright
@@ -26,24 +26,17 @@
  **
  *************************************************************************/
 
-#ifndef VMEASUREMENTS_H
-#define VMEASUREMENTS_H
+#ifndef VTAPESETTINGS_H
+#define VTAPESETTINGS_H
 
-#include "../ifc/xml/vdomdocument.h"
-#include "../vpatterndb/vcontainer.h"
+#include "vcommonsettings.h"
 
-class VMeasurements : public VDomDocument
+class VTapeSettings : public VCommonSettings
 {
-
+    Q_OBJECT
 public:
-    VMeasurements(VContainer *data);
-    virtual ~VMeasurements() Q_DECL_OVERRIDE;
-
-private:
-    Q_DISABLE_COPY(VMeasurements)
-
-    /** @brief data container with data. */
-    VContainer     *data;
+    VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                  QObject *parent = 0);
 };
 
-#endif // VMEASUREMENTS_H
+#endif // VTAPESETTINGS_H

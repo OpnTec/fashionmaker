@@ -9,7 +9,9 @@ SOURCES += \
     $$PWD/backport/qcommandlineparser.cpp \
     $$PWD/vsettings.cpp \
     $$PWD/vabstractapplication.cpp \
-    projectversion.cpp
+    $$PWD/projectversion.cpp \
+    $$PWD/vcommonsettings.cpp \
+    $$PWD/vtapesettings.cpp
 
 HEADERS += \
     $$PWD/stable.h \
@@ -21,4 +23,6 @@ HEADERS += \
     $$PWD/backport/qcommandlineparser.h \
     $$PWD/vsettings.h \
     $$PWD/vabstractapplication.h \
-    projectversion.h
+    $$PWD/projectversion.h \
+    $$PWD/vcommonsettings.h \
+    $$PWD/vtapesettings.h

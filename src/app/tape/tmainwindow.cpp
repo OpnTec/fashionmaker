@@ -35,7 +35,9 @@
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
     :QMainWindow(parent),
-      ui(new Ui::TMainWindow)
+      ui(new Ui::TMainWindow),
+      m(nullptr),
+      data(nullptr)
 {
     ui->setupUi(this);
     ui->tabWidget->setVisible(false);
@@ -46,6 +48,8 @@ TMainWindow::TMainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::~TMainWindow()
 {
+    delete data;
+    delete m;
     delete ui;
 }
 
@@ -59,19 +63,35 @@ void TMainWindow::LoadFile(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileNew()
 {
-    DialogNewMeasurements measurements(this);
-    if (measurements.exec() == QDialog::Rejected)
+    if (m == nullptr)
     {
-        return;
-    }
+        DialogNewMeasurements measurements(this);
+        if (measurements.exec() == QDialog::Rejected)
+        {
+            return;
+        }
 
-    InitNew(measurements.Type());
+        InitNew(measurements.Type(), measurements.MUnit());
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->FileNew();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileOpen()
 {
+    if (m == nullptr)
+    {
 
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->FileOpen();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,7 +110,7 @@ void TMainWindow::FileSaveAs()
 void TMainWindow::AboutToShowWindowMenu()
 {
     ui->menuWindow->clear();
-    QList<TMainWindow*> windows = MApplication::instance()->MainWindows();
+    QList<TMainWindow*> windows = qApp->MainWindows();
     for (int i = 0; i < windows.count(); ++i)
     {
         TMainWindow *window = windows.at(i);
@@ -113,7 +133,7 @@ void TMainWindow::ShowWindow()
         if (v.canConvert<int>())
         {
             const int offset = qvariant_cast<int>(v);
-            QList<TMainWindow*> windows = MApplication::instance()->MainWindows();
+            QList<TMainWindow*> windows = qApp->MainWindows();
             windows.at(offset)->activateWindow();
         }
     }
@@ -164,10 +184,16 @@ void TMainWindow::SetupMenu()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::InitNew(MeasurementsType type)
+void TMainWindow::InitNew(MeasurementsType type, Unit unit)
 {
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
+
+    qApp->setMType(type);
+    qApp->setMUnit(unit);
+
+    data = new VContainer(qApp->TrVars(), qApp->mUnitP());
+    m = new VMeasurements(data);
 
     if (type == MeasurementsType::Standard)
     {

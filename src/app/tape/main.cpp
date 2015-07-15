@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
     {
         return 0;
     }
+    app.InitOptions();
 
     QStringList args = QCoreApplication::arguments();
     if (args.count() > 1)

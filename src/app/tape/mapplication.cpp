@@ -30,14 +30,21 @@
 #include "version.h"
 #include "tmainwindow.h"
 
+#include <QDir>
 #include <QFileOpenEvent>
+#include <QLibraryInfo>
 #include <QLocalSocket>
+#include <QTranslator>
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
     :QApplication(argc, argv),
       mainWindows(),
-      localServer(nullptr)
+      localServer(nullptr),
+      trVars(nullptr),
+      _mUnit(Unit::Cm),
+      _mType(MeasurementsType::Individual),
+      settings(nullptr)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -93,12 +100,6 @@ MApplication::~MApplication()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MApplication *MApplication::instance()
-{
-    return (static_cast<MApplication *>(QCoreApplication::instance()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool MApplication::IsTheOnly() const
 {
     return (localServer != 0);
@@ -127,6 +128,156 @@ QList<TMainWindow *> MApplication::MainWindows()
     return list;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::InitOptions()
+{
+    OpenSettings();
+
+    qDebug()<<"Version:"<<APP_VERSION_STR;
+    qDebug()<<"Build revision:"<<BUILD_REVISION;
+    qDebug()<<buildCompatibilityString();
+    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
+    qDebug()<<"Command-line arguments:"<<this->arguments();
+    qDebug()<<"Process ID:"<<this->applicationPid();
+
+    const QString checkedLocale = Settings()->GetLocale();
+    qDebug()<<"Checked locale:"<<checkedLocale;
+
+    QTranslator *qtTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN)
+    qtTranslator->load("qt_" + checkedLocale, translationsPath());
+#else
+    qtTranslator->load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtTranslator);
+
+    QTranslator *qtxmlTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN)
+    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, translationsPath());
+#else
+    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtxmlTranslator);
+
+    QTranslator *appTranslator = new QTranslator(this);
+    appTranslator->load("valentina_" + checkedLocale, translationsPath());
+    installTranslator(appTranslator);
+
+    InitTrVars();//Very important do it after load QM files.
+
+    static const char * GENERIC_ICON_TO_CHECK = "document-open";
+    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    {
+       //If there is no default working icon theme then we should
+       //use an icon theme that we provide via a .qrc file
+       //This case happens under Windows and Mac OS X
+       //This does not happen under GNOME or KDE
+       QIcon::setThemeName("win.icon.theme");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const VTranslateVars *MApplication::TrVars()
+{
+    return trVars;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::InitTrVars()
+{
+    trVars = new VTranslateVars(Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::OpenSettings()
+{
+    settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                                 QApplication::applicationName(), this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VTapeSettings *MApplication::Settings()
+{
+    SCASSERT(settings != nullptr);
+    return settings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MApplication::translationsPath() const
+{
+    const QString trPath = QStringLiteral("/translations");
+#ifdef Q_OS_WIN
+    QDir dir(QApplication::applicationDirPath() + trPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+    else
+    {
+        return QApplication::applicationDirPath() + "../../valentina/bin" + trPath;
+    }
+#else
+    #ifdef QT_DEBUG
+        QDir dir(QApplication::applicationDirPath() + trPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QApplication::applicationDirPath() + "../../valentina/bin" + trPath;
+        }
+    #else
+        QDir dir1(QApplication::applicationDirPath() + trPath);
+        if (dir1.exists())
+        {
+            return dir1.absolutePath();
+        }
+
+        QDir dir2(QApplication::applicationDirPath() + "../../valentina/bin" + trPath);
+        if (dir2.exists())
+        {
+            return dir2.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/translations");
+        }
+    #endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Unit MApplication::mUnit() const
+{
+    return _mUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const Unit *MApplication::mUnitP() const
+{
+    return &_mUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::setMUnit(const Unit &mUnit)
+{
+    _mUnit = mUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+MeasurementsType MApplication::mType() const
+{
+    return mType();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::setMType(const MeasurementsType &mType)
+{
+    _mType = mType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_WS_MAC)
 bool MApplication::event(QEvent* event)
 {

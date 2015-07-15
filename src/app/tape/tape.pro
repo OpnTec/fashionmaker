@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core gui widgets network
+QT       += core gui widgets network xml xmlpatterns printsupport
 
 # Name of binary file
 TARGET = tape
@@ -150,7 +150,7 @@ DEPENDPATH += $$PWD/../../libs/vwidgets
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
 
-# VFormat static library (depend on VPatternDB)
+# VFormat static library (depend on VPatternDB, IFC)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
 
 INCLUDEPATH += $$PWD/../../libs/vformat
@@ -159,7 +159,7 @@ DEPENDPATH += $$PWD/../../libs/vformat
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
 
-#VPatternDB static library (depend on vgeometry, vmisc)
+#VPatternDB static library (depend on vgeometry, vmisc, VLayout)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
 
 INCLUDEPATH += $$PWD/../../libs/vpatterndb
@@ -194,6 +194,23 @@ DEPENDPATH += $$PWD/../../libs/ifc
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
+
+# VLayout static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
+
+INCLUDEPATH += $$PWD/../../libs/vlayout
+DEPENDPATH += $$PWD/../../libs/vlayout
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
+
+# QMuParser library
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
+
+INCLUDEPATH += $${PWD}/../../libs/qmuparser
+DEPENDPATH += $${PWD}/../../libs/qmuparser
 
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing

@@ -576,7 +576,7 @@ const VTranslateVars *VApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    trVars = new VTranslateVars(Settings());
+    trVars = new VTranslateVars(Settings()->GetOsSeparator());
 }
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

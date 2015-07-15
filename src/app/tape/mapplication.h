@@ -31,8 +31,18 @@
 
 #include <QApplication>
 
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vtapesettings.h"
+
+class MApplication;// use in define
 class TMainWindow;
 class QLocalServer;
+
+#if defined(qApp)
+#undef qApp
+#endif
+#define qApp (static_cast<MApplication*>(QApplication::instance()))
 
 class MApplication : public QApplication
 {
@@ -42,8 +52,6 @@ public:
     MApplication(int &argc, char **argv);
     virtual ~MApplication() Q_DECL_OVERRIDE;
 
-    static MApplication *instance();
-
     bool IsTheOnly() const;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
@@ -51,6 +59,23 @@ public:
 #if defined(Q_WS_MAC)
     bool event(QEvent *event);
 #endif
+
+    void InitOptions();
+
+    virtual const VTranslateVars *TrVars();
+    void InitTrVars();
+
+    void      OpenSettings();
+    VTapeSettings *Settings();
+
+    QString translationsPath() const;
+
+    Unit             mUnit() const;
+    const Unit      *mUnitP() const;
+    void             setMUnit(const Unit &mUnit);
+
+    MeasurementsType mType() const;
+    void             setMType(const MeasurementsType &mType);
 
 public slots:
     TMainWindow *NewMainWindow();
@@ -63,6 +88,15 @@ private:
     Q_DISABLE_COPY(MApplication)
     QList<QPointer<TMainWindow> > mainWindows;
     QLocalServer *localServer;
+    VTranslateVars *trVars;
+
+    Unit             _mUnit;
+    MeasurementsType _mType;
+
+    /**
+     * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
+     */
+    VTapeSettings *settings;
 
     void Clean();
 };
