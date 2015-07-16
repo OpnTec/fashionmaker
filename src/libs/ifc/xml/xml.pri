@@ -6,11 +6,15 @@ HEADERS += \
     $$PWD/vdomdocument.h \
     $$PWD/vpatternconverter.h \
     $$PWD/vtoolrecord.h \
-    xml/vabstractpattern.h
+    $$PWD/vabstractpattern.h \
+    $$PWD/vvstconverter.h \
+    xml/vvitconverter.h
 
 SOURCES += \
     $$PWD/vabstractconverter.cpp \
     $$PWD/vdomdocument.cpp \
     $$PWD/vpatternconverter.cpp \
     $$PWD/vtoolrecord.cpp \
-    xml/vabstractpattern.cpp
+    $$PWD/vabstractpattern.cpp \
+    $$PWD/vvstconverter.cpp \
+    xml/vvitconverter.cpp

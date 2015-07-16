@@ -70,13 +70,6 @@ public:
 
     QString translationsPath() const;
 
-    Unit             mUnit() const;
-    const Unit      *mUnitP() const;
-    void             setMUnit(const Unit &mUnit);
-
-    MeasurementsType mType() const;
-    void             setMType(const MeasurementsType &mType);
-
 public slots:
     TMainWindow *NewMainWindow();
 
@@ -89,9 +82,6 @@ private:
     QList<QPointer<TMainWindow> > mainWindows;
     QLocalServer *localServer;
     VTranslateVars *trVars;
-
-    Unit             _mUnit;
-    MeasurementsType _mType;
 
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.

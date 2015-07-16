@@ -37,7 +37,9 @@ TMainWindow::TMainWindow(QWidget *parent)
     :QMainWindow(parent),
       ui(new Ui::TMainWindow),
       m(nullptr),
-      data(nullptr)
+      data(nullptr),
+      mUnit(Unit::Cm),
+      mType(MeasurementsType::Individual)
 {
     ui->setupUi(this);
     ui->tabWidget->setVisible(false);
@@ -71,7 +73,21 @@ void TMainWindow::FileNew()
             return;
         }
 
-        InitNew(measurements.Type(), measurements.MUnit());
+        mUnit = measurements.MUnit();
+        mType = measurements.Type();
+
+        data = new VContainer(qApp->TrVars(), &mUnit);
+
+        if (mType == MeasurementsType::Standard)
+        {
+            m = new VMeasurements(mUnit, measurements.BaseSize(), measurements.BaseHeight(), data);
+        }
+        else
+        {
+            m = new VMeasurements(mUnit, data);
+        }
+
+        InitWindow();
     }
     else
     {
@@ -184,20 +200,20 @@ void TMainWindow::SetupMenu()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::InitNew(MeasurementsType type, Unit unit)
+void TMainWindow::InitWindow()
 {
+    SCASSERT(m != nullptr);
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
 
-    qApp->setMType(type);
-    qApp->setMUnit(unit);
+    ui->plainTextEditNotes->setEnabled(true);
 
-    data = new VContainer(qApp->TrVars(), qApp->mUnitP());
-    m = new VMeasurements(data);
-
-    if (type == MeasurementsType::Standard)
+    if (mType == MeasurementsType::Standard)
     {
         ui->labelMType->setText(tr("Standard measurements"));
+        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + VDomDocument::UnitsToStr(m->MUnit(), true));
+        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) +
+                                                           VDomDocument::UnitsToStr(m->MUnit(), true));
 
         // Tab Measurements
         delete ui->labelValue;
@@ -219,6 +235,12 @@ void TMainWindow::InitNew(MeasurementsType type, Unit unit)
     {
         ui->labelMType->setText(tr("Individual measurements"));
 
+        ui->lineEditGivenName->setEnabled(true);
+        ui->lineEditFamilyName->setEnabled(true);
+        ui->dateEditBirthDate->setEnabled(true);
+        ui->comboBoxSex->setEnabled(true);
+        ui->lineEditEmail->setEnabled(true);
+
         // Tab Measurements
         delete ui->labelBaseValue;
         delete ui->doubleSpinBoxBaseValue;
@@ -234,13 +256,17 @@ void TMainWindow::InitNew(MeasurementsType type, Unit unit)
         delete ui->labelBaseHeightValue;
     }
 
-    InitTable(type);
+    ui->actionAddCustom->setEnabled(true);
+    ui->actionAddKnown->setEnabled(true);
+    ui->actionReadOnly->setEnabled(true);
+
+    InitTable();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::InitTable(MeasurementsType type)
+void TMainWindow::InitTable()
 {
-    if (type == MeasurementsType::Standard)
+    if (mType == MeasurementsType::Standard)
     {
         ui->tableWidget->setColumnHidden( 1, true );// value
     }

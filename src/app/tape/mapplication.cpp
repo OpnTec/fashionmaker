@@ -42,8 +42,6 @@ MApplication::MApplication(int &argc, char **argv)
       mainWindows(),
       localServer(nullptr),
       trVars(nullptr),
-      _mUnit(Unit::Cm),
-      _mType(MeasurementsType::Individual),
       settings(nullptr)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
@@ -245,36 +243,6 @@ QString MApplication::translationsPath() const
         }
     #endif
 #endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Unit MApplication::mUnit() const
-{
-    return _mUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const Unit *MApplication::mUnitP() const
-{
-    return &_mUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::setMUnit(const Unit &mUnit)
-{
-    _mUnit = mUnit;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-MeasurementsType MApplication::mType() const
-{
-    return mType();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::setMType(const MeasurementsType &mType)
-{
-    _mType = mType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

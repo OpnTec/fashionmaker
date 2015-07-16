@@ -38,7 +38,7 @@
 
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
-enum class MeasurementsType : char { Standard, Individual };
+enum class MeasurementsType : char { Standard, Individual, Unknown };
 enum class Unit : char { Mm, Cm, Inch, Px };
 enum class Source : char { FromGui, FromFile, FromTool };
 

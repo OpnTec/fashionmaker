@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   tmainwindow.h
+ **  @file   vmeasurementconverter.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 7, 2015
+ **  @date   15 7, 2015
  **
  **  @brief
  **  @copyright
@@ -26,50 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef TMAINWINDOW_H
-#define TMAINWINDOW_H
+#ifndef VMEASUREMENTCONVERTER_H
+#define VMEASUREMENTCONVERTER_H
 
-#include <QMainWindow>
+#include "vabstractconverter.h"
 
-#include "../vmisc/def.h"
-#include "../vformat/vmeasurements.h"
-
-namespace Ui
+class VVSTConverter : public VAbstractConverter
 {
-    class TMainWindow;
-}
-
-class TMainWindow : public QMainWindow
-{
-    Q_OBJECT
-
+    Q_DECLARE_TR_FUNCTIONS(VVSTConverter)
 public:
-    explicit TMainWindow(QWidget *parent = 0);
-    virtual ~TMainWindow() Q_DECL_OVERRIDE;
+    VVSTConverter(const QString &fileName);
+    virtual ~VVSTConverter() Q_DECL_OVERRIDE;
 
-public slots:
-    void LoadFile(const QString &path);
-    void FileNew();
-    void FileOpen();
+    static const QString    MeasurementMaxVerStr;
+    static const QString    CurrentSchema;
 
-private slots:
-    void FileSave();
-    void FileSaveAs();
-    void AboutToShowWindowMenu();
-    void ShowWindow();
-    void AboutApplication();
+protected:
+    virtual int     MinVer() const Q_DECL_OVERRIDE;
+    virtual int     MaxVer() const Q_DECL_OVERRIDE;
+
+    virtual QString MinVerStr() const Q_DECL_OVERRIDE;
+    virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
+
+    QString         XSDSchema(int ver) const;
+    virtual void    ApplyPatches() Q_DECL_OVERRIDE;
 
 private:
-    Q_DISABLE_COPY(TMainWindow)
-    Ui::TMainWindow *ui;
-    VMeasurements   *m;
-    VContainer      *data;
-    Unit             mUnit;
-    MeasurementsType mType;
+    Q_DISABLE_COPY(VVSTConverter)
+    static const QString    MeasurementMinVerStr;
 
-    void SetupMenu();
-    void InitWindow();
-    void InitTable();
+    void ToV0_4_0();
 };
 
-#endif // TMAINWINDOW_H
+#endif // VMEASUREMENTCONVERTER_H

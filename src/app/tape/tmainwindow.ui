@@ -32,7 +32,7 @@
        <string>Remove measurement</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
@@ -340,7 +340,9 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="go-up"/>
+                <iconset theme="go-up">
+                 <normaloff/>
+                </iconset>
                </property>
               </widget>
              </item>
@@ -356,7 +358,9 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="go-down"/>
+                <iconset theme="go-down">
+                 <normaloff/>
+                </iconset>
                </property>
               </widget>
              </item>
@@ -373,7 +377,9 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="list-remove"/>
+                <iconset theme="list-remove">
+                 <normaloff/>
+                </iconset>
                </property>
               </widget>
              </item>

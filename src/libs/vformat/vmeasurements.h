@@ -32,18 +32,74 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vcontainer.h"
 
+enum class SexType : char { Male, Female, Unknown };
+
 class VMeasurements : public VDomDocument
 {
 
 public:
     VMeasurements(VContainer *data);
+    VMeasurements(Unit unit, VContainer *data);
+    VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_OVERRIDE;
+
+    MeasurementsType Type() const;
+    Unit MUnit() const;
+    int BaseSize() const;
+    int BaseHeight() const;
+
+    QString Notes() const;
+    void    SetNotes(const QString &text);
+
+    QString FamilyName() const;
+    void    SetFamilyName(const QString &text);
+
+    QString GivenName() const;
+    void    SetGivenName(const QString &text);
+
+    QDate   BirthDate() const;
+    void    SetBirthDate(const QDate &date);
+
+    SexType Sex() const;
+    void    SetSex(const SexType &sex);
+
+    QString Email() const;
+    void    SetEmail(const QString &text);
+
+    static const QString TagVST;
+    static const QString TagVIT;
+    static const QString TagBodyMeasurements;
+    static const QString TagUnit;
+    static const QString TagNotes;
+    static const QString TagSize;
+    static const QString TagHeight;
+    static const QString TagPersonal;
+    static const QString TagFamilyName;
+    static const QString TagGivenName;
+    static const QString TagBirthDate;
+    static const QString TagSex;
+    static const QString TagEmail;
+
+    static const QString AttrBase;
+
+    static const QString SexMale;
+    static const QString SexFemale;
+    static const QString SexUnknown;
+
+    static QString GenderToStr(const SexType &sex);
+    static SexType StrToGender(const QString &sex);
 
 private:
     Q_DISABLE_COPY(VMeasurements)
 
     /** @brief data container with data. */
     VContainer     *data;
+    MeasurementsType type;
+
+    void CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight);
+    void CreateEmptyIndividualFile(Unit unit);
+
+    qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;
 };
 
 #endif // VMEASUREMENTS_H

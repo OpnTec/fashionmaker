@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   tmainwindow.h
+ **  @file   vvitconverter.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 7, 2015
+ **  @date   15 7, 2015
  **
  **  @brief
  **  @copyright
@@ -26,50 +26,36 @@
  **
  *************************************************************************/
 
-#ifndef TMAINWINDOW_H
-#define TMAINWINDOW_H
+#ifndef VVITCONVERTER_H
+#define VVITCONVERTER_H
 
-#include <QMainWindow>
+#include "vabstractconverter.h"
 
-#include "../vmisc/def.h"
-#include "../vformat/vmeasurements.h"
-
-namespace Ui
+class VVITConverter : public VAbstractConverter
 {
-    class TMainWindow;
-}
-
-class TMainWindow : public QMainWindow
-{
-    Q_OBJECT
-
+    Q_DECLARE_TR_FUNCTIONS(VVITConverter)
 public:
-    explicit TMainWindow(QWidget *parent = 0);
-    virtual ~TMainWindow() Q_DECL_OVERRIDE;
+    VVITConverter(const QString &fileName);
+    virtual ~VVITConverter() Q_DECL_OVERRIDE;
 
-public slots:
-    void LoadFile(const QString &path);
-    void FileNew();
-    void FileOpen();
+    static const QString    MeasurementMaxVerStr;
+    static const QString    CurrentSchema;
 
-private slots:
-    void FileSave();
-    void FileSaveAs();
-    void AboutToShowWindowMenu();
-    void ShowWindow();
-    void AboutApplication();
+protected:
+    virtual int     MinVer() const Q_DECL_OVERRIDE;
+    virtual int     MaxVer() const Q_DECL_OVERRIDE;
+
+    virtual QString MinVerStr() const Q_DECL_OVERRIDE;
+    virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
+
+    QString         XSDSchema(int ver) const;
+    virtual void    ApplyPatches() Q_DECL_OVERRIDE;
 
 private:
-    Q_DISABLE_COPY(TMainWindow)
-    Ui::TMainWindow *ui;
-    VMeasurements   *m;
-    VContainer      *data;
-    Unit             mUnit;
-    MeasurementsType mType;
+    Q_DISABLE_COPY(VVITConverter)
+    static const QString    MeasurementMinVerStr;
 
-    void SetupMenu();
-    void InitWindow();
-    void InitTable();
+    void ToV0_3_0();
 };
 
-#endif // TMAINWINDOW_H
+#endif // VVITCONVERTER_H
