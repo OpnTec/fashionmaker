@@ -324,6 +324,20 @@ void TMainWindow::ReadOnly(bool ro)
         ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_opened.png"));
     }
     m->SetReadOnly(ro);
+    MeasurementsWasSaved(false);
+
+    ui->plainTextEditNotes->setDisabled(ro);
+    ui->actionAddCustom->setDisabled(ro);
+    ui->actionAddKnown->setDisabled(ro);
+
+    if (mType == MeasurementsType::Individual)
+    {
+        ui->lineEditGivenName->setDisabled(ro);
+        ui->lineEditFamilyName->setDisabled(ro);
+        ui->dateEditBirthDate->setDisabled(ro);
+        ui->comboBoxSex->setDisabled(ro);
+        ui->lineEditEmail->setDisabled(ro);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
