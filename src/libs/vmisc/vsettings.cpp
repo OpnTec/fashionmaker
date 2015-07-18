@@ -43,8 +43,6 @@
 
 const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");
 
-const QString VSettings::SettingPathsIndividualMeasurements      = QStringLiteral("paths/individual_measurements");
-const QString VSettings::SettingPathsStandardMeasurements        = QStringLiteral("paths/standard_measurements");
 const QString VSettings::SettingPathsPattern                     = QStringLiteral("paths/pattern");
 const QString VSettings::SettingPathsLayout                      = QStringLiteral("paths/layout");
 
@@ -88,30 +86,6 @@ QString VSettings::GetLabelLanguage() const
 void VSettings::SetLabelLanguage(const QString &value)
 {
     setValue(SettingConfigurationLabelLanguage, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetPathIndividualMeasurements() const
-{
-    return value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetPathIndividualMeasurements(const QString &value)
-{
-    setValue(SettingPathsIndividualMeasurements, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VSettings::GetPathStandardMeasurements() const
-{
-    return value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetPathStandardMeasurements(const QString &value)
-{
-    setValue(SettingPathsStandardMeasurements, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -495,7 +469,7 @@ void VSettings::SetLayoutUnitePages(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSettings::StandardTablesPath()
+QString VSettings::StandardTablesPath() const
 {
     const QString stPath = QStringLiteral("/tables/standard");
 #ifdef Q_OS_WIN

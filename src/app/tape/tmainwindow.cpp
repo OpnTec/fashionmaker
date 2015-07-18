@@ -32,6 +32,10 @@
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
 
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QMessageBox>
+
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
     :QMainWindow(parent),
@@ -39,7 +43,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       m(nullptr),
       data(nullptr),
       mUnit(Unit::Cm),
-      mType(MeasurementsType::Individual)
+      mType(MeasurementsType::Individual),
+      curFile()
 {
     ui->setupUi(this);
     ui->tabWidget->setVisible(false);
@@ -87,6 +92,9 @@ void TMainWindow::FileNew()
             m = new VMeasurements(mUnit, data);
         }
 
+        SetCurrentFile("");
+        MeasurementsWasSaved(false);
+
         InitWindow();
     }
     else
@@ -113,13 +121,88 @@ void TMainWindow::FileOpen()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileSave()
 {
-
+    if (curFile.isEmpty())
+    {
+        return FileSaveAs();
+    }
+    else
+    {
+        QString error;
+        bool result = SaveMeasurements(curFile, error);
+        if (not result)
+        {
+            QMessageBox messageBox;
+            messageBox.setIcon(QMessageBox::Warning);
+            messageBox.setInformativeText(tr("Could not save file"));
+            messageBox.setDefaultButton(QMessageBox::Ok);
+            messageBox.setDetailedText(error);
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.exec();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileSaveAs()
 {
+    QString filters;
+    QString fName = tr("measurements");
+    QString suffix;
+    if (mType == MeasurementsType::Individual)
+    {
+        filters = tr("Standard measurements (*.vst)");
+        suffix = "vst";
+        fName += "." + suffix;
+    }
+    else
+    {
+        filters = tr("Individual measurements (*.vit)");
+        suffix = "vit";
+        fName += "." + suffix;
+    }
 
+    QString dir;
+    if (curFile.isEmpty())
+    {
+        if (mType == MeasurementsType::Individual)
+        {
+            dir = qApp->Settings()->GetPathStandardMeasurements() + "/" + fName;
+        }
+        else
+        {
+            dir = qApp->Settings()->GetPathIndividualMeasurements() + "/" + fName;
+        }
+
+    }
+    else
+    {
+        dir = QFileInfo(curFile).absolutePath() + "/" + fName;
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += "." + suffix;
+    }
+    QString error;
+    bool result = SaveMeasurements(fileName, error);
+    if (result == false)
+    {
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setInformativeText(tr("Could not save file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -330,6 +413,7 @@ void TMainWindow::InitWindow()
     ui->actionAddCustom->setEnabled(true);
     ui->actionAddKnown->setEnabled(true);
     ui->actionReadOnly->setEnabled(true);
+    ui->actionSaveAs->setEnabled(true);
 
     InitTable();
 }
@@ -347,4 +431,51 @@ void TMainWindow::InitTable()
         ui->tableWidget->setColumnHidden( 3, true );// in sizes
         ui->tableWidget->setColumnHidden( 4, true );// in heights
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MeasurementsWasSaved(bool saved)
+{
+    setWindowModified(!saved);
+    ui->actionSave->setEnabled(!saved);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetCurrentFile(const QString &fileName)
+{
+    curFile = fileName;
+    QString shownName = QFileInfo(curFile).fileName();
+    if (curFile.isEmpty())
+    {
+        shownName = tr("untitled");
+        if (mType == MeasurementsType::Standard)
+        {
+            shownName += ".vst";
+        }
+        else
+        {
+            shownName += ".vit";
+        }
+        ui->labelPathToFile->setText(tr("<Empty>"));
+        ui->pushButtonShowInFolder->setEnabled(false);
+    }
+    else
+    {
+        ui->labelPathToFile->setText(curFile);
+        ui->pushButtonShowInFolder->setEnabled(true);
+    }
+    shownName += "[*]";
+    setWindowTitle(shownName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::SaveMeasurements(const QString &fileName, QString &error)
+{
+    const bool result = m->SaveDocument(fileName, error);
+    if (result)
+    {
+        SetCurrentFile(fileName);
+        MeasurementsWasSaved(result);
+    }
+    return result;
 }

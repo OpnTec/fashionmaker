@@ -41,6 +41,9 @@
 #   include <QtMath>
 #endif
 
+const QString VCommonSettings::SettingPathsIndividualMeasurements     = QStringLiteral("paths/individual_measurements");
+const QString VCommonSettings::SettingPathsStandardMeasurements       = QStringLiteral("paths/standard_measurements");
+
 const QString VCommonSettings::SettingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
 const QString VCommonSettings::SettingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
 const QString VCommonSettings::SettingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
@@ -65,6 +68,30 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
                      QObject *parent)
     :QSettings(format, scope, organization, application, parent)
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathIndividualMeasurements() const
+{
+    return value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
+{
+    setValue(SettingPathsIndividualMeasurements, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathStandardMeasurements() const
+{
+    return value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathStandardMeasurements(const QString &value)
+{
+    setValue(SettingPathsStandardMeasurements, value);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VCommonSettings::GetOsSeparator() const

@@ -37,6 +37,11 @@ class VTapeSettings : public VCommonSettings
 public:
     VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                   QObject *parent = 0);
+
+    virtual QString StandardTablesPath()const Q_DECL_OVERRIDE;
+
+private:
+    Q_DISABLE_COPY(VTapeSettings)
 };
 
 #endif // VTAPESETTINGS_H

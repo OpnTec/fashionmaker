@@ -423,7 +423,7 @@
         <item row="1" column="1">
          <layout class="QHBoxLayout" name="horizontalLayoutPath">
           <item>
-           <widget class="QLabel" name="label_18">
+           <widget class="QLabel" name="labelPathToFile">
             <property name="text">
              <string>Path to file</string>
             </property>

@@ -28,9 +28,81 @@
 
 #include "vtapesettings.h"
 
+#include <QApplication>
+#include <QDir>
+
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
                              QObject *parent)
     :VCommonSettings(format, scope, organization, application, parent)
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTapeSettings::StandardTablesPath() const
+{
+    const QString stPath = QStringLiteral("/tables/standard");
+#ifdef Q_OS_WIN
+    QDir dir(QApplication::applicationDirPath() + stPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+    else
+    {
+        return QApplication::applicationDirPath() + "../../valentina/bin" + stPath;
+    }
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir1(QApplication::applicationDirPath() + stPath);
+        if (dir1.exists())
+        {
+            return dir1.absolutePath();
+        }
+
+        QDir dir2(QApplication::applicationDirPath() + "../../valentina/bin" + stPath);
+        if (dir2.exists())
+        {
+            return dir2.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    }
+#else // Unix
+    #ifdef QT_DEBUG
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QApplication::applicationDirPath() + "../../valentina/bin" + stPath;
+        }
+    #else
+        QDir dir1(QApplication::applicationDirPath() + stPath);
+        if (dir1.exists())
+        {
+            return dir1.absolutePath();
+        }
+
+        QDir dir2(QApplication::applicationDirPath() + "../../valentina/bin" + stPath);
+        if (dir2.exists())
+        {
+            return dir2.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    #endif
+#endif
 }

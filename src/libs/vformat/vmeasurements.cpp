@@ -272,7 +272,7 @@ void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHei
     mElement.appendChild(version);
 
     QDomElement ro = createElement(TagReadOnly);
-    const QDomText roNodeText = createTextNode(false);
+    const QDomText roNodeText = createTextNode("false");
     ro.appendChild(roNodeText);
     mElement.appendChild(ro);
 
@@ -311,7 +311,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(version);
 
     QDomElement ro = createElement(TagReadOnly);
-    const QDomText roNodeText = createTextNode(false);
+    const QDomText roNodeText = createTextNode("false");
     ro.appendChild(roNodeText);
     mElement.appendChild(ro);
 

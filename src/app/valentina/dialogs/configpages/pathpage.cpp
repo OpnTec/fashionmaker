@@ -88,8 +88,8 @@ void PathPage::DefaultPath()
     switch (row)
     {
         case 1: // standard measurements
-            item->setText(VSettings::StandardTablesPath());
-            item->setToolTip(VSettings::StandardTablesPath());
+            item->setText(qApp->Settings()->StandardTablesPath());
+            item->setToolTip(qApp->Settings()->StandardTablesPath());
             break;
         case 0: // individual measurements
         case 2: // pattern path

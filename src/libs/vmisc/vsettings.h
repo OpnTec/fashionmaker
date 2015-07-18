@@ -39,16 +39,10 @@ public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
-    static QString StandardTablesPath();
+    virtual QString StandardTablesPath() const Q_DECL_OVERRIDE;
 
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
-
-    QString GetPathIndividualMeasurements() const;
-    void SetPathIndividualMeasurements(const QString &value);
-
-    QString GetPathStandardMeasurements() const;
-    void SetPathStandardMeasurements(const QString &value);
 
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
@@ -128,8 +122,6 @@ private:
     Q_DISABLE_COPY(VSettings)
     static const QString SettingConfigurationLabelLanguage;
 
-    static const QString SettingPathsIndividualMeasurements;
-    static const QString SettingPathsStandardMeasurements;
     static const QString SettingPathsPattern;
     static const QString SettingPathsLayout;
 

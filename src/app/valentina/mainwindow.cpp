@@ -1543,7 +1543,7 @@ bool MainWindow::SaveAs()
     }
     else
     {
-        dir = QFileInfo(curFile).absolutePath() + tr("/pattern.val");
+        dir = QFileInfo(curFile).absolutePath() + "/" + tr("pattern") + ".val";
     }
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir, filters);
 

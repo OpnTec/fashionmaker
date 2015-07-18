@@ -73,10 +73,15 @@ private:
     VContainer      *data;
     Unit             mUnit;
     MeasurementsType mType;
+    QString          curFile;
 
     void SetupMenu();
     void InitWindow();
     void InitTable();
+
+    void MeasurementsWasSaved(bool saved);
+    void SetCurrentFile(const QString &fileName);
+    bool SaveMeasurements(const QString &fileName, QString &error);
 };
 
 #endif // TMAINWINDOW_H
