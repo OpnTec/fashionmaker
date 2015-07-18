@@ -135,7 +135,10 @@ QString VMeasurements::Notes() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetNotes(const QString &text)
 {
-    setTagText(TagNotes, text);
+    if (not ReadOnly())
+    {
+        setTagText(TagNotes, text);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +150,10 @@ QString VMeasurements::FamilyName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetFamilyName(const QString &text)
 {
-    setTagText(TagFamilyName, text);
+    if (not ReadOnly())
+    {
+        setTagText(TagFamilyName, text);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,7 +165,10 @@ QString VMeasurements::GivenName() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetGivenName(const QString &text)
 {
-    setTagText(TagGivenName, text);
+    if (not ReadOnly())
+    {
+        setTagText(TagGivenName, text);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,7 +181,10 @@ QDate VMeasurements::BirthDate() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetBirthDate(const QDate &date)
 {
-    setTagText(TagBirthDate, date.toString("yyyy-MM-dd"));
+    if (not ReadOnly())
+    {
+        setTagText(TagBirthDate, date.toString("yyyy-MM-dd"));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,7 +196,10 @@ SexType VMeasurements::Sex() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetSex(const SexType &sex)
 {
-    setTagText(TagSex, GenderToStr(sex));
+    if (not ReadOnly())
+    {
+        setTagText(TagSex, GenderToStr(sex));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,7 +211,10 @@ QString VMeasurements::Email() const
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetEmail(const QString &text)
 {
-    setTagText(TagEmail, text);
+    if (not ReadOnly())
+    {
+        setTagText(TagEmail, text);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
