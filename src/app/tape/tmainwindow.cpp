@@ -260,36 +260,42 @@ void TMainWindow::AboutApplication()
 void TMainWindow::SaveGivenName()
 {
     m->SetGivenName(ui->lineEditGivenName->text());
+    MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveFamilyName()
 {
     m->SetFamilyName(ui->lineEditFamilyName->text());
+    MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveEmail()
 {
     m->SetEmail(ui->lineEditEmail->text());
+    MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveSex(int index)
 {
     m->SetSex(static_cast<SexType>(ui->comboBoxSex->itemData(index).toInt()));
+    MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveBirthDate(const QDate &date)
 {
     m->SetBirthDate(date);
+    MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveNotes()
 {
     m->SetNotes(ui->plainTextEditNotes->toPlainText());
+    MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
