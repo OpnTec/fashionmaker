@@ -121,6 +121,19 @@ void TMainWindow::FileOpen()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::closeEvent(QCloseEvent *event)
+{
+    if (MaybeSave())
+    {
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileSave()
 {
     if (curFile.isEmpty())
@@ -494,4 +507,25 @@ bool TMainWindow::SaveMeasurements(const QString &fileName, QString &error)
         MeasurementsWasSaved(result);
     }
     return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::MaybeSave()
+{
+    if (this->isWindowModified())
+    {
+        QMessageBox::StandardButton ret;
+        ret = QMessageBox::warning(this, tr("Unsaved changes"), tr("Measurements have been modified.\n"
+                                                             "Do you want to save your changes?"),
+                                   QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        if (ret == QMessageBox::Save)
+        {
+            FileSave();
+        }
+        else if (ret == QMessageBox::Cancel)
+        {
+            return false;
+        }
+    }
+    return true;
 }

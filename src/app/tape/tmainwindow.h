@@ -52,6 +52,9 @@ public slots:
     void FileNew();
     void FileOpen();
 
+protected:
+    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+
 private slots:
     void FileSave();
     void FileSaveAs();
@@ -82,6 +85,8 @@ private:
     void MeasurementsWasSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
     bool SaveMeasurements(const QString &fileName, QString &error);
+
+    bool MaybeSave();
 };
 
 #endif // TMAINWINDOW_H

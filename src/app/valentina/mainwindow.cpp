@@ -2437,7 +2437,7 @@ bool MainWindow::MaybeSave()
     if (this->isWindowModified() && guiEnabled)
     {
         QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("Unsaved change"), tr("The pattern has been modified.\n"
+        ret = QMessageBox::warning(this, tr("Unsaved changes"), tr("The pattern has been modified.\n"
                                                              "Do you want to save your changes?"),
                                    QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         if (ret == QMessageBox::Save)
