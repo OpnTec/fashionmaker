@@ -50,6 +50,8 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->tabWidget->setVisible(false);
 
     SetupMenu();
+
+    setWindowTitle(tr("untitled"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,7 +215,15 @@ void TMainWindow::AboutToShowWindowMenu()
     for (int i = 0; i < windows.count(); ++i)
     {
         TMainWindow *window = windows.at(i);
-        QAction *action = ui->menuWindow->addAction(window->windowTitle(), this, SLOT(ShowWindow()));
+
+        QString title = window->windowTitle();
+        const int index = title.lastIndexOf("[*]");
+        if (index != -1)
+        {
+            title.replace(index, 3, "*");
+        }
+
+        QAction *action = ui->menuWindow->addAction(title, this, SLOT(ShowWindow()));
         action->setData(i);
         action->setCheckable(true);
         if (window == this)
