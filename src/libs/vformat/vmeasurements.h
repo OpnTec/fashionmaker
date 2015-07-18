@@ -66,6 +66,9 @@ public:
     QString Email() const;
     void    SetEmail(const QString &text);
 
+    bool    ReadOnly() const;
+    void    SetReadOnly(bool ro);
+
     static const QString TagVST;
     static const QString TagVIT;
     static const QString TagBodyMeasurements;
@@ -79,6 +82,7 @@ public:
     static const QString TagBirthDate;
     static const QString TagSex;
     static const QString TagEmail;
+    static const QString TagReadOnly;
 
     static const QString AttrBase;
 

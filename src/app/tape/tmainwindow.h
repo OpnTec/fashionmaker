@@ -58,6 +58,13 @@ private slots:
     void AboutToShowWindowMenu();
     void ShowWindow();
     void AboutApplication();
+    void SaveGivenName();
+    void SaveFamilyName();
+    void SaveEmail();
+    void SaveSex(int index);
+    void SaveBirthDate(const QDate & date);
+    void SaveNotes();
+    void ReadOnly(bool ro);
 
 private:
     Q_DISABLE_COPY(TMainWindow)

@@ -76,13 +76,13 @@ Unit DialogNewMeasurements::MUnit() const
 //---------------------------------------------------------------------------------------------------------------------
 int DialogNewMeasurements::BaseSize() const
 {
-    return ui->comboBoxBaseSize->currentData().toInt();
+    return ui->comboBoxBaseSize->currentText().toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int DialogNewMeasurements::BaseHeight() const
 {
-    return ui->comboBoxBaseHeight->currentData().toInt();
+    return ui->comboBoxBaseHeight->currentText().toInt();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -164,6 +164,57 @@ void TMainWindow::AboutApplication()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveGivenName()
+{
+    m->SetGivenName(ui->lineEditGivenName->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveFamilyName()
+{
+    m->SetFamilyName(ui->lineEditFamilyName->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveEmail()
+{
+    m->SetEmail(ui->lineEditEmail->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveSex(int index)
+{
+    m->SetSex(static_cast<SexType>(ui->comboBoxSex->itemData(index).toInt()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveBirthDate(const QDate &date)
+{
+    m->SetBirthDate(date);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveNotes()
+{
+    m->SetNotes(ui->plainTextEditNotes->toPlainText());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ReadOnly(bool ro)
+{
+    ui->actionReadOnly->setChecked(ro);
+    if (ro)
+    {
+        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_locked.png"));
+    }
+    else
+    {
+        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_opened.png"));
+    }
+    m->SetReadOnly(ro);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -179,16 +230,10 @@ void TMainWindow::SetupMenu()
     connect(ui->actionSaveAs, &QAction::triggered, this, &TMainWindow::FileSaveAs);
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
-    QAction *separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    ui->menuFile->insertAction(ui->actionQuit, separatorAct);
+    connect(ui->actionReadOnly, &QAction::triggered, this, &TMainWindow::ReadOnly);
 
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
     ui->actionQuit->setShortcuts(QKeySequence::Quit);
-
-    // Edit
-    //ui->actionUndo->setShortcuts(QKeySequence::Undo);
-    //ui->actionRedo->setShortcuts(QKeySequence::Redo);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
@@ -211,13 +256,19 @@ void TMainWindow::InitWindow()
     if (mType == MeasurementsType::Standard)
     {
         ui->labelMType->setText(tr("Standard measurements"));
-        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + VDomDocument::UnitsToStr(m->MUnit(), true));
-        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) +
-                                                           VDomDocument::UnitsToStr(m->MUnit(), true));
+        ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
+                                        VDomDocument::UnitsToStr(m->MUnit(), true));
+        ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
+                                          VDomDocument::UnitsToStr(m->MUnit(), true));
 
         // Tab Measurements
         delete ui->labelValue;
         delete ui->horizontalLayoutValue;
+        delete ui->plainTextEditFormula;
+        delete ui->pushButtonGrowLength;
+        delete ui->toolButtonExprLength;
+        delete ui->labelEqual;
+        delete ui->labelResultCalculation;
 
         // Tab Information
         delete ui->labelGivenName;
@@ -254,6 +305,26 @@ void TMainWindow::InitWindow()
         delete ui->labelBaseSizeValue;
         delete ui->labelBaseHeight;
         delete ui->labelBaseHeightValue;
+
+        ui->lineEditGivenName->setText(m->GivenName());
+        ui->lineEditFamilyName->setText(m->FamilyName());
+
+        ui->comboBoxSex->addItem(tr("male"), QVariant(static_cast<int>(SexType::Male)));
+        ui->comboBoxSex->addItem(tr("female"), QVariant(static_cast<int>(SexType::Female)));
+        const qint32 index = ui->comboBoxSex->findData(static_cast<int>(m->Sex()));
+        ui->comboBoxSex->setCurrentIndex(index);
+
+        ui->dateEditBirthDate->setDate(m->BirthDate());
+        ui->lineEditEmail->setText(m->Email());
+        ui->plainTextEditNotes->setPlainText(m->Notes());
+
+        connect(ui->lineEditGivenName, &QLineEdit::editingFinished, this, &TMainWindow::SaveGivenName);
+        connect(ui->lineEditFamilyName, &QLineEdit::editingFinished, this, &TMainWindow::SaveFamilyName);
+        connect(ui->lineEditEmail, &QLineEdit::editingFinished, this, &TMainWindow::SaveEmail);
+        connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                &TMainWindow::SaveSex);
+        connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &TMainWindow::SaveBirthDate);
+        connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
     }
 
     ui->actionAddCustom->setEnabled(true);

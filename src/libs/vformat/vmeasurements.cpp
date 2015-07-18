@@ -43,6 +43,7 @@ const QString VMeasurements::TagGivenName        = QStringLiteral("given-name");
 const QString VMeasurements::TagBirthDate        = QStringLiteral("birth-date");
 const QString VMeasurements::TagSex              = QStringLiteral("sex");
 const QString VMeasurements::TagEmail            = QStringLiteral("email");
+const QString VMeasurements::TagReadOnly         = QStringLiteral("read-only");
 
 const QString VMeasurements::AttrBase = QStringLiteral("base");
 
@@ -199,6 +200,32 @@ void VMeasurements::SetEmail(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VMeasurements::ReadOnly() const
+{
+    if (UniqueTagText(TagReadOnly, "false") == "true")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetReadOnly(bool ro)
+{
+    if (ro)
+    {
+        setTagText(TagReadOnly, "true");
+    }
+    else
+    {
+        setTagText(TagReadOnly, "false");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::GenderToStr(const SexType &sex)
 {
     switch (sex)
@@ -244,6 +271,11 @@ void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHei
     version.appendChild(newNodeText);
     mElement.appendChild(version);
 
+    QDomElement ro = createElement(TagReadOnly);
+    const QDomText roNodeText = createTextNode(false);
+    ro.appendChild(roNodeText);
+    mElement.appendChild(ro);
+
     mElement.appendChild(createElement(TagNotes));
 
     QDomElement mUnit = createElement(TagUnit);
@@ -277,6 +309,11 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     const QDomText newNodeText = createTextNode(VVITConverter::MeasurementMaxVerStr);
     version.appendChild(newNodeText);
     mElement.appendChild(version);
+
+    QDomElement ro = createElement(TagReadOnly);
+    const QDomText roNodeText = createTextNode(false);
+    ro.appendChild(roNodeText);
+    mElement.appendChild(ro);
 
     mElement.appendChild(createElement(TagNotes));
 

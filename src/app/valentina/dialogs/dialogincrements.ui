@@ -39,7 +39,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabStandard">
       <property name="sizePolicy">
@@ -108,7 +108,7 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="pagePersonalInformation">
           <property name="enabled">
@@ -118,8 +118,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>559</width>
-            <height>82</height>
+            <width>939</width>
+            <height>411</height>
            </rect>
           </property>
           <attribute name="icon">

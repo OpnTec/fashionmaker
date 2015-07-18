@@ -377,7 +377,15 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                return domElement.text();
+                const QString text = domElement.text();
+                if (text.isEmpty())
+                {
+                    return defVal;
+                }
+                else
+                {
+                    return text;
+                }
             }
         }
     }
