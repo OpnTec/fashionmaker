@@ -43,6 +43,8 @@ public:
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_OVERRIDE;
 
+    int AddEmptyMeasurement(QString &name);
+
     MeasurementsType Type() const;
     Unit MUnit() const;
     int BaseSize() const;
@@ -83,8 +85,14 @@ public:
     static const QString TagSex;
     static const QString TagEmail;
     static const QString TagReadOnly;
+    static const QString TagMeasurement;
 
     static const QString AttrBase;
+    static const QString AttrValue;
+    static const QString AttrSizeIncrease;
+    static const QString AttrHeightIncrease;
+    static const QString AttrDescription;
+    static const QString AttrName;
 
     static const QString SexMale;
     static const QString SexFemale;
@@ -99,6 +107,7 @@ private:
     /** @brief data container with data. */
     VContainer     *data;
     MeasurementsType type;
+    int id;
 
     void CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight);
     void CreateEmptyIndividualFile(Unit unit);

@@ -341,6 +341,63 @@ void TMainWindow::ReadOnly(bool ro)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AddCustom()
+{
+    ui->tableWidget->setFocus(Qt::OtherFocusReason);
+    ui->tableWidget->blockSignals(true);
+    const qint32 currentRow  = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow( currentRow );
+
+    qint32 num = 1;
+    QString name;
+    do
+    {
+        name = QString("@" + tr("M_%1")).arg(num);
+        num++;
+    } while (data->IsUnique(name) == false);
+
+    const int id = m->AddEmptyMeasurement(name);
+
+    VMeasurement *meash;
+    if (mType == MeasurementsType::Standard)
+    {
+        meash = new VMeasurement(name, 0, 0, 0);
+    }
+    else
+    {
+        meash = new VMeasurement(data, id, name, 0, "0");
+    }
+    data->AddVariable(name, meash);
+
+    if (mType == MeasurementsType::Individual)
+    {
+        AddCell(name, currentRow, 0, id); // name
+        AddCell("0", currentRow, 2); // value
+    }
+    else
+    {
+        AddCell(name, currentRow, 0); // name
+        AddCell("0", currentRow, 1); // calculated value
+        AddCell("0", currentRow, 3); // base value
+        AddCell("0", currentRow, 4); // in sizes
+        AddCell("0", currentRow, 5); // in heights
+    }
+
+    //ui->toolButtonRemove->setEnabled(true);
+    ui->tableWidget->blockSignals(false);
+
+    ui->tableWidget->selectRow(currentRow);
+
+    MeasurementsWasSaved(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AddKnown()
+{
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -360,6 +417,10 @@ void TMainWindow::SetupMenu()
 
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
     ui->actionQuit->setShortcuts(QKeySequence::Quit);
+
+    // Measurements
+    connect(ui->actionAddCustom, &QAction::triggered, this, &TMainWindow::AddCustom);
+    connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
@@ -466,13 +527,14 @@ void TMainWindow::InitTable()
 {
     if (mType == MeasurementsType::Standard)
     {
-        ui->tableWidget->setColumnHidden( 1, true );// value
+        ui->tableWidget->setColumnHidden( 2, true );// value
     }
     else
     {
-        ui->tableWidget->setColumnHidden( 2, true );// base value
-        ui->tableWidget->setColumnHidden( 3, true );// in sizes
-        ui->tableWidget->setColumnHidden( 4, true );// in heights
+        ui->tableWidget->setColumnHidden( 1, true );// calculated value
+        ui->tableWidget->setColumnHidden( 3, true );// base value
+        ui->tableWidget->setColumnHidden( 4, true );// in sizes
+        ui->tableWidget->setColumnHidden( 5, true );// in heights
     }
 }
 
@@ -542,4 +604,22 @@ bool TMainWindow::MaybeSave()
         }
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AddCell(const QString &text, int row, int column, int id)
+{
+    QTableWidgetItem *item = new QTableWidgetItem(text);
+    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    // set the item non-editable (view only), and non-selectable
+    Qt::ItemFlags flags = item->flags();
+    flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
+
+    if (mType == MeasurementsType::Individual && id >= 0)
+    {
+        item->setData(Qt::UserRole, id);
+    }
+
+    ui->tableWidget->setItem(row, column, item);
 }

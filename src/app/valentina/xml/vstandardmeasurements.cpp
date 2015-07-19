@@ -116,8 +116,8 @@ void VStandardMeasurements::ReadMeasurement(const QDomElement &domElement, const
         qWarning()<<"Standard table can't use inch unit.";
     }
 
-    data->AddVariable(tag, new VMeasurement(tag, value, size_increase, height_increase, qApp->TrVars()->GuiText(tag),
-                                            qApp->TrVars()->Description(tag), tag));
+    data->AddVariable(tag, new VMeasurement(tag, value, size_increase, height_increase,
+                                            qApp->TrVars()->GuiText(tag), qApp->TrVars()->Description(tag), tag));
 }
 
 

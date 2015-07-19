@@ -31,6 +31,8 @@
 
 #include <QSharedData>
 
+#include "vcontainer.h"
+
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
@@ -40,24 +42,27 @@ class VMeasurementData : public QSharedData
 {
 public:
 
-    VMeasurementData()
-        :gui_text(QString()), _tagName(QString())
+    VMeasurementData(const QString &gui_text, const QString &tagName)
+        :data(VContainer(nullptr, nullptr)), id(0), gui_text(gui_text), _tagName(tagName)
     {}
 
-    VMeasurementData(const QString &gui_text, const QString &tagName)
-        :gui_text(gui_text), _tagName(tagName)
+    VMeasurementData(VContainer *data, quint32 id, const QString &formula, const QString &gui_text,
+                     const QString &tagName)
+        :data(*data), id(id), formula(formula), gui_text(gui_text), _tagName(tagName)
     {}
 
     VMeasurementData(const VMeasurementData &m)
-        :QSharedData(m), gui_text(m.gui_text), _tagName(m._tagName)
+        :QSharedData(m), data(m.data), id(m.id), formula(m.formula), gui_text(m.gui_text), _tagName(m._tagName)
     {}
 
     virtual  ~VMeasurementData();
 
     /** @brief description description measurement */
-    QString        gui_text;
-
-    QString        _tagName;
+    VContainer data;
+    quint32 id;
+    QString formula;
+    QString gui_text;
+    QString _tagName;
 };
 
 VMeasurementData::~VMeasurementData()

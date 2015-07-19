@@ -32,7 +32,7 @@
        <string>Remove measurement</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
@@ -82,12 +82,20 @@
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>true</bool>
           </attribute>
           <column>
            <property name="text">
             <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Calculated value</string>
            </property>
           </column>
           <column>
@@ -606,7 +614,15 @@
     <addaction name="actionAboutQt"/>
     <addaction name="actionAboutTape"/>
    </widget>
+   <widget class="QMenu" name="menuMeasurements">
+    <property name="title">
+     <string>Measurements</string>
+    </property>
+    <addaction name="actionAddKnown"/>
+    <addaction name="actionAddCustom"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuMeasurements"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>

@@ -35,6 +35,7 @@
 #include <QStringList>
 
 class VMeasurementData;
+class VContainer;
 
 /**
  * @brief The VMeasurement class keep data row of standard table
@@ -42,12 +43,12 @@ class VMeasurementData;
 class VMeasurement :public VVariable
 {
 public:
-    VMeasurement();
-    VMeasurement(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
+    VMeasurement(const QString &name, const qreal &base, const qreal &ksize,
+                 const qreal &kheight, const QString &gui_text = QString(), const QString &description = QString(),
+                 const QString &TagName = QString());
+    VMeasurement(VContainer *data, quint32 id, const QString &name, const qreal &base, const QString &formula,
                  const QString &gui_text = QString(), const QString &description = QString(),
                  const QString &TagName = QString());
-    VMeasurement(const QString &name, const qreal &base, const QString &gui_text = QString(),
-                 const QString &description = QString(), const QString &TagName = QString());
     VMeasurement(const VMeasurement &m);
     VMeasurement &operator=(const VMeasurement &m);
     virtual ~VMeasurement() Q_DECL_OVERRIDE;

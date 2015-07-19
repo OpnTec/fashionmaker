@@ -31,16 +31,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VMeasurement create empty measurement
- */
-VMeasurement::VMeasurement()
-    :VVariable(), d(new VMeasurementData)
-{
-    SetType(VarType::Measurement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VMeasurement create measurement for standard table
  * @param name measurement's name
  * @param base value in base size and height
@@ -50,7 +40,8 @@ VMeasurement::VMeasurement()
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
+VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &ksize,
+                           const qreal &kheight,
                            const QString &gui_text, const QString &description, const QString &tagName)
     :VVariable(name, base, ksize, kheight, description), d(new VMeasurementData(gui_text, tagName))
 {
@@ -66,9 +57,10 @@ VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const QString &name, const qreal &base, const QString &gui_text, const QString &description,
+VMeasurement::VMeasurement(VContainer *data, quint32 id, const QString &name, const qreal &base,
+                           const QString &formula, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(name, base, description), d(new VMeasurementData(gui_text, tagName))
+    :VVariable(name, base, description), d(new VMeasurementData(data, id, formula, gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }

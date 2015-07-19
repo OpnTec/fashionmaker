@@ -68,6 +68,8 @@ private slots:
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
     void ReadOnly(bool ro);
+    void AddCustom();
+    void AddKnown();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
@@ -87,6 +89,8 @@ private:
     bool SaveMeasurements(const QString &fileName, QString &error);
 
     bool MaybeSave();
+
+    void AddCell(const QString &text, int row, int column, int id = -1);
 };
 
 #endif // TMAINWINDOW_H

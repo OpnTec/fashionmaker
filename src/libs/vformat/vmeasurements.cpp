@@ -44,8 +44,14 @@ const QString VMeasurements::TagBirthDate        = QStringLiteral("birth-date");
 const QString VMeasurements::TagSex              = QStringLiteral("sex");
 const QString VMeasurements::TagEmail            = QStringLiteral("email");
 const QString VMeasurements::TagReadOnly         = QStringLiteral("read-only");
+const QString VMeasurements::TagMeasurement      = QStringLiteral("m");
 
-const QString VMeasurements::AttrBase = QStringLiteral("base");
+const QString VMeasurements::AttrBase           = QStringLiteral("base");
+const QString VMeasurements::AttrValue          = QStringLiteral("value");
+const QString VMeasurements::AttrSizeIncrease   = QStringLiteral("size_increase");
+const QString VMeasurements::AttrHeightIncrease = QStringLiteral("height_increase");
+const QString VMeasurements::AttrDescription    = QStringLiteral("description");
+const QString VMeasurements::AttrName           = QStringLiteral("name");
 
 const QString VMeasurements::SexMale    = QStringLiteral("male");
 const QString VMeasurements::SexFemale  = QStringLiteral("female");
@@ -55,7 +61,8 @@ const QString VMeasurements::SexUnknown = QStringLiteral("unknown");
 VMeasurements::VMeasurements(VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Unknown)
+      type(MeasurementsType::Unknown),
+      id(-1)
 {
     SCASSERT(data != nullptr)
 }
@@ -64,7 +71,8 @@ VMeasurements::VMeasurements(VContainer *data)
 VMeasurements::VMeasurements(Unit unit, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Individual)
+      type(MeasurementsType::Individual),
+      id(-1)
 {
     SCASSERT(data != nullptr);
 
@@ -75,7 +83,8 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Standard)
+      type(MeasurementsType::Standard),
+      id(-1)
 {
     SCASSERT(data != nullptr);
 
@@ -85,6 +94,32 @@ VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurements::~VMeasurements()
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VMeasurements::AddEmptyMeasurement(QString &name)
+{
+    QDomElement element = createElement(TagMeasurement);
+
+    SetAttribute(element, AttrName, name);
+    SetAttribute(element, AttrValue, QString("0"));
+
+    if (type == MeasurementsType::Standard)
+    {
+        SetAttribute(element, AttrSizeIncrease, QString("0"));
+        SetAttribute(element, AttrHeightIncrease, QString("0"));
+    }
+    else
+    {
+        ++id;
+        SetAttribute(element, AttrId, id);
+        SetAttribute(element, AttrDescription, QString(""));
+    }
+
+    QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+    list.at(0).appendChild(element);
+
+    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
