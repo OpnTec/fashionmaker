@@ -70,6 +70,7 @@ private slots:
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
     void ReadOnly(bool ro);
+
     void AddCustom();
     void AddKnown();
 
@@ -105,7 +106,7 @@ private:
 
     bool MaybeSave();
 
-    void AddCell(const QString &text, int row, int column, int id = -1);
+    void AddCell(const QString &text, int row, int column);
 
     QComboBox *SetGradationList(const QString &label, const QStringList &list);
     void       SetDefaultHeight(int value);

@@ -360,8 +360,6 @@ void TMainWindow::AddCustom()
 {
     ui->tableWidget->setFocus(Qt::OtherFocusReason);
     ui->tableWidget->blockSignals(true);
-    const qint32 currentRow  = ui->tableWidget->rowCount();
-    ui->tableWidget->insertRow( currentRow );
 
     qint32 num = 1;
     QString name;
@@ -371,7 +369,21 @@ void TMainWindow::AddCustom()
         num++;
     } while (data->IsUnique(name) == false);
 
-    const int id = m->AddEmptyMeasurement(name);
+    qint32 currentRow;
+
+    if (ui->tableWidget->currentRow() == -1)
+    {
+        currentRow  = ui->tableWidget->rowCount();
+        ui->tableWidget->insertRow( currentRow );
+        m->AddEmpty(name);
+    }
+    else
+    {
+        currentRow  = ui->tableWidget->currentRow()+1;
+        ui->tableWidget->insertRow( currentRow );
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+        m->AddEmptyAfter(nameField->text(), name);
+    }
 
     VMeasurement *meash;
     if (mType == MeasurementsType::Standard)
@@ -380,13 +392,13 @@ void TMainWindow::AddCustom()
     }
     else
     {
-        meash = new VMeasurement(data, id, name, 0, "0");
+        meash = new VMeasurement(data, currentRow, name, 0, "0");
     }
     data->AddVariable(name, meash);
 
     if (mType == MeasurementsType::Individual)
     {
-        AddCell(name, currentRow, 0, id); // name
+        AddCell(name, currentRow, 0); // name
         AddCell("0", currentRow, 1); // calculated value
         AddCell("0", currentRow, 2); // formula
     }
@@ -758,19 +770,15 @@ bool TMainWindow::MaybeSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::AddCell(const QString &text, int row, int column, int id)
+void TMainWindow::AddCell(const QString &text, int row, int column)
 {
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
     flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
     item->setFlags(flags);
-
-    if (mType == MeasurementsType::Individual && id >= 0)
-    {
-        item->setData(Qt::UserRole, id);
-    }
 
     ui->tableWidget->setItem(row, column, item);
 }

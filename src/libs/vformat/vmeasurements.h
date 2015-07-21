@@ -43,7 +43,8 @@ public:
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_OVERRIDE;
 
-    int AddEmptyMeasurement(QString &name);
+    void AddEmpty(const QString &name);
+    void AddEmptyAfter(const QString &after, const QString &name);
 
     MeasurementsType Type() const;
     Unit MUnit() const;
@@ -107,12 +108,14 @@ private:
     /** @brief data container with data. */
     VContainer     *data;
     MeasurementsType type;
-    int id;
 
     void CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight);
     void CreateEmptyIndividualFile(Unit unit);
 
     qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;
+
+    QDomElement MakeEmpty(const QString &name);
+    QDomElement FindM(const QString &name) const;
 };
 
 #endif // VMEASUREMENTS_H

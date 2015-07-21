@@ -61,8 +61,7 @@ const QString VMeasurements::SexUnknown = QStringLiteral("unknown");
 VMeasurements::VMeasurements(VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Unknown),
-      id(-1)
+      type(MeasurementsType::Unknown)
 {
     SCASSERT(data != nullptr)
 }
@@ -71,8 +70,7 @@ VMeasurements::VMeasurements(VContainer *data)
 VMeasurements::VMeasurements(Unit unit, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Individual),
-      id(-1)
+      type(MeasurementsType::Individual)
 {
     SCASSERT(data != nullptr);
 
@@ -83,8 +81,7 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data)
 VMeasurements::VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data)
     :VDomDocument(),
       data(data),
-      type(MeasurementsType::Standard),
-      id(-1)
+      type(MeasurementsType::Standard)
 {
     SCASSERT(data != nullptr);
 
@@ -97,29 +94,30 @@ VMeasurements::~VMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurements::AddEmptyMeasurement(QString &name)
+void VMeasurements::AddEmpty(const QString &name)
 {
-    QDomElement element = createElement(TagMeasurement);
+    const QDomElement element = MakeEmpty(name);
 
-    SetAttribute(element, AttrName, name);
-    SetAttribute(element, AttrValue, QString("0"));
+    const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+    list.at(0).appendChild(element);
+}
 
-    if (type == MeasurementsType::Standard)
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::AddEmptyAfter(const QString &after, const QString &name)
+{
+    const QDomElement element = MakeEmpty(name);
+    const QDomElement sibling = FindM(after);
+
+    const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+
+    if (sibling.isNull())
     {
-        SetAttribute(element, AttrSizeIncrease, QString("0"));
-        SetAttribute(element, AttrHeightIncrease, QString("0"));
+        list.at(0).appendChild(element);
     }
     else
     {
-        ++id;
-        SetAttribute(element, AttrId, id);
-        SetAttribute(element, AttrDescription, QString(""));
+        list.at(0).insertAfter(element, sibling);
     }
-
-    QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-    list.at(0).appendChild(element);
-
-    return id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -410,4 +408,46 @@ qreal VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qrea
         }
     }
     return defVal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VMeasurements::MakeEmpty(const QString &name)
+{
+    QDomElement element = createElement(TagMeasurement);
+
+    SetAttribute(element, AttrName, name);
+    SetAttribute(element, AttrValue, QString("0"));
+
+    if (type == MeasurementsType::Standard)
+    {
+        SetAttribute(element, AttrSizeIncrease, QString("0"));
+        SetAttribute(element, AttrHeightIncrease, QString("0"));
+    }
+    else
+    {
+        SetAttribute(element, AttrDescription, QString(""));
+    }
+
+    return element;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VMeasurements::FindM(const QString &name) const
+{
+    QDomNodeList list = elementsByTagName(TagMeasurement);
+
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement domElement = list.at(i).toElement();
+        if (domElement.isNull() == false)
+        {
+            const QString parameter = domElement.attribute(AttrName);
+            if (parameter == name)
+            {
+                return domElement;
+            }
+        }
+    }
+
+    return QDomElement();
 }
