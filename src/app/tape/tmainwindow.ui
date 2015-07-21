@@ -602,6 +602,9 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="windowTitle">
+    <string>Menu</string>
+   </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
@@ -619,6 +622,26 @@
    <addaction name="actionReadOnly"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBarGradation">
+   <property name="windowTitle">
+    <string>Gradation</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="actionOpen">
    <property name="icon">
     <iconset theme="document-open">

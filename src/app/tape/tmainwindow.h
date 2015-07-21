@@ -39,6 +39,8 @@ namespace Ui
     class TMainWindow;
 }
 
+class QComboBox;
+
 class TMainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -71,6 +73,9 @@ private slots:
     void AddCustom();
     void AddKnown();
 
+    void ChangedSize(const QString &text);
+    void ChangedHeight(const QString & text);
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
@@ -79,6 +84,8 @@ private:
     Unit             mUnit;
     MeasurementsType mType;
     QString          curFile;
+    QComboBox       *gradationHeights;
+    QComboBox       *gradationSizes;
 
     void SetupMenu();
     void InitWindow();
@@ -91,6 +98,12 @@ private:
     bool MaybeSave();
 
     void AddCell(const QString &text, int row, int column, int id = -1);
+
+    QComboBox *SetGradationList(const QString &label, const QStringList &list);
+    void       SetDefaultHeight(int value);
+    void       SetDefaultSize(int value);
+
+    void RefreshData();
 };
 
 #endif // TMAINWINDOW_H

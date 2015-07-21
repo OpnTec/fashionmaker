@@ -35,6 +35,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QComboBox>
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
@@ -44,10 +45,16 @@ TMainWindow::TMainWindow(QWidget *parent)
       data(nullptr),
       mUnit(Unit::Cm),
       mType(MeasurementsType::Individual),
-      curFile()
+      curFile(),
+      gradationHeights(nullptr),
+      gradationSizes(nullptr)
 {
     ui->setupUi(this);
     ui->tabWidget->setVisible(false);
+
+    ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    ui->toolBarGradation->setContextMenuPolicy(Qt::PreventContextMenu);
+    ui->toolBarGradation->setVisible(false);
 
     SetupMenu();
 
@@ -84,6 +91,8 @@ void TMainWindow::FileNew()
         mType = measurements.Type();
 
         data = new VContainer(qApp->TrVars(), &mUnit);
+        data->SetHeight(measurements.BaseHeight());
+        data->SetSize(measurements.BaseSize());
 
         if (mType == MeasurementsType::Standard)
         {
@@ -398,6 +407,20 @@ void TMainWindow::AddKnown()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ChangedSize(const QString &text)
+{
+    data->SetSize(text.toInt());
+    RefreshData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ChangedHeight(const QString &text)
+{
+    data->SetHeight(text.toInt());
+    RefreshData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -468,6 +491,20 @@ void TMainWindow::InitWindow()
         delete ui->comboBoxSex;
         delete ui->labelEmail;
         delete ui->lineEditEmail;
+
+        ui->toolBarGradation->setVisible(true);
+        const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
+        const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
+
+        gradationHeights = SetGradationList(tr("Height: "), listHeights);
+        SetDefaultHeight(static_cast<int>(data->height()));
+        connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &TMainWindow::ChangedHeight);
+
+        gradationSizes = SetGradationList(tr("Size: "), listSizes);
+        SetDefaultSize(static_cast<int>(data->size()));
+        connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &TMainWindow::ChangedSize);
     }
     else
     {
@@ -622,4 +659,50 @@ void TMainWindow::AddCell(const QString &text, int row, int column, int id)
     }
 
     ui->tableWidget->setItem(row, column, item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QComboBox *TMainWindow::SetGradationList(const QString &label, const QStringList &list)
+{
+    ui->toolBarGradation->addWidget(new QLabel(label));
+
+    QComboBox *comboBox = new QComboBox;
+    comboBox->addItems(list);
+    ui->toolBarGradation->addWidget(comboBox);
+
+    return comboBox;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetDefaultHeight(int value)
+{
+    const qint32 index = gradationHeights->findText(QString("%1").arg(value));
+    if (index != -1)
+    {
+        gradationHeights->setCurrentIndex(index);
+    }
+    else
+    {
+        data->SetHeight(gradationHeights->currentText().toInt());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetDefaultSize(int value)
+{
+    const qint32 index = gradationSizes->findText(QString("%1").arg(value));
+    if (index != -1)
+    {
+        gradationSizes->setCurrentIndex(index);
+    }
+    else
+    {
+        data->SetSize(gradationSizes->currentText().toInt());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RefreshData()
+{
+
 }
