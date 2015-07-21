@@ -384,7 +384,8 @@ void TMainWindow::AddCustom()
     if (mType == MeasurementsType::Individual)
     {
         AddCell(name, currentRow, 0, id); // name
-        AddCell("0", currentRow, 2); // value
+        AddCell("0", currentRow, 1); // calculated value
+        AddCell("0", currentRow, 2); // formula
     }
     else
     {
@@ -399,6 +400,9 @@ void TMainWindow::AddCustom()
     ui->tableWidget->blockSignals(false);
 
     ui->tableWidget->selectRow(currentRow);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
     MeasurementsWasSaved(false);
 }
@@ -615,17 +619,42 @@ void TMainWindow::InitTable()
 {
     if (mType == MeasurementsType::Standard)
     {
-        ui->tableWidget->setColumnHidden( 2, true );// value
+        ui->tableWidget->setColumnHidden( 2, true );// formula
     }
     else
     {
-        ui->tableWidget->setColumnHidden( 1, true );// calculated value
         ui->tableWidget->setColumnHidden( 3, true );// base value
         ui->tableWidget->setColumnHidden( 4, true );// in sizes
         ui->tableWidget->setColumnHidden( 5, true );// in heights
     }
 
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this, &TMainWindow::ShowMData);
+
+    ShowUnits();
+
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowUnits()
+{
+    const QString unit = VDomDocument::UnitsToStr(mUnit);
+
+    ShowHeaderUnits(ui->tableWidget, 1, unit);// calculated value
+    ShowHeaderUnits(ui->tableWidget, 3, unit);// base value
+    ShowHeaderUnits(ui->tableWidget, 4, unit);// in sizes
+    ShowHeaderUnits(ui->tableWidget, 5, unit);// in heights
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString &unit)
+{
+    SCASSERT(table != nullptr);
+
+    const QString header = table->horizontalHeaderItem(column)->text();
+    const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
+    table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -72,7 +72,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Value</string>
+            <string>Formula</string>
            </property>
           </column>
           <column>
@@ -343,7 +343,7 @@
            <item row="4" column="1">
             <widget class="QLabel" name="labelCalculatedValue">
              <property name="text">
-              <string notr="true">0</string>
+              <string notr="true"/>
              </property>
             </widget>
            </item>

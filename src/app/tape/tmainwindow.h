@@ -93,6 +93,9 @@ private:
     void InitWindow();
     void InitTable();
 
+    void ShowUnits();
+    void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
+
     void MeasurementsWasSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
     bool SaveMeasurements(const QString &fileName, QString &error);
