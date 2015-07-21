@@ -78,6 +78,8 @@ private slots:
 
     void ShowMData();
 
+    void DeployFormula();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
@@ -88,6 +90,7 @@ private:
     QString          curFile;
     QComboBox       *gradationHeights;
     QComboBox       *gradationSizes;
+    int              formulaBaseHeight;
 
     void SetupMenu();
     void InitWindow();

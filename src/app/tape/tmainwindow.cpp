@@ -38,6 +38,8 @@
 #include <QMessageBox>
 #include <QComboBox>
 
+#define DIALOG_MAX_FORMULA_HEIGHT 64
+
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
     :QMainWindow(parent),
@@ -48,7 +50,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       mType(MeasurementsType::Individual),
       curFile(),
       gradationHeights(nullptr),
-      gradationSizes(nullptr)
+      gradationSizes(nullptr),
+      formulaBaseHeight(0)
 {
     ui->setupUi(this);
     ui->tabWidget->setVisible(false);
@@ -457,6 +460,7 @@ void TMainWindow::ShowMData()
         }
         else
         {
+            this->formulaBaseHeight = ui->plainTextEditFormula->height();
             EvalFormula(meash->GetFormula(), meash->GetData(), ui->labelCalculatedValue);
             ui->plainTextEditFormula->setPlainText(qApp->TrVars()->FormulaToUser(meash->GetFormula()));
         }
@@ -475,6 +479,33 @@ void TMainWindow::ShowMData()
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::DeployFormula()
+{
+    SCASSERT(ui->plainTextEditFormula != nullptr);
+    SCASSERT(ui->pushButtonGrow != nullptr)
+    if (ui->plainTextEditFormula->height() < DIALOG_MAX_FORMULA_HEIGHT)
+    {
+        ui->plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
+        //Set icon from theme (internal for Windows system)
+        ui->pushButtonGrow->setIcon(QIcon::fromTheme("go-next",
+                                                     QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+    }
+    else
+    {
+       ui->plainTextEditFormula->setFixedHeight(formulaBaseHeight);
+       //Set icon from theme (internal for Windows system)
+       ui->pushButtonGrow->setIcon(QIcon::fromTheme("go-down",
+                                                    QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+    }
+
+    // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
+    // This code prevent this.
+    setUpdatesEnabled(false);
+    repaint();
+    setUpdatesEnabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -604,6 +635,7 @@ void TMainWindow::InitWindow()
                 &TMainWindow::SaveSex);
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &TMainWindow::SaveBirthDate);
         connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
+        connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TMainWindow::DeployFormula);
     }
 
     ui->actionAddCustom->setEnabled(true);
