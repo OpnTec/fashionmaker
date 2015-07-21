@@ -118,14 +118,14 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="labelValue">
+           <item row="5" column="0">
+            <widget class="QLabel" name="labelFormula">
              <property name="text">
-              <string>Value:</string>
+              <string>Formula:</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="5" column="1">
             <layout class="QHBoxLayout" name="horizontalLayoutValue">
              <item>
               <widget class="QPlainTextEdit" name="plainTextEditFormula">
@@ -207,93 +207,58 @@
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QLabel" name="labelEqual">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="share/resources/tapeicon.qrc">:/tapeicon/24x24/equal.png</pixmap>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="labelResultCalculation">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>87</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Value of first angle</string>
-               </property>
-               <property name="whatsThis">
-                <string notr="true"/>
-               </property>
-               <property name="text">
-                <string>_</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
-           <item row="5" column="0">
+           <item row="6" column="0">
             <widget class="QLabel" name="labelBaseValue">
              <property name="text">
               <string>Base value:</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="6" column="1">
             <widget class="QDoubleSpinBox" name="doubleSpinBoxBaseValue">
              <property name="enabled">
               <bool>false</bool>
              </property>
             </widget>
            </item>
-           <item row="6" column="0">
+           <item row="7" column="0">
             <widget class="QLabel" name="labelInSizes">
              <property name="text">
               <string>In sizes:</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
+           <item row="7" column="1">
             <widget class="QDoubleSpinBox" name="doubleSpinBoxInSizes">
              <property name="enabled">
               <bool>false</bool>
              </property>
             </widget>
            </item>
-           <item row="7" column="0">
+           <item row="8" column="0">
             <widget class="QLabel" name="labelInHeights">
              <property name="text">
               <string>In heights:</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
+           <item row="8" column="1">
             <widget class="QDoubleSpinBox" name="doubleSpinBoxInHeights">
              <property name="enabled">
               <bool>false</bool>
              </property>
             </widget>
            </item>
-           <item row="8" column="0">
+           <item row="9" column="0">
             <widget class="QLabel" name="label_7">
              <property name="text">
               <string>Description:</string>
              </property>
             </widget>
            </item>
-           <item row="8" column="1">
+           <item row="9" column="1">
             <widget class="QPlainTextEdit" name="plainTextEdit">
              <property name="enabled">
               <bool>false</bool>
@@ -364,6 +329,20 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelCalculated">
+             <property name="text">
+              <string>Calculated value:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="labelCalculatedValue">
+             <property name="text">
+              <string notr="true">0</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

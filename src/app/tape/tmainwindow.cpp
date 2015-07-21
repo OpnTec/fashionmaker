@@ -472,13 +472,11 @@ void TMainWindow::InitWindow()
                                           VDomDocument::UnitsToStr(m->MUnit(), true));
 
         // Tab Measurements
-        delete ui->labelValue;
+        delete ui->labelFormula;
         delete ui->horizontalLayoutValue;
         delete ui->plainTextEditFormula;
         delete ui->pushButtonGrowLength;
         delete ui->toolButtonExprLength;
-        delete ui->labelEqual;
-        delete ui->labelResultCalculation;
 
         // Tab Information
         delete ui->labelGivenName;
