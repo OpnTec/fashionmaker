@@ -208,3 +208,28 @@ void VMeasurement::setTagName(const QString &tagName)
 {
     d->_tagName = tagName;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurement::GetFormula() const
+{
+    return d->formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VMeasurement::IsCustom() const
+{
+    if (GetName().indexOf("@") == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VContainer *VMeasurement::GetData()
+{
+    return &d->data;
+}

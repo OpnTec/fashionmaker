@@ -70,6 +70,9 @@ public:
 
     QString translationsPath() const;
 
+    template <typename T>
+    QString LocaleToString(const T &value);
+
 public slots:
     TMainWindow *NewMainWindow();
 
@@ -90,5 +93,15 @@ private:
 
     void Clean();
 };
+
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline QString MApplication::LocaleToString(const T &value)
+{
+    QLocale loc;
+    qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
+    return loc.toString(value);
+}
 
 #endif // MAPPLICATION_H

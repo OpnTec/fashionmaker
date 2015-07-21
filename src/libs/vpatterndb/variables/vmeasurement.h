@@ -53,9 +53,17 @@ public:
     VMeasurement &operator=(const VMeasurement &m);
     virtual ~VMeasurement() Q_DECL_OVERRIDE;
 
-    QString            GetGuiText() const;
-    QString            TagName() const;
-    void               setTagName(const QString &TagName);
+    QString GetGuiText() const;
+
+    QString TagName() const;
+    void    setTagName(const QString &TagName);
+
+    QString GetFormula() const;
+
+    bool    IsCustom() const;
+
+    VContainer *GetData();
+
     static QStringList ListHeights(QMap<GHeights, bool> heights, Unit patternUnit);
     static QStringList ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit);
     static QStringList WholeListHeights(Unit patternUnit);

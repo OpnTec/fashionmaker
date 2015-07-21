@@ -76,6 +76,8 @@ private slots:
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString & text);
 
+    void ShowMData();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
@@ -104,6 +106,13 @@ private:
     void       SetDefaultSize(int value);
 
     void RefreshData();
+
+    void Controls();
+    void MFields(bool enabled);
+
+    QString ClearCustomName(const QString &name) const;
+
+    void EvalFormula(const QString &formula, VContainer *data, QLabel *label);
 };
 
 #endif // TMAINWINDOW_H

@@ -31,6 +31,7 @@
 #include "mapplication.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
+#include "../vpatterndb/calculator.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -347,6 +348,8 @@ void TMainWindow::ReadOnly(bool ro)
         ui->comboBoxSex->setDisabled(ro);
         ui->lineEditEmail->setDisabled(ro);
     }
+
+    ui->groupBoxDetails->setDisabled(ro);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -421,6 +424,56 @@ void TMainWindow::ChangedHeight(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowMData()
+{
+    Controls(); // Buttons remove, up, down
+
+    if (ui->tableWidget->rowCount() > 0)
+    {
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+        QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+
+        ui->lineEditName->setText(ClearCustomName(meash->GetName()));
+        if (meash->IsCustom())
+        {
+            ui->plainTextEditDescription->setPlainText(meash->GetDescription());
+        }
+        else
+        {
+            //Show from known description
+            ui->plainTextEditDescription->setPlainText("");
+        }
+
+        if (mType == MeasurementsType::Standard)
+        {
+            ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(nameField->text(), mType)));
+            ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
+            ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
+            ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
+        }
+        else
+        {
+            EvalFormula(meash->GetFormula(), meash->GetData(), ui->labelCalculatedValue);
+            ui->plainTextEditFormula->setPlainText(qApp->TrVars()->FormulaToUser(meash->GetFormula()));
+        }
+
+        if (m->ReadOnly())
+        {
+            MFields(false);
+        }
+        else
+        {
+            MFields(true);
+
+            if (not meash->IsCustom())
+            {
+                ui->lineEditName->setEnabled(false);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -475,8 +528,8 @@ void TMainWindow::InitWindow()
         delete ui->labelFormula;
         delete ui->horizontalLayoutValue;
         delete ui->plainTextEditFormula;
-        delete ui->pushButtonGrowLength;
-        delete ui->toolButtonExprLength;
+        delete ui->pushButtonGrow;
+        delete ui->toolButtonExpr;
 
         // Tab Information
         delete ui->labelGivenName;
@@ -571,6 +624,8 @@ void TMainWindow::InitTable()
         ui->tableWidget->setColumnHidden( 4, true );// in sizes
         ui->tableWidget->setColumnHidden( 5, true );// in heights
     }
+
+    connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this, &TMainWindow::ShowMData);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -703,4 +758,112 @@ void TMainWindow::SetDefaultSize(int value)
 void TMainWindow::RefreshData()
 {
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Controls()
+{
+    if (m->ReadOnly())
+    {
+        ui->toolButtonRemove->setEnabled(false);
+        ui->toolButtonUp->setEnabled(false);
+        ui->toolButtonDown->setEnabled(false);
+        return;
+    }
+
+    if (ui->tableWidget->rowCount() > 0)
+    {
+        ui->toolButtonRemove->setEnabled(true);
+    }
+    else
+    {
+        ui->toolButtonRemove->setEnabled(false);
+    }
+
+    if (ui->tableWidget->rowCount() >= 2)
+    {
+        if (ui->tableWidget->currentRow() == 0)
+        {
+            ui->toolButtonUp->setEnabled(false);
+            ui->toolButtonDown->setEnabled(true);
+        }
+        else if (ui->tableWidget->currentRow() == ui->tableWidget->rowCount()-1)
+        {
+            ui->toolButtonUp->setEnabled(true);
+            ui->toolButtonDown->setEnabled(false);
+        }
+        else
+        {
+            ui->toolButtonUp->setEnabled(true);
+            ui->toolButtonDown->setEnabled(true);
+        }
+    }
+    else
+    {
+        ui->toolButtonUp->setEnabled(false);
+        ui->toolButtonDown->setEnabled(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MFields(bool enabled)
+{
+    ui->lineEditName->setEnabled(enabled);
+    ui->plainTextEditDescription->setEnabled(enabled);
+
+    if (mType == MeasurementsType::Standard)
+    {
+        ui->doubleSpinBoxBaseValue->setEnabled(enabled);
+        ui->doubleSpinBoxInSizes->setEnabled(enabled);
+        ui->doubleSpinBoxInHeights->setEnabled(enabled);
+    }
+    else
+    {
+        ui->plainTextEditFormula->setEnabled(enabled);
+        ui->pushButtonGrow->setEnabled(enabled);
+        ui->toolButtonExpr->setEnabled(enabled);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString TMainWindow::ClearCustomName(const QString &name) const
+{
+    QString clear = name;
+    const int index = clear.indexOf("@");
+    if (index == 0)
+    {
+        clear.remove(0, 1);
+    }
+    return clear;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *label)
+{
+    const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+    if (formula.isEmpty())
+    {
+        label->setText(tr("Error") + " (" + postfix + ")");
+        label->setToolTip(tr("Empty field"));
+    }
+    else
+    {
+        try
+        {
+            // Replace line return character with spaces for calc if exist
+            QString f = formula;
+            f.replace("\n", " ");
+            Calculator *cal = new Calculator(data, mType);
+            const qreal result = cal->EvalFormula(f);
+            delete cal;
+
+            label->setText(qApp->LocaleToString(result) + " " +postfix);
+            label->setToolTip(tr("Value"));
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            label->setText(tr("Error") + " (" + postfix + ")");
+            label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        }
+    }
 }
