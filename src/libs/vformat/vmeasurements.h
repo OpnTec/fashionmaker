@@ -45,6 +45,7 @@ public:
 
     void AddEmpty(const QString &name);
     void AddEmptyAfter(const QString &after, const QString &name);
+    void Remove(const QString &name);
 
     MeasurementsType Type() const;
     Unit MUnit() const;

@@ -356,6 +356,24 @@ void TMainWindow::ReadOnly(bool ro)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Remove()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->Remove(nameField->text());
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddCustom()
 {
     ui->tableWidget->setFocus(Qt::OtherFocusReason);
@@ -654,6 +672,8 @@ void TMainWindow::InitWindow()
     ui->actionAddKnown->setEnabled(true);
     ui->actionReadOnly->setEnabled(true);
     ui->actionSaveAs->setEnabled(true);
+
+    connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
 
     InitTable();
 }

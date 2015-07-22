@@ -121,6 +121,13 @@ void VMeasurements::AddEmptyAfter(const QString &after, const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::Remove(const QString &name)
+{
+    const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+    list.at(0).removeChild(FindM(name));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 MeasurementsType VMeasurements::Type() const
 {
     return type;
