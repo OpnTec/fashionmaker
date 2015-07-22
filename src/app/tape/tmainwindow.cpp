@@ -33,6 +33,7 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
+#include "../qmuparser/qmudef.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -869,6 +870,8 @@ void TMainWindow::InitWindow()
     ui->actionAddKnown->setEnabled(true);
     ui->actionReadOnly->setEnabled(true);
     ui->actionSaveAs->setEnabled(true);
+
+    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp())) );
 
     connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
     connect(ui->toolButtonUp, &QToolButton::clicked, this, &TMainWindow::MoveUp);
