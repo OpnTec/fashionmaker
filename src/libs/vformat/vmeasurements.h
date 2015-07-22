@@ -46,6 +46,8 @@ public:
     void AddEmpty(const QString &name);
     void AddEmptyAfter(const QString &after, const QString &name);
     void Remove(const QString &name);
+    void MoveUp(const QString &name);
+    void MoveDown(const QString &name);
 
     MeasurementsType Type() const;
     Unit MUnit() const;

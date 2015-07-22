@@ -128,6 +128,36 @@ void VMeasurements::Remove(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::MoveUp(const QString &name)
+{
+    const QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        const QDomElement prSibling = node.previousSiblingElement(TagMeasurement);
+        if (not prSibling.isNull())
+        {
+            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+            list.at(0).insertBefore(node, prSibling);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::MoveDown(const QString &name)
+{
+    const QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        const QDomElement nextSibling = node.nextSiblingElement(TagMeasurement);
+        if (not nextSibling.isNull())
+        {
+            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+            list.at(0).insertAfter(node, nextSibling);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 MeasurementsType VMeasurements::Type() const
 {
     return type;

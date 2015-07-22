@@ -70,7 +70,10 @@ private slots:
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
     void ReadOnly(bool ro);
+
     void Remove();
+    void MoveUp();
+    void MoveDown();
 
     void AddCustom();
     void AddKnown();

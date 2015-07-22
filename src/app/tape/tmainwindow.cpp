@@ -374,6 +374,42 @@ void TMainWindow::Remove()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MoveUp()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->MoveUp(nameField->text());
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MoveDown()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->MoveDown(nameField->text());
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddCustom()
 {
     ui->tableWidget->setFocus(Qt::OtherFocusReason);
@@ -429,7 +465,6 @@ void TMainWindow::AddCustom()
         AddCell("0", currentRow, 5); // in heights
     }
 
-    //ui->toolButtonRemove->setEnabled(true);
     ui->tableWidget->blockSignals(false);
 
     ui->tableWidget->selectRow(currentRow);
@@ -674,6 +709,8 @@ void TMainWindow::InitWindow()
     ui->actionSaveAs->setEnabled(true);
 
     connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, &TMainWindow::MoveUp);
+    connect(ui->toolButtonDown, &QToolButton::clicked, this, &TMainWindow::MoveDown);
 
     InitTable();
 }
