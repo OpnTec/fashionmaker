@@ -32,6 +32,7 @@
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
 #include "../vpatterndb/calculator.h"
+#include "../ifc/ifcdef.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -419,7 +420,7 @@ void TMainWindow::AddCustom()
     QString name;
     do
     {
-        name = QString("@" + tr("M_%1")).arg(num);
+        name = QString(CustomSign + tr("M_%1")).arg(num);
         num++;
     } while (data->IsUnique(name) == false);
 
@@ -519,9 +520,9 @@ void TMainWindow::ShowMData()
         if (mType == MeasurementsType::Standard)
         {
             ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(nameField->text(), mType)));
-            ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
-            ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
-            ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
+            ui->spinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
+            ui->spinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
+            ui->spinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
         }
         else
         {
@@ -540,6 +541,7 @@ void TMainWindow::ShowMData()
 
             if (not meash->IsCustom())
             {
+                ui->plainTextEditDescription->setEnabled(false);
                 ui->lineEditName->setEnabled(false);
             }
         }
@@ -571,6 +573,157 @@ void TMainWindow::DeployFormula()
     setUpdatesEnabled(false);
     repaint();
     setUpdatesEnabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMName()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+
+    QString newName = ui->lineEditName->text();
+    if (meash->IsCustom())
+    {
+        newName = CustomSign + newName;
+    }
+
+    if (data->IsUnique(newName))
+    {
+        m->SetMName(nameField->text(), newName);
+        MeasurementsWasSaved(false);
+        RefreshData();
+
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->resizeColumnsToContents();
+        ui->tableWidget->resizeRowsToContents();
+        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    }
+    else
+    {
+        ui->lineEditName->setText(ClearCustomName(nameField->text()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMValue()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->SetMValue(nameField->text(), ui->plainTextEditFormula->toPlainText());
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMBaseValue(int value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->SetMBaseValue(nameField->text(), value);
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMSizeIncrease(int value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->SetMSizeIncrease(nameField->text(), value);
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMHeightIncrease(int value)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->SetMHeightIncrease(nameField->text(), value);
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMDescription()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->SetMDescription(nameField->text(), ui->plainTextEditDescription->toPlainText());
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -656,6 +809,13 @@ void TMainWindow::InitWindow()
         SetDefaultSize(static_cast<int>(data->size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedSize);
+
+        connect(ui->spinBoxBaseValue, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+                &TMainWindow::SaveMBaseValue);
+        connect(ui->spinBoxInHeights, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+                &TMainWindow::SaveMSizeIncrease);
+        connect(ui->spinBoxInHeights, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+                &TMainWindow::SaveMHeightIncrease);
     }
     else
     {
@@ -669,11 +829,11 @@ void TMainWindow::InitWindow()
 
         // Tab Measurements
         delete ui->labelBaseValue;
-        delete ui->doubleSpinBoxBaseValue;
+        delete ui->spinBoxBaseValue;
         delete ui->labelInSizes;
-        delete ui->doubleSpinBoxInSizes;
+        delete ui->spinBoxInSizes;
         delete ui->labelInHeights;
-        delete ui->doubleSpinBoxInHeights;
+        delete ui->spinBoxInHeights;
 
         // Tab Information
         delete ui->labelBaseSize;
@@ -701,6 +861,8 @@ void TMainWindow::InitWindow()
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &TMainWindow::SaveBirthDate);
         connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
         connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TMainWindow::DeployFormula);
+
+        connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMValue);
     }
 
     ui->actionAddCustom->setEnabled(true);
@@ -711,6 +873,9 @@ void TMainWindow::InitWindow()
     connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
     connect(ui->toolButtonUp, &QToolButton::clicked, this, &TMainWindow::MoveUp);
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &TMainWindow::MoveDown);
+
+    connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
+    connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
 
     InitTable();
 }
@@ -939,9 +1104,9 @@ void TMainWindow::MFields(bool enabled)
 
     if (mType == MeasurementsType::Standard)
     {
-        ui->doubleSpinBoxBaseValue->setEnabled(enabled);
-        ui->doubleSpinBoxInSizes->setEnabled(enabled);
-        ui->doubleSpinBoxInHeights->setEnabled(enabled);
+        ui->spinBoxBaseValue->setEnabled(enabled);
+        ui->spinBoxInSizes->setEnabled(enabled);
+        ui->spinBoxInHeights->setEnabled(enabled);
     }
     else
     {
@@ -955,7 +1120,7 @@ void TMainWindow::MFields(bool enabled)
 QString TMainWindow::ClearCustomName(const QString &name) const
 {
     QString clear = name;
-    const int index = clear.indexOf("@");
+    const int index = clear.indexOf(CustomSign);
     if (index == 0)
     {
         clear.remove(0, 1);

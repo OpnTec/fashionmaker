@@ -85,6 +85,13 @@ private slots:
 
     void DeployFormula();
 
+    void SaveMName();
+    void SaveMValue();
+    void SaveMBaseValue(int value);
+    void SaveMSizeIncrease(int value);
+    void SaveMHeightIncrease(int value);
+    void SaveMDescription();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

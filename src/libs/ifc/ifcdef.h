@@ -32,6 +32,8 @@
 #include <QtGlobal>
 #include "../vmisc/def.h"
 
+extern const QString CustomSign;
+
 #ifdef Q_OS_WIN32
     extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
     #include <windows.h>

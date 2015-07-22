@@ -218,7 +218,7 @@ QString VMeasurement::GetFormula() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VMeasurement::IsCustom() const
 {
-    if (GetName().indexOf("@") == 0)
+    if (GetName().indexOf(CustomSign) == 0)
     {
         return true;
     }

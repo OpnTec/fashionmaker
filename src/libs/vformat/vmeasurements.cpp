@@ -314,6 +314,66 @@ void VMeasurements::SetReadOnly(bool ro)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMName(const QString &name, const QString &text)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrName, text);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMValue(const QString &name, const QString &text)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrValue, text);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMBaseValue(const QString &name, int value)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrValue, value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMSizeIncrease(const QString &name, int value)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrSizeIncrease, value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMHeightIncrease(const QString &name, int value)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrHeightIncrease, value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMDescription(const QString &name, const QString &text)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrDescription, text);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::GenderToStr(const SexType &sex)
 {
     switch (sex)
@@ -453,15 +513,16 @@ QDomElement VMeasurements::MakeEmpty(const QString &name)
     QDomElement element = createElement(TagMeasurement);
 
     SetAttribute(element, AttrName, name);
-    SetAttribute(element, AttrValue, QString("0"));
 
     if (type == MeasurementsType::Standard)
     {
+        SetAttribute(element, AttrBase, QString("0"));
         SetAttribute(element, AttrSizeIncrease, QString("0"));
         SetAttribute(element, AttrHeightIncrease, QString("0"));
     }
     else
     {
+        SetAttribute(element, AttrValue, QString("0"));
         SetAttribute(element, AttrDescription, QString(""));
     }
 
