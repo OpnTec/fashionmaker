@@ -20,7 +20,7 @@
    <string>Tables of Variables</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../share/resources/icon.qrc">
+   <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -123,7 +123,7 @@
            </rect>
           </property>
           <attribute name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
             <normaloff>:/icon/16x16/info.png</normaloff>:/icon/16x16/info.png</iconset>
           </attribute>
           <attribute name="label">
@@ -283,7 +283,7 @@
            </rect>
           </property>
           <attribute name="icon">
-           <iconset resource="../share/resources/icon.qrc">
+           <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
             <normaloff>:/icon/16x16/measurement.png</normaloff>:/icon/16x16/measurement.png</iconset>
           </attribute>
           <attribute name="label">
@@ -796,7 +796,7 @@
   <tabstop>tableWidgetArcs</tabstop>
  </tabstops>
  <resources>
-  <include location="../share/resources/icon.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

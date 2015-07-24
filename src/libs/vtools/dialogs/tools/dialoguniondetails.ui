@@ -17,7 +17,7 @@
    <string>Union tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../../app/share/resources/icon.qrc">
+   <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="modal">
@@ -47,7 +47,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../app/share/resources/icon.qrc"/>
+  <include location="../../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -17,7 +17,7 @@
    <string>Individual measurements</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../share/resources/icon.qrc">
+   <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="modal">
@@ -246,7 +246,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../share/resources/icon.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

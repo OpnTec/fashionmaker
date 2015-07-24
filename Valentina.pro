@@ -8,3 +8,22 @@ include(common.pri)
 
 TEMPLATE = subdirs
 SUBDIRS = src
+
+RESOURCES += \
+    src/app/valentina/share/resources/icon.qrc \
+    src/app/valentina/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc \
+    src/app/share/resources/icon.qrc
