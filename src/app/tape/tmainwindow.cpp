@@ -373,6 +373,54 @@ void TMainWindow::Remove()
     MeasurementsWasSaved(false);
 
     RefreshData();
+
+    if (ui->tableWidget->rowCount() > 0)
+    {
+        ui->tableWidget->selectRow(0);
+        ui->tableWidget->resizeColumnsToContents();
+        ui->tableWidget->resizeRowsToContents();
+        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    }
+    else
+    {
+        ui->groupBoxDetails->setEnabled(false);
+
+        ui->lineEditName->blockSignals(true);
+        ui->lineEditName->setText("");
+        ui->lineEditName->blockSignals(false);
+
+        ui->plainTextEditDescription->blockSignals(true);
+        ui->plainTextEditDescription->setPlainText("");
+        ui->plainTextEditDescription->blockSignals(false);
+
+        if (mType == MeasurementsType::Standard)
+        {
+            ui->labelCalculatedValue->blockSignals(true);
+            ui->spinBoxBaseValue->blockSignals(true);
+            ui->spinBoxInSizes->blockSignals(true);
+            ui->spinBoxInHeights->blockSignals(true);
+
+            ui->labelCalculatedValue->setText("");
+            ui->spinBoxBaseValue->setValue(0);
+            ui->spinBoxInSizes->setValue(0);
+            ui->spinBoxInHeights->setValue(0);
+
+            ui->labelCalculatedValue->blockSignals(false);
+            ui->spinBoxBaseValue->blockSignals(false);
+            ui->spinBoxInSizes->blockSignals(false);
+            ui->spinBoxInHeights->blockSignals(false);
+        }
+        else
+        {
+            ui->labelCalculatedValue->blockSignals(true);
+            ui->labelCalculatedValue->setText("");
+            ui->labelCalculatedValue->blockSignals(false);
+
+            ui->plainTextEditFormula->blockSignals(true);
+            ui->plainTextEditFormula->setPlainText("");
+            ui->plainTextEditFormula->blockSignals(false);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -522,6 +570,8 @@ void TMainWindow::ShowMData()
 
     if (ui->tableWidget->rowCount() > 0)
     {
+        ui->groupBoxDetails->setEnabled(true);
+
         QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
         QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
 
