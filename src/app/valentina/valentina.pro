@@ -49,7 +49,6 @@ include(valentina.pri)
 
 # Resource files. This files will be included in binary.
 RESOURCES += \
-    share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
     share/resources/cursor.qrc \ # Tools cursor icons.
     share/resources/measurements.qrc \ # For measurements files that we save as resource.
     share/resources/flags.qrc \

@@ -31,6 +31,7 @@ include(vmisc.pri)
 # Resource files. This files will be included in binary.
 RESOURCES += \
     share/resources/theme.qrc \ # Windows theme icons.
+    share/resources/icon.qrc  # All other icons except cursors and Windows theme.
 
 # This is static library so no need in "make install"
 

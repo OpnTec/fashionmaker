@@ -14,7 +14,7 @@
    <string>Valentina</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="share/resources/icon.qrc">
+   <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -69,7 +69,7 @@
         <string>Tools for creating points.</string>
        </property>
        <attribute name="icon">
-        <iconset resource="share/resources/icon.qrc">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/toolsectionpoint.png</normaloff>:/icon/16x16/toolsectionpoint.png</iconset>
        </attribute>
        <attribute name="label">
@@ -351,7 +351,7 @@
            <string notr="true">...</string>
           </property>
           <property name="icon">
-           <iconset resource="share/resources/icon.qrc">
+           <iconset resource="share/resources/toolicon.qrc">
             <normaloff>:/toolicon/32x32/true_darts.png</normaloff>:/toolicon/32x32/true_darts.png</iconset>
           </property>
           <property name="iconSize">
@@ -386,7 +386,7 @@
         <string>Tools for creating lines.</string>
        </property>
        <attribute name="icon">
-        <iconset resource="share/resources/icon.qrc">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/toolsectionline.png</normaloff>:/icon/16x16/toolsectionline.png</iconset>
        </attribute>
        <attribute name="label">
@@ -472,7 +472,7 @@
         <string>Tools for creating curves.</string>
        </property>
        <attribute name="icon">
-        <iconset resource="share/resources/icon.qrc">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/toolsectioncurve.png</normaloff>:/icon/16x16/toolsectioncurve.png</iconset>
        </attribute>
        <attribute name="label">
@@ -636,7 +636,7 @@
         <string>Tools for creating arcs.</string>
        </property>
        <attribute name="icon">
-        <iconset resource="share/resources/icon.qrc">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/toolsectionarc.png</normaloff>:/icon/16x16/toolsectionarc.png</iconset>
        </attribute>
        <attribute name="label">
@@ -878,7 +878,7 @@
         <string>Tools for creating details.</string>
        </property>
        <attribute name="icon">
-        <iconset resource="share/resources/icon.qrc">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/toolsectiondetail.png</normaloff>:/icon/16x16/toolsectiondetail.png</iconset>
        </attribute>
        <attribute name="label">
@@ -955,7 +955,7 @@
         </rect>
        </property>
        <attribute name="icon">
-        <iconset resource="share/resources/icon.qrc">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/toolsectionlayout.png</normaloff>:/icon/16x16/toolsectionlayout.png</iconset>
        </attribute>
        <attribute name="label">
@@ -1414,7 +1414,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/draw.png</normaloff>:/icon/32x32/draw.png</iconset>
    </property>
    <property name="text">
@@ -1435,7 +1435,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/kontur.png</normaloff>:/icon/32x32/kontur.png</iconset>
    </property>
    <property name="text">
@@ -1456,7 +1456,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
    </property>
    <property name="text">
@@ -1471,7 +1471,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/new_draw.png</normaloff>:/icon/32x32/new_draw.png</iconset>
    </property>
    <property name="text">
@@ -1489,7 +1489,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/option_draw.png</normaloff>:/icon/32x32/option_draw.png</iconset>
    </property>
    <property name="text">
@@ -1507,7 +1507,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/table.png</normaloff>:/icon/32x32/table.png</iconset>
    </property>
    <property name="text">
@@ -1528,7 +1528,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/history.png</normaloff>:/icon/32x32/history.png</iconset>
    </property>
    <property name="text">
@@ -1546,7 +1546,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/layout.png</normaloff>:/icon/32x32/layout.png</iconset>
    </property>
    <property name="text">
@@ -1750,7 +1750,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
    </property>
    <property name="text">
@@ -1765,7 +1765,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
    </property>
    <property name="text">
@@ -1844,7 +1844,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/icon.qrc">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
      <normaloff>:/icon/32x32/export_to_picture_document.png</normaloff>:/icon/32x32/export_to_picture_document.png</iconset>
    </property>
    <property name="text">
@@ -1867,8 +1867,8 @@
   <tabstop>toolButtonSplinePath</tabstop>
  </tabstops>
  <resources>
-  <include location="share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>
