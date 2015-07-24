@@ -391,6 +391,15 @@ void TMainWindow::MoveUp()
     MeasurementsWasSaved(false);
 
     RefreshData();
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row-1);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
+
+    Controls(); // Buttons remove, up, down
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -409,6 +418,15 @@ void TMainWindow::MoveDown()
     MeasurementsWasSaved(false);
 
     RefreshData();
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row+1);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
+
+    Controls(); // Buttons remove, up, down
 }
 
 //---------------------------------------------------------------------------------------------------------------------
