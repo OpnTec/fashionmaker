@@ -49,6 +49,8 @@ public:
     void MoveUp(const QString &name);
     void MoveDown(const QString &name);
 
+    void ReadMeasurements() const;
+
     MeasurementsType Type() const;
     Unit MUnit() const;
     int BaseSize() const;
@@ -126,6 +128,8 @@ private:
 
     QDomElement MakeEmpty(const QString &name);
     QDomElement FindM(const QString &name) const;
+
+    qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 };
 
 #endif // VMEASUREMENTS_H

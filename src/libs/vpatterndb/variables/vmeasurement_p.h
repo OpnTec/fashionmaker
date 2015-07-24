@@ -42,27 +42,29 @@ class VMeasurementData : public QSharedData
 {
 public:
 
-    VMeasurementData(const QString &gui_text, const QString &tagName)
-        :data(VContainer(nullptr, nullptr)), id(0), gui_text(gui_text), _tagName(tagName)
+    VMeasurementData(quint32 index, const QString &gui_text, const QString &tagName)
+        :data(VContainer(nullptr, nullptr)), index(index), gui_text(gui_text), _tagName(tagName), formulaOk(true)
     {}
 
-    VMeasurementData(VContainer *data, quint32 id, const QString &formula, const QString &gui_text,
+    VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, const QString &gui_text,
                      const QString &tagName)
-        :data(*data), id(id), formula(formula), gui_text(gui_text), _tagName(tagName)
+        :data(*data), index(index), formula(formula), gui_text(gui_text), _tagName(tagName), formulaOk(ok)
     {}
 
     VMeasurementData(const VMeasurementData &m)
-        :QSharedData(m), data(m.data), id(m.id), formula(m.formula), gui_text(m.gui_text), _tagName(m._tagName)
+        :QSharedData(m), data(m.data), index(m.index), formula(m.formula), gui_text(m.gui_text), _tagName(m._tagName),
+          formulaOk(m.formulaOk)
     {}
 
     virtual  ~VMeasurementData();
 
     /** @brief description description measurement */
     VContainer data;
-    quint32 id;
+    quint32 index;
     QString formula;
     QString gui_text;
     QString _tagName;
+    bool formulaOk;
 };
 
 VMeasurementData::~VMeasurementData()

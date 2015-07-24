@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   tmainwindow.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -444,11 +444,11 @@ void TMainWindow::AddCustom()
     VMeasurement *meash;
     if (mType == MeasurementsType::Standard)
     {
-        meash = new VMeasurement(name, 0, 0, 0);
+        meash = new VMeasurement(currentRow, name, 0, 0, 0);
     }
     else
     {
-        meash = new VMeasurement(data, currentRow, name, 0, "0");
+        meash = new VMeasurement(data, currentRow, name, 0, "0", true);
     }
     data->AddVariable(name, meash);
 
@@ -507,7 +507,11 @@ void TMainWindow::ShowMData()
         QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
         QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
 
+        ui->lineEditName->blockSignals(true);
         ui->lineEditName->setText(ClearCustomName(meash->GetName()));
+        ui->lineEditName->blockSignals(false);
+
+        ui->plainTextEditDescription->blockSignals(true);
         if (meash->IsCustom())
         {
             ui->plainTextEditDescription->setPlainText(meash->GetDescription());
@@ -517,19 +521,44 @@ void TMainWindow::ShowMData()
             //Show from known description
             ui->plainTextEditDescription->setPlainText("");
         }
+        ui->plainTextEditDescription->blockSignals(false);
 
         if (mType == MeasurementsType::Standard)
         {
+            ui->labelCalculatedValue->blockSignals(true);
+            ui->spinBoxBaseValue->blockSignals(true);
+            ui->spinBoxInSizes->blockSignals(true);
+            ui->spinBoxInHeights->blockSignals(true);
+
             ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(nameField->text(), mType)));
             ui->spinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
             ui->spinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
             ui->spinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
+
+            ui->labelCalculatedValue->blockSignals(false);
+            ui->spinBoxBaseValue->blockSignals(false);
+            ui->spinBoxInSizes->blockSignals(false);
+            ui->spinBoxInHeights->blockSignals(false);
         }
         else
         {
-            this->formulaBaseHeight = ui->plainTextEditFormula->height();
             EvalFormula(meash->GetFormula(), meash->GetData(), ui->labelCalculatedValue);
-            ui->plainTextEditFormula->setPlainText(qApp->TrVars()->FormulaToUser(meash->GetFormula()));
+
+            ui->plainTextEditFormula->blockSignals(true);
+
+            QString formula;
+            try
+            {
+                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula());
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                Q_UNUSED(e);
+                formula = meash->GetFormula();
+            }
+
+            ui->plainTextEditFormula->setPlainText(formula);
+            ui->plainTextEditFormula->blockSignals(false);
         }
 
         if (m->ReadOnly())
@@ -540,10 +569,15 @@ void TMainWindow::ShowMData()
         {
             MFields(true);
 
-            if (not meash->IsCustom())
+            if (meash->IsCustom())
             {
-                ui->plainTextEditDescription->setEnabled(false);
-                ui->lineEditName->setEnabled(false);
+                ui->plainTextEditDescription->setReadOnly(false);
+                ui->lineEditName->setReadOnly(false);
+            }
+            else
+            {
+                ui->plainTextEditDescription->setReadOnly(false);
+                ui->lineEditName->setReadOnly(false);
             }
         }
     }
@@ -601,10 +635,12 @@ void TMainWindow::SaveMName()
         MeasurementsWasSaved(false);
         RefreshData();
 
+        ui->tableWidget->blockSignals(true);
         ui->tableWidget->selectRow(row);
         ui->tableWidget->resizeColumnsToContents();
         ui->tableWidget->resizeRowsToContents();
         ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+        ui->tableWidget->blockSignals(false);
     }
     else
     {
@@ -623,16 +659,56 @@ void TMainWindow::SaveMValue()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->SetMValue(nameField->text(), ui->plainTextEditFormula->toPlainText());
+
+    // Replace line return character with spaces for calc if exist
+    QString text = ui->plainTextEditFormula->toPlainText();
+    text.replace("\n", " ");
+
+    QTableWidgetItem *formulaField = ui->tableWidget->item(ui->tableWidget->currentRow(), 2);
+    if (formulaField->text() == text)
+    {
+        return;
+    }
+
+    if (text.isEmpty())
+    {
+        const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+        ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
+        return;
+    }
+
+    QString formula;
+    try
+    {
+        // Translate to internal look.
+        formula = qApp->TrVars()->FormulaFromUser(text, true);
+        QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+        EvalFormula(formula, meash->GetData(), ui->labelCalculatedValue);
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+        ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " +
+                                          tr("Parser error: %1").arg(e.GetMsg()));
+        return;
+    }
+
+    m->SetMValue(nameField->text(), formula);
 
     MeasurementsWasSaved(false);
 
+    const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
+
     RefreshData();
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
+
+    ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -719,12 +795,18 @@ void TMainWindow::SaveMDescription()
 
     MeasurementsWasSaved(false);
 
+    const QTextCursor cursor = ui->plainTextEditDescription->textCursor();
+
     RefreshData();
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
+
+    ui->plainTextEditDescription->setTextCursor(cursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -863,7 +945,9 @@ void TMainWindow::InitWindow()
         connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
         connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TMainWindow::DeployFormula);
 
-        connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMValue);
+        this->formulaBaseHeight = ui->plainTextEditFormula->height();
+        connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMValue,
+                Qt::UniqueConnection);
     }
 
     ui->actionAddCustom->setEnabled(true);
@@ -995,7 +1079,7 @@ bool TMainWindow::MaybeSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::AddCell(const QString &text, int row, int column)
+void TMainWindow::AddCell(const QString &text, int row, int column, bool ok)
 {
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -1004,6 +1088,13 @@ void TMainWindow::AddCell(const QString &text, int row, int column)
     Qt::ItemFlags flags = item->flags();
     flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
     item->setFlags(flags);
+
+    if (not ok)
+    {
+        QBrush brush = item->foreground();
+        brush.setColor(Qt::red);
+        item->setForeground(brush);
+    }
 
     ui->tableWidget->setItem(row, column, item);
 }
@@ -1051,7 +1142,68 @@ void TMainWindow::SetDefaultSize(int value)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData()
 {
+    data->ClearVariables(VarType::Measurement);
+    m->ReadMeasurements();
 
+    RefreshTable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RefreshTable()
+{
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->clearContents();
+
+    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
+    QMap<int, QSharedPointer<VMeasurement> > orderedTable;
+    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
+    for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
+    {
+        QSharedPointer<VMeasurement> meash = iterMap.value();
+        orderedTable.insert(meash->Index(), meash);
+    }
+
+    qint32 currentRow = -1;
+    QMap<int, QSharedPointer<VMeasurement> >::const_iterator iMap;
+    ui->tableWidget->setRowCount ( orderedTable.size() );
+    for (iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
+    {
+        QSharedPointer<VMeasurement> meash = iMap.value();
+        currentRow++;
+
+        if (mType == MeasurementsType::Individual)
+        {
+            AddCell(meash->GetName(), currentRow, 0); // name
+            AddCell(QString().setNum(*meash->GetValue()), currentRow, 1, meash->IsFormulaOk()); // calculated value
+
+            QString formula;
+            try
+            {
+                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula());
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                Q_UNUSED(e);
+                formula = meash->GetFormula();
+            }
+
+            AddCell(formula, currentRow, 2); // formula
+        }
+        else
+        {
+            AddCell(meash->GetName(), currentRow, 0); // name
+            AddCell(QString().setNum(data->GetTableValue(meash->GetName(), mType)), currentRow, 1,
+                    meash->IsFormulaOk()); // calculated value
+            AddCell(QString().setNum(meash->GetBase()), currentRow, 3); // base value
+            AddCell(QString().setNum(meash->GetKsize()), currentRow, 4); // in sizes
+            AddCell(QString().setNum(meash->GetKheight()), currentRow, 5); // in heights
+        }
+    }
+
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

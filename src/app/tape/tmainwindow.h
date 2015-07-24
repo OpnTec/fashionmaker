@@ -40,6 +40,7 @@ namespace Ui
 }
 
 class QComboBox;
+class QTableWidgetItem;
 
 class TMainWindow : public QMainWindow
 {
@@ -117,13 +118,14 @@ private:
 
     bool MaybeSave();
 
-    void AddCell(const QString &text, int row, int column);
+    void AddCell(const QString &text, int row, int column, bool ok = true);
 
     QComboBox *SetGradationList(const QString &label, const QStringList &list);
     void       SetDefaultHeight(int value);
     void       SetDefaultSize(int value);
 
     void RefreshData();
+    void RefreshTable();
 
     void Controls();
     void MFields(bool enabled);

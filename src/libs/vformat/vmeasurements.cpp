@@ -29,6 +29,8 @@
 #include "vmeasurements.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
+#include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../vpatterndb/calculator.h"
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
@@ -154,6 +156,46 @@ void VMeasurements::MoveDown(const QString &name)
             const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
             list.at(0).insertAfter(node, nextSibling);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::ReadMeasurements() const
+{
+    const QDomNodeList list = elementsByTagName(TagMeasurement);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        const QString name = GetParametrString(dom, AttrName);
+
+        QString description;
+        try
+        {
+            description = GetParametrString(dom, AttrDescription);
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        VMeasurement *meash;
+        if (type == MeasurementsType::Standard)
+        {
+            const quint32 base = GetParametrUInt(dom, AttrBase, "0");
+            const quint32 ksize = GetParametrUInt(dom, AttrSizeIncrease, "0");
+            const quint32 kheight = GetParametrUInt(dom, AttrHeightIncrease, "0");
+
+            meash = new VMeasurement(i, name, base, ksize, kheight, "", description);
+        }
+        else
+        {
+            QString formula = GetParametrString(dom, AttrValue, "0");
+            bool ok = false;
+            const qreal value = EvalFormula(data, formula, &ok);
+            meash = new VMeasurement(data, i, name, value, formula, ok, "", description);
+        }
+        data->AddVariable(name, meash);
     }
 }
 
@@ -548,4 +590,34 @@ QDomElement VMeasurements::FindM(const QString &name) const
     }
 
     return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool *ok) const
+{
+    if (formula.isEmpty())
+    {
+        *ok = true;
+        return 0;
+    }
+    else
+    {
+        try
+        {
+            // Replace line return character with spaces for calc if exist
+            QString f = formula;
+            f.replace("\n", " ");
+            Calculator *cal = new Calculator(data, type);
+            const qreal result = cal->EvalFormula(f);
+            delete cal;
+
+            *ok = true;
+            return result;
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            *ok = false;
+            return 0;
+        }
+    }
 }

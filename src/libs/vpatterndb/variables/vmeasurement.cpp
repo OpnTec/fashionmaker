@@ -40,10 +40,10 @@
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &ksize,
+VMeasurement::VMeasurement(quint32 index, const QString &name, const qreal &base, const qreal &ksize,
                            const qreal &kheight,
                            const QString &gui_text, const QString &description, const QString &tagName)
-    :VVariable(name, base, ksize, kheight, description), d(new VMeasurementData(gui_text, tagName))
+    :VVariable(name, base, ksize, kheight, description), d(new VMeasurementData(index, gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }
@@ -57,10 +57,10 @@ VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(VContainer *data, quint32 id, const QString &name, const qreal &base,
-                           const QString &formula, const QString &gui_text, const QString &description,
+VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base,
+                           const QString &formula, bool ok, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(name, base, description), d(new VMeasurementData(data, id, formula, gui_text, tagName))
+    :VVariable(name, base, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }
@@ -226,6 +226,18 @@ bool VMeasurement::IsCustom() const
     {
         return false;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VMeasurement::Index() const
+{
+    return d->index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VMeasurement::IsFormulaOk() const
+{
+    return d->formulaOk;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
