@@ -484,7 +484,7 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    const QString checkedLocale = Settings()->GetLocale();
+    const QString checkedLocale = ValentinaSettings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator *qtTranslator = new QTranslator(this);
@@ -576,7 +576,26 @@ const VTranslateVars *VApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    trVars = new VTranslateVars(Settings()->GetOsSeparator());
+    trVars = new VTranslateVars(ValentinaSettings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief OpenSettings get acsses to application settings.
+ *
+ * Because we can create object in constructor we open file separately.
+ */
+void VApplication::OpenSettings()
+{
+    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
+                             QApplication::applicationName(), this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSettings *VApplication::ValentinaSettings()
+{
+    SCASSERT(settings != nullptr);
+    return qobject_cast<VSettings *>(settings);
 }
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

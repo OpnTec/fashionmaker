@@ -75,6 +75,7 @@ private slots:
     void Remove();
     void MoveUp();
     void MoveDown();
+    void Fx();
 
     void AddCustom();
     void AddKnown();

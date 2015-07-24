@@ -1539,7 +1539,7 @@ bool MainWindow::SaveAs()
     QString dir;
     if (curFile.isEmpty())
     {
-        dir = qApp->Settings()->GetPathPattern() + "/" + tr("pattern") + ".val";
+        dir = qApp->ValentinaSettings()->GetPathPattern() + "/" + tr("pattern") + ".val";
     }
     else
     {
@@ -1572,9 +1572,9 @@ bool MainWindow::SaveAs()
     if (oldFileName != curFile)
     {// Now we have new file name after save as.
      // But still have previous name in restore list. We should delete them.
-        QStringList restoreFiles = qApp->Settings()->GetRestoreFileList();
+        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
         restoreFiles.removeAll(oldFileName);
-        qApp->Settings()->SetRestoreFileList(restoreFiles);
+        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
     }
     return result;
 }
@@ -1623,7 +1623,7 @@ void MainWindow::Open()
     qCDebug(vMainWindow, "Openning new file.");
     const QString filter(tr("Pattern files (*.val)"));
     //Get list last open files
-    const QStringList files = qApp->Settings()->GetRecentFileList();
+    const QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
     QString dir;
     if (files.isEmpty())
     {
@@ -1735,9 +1735,9 @@ void MainWindow::FileClosedCorrect()
     WriteSettings();
 
     //File was closed correct.
-    QStringList restoreFiles = qApp->Settings()->GetRestoreFileList();
+    QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
     restoreFiles.removeAll(curFile);
-    qApp->Settings()->SetRestoreFileList(restoreFiles);
+    qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
     QFile autofile(curFile +".autosave");
@@ -2359,7 +2359,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     else
     {
         qCDebug(vMainWindow, "Updating recent file list.");
-        QStringList files = qApp->Settings()->GetRecentFileList();
+        QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
         while (files.size() > MaxRecentFiles)
@@ -2367,14 +2367,14 @@ void MainWindow::setCurrentFile(const QString &fileName)
             files.removeLast();
         }
 
-        qApp->Settings()->SetRecentFileList(files);
+        qApp->ValentinaSettings()->SetRecentFileList(files);
         UpdateRecentFileActions();
 
         qCDebug(vMainWindow, "Updating restore file list.");
-        QStringList restoreFiles = qApp->Settings()->GetRestoreFileList();
+        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
-        qApp->Settings()->SetRestoreFileList(restoreFiles);
+        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
     }
     shownName+="[*]";
     setWindowTitle(shownName);
@@ -2398,17 +2398,17 @@ QString MainWindow::strippedName(const QString &fullFileName)
 void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
-    restoreGeometry(qApp->Settings()->GetGeometry());
-    restoreState(qApp->Settings()->GetWindowState());
-    restoreState(qApp->Settings()->GetToolbarsState(), APP_VERSION);
+    restoreGeometry(qApp->ValentinaSettings()->GetGeometry());
+    restoreState(qApp->ValentinaSettings()->GetWindowState());
+    restoreState(qApp->ValentinaSettings()->GetToolbarsState(), APP_VERSION);
 
     // Scene antialiasing
-    const bool graphOutputValue = qApp->Settings()->GetGraphicalOutput();
+    const bool graphOutputValue = qApp->ValentinaSettings()->GetGraphicalOutput();
     ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
-    qApp->getUndoStack()->setUndoLimit(qApp->Settings()->GetUndoCount());
+    qApp->getUndoStack()->setUndoLimit(qApp->ValentinaSettings()->GetUndoCount());
 
     // Text under tool buton icon
     ToolBarStyles();
@@ -2422,9 +2422,9 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    qApp->Settings()->SetGeometry(saveGeometry());
-    qApp->Settings()->SetWindowState(saveState());
-    qApp->Settings()->SetToolbarsState(saveState(APP_VERSION));
+    qApp->ValentinaSettings()->SetGeometry(saveGeometry());
+    qApp->ValentinaSettings()->SetWindowState(saveState());
+    qApp->ValentinaSettings()->SetToolbarsState(saveState(APP_VERSION));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2456,7 +2456,7 @@ bool MainWindow::MaybeSave()
 void MainWindow::UpdateRecentFileActions()
 {
     qCDebug(vMainWindow, "Updating recent file actions.");
-    const QStringList files = qApp->Settings()->GetRecentFileList();
+    const QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
     const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
     for (int i = 0; i < numRecentFiles; ++i)
@@ -2739,9 +2739,9 @@ void MainWindow::InitAutoSave()
     connect(autoSaveTimer, &QTimer::timeout, this, &MainWindow::AutoSavePattern);
     autoSaveTimer->stop();
 
-    if (qApp->Settings()->GetAutosaveState())
+    if (qApp->ValentinaSettings()->GetAutosaveState())
     {
-        const qint32 autoTime = qApp->Settings()->GetAutosaveTime();
+        const qint32 autoTime = qApp->ValentinaSettings()->GetAutosaveTime();
         autoSaveTimer->start(autoTime*60000);
         qCDebug(vMainWindow, "Autosaving each %d minutes.", autoTime);
     }
@@ -2925,7 +2925,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QStringList restoreFiles;
     //Take all files that need to be restored
-    QStringList files = qApp->Settings()->GetRestoreFileList();
+    QStringList files = qApp->ValentinaSettings()->GetRestoreFileList();
     if (files.size() > 0)
     {
         for (int i = 0; i < files.size(); ++i)
@@ -2947,7 +2947,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
             files.removeAll(restoreFiles.at(i));
         }
 
-        qApp->Settings()->SetRestoreFileList(files);
+        qApp->ValentinaSettings()->SetRestoreFileList(files);
 
     }
     return restoreFiles;
@@ -2959,7 +2959,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::WindowsLocale()
 {
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2993,7 +2993,7 @@ void MainWindow::ShowPaper(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStyle(QToolBar *bar)
 {
-    if (qApp->Settings()->GetToolBarStyle())
+    if (qApp->ValentinaSettings()->GetToolBarStyle())
     {
         bar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     }
@@ -3077,14 +3077,14 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
             {
                 filter = tr("Standard measurements (*.vst)");
                 //Use standard path to standard measurements
-                const QString path = qApp->Settings()->GetPathStandardMeasurements();
+                const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
                 mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
             else
             {
                 filter = tr("Individual measurements (*.vit)");
                 //Use standard path to individual measurements
-                const QString path = qApp->Settings()->GetPathIndividualMeasurements();
+                const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
                 mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
 

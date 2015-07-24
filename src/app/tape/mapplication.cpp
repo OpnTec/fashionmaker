@@ -38,11 +38,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
-    :QApplication(argc, argv),
+    :VAbstractApplication(argc, argv),
       mainWindows(),
       localServer(nullptr),
-      trVars(nullptr),
-      settings(nullptr)
+      trVars(nullptr)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -138,7 +137,7 @@ void MApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    const QString checkedLocale = Settings()->GetLocale();
+    const QString checkedLocale = TapeSettings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
     QTranslator *qtTranslator = new QTranslator(this);
@@ -183,7 +182,7 @@ const VTranslateVars *MApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::InitTrVars()
 {
-    trVars = new VTranslateVars(Settings()->GetOsSeparator());
+    trVars = new VTranslateVars(TapeSettings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,10 +193,10 @@ void MApplication::OpenSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VTapeSettings *MApplication::Settings()
+VTapeSettings *MApplication::TapeSettings()
 {
     SCASSERT(settings != nullptr);
-    return settings;
+    return qobject_cast<VTapeSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

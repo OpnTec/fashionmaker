@@ -67,27 +67,14 @@ void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VAbstractApplication::OpenSettings()
-{
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                             QApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
  */
-VSettings *VAbstractApplication::Settings()
+VCommonSettings *VAbstractApplication::Settings()
 {
     SCASSERT(settings != nullptr);
     return settings;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsScene *VAbstractApplication::getCurrentScene() const

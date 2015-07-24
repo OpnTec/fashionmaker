@@ -58,17 +58,17 @@ PatternPage::PatternPage(QWidget *parent):
 //---------------------------------------------------------------------------------------------------------------------
 void PatternPage::Apply()
 {
-    qApp->Settings()->SetUser(userName->text());
+    qApp->ValentinaSettings()->SetUser(userName->text());
 
     // Scene antialiasing
-    qApp->Settings()->SetGraphicalOutput(graphOutputCheck->isChecked());
+    qApp->ValentinaSettings()->SetGraphicalOutput(graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputCheck->isChecked());
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
      * prints a warning and does nothing.*/
-    qApp->Settings()->SetUndoCount(undoCount->value());
+    qApp->ValentinaSettings()->SetUndoCount(undoCount->value());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ QGroupBox *PatternPage::UserGroup()
     QLabel *nameLabel = new QLabel(tr("User name"));
 
     userName = new QLineEdit;
-    userName->setText(qApp->Settings()->GetUser());
+    userName->setText(qApp->ValentinaSettings()->GetUser());
 
     QHBoxLayout *nameLayout = new QHBoxLayout;
     nameLayout->addWidget(nameLabel);
@@ -96,7 +96,7 @@ QGroupBox *PatternPage::GraphOutputGroup()
     QGroupBox *graphOutputGroup = new QGroupBox(tr("Graphical output"));
 
     graphOutputCheck = new QCheckBox(tr("Use antialiasing"));
-    graphOutputCheck->setChecked(qApp->Settings()->GetGraphicalOutput());
+    graphOutputCheck->setChecked(qApp->ValentinaSettings()->GetGraphicalOutput());
 
     QHBoxLayout *graphLayout = new QHBoxLayout;
     graphLayout->addWidget(graphOutputCheck);
@@ -114,7 +114,7 @@ QGroupBox *PatternPage::UndoGroup()
     QLabel *undoLabel = new QLabel(tr("Count steps (0 - no limit)"));
     undoCount = new QSpinBox;
     undoCount->setMinimum(0);
-    undoCount->setValue(qApp->Settings()->GetUndoCount());
+    undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
 
     QHBoxLayout *countLayout = new QHBoxLayout;
     countLayout->addWidget(undoLabel);

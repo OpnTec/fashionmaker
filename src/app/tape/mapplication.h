@@ -29,11 +29,10 @@
 #ifndef MAPPLICATION_H
 #define MAPPLICATION_H
 
-#include <QApplication>
-
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vtapesettings.h"
+#include "../vmisc/vabstractapplication.h"
 
 class MApplication;// use in define
 class TMainWindow;
@@ -42,9 +41,9 @@ class QLocalServer;
 #if defined(qApp)
 #undef qApp
 #endif
-#define qApp (static_cast<MApplication*>(QApplication::instance()))
+#define qApp (static_cast<MApplication*>(VAbstractApplication::instance()))
 
-class MApplication : public QApplication
+class MApplication : public VAbstractApplication
 {
     Q_OBJECT
 
@@ -65,13 +64,10 @@ public:
     virtual const VTranslateVars *TrVars();
     void InitTrVars();
 
-    void      OpenSettings();
-    VTapeSettings *Settings();
+    virtual void  OpenSettings() Q_DECL_OVERRIDE;
+    VTapeSettings *TapeSettings();
 
     QString translationsPath() const;
-
-    template <typename T>
-    QString LocaleToString(const T &value);
 
 public slots:
     TMainWindow *NewMainWindow();
@@ -86,22 +82,7 @@ private:
     QLocalServer *localServer;
     VTranslateVars *trVars;
 
-    /**
-     * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
-     */
-    VTapeSettings *settings;
-
     void Clean();
 };
-
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline QString MApplication::LocaleToString(const T &value)
-{
-    QLocale loc;
-    qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
-    return loc.toString(value);
-}
 
 #endif // MAPPLICATION_H

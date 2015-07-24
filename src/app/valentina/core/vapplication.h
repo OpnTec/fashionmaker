@@ -84,6 +84,9 @@ public:
     void               CollectReports() const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
 
+    virtual void OpenSettings() Q_DECL_OVERRIDE;
+    VSettings *ValentinaSettings();
+
 private slots:
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     void               CleanGist() const;

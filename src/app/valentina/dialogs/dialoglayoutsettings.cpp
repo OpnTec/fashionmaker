@@ -52,7 +52,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     ReadSettings();
 
@@ -363,8 +363,8 @@ void DialogLayoutSettings::InitPaperUnits()
     ui->comboBoxPaperSizeUnit->addItem(tr("Pixels"), QVariant(VDomDocument::UnitsToStr(Unit::Px)));
 
     // set default unit
-    oldPaperUnit = VDomDocument::StrToUnits(qApp->Settings()->GetUnit());
-    const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(qApp->Settings()->GetUnit());
+    oldPaperUnit = VDomDocument::StrToUnits(qApp->ValentinaSettings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(qApp->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxPaperSizeUnit->setCurrentIndex(indexUnit);
@@ -379,8 +379,8 @@ void DialogLayoutSettings::InitLayoutUnits()
     ui->comboBoxLayoutUnit->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
 
     // set default unit
-    oldLayoutUnit = VDomDocument::StrToUnits(qApp->Settings()->GetUnit());
-    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(qApp->Settings()->GetUnit());
+    oldLayoutUnit = VDomDocument::StrToUnits(qApp->ValentinaSettings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(qApp->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
@@ -611,33 +611,33 @@ void DialogLayoutSettings::ReadSettings()
     MinimumPaperSize();
     MinimumLayoutSize();
 
-    SetLayoutWidth(qApp->Settings()->GetLayoutWidth());
-    SetShift(qApp->Settings()->GetLayoutShift());
+    SetLayoutWidth(qApp->ValentinaSettings()->GetLayoutWidth());
+    SetShift(qApp->ValentinaSettings()->GetLayoutShift());
 
-    const qreal width = UnitConvertor(qApp->Settings()->GetLayoutPaperWidth(), Unit::Px, LayoutUnit());
-    const qreal height = UnitConvertor(qApp->Settings()->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
+    const qreal width = UnitConvertor(qApp->ValentinaSettings()->GetLayoutPaperWidth(), Unit::Px, LayoutUnit());
+    const qreal height = UnitConvertor(qApp->ValentinaSettings()->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
     SheetSize(QSizeF(width, height));
-    SetGroup(qApp->Settings()->GetLayoutGroup());
-    SetRotate(qApp->Settings()->GetLayoutRotate());
-    SetIncrease(qApp->Settings()->GetLayoutRotationIncrease());
-    SetAutoCrop(qApp->Settings()->GetLayoutAutoCrop());
-    SetSaveLength(qApp->Settings()->GetLayoutSaveLength());
-    SetUnitePages(qApp->Settings()->GetLayoutUnitePages());
+    SetGroup(qApp->ValentinaSettings()->GetLayoutGroup());
+    SetRotate(qApp->ValentinaSettings()->GetLayoutRotate());
+    SetIncrease(qApp->ValentinaSettings()->GetLayoutRotationIncrease());
+    SetAutoCrop(qApp->ValentinaSettings()->GetLayoutAutoCrop());
+    SetSaveLength(qApp->ValentinaSettings()->GetLayoutSaveLength());
+    SetUnitePages(qApp->ValentinaSettings()->GetLayoutUnitePages());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::WriteSettings() const
 {
-    qApp->Settings()->SetLayoutWidth(GetLayoutWidth());
-    qApp->Settings()->SetLayoutGroup(GetGroup());
-    qApp->Settings()->SetLayoutPaperHeight(GetPaperHeight());
-    qApp->Settings()->SetLayoutPaperWidth(GetPaperWidth());
-    qApp->Settings()->SetLayoutShift(GetShift());
-    qApp->Settings()->SetLayoutRotate(GetRotate());
-    qApp->Settings()->SetLayoutRotationIncrease(GetIncrease());
-    qApp->Settings()->SetLayoutAutoCrop(GetAutoCrop());
-    qApp->Settings()->SetLayoutSaveLength(IsSaveLength());
-    qApp->Settings()->SetLayoutUnitePages(IsUnitePages());
+    qApp->ValentinaSettings()->SetLayoutWidth(GetLayoutWidth());
+    qApp->ValentinaSettings()->SetLayoutGroup(GetGroup());
+    qApp->ValentinaSettings()->SetLayoutPaperHeight(GetPaperHeight());
+    qApp->ValentinaSettings()->SetLayoutPaperWidth(GetPaperWidth());
+    qApp->ValentinaSettings()->SetLayoutShift(GetShift());
+    qApp->ValentinaSettings()->SetLayoutRotate(GetRotate());
+    qApp->ValentinaSettings()->SetLayoutRotationIncrease(GetIncrease());
+    qApp->ValentinaSettings()->SetLayoutAutoCrop(GetAutoCrop());
+    qApp->ValentinaSettings()->SetLayoutSaveLength(IsSaveLength());
+    qApp->ValentinaSettings()->SetLayoutUnitePages(IsUnitePages());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

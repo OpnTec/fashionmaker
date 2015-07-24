@@ -60,8 +60,8 @@ public:
     MeasurementsType patternType() const;
     void             setPatternType(const MeasurementsType &patternType);
 
-    void             OpenSettings();
-    VSettings       *Settings();
+    virtual void     OpenSettings()=0;
+    VCommonSettings *Settings();
 
     template <typename T>
     QString          LocaleToString(const T &value);
@@ -98,7 +98,7 @@ protected:
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
-    VSettings          *settings;
+    VCommonSettings    *settings;
 
 private:
     Q_DISABLE_COPY(VAbstractApplication)

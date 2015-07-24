@@ -812,7 +812,7 @@ QString VPattern::GetLabelBase(unsigned int index) const
 {
     QStringList list = VApplication::LabelLanguages();
     QStringList alphabet;
-    switch (list.indexOf(qApp->Settings()->GetLabelLanguage()))
+    switch (list.indexOf(qApp->ValentinaSettings()->GetLabelLanguage()))
     {
         case 0: // de
         {
@@ -2175,7 +2175,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
 //---------------------------------------------------------------------------------------------------------------------
 QString VPattern::GetAuthor() const
 {
-    return UniqueTagText(TagAuthor, qApp->Settings()->GetUser());
+    return UniqueTagText(TagAuthor, qApp->ValentinaSettings()->GetUser());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

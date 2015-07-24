@@ -62,10 +62,10 @@ PathPage::PathPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::Apply()
 {
-    qApp->Settings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
-    qApp->Settings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
-    qApp->Settings()->SetPathPattern(pathTable->item(2, 1)->text());
-    qApp->Settings()->SetPathLayout(pathTable->item(3, 1)->text());
+    qApp->ValentinaSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
+    qApp->ValentinaSettings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
+    qApp->ValentinaSettings()->SetPathPattern(pathTable->item(2, 1)->text());
+    qApp->ValentinaSettings()->SetPathLayout(pathTable->item(3, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,8 +88,8 @@ void PathPage::DefaultPath()
     switch (row)
     {
         case 1: // standard measurements
-            item->setText(qApp->Settings()->StandardTablesPath());
-            item->setToolTip(qApp->Settings()->StandardTablesPath());
+            item->setText(qApp->ValentinaSettings()->StandardTablesPath());
+            item->setToolTip(qApp->ValentinaSettings()->StandardTablesPath());
             break;
         case 0: // individual measurements
         case 2: // pattern path
@@ -113,16 +113,16 @@ void PathPage::EditPath()
     switch (row)
     {
         case 0: // individual measurements
-            path = qApp->Settings()->GetPathIndividualMeasurements();
+            path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
             break;
         case 1: // standard measurements
-            path = qApp->Settings()->GetPathStandardMeasurements();
+            path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
             break;
         case 2: // pattern path
-            path = qApp->Settings()->GetPathPattern();
+            path = qApp->ValentinaSettings()->GetPathPattern();
             break;
         case 3: // layout path
-            path = qApp->Settings()->GetPathLayout();
+            path = qApp->ValentinaSettings()->GetPathLayout();
             break;
         default:
             break;
@@ -182,29 +182,29 @@ void PathPage::InitTable()
 
     {
         pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathIndividualMeasurements());
-        item->setToolTip(qApp->Settings()->GetPathIndividualMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathIndividualMeasurements());
+        item->setToolTip(qApp->ValentinaSettings()->GetPathIndividualMeasurements());
         pathTable->setItem(0, 1, item);
     }
 
     {
         pathTable->setItem(1, 0, new QTableWidgetItem(tr("Standard measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathStandardMeasurements());
-        item->setToolTip(qApp->Settings()->GetPathStandardMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathStandardMeasurements());
+        item->setToolTip(qApp->ValentinaSettings()->GetPathStandardMeasurements());
         pathTable->setItem(1, 1, item);
     }
 
     {
         pathTable->setItem(2, 0, new QTableWidgetItem(tr("Patterns")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathPattern());
-        item->setToolTip(qApp->Settings()->GetPathPattern());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathPattern());
+        item->setToolTip(qApp->ValentinaSettings()->GetPathPattern());
         pathTable->setItem(2, 1, item);
     }
 
     {
         pathTable->setItem(3, 0, new QTableWidgetItem(tr("Layout")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->Settings()->GetPathLayout());
-        item->setToolTip(qApp->Settings()->GetPathLayout());
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathLayout());
+        item->setToolTip(qApp->ValentinaSettings()->GetPathLayout());
         pathTable->setItem(3, 1, item);
     }
 

@@ -153,7 +153,7 @@ void MainWindowsNoGUI::ExportLayoutAs()
     suf.replace(".", "");
 
     const QString path = dialog.Path();
-    qApp->Settings()->SetPathLayout(path);
+    qApp->ValentinaSettings()->SetPathLayout(path);
     const QString mask = dialog.FileName();
 
     for (int i=0; i < scenes.size(); ++i)
@@ -718,7 +718,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
     printer.setOutputFormat(QPrinter::PdfFormat);
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
-                                                    qApp->Settings()->GetPathLayout()+"/"+FileName()+".pdf",
+                                                    qApp->ValentinaSettings()->GetPathLayout()+"/"+FileName()+".pdf",
                                                     tr("PDF file (*.pdf)"));
     if (not fileName.isEmpty())
     {
@@ -727,7 +727,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
         {
             fileName.append(".pdf");
         }
-        qApp->Settings()->SetPathLayout(f.absolutePath());
+        qApp->ValentinaSettings()->SetPathLayout(f.absolutePath());
 
         printer.setOutputFileName(fileName);
         printer.setResolution(static_cast<int>(PrintDPI));

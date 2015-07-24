@@ -47,7 +47,7 @@ DialogStandardMeasurements::DialogStandardMeasurements(VContainer *data, const Q
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
@@ -157,7 +157,7 @@ void DialogStandardMeasurements::LoadStandardTables()
     qCDebug(vStMeasur, "Loading standard table.");
     QStringList filters{"*.vst"};
     //Use standard path to standard measurements
-    const QString path = qApp->Settings()->GetPathStandardMeasurements();
+    const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
     QDir tablesDir(path);
     tablesDir.setNameFilters(filters);
     tablesDir.setCurrent(path);

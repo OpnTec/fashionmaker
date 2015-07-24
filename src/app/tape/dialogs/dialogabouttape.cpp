@@ -41,7 +41,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     ui->label_Tape_Version->setText(QString("Tape %1").arg(APP_VERSION_STR));
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));

@@ -141,6 +141,19 @@ CONFIG(debug, debug|release){
 # Path to recource file.
 win32:RC_FILE = share/resources/tape.rc
 
+# When the GNU linker sees a library, it discards all symbols that it doesn't need.
+# Add dependent library the first.
+
+#VTools static library (depend on VWidgets, VMisc, VPatternDB)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtools/$${DESTDIR}/ -lvtools
+
+INCLUDEPATH += $$PWD/../../libs/vtools
+INCLUDEPATH += $$OUT_PWD/../../libs/vtools/$${UI_DIR} # For UI files
+DEPENDPATH += $$PWD/../../libs/vtools
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
+
 #VWidgets static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/ -lvwidgets
 
@@ -211,6 +224,14 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
 
 INCLUDEPATH += $${PWD}/../../libs/qmuparser
 DEPENDPATH += $${PWD}/../../libs/qmuparser
+
+# VPropertyExplorer library
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+
+INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
+DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing

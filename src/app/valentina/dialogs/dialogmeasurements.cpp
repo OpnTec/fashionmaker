@@ -36,7 +36,7 @@ DialogMeasurements::DialogMeasurements(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     connect(ui->toolButtonStandard, &QToolButton::clicked, this, &DialogMeasurements::StandardMeasurements);
     connect(ui->toolButtonIndividual, &QToolButton::clicked, this, &DialogMeasurements::IndividualMeasurements);

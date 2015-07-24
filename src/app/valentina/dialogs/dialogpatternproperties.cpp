@@ -45,7 +45,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
 
     SCASSERT(doc != nullptr);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     ui->lineEditAuthor->setText(doc->GetAuthor());
     connect(ui->lineEditAuthor, &QLineEdit::editingFinished, this, &DialogPatternProperties::DescEdited);

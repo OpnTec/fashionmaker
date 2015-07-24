@@ -28,12 +28,13 @@
 
 #include "tmainwindow.h"
 #include "ui_tmainwindow.h"
-#include "mapplication.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
 #include "../qmuparser/qmudef.h"
+#include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "mapplication.h" // Should be last because of definning qApp
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -196,11 +197,11 @@ void TMainWindow::FileSaveAs()
     {
         if (mType == MeasurementsType::Individual)
         {
-            dir = qApp->Settings()->GetPathStandardMeasurements() + "/" + fName;
+            dir = qApp->TapeSettings()->GetPathStandardMeasurements() + "/" + fName;
         }
         else
         {
-            dir = qApp->Settings()->GetPathIndividualMeasurements() + "/" + fName;
+            dir = qApp->TapeSettings()->GetPathIndividualMeasurements() + "/" + fName;
         }
 
     }
@@ -478,6 +479,45 @@ void TMainWindow::MoveDown()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Fx()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
+    QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+
+    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(meash->GetData(), NULL_ID, this);
+    dialog->setWindowTitle(tr("Edit measurement"));
+
+    QString text = ui->plainTextEditFormula->toPlainText();
+    text.replace("\n", " ");
+
+    dialog->SetFormula(text);
+    const QString postfix = VDomDocument::UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
+    dialog->setPostfix(postfix);
+
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        m->SetMValue(nameField->text(), dialog->GetFormula());
+
+        MeasurementsWasSaved(false);
+
+        RefreshData();
+
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->resizeColumnsToContents();
+        ui->tableWidget->resizeRowsToContents();
+        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    }
+    delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddCustom()
 {
     ui->tableWidget->setFocus(Qt::OtherFocusReason);
@@ -726,13 +766,13 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
 
     // Replace line return character with spaces for calc if exist
     QString text = ui->plainTextEditFormula->toPlainText();
     text.replace("\n", " ");
 
-    QTableWidgetItem *formulaField = ui->tableWidget->item(ui->tableWidget->currentRow(), 2);
+    QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
     if (formulaField->text() == text)
     {
         return;
@@ -1016,6 +1056,8 @@ void TMainWindow::InitWindow()
         this->formulaBaseHeight = ui->plainTextEditFormula->height();
         connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMValue,
                 Qt::UniqueConnection);
+
+        connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
     }
 
     ui->actionAddCustom->setEnabled(true);

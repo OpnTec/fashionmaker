@@ -93,7 +93,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     setWindowTitle(tr("Config Dialog"));
 
     this->setFixedSize(QSize(750, 550));
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ void ConfigDialog::Apply()
         default:
             break;
     }
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
     emit UpdateProperties();
     setResult(QDialog::Accepted);
 }

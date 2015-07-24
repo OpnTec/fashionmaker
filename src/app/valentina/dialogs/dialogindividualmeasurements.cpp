@@ -47,7 +47,7 @@ DialogIndividualMeasurements::DialogIndividualMeasurements(VContainer *data, con
 {
     ui->setupUi(this);
 
-    qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+    qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();
     position.moveCenter(QDesktopWidget().availableGeometry().center());
@@ -203,7 +203,7 @@ void DialogIndividualMeasurements::CheckState()
 void DialogIndividualMeasurements::OpenTable()
 {
     const QString filter(tr("Individual measurements (*.vit)"));
-    const QString path = qApp->Settings()->GetPathIndividualMeasurements();
+    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
     if (fileName.isEmpty())
@@ -232,7 +232,7 @@ void DialogIndividualMeasurements::OpenTable()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIndividualMeasurements::NewTable()
 {
-    const QString dir = qApp->Settings()->GetPathIndividualMeasurements()+"/measurements.vit";
+    const QString dir = qApp->ValentinaSettings()->GetPathIndividualMeasurements()+"/measurements.vit";
     QString name = QFileDialog::getSaveFileName(this, tr("Where save measurements?"), dir,
                                                 tr("Individual measurements (*.vit)"));
 
@@ -260,7 +260,7 @@ void DialogIndividualMeasurements::InitUnits()
     ui->comboBoxUnits->addItem(tr("Inches"), QVariant(VDomDocument::UnitsToStr(Unit::Inch)));
 
     // set default unit
-    const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->Settings()->GetUnit());
+    const qint32 indexUnit = ui->comboBoxUnits->findData(qApp->ValentinaSettings()->GetUnit());
     if (indexUnit != -1)
     {
         ui->comboBoxUnits->setCurrentIndex(indexUnit);
