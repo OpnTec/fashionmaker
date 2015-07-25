@@ -405,9 +405,6 @@ void TMainWindow::Remove()
     if (ui->tableWidget->rowCount() > 0)
     {
         ui->tableWidget->selectRow(0);
-        ui->tableWidget->resizeColumnsToContents();
-        ui->tableWidget->resizeRowsToContents();
-        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     }
     else
     {
@@ -470,9 +467,6 @@ void TMainWindow::MoveUp()
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row-1);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
     Controls(); // Buttons remove, up, down
@@ -497,9 +491,6 @@ void TMainWindow::MoveDown()
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row+1);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
     Controls(); // Buttons remove, up, down
@@ -537,9 +528,6 @@ void TMainWindow::Fx()
         RefreshData();
 
         ui->tableWidget->selectRow(row);
-        ui->tableWidget->resizeColumnsToContents();
-        ui->tableWidget->resizeRowsToContents();
-        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     }
     delete dialog;
 }
@@ -601,11 +589,7 @@ void TMainWindow::AddCustom()
     }
 
     ui->tableWidget->blockSignals(false);
-
     ui->tableWidget->selectRow(currentRow);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
     MeasurementsWasSaved(false);
 }
@@ -631,9 +615,6 @@ void TMainWindow::ChangedSize(const QString &text)
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 }
 
@@ -652,9 +633,6 @@ void TMainWindow::ChangedHeight(const QString &text)
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 }
 
@@ -800,9 +778,6 @@ void TMainWindow::SaveMName()
 
         ui->tableWidget->blockSignals(true);
         ui->tableWidget->selectRow(row);
-        ui->tableWidget->resizeColumnsToContents();
-        ui->tableWidget->resizeRowsToContents();
-        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
         ui->tableWidget->blockSignals(false);
     }
     else
@@ -866,9 +841,6 @@ void TMainWindow::SaveMValue()
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
     ui->plainTextEditFormula->setTextCursor(cursor);
@@ -893,9 +865,6 @@ void TMainWindow::SaveMBaseValue(double value)
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 }
 
@@ -918,9 +887,6 @@ void TMainWindow::SaveMSizeIncrease(double value)
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 }
 
@@ -942,9 +908,6 @@ void TMainWindow::SaveMHeightIncrease(double value)
     RefreshData();
 
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -968,9 +931,6 @@ void TMainWindow::SaveMDescription()
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
     ui->plainTextEditDescription->setTextCursor(cursor);
@@ -1161,6 +1121,7 @@ void TMainWindow::InitTable()
 
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
