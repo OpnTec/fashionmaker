@@ -69,6 +69,7 @@ private slots:
     void AboutToShowWindowMenu();
     void ShowWindow();
     void AboutApplication();
+
     void SaveGivenName();
     void SaveFamilyName();
     void SaveEmail();
@@ -144,6 +145,7 @@ private:
     void EvalFormula(const QString &formula, VContainer *data, QLabel *label);
 
     void Open(const QString &pathTo, const QString &filter);
+    void GUIReadOnly(bool ro);
 };
 
 #endif // TMAINWINDOW_H

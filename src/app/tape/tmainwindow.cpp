@@ -151,12 +151,13 @@ void TMainWindow::LoadFile(const QString &path)
             InitWindow();
 
             RefreshData();
-            ReadOnly(m->ReadOnly());
 
             if (ui->tableWidget->rowCount() > 0)
             {
                 ui->tableWidget->selectRow(0);
             }
+
+            GUIReadOnly(m->ReadOnly()); // Keep last
         }
         catch (VException &e)
         {
@@ -209,6 +210,8 @@ void TMainWindow::FileNew()
         MeasurementsWasSaved(false);
 
         InitWindow();
+
+        GUIReadOnly(m->ReadOnly()); // Keep last
     }
     else
     {
@@ -420,101 +423,71 @@ void TMainWindow::AboutApplication()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveGivenName()
 {
-    m->SetGivenName(ui->lineEditGivenName->text());
-    MeasurementsWasSaved(false);
+    if (m->GivenName() != ui->lineEditGivenName->text())
+    {
+        m->SetGivenName(ui->lineEditGivenName->text());
+        MeasurementsWasSaved(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveFamilyName()
 {
-    m->SetFamilyName(ui->lineEditFamilyName->text());
-    MeasurementsWasSaved(false);
+    if (m->FamilyName() != ui->lineEditFamilyName->text())
+    {
+        m->SetFamilyName(ui->lineEditFamilyName->text());
+        MeasurementsWasSaved(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveEmail()
 {
-    m->SetEmail(ui->lineEditEmail->text());
-    MeasurementsWasSaved(false);
+    if (m->Email() != ui->lineEditEmail->text())
+    {
+        m->SetEmail(ui->lineEditEmail->text());
+        MeasurementsWasSaved(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveSex(int index)
 {
-    m->SetSex(static_cast<SexType>(ui->comboBoxSex->itemData(index).toInt()));
-    MeasurementsWasSaved(false);
+    const SexType type = static_cast<SexType>(ui->comboBoxSex->itemData(index).toInt());
+    if (m->Sex() != type)
+    {
+        m->SetSex(type);
+        MeasurementsWasSaved(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveBirthDate(const QDate &date)
 {
-    m->SetBirthDate(date);
-    MeasurementsWasSaved(false);
+    if (m->BirthDate() != date)
+    {
+        m->SetBirthDate(date);
+        MeasurementsWasSaved(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveNotes()
 {
-    m->SetNotes(ui->plainTextEditNotes->toPlainText());
-    MeasurementsWasSaved(false);
+    if (m->Notes() != ui->plainTextEditNotes->toPlainText())
+    {
+        m->SetNotes(ui->plainTextEditNotes->toPlainText());
+        MeasurementsWasSaved(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ReadOnly(bool ro)
 {
-    ui->actionReadOnly->setChecked(ro);
-    if (ro)
-    {
-        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_locked.png"));
-    }
-    else
-    {
-        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_opened.png"));
-    }
     m->SetReadOnly(ro);
     MeasurementsWasSaved(false);
 
-    ui->plainTextEditNotes->setReadOnly(ro);
-    ui->actionAddCustom->setDisabled(ro);
-    ui->actionAddKnown->setDisabled(ro);
-
-    if (not ro)
-    {
-        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
-        {
-            if (nameField->text().indexOf(CustomSign) == 0) // Check if custom
-            {
-                ui->lineEditName->setReadOnly(ro);
-            }
-        }
-    }
-    else
-    {
-        ui->lineEditName->setReadOnly(ro);
-    }
-    ui->plainTextEditDescription->setReadOnly(ro);
-
-    if (mType == MeasurementsType::Individual)
-    {
-        ui->lineEditGivenName->setReadOnly(ro);
-        ui->lineEditFamilyName->setReadOnly(ro);
-        ui->dateEditBirthDate->setReadOnly(ro);
-        ui->comboBoxSex->setDisabled(ro);
-        ui->lineEditEmail->setReadOnly(ro);
-
-        ui->plainTextEditFormula->setReadOnly(ro);
-    }
-    else
-    {
-        ui->doubleSpinBoxBaseValue->setDisabled(ro);
-        ui->doubleSpinBoxInSizes->setDisabled(ro);
-        ui->doubleSpinBoxInHeights->setDisabled(ro);
-
-        gradationHeights->setDisabled(ro);
-        gradationSizes->setDisabled(ro);
-    }
-
-    Controls(); // Buttons remove, up, down
+    GUIReadOnly(ro);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -854,11 +827,23 @@ void TMainWindow::ShowMData()
             {
                 ui->plainTextEditDescription->setReadOnly(false);
                 ui->lineEditName->setReadOnly(false);
+                ui->lineEditFullName->setReadOnly(false);
+
+                if (mType == MeasurementsType::Individual)
+                {
+                    ui->plainTextEditFormula->setReadOnly(false);
+                }
             }
             else
             {
-                ui->plainTextEditDescription->setReadOnly(false);
-                ui->lineEditName->setReadOnly(false);
+                ui->plainTextEditDescription->setReadOnly(true);
+                ui->lineEditName->setReadOnly(true);
+                ui->lineEditFullName->setReadOnly(true);
+
+                if (mType == MeasurementsType::Individual)
+                {
+                    ui->plainTextEditFormula->setReadOnly(true);
+                }
             }
         }
     }
@@ -1140,6 +1125,7 @@ void TMainWindow::InitWindow()
     SCASSERT(m != nullptr);
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
+    ui->tabWidget->setCurrentIndex(0);
 
     ui->plainTextEditNotes->setEnabled(true);
 
@@ -1557,10 +1543,6 @@ void TMainWindow::Controls()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::MFields(bool enabled)
 {
-    ui->lineEditName->setEnabled(enabled);
-    ui->plainTextEditDescription->setEnabled(enabled);
-    ui->lineEditFullName->setEnabled(enabled);
-
     if (mType == MeasurementsType::Standard)
     {
         ui->doubleSpinBoxBaseValue->setEnabled(enabled);
@@ -1569,7 +1551,6 @@ void TMainWindow::MFields(bool enabled)
     }
     else
     {
-        ui->plainTextEditFormula->setEnabled(enabled);
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
     }
@@ -1631,6 +1612,68 @@ void TMainWindow::Open(const QString &pathTo, const QString &filter)
     {
         LoadFile(mPath);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::GUIReadOnly(bool ro)
+{
+    ui->actionReadOnly->setChecked(ro);
+    if (ro)
+    {
+        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_locked.png"));
+    }
+    else
+    {
+        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_opened.png"));
+    }
+
+    ui->plainTextEditNotes->setReadOnly(ro);
+    ui->actionAddCustom->setDisabled(ro);
+    ui->actionAddKnown->setDisabled(ro);
+
+    ui->lineEditName->setDisabled(false);
+    if (not ro)
+    {
+        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
+        {
+            if (nameField->text().indexOf(CustomSign) == 0) // Check if custom
+            {
+                ui->lineEditName->setReadOnly(ro);
+            }
+        }
+    }
+    else
+    {
+        ui->lineEditName->setReadOnly(ro);
+    }
+
+    ui->plainTextEditDescription->setDisabled(false);
+    ui->plainTextEditDescription->setReadOnly(ro);
+    ui->lineEditFullName->setDisabled(false);
+    ui->lineEditFullName->setReadOnly(ro);
+
+    if (mType == MeasurementsType::Individual)
+    {
+        ui->lineEditGivenName->setReadOnly(ro);
+        ui->lineEditFamilyName->setReadOnly(ro);
+        ui->dateEditBirthDate->setReadOnly(ro);
+        ui->comboBoxSex->setDisabled(ro);
+        ui->lineEditEmail->setReadOnly(ro);
+
+        ui->plainTextEditFormula->setDisabled(false);
+        ui->plainTextEditFormula->setReadOnly(ro);
+    }
+    else
+    {
+        ui->doubleSpinBoxBaseValue->setDisabled(ro);
+        ui->doubleSpinBoxInSizes->setDisabled(ro);
+        ui->doubleSpinBoxInHeights->setDisabled(ro);
+
+        gradationHeights->setDisabled(ro);
+        gradationSizes->setDisabled(ro);
+    }
+
+    Controls(); // Buttons remove, up, down
 }
 
 //---------------------------------------------------------------------------------------------------------------------
