@@ -326,42 +326,42 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="1">
-            <widget class="QSpinBox" name="spinBoxInHeights">
+           <item row="6" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxBaseValue">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="minimum">
-              <number>-1000</number>
+              <double>-10000.000000000000000</double>
              </property>
              <property name="maximum">
-              <number>1000</number>
+              <double>10000.000000000000000</double>
              </property>
             </widget>
            </item>
            <item row="7" column="1">
-            <widget class="QSpinBox" name="spinBoxInSizes">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxInSizes">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="minimum">
-              <number>-1000</number>
+              <double>-10000.000000000000000</double>
              </property>
              <property name="maximum">
-              <number>1000</number>
+              <double>10000.000000000000000</double>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
-            <widget class="QSpinBox" name="spinBoxBaseValue">
+           <item row="8" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxInHeights">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="minimum">
-              <number>-1000</number>
+              <double>-10000.000000000000000</double>
              </property>
              <property name="maximum">
-              <number>1000</number>
+              <double>10000.000000000000000</double>
              </property>
             </widget>
            </item>

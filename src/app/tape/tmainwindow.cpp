@@ -397,19 +397,19 @@ void TMainWindow::Remove()
         if (mType == MeasurementsType::Standard)
         {
             ui->labelCalculatedValue->blockSignals(true);
-            ui->spinBoxBaseValue->blockSignals(true);
-            ui->spinBoxInSizes->blockSignals(true);
-            ui->spinBoxInHeights->blockSignals(true);
+            ui->doubleSpinBoxBaseValue->blockSignals(true);
+            ui->doubleSpinBoxInSizes->blockSignals(true);
+            ui->doubleSpinBoxInHeights->blockSignals(true);
 
             ui->labelCalculatedValue->setText("");
-            ui->spinBoxBaseValue->setValue(0);
-            ui->spinBoxInSizes->setValue(0);
-            ui->spinBoxInHeights->setValue(0);
+            ui->doubleSpinBoxBaseValue->setValue(0);
+            ui->doubleSpinBoxInSizes->setValue(0);
+            ui->doubleSpinBoxInHeights->setValue(0);
 
             ui->labelCalculatedValue->blockSignals(false);
-            ui->spinBoxBaseValue->blockSignals(false);
-            ui->spinBoxInSizes->blockSignals(false);
-            ui->spinBoxInHeights->blockSignals(false);
+            ui->doubleSpinBoxBaseValue->blockSignals(false);
+            ui->doubleSpinBoxInSizes->blockSignals(false);
+            ui->doubleSpinBoxInHeights->blockSignals(false);
         }
         else
         {
@@ -662,19 +662,19 @@ void TMainWindow::ShowMData()
         if (mType == MeasurementsType::Standard)
         {
             ui->labelCalculatedValue->blockSignals(true);
-            ui->spinBoxBaseValue->blockSignals(true);
-            ui->spinBoxInSizes->blockSignals(true);
-            ui->spinBoxInHeights->blockSignals(true);
+            ui->doubleSpinBoxBaseValue->blockSignals(true);
+            ui->doubleSpinBoxInSizes->blockSignals(true);
+            ui->doubleSpinBoxInHeights->blockSignals(true);
 
             ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(nameField->text(), mType)));
-            ui->spinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
-            ui->spinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
-            ui->spinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
+            ui->doubleSpinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
+            ui->doubleSpinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
+            ui->doubleSpinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
 
             ui->labelCalculatedValue->blockSignals(false);
-            ui->spinBoxBaseValue->blockSignals(false);
-            ui->spinBoxInSizes->blockSignals(false);
-            ui->spinBoxInHeights->blockSignals(false);
+            ui->doubleSpinBoxBaseValue->blockSignals(false);
+            ui->doubleSpinBoxInSizes->blockSignals(false);
+            ui->doubleSpinBoxInHeights->blockSignals(false);
         }
         else
         {
@@ -848,7 +848,7 @@ void TMainWindow::SaveMValue()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMBaseValue(int value)
+void TMainWindow::SaveMBaseValue(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -873,7 +873,7 @@ void TMainWindow::SaveMBaseValue(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMSizeIncrease(int value)
+void TMainWindow::SaveMSizeIncrease(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -898,7 +898,7 @@ void TMainWindow::SaveMSizeIncrease(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveMHeightIncrease(int value)
+void TMainWindow::SaveMHeightIncrease(double value)
 {
     const int row = ui->tableWidget->currentRow();
 
@@ -1033,12 +1033,17 @@ void TMainWindow::InitWindow()
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedSize);
 
-        connect(ui->spinBoxBaseValue, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
-                &TMainWindow::SaveMBaseValue);
-        connect(ui->spinBoxInSizes, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
-                &TMainWindow::SaveMSizeIncrease);
-        connect(ui->spinBoxInHeights, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
-                &TMainWindow::SaveMHeightIncrease);
+        connect(ui->doubleSpinBoxBaseValue,
+                static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMBaseValue);
+        connect(ui->doubleSpinBoxInSizes,
+                static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMSizeIncrease);
+        connect(ui->doubleSpinBoxInHeights,
+                static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
+                this, &TMainWindow::SaveMHeightIncrease);
+
+        SetDecimals();
     }
     else
     {
@@ -1052,11 +1057,11 @@ void TMainWindow::InitWindow()
 
         // Tab Measurements
         delete ui->labelBaseValue;
-        delete ui->spinBoxBaseValue;
+        delete ui->doubleSpinBoxBaseValue;
         delete ui->labelInSizes;
-        delete ui->spinBoxInSizes;
+        delete ui->doubleSpinBoxInSizes;
         delete ui->labelInHeights;
-        delete ui->spinBoxInHeights;
+        delete ui->doubleSpinBoxInHeights;
 
         // Tab Information
         delete ui->labelBaseSize;
@@ -1401,9 +1406,9 @@ void TMainWindow::MFields(bool enabled)
 
     if (mType == MeasurementsType::Standard)
     {
-        ui->spinBoxBaseValue->setEnabled(enabled);
-        ui->spinBoxInSizes->setEnabled(enabled);
-        ui->spinBoxInHeights->setEnabled(enabled);
+        ui->doubleSpinBoxBaseValue->setEnabled(enabled);
+        ui->doubleSpinBoxInSizes->setEnabled(enabled);
+        ui->doubleSpinBoxInHeights->setEnabled(enabled);
     }
     else
     {
@@ -1453,5 +1458,30 @@ void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *
             label->setText(tr("Error") + " (" + postfix + ")");
             label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetDecimals()
+{
+    switch (mUnit)
+    {
+        case Unit::Cm:
+            ui->doubleSpinBoxBaseValue->setDecimals(1);
+            ui->doubleSpinBoxInSizes->setDecimals(1);
+            ui->doubleSpinBoxInHeights->setDecimals(1);
+            break;
+        case Unit::Mm:
+            ui->doubleSpinBoxBaseValue->setDecimals(0);
+            ui->doubleSpinBoxInSizes->setDecimals(0);
+            ui->doubleSpinBoxInHeights->setDecimals(0);
+            break;
+        case Unit::Inch:
+            ui->doubleSpinBoxBaseValue->setDecimals(5);
+            ui->doubleSpinBoxInSizes->setDecimals(5);
+            ui->doubleSpinBoxInHeights->setDecimals(5);
+            break;
+        default:
+            break;
     }
 }

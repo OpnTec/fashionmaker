@@ -41,6 +41,7 @@ namespace Ui
 
 class QComboBox;
 class QTableWidgetItem;
+class QLabel;
 
 class TMainWindow : public QMainWindow
 {
@@ -89,9 +90,9 @@ private slots:
 
     void SaveMName();
     void SaveMValue();
-    void SaveMBaseValue(int value);
-    void SaveMSizeIncrease(int value);
-    void SaveMHeightIncrease(int value);
+    void SaveMBaseValue(double value);
+    void SaveMSizeIncrease(double value);
+    void SaveMHeightIncrease(double value);
     void SaveMDescription();
 
 private:
@@ -109,6 +110,7 @@ private:
     void SetupMenu();
     void InitWindow();
     void InitTable();
+    void SetDecimals();
 
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);

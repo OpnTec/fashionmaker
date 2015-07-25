@@ -182,9 +182,9 @@ void VMeasurements::ReadMeasurements() const
         VMeasurement *meash;
         if (type == MeasurementsType::Standard)
         {
-            const quint32 base = GetParametrUInt(dom, AttrBase, "0");
-            const quint32 ksize = GetParametrUInt(dom, AttrSizeIncrease, "0");
-            const quint32 kheight = GetParametrUInt(dom, AttrHeightIncrease, "0");
+            const qreal base = GetParametrDouble(dom, AttrBase, "0");
+            const qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
+            const qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
             meash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight, "", description);
         }
@@ -376,7 +376,7 @@ void VMeasurements::SetMValue(const QString &name, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetMBaseValue(const QString &name, int value)
+void VMeasurements::SetMBaseValue(const QString &name, double value)
 {
     QDomElement node = FindM(name);
     if (not node.isNull())
@@ -386,7 +386,7 @@ void VMeasurements::SetMBaseValue(const QString &name, int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetMSizeIncrease(const QString &name, int value)
+void VMeasurements::SetMSizeIncrease(const QString &name, double value)
 {
     QDomElement node = FindM(name);
     if (not node.isNull())
@@ -396,7 +396,7 @@ void VMeasurements::SetMSizeIncrease(const QString &name, int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetMHeightIncrease(const QString &name, int value)
+void VMeasurements::SetMHeightIncrease(const QString &name, double value)
 {
     QDomElement node = FindM(name);
     if (not node.isNull())

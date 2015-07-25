@@ -79,9 +79,9 @@ public:
 
     void SetMName(const QString &name, const QString &text);
     void SetMValue(const QString &name, const QString &text);
-    void SetMBaseValue(const QString &name, int value);
-    void SetMSizeIncrease(const QString &name, int value);
-    void SetMHeightIncrease(const QString &name, int value);
+    void SetMBaseValue(const QString &name, double value);
+    void SetMSizeIncrease(const QString &name, double value);
+    void SetMHeightIncrease(const QString &name, double value);
     void SetMDescription(const QString &name, const QString &text);
 
     static const QString TagVST;
