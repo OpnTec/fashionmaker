@@ -29,10 +29,10 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="toolTip">
-       <string>Remove measurement</string>
+       <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
@@ -418,6 +418,12 @@
          <layout class="QHBoxLayout" name="horizontalLayoutPath">
           <item>
            <widget class="QLabel" name="labelPathToFile">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Path to file</string>
             </property>

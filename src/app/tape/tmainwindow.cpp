@@ -1338,6 +1338,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     else
     {
         ui->labelPathToFile->setText(curFile);
+        ui->labelPathToFile->setToolTip(curFile);
         ui->pushButtonShowInFolder->setEnabled(true);
     }
     shownName += "[*]";
