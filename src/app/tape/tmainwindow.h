@@ -91,6 +91,7 @@ private slots:
     void ShowMData();
 
     void DeployFormula();
+    void ShowInGraphicalShell();
 
     void SaveMName();
     void SaveMValue();

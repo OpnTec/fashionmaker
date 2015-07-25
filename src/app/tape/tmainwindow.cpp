@@ -42,6 +42,7 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QComboBox>
+#include <QProcess>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -1262,6 +1263,8 @@ void TMainWindow::InitWindow()
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
 
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, &TMainWindow::ShowInGraphicalShell);
+
     InitTable();
 }
 
@@ -1333,13 +1336,13 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
             shownName += ".vit";
         }
         ui->labelPathToFile->setText(tr("<Empty>"));
-        ui->pushButtonShowInFolder->setEnabled(false);
+        ui->pushButtonShowInExplorer->setEnabled(false);
     }
     else
     {
         ui->labelPathToFile->setText(curFile);
         ui->labelPathToFile->setToolTip(curFile);
-        ui->pushButtonShowInFolder->setEnabled(true);
+        ui->pushButtonShowInExplorer->setEnabled(true);
     }
     shownName += "[*]";
     setWindowTitle(shownName);
@@ -1653,4 +1656,56 @@ void TMainWindow::SetDecimals()
         default:
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowInGraphicalShell()
+{
+#ifdef Q_WS_MAC
+    QStringList args;
+    args << "-e";
+    args << "tell application \"Finder\"";
+    args << "-e";
+    args << "activate";
+    args << "-e";
+    args << "select POSIX file \""+curFile+"\"";
+    args << "-e";
+    args << "end tell";
+    QProcess::startDetached("osascript", args);
+#elif defined(Q_WS_WIN)
+    QStringList args;
+    args << "/select," << QDir::toNativeSeparators(curFile);
+    const QString command = "explorer" + " " + args;
+    QProcess::startDetached(command);
+#else
+    const QString app = "xdg-open %d";
+    QString cmd;
+    for (int i = 0; i < app.size(); ++i)
+    {
+        QChar c = app.at(i);
+        if (c == QLatin1Char('%') && i < app.size()-1)
+        {
+            c = app.at(++i);
+            QString s;
+            if (c == QLatin1Char('d'))
+            {
+                s = QLatin1Char('"') + QFileInfo(curFile).path() + QLatin1Char('"');
+            }
+            else if (c == QLatin1Char('%'))
+            {
+                s = c;
+            }
+            else
+            {
+                s = QLatin1Char('%');
+                s += c;
+            }
+            cmd += s;
+            continue;
+        }
+        cmd += c;
+    }
+    QProcess::startDetached(cmd);
+#endif
+
 }

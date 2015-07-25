@@ -433,12 +433,12 @@
            </widget>
           </item>
           <item alignment="Qt::AlignRight">
-           <widget class="QPushButton" name="pushButtonShowInFolder">
+           <widget class="QPushButton" name="pushButtonShowInExplorer">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Show in folder</string>
+             <string>Show in Explorer</string>
             </property>
            </widget>
           </item>
