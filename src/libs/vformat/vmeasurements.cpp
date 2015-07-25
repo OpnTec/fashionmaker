@@ -54,6 +54,7 @@ const QString VMeasurements::AttrSizeIncrease   = QStringLiteral("size_increase"
 const QString VMeasurements::AttrHeightIncrease = QStringLiteral("height_increase");
 const QString VMeasurements::AttrDescription    = QStringLiteral("description");
 const QString VMeasurements::AttrName           = QStringLiteral("name");
+const QString VMeasurements::AttrFullName       = QStringLiteral("full_name");
 
 const QString VMeasurements::SexMale    = QStringLiteral("male");
 const QString VMeasurements::SexFemale  = QStringLiteral("female");
@@ -179,6 +180,16 @@ void VMeasurements::ReadMeasurements() const
             Q_UNUSED(e)
         }
 
+        QString fullName;
+        try
+        {
+            fullName = GetParametrString(dom, AttrFullName);
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
         VMeasurement *meash;
         if (type == MeasurementsType::Standard)
         {
@@ -186,14 +197,14 @@ void VMeasurements::ReadMeasurements() const
             const qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
             const qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
-            meash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight, "", description);
+            meash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight, fullName, description);
         }
         else
         {
             QString formula = GetParametrString(dom, AttrValue, "0");
             bool ok = false;
             const qreal value = EvalFormula(data, formula, &ok);
-            meash = new VMeasurement(data, i, name, value, formula, ok, "", description);
+            meash = new VMeasurement(data, i, name, value, formula, ok, fullName, description);
         }
         data->AddVariable(name, meash);
     }
@@ -416,6 +427,16 @@ void VMeasurements::SetMDescription(const QString &name, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMFullName(const QString &name, const QString &text)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, AttrFullName, text);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::GenderToStr(const SexType &sex)
 {
     switch (sex)
@@ -566,6 +587,7 @@ QDomElement VMeasurements::MakeEmpty(const QString &name)
     {
         SetAttribute(element, AttrValue, QString("0"));
         SetAttribute(element, AttrDescription, QString(""));
+        SetAttribute(element, AttrFullName, QString(""));
     }
 
     return element;

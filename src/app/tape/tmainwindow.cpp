@@ -418,6 +418,10 @@ void TMainWindow::Remove()
         ui->plainTextEditDescription->setPlainText("");
         ui->plainTextEditDescription->blockSignals(false);
 
+        ui->lineEditFullName->blockSignals(true);
+        ui->lineEditFullName->setText("");
+        ui->lineEditFullName->blockSignals(false);
+
         if (mType == MeasurementsType::Standard)
         {
             ui->labelCalculatedValue->blockSignals(true);
@@ -663,6 +667,10 @@ void TMainWindow::ShowMData()
             ui->plainTextEditDescription->setPlainText("");
         }
         ui->plainTextEditDescription->blockSignals(false);
+
+        ui->lineEditFullName->blockSignals(true);
+        ui->lineEditFullName->setText(meash->GetGuiText());
+        ui->lineEditFullName->blockSignals(false);
 
         if (mType == MeasurementsType::Standard)
         {
@@ -936,6 +944,29 @@ void TMainWindow::SaveMDescription()
     ui->plainTextEditDescription->setTextCursor(cursor);
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMFullName()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    m->SetMFullName(nameField->text(), ui->lineEditFullName->text());
+
+    MeasurementsWasSaved(false);
+
+    RefreshData();
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
@@ -1097,6 +1128,7 @@ void TMainWindow::InitWindow()
 
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
+    connect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
 
     InitTable();
 }
@@ -1391,6 +1423,7 @@ void TMainWindow::MFields(bool enabled)
 {
     ui->lineEditName->setEnabled(enabled);
     ui->plainTextEditDescription->setEnabled(enabled);
+    ui->lineEditFullName->setEnabled(enabled);
 
     if (mType == MeasurementsType::Standard)
     {

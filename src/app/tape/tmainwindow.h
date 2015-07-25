@@ -94,6 +94,7 @@ private slots:
     void SaveMSizeIncrease(double value);
     void SaveMHeightIncrease(double value);
     void SaveMDescription();
+    void SaveMFullName();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
