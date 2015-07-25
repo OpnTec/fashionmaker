@@ -97,6 +97,13 @@ VMeasurements::~VMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::setXMLContent(const QString &fileName)
+{
+    VDomDocument::setXMLContent(fileName);
+    type = ReadType();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::AddEmpty(const QString &name)
 {
     const QDomElement element = MakeEmpty(name);
@@ -612,6 +619,24 @@ QDomElement VMeasurements::FindM(const QString &name) const
     }
 
     return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+MeasurementsType VMeasurements::ReadType() const
+{
+    QDomElement root = documentElement();
+    if (root.tagName() == TagVST)
+    {
+        return MeasurementsType::Standard;
+    }
+    else if (root.tagName() == TagVIT)
+    {
+        return MeasurementsType::Individual;
+    }
+    else
+    {
+        return MeasurementsType::Unknown;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

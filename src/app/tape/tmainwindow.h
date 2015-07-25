@@ -51,10 +51,14 @@ public:
     explicit TMainWindow(QWidget *parent = 0);
     virtual ~TMainWindow() Q_DECL_OVERRIDE;
 
+    QString CurrentFile() const;
+
 public slots:
     void LoadFile(const QString &path);
     void FileNew();
-    void FileOpen();
+    void OpenIndividual();
+    void OpenStandard();
+    void OpenTemplate();
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
@@ -137,6 +141,8 @@ private:
     QString ClearCustomName(const QString &name) const;
 
     void EvalFormula(const QString &formula, VContainer *data, QLabel *label);
+
+    void Open(const QString &pathTo, const QString &filter);
 };
 
 #endif // TMAINWINDOW_H

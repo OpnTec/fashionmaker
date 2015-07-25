@@ -32,6 +32,8 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vvitconverter.h"
+#include "../ifc/xml/vvstconverter.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "mapplication.h" // Should be last because of definning qApp
@@ -71,16 +73,108 @@ TMainWindow::TMainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::~TMainWindow()
 {
-    delete data;
-    delete m;
+    if (data != nullptr)
+    {
+        delete data;
+    }
+
+    if (m != nullptr)
+    {
+        delete m;
+    }
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString TMainWindow::CurrentFile() const
+{
+    return curFile;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::LoadFile(const QString &path)
 {
-    ui->labelToolTip->setVisible(false);
-    ui->tabWidget->setVisible(true);
+    if (m == nullptr)
+    {
+        // Check if file already opened
+        QList<TMainWindow*>list = qApp->MainWindows();
+        for (int i = 0; i < list.size(); ++i)
+        {
+            if (list.at(i)->CurrentFile() == path)
+            {
+                list.at(i)->activateWindow();
+                return;
+            }
+        }
+
+        try
+        {
+            data = new VContainer(qApp->TrVars(), &mUnit);
+
+            m = new VMeasurements(data);
+            m->setXMLContent(path);
+
+            mType = m->Type();
+
+            if (mType == MeasurementsType::Unknown)
+            {
+                VException e("File has unknown format.");
+                throw e;
+            }
+
+            if (mType == MeasurementsType::Standard)
+            {
+                VVSTConverter converter(path);
+                converter.Convert();
+
+                VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, path);
+            }
+            else
+            {
+                VVITConverter converter(path);
+                converter.Convert();
+
+                VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
+            }
+
+            mUnit = m->MUnit();
+
+            data->SetHeight(m->BaseHeight());
+            data->SetSize(m->BaseSize());
+
+            ui->labelToolTip->setVisible(false);
+            ui->tabWidget->setVisible(true);
+
+            SetCurrentFile(path);
+
+            InitWindow();
+
+            RefreshData();
+            ReadOnly(m->ReadOnly());
+
+            if (ui->tableWidget->rowCount() > 0)
+            {
+                ui->tableWidget->selectRow(0);
+            }
+        }
+        catch (VException &e)
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+            ui->labelToolTip->setVisible(true);
+            ui->tabWidget->setVisible(false);
+            delete m;
+            m = nullptr;
+            delete data;
+            data = nullptr;
+            return;
+        }
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->LoadFile(path);
+    }
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,16 +217,53 @@ void TMainWindow::FileNew()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::FileOpen()
+void TMainWindow::OpenIndividual()
 {
     if (m == nullptr)
     {
-
+        const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+        //Use standard path to individual measurements
+        const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+        Open(pathTo, filter);
     }
     else
     {
         qApp->NewMainWindow();
-        qApp->MainWindow()->FileOpen();
+        qApp->MainWindow()->OpenIndividual();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::OpenStandard()
+{
+    if (m == nullptr)
+    {
+        const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit)");
+        //Use standard path to individual measurements
+        const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
+        Open(pathTo, filter);
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->OpenStandard();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::OpenTemplate()
+{
+    if (m == nullptr)
+    {
+        const QString filter = tr("Measurements (*.vst, *.vit)");
+        //Use standard path to individual measurements
+        const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
+        Open(pathTo, filter);
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->OpenTemplate();
     }
 }
 
@@ -181,14 +312,14 @@ void TMainWindow::FileSaveAs()
     QString suffix;
     if (mType == MeasurementsType::Individual)
     {
-        filters = tr("Standard measurements (*.vst)");
-        suffix = "vst";
+        filters = tr("Individual measurements (*.vit)");
+        suffix = "vit";
         fName += "." + suffix;
     }
     else
     {
-        filters = tr("Individual measurements (*.vit)");
-        suffix = "vit";
+        filters = tr("Standard measurements (*.vst)");
+        suffix = "vst";
         fName += "." + suffix;
     }
 
@@ -197,11 +328,11 @@ void TMainWindow::FileSaveAs()
     {
         if (mType == MeasurementsType::Individual)
         {
-            dir = qApp->TapeSettings()->GetPathStandardMeasurements() + "/" + fName;
+            dir = qApp->TapeSettings()->GetPathIndividualMeasurements() + "/" + fName;
         }
         else
         {
-            dir = qApp->TapeSettings()->GetPathIndividualMeasurements() + "/" + fName;
+            dir = qApp->TapeSettings()->GetPathStandardMeasurements() + "/" + fName;
         }
 
     }
@@ -974,8 +1105,9 @@ void TMainWindow::SetupMenu()
     connect(ui->actionNew, &QAction::triggered, this, &TMainWindow::FileNew);
     ui->actionNew->setShortcuts(QKeySequence::New);
 
-    connect(ui->actionOpen, &QAction::triggered, this, &TMainWindow::FileOpen);
-    ui->actionOpen->setShortcuts(QKeySequence::Open);
+    connect(ui->actionOpenIndividual, &QAction::triggered, this, &TMainWindow::OpenIndividual);
+    connect(ui->actionOpenStandard, &QAction::triggered, this, &TMainWindow::OpenStandard);
+    connect(ui->actionOpenTemplate, &QAction::triggered, this, &TMainWindow::OpenTemplate);
 
     connect(ui->actionSave, &QAction::triggered, this, &TMainWindow::FileSave);
     ui->actionSave->setShortcuts(QKeySequence::Save);
@@ -1479,6 +1611,21 @@ void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *
             label->setText(tr("Error") + " (" + postfix + ")");
             label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Open(const QString &pathTo, const QString &filter)
+{
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter);
+
+    if (mPath.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        LoadFile(mPath);
     }
 }
 

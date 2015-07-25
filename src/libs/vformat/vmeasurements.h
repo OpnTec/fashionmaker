@@ -43,6 +43,8 @@ public:
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_OVERRIDE;
 
+    void setXMLContent(const QString &fileName);
+
     void AddEmpty(const QString &name);
     void AddEmptyAfter(const QString &after, const QString &name);
     void Remove(const QString &name);
@@ -130,6 +132,7 @@ private:
 
     QDomElement MakeEmpty(const QString &name);
     QDomElement FindM(const QString &name) const;
+    MeasurementsType ReadType() const;
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 };

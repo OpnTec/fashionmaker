@@ -31,6 +31,8 @@
 #include <QApplication>
 #include <QDir>
 
+const QString VTapeSettings::SettingPathsTemplates = QStringLiteral("paths/templates");
+
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
                              QObject *parent)
@@ -105,4 +107,57 @@ QString VTapeSettings::StandardTablesPath() const
         }
     #endif
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTapeSettings::TemplatesPath() const
+{
+    const QString stPath = QStringLiteral("/tables/template");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + stPath;
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/template");
+        }
+    }
+#else // Unix
+    #ifdef QT_DEBUG
+        return QApplication::applicationDirPath() + stPath;
+    #else
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/template");
+        }
+    #endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTapeSettings::GetPathTemplate() const
+{
+    return value(SettingPathsTemplates, TemplatesPath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetPathTemplate(const QString &value)
+{
+    setValue(SettingPathsTemplates, value);
 }
