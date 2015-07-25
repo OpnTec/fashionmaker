@@ -43,9 +43,9 @@ class VContainer;
 class VMeasurement :public VVariable
 {
 public:
-    VMeasurement(quint32 index, const QString &name, const qreal &base, const qreal &ksize,
-                 const qreal &kheight, const QString &gui_text = QString(), const QString &description = QString(),
-                 const QString &TagName = QString());
+    VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
+                 const qreal &ksize, const qreal &kheight, const QString &gui_text = QString(),
+                 const QString &description = QString(), const QString &TagName = QString());
     VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base, const QString &formula,
                  bool ok, const QString &gui_text = QString(), const QString &description = QString(),
                  const QString &TagName = QString());

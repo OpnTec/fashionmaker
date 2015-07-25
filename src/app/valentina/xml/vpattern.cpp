@@ -2164,7 +2164,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
                     const qreal kgrowth = GetParametrDouble(domElement, IncrementKgrowth, "0");
                     const QString desc = GetParametrString(domElement, IncrementDescription, "Description");
                     data->UpdateId(id);
-                    data->AddVariable(name, new VIncrement(name, id, base, ksize, kgrowth, desc));
+                    data->AddVariable(name, new VIncrement(name, id, base, desc));
                 }
             }
         }

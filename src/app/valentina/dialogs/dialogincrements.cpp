@@ -721,7 +721,7 @@ void DialogIncrements::clickedToolButtonAdd()
 
     const quint32 id = data->getNextId();
     const QString description(tr("Description"));
-    VIncrement *incr = new VIncrement(name, id, 0, 0, 0, description);
+    VIncrement *incr = new VIncrement(name, id, 0, description);
     data->AddVariable(name, incr);
 
     AddIncrementToFile(id, name, 0, 0, 0, description);

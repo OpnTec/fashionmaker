@@ -41,19 +41,22 @@ class VVariableData : public QSharedData
 public:
 
     VVariableData()
-        :base(0), ksize(0), kheight(0), description(QString())
+        :base(0), ksize(0), kheight(0), description(QString()), baseSize(0), baseHeight(0)
     {}
 
-    VVariableData(const qreal &base, const qreal &ksize, const qreal &kheight, const QString &description)
-        :base(base), ksize(ksize), kheight(kheight), description(description)
+    VVariableData(qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize, const qreal &kheight,
+                  const QString &description)
+        :base(base), ksize(ksize), kheight(kheight), description(description), baseSize(baseSize),
+          baseHeight(baseHeight)
     {}
 
     VVariableData(const qreal &base, const QString &description)
-        :base(base), ksize(0), kheight(0), description(description)
+        :base(base), ksize(0), kheight(0), description(description), baseSize(0), baseHeight(0)
     {}
 
     VVariableData(const VVariableData &var)
-        :QSharedData(var), base(var.base), ksize(var.ksize), kheight(var.kheight), description(var.description)
+        :QSharedData(var), base(var.base), ksize(var.ksize), kheight(var.kheight), description(var.description),
+          baseSize(var.baseSize), baseHeight(var.baseHeight)
     {}
 
     virtual ~VVariableData();
@@ -69,6 +72,9 @@ public:
 
     /** @brief description description of increment */
     QString description;
+
+    qreal baseSize;
+    qreal baseHeight;
 };
 
 VVariableData::~VVariableData()

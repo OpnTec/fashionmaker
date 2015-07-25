@@ -186,7 +186,7 @@ void VMeasurements::ReadMeasurements() const
             const quint32 ksize = GetParametrUInt(dom, AttrSizeIncrease, "0");
             const quint32 kheight = GetParametrUInt(dom, AttrHeightIncrease, "0");
 
-            meash = new VMeasurement(i, name, base, ksize, kheight, "", description);
+            meash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight, "", description);
         }
         else
         {
@@ -381,7 +381,7 @@ void VMeasurements::SetMBaseValue(const QString &name, int value)
     QDomElement node = FindM(name);
     if (not node.isNull())
     {
-        SetAttribute(node, AttrValue, value);
+        SetAttribute(node, AttrBase, value);
     }
 }
 

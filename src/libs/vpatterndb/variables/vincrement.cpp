@@ -44,13 +44,11 @@ VIncrement::VIncrement()
  * @brief VIncrementTableRow create increment
  * @param name increment's name
  * @param id id
- * @param base value in base size and height
- * @param ksize increment in sizes
- * @param kheight increment in heights
+ * @param base value
  * @param description description of increment
  */
-VIncrement::VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight, QString description)
-    :VVariable(name, base, ksize, kheight, description), d(new VIncrementData(id))
+VIncrement::VIncrement(const QString &name, quint32 id, qreal base, QString description)
+    :VVariable(name, base, description), d(new VIncrementData(id))
 {
     SetType(VarType::Increment);
 }

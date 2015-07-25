@@ -550,7 +550,7 @@ void TMainWindow::AddCustom()
     VMeasurement *meash;
     if (mType == MeasurementsType::Standard)
     {
-        meash = new VMeasurement(currentRow, name, 0, 0, 0);
+        meash = new VMeasurement(currentRow, name, m->BaseSize(), m->BaseHeight(), 0, 0, 0);
     }
     else
     {
@@ -592,15 +592,43 @@ void TMainWindow::AddKnown()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ChangedSize(const QString &text)
 {
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
     data->SetSize(text.toInt());
     RefreshData();
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ChangedHeight(const QString &text)
 {
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
     data->SetHeight(text.toInt());
     RefreshData();
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->resizeColumnsToContents();
+    ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -836,10 +864,12 @@ void TMainWindow::SaveMBaseValue(int value)
 
     RefreshData();
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -859,10 +889,12 @@ void TMainWindow::SaveMSizeIncrease(int value)
 
     RefreshData();
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1003,7 +1035,7 @@ void TMainWindow::InitWindow()
 
         connect(ui->spinBoxBaseValue, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
                 &TMainWindow::SaveMBaseValue);
-        connect(ui->spinBoxInHeights, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+        connect(ui->spinBoxInSizes, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
                 &TMainWindow::SaveMSizeIncrease);
         connect(ui->spinBoxInHeights, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
                 &TMainWindow::SaveMHeightIncrease);

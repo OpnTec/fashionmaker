@@ -40,8 +40,7 @@ class VIncrement :public VVariable
 {
 public:
     VIncrement();
-    VIncrement(const QString &name, quint32 id, qreal base, qreal ksize, qreal kheight,
-               QString description = QString());
+    VIncrement(const QString &name, quint32 id, qreal base, QString description = QString());
     VIncrement(const VIncrement &incr);
     VIncrement &operator=(const VIncrement &incr);
     virtual ~VIncrement() Q_DECL_OVERRIDE;

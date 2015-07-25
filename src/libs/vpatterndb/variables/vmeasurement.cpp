@@ -40,10 +40,11 @@
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(quint32 index, const QString &name, const qreal &base, const qreal &ksize,
-                           const qreal &kheight,
-                           const QString &gui_text, const QString &description, const QString &tagName)
-    :VVariable(name, base, ksize, kheight, description), d(new VMeasurementData(index, gui_text, tagName))
+VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
+                           const qreal &ksize, const qreal &kheight, const QString &gui_text,
+                           const QString &description, const QString &tagName)
+    :VVariable(name, baseSize, baseHeight, base, ksize, kheight, description),
+      d(new VMeasurementData(index, gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }

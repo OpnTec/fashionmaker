@@ -37,9 +37,9 @@ VVariable::VVariable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
-                     const QString &description)
-    :VInternalVariable(), d(new VVariableData(base, ksize, kheight, description))
+VVariable::VVariable(const QString &name, qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize,
+                     const qreal &kheight, const QString &description)
+    :VInternalVariable(), d(new VVariableData(baseSize, baseHeight, base, ksize, kheight, description))
 {
     VInternalVariable::SetValue(d->base);
     SetName(name);
@@ -82,14 +82,12 @@ void VVariable::SetValue(const qreal &size, const qreal &height, Unit patternUni
         qWarning("Gradation doesn't support inches");
         return;
     }
-    const qreal baseSize = UnitConvertor(50.0, Unit::Cm, patternUnit);
-    const qreal baseHeight = UnitConvertor(176.0, Unit::Cm, patternUnit);
     const qreal sizeIncrement = UnitConvertor(2.0, Unit::Cm, patternUnit);
     const qreal heightIncrement = UnitConvertor(6.0, Unit::Cm, patternUnit);
 
     // Formula for calculation gradation
-    const qreal k_size    = ( size - baseSize ) / sizeIncrement;
-    const qreal k_height  = ( height - baseHeight ) / heightIncrement;
+    const qreal k_size    = ( size - d->baseSize ) / sizeIncrement;
+    const qreal k_height  = ( height - d->baseHeight ) / heightIncrement;
     VInternalVariable::SetValue(d->base + k_size * d->ksize + k_height * d->kheight);
 }
 
