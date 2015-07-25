@@ -342,20 +342,47 @@ void TMainWindow::ReadOnly(bool ro)
     m->SetReadOnly(ro);
     MeasurementsWasSaved(false);
 
-    ui->plainTextEditNotes->setDisabled(ro);
+    ui->plainTextEditNotes->setReadOnly(ro);
     ui->actionAddCustom->setDisabled(ro);
     ui->actionAddKnown->setDisabled(ro);
 
+    if (not ro)
+    {
+        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
+        {
+            if (nameField->text().indexOf(CustomSign) == 0) // Check if custom
+            {
+                ui->lineEditName->setReadOnly(ro);
+            }
+        }
+    }
+    else
+    {
+        ui->lineEditName->setReadOnly(ro);
+    }
+    ui->plainTextEditDescription->setReadOnly(ro);
+
     if (mType == MeasurementsType::Individual)
     {
-        ui->lineEditGivenName->setDisabled(ro);
-        ui->lineEditFamilyName->setDisabled(ro);
-        ui->dateEditBirthDate->setDisabled(ro);
+        ui->lineEditGivenName->setReadOnly(ro);
+        ui->lineEditFamilyName->setReadOnly(ro);
+        ui->dateEditBirthDate->setReadOnly(ro);
         ui->comboBoxSex->setDisabled(ro);
-        ui->lineEditEmail->setDisabled(ro);
+        ui->lineEditEmail->setReadOnly(ro);
+
+        ui->plainTextEditFormula->setReadOnly(ro);
+    }
+    else
+    {
+        ui->doubleSpinBoxBaseValue->setDisabled(ro);
+        ui->doubleSpinBoxInSizes->setDisabled(ro);
+        ui->doubleSpinBoxInHeights->setDisabled(ro);
+
+        gradationHeights->setDisabled(ro);
+        gradationSizes->setDisabled(ro);
     }
 
-    ui->groupBoxDetails->setDisabled(ro);
+    Controls(); // Buttons remove, up, down
 }
 
 //---------------------------------------------------------------------------------------------------------------------
