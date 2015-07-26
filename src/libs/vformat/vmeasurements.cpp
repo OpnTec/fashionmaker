@@ -477,6 +477,40 @@ SexType VMeasurements::StrToGender(const QString &sex)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurements::ListAll() const
+{
+    QStringList listNames;
+    const QDomNodeList list = elementsByTagName(TagMeasurement);
+
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement domElement = list.at(i).toElement();
+        if (domElement.isNull() == false)
+        {
+            listNames.append(domElement.attribute(AttrName));
+        }
+    }
+
+    return listNames;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurements::ListKnown() const
+{
+    QStringList listNames;
+    const QStringList list = ListAll();
+    for (int i=0; i < list.size(); ++i)
+    {
+        if (list.at(i).indexOf(CustomSign) != 0)
+        {
+            listNames.append(list.at(i));
+        }
+    }
+
+    return listNames;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight)
 {
     this->clear();
