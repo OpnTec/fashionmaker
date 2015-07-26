@@ -52,6 +52,10 @@ $$enable_ccache()
 $$set_PCH()
 
 INCLUDEPATH += $$PWD/../vpatterndb
+INCLUDEPATH += $${_PRO_FILE_PWD_}/../vmisc
+INCLUDEPATH += $${_PRO_FILE_PWD_}/../vwidgets
+INCLUDEPATH += $${_PRO_FILE_PWD_}/visualization
+INCLUDEPATH += $${_PRO_FILE_PWD_}/../ifc
 
 CONFIG(debug, debug|release){
     # Debug mode
