@@ -37,6 +37,10 @@
 #   include <QCommandLineParser>
 #endif
 
+// Lock producing random attribute order in XML
+// https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml
+extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
+
 //---------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
@@ -49,6 +53,8 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(toolicon);
 
     QT_REQUIRE_VERSION(argc, argv, "5.0.0");
+
+    qt_qhash_seed.store(0); // Lock producing random attribute order in XML
 
     VApplication app(argc, argv);
     app.InitOptions();

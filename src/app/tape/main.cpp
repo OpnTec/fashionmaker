@@ -31,6 +31,10 @@
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
+// Lock producing random attribute order in XML
+// https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml
+extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
+
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(tapeicon);
@@ -39,6 +43,8 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(schema);
 
     QT_REQUIRE_VERSION(argc, argv, "5.0.0");
+
+    qt_qhash_seed.store(0); // Lock producing random attribute order in XML
 
     MApplication app(argc, argv);
     if (not app.IsTheOnly())

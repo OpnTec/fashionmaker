@@ -118,6 +118,9 @@ public:
     static QString GenderToStr(const SexType &sex);
     static SexType StrToGender(const QString &sex);
 
+    QStringList ListAll() const;
+    QStringList ListKnown() const;
+
 private:
     Q_DISABLE_COPY(VMeasurements)
 
