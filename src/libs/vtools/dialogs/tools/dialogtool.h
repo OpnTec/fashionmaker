@@ -29,8 +29,6 @@
 #ifndef DIALOGTOOL_H
 #define DIALOGTOOL_H
 
-
-
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/logging.h"
 #include "../vwidgets/vmaingraphicsscene.h"
