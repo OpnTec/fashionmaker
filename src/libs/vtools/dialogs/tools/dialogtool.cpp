@@ -284,7 +284,6 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FixateSize()
 {
-    adjustSize();
     setMaximumSize(size());
     setMinimumSize(size());
 }

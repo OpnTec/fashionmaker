@@ -59,7 +59,6 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 
-    adjustSize();
     setMaximumSize(size());
     setMinimumSize(size());
 }

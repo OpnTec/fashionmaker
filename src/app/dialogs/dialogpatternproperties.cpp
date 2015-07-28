@@ -81,7 +81,6 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
 
     gradationChanged = false;//Set to default value after initialization
 
-    adjustSize();
     setMaximumSize(size());
     setMinimumSize(size());
 }
