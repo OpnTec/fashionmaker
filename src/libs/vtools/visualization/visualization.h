@@ -32,8 +32,8 @@
 #include <QObject>
 #include <QGraphicsItem>
 
-#include "../../vmisc/vabstractapplication.h"
-#include "../../vwidgets/vmaingraphicsscene.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vmisc/logging.h"
 #include "../../libs/vpatterndb/vcontainer.h"
 
