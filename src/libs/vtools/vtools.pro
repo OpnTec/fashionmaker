@@ -51,12 +51,6 @@ $$enable_ccache()
 # Set precompiled headers. Function set_PCH() defined in Valentina.pri.
 $$set_PCH()
 
-INCLUDEPATH += $$PWD/../vpatterndb
-INCLUDEPATH += $${_PRO_FILE_PWD_}/../vmisc
-INCLUDEPATH += $${_PRO_FILE_PWD_}/../vwidgets
-INCLUDEPATH += $${_PRO_FILE_PWD_}/visualization
-INCLUDEPATH += $${_PRO_FILE_PWD_}/../ifc
-
 CONFIG(debug, debug|release){
     # Debug mode
     unix {
