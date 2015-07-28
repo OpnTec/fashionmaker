@@ -123,7 +123,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>Настройки языка интерфейса пользователя оновлены и будут задействованы при следующем запуске</translation>
+        <translation>Настройки языка интерфейса пользователя обновлены и будут задействованы при следующем запуске</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Разделитель дробовой части</translation>
+        <translation>Разделитель дробной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -175,19 +175,19 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Отсылка отчета об ошибках</translation>
+        <translation>Отправить отчет об ошибках</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Отсылка отчета об ошибках (рекомендуется)</translation>
+        <translation>Отправить отчет об ошибках (рекомендуется)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>После каждого падения Valentina собирает информацию которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt; которую мы собираем.</translation>
+        <translation>После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
     <message>
         <source>Milimiters</source>
-        <translation type="vanished">Milimiters</translation>
+        <translation type="vanished">Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Подтвердите удаление елемента</translation>
+        <translation>Подтвердить удаление элемента</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -215,7 +215,7 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation>Текст отображается под инонками. (рекомендуется для начинающих.)</translation>
+        <translation>Текст отображается под иконками. (рекомендуется для начинающих.)</translation>
     </message>
 </context>
 <context>
@@ -306,7 +306,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -394,7 +394,7 @@
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <translation>Выберите вторую точку линии</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -473,7 +473,7 @@
     </message>
     <message>
         <source>Insert marked variable into formula</source>
-        <translation type="vanished">Вставить выбраную переменную в формулу</translation>
+        <translation type="vanished">Вставить выбранную переменную в формулу</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -533,7 +533,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -580,7 +580,7 @@
     <name>DialogBisector</name>
     <message>
         <source>Bisector</source>
-        <translation type="vanished">Бисектриса</translation>
+        <translation type="vanished">Биссектриса</translation>
     </message>
     <message>
         <source>Length</source>
@@ -600,15 +600,15 @@
     </message>
     <message>
         <source>Calculation of length of bisector by using the formula</source>
-        <translation type="vanished">Расчет длины бисектрисы используя формулу</translation>
+        <translation type="vanished">Расчет длины биссектрисы используя формулу</translation>
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
-        <translation type="vanished">Вставить выбраную переменную в формулу</translation>
+        <translation type="vanished">Вставить выбранную переменную в формулу</translation>
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -648,7 +648,7 @@
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -664,7 +664,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -700,15 +700,15 @@
     </message>
     <message>
         <source>Select second point of angle</source>
-        <translation>Выберить вторую точку угла</translation>
+        <translation>Выберите вторую точку угла</translation>
     </message>
     <message>
         <source>Select third point of angle</source>
-        <translation>Выберить третью точку угла</translation>
+        <translation>Выберите третью точку угла</translation>
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Точка вдоль бисектрисы</translation>
+        <translation>Точка вдоль биссектрисы</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -723,7 +723,7 @@
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Curve intersect axis</source>
-        <translation type="vanished">Пересичение кривой и оси</translation>
+        <translation type="vanished">Пересечение кривой и оси</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -731,7 +731,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -763,7 +763,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -795,7 +795,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -807,7 +807,7 @@
     </message>
     <message>
         <source>Select axis point</source>
-        <translation>Выберить точку оси</translation>
+        <translation>Выберите точку оси</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
@@ -850,7 +850,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -870,7 +870,7 @@
     </message>
     <message>
         <source>Selected curve</source>
-        <translation type="vanished">Выбраная кривая</translation>
+        <translation type="vanished">Выбранная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -910,7 +910,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -926,7 +926,7 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Выбраная дуга</translation>
+        <translation>Выбранная дуга</translation>
     </message>
     <message>
         <source>Color</source>
@@ -961,7 +961,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -981,7 +981,7 @@
     </message>
     <message>
         <source>Selected curve</source>
-        <translation>Выбраная кривая</translation>
+        <translation>Выбранная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1021,7 +1021,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -1068,7 +1068,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1088,7 +1088,7 @@
     </message>
     <message>
         <source>Selected curve path</source>
-        <translation>Выбраная сложная кривая</translation>
+        <translation>Выбранная сложная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1128,7 +1128,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -1195,11 +1195,11 @@
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
-        <translation>Получен не правильный объект сцены. Ингорируем.</translation>
+        <translation>Получен неправильный объект сцены. Игнорируем.</translation>
     </message>
     <message>
         <source>Got wrong tools. Ignore.</source>
-        <translation type="vanished">Получен не правильный инструмент. Игнорируем.</translation>
+        <translation type="vanished">Получен неправильный инструмент. Игнорируем.</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -1230,7 +1230,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -1278,7 +1278,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Уголы линий</translation>
+        <translation>Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -1290,7 +1290,7 @@
     </message>
     <message>
         <source>Double click for add to formula</source>
-        <translation>Двойной счелчок для добавления у формулу</translation>
+        <translation>Двойной щелчок для добавления у формулу</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1333,7 +1333,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>...</source>
@@ -1377,7 +1377,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -1393,7 +1393,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -1488,15 +1488,15 @@
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Показать линию с первой точки к нашей</translation>
+        <translation>Показать линию от первой точки к нашей</translation>
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation>Выберить первую точку линии</translation>
+        <translation>Выберите первую точку линии</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <translation>Выберите вторую точку линии</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -1527,7 +1527,7 @@
     </message>
     <message>
         <source>%1_%2 - Line from point %1 to point %2</source>
-        <translation>%1_%2 - Линия с точки %1 к точке %2</translation>
+        <translation>%1_%2 - Линия от точки %1 к точке %2</translation>
     </message>
     <message>
         <source>%3 - Point along line %1_%2</source>
@@ -1551,7 +1551,7 @@
     </message>
     <message>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
-        <translation>Точка перпендикуляра с точки %1 до линии %2_%3</translation>
+        <translation>Точка перпендикуляра от точки %1 до линии %2_%3</translation>
     </message>
     <message>
         <source>%1 - point of intersection %2 and %3</source>
@@ -1583,7 +1583,7 @@
     </message>
     <message>
         <source>Got wrong tool type. Ignore.</source>
-        <translation type="vanished">Получено неправильный тип инструмента. Игнорируем.</translation>
+        <translation type="vanished">Получен неправильный тип инструмента. Игнорируем.</translation>
     </message>
     <message>
         <source>Curve %1_%2</source>
@@ -1646,7 +1646,7 @@
     </message>
     <message>
         <source>Sex</source>
-        <translation>Стать</translation>
+        <translation>Пол</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -1658,7 +1658,7 @@
     </message>
     <message>
         <source>The calculated value</source>
-        <translation>Расчитаное значение</translation>
+        <translation>Рассчитаное значение</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -1674,7 +1674,7 @@
     </message>
     <message>
         <source>Description</source>
-        <translation>Опис</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>In size</source>
@@ -1762,7 +1762,7 @@
     </message>
     <message>
         <source>Could not save Sex</source>
-        <translation>Не удалось сохранить стать</translation>
+        <translation>Не удалось сохранить пол</translation>
     </message>
     <message>
         <source>Could not save BirthDate</source>
@@ -1802,7 +1802,7 @@
     </message>
     <message>
         <source>Calculated value</source>
-        <translation type="obsolete">Расчитаное значение</translation>
+        <translation type="obsolete">Рассчитаное значение</translation>
     </message>
     <message>
         <source>Length</source>
@@ -1873,7 +1873,7 @@
     </message>
     <message>
         <source>Please try again or change file</source>
-        <translation>Пожайлуста попробуйте снова или смените файл</translation>
+        <translation>Пожалуйста, попробуйте снова или смените файл</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -1901,7 +1901,7 @@
     </message>
     <message>
         <source>Milimiters</source>
-        <translation type="vanished">Milimiters</translation>
+        <translation type="vanished">Миллиметры</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -1924,7 +1924,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, waite.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лутшей позиции для детали. Пожайлуста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -1948,7 +1948,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лутшей позиции для детали. Пожайлуста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -1975,7 +1975,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Выстора:</translation>
+        <translation>Высота:</translation>
     </message>
     <message>
         <source>...</source>
@@ -2007,7 +2007,7 @@
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Прицип выбора очередной детали</translation>
+        <translation>Принцип выбора очередной детали</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2094,11 +2094,11 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Выберить вторую точку</translation>
+        <translation>Выберите вторую точку</translation>
     </message>
     <message>
         <source>Line between points</source>
@@ -2113,11 +2113,11 @@
     <name>DialogLineIntersect</name>
     <message>
         <source>Point of line intersection</source>
-        <translation type="obsolete">Точка пересичения линий</translation>
+        <translation type="obsolete">Точка пересечения линий</translation>
     </message>
     <message>
         <source>Intersection of lines</source>
-        <translation type="vanished">Пересичение линий</translation>
+        <translation type="vanished">Пересечение линий</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2141,19 +2141,19 @@
     </message>
     <message>
         <source>Select second point of first line</source>
-        <translation>Выберить вторую точку первой линии</translation>
+        <translation>Выберите вторую точку первой линии</translation>
     </message>
     <message>
         <source>Select first point of second line</source>
-        <translation>Выберить первую точку второй линии</translation>
+        <translation>Выберите первую точку второй линии</translation>
     </message>
     <message>
         <source>Select second point of second line</source>
-        <translation>Выберить вторую точку второй линии</translation>
+        <translation>Выберите вторую точку второй линии</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Точка пересичения линий</translation>
+        <translation>Точка пересечения линий</translation>
     </message>
 </context>
 <context>
@@ -2168,7 +2168,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Value of angle</source>
@@ -2204,7 +2204,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -2236,7 +2236,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -2248,11 +2248,11 @@
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <translation>Выберите вторую точку линии</translation>
     </message>
     <message>
         <source>Select axis point</source>
-        <translation>Выберить точку оси</translation>
+        <translation>Выберите точку оси</translation>
     </message>
     <message>
         <source>Point intersect line and axis</source>
@@ -2350,7 +2350,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2370,7 +2370,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию с первой точки до этой</translation>
+        <translation>Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -2402,7 +2402,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -2414,7 +2414,7 @@
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <translation>Выберите вторую точку линии</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -2461,11 +2461,11 @@
     </message>
     <message>
         <source>Heights and Sizes</source>
-        <translation>Роста и размеры</translation>
+        <translation>Росты и размеры</translation>
     </message>
     <message>
         <source>All heights (cm)</source>
-        <translation>Все роста (см)</translation>
+        <translation>Все росты (см)</translation>
     </message>
     <message>
         <source>92</source>
@@ -2632,7 +2632,7 @@
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation>&lt;Нет выбораного&gt;</translation>
+        <translation>&lt;Нет выбранного&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
@@ -2652,7 +2652,7 @@
     </message>
     <message>
         <source>Remove attibute</source>
-        <translation type="vanished">Удалить attibute</translation>
+        <translation type="vanished">Удалить атрибут</translation>
     </message>
     <message>
         <source>Remove node</source>
@@ -2692,7 +2692,7 @@
     </message>
     <message>
         <source>Cannot delete previously created node</source>
-        <translation>Не вдається видалити раніше створений вузол</translation>
+        <translation>Не удается удалить ранее созданный узел</translation>
     </message>
     <message>
         <source>No changes left</source>
@@ -2708,7 +2708,7 @@
     </message>
     <message>
         <source>Unchanged</source>
-        <translation>Неизменившийся</translation>
+        <translation>Неизмененный</translation>
     </message>
     <message>
         <source>Cannot delete previously created attribute</source>
@@ -2791,7 +2791,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2823,7 +2823,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -2859,7 +2859,7 @@
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <translation>Выберите вторую точку линии</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -2906,7 +2906,7 @@
     </message>
     <message>
         <source>Select point horizontally</source>
-        <translation type="vanished">Выберить точку по горозинтали</translation>
+        <translation type="vanished">Выберите точку по горозинтали</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -2922,7 +2922,7 @@
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
-        <translation>Выберить точку по горозинтали</translation>
+        <translation>Выберите точку по горозинтали</translation>
     </message>
 </context>
 <context>
@@ -2953,7 +2953,7 @@
     </message>
     <message>
         <source>Calculate value</source>
-        <translation type="vanished">Расчитать значение</translation>
+        <translation type="vanished">Рассчитать значение</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2985,7 +2985,7 @@
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Показать линию с первой точки к нашей</translation>
+        <translation>Показать линию от первой точки к нашей</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -3001,7 +3001,7 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation type="vanished">Уголы линий</translation>
+        <translation type="vanished">Углы линий</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
@@ -3037,15 +3037,15 @@
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation>Выберить первую точку линии</translation>
+        <translation>Выберите первую точку линии</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation>Выберить вторую точку линии</translation>
+        <translation>Выберите вторую точку линии</translation>
     </message>
     <message>
         <source>Select point of shoulder</source>
-        <translation type="vanished">Выберить точку плеча</translation>
+        <translation type="vanished">Выберите точку плеча</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -3099,7 +3099,7 @@
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Коефициент длины первой контрольной точки</translation>
+        <translation>коэффициент длины первой контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
@@ -3111,7 +3111,7 @@
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Коефициент длины второй контрольной точки</translation>
+        <translation>коэффициент длины второй контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
@@ -3123,7 +3123,7 @@
     </message>
     <message>
         <source>Select last point of curve</source>
-        <translation>Выберить последнюю точку кривой</translation>
+        <translation>Выберите последнюю точку кривой</translation>
     </message>
     <message>
         <source>Simple curve</source>
@@ -3150,7 +3150,7 @@
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Коефициент длины первой контрольной точки</translation>
+        <translation>коэффициент длины первой контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
@@ -3158,7 +3158,7 @@
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Коефициент длины второй контрольной точки</translation>
+        <translation>коэффициент длины второй контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
@@ -3170,11 +3170,11 @@
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
-        <translation>Коефициент кривизные кривой</translation>
+        <translation>коэффициент кривизные кривой</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation>Выберить точку сложной кривой</translation>
+        <translation>Выберите точку сложной кривой</translation>
     </message>
     <message>
         <source>Color</source>
@@ -3216,7 +3216,7 @@
     </message>
     <message>
         <source>Can&apos;t find point by name</source>
-        <translation type="obsolete">Не могу найти точку за именем</translation>
+        <translation type="obsolete">Не могу найти точку по имени</translation>
     </message>
     <message>
         <source>Error</source>
@@ -3244,7 +3244,7 @@
     </message>
     <message>
         <source>Can&apos;t find object by name</source>
-        <translation type="vanished">Не могу найти объект за именем</translation>
+        <translation type="vanished">Не могу найти объект по имени</translation>
     </message>
     <message>
         <source>Empty field</source>
@@ -3323,15 +3323,15 @@
     </message>
     <message>
         <source>Select second point of axis</source>
-        <translation>Выберить вторую точку оси</translation>
+        <translation>Выберите вторую точку оси</translation>
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Выберить первую точку</translation>
+        <translation>Выберите первую точку</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Выберить вторую точку</translation>
+        <translation>Выберите вторую точку</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -3358,7 +3358,7 @@
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Ошибка при расчете формулы. Вы можете попробывать отменить последнюю операцию или исправить неисправную формулу.</translation>
+        <translation>Ошибка при расчете формулы. Вы можете попробовать отменить последнюю операцию или исправить неисправную формулу.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3385,11 +3385,11 @@
     </message>
     <message>
         <source>Select first point</source>
-        <translation type="vanished">Выберить первую точку</translation>
+        <translation type="vanished">Выберите первую точку</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation type="vanished">Выберить вторую точку</translation>
+        <translation type="vanished">Выберите вторую точку</translation>
     </message>
     <message>
         <source>Select another second point</source>
@@ -3397,7 +3397,7 @@
     </message>
     <message>
         <source>Select detail</source>
-        <translation type="vanished">Выберить деталь</translation>
+        <translation type="vanished">Выберите деталь</translation>
     </message>
     <message>
         <source>Union details</source>
@@ -3413,23 +3413,23 @@
     </message>
     <message>
         <source>Select a first point</source>
-        <translation>Выберить первую точку</translation>
+        <translation>Выберите первую точку</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation>Деталь должна иметь по крайней мере две точки и три объекты</translation>
+        <translation>Деталь должна иметь по крайней мере две точки и три объекта</translation>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation>Выберить вторую точку</translation>
+        <translation>Выберите вторую точку</translation>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation>Выберить уникальную точку</translation>
+        <translation>Выберите уникальную точку</translation>
     </message>
     <message>
         <source>Select a detail</source>
-        <translation>Выберить деталь</translation>
+        <translation>Выберите деталь</translation>
     </message>
     <message>
         <source>Select a point on edge</source>
@@ -3568,7 +3568,7 @@
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation>Программа предоставляется КАК ЕСТЬ без ГАРАНТИЙ ЛЮБОГО РОДА, ВКЛЮЧАЯ ГАРАНТИЙ ДИЗАЙНА, КОММЕРЧЕСКОЙ ЦЕННОСТИ И ПРИГОДНОСТИ ДЛЯ КОНКРЕТНЫХ ЦЕЛЕЙ.</translation>
+        <translation>Программа предоставляется КАК ЕСТЬ без ГАРАНТИЙ ЛЮБОГО РОДА, ВКЛЮЧАЯ ГАРАНТИИ ДИЗАЙНА, КОММЕРЧЕСКОЙ ЦЕННОСТИ И ПРИГОДНОСТИ ДЛЯ КОНКРЕТНЫХ ЦЕЛЕЙ.</translation>
     </message>
 </context>
 <context>
@@ -3607,7 +3607,7 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Инструмент точка бисектрисы</translation>
+        <translation>Инструмент точка биссектрисы</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line.</source>
@@ -3635,7 +3635,7 @@
     </message>
     <message>
         <source>Tool point of line intersection.</source>
-        <translation type="obsolete">Инструмент точка пересичения линий.</translation>
+        <translation type="obsolete">Инструмент точка пересечения линий.</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
@@ -3719,7 +3719,7 @@
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Точка пересичения линий</translation>
+        <translation>Точка пересечения линий</translation>
     </message>
     <message>
         <source>Curve tool.</source>
@@ -3895,7 +3895,7 @@
     </message>
     <message>
         <source>Export pattern (layout)</source>
-        <translation type="vanished">Экспорт чертежа (роскладка)</translation>
+        <translation type="vanished">Экспорт чертежа (раскладка)</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -4003,7 +4003,7 @@
     </message>
     <message>
         <source>Tables of variables</source>
-        <translation>Таблици переменных</translation>
+        <translation>Таблицы переменных</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
@@ -4019,7 +4019,7 @@
     </message>
     <message>
         <source>Layout</source>
-        <translation>Роскладка</translation>
+        <translation>Раскладка</translation>
     </message>
     <message>
         <source>Create layout</source>
@@ -4055,7 +4055,7 @@
     </message>
     <message>
         <source>Error saving change!!!</source>
-        <translation type="vanished">Пошибка сохранение изменений!!!</translation>
+        <translation type="vanished">Ошибка сохранения изменений!!!</translation>
     </message>
     <message>
         <source>Create new pattern piece to start working.</source>
@@ -4095,15 +4095,15 @@
     </message>
     <message>
         <source>Select point</source>
-        <translation>Выберить точку</translation>
+        <translation>Выберите точку</translation>
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Выберить первую точку</translation>
+        <translation>Выберите первую точку</translation>
     </message>
     <message>
         <source>Select point of shoulder</source>
-        <translation type="vanished">Выберить точку плеча</translation>
+        <translation type="vanished">Выберите точку плеча</translation>
     </message>
     <message>
         <source>Individual measurements is under development</source>
@@ -4113,47 +4113,47 @@
         <source>There is no way create individual measurements file independent on the pattern file.
 For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
         <translation>У вас не будет возможности создать файл с индивидуальными мерками независимо от файла лекала.
-Для того что бы отрыть файл лекала сохраните оба вайла: выкройку и мерки. Вы хотите продолжить?</translation>
+Для того что бы отрыть файл лекала сохраните оба файла: выкройку и мерки. Вы хотите продолжить?</translation>
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation>Выберить первую точку линии</translation>
+        <translation>Выберите первую точку линии</translation>
     </message>
     <message>
         <source>Select first point of angle</source>
-        <translation>Выберить первую точку угла</translation>
+        <translation>Выберите первую точку угла</translation>
     </message>
     <message>
         <source>Select first point of first line</source>
-        <translation>Выберить первую точку первой линии</translation>
+        <translation>Выберите первую точку первой линии</translation>
     </message>
     <message>
         <source>Select first point curve</source>
-        <translation>Выберить первую точку кривой</translation>
+        <translation>Выберите первую точку кривой</translation>
     </message>
     <message>
         <source>Select simple curve</source>
-        <translation>Выберить простую кривую</translation>
+        <translation>Выберите простую кривую</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Выберить точку центра дуги</translation>
+        <translation>Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
-        <translation>Выберить точку сложной кривой</translation>
+        <translation>Выберите точку сложной кривой</translation>
     </message>
     <message>
         <source>Select curve path</source>
-        <translation>Выберить сложною кривую</translation>
+        <translation>Выберите сложною кривую</translation>
     </message>
     <message>
         <source>Select detail</source>
-        <translation>Выберить деталь</translation>
+        <translation>Выберите деталь</translation>
     </message>
     <message>
         <source>Select arc</source>
-        <translation>Выберить дугу</translation>
+        <translation>Выберите дугу</translation>
     </message>
     <message>
         <source>Select curve</source>
@@ -4197,7 +4197,7 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
-        <translation type="vanished">Мерки используют другие единицы измерения нежели лекало. Ето леколо требует мерки в %1</translation>
+        <translation type="vanished">Мерки используют другие единицы измерения нежели лекало. Это лекало требует мерки в %1</translation>
     </message>
     <message>
         <source>Wrong units.</source>
@@ -4271,7 +4271,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to save your changes?</source>
-        <translation type="obsolete">Вы хочете сохранить изменения?</translation>
+        <translation type="obsolete">Вы хотите сохранить изменения?</translation>
     </message>
     <message>
         <source>Parsing pattern file error.</source>
@@ -4345,19 +4345,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation>Выберить точки, дуги, кривые за часовой стрелкой.</translation>
+        <translation>Выберите точки, дуги, кривые по часовой стрелке.</translation>
     </message>
     <message>
         <source>Select base point</source>
-        <translation>Выберить базовую точку</translation>
+        <translation>Выберите базовую точку</translation>
     </message>
     <message>
         <source>Select first point of axis</source>
-        <translation>Выберить первую тчоку оси</translation>
+        <translation>Выберите первую тчоку оси</translation>
     </message>
     <message>
         <source>Select point vertically</source>
-        <translation type="vanished">Выберить точку по вертикали</translation>
+        <translation type="vanished">Выберите точку по вертикали</translation>
     </message>
     <message>
         <source>Based on Qt %2 (32 bit)</source>
@@ -4509,7 +4509,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
-        <translation>Выберить точку по вертикали</translation>
+        <translation>Выберите точку по вертикали</translation>
     </message>
     <message>
         <source>Mode</source>
@@ -7432,7 +7432,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Роскладка</translation>
+        <translation>Раскладка</translation>
     </message>
 </context>
 <context>
@@ -7936,11 +7936,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Страницы роскладки</translation>
+        <translation>Страницы раскладки</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Роскладка</translation>
+        <translation>Раскладка</translation>
     </message>
     <message>
         <source>Main toolbar</source>
@@ -8112,7 +8112,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Подтвердите удаление</translation>
+        <translation>Подтвердить удаление</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
@@ -8143,7 +8143,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправельный id. Програма будет закрыта.</translation>
+        <translation>Ошибка неправильный id. Програма будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -8196,7 +8196,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation>Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
+        <translation>Получен неправильный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toLongLong parameter</source>
@@ -8279,11 +8279,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of bisector</source>
-        <translation type="vanished">Ошибка создания или обновления точки бисектрисы</translation>
+        <translation type="vanished">Ошибка создания или обновления точки биссектрисы</translation>
     </message>
     <message>
         <source>Error creating or updating point of lineintersection</source>
-        <translation type="vanished">Ошибка создания или обновления точки пересичения линий</translation>
+        <translation type="vanished">Ошибка создания или обновления точки пересечения линий</translation>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
@@ -8303,7 +8303,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of intersection</source>
-        <translation type="vanished">Ошибка создания или обновления точки пересичения</translation>
+        <translation type="vanished">Ошибка создания или обновления точки пересечения</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline point</source>
@@ -8382,7 +8382,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can not find the element after which you want to insert.</source>
-        <translation type="vanished">Не могу найти елемент после которого вы хочете вставить.</translation>
+        <translation type="vanished">Не могу найти элемент после которого вы хотите вставить.</translation>
     </message>
     <message>
         <source>Can&apos;t find tag Calculation</source>
@@ -8537,11 +8537,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of bisector</source>
-        <translation>Ошибка создания или обновления точки бисектрисы</translation>
+        <translation>Ошибка создания или обновления точки биссектрисы</translation>
     </message>
     <message>
         <source>Error creating or updating point of lineintersection</source>
-        <translation>Ошибка создания или обновления точки пересичения линий</translation>
+        <translation>Ошибка создания или обновления точки пересечения линий</translation>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
@@ -8561,7 +8561,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of intersection</source>
-        <translation>Ошибка создания или обновления точки пересичения</translation>
+        <translation>Ошибка создания или обновления точки пересечения</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline point</source>
@@ -8617,7 +8617,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Получен неправельный параметр id. Допустимы только id &gt; 0.</translation>
+        <translation type="vanished">Получен неправильный параметр id. Допустимы только id &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
@@ -8728,7 +8728,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Инструмент точка бисектрисы</translation>
+        <translation>Инструмент точка биссектрисы</translation>
     </message>
     <message>
         <source>Cut arc tool</source>
@@ -8752,7 +8752,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Точка пересичения линий</translation>
+        <translation>Точка пересечения линий</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
