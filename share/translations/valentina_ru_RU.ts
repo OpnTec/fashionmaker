@@ -175,11 +175,11 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation>Отправить отчет об ошибках</translation>
+        <translation>Отправка отчета об ошибках</translation>
     </message>
     <message>
         <source>Send crash reports (recommended)</source>
-        <translation>Отправить отчет об ошибках (рекомендуется)</translation>
+        <translation>Отправка отчета об ошибках (рекомендуется)</translation>
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Подтвердить удаление элемента</translation>
+        <translation>Подтвердите удаление элемента</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -3099,7 +3099,7 @@
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>коэффициент длины первой контрольной точки</translation>
+        <translation>Коэффициент длины первой контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
@@ -3111,7 +3111,7 @@
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>коэффициент длины второй контрольной точки</translation>
+        <translation>Коэффициент длины второй контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
@@ -3150,7 +3150,7 @@
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>коэффициент длины первой контрольной точки</translation>
+        <translation>Коэффициент длины первой контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
@@ -3158,7 +3158,7 @@
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>коэффициент длины второй контрольной точки</translation>
+        <translation>Коэффициент длины второй контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
@@ -3170,7 +3170,7 @@
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
-        <translation>коэффициент кривизные кривой</translation>
+        <translation>Коэффициент кривизны кривой</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
@@ -8076,7 +8076,7 @@ Do you want to save your changes?</source>
     <name>VAbstractTool</name>
     <message>
         <source>Confirm the deletion.</source>
-        <translation type="vanished">Подтвердить удаление.</translation>
+        <translation type="vanished">Подтвердите удаление.</translation>
     </message>
     <message>
         <source>Do you really want delete?</source>
@@ -8112,7 +8112,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Подтвердить удаление</translation>
+        <translation>Подтвердите удаление</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
