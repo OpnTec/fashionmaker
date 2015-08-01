@@ -31,7 +31,8 @@
 #include <QApplication>
 #include <QDir>
 
-const QString VTapeSettings::SettingPathsTemplates = QStringLiteral("paths/templates");
+const QString VTapeSettings::SettingPathsTemplates      = QStringLiteral("paths/templates");
+const QString VTapeSettings::SettingDataBaseGeometry    = QStringLiteral("database/geometry");
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -160,4 +161,16 @@ QString VTapeSettings::GetPathTemplate() const
 void VTapeSettings::SetPathTemplate(const QString &value)
 {
     setValue(SettingPathsTemplates, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QByteArray VTapeSettings::GetDataBaseGeometry() const
+{
+    return value(SettingDataBaseGeometry).toByteArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetDataBaseGeometry(const QByteArray &value)
+{
+    setValue(SettingDataBaseGeometry, value);
 }

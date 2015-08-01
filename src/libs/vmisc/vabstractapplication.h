@@ -39,6 +39,9 @@ class VTranslateVars;
 class VAbstractPattern;
 class VMainGraphicsView;
 class QUndoStack;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+class QLockFile;
+#endif
 
 #if defined(qApp)
 #undef qApp
@@ -85,6 +88,10 @@ public:
     void             setMainWindow(QWidget *value);
 
     QUndoStack      *getUndoStack() const;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    static bool TryLock(QLockFile *lock);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
 protected:
     QUndoStack         *undoStack;

@@ -37,6 +37,7 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "version.h"
 #include "mapplication.h" // Should be last because of definning qApp
 
 #include <QFileDialog>
@@ -44,8 +45,13 @@
 #include <QMessageBox>
 #include <QComboBox>
 #include <QProcess>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+#   include <QLockFile>
+#endif
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
+
+Q_LOGGING_CATEGORY(tMainWindow, "t.mainwindow")
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
@@ -58,7 +64,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       curFile(),
       gradationHeights(nullptr),
       gradationSizes(nullptr),
-      formulaBaseHeight(0)
+      formulaBaseHeight(0),
+      lock(nullptr)
 {
     ui->setupUi(this);
     ui->tabWidget->setVisible(false);
@@ -70,6 +77,8 @@ TMainWindow::TMainWindow(QWidget *parent)
     SetupMenu();
 
     setWindowTitle(tr("untitled %1").arg(qApp->MainWindows().size()+1));
+
+    ReadSettings();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,6 +93,11 @@ TMainWindow::~TMainWindow()
     {
         delete m;
     }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    delete lock; // Unlock pattern file
+#endif
+
     delete ui;
 }
 
@@ -105,9 +119,23 @@ void TMainWindow::LoadFile(const QString &path)
             if (list.at(i)->CurrentFile() == path)
             {
                 list.at(i)->activateWindow();
+                close();
                 return;
             }
         }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+        lock = new QLockFile(QFileInfo(path).fileName()+".lock");
+        lock->setStaleLockTime(0);
+        if (not MApplication::TryLock(lock))
+        {
+            if (lock->error() == QLockFile::LockFailedError)
+            {
+                qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+                return;
+            }
+        }
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
         try
         {
@@ -277,6 +305,7 @@ void TMainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
     {
+        WriteSettings();
         event->accept();
         deleteLater();
     }
@@ -1720,6 +1749,25 @@ void TMainWindow::GUIReadOnly(bool ro)
     }
 
     Controls(); // Buttons remove, up, down
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ReadSettings()
+{
+    restoreGeometry(qApp->TapeSettings()->GetGeometry());
+    restoreState(qApp->TapeSettings()->GetWindowState());
+    restoreState(qApp->TapeSettings()->GetToolbarsState(), APP_VERSION);
+
+    // Stack limit
+    //qApp->getUndoStack()->setUndoLimit(qApp->TapeSettings()->GetUndoCount());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::WriteSettings()
+{
+    qApp->TapeSettings()->SetGeometry(saveGeometry());
+    qApp->TapeSettings()->SetWindowState(saveState());
+    qApp->TapeSettings()->SetToolbarsState(saveState(APP_VERSION));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

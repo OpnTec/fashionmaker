@@ -42,6 +42,8 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
 
     connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
+
+    ReadSettings();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,11 +58,14 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
     InitDataBase();
 
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
+
+    ReadSettings();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMDataBase::~DialogMDataBase()
 {
+    WriteSettings();
     delete ui;
 }
 
@@ -1509,4 +1514,16 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     }
 
     return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::ReadSettings()
+{
+    restoreGeometry(qApp->TapeSettings()->GetDataBaseGeometry());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::WriteSettings()
+{
+    qApp->TapeSettings()->SetDataBaseGeometry(saveGeometry());
 }

@@ -45,7 +45,7 @@ class DialogMDataBase : public QDialog
 public:
     DialogMDataBase(const QStringList &list, QWidget *parent = 0);
     explicit DialogMDataBase(QWidget *parent = 0);
-    ~DialogMDataBase();
+    virtual ~DialogMDataBase() Q_DECL_OVERRIDE;
 
     QStringList GetNewNames() const;
 
@@ -84,6 +84,9 @@ private:
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
 
     QString MapDiagrams(const QString &number) const;
+
+    void ReadSettings();
+    void WriteSettings();
 };
 
 #endif // DIALOGMDATABASE_H

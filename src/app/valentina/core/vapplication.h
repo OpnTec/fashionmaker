@@ -39,9 +39,6 @@ class VApplication;// use in define
 class VMainGraphicsView;
 class VPattern;
 class QFile;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-class QLockFile;
-#endif
 
 #if defined(qApp)
 #undef qApp
@@ -61,10 +58,6 @@ public:
     virtual bool       notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
     void               InitOptions();
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    static bool        TryLock(QLockFile *lock);
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     QString            translationsPath() const;
 

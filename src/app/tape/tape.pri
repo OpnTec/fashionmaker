@@ -16,7 +16,8 @@ HEADERS  += \
     $$PWD/mapplication.h \
     $$PWD/dialogs/dialogabouttape.h \
     $$PWD/dialogs/dialognewmeasurements.h \
-    $$PWD/dialogs/dialogmdatabase.h
+    $$PWD/dialogs/dialogmdatabase.h \
+    $$PWD/version.h
 
 FORMS    += \
     $$PWD/tmainwindow.ui \

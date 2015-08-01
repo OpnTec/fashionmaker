@@ -42,6 +42,9 @@ namespace Ui
 class QComboBox;
 class QTableWidgetItem;
 class QLabel;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+class QLockFile;
+#endif
 
 class TMainWindow : public QMainWindow
 {
@@ -116,6 +119,10 @@ private:
     QComboBox       *gradationSizes;
     int              formulaBaseHeight;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    QLockFile          *lock;
+#endif
+
     void SetupMenu();
     void InitWindow();
     void InitTable();
@@ -148,6 +155,9 @@ private:
 
     void Open(const QString &pathTo, const QString &filter);
     void GUIReadOnly(bool ro);
+
+    void ReadSettings();
+    void WriteSettings();
 };
 
 #endif // TMAINWINDOW_H

@@ -44,10 +44,14 @@ public:
     QString GetPathTemplate() const;
     void SetPathTemplate(const QString &value);
 
+    QByteArray GetDataBaseGeometry() const;
+    void SetDataBaseGeometry(const QByteArray &value);
+
 private:
     Q_DISABLE_COPY(VTapeSettings)
 
     static const QString SettingPathsTemplates;
+    static const QString SettingDataBaseGeometry;
 };
 
 #endif // VTAPESETTINGS_H

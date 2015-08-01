@@ -43,6 +43,9 @@ namespace Ui
 }
 
 class VToolOptionsPropertyBrowser;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+class QLockFile;
+#endif
 
 /**
  * @brief The MainWindow class main windows.
