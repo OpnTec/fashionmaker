@@ -100,12 +100,19 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
 
     if (item->childCount() != 0 && item->checkState(0) != Qt::PartiallyChecked && column != -1)
     {
+        bool flag = false; // Check if we could change atleast one children
         Qt::CheckState checkState = item->checkState(0);
         for (int i = 0; i < item->childCount(); ++i)
         {
             if (not list.contains(item->child(i)->data(0, Qt::UserRole).toString()))
             {
                 item->child(i)->setCheckState(0, checkState);
+                flag = true;
+            }
+
+            if (flag == false) // All child in the list
+            {
+                item->setCheckState(0, Qt::Checked);
             }
         }
     }
@@ -129,7 +136,7 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
         }
         else
         {
-            item->parent()->setCheckState(0,item->checkState(0));
+            item->parent()->setCheckState(0, item->checkState(0));
         }
 
         if (item->parent() != nullptr)
@@ -606,6 +613,7 @@ QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
     {
         group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
         group->setCheckState(0, Qt::Unchecked);
+        group->setBackground(0, QBrush(Qt::lightGray));
     }
     return group;
 }
@@ -621,12 +629,15 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
         {
             m->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
             m->setCheckState(0, Qt::Checked);
+            m->setBackground(0, QBrush(Qt::yellow));
         }
         else
         {
             m->setCheckState(0, Qt::Unchecked);
         }
     }
+
+    UpdateChecks(m, 0);
 
     const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
     m->setText(0, text);
