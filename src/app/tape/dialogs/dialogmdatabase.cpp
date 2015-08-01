@@ -218,13 +218,7 @@ void DialogMDataBase::InitDataBase()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupA(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "A. " + tr("Direct Height"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("A. " + tr("Direct Height", "Measurement section"));
 
     AddMeasurement(group, height_M, list);                // A01
     AddMeasurement(group, heightNeckBack_M, list);        // A02
@@ -253,13 +247,7 @@ void DialogMDataBase::InitGroupA(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupB(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "B. " + tr("Direct Width"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("B. " + tr("Direct Width", "Measurement section"));
 
     AddMeasurement(group, widthShoulder_M, list);     // B01
     AddMeasurement(group, widthBust_M, list);         // B02
@@ -273,13 +261,7 @@ void DialogMDataBase::InitGroupB(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupC(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "C. " + tr("Indentation"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("C. " + tr("Indentation", "Measurement section"));
 
     AddMeasurement(group, indentNeckBack_M, list);  // C01
     AddMeasurement(group, indentWaistBack_M, list); // C02
@@ -291,13 +273,7 @@ void DialogMDataBase::InitGroupC(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupD(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "D. " + tr("Circumference and Arc"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("D. " + tr("Circumference and Arc", "Measurement section"));
 
     AddMeasurement(group, neckMidCirc_M, list);        // D01
     AddMeasurement(group, neckCirc_M, list);           // D02
@@ -351,13 +327,7 @@ void DialogMDataBase::InitGroupD(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupE(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "E. " + tr("Vertical"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("E. " + tr("Vertical", "Measurement section"));
 
     AddMeasurement(group, neckFrontToWaistF_M, list);             // E01
     AddMeasurement(group, neckFrontToWaistFlatF_M, list);         // E02
@@ -403,13 +373,7 @@ void DialogMDataBase::InitGroupE(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupF(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "F." + tr("Horizontal"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("F." + tr("Horizontal", "Measurement section"));
 
     AddMeasurement(group, shoulderLength_M, list);                // F01
     AddMeasurement(group, shoulderWidthF_M, list);                // F02
@@ -432,13 +396,7 @@ void DialogMDataBase::InitGroupF(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupG(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "G. " + tr("Bust"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("G. " + tr("Bust", "Measurement section"));
 
     AddMeasurement(group, bustpointToBustpoint_M, list);       // G01
     AddMeasurement(group, bustpointToNeckSide_M, list);        // G02
@@ -455,13 +413,7 @@ void DialogMDataBase::InitGroupG(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupH(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "H. " + tr("Balance"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("H. " + tr("Balance", "Measurement section"));
 
     AddMeasurement(group, shoulderTipToWaistFront_M, list); // H01
     AddMeasurement(group, neckFrontToWaistSide_M, list);    // H02
@@ -482,13 +434,7 @@ void DialogMDataBase::InitGroupH(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupI(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "I. " + tr("Arm"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("I. " + tr("Arm", "Measurement section"));
 
     AddMeasurement(group, armShoulderTipToWristBent_M, list);   // I01
     AddMeasurement(group, armShoulderTipToElbowBent_M, list);   // I02
@@ -518,13 +464,7 @@ void DialogMDataBase::InitGroupI(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupJ(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "J. " + tr("Leg"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("J. " + tr("Leg", "Measurement section"));
 
     AddMeasurement(group, legCrotchToFloor_M, list);    // J01
     AddMeasurement(group, legWaistSideToFloor_M, list); // J02
@@ -545,13 +485,7 @@ void DialogMDataBase::InitGroupJ(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupK(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "K. " + tr("Crotch and Rise"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("K. " + tr("Crotch and Rise", "Measurement section"));
 
     AddMeasurement(group, crotchLength_M, list);   // K01
     AddMeasurement(group, crotchLengthB_M, list);  // K02
@@ -567,13 +501,7 @@ void DialogMDataBase::InitGroupK(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupL(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "L. " + tr("Hand"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("L. " + tr("Hand", "Measurement section"));
 
     AddMeasurement(group, handPalmLength_M, list); // L01
     AddMeasurement(group, handLength_M, list);     // L02
@@ -587,13 +515,7 @@ void DialogMDataBase::InitGroupL(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupM(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "M. " + tr("Foot"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("M. " + tr("Foot", "Measurement section"));
 
     AddMeasurement(group, footWidth_M, list);      // M01
     AddMeasurement(group, footLength_M, list);     // M02
@@ -606,13 +528,7 @@ void DialogMDataBase::InitGroupM(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupN(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "N. " + tr("Head"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("N. " + tr("Head", "Measurement section"));
 
     AddMeasurement(group, headCirc_M, list);	        // N01
     AddMeasurement(group, headLength_M, list);          // N02
@@ -627,13 +543,7 @@ void DialogMDataBase::InitGroupN(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupO(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "O. " + tr("Men & Tailoring"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("O. " + tr("Men & Tailoring", "Measurement section"));
 
     AddMeasurement(group, neckBackToWaistFront_M, list);	        // O01
     AddMeasurement(group, waistToWaistHalter_M, list);	            // O02
@@ -656,13 +566,7 @@ void DialogMDataBase::InitGroupO(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupP(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "P. " + tr("Historical & Specialty"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("P. " + tr("Historical & Specialty", "Measurement section"));
 
     AddMeasurement(group, armfoldToArmfoldBust_M, list);                             // P01
     AddMeasurement(group, armfoldToBustFront_M, list);	                             // P02
@@ -683,19 +587,27 @@ void DialogMDataBase::InitGroupP(const QStringList &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitGroupQ(const QStringList &list)
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
-    group->setText(0, "Q. " + tr("Patternmaking measurements"));
-    if (selectMode)
-    {
-        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-        group->setCheckState(0, Qt::Unchecked);
-    }
+    QTreeWidgetItem *group = AddGroup("Q. " + tr("Patternmaking measurements", "Measurement section"));
 
     AddMeasurement(group, dartWidthShoulder_M, list); // Q01
     AddMeasurement(group, dartWidthBust_M, list);	  // Q02
     AddMeasurement(group, dartWidthWaist_M, list);    // Q03
 
     ui->treeWidget->setItemExpanded(group, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
+{
+    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
+    group->setText(0, text);
+    group->setToolTip(0, text);
+    if (selectMode)
+    {
+        group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+        group->setCheckState(0, Qt::Unchecked);
+    }
+    return group;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -716,7 +628,9 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
         }
     }
 
-    m->setText(0, qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name));
+    const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
+    m->setText(0, text);
+    m->setToolTip(0, text);
     m->setData(0, Qt::UserRole, name);
 }
 

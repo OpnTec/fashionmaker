@@ -80,6 +80,7 @@ private:
     void InitGroupP(const QStringList &list = QStringList());
     void InitGroupQ(const QStringList &list = QStringList());
 
+    QTreeWidgetItem *AddGroup(const QString &text);
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
 
     QString MapDiagrams(const QString &number) const;
