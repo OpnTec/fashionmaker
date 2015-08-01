@@ -942,6 +942,9 @@ void TMainWindow::SaveMValue()
     QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
     if (formulaField->text() == text)
     {
+        QTableWidgetItem *result = ui->tableWidget->item(row, 1);
+        const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+        ui->labelCalculatedValue->setText(result->text() + " " +postfix);
         return;
     }
 
